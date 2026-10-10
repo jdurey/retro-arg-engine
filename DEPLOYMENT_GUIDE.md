@@ -1,58 +1,39 @@
-# Deployment Guide: Nova Hart Retro ARG Engine
+# Deployment Guide: Nova Hart Retro ARG Engine (Netlify Edition)
 
-To deploy this massive decentralized 1990s web swarm efficiently and cost-effectively (under $25/month), follow these instructions. 
-
-## Overview
-We are going to deploy the static files (the `site/` folder) to a free static host (like Cloudflare Pages), and then deploy a **Cloudflare Worker** as a reverse proxy. The worker will intercept wildcard subdomains (`*.your-domain.com`) and route them to the correct static folder while spoofing 1994 HTTP headers.
+To deploy this massive decentralized 1990s web swarm efficiently and cost-effectively, we are using **Netlify**. Netlify handles the Python build step automatically, serves the static files, and uses an **Edge Function** to intercept wildcard subdomains and spoof 1994 HTTP headers.
 
 ## Prerequisites
-1. A domain name registered and using **Cloudflare DNS** (e.g. `telecom-history.net`).
-2. The `wrangler` CLI installed (`npm install -g wrangler`).
-3. Your Cloudflare account configured.
+1. A domain name with DNS managed by Netlify (or configured to point to Netlify).
+2. A GitHub/GitLab/Bitbucket repository containing this codebase.
+3. A free Netlify account.
 
-## Step 1: Deploy the Static Assets
-1. Generate the static site locally if you haven't already:
-   ```bash
-   python3 src/build.py
-   ```
-2. Deploy the `site/` folder to **Cloudflare Pages**:
-   ```bash
-   npx wrangler pages deploy site/ --project-name retro-arg-static
-   ```
-3. Take note of the deployed URL (e.g., `https://retro-arg-static.pages.dev`).
+## Step 1: Deploy to Netlify
+1. Log into your Netlify Dashboard.
+2. Click **Add new site** -> **Import an existing project**.
+3. Connect your Git provider and select the repository containing this project.
+4. Netlify will automatically detect the `netlify.toml` file.
+   * **Build command**: `python3 src/build.py`
+   * **Publish directory**: `site`
+5. Click **Deploy site**.
 
-## Step 2: Configure the Edge Router
-1. Open `deploy/wrangler.toml`.
-2. Update the `BASE_STATIC_URL` variable to match the URL you got in Step 1.
-   ```toml
-   [vars]
-   BASE_STATIC_URL = "https://retro-arg-static.pages.dev"
-   ```
+Netlify will boot up a build container, run the Python script to generate all 30,000+ files, and deploy the `site/` directory globally.
 
-## Step 3: Setup Wildcard DNS
-1. Log into your Cloudflare Dashboard.
-2. Go to your domain's **DNS** settings.
-3. Add a **CNAME** record:
-   * Name: `*` (asterisk, for a wildcard)
-   * Target: your worker URL or `@` (depending on your setup)
-   * Proxy status: **Proxied (Orange Cloud)**
-
-## Step 4: Deploy the Worker
-1. Navigate to the `deploy/` directory:
-   ```bash
-   cd deploy/
-   ```
-2. Deploy the worker to Cloudflare:
-   ```bash
-   wrangler deploy
-   ```
-3. In the Cloudflare Dashboard, go to **Workers & Pages** -> **Routes** for your domain.
-4. Add a route linking `*.your-domain.com/*` to the `retro-arg-router` worker.
+## Step 2: Configure Wildcard Domains
+To make the illusion work, you need to point wildcard subdomains (e.g., `*.your-domain.com`) to your Netlify site.
+1. In the Netlify Dashboard, go to your site's **Domain management**.
+2. Add your custom domain (e.g., `telecom-history.net`).
+3. If you are using Netlify DNS, add a wildcard DNS record:
+   * **Record Type**: CNAME
+   * **Name**: `*`
+   * **Value**: `your-site-name.netlify.app`
+4. *Note: Wildcard custom domains on Netlify require the Pro tier ($19/mo), which fits within the $25/month budget. Alternatively, you can explicitly add specific subdomains (e.g., `ftp.ashford-poly.your-domain.com`) on the Free tier.*
 
 ## Testing
+The `netlify/edge-functions/router.js` script automatically intercepts the subdomains and routes them to the correct directory under `site/` while adding vintage headers.
+
 Once DNS propagates, you can visit URLs like:
 * `http://synthkid-2210.geocities.your-domain.com`
 * `http://comp-dsp.usenet.your-domain.com`
 * `http://ftp.ashford-poly.your-domain.com`
 
-All requests will be routed to the static pages with authentic `CERN-HTTPd/3.0` server headers.
+All requests will be served with authentic `CERN-HTTPd/3.0` server headers!
