@@ -13,6 +13,23 @@ export const APEX = "stardust-archive.net";
 export const KINDS = ["geocities", "usenet", "ftp", "regional"];
 const MAX_LABEL = 63; // DNS hard limit per label
 
+// Hand-authored homepages (data/personas.json). Everything else under
+// geocities/ is procedurally generated swarm.
+const CURATED_GEO = new Set(["index", "siliconvalley-lab-1984", "athens-forum-3317", "capecanaveral-lab-0068", "tokyo-garden-1420", "area51-vault-7734", "sunsetstrip-club-2210", "hollywood-hills-4127", "paris-leftbank-0142"]);
+
+/**
+ * True for hand-authored story pages that should be indexed by search engines.
+ * Swarm pages (generated GeoCities homepages, sNNNNN Usenet posts) get
+ * `noindex, follow` so tens of thousands of templated pages can't trigger a
+ * scaled-content demotion of the whole domain. Players still reach them in-world.
+ */
+export function isStory(sitePath) {
+  const p = sitePath.replace(/^\/+/, "");
+  if (p.startsWith("geocities/")) return CURATED_GEO.has(p.slice(10, -5));
+  if (/^usenet\/[^/]+\/s\d+\.txt$/.test(p)) return false;
+  return true;
+}
+
 const WORDS = ["nova", "hart", "sie", "akasaka", "reel", "node", "relay", "dust", "idol", "kamome", "hale", "carrier", "ghost", "chorus", "spool", "mirror", "pub", "incoming", "tmp", "users"];
 const ALNUM = "abcdefghijklmnopqrstuvwxyz0123456789";
 
