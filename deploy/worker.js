@@ -1,41 +1,71 @@
-export default {
-  async fetch(request, env, ctx) {
-    const url = new URL(request.url);
-    const hostname = url.hostname;
-    
-    let path = url.pathname;
-    if (path === "/") {
-      path = "/index.html";
-    }
+import { APEX, publicUrl, resolve } from "./urlmap.js";
 
-    if (hostname.includes(".geocities.")) {
-      const slug = hostname.split(".geocities.")[0];
-      path = `/geocities/${slug}.html`;
-    } 
-    else if (hostname.includes(".usenet.")) {
-      const group = hostname.split(".usenet.")[0];
-      path = (path === "/index.html" || path === "/") ? `/usenet/${group}/index.html` : `/usenet/${group}${path}`;
-    } 
-    else if (hostname.startsWith("ftp.")) {
-      const parts = hostname.split(".");
-      const site = parts[1];
-      path = (path === "/index.html" || path === "/") ? `/ftp/${site}/index.html` : `/ftp/${site}${path}`;
-    }
-    else if (hostname.includes(".regional.")) {
-      const node = hostname.split(".regional.")[0];
-      path = (path === "/index.html" || path === "/") ? `/regional/${node}/index.html` : `/regional/${node}${path}`;
-    }
+const NOT_FOUND = `<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<HTML><HEAD><TITLE>404 Not Found</TITLE></HEAD>
+<BODY><H1>Not Found</H1>
+The requested URL was not found on this server.<P>
+<HR><ADDRESS>CERN-HTTPd/3.0</ADDRESS>
+</BODY></HTML>
+`;
 
-    // Fetch the static asset from Cloudflare Pages or GitHub pages
-    // Note: ensure BASE_STATIC_URL points to the deploy URL
-    const baseUrl = env.BASE_STATIC_URL.endsWith('/') ? env.BASE_STATIC_URL.slice(0, -1) : env.BASE_STATIC_URL;
-    const targetUrl = new URL(baseUrl + (path.startsWith('/') ? path : '/' + path));
-    let response = await fetch(targetUrl.toString(), request);
-    
-    response = new Response(response.body, response);
-    response.headers.set("Server", "CERN-HTTPd/3.0");
-    response.headers.set("X-Powered-By", "Stardust");
+function retroHeaders(contentType) {
+  const h = new Headers();
+  h.set("Content-Type", contentType);
+  h.set("Server", "CERN-HTTPd/3.0");
+  h.set("X-Powered-By", "Stardust");
+  h.set("Cache-Control", "public, max-age=3600");
+  return h;
+}
 
-    return response;
+function notFound() {
+  return new Response(NOT_FOUND, { status: 404, headers: retroHeaders("text/html; charset=utf-8") });
+}
+
+// Rewrites relative links in a page (which assume the flat site/ layout) into
+// the long single-level public URLs.
+class LinkRewriter {
+  constructor(attr, sitePath) {
+    this.attr = attr;
+    this.base = new URL("https://build.invalid/" + sitePath);
   }
+  element(el) {
+    const v = el.getAttribute(this.attr);
+    if (!v || /^[a-z][a-z0-9+.-]*:/i.test(v) || v.startsWith("#") || v.startsWith("//")) return;
+    let target;
+    try { target = new URL(v, this.base); } catch { return; }
+    const mapped = publicUrl(target.pathname);
+    if (mapped) el.setAttribute(this.attr, mapped + target.hash);
+  }
+}
+
+export default {
+  async fetch(request, env) {
+    const url = new URL(request.url);
+    const { sitePath, canonical } = resolve(url.hostname, url.pathname);
+
+    if (canonical) return Response.redirect(canonical, 301);
+    if (url.protocol === "http:") {
+      url.protocol = "https:";
+      return Response.redirect(url.toString(), 301);
+    }
+    if (!sitePath) return notFound();
+
+    const base = env.BASE_STATIC_URL.replace(/\/+$/, "");
+    const encoded = sitePath.split("/").map(encodeURIComponent).join("/");
+    const upstream = await fetch(`${base}/${encoded}`, {
+      method: request.method === "HEAD" ? "HEAD" : "GET",
+      cf: { cacheTtl: 3600, cacheEverything: true },
+    });
+    if (!upstream.ok) return notFound();
+
+    const type = upstream.headers.get("Content-Type") || "application/octet-stream";
+    const response = new Response(upstream.body, { status: 200, headers: retroHeaders(type) });
+    if (!type.startsWith("text/html")) return response;
+
+    return new HTMLRewriter()
+      .on("[href]", new LinkRewriter("href", sitePath))
+      .on("[src]", new LinkRewriter("src", sitePath))
+      .on("[background]", new LinkRewriter("background", sitePath))
+      .transform(response);
+  },
 };
