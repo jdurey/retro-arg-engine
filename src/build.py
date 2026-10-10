@@ -16,10 +16,10 @@ def main():
     
     ctx = Ctx(out)
     print("Building GeoCities ring...")
-    print(geocities_builder.build(ctx, swarm=8))
+    print(geocities_builder.build(ctx, swarm=5000))
     
     print("Building Usenet spool...")
-    print(usenet_builder.build(ctx, swarm=50))
+    print(usenet_builder.build(ctx, swarm=25000))
     
     print("Building Regional nodes...")
     print(regional_builder.build(ctx))
