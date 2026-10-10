@@ -8,6 +8,7 @@ import datetime
 import os
 
 from common import esc, group_slug, relay_table_lines, rng_for, write
+import usenet_bank as ub
 
 # Fictional UUCP backbone per regional node -> bang path toward the reading site.
 NODE_ROUTES = {
@@ -189,60 +190,9 @@ def render_thread_txt(thread, built):
 
 
 # --------------------------------------------------------------------------- swarm
-FIRST = ["Dave", "Karen", "Mike", "Lisa", "Steve", "Jen", "Brian", "Amy", "Kenji", "Marta", "Lars", "Ines", "Raj", "Olga", "Tomas", "Mei", "Hugo", "Sun-mi", "Diego", "Freya"]
-LAST = ["Kowalski", "Brennan", "Sato", "Lindqvist", "Moreno", "Fischer", "Choi", "Nakamura", "Duarte", "Novak", "Reyes", "Hughes", "Petrov", "Laurent", "Okonkwo"]
-ISPS = [("netcove.com", "NetCove Online"), ("pacnet-online.com", "PacNet Online"), ("cs.lakeridge.edu", "Lakeridge University CS"),
-        ("ee.northvale.edu", "University of Northvale"), ("halley.net", "Halley Internet Services"), ("bbs.lowband.org", "LowBand Public Access Unix")]
-SWARM_SUBJECTS = [
-    "Heard 14.2 Hz on my {pressing} copy?",
-    "stardust.c on {machine} - success!",
-    "Found a Marcus Hale reference in {place}",
-    "Anyone else dream about the Hatch?",
-    "Is Luna Gray's new single patched? ({year})",
-    "{pressing} pressing for trade - node unknown",
-    "7 sigma replicated on {machine}",
-]
-SWARM_BODIES = [
-    ["Ran stardust.c on my {pressing} copy last night on a {machine}.", "Got the header but the payload line is smeared. Clean copies only?", "Anyone near {place} want to compare?"],
-    ["Weird one. A used record shop in {place} had a copy of SYNTHESIS with", "'0909' scratched into the runout. Owner says Marcus came in once.", "He said it like everybody knows who Marcus is."],
-    ["Long time lurker. My dad worked for Orion distribution in the 80s.", "He says the Special Projects pallets were never opened by the warehouse.", "He also says to stop asking him about it."],
-    ["Played 'Memory Hatch' at 14.2x slowdown on a {machine}. Don't.", "I'm not joking. I didn't sleep. There's a voice under the voice."],
-    ["Pitch analysis on {machine}: Nova F#4 sustains drift in a pattern that", "repeats every 26 cycles. Luna Gray's do not drift at all. Data on request."],
-]
-MACHINES = ["Amiga 500", "Atari ST", "Mac IIci", "386DX-33", "PC-9801", "NeXTcube", "SPARCstation 1", "Acorn Archimedes", "C64 with a homebrew ADC"]
-PLACES = ["Osaka", "Hamburg", "Mexico City", "Seoul", "Sao Paulo", "Manchester", "Lyon", "Tulsa", "Gothenburg", "Leningrad", "Akihabara", "Paju"]
-SWARM_GROUPS = ["alt.music.synth-pop", "alt.conspiracy", "comp.dsp"]
-
-
 def swarm_threads(ctx, count):
-    pressings = [n["pressing"].split(" (")[0] for n in ctx.lore["project_stardust"]["relay_nodes"][:10]]
-    threads = []
-    for i in range(count):
-        r = rng_for(ctx.seed, "swarm-thread", i)
-        fill = {"pressing": r.choice(pressings), "machine": r.choice(MACHINES), "place": r.choice(PLACES), "year": r.choice([1994, 1995])}
-        n_msgs = r.randint(2, 6)
-        authors = []
-        for j in range(n_msgs):
-            f, l = r.choice(FIRST), r.choice(LAST)
-            dom, org = r.choice(ISPS)
-            pid = "swarm-%d-%d" % (i, j)
-            ctx.personas[pid] = {"id": pid, "name": "%s %s" % (f, l), "email": "%s%s@%s" % (f[0].lower(), l.lower(), dom),
-                                 "org": org, "node": "%02d" % r.randint(1, 10), "sig": ["%s %s" % (f, l)]}
-            authors.append(pid)
-        msgs = []
-        for j, pid in enumerate(authors):
-            body = [s.format(**fill) for s in r.choice(SWARM_BODIES)]
-            m = {"from": pid, "body": body}
-            if j:
-                m["reply_to"] = r.randint(0, j - 1)
-                m["quote"] = r.randint(1, 2)
-            msgs.append(m)
-        start = datetime.datetime(fill["year"], r.randint(1, 12), r.randint(1, 28), r.randint(0, 23), r.randint(0, 59), r.randint(0, 59))
-        tid = "s%05d" % i
-        threads.append({"id": tid, "group": r.choice(SWARM_GROUPS), "subject": r.choice(SWARM_SUBJECTS).format(**fill),
-                        "start": start.strftime("%Y-%m-%dT%H:%M:%S"), "messages": msgs, "swarm": True})
-        ctx.thread_group[tid] = threads[-1]["group"]
-    return threads
+    return ub.build_swarm_threads(ctx, count)
+
 
 
 # --------------------------------------------------------------------------- pages
