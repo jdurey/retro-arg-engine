@@ -8,7 +8,7 @@ const ROBOTS = `User-agent: *\nAllow: /\n\nSitemap: https://${APEX}/sitemap.xml\
 // IndexNow keys are public by design (they prove control of the host, nothing more).
 const INDEXNOW_KEY = "37feeed875722863fda484c68e6695e5";
 // Bump when files in assets/ are replaced so edge + browser caches refetch.
-const ASSET_VERSION = "5";
+const ASSET_VERSION = "6";
 
 function sitemap() {
   const urls = STORY_PATHS.map((sp) => publicUrl(sp)).filter((u) => u && u.startsWith("https://"));
@@ -54,6 +54,16 @@ function notFound() {
   return new Response(NOT_FOUND, { status: 404, headers: retroHeaders("text/html; charset=utf-8") });
 }
 
+const urlCache = new Map();
+function cachedPublicUrl(sitePath) {
+  let hit = urlCache.get(sitePath);
+  if (!hit) {
+    hit = publicUrl(sitePath);
+    if (hit) urlCache.set(sitePath, hit);
+  }
+  return hit;
+}
+
 // Rewrites relative links in a page (which assume the flat site/ layout) into
 // the long single-level public URLs.
 class LinkRewriter {
@@ -66,7 +76,7 @@ class LinkRewriter {
     if (!v || /^[a-z][a-z0-9+.-]*:/i.test(v) || v.startsWith("#") || v.startsWith("//")) return;
     let target;
     try { target = new URL(v, this.base); } catch { return; }
-    let mapped = publicUrl(target.pathname);
+    let mapped = cachedPublicUrl(target.pathname);
     if (mapped && mapped.startsWith("/assets/")) mapped += `?v=${ASSET_VERSION}`;
     if (mapped) el.setAttribute(this.attr, mapped + target.hash);
   }
