@@ -16,6 +16,8 @@ export default [
  "ftp/kamome/readme.txt",
  "ftp/kamome/reel_log.txt",
  "ftp/kamome/tracklist.txt",
+ "ftp/kamome/visual/novachan_tv90_f0420.gif",
+ "ftp/kamome/visual/novachan_tv90_f1263.gif",
  "geocities/area51-vault-7734.html",
  "geocities/athens-forum-3317.html",
  "geocities/capecanaveral-lab-0068.html",

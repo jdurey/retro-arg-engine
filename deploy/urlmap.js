@@ -98,8 +98,9 @@ export function publicUrl(sitePath) {
   if (segs.length === 2 && segs[1] === "index.html") {
     return `https://${hostFor(kind, "index")}${junkPath(kind, "index")}`;
   }
-  if (segs.length === 3) {
-    const [, key, file] = segs;
+  if (segs.length >= 3) {
+    const key = segs[1];
+    const file = segs.slice(2).join("/");
     return `https://${hostFor(kind, key)}${junkPath(kind, key)}${file === "index.html" ? "" : file}`;
   }
   return null;
@@ -144,7 +145,11 @@ export function resolve(hostname, pathname) {
   if (!m) return { sitePath: null };
   const [, key, kind] = m;
   if (kind === "geocities") return { sitePath: `geocities/${key}.html` };
-  const file = path.split("/").pop() || "index.html";
   if (key === "index") return { sitePath: `${kind}/index.html` };
+  // Strip the deterministic junk prefix to recover nested paths; fall back to
+  // the last segment if someone hand-edits the junk.
+  const jp = junkPath(kind, key);
+  const rest = path.startsWith(jp) ? path.slice(jp.length) : path.split("/").pop();
+  const file = rest.endsWith("/") || rest === "" ? rest + "index.html" : rest;
   return { sitePath: `${kind}/${key}/${file}` };
 }

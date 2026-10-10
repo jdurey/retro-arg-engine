@@ -49,7 +49,18 @@ def build(ctx, **kwargs):
         content = "\n".join(docs[doc_key]) + "\n"
         write(os.path.join(ctx.out, rel_path), content)
         count += 1
-        
+
+    # The Akasaka readme and the Tokyo homepage reference frame grabs at
+    # ftp://kamome/visual/ - publish them there and list them in the index.
+    visual_src = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "assets", "akasaka")
+    if "kamome" in sites and os.path.isdir(visual_src):
+        for fname in sorted(os.listdir(visual_src)):
+            if fname.endswith(".gif"):
+                with open(os.path.join(visual_src, fname), "rb") as fh:
+                    write(os.path.join(ctx.out, "ftp", "kamome", "visual", fname), fh.read(), binary=True)
+                sites["kamome"].append((f"visual/{fname}", None))
+                count += 1
+
     # Generate index.html for each host
     for host, files in sites.items():
         lines = [DOCTYPE, f'<HTML><HEAD><TITLE>Index of ftp://{host}/</TITLE></HEAD>', '<BODY>', f'<H1>Index of ftp://{host}/</H1>', '<PRE>']
