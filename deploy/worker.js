@@ -7,6 +7,8 @@ const OG_IMAGE = `https://${APEX}/assets/og_card.jpg`;
 const ROBOTS = `User-agent: *\nAllow: /\n\nSitemap: https://${APEX}/sitemap.xml\n`;
 // IndexNow keys are public by design (they prove control of the host, nothing more).
 const INDEXNOW_KEY = "37feeed875722863fda484c68e6695e5";
+// Bump when files in assets/ are replaced so edge + browser caches refetch.
+const ASSET_VERSION = "2";
 
 function sitemap() {
   const urls = STORY_PATHS.map((sp) => publicUrl(sp)).filter((u) => u && u.startsWith("https://"));
@@ -64,7 +66,8 @@ class LinkRewriter {
     if (!v || /^[a-z][a-z0-9+.-]*:/i.test(v) || v.startsWith("#") || v.startsWith("//")) return;
     let target;
     try { target = new URL(v, this.base); } catch { return; }
-    const mapped = publicUrl(target.pathname);
+    let mapped = publicUrl(target.pathname);
+    if (mapped && mapped.startsWith("/assets/")) mapped += `?v=${ASSET_VERSION}`;
     if (mapped) el.setAttribute(this.attr, mapped + target.hash);
   }
 }
@@ -92,7 +95,8 @@ export default {
 
     const base = env.BASE_STATIC_URL.replace(/\/+$/, "");
     const encoded = sitePath.split("/").map(encodeURIComponent).join("/");
-    const upstream = await fetch(`${base}/${encoded}`, {
+    const bust = `?v=${ASSET_VERSION}`;
+    const upstream = await fetch(`${base}/${encoded}${bust}`, {
       method: request.method === "HEAD" ? "HEAD" : "GET",
       cf: { cacheTtl: 3600, cacheEverything: true },
     });
