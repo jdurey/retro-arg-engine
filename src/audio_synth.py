@@ -153,36 +153,57 @@ def master(buf, carrier_db=-58.0):
     return buf
 
 
+PROG_SYNTHETIC = [[45, 52, 57, 60], [41, 48, 53, 57], [48, 55, 60, 64], [43, 50, 55, 59]]  # Am F C G
+PROG_HATCH = [[47, 54, 59, 62], [43, 50, 55, 59], [40, 47, 52, 55], [42, 49, 54, 58]]          # Bm7 Gmaj7 Em9 F#7
+PROG_SMILE = [[48, 52, 55, 60], [45, 48, 52, 55], [41, 45, 48, 52], [43, 47, 50, 53]]          # Cmaj7 Am7 Dm7 G7
+
+MELODY_SYNTHETIC = [
+    (0, 1.0, 69), (1, 0.5, 72), (1.5, 0.5, 71), (2, 1.0, 69), (3, 1.0, 67), (4, 2.0, 69),
+    (6, 1.0, 69), (7, 0.5, 72), (7.5, 0.5, 74), (8, 2.0, 76), (10, 1.0, 74), (11, 1.0, 72), (12, 3.0, 69)
+]
+
+MELODY_HATCH = [
+    (0, 1.5, 71), (1.5, 0.5, 74), (2, 1.0, 76), (3, 1.0, 74), (4, 2.0, 71), (6, 1.0, 69), (7, 1.0, 67),
+    (8, 1.5, 71), (9.5, 0.5, 74), (10, 1.0, 78), (11, 1.0, 76), (12, 2.0, 74), (14, 2.0, 71)
+]
+
+MELODY_SMILE = [
+    (0, 0.5, 72), (0.5, 0.5, 76), (1, 0.5, 79), (1.5, 0.5, 84), (2, 1.0, 81), (3, 1.0, 79),
+    (4, 0.5, 77), (4.5, 0.5, 79), (5, 0.5, 81), (5.5, 0.5, 79), (6, 2.0, 76),
+    (8, 0.5, 72), (8.5, 0.5, 74), (9, 1.0, 76), (10, 1.0, 79), (11, 1.0, 77), (12, 3.0, 72)
+]
+
+
 # ----------------------------------------------------------------------------- tracks
-def track_a1():  # Synthetic Dawn (Akasaka Mix): +38 cent drift at 0:07
+def track_a1():  # Synthetic Dawn (Akasaka Mix): A minor, industrial square wave, +38 cent drift at 0:07
     secs, bpm = 12.0, 116
     buf = np.zeros(int(secs * SR))
-    backing(secs, bpm, PROG_CITYPOP, buf)
-    melody(buf, bpm, 0.0, repeat=1)
+    backing(secs, bpm, PROG_SYNTHETIC, buf, swing=False)
+    melody(buf, bpm, 0.0, notes=MELODY_SYNTHETIC, repeat=1)
     beat = 60.0 / bpm
     place(buf, lead(midi(81), 1.6, drift_cents=(0.35, 38)), 7.0)
-    melody(buf, bpm, 16 * beat + 1.6, notes=MELODY[:6], repeat=1)
+    melody(buf, bpm, 16 * beat + 1.6, notes=MELODY_SYNTHETIC[:6], repeat=1)
     return master(buf)
 
 
-def track_a2():  # Memory Hatch (City Pop Version): 1.2 s unmasked take at 0:09
-    secs, bpm = 13.0, 112
+def track_a2():  # Memory Hatch (City Pop Version): B minor, Rhodes & slap bass, 1.2 s unmasked take at 0:09
+    secs, bpm = 13.0, 104
     buf = np.zeros(int(secs * SR))
-    backing(secs, bpm, PROG_CITYPOP, buf)
-    melody(buf, bpm, 0.0, repeat=2)
+    backing(secs, bpm, PROG_HATCH, buf, swing=True)
+    melody(buf, bpm, 0.0, notes=MELODY_HATCH, repeat=2)
     a, b = int(9.0 * SR), int(10.2 * SR)
     buf[a:b] *= 0.18  # the smile ducks...
-    for k, nn in enumerate((57, 60, 56, 57)):  # ...and the other take comes through, minor
+    for k, nn in enumerate((59, 62, 58, 59)):  # B minor unmasked take
         place(buf, rage(midi(nn), 0.3), 9.0 + k * 0.3)
     buf[b:b + int(0.04 * SR)] = 0.0  # gate clamps
     return master(buf)
 
 
-def track_a3():  # Synthesized Smile: quantised to the cent, nobody inside
-    secs, bpm = 12.0, 124
+def track_a3():  # Synthesized Smile: C major, rigidly quantised to the cent, clockwork idol pop
+    secs, bpm = 12.0, 128
     buf = np.zeros(int(secs * SR))
-    backing(secs, bpm, PROG_CITYPOP, buf, swing=False)
-    melody(buf, bpm, 0.0, repeat=2, quantised=True, vibrato=False)
+    backing(secs, bpm, PROG_SMILE, buf, swing=False)
+    melody(buf, bpm, 0.0, notes=MELODY_SMILE, repeat=2, quantised=True, vibrato=False)
     return master(buf)
 
 

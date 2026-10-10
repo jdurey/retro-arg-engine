@@ -92,6 +92,46 @@ def build(ctx, **kwargs):
         ctx.register(audio_index_rel, "ftp", "kamome audio archive")
         count += 1
 
+    # 2b. Kamome MIDI Archive (assets/midi/*.mid)
+    midi_src = os.path.join(root_dir, "assets", "midi")
+    midi_files = []
+    if os.path.isdir(midi_src):
+        os.makedirs(os.path.join(ctx.out, "ftp", "kamome", "midi"), exist_ok=True)
+        for fname in sorted(os.listdir(midi_src)):
+            if fname.endswith(".mid"):
+                src_f = os.path.join(midi_src, fname)
+                with open(src_f, "rb") as fh:
+                    rel_p = f"ftp/kamome/midi/{fname}"
+                    write(os.path.join(ctx.out, rel_p), fh.read(), binary=True)
+                    ctx.register(rel_p, "ftp", "kamome")
+                    count += 1
+                size_kb = os.path.getsize(src_f) / 1024
+                midi_files.append((fname, size_kb))
+
+        # Build ftp://kamome/midi/index.html
+        midi_lines = [
+            DOCTYPE,
+            '<HTML><HEAD><TITLE>Index of ftp://kamome/midi/</TITLE></HEAD>',
+            '<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000EE" VLINK="#551A8B">',
+            '<H1>Index of ftp://kamome/midi/</H1>',
+            '<PRE>',
+            '<A HREF="../">[DIR]  ../ (Parent Directory)</A>',
+            '-------------------------------------------------------------------------------',
+        ]
+        for fname, size_kb in midi_files:
+            midi_lines.append(f'[MID]  <A HREF="{fname}">{fname:<42}</A>  {size_kb:>6.1f} KB')
+        midi_lines += [
+            '-------------------------------------------------------------------------------',
+            '</PRE>',
+            '<HR>',
+            '<ADDRESS>CERN-HTTPd/3.0 &middot; Kamome-Net Anonymous FTP Service (General MIDI Archive)</ADDRESS>',
+            '</BODY></HTML>'
+        ]
+        midi_index_rel = "ftp/kamome/midi/index.html"
+        write(os.path.join(ctx.out, midi_index_rel), "\n".join(midi_lines) + "\n")
+        ctx.register(midi_index_rel, "ftp", "kamome midi archive")
+        count += 1
+
     # 3. Ashford Telemetry Outtakes (assets/ashford/telemetry/*.mp3)
     telemetry_src = os.path.join(root_dir, "assets", "ashford", "telemetry")
     telemetry_files = []
@@ -146,6 +186,7 @@ def build(ctx, **kwargs):
         # Include subdirectories if applicable
         if host == "kamome":
             lines.append('[DIR]  <A HREF="audio/">audio/</A>                                  Recovered audio outtakes (.mp3 / .au)')
+            lines.append('[DIR]  <A HREF="midi/">midi/</A>                                   General MIDI sequence archives (.mid)')
             lines.append('[DIR]  <A HREF="visual/">visual/</A>                                 U-matic TV-90 anime frame grabs (.gif)')
         elif host == "ashford-poly":
             lines.append('[DIR]  <A HREF="telemetry/">telemetry/</A>                              Microwave link telemetry outtakes (.mp3)')

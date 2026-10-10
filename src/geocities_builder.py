@@ -53,6 +53,26 @@ def render_badges(ctx, badges, from_dir):
     return '<CENTER><P>' + "".join(imgs) + '</P></CENTER>'
 
 
+def midi_jukebox_html(ctx, from_dir):
+    midis = [
+        ("gasoline_heart", "Gasoline Heart (ガソリン・ハート)", "1985 J-Rock / Synthpop", "7.3 KB"),
+        ("ghost_transit", "Ghost Transit (ゴースト・トランジット)", "1985 Atmospheric Ballad", "4.3 KB"),
+        ("midnight_animal", "Midnight Animal (ミッドナイト・アニマル)", "1986 Funky City Pop", "6.7 KB"),
+        ("brighter_than_sun", "Brighter Than The Sun (太陽よりも、輝いて！)", "1987 80s Idol Anthem", "9.9 KB"),
+        ("only_we_remain", "Only We Remain (残されたのは、私たちだけ)", "1989 Kayokyoku Ballad", "4.3 KB"),
+        ("synthetic_dawn", "Synthetic Dawn", "1985 Industrial Synthwave", "3.7 KB"),
+        ("memory_hatch", "Memory Hatch", "1985 Sophisti-Pop / Rhodes", "3.5 KB"),
+    ]
+    rows = []
+    for slug, title, genre, sz in midis:
+        m_link = ctx.link(f"asset:midi/{slug}.mid", from_dir)
+        rows.append('<TR><TD><FONT FACE="Arial,Helvetica" SIZE=2><B>%s</B></FONT></TD><TD><FONT FACE="Arial,Helvetica" SIZE=2>%s</FONT></TD><TD ALIGN=RIGHT><TT>%s</TT></TD><TD ALIGN=CENTER><FONT FACE="Arial,Helvetica" SIZE=2>[ <A HREF="%s"><B>DOWNLOAD .MID</B></A> ]</FONT></TD></TR>' % (
+            esc(title), esc(genre), sz, m_link))
+    return ('<TABLE BORDER=2 CELLPADDING=4 CELLSPACING=0 BGCOLOR="#000000" WIDTH="92%%">'
+            '<TR BGCOLOR="#222255"><TH><FONT COLOR="#FFFF00" FACE="Arial,Helvetica" SIZE=2>TRACK TITLE</FONT></TH><TH><FONT COLOR="#FFFF00" FACE="Arial,Helvetica" SIZE=2>GENRE / STYLE</FONT></TH><TH><FONT COLOR="#FFFF00" FACE="Arial,Helvetica" SIZE=2>SIZE</FONT></TH><TH><FONT COLOR="#FFFF00" FACE="Arial,Helvetica" SIZE=2>GENERAL MIDI</FONT></TH></TR>'
+            + "".join(rows) + '</TABLE>')
+
+
 def render_sections_html(ctx, sections, from_dir, hp):
     sec_parts = []
     for s in sections:
@@ -68,6 +88,8 @@ def render_sections_html(ctx, sections, from_dir, hp):
             sec_parts.append("<PRE>%s</PRE>" % esc("\n".join(s["pre"])))
         if s.get("relay_table"):
             sec_parts.append("<CENTER>" + relay_table_html(ctx.lore, hp) + "</CENTER>")
+        if s.get("midi_list"):
+            sec_parts.append("<CENTER>" + midi_jukebox_html(ctx, from_dir) + "</CENTER>")
     return "\n".join(sec_parts)
 
 
@@ -84,8 +106,12 @@ def render(ctx, hp, owner, ring, idx):
         '<META NAME="keywords" CONTENT="Nova Hart, SYNTHESIS, Orion Records, Marcus Hale, Stardust, 14.2 Hz">',
         '</HEAD>',
         '<BODY BGCOLOR="%s" TEXT="%s" LINK="%s" VLINK="%s" ALINK="#FF0000">' % (hp["bg"], hp["text"], hp["link"], hp["vlink"]),
-        '<FONT SIZE=1 FACE="Arial,Helvetica">GeoCities &gt; %s</FONT>' % esc(" > ".join(hp["path_display"].split("/"))),
     ]
+    if hp.get("midi"):
+        m_link = ctx.link(hp["midi"], from_dir)
+        parts.append('<BGSOUND SRC="%s" LOOP="INFINITE">' % m_link)
+        parts.append('<EMBED SRC="%s" AUTOSTART="TRUE" LOOP="TRUE" HIDDEN="TRUE" WIDTH="0" HEIGHT="0">' % m_link)
+    parts.append('<FONT SIZE=1 FACE="Arial,Helvetica">GeoCities &gt; %s</FONT>' % esc(" > ".join(hp["path_display"].split("/"))))
     
     # ------------------------------------------------ Layout: TWO COLUMN
     if layout == "two_column":

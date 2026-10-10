@@ -487,6 +487,13 @@ def generate_swarm_homepage(ctx, i, total_swarm=5000):
         elif stype == "pen_pals":
             heading = "International Pen-Pals Wanted"
             p_list.append(r.choice(sb.PEN_PALS).format(**slot_vars))
+
+        elif stype == "midi":
+            heading = "General MIDI Sequence Archive (.MID)"
+            p_list.append("I spent weeks sequencing these Nova Hart songs on Cakewalk / Master Tracks Pro for my Roland Sound Canvas SC-55 and Sound Blaster 16. Click below to download the .MID files for your own web page background or hardware sound module:")
+            sec_obj = {"h": heading, "p": p_list, "midi_list": True}
+            sections.append(sec_obj)
+            continue
             
         sec_obj = {"h": heading}
         if p_list:
@@ -530,6 +537,11 @@ def generate_swarm_homepage(ctx, i, total_swarm=5000):
     ]
     chosen_thematics = r.sample(thematic_pool, k=r.randint(2, 4))
     links.extend(chosen_thematics)
+
+    midi_bg = None
+    if r.random() < 0.35:
+        chosen_mid = r.choice(sb.MIDI_SLUGS)
+        midi_bg = f"asset:midi/{chosen_mid}.mid"
     
     hp = {
         "slug": slug,
@@ -548,5 +560,7 @@ def generate_swarm_homepage(ctx, i, total_swarm=5000):
         "sections": sections,
         "links": links,
     }
+    if midi_bg:
+        hp["midi"] = midi_bg
     owner = {"email": email}
     return hp, owner, clue_record

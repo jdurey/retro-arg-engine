@@ -30,6 +30,10 @@ AKASAKA_REELS = [  # known only after the 1995-05-22 FTP post
     ("JP-85-SD-R", "Synthetic Dawn (Akasaka rework)"), ("JP-85-MH-R", "Memory Hatch (City Pop rework)"),
     ("JP-85-TH-R", "Threshold (kayokyoku rework)"), ("(no file)", "Synthesized Smile"), ("(no file)", "Ghost in the Chorus"),
 ]
+MIDI_SLUGS = [
+    "gasoline_heart", "ghost_transit", "midnight_animal", "brighter_than_sun",
+    "only_we_remain", "synthetic_dawn", "memory_hatch"
+]
 PRESSINGS = {  # by region key -> how a local fan names their copy
     "us": "the US pressing (ORX-0909)", "jp": "the Japanese pressing (OJ-28011)", "kr": "the Korean licensed pressing",
     "mx": "the Mexican pressing (Orion México)", "de": "the West German pressing", "fr": "the French pressing",
@@ -118,15 +122,15 @@ REGION_PALETTES = {  # (bg, text, link, vlink)
 # section weights per archetype (sections defined in swarm_corner.py)
 ARCHETYPES = {
     "otaku":       dict(regions={"jp": 6, "kr": 4, "other": 1}, voice="polite",
-                        sections={"favorite": 3, "jp_singles": 5, "vhs": 4, "lyric_log": 4, "fanart": 3, "collection": 2, "pen_pals": 2, "theory": 1, "akasaka": 3}),
+                        sections={"favorite": 3, "jp_singles": 5, "vhs": 4, "lyric_log": 4, "fanart": 3, "collection": 2, "pen_pals": 2, "theory": 1, "akasaka": 3, "midi": 3}),
     "rockero":     dict(regions={"mx": 6, "br": 5, "other": 1}, voice="loud",
-                        sections={"favorite": 4, "solos": 5, "concert_dream": 3, "where_i_was": 3, "theory": 2, "collection": 2, "top5": 2}),
+                        sections={"favorite": 4, "solos": 5, "concert_dream": 3, "where_i_was": 3, "theory": 2, "collection": 2, "top5": 2, "midi": 1}),
     "taper":       dict(regions={"su": 7, "de": 2, "se": 1}, voice="terse",
-                        sections={"tape_genealogy": 5, "node_hunt": 3, "favorite": 2, "where_i_was": 2, "trading": 3, "theory": 1}),
+                        sections={"tape_genealogy": 5, "node_hunt": 3, "favorite": 2, "where_i_was": 2, "trading": 3, "theory": 1, "midi": 2}),
     "dsp":         dict(regions={"us": 4, "uk": 3, "de": 3, "se": 3, "other": 1}, voice="technical",
-                        sections={"spectrum": 5, "listening_night": 4, "node_hunt": 3, "gear": 3, "favorite": 2, "theory": 1}),
+                        sections={"spectrum": 5, "listening_night": 4, "node_hunt": 3, "gear": 3, "favorite": 2, "theory": 1, "midi": 2}),
     "collector":   dict(regions={"us": 3, "uk": 3, "jp": 2, "de": 2, "fr": 2, "other": 1}, voice="precise",
-                        sections={"collection": 5, "trading": 4, "favorite": 2, "jp_singles": 2, "lyric_log": 1}),
+                        sections={"collection": 5, "trading": 4, "favorite": 2, "jp_singles": 2, "lyric_log": 1, "midi": 3}),
     "conspiracist": dict(regions={"us": 5, "uk": 2, "mx": 1, "fr": 1, "other": 1}, voice="breathless",
                         sections={"theory": 5, "marcus": 4, "node_hunt": 2, "where_i_was": 2, "favorite": 1, "akasaka": 2}),
     "grieving":    dict(regions={"us": 3, "de": 3, "fr": 3, "jp": 1, "br": 1, "other": 1}, voice="quiet",
@@ -134,9 +138,9 @@ ARCHETYPES = {
     "skeptic":     dict(regions={"uk": 3, "us": 2, "se": 2, "de": 1}, voice="dry",
                         sections={"skeptic": 6, "spectrum": 2, "favorite": 1, "collection": 1}),
     "kid":         dict(regions={"us": 4, "uk": 2, "other": 2, "br": 1}, voice="kid",
-                        sections={"top5": 5, "favorite": 4, "fanart": 3, "pen_pals": 2, "theory": 1}),
+                        sections={"top5": 5, "favorite": 4, "fanart": 3, "pen_pals": 2, "theory": 1, "midi": 3}),
     "penpal":      dict(regions={"fr": 3, "se": 3, "kr": 2, "br": 2, "de": 2, "other": 2}, voice="earnest",
-                        sections={"pen_pals": 6, "trading": 3, "favorite": 3, "top5": 1}),
+                        sections={"pen_pals": 6, "trading": 3, "favorite": 3, "top5": 1, "midi": 1}),
 }
 
 # --------------------------------------------------------------------------- English fragments
