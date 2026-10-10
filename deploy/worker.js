@@ -26,9 +26,10 @@ export default {
       path = (path === "/index.html" || path === "/") ? `/regional/${node}/index.html` : `/regional/${node}${path}`;
     }
 
-    // Fetch the static asset from Cloudflare Pages
-    // Note: ensure BASE_STATIC_URL points to the Cloudflare Pages deploy URL (e.g. https://your-site.pages.dev)
-    const targetUrl = new URL(path, env.BASE_STATIC_URL);
+    // Fetch the static asset from Cloudflare Pages or GitHub pages
+    // Note: ensure BASE_STATIC_URL points to the deploy URL
+    const baseUrl = env.BASE_STATIC_URL.endsWith('/') ? env.BASE_STATIC_URL.slice(0, -1) : env.BASE_STATIC_URL;
+    const targetUrl = new URL(baseUrl + (path.startsWith('/') ? path : '/' + path));
     let response = await fetch(targetUrl.toString(), request);
     
     response = new Response(response.body, response);
