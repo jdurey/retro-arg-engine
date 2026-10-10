@@ -8,7 +8,7 @@ const ROBOTS = `User-agent: *\nAllow: /\n\nSitemap: https://${APEX}/sitemap.xml\
 // IndexNow keys are public by design (they prove control of the host, nothing more).
 const INDEXNOW_KEY = "37feeed875722863fda484c68e6695e5";
 // Bump when files in assets/ are replaced so edge + browser caches refetch.
-const ASSET_VERSION = "6";
+const ASSET_VERSION = "7";
 
 function sitemap() {
   const urls = STORY_PATHS.map((sp) => publicUrl(sp)).filter((u) => u && u.startsWith("https://"));

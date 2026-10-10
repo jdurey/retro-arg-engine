@@ -108,6 +108,20 @@ def build(ctx, **kwargs):
                 size_kb = os.path.getsize(src_f) / 1024
                 midi_files.append((fname, size_kb))
 
+        # Also copy 14.4k streams if available
+        streams_src = os.path.join(root_dir, "assets", "audio", "streams")
+        if os.path.isdir(streams_src):
+            for fname in sorted(os.listdir(streams_src)):
+                if fname.endswith(".mp3"):
+                    src_f = os.path.join(streams_src, fname)
+                    with open(src_f, "rb") as fh:
+                        rel_p = f"ftp/kamome/midi/{fname}"
+                        write(os.path.join(ctx.out, rel_p), fh.read(), binary=True)
+                        ctx.register(rel_p, "ftp", "kamome")
+                        count += 1
+                    size_kb = os.path.getsize(src_f) / 1024
+                    midi_files.append((fname, size_kb))
+
         # Build ftp://kamome/midi/index.html
         midi_lines = [
             DOCTYPE,
@@ -118,13 +132,15 @@ def build(ctx, **kwargs):
             '<A HREF="../">[DIR]  ../ (Parent Directory)</A>',
             '-------------------------------------------------------------------------------',
         ]
-        for fname, size_kb in midi_files:
-            midi_lines.append(f'[MID]  <A HREF="{fname}">{fname:<42}</A>  {size_kb:>6.1f} KB')
+        sorted_files = sorted(midi_files, key=lambda x: (0 if x[0].endswith(".mid") else 1, x[0]))
+        for fname, size_kb in sorted_files:
+            type_tag = "[MID]" if fname.endswith(".mid") else "[14K]"
+            midi_lines.append(f'{type_tag}  <A HREF="{fname}">{fname:<42}</A>  {size_kb:>6.1f} KB')
         midi_lines += [
             '-------------------------------------------------------------------------------',
             '</PRE>',
             '<HR>',
-            '<ADDRESS>CERN-HTTPd/3.0 &middot; Kamome-Net Anonymous FTP Service (General MIDI Archive)</ADDRESS>',
+            '<ADDRESS>CERN-HTTPd/3.0 &middot; Kamome-Net Anonymous FTP Service (General MIDI & 14.4k Streams)</ADDRESS>',
             '</BODY></HTML>'
         ]
         midi_index_rel = "ftp/kamome/midi/index.html"

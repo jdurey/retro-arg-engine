@@ -85,13 +85,94 @@ def midi_jukebox_html(ctx, from_dir):
         ("memory_hatch", "Memory Hatch", "1985 Sophisti-Pop / Rhodes", "3.5 KB"),
     ]
     rows = []
+    audios = []
     for slug, title, genre, sz in midis:
         m_link = ctx.link(f"asset:midi/{slug}.mid", from_dir)
-        rows.append('<TR><TD><FONT FACE="Arial,Helvetica" SIZE=2><B>%s</B></FONT></TD><TD><FONT FACE="Arial,Helvetica" SIZE=2>%s</FONT></TD><TD ALIGN=RIGHT><TT>%s</TT></TD><TD ALIGN=CENTER><FONT FACE="Arial,Helvetica" SIZE=2>[ <A HREF="%s"><B>DOWNLOAD .MID</B></A> ]</FONT></TD></TR>' % (
-            esc(title), esc(genre), sz, m_link))
-    return ('<TABLE BORDER=2 CELLPADDING=4 CELLSPACING=0 BGCOLOR="#000000" WIDTH="92%%">'
-            '<TR BGCOLOR="#222255"><TH><FONT COLOR="#FFFF00" FACE="Arial,Helvetica" SIZE=2>TRACK TITLE</FONT></TH><TH><FONT COLOR="#FFFF00" FACE="Arial,Helvetica" SIZE=2>GENRE / STYLE</FONT></TH><TH><FONT COLOR="#FFFF00" FACE="Arial,Helvetica" SIZE=2>SIZE</FONT></TH><TH><FONT COLOR="#FFFF00" FACE="Arial,Helvetica" SIZE=2>GENERAL MIDI</FONT></TH></TR>'
-            + "".join(rows) + '</TABLE>')
+        s_link = ctx.link(f"asset:audio/streams/{slug}_14k.mp3", from_dir)
+        clean_title = esc(title).replace("'", "\\'")
+        audios.append('<AUDIO ID="audio_%s" SRC="%s" PRELOAD="none"></AUDIO>' % (slug, s_link))
+        rows.append(
+            '<TR><TD><FONT FACE="Arial,Helvetica" SIZE=2><B>%s</B></FONT></TD>'
+            '<TD><FONT FACE="Arial,Helvetica" SIZE=2>%s</FONT></TD>'
+            '<TD ALIGN=RIGHT><TT>%s</TT></TD>'
+            '<TD ALIGN=CENTER NOWRAP>'
+            '<BUTTON TYPE="BUTTON" ID="btn_%s" ONCLICK="play14k(\'%s\', \'%s\', this)" '
+            'STYLE="cursor:pointer; background:#111111; color:#00FF66; border:2px outset #666666; '
+            'font-family:Courier New,monospace; font-weight:bold; font-size:11px; padding:2px 7px; margin-right:6px;">'
+            '&#9654; 14.4k</BUTTON>'
+            '<FONT FACE="Arial,Helvetica" SIZE=2>[ <A HREF="%s"><B>DOWNLOAD .MID</B></A> ]</FONT>'
+            '</TD></TR>' % (esc(title), esc(genre), sz, slug, slug, clean_title, m_link)
+        )
+    
+    script = (
+        '<SCRIPT>\n'
+        'var currentAudio = null;\n'
+        'var currentBtn = null;\n'
+        'function play14k(slug, title, btn) {\n'
+        '  var audio = document.getElementById("audio_" + slug);\n'
+        '  var status = document.getElementById("midi_stream_status");\n'
+        '  if (!audio) return;\n'
+        '  if (currentAudio === audio && !audio.paused) {\n'
+        '    audio.pause();\n'
+        '    audio.currentTime = 0;\n'
+        '    btn.innerHTML = "&#9654; 14.4k";\n'
+        '    btn.style.color = "#00FF66";\n'
+        '    if (status) status.innerHTML = "STREAM: [ IDLE / READY ]";\n'
+        '    currentAudio = null;\n'
+        '    currentBtn = null;\n'
+        '    return;\n'
+        '  }\n'
+        '  if (currentAudio) {\n'
+        '    currentAudio.pause();\n'
+        '    currentAudio.currentTime = 0;\n'
+        '    if (currentBtn) {\n'
+        '      currentBtn.innerHTML = "&#9654; 14.4k";\n'
+        '      currentBtn.style.color = "#00FF66";\n'
+        '    }\n'
+        '  }\n'
+        '  if (status) status.innerHTML = "STREAM: [ BUFFERING 14.4 KB/S V.32bis... ]";\n'
+        '  btn.innerHTML = "&#9632; BUFFER";\n'
+        '  btn.style.color = "#FFFF00";\n'
+        '  currentAudio = audio;\n'
+        '  currentBtn = btn;\n'
+        '  var p = audio.play();\n'
+        '  if (p !== undefined) {\n'
+        '    p.then(function() {\n'
+        '      btn.innerHTML = "&#9632; STOP";\n'
+        '      btn.style.color = "#FF4444";\n'
+        '      if (status) status.innerHTML = "STREAM: [ PLAYING @ 14,400 BPS ]: " + title;\n'
+        '    }).catch(function(e) {\n'
+        '      btn.innerHTML = "&#9654; 14.4k";\n'
+        '      btn.style.color = "#00FF66";\n'
+        '      if (status) status.innerHTML = "STREAM: [ ERROR: CARRIER DROPPED ]";\n'
+        '    });\n'
+        '  }\n'
+        '  audio.onended = function() {\n'
+        '    btn.innerHTML = "&#9654; 14.4k";\n'
+        '    btn.style.color = "#00FF66";\n'
+        '    if (status) status.innerHTML = "STREAM: [ COMPLETED / READY ]";\n'
+        '    currentAudio = null;\n'
+        '    currentBtn = null;\n'
+        '  };\n'
+        '}\n'
+        '</SCRIPT>\n'
+    )
+    
+    header_tr = (
+        '<TR BGCOLOR="#111133"><TD COLSPAN=4><FONT FACE="Courier New,monospace" SIZE=2 COLOR="#00FFCC">'
+        '<B>&#128225; STARDUST AUDIO RELAY // 14,400 BPS MODEM STREAMING ACTIVE</B><BR>'
+        '<SPAN ID="midi_stream_status" STYLE="color:#FFFF33;">STREAM: [ IDLE &middot; CLICK PLAY TO STREAM AT 14.4 KB/S ]</SPAN>'
+        '</FONT></TD></TR>'
+        '<TR BGCOLOR="#222255"><TH><FONT COLOR="#FFFF00" FACE="Arial,Helvetica" SIZE=2>TRACK TITLE</FONT></TH>'
+        '<TH><FONT COLOR="#FFFF00" FACE="Arial,Helvetica" SIZE=2>GENRE / STYLE</FONT></TH>'
+        '<TH><FONT COLOR="#FFFF00" FACE="Arial,Helvetica" SIZE=2>SIZE</FONT></TH>'
+        '<TH><FONT COLOR="#FFFF00" FACE="Arial,Helvetica" SIZE=2>STREAM / DOWNLOAD</FONT></TH></TR>'
+    )
+    
+    return "".join(audios) + script + (
+        '<TABLE BORDER=2 CELLPADDING=4 CELLSPACING=0 BGCOLOR="#000000" WIDTH="94%%">'
+        + header_tr + "".join(rows) + '</TABLE>'
+    )
 
 
 def render_sections_html(ctx, sections, from_dir, hp):
