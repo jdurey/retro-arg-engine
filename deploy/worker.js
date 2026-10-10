@@ -5,6 +5,8 @@ const OG_DESCRIPTION = "A 1994 webring for fans of Nova Hart and the 14.2 Hz Sta
 const OG_IMAGE = `https://${APEX}/assets/og_card.jpg`;
 
 const ROBOTS = `User-agent: *\nAllow: /\n\nSitemap: https://${APEX}/sitemap.xml\n`;
+// IndexNow keys are public by design (they prove control of the host, nothing more).
+const INDEXNOW_KEY = "37feeed875722863fda484c68e6695e5";
 
 function sitemap() {
   const urls = STORY_PATHS.map((sp) => publicUrl(sp)).filter((u) => u && u.startsWith("https://"));
@@ -75,6 +77,9 @@ export default {
     }
     if (url.pathname === "/sitemap.xml") {
       return new Response(sitemap(), { headers: retroHeaders("application/xml; charset=utf-8") });
+    }
+    if (url.pathname === `/${INDEXNOW_KEY}.txt`) {
+      return new Response(INDEXNOW_KEY, { headers: retroHeaders("text/plain; charset=utf-8") });
     }
     const { sitePath, canonical } = resolve(url.hostname, url.pathname);
 
