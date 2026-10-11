@@ -20,13 +20,14 @@ fi
 
 python3 "$DIR/build_playlist.py"
 
-BACKDROP="$DIR/backdrop.jpg"
+BACKDROP="$DIR/backdrop_clean.png"
 PLAYLIST="$DIR/playlist.txt"
 RTMP_URL="rtmp://a.rtmp.youtube.com/live2/$STREAM_KEY"
 
 echo "=========================================================="
 echo " Starting 24/7 Live Broadcast: 14.2 Hz Carrier Signal"
-echo " RTMP Endpoint: rtmp://a.rtmp.youtube.com/live2/****"
+echo " Bitrate Target: 6800 Kbps (YouTube Optimal 1080p)"
+echo " Audio Waveform: Real-Time CRT Oscilloscope Reactive Display"
 echo " Stream will run continuously with auto-reconnect..."
 echo " Press Ctrl+C to terminate."
 echo "=========================================================="
@@ -34,8 +35,9 @@ echo "=========================================================="
 while true; do
     ffmpeg -re -loop 1 -framerate 30 -i "$BACKDROP" \
         -f concat -safe 0 -stream_loop -1 -i "$PLAYLIST" \
-        -vf "scale=1920:1080:force_original_aspect_ratio=decrease,pad=1920:1080:(ow-iw)/2:(oh-ih)/2" \
-        -c:v libx264 -preset veryfast -b:v 3000k -maxrate 3500k -bufsize 7000k \
+        -filter_complex "[0:v]scale=1920:1080[bg];[1:a]showwaves=s=404x214:mode=line:colors=lime:draw=full:scale=cbrt[wave];[wave]colorkey=0x000000:0.05:0.1[wave_trans];[bg][wave_trans]overlay=x=731:y=456[v]" \
+        -map "[v]" -map 1:a \
+        -c:v libx264 -preset veryfast -b:v 6800k -minrate 6000k -maxrate 7200k -bufsize 14000k \
         -pix_fmt yuv420p -g 60 -keyint_min 60 \
         -c:a aac -b:a 192k -ar 44100 -ac 2 \
         -f flv "$RTMP_URL" || true
@@ -43,4 +45,3 @@ while true; do
     echo "Stream disconnected. Reconnecting in 5 seconds..."
     sleep 5
 done
-
