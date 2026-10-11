@@ -155,21 +155,36 @@ def apply(dry_run=False, limit=None, reset_done=False, translate_mode=False):
                 print(f"    Sample JA Desc:  {locs['ja']['description'][:200]}...\n")
             n += 1
             continue
-        try:
-            api.videos().update(part="snippet,localizations", body=body).execute()
-        except HttpError as e:
-            if e.resp.status == 403 and b"quota" in e.content.lower():
-                print(f"\n[!] YouTube API daily quota reached after {n} video updates.")
-                print("    Google resets quota daily at midnight Pacific Time (07:00 UTC).")
-                print(f"    Progress saved ({len(done)}/{len(videos)} videos updated).")
+        success = False
+        is_quota = False
+        for attempt in range(3):
+            try:
+                api.videos().update(part="snippet,localizations", body=body).execute()
+                success = True
                 break
-            print("ERROR", vid, e.resp.status, e.content[:300])
+            except HttpError as e:
+                if e.resp.status == 403 and b"quota" in e.content.lower():
+                    print(f"\n[!] YouTube API daily quota reached after {n} video updates.")
+                    print("    Google resets quota daily at midnight Pacific Time (07:00 UTC).")
+                    print(f"    Progress saved ({len(done)}/{len(videos)} videos updated).")
+                    is_quota = True
+                    break
+                print(f"HttpError {vid} (attempt {attempt+1}): {e.resp.status} {e.content[:200]}")
+                time.sleep(2)
+            except Exception as e:
+                print(f"Transient network error on {vid} (attempt {attempt+1}): {e}")
+                time.sleep(2)
+        if is_quota:
+            break
+        if not success:
+            print(f"Skipping {vid} after 3 failed attempts.")
             continue
         done.add(vid)
         json.dump(sorted(done), open(done_path, "w"))
         n += 1
         print(f"[{len(done)}/{len(videos)}] updated {vid} -> {v_path}", flush=True)
     print(f"\nDone this run: {n}; total {len(done)}/{len(videos)} videos updated.")
+
 
 
 def sync(max_results=20, dry_run=False):
