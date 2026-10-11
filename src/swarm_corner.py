@@ -144,6 +144,32 @@ def make_title(archetype, reg_key, name, city, r):
             f"Nod 10 // {name}'s Webbsida",
         ]
         return r.choice(titles_sv)
+    elif reg_key == "hi":
+        titles_hi = [
+            f"★ {name} का नोवा हार्ट कॉर्नर ({city}) ★",
+            f"वीएसएनएल नोड 11 - {name} का वेबपेज",
+            f"14.2 Hz भारत आर्काइव - {name}",
+            f"{name}'s Nova Hart Sanctuary ({city})",
+            f"पालिका बाज़ार टेप संग्रह // {name}",
+        ]
+        return r.choice(titles_hi)
+    elif reg_key == "au":
+        titles_au = [
+            f"★ {name}'s Aussie Nova Hart Shrine ({city}) ★",
+            f"Node 12 Down Under - {name}'s GeoCities Hub",
+            f"{name}'s BigPond 14.2 Hz Listening Post",
+            f"Triple J Off-Air Tapes // {name} ({city})",
+            f"{name}'s Aussie Tape Exchange & Shrine",
+        ]
+        return r.choice(titles_au)
+    elif reg_key == "fj":
+        titles_fj = [
+            f"★ {name}'s Pacific Island Relay // {city} ★",
+            f"Bula! {name}'s South Pacific Nova Hart Page",
+            f"USP Satellite Station 13 - {name} ({city})",
+            f"Suva Shortwave DX Hub - {name}",
+        ]
+        return r.choice(titles_fj)
     return r.choice(titles_en)
 
 def generate_swarm_homepage(ctx, i, total_swarm=5000):
@@ -532,6 +558,9 @@ def generate_swarm_homepage(ctx, i, total_swarm=5000):
         {"t": "Regional Node 02: Kamome BBS (Japan)", "u": "regional:02-japan"},
         {"t": "Regional Node 04: Red Coyoacán (Mexico)", "u": "regional:04-mexico"},
         {"t": "Regional Node 08: Relcom Node 08 (USSR)", "u": "regional:08-ussr"},
+        {"t": "Regional Node 11: VSNL Gateway (India)", "u": "regional:11-india"},
+        {"t": "Regional Node 12: OzEmail Node (Australia)", "u": "regional:12-australia"},
+        {"t": "Regional Node 13: USP Pacific Relay (Fiji)", "u": "regional:13-fiji"},
         {"t": "Tokyo Garden #1420 - Akasaka Shrine", "u": "geo:tokyo-garden-1420"},
         {"t": "Silicon Valley Lab #1984 - DSP Lab", "u": "geo:siliconvalley-lab-1984"},
     ]
@@ -539,7 +568,7 @@ def generate_swarm_homepage(ctx, i, total_swarm=5000):
     links.extend(chosen_thematics)
 
     midi_bg = None
-    if r.random() < 0.35:
+    if r.random() < 0.65:
         chosen_mid = r.choice(sb.MIDI_SLUGS)
         midi_bg = f"asset:midi/{chosen_mid}.mid"
     

@@ -76,11 +76,23 @@ def render_badges(ctx, badges, from_dir):
 
 def midi_jukebox_html(ctx, from_dir):
     midis = [
-        ("gasoline_heart", "Gasoline Heart (ガソリン・ハート)", "1985 J-Rock / Synthpop", "7.3 KB"),
+        ("gasoline_heart", "Gasoline Heart (ガソリン・ハート)", "1985 J-Rock / City Pop Anthem", "7.3 KB"),
+        ("these_wings_are_my_own", "These Wings Are My Own", "1985 Power Ballad", "2.9 KB"),
+        ("shes_hardwired", "She's Hardwired", "1985 Synthrock / FM Lead", "4.1 KB"),
+        ("behind_the_glass", "Behind the Glass", "1985 DX7 Arena Power Ballad", "3.3 KB"),
+        ("chrome_velocity", "Chrome Velocity", "1986 High-Speed Hard Rock", "3.8 KB"),
+        ("hearts_on_fire", "Hearts on Fire", "1986 Epic Arena Rock Anthem", "3.7 KB"),
+        ("hold_back_the_storm", "Hold Back the Storm", "1986 Arena Rock Anthem", "3.4 KB"),
+        ("before_you_disappear", "Before You Disappear", "1985 Emotional Power Ballad", "3.0 KB"),
+        ("static_and_steel", "Static & Steel", "1988 Power Ballad", "2.8 KB"),
+        ("run_with_the_fire", "Run With The Fire", "1987 Hard Rock Adrenaline", "4.1 KB"),
         ("ghost_transit", "Ghost Transit (ゴースト・トランジット)", "1985 Atmospheric Ballad", "4.3 KB"),
         ("midnight_animal", "Midnight Animal (ミッドナイト・アニマル)", "1986 Funky City Pop", "6.7 KB"),
         ("brighter_than_sun", "Brighter Than The Sun (太陽よりも、輝いて！)", "1987 80s Idol Anthem", "9.9 KB"),
         ("only_we_remain", "Only We Remain (残されたのは、私たちだけ)", "1989 Kayokyoku Ballad", "4.3 KB"),
+        ("togethers_the_way", "Together's the Way", "1984 Orion Records Broadcast", "3.5 KB"),
+        ("perfect_daydream", "Perfect Daydream", "1984 Orion City Pop Broadcast", "3.2 KB"),
+        ("summer_of_85", "Summer of '85", "1985 Nostalgic Power Ballad", "3.4 KB"),
         ("synthetic_dawn", "Synthetic Dawn", "1985 Industrial Synthwave", "3.7 KB"),
         ("memory_hatch", "Memory Hatch", "1985 Sophisti-Pop / Rhodes", "3.5 KB"),
     ]

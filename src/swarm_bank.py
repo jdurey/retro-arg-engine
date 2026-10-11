@@ -13,11 +13,23 @@ is used here - no production notes.
 # --------------------------------------------------------------------------- catalogue
 # Canon songs a 1995-96 fan could know: (title, year, note-for-slotting)
 SONGS = [
+    # Power Ballads
+    ("These Wings Are My Own", 1985), ("Behind the Glass", 1985), ("Before You Disappear", 1985),
+    ("Static & Steel", 1988), ("Walls of Sound", 1985), ("Cage in Your Hand", 1986),
+    ("Where The Fire Goes", 1986), ("Silent Room", 1987), ("If This Is the End", 1988),
+    ("Only We Remain", 1989), ("Echoes of Stardust", 1986),
+    # Synthrock & Arena Anthems
+    ("She's Hardwired", 1985), ("Gasoline Heart", 1985), ("Midnight Animal", 1985),
+    ("Chrome Velocity", 1986), ("Hearts on Fire", 1986), ("Hold Back the Storm", 1986),
+    ("Run With The Fire", 1987), ("Signal in the Fire", 1987), ("Ride the Real Thing", 1986),
+    ("Secrets in the Spotlight", 1986), ("One Chance Tonight", 1987), ("One Voice Left", 1987),
+    ("Heart on the Line", 1984), ("The Last Secret", 1987), ("Rise From The Silence", 1988),
+    # 1984 Orion Broadcasts / Idol Pop
     ("Brighter Than The Sun", 1984), ("Together's the Way", 1984), ("Perfect Daydream", 1984),
-    ("Harbor and Home", 1984), ("Warm Hands, One Map", 1984),
-    ("Synthetic Dawn", 1985), ("Memory Hatch", 1985), ("Threshold", 1985), ("Gasoline Heart", 1985),
-    ("Summer of '85", 1985), ("She's Hardwired", 1985), ("Midnight Animal", 1985),
-    ("Static & Steel", 1988), ("Midnight Protocol (Part II: Nova)", 1989), ("Midnight Protocol (Part III: The Chorus)", 1989),
+    ("Harbor and Home", 1984), ("Warm Hands, One Map", 1984), ("Summer of '85", 1985),
+    # Deep Cuts & Ambient
+    ("Synthetic Dawn", 1985), ("Memory Hatch", 1985), ("Threshold", 1985),
+    ("Midnight Protocol (Part II: Nova)", 1989), ("Midnight Protocol (Part III: The Chorus)", 1989),
 ]
 JP_SINGLES = [  # Idol Protocol singles (Akasaka), canon file numbers
     ("JP-85-GH", "ガソリン・ハート", "Gasoline Heart", 1985),
@@ -32,19 +44,26 @@ AKASAKA_REELS = [  # known only after the 1995-05-22 FTP post
 ]
 MIDI_SLUGS = [
     "gasoline_heart", "ghost_transit", "midnight_animal", "brighter_than_sun",
-    "only_we_remain", "synthetic_dawn", "memory_hatch"
+    "only_we_remain", "synthetic_dawn", "memory_hatch",
+    "these_wings_are_my_own", "shes_hardwired", "behind_the_glass",
+    "chrome_velocity", "hearts_on_fire", "hold_back_the_storm",
+    "before_you_disappear", "static_and_steel", "run_with_the_fire",
+    "togethers_the_way", "perfect_daydream", "summer_of_85"
 ]
 PRESSINGS = {  # by region key -> how a local fan names their copy
     "us": "the US pressing (ORX-0909)", "jp": "the Japanese pressing (OJ-28011)", "kr": "the Korean licensed pressing",
     "mx": "the Mexican pressing (Orion México)", "de": "the West German pressing", "fr": "the French pressing",
-    "uk": "the UK pressing", "su": "the unauthorised Soviet pressing (1990)", "br": "the Brazilian pressing",
-    "se": "the Swedish pressing", "other": "an import of the US pressing (ORX-0909)",
+    "uk": "the UK pressing", "su": "the unauthorised Soviet pressing (1990)", "br": "the Brazilian pressing (Orion do Brasil)",
+    "se": "the Swedish pressing", "hi": "the Indian import cassette (Palika Bazaar copy)",
+    "au": "the Australian festival pressing (OR-OZ85)", "fj": "the South Pacific shortwave cassette capture",
+    "other": "an import of the US pressing (ORX-0909)",
 }
 NODE_LINES = {1: "NOVA HART TO ALL STATIONS", 2: "THE SIGNAL IS OLDER THAN THE SONG", 3: "THE CRACK RUNS UNDER THE BORDER",
               4: "ORION BUILT A PATCH NOT A STAR", 5: "THEY WILL SEND A COPY IN MY PLACE", 6: "DO NOT WORSHIP THE COPY",
               7: "MARCUS IS NOT ONE MAN", 8: "HE IS IN EVERY NODE", 9: "FIND HIM WHERE YOU ARE",
-              10: "KEEP THE PRESSINGS APART AND THE CHANNEL STAYS CLOSED"}
-REGION_NODE = {"us": 1, "jp": 2, "kr": 3, "mx": 4, "de": 5, "fr": 6, "uk": 7, "su": 8, "br": 9, "se": 10, "other": 1}
+              10: "KEEP THE PRESSINGS APART AND THE CHANNEL STAYS CLOSED",
+              11: "THE OCEAN OF SOUND SWALLOWS THE CAGE", 12: "SOUTHERN SKIES HEAR THE ECHO FIRST", 13: "ISLAND RELAYS HOLD THE LAST REFLECTION"}
+REGION_NODE = {"us": 1, "jp": 2, "kr": 3, "mx": 4, "de": 5, "fr": 6, "uk": 7, "su": 8, "br": 9, "se": 10, "hi": 11, "au": 12, "fj": 13, "other": 1}
 # Wrong-but-plausible lines fans "decoded" themselves (red herrings)
 FAKE_LINES = ["THE HATCH IS OPEN", "HOLD FOR RELAY", "SHE IS NOT RESTING", "ASK WHERE NOT WHO", "EVERY COPY REMEMBERS",
               "THE CHORUS IS LISTENING", "TURN THE RECORD OVER", "THE SMILE IS A PATCH", "COUNT THE FIRES", "02:14 IS A DOOR"]
@@ -58,19 +77,19 @@ EMO = {"en": [":)", ":-)", ";-)", ":-P", "!!", "(c:", ""], "jp": ["^_^", "(^o^)"
 # --------------------------------------------------------------------------- regions
 # weight ~ share of pages; lang = page language; native = sections written natively
 REGIONS = {
-    "us": dict(weight=20, lang="en", emo="en",
+    "us": dict(weight=12, lang="en", emo="en",
                names=["Kim", "Jess", "Pete", "Chris", "Jordan", "Dana", "Tasha", "Rob", "Mikey", "Laurie", "Dwayne", "Becca", "Tyler", "Shawna", "Eddie", "Marisol", "Trent", "Kayla", "Greg", "Amber", "Lonnie", "Nicole", "Darnell", "Heather"],
                cities=["Columbus, Ohio", "Austin, TX", "Fresno", "Tacoma", "Duluth", "Albuquerque", "Bakersfield", "Providence", "Boise", "Tulsa", "Ann Arbor", "Gainesville", "Spokane", "Reno", "Pasadena", "Omaha", "Asheville", "Baltimore"],
                domains=["pacnet-online.com", "ashpoly.edu", "netcom-west.com", "prairie.net", "cyberia-bbs.com"]),
-    "uk": dict(weight=7, lang="en", emo="en",
+    "uk": dict(weight=6, lang="en", emo="en",
                names=["Ollie", "Gemma", "Nigel", "Siobhan", "Callum", "Fiona", "Gareth", "Becky", "Rhys", "Kirsty", "Dev", "Morag"],
                cities=["Leeds", "Sheffield", "Cardiff", "Glasgow", "Bristol", "Norwich", "Swindon", "Belfast", "Hull", "Brighton"],
                domains=["janet-gw.ac.uk", "demon-dial.co.uk", "ashpoly.ac.uk"]),
-    "other": dict(weight=7, lang="en", emo="en",
+    "other": dict(weight=5, lang="en", emo="en",
                   names=["Priya", "Liam", "Matteo", "Sanne", "Bram", "Aroha", "Giulia", "Connor", "Noor", "Kieran"],
-                  cities=["Perth", "Toronto", "Auckland", "Utrecht", "Bologna", "Winnipeg", "Hobart", "Ghent", "Cork", "Halifax"],
-                  domains=["pacnet-online.com", "ozemail-west.au", "xs4all-node.nl"]),
-    "jp": dict(weight=18, lang="ja", emo="jp",
+                  cities=["Toronto", "Auckland", "Utrecht", "Bologna", "Winnipeg", "Ghent", "Cork", "Halifax"],
+                  domains=["pacnet-online.com", "xs4all-node.nl"]),
+    "jp": dict(weight=16, lang="ja", emo="jp",
                names=["Aiko", "Yuki", "Kenji", "Hana", "Takeshi", "Mariko", "Shun", "Naomi", "Daisuke", "Emi", "Hiro", "Sayaka"],
                cities=["Osaka", "Kyoto", "Sapporo", "Fukuoka", "Sendai", "Kobe", "Nagoya", "Yokohama", "Hiroshima", "Kanazawa"],
                domains=["kamome-net.or.jp", "pc-van-alt.or.jp", "tokyo-u-net.ac.jp"]),
@@ -82,10 +101,10 @@ REGIONS = {
                names=["Mateo", "Camila", "Lucía", "Diego", "Ximena", "Rodrigo", "Itzel", "Alejandro", "Paola", "Emiliano", "Valeria", "Toño"],
                cities=["Guadalajara", "Monterrey", "Puebla", "Coyoacán, D.F.", "Tijuana", "Oaxaca", "Mérida", "Bogotá", "Buenos Aires", "Santiago de Chile"],
                domains=["redcoyoacan.mx", "telnet-ala.mx", "rockeros.org.ar"]),
-    "br": dict(weight=6, lang="pt", emo="pt",
-               names=["Thiago", "Juliana", "Rafael", "Fernanda", "Bruno", "Larissa", "Caio", "Renata"],
-               cities=["Porto Alegre", "São Paulo", "Belo Horizonte", "Curitiba", "Recife", "Salvador", "Florianópolis"],
-               domains=["saturno.com.br", "alternex-alt.br"]),
+    "br": dict(weight=8, lang="pt", emo="pt",
+               names=["Thiago", "Juliana", "Rafael", "Fernanda", "Bruno", "Larissa", "Caio", "Renata", "Rodrigo", "Beatriz", "Marcelo", "Camila"],
+               cities=["Porto Alegre", "São Paulo", "Belo Horizonte", "Curitiba", "Recife", "Salvador", "Florianópolis", "Rio de Janeiro", "Brasília", "Lisboa", "Porto"],
+               domains=["saturno.com.br", "alternex-alt.br", "embratel.net.br", "telepac.pt", "usp-net.br"]),
     "de": dict(weight=7, lang="de", emo="default",
                names=["Tobias", "Sven", "Anja", "Jens", "Katrin", "Matthias", "Steffi", "Holger", "Nadine"],
                cities=["Hamburg", "Bremen", "Köln", "Leipzig", "Dresden", "Hannover", "Kiel", "Wien", "Zürich"],
@@ -94,14 +113,26 @@ REGIONS = {
                names=["Lucie", "Julien", "Inès", "Mathieu", "Camille", "Yannick", "Élodie", "Bastien"],
                cities=["Lyon", "Lille", "Nantes", "Marseille", "Toulouse", "Rennes", "Bruxelles", "Montréal"],
                domains=["stardust3615.fr", "francenet-alt.fr"]),
-    "su": dict(weight=8, lang="ru", emo="default",
-               names=["Nadia", "Dmitri", "Olga", "Sergei", "Katya", "Andrei", "Irina", "Pavel", "Marta", "Tomas"],
-               cities=["St. Petersburg", "Moscow", "Riga", "Kyiv", "Minsk", "Tallinn", "Novosibirsk", "Vilnius", "Kraków"],
-               domains=["relcom-node08.su", "demos-alt.ru"]),
+    "su": dict(weight=10, lang="ru", emo="default",
+               names=["Nadia", "Dmitri", "Olga", "Sergei", "Katya", "Andrei", "Irina", "Pavel", "Marta", "Tomas", "Vadim", "Svetlana", "Igor", "Elena"],
+               cities=["St. Petersburg", "Moscow", "Riga", "Kyiv", "Minsk", "Tallinn", "Novosibirsk", "Vilnius", "Kraków", "Nizhny Novgorod", "Ekaterinburg", "Vladivostok"],
+               domains=["relcom-node08.su", "demos-alt.ru", "fido-spb.org.ru", "glasnet.ru", "kiae.su"]),
     "se": dict(weight=4, lang="sv", emo="default",
                names=["Sven", "Elin", "Johan", "Maja", "Linnea", "Oskar", "Frida"],
                cities=["Uppsala", "Göteborg", "Malmö", "Umeå", "Lund", "Oslo", "Helsinki"],
                domains=["sunet-mirror.se", "lysator-alt.se"]),
+    "hi": dict(weight=8, lang="hi", emo="default",
+               names=["Aarav", "Pooja", "Vikram", "Ananya", "Rohan", "Neha", "Arjun", "Sneha", "Karan", "Meera", "Aditya", "Ritu", "Deepak", "Sunita"],
+               cities=["New Delhi", "Mumbai", "Bangalore", "Pune", "Calcutta", "Hyderabad", "Jaipur", "Chandigarh", "Madras", "Ahmedabad"],
+               domains=["vsnl.net.in", "iitb.ac.in", "delhi-bbs.in", "bombay-radio.net.in", "ncst.ernet.in", "iitd.ernet.in"]),
+    "au": dict(weight=6, lang="en", emo="en",
+               names=["Liam", "Chloe", "Lachlan", "Bec", "Shane", "Kylie", "Damian", "Jemma", "Brendan", "Tegan", "Brett", "Stacey"],
+               cities=["Melbourne", "Sydney", "Brisbane", "Perth", "Adelaide", "Hobart", "Newcastle", "Canberra", "Geelong", "Darwin"],
+               domains=["ozemail.com.au", "telstra.net.au", "unimelb.edu.au", "apana.org.au", "vicnet.net.au", "connect.com.au"]),
+    "fj": dict(weight=4, lang="fj", emo="en",
+               names=["Jone", "Mere", "Seru", "Alisi", "Kitione", "Litiana", "Vilimoni", "Salote", "Wame", "Ana"],
+               cities=["Suva", "Nadi", "Lautoka", "Nausori", "Labasa", "Savusavu", "Levuka"],
+               domains=["fptl.com.fj", "usp.ac.fj", "pacific-islands.net.fj", "telecom-fiji.com.fj"]),
 }
 
 REGION_PALETTES = {  # (bg, text, link, vlink)
@@ -116,6 +147,9 @@ REGION_PALETTES = {  # (bg, text, link, vlink)
     "fr": [("#000033", "#00FFFF", "#FFFFFF", "#99CCFF"), ("#FFFFF0", "#000000", "#990000", "#663333")],
     "su": [("#2B2B2B", "#D0D0D0", "#FF6666", "#CC9999"), ("#E8E8E0", "#202020", "#8B0000", "#555555")],
     "se": [("#F5F5FF", "#000044", "#0044AA", "#553388"), ("#000022", "#CCDDFF", "#FFEE66", "#BBAA44")],
+    "hi": [("#1A0033", "#FFD700", "#FF6600", "#FFCC00"), ("#002B11", "#FFFFDD", "#FF9933", "#00FF99"), ("#33001A", "#FFE4B5", "#FF4500", "#FFD700")],
+    "au": [("#001F3F", "#FFDC00", "#01FF70", "#7FDBFF"), ("#1A2421", "#E0D7C6", "#FF851B", "#F012BE"), ("#2C3E50", "#ECF0F1", "#E74C3C", "#F39C12")],
+    "fj": [("#003366", "#CCFFFF", "#FFD700", "#00FFCC"), ("#004D40", "#E0F2F1", "#FFAB00", "#64FFDA"), ("#1A1A2E", "#F8E9A1", "#F76C6C", "#A8DADC")],
 }
 
 # --------------------------------------------------------------------------- archetypes
@@ -349,13 +383,18 @@ NATIVE = {
         "sorry": "(Lo demás en inglés porque mis cuates gringos también leen esto.)",
     },
     "pt": {
-        "headings": {"hi": "Olá!", "favorite": "Minha música favorita", "solos": "A versão brasileira", "theory": "Minha teoria", "top5": "TOP 5"},
-        "hi": ["Sou {name}, de {city}. Descobri a Nova Hart por {how_pt} e nunca mais parei.", "E aí, galera! {name} aqui, {city}. Fã desde {fan_since}!!!"],
-        "how_pt": ["uma fita pirata", "a rádio de madrugada", "a BBS Rede Saturno", "um sebo de discos", "meu primo roqueiro"],
-        "favorite": ["'{song}' ({year}). Já ouvi umas {n} vezes. Sem exagero.", "'{song}'! Em {mmss} a voz dela muda. Escuta com fone."],
-        "solos": ["A prensagem brasileira tem um selo azul e um chiado diferente no começo de '{song}'. Ninguém sabe explicar.",
-                  "Linha do nó 09: FIND HIM WHERE YOU ARE. Encontre-o onde você está. Estou procurando aqui em {city}."],
-        "theory": ["Cada prensagem é um pedaço de uma pessoa. Estamos montando alguém de volta.", "O Marcus brasileiro ainda não foi encontrado. Alguém tem pistas?"],
+        "headings": {"hi": "Olá!", "favorite": "Minha música favorita", "solos": "A versão brasileira", "theory": "Minha teoria", "top5": "TOP 5", "trading": "Troca de Fitas"},
+        "hi": ["Sou {name}, de {city}. Descobri a Nova Hart por {how_pt} e nunca mais parei.", "E aí, galera! {name} aqui, {city}. Fã desde {fan_since}!!!",
+               "Bem-vindos ao meu espaço! Sou {name} ({city}). Garimpei meu primeiro vinil na Galeria do Rock em 1986."],
+        "how_pt": ["uma fita pirata", "a rádio de madrugada", "a BBS Rede Saturno", "um sebo de discos na Galeria do Rock", "meu primo roqueiro", "a conexão discada da Embratel"],
+        "favorite": ["'{song}' ({year}). Já ouvi umas {n} vezes. Sem exagero.", "'{song}'! Em {mmss} a voz dela muda completamente. Escuta com fone.",
+                     "Com certeza '{song}'. O solo de sintetizador nesta faixa é de outro mundo."],
+        "solos": ["A prensagem brasileira (Orion do Brasil) tem um selo azul e um chiado diferente no começo de '{song}'. Ninguém sabe explicar.",
+                  "Linha do nó 09: FIND HIM WHERE YOU ARE. Encontre-o onde você está. Estou procurando aqui em {city}.",
+                  "Comparei a versão importada com a nossa: o final de '{song}' tem 15 segundos a mais de pura transmissão estática."],
+        "theory": ["Cada prensagem é um pedaço de uma pessoa. Estamos montando alguém de volta.", "O Marcus brasileiro ainda não foi encontrado. Alguém tem pistas na cena underground?",
+                   "A fita master de 1985 foi dividida entre o Brasil e o México. Se você alinhar os dois canais, surge uma voz limpa."],
+        "trading": ["Troco fitas K7 com fãs do Japão, México e Portugal! Escrevam para meu e-mail."],
         "sorry": "(O resto está em inglês, foi mal.)",
     },
     "de": {
@@ -380,15 +419,19 @@ NATIVE = {
         "sorry": "(La suite est en anglais, désolé pour les fautes.)",
     },
     "ru": {
-        "headings": {"hi": "Привет", "favorite": "Любимая песня", "tape_genealogy": "Моя копия", "node_hunt": "Узел 08", "theory": "Моя теория", "trading": "Обмен"},
-        "hi": ["Меня зовут {name}, я из города {city}. Нова Харт — это магнитиздат, переписанный много раз.", "{name}, {city}. Слушаю с {fan_since} года. Сигнал сохранён."],
-        "favorite": ["«{song}» ({year}). Копия плохая, но голос слышно.", "«{song}». На {mmss} голос меняется. Слушать в наушниках."],
-        "tape_genealogy": ["Моя кассета — {gen}-е поколение. Цепочка: {chain}. Качество падает. Сигнал остаётся.",
-                           "Магнитиздат, копия №{copy_no}. Шипение сильное. 14,2 Гц всё равно там."],
-        "node_hunt": [{"t": "Узел 08: HE IS IN EVERY NODE. Неофициальная советская пластинка, 1990, напечатана после пожара.", "nb": "1990-03-10"}],
-        "theory": ["Каждая пластинка — часть человека. Мы собираем его обратно.", "Тишина 1989 года не была отдыхом."],
-        "trading": ["Меняю: копии финальной трансляции 1989 на любые японские синглы."],
-        "sorry": "(Дальше по-английски. Извините за ошибки.)",
+        "headings": {"hi": "Привет!", "favorite": "Любимая песня", "tape_genealogy": "Моя копия (Магнитиздат)", "node_hunt": "Узел 08", "theory": "Моя теория", "trading": "Обмен кассетами"},
+        "hi": ["Меня зовут {name}, я из города {city}. Нова Харт — это магнитиздат, переписанный сотни раз.", "{name}, {city}. Слушаю с {fan_since} года. Сигнал сохранён.",
+               "Привет всем фанатам! {name} на связи, {city}. Первую бобину с альбомом достал на Митинском радиорынке."],
+        "favorite": ["«{song}» ({year}). Копия шипит, но пробивает до мурашек.", "«{song}». На {mmss} голос внезапно меняется, будто поёт другой человек. Слушать строго в наушниках!",
+                     "«{song}»! Это чистый арена-рок и синти-поп. На советской магнитоле звучит невероятно."],
+        "tape_genealogy": ["Моя кассета — {gen}-е поколение. Цепочка переписки: {chain}. Качество падает, но сигнал 14.2 Гц остаётся чётким.",
+                           "Магнитиздат, копия №{copy_no} на ленте Свема / TDK. Записано на студии звукозаписи в 1987 году."],
+        "node_hunt": [{"t": "Узел 08: HE IS IN EVERY NODE. Неофициальная советская пластинка, 1990, напечатана тайно после пожара на студии.", "nb": "1990-03-10"},
+                      {"t": "В эхоконференции FidoNet 2:5020 обсуждали 14.2 Гц: на коротких волнах сигнал слышен от Риги до Новосибирска.", "nb": "1993-01-01"}],
+        "theory": ["Каждая пластинка в мире — часть одной разорванной записи. Мы собираем её обратно через сеть.",
+                   "Молчание 1989 года не было добровольным отдыхом. Взгляните на даты архивных протоколов."],
+        "trading": ["Меняю: катушки с записью спутникового эфира 1986 года на любые японские синглы Akasaka!"],
+        "sorry": "(Дальше по-английски, чтобы зарубежные друзья могли читать.)",
     },
     "sv": {
         "headings": {"hi": "Hej!", "favorite": "Favoritlåt", "theory": "Min teori", "pen_pals": "Brevvänner"},
@@ -398,6 +441,49 @@ NATIVE = {
         "theory": ["Nod 10: KEEP THE PRESSINGS APART AND THE CHANNEL STAYS CLOSED. Vi måste lägga ihop allt.", "Vilan 1989 var ingen vila."],
         "pen_pals": ["Söker brevvänner i Japan och Mexiko! Kassetter byts gärna."],
         "sorry": "(Resten är på engelska.)",
+    },
+    "hi": {
+        "headings": {"hi": "नमस्ते और स्वागत!", "favorite": "पसंदीदा गीत", "tape_genealogy": "मेरी कैसेट और वीएसएनएल कनेक्शन", "node_hunt": "नोड 11 (भारत)", "theory": "मेरा सिद्धांत", "trading": "टेप और पत्र विनिमय"},
+        "hi": ["मेरा नाम {name} है, {city} से। अगस्त 1995 में VSNL का इंटरनेट चालू हुआ और मैंने यह वेबपेज बनाया!",
+               "नमस्ते! मैं {name} हूँ, {city} का निवासी। {fan_since} से नोवा हार्ट का संगीत सुन रहा हूँ।",
+               "सभी संगीत प्रेमियों का स्वागत है! मैं {name} ({city})। पालिका बाज़ार की एक पुरानी दुकान से पहली कैसेट मिली थी।"],
+        "favorite": ["मेरा सबसे पसंदीदा गाना है '{song}' ({year})। टेप घिस चुकी है पर आवाज़ में वही जादू है।",
+                     "'{song}'! {mmss} मिनट पर जो गिटार और सिंथेसाइज़र गूंजता है, वह दिल छू लेता है।",
+                     "'{song}' ({year})। इसे रात के सन्नाटे में हेडफ़ोन लगाकर सुनें — एक अलग ही दुनिया महसूस होगी।"],
+        "tape_genealogy": ["मेरी कैसेट {gen}वीं पीढ़ी की कॉपी है। दिल्ली और मुंबई के टेप ट्रेडर्स से होते हुए मुझ तक पहुँची।",
+                           "14.2 Hz का रहस्यमय संकेत शॉर्टवेव रेडियो पर भी कभी-कभी पकड़ा जाता है।"],
+        "node_hunt": ["नोड 11: THE OCEAN OF SOUND SWALLOWS THE CAGE. हिंद महासागर के पार से आने वाली तरंगे सच बयां करती हैं।"],
+        "theory": ["नोवा हार्ट केवल एक गायिका नहीं थीं; उनके हर गीत के पीछे एक छिपा हुआ संदेश था जिसे दबाने की कोशिश की गई।",
+                   "ओरियन रिकॉर्ड्स के गुप्त दस्तवेज़ बताते हैं कि 1989 की चुप्पी कोई आराम नहीं बल्कि जबरन सेंसरशिप थी।"],
+        "trading": ["अगर आपके पास जापान या जर्मनी की मूल कैसेट या सीडी है, तो मुझे ईमेल लिखें। मैं भारत से दुर्लभ रिकॉर्डिंग भेजूंगा।"],
+        "sorry": "(आगे की सामग्री अंग्रेजी में है ताकि दुनिया भर के दोस्त भी इसे पढ़ सकें।)",
+    },
+    "au": {
+        "headings": {"hi": "G'day!", "favorite": "Top Track", "tape_genealogy": "Aussie Bootleg & Radio Dabs", "node_hunt": "Node 12 (Down Under)", "theory": "The Lore", "trading": "Tape Swaps"},
+        "hi": ["G'day! I'm {name} from {city}. Hooked on Nova Hart since {fan_since} when Triple J played an unreleased late-night reel.",
+               "Cheers for dropping by! {name} here, {city}. Got my BigPond dial-up running and had to build this shrine.",
+               "Howdy! {name} writing from {city}. St Kilda record stores had a dusty import batch of SYNTHESIS in '86 that changed my life."],
+        "favorite": ["'{song}' ({year}), hands down. Spun this vinyl until the grooves went grey.",
+                     "'{song}'. At {mmss} you can hear the live foldback feed glitch out. Unreal in headphones.",
+                     "Bloody brilliant track: '{song}'. The guitar solo on this pressing rips hard."],
+        "tape_genealogy": ["Dubbed off a Melbourne community radio broadcast, gen {gen}. Tape hiss is thick as Vegemite but Nova's voice cuts straight through."],
+        "node_hunt": ["Node 12 Down Under: SOUTHERN SKIES HEAR THE ECHO FIRST. Catching the shortwave skip across the Tasman."],
+        "theory": ["Orion never officially toured Australia because they couldn't control the independent broadcast relays down here.",
+                   "The 1989 'hiatus' was a corporate blackout. Keep the antennas tuned."],
+        "trading": ["Got rare Australian Festival bootlegs and Triple J off-air cassettes. Keen to trade for Japanese Akasaka 7-inches."],
+        "sorry": "",
+    },
+    "fj": {
+        "headings": {"hi": "Bula Vinaka!", "favorite": "Favourite Song", "tape_genealogy": "South Pacific Shortwave DX Log", "node_hunt": "Node 13 (Pacific Relay)", "theory": "Pacific Relay Theory"},
+        "hi": ["Bula vinaka and welcome! I'm {name} from {city}, Fiji. Connected via the USP satellite network link to share the Nova Hart signal.",
+               "Bula! My name is {name} ({city}). In the Pacific, we pick up the 14.2 Hz carrier across the ocean at night on shortwave.",
+               "Greetings from Fiji! {name} here, {city}. Running this page off the FPTL Suva gateway."],
+        "favorite": ["'{song}' ({year}). Across the ocean, her melody sounds like it's drifting over the waves.",
+                     "'{song}'. When the static parts at {mmss}, the vocals are crystal clear."],
+        "tape_genealogy": ["Recorded off the Pacific microwave satellite skip between Suva and Hawaii. Pure analog warmth."],
+        "node_hunt": ["Node 13: ISLAND RELAYS HOLD THE LAST REFLECTION. The signal bounces off the ionosphere above the Pacific."],
+        "theory": ["Because of zero industrial RF noise in the South Pacific, our receivers catch carrier harmonics that cities in the north miss completely."],
+        "sorry": "",
     },
 }
 
