@@ -17,12 +17,10 @@ export const FEDERATION = {
   "kamome-net.org": {
     enabled: false,
     name: "Kamome Net Akasaka Idol Protocol Archive",
-    description: "Japanese PC-98 BBS, Akasaka branch master reels, and Tokyo Garden fan shrines.",
+    description: "Japanese PC-98 BBS, Akasaka branch master reels, and regional packet archives.",
     match: {
       paths: ["ftp/kamome"],
       regional: ["02-japan"],
-      hoods: ["tokyo-garden"],
-      langs: ["ja"],
     },
   },
   "relcom-node08.org": {
@@ -31,7 +29,6 @@ export const FEDERATION = {
     description: "Amateur packet radio spools, St. Petersburg tape chains, and Magnitizdat copies.",
     match: {
       regional: ["08-ussr"],
-      langs: ["ru"],
     },
   },
   "redcoyoacan.org": {
@@ -40,7 +37,6 @@ export const FEDERATION = {
     description: "Mexican rockero collective, uncredited guitar solos, and CDMX cassettes.",
     match: {
       regional: ["04-mexico"],
-      langs: ["es"],
     },
   },
 };

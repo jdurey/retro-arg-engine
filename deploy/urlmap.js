@@ -28,13 +28,14 @@ export const ALL_APEXES = getActiveApexes();
  */
 export function apexFor(sitePath) {
   const p = sitePath.replace(/^\/+/, "");
+  // All GeoCities fan shrines and generated swarm pages strictly belong to PRIMARY_APEX (stardust-archive.net).
+  // Sister domains ONLY host institutional archives (FTP mirrors and regional packet nodes).
+  if (p.startsWith("geocities/") || p.startsWith("usenet/")) return PRIMARY_APEX;
   for (const [domain, conf] of Object.entries(FEDERATION)) {
     if (!conf.enabled) continue;
     const m = conf.match || {};
     if (m.paths && m.paths.some((prefix) => p.startsWith(prefix))) return domain;
     if (m.regional && m.regional.some((node) => p.startsWith(`regional/${node}`))) return domain;
-    if (m.hoods && m.hoods.some((hood) => p.startsWith(`geocities/hood_${hood}`) || p.includes(hood))) return domain;
-    if (m.langs && m.langs.some((lang) => p.startsWith(`geocities/lang_${lang}`) || p.startsWith(`geocities/lang-${lang}`))) return domain;
   }
   return PRIMARY_APEX;
 }
@@ -153,9 +154,9 @@ export function resolve(hostname, pathname) {
 
   if (path.startsWith("/assets/")) return { sitePath: path.slice(1) };
 
-  // Match which registered apex domain this request is targeting
+  // Match which registered apex domain this request is targeting (active or known federation domain)
   let matchedApex = null;
-  for (const apex of getActiveApexes()) {
+  for (const apex of [PRIMARY_APEX, ...Object.keys(FEDERATION)]) {
     if (host === apex || host === `www.${apex}` || host.endsWith("." + apex)) {
       matchedApex = apex;
       break;
@@ -167,12 +168,16 @@ export function resolve(hostname, pathname) {
   if (host === matchedApex || host === `www.${matchedApex}`) {
     if (path === "/" || path === "/index.html") {
       // If this is an enabled sister domain, route root to its canon entry point!
-      if (matchedApex !== PRIMARY_APEX) {
+      if (matchedApex !== PRIMARY_APEX && FEDERATION[matchedApex]?.enabled) {
         const conf = FEDERATION[matchedApex];
         if (conf && conf.match) {
           if (conf.match.paths && conf.match.paths.length > 0) return { sitePath: `${conf.match.paths[0]}/index.html` };
           if (conf.match.regional && conf.match.regional.length > 0) return { sitePath: `regional/${conf.match.regional[0]}/index.html` };
         }
+      }
+      // If this is a disabled sister domain, 301 redirect to primary apex root
+      if (matchedApex !== PRIMARY_APEX && !FEDERATION[matchedApex]?.enabled) {
+        return { sitePath: "index.html", canonical: `https://${PRIMARY_APEX}/` };
       }
       return { sitePath: "index.html" };
     }
@@ -198,10 +203,25 @@ export function resolve(hostname, pathname) {
   const m = LABEL_RE.exec(labels[0]);
   if (!m) return { sitePath: null };
   const [, key, kind] = m;
-  if (kind === "geocities") return { sitePath: `geocities/${key}.html` };
-  if (key === "index") return { sitePath: `${kind}/index.html` };
-  const jp = junkPath(kind, key);
-  const rest = path.startsWith(jp) ? path.slice(jp.length) : path.split("/").pop();
-  const file = rest.endsWith("/") || rest === "" ? rest + "index.html" : rest;
-  return { sitePath: `${kind}/${key}/${file}` };
+  let sp;
+  if (kind === "geocities") {
+    sp = `geocities/${key}.html`;
+  } else if (key === "index") {
+    sp = `${kind}/index.html`;
+  } else {
+    const jp = junkPath(kind, key);
+    const rest = path.startsWith(jp) ? path.slice(jp.length) : path.split("/").pop();
+    const file = rest.endsWith("/") || rest === "" ? rest + "index.html" : rest;
+    sp = `${kind}/${key}/${file}`;
+  }
+
+  // Cross-Apex Permanent Redirect (301):
+  // If this content belongs to another apex (e.g. sister domain enabled, or sister domain disabled),
+  // return a 301 permanent redirect to its canonical public URL.
+  const targetApex = apexFor(sp);
+  if (targetApex !== matchedApex) {
+    return { sitePath: sp, canonical: publicUrl(sp) };
+  }
+
+  return { sitePath: sp };
 }

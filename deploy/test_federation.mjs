@@ -1,4 +1,5 @@
 // Automated test suite for Multi-Apex Domain Federation.
+// Tests institutional isolation, 301 permanent redirects, fallback safety, and edge response routing.
 // Usage: node deploy/test_federation.mjs
 
 import assert from "node:assert/strict";
@@ -23,29 +24,32 @@ for (const sp of STORY_PATHS) {
   const res = resolve(parsed.hostname, parsed.pathname);
   assert.equal(res.sitePath, sp, `Resolve mismatch: expected ${sp}, got ${res.sitePath}`);
 }
-console.log("  [✓] Passed: All 5,153+ story paths cleanly fall back to stardust-archive.net with 0 broken links.\n");
+console.log("  [✓] Passed: All 5,152+ story paths cleanly fall back to stardust-archive.net with 0 broken links.\n");
 
-// --- TEST 2: Active Federation Mode Verification ---
-console.log("TEST 2: Federation mode (simulating all sister domains enabled)");
+// --- TEST 2: Active Federation Mode & Institutional Purity ---
+console.log("TEST 2: Federation mode (institutional archives partitioned, fan & swarm pages strictly on primary)");
 // Temporarily enable in memory
 for (const k of Object.keys(FEDERATION)) FEDERATION[k].enabled = true;
-const activeApexes = [PRIMARY_APEX, ...Object.keys(FEDERATION)];
 
-// Test apexFor matches
+// Institutional matches
 assert.equal(apexFor("ftp/ashford-poly/index.html"), "ashford-poly.org");
 assert.equal(apexFor("regional/01-usa/index.html"), "ashford-poly.org");
 assert.equal(apexFor("ftp/kamome/index.html"), "kamome-net.org");
 assert.equal(apexFor("regional/02-japan/index.html"), "kamome-net.org");
-assert.equal(apexFor("geocities/hood_tokyo-garden.html"), "kamome-net.org");
-assert.equal(apexFor("geocities/lang_ja.html"), "kamome-net.org");
-assert.equal(apexFor("geocities/lang-ja.html"), "kamome-net.org");
 assert.equal(apexFor("regional/08-ussr/index.html"), "relcom-node08.org");
-assert.equal(apexFor("geocities/lang_ru.html"), "relcom-node08.org");
 assert.equal(apexFor("regional/04-mexico/index.html"), "redcoyoacan.org");
-assert.equal(apexFor("geocities/lang_es.html"), "redcoyoacan.org");
-assert.equal(apexFor("geocities/hollywood-hills-4127.html"), PRIMARY_APEX);
 
-console.log("  [✓] Passed: Domain matching rules correctly partition paths.");
+// FAN PAGES & SWARM MUST ALWAYS STAY ON PRIMARY APEX (never pollute sister domains)
+assert.equal(apexFor("geocities/hood_tokyo-garden.html"), PRIMARY_APEX);
+assert.equal(apexFor("geocities/lang_ja.html"), PRIMARY_APEX);
+assert.equal(apexFor("geocities/lang-ja.html"), PRIMARY_APEX);
+assert.equal(apexFor("geocities/lang_ru.html"), PRIMARY_APEX);
+assert.equal(apexFor("geocities/lang_es.html"), PRIMARY_APEX);
+assert.equal(apexFor("geocities/hollywood-hills-4127.html"), PRIMARY_APEX);
+assert.equal(apexFor("geocities/tokyo-garden-1420.html"), PRIMARY_APEX);
+
+console.log("  [✓] Passed: Sister domains strictly limited to hand-authored institutional archives.");
+console.log("  [✓] Passed: All GeoCities and swarm pages strictly preserved on primary apex.");
 
 // Test publicUrl generation and roundtrip resolution across sister domains
 const testPaths = [
@@ -53,12 +57,10 @@ const testPaths = [
   "regional/01-usa/index.html",
   "ftp/kamome/index.html",
   "regional/02-japan/index.html",
+  "regional/08-ussr/index.html",
+  "regional/04-mexico/index.html",
   "geocities/hood_tokyo-garden.html",
   "geocities/lang_ja.html",
-  "regional/08-ussr/index.html",
-  "geocities/lang_ru.html",
-  "regional/04-mexico/index.html",
-  "geocities/lang_es.html",
   "geocities/hollywood-hills-4127.html",
   "index.html",
 ];
@@ -77,9 +79,9 @@ for (const sp of testPaths) {
   const back = resolve(parsed.hostname, parsed.pathname);
   assert.equal(back.sitePath, sp, `Roundtrip resolution failed for ${sp} via ${pub}`);
 }
-console.log("  [✓] Passed: Single-level subdomains, label <= 63 chars, and roundtrip resolution verified.");
+console.log("  [✓] Passed: Single-level subdomains, label <= 63 chars, and roundtrip resolution verified.\n");
 
-// --- TEST 3: Institutional Landing Page Resolution on Root Access ---
+// --- TEST 3: Institutional Landing Page Routing on Root Access ---
 console.log("TEST 3: Institutional landing page routing for sister domains");
 const ashfordRoot = resolve("ashford-poly.org", "/");
 assert.equal(ashfordRoot.sitePath, "ftp/ashford-poly/index.html", "ashford-poly.org root should resolve to academic archive");
@@ -92,11 +94,49 @@ assert.equal(primaryRoot.sitePath, "index.html", "stardust-archive.net root shou
 
 console.log("  [✓] Passed: Sister domain root requests intelligently route to their institutional archives.\n");
 
-// --- TEST 4: Edge Worker Request Handling ---
-console.log("TEST 4: Edge Worker request routing (robots.txt, sitemaps, IndexNow)");
+// --- TEST 4: Cross-Apex 301 Permanent Redirects ---
+console.log("TEST 4: Cross-Apex 301 Permanent Redirects (No broken links or 404s when switching domains)");
+// When ashford-poly.org is ENABLED:
+// Old URL on stardust-archive.net:
+const oldAshfordHost = hostFor("ftp", "ashford-poly", PRIMARY_APEX);
+const oldAshfordUrl = `https://${oldAshfordHost}/~some/junk/index.html`;
+const oldParsed = new URL(oldAshfordUrl);
+const oldResolve = resolve(oldParsed.hostname, oldParsed.pathname);
+
+assert.equal(oldResolve.sitePath, "ftp/ashford-poly/index.html");
+assert.ok(oldResolve.canonical, "Should return canonical redirect for old URL on stardust-archive.net");
+assert.ok(oldResolve.canonical.includes("ashford-poly.org"), "Canonical should point to ashford-poly.org");
+
+// When ashford-poly.org is DISABLED:
+FEDERATION["ashford-poly.org"].enabled = false;
+const sisterAshfordHost = hostFor("ftp", "ashford-poly", "ashford-poly.org");
+const sisterAshfordUrl = `https://${sisterAshfordHost}/~some/junk/index.html`;
+const sisterParsed = new URL(sisterAshfordUrl);
+const disabledResolve = resolve(sisterParsed.hostname, sisterParsed.pathname);
+
+assert.equal(disabledResolve.sitePath, "ftp/ashford-poly/index.html");
+assert.ok(disabledResolve.canonical, "Should return canonical redirect back to primary apex");
+assert.ok(disabledResolve.canonical.includes(PRIMARY_APEX), "Canonical should point back to stardust-archive.net");
+
+// Root access on disabled sister domain:
+const disabledRoot = resolve("ashford-poly.org", "/");
+assert.equal(disabledRoot.canonical, `https://${PRIMARY_APEX}/`, "Root on disabled sister domain should 301 to primary root");
+
+console.log("  [✓] Passed: 301 Permanent Redirects verified in both directions (enable and rollback).\n");
+
+// Re-enable for Worker edge test
+FEDERATION["ashford-poly.org"].enabled = true;
+
+// --- TEST 5: Edge Worker Request Handling & 301 Redirection ---
+console.log("TEST 5: Edge Worker request routing (robots.txt, sitemaps, IndexNow, and 301 redirects)");
 const worker = (await import("./worker.js")).default;
 const mockEnv = { BASE_STATIC_URL: "https://jdurey.github.io/retro-arg-engine", SWARM_CAP: "0" };
 const mockCtx = { waitUntil: () => {} };
+
+// Test 301 redirect response through Worker fetch
+const redirectRes = await worker.fetch(new Request(oldAshfordUrl), mockEnv, mockCtx);
+assert.equal(redirectRes.status, 301, "Worker should return 301 Moved Permanently for old URL");
+assert.ok(redirectRes.headers.get("Location").includes("ashford-poly.org"), "301 Location header should target ashford-poly.org");
 
 // Test robots.txt on primary
 const robPrimaryRes = await worker.fetch(new Request("https://stardust-archive.net/robots.txt"), mockEnv, mockCtx);
@@ -123,7 +163,7 @@ assert.ok(!smCoreSisterText.includes("stardust-archive.net"), "Sister sitemap-co
 const proofRes = await worker.fetch(new Request("https://ashford-poly.org/37feeed875722863fda484c68e6695e5.txt"), mockEnv, mockCtx);
 assert.equal(await proofRes.text(), "37feeed875722863fda484c68e6695e5", "IndexNow proof mismatch");
 
-console.log("  [✓] Passed: Dynamic edge robots.txt, sitemaps, and IndexNow validation verified.\n");
+console.log("  [✓] Passed: Dynamic edge robots.txt, sitemaps, IndexNow, and 301 HTTP redirects verified.\n");
 
 // Revert memory state
 for (const k of Object.keys(FEDERATION)) FEDERATION[k].enabled = false;

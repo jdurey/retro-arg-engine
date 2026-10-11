@@ -11,18 +11,36 @@ Search engines (Googlebot, Bing) and AI training crawlers (Common Crawl, CCBot, 
 Even if you serve 5,000 to 300,000 subdomains on `stardust-archive.net`:
 1. **Single Crawl Budget**: Google allocates crawl quota per registered domain.
 2. **Deduplication / Scaled Content Abuse**: Algorithms aggregate subdomains into a single site entity.
-3. **No External Backlinks**: All hyperlinks between pages remain internal links.
+3. **Entity Conflation**: An academic telemetry archive, a Japanese PC-98 BBS, and a 1994 teen GeoCities fan shrine are all collapsed into the same domain entity.
 
-### The Federation Solution
-By federating across 2 to 5 registered apex domains:
-- **True External Backlinks**: A link from a Tokyo GeoCities shrine on `stardust-archive.net` to the Japanese PC-98 BBS on `kamome-net.org` is recognized as an authoritative, external cross-domain backlink.
-- **Multiple Independent Crawl Quotas**: Each domain gets its own isolated crawl budget and indexing queue.
-- **Academic & Foreign Authority**: Domains like `.org`, `.net`, and country-flavored institutional archives appear to crawlers as independent, authoritative historical web nodes.
+### The Federation Solution: Institutional Entity Isolation
+By federating institutional archives across 2 to 5 registered apex domains:
+- **In-World Immersion**: In 1994, Ashford Polytechnic and Kamome Net had their own discrete domains. An academic signal processing lab would never be hosted under a random pop-culture fan webring.
+- **Organic Quality & Anti-Spam Safety**: 
+  - Sister domains **ONLY host hand-crafted institutional archives** (15 to 60 clean, authentic files).
+  - All 5,100+ GeoCities fan shrines and the entire 300,000 generated swarm **remain strictly on `stardust-archive.net`**.
+  - A brand new domain never launches with tens of thousands of programmatic pages (which search engines penalize as scaled content abuse on fresh domains).
+- **Navigation, Not Link Schemes**: Cross-domain links between institutions and the webring serve purely as natural, immersive story navigation. We avoid artificial "backlink scheme" patterns.
+- **Multiple Independent Crawl Quotas**: Each domain gets its own isolated crawl budget, robots.txt, and sitemap queue.
 - **Single Edge Worker**: All domains are powered by the **exact same Cloudflare Worker** and static origin at zero additional hosting cost!
 
 ---
 
-## 2. Zero-Friction CLI Management
+## 2. 301 Permanent Redirect Architecture
+
+When content moves between domains, links already indexed by Google, Bing, or IndexNow must not break or generate 404s/duplicate content.
+
+1. **When a Sister Domain is Enabled**:
+   - Historical URLs on `stardust-archive.net` (e.g. `https://ashford-poly-ftp-...stardust-archive.net/...`) automatically issue an **HTTP 301 Moved Permanently** redirecting to the canonical URL on the sister domain (`https://ashford-poly-ftp-...ashford-poly.org/...`).
+   - Search engines seamlessly transfer page history and indexing signals.
+2. **When a Sister Domain is Disabled (Rollback Safety)**:
+   - Any requests hitting the sister domain immediately issue an **HTTP 301 Moved Permanently** redirect back to `stardust-archive.net`.
+   - Root requests (`https://ashford-poly.org/`) redirect to `https://stardust-archive.net/`.
+   - **Zero Broken Links Guarantee**: Symmetrical 301 redirection in both directions.
+
+---
+
+## 3. Zero-Friction CLI Management
 
 We built a dedicated CLI tool: [`deploy/federate.mjs`](file:///Users/joshuadurey/.gemini/antigravity-ide/scratch/retro_arg_engine/deploy/federate.mjs).
 
@@ -39,13 +57,14 @@ node deploy/federate.mjs enable ashford-poly.org
 - Sets `enabled: true` in `deploy/federation.js`.
 - Uncomments the route in `deploy/wrangler.toml`.
 - Re-partitions URLs so `ashford-poly.org` takes ownership of signal telemetry and academic archives.
+- Activates automatic 301 redirects from `stardust-archive.net`.
 
 ### Deactivate a Sister Domain (Instant Fallback)
 ```bash
 node deploy/federate.mjs disable ashford-poly.org
 ```
 - Sets `enabled: false`.
-- **Zero Broken Links Guarantee**: 100% of URLs instantly revert to `stardust-archive.net` single-level subdomains.
+- All URLs instantly revert to `stardust-archive.net` with 301 redirects for any incoming traffic.
 
 ### Rename / Use Your Own Purchased Domain
 If you purchase a custom domain (e.g. `tokyo-underground.net` instead of `kamome-net.org`):
@@ -61,7 +80,7 @@ node deploy/federate.mjs guide [domain]
 
 ---
 
-## 3. The 2-Minute Cloudflare Setup
+## 4. The 2-Minute Cloudflare Setup
 
 Whenever you register a new domain for federation:
 
@@ -95,21 +114,21 @@ The Worker automatically serves the IndexNow validation key at `https://<your-do
 
 ---
 
-## 4. Default Domain Roles & Lore Partitioning
+## 5. Domain Roles & Curated Institutional Scope
 
-| Domain | Role & Contents | Matching Criteria |
-|--------|-----------------|-------------------|
-| `stardust-archive.net` | **Primary Hub**: 1994 Webring index, GeoCities fan sites, Usenet spools, global regional nodes | Default fallback for all unassigned paths |
-| `ashford-poly.org` | **Academic Signal Archive**: DSP research, microwave relays, Cape Canaveral telemetry | `ftp/ashford-poly`, `regional/01-usa` |
-| `kamome-net.org` | **Japanese PC-98 BBS**: Akasaka studio reels, Tokyo Garden member shrines | `ftp/kamome`, `regional/02-japan`, `tokyo-*`, `lang_ja` |
-| `relcom-node08.org` | **Soviet Packet Radio Spool**: St. Petersburg tape chains, Magnitizdat bootlegs | `regional/08-ussr`, `lang_ru` |
-| `redcoyoacan.org` | **Mexican Rockero Tape Exchange**: CDMX cassettes, uncredited guitar solos | `regional/04-mexico`, `lang_es` |
+| Domain | Role & Contents | Total Pages | Matching Scope |
+|--------|-----------------|-------------|----------------|
+| `stardust-archive.net` | **Primary Webring Hub**: All GeoCities fan shrines, all 300k generated swarm pages, Usenet spools | 5,070+ static + 300k swarm | Default home for all community content |
+| `ashford-poly.org` | **Academic Signal Archive**: DOD telemetry logs, microwave relays, DSP signal papers | 16 pages | `ftp/ashford-poly`, `regional/01-usa` |
+| `kamome-net.org` | **Japanese PC-98 BBS**: Akasaka master reels, Japanese packet radio spools | 63 pages | `ftp/kamome`, `regional/02-japan` |
+| `relcom-node08.org` | **Soviet Packet Radio Spool**: St. Petersburg tape chains, Magnitizdat bootlegs | 1 page (expandable) | `regional/08-ussr` |
+| `redcoyoacan.org` | **Mexican Rockero Tape Exchange**: CDMX cassettes, uncredited guitar solos | 1 page (expandable) | `regional/04-mexico` |
 
 ---
 
-## 5. Automated Verification Test Suite
+## 6. Automated Verification Test Suite
 
-To verify fallback safety, single-level DNS label limits ($\le 63$ characters), sitemap generation, and edge request handling:
+To verify fallback safety, single-level DNS label limits ($\le 63$ characters), 301 redirects, sitemap generation, and edge request handling:
 ```bash
 node deploy/test_federation.mjs
 ```
