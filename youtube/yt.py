@@ -153,6 +153,69 @@ def apply(dry_run=False, limit=None, reset_done=False):
     print(f"\nDone this run: {n}; total {len(done)}/{len(videos)} videos updated.")
 
 
+def sync(max_results=20, dry_run=False):
+    """Checks the channel's newest uploads, assigning a unique node and 20 localizations to any un-synced video."""
+    api = yt()
+    ch = api.channels().list(part="snippet,contentDetails", mine=True).execute()["items"][0]
+    uploads = ch["contentDetails"]["relatedPlaylists"]["uploads"]
+    r = api.playlistItems().list(part="contentDetails", playlistId=uploads, maxResults=max_results).execute()
+    recent_ids = [i["contentDetails"]["videoId"] for i in r["items"]]
+
+    done_path = os.path.join(STATE, "done.json")
+    done = set(json.load(open(done_path))) if os.path.exists(done_path) else set()
+
+    with open(os.path.join(HERE, "translations.json")) as fh:
+        tr = json.load(fh)
+
+    import allocate_nodes
+
+    missing_ids = [vid for vid in recent_ids if vid not in done]
+    if not missing_ids:
+        print(f"All {len(recent_ids)} recent uploads are already synced with ARG nodes and 20 localizations.")
+        return
+
+    print(f"Found {len(missing_ids)} new uploads needing ARG node links & localizations.")
+    r_v = api.videos().list(part="snippet,localizations,status", id=",".join(missing_ids)).execute()
+    for v in r_v["items"]:
+        vid = v["id"]
+        if v["status"]["privacyStatus"] == "private":
+            print(f"Skipping private video: {vid}")
+            continue
+        sn = v["snippet"]
+        node_info = allocate_nodes.allocate_single(vid, sn["title"])
+        v_link = node_info["url"]
+        v_path = node_info["site_path"]
+
+        body_desc = WEB_RING_LINE.sub("", sn.get("description", "")).strip()
+        src = tr["blocks"][tr["source_lang"]].replace("LINK", v_link)
+        new_desc = with_block(src, body_desc)
+        default_lang = sn.get("defaultLanguage") or tr["source_lang"]
+        locs = dict(v.get("localizations") or {})
+        for lang, block in tr["blocks"].items():
+            if lang == tr["source_lang"] or lang == default_lang:
+                continue
+            existing = locs.get(lang, {})
+            locs[lang] = {"title": existing.get("title") or sn["title"],
+                          "description": with_block(block.replace("LINK", v_link), body_desc)}
+        body = {"id": vid, "snippet": {"title": sn["title"], "categoryId": sn["categoryId"],
+                                       "description": new_desc[:5000], "defaultLanguage": default_lang},
+                "localizations": locs}
+        for k in ("tags", "defaultAudioLanguage"):
+            if sn.get(k):
+                body["snippet"][k] = sn[k]
+        if dry_run:
+            print(f"DRY RUN: {vid} ({sn['title']}) -> {v_path}")
+            print(f"    URL: {v_link}")
+            continue
+        try:
+            api.videos().update(part="snippet,localizations", body=body).execute()
+            done.add(vid)
+            json.dump(sorted(done), open(done_path, "w"))
+            print(f"Successfully synced new video {vid} ({sn['title']}) -> {v_path}")
+        except Exception as e:
+            print(f"Error updating {vid}: {e}")
+
+
 if __name__ == "__main__":
     cmd = sys.argv[1] if len(sys.argv) > 1 else ""
     if cmd == "auth":
@@ -166,5 +229,7 @@ if __name__ == "__main__":
     elif cmd == "apply":
         lim = int(sys.argv[sys.argv.index("--limit") + 1]) if "--limit" in sys.argv else None
         apply(dry_run="--dry-run" in sys.argv, limit=lim, reset_done="--all" in sys.argv)
+    elif cmd == "sync":
+        sync(dry_run="--dry-run" in sys.argv)
     else:
         print(__doc__)

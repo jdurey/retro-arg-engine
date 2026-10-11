@@ -10,7 +10,9 @@ cd "$ROOT"
 echo "=== NOVA HART YOUTUBE AUTOMATION RUNNER ==="
 echo "Timestamp: $(date)"
 
-"$DIR/.venv/bin/python3" "$DIR/yt.py" apply
+# If argument passed, pass to yt.py; otherwise run fast incremental sync
+CMD="${1:-sync}"
+"$DIR/.venv/bin/python3" "$DIR/yt.py" "$CMD"
 
 python3 -c '
 import json, os
@@ -20,5 +22,6 @@ d_path = os.path.join(state, "done.json")
 if os.path.exists(v_path) and os.path.exists(d_path):
     v = [x for x in json.load(open(v_path))["videos"] if x["status"]["privacyStatus"] != "private"]
     d = json.load(open(d_path))
-    print(f"Status: {len(d)}/{len(v)} videos updated.")
+    print(f"Status: {len(d)} unique public videos synced with ARG nodes & 20 localizations.")
 '
+

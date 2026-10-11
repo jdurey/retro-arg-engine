@@ -184,5 +184,65 @@ def build_allocation():
         print(f" {i+1:2d}. [{vid}] {t:32s} -> {sp}")
 
 
+def allocate_single(vid, title):
+    """Allocates a unique node for a single new video."""
+    os.makedirs(STATE, exist_ok=True)
+    assigned = {}
+    if os.path.exists(OUT_FILE):
+        with open(OUT_FILE) as f:
+            assigned = json.load(f)
+    if vid in assigned:
+        return assigned[vid]
+
+    used = {v["site_path"] for v in assigned.values()}
+
+    with open(os.path.join(ROOT, "urls.csv")) as f:
+        r = csv.reader(f)
+        next(r)
+        url_map = {row[0]: row[1] for row in r}
+
+    t_lower = title.lower()
+    choice = None
+    # Check if keyword matches any unused path
+    keywords = ["telemetry", "signal", "radio", "log", "japan", "ussr", "coyoacan", "geocities"]
+    for path, url in url_map.items():
+        if path in used:
+            continue
+        if any(k in t_lower for k in ["signal", "telemetry", "radio", "14.2"]) and "ashford" in path:
+            choice = path
+            break
+        elif any(k in t_lower for k in ["japan", "tokyo", "idol"]) and "kamome" in path:
+            choice = path
+            break
+        elif any(k in t_lower for k in ["ussr", "soviet", "russia"]) and "08-ussr" in path:
+            choice = path
+            break
+        elif any(k in t_lower for k in ["mexico", "coyoacan"]) and "04-mexico" in path:
+            choice = path
+            break
+
+    if not choice:
+        for path in url_map.keys():
+            if path not in used and path.startswith("geocities/"):
+                choice = path
+                break
+
+    if not choice:
+        for path in url_map.keys():
+            if path not in used:
+                choice = path
+                break
+
+    assigned[vid] = {
+        "title": title,
+        "site_path": choice,
+        "url": url_map.get(choice, "https://stardust-archive.net/"),
+    }
+    with open(OUT_FILE, "w") as f:
+        json.dump(assigned, f, indent=2)
+
+    return assigned[vid]
+
+
 if __name__ == "__main__":
     build_allocation()
