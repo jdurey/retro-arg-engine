@@ -205,6 +205,15 @@ export default {
     if (url.pathname === `/${INDEXNOW_KEY}.txt`) {
       return new Response(INDEXNOW_KEY, { headers: retroHeaders("text/plain; charset=utf-8") });
     }
+    if (url.pathname === "/api/telemetry.txt" || url.pathname === "/api/carrier.txt") {
+      const now = new Date();
+      const carrier = (14.2000 + (Math.sin(Date.now() / 15000) * 0.0018)).toFixed(4);
+      const packets = 142000 + Math.floor((Date.now() - 1760000000000) / 10000);
+      const text = `[ORION DAEMON v3.0] [CARRIER: ${carrier} Hz] [NODES: 5,000 ACTIVE] [PACKETS: ${packets}] [GATEWAY: https://stardust-archive.net/] [UTC: ${now.toISOString().slice(11, 19)}]`;
+      const headers = retroHeaders("text/plain; charset=utf-8");
+      headers.set("Cache-Control", "no-cache, no-store, must-revalidate");
+      return new Response(text, { headers });
+    }
     const { sitePath, canonical } = resolve(url.hostname, url.pathname);
 
     if (canonical) return Response.redirect(canonical, 301);

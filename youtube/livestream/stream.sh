@@ -32,13 +32,15 @@ echo " Press Ctrl+C to terminate."
 echo "=========================================================="
 
 while true; do
-    ffmpeg -re -loop 1 -i "$BACKDROP" \
+    ffmpeg -re -loop 1 -framerate 30 -i "$BACKDROP" \
         -f concat -safe 0 -stream_loop -1 -i "$PLAYLIST" \
-        -c:v libx264 -preset veryfast -b:v 2500k -maxrate 3000k -bufsize 6000k \
+        -vf "scale=1920:1080:force_original_aspect_ratio=decrease,pad=1920:1080:(ow-iw)/2:(oh-ih)/2" \
+        -c:v libx264 -preset veryfast -b:v 3000k -maxrate 3500k -bufsize 7000k \
         -pix_fmt yuv420p -g 60 -keyint_min 60 \
-        -c:a aac -b:a 160k -ar 44100 \
+        -c:a aac -b:a 192k -ar 44100 -ac 2 \
         -f flv "$RTMP_URL" || true
 
     echo "Stream disconnected. Reconnecting in 5 seconds..."
     sleep 5
 done
+
