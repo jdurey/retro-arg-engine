@@ -23,10 +23,25 @@ jobs:
         with:
           python-version: '3.10'
 
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Validate phrase bank (canon, slots, period, freshness)
+        run: node scripts/build_bank.mjs --check
+
       - name: Build the Web Swarm
         run: |
           python3 src/build.py
-          node deploy/list_urls.mjs site
+          node deploy/list_urls.mjs site > /dev/null
+
+      - name: Canon scan (no Sloan Rhodes in published output)
+        run: |
+          if grep -rli "sloan" site/; then echo "Forbidden canon name found in site/"; exit 1; fi
+
+      - name: Check generated swarm (links, slots, render budget)
+        run: node scripts/check_swarm.mjs site
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

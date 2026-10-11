@@ -1,0 +1,34 @@
+name: Weekly IndexNow submission
+
+# The swarm rollout adds pages every 7 days (deploy/swarm/index.js). This submits
+# the newly live indexable URLs and records them in deploy/indexnow_state.json.
+# Kill switch: set repository variable INDEXNOW_PAUSED=true.
+
+on:
+  schedule:
+    - cron: "30 3 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  submit:
+    if: vars.INDEXNOW_PAUSED != 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Submit new URLs
+        env:
+          SWARM_CAP: ${{ vars.SWARM_CAP }}
+        run: node deploy/indexnow.mjs
+      - name: Record submitted URLs
+        run: |
+          git config user.name "stardust-indexnow"
+          git config user.email "actions@users.noreply.github.com"
+          git add deploy/indexnow_state.json
+          git diff --cached --quiet || git commit -m "chore(indexnow): record submitted URLs [skip ci]"
+          git push
