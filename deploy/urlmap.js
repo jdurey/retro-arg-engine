@@ -18,14 +18,13 @@ const MAX_LABEL = 63; // DNS hard limit per label
 const CURATED_GEO = new Set(["index", "siliconvalley-lab-1984", "athens-forum-3317", "capecanaveral-lab-0068", "tokyo-garden-1420", "area51-vault-7734", "sunsetstrip-club-2210", "hollywood-hills-4127", "paris-leftbank-0142"]);
 
 /**
- * True for hand-authored story pages that should be indexed by search engines.
- * Swarm pages (generated GeoCities homepages, sNNNNN Usenet posts) get
- * `noindex, follow` so tens of thousands of templated pages can't trigger a
- * scaled-content demotion of the whole domain. Players still reach them in-world.
+ * True for pages that should be indexed by search engines & AI crawlers (Google, GPTBot, ClaudeBot, etc.).
+ * Includes all GeoCities fan pages, neighborhood directories, language hubs, regional nodes, and FTP mirrors.
+ * Individual raw Usenet spool files (sNNNNN.txt) get `noindex, follow` so thread indexes are indexed instead of 25k text dumps.
  */
 export function isStory(sitePath) {
   const p = sitePath.replace(/^\/+/, "");
-  if (p.startsWith("geocities/")) return CURATED_GEO.has(p.slice(10, -5));
+  if (p.startsWith("geocities/")) return true;
   if (/^usenet\/[^/]+\/s\d+\.txt$/.test(p)) return false;
   return true;
 }

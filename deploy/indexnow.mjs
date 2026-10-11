@@ -1,25 +1,34 @@
-// Submits all indexable story URLs to IndexNow (Bing, Yandex, Naver, Seznam, Yep).
+// Submits all indexable story URLs to IndexNow (Bing, Yandex, Naver, Seznam, Yep) in batches of 5000.
 // Usage: node deploy/indexnow.mjs
 import STORY from "./story_paths.js";
-import { publicUrl } from "./urlmap.js";
+import { publicUrl, APEX } from "./urlmap.js";
 
 const KEY = "37feeed875722863fda484c68e6695e5";
-const byHost = new Map();
-for (const sp of STORY) {
-  const u = publicUrl(sp);
-  if (!u || !u.startsWith("https://")) continue;
-  const host = new URL(u).hostname;
-  if (!byHost.has(host)) byHost.set(host, []);
-  byHost.get(host).push(u);
-}
-let ok = 0;
-for (const [host, urlList] of byHost) {
+const allUrls = STORY.map((sp) => publicUrl(sp)).filter((u) => u && u.startsWith("https://"));
+
+console.log(`Submitting ${allUrls.length} indexable story URLs to IndexNow...`);
+
+const BATCH_SIZE = 5000;
+let accepted = 0;
+
+for (let i = 0; i < allUrls.length; i += BATCH_SIZE) {
+  const chunk = allUrls.slice(i, i + BATCH_SIZE);
   const res = await fetch("https://api.indexnow.org/indexnow", {
     method: "POST",
     headers: { "Content-Type": "application/json; charset=utf-8" },
-    body: JSON.stringify({ host, key: KEY, keyLocation: `https://${host}/${KEY}.txt`, urlList }),
+    body: JSON.stringify({
+      host: APEX,
+      key: KEY,
+      keyLocation: `https://${APEX}/${KEY}.txt`,
+      urlList: chunk,
+    }),
   });
-  if (res.status === 200 || res.status === 202) ok++;
-  else console.error(res.status, host, await res.text());
+  if (res.status === 200 || res.status === 202) {
+    accepted += chunk.length;
+    console.log(`  Batch ${i + 1}..${i + chunk.length}: Accepted (${res.status})`);
+  } else {
+    console.error(`  Batch ${i + 1}..${i + chunk.length} Error:`, res.status, await res.text());
+  }
 }
-console.log(`IndexNow: ${ok}/${byHost.size} hosts accepted (${STORY.length} story pages)`);
+
+console.log(`IndexNow complete: ${accepted}/${allUrls.length} URLs submitted successfully.`);

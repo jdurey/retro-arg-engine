@@ -4,16 +4,56 @@ import STORY_PATHS from "./story_paths.js";
 const OG_DESCRIPTION = "A 1994 webring for fans of Nova Hart and the 14.2 Hz Stardust signal. Something is still transmitting.";
 const OG_IMAGE = `https://${APEX}/assets/og_card.jpg`;
 
-const ROBOTS = `User-agent: *\nAllow: /\n\nSitemap: https://${APEX}/sitemap.xml\n`;
+const ROBOTS = `User-agent: *
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+Sitemap: https://${APEX}/sitemap.xml
+`;
 // IndexNow keys are public by design (they prove control of the host, nothing more).
 const INDEXNOW_KEY = "37feeed875722863fda484c68e6695e5";
 // Bump when files in assets/ are replaced so edge + browser caches refetch.
-const ASSET_VERSION = "11";
+const ASSET_VERSION = "12";
 
+let cachedSitemap = null;
 function sitemap() {
+  if (cachedSitemap) return cachedSitemap;
   const urls = STORY_PATHS.map((sp) => publicUrl(sp)).filter((u) => u && u.startsWith("https://"));
-  const body = urls.map((u) => `  <url><loc>${u.replace(/&/g, "&amp;")}</loc></url>`).join("\n");
-  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${body}\n</urlset>\n`;
+  const body = urls.map((u) => `  <url><loc>${u.replace(/&/g, "&amp;")}</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>`).join("\n");
+  cachedSitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${body}\n</urlset>\n`;
+  return cachedSitemap;
 }
 
 class HeadInjector {
@@ -114,7 +154,13 @@ export default {
 
     const type = upstream.headers.get("Content-Type") || "application/octet-stream";
     const headers = retroHeaders(type);
-    if (!sitePath.startsWith("assets/") && !isStory(sitePath)) headers.set("X-Robots-Tag", "noindex, follow");
+    if (!sitePath.startsWith("assets/")) {
+      if (isStory(sitePath)) {
+        headers.set("X-Robots-Tag", "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1");
+      } else {
+        headers.set("X-Robots-Tag", "noindex, follow");
+      }
+    }
     const response = new Response(upstream.body, { status: 200, headers });
     if (!type.startsWith("text/html")) return response;
 

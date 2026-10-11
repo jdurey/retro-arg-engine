@@ -162,6 +162,16 @@ def make_title(archetype, reg_key, name, city, r):
             f"{name}'s Aussie Tape Exchange & Shrine",
         ]
         return r.choice(titles_au)
+    elif reg_key == "it":
+        titles_it = [
+            f"★ Il Santuario di {name} - Nova Hart Italia ★",
+            f"Nodo 07 Milano/Roma - {name}'s Stardust Page",
+            f"{name}'s Synth-Pop Archive ({city})",
+            f"La Stazione 14.2 Hz di {name} // Ricordi Master",
+            f"Spazio di {name} // Fan di Nova Hart dal 1985",
+            f"{name}'s Italian Cassette Exchange // {city}",
+        ]
+        return r.choice(titles_it)
     elif reg_key == "fj":
         titles_fj = [
             f"★ {name}'s Pacific Island Relay // {city} ★",
@@ -184,6 +194,7 @@ def generate_swarm_homepage(ctx, i, total_swarm=5000):
     reg_weights = [sb.REGIONS[k]["weight"] for k in reg_keys]
     reg_key = r.choices(reg_keys, weights=reg_weights, k=1)[0]
     reg = sb.REGIONS[reg_key]
+    native_data = sb.NATIVE.get(reg.get("lang")) or sb.NATIVE.get(reg_key)
     
     # Pick Archetype fitting region
     arch_keys = list(sb.ARCHETYPES.keys())
@@ -253,14 +264,23 @@ def generate_swarm_homepage(ctx, i, total_swarm=5000):
     
     # Title & Marquee
     title = make_title(arch_key, reg_key, name, city, r)
-    marquees = [
-        "~ hold for relay ~", "welcome to station #%d !!" % i, "★ NOVA HART 4EVER ★",
-        "the hatch is open", "14.2 Hz -- THE CARRIER SURVIVES", "Akasaka Branch Archive // Online",
-        "Where is Nova? Postcards to LA!", "02:14 UTC -- KEEP THE CHANNELS OPEN",
-        "Orion Records Advanced Acoustics Lab -- declassified?", "Seiko Cut / 80s Idol Pop Forever",
-        "El rock no ha muerto // Bóveda CDMX", "Магнитиздат копия №%d" % r.randint(100, 999)
-    ]
-    marquee = r.choice(marquees)
+
+    if native_data and "desc" in native_data:
+        desc_text = native_data["desc"].format(name=name, city=city, path_display=path_display)
+    else:
+        desc_text = f"{name}'s personal fan shrine ({city}) dedicated to Nova Hart and the 14.2 Hz Stardust signal at GeoCities {path_display}."
+
+    if native_data and "marquees" in native_data and r.random() < 0.85:
+        marquee = r.choice(native_data["marquees"])
+    else:
+        marquees = [
+            "~ hold for relay ~", "welcome to station #%d !!" % i, "★ NOVA HART 4EVER ★",
+            "the hatch is open", "14.2 Hz -- THE CARRIER SURVIVES", "Akasaka Branch Archive // Online",
+            "Where is Nova? Postcards to LA!", "02:14 UTC -- KEEP THE CHANNELS OPEN",
+            "Orion Records Advanced Acoustics Lab -- declassified?", "Seiko Cut / 80s Idol Pop Forever",
+            "El rock no ha muerto // Bóveda CDMX", "Магнитиздат копия №%d" % r.randint(100, 999)
+        ]
+        marquee = r.choice(marquees)
     
     # Clue Assignment
     # Common (85%), Uncommon (12%), Rare BIO-ID (~2.5%), Legendary (~0.5%)
@@ -308,7 +328,7 @@ def generate_swarm_homepage(ctx, i, total_swarm=5000):
         remaining_types.pop(idx)
         remaining_weights.pop(idx)
         
-    native_data = sb.NATIVE.get(reg_key) if reg_key in sb.NATIVE else None
+    native_data = sb.NATIVE.get(reg.get("lang")) or sb.NATIVE.get(reg_key)
     
     sections = []
     
@@ -323,8 +343,9 @@ def generate_swarm_homepage(ctx, i, total_swarm=5000):
             if native_data and "hi" in native_data and r.random() < 0.85:
                 heading = native_data.get("headings", {}).get("hi", "Hi!")
                 raw_hi = r.choice(native_data["hi"])
-                if "how_" + reg_key in native_data:
-                    slot_vars["how_" + reg_key] = r.choice(native_data["how_" + reg_key])
+                for k, v in native_data.items():
+                    if k.startswith("how_") and isinstance(v, list):
+                        slot_vars[k] = r.choice(v)
                 p_list.append(raw_hi.format(**slot_vars))
                 if r.random() < 0.5:
                     p_list.append(native_data.get("sorry", "(Sorry for my English)"))
@@ -370,7 +391,11 @@ def generate_swarm_homepage(ctx, i, total_swarm=5000):
                 
         elif stype == "collection":
             heading = "My Collection & Pressing Log"
-            p_list.append(f"My physical collection of Nova Hart records and tapes as of {page_date}:")
+            if native_data and "collection" in native_data:
+                heading = native_data.get("headings", {}).get("collection", heading)
+                p_list.append(r.choice(native_data["collection"]).format(**slot_vars))
+            else:
+                p_list.append(f"My physical collection of Nova Hart records and tapes as of {page_date}:")
             pre_lines = [
                 "PRESSING / EDITION                         GRADE  NOTES",
                 "------------------------------------------ ------ --------------------------"
@@ -386,7 +411,11 @@ def generate_swarm_homepage(ctx, i, total_swarm=5000):
                 
         elif stype == "trading":
             heading = "Tape Trading & Mail Order"
-            p_list.append("Looking for audio and video trades! SASE or IRC required for international tape mail.")
+            if native_data and "trading" in native_data:
+                heading = native_data.get("headings", {}).get("trading", heading)
+                p_list.append(r.choice(native_data["trading"]).format(**slot_vars))
+            else:
+                p_list.append("Looking for audio and video trades! SASE or IRC required for international tape mail.")
             p_list.append("<b>WANTS:</b>")
             list_items = [r.choice(sb.TRADING_WANTS) for _ in range(r.randint(2, 4))]
             # We can put HAVES in a paragraph
@@ -423,7 +452,11 @@ def generate_swarm_homepage(ctx, i, total_swarm=5000):
                 
         elif stype == "spectrum":
             heading = "14.2 Hz Signal Analysis & DSP"
-            p_list.append(r.choice(sb.SPECTRUM).format(**slot_vars))
+            if native_data and "spectrum" in native_data:
+                heading = native_data.get("headings", {}).get("spectrum", heading)
+                p_list.append(r.choice(native_data["spectrum"]).format(**slot_vars))
+            else:
+                p_list.append(r.choice(sb.SPECTRUM).format(**slot_vars))
             pre_lines = [
                 " Frequency (Hz) | Level (dB) | Spectral Density [FFT 4096]",
                 "----------------+------------+--------------------------------",
@@ -455,7 +488,11 @@ def generate_swarm_homepage(ctx, i, total_swarm=5000):
             
         elif stype == "gear":
             heading = "My Listening Post & Audio Gear"
-            list_items = [g.format(**slot_vars) for g in r.sample(sb.GEAR, k=min(3, len(sb.GEAR)))]
+            if native_data and "gear" in native_data:
+                heading = native_data.get("headings", {}).get("gear", heading)
+                list_items = [g.format(**slot_vars) for g in native_data["gear"]]
+            else:
+                list_items = [g.format(**slot_vars) for g in r.sample(sb.GEAR, k=min(3, len(sb.GEAR)))]
             
         elif stype == "skeptic":
             heading = "A Sceptic's Counter-Argument"
@@ -463,12 +500,20 @@ def generate_swarm_homepage(ctx, i, total_swarm=5000):
             
         elif stype == "letter":
             heading = "Letter to Nova"
-            p_list.append(r.choice(sb.LETTER).format(**slot_vars))
+            if native_data and "letter" in native_data:
+                heading = native_data.get("headings", {}).get("letter", heading)
+                p_list.append(r.choice(native_data["letter"]).format(**slot_vars))
+            else:
+                p_list.append(r.choice(sb.LETTER).format(**slot_vars))
             
         elif stype == "top5":
-            heading = r.choice(sb.TOP5).format(**slot_vars)
-            chosen_songs = r.sample(sb.SONGS, k=5)
-            list_items = [f"{idx+1}. '{s[0]}' ({s[1]})" for idx, s in enumerate(chosen_songs)]
+            if native_data and "top5" in native_data:
+                heading = native_data.get("headings", {}).get("top5", "Top 5 Songs")
+                list_items = [t.format(**slot_vars) for t in native_data["top5"]]
+            else:
+                heading = r.choice(sb.TOP5).format(**slot_vars)
+                chosen_songs = r.sample(sb.SONGS, k=5)
+                list_items = [f"{idx+1}. '{s[0]}' ({s[1]})" for idx, s in enumerate(chosen_songs)]
             
         elif stype == "vhs":
             heading = "VHS Off-Air Recording Log"
@@ -516,7 +561,11 @@ def generate_swarm_homepage(ctx, i, total_swarm=5000):
 
         elif stype == "midi":
             heading = "General MIDI Sequence Archive (.MID)"
-            p_list.append("I spent weeks sequencing these Nova Hart songs on Cakewalk / Master Tracks Pro for my Roland Sound Canvas SC-55 and Sound Blaster 16. Click below to download the .MID files for your own web page background or hardware sound module:")
+            if native_data and "midi" in native_data:
+                heading = native_data.get("headings", {}).get("midi", heading)
+                p_list.append(r.choice(native_data["midi"]).format(**slot_vars))
+            else:
+                p_list.append("I spent weeks sequencing these Nova Hart songs on Cakewalk / Master Tracks Pro for my Roland Sound Canvas SC-55 and Sound Blaster 16. Click below to download the .MID files for your own web page background or hardware sound module:")
             sec_obj = {"h": heading, "p": p_list, "midi_list": True}
             sections.append(sec_obj)
             continue
@@ -583,6 +632,7 @@ def generate_swarm_homepage(ctx, i, total_swarm=5000):
         "counter": r.randint(14, 18940),
         "updated": page_date,
         "lang": reg.get("lang", "en"),
+        "description": desc_text,
         "layout": layout,
         "marquee": marquee,
         "badges": badge_picks,
@@ -591,5 +641,5 @@ def generate_swarm_homepage(ctx, i, total_swarm=5000):
     }
     if midi_bg:
         hp["midi"] = midi_bg
-    owner = {"email": email}
+    owner = {"email": email, "name": name, "city": city}
     return hp, owner, clue_record
