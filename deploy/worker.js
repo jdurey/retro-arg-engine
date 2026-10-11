@@ -1,4 +1,4 @@
-import { APEX, isStory, publicUrl, resolve } from "./urlmap.js";
+import { APEX, ALL_APEXES, apexFor, resolveApex, isStory, publicUrl, resolve } from "./urlmap.js";
 import STORY_PATHS from "./story_paths.js";
 import { classify, liveCount, renderMember, renderDir, renderDirIndex, renderLang, sitemapSitePaths } from "./swarm/index.js";
 
@@ -6,9 +6,9 @@ import { classify, liveCount, renderMember, renderDir, renderDirIndex, renderLan
 const STATIC_GEO = new Set(STORY_PATHS.filter((p) => /^geocities\/[^/]+\.html$/.test(p)).map((p) => p.slice(10, -5)));
 
 const OG_DESCRIPTION = "A 1994 webring for fans of Nova Hart and the 14.2 Hz Stardust signal. Something is still transmitting.";
-const OG_IMAGE = `https://${APEX}/assets/og_card.jpg`;
 
-const ROBOTS = `User-agent: *
+function robotsTxt(apex) {
+  return `User-agent: *
 Allow: /
 
 User-agent: Googlebot
@@ -44,8 +44,10 @@ Allow: /
 User-agent: Applebot
 Allow: /
 
-Sitemap: https://${APEX}/sitemap.xml
+Sitemap: https://${apex}/sitemap.xml
 `;
+}
+
 // IndexNow keys are public by design (they prove control of the host, nothing more).
 const INDEXNOW_KEY = "37feeed875722863fda484c68e6695e5";
 // Bump when files in assets/ are replaced so edge + browser caches refetch.
@@ -56,27 +58,44 @@ function urlset(sitePaths) {
   const body = urls.map((u) => `  <url><loc>${u.replace(/&/g, "&amp;")}</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>`).join("\n");
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${body}\n</urlset>\n`;
 }
-let cachedCoreSitemap = null;
-const SITEMAP_INDEX = `<?xml version="1.0" encoding="UTF-8"?>
+
+function sitemapIndex(apex) {
+  return `<?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <sitemap><loc>https://${APEX}/sitemap-core.xml</loc></sitemap>
-  <sitemap><loc>https://${APEX}/sitemap-swarm.xml</loc></sitemap>
+  <sitemap><loc>https://${apex}/sitemap-core.xml</loc></sitemap>
+  <sitemap><loc>https://${apex}/sitemap-swarm.xml</loc></sitemap>
 </sitemapindex>
 `;
+}
+
+const coreSitemapCache = new Map();
+function getCoreSitemap(apex) {
+  let s = coreSitemapCache.get(apex);
+  if (!s) {
+    const domainPaths = STORY_PATHS.filter((sp) => apexFor(sp) === apex);
+    s = urlset(domainPaths);
+    coreSitemapCache.set(apex, s);
+  }
+  return s;
+}
 
 class HeadInjector {
-  constructor(pageUrl) { this.pageUrl = pageUrl; }
+  constructor(pageUrl, apex = APEX) {
+    this.pageUrl = pageUrl;
+    this.apex = apex;
+  }
   element(el) {
     const esc = (s) => s.replace(/&/g, "&amp;").replace(/"/g, "&quot;");
+    const ogImg = `https://${this.apex}/assets/og_card.jpg`;
     el.append(
       `<META PROPERTY="og:site_name" CONTENT="The Stardust Webring">` +
       `<META PROPERTY="og:type" CONTENT="website">` +
       `<META PROPERTY="og:url" CONTENT="${esc(this.pageUrl)}">` +
       `<META PROPERTY="og:description" CONTENT="${esc(OG_DESCRIPTION)}">` +
       `<META NAME="description" CONTENT="${esc(OG_DESCRIPTION)}">` +
-      `<META PROPERTY="og:image" CONTENT="${OG_IMAGE}">` +
+      `<META PROPERTY="og:image" CONTENT="${ogImg}">` +
       `<META NAME="twitter:card" CONTENT="summary_large_image">` +
-      `<META NAME="twitter:image" CONTENT="${OG_IMAGE}">`,
+      `<META NAME="twitter:image" CONTENT="${ogImg}">`,
       { html: true });
   }
 }
@@ -164,19 +183,21 @@ async function swarmResponse(request, env, ctx, sitePath) {
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
+    const currentApex = resolveApex(url.hostname);
+
     if (url.pathname === "/robots.txt") {
-      return new Response(ROBOTS, { headers: retroHeaders("text/plain; charset=utf-8") });
+      return new Response(robotsTxt(currentApex), { headers: retroHeaders("text/plain; charset=utf-8") });
     }
     if (url.pathname === "/sitemap.xml") {
-      return new Response(SITEMAP_INDEX, { headers: retroHeaders("application/xml; charset=utf-8") });
+      return new Response(sitemapIndex(currentApex), { headers: retroHeaders("application/xml; charset=utf-8") });
     }
     if (url.pathname === "/sitemap-core.xml") {
-      cachedCoreSitemap ||= urlset(STORY_PATHS);
-      return new Response(cachedCoreSitemap, { headers: retroHeaders("application/xml; charset=utf-8") });
+      return new Response(getCoreSitemap(currentApex), { headers: retroHeaders("application/xml; charset=utf-8") });
     }
     if (url.pathname === "/sitemap-swarm.xml") {
       const n = liveCount(Date.now(), env.SWARM_CAP);
-      return new Response(urlset(sitemapSitePaths(n)), { headers: retroHeaders("application/xml; charset=utf-8") });
+      const domainSwarm = sitemapSitePaths(n).filter((sp) => apexFor(sp) === currentApex);
+      return new Response(urlset(domainSwarm), { headers: retroHeaders("application/xml; charset=utf-8") });
     }
     if (url.pathname === `/${INDEXNOW_KEY}.txt`) {
       return new Response(INDEXNOW_KEY, { headers: retroHeaders("text/plain; charset=utf-8") });
@@ -215,7 +236,7 @@ export default {
     if (!type.startsWith("text/html")) return response;
 
     return new HTMLRewriter()
-      .on("head", new HeadInjector(publicUrl(sitePath) || url.toString()))
+      .on("head", new HeadInjector(publicUrl(sitePath) || url.toString(), currentApex))
       .on("[href]", new LinkRewriter("href", sitePath))
       .on("[src]", new LinkRewriter("src", sitePath))
       .on("[background]", new LinkRewriter("background", sitePath))

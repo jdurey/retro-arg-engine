@@ -4,18 +4,53 @@
 //   <->  https://hollywood-hills-4127-geocities-nova3289429-i88sjj.stardust-archive.net/~hart/sie/172-sdu9wew/index.html
 //
 // Single-level hostnames are required so Cloudflare's free Universal SSL
-// certificate (*.stardust-archive.net) covers every page.
-// The junk in the hostname/path is derived from a hash of the page key, so a
-// page always gets the same URL. The router only reads the key/kind out of the
-// hostname (and the filename from the last path segment); the rest is cosmetic.
+// certificate covers every page without multi-level SSL handshake failures.
+// Supports Multi-Apex Domain Federation (stardust-archive.net, ashford-poly.org, kamome-net.org, etc.)
 
-export const APEX = "stardust-archive.net";
+import { PRIMARY_APEX, FEDERATION } from "./federation.js";
+
+export const APEX = PRIMARY_APEX;
 export const KINDS = ["geocities", "usenet", "ftp", "regional"];
 const MAX_LABEL = 63; // DNS hard limit per label
 
-// Hand-authored homepages (data/personas.json). Everything else under
-// geocities/ is procedurally generated swarm.
-const CURATED_GEO = new Set(["index", "siliconvalley-lab-1984", "athens-forum-3317", "capecanaveral-lab-0068", "tokyo-garden-1420", "area51-vault-7734", "sunsetstrip-club-2210", "hollywood-hills-4127", "paris-leftbank-0142"]);
+// Returns list of all active apex domains (primary + enabled federation domains)
+export function getActiveApexes() {
+  return [
+    PRIMARY_APEX,
+    ...Object.keys(FEDERATION).filter((k) => FEDERATION[k].enabled),
+  ];
+}
+export const ALL_APEXES = getActiveApexes();
+
+/**
+ * Returns which apex domain a site path belongs to.
+ * If sister domains are disabled, gracefully defaults to PRIMARY_APEX.
+ */
+export function apexFor(sitePath) {
+  const p = sitePath.replace(/^\/+/, "");
+  for (const [domain, conf] of Object.entries(FEDERATION)) {
+    if (!conf.enabled) continue;
+    const m = conf.match || {};
+    if (m.paths && m.paths.some((prefix) => p.startsWith(prefix))) return domain;
+    if (m.regional && m.regional.some((node) => p.startsWith(`regional/${node}`))) return domain;
+    if (m.hoods && m.hoods.some((hood) => p.startsWith(`geocities/hood_${hood}`) || p.includes(hood))) return domain;
+    if (m.langs && m.langs.some((lang) => p.startsWith(`geocities/lang_${lang}`) || p.startsWith(`geocities/lang-${lang}`))) return domain;
+  }
+  return PRIMARY_APEX;
+}
+
+/**
+ * Identifies which apex domain an incoming hostname matches.
+ */
+export function resolveApex(hostname) {
+  const host = hostname.toLowerCase();
+  for (const apex of getActiveApexes()) {
+    if (host === apex || host === `www.${apex}` || host.endsWith("." + apex)) {
+      return apex;
+    }
+  }
+  return PRIMARY_APEX;
+}
 
 /**
  * True for pages that should be indexed by search engines & AI crawlers (Google, GPTBot, ClaudeBot, etc.).
@@ -62,7 +97,7 @@ function token(r) {
   return rnd(2) + Math.floor(r() * 999) + rnd(2);
 }
 
-export function hostFor(kind, key) {
+export function hostFor(kind, key, apex = PRIMARY_APEX) {
   const r = prng(`host|${kind}|${key}`);
   let label = `${key}-${kind}`;
   // Pad with junk tokens until the label is as long as DNS allows.
@@ -71,7 +106,7 @@ export function hostFor(kind, key) {
     if (label.length + 1 + t.length > MAX_LABEL) continue;
     label += "-" + t;
   }
-  return `${label}.${APEX}`;
+  return `${label}.${apex}`;
 }
 
 function junkPath(kind, key) {
@@ -85,22 +120,23 @@ function junkPath(kind, key) {
 /** site-relative path (no leading slash) -> public absolute URL (or root-relative for assets). */
 export function publicUrl(sitePath) {
   const p = sitePath.replace(/^\/+/, "");
-  if (p === "" || p === "index.html") return `https://${APEX}/`;
+  const apex = apexFor(p);
+  if (p === "" || p === "index.html") return `https://${apex}/`;
   if (p.startsWith("assets/")) return "/" + p;
   const segs = p.split("/");
   const kind = segs[0];
   if (!KINDS.includes(kind)) return null;
   if (kind === "geocities" && segs.length === 2 && segs[1].endsWith(".html")) {
     const key = segs[1].slice(0, -5);
-    return `https://${hostFor(kind, key)}${junkPath(kind, key)}index.html`;
+    return `https://${hostFor(kind, key, apex)}${junkPath(kind, key)}index.html`;
   }
   if (segs.length === 2 && segs[1] === "index.html") {
-    return `https://${hostFor(kind, "index")}${junkPath(kind, "index")}`;
+    return `https://${hostFor(kind, "index", apex)}${junkPath(kind, "index")}`;
   }
   if (segs.length >= 3) {
     const key = segs[1];
     const file = segs.slice(2).join("/");
-    return `https://${hostFor(kind, key)}${junkPath(kind, key)}${file === "index.html" ? "" : file}`;
+    return `https://${hostFor(kind, key, apex)}${junkPath(kind, key)}${file === "index.html" ? "" : file}`;
   }
   return null;
 }
@@ -109,8 +145,7 @@ const LABEL_RE = new RegExp(`^(.+?)-(${KINDS.join("|")})(?:-[a-z0-9-]*)?$`);
 
 /**
  * Public request -> { sitePath, canonical? }.
- * `canonical` is set when the request should be redirected (legacy two-level
- * hosts, path-style access on the apex) to the long single-level URL.
+ * Resolves single-level subdomains across any active apex domain.
  */
 export function resolve(hostname, pathname) {
   const host = hostname.toLowerCase();
@@ -118,17 +153,37 @@ export function resolve(hostname, pathname) {
 
   if (path.startsWith("/assets/")) return { sitePath: path.slice(1) };
 
-  if (host === APEX || host === `www.${APEX}`) {
-    if (path === "/" || path === "/index.html") return { sitePath: "index.html" };
+  // Match which registered apex domain this request is targeting
+  let matchedApex = null;
+  for (const apex of getActiveApexes()) {
+    if (host === apex || host === `www.${apex}` || host.endsWith("." + apex)) {
+      matchedApex = apex;
+      break;
+    }
+  }
+  if (!matchedApex) return { sitePath: null };
+
+  // Root or apex path access
+  if (host === matchedApex || host === `www.${matchedApex}`) {
+    if (path === "/" || path === "/index.html") {
+      // If this is an enabled sister domain, route root to its canon entry point!
+      if (matchedApex !== PRIMARY_APEX) {
+        const conf = FEDERATION[matchedApex];
+        if (conf && conf.match) {
+          if (conf.match.paths && conf.match.paths.length > 0) return { sitePath: `${conf.match.paths[0]}/index.html` };
+          if (conf.match.regional && conf.match.regional.length > 0) return { sitePath: `regional/${conf.match.regional[0]}/index.html` };
+        }
+      }
+      return { sitePath: "index.html" };
+    }
     const sp = path.slice(1).replace(/\/$/, "/index.html");
     const canon = publicUrl(sp);
-    return { sitePath: sp, canonical: canon && canon !== `https://${APEX}/` ? canon : null };
+    return { sitePath: sp, canonical: canon && canon !== `https://${matchedApex}/` ? canon : null };
   }
 
-  if (!host.endsWith("." + APEX)) return { sitePath: null };
-  const labels = host.slice(0, -(APEX.length + 1)).split(".");
+  const labels = host.slice(0, -(matchedApex.length + 1)).split(".");
 
-  // Legacy two-level form: <key>.<kind>.stardust-archive.net  /  ftp.<site>.stardust-archive.net
+  // Legacy two-level form: <key>.<kind>.<apex>
   if (labels.length === 2) {
     let kind, key;
     if (labels[0] === "ftp") [kind, key] = ["ftp", labels[1]];
@@ -145,8 +200,6 @@ export function resolve(hostname, pathname) {
   const [, key, kind] = m;
   if (kind === "geocities") return { sitePath: `geocities/${key}.html` };
   if (key === "index") return { sitePath: `${kind}/index.html` };
-  // Strip the deterministic junk prefix to recover nested paths; fall back to
-  // the last segment if someone hand-edits the junk.
   const jp = junkPath(kind, key);
   const rest = path.startsWith(jp) ? path.slice(jp.length) : path.split("/").pop();
   const file = rest.endsWith("/") || rest === "" ? rest + "index.html" : rest;
