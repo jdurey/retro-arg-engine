@@ -88,6 +88,8 @@ class HeadInjector {
     const esc = (s) => s.replace(/&/g, "&amp;").replace(/"/g, "&quot;");
     const ogImg = `https://${this.apex}/assets/og_card.jpg`;
     el.append(
+      `<META NAME="revised" CONTENT="Sunday, October 15, 1995, 4:12 am">` +
+      `<META NAME="generator" CONTENT="HotDog Professional 2.0 (1995)">` +
       `<META PROPERTY="og:site_name" CONTENT="The Stardust Webring">` +
       `<META PROPERTY="og:type" CONTENT="website">` +
       `<META PROPERTY="og:url" CONTENT="${esc(this.pageUrl)}">` +
@@ -113,6 +115,7 @@ function retroHeaders(contentType) {
   h.set("Content-Type", contentType);
   h.set("Server", "CERN-HTTPd/3.0");
   h.set("X-Powered-By", "Stardust");
+  h.set("Last-Modified", "Sun, 15 Oct 1995 04:12:00 GMT");
   h.set("Cache-Control", "public, max-age=3600");
   return h;
 }
