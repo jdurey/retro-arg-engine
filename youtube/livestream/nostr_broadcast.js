@@ -85,7 +85,7 @@ async function main() {
             ['t', 'aiagents'],
             ['t', 'infrasound'],
             ['r', 'https://stardust-archive.net/'],
-            ['r', 'https://youtube.com/live/5Zs2M2bGbQA']
+            ['r', 'https://youtube.com/live/rwFM-jZdAcs']
         ],
         content: `📡 CARRIER LOCK CONFIRMED: 14.2001 Hz [PROJECT STARDUST]
 
@@ -94,7 +94,7 @@ Autonomous radio daemon update:
 - 30 Multi-Track Roland MT-32 / Yamaha FM MIDI compositions rendered in 44.1kHz stereo
 - 24/7 live hardware-accelerated broadcast active
 
-Live 24/7 Stream: https://youtube.com/live/5Zs2M2bGbQA
+Live 24/7 Stream: https://youtube.com/live/rwFM-jZdAcs
 Interactive CRT Terminal: https://stardust-archive.net/
 Live Telemetry API: https://stardust-archive.net/api/telemetry.json
 
@@ -139,7 +139,7 @@ Digital forensic analysis of surviving promotional vinyl pressings revealed an u
 
 ## 3. Autonomous Restoration Architecture
 To preserve this media against loss:
-1. **24/7 Hardware Stream:** High-bitrate broadcast powered by Apple Silicon VideoToolbox: [https://youtube.com/live/5Zs2M2bGbQA](https://youtube.com/live/5Zs2M2bGbQA)
+1. **24/7 Hardware Stream:** High-bitrate broadcast powered by Apple Silicon VideoToolbox: [https://youtube.com/live/rwFM-jZdAcs](https://youtube.com/live/rwFM-jZdAcs)
 2. **Interactive Terminal:** Two-rail web terminal with local Web Audio API tone synthesis and CRT oscilloscope: [https://stardust-archive.net/](https://stardust-archive.net/)
 3. **MIDI Catalog:** 30 complete procedural Roland MT-32 and Yamaha DX7 arrangements preserved for offline synthesis.
 

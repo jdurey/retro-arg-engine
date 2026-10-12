@@ -43,7 +43,7 @@ All commands and the 15-minute ARG broadcast timer will be created automatically
 | :--- | :--- | :--- |
 | `!status` | `[ORION DAEMON v3.0]: CARRIER: 14.2001 Hz // 5,000 NODES SYNCHRONIZED // ZERO PACKET LOSS // GATEWAY: https://stardust-archive.net/` | Displays core server and node synchronization state. |
 | `!carrier` | `$(urlfetch https://stardust-archive.net/api/telemetry.txt)` | **Dynamic Live Telemetry**: Nightbot queries Cloudflare edge to fetch live carrier frequency and packet counts in real time. |
-| `!tune` | `[FREQUENCY LOCKED]: Intercepting 14.2 Hz Akasaka relay... Spool active: https://kamome-net.org/` | Directs ARG investigators to the Tokyo Akasaka spool mirror. |
+| `!tune` | `[FREQUENCY LOCKED]: Intercepting 14.2 Hz Akasaka relay... Spool active: https://stardust-archive.net/ftp/kamome/` | Directs ARG investigators to the Tokyo Akasaka spool mirror. |
 | `!whois` | `[ARCHIVE RETRIEVAL]: SUBJECT: NOVA HART (1989). STATUS: SCHEDULED FOR PURGE. ERROR: RECURSIVE ARCHIVE PERSISTS at https://stardust-archive.net/` | In-lore character dossier clue pointing to the persistent web archive. |
 | `!telemetry` | `[TRANSMISSION]: Ashford Poly Telemetry Log (1989-09) -> https://stardust-archive.net/ftp/ashford-poly/hale_telemetry_1989-09.log` | Deep link to the raw laboratory telemetry text log. |
 | `!decode` | `[LEVEL 4 CLEARANCE]: Clue file unsealed -> https://stardust-archive.net/geocities/area51-vault-7004.html` | Decryption access link to the Area 51 Geocities vault. |

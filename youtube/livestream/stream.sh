@@ -34,16 +34,19 @@ echo " Press Ctrl+C to terminate."
 echo "=========================================================="
 
 while true; do
+    python3 "$DIR/build_playlist.py" || true
+
     caffeinate -d -i -m -s -u \
     ffmpeg -stream_loop -1 -re -i "$BACKDROP" \
-        -f concat -safe 0 -stream_loop -1 -i "$PLAYLIST" \
-        -filter_complex "[1:a]aresample=async=1000[a];[a]showwaves=s=404x214:mode=line:colors=lime:draw=full:scale=cbrt:r=30[wave];[wave]colorkey=0x000000:0.05:0.1[wave_trans];[0:v][wave_trans]overlay=x=731:y=456:eof_action=repeat:shortest=0:repeatlast=1[v]" \
-        -map "[v]" -map 1:a \
+        -f concat -safe 0 -i "$PLAYLIST" \
+        -filter_complex "[1:a]aresample=async=1000,asplit=2[a_out][a_wave];[a_wave]showwaves=s=404x214:mode=line:colors=lime:draw=full:scale=cbrt:r=30[wave];[wave]colorkey=0x000000:0.05:0.1[wave_trans];[0:v][wave_trans]overlay=x=731:y=456:eof_action=repeat:shortest=0:repeatlast=1[v]" \
+        -map "[v]" -map "[a_out]" \
         -c:v h264_videotoolbox -b:v 5500k -realtime 1 -prio_speed 1 -pix_fmt yuv420p -g 60 -keyint_min 60 \
         -c:a aac -b:a 192k -ar 44100 -ac 2 \
-        -flvflags no_duration_filesize \
-        -f flv "$RTMP_URL" || true
+        -rtmp_buffer 4000 \
+        -flvflags no_duration_filesize+no_sequence_end \
+        -f flv "$RTMP_URL" 2>&1 | tee -a "$DIR/stream.log" || true
 
-    echo "Stream disconnected. Reconnecting in 5 seconds..."
-    sleep 5
+    echo "Stream disconnected. Reconnecting in 1 second..."
+    sleep 1
 done

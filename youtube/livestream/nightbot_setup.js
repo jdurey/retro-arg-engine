@@ -57,7 +57,7 @@
     },
     {
       name: "!tune",
-      message: "[FREQUENCY LOCKED]: Intercepting 14.2 Hz Akasaka relay... Spool active: https://kamome-net.org/",
+      message: "[FREQUENCY LOCKED]: Intercepting 14.2 Hz Akasaka relay... Spool active: https://stardust-archive.net/ftp/kamome/",
       coolDown: 5,
       userLevel: "everyone"
     },
