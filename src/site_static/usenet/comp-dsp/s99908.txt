@@ -1,0 +1,54 @@
+From fourier_dr@dsp.stanford.edu Wed Feb 28 11:15:30 1996
+Path: stanford!decwrl!sdd.hp.com!news.ans.net!fourier_dr
+From: fourier_dr@dsp.stanford.edu (Dr. Ronald Vance)
+Newsgroups: comp.dsp,alt.conspiracy,comp.sys.m68k
+Subject: Mathematical Proof: Why 14.2001 Hz carrier survives MP3/AAC perceptual coding
+Message-ID: <1996Feb28.111530.99908@dsp.stanford.edu>
+Date: Wed, 28 Feb 1996 11:15:30 GMT
+Organization: Center for Computer Research in Music and Acoustics (CCRMA), Stanford
+Lines: 52
+
+Colleagues in signal processing:
+
+Several people have asked: "If modern lossy compression algorithms (MPEG-1 Layer 3,
+MPEG-4 AAC, Opus) apply a steep high-pass filter discarding everything below 20 Hz,
+how can a 14.2001 Hz sub-carrier survive modern digital transmission?"
+
+The answer lies in non-linear intermodulation distortion and spectral leakage
+introduced during analog-to-digital mastering.
+
+Let the acoustic signal be:
+   x(t) = s_audio(t) + A * cos(2 * pi * f_c * t + phi(t))
+where f_c = 14.2001 Hz and phi(t) in {0, pi} is the DBPSK symbol stream.
+
+When this composite signal passes through analog vacuum tube compressors, magnetic
+tape saturation, or vinyl cutter heads, the transfer function is non-linear:
+   y(t) = alpha_1 * x(t) + alpha_2 * x(t)^2 + alpha_3 * x(t)^3 + ...
+
+The quadratic term x(t)^2 generates cross-products:
+   2 * s_audio(t) * A * cos(2 * pi * f_c * t + phi(t))
+
+Notice that this convolves the entire audible spectrum of Nova Hart's vocals with
+the 14.2 Hz DBPSK sub-carrier! The phase information phi(t) is thus mirrored
+around EVERY audible harmonic in the voice (e.g. at 440 Hz +/- 14.2 Hz, 750 Hz +/- 14.2 Hz,
+and 1500 Hz +/- 14.2 Hz).
+
+Even if a psychoacoustic codec zeros out the fundamental bin at 0-20 Hz:
+1. The sideband skirts around 750 Hz and 1500 Hz fall well within the human
+   auditory passband and the codec's highest bit-allocation sub-bands.
+2. A second-order cross-correlator or envelope demodulator running on the
+   decoded PCM output can effortlessly extract the original 14.2 Hz phase reversals
+   with greater than 99.4% bit accuracy.
+
+Hale was not merely an audio mixer; he understood non-linear acoustics and
+psychoacoustic masking forty years ahead of his time. He did not hide the carrier
+in the bass bin—he intertwined it with the very timbre of the human voice.
+
+You can verify this directly with the Web Audio API demodulator:
+https://stardust-archive.net/terminal/
+and follow the live 24/7 spectrum at:
+https://youtube.com/@novahart_official/live
+
+--
+Dr. Ronald Vance | Stanford CCRMA
+"Information cannot be destroyed if it is modulated into the envelope."

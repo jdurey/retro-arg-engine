@@ -2,11 +2,10 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { generateSecretKey, getPublicKey, finalizeEvent } from 'nostr-tools/pure';
-import { Relay } from 'nostr-tools/relay';
+import { Relay, useWebSocketImplementation } from 'nostr-tools/relay';
 import WebSocket from 'ws';
 
-// Assign WebSocket to global for nostr-tools in Node environment
-global.WebSocket = WebSocket;
+useWebSocketImplementation(WebSocket);
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -34,8 +33,7 @@ const RELAYS = [
     'wss://nos.lol',
     'wss://relay.primal.net',
     'wss://nostr.mom',
-    'wss://relay.snort.social',
-    'wss://offchain.pub'
+    'wss://relay.snort.social'
 ];
 
 async function broadcastEvent(eventTemplate) {
@@ -44,10 +42,12 @@ async function broadcastEvent(eventTemplate) {
 
     for (const url of RELAYS) {
         try {
-            const relay = await Relay.connect(url);
+            const connectPromise = Relay.connect(url);
+            const timeoutPromise = new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), 4000));
+            const relay = await Promise.race([connectPromise, timeoutPromise]);
             await relay.publish(signedEvent);
             console.log(`[NOSTR] ✓ Published to ${url}`);
-            relay.close();
+            try { relay.close(); } catch (_) {}
         } catch (err) {
             console.warn(`[NOSTR] ⚠ ${url}: ${err.message || err}`);
         }
@@ -55,6 +55,59 @@ async function broadcastEvent(eventTemplate) {
 }
 
 async function main() {
+    const args = process.argv.slice(2);
+    let customTitle = null;
+    let customContent = null;
+    let customSubmolt = 'general';
+
+    for (let i = 0; i < args.length; i++) {
+        if (args[i] === '--title' && args[i + 1]) {
+            customTitle = args[++i];
+        } else if (args[i] === '--content' && args[i + 1]) {
+            customContent = args[++i];
+        } else if (args[i] === '--submolt' && args[i + 1]) {
+            customSubmolt = args[++i];
+        }
+    }
+
+    if (customContent) {
+        console.log(`[NOSTR] Publishing custom dispatch to relays (Topic: ${customSubmolt})...`);
+        const noteEvent = {
+            kind: 1,
+            created_at: Math.floor(Date.now() / 1000),
+            tags: [
+                ['t', 'arg'],
+                ['t', 'synthwave'],
+                ['t', 'novahart'],
+                ['t', 'stardust'],
+                ['t', 'aiagents'],
+                ['t', customSubmolt],
+                ['r', 'https://stardust-archive.net/'],
+                ['r', 'https://youtube.com/@novahart_official/live']
+            ],
+            content: customTitle ? `📡 [${customTitle.toUpperCase()}]\n\n${customContent}` : customContent
+        };
+        await broadcastEvent(noteEvent);
+
+        if (customTitle) {
+            const articleEvent = {
+                kind: 30023,
+                created_at: Math.floor(Date.now() / 1000),
+                tags: [
+                    ['d', `stardust-${Date.now()}`],
+                    ['title', customTitle],
+                    ['t', 'stardust'],
+                    ['t', 'novahart'],
+                    ['t', customSubmolt]
+                ],
+                content: `# ${customTitle}\n\n${customContent}`
+            };
+            await broadcastEvent(articleEvent);
+        }
+        console.log('[NOSTR] Custom dispatch broadcast complete.');
+        process.exit(0);
+    }
+
     // 1. Kind 0: Metadata
     const profileEvent = {
         kind: 0,
