@@ -561,7 +561,7 @@ AVAILABLE COMMANDS:
 
     function playSectorAudio(sectorNum) {
       initAudioContext();
-      print("\n[DEMODULATING]: Demodulating " + SECTOR_TITLES[sectorNum] + "...");
+      print("\\n[DEMODULATING]: Demodulating " + SECTOR_TITLES[sectorNum] + "...");
 
       const b64 = MARCUS_EMBEDDED[sectorNum];
       if (b64) {
