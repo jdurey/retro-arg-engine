@@ -60,6 +60,8 @@ class Ctx:
         kind, _, arg = token.partition(":")
         if kind == "home":
             return "index.html"
+        if kind == "terminal":
+            return "terminal/index.html"
         if kind == "usenet":
             return "usenet/%s/%s.txt" % (group_slug(self.thread_group[arg]), arg)
         if kind == "usenetgroup":

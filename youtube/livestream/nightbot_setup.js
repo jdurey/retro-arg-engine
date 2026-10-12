@@ -86,8 +86,32 @@
       userLevel: "everyone"
     },
     {
+      name: "!terminal",
+      message: "[FORENSIC TERMINAL]: Sublevel B2 Tape Demodulator online. Reconstruct sound engineer Marcus Hale's acoustic footprint -> https://stardust-archive.net/terminal",
+      coolDown: 5,
+      userLevel: "everyone"
+    },
+    {
+      name: "!marcus",
+      message: "[ORION CLASSIFIED]: Marcus Hale was NOT transferred to New Geneva. He was executed in Sublevel B2 for coding Nova's backdoor. Recover his voice: https://stardust-archive.net/terminal",
+      coolDown: 5,
+      userLevel: "everyone"
+    },
+    {
+      name: "!tapeofus",
+      message: "[ARCHIVAL REEL SD-0004]: 'I'll hide us in the tape, between the beat and hiss...' Listen past the dead air fadeout on YouTube: https://www.youtube.com/watch?v=4XSWqvZ2eas",
+      coolDown: 5,
+      userLevel: "everyone"
+    },
+    {
+      name: "!midnight",
+      message: "[BOOTLEG REEL SD-0008]: 'Midnight Protocol' - Marcus's 3-act backdoor rock opera. Read the full libretto: https://stardust-archive.net/geocities/sunsetstrip-underground-1989-midnight-protocol.html",
+      coolDown: 5,
+      userLevel: "everyone"
+    },
+    {
       name: "!help",
-      message: "[SIGNAL MONITORS]: Available decoders: !status | !carrier | !tune | !whois | !telemetry | !decode | !signal",
+      message: "[SIGNAL MONITORS]: Available decoders: !status | !terminal | !marcus | !tapeofus | !midnight | !carrier | !tune | !whois | !telemetry | !decode | !signal",
       coolDown: 5,
       userLevel: "everyone"
     }

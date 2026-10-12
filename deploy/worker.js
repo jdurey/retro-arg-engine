@@ -1,6 +1,7 @@
 import { APEX, ALL_APEXES, apexFor, resolveApex, isStory, publicUrl, resolve } from "./urlmap.js";
 import STORY_PATHS from "./story_paths.js";
 import { classify, liveCount, renderMember, renderDir, renderDirIndex, renderLang, sitemapSitePaths } from "./swarm/index.js";
+import { TERMINAL_HTML } from "./terminal_html.js";
 
 // Legacy static GeoCities pages always win over generated swarm addresses.
 const STATIC_GEO = new Set(STORY_PATHS.filter((p) => /^geocities\/[^/]+\.html$/.test(p)).map((p) => p.slice(10, -5)));
@@ -51,7 +52,7 @@ Sitemap: https://${apex}/sitemap.xml
 // IndexNow keys are public by design (they prove control of the host, nothing more).
 const INDEXNOW_KEY = "37feeed875722863fda484c68e6695e5";
 // Bump when files in assets/ are replaced so edge + browser caches refetch.
-const ASSET_VERSION = "13";
+const ASSET_VERSION = "14";
 
 function urlset(sitePaths) {
   const urls = sitePaths.map((sp) => publicUrl(sp)).filter((u) => u && u.startsWith("https://"));
@@ -204,6 +205,11 @@ export default {
     }
     if (url.pathname === `/${INDEXNOW_KEY}.txt`) {
       return new Response(INDEXNOW_KEY, { headers: retroHeaders("text/plain; charset=utf-8") });
+    }
+    if (url.pathname === "/terminal" || url.pathname === "/terminal/" ||
+        url.pathname === "/forensics" || url.pathname === "/forensics/" ||
+        url.pathname === "/reconstruction" || url.pathname === "/reconstruction/") {
+      return new Response(TERMINAL_HTML, { headers: retroHeaders("text/html; charset=utf-8") });
     }
     if (url.pathname === "/api/telemetry.txt" || url.pathname === "/api/carrier.txt") {
       const now = new Date();

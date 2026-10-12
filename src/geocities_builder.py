@@ -698,6 +698,8 @@ def render_sections_html(ctx, sections, from_dir, hp):
             sec_parts.append("<CENTER>" + relay_table_html(ctx.lore, hp) + "</CENTER>")
         if s.get("midi_list"):
             sec_parts.append("<CENTER>" + midi_jukebox_html(ctx, from_dir) + "</CENTER>")
+        if s.get("html"):
+            sec_parts.append(s["html"])
     return "\n".join(sec_parts)
 
 
@@ -1361,6 +1363,19 @@ def build(ctx, swarm=0):
         '<A HREF="#spotlight">Top Stations Spotlight</A> | '
         '<A HREF="dir-index.html">All Suburbs (1996 Expansion)</A> | '
         '<A HREF="../index.html">WWW Virtual Library</A> ]</P>\n'
+        '<DIV STYLE="background:#330011; border:2px dashed #FF3333; padding:8px; margin:12px auto; max-width:800px; text-align:left;">\n'
+        '  <FONT COLOR="#FF5555" FACE="Arial Black,Arial" SIZE=2><B>&#9888; CRITICAL SYSTEM ALERT // SUBLEVEL B2 CONSOLE DISCOVERY (1996)</B></FONT><BR>\n'
+        '  <FONT FACE="Arial,Helvetica" SIZE=2 COLOR="#FFCCCC">\n'
+        '    The official Orion Records line was that sound engineer Marcus Hale was transferred to New Geneva overseas. \n'
+        '    <b>We now have proof of execution in Sublevel B2 while opening the Worldnet backdoor to save Nova.</b> \n'
+        '    Her biometric audio footprint has been decoded. Two primary unsealed recordings hold the recovery keys:\n'
+        '  </FONT>\n'
+        '  <UL STYLE="margin-top:4px; margin-bottom:6px;">\n'
+        '    <LI><FONT FACE="Arial,Helvetica" SIZE=2><B><A HREF="../terminal/index.html" STYLE="color:#33FF33;">Launch Orion Forensic Demodulator Terminal (/terminal)</A></B> &mdash; Reconstruct missing carrier sectors</FONT></LI>\n'
+        '    <LI><FONT FACE="Arial,Helvetica" SIZE=2><B><A HREF="sunsetstrip-nova-tape-of-us-analysis.html" STYLE="color:#00FFFF;">"Tape of Us" Master Reel Analysis</A></B> &mdash; Uncut 1989 master tape with runout clue for Sector 1</FONT></LI>\n'
+        '    <LI><FONT FACE="Arial,Helvetica" SIZE=2><B><A HREF="sunsetstrip-underground-1989-midnight-protocol.html" STYLE="color:#FF77EE;">"Midnight Protocol" 3-Act Rock Opera</A></B> &mdash; Complete lyrics detailing the B2 escape route</FONT></LI>\n'
+        '  </UL>\n'
+        '</DIV>\n'
         '</CENTER>\n'
         '<A NAME="ring"></A>\n'
         '<H2><FONT FACE="Arial,Helvetica" COLOR="#003366">&#9733; Ring Home &amp; Featured Homesteads</FONT></H2>\n'

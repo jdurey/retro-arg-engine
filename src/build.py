@@ -32,6 +32,11 @@ def main():
     assets_dest = os.path.join(out, "assets")
     shutil.copytree(assets_src, assets_dest)
     
+    static_src = os.path.join(root_dir, "src", "site_static")
+    if os.path.exists(static_src):
+        print("Copying static site overrides...")
+        shutil.copytree(static_src, out, dirs_exist_ok=True)
+    
     print("Creating root index...")
     index_html = [
         '<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">',
@@ -39,6 +44,7 @@ def main():
         '<BODY><H1>Project Stardust Web Swarm</H1>',
         '<P>Navigate the early internet archives of the Nova Hart ARG:</P>',
         '<UL>',
+        '<LI><A HREF="terminal/index.html" STYLE="color:#00FF66; font-weight:bold;"><B>&#9654; Orion Demodulator Console (/terminal)</B></A></LI>',
         '<LI><A HREF="geocities/index.html">GeoCities Webring</A></LI>',
         '<LI><A HREF="usenet/index.html">Usenet News Archive</A></LI>'
     ]

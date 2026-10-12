@@ -21,7 +21,8 @@ walk(siteDir);
 
 const out = ["site_path,public_url"];
 for (const sp of rows.sort()) {
-  if (sp.startsWith("assets/") || sp === "sitemap.xml" || sp === "robots.txt") continue;
+  if (sp.startsWith("assets/") || sp === "sitemap.xml" || sp === "robots.txt" ||
+      sp.startsWith("terminal/") || sp.startsWith("reconstruction/") || sp.startsWith("forensics/")) continue;
   const pub = publicUrl(sp);
   if (!pub) { console.error("UNMAPPED", sp); errors++; continue; }
   const u = new URL(pub);
