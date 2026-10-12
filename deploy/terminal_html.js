@@ -230,6 +230,12 @@ export const TERMINAL_HTML = `<!DOCTYPE html>
     let analyser = null;
     let sourceNode = null;
     const player = document.getElementById("audio-player");
+    player.crossOrigin = "anonymous";
+    player.addEventListener("error", (e) => {
+      console.error("Player audio error:", player.error);
+      const code = player.error ? player.error.code : "unknown";
+      print("[AUDIO LOAD ERROR]: Unable to load audio stream (Code " + code + "). Retrying...", true);
+    });
     const canvas = document.getElementById("oscilloscope");
     const ctx = canvas.getContext("2d");
 

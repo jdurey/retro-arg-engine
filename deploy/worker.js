@@ -2,6 +2,7 @@ import { APEX, ALL_APEXES, apexFor, resolveApex, isStory, publicUrl, resolve } f
 import STORY_PATHS from "./story_paths.js";
 import { classify, liveCount, renderMember, renderDir, renderDirIndex, renderLang, sitemapSitePaths } from "./swarm/index.js";
 import { TERMINAL_HTML } from "./terminal_html.js";
+import { MARCUS_AUDIO } from "./marcus_audio.js";
 
 // Legacy static GeoCities pages always win over generated swarm addresses.
 const STATIC_GEO = new Set(STORY_PATHS.filter((p) => /^geocities\/[^/]+\.html$/.test(p)).map((p) => p.slice(10, -5)));
@@ -213,6 +214,30 @@ export default {
         url.pathname === "/reconstruction" || url.pathname === "/reconstruction/" || url.pathname === "/reconstruction/index.html" ||
         url.pathname.endsWith("/reconstruction") || url.pathname.endsWith("/reconstruction/") || url.pathname.endsWith("/reconstruction/index.html")) {
       return new Response(TERMINAL_HTML, { headers: retroHeaders("text/html; charset=utf-8") });
+    }
+    if (url.pathname.startsWith("/assets/audio/marcus/")) {
+      const filename = url.pathname.split("/").pop();
+      let b64 = null;
+      if (filename.includes("sector1")) b64 = MARCUS_AUDIO.sector1;
+      else if (filename.includes("sector2")) b64 = MARCUS_AUDIO.sector2;
+      else if (filename.includes("sector3")) b64 = MARCUS_AUDIO.sector3;
+      else if (filename.includes("sector4")) b64 = MARCUS_AUDIO.sector4;
+
+      if (b64) {
+        const binStr = atob(b64);
+        const len = binStr.length;
+        const bytes = new Uint8Array(len);
+        for (let i = 0; i < len; i++) {
+          bytes[i] = binStr.charCodeAt(i);
+        }
+        const headers = new Headers();
+        headers.set("Content-Type", "audio/mpeg");
+        headers.set("Content-Length", len.toString());
+        headers.set("Cache-Control", "public, max-age=86400");
+        headers.set("Access-Control-Allow-Origin", "*");
+        headers.set("Accept-Ranges", "bytes");
+        return new Response(bytes, { status: 200, headers });
+      }
     }
     if (url.pathname === "/api/telemetry.txt" || url.pathname === "/api/carrier.txt") {
       const now = new Date();
