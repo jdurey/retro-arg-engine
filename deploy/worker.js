@@ -287,14 +287,33 @@ export default {
     const base = env.BASE_STATIC_URL.replace(/\/+$/, "");
     const encoded = sitePath.split("/").map(encodeURIComponent).join("/");
     const bust = `?v=${ASSET_VERSION}`;
+    const forwardHeaders = new Headers();
+    const rangeHeader = request.headers.get("range");
+    if (rangeHeader) {
+      forwardHeaders.set("range", rangeHeader);
+    }
     const upstream = await fetch(`${base}/${encoded}${bust}`, {
       method: request.method === "HEAD" ? "HEAD" : "GET",
+      headers: forwardHeaders,
       cf: { cacheTtl: 3600, cacheEverything: true },
     });
-    if (!upstream.ok) return notFound();
+    if (!upstream.ok && upstream.status !== 206) return notFound();
 
     const type = upstream.headers.get("Content-Type") || "application/octet-stream";
     const headers = retroHeaders(type);
+    headers.set("Access-Control-Allow-Origin", "*");
+    headers.set("Accept-Ranges", "bytes");
+
+    if (upstream.status === 206) {
+      if (upstream.headers.has("Content-Range")) {
+        headers.set("Content-Range", upstream.headers.get("Content-Range"));
+      }
+      if (upstream.headers.has("Content-Length")) {
+        headers.set("Content-Length", upstream.headers.get("Content-Length"));
+      }
+      return new Response(upstream.body, { status: 206, headers });
+    }
+
     if (!sitePath.startsWith("assets/")) {
       if (isStory(sitePath)) {
         headers.set("X-Robots-Tag", INDEX_HEADER);

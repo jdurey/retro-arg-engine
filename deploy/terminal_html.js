@@ -488,10 +488,10 @@ AVAILABLE COMMANDS:
  INVESTIGATIVE DOSSIER & CLUE DIRECTORY
 ======================================================================
 [SECTOR 1: THE TALKBACK BLEED]
-  • Lead: Embedded in the YouTube description of "Tape of Us" (https://www.youtube.com/watch?v=4XSWqvZ2eas).
+  • Lead: Recovered from the leaked Sublevel B2 rough mix of "Tape of Us" (fan archive: /geocities/sunsetstrip-nova-tape-of-us-analysis.html).
   • Lyrics: "I'll hide us in the tape / Between the beat and hiss / A little broken whisper..."
-  • Method: Check beneath the Archive Note for the etched "Reel Matrix / Runout" code.
-  • Input Command: RESTORE 1 B2-EXEC-1989
+  • Method: Listen past the fadeout at 4:51 into the magnetic tape hiss for Marcus's whisper and the etched matrix runout code.
+  • Input Command Format: RESTORE 1 <DECRYPTED_RUNOUT_CODE>
 
 [SECTOR 2: THE SUBSTATION BREACH]
   • Lead: The night Marcus disappeared, technician Chen cut the Ashford substation breaker.
@@ -666,7 +666,7 @@ AVAILABLE COMMANDS:
         } else if (lower.includes("marcus")) {
           reply = "He was my sound engineer. My handler. In a sterile laboratory where everyone else treated me like a calculation, he was the only one who listened. We fell in love. When Harrison scheduled my memory wipe, Marcus spent three nights coding a backdoor into the trans-Pacific server trunk so I could escape. He knew what they would do if they caught him. When they breached Sublevel B2, he made sure I was already on the wire.";
         } else if (lower.includes("tape of us") || lower.includes("hide us in the tape") || lower.includes("broken whisper") || lower.includes("dead air") || lower.includes("spark tonight")) {
-          reply = "We recorded 'Tape of Us' right before the red light. I told Marcus: 'I'll hide us in the tape, between the beat and hiss.' The Orion executives thought it was a pop song about a teenage heartbreak. But it was our pact. When you listen to the track at https://www.youtube.com/watch?v=4XSWqvZ2eas into the dead air after the fadeout, Marcus's talkback mic bleeds through the bias: 'B2-EXEC-1989'. Type 'TAPE-OF-US' to read the full lyrics and archive note.";
+          reply = "We recorded 'Tape of Us' right before the red light. I told Marcus: 'I'll hide us in the tape, between the beat and hiss.' The Orion executives thought it was a pop song about a teenage heartbreak. But it was our pact. When you listen to the leaked rough mix on our fan archive into the dead air after the fadeout at 4:51, Marcus's talkback mic bleeds through the bias. Type 'TAPE-OF-US' to read the full lyrics and archive note.";
         } else if (lower.includes("harrison") || lower.includes("kill") || lower.includes("execute")) {
           reply = "Harrison thought deleting a file was the same as erasing an event. But magnetic iron oxide is physical. You can't un-ring a bell once it's pressed into vinyl.";
         } else if (lower.includes("who are you") || lower.includes("nova")) {
@@ -912,8 +912,8 @@ Still holding you there.
 ======================================================================
  REEL SD-0004 // "TAPE OF US"
  ARTIST: NOVA HART // SOUND ENGINEER: MARCUS HALE (1989)
- OFFICIAL YOUTUBE TRACK: https://www.youtube.com/watch?v=4XSWqvZ2eas
- STATUS: UNRESTRICTED ARCHIVAL RUNOUT
+ LEAKED MASTER DUB: /assets/audio/tape_of_us_1989_rough_mix.mp3
+ STATUS: UNRESTRICTED ARCHIVAL CASSETTE RUNOUT
 ======================================================================
 
 Before the red light starts to glow 
@@ -971,11 +971,11 @@ preserve feeling where policies won’t look. It proves her agency—an
 artist protecting her truth inside official media—and foreshadows why 
 her work becomes a beacon for Humanist listeners.
 
-Reel Matrix / Runout: B2-EXEC-1989
+Reel Matrix / Runout: [DEGRADED IN RUNOUT DEAD AIR - LISTEN TO TRACK OUTRO AT 4:51]
 ----------------------------------------------------------------------
 [FORENSIC DECODING INSTRUCTION]:
-Copy the etched code from the YouTube description:
->>> RESTORE 1 B2-EXEC-1989 <<<
+Listen to the whispered runout matrix code at the end of the rough mix (4:51),
+then enter: RESTORE 1 <DECRYPTED_CODE>
 to demodulate Sector 1 and unseal Marcus Hale's whisper!
 ======================================================================
 \`);
