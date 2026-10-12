@@ -1,3 +1,5 @@
+import { MARCUS_AUDIO } from "./marcus_audio.js";
+
 export const TERMINAL_HTML = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -225,16 +227,31 @@ export const TERMINAL_HTML = `<!DOCTYPE html>
   <audio id="audio-player" style="display:none;"></audio>
 
   <script>
+    // Embedded Marcus Hale Audio Tracks (Base64) - Instant In-Memory Playback
+    const MARCUS_EMBEDDED = {
+      1: "${MARCUS_AUDIO.sector1}",
+      2: "${MARCUS_AUDIO.sector2}",
+      3: "${MARCUS_AUDIO.sector3}",
+      4: "${MARCUS_AUDIO.sector4}"
+    };
+
+    function b64ToUint8(b64) {
+      const bin = atob(b64);
+      const len = bin.length;
+      const u8 = new Uint8Array(len);
+      for (let i = 0; i < len; i++) {
+        u8[i] = bin.charCodeAt(i);
+      }
+      return u8;
+    }
+
     // Audio Context for mechanical keyboard clicks & waveform visualization
     let audioCtx = null;
     let analyser = null;
-    let sourceNode = null;
+    let currentBufferSource = null;
     const player = document.getElementById("audio-player");
-    player.crossOrigin = "anonymous";
     player.addEventListener("error", (e) => {
-      console.error("Player audio error:", player.error);
-      const code = player.error ? player.error.code : "unknown";
-      print("[AUDIO LOAD ERROR]: Unable to load audio stream (Code " + code + "). Retrying...", true);
+      console.warn("Audio player event:", player.error);
     });
     const canvas = document.getElementById("oscilloscope");
     const ctx = canvas.getContext("2d");
@@ -318,9 +335,6 @@ export const TERMINAL_HTML = `<!DOCTYPE html>
         audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         analyser = audioCtx.createAnalyser();
         analyser.fftSize = 256;
-        sourceNode = audioCtx.createMediaElementSource(player);
-        sourceNode.connect(analyser);
-        analyser.connect(audioCtx.destination);
         drawOscilloscope();
       }
       if (audioCtx.state === "suspended") {
@@ -547,13 +561,74 @@ AVAILABLE COMMANDS:
 
     function playSectorAudio(sectorNum) {
       initAudioContext();
+      print("\n[DEMODULATING]: Demodulating " + SECTOR_TITLES[sectorNum] + "...");
+
+      const b64 = MARCUS_EMBEDDED[sectorNum];
+      if (b64) {
+        try {
+          const u8 = b64ToUint8(b64);
+          audioCtx.decodeAudioData(u8.buffer.slice(0), (decoded) => {
+            if (currentBufferSource) {
+              try { currentBufferSource.stop(); } catch(e) {}
+            }
+            currentBufferSource = audioCtx.createBufferSource();
+            currentBufferSource.buffer = decoded;
+            currentBufferSource.connect(analyser);
+            analyser.connect(audioCtx.destination);
+            currentBufferSource.start(0);
+            print("▶ [PLAYING AUDIO]: " + SECTOR_TITLES[sectorNum]);
+          }, (err) => {
+            console.warn("Web Audio decode error, falling back to Blob:", err);
+            playBlobFallback(u8, sectorNum);
+          });
+          return;
+        } catch(e) {
+          console.warn("Base64 audio unpack error:", e);
+        }
+      }
+
+      // Secondary Network fallback
       const url = getAudioUrl(sectorNum);
-      player.src = url;
-      player.play().then(() => {
-        print(\`\\n▶ [PLAYING AUDIO]: \${SECTOR_TITLES[sectorNum]}\`);
-      }).catch(e => {
-        print(\`[AUDIO NOTE]: Click anywhere or type a command to allow audio playback.\`);
-      });
+      fetch(url)
+        .then(res => {
+          if (!res.ok) throw new Error("HTTP " + res.status);
+          return res.arrayBuffer();
+        })
+        .then(buf => audioCtx.decodeAudioData(buf))
+        .then(decoded => {
+          if (currentBufferSource) {
+            try { currentBufferSource.stop(); } catch(e) {}
+          }
+          currentBufferSource = audioCtx.createBufferSource();
+          currentBufferSource.buffer = decoded;
+          currentBufferSource.connect(analyser);
+          analyser.connect(audioCtx.destination);
+          currentBufferSource.start(0);
+          print("▶ [PLAYING AUDIO]: " + SECTOR_TITLES[sectorNum]);
+        })
+        .catch(err => {
+          console.warn("Network audio fetch failed:", err);
+          player.src = url;
+          player.play().then(() => {
+            print("▶ [PLAYING AUDIO]: " + SECTOR_TITLES[sectorNum]);
+          }).catch(e => {
+            print("[AUDIO NOTE]: Click anywhere or type a command to allow audio playback.");
+          });
+        });
+    }
+
+    function playBlobFallback(u8, sectorNum) {
+      try {
+        const blob = new Blob([u8], { type: "audio/mpeg" });
+        player.src = URL.createObjectURL(blob);
+        player.play().then(() => {
+          print("▶ [PLAYING AUDIO]: " + SECTOR_TITLES[sectorNum]);
+        }).catch(e => {
+          print("[AUDIO NOTE]: Click anywhere or type a command to allow audio playback.");
+        });
+      } catch(e) {
+        console.error("Blob player error:", e);
+      }
     }
 
     function cmdPlay(sectorNum) {
@@ -1009,6 +1084,10 @@ transferred to Orion's overseas facility in New Geneva."
           cmdPlay(parseInt(args[0], 10));
           break;
         case "STOP":
+          if (currentBufferSource) {
+            try { currentBufferSource.stop(); } catch(e) {}
+            currentBufferSource = null;
+          }
           player.pause();
           print(\`[AUDIO STOPPED]\`);
           break;

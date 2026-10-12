@@ -213,7 +213,14 @@ export default {
         url.pathname.endsWith("/forensics") || url.pathname.endsWith("/forensics/") || url.pathname.endsWith("/forensics/index.html") ||
         url.pathname === "/reconstruction" || url.pathname === "/reconstruction/" || url.pathname === "/reconstruction/index.html" ||
         url.pathname.endsWith("/reconstruction") || url.pathname.endsWith("/reconstruction/") || url.pathname.endsWith("/reconstruction/index.html")) {
-      return new Response(TERMINAL_HTML, { headers: retroHeaders("text/html; charset=utf-8") });
+      const headers = new Headers();
+      headers.set("Content-Type", "text/html; charset=utf-8");
+      headers.set("Server", "CERN-HTTPd/3.0");
+      headers.set("X-Powered-By", "Stardust");
+      headers.set("Cache-Control", "no-cache, no-store, must-revalidate, max-age=0");
+      headers.set("Pragma", "no-cache");
+      headers.set("Expires", "0");
+      return new Response(TERMINAL_HTML, { headers });
     }
     if (url.pathname.startsWith("/assets/audio/marcus/")) {
       const filename = url.pathname.split("/").pop();
@@ -225,14 +232,31 @@ export default {
 
       if (b64) {
         const binStr = atob(b64);
-        const len = binStr.length;
-        const bytes = new Uint8Array(len);
-        for (let i = 0; i < len; i++) {
+        const total = binStr.length;
+        const bytes = new Uint8Array(total);
+        for (let i = 0; i < total; i++) {
           bytes[i] = binStr.charCodeAt(i);
         }
+
+        const range = request.headers.get("range");
+        if (range && range.startsWith("bytes=")) {
+          const parts = range.replace("bytes=", "").split("-");
+          const start = parseInt(parts[0], 10) || 0;
+          const end = parts[1] ? parseInt(parts[1], 10) : total - 1;
+          const chunk = bytes.subarray(start, end + 1);
+          const headers = new Headers();
+          headers.set("Content-Type", "audio/mpeg");
+          headers.set("Content-Range", `bytes ${start}-${end}/${total}`);
+          headers.set("Content-Length", chunk.length.toString());
+          headers.set("Accept-Ranges", "bytes");
+          headers.set("Cache-Control", "public, max-age=86400");
+          headers.set("Access-Control-Allow-Origin", "*");
+          return new Response(chunk, { status: 206, headers });
+        }
+
         const headers = new Headers();
         headers.set("Content-Type", "audio/mpeg");
-        headers.set("Content-Length", len.toString());
+        headers.set("Content-Length", total.toString());
         headers.set("Cache-Control", "public, max-age=86400");
         headers.set("Access-Control-Allow-Origin", "*");
         headers.set("Accept-Ranges", "bytes");
