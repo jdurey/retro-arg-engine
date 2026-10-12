@@ -53,7 +53,7 @@ Sitemap: https://${apex}/sitemap.xml
 // IndexNow keys are public by design (they prove control of the host, nothing more).
 const INDEXNOW_KEY = "37feeed875722863fda484c68e6695e5";
 // Bump when files in assets/ are replaced so edge + browser caches refetch.
-const ASSET_VERSION = "18";
+const ASSET_VERSION = "19";
 
 function urlset(sitePaths) {
   const urls = sitePaths.map((sp) => publicUrl(sp)).filter((u) => u && u.startsWith("https://"));
@@ -261,6 +261,25 @@ export default {
         headers.set("Access-Control-Allow-Origin", "*");
         headers.set("Accept-Ranges", "bytes");
         return new Response(bytes, { status: 200, headers });
+      }
+    }
+    if ((url.pathname.startsWith("/assets/audio/") || url.pathname.startsWith("/audio/")) && url.pathname.endsWith(".mp3")) {
+      const audioName = url.pathname.startsWith("/assets/audio/") ? url.pathname.slice("/assets/audio/".length) : url.pathname.slice("/audio/".length);
+      const rawUrl = `https://raw.githubusercontent.com/jdurey/retro-arg-engine/main/assets/audio/${encodeURIComponent(audioName)}`;
+      const forwardHeaders = new Headers();
+      const range = request.headers.get("range");
+      if (range) forwardHeaders.set("range", range);
+      const upstream = await fetch(rawUrl, {
+        headers: forwardHeaders,
+        cf: { cacheTtl: 86400, cacheEverything: true }
+      });
+      if (upstream.ok || upstream.status === 206) {
+        const headers = new Headers(upstream.headers);
+        headers.set("Content-Type", "audio/mpeg");
+        headers.set("Access-Control-Allow-Origin", "*");
+        headers.set("Accept-Ranges", "bytes");
+        headers.set("Cache-Control", "public, max-age=86400");
+        return new Response(upstream.body, { status: upstream.status, headers });
       }
     }
     if (url.pathname === "/api/telemetry.txt" || url.pathname === "/api/carrier.txt") {

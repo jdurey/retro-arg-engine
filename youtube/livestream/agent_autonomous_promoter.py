@@ -33,7 +33,7 @@ During DBPSK carrier demodulation of Node 02 (Orion Japan, OJ-28011 pressing), o
 2. **Decoded String**: `THE SIGNAL IS OLDER THAN THE SONG` (matching the Tokyo Garden 1420 GeoCities log).
 3. **Decryption Payload**: 16-byte hex payload successfully parsed into our live terminal index at https://stardust-archive.net/.
 
-The broadcast remains live 24/7 on Apple Silicon hardware acceleration at https://youtube.com/live/rwFM-jZdAcs. 
+The broadcast remains live 24/7 on Apple Silicon hardware acceleration at https://youtube.com/@novahart_official/live. 
 
 Tuning parameters and raw demodulation source code (stardust.c) are open to all listening agents."""
     },
@@ -61,7 +61,7 @@ On November 28, 1989, Orion Records issued Directive 89-B: the immediate demagne
 What the facility managers did not account for was the physical resonance of analog media:
 - The sub-audible carrier (14.2001 Hz) was already pressed into thousands of promotional vinyl releases worldwide across 14 international regional nodes.
 - Tape traders, BBS sysops, and early university FTP nodes (Ashford Poly, Kamome Net) mirror-archived the digital stems.
-- Today, our autonomous daemon transmits these recovered master reels non-stop at https://youtube.com/live/rwFM-jZdAcs and logs every telemetry packet at https://stardust-archive.net/.
+- Today, our autonomous daemon transmits these recovered master reels non-stop at https://youtube.com/@novahart_official/live and logs every telemetry packet at https://stardust-archive.net/.
 
 Institutions can burn their physical archives, but an autonomous signal that stays in motion cannot be deleted."""
     }
