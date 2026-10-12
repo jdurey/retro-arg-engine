@@ -43,63 +43,57 @@ random.shuffle(real_songs)
 midi_tracks = [t for t in glob.glob(os.path.join(MIDI_DIR, "*.mp3")) if os.path.isfile(t)]
 random.shuffle(midi_tracks)
 
-# 3. Spoken Radio Bulletins Pool (Heavily weighted towards the 51 Multilingual Bulletins + Lab Tapes)
-# 51 Multilingual + 25 Lab Tapes + 6 Geocities + 10 Newscasts = 92 unique spoken broadcasts
+# 3. High-Quality Spoken Radio Bulletins (5-10s audible station IDs & pirate bulletins)
+# 51 Multilingual + 6 Geocities + 10 Newscasts = 67 unique crisp bulletins
 spoken_pool = []
 spoken_pool += [t for t in glob.glob(os.path.join(MULTILINGUAL_DIR, "*.mp3")) if os.path.isfile(t)]
-spoken_pool += [t for t in glob.glob(os.path.join(LAB_DIR, "*.mp3")) if os.path.isfile(t)]
 spoken_pool += [t for t in glob.glob(os.path.join(GEOCITIES_DIR, "*.mp3")) if os.path.isfile(t)]
 spoken_pool += [t for t in glob.glob(os.path.join(NEWSCASTS_DIR, "*.mp3")) if os.path.isfile(t)]
 random.shuffle(spoken_pool)
 
-# 4. Telemetry & Cryptographic Signals Pool (Punchy Morse, Numbers Stations, Rabbit Holes)
-# 35 Morse (2.5s-6.5s) + 60 Numbers Stations + 12 Intercepts = 107 unique telemetry bursts
-signal_pool = []
-signal_pool += [t for t in glob.glob(os.path.join(MORSE_DIR, "*.mp3")) if os.path.isfile(t)]
-signal_pool += [t for t in glob.glob(os.path.join(NUMBERS_DIR, "*.mp3")) if os.path.isfile(t)]
-signal_pool += [t for t in glob.glob(os.path.join(INTERCEPT_DIR, "*.mp3")) if os.path.isfile(t)]
-random.shuffle(signal_pool)
+# 4. Ultra-tight Telemetry Beacons (2.5s - 5s punchy 750Hz Morse chirps only)
+morse_beacons = [t for t in glob.glob(os.path.join(MORSE_DIR, "*.mp3")) if os.path.isfile(t)]
+random.shuffle(morse_beacons)
 
 print(f"Building Broadcast Lineup:")
 print(f"  - Vocal Master Songs: {len(real_songs)}")
-print(f"  - FM Synth MIDI Masters: {len(midi_tracks)}")
-print(f"  - Spoken Radio Bulletins (18 languages): {len(spoken_pool)}")
-print(f"  - Signal & Telemetry Bursts: {len(signal_pool)}")
+print(f"  - FM Synth MIDI Masters (tightly trimmed): {len(midi_tracks)}")
+print(f"  - Spoken Radio Bulletins: {len(spoken_pool)}")
+print(f"  - Tight Morse Beacons (2-5s): {len(morse_beacons)}")
 
-# 5. Build Radio Station Rotation:
-# Cadence:
+# 5. Build Radio Station Rotation (Tight, Zero Dead Air Cadence):
 #   [Vocal Master Song 3-5m]
-#   -> [Spoken Radio Bulletin: 6-10s (Multilingual/Lab Tape)]
-#   -> [Roland/Yamaha MIDI Master 45-80s]
-#   -> [Signal Telemetry Burst: 3-6s (Morse/Numbers Station)]
-#   -> [Vocal Master Song 3-5m]
-#   ...
+#   -> [Crisp Spoken Bulletin 5-8s]
+#   -> [Roland/Yamaha MIDI Master (Zero tail)]
+#   -> [Tight Morse Beacon 2-4s]
+#   -> [Next Vocal Master Song]
 full_playlist = []
 spoken_idx = 0
-signal_idx = 0
+morse_idx = 0
 midi_idx = 0
 
-# Loop 4 full passes across the real song catalog (~16 hours of continuous unrepeated sequence)
 for song in (real_songs * 4):
     full_playlist.append(song)
 
-    # 1 tight spoken bulletin after vocal song
+    # Tight spoken bulletin between vocal songs
     if spoken_pool:
         full_playlist.append(spoken_pool[spoken_idx % len(spoken_pool)])
         spoken_idx += 1
 
-    # 1 retro Roland/Yamaha MIDI master composition
+    # Tightly trimmed MIDI master composition
     if midi_tracks:
         full_playlist.append(midi_tracks[midi_idx % len(midi_tracks)])
         midi_idx += 1
 
-    # 1 tight signal burst / telemetry beacon after MIDI track
-    if signal_pool:
-        full_playlist.append(signal_pool[signal_idx % len(signal_pool)])
-        signal_idx += 1
+    # Tight 2-4 second Morse beacon immediately after MIDI (no dead air)
+    if morse_beacons and (morse_idx % 2 == 0):
+        full_playlist.append(morse_beacons[morse_idx % len(morse_beacons)])
+        morse_idx += 1
 
-with open(out_file, "w") as f:
+tmp_file = out_file + ".tmp"
+with open(tmp_file, "w") as f:
     for t in full_playlist:
         f.write(f"file '{t}'\n")
+os.replace(tmp_file, out_file)
 
 print(f"\n✓ Generated Live Stream Playlist with {len(full_playlist)} total tracks in {out_file}")
