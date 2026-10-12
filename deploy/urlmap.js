@@ -124,6 +124,9 @@ export function publicUrl(sitePath) {
   const apex = apexFor(p);
   if (p === "" || p === "index.html") return `https://${apex}/`;
   if (p.startsWith("assets/")) return "/" + p;
+  if (p === "terminal" || p === "terminal/index.html") return `https://${apex}/terminal`;
+  if (p === "forensics" || p === "forensics/index.html") return `https://${apex}/forensics`;
+  if (p === "reconstruction" || p === "reconstruction/index.html") return `https://${apex}/reconstruction`;
   const segs = p.split("/");
   const kind = segs[0];
   if (!KINDS.includes(kind)) return null;

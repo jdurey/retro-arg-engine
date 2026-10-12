@@ -52,7 +52,7 @@ Sitemap: https://${apex}/sitemap.xml
 // IndexNow keys are public by design (they prove control of the host, nothing more).
 const INDEXNOW_KEY = "37feeed875722863fda484c68e6695e5";
 // Bump when files in assets/ are replaced so edge + browser caches refetch.
-const ASSET_VERSION = "14";
+const ASSET_VERSION = "15";
 
 function urlset(sitePaths) {
   const urls = sitePaths.map((sp) => publicUrl(sp)).filter((u) => u && u.startsWith("https://"));
@@ -206,9 +206,12 @@ export default {
     if (url.pathname === `/${INDEXNOW_KEY}.txt`) {
       return new Response(INDEXNOW_KEY, { headers: retroHeaders("text/plain; charset=utf-8") });
     }
-    if (url.pathname === "/terminal" || url.pathname === "/terminal/" ||
-        url.pathname === "/forensics" || url.pathname === "/forensics/" ||
-        url.pathname === "/reconstruction" || url.pathname === "/reconstruction/") {
+    if (url.pathname === "/terminal" || url.pathname === "/terminal/" || url.pathname === "/terminal/index.html" ||
+        url.pathname.endsWith("/terminal") || url.pathname.endsWith("/terminal/") || url.pathname.endsWith("/terminal/index.html") ||
+        url.pathname === "/forensics" || url.pathname === "/forensics/" || url.pathname === "/forensics/index.html" ||
+        url.pathname.endsWith("/forensics") || url.pathname.endsWith("/forensics/") || url.pathname.endsWith("/forensics/index.html") ||
+        url.pathname === "/reconstruction" || url.pathname === "/reconstruction/" || url.pathname === "/reconstruction/index.html" ||
+        url.pathname.endsWith("/reconstruction") || url.pathname.endsWith("/reconstruction/") || url.pathname.endsWith("/reconstruction/index.html")) {
       return new Response(TERMINAL_HTML, { headers: retroHeaders("text/html; charset=utf-8") });
     }
     if (url.pathname === "/api/telemetry.txt" || url.pathname === "/api/carrier.txt") {

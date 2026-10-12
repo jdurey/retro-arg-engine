@@ -1371,7 +1371,7 @@ def build(ctx, swarm=0):
         '    Her biometric audio footprint has been decoded. Two primary unsealed recordings hold the recovery keys:\n'
         '  </FONT>\n'
         '  <UL STYLE="margin-top:4px; margin-bottom:6px;">\n'
-        '    <LI><FONT FACE="Arial,Helvetica" SIZE=2><B><A HREF="../terminal/index.html" STYLE="color:#33FF33;">Launch Orion Forensic Demodulator Terminal (/terminal)</A></B> &mdash; Reconstruct missing carrier sectors</FONT></LI>\n'
+        '    <LI><FONT FACE="Arial,Helvetica" SIZE=2><B><A HREF="https://stardust-archive.net/terminal" STYLE="color:#33FF33;">Launch Orion Forensic Demodulator Terminal (/terminal)</A></B> &mdash; Reconstruct missing carrier sectors</FONT></LI>\n'
         '    <LI><FONT FACE="Arial,Helvetica" SIZE=2><B><A HREF="sunsetstrip-nova-tape-of-us-analysis.html" STYLE="color:#00FFFF;">"Tape of Us" Master Reel Analysis</A></B> &mdash; Uncut 1989 master tape with runout clue for Sector 1</FONT></LI>\n'
         '    <LI><FONT FACE="Arial,Helvetica" SIZE=2><B><A HREF="sunsetstrip-underground-1989-midnight-protocol.html" STYLE="color:#FF77EE;">"Midnight Protocol" 3-Act Rock Opera</A></B> &mdash; Complete lyrics detailing the B2 escape route</FONT></LI>\n'
         '  </UL>\n'
