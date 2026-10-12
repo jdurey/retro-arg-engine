@@ -240,6 +240,9 @@ def render_midi_to_stereo_mp3(midi_path, out_mp3_path):
     cmd = [
         "ffmpeg", "-y",
         "-f", "s16le", "-ar", str(SR), "-ac", "2", "-i", "pipe:0",
+        "-filter_complex",
+        "[0:a]volume=0.40,highpass=f=140:poles=1,lowpass=f=5200:poles=2,equalizer=f=400:t=q:w=1.2:g=2.5,equalizer=f=1800:t=q:w=1.5:g=1.5,equalizer=f=3500:t=q:w=1.0:g=-3[out]",
+        "-map", "[out]",
         "-c:a", "libmp3lame", "-b:a", "192k",
         out_mp3_path
     ]
