@@ -35,45 +35,65 @@ def slugify(filename):
     cleaned = cleaned.strip('_')
     return f"radio_{cleaned}.mp3"
 
-def ingest_all():
+# 1980s FM/AM Radio Broadcast DSP Chain with Precision Silence Trimming
+RADIO_BROADCAST_FILTER = (
+    "silenceremove=start_periods=1:start_duration=0.04:start_threshold=-30dB:detection=peak,"
+    "areverse,silenceremove=start_periods=1:start_duration=0.08:start_threshold=-30dB:detection=peak,areverse,"
+    "highpass=f=130,lowpass=f=6400,"
+    "equalizer=f=2800:width_type=o:width=1.5:g=3.2,"
+    "equalizer=f=220:width_type=o:width=1.2:g=2.2,"
+    "acompressor=threshold=-18dB:ratio=4.5:attack=6:release=70,"
+    "volume=1.4"
+)
+
+from concurrent.futures import ThreadPoolExecutor
+
+def process_one_track(item):
+    fname, force = item
+    src_path = os.path.join(DOWNLOADS_DIR, fname)
+    dest_filename = slugify(fname)
+    dest_path = os.path.join(DEST_DIR, dest_filename)
+
+    src_mtime = os.path.getmtime(src_path)
+    dest_exists = os.path.exists(dest_path)
+    dest_mtime = os.path.getmtime(dest_path) if dest_exists else 0
+
+    # If dest exists and is newer than source, skip unless force is True
+    if not force and dest_exists and dest_mtime >= src_mtime:
+        return None
+
+    try:
+        cmd = [
+            "ffmpeg", "-y",
+            "-i", src_path,
+            "-af", RADIO_BROADCAST_FILTER,
+            "-c:a", "libmp3lame", "-b:a", "192k", "-ar", "44100", "-ac", "2",
+            dest_path
+        ]
+        subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
+
+        cmd_info = ["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "default=noprint_wrappers=1:nokey=1", dest_path]
+        dur = float(subprocess.check_output(cmd_info).decode().strip())
+        sz_kb = os.path.getsize(dest_path) // 1024
+        print(f"  ✓ {dest_filename}: {dur:.2f}s ({sz_kb} KB) mastered with radio EQ!")
+        return dest_path
+    except Exception as e:
+        print(f"  ✗ Failed to process {fname}: {e}")
+        return None
+
+def ingest_all(force=False):
     if not os.path.exists(DOWNLOADS_DIR):
         print(f"Directory not found: {DOWNLOADS_DIR}")
         return []
 
-    newly_added = []
     candidates = [f for f in os.listdir(DOWNLOADS_DIR) if f.lower().endswith(SUPPORTED_EXTS) and not f.startswith(".")]
+    tasks = [(f, force) for f in sorted(candidates)]
 
-    for fname in sorted(candidates):
-        src_path = os.path.join(DOWNLOADS_DIR, fname)
-        dest_filename = slugify(fname)
-        dest_path = os.path.join(DEST_DIR, dest_filename)
-
-        src_mtime = os.path.getmtime(src_path)
-        dest_exists = os.path.exists(dest_path)
-        dest_mtime = os.path.getmtime(dest_path) if dest_exists else 0
-
-        # If dest exists and is newer than source, skip
-        if dest_exists and dest_mtime >= src_mtime:
-            continue
-
-        print(f"Ingesting '{fname}' -> '{dest_filename}'...")
-        try:
-            cmd = [
-                "ffmpeg", "-y",
-                "-i", src_path,
-                "-af", "silenceremove=start_periods=1:start_duration=0.04:start_threshold=-30dB:detection=peak,areverse,silenceremove=start_periods=1:start_duration=0.08:start_threshold=-30dB:detection=peak,areverse",
-                "-c:a", "libmp3lame", "-b:a", "192k", "-ar", "44100", "-ac", "2",
-                dest_path
-            ]
-            subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
-
-            cmd_info = ["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "default=noprint_wrappers=1:nokey=1", dest_path]
-            dur = float(subprocess.check_output(cmd_info).decode().strip())
-            sz_kb = os.path.getsize(dest_path) // 1024
-            print(f"  ✓ {dest_filename}: {dur:.2f}s ({sz_kb} KB) ready for broadcast!")
-            newly_added.append(dest_path)
-        except Exception as e:
-            print(f"  ✗ Failed to process {fname}: {e}")
+    print(f"Ingesting {len(tasks)} tracks with Radio Broadcast EQ (4 workers)...")
+    newly_added = []
+    with ThreadPoolExecutor(max_workers=4) as ex:
+        results = list(ex.map(process_one_track, tasks))
+        newly_added = [r for r in results if r is not None]
 
     return newly_added
 

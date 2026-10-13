@@ -105,18 +105,25 @@ print(f"  - Spoken Radio Bulletins: {len(spoken_pool)}")
 print(f"  - Tight Morse Beacons: {len(morse_beacons)}")
 
 # 7. Helper to generate a well-spaced single cycle containing every song exactly once
-def build_shuffled_cycle(song_list, avoid_start_root=None):
-    for _ in range(100):
+def build_shuffled_cycle(song_list, avoid_recent=None):
+    if avoid_recent is None:
+        avoid_recent = []
+    avoid_roots = {get_base_root(s) for s in avoid_recent}
+    
+    for attempt in range(500):
         cand = list(song_list)
         rng.shuffle(cand)
-        if avoid_start_root and get_base_root(cand[0]) == avoid_start_root:
+        
+        # Ensure the opening of this cycle does not repeat the end of the previous cycle
+        if any(get_base_root(cand[i]) in avoid_roots for i in range(min(len(cand), len(avoid_recent)))):
             continue
-        # Verify spacing between same-root songs
+            
+        # Verify internal spacing between any duplicate roots (e.g. movements)
         valid = True
         recent = []
         for s in cand:
             r = get_base_root(s)
-            if r in recent[-10:]:
+            if r in recent[-20:]:  # At least 20 songs between similar roots
                 valid = False
                 break
             recent.append(r)
@@ -124,32 +131,18 @@ def build_shuffled_cycle(song_list, avoid_start_root=None):
             return cand
     return cand
 
-# 8. Build 4 distinct cycles (~21 hours before playlist loop)
-# In Cycle 1: Front-load all new tracks interleaved with classic tracks so listeners hear new songs immediately!
-cycle_1 = []
-rng.shuffle(new_tracks)
-rng.shuffle(classic_tracks)
+# 8. Build 8 distinct cycles (~44 hours of non-repeating fair rotation)
+# Every song in the 80-track catalog appears EXACTLY ONCE per cycle (~5.3 hours apart)
+NUM_CYCLES = 8
+cycles = []
+last_tail = []
 
-# Interleave new tracks with classic tracks at the opening
-c_idx = 0
-for n_song in new_tracks:
-    cycle_1.append(n_song)
-    if c_idx < len(classic_tracks):
-        cycle_1.append(classic_tracks[c_idx])
-        c_idx += 1
-
-# Append remaining classic tracks
-cycle_1.extend(classic_tracks[c_idx:])
-
-# Cycles 2, 3, 4: Pure randomized fair rotation of all 80 songs
-cycles = [cycle_1]
-last_root = get_base_root(cycle_1[-1])
-for _ in range(3):
-    next_cycle = build_shuffled_cycle(all_songs, avoid_start_root=last_root)
+for c_num in range(NUM_CYCLES):
+    next_cycle = build_shuffled_cycle(all_songs, avoid_recent=last_tail)
     cycles.append(next_cycle)
-    last_root = get_base_root(next_cycle[-1])
+    last_tail = next_cycle[-30:]  # Protect the last 30 songs from appearing in the start of next cycle
 
-# Combine all cycles
+# Combine all cycles into ordered songs list
 ordered_songs = []
 for c in cycles:
     ordered_songs.extend(c)
@@ -190,6 +183,6 @@ with open(tmp_file, "w") as f:
 os.replace(tmp_file, out_file)
 
 believers_count = sum(1 for s in ordered_songs if "calling_all_believers" in s)
-print(f"\n✓ Generated Live Stream Playlist with {len(full_playlist)} total tracks ({len(ordered_songs)} songs across 4 cycles) in {out_file}")
-print(f"✓ Calling All Believers appears {believers_count} time(s) total (exactly once per 80-song cycle, ~5.3 hours apart)!")
+print(f"\n✓ Generated Live Stream Playlist with {len(full_playlist)} total tracks ({len(ordered_songs)} songs across {NUM_CYCLES} cycles) in {out_file}")
+print(f"✓ Every song in the 80-track catalog appears exactly once per cycle (~5.3 hours apart)!")
 
