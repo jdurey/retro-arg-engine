@@ -157,7 +157,7 @@ def compute_diagnostic_ramp(current_track: dict, relay: dict) -> dict:
             "fault_code": "FAULT 0x08 // VIS-1200HZ RASTER",
             "line1": "[! FAULT 0x08] VIS-1200HZ RASTER BLEED ON BIAS SUB-CARRIER (1500-2300 HZ)",
             "line2": "DMA PARTITION ANCHORS -> DEMODULATE AT stardust-archive.net/forensics/signal_lab.html",
-            "line3": "LOGGED BY: vax4000.ashford-poly.org // SEE SPOOL: stardust-archive.net/usenet/comp.dsp",
+            "line3": "LOGGED BY: vax4000.ashford-poly.org // SEE SPOOL: stardust-archive.net/forensics/usenet_1995_feed.html",
         }
     if "rabbit_09" in stem or "bell103" in stem or kind == "numbers_station":
         return {
@@ -165,7 +165,7 @@ def compute_diagnostic_ramp(current_track: dict, relay: dict) -> dict:
             "fault_code": "FAULT 0x09 // BELL-103 AX.25",
             "line1": "[! FAULT 0x09] 110-BAUD BELL-103 AFSK PACKET (1270/1070 HZ) ON 4625 KHZ",
             "line2": "ORIGIN: RELCOM-NODE08 (LENINGRAD) // FEISTEL PERMUTATION MASK IN FRAME",
-            "line3": "SPOOL ARCHIVE: stardust-archive.net/usenet/alt.conspiracy // FINGER op08@relcom-node08.org",
+            "line3": "DOSSIER: stardust-archive.net/forensics/relcom_node08.html // FINGER op08@relcom-node08.org",
         }
     if "rabbit_10" in stem or "phase" in stem or kind in ("classified_lab_tape", "morse_beacon"):
         return {
@@ -173,7 +173,7 @@ def compute_diagnostic_ramp(current_track: dict, relay: dict) -> dict:
             "fault_code": "FAULT 0x0A // CORR -0.94 PHASE NULL",
             "line1": "[! FAULT 0x0A] CH-L / CH-R PHASE CORRELATION = -0.94 (180 DEG DIFFERENTIAL)",
             "line2": "330/495/990 HZ CALIBRATION TRIAD CANCELS UNDER L+R MONO SUMMATION",
-            "line3": "ISOLATE 750 HZ BIAS CW SALT -> stardust-archive.net/terminal (MEMO 89-114)",
+            "line3": "ISOLATE 750 HZ BIAS CW SALT -> stardust-archive.net/forensics/index.html",
         }
     return {
         "mode": "NOMINAL",

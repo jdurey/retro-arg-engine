@@ -194,8 +194,21 @@ export function resolve(hostname, pathname) {
     }
     let sp = path.slice(1).replace(/\/$/, "/index.html");
     if (sp === "terminal" || sp === "forensics" || sp === "reconstruction") sp = `${sp}/index.html`;
+    // Direct apex routes (forensics/*, terminal/*, reconstruction/*, federation/*, .well-known/*)
+    // must NOT 301-redirect to themselves when requested on matchedApex!
+    if (
+      sp.startsWith("forensics/") ||
+      sp.startsWith("terminal/") ||
+      sp.startsWith("reconstruction/") ||
+      sp.startsWith("federation/") ||
+      sp.startsWith(".well-known/") ||
+      sp === "usenet/live_1995_feed.html"
+    ) {
+      return { sitePath: sp, canonical: matchedApex !== PRIMARY_APEX ? `https://${PRIMARY_APEX}/${sp}` : null };
+    }
     const canon = publicUrl(sp);
-    return { sitePath: sp, canonical: canon && canon !== `https://${matchedApex}/` ? canon : null };
+    const selfUrl = `https://${matchedApex}${path}`;
+    return { sitePath: sp, canonical: canon && canon !== `https://${matchedApex}/` && canon !== selfUrl ? canon : null };
   }
 
   const labels = host.slice(0, -(matchedApex.length + 1)).split(".");

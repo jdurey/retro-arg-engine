@@ -51,7 +51,7 @@ Sitemap: https://${apex}/sitemap.xml
 }
 
 const INDEXNOW_KEY = "37feeed875722863fda484c68e6695e5";
-const ASSET_VERSION = "14";
+const ASSET_VERSION = "16";
 
 const BROADCAST_EPOCH_SEC = 1791763200; // 2026-10-12T00:00:00Z
 const CYCLE_DURATION_SEC = 44 * 3600;
@@ -194,7 +194,9 @@ function retroHeaders(contentType) {
 }
 
 function notFound() {
-  return new Response(NOT_FOUND, { status: 404, headers: retroHeaders("text/html; charset=utf-8") });
+  const h = retroHeaders("text/html; charset=utf-8");
+  h.set("Cache-Control", "no-store");
+  return new Response(NOT_FOUND, { status: 404, headers: h });
 }
 
 const urlCache = new Map();
