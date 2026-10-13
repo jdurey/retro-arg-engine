@@ -114,8 +114,8 @@ def build_intercept(name, voice_configs, extra_audio_fn, filter_complex, out_fil
             idx += 1
             
         cmd = ["ffmpeg", "-y"] + input_args + [
-            "-filter_complex", filter_complex,
-            "-map", "[out]",
+            "-filter_complex", filter_complex.strip() + ";[out]loudnorm=I=-16:TP=-1.5:LRA=7[norm_out]",
+            "-map", "[norm_out]",
             "-c:a", "libmp3lame", "-b:a", "192k",
             out_path
         ]
@@ -141,9 +141,9 @@ build_intercept(
     ],
     extra_audio_fn=None,
     filter_complex=f"""
-    [0:a]{NORM},volume=0.9[intro];
-    [1:a]{NORM},volume=1.1,bandpass=f=1800:w=2000,aecho=0.8:0.6:30:0.2[nova];
-    [2:a]{NORM},volume=1.0,bandpass=f=1400:w=1600[eng];
+    [0:a]{NORM},volume=1.0,highpass=f=250,lowpass=f=3800[intro];
+    [1:a]{NORM},volume=1.2,highpass=f=250,lowpass=f=3800,aecho=0.8:0.6:30:0.2[nova];
+    [2:a]{NORM},volume=1.1,highpass=f=250,lowpass=f=3600[eng];
     [intro][nova][eng]concat=n=3:v=0:a=1,aecho=0.7:0.5:50:0.2,tremolo=f=3:d=0.2[out]
     """,
     out_filename="rabbit_01_empathy_trial_1985.mp3"
@@ -160,8 +160,8 @@ build_intercept(
     ],
     extra_audio_fn=hale_morse,
     filter_complex=f"""
-    [0:a]{NORM},volume=1.2,bandpass=f=1500:w=1800,flanger=delay=2:depth=1:regen=20:width=80[voice];
-    [1:a]{NORM},volume=0.6,bandpass=f=800:w=400[morse];
+    [0:a]{NORM},volume=1.3,highpass=f=250,lowpass=f=3800,flanger=delay=2:depth=1:regen=20:width=80[voice];
+    [1:a]{NORM},volume=0.8,bandpass=f=800:w=400[morse];
     [voice][morse]concat=n=2:v=0:a=1,aecho=0.8:0.7:40|80:0.3|0.2[out]
     """,
     out_filename="rabbit_02_marcus_hale_dictaphone.mp3"
@@ -176,9 +176,9 @@ build_intercept(
     ],
     extra_audio_fn=lambda: generate_morse("PAJU 14.2", wpm=20),
     filter_complex=f"""
-    [0:a]{NORM},volume=1.1,bandpass=f=2000:w=2200,aecho=0.8:0.7:35:0.25[kor];
-    [1:a]{NORM},volume=0.9,bandpass=f=1600:w=1400[eng];
-    [2:a]{NORM},volume=0.4,bandpass=f=750:w=200[morse];
+    [0:a]{NORM},volume=1.2,highpass=f=250,lowpass=f=3800,aecho=0.8:0.7:35:0.25[kor];
+    [1:a]{NORM},volume=1.0,highpass=f=250,lowpass=f=3600[eng];
+    [2:a]{NORM},volume=0.5,bandpass=f=750:w=200[morse];
     [kor][eng][morse]concat=n=3:v=0:a=1,aecho=0.7:0.5:45:0.2[out]
     """,
     out_filename="rabbit_03_dmz_paju_subcarrier.mp3"
@@ -192,8 +192,8 @@ build_intercept(
     ],
     extra_audio_fn=lambda: generate_dtmf("09091985", dur=0.1, pause=0.05),
     filter_complex=f"""
-    [0:a]{NORM},volume=1.0,bandpass=f=1400:w=1600,flanger=delay=4:depth=2:regen=30:width=90[ai];
-    [1:a]{NORM},volume=0.5[dtmf];
+    [0:a]{NORM},volume=1.2,highpass=f=250,lowpass=f=3800,flanger=delay=4:depth=2:regen=30:width=90[ai];
+    [1:a]{NORM},volume=0.7[dtmf];
     [ai][dtmf]concat=n=2:v=0:a=1,aecho=0.8:0.6:60:0.3[out]
     """,
     out_filename="rabbit_04_harrison_ai_purge_override.mp3"
@@ -207,8 +207,8 @@ build_intercept(
     ],
     extra_audio_fn=lambda: generate_dtmf("142001", dur=0.18, pause=0.08),
     filter_complex=f"""
-    [0:a]{NORM},volume=1.6,bandpass=f=2200:w=3000,aecho=0.9:0.8:80|160:0.4|0.3[whisper];
-    [1:a]{NORM},volume=0.4,bandpass=f=1200:w=1000[tones];
+    [0:a]{NORM},volume=1.6,highpass=f=250,lowpass=f=3800,aecho=0.9:0.8:80|160:0.4|0.3[whisper];
+    [1:a]{NORM},volume=0.5,bandpass=f=1200:w=1000[tones];
     [whisper][tones]concat=n=2:v=0:a=1[out]
     """,
     out_filename="rabbit_05_cern_whisper_quantum_echo.mp3"
@@ -223,9 +223,9 @@ build_intercept(
     ],
     extra_audio_fn=lambda: generate_buzzer(beeps=3),
     filter_complex=f"""
-    [2:a]{NORM},volume=0.7,bandpass=f=300:w=600[buzz];
-    [0:a]{NORM},volume=1.1,bandpass=f=1600:w=1800,aecho=0.8:0.6:40:0.25[ru];
-    [1:a]{NORM},volume=0.9,bandpass=f=1400:w=1600[eng];
+    [2:a]{NORM},volume=0.8,bandpass=f=300:w=600[buzz];
+    [0:a]{NORM},volume=1.2,highpass=f=250,lowpass=f=3800,aecho=0.8:0.6:40:0.25[ru];
+    [1:a]{NORM},volume=1.1,highpass=f=250,lowpass=f=3600[eng];
     [buzz][ru][eng]concat=n=3:v=0:a=1,aecho=0.7:0.5:50:0.2[out]
     """,
     out_filename="rabbit_06_soviet_uvb76_relcom_burst.mp3"
@@ -242,8 +242,8 @@ build_intercept(
     ],
     extra_audio_fn=full_beacon_morse,
     filter_complex=f"""
-    [0:a]{NORM},volume=0.8,bandpass=f=1500:w=1600[voice];
-    [1:a]{NORM},volume=0.7,bandpass=f=800:w=300,aecho=0.8:0.5:60:0.2[morse];
+    [0:a]{NORM},volume=1.1,highpass=f=250,lowpass=f=3800[voice];
+    [1:a]{NORM},volume=0.8,bandpass=f=800:w=300,aecho=0.8:0.5:60:0.2[morse];
     [voice][morse]concat=n=2:v=0:a=1[out]
     """,
     out_filename="rabbit_07_spectrogram_morse_beacon.mp3"

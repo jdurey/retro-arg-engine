@@ -58,7 +58,7 @@ def generate():
         # 2. ffmpeg telephone bandpass & analog tape delay
         cmd = [
             "ffmpeg", "-y", "-i", raw_aiff,
-            "-af", item["pitch_shift"],
+            "-af", f"{item['pitch_shift']},loudnorm=I=-16:TP=-1.5:LRA=7",
             "-ar", "44100", "-b:a", "192k",
             out_mp3
         ]

@@ -40,6 +40,8 @@ while true; do
         -flvflags no_duration_filesize+no_sequence_end \
         -f flv "$RTMP_URL" 2>&1 | tee -a "$DIR/stream.log" || true
 
-    echo "Stream disconnected. Reconnecting in 1 second..."
+    echo "Stream disconnected. Rotating played tracks to preserve continuous broadcast..."
+    python3 "$DIR/rotate_playlist.py" || true
+    echo "Reconnecting in 1 second..."
     sleep 1
 done
