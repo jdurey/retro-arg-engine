@@ -1,4 +1,4 @@
-import { APEX, isStory, publicUrl, resolve } from "./urlmap.js";
+import { APEX, isStory, publicUrl, resolve, resolveApex, apexFor } from "./urlmap.js";
 import STORY_PATHS from "./story_paths.js";
 import { classify, liveCount, renderMember, renderDir, renderDirIndex, renderLang, sitemapSitePaths } from "./swarm/index.js";
 import { handleFederationRequest, SISTER_DOMAINS } from "./federation.js";
@@ -9,7 +9,8 @@ const STATIC_GEO = new Set(STORY_PATHS.filter((p) => /^geocities\/[^/]+\.html$/.
 const OG_DESCRIPTION = "A 1994 webring for fans of Nova Hart and the 14.2 Hz Stardust signal. Something is still transmitting.";
 const OG_IMAGE = `https://${APEX}/assets/og_card.jpg`;
 
-const ROBOTS = `User-agent: *
+function robotsTxt(apex) {
+  return `User-agent: *
 Allow: /
 
 User-agent: Googlebot
@@ -45,8 +46,9 @@ Allow: /
 User-agent: Applebot
 Allow: /
 
-Sitemap: https://${APEX}/sitemap.xml
+Sitemap: https://${apex}/sitemap.xml
 `;
+}
 
 const INDEXNOW_KEY = "37feeed875722863fda484c68e6695e5";
 const ASSET_VERSION = "14";
@@ -136,13 +138,25 @@ function urlset(sitePaths) {
   const body = urls.map((u) => `  <url><loc>${u.replace(/&/g, "&amp;")}</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>`).join("\n");
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${body}\n</urlset>\n`;
 }
-let cachedCoreSitemap = null;
-const SITEMAP_INDEX = `<?xml version="1.0" encoding="UTF-8"?>
+function sitemapIndex(apex) {
+  return `<?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <sitemap><loc>https://${APEX}/sitemap-core.xml</loc></sitemap>
-  <sitemap><loc>https://${APEX}/sitemap-swarm.xml</loc></sitemap>
+  <sitemap><loc>https://${apex}/sitemap-core.xml</loc></sitemap>
+  <sitemap><loc>https://${apex}/sitemap-swarm.xml</loc></sitemap>
 </sitemapindex>
 `;
+}
+
+const coreSitemapCache = new Map();
+function getCoreSitemap(apex) {
+  let s = coreSitemapCache.get(apex);
+  if (!s) {
+    const domainPaths = STORY_PATHS.filter((sp) => apexFor(sp) === apex);
+    s = urlset(domainPaths);
+    coreSitemapCache.set(apex, s);
+  }
+  return s;
+}
 
 class HeadInjector {
   constructor(pageUrl) { this.pageUrl = pageUrl; }
@@ -289,15 +303,16 @@ export default {
     const fedRes = handleFederationRequest(url);
     if (fedRes) return fedRes;
 
+    const currentApex = resolveApex(url.hostname);
+
     if (url.pathname === "/robots.txt") {
-      return new Response(ROBOTS, { headers: retroHeaders("text/plain; charset=utf-8") });
+      return new Response(robotsTxt(currentApex), { headers: retroHeaders("text/plain; charset=utf-8") });
     }
     if (url.pathname === "/sitemap.xml") {
-      return new Response(SITEMAP_INDEX, { headers: retroHeaders("application/xml; charset=utf-8") });
+      return new Response(sitemapIndex(currentApex), { headers: retroHeaders("application/xml; charset=utf-8") });
     }
     if (url.pathname === "/sitemap-core.xml") {
-      cachedCoreSitemap ||= urlset(STORY_PATHS);
-      return new Response(cachedCoreSitemap, { headers: retroHeaders("application/xml; charset=utf-8") });
+      return new Response(getCoreSitemap(currentApex), { headers: retroHeaders("application/xml; charset=utf-8") });
     }
     if (url.pathname === "/sitemap-swarm.xml") {
       const n = liveCount(Date.now(), env.SWARM_CAP);
