@@ -43,13 +43,40 @@ def build(ctx, **kwargs):
     # 1. Kamome Visuals (assets/akasaka/*.gif)
     visual_src = os.path.join(root_dir, "assets", "akasaka")
     if "kamome" in sites and os.path.isdir(visual_src):
+        visual_files = []
         for fname in sorted(os.listdir(visual_src)):
             if fname.endswith(".gif"):
-                with open(os.path.join(visual_src, fname), "rb") as fh:
+                src_f = os.path.join(visual_src, fname)
+                with open(src_f, "rb") as fh:
                     rel_p = f"ftp/kamome/visual/{fname}"
                     write(os.path.join(ctx.out, rel_p), fh.read(), binary=True)
                     ctx.register(rel_p, "ftp", "kamome")
                     count += 1
+                size_kb = os.path.getsize(src_f) / 1024
+                visual_files.append((fname, size_kb))
+
+        vis_lines = [
+            DOCTYPE,
+            '<HTML><HEAD><TITLE>Index of ftp://kamome/visual/</TITLE></HEAD>',
+            '<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000EE" VLINK="#551A8B">',
+            '<H1>Index of ftp://kamome/visual/</H1>',
+            '<PRE>',
+            '<A HREF="../">[DIR]  ../ (Parent Directory)</A>',
+            '-------------------------------------------------------------------------------',
+        ]
+        for vname, vkb in visual_files:
+            vis_lines.append(f'[GIF]  <A HREF="{vname}">{vname:<42}</A>  {vkb:>6.1f} KB')
+        vis_lines += [
+            '-------------------------------------------------------------------------------',
+            '</PRE>',
+            '<HR>',
+            '<ADDRESS>CERN-HTTPd/3.0 &middot; Kamome-Net Anonymous FTP Service (Akasaka Visual Archive)</ADDRESS>',
+            '</BODY></HTML>'
+        ]
+        vis_index_rel = "ftp/kamome/visual/index.html"
+        write(os.path.join(ctx.out, vis_index_rel), "\n".join(vis_lines) + "\n")
+        ctx.register(vis_index_rel, "ftp", "kamome visual archive")
+        count += 1
 
     # 2. Kamome Audio Outtakes (assets/akasaka/audio/*.mp3 and *.au)
     audio_src = os.path.join(root_dir, "assets", "akasaka", "audio")
