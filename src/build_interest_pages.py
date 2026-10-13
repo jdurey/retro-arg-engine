@@ -1532,6 +1532,21 @@ def main() -> None:
     (deploy_dir / "interests.js").write_text(interests_js, encoding="utf-8")
     print(f"[INTEREST_BUILDER] Wrote {deploy_dir / 'interests.js'}")
 
+    sp_path = deploy_dir / "story_paths.js"
+    if sp_path.exists():
+        import re as _re
+        raw_sp = sp_path.read_text(encoding="utf-8")
+        existing_paths = _re.findall(r'"([^"]+)"', raw_sp)
+        for spec in INTEREST_SPECS:
+            rel_p = f"geocities/{spec['slug']}.html"
+            if rel_p not in existing_paths:
+                existing_paths.append(rel_p)
+        sp_out = "// Auto-generated list of story-bearing site-relative paths.\nexport default [\n"
+        sp_out += ",\n".join(f"  {json.dumps(x)}" for x in existing_paths)
+        sp_out += "\n];\n"
+        sp_path.write_text(sp_out, encoding="utf-8")
+        print(f"[INTEREST_BUILDER] Validated {sp_path} ({len(existing_paths)} comma-separated entries)")
+
 
 if __name__ == "__main__":
     main()
