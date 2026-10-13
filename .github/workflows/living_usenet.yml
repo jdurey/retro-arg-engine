@@ -1,0 +1,34 @@
+name: Living Usenet & Telemetry Chronological Tick
+
+on:
+  schedule:
+    - cron: "14 2 * * *"  # Daily at 02:14 UTC (Listening Night synchronization)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  advance-1995-spool:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Advance Living Usenet Spool & Broadcast Telemetry Snapshot
+        run: |
+          python3 src/living_usenet_daemon.py
+          python3 youtube/livestream/sync_telemetry.py --repo-root .
+
+      - name: Commit and Push Chronological Spool Updates
+        run: |
+          git config user.name "stardust-relay-daemon"
+          git config user.email "relay@stardust-archive.net"
+          git add site/usenet/ site/assets/live_telemetry.json
+          git diff --cached --quiet || git commit -m "chore(usenet): advance 1995 chronological spool & 02:14 UTC telemetry"
+          git push origin main

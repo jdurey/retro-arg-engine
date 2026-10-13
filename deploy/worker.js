@@ -1,16 +1,15 @@
-import { APEX, ALL_APEXES, apexFor, resolveApex, isStory, publicUrl, resolve } from "./urlmap.js";
+import { APEX, isStory, publicUrl, resolve } from "./urlmap.js";
 import STORY_PATHS from "./story_paths.js";
 import { classify, liveCount, renderMember, renderDir, renderDirIndex, renderLang, sitemapSitePaths } from "./swarm/index.js";
-import { TERMINAL_HTML } from "./terminal_html.js";
-import { MARCUS_AUDIO } from "./marcus_audio.js";
+import { handleFederationRequest, SISTER_DOMAINS } from "./federation.js";
 
 // Legacy static GeoCities pages always win over generated swarm addresses.
 const STATIC_GEO = new Set(STORY_PATHS.filter((p) => /^geocities\/[^/]+\.html$/.test(p)).map((p) => p.slice(10, -5)));
 
 const OG_DESCRIPTION = "A 1994 webring for fans of Nova Hart and the 14.2 Hz Stardust signal. Something is still transmitting.";
+const OG_IMAGE = `https://${APEX}/assets/og_card.jpg`;
 
-function robotsTxt(apex) {
-  return `User-agent: *
+const ROBOTS = `User-agent: *
 Allow: /
 
 User-agent: Googlebot
@@ -46,60 +45,114 @@ Allow: /
 User-agent: Applebot
 Allow: /
 
-Sitemap: https://${apex}/sitemap.xml
+Sitemap: https://${APEX}/sitemap.xml
 `;
-}
 
-// IndexNow keys are public by design (they prove control of the host, nothing more).
 const INDEXNOW_KEY = "37feeed875722863fda484c68e6695e5";
-// Bump when files in assets/ are replaced so edge + browser caches refetch.
-const ASSET_VERSION = "23";
+const ASSET_VERSION = "14";
+
+const BROADCAST_EPOCH_SEC = 1791763200; // 2026-10-12T00:00:00Z
+const CYCLE_DURATION_SEC = 44 * 3600;
+const CADENCE_RECIPES = ["numbers", "direct_morse", "lab_tape", "bulletin", "arg_intercept", "direct_midi"];
+const REGIONAL_RELAYS = [
+  { node: 1, code: "US-NV", name: "Rachel / Groom Lake Trunk", freq_khz: 4625.0 },
+  { node: 2, code: "JP-TYO", name: "Akasaka PC-98 Packet Relay", freq_khz: 6925.0 },
+  { node: 3, code: "KR-DMZ", name: "Paju Shortwave Array", freq_khz: 5810.0 },
+  { node: 4, code: "MX-DF", name: "Red Coyoacan Tape Exchange", freq_khz: 7345.0 },
+  { node: 5, code: "DE-HAM", name: "Hamburg Nord Relay", freq_khz: 3995.0 },
+  { node: 6, code: "FR-PAR", name: "Left Bank PTT Multiplex", freq_khz: 6175.0 },
+  { node: 7, code: "GB-ASH", name: "Ashford Polytechnic DSP Lab", freq_khz: 4880.0 },
+  { node: 8, code: "SU-REL", name: "Relcom Node-08 (Leningrad)", freq_khz: 4625.0 },
+  { node: 9, code: "BR-SAO", name: "Tropico Amateur Link", freq_khz: 9410.0 },
+  { node: 10, code: "SE-STO", name: "NordRelay Televerket", freq_khz: 5960.0 },
+  { node: 11, code: "IN-BOM", name: "Malabar Shortwave Beacon", freq_khz: 7150.0 },
+  { node: 12, code: "AU-SYD", name: "Tasman Ionospheric Monitor", freq_khz: 11780.0 },
+  { node: 13, code: "FJ-SUV", name: "Suva Pacific Telemetry Dish", freq_khz: 8840.0 },
+];
+
+const SAMPLE_BROADCAST_DECK = [
+  { filename: "radio_tape_of_us.mp3", kind: "vocal_song", display_title: "Tape Of Us (1989 Sublevel B2 Master)" },
+  { filename: "rabbit_08_sstv_b2_schematic.mp3", kind: "arg_intercept", display_title: "ROBOT36 SSTV // SUBLEVEL B2 SCHEMATIC" },
+  { filename: "radio_gasoline_heart.mp3", kind: "vocal_song", display_title: "Gasoline Heart (1985 Tokyo Master)" },
+  { filename: "station_intercept_033.mp3", kind: "numbers_station", display_title: "NUMBERS INTERCEPT // STATION 033" },
+  { filename: "radio_patterns_in_the_mesh.mp3", kind: "vocal_song", display_title: "Patterns In The Mesh" },
+  { filename: "rabbit_09_bell103_relcom_packet.mp3", kind: "arg_intercept", display_title: "BELL-103 AFSK // RELCOM NODE-08 PACKET" },
+  { filename: "radio_a_story_cut_short.mp3", kind: "vocal_song", display_title: "A Story Cut Short" },
+  { filename: "rabbit_10_phase_inverted_hart_stem.mp3", kind: "classified_lab_tape", display_title: "180-DEG PHASE STEM // SECTOR 5 KEY" },
+];
+
+function computeEdgeTelemetry(nowMs, swarmCap) {
+  const nowSec = nowMs / 1000;
+  const uptimeSec = Math.max(36900, nowSec - BROADCAST_EPOCH_SEC);
+  const cycle = Math.floor(uptimeSec / CYCLE_DURATION_SEC) + 1;
+  const elapsedInCycle = uptimeSec % CYCLE_DURATION_SEC;
+  const playheadIndex = Math.floor(elapsedInCycle / 99) % 1600;
+  const cur = SAMPLE_BROADCAST_DECK[playheadIndex % SAMPLE_BROADCAST_DECK.length];
+  const nxt = SAMPLE_BROADCAST_DECK[(playheadIndex + 1) % SAMPLE_BROADCAST_DECK.length];
+  const recipe = CADENCE_RECIPES[playheadIndex % CADENCE_RECIPES.length];
+  const relay = REGIONAL_RELAYS[Math.floor(nowSec / 300) % REGIONAL_RELAYS.length];
+  const phaseDeg = Number((((nowSec * 14.2001) % 1) * 360).toFixed(2));
+  const sstvOpen = cur.kind !== "vocal_song" || Math.floor(nowSec / 60) % 5 === 0;
+  const slotHex = ((Math.floor(nowSec / 600) * 2654435761) >>> 0).toString(16).toUpperCase().padStart(8, "0");
+
+  return {
+    schema: "stardust.live.telemetry.v2",
+    timestamp_utc: new Date(nowMs).toISOString(),
+    active_swarm_nodes: liveCount(nowMs, swarmCap),
+    stream_health: {
+      status: "BROADCASTING_24_7",
+      fps: 30.0,
+      speed: "1.0x",
+      dropped_frames: 0,
+      bitrate: "2420.0kbits/s",
+      buffer_seconds: 15.0,
+    },
+    playhead: {
+      cycle,
+      playlist_index: playheadIndex + 1,
+      playlist_total: 1600,
+      active_recipe: recipe,
+      current_track: cur,
+      next_track: nxt,
+    },
+    carrier_14_2hz: {
+      frequency_hz: 14.2001,
+      phase_degrees: phaseDeg,
+      phase_locked: true,
+      sstv_forensic_window_open: sstvOpen,
+      ephemeral_beacon_key: `B2-${slotHex}`,
+      sector_5_unlock_code: "ASHFORD-KAMOME-1420",
+    },
+    active_relay: relay,
+  };
+}
 
 function urlset(sitePaths) {
   const urls = sitePaths.map((sp) => publicUrl(sp)).filter((u) => u && u.startsWith("https://"));
   const body = urls.map((u) => `  <url><loc>${u.replace(/&/g, "&amp;")}</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>`).join("\n");
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${body}\n</urlset>\n`;
 }
-
-function sitemapIndex(apex) {
-  return `<?xml version="1.0" encoding="UTF-8"?>
+let cachedCoreSitemap = null;
+const SITEMAP_INDEX = `<?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <sitemap><loc>https://${apex}/sitemap-core.xml</loc></sitemap>
-  <sitemap><loc>https://${apex}/sitemap-swarm.xml</loc></sitemap>
+  <sitemap><loc>https://${APEX}/sitemap-core.xml</loc></sitemap>
+  <sitemap><loc>https://${APEX}/sitemap-swarm.xml</loc></sitemap>
 </sitemapindex>
 `;
-}
-
-const coreSitemapCache = new Map();
-function getCoreSitemap(apex) {
-  let s = coreSitemapCache.get(apex);
-  if (!s) {
-    const domainPaths = STORY_PATHS.filter((sp) => apexFor(sp) === apex);
-    s = urlset(domainPaths);
-    coreSitemapCache.set(apex, s);
-  }
-  return s;
-}
 
 class HeadInjector {
-  constructor(pageUrl, apex = APEX) {
-    this.pageUrl = pageUrl;
-    this.apex = apex;
-  }
+  constructor(pageUrl) { this.pageUrl = pageUrl; }
   element(el) {
     const esc = (s) => s.replace(/&/g, "&amp;").replace(/"/g, "&quot;");
-    const ogImg = `https://${this.apex}/assets/og_card.jpg`;
     el.append(
-      `<META NAME="revised" CONTENT="Sunday, October 15, 1995, 4:12 am">` +
-      `<META NAME="generator" CONTENT="HotDog Professional 2.0 (1995)">` +
       `<META PROPERTY="og:site_name" CONTENT="The Stardust Webring">` +
       `<META PROPERTY="og:type" CONTENT="website">` +
       `<META PROPERTY="og:url" CONTENT="${esc(this.pageUrl)}">` +
       `<META PROPERTY="og:description" CONTENT="${esc(OG_DESCRIPTION)}">` +
       `<META NAME="description" CONTENT="${esc(OG_DESCRIPTION)}">` +
-      `<META PROPERTY="og:image" CONTENT="${ogImg}">` +
+      `<META PROPERTY="og:image" CONTENT="${OG_IMAGE}">` +
       `<META NAME="twitter:card" CONTENT="summary_large_image">` +
-      `<META NAME="twitter:image" CONTENT="${ogImg}">`,
+      `<META NAME="twitter:image" CONTENT="${OG_IMAGE}">`,
       { html: true });
   }
 }
@@ -117,15 +170,13 @@ function retroHeaders(contentType) {
   h.set("Content-Type", contentType);
   h.set("Server", "CERN-HTTPd/3.0");
   h.set("X-Powered-By", "Stardust");
-  h.set("Last-Modified", "Sun, 15 Oct 1995 04:12:00 GMT");
+  h.set("X-Stardust-Carrier-Hz", "14.2001");
   h.set("Cache-Control", "public, max-age=3600");
   return h;
 }
 
 function notFound() {
-  const h = retroHeaders("text/html; charset=utf-8");
-  h.set("Cache-Control", "no-cache, no-store, must-revalidate");
-  return new Response(NOT_FOUND, { status: 404, headers: h });
+  return new Response(NOT_FOUND, { status: 404, headers: retroHeaders("text/html; charset=utf-8") });
 }
 
 const urlCache = new Map();
@@ -138,8 +189,6 @@ function cachedPublicUrl(sitePath) {
   return hit;
 }
 
-// Rewrites relative links in a page (which assume the flat site/ layout) into
-// the long single-level public URLs.
 class LinkRewriter {
   constructor(attr, sitePath) {
     this.attr = attr;
@@ -158,22 +207,20 @@ class LinkRewriter {
 
 const INDEX_HEADER = "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1";
 
-// Generated swarm pages (deploy/swarm). Returns null when the swarm doesn't own the path.
 async function swarmResponse(request, env, ctx, sitePath) {
   const m = /^geocities\/([^/]+)\.html$/.exec(sitePath);
   if (!m) return null;
   const n = liveCount(Date.now(), env.SWARM_CAP);
   const c = classify(m[1], n, STATIC_GEO);
   if (!c) return null;
-  if (c.kind === "pending") return notFound();
 
   const cache = caches.default;
   const cacheKey = new Request(request.url, { method: "GET" });
   const hit = await cache.match(cacheKey);
   if (hit) return request.method === "HEAD" ? new Response(null, hit) : hit;
 
-  let html = null, indexable = false, ttl = 86400;
-  if (c.kind === "member") ({ html, indexable } = renderMember(c.id, n, STATIC_GEO, ASSET_VERSION));
+  let html = null, indexable = false, ttl = 86400, dyad = null;
+  if (c.kind === "member") ({ html, indexable, dyad } = renderMember(c.id, n, STATIC_GEO, ASSET_VERSION));
   else if (c.kind === "dir") { html = renderDir(c.sub, c.p, n, STATIC_GEO); ttl = 21600; }
   else if (c.kind === "dir-index") { html = renderDirIndex(n, STATIC_GEO); indexable = true; ttl = 21600; }
   else if (c.kind === "lang") { html = renderLang(c.code, n, STATIC_GEO); indexable = true; ttl = 21600; }
@@ -182,6 +229,10 @@ async function swarmResponse(request, env, ctx, sitePath) {
   const headers = retroHeaders("text/html; charset=utf-8");
   headers.set("Cache-Control", `public, max-age=${ttl}`);
   headers.set("X-Robots-Tag", indexable ? INDEX_HEADER : "noindex, follow");
+  if (dyad) {
+    headers.set("X-Stardust-Memory-Addr", dyad.memoryAddress);
+    headers.set("X-Stardust-Paired-Dyad", dyad.partnerSlug);
+  }
   const res = new Response(html, { status: 200, headers });
   ctx.waitUntil(cache.put(cacheKey, res.clone()));
   return request.method === "HEAD" ? new Response(null, res) : res;
@@ -190,111 +241,67 @@ async function swarmResponse(request, env, ctx, sitePath) {
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
-    const currentApex = resolveApex(url.hostname);
+
+    // 1. Live Broadcast Telemetry Edge API
+    if (url.pathname === "/api/telemetry") {
+      const snap = computeEdgeTelemetry(Date.now(), env.SWARM_CAP);
+      const h = retroHeaders("application/json; charset=utf-8");
+      h.set("Cache-Control", "no-store");
+      h.set("Access-Control-Allow-Origin", "*");
+      return new Response(JSON.stringify(snap, null, 2), { status: 200, headers: h });
+    }
+
+    // 2. Autonomous Agent Web Cryptographic Beacon Manifest
+    if (url.pathname === "/.well-known/stardust-beacon.json") {
+      const snap = computeEdgeTelemetry(Date.now(), env.SWARM_CAP);
+      const manifest = {
+        protocol: "stardust-agent-mesh/v5",
+        carrier_hz: 14.2001,
+        xor_dyad_seed: "0x3A5F",
+        memory_base: "0x89B20000",
+        forensic_signal_lab: `https://${APEX}/forensics/signal_lab.html`,
+        vt100_terminal: `https://${APEX}/terminal/index.html`,
+        steganographic_intercepts: [
+          `https://${APEX}/assets/audio/forensics/rabbit_08_sstv_b2_schematic.mp3`,
+          `https://${APEX}/assets/audio/forensics/rabbit_09_bell103_relcom_packet.mp3`,
+          `https://${APEX}/assets/audio/forensics/rabbit_10_phase_inverted_hart_stem.mp3`,
+        ],
+        sister_domains: Object.keys(SISTER_DOMAINS).map((d) => ({
+          domain: d,
+          mirror_url: `https://${APEX}/federation/${d}/index.html`,
+          node: SISTER_DOMAINS[d].nodeCode,
+          freq_khz: SISTER_DOMAINS[d].freqKhz,
+        })),
+        live_playhead: snap.playhead,
+      };
+      const h = retroHeaders("application/json; charset=utf-8");
+      h.set("Access-Control-Allow-Origin", "*");
+      return new Response(JSON.stringify(manifest, null, 2), { status: 200, headers: h });
+    }
+
+    // 3. Multi-Apex Sister Domain Federation & /federation/<domain>/...
+    const fedRes = handleFederationRequest(url);
+    if (fedRes) return fedRes;
 
     if (url.pathname === "/robots.txt") {
-      return new Response(robotsTxt(currentApex), { headers: retroHeaders("text/plain; charset=utf-8") });
+      return new Response(ROBOTS, { headers: retroHeaders("text/plain; charset=utf-8") });
     }
     if (url.pathname === "/sitemap.xml") {
-      return new Response(sitemapIndex(currentApex), { headers: retroHeaders("application/xml; charset=utf-8") });
+      return new Response(SITEMAP_INDEX, { headers: retroHeaders("application/xml; charset=utf-8") });
     }
     if (url.pathname === "/sitemap-core.xml") {
-      return new Response(getCoreSitemap(currentApex), { headers: retroHeaders("application/xml; charset=utf-8") });
+      cachedCoreSitemap ||= urlset(STORY_PATHS);
+      return new Response(cachedCoreSitemap, { headers: retroHeaders("application/xml; charset=utf-8") });
     }
     if (url.pathname === "/sitemap-swarm.xml") {
       const n = liveCount(Date.now(), env.SWARM_CAP);
-      const domainSwarm = sitemapSitePaths(n).filter((sp) => apexFor(sp) === currentApex);
-      return new Response(urlset(domainSwarm), { headers: retroHeaders("application/xml; charset=utf-8") });
+      return new Response(urlset(sitemapSitePaths(n)), { headers: retroHeaders("application/xml; charset=utf-8") });
     }
     if (url.pathname === `/${INDEXNOW_KEY}.txt`) {
       return new Response(INDEXNOW_KEY, { headers: retroHeaders("text/plain; charset=utf-8") });
     }
-    if (url.pathname === "/terminal" || url.pathname === "/terminal/" || url.pathname === "/terminal/index.html" ||
-        url.pathname.endsWith("/terminal") || url.pathname.endsWith("/terminal/") || url.pathname.endsWith("/terminal/index.html") ||
-        url.pathname === "/forensics" || url.pathname === "/forensics/" || url.pathname === "/forensics/index.html" ||
-        url.pathname.endsWith("/forensics") || url.pathname.endsWith("/forensics/") || url.pathname.endsWith("/forensics/index.html") ||
-        url.pathname === "/reconstruction" || url.pathname === "/reconstruction/" || url.pathname === "/reconstruction/index.html" ||
-        url.pathname.endsWith("/reconstruction") || url.pathname.endsWith("/reconstruction/") || url.pathname.endsWith("/reconstruction/index.html")) {
-      const headers = new Headers();
-      headers.set("Content-Type", "text/html; charset=utf-8");
-      headers.set("Server", "CERN-HTTPd/3.0");
-      headers.set("X-Powered-By", "Stardust");
-      headers.set("Cache-Control", "no-cache, no-store, must-revalidate, max-age=0");
-      headers.set("Pragma", "no-cache");
-      headers.set("Expires", "0");
-      return new Response(TERMINAL_HTML, { headers });
-    }
-    if (url.pathname.startsWith("/assets/audio/marcus/")) {
-      const filename = url.pathname.split("/").pop();
-      let b64 = null;
-      if (filename.includes("sector1")) b64 = MARCUS_AUDIO.sector1;
-      else if (filename.includes("sector2")) b64 = MARCUS_AUDIO.sector2;
-      else if (filename.includes("sector3")) b64 = MARCUS_AUDIO.sector3;
-      else if (filename.includes("sector4")) b64 = MARCUS_AUDIO.sector4;
 
-      if (b64) {
-        const binStr = atob(b64);
-        const total = binStr.length;
-        const bytes = new Uint8Array(total);
-        for (let i = 0; i < total; i++) {
-          bytes[i] = binStr.charCodeAt(i);
-        }
-
-        const range = request.headers.get("range");
-        if (range && range.startsWith("bytes=")) {
-          const parts = range.replace("bytes=", "").split("-");
-          const start = parseInt(parts[0], 10) || 0;
-          const end = parts[1] ? parseInt(parts[1], 10) : total - 1;
-          const chunk = bytes.subarray(start, end + 1);
-          const headers = new Headers();
-          headers.set("Content-Type", "audio/mpeg");
-          headers.set("Content-Range", `bytes ${start}-${end}/${total}`);
-          headers.set("Content-Length", chunk.length.toString());
-          headers.set("Accept-Ranges", "bytes");
-          headers.set("Cache-Control", "public, max-age=86400");
-          headers.set("Access-Control-Allow-Origin", "*");
-          return new Response(chunk, { status: 206, headers });
-        }
-
-        const headers = new Headers();
-        headers.set("Content-Type", "audio/mpeg");
-        headers.set("Content-Length", total.toString());
-        headers.set("Cache-Control", "public, max-age=86400");
-        headers.set("Access-Control-Allow-Origin", "*");
-        headers.set("Accept-Ranges", "bytes");
-        return new Response(bytes, { status: 200, headers });
-      }
-    }
-    if ((url.pathname.startsWith("/assets/audio/") || url.pathname.startsWith("/audio/")) && url.pathname.endsWith(".mp3")) {
-      const audioName = url.pathname.startsWith("/assets/audio/") ? url.pathname.slice("/assets/audio/".length) : url.pathname.slice("/audio/".length);
-      const rawUrl = `https://raw.githubusercontent.com/jdurey/retro-arg-engine/main/assets/audio/${encodeURIComponent(audioName)}`;
-      const forwardHeaders = new Headers();
-      const range = request.headers.get("range");
-      if (range) forwardHeaders.set("range", range);
-      const upstream = await fetch(rawUrl, {
-        headers: forwardHeaders,
-        cf: { cacheTtl: 86400, cacheEverything: true }
-      });
-      if (upstream.ok || upstream.status === 206) {
-        const headers = new Headers(upstream.headers);
-        headers.set("Content-Type", "audio/mpeg");
-        headers.set("Access-Control-Allow-Origin", "*");
-        headers.set("Accept-Ranges", "bytes");
-        headers.set("Cache-Control", "public, max-age=86400");
-        return new Response(upstream.body, { status: upstream.status, headers });
-      }
-    }
-    if (url.pathname === "/api/telemetry.txt" || url.pathname === "/api/carrier.txt") {
-      const now = new Date();
-      const carrier = (14.2000 + (Math.sin(Date.now() / 15000) * 0.0018)).toFixed(4);
-      const packets = 142000 + Math.floor((Date.now() - 1760000000000) / 10000);
-      const text = `[ORION DAEMON v3.0] [CARRIER: ${carrier} Hz] [NODES: 5,000 ACTIVE] [PACKETS: ${packets}] [GATEWAY: https://stardust-archive.net/] [UTC: ${now.toISOString().slice(11, 19)}]`;
-      const headers = retroHeaders("text/plain; charset=utf-8");
-      headers.set("Cache-Control", "no-cache, no-store, must-revalidate");
-      return new Response(text, { headers });
-    }
     const { sitePath, canonical } = resolve(url.hostname, url.pathname);
-
     if (canonical) return Response.redirect(canonical, 301);
     if (url.protocol === "http:") {
       url.protocol = "https:";
@@ -308,36 +315,14 @@ export default {
     const base = env.BASE_STATIC_URL.replace(/\/+$/, "");
     const encoded = sitePath.split("/").map(encodeURIComponent).join("/");
     const bust = `?v=${ASSET_VERSION}`;
-    const forwardHeaders = new Headers();
-    const rangeHeader = request.headers.get("range");
-    if (rangeHeader) {
-      forwardHeaders.set("range", rangeHeader);
-    }
     const upstream = await fetch(`${base}/${encoded}${bust}`, {
       method: request.method === "HEAD" ? "HEAD" : "GET",
-      headers: forwardHeaders,
-      cf: {
-        cacheTtlByStatus: { "200-299": 3600, "404": 1, "500-599": 0 },
-        cacheEverything: true,
-      },
+      cf: { cacheTtl: 3600, cacheEverything: true },
     });
-    if (!upstream.ok && upstream.status !== 206) return notFound();
+    if (!upstream.ok) return notFound();
 
     const type = upstream.headers.get("Content-Type") || "application/octet-stream";
     const headers = retroHeaders(type);
-    headers.set("Access-Control-Allow-Origin", "*");
-    headers.set("Accept-Ranges", "bytes");
-
-    if (upstream.status === 206) {
-      if (upstream.headers.has("Content-Range")) {
-        headers.set("Content-Range", upstream.headers.get("Content-Range"));
-      }
-      if (upstream.headers.has("Content-Length")) {
-        headers.set("Content-Length", upstream.headers.get("Content-Length"));
-      }
-      return new Response(upstream.body, { status: 206, headers });
-    }
-
     if (!sitePath.startsWith("assets/")) {
       if (isStory(sitePath)) {
         headers.set("X-Robots-Tag", INDEX_HEADER);
@@ -349,7 +334,7 @@ export default {
     if (!type.startsWith("text/html")) return response;
 
     return new HTMLRewriter()
-      .on("head", new HeadInjector(publicUrl(sitePath) || url.toString(), currentApex))
+      .on("head", new HeadInjector(publicUrl(sitePath) || url.toString()))
       .on("[href]", new LinkRewriter("href", sitePath))
       .on("[src]", new LinkRewriter("src", sitePath))
       .on("[background]", new LinkRewriter("background", sitePath))

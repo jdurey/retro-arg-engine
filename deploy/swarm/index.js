@@ -1,17 +1,14 @@
-// Edge entry point for the generated swarm (v3).
+// Edge entry point for the generated swarm (v3 + v5 Cryptographic XOR Dyads).
 //
 // Pages:   geocities/<suburb-slug>-<NNNN>.html  -> member page for id = idOf(slug)
 //          geocities/dir-index.html              -> all suburbs
 //          geocities/dir-<suburb-slug>-p<N>.html -> suburb directory, 100 per page
 //          geocities/lang-<code>.html            -> language hub (sample + suburb links)
-//
-// Rollout is by date: N_START pages live at LAUNCH, +N_STEP every 7 days, up to
-// N_MAX. env.SWARM_CAP (wrangler var) caps it; SWARM_CAP=0 turns the swarm off.
 
 import BANK from "./bank.js";
-import TIER2, { LANG_HUBS } from "./tier2.js";
-import { SUBURBS, BLOCK, addressOf, idOf, idsInSuburb, suburbSlug } from "./address.js";
-import { header, page } from "./generate.js";
+import TIER2 from "./tier2.js";
+import { SUBURBS, BLOCK, addressOf, idOf, idsInSuburb, suburbSlug, pairedNodeOf } from "./address.js";
+import { header, langOf, page } from "./generate.js";
 import { renderPage, esc, counterHtml } from "./render.js";
 import { publicUrl } from "../urlmap.js";
 import { hash32 } from "./rng.js";
@@ -19,7 +16,7 @@ import { hash32 } from "./rng.js";
 export const N_MAX = 300000;
 export const N_START = 50000;
 export const N_STEP = 50000;
-export const LAUNCH = Date.UTC(2026, 9, 11); // 2026-10-11
+export const LAUNCH = Date.UTC(2026, 9, 12); // 2026-10-12
 const PER_PAGE = 100;
 const DOCTYPE = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">';
 
@@ -36,10 +33,6 @@ export const dirPath = (sub, p = 1) => `geocities/dir-${suburbSlug(sub)}-p${p}.h
 export const langPath = (code) => `geocities/lang-${code.toLowerCase()}.html`;
 export const DIR_INDEX = "geocities/dir-index.html";
 
-/**
- * Classify a geocities key. staticSlugs: Set of legacy static page slugs (they win).
- * Returns null when the swarm doesn't own the key.
- */
 export function classify(key, n, staticSlugs) {
   if (key === "dir-index") return { kind: "dir-index" };
   let m = /^dir-(.+)-p(\d+)$/.exec(key);
@@ -54,8 +47,7 @@ export function classify(key, n, staticSlugs) {
   }
   if (staticSlugs.has(key)) return null;
   const id = idOf(key);
-  if (id < 0) return null;
-  return id < n ? { kind: "member", id } : { kind: "pending" }; // valid address, not live yet
+  return id >= 0 && id < n ? { kind: "member", id } : null;
 }
 
 export const isTier2 = (id, n) => id < n && TIER2_SET.has(id);
@@ -77,7 +69,9 @@ function nextLive(id, step, n, staticSlugs) {
 export function renderMember(id, n, staticSlugs, assetVersion) {
   const hp = page(id);
   const indexable = isTier2(id, n);
-  const html = renderPage(hp, {
+  const dyad = pairedNodeOf(id, n);
+  const dyadUrl = publicUrl(geoPath(dyad.partnerSlug));
+  const rawHtml = renderPage(hp, {
     assetVersion, indexable,
     selfUrl: publicUrl(geoPath(hp.slug)),
     prev: addressOf(nextLive(id, -1, n, staticSlugs)).slug,
@@ -89,7 +83,9 @@ export function renderMember(id, n, staticSlugs, assetVersion) {
     dirIndexUrl: publicUrl(DIR_INDEX),
     geoIndexUrl: publicUrl("geocities/index.html"),
   });
-  return { html, indexable, page: hp };
+  const breadcrumb = `\n<!-- SUBLEVEL-B2-MEM: ${dyad.memoryAddress} | XOR-DYAD-SEED: ${dyad.xorSeed} | PAIRED-NODE: ${dyad.partnerSlug} (${dyadUrl}) | CARRIER: 14.2001 Hz -->`;
+  const html = rawHtml + breadcrumb;
+  return { html, indexable, page: hp, dyad };
 }
 
 function shell(title, desc, body, { lang = "en", indexable = false, selfUrl = "" } = {}) {
@@ -103,66 +99,77 @@ function shell(title, desc, body, { lang = "en", indexable = false, selfUrl = ""
     `<TD ALIGN=CENTER><FONT FACE="Arial,Helvetica" SIZE=2><B><A HREF="${esc(publicUrl("geocities/index.html"))}">Homestead Directory</A></B></FONT></TD>` +
     `<TD ALIGN=CENTER><FONT FACE="Arial,Helvetica" SIZE=2><B><A HREF="${esc(publicUrl(DIR_INDEX))}">All Neighborhoods</A></B></FONT></TD>` +
     `<TD ALIGN=CENTER><FONT FACE="Arial,Helvetica" SIZE=2><B><A HREF="${esc(publicUrl("geocities/hollywood-hills-4127.html"))}">Ring Home</A></B></FONT></TD></TR></TABLE>\n` +
-    `${body}\n<HR SIZE=3 NOSHADE><P><FONT SIZE=2>Hosted free by <B>GeoCities</B> &middot; Best viewed with <B>Netscape Navigator 2.0</B> at 640x480 &middot; Keep the channels open.</FONT></P>\n</CENTER></BODY></HTML>\n`;
+    `${body}\n<HR SIZE=3 NOSHADE><P><FONT SIZE=2>Hosted free by <B>GeoCities</B> &middot; Best viewed with <B>Netscape Navigator 2.0</B></FONT></P></CENTER></BODY></HTML>\n`;
 }
-
-const pageLinks = (sub, pages, cur) =>
-  `<P><FONT SIZE=2>Pages: ${Array.from({ length: pages }, (_, i) => i + 1 === cur ? `<B>[${i + 1}]</B>` : `<A HREF="${esc(publicUrl(dirPath(sub, i + 1)))}">${i + 1}</A>`).join(" ")}</FONT></P>`;
 
 export function renderDirIndex(n, staticSlugs) {
   const byHood = new Map();
   SUBURBS.forEach(([hood, suburb], i) => {
+    const cnt = liveIdsInSuburb(i, n, staticSlugs).length;
+    if (!cnt) return;
     if (!byHood.has(hood)) byHood.set(hood, []);
-    byHood.get(hood).push([suburb, i]);
+    byHood.get(hood).push({ i, suburb, cnt });
   });
-  const rows = [...byHood].map(([hood, subs]) =>
-    `<TR><TD VALIGN=TOP><B><FONT FACE="Arial,Helvetica">${esc(hood)}</FONT></B><BR><FONT SIZE=1>${esc(BANK.base.hood_themes[hood + "/" + subs[0][0]] || BANK.base.hood_themes[Object.keys(BANK.base.hood_themes).find((k) => k.startsWith(hood + "/"))] || "")}</FONT></TD>` +
-    `<TD>${subs.map(([s, i]) => `<A HREF="${esc(publicUrl(dirPath(i, 1)))}">${esc(hood + "/" + s)}</A>`).join(" &middot; ")}</TD></TR>`).join("\n");
-  const langs = Object.entries(BANK.langs).map(([c, L]) => `<A HREF="${esc(publicUrl(langPath(c)))}">${esc((L.info && L.info.name) || c)}</A>`).join(" &middot; ");
-  const total = 5039 + n;
-  return shell("GeoCities Neighborhoods - The Stardust Webring", `Directory of every GeoCities neighborhood and suburb in The Stardust Webring: ${total.toLocaleString("en-US")} member stations.`,
-    `<H1><FONT FACE="Arial Black,Arial,Helvetica">GEOCITIES NEIGHBORHOODS &amp; SUBURBS</FONT></H1>\n<P>${total.toLocaleString("en-US")} registered homesteads across ${byHood.size} neighborhoods and ${SUBURBS.length} suburbs.</P>\n` +
-    `<TABLE BORDER=2 CELLPADDING=4 CELLSPACING=0 WIDTH="720">\n<TR BGCOLOR="#E6F2FF"><TH>Neighborhood</TH><TH>Suburbs</TH></TR>\n${rows}\n</TABLE>\n<H2>Language Hubs</H2>\n<P>${langs}</P>`,
-    { indexable: true, selfUrl: publicUrl(DIR_INDEX) });
+  const rows = [];
+  for (const [hood, subs] of byHood) {
+    const links = subs.map((s) => `<A HREF="${esc(publicUrl(dirPath(s.i, 1)))}">${esc(s.suburb)}</A> <FONT SIZE=1>(${s.cnt})</FONT>`).join(" &middot; ");
+    rows.push(`<TR><TD VALIGN=TOP><B>${esc(hood)}</B></TD><TD>${links}</TD></TR>`);
+  }
+  const langLinks = Object.entries(BANK.langs).map(([c, v]) =>
+    `<A HREF="${esc(publicUrl(langPath(c)))}">${esc(v.info.native)} (${esc(v.info.name)})</A>`).join(" &middot; ");
+  const body = `<H1>GeoCities Homestead Neighborhoods</H1>\n<P><FONT SIZE=2><B>${n.toLocaleString("en-US")}</B> active member pages across <B>${SUBURBS.length}</B> suburbs.</FONT></P>\n` +
+    `<TABLE BORDER=1 CELLPADDING=5 CELLSPACING=0 WIDTH="720"><TR BGCOLOR="#CCCCCC"><TH ALIGN=LEFT>Neighborhood</TH><TH ALIGN=LEFT>Suburbs (member count)</TH></TR>\n${rows.join("\n")}</TABLE>\n` +
+    `<H2>Browse by Language</H2><P WIDTH="720">${langLinks}</P>`;
+  return shell("GeoCities - All Neighborhoods - The Stardust Webring",
+    `Directory of all ${SUBURBS.length} GeoCities suburbs hosting Nova Hart & Project Stardust member pages.`,
+    body, { indexable: true, selfUrl: publicUrl(DIR_INDEX) });
 }
 
-export function renderDir(sub, p, n, staticSlugs) {
+export function renderDir(sub, pageNum, n, staticSlugs) {
+  const [hood, suburb] = SUBURBS[sub];
   const ids = liveIdsInSuburb(sub, n, staticSlugs);
   const pages = Math.max(1, Math.ceil(ids.length / PER_PAGE));
-  if (p > pages) return null;
-  const [hood, suburb] = SUBURBS[sub];
-  const rows = ids.slice((p - 1) * PER_PAGE, p * PER_PAGE).map((id) => {
+  if (pageNum < 1 || pageNum > pages) return null;
+  const slice = ids.slice((pageNum - 1) * PER_PAGE, pageNum * PER_PAGE);
+  const items = slice.map((id) => {
     const h = header(id);
-    const L = BANK.langs[h.lang];
-    return `<TR><TD><TT>${esc(h.pathDisplay)}</TT></TD><TD><A HREF="${esc(publicUrl(geoPath(h.slug)))}"><B>${esc(h.title)}</B></A></TD>` +
-      `<TD><FONT SIZE=2>${esc(h.name)} (${esc(h.city)})</FONT></TD><TD><FONT SIZE=2>${esc(((L && L.info && L.info.name) || h.lang).split(" ")[0])}</FONT></TD><TD ALIGN=RIGHT>${h.counter}</TD></TR>`;
-  }).join("\n");
-  return shell(`GeoCities ${hood}/${suburb} - Directory page ${p}`, `Member homesteads in the GeoCities ${hood}/${suburb} suburb (page ${p} of ${pages}).`,
-    `<H1><FONT FACE="Arial Black,Arial,Helvetica">${esc(hood.toUpperCase())} / ${esc(suburb.toUpperCase())}</FONT></H1>\n<P>${ids.length} homesteads in this suburb.</P>\n${pageLinks(sub, pages, p)}\n` +
-    `<TABLE BORDER=2 CELLPADDING=4 CELLSPACING=0 WIDTH="100%">\n<TR BGCOLOR="#E6F2FF"><TH>Address</TH><TH>Homepage</TH><TH>Webmaster</TH><TH>Language</TH><TH>Hits</TH></TR>\n${rows}\n</TABLE>\n${pageLinks(sub, pages, p)}`);
+    return `<TR><TD><TT>${h.num}</TT></TD><TD><A HREF="${esc(publicUrl(geoPath(h.slug)))}"><B>${esc(h.title)}</B></A></TD>` +
+      `<TD>${esc(h.name)} <FONT SIZE=1>(${esc(h.city)})</FONT></TD><TD><TT>${h.lang}</TT></TD><TD><TT>${h.date}</TT></TD></TR>`;
+  });
+  const pager = Array.from({ length: pages }, (_, i) => i + 1).map((p) =>
+    p === pageNum ? `<B>[${p}]</B>` : `<A HREF="${esc(publicUrl(dirPath(sub, p)))}">${p}</A>`).join(" ");
+  const body = `<H1>${esc(hood)} / ${esc(suburb)} &mdash; Homestead Directory (Page ${pageNum} of ${pages})</H1>\n<P>Pages: ${pager}</P>\n` +
+    `<TABLE BORDER=1 CELLPADDING=4 CELLSPACING=0 WIDTH="720"><TR BGCOLOR="#CCCCCC"><TH>Addr</TH><TH ALIGN=LEFT>Page Title</TH><TH ALIGN=LEFT>Homesteader</TH><TH>Lang</TH><TH>Updated</TH></TR>\n` +
+    `${items.join("\n")}</TABLE>\n<P>Pages: ${pager}</P>`;
+  return shell(`GeoCities ${hood}/${suburb} Directory (Page ${pageNum})`,
+    `Member pages in GeoCities ${hood}/${suburb} belonging to The Stardust Webring.`,
+    body, { indexable: pageNum === 1, selfUrl: publicUrl(dirPath(sub, pageNum)) });
 }
 
 export function renderLang(code, n, staticSlugs) {
   const L = BANK.langs[code];
-  const rows = [];
-  for (const id of LANG_HUBS[code] || []) {
-    if (id >= n || rows.length >= 150) continue;
+  if (!L) return null;
+  const hits = [];
+  const step = Math.max(1, Math.floor(n / 1800));
+  for (let id = 0; id < n && hits.length < 120; id += step) {
+    if (langOf(id) !== code) continue;
     const h = header(id);
-    rows.push(`<TR><TD><TT>${esc(h.pathDisplay)}</TT></TD><TD><A HREF="${esc(publicUrl(geoPath(h.slug)))}">${esc(h.title)}</A></TD><TD><FONT SIZE=2>${esc(h.city)}</FONT></TD></TR>`);
+    if (staticSlugs.has(h.slug)) continue;
+    hits.push(h);
   }
-  const name = (L.info && L.info.name) || code;
-  return shell(`GeoCities International Hub: ${name}`, `Nova Hart fan homepages written in ${name}, with links to every GeoCities suburb directory.`,
-    `<H1><FONT FACE="Arial Black,Arial,Helvetica">GLOBAL LANGUAGE HUB: ${esc(name)}</FONT></H1>\n<P><B>${esc((L.info && L.info.node) || "")}</B> &middot; ${esc((L.info && L.info.region) || "")}</P>\n` +
-    `<TABLE BORDER=2 CELLPADDING=4 CELLSPACING=0 WIDTH="100%">\n<TR BGCOLOR="#FFF2E6"><TH>Address</TH><TH>Homepage</TH><TH>City</TH></TR>\n${rows.join("\n")}\n</TABLE>\n` +
-    `<P>Browse every suburb: <A HREF="${esc(publicUrl(DIR_INDEX))}">GeoCities Neighborhoods</A></P>`,
-    { lang: code, indexable: true, selfUrl: publicUrl(langPath(code)) });
+  const items = hits.map((h) =>
+    `<LI><A HREF="${esc(publicUrl(geoPath(h.slug)))}"><B>${esc(h.title)}</B></A> &mdash; ${esc(h.name)} (${esc(h.city)}) &middot; <TT>${esc(h.pathDisplay)}</TT></LI>`);
+  const body = `<H1>${esc(L.info.native)} (${esc(L.info.name)}) &mdash; Stardust Webring Stations</H1>\n` +
+    `<P>${esc(L.info.blurb || "")}</P>\n<UL>\n${items.join("\n")}</UL>`;
+  return shell(`${L.info.native} (${L.info.name}) - The Stardust Webring`,
+    `GeoCities fan pages in ${L.info.name} dedicated to Nova Hart and the 14.2 Hz Stardust signal.`,
+    body, { lang: code, indexable: true, selfUrl: publicUrl(langPath(code)) });
 }
 
-/** Swarm URLs that belong in the sitemap for a given live count. */
 export function sitemapSitePaths(n) {
-  const out = [DIR_INDEX, ...Object.keys(BANK.langs).map(langPath)];
+  const out = [DIR_INDEX];
+  for (let i = 0; i < SUBURBS.length; i++) out.push(dirPath(i, 1));
+  for (const c of Object.keys(BANK.langs)) out.push(langPath(c));
   for (const id of TIER2) if (id < n) out.push(geoPath(addressOf(id).slug));
   return out;
 }
-
-export { counterHtml };

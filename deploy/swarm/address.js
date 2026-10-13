@@ -2,12 +2,12 @@
 // "tokyo-ginza-4412"). A keyed Feistel permutation scatters ids over every
 // suburb's 1000-9999 address block, and it is invertible, so the Worker can turn
 // any requested hostname back into the id that generates the page.
+//
+// v5 Expansion: Adds deterministic Sublevel B2 virtual memory addressing
+// (0x89B2xxxx) and cryptographic XOR dyad node pairing (XOR_DYAD_SEED = 0x3A5F).
 
 import { hash32 } from "./rng.js";
 
-// [Neighborhood, Suburb]. The first 18 are the v2 suburbs (legacy static pages
-// live there too; a static page always wins over a generated one at the same
-// address). The rest are period GeoCities suburbs of the same neighborhoods.
 export const SUBURBS = [
   ["SiliconValley", "Lab"], ["Hollywood", "Hills"], ["SunsetStrip", "Club"], ["Area51", "Vault"], ["Tokyo", "Garden"],
   ["Athens", "Forum"], ["Paris", "LeftBank"], ["CapeCanaveral", "Lab"], ["Heartland", "Plains"], ["SoHo", "Studio"],
@@ -35,10 +35,10 @@ export const SUBURBS = [
 
 export const BLOCK = 9000; // addresses 1000..9999 per suburb
 export const DOMAIN = SUBURBS.length * BLOCK;
+export const XOR_DYAD_SEED = 0x3A5F;
 export const suburbSlug = (i) => `${SUBURBS[i][0]}-${SUBURBS[i][1]}`.toLowerCase();
 const SLUG_TO_SUBURB = new Map(SUBURBS.map((_, i) => [suburbSlug(i), i]));
 
-// ---- keyed Feistel permutation over [0, 2^BITS), cycle-walked into [0, DOMAIN)
 const HALF = 10;
 const BITS = HALF * 2;
 const MASK = (1 << HALF) - 1;
@@ -79,6 +79,26 @@ export function addressOf(id) {
   return { suburbIndex: sub, num, hood, suburb, slug: `${suburbSlug(sub)}-${num}`, pathDisplay: `${hood}/${suburb}/${num}` };
 }
 
+/** Deterministic 32-bit Sublevel B2 virtual memory address for swarm node id. */
+export function memoryAddressOf(id) {
+  const offset = (Math.imul(id ^ XOR_DYAD_SEED, 0x9E3779B1) >>> 16) & 0xFFFF;
+  return `0x89B2${offset.toString(16).toUpperCase().padStart(4, "0")}`;
+}
+
+/** Deterministic cryptographic XOR dyad partner for swarm node id within live range n. */
+export function pairedNodeOf(id, n = 50000) {
+  const bound = Math.max(1, n);
+  const partnerId = ((id ^ XOR_DYAD_SEED) >>> 0) % bound;
+  const addr = addressOf(partnerId);
+  return {
+    partnerId,
+    partnerSlug: addr.slug,
+    memoryAddress: memoryAddressOf(id),
+    partnerMemoryAddress: memoryAddressOf(partnerId),
+    xorSeed: "0x3A5F",
+  };
+}
+
 /** slug -> id, or -1 if the slug is not a generated-swarm address. */
 export function idOf(slug) {
   const m = /^(.+)-(\d{4})$/.exec(slug);
@@ -89,7 +109,6 @@ export function idOf(slug) {
   return permInv(sub * BLOCK + (num - 1000));
 }
 
-/** ids whose address falls in a suburb, in address order (for directories). */
 const suburbMemo = new Map();
 export function idsInSuburb(sub) {
   let out = suburbMemo.get(sub);
