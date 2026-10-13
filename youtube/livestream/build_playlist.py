@@ -81,30 +81,43 @@ for s in all_songs:
 # Use dynamic system randomness (no static seed)
 rng = random.Random()
 
-# 4. Authentic 1980s Roland/Yamaha FM Synthesizer MIDI Masters
+# 4. Authentic 1980s Roland/Yamaha FM Synthesizer MIDI Masters (30 files)
 midi_tracks = [t for t in glob.glob(os.path.join(MIDI_DIR, "*.mp3")) if os.path.isfile(t)]
 rng.shuffle(midi_tracks)
 
-# 5. High-Quality Spoken Radio Bulletins (67 unique crisp bulletins)
+# 5. Spoken Radio Bulletins, Newscasts & Marine Advisories (69 files)
 spoken_pool = []
 spoken_pool += [t for t in glob.glob(os.path.join(MULTILINGUAL_DIR, "*.mp3")) if os.path.isfile(t)]
 spoken_pool += [t for t in glob.glob(os.path.join(GEOCITIES_DIR, "*.mp3")) if os.path.isfile(t)]
 spoken_pool += [t for t in glob.glob(os.path.join(NEWSCASTS_DIR, "*.mp3")) if os.path.isfile(t)]
 rng.shuffle(spoken_pool)
 
-# 6. Ultra-tight Telemetry Beacons (2.5s - 5s punchy 750Hz Morse chirps)
+# 6. Ultra-tight Telemetry Beacons (35 files, 2.5s - 5s punchy 750Hz Morse chirps)
 morse_beacons = [t for t in glob.glob(os.path.join(MORSE_DIR, "*.mp3")) if os.path.isfile(t)]
 rng.shuffle(morse_beacons)
 
+# 7. Shortwave Numbers Station Intercepts (60 files, 20s - 35s phonetic codes)
+numbers_pool = [t for t in glob.glob(os.path.join(NUMBERS_DIR, "*.mp3")) if os.path.isfile(t)]
+rng.shuffle(numbers_pool)
+
+# 8. Classified Orion Lab Tapes (25 files, Marcus Hale dictaphone, Harrison purge logs)
+lab_pool = [t for t in glob.glob(os.path.join(LAB_DIR, "*.mp3")) if os.path.isfile(t)]
+rng.shuffle(lab_pool)
+
+# 9. Deep Rabbit Hole ARG Intercepts & UVB-76 Buzzer Bursts (12 files)
+intercept_pool = [t for t in glob.glob(os.path.join(INTERCEPT_DIR, "*.mp3")) if os.path.isfile(t)]
+rng.shuffle(intercept_pool)
+
 print(f"Building Broadcast Lineup:")
 print(f"  - Total Unique Vocal Master Songs: {len(all_songs)}")
-print(f"    * Newly Added Tracks (Front-Loaded): {len(new_tracks)}")
-print(f"    * Classic Repertoire Tracks: {len(classic_tracks)}")
 print(f"  - FM Synth MIDI Masters: {len(midi_tracks)}")
 print(f"  - Spoken Radio Bulletins: {len(spoken_pool)}")
 print(f"  - Tight Morse Beacons: {len(morse_beacons)}")
+print(f"  - Shortwave Numbers Stations: {len(numbers_pool)}")
+print(f"  - Classified Orion Lab Tapes: {len(lab_pool)}")
+print(f"  - Deep ARG Signal Intercepts: {len(intercept_pool)}")
 
-# 7. Helper to generate a well-spaced single cycle containing every song exactly once
+# 10. Helper to generate a well-spaced single cycle containing every song exactly once
 def build_shuffled_cycle(song_list, avoid_recent=None):
     if avoid_recent is None:
         avoid_recent = []
@@ -131,7 +144,7 @@ def build_shuffled_cycle(song_list, avoid_recent=None):
             return cand
     return cand
 
-# 8. Build 8 distinct cycles (~44 hours of non-repeating fair rotation)
+# 11. Build 8 distinct cycles (~44 hours of non-repeating fair rotation)
 # Every song in the 80-track catalog appears EXACTLY ONCE per cycle (~5.3 hours apart)
 NUM_CYCLES = 8
 cycles = []
@@ -147,34 +160,79 @@ ordered_songs = []
 for c in cycles:
     ordered_songs.extend(c)
 
-# 9. Interweave with Zero Dead Air Cadence:
-#   [Vocal Master Song 3-5m]
-#   -> [3.5s Roland/Yamaha FM Synth MIDI Stinger]
-#   -> [Crisp Spoken Radio Bulletin / Narration 5-8s]
-#   -> [Tight Morse Beacon 2-4s (alternating)]
-#   -> [Next Vocal Master Song]
+# 12. Dynamic Transition Engine:
+# Alternates between 6 authentic radio interstitial cadences so transitions never feel robotic
+CADENCE_PATTERNS = [
+    "bulletin",       # MIDI Stinger + Radio Bulletin / Newscast
+    "numbers",        # Morse Beacon + Shortwave Numbers Station
+    "direct_morse",   # Quick Morse chirp straight into next song (keeps energy up)
+    "lab_tape",       # Classified Orion Dictaphone / Marcus Hale tape + Morse
+    "bulletin",       # MIDI Stinger + Marine Advisory / Foreign Radio Dispatch
+    "arg_intercept",  # UVB-76 Buzzer / Deep Shortwave Intercept
+    "direct_midi",    # Vintage 3.5s FM Synth Stinger direct segue
+    "numbers",        # Shortwave Numbers Station
+    "lab_tape",       # Classified Lab Tape
+    "bulletin",       # MIDI Stinger + GeoCities Reading / Community Bulletin
+]
+
 full_playlist = []
 spoken_idx = 0
 morse_idx = 0
 midi_idx = 0
+numbers_idx = 0
+lab_idx = 0
+intercept_idx = 0
 
-for song in ordered_songs:
+for song_idx, song in enumerate(ordered_songs):
     full_playlist.append(song)
-
-    # 1. 3.5s Vintage FM Synth MIDI Stinger (plays BEFORE narration)
-    if midi_tracks:
-        full_playlist.append(midi_tracks[midi_idx % len(midi_tracks)])
-        midi_idx += 1
-
-    # 2. Tight spoken radio bulletin / narration
-    if spoken_pool:
-        full_playlist.append(spoken_pool[spoken_idx % len(spoken_pool)])
-        spoken_idx += 1
-
-    # 3. Tight 2-4 second Morse beacon
-    if morse_beacons and (morse_idx % 2 == 0):
-        full_playlist.append(morse_beacons[morse_idx % len(morse_beacons)])
-        morse_idx += 1
+    
+    # Pick next transition pattern
+    pattern = CADENCE_PATTERNS[song_idx % len(CADENCE_PATTERNS)]
+    
+    if pattern == "bulletin":
+        # 3.5s MIDI Stinger -> Spoken Bulletin
+        if midi_tracks:
+            full_playlist.append(midi_tracks[midi_idx % len(midi_tracks)])
+            midi_idx += 1
+        if spoken_pool:
+            full_playlist.append(spoken_pool[spoken_idx % len(spoken_pool)])
+            spoken_idx += 1
+            
+    elif pattern == "numbers":
+        # Morse Beacon -> Numbers Station
+        if morse_beacons and (song_idx % 2 == 0):
+            full_playlist.append(morse_beacons[morse_idx % len(morse_beacons)])
+            morse_idx += 1
+        if numbers_pool:
+            full_playlist.append(numbers_pool[numbers_idx % len(numbers_pool)])
+            numbers_idx += 1
+            
+    elif pattern == "lab_tape":
+        # Classified Orion Tape -> Tight Morse chirp
+        if lab_pool:
+            full_playlist.append(lab_pool[lab_idx % len(lab_pool)])
+            lab_idx += 1
+        if morse_beacons:
+            full_playlist.append(morse_beacons[morse_idx % len(morse_beacons)])
+            morse_idx += 1
+            
+    elif pattern == "arg_intercept":
+        # Deep ARG Intercept / UVB-76 Buzzer
+        if intercept_pool:
+            full_playlist.append(intercept_pool[intercept_idx % len(intercept_pool)])
+            intercept_idx += 1
+            
+    elif pattern == "direct_morse":
+        # Punchy 2-4 second Morse beacon direct segue
+        if morse_beacons:
+            full_playlist.append(morse_beacons[morse_idx % len(morse_beacons)])
+            morse_idx += 1
+            
+    elif pattern == "direct_midi":
+        # Vintage FM Synth Stinger direct segue
+        if midi_tracks:
+            full_playlist.append(midi_tracks[midi_idx % len(midi_tracks)])
+            midi_idx += 1
 
 tmp_file = out_file + ".tmp"
 with open(tmp_file, "w") as f:
@@ -183,6 +241,7 @@ with open(tmp_file, "w") as f:
 os.replace(tmp_file, out_file)
 
 believers_count = sum(1 for s in ordered_songs if "calling_all_believers" in s)
-print(f"\n✓ Generated Live Stream Playlist with {len(full_playlist)} total tracks ({len(ordered_songs)} songs across {NUM_CYCLES} cycles) in {out_file}")
+print(f"\n✓ Generated Dynamic Live Stream Playlist with {len(full_playlist)} total tracks ({len(ordered_songs)} songs across {NUM_CYCLES} cycles) in {out_file}")
 print(f"✓ Every song in the 80-track catalog appears exactly once per cycle (~5.3 hours apart)!")
+print(f"✓ Interstitial diversity: Numbers Stations, Classified Lab Tapes, ARG Intercepts, Bulletins, Morse Beacons, and MIDI Stingers all actively rotating!")
 
