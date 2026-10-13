@@ -30,7 +30,7 @@ def main():
     print("Copying assets...")
     assets_src = os.path.join(root_dir, "assets")
     assets_dest = os.path.join(out, "assets")
-    shutil.copytree(assets_src, assets_dest)
+    shutil.copytree(assets_src, assets_dest, dirs_exist_ok=True)
     
     static_src = os.path.join(root_dir, "src", "site_static")
     if os.path.exists(static_src):

@@ -126,6 +126,9 @@ export function publicUrl(sitePath) {
   if (p.startsWith("assets/")) return "/" + p;
   if (p === "terminal" || p === "terminal/index.html") return `https://${apex}/terminal`;
   if (p === "forensics" || p === "forensics/index.html") return `https://${apex}/forensics`;
+  if (p.startsWith("forensics/")) return `https://${apex}/${p}`;
+  if (p === "usenet/live_1995_feed.html") return `https://${apex}/${p}`;
+  if (p.startsWith(".well-known/")) return `https://${apex}/${p}`;
   if (p === "reconstruction" || p === "reconstruction/index.html") return `https://${apex}/reconstruction`;
   const segs = p.split("/");
   const kind = segs[0];
@@ -184,7 +187,8 @@ export function resolve(hostname, pathname) {
       }
       return { sitePath: "index.html" };
     }
-    const sp = path.slice(1).replace(/\/$/, "/index.html");
+    let sp = path.slice(1).replace(/\/$/, "/index.html");
+    if (sp === "terminal" || sp === "forensics" || sp === "reconstruction") sp = `${sp}/index.html`;
     const canon = publicUrl(sp);
     return { sitePath: sp, canonical: canon && canon !== `https://${matchedApex}/` ? canon : null };
   }

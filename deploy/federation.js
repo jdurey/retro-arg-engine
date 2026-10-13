@@ -4,7 +4,44 @@
 //   - kamome-net.org     (PC-9801 Akasaka BBS & Shift-JIS Idol Archive)
 //   - relcom-node08.org  (Leningrad Amateur Packet Radio AX.25 Relay)
 //   - redcoyoacan.org    (Mexico DF Rockero Cassette & Phase-Stem Exchange)
-// and path-mounted mirrors under https://stardust-archive.net/federation/<domain>/...
+export const PRIMARY_APEX = "stardust-archive.net";
+
+export const FEDERATION = {
+  "ashford-poly.org": {
+    enabled: false,
+    name: "Ashford Polytechnic Signal Analysis & Telemetry Archive",
+    description: "Academic signal processing lab, microwave relay logs, and declassified DOD telemetry.",
+    match: {
+      paths: ["ftp/ashford-poly"],
+      regional: ["01-usa"],
+    },
+  },
+  "kamome-net.org": {
+    enabled: false,
+    name: "Kamome Net Akasaka Idol Protocol Archive",
+    description: "Japanese PC-98 BBS, Akasaka branch master reels, and regional packet archives.",
+    match: {
+      paths: ["ftp/kamome"],
+      regional: ["02-japan"],
+    },
+  },
+  "relcom-node08.org": {
+    enabled: false,
+    name: "Relcom Node 08 Soviet Tape Archive",
+    description: "Amateur packet radio spools, St. Petersburg tape chains, and Magnitizdat copies.",
+    match: {
+      regional: ["08-ussr"],
+    },
+  },
+  "redcoyoacan.org": {
+    enabled: false,
+    name: "Red Coyoacán Mexican Tape Exchange",
+    description: "Mexican rockero collective, uncredited guitar solos, and CDMX cassettes.",
+    match: {
+      regional: ["04-mexico"],
+    },
+  },
+};
 
 export const SISTER_DOMAINS = {
   "ashford-poly.org": {
@@ -148,11 +185,13 @@ ${info.body}
 
 export function handleFederationRequest(url) {
   const host = url.hostname.toLowerCase().replace(/^www\./, "");
-  let domainKey = SISTER_DOMAINS[host] ? host : null;
-  if (!domainKey) {
-    const m = /^\/federation\/([^/]+)(?:\/.*)?$/.exec(url.pathname);
-    if (m && SISTER_DOMAINS[m[1].toLowerCase()]) {
-      domainKey = m[1].toLowerCase();
+  let domainKey = null;
+  const m = /^\/federation\/([^/]+)(?:\/.*)?$/.exec(url.pathname);
+  if (m && SISTER_DOMAINS[m[1].toLowerCase()]) {
+    domainKey = m[1].toLowerCase();
+  } else if (SISTER_DOMAINS[host]) {
+    if (url.pathname === "/" || url.pathname === "/index.html" || url.pathname === "") {
+      domainKey = host;
     }
   }
   if (!domainKey) return null;
