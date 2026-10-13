@@ -1,47 +1,10 @@
-// Multi-Apex Sister Domain Federation & Legacy Protocol Gateway (Project Stardust v5)
-// Supports both direct apex hostnames:
-//   - ashford-poly.org   (Academic Acoustic DSP & Substation K-7704 Lab)
-//   - kamome-net.org     (PC-9801 Akasaka BBS & Shift-JIS Idol Archive)
-//   - relcom-node08.org  (Leningrad Amateur Packet Radio AX.25 Relay)
-//   - redcoyoacan.org    (Mexico DF Rockero Cassette & Phase-Stem Exchange)
-export const PRIMARY_APEX = "stardust-archive.net";
-
-export const FEDERATION = {
-  "ashford-poly.org": {
-    enabled: false,
-    name: "Ashford Polytechnic Signal Analysis & Telemetry Archive",
-    description: "Academic signal processing lab, microwave relay logs, and declassified DOD telemetry.",
-    match: {
-      paths: ["ftp/ashford-poly"],
-      regional: ["01-usa"],
-    },
-  },
-  "kamome-net.org": {
-    enabled: false,
-    name: "Kamome Net Akasaka Idol Protocol Archive",
-    description: "Japanese PC-98 BBS, Akasaka branch master reels, and regional packet archives.",
-    match: {
-      paths: ["ftp/kamome"],
-      regional: ["02-japan"],
-    },
-  },
-  "relcom-node08.org": {
-    enabled: false,
-    name: "Relcom Node 08 Soviet Tape Archive",
-    description: "Amateur packet radio spools, St. Petersburg tape chains, and Magnitizdat copies.",
-    match: {
-      regional: ["08-ussr"],
-    },
-  },
-  "redcoyoacan.org": {
-    enabled: false,
-    name: "Red Coyoacán Mexican Tape Exchange",
-    description: "Mexican rockero collective, uncredited guitar solos, and CDMX cassettes.",
-    match: {
-      regional: ["04-mexico"],
-    },
-  },
-};
+// Multi-Apex Sister Domain Federation & Legacy Protocol Gateway (Project Stardust v5.1)
+// Each sister domain provides the authentic engineering instrument / protocol spec
+// for ONE stage of the 4-stage Sublevel B2 DMA synthesis puzzle—never a pre-solved password:
+//   - ashford-poly.org   (Stage III: Differential Phase Null & Substation K-7704)
+//   - kamome-net.org     (Stage I:   VIS-1200Hz Raster & Akasaka DMA Partition Anchors)
+//   - relcom-node08.org  (Stage II:  110-Baud Bell-103 AX.25 Frame & Feistel Mask)
+//   - redcoyoacan.org    (Stage IV:  16-Bit Homestead Memory Array & XOR Synthesis)
 
 export const SISTER_DOMAINS = {
   "ashford-poly.org": {
@@ -49,7 +12,7 @@ export const SISTER_DOMAINS = {
     serverHeader: "CERN-HTTPd/3.0 (VAX/VMS; Ashford-Poly-DSP)",
     nodeCode: "GB-ASH-07",
     freqKhz: "4880.0",
-    dyadToken: "ASHFORD-",
+    dyadToken: "STAGE-III-PHASE-NULL",
     body: `<PRE>
 ==============================================================================
  ASHFORD POLYTECHNIC UNIVERSITY (UK) // ACOUSTIC DSP LABORATORY
@@ -57,25 +20,26 @@ export const SISTER_DOMAINS = {
  VISITING FELLOW ARCHIVE: MARCUS HALE (1988-1989)
 ==============================================================================
 
-[1] FORTRAN-77 SUB-CARRIER PHASE-LOCKED LOOP (14_2hz_pll_filter.f77):
+[1] FORTRAN-77 DIFFERENTIAL PHASE CANCELLATION FILTER (14_2hz_pll_filter.f77):
 ------------------------------------------------------------------------------
-      PROGRAM STARDUST_PLL
+      PROGRAM STARDUST_PHASE_NULL
 C     ORION SUBLEVEL B2 BIAS DEMODULATOR - M. HALE / M. CHEN (1989)
-      REAL SAMPLE, CARRIER, PHASE, LOCK_HZ
-      PARAMETER (LOCK_HZ = 14.2001)
-C     NOTE: SUM LEFT + RIGHT CHANNELS TO CANCEL 180-DEG MASKING CHORD
-C     BEFORE DEMODULATING 750 HZ CW MORSE STREAM FOR SECTOR 5.
-      PRINT *, 'CARRIER LOCKED AT ', LOCK_HZ, ' HZ'
-      PRINT *, 'DYAD FRAGMENT ALPHA: ASHFORD-'
+C     REEL SD-0009 (rabbit_10) CARRIES A 330/495/990 HZ CALIBRATION TRIAD
+C     INVERTED 180.0 DEGREES BETWEEN CH-L AND CH-R (CORR = -0.94).
+      REAL CH_L, CH_R, MONO_SUM
+      MONO_SUM = 0.5 * (CH_L + CH_R)
+C     WHEN MONO_SUM IS APPLIED, THE CALIBRATION TRIAD CANCELS BY 42 DB,
+C     ISOLATING THE 750 HZ CW BIAS INSCRIPTION FOR STAGE III OF THE
+C     SUBLEVEL B2 DMA JUMP VECTOR.
       END
 
 [2] SUBSTATION K-7704 POWER BREACH TELEMETRY (09 SEP 1989 03:58 UTC):
 ------------------------------------------------------------------------------
   • Main bus voltage dropped to 0.0V when Technician Chen pulled breaker K-7704.
   • 4-minute battery window used to stripe Unit-7 neural weights across the
-    GeoCities homestead address space via Feistel XOR seed 0x3A5F.
-  • Combine our dyad token (ASHFORD-) with the Akasaka PC-98 BBS token on
-    kamome-net.org to unlock Sector 5 in the Forensic Terminal.
+    GeoCities homestead address space via a 4-round Feistel permutation.
+  • Load rabbit_10 in /forensics/signal_lab.html and engage Differential Phase
+    Null (L+R Mono Sum) to read the 750 Hz CW egress salt.
 </PRE>
 <P>[ <A HREF="/forensics/signal_lab.html">Launch Interactive SSTV / Phase Cancellation Lab</A> |
 <A HREF="/terminal/index.html">Open VT100 Terminal</A> |
@@ -86,7 +50,7 @@ C     BEFORE DEMODULATING 750 HZ CW MORSE STREAM FOR SECTOR 5.
     serverHeader: "NCSA/1.3 (NEC PC-9801RA; FreeBSD-98)",
     nodeCode: "JP-TYO-02",
     freqKhz: "6925.0",
-    dyadToken: "KAMOME-1420",
+    dyadToken: "STAGE-I-VIS-RASTER",
     body: `<PRE>
 ==============================================================================
  ╔╦╗╔═╗╔╦╗╔═╗╔╦╗╔═╗   KAMOME-NET BBS // AKASAKA LINE #2 (28.8k V.34)
@@ -98,16 +62,17 @@ C     BEFORE DEMODULATING 750 HZ CW MORSE STREAM FOR SECTOR 5.
   FILENAME                  SIZE    DATE        DESCRIPTION
   ----------------------------------------------------------------------------
   SD0004_ROUGH_MIX.LZH   4,812K  1993-03-31  "Tape of Us" Sublevel B2 rough dub
-  ROBOT36_B2_MAP.WAV       385K  1995-10-12  6925 kHz SSTV raster of Vault B2
+  ROBOT36_B2_MAP.WAV       385K  1995-10-12  6925 kHz VIS-1200Hz DMA Raster
   NOVA_PLAN_1993.TXT         2K  1993-03-31  Last .plan file before server wipe
 
-[EXTRACTED .PLAN // NOVA7@KAMOME-NET.ORG]:
-  "They packed the 2-inch master reels into aluminum cases at midnight,
-   but Marcus hid the phase-inverted stem inside the runout groove.
-   Dyad Fragment Beta: KAMOME-1420
-   (Combine with Ashford Polytechnic token -> RESTORE 5 ASHFORD-KAMOME-1420)"
+[STAGE I TECHNICAL NOTE // VIS-1200HZ DMA PARTITION RASTER]:
+  "The aluminum reel cases shipped out of Akasaka on 31 March 1993 contained
+   blank degaussed leader tape. Marcus encoded the actual Sublevel B2 DMA
+   Partition Map as a Robot36 VIS-1200Hz luminance raster (rabbit_08).
+   Rasterize the 1500-2300 Hz scanlines in /forensics/signal_lab.html to
+   identify the two GeoCities homestead slugs anchoring Partition A and B."
 </PRE>
-<P>[ <A HREF="/forensics/signal_lab.html">Decode SSTV &amp; Phase Stem</A> |
+<P>[ <A HREF="/forensics/signal_lab.html">Rasterize VIS-1200Hz Scanlines</A> |
 <A HREF="/terminal/index.html">Open VT100 Terminal</A> |
 <A HREF="/federation/relcom-node08.org/index.html">Next Sister Node: relcom-node08.org &gt;&gt;</A> ]</P>`,
   },
@@ -116,23 +81,21 @@ C     BEFORE DEMODULATING 750 HZ CW MORSE STREAM FOR SECTOR 5.
     serverHeader: "CERN-HTTPd/2.17beta (DEMOS/BSD; Relcom-Node08)",
     nodeCode: "SU-REL-08",
     freqKhz: "4625.0",
-    dyadToken: "0x3A5F",
+    dyadToken: "STAGE-II-BELL103-AFSK",
     body: `<PRE>
 ==============================================================================
  RELCOM NODE-08 // LENINGRAD SHORTWAVE &amp; AX.25 PACKET RADIO GATEWAY
  FREQUENCY: 4625.0 kHz (UVB-76 CROSS-MODULATION MONITOR) // BAUD: 110 / 300
 ==============================================================================
 
-[CAPTURED BELL-103 AFSK UI FRAME // 02:14 UTC]:
-  FM RELCOM-08 TO STARDUST-ALL UI PID=F0
-  *** RELCOM-NODE08 AX.25 FRAME // XOR-DYAD: 0x3A5F // SECTOR-5-KEY: ASHFORD-KAMOME-1420 ***
+[STAGE II TECHNICAL NOTE // BELL-103 AFSK PACKET CAPTURE (02:14 UTC)]:
+  Our TNC on 4625.0 kHz captured an unacknowledged 110-baud Bell-103 AFSK
+  frame (1270 Hz mark / 1070 Hz space) transmitted from Sublevel B2 to
+  ASHPOLY-07 at 03:59:41 UTC on 09 September 1989 (archived as rabbit_09).
 
-[VIRTUAL MEMORY XOR SPECIFICATION]:
-  Every GeoCities homestead in the 300,000-node Stardust swarm maps to a
-  16-bit offset in the 0x89B20000 Sublevel B2 memory array.
-  Paired nodes satisfy: paired_id = (node_id ^ 0x3A5F) % DOMAIN.
-  Run 'XOR tokyo-garden-1420 siliconvalley-lab-1984' in the VT100 terminal
-  to inspect the reconstructed stardust.c source line.
+  Demodulating the Bell-103 frame in /forensics/signal_lab.html reveals the
+  16-bit hexadecimal Feistel permutation mask used to scramble the homestead
+  memory array.
 </PRE>
 <P>[ <A HREF="/forensics/signal_lab.html">Demodulate Bell-103 AFSK Audio</A> |
 <A HREF="/terminal/index.html">Open VT100 Terminal</A> |
@@ -143,26 +106,28 @@ C     BEFORE DEMODULATING 750 HZ CW MORSE STREAM FOR SECTOR 5.
     serverHeader: "Apache/0.8.14 (SunOS 4.1.3; UNAM-Coyoacan)",
     nodeCode: "MX-DF-04",
     freqKhz: "7345.0",
-    dyadToken: "PHASE-180",
+    dyadToken: "STAGE-IV-DMA-SYNTHESIS",
     body: `<PRE>
 ==============================================================================
  RED COYOACAN // INTERCAMBIO DE CINTAS &amp; LABORATORIO ACUSTICO (MEXICO DF)
  COORDINADORA: ELENA VILLALOBOS (elena@redcoyoacan.org) // 7345.0 kHz
 ==============================================================================
 
-[COMPARACION DE MATRICES // CASSETTE CrO2 GENERACION 3]:
-  1. Heartstrike - Live in Monterrey 1986 (B-Side Runout: 14.2 Hz Sub-Carrier)
-  2. Steel Thunder (1987 VHS Hi-Fi Stereo Track - Unfiltered 16 kHz Master)
-  3. Nova Hart - "Tape of Us" (Sublevel B2 Rough Mix / 180-deg Phase Stem)
+[STAGE IV TECHNICAL NOTE // HOMESTEAD MEMORY ARRAY &amp; DMA SYNTHESIS]:
+  Every GeoCities homestead in the 300,000-node Stardust Webring returns an
+  HTTP header in the Sublevel B2 memory range:
+    X-Stardust-Memory-Addr: 0x89B2xxxx
 
-[NOTA TECNICA PARA OPERADORES]:
-  El canal derecho (R) del tema "rabbit_10_phase_inverted_hart_stem.mp3"
-  tiene la onda portadora invertida 180 grados respecto al canal izquierdo (L).
-  Al activar [PHASE CANCELLATION (L+R MONO SUM)] en el Laboratorio de Senales,
-  el acorde enmascarador desaparece por completo y queda limpio el codigo
-  Morse de 750 Hz: ASHFORD-KAMOME-1420.
+  Once you have extracted:
+    1. The two DMA anchor homestead slugs from the VIS-1200Hz raster (rabbit_08)
+    2. The 16-bit Feistel hex mask from the Bell-103 AX.25 frame (rabbit_09)
+    3. The 750 Hz CW egress salt from the L+R phase-cancelled stem (rabbit_10)
+
+  Open the VT100 terminal (/terminal/index.html) and run:
+    XOR &lt;ANCHOR_SLUG_A&gt; &lt;ANCHOR_SLUG_B&gt; &lt;FEISTEL_MASK_HEX&gt;
+  to compute the 16-bit DMA offset and synthesize the Sector 5 restoration vector.
 </PRE>
-<P>[ <A HREF="/forensics/signal_lab.html">Abrir Laboratorio de Cancelacion de Fase</A> |
+<P>[ <A HREF="/forensics/signal_lab.html">Abrir Laboratorio de Senales</A> |
 <A HREF="/terminal/index.html">Open VT100 Terminal</A> |
 <A HREF="/federation/ashford-poly.org/index.html">Back to ashford-poly.org &gt;&gt;</A> ]</P>`,
   },
@@ -185,13 +150,11 @@ ${info.body}
 
 export function handleFederationRequest(url) {
   const host = url.hostname.toLowerCase().replace(/^www\./, "");
-  let domainKey = null;
-  const m = /^\/federation\/([^/]+)(?:\/.*)?$/.exec(url.pathname);
-  if (m && SISTER_DOMAINS[m[1].toLowerCase()]) {
-    domainKey = m[1].toLowerCase();
-  } else if (SISTER_DOMAINS[host]) {
-    if (url.pathname === "/" || url.pathname === "/index.html" || url.pathname === "") {
-      domainKey = host;
+  let domainKey = SISTER_DOMAINS[host] ? host : null;
+  if (!domainKey) {
+    const m = /^\/federation\/([^/]+)(?:\/.*)?$/.exec(url.pathname);
+    if (m && SISTER_DOMAINS[m[1].toLowerCase()]) {
+      domainKey = m[1].toLowerCase();
     }
   }
   if (!domainKey) return null;
@@ -202,7 +165,7 @@ export function handleFederationRequest(url) {
     "Server": info.serverHeader,
     "X-Powered-By": "Stardust-Federation",
     "X-Federation-Node": info.nodeCode,
-    "X-Stardust-Dyad-Token": info.dyadToken,
+    "X-Stardust-Investigation-Stage": info.dyadToken,
     "Cache-Control": "public, max-age=3600",
   });
   return new Response(html, { status: 200, headers });

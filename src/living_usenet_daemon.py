@@ -2,12 +2,12 @@
 """
 Project Stardust — Autonomous "Living Usenet" Chronological Thread Progression Engine
 Advances the 1995 Usenet newsgroup spools day-by-day in lockstep with real-world
-elapsed days since launch, appending RFC-1036 compliant articles and cross-posted
-federated mysteries across:
-  - alt.music.heartstrike
-  - alt.fan.nova-hart
+elapsed days since launch, providing high-level technical ramps (never pre-solved
+passwords) across:
   - comp.dsp
+  - alt.fan.nova-hart
   - alt.conspiracy
+  - alt.music.heartstrike
   - comp.sys.ibm-pc.hardware
 """
 
@@ -26,62 +26,66 @@ CHRONOLOGICAL_DISPATCHES = [
         "day_offset": 0,
         "group": "comp.dsp",
         "from": "m.chen@ee.ashford-poly.org (Dr. Mei-Ling Chen)",
-        "subject": "Re: 14.2001 Hz phase-locked sub-carrier in Orion Records master dubs",
+        "subject": "Re: -0.94 stereo phase correlation on Orion Reel SD-0009 calibration stem",
         "msgid": "<1995Oct12.041201.9912@ee.ashford-poly.org>",
         "path": "ashpoly!uknet!uunet!comp.dsp",
         "body": """In article <1995Oct10.221904.4102@mit.edu>, r_vance@mit.edu writes:
-> Has anyone run a 16384-point Blackman-Harris FFT on the runout groove of
-> the 1989 "Tape of Us" rough mix? There is a phase reversal between Left and Right.
+> Has anyone run a cross-correlation pass on the 330/495/990 Hz calibration
+> triad that interrupts the shortwave broadcast? It sounds like pure tone masking.
 
-We just ran the 3rd-generation dub from Red Coyoacan through our VAXstation 4000
-at Ashford Polytechnic (Substation K-7704).
+It isn't random tone masking—it's a differential phase lock engineered by
+Marcus Hale before Orion shut down Sublevel B2.
 
-The 330/495/990 Hz chord in the runout is recorded 180 degrees out of phase
-between Left and Right (correlation = -0.94). When you sum L+R to mono, the
-masking chord drops by 42 dB and reveals a 750 Hz CW Morse burst:
-  "SECTOR 5 KEY ASHFORD-KAMOME-1420"
+We captured the stem (`rabbit_10_phase_inverted_hart_stem.mp3`) on our
+VAXstation 4000 at Ashford Polytechnic. The 330/495/990 Hz triad on the
+Right channel is inverted 180.0 degrees relative to the Left channel
+(Pearson correlation r = -0.94).
 
-Whoever engineered Sublevel B2 (Marcus Hale's signature is all over the bias
-calibration) built a cross-domain lock between our lab and the Akasaka BBS.
-See our Fortran-77 PLL filter at /federation/ashford-poly.org/index.html.""",
+If you listen in stereo, the triad completely masks the 750 Hz band.
+But if you sum Left + Right to mono (either in hardware or in our Web Audio
+demodulator at /forensics/signal_lab.html), the triad cancels out by 42 dB
+and exposes a clean 750 Hz CW Morse bias inscription containing the B2
+egress salt.""",
     },
     {
         "day_offset": 1,
         "group": "alt.fan.nova-hart",
         "from": "kenji_t@kamome-net.org (Kenji Takahashi // PC-9801RA)",
-        "subject": "Akasaka Branch closure boxes (31 March 1993) & Robot36 SSTV burst!",
+        "subject": "VIS-1200Hz scanline bleed on 6925 kHz -> Two GeoCities DMA anchors?",
         "msgid": "<1995Oct13.110844.1420@kamome-net.org>",
         "path": "kamome!twics!iiJnet!uunet!alt.fan.nova-hart",
-        "body": """Konbanwa from Tokyo/Garden/1420,
+        "body": """Konbanwa from Tokyo,
 
-Last night at 02:14 UTC while recording the shortwave relay on 6925 kHz,
-a Robot36 VIS header (1900 Hz / 1200 Hz sync) broke through right after
-the Polish marine bulletin.
+When the automated broadcast monitor threw `[FAULT 0x08 // VIS-1200HZ RASTER]`
+last night at 02:14 UTC, we piped the audio (`rabbit_08_sstv_b2_schematic.mp3`)
+into our scanline rasterizer (1200 Hz horizontal sync, 1500 Hz black,
+2300 Hz white).
 
-When we rasterized the 1500-2300 Hz scanlines in the Signal Lab
-(/forensics/signal_lab.html), it drew a floorplan of Orion Sublevel B2-114
-pointing to Nevada trunk coordinates 37.242N, 115.810W.
+It didn't draw a picture of Nova—it drew a Sublevel B2 DMA Partition Map
+listing two specific GeoCities homestead coordinates as memory anchors,
+plus a pointer at the bottom: `XOR -> RELCOM`.
 
-Also: try running `FINGER nova@kamome-net.org` on the VT100 terminal
-(/terminal/index.html). Her `.plan` file from 31 March 1993 is still live!""",
+Check `FINGER nova@kamome-net.org` from the VT100 terminal (/terminal/index.html)
+for her final March 1993 `.plan` entry before the Akasaka branch was crated up.""",
     },
     {
         "day_offset": 2,
         "group": "alt.conspiracy",
         "from": "op08@relcom-node08.org (Dimitri V. // Leningrad AX.25 Relay)",
-        "subject": "UVB-76 / Bell-103 AFSK Packet Intercept: XOR Dyad Seed 0x3A5F",
+        "subject": "Unacknowledged Bell-103 AX.25 frame on 4625 kHz (Feistel round mask)",
         "msgid": "<1995Oct14.021419.0808@relcom-node08.org>",
         "path": "relcom08!demos!fuug!mcsun!uunet!alt.conspiracy",
-        "body": """At 02:14 UTC on 4625 kHz, immediately following the Russian buzzer burst,
-Relcom Node-08 captured a 110-baud Bell-103 AFSK frame (1270 Hz mark / 1070 Hz space).
+        "body": """At 02:14 UTC on 4625.0 kHz, our TNC at Relcom Node-08 logged a 110-baud
+Bell-103 AFSK burst (1270 Hz mark / 1070 Hz space, archived as `rabbit_09`).
 
-Raw hex dump of the AX.25 UI frame:
-  RELCOM-NODE08 FRAME // XOR-DYAD: 0x3A5F // SECTOR-5-KEY: ASHFORD-KAMOME-1420
+The UI frame carries a 1989 Sublevel B2 emergency egress header addressed
+to `ASHPOLY-07`, specifying the 16-bit Feistel permutation mask used to
+scramble the GeoCities homestead memory space (`0x89B2xxxx`).
 
-Even stranger: every GeoCities homestead in the Stardust Webring now carries
-an `X-Stardust-Memory-Addr` header in the `0x89B2xxxx` range. If you XOR two
-paired homesteads with seed `0x3A5F` (type `XOR tokyo-garden-1420 siliconvalley-lab-1984`
-in the forensic terminal), it reconstructs lines of `stardust.c`!""",
+Once you demodulate the Bell-103 frame to get the 16-bit hex mask, combine
+it with the two DMA anchor slugs from the VIS-1200Hz raster using the
+terminal's `XOR <ANCHOR_A> <ANCHOR_B> <MASK>` utility, and append the
+phase-cancelled CW salt from Reel SD-0009.""",
     },
     {
         "day_offset": 2,
@@ -94,12 +98,12 @@ in the forensic terminal), it reconstructs lines of `stardust.c`!""",
 
 We compared our 2nd-gen CrO2 cassette of Heartstrike's 1986 set against the
 *Steel Thunder* VHS hi-fi stereo track. The 6400 Hz FM broadcast lowpass filter
-on the Orion promo pressing hides a 14.2 Hz sub-carrier pulse right before
+on the Orion promo pressing hides a 14.2001 Hz sub-carrier pulse right before
 the guitar solo.
 
-We uploaded our tape-exchange matrix notes to the Red Coyoacan mirror
-(/federation/redcoyoacan.org/index.html). Don't trust the re-equalized CD reissues—
-keep your analog decks calibrated!""",
+Even wilder: if you inspect the HTTP response headers on any GeoCities page
+in the Stardust Webring, the server returns `X-Stardust-Memory-Addr: 0x89B2xxxx`.
+The entire webring is a memory-mapped array!""",
     },
     {
         "day_offset": 2,
@@ -112,9 +116,8 @@ keep your analog decks calibrated!""",
 waterfall rendering hasn't written tight protected-mode assembly.
 
 With a 486DX2-66, 16MB RAM, and a Sound Blaster 16 (jumper set to IRQ 5, DMA 1),
-we are decoding the 14.2001 Hz Stardust telemetry stream in real time without
-dropping a single DMA buffer. Check your ISA bus clock divider if your
-oscilloscope stutters!""",
+we are decoding the 14.2001 Hz Stardust telemetry stream and watching the
+Sublevel B2 diagnostic fault codes (`FAULT 0x08`, `0x09`, `0x0A`) in real time.""",
     },
 ]
 
@@ -155,7 +158,6 @@ def build_living_usenet(site_dir: Path, now_ts: float | None = None) -> dict:
         written_files.append(str(spool_path))
         by_group.setdefault(post["group"], []).append((spool_name, post, pdate))
 
-    # Write a Living Usenet Live Feed HTML index at site/usenet/live_1995_feed.html
     rows_html = []
     for grp, items in sorted(by_group.items()):
         rows_html.append(f"<H2>Newsgroup: <TT>{html.escape(grp)}</TT></H2><UL>")

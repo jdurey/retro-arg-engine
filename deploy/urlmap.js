@@ -99,8 +99,11 @@ function token(r) {
 }
 
 export function hostFor(kind, key, apex = PRIMARY_APEX) {
-  const r = prng(`host|${kind}|${key}`);
-  let label = `${key}-${kind}`;
+  // CRITICAL: DNS host labels must NEVER contain periods, which create multi-level subdomains
+  // and trigger Cloudflare SSL wildcard mismatch (ERR_SSL_VERSION_OR_CIPHER_MISMATCH).
+  const safeKey = key.toLowerCase().replace(/\./g, "-");
+  const r = prng(`host|${kind}|${safeKey}`);
+  let label = `${safeKey}-${kind}`;
   // Pad with junk tokens until the label is as long as DNS allows.
   for (let i = 0; i < 12; i++) {
     const t = token(r);
@@ -129,6 +132,7 @@ export function publicUrl(sitePath) {
   if (p.startsWith("forensics/")) return `https://${apex}/${p}`;
   if (p === "usenet/live_1995_feed.html") return `https://${apex}/${p}`;
   if (p.startsWith(".well-known/")) return `https://${apex}/${p}`;
+  if (p.startsWith("federation/")) return `https://${apex}/${p}`;
   if (p === "reconstruction" || p === "reconstruction/index.html") return `https://${apex}/reconstruction`;
   const segs = p.split("/");
   const kind = segs[0];
@@ -141,7 +145,8 @@ export function publicUrl(sitePath) {
     return `https://${hostFor(kind, "index", apex)}${junkPath(kind, "index")}`;
   }
   if (segs.length >= 3) {
-    const key = segs[1];
+    let key = segs[1];
+    if (kind === "usenet" && key.includes(".")) key = key.replace(/\./g, "-");
     const file = segs.slice(2).join("/");
     return `https://${hostFor(kind, key, apex)}${junkPath(kind, key)}${file === "index.html" ? "" : file}`;
   }
