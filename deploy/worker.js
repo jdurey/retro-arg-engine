@@ -81,7 +81,7 @@ const SAMPLE_BROADCAST_DECK = [
   { filename: "rabbit_10_phase_inverted_hart_stem.mp3", kind: "classified_lab_tape", display_title: "180-DEG PHASE STEM // SECTOR 5 KEY" },
 ];
 
-function computeEdgeTelemetry(nowMs, swarmCap) {
+function computeEdgeTelemetry(nowMs, swarmCap, streamLive = false) {
   const nowSec = nowMs / 1000;
   const uptimeSec = Math.max(36900, nowSec - BROADCAST_EPOCH_SEC);
   const cycle = Math.floor(uptimeSec / CYCLE_DURATION_SEC) + 1;
@@ -92,7 +92,6 @@ function computeEdgeTelemetry(nowMs, swarmCap) {
   const recipe = CADENCE_RECIPES[playheadIndex % CADENCE_RECIPES.length];
   const relay = REGIONAL_RELAYS[Math.floor(nowSec / 300) % REGIONAL_RELAYS.length];
   const phaseDeg = Number((((nowSec * 14.2001) % 1) * 360).toFixed(2));
-  const sstvOpen = cur.kind !== "vocal_song" || Math.floor(nowSec / 60) % 5 === 0;
   const slotHex = ((Math.floor(nowSec / 600) * 2654435761) >>> 0).toString(16).toUpperCase().padStart(8, "0");
 
   return {
@@ -100,14 +99,19 @@ function computeEdgeTelemetry(nowMs, swarmCap) {
     timestamp_utc: new Date(nowMs).toISOString(),
     active_swarm_nodes: liveCount(nowMs, swarmCap),
     stream_health: {
-      status: "BROADCASTING_24_7",
-      fps: 30.0,
-      speed: "1.0x",
+      is_live: Boolean(streamLive),
+      status: streamLive ? "BROADCASTING_24_7" : "OFFLINE_EDGE_AUTONOMOUS_FALLBACK",
+      in_universe_status: streamLive
+        ? "PRIMARY YOUTUBE RTMP CARRIER LOCKED"
+        : "PRIMARY YOUTUBE RTMP TRANSMITTER OFFLINE — RUNNING ON CLOUDFLARE EDGE & ARCHIVE BUFFER",
+      fps: streamLive ? 30.0 : 0.0,
+      speed: streamLive ? "1.0x" : "0.0x",
       dropped_frames: 0,
-      bitrate: "2420.0kbits/s",
-      buffer_seconds: 15.0,
+      bitrate: streamLive ? "2420.0kbits/s" : "0.0kbits/s",
+      buffer_seconds: streamLive ? 15.0 : 0.0,
     },
     playhead: {
+      mode: streamLive ? "LIVE_RTMP" : "EDGE_AUTONOMOUS_ROTATION",
       cycle,
       playlist_index: playheadIndex + 1,
       playlist_total: 1600,
@@ -119,7 +123,7 @@ function computeEdgeTelemetry(nowMs, swarmCap) {
       frequency_hz: 14.2001,
       phase_degrees: phaseDeg,
       phase_locked: true,
-      sstv_forensic_window_open: sstvOpen,
+      sstv_forensic_window_open: true,
       ephemeral_beacon_key: `B2-${slotHex}`,
       sector_5_unlock_code: "ASHFORD-KAMOME-1420",
     },
@@ -241,10 +245,11 @@ async function swarmResponse(request, env, ctx, sitePath) {
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
+    const streamLive = env.STREAM_LIVE === "1" || env.STREAM_LIVE === "true";
 
-    // 1. Live Broadcast Telemetry Edge API
+    // 1. Broadcast & Autonomous Edge Telemetry API
     if (url.pathname === "/api/telemetry") {
-      const snap = computeEdgeTelemetry(Date.now(), env.SWARM_CAP);
+      const snap = computeEdgeTelemetry(Date.now(), env.SWARM_CAP, streamLive);
       const h = retroHeaders("application/json; charset=utf-8");
       h.set("Cache-Control", "no-store");
       h.set("Access-Control-Allow-Origin", "*");
@@ -253,10 +258,11 @@ export default {
 
     // 2. Autonomous Agent Web Cryptographic Beacon Manifest
     if (url.pathname === "/.well-known/stardust-beacon.json") {
-      const snap = computeEdgeTelemetry(Date.now(), env.SWARM_CAP);
+      const snap = computeEdgeTelemetry(Date.now(), env.SWARM_CAP, streamLive);
       const manifest = {
         protocol: "stardust-agent-mesh/v5",
         carrier_hz: 14.2001,
+        youtube_rtmp_status: snap.stream_health.status,
         xor_dyad_seed: "0x3A5F",
         memory_base: "0x89B20000",
         forensic_signal_lab: `https://${APEX}/forensics/signal_lab.html`,

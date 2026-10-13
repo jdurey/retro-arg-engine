@@ -2,8 +2,8 @@
 """
 Project Stardust — Bi-Directional Livestream Telemetry & CRT OSD Synchronizer
 Reads active FFmpeg stream.log and playlist.txt (with deterministic epoch fallback),
-computes exact playhead position, active transition cadence recipe, 14.2001 Hz
-carrier phase lock, and active regional transmitter, and writes:
+detects whether the YouTube RTMP livestream is actively broadcasting or OFFLINE
+(based on stream.log freshness < 30s or explicit --offline flag), and writes:
   1. site/assets/live_telemetry.json (for Web & Cloudflare Edge sync)
   2. youtube/livestream/live_telemetry.ass (dynamic CRT VT100 OSD overlay for FFmpeg)
 """
@@ -13,7 +13,6 @@ import argparse
 import datetime
 import hashlib
 import json
-import math
 import os
 import re
 import time
@@ -21,8 +20,6 @@ from pathlib import Path
 
 BROADCAST_EPOCH = 1791763200  # 2026-10-12T00:00:00Z
 CYCLE_DURATION_SEC = 44 * 3600  # 44-hour non-repeating fair-rotation schedule
-TOTAL_CATALOG_SONGS = 80
-TOTAL_INTERSTITIALS = 231
 CADENCE_RECIPES = [
     "numbers",
     "direct_morse",
@@ -84,10 +81,12 @@ def classify_track(filepath: str) -> dict:
     return {"filename": p.name, "stem": stem, "category": parent, "kind": kind, "display_title": clean}
 
 
-def parse_stream_log(log_path: Path) -> dict:
+def parse_stream_log(log_path: Path, now_ts: float) -> dict:
     if not log_path.exists():
-        return {}
+        return {"is_live": False}
     try:
+        mtime = log_path.stat().st_mtime
+        is_live = (now_ts - mtime) <= 30.0
         with open(log_path, "rb") as f:
             f.seek(0, os.SEEK_END)
             size = f.tell()
@@ -103,14 +102,16 @@ def parse_stream_log(log_path: Path) -> dict:
             h, m, s = times[-1]
             elapsed_sec = int(h) * 3600 + int(m) * 60 + float(s)
         return {
+            "is_live": is_live,
+            "last_log_mtime_age_sec": round(now_ts - mtime, 1),
             "elapsed_sec": round(elapsed_sec, 2),
-            "fps": float(fps_list[-1]) if fps_list else 30.0,
-            "speed": f"{speeds[-1]}x" if speeds else "1.0x",
+            "fps": float(fps_list[-1]) if (is_live and fps_list) else 0.0,
+            "speed": f"{speeds[-1]}x" if (is_live and speeds) else "0.0x",
             "drop": int(drops[-1]) if drops else 0,
-            "bitrate": bitrates[-1] if bitrates else "2420.0kbits/s",
+            "bitrate": bitrates[-1] if (is_live and bitrates) else "0.0kbits/s",
         }
     except Exception:
-        return {}
+        return {"is_live": False}
 
 
 def load_playlist(playlist_path: Path) -> list[str]:
@@ -135,34 +136,32 @@ def load_playlist(playlist_path: Path) -> list[str]:
     ]
 
 
-def build_telemetry_snapshot(repo_root: Path, now_ts: float | None = None) -> dict:
+def build_telemetry_snapshot(repo_root: Path, now_ts: float | None = None, force_offline: bool = False) -> dict:
     now = now_ts if now_ts is not None else time.time()
     playlist_path = repo_root / "youtube" / "livestream" / "playlist.txt"
     log_path = repo_root / "youtube" / "livestream" / "stream.log"
 
     tracks = load_playlist(playlist_path)
-    stream_metrics = parse_stream_log(log_path)
+    stream_metrics = parse_stream_log(log_path, now)
+    is_live = False if force_offline else bool(stream_metrics.get("is_live", False))
 
     total_uptime_sec = max(36900.0, now - BROADCAST_EPOCH)
-    elapsed_sec = stream_metrics.get("elapsed_sec") or (total_uptime_sec % CYCLE_DURATION_SEC)
+    elapsed_sec = stream_metrics.get("elapsed_sec") or 0.0
 
+    # When offline, hold playhead at the last rotated head of playlist.txt (or Track #328 checkpoint)
     cycle_number = int(total_uptime_sec // CYCLE_DURATION_SEC) + 1
-    avg_item_sec = 99.0  # weighted mean across 80 vocal tracks + interstitials
-    playhead_index = int(elapsed_sec // avg_item_sec) % len(tracks)
+    avg_item_sec = 99.0
+    if is_live and elapsed_sec > 0:
+        playhead_index = int(elapsed_sec // avg_item_sec) % len(tracks)
+    else:
+        playhead_index = 0  # Head of rotated playlist.txt awaits next FFmpeg launch
 
     current_track = classify_track(tracks[playhead_index])
     next_track = classify_track(tracks[(playhead_index + 1) % len(tracks)])
     recipe = CADENCE_RECIPES[playhead_index % len(CADENCE_RECIPES)]
     relay = REGIONAL_RELAYS[int(now // 300) % len(REGIONAL_RELAYS)]
 
-    # 14.2001 Hz sub-carrier phase & steganographic window state
     carrier_phase_deg = round(((now * 14.2001) % 1.0) * 360.0, 2)
-    sstv_window_open = (
-        current_track["kind"] in ("arg_intercept", "numbers_station", "classified_lab_tape", "morse_beacon")
-        or (int(now // 60) % 5 == 0)
-    )
-
-    # Deterministic XOR beacon token synchronized with Cloudflare Worker edge
     window_slot = int(now // 600)
     beacon_hash = hashlib.sha256(f"stardust-14.2hz|{window_slot}|{relay['code']}".encode()).hexdigest()[:12].upper()
 
@@ -173,14 +172,21 @@ def build_telemetry_snapshot(repo_root: Path, now_ts: float | None = None) -> di
             788918400 + (now - BROADCAST_EPOCH), tz=datetime.timezone.utc
         ).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "stream_health": {
-            "status": "BROADCASTING_24_7",
-            "fps": stream_metrics.get("fps", 30.0),
-            "speed": stream_metrics.get("speed", "1.0x"),
+            "is_live": is_live,
+            "status": "BROADCASTING_24_7" if is_live else "OFFLINE_EDGE_AUTONOMOUS_FALLBACK",
+            "in_universe_status": (
+                "PRIMARY YOUTUBE RTMP CARRIER LOCKED"
+                if is_live
+                else "PRIMARY TRANSMITTER OFFLINE — RUNNING ON CLOUDFLARE EDGE & ARCHIVE BUFFER"
+            ),
+            "fps": stream_metrics.get("fps", 0.0),
+            "speed": stream_metrics.get("speed", "0.0x"),
             "dropped_frames": stream_metrics.get("drop", 0),
-            "bitrate": stream_metrics.get("bitrate", "2420.0kbits/s"),
-            "buffer_seconds": 15.0,
+            "bitrate": stream_metrics.get("bitrate", "0.0kbits/s"),
+            "buffer_seconds": 15.0 if is_live else 0.0,
         },
         "playhead": {
+            "mode": "LIVE_RTMP" if is_live else "STANDBY_AT_ROTATED_HEAD",
             "cycle": cycle_number,
             "playlist_index": playhead_index + 1,
             "playlist_total": max(1600, len(tracks)),
@@ -192,7 +198,7 @@ def build_telemetry_snapshot(repo_root: Path, now_ts: float | None = None) -> di
             "frequency_hz": 14.2001,
             "phase_degrees": carrier_phase_deg,
             "phase_locked": True,
-            "sstv_forensic_window_open": sstv_window_open,
+            "sstv_forensic_window_open": True,  # Always open in Signal Lab when primary RTMP is offline
             "ephemeral_beacon_key": f"B2-{beacon_hash}",
             "sector_5_unlock_code": "ASHFORD-KAMOME-1420",
         },
@@ -201,7 +207,7 @@ def build_telemetry_snapshot(repo_root: Path, now_ts: float | None = None) -> di
 
 
 def generate_ass_overlay(telemetry: dict) -> str:
-    """Generates an FFmpeg-compatible .ass CRT VT100 telemetry overlay."""
+    """Generates an FFmpeg-compatible .ass CRT VT100 telemetry overlay for when stream.sh runs."""
     t = telemetry
     cur = t["playhead"]["current_track"]
     nxt = t["playhead"]["next_track"]
@@ -228,20 +234,20 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
     hud_line_1 = (
         f"ORION ARCHIVE RELAY // CYCLE #{t['playhead']['cycle']} "
         f"[TRACK #{t['playhead']['playlist_index']}/{t['playhead']['playlist_total']}] "
-        f"// CADENCE: {t['playhead']['active_recipe'].upper()}"
+        f"// STATUS: {health['status']}"
     )
-    hud_line_2 = f"NOW TRANSMITTING: {cur['display_title']} ({cur['kind'].upper()})"
+    hud_line_2 = f"QUEUED AT PLAYHEAD: {cur['display_title']} ({cur['kind'].upper()})"
     hud_line_3 = (
         f"CARRIER: {c14['frequency_hz']} HZ [PHASE {c14['phase_degrees']} DEG] "
         f"// NODE #{relay['node']:02d} {relay['code']} ({relay['freq_khz']} kHz)"
     )
     hud_line_4 = (
-        f"SSTV/AFSK WINDOW: {'[OPEN - RECORD STREAM NOW]' if c14['sstv_forensic_window_open'] else '[STANDBY]'} "
+        f"SSTV/AFSK LAB: /forensics/signal_lab.html "
         f"// BEACON: {c14['ephemeral_beacon_key']} // NEXT: {nxt['display_title'][:38]}"
     )
     events = [
         f"Dialogue: 0,0:00:00.00,9:59:59.00,CRT_HUD,,0,0,0,,{{\\pos(731,690)}}{hud_line_1}\\N{hud_line_2}\\N{hud_line_3}",
-        f"Dialogue: 0,0:00:00.00,9:59:59.00,CRT_ALERT,,0,0,0,,{{\\pos(731,785)}}{hud_line_4} [FPS:{health['fps']} DROP:{health['dropped_frames']}]",
+        f"Dialogue: 0,0:00:00.00,9:59:59.00,CRT_ALERT,,0,0,0,,{{\\pos(731,785)}}{hud_line_4}",
     ]
     return header + "\n".join(events) + "\n"
 
@@ -251,6 +257,7 @@ def main() -> None:
     parser.add_argument("--repo-root", type=Path, default=Path(__file__).resolve().parents[2])
     parser.add_argument("--out-json", type=Path, default=None)
     parser.add_argument("--out-ass", type=Path, default=None)
+    parser.add_argument("--offline", action="store_true", help="Force offline status in telemetry snapshot")
     parser.add_argument("--daemon", action="store_true", help="Continuously update every 5 seconds")
     args = parser.parse_args()
 
@@ -260,12 +267,12 @@ def main() -> None:
     out_ass.parent.mkdir(parents=True, exist_ok=True)
 
     while True:
-        snap = build_telemetry_snapshot(args.repo_root)
+        snap = build_telemetry_snapshot(args.repo_root, force_offline=args.offline)
         out_json.write_text(json.dumps(snap, indent=2), encoding="utf-8")
         out_ass.write_text(generate_ass_overlay(snap), encoding="utf-8")
         if not args.daemon:
-            print(f"[SYNC_TELEMETRY] Wrote {out_json} and {out_ass}")
-            print(f"  -> Track #{snap['playhead']['playlist_index']}: {snap['playhead']['current_track']['display_title']}")
+            print(f"[SYNC_TELEMETRY] Status: {snap['stream_health']['status']}")
+            print(f"  -> Playhead Mode: {snap['playhead']['mode']} ({snap['playhead']['current_track']['display_title']})")
             print(f"  -> Beacon Key: {snap['carrier_14_2hz']['ephemeral_beacon_key']} | Relay: {snap['active_relay']['name']}")
             break
         time.sleep(5)
