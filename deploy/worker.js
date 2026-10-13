@@ -2,6 +2,7 @@ import { APEX, isStory, publicUrl, resolve, resolveApex, apexFor } from "./urlma
 import STORY_PATHS from "./story_paths.js";
 import { classify, liveCount, renderMember, renderDir, renderDirIndex, renderLang, sitemapSitePaths } from "./swarm/index.js";
 import { handleFederationRequest, SISTER_DOMAINS } from "./federation.js";
+import { INTEREST_PAGES, INTEREST_LABEL_URLS } from "./interests.js";
 
 // Legacy static GeoCities pages always win over generated swarm addresses.
 const STATIC_GEO = new Set(STORY_PATHS.filter((p) => /^geocities\/[^/]+\.html$/.test(p)).map((p) => p.slice(10, -5)));
@@ -230,6 +231,11 @@ const INDEX_HEADER = "index, follow, max-image-preview:large, max-snippet:-1, ma
 async function swarmResponse(request, env, ctx, sitePath) {
   const m = /^geocities\/([^/]+)\.html$/.exec(sitePath);
   if (!m) return null;
+  if (INTEREST_PAGES[m[1]]) {
+    const h = retroHeaders("text/html; charset=utf-8");
+    h.set("X-Stardust-Interest", m[1]);
+    return new Response(INTEREST_PAGES[m[1]], { status: 200, headers: h });
+  }
   const n = liveCount(Date.now(), env.SWARM_CAP);
   const c = classify(m[1], n, STATIC_GEO);
   if (!c) return null;
@@ -353,7 +359,15 @@ export default {
         headers.set("X-Robots-Tag", "noindex, follow");
       }
     }
-    const response = new Response(upstream.body, { status: 200, headers });
+    let bodyStream = upstream.body;
+    if (sitePath === "geocities/index.html") {
+      let html = await upstream.text();
+      for (const [label, targetUrl] of Object.entries(INTEREST_LABEL_URLS)) {
+        html = html.replace(`<A HREF="#neighborhoods">${label}</A>`, `<A HREF="${targetUrl}">${label}</A>`);
+      }
+      bodyStream = html;
+    }
+    const response = new Response(bodyStream, { status: 200, headers });
     if (!type.startsWith("text/html")) return response;
 
     return new HTMLRewriter()

@@ -62,3 +62,13 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+# STARDUST_V5_INTEREST_AND_FORENSICS_HOOK
+import subprocess as _sp, sys as _sys
+from pathlib import Path as _Path
+_src_dir = _Path(__file__).resolve().parent
+for _script in ("build_forensics_dossiers.py", "build_interest_pages.py"):
+    _p = _src_dir / _script
+    if _p.exists():
+        _sp.run([_sys.executable, str(_p), "--repo-root", str(_src_dir.parent)], check=False)
