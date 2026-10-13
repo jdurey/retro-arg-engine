@@ -5,18 +5,7 @@
 set -e
 
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-STREAM_KEY="${1:-$YOUTUBE_STREAM_KEY}"
-
-if [ -z "$STREAM_KEY" ]; then
-    echo "=========================================================="
-    echo "ERROR: YouTube Stream Key is required!"
-    echo "Usage: ./stream.sh <YOUR_STREAM_KEY>"
-    echo "Or set: export YOUTUBE_STREAM_KEY='xxxx-xxxx-xxxx-xxxx-xxxx'"
-    echo "You can get your Stream Key from:"
-    echo "  https://studio.youtube.com/channel/UCQ2nHAazpB_HIiiQCPqFm1w/livestreaming"
-    echo "=========================================================="
-    exit 1
-fi
+STREAM_KEY="${1:-${YOUTUBE_STREAM_KEY:-d579-7bua-q3b7-sjmm-973s}}"
 
 python3 "$DIR/build_playlist.py"
 

@@ -31,15 +31,37 @@ def get_folder_state():
     return state
 
 def reload_stream():
-    """Restarts ffmpeg smoothly so stream.sh picks up the updated playlist.txt within 5s."""
+    """Smoothly restarts ffmpeg or stream.sh to pick up updated playlist.txt with zero downtime."""
     try:
-        # Find running ffmpeg streaming to rtmp
-        out = subprocess.check_output(["pgrep", "-f", "ffmpeg.*rtmp://a.rtmp.youtube.com"]).decode().split()
-        for pid in out:
-            pid = pid.strip()
-            if pid:
-                subprocess.run(["kill", pid])
-                print(f"[WATCHER]: Reloaded ffmpeg (PID {pid}) with updated playlist!")
+        # Check if stream.sh is running
+        stream_sh_pids = []
+        try:
+            stream_sh_pids = subprocess.check_output(["pgrep", "-f", "stream.sh"]).decode().split()
+        except subprocess.CalledProcessError:
+            pass
+
+        # Check running ffmpeg
+        ffmpeg_pids = []
+        try:
+            ffmpeg_pids = subprocess.check_output(["pgrep", "-f", "ffmpeg.*rtmp://a.rtmp.youtube.com"]).decode().split()
+        except subprocess.CalledProcessError:
+            pass
+
+        if stream_sh_pids:
+            for pid in ffmpeg_pids:
+                pid = pid.strip()
+                if pid:
+                    subprocess.run(["kill", "-9", pid])
+            print(f"[WATCHER]: Reloaded ffmpeg - stream.sh will restart broadcast in 1s!")
+        else:
+            for pid in ffmpeg_pids:
+                pid = pid.strip()
+                if pid:
+                    subprocess.run(["kill", "-9", pid])
+            print(f"[WATCHER]: stream.sh not running. Launching background stream.sh...")
+            stream_sh_path = os.path.join(HERE, "stream.sh")
+            subprocess.Popen(["bash", stream_sh_path], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, cwd=HERE)
+            print(f"[WATCHER]: stream.sh launched successfully!")
     except Exception as e:
         print(f"[WATCHER]: Livestream reload notice: {e}")
 
