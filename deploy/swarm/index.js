@@ -116,7 +116,7 @@ export function renderDirIndex(n, staticSlugs) {
     rows.push(`<TR><TD VALIGN=TOP><B>${esc(hood)}</B></TD><TD>${links}</TD></TR>`);
   }
   const langLinks = Object.entries(BANK.langs).map(([c, v]) =>
-    `<A HREF="${esc(publicUrl(langPath(c)))}">${esc(v.info.native)} (${esc(v.info.name)})</A>`).join(" &middot; ");
+    `<A HREF="${esc(publicUrl(langPath(c)))}">${esc(v.info?.name || c)}</A>`).join(" &middot; ");
   const body = `<H1>GeoCities Homestead Neighborhoods</H1>\n<P><FONT SIZE=2><B>${n.toLocaleString("en-US")}</B> active member pages across <B>${SUBURBS.length}</B> suburbs.</FONT></P>\n` +
     `<TABLE BORDER=1 CELLPADDING=5 CELLSPACING=0 WIDTH="720"><TR BGCOLOR="#CCCCCC"><TH ALIGN=LEFT>Neighborhood</TH><TH ALIGN=LEFT>Suburbs (member count)</TH></TR>\n${rows.join("\n")}</TABLE>\n` +
     `<H2>Browse by Language</H2><P WIDTH="720">${langLinks}</P>`;
@@ -159,10 +159,11 @@ export function renderLang(code, n, staticSlugs) {
   }
   const items = hits.map((h) =>
     `<LI><A HREF="${esc(publicUrl(geoPath(h.slug)))}"><B>${esc(h.title)}</B></A> &mdash; ${esc(h.name)} (${esc(h.city)}) &middot; <TT>${esc(h.pathDisplay)}</TT></LI>`);
-  const body = `<H1>${esc(L.info.native)} (${esc(L.info.name)}) &mdash; Stardust Webring Stations</H1>\n` +
-    `<P>${esc(L.info.blurb || "")}</P>\n<UL>\n${items.join("\n")}</UL>`;
-  return shell(`${L.info.native} (${L.info.name}) - The Stardust Webring`,
-    `GeoCities fan pages in ${L.info.name} dedicated to Nova Hart and the 14.2 Hz Stardust signal.`,
+  const langName = L.info?.name || code;
+  const body = `<H1>${esc(langName)} &mdash; Stardust Webring Stations</H1>\n` +
+    `<P>${esc(L.info?.region || "")}</P>\n<UL>\n${items.join("\n")}</UL>`;
+  return shell(`${langName} - The Stardust Webring`,
+    `GeoCities fan pages in ${langName} dedicated to Nova Hart and the 14.2 Hz Stardust signal.`,
     body, { lang: code, indexable: true, selfUrl: publicUrl(langPath(code)) });
 }
 
