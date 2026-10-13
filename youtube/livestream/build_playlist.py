@@ -63,9 +63,9 @@ print(f"  - Tight Morse Beacons (2-5s): {len(morse_beacons)}")
 
 # 5. Build Radio Station Rotation (Tight, Zero Dead Air Cadence):
 #   [Vocal Master Song 3-5m]
-#   -> [Crisp Spoken Bulletin 5-8s]
-#   -> [Roland/Yamaha MIDI Master (Zero tail)]
-#   -> [Tight Morse Beacon 2-4s]
+#   -> [3.5s Roland/Yamaha FM Synth MIDI Stinger (Plays BEFORE Narration)]
+#   -> [Crisp Spoken Radio Bulletin / Narration 5-8s]
+#   -> [Tight Morse Beacon 2-4s (alternating)]
 #   -> [Next Vocal Master Song]
 full_playlist = []
 spoken_idx = 0
@@ -75,17 +75,17 @@ midi_idx = 0
 for song in (real_songs * 4):
     full_playlist.append(song)
 
-    # Tight spoken bulletin between vocal songs
-    if spoken_pool:
-        full_playlist.append(spoken_pool[spoken_idx % len(spoken_pool)])
-        spoken_idx += 1
-
-    # Tightly trimmed MIDI master composition
+    # 1. 3.5s Vintage FM Synth MIDI Stinger (plays BEFORE narration)
     if midi_tracks:
         full_playlist.append(midi_tracks[midi_idx % len(midi_tracks)])
         midi_idx += 1
 
-    # Tight 2-4 second Morse beacon immediately after MIDI (no dead air)
+    # 2. Tight spoken radio bulletin / narration
+    if spoken_pool:
+        full_playlist.append(spoken_pool[spoken_idx % len(spoken_pool)])
+        spoken_idx += 1
+
+    # 3. Tight 2-4 second Morse beacon (no dead air)
     if morse_beacons and (morse_idx % 2 == 0):
         full_playlist.append(morse_beacons[morse_idx % len(morse_beacons)])
         morse_idx += 1
