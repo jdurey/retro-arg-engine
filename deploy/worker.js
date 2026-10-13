@@ -53,7 +53,7 @@ Sitemap: https://${apex}/sitemap.xml
 // IndexNow keys are public by design (they prove control of the host, nothing more).
 const INDEXNOW_KEY = "37feeed875722863fda484c68e6695e5";
 // Bump when files in assets/ are replaced so edge + browser caches refetch.
-const ASSET_VERSION = "19";
+const ASSET_VERSION = "20";
 
 function urlset(sitePaths) {
   const urls = sitePaths.map((sp) => publicUrl(sp)).filter((u) => u && u.startsWith("https://"));
@@ -123,7 +123,9 @@ function retroHeaders(contentType) {
 }
 
 function notFound() {
-  return new Response(NOT_FOUND, { status: 404, headers: retroHeaders("text/html; charset=utf-8") });
+  const h = retroHeaders("text/html; charset=utf-8");
+  h.set("Cache-Control", "no-cache, no-store, must-revalidate");
+  return new Response(NOT_FOUND, { status: 404, headers: h });
 }
 
 const urlCache = new Map();
@@ -314,7 +316,10 @@ export default {
     const upstream = await fetch(`${base}/${encoded}${bust}`, {
       method: request.method === "HEAD" ? "HEAD" : "GET",
       headers: forwardHeaders,
-      cf: { cacheTtl: 3600, cacheEverything: true },
+      cf: {
+        cacheTtlByStatus: { "200-299": 3600, "404": 1, "500-599": 0 },
+        cacheEverything: true,
+      },
     });
     if (!upstream.ok && upstream.status !== 206) return notFound();
 
