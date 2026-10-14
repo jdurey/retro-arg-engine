@@ -84,7 +84,7 @@ def run_rotate_playlist(repo_root: Path) -> None:
     if rotate_script.exists():
         try:
             res = subprocess.run(
-                [sys.executable, str(rotate_script)],
+                ["/usr/bin/python3", str(rotate_script)],
                 cwd=str(repo_root),
                 capture_output=True,
                 text=True,
@@ -101,7 +101,7 @@ def run_sync_telemetry(repo_root: Path) -> None:
     if sync_script.exists():
         try:
             subprocess.run(
-                [sys.executable, str(sync_script), "--repo-root", str(repo_root)],
+                ["/usr/bin/python3", str(sync_script), "--repo-root", str(repo_root)],
                 cwd=str(repo_root),
                 capture_output=True,
                 text=True,

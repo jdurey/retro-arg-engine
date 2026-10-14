@@ -45,20 +45,36 @@ def get_last_elapsed_seconds():
         print(f"Warning: could not parse elapsed time from log: {e}")
     return 0.0, ""
 
+import json
+
+DURATIONS_FILE = os.path.join(DIR, "track_durations.json")
+try:
+    with open(DURATIONS_FILE, "r") as _df:
+        _DURATION_CACHE = json.load(_df)
+except Exception:
+    _DURATION_CACHE = {}
+
 def get_duration(filepath):
+    bname = os.path.basename(filepath)
+    if bname in _DURATION_CACHE:
+        try:
+            if os.path.getsize(filepath) > 4096:
+                return float(_DURATION_CACHE[bname])
+        except Exception:
+            return float(_DURATION_CACHE[bname])
     try:
-        # All broadcast MP3s are 192 kbps CBR (24,000 bytes/sec)
         sz = os.path.getsize(filepath)
-        if sz > 4096:
-            return sz / 24000.0
+        if sz <= 4096:
+            return 0.05
+        with open(filepath, "rb") as f:
+            hdr = f.read(10)
+        if len(hdr) == 10 and hdr[:3] == b"ID3":
+            id3_sz = ((hdr[6] & 0x7f) << 21) | ((hdr[7] & 0x7f) << 14) | ((hdr[8] & 0x7f) << 7) | (hdr[9] & 0x7f)
+            sz -= (id3_sz + 10)
+        return max(0.05, (sz - 1440) / 24000.0)
     except Exception:
-        pass
-    try:
-        cmd = ["ffprobe", "-i", filepath, "-show_entries", "format=duration", "-v", "quiet", "-of", "csv=p=0"]
-        out = subprocess.check_output(cmd, text=True).strip()
-        return float(out)
-    except Exception:
-        return 200.0 # fallback
+        return 200.0
+
 
 def rotate():
     elapsed, session_id = get_last_elapsed_seconds()

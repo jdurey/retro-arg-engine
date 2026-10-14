@@ -1,12 +1,23 @@
 #!/usr/bin/env python3
 """
-Project Stardust — Bi-Directional Livestream Telemetry & Diegetic CRT HUD Renderer
+Project Stardust — Intentional Track-Synchronized ARG Visual & Telemetry Engine
 Reads active FFmpeg stream.log and playlist.txt, computes exact playhead state,
 and writes:
-  1. site/assets/live_telemetry.json (Web & Cloudflare Edge synchronization)
-  2. youtube/livestream/live_hud.png (Real-time 8x8 VGA bitmap CRT Diagnostic HUD
-     overlaid onto the 24/7 YouTube broadcast via atomic os.replace)
-  3. youtube/livestream/live_telemetry.ass (Optional libass subtitle stream)
+  1. site/assets/live_telemetry.json & site/forensics/live_telemetry.json
+  2. youtube/livestream/live_hud.png (960x540 RGBA Diegetic Overlay containing BOTH:
+     - Region A [CRT Monitor Window x=366, y=228, w=202, h=108]:
+       100% intentionally synchronized to the active audio track:
+         * Foreign Broadcasts -> Live English Translation Teleprinter
+         * Morse Code Beacons -> 750 Hz CW Morse Demodulator + 3D Wireframe + Decoded ASCII
+         * Numbers Stations   -> 5-Digit One-Time-Pad Cipher Matrix & Feistel Key Mask
+         * Classified Tapes   -> Sublevel B2 Magnetic Reel Dossier & Speaker Transcript
+         * Nova Hart Memory Songs -> Haunting 1985 CRT Digital Face of Nova Hart (with blinking eyes)
+         * Counterpoint Songs -> Dual-Profile "Second Voice" Phase Anomaly (Marcus + Nova)
+         * Neural Mesh Songs  -> Biometric Iris Scan (Empathy Trial #04)
+         * Nominal Songs      -> Transparent (classic 14.2 Hz CRT Oscilloscope Grid + 30fps live soundwave)
+     - Region B [Bottom Telemetry HUD Label x=80, y=476, w=800, h=54]:
+       Always visible at the bottom of the screen with live English translations,
+       decoded Morse payloads, song provenance, and solvable ARG instructions.
 """
 
 from __future__ import annotations
@@ -14,12 +25,16 @@ import argparse
 import datetime
 import hashlib
 import json
+import math
 import os
 import re
-import struct
 import time
-import zlib
+import textwrap
 from pathlib import Path
+import numpy as np
+from PIL import Image, ImageDraw
+
+from arg_broadcast_codex import resolve_intentional_state
 
 BROADCAST_EPOCH = 1791763200  # 2026-10-12T00:00:00Z
 CYCLE_DURATION_SEC = 44 * 3600
@@ -48,63 +63,10 @@ REGIONAL_RELAYS = [
     {"node": 13, "code": "FJ-SUV", "name": "Suva Pacific Telemetry Dish", "freq_khz": 8840.0},
 ]
 
-# Compact 5x7 / 8x8 VGA terminal glyph bitmaps for uppercase ASCII, digits, and punctuation
-GLYPHS_5X7: dict[str, list[int]] = {
-    " ": [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00],
-    "!": [0x04, 0x04, 0x04, 0x04, 0x04, 0x00, 0x04],
-    '"': [0x0A, 0x0A, 0x00, 0x00, 0x00, 0x00, 0x00],
-    "#": [0x0A, 0x1F, 0x0A, 0x0A, 0x1F, 0x0A, 0x00],
-    "(": [0x02, 0x04, 0x08, 0x08, 0x08, 0x04, 0x02],
-    ")": [0x08, 0x04, 0x02, 0x02, 0x02, 0x04, 0x08],
-    "*": [0x00, 0x04, 0x15, 0x0E, 0x15, 0x04, 0x00],
-    "+": [0x00, 0x04, 0x04, 0x1F, 0x04, 0x04, 0x00],
-    ",": [0x00, 0x00, 0x00, 0x00, 0x04, 0x04, 0x08],
-    "-": [0x00, 0x00, 0x00, 0x1F, 0x00, 0x00, 0x00],
-    ".": [0x00, 0x00, 0x00, 0x00, 0x00, 0x0C, 0x0C],
-    "/": [0x01, 0x02, 0x02, 0x04, 0x08, 0x08, 0x10],
-    "0": [0x0E, 0x11, 0x13, 0x15, 0x19, 0x11, 0x0E],
-    "1": [0x04, 0x0C, 0x04, 0x04, 0x04, 0x04, 0x0E],
-    "2": [0x0E, 0x11, 0x01, 0x06, 0x08, 0x10, 0x1F],
-    "3": [0x1F, 0x02, 0x04, 0x06, 0x01, 0x11, 0x0E],
-    "4": [0x02, 0x06, 0x0A, 0x12, 0x1F, 0x02, 0x02],
-    "5": [0x1F, 0x10, 0x1E, 0x01, 0x01, 0x11, 0x0E],
-    "6": [0x06, 0x08, 0x10, 0x1E, 0x11, 0x11, 0x0E],
-    "7": [0x1F, 0x01, 0x02, 0x04, 0x08, 0x08, 0x08],
-    "8": [0x0E, 0x11, 0x11, 0x0E, 0x11, 0x11, 0x0E],
-    "9": [0x0E, 0x11, 0x11, 0x0F, 0x01, 0x02, 0x0C],
-    ":": [0x00, 0x0C, 0x0C, 0x00, 0x0C, 0x0C, 0x00],
-    "=": [0x00, 0x00, 0x1F, 0x00, 0x1F, 0x00, 0x00],
-    ">": [0x08, 0x04, 0x02, 0x01, 0x02, 0x04, 0x08],
-    "[": [0x0E, 0x08, 0x08, 0x08, 0x08, 0x08, 0x0E],
-    "]": [0x0E, 0x02, 0x02, 0x02, 0x02, 0x02, 0x0E],
-    "_": [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x1F],
-    "A": [0x0E, 0x11, 0x11, 0x1F, 0x11, 0x11, 0x11],
-    "B": [0x1E, 0x11, 0x11, 0x1E, 0x11, 0x11, 0x1E],
-    "C": [0x0E, 0x11, 0x10, 0x10, 0x10, 0x11, 0x0E],
-    "D": [0x1C, 0x12, 0x11, 0x11, 0x11, 0x12, 0x1C],
-    "E": [0x1F, 0x10, 0x10, 0x1E, 0x10, 0x10, 0x1F],
-    "F": [0x1F, 0x10, 0x10, 0x1E, 0x10, 0x10, 0x10],
-    "G": [0x0E, 0x11, 0x10, 0x17, 0x11, 0x11, 0x0F],
-    "H": [0x11, 0x11, 0x11, 0x1F, 0x11, 0x11, 0x11],
-    "I": [0x0E, 0x04, 0x04, 0x04, 0x04, 0x04, 0x0E],
-    "J": [0x07, 0x02, 0x02, 0x02, 0x02, 0x12, 0x0C],
-    "K": [0x11, 0x12, 0x14, 0x18, 0x14, 0x12, 0x11],
-    "L": [0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x1F],
-    "M": [0x11, 0x1B, 0x15, 0x15, 0x11, 0x11, 0x11],
-    "N": [0x11, 0x19, 0x15, 0x13, 0x11, 0x11, 0x11],
-    "O": [0x0E, 0x11, 0x11, 0x11, 0x11, 0x11, 0x0E],
-    "P": [0x1E, 0x11, 0x11, 0x1E, 0x10, 0x10, 0x10],
-    "Q": [0x0E, 0x11, 0x11, 0x11, 0x15, 0x12, 0x0D],
-    "R": [0x1E, 0x11, 0x11, 0x1E, 0x14, 0x12, 0x11],
-    "S": [0x0F, 0x10, 0x10, 0x0E, 0x01, 0x01, 0x1E],
-    "T": [0x1F, 0x04, 0x04, 0x04, 0x04, 0x04, 0x04],
-    "U": [0x11, 0x11, 0x11, 0x11, 0x11, 0x11, 0x0E],
-    "V": [0x11, 0x11, 0x11, 0x11, 0x11, 0x0A, 0x04],
-    "W": [0x11, 0x11, 0x11, 0x15, 0x15, 0x15, 0x0A],
-    "X": [0x11, 0x11, 0x0A, 0x04, 0x0A, 0x11, 0x11],
-    "Y": [0x11, 0x11, 0x0A, 0x04, 0x04, 0x04, 0x04],
-    "Z": [0x1F, 0x01, 0x02, 0x04, 0x08, 0x10, 0x1F],
-}
+# 960x540 (exact 0.5x of 1920x1080) coordinates
+FRAME_W, FRAME_H = 960, 540
+CRT_X, CRT_Y, CRT_W, CRT_H = 366, 228, 202, 108
+HUD_X, HUD_Y, HUD_W, HUD_H = 70, 476, 820, 54
 
 TIME_RE = re.compile(r"time=(\d+):(\d+):(\d+(?:\.\d+)?)")
 SPEED_RE = re.compile(r"speed=\s*([0-9.]+)x")
@@ -113,6 +75,213 @@ DROP_RE = re.compile(r"drop=\s*(\d+)")
 BITRATE_RE = re.compile(r"bitrate=\s*([0-9.]+kbits/s)")
 FILE_RE = re.compile(r"file\s+'([^']+)'")
 
+_ASSET_CACHE: dict[str, np.ndarray] = {}
+
+
+def load_crt_rgba_asset(asset_path: Path, zoom: float = 1.08) -> np.ndarray:
+    """Loads a CRT graphic (face, eye, second voice), fits to CRT_W x CRT_H, and computes alpha from luminance."""
+    key = f"{asset_path}:{zoom}"
+    if key in _ASSET_CACHE:
+        return _ASSET_CACHE[key]
+
+    im = Image.open(asset_path).convert("RGB")
+    iw, ih = im.size
+    target_ratio = CRT_W / CRT_H
+    cur_ratio = iw / ih
+    if cur_ratio > target_ratio:
+        new_w = int(ih * target_ratio)
+        left = (iw - new_w) // 2
+        im = im.crop((left, 0, left + new_w, ih))
+    else:
+        new_h = int(iw / target_ratio)
+        top = (ih - new_h) // 2
+        im = im.crop((0, top, iw, top + new_h))
+
+    zw, zh = int(CRT_W * zoom), int(CRT_H * zoom)
+    im = im.resize((zw, zh), Image.Resampling.LANCZOS)
+    lx = (zw - CRT_W) // 2
+    ly = (zh - CRT_H) // 2
+    im = im.crop((lx, ly, lx + CRT_W, ly + CRT_H))
+
+    rgb = np.asarray(im, dtype=np.float32)
+    lum = (rgb[:, :, 0] * 0.299 + rgb[:, :, 1] * 0.587 + rgb[:, :, 2] * 0.114) / 255.0
+
+    # CRT vignette
+    yy, xx = np.mgrid[0:CRT_H, 0:CRT_W]
+    nx = (xx - CRT_W / 2.0) / (CRT_W / 2.0)
+    ny = (yy - CRT_H / 2.0) / (CRT_H / 2.0)
+    vig = np.clip(1.0 - 0.25 * (nx**2 + ny**2), 0.3, 1.0)
+
+    # Scanline dimming
+    scan = np.where((yy % 2) == 1, 0.78, 1.0)
+    factor = (vig * scan)[:, :, None]
+    out_rgb = np.clip(rgb * factor, 0, 255).astype(np.uint8)
+
+    # Alpha: dark background has alpha ~90 so the live 30fps green soundwave shines through behind the face!
+    # Glowing phosphor wireframe lines have alpha up to 245 so the portrait is vivid and sharp!
+    alpha = np.clip(75.0 + lum * 210.0, 0, 245) * vig
+    # Keep outer 2px border transparent so the monitor's green bezel line stays intact
+    alpha[:2, :] = 0
+    alpha[-2:, :] = 0
+    alpha[:, :2] = 0
+    alpha[:, -2:] = 0
+
+    rgba = np.dstack([out_rgb, alpha.astype(np.uint8)])
+    _ASSET_CACHE[key] = rgba
+    return rgba
+
+
+from PIL import ImageFont
+
+try:
+    FONT_CRT_9 = ImageFont.truetype("/System/Library/Fonts/Monaco.ttf", 9)
+    FONT_HUD_11 = ImageFont.truetype("/System/Library/Fonts/Monaco.ttf", 11)
+except Exception:
+    FONT_CRT_9 = ImageFont.load_default()
+    FONT_HUD_11 = ImageFont.load_default()
+
+
+def render_crt_window_patch(state: dict, assets_dir: Path, now_ts: float) -> Image.Image | None:
+    """Renders the 202x108 RGBA patch for the CRT Monitor Window based on the intentional track state."""
+    mode = state["crt_mode"]
+    if mode == "OSCILLOSCOPE":
+        return None  # Fully transparent: live 30fps green soundwave over the CRT grid!
+
+    if mode in ("NOVA_FACE", "BIOMETRIC_EYE", "SECOND_VOICE"):
+        asset_map = {
+            "NOVA_FACE": (assets_dir / "crt_nova_face.jpg", 1.10),
+            "BIOMETRIC_EYE": (assets_dir / "crt_neural_eye.jpg", 1.04),
+            "SECOND_VOICE": (assets_dir / "crt_second_voice.jpg", 1.06),
+        }
+        apath, zoom = asset_map[mode]
+        if apath.exists():
+            rgba = load_crt_rgba_asset(apath, zoom=zoom).copy()
+            # Dynamic animation per second:
+            # 1. Subtle eye blink on NOVA_FACE every 4 seconds
+            if mode == "NOVA_FACE" and (int(now_ts * 2) % 9 == 0):
+                rgba[36:49, 64:138, :3] = (rgba[36:49, 64:138, :3].astype(np.float32) * 0.2).astype(np.uint8)
+                rgba[42:44, 68:134, :3] = np.array([40, 210, 60], dtype=np.uint8)
+            # 2. Phase shift oscillation on SECOND_VOICE
+            if mode == "SECOND_VOICE":
+                shift = int(2.0 * math.sin(now_ts * 2.5))
+                rgba[4:-4, 4:-4] = np.roll(rgba[4:-4, 4:-4], shift, axis=1)
+
+            im = Image.fromarray(rgba, mode="RGBA")
+            draw = ImageDraw.Draw(im)
+            is_warn = (state.get("hud_mode") or state.get("mode")) == "ANOMALY_WARN"
+            fg = (255, 184, 20, 255) if is_warn else (70, 255, 90, 255)
+            hdr = state["crt_header"][:32]
+            ftr = state["crt_footer"][:32]
+            draw.rectangle([3, 3, CRT_W - 4, 15], fill=(2, 12, 4, 220))
+            draw.text((6, 3), hdr, fill=fg, font=FONT_CRT_9)
+            draw.rectangle([3, CRT_H - 15, CRT_W - 4, CRT_H - 3], fill=(2, 12, 4, 220))
+            draw.text((6, CRT_H - 14), ftr, fill=fg, font=FONT_CRT_9)
+            return im
+
+    # Text / Telemetry Driven Modes: TRANSLATOR, MORSE_DECODER, NUMBERS_CIPHER, LAB_DOSSIER
+    # Top 80 pixels (y=2..82) has high-contrast dark CRT teleprinter background (alpha=232),
+    # while bottom 24 pixels (y=83..105) is transparent so the live 30fps soundwave pulses in the bottom strip!
+    im = Image.new("RGBA", (CRT_W, CRT_H), (0, 0, 0, 0))
+    draw = ImageDraw.Draw(im)
+
+    # Teleprinter upper window
+    draw.rectangle([2, 2, CRT_W - 3, 82], fill=(3, 14, 5, 232), outline=(40, 180, 60, 235))
+    # Header bar
+    draw.rectangle([3, 3, CRT_W - 4, 15], fill=(12, 38, 16, 245))
+    draw.text((6, 3), state["crt_header"][:32], fill=(255, 190, 30, 255), font=FONT_CRT_9)
+
+    if mode == "MORSE_DECODER":
+        # Draw Morse pulse bars + decoded text + rotating 3D octahedron
+        draw.text((6, 16), state["crt_sub"][:32], fill=(80, 255, 100, 255), font=FONT_CRT_9)
+        # Pulse train box
+        draw.rectangle([6, 29, CRT_W - 7, 45], fill=(2, 10, 3, 240), outline=(30, 120, 45, 220))
+        morse_str = state["crt_body"]
+        offset = int(now_ts * 4) % max(1, len(morse_str))
+        rotated_morse = (morse_str + "   " + morse_str)[offset:]
+        cx = 10
+        for ch in rotated_morse:
+            if cx >= CRT_W - 14:
+                break
+            if ch == ".":
+                draw.rectangle([cx, 34, cx + 4, 40], fill=(60, 255, 80, 255))
+                cx += 8
+            elif ch == "-":
+                draw.rectangle([cx, 34, cx + 11, 40], fill=(255, 180, 25, 255))
+                cx += 15
+            else:
+                cx += 6
+
+        # Mini 3D rotating wireframe on left + hex clue on right
+        verts = [(0, 1, 0), (0, -1, 0), (1, 0, 0), (-1, 0, 0), (0, 0, 1), (0, 0, -1)]
+        edges = [(0, 2), (0, 3), (0, 4), (0, 5), (1, 2), (1, 3), (1, 4), (1, 5), (2, 4), (4, 3), (3, 5), (5, 2)]
+        ay, ax = now_ts * 1.3, now_ts * 0.8
+        pts = []
+        for vx, vy, vz in verts:
+            x1 = vx * math.cos(ay) - vz * math.sin(ay)
+            z1 = vx * math.sin(ay) + vz * math.cos(ay)
+            y2 = vy * math.cos(ax) - z1 * math.sin(ax)
+            pts.append((int(28 + x1 * 13), int(63 + y2 * 11)))
+        for i, j in edges:
+            draw.line([pts[i], pts[j]], fill=(60, 250, 90, 245), width=1)
+
+        draw.text((54, 49), "FEISTEL: 0x89B2B2D8", fill=(65, 235, 85, 255), font=FONT_CRT_9)
+        draw.text((54, 62), state["crt_footer"][:25], fill=(255, 180, 30, 255), font=FONT_CRT_9)
+        return im
+
+    # TRANSLATOR, NUMBERS_CIPHER, or LAB_DOSSIER word-wrapped teleprinter (up to 4 lines of 33 chars)
+    draw.text((6, 16), state["crt_sub"][:33], fill=(255, 185, 40, 255), font=FONT_CRT_9)
+    wrapped = textwrap.wrap(state["crt_body"], width=33)[:4]
+    for idx, line in enumerate(wrapped):
+        draw.text((6, 27 + idx * 10), line, fill=(75, 255, 95, 255), font=FONT_CRT_9)
+
+    # Footer bar right above the live soundwave strip
+    draw.rectangle([2, 69, CRT_W - 3, 82], fill=(6, 24, 9, 235))
+    draw.text((6, 70), state["crt_footer"][:33], fill=(255, 190, 40, 255), font=FONT_CRT_9)
+    return im
+
+
+def render_full_arg_overlay_png(out_path: Path, state: dict, assets_dir: Path, now_ts: float) -> bytes:
+    """
+    Renders a 960x540 RGBA PNG containing:
+      1. The track-synchronized CRT Monitor Window patch at (CRT_X, CRT_Y)
+      2. The 3-line Bottom Telemetry Label at (HUD_X, HUD_Y)
+    Written atomically via os.replace and returned as raw PNG bytes for image2pipe.
+    """
+    import io
+    canvas = Image.new("RGBA", (FRAME_W, FRAME_H), (0, 0, 0, 0))
+
+    # 1. Paste CRT Monitor Window patch if active
+    crt_patch = render_crt_window_patch(state, assets_dir, now_ts)
+    if crt_patch is not None:
+        canvas.paste(crt_patch, (CRT_X, CRT_Y))
+
+    # 2. Draw Bottom Telemetry HUD Box (HUD_X, HUD_Y, HUD_W, HUD_H)
+    draw = ImageDraw.Draw(canvas)
+    is_warn = (state.get("hud_mode") or state.get("mode")) == "ANOMALY_WARN"
+    border_col = (255, 176, 0, 235) if is_warn else (51, 255, 51, 225)
+    bg_col = (14, 8, 2, 225) if is_warn else (2, 12, 4, 220)
+    line1_col = (255, 195, 35, 255) if is_warn else (80, 255, 100, 255)
+    line2_col = (255, 235, 160, 255) if is_warn else (190, 255, 195, 255)
+    line3_col = (255, 176, 0, 245) if is_warn else (51, 235, 75, 245)
+
+    draw.rectangle(
+        [HUD_X, HUD_Y, HUD_X + HUD_W, HUD_Y + HUD_H],
+        fill=bg_col,
+        outline=border_col,
+        width=2,
+    )
+    draw.text((HUD_X + 10, HUD_Y + 4), state["line1"][:118], fill=line1_col, font=FONT_HUD_11)
+    draw.text((HUD_X + 10, HUD_Y + 20), state["line2"][:118], fill=line2_col, font=FONT_HUD_11)
+    draw.text((HUD_X + 10, HUD_Y + 36), state["line3"][:118], fill=line3_col, font=FONT_HUD_11)
+
+    buf = io.BytesIO()
+    canvas.save(buf, format="PNG", compress_level=1)
+    png_bytes = buf.getvalue()
+    tmp_path = out_path.with_suffix(".tmp.png")
+    tmp_path.write_bytes(png_bytes)
+    os.replace(tmp_path, out_path)
+    return png_bytes
+
 
 def classify_track(filepath: str) -> dict:
     p = Path(filepath)
@@ -120,7 +289,7 @@ def classify_track(filepath: str) -> dict:
     parent = p.parent.name
     if "radio_master_songs" in filepath or stem.startswith("radio_"):
         kind = "vocal_song"
-        clean = re.sub(r"^radio_", "", stem).replace("_", " ").title()
+        clean = re.sub(r"_1$", "", re.sub(r"^radio_(?:\d+_)?", "", stem)).replace("_", " ").title()
     elif "numbers_stations" in filepath or stem.startswith("station_"):
         kind = "numbers_station"
         clean = f"NUMBERS INTERCEPT // {stem.upper()}"
@@ -132,7 +301,7 @@ def classify_track(filepath: str) -> dict:
         clean = f"750 HZ MORSE TELEMETRY // {stem.upper()}"
     elif "multilingual_bulletins" in filepath:
         kind = "multilingual_bulletin"
-        clean = f"MARINE / SHORTWAVE BULLETIN // {stem.upper()}"
+        clean = f"SHORTWAVE BULLETIN // {stem.upper()}"
     elif "midi_masters" in filepath or stem.startswith("midi_"):
         kind = "fm_synth_bumper"
         clean = f"FM SYNTH BUMPER // {stem.replace('midi_', '').replace('_', ' ').upper()}"
@@ -140,133 +309,6 @@ def classify_track(filepath: str) -> dict:
         kind = "arg_intercept"
         clean = f"DEEP SHORTWAVE INTERCEPT // {stem.upper()}"
     return {"filename": p.name, "stem": stem, "category": parent, "kind": kind, "display_title": clean}
-
-
-def compute_diagnostic_ramp(current_track: dict, relay: dict) -> dict:
-    """
-    Produces a diegetic Sublevel B2 diagnostic log entry that gives observant
-    livestream viewers a genuine engineering lead without ever breaking character
-    or handing out a pre-solved password.
-    """
-    stem = current_track["stem"].lower()
-    kind = current_track["kind"]
-
-    if "rabbit_08" in stem or "sstv" in stem:
-        return {
-            "mode": "ANOMALY_WARN",
-            "fault_code": "FAULT 0x08 // VIS-1200HZ RASTER",
-            "line1": "[! FAULT 0x08] VIS-1200HZ RASTER BLEED ON BIAS SUB-CARRIER (1500-2300 HZ)",
-            "line2": "DMA PARTITION ANCHORS -> DEMODULATE AT stardust-archive.net/forensics/signal_lab.html",
-            "line3": "LOGGED BY: vax4000.ashford-poly.org // SEE SPOOL: stardust-archive.net/forensics/usenet_1995_feed.html",
-        }
-    if "rabbit_09" in stem or "bell103" in stem or kind == "numbers_station":
-        return {
-            "mode": "ANOMALY_WARN",
-            "fault_code": "FAULT 0x09 // BELL-103 AX.25",
-            "line1": "[! FAULT 0x09] 110-BAUD BELL-103 AFSK PACKET (1270/1070 HZ) ON 4625 KHZ",
-            "line2": "ORIGIN: RELCOM-NODE08 (LENINGRAD) // FEISTEL PERMUTATION MASK IN FRAME",
-            "line3": "DOSSIER: stardust-archive.net/forensics/relcom_node08.html // FINGER op08@relcom-node08.org",
-        }
-    if "rabbit_10" in stem or "phase" in stem or kind in ("classified_lab_tape", "morse_beacon"):
-        return {
-            "mode": "ANOMALY_WARN",
-            "fault_code": "FAULT 0x0A // CORR -0.94 PHASE NULL",
-            "line1": "[! FAULT 0x0A] CH-L / CH-R PHASE CORRELATION = -0.94 (180 DEG DIFFERENTIAL)",
-            "line2": "330/495/990 HZ CALIBRATION TRIAD CANCELS UNDER L+R MONO SUMMATION",
-            "line3": "ISOLATE 750 HZ BIAS CW SALT -> stardust-archive.net/forensics/index.html",
-        }
-    if "two_voices" in stem or "only_we_remain" in stem:
-        return {
-            "mode": "ANOMALY_WARN",
-            "fault_code": "SIGNAL 0x0B // SD-0010 COUNTERPOINT",
-            "line1": f"[! SIGNAL 0x0B] REEL SD-0010 DUAL-CARRIER COUNTERPOINT: {current_track['display_title'][:28].upper()}",
-            "line2": "14.2001 HZ HETERODYNE BEAT LOCKED -> ANALYZE BUTTON 4 IN /forensics/signal_lab.html",
-            "line3": "UNSEAL SECTOR 6 EPILOGUE IN TERMINAL -> stardust-archive.net/forensics/index.html",
-        }
-    return {
-        "mode": "NOMINAL",
-        "fault_code": "PARITY NOMINAL",
-        "line1": f"ORION ARCHIVE B2 // 15 IPS NAB // BIAS CARRIER: 14.2001 HZ [LOCKED]",
-        "line2": f"REEL: {current_track['display_title'][:42]} // NODE #{relay['node']:02d} {relay['code']}",
-        "line3": "UUCP / HTTPd ARCHIVE MIRROR: stardust-archive.net // FEISTEL BUS: 0x89B2B2D8",
-    }
-
-
-def render_crt_hud_png(out_path: Path, ramp: dict) -> None:
-    """
-    Renders a 720x58 RGBA PNG with an authentic 5x7 CRT pixel font and scanline
-    dimming, written atomically via os.replace so FFmpeg -loop 1 -i live_hud.png
-    never reads a partial frame.
-    """
-    width, height = 720, 58
-    buf = bytearray(width * height * 4)
-
-    is_warn = ramp["mode"] == "ANOMALY_WARN"
-    # Phosphor amber for diagnostic anomalies, phosphor green for nominal tape playback
-    fg_r, fg_g, fg_b = (255, 176, 0) if is_warn else (51, 255, 51)
-    bg_r, bg_g, bg_b = (14, 8, 2) if is_warn else (2, 10, 2)
-
-    for y in range(height):
-        scan = 0.78 if (y % 2 == 1) else 1.0
-        row_off = y * width * 4
-        border = y in (0, 1, height - 2, height - 1)
-        for x in range(width):
-            idx = row_off + x * 4
-            if border or x in (0, 1, width - 2, width - 1):
-                buf[idx] = int(fg_r * 0.7 * scan)
-                buf[idx + 1] = int(fg_g * 0.7 * scan)
-                buf[idx + 2] = int(fg_b * 0.7 * scan)
-                buf[idx + 3] = 235
-            else:
-                buf[idx] = bg_r
-                buf[idx + 1] = bg_g
-                buf[idx + 2] = bg_b
-                buf[idx + 3] = 215
-
-    lines = [ramp["line1"][:56], ramp["line2"][:56], ramp["line3"][:56]]
-    for line_idx, text in enumerate(lines):
-        base_y = 7 + line_idx * 16
-        base_x = 12
-        for ch_idx, ch in enumerate(text.upper()):
-            glyph = GLYPHS_5X7.get(ch, GLYPHS_5X7[" "])
-            gx = base_x + ch_idx * 12
-            if gx + 10 >= width - 4:
-                break
-            for row_i, row_bits in enumerate(glyph):
-                for col_i in range(5):
-                    if (row_bits >> (4 - col_i)) & 1:
-                        # 2x2 pixel scaling for crisp 1080p readability
-                        for dy in range(2):
-                            for dx in range(2):
-                                py = base_y + row_i * 2 + dy
-                                px = gx + col_i * 2 + dx
-                                if 0 <= py < height and 0 <= px < width:
-                                    p_idx = (py * width + px) * 4
-                                    scan = 0.85 if (py % 2 == 1) else 1.0
-                                    buf[p_idx] = int(fg_r * scan)
-                                    buf[p_idx + 1] = int(fg_g * scan)
-                                    buf[p_idx + 2] = int(fg_b * scan)
-                                    buf[p_idx + 3] = 255
-
-    def png_chunk(tag: bytes, data: bytes) -> bytes:
-        return struct.pack(">I", len(data)) + tag + data + struct.pack(">I", zlib.crc32(tag + data) & 0xFFFFFFFF)
-
-    raw = bytearray()
-    stride = width * 4
-    for y in range(height):
-        raw.append(0)
-        raw.extend(buf[y * stride : (y + 1) * stride])
-
-    ihdr = struct.pack(">IIBBBBB", width, height, 8, 6, 0, 0, 0)
-    png_bytes = (
-        b"\x89PNG\r\n\x1a\n"
-        + png_chunk(b"IHDR", ihdr)
-        + png_chunk(b"IDAT", zlib.compress(bytes(raw), 6))
-        + png_chunk(b"IEND", b"")
-    )
-    tmp_path = out_path.with_suffix(".tmp.png")
-    tmp_path.write_bytes(png_bytes)
-    os.replace(tmp_path, out_path)
 
 
 def parse_stream_log(log_path: Path, now_ts: float) -> dict:
@@ -278,8 +320,10 @@ def parse_stream_log(log_path: Path, now_ts: float) -> dict:
         with open(log_path, "rb") as f:
             f.seek(0, os.SEEK_END)
             size = f.tell()
-            f.seek(max(0, size - 8192))
-            tail = f.read().decode("utf-8", errors="ignore")
+            f.seek(max(0, size - 262144))
+            chunk = f.read().decode("utf-8", errors="ignore")
+        parts = chunk.split("[STREAM.SH] Selected encoder:")
+        tail = parts[-1] if parts else chunk
         times = TIME_RE.findall(tail)
         speeds = SPEED_RE.findall(tail)
         fps_list = FPS_RE.findall(tail)
@@ -303,25 +347,47 @@ def parse_stream_log(log_path: Path, now_ts: float) -> dict:
 
 
 def load_playlist(playlist_path: Path) -> list[str]:
-    candidates = [playlist_path, Path("/tmp/debug_playlist.txt"), Path("/tmp/test_playlist.txt")]
-    for c in candidates:
-        if c.exists():
-            lines = c.read_text(encoding="utf-8", errors="ignore").splitlines()
-            files = []
-            for line in lines:
-                m = FILE_RE.search(line)
-                if m:
-                    files.append(m.group(1))
-            if files:
-                return files
-    return [
-        "broadcast_archive/radio_master_songs/radio_tape_of_us.mp3",
-        "intercepts/rabbit_08_sstv_b2_schematic.mp3",
-        "broadcast_archive/numbers_stations/station_intercept_033.mp3",
-        "broadcast_archive/radio_master_songs/radio_patterns_in_the_mesh.mp3",
-        "intercepts/rabbit_09_bell103_relcom_packet.mp3",
-        "intercepts/rabbit_10_phase_inverted_hart_stem.mp3",
-    ]
+    if playlist_path.exists():
+        lines = playlist_path.read_text(encoding="utf-8", errors="ignore").splitlines()
+        files = []
+        for line in lines:
+            m = FILE_RE.search(line)
+            if m:
+                files.append(m.group(1))
+        if files:
+            return files
+    return ["broadcast_archive/radio_master_songs/radio_tape_of_us.mp3"]
+
+
+_DURATION_CACHE: dict[str, float] | None = None
+
+
+def get_exact_track_duration(tpath: str, repo_root: Path) -> float:
+    global _DURATION_CACHE
+    if _DURATION_CACHE is None:
+        dur_file = repo_root / "youtube" / "livestream" / "track_durations.json"
+        if dur_file.exists():
+            try:
+                _DURATION_CACHE = json.loads(dur_file.read_text(encoding="utf-8"))
+            except Exception:
+                _DURATION_CACHE = {}
+        else:
+            _DURATION_CACHE = {}
+    bname = os.path.basename(tpath)
+    try:
+        sz = os.path.getsize(tpath)
+        if sz <= 4096:
+            return 0.05
+        if bname in _DURATION_CACHE:
+            return float(_DURATION_CACHE[bname])
+        with open(tpath, "rb") as f:
+            hdr = f.read(10)
+        if len(hdr) == 10 and hdr[:3] == b"ID3":
+            id3_sz = ((hdr[6] & 0x7f) << 21) | ((hdr[7] & 0x7f) << 14) | ((hdr[8] & 0x7f) << 7) | (hdr[9] & 0x7f)
+            sz -= (id3_sz + 10)
+        return max(0.05, (sz - 1440) / 24000.0)
+    except OSError:
+        return 99.0
 
 
 def build_telemetry_snapshot(repo_root: Path, now_ts: float | None = None, force_offline: bool = False) -> dict:
@@ -338,16 +404,17 @@ def build_telemetry_snapshot(repo_root: Path, now_ts: float | None = None, force
 
     cycle_number = int(total_uptime_sec // CYCLE_DURATION_SEC) + 1
     playhead_index = 0
+    track_offset_sec = 0.0
+    track_dur_sec = 180.0
+
     if is_live and elapsed_sec > 0 and tracks:
         accum = 0.0
         for idx, tpath in enumerate(tracks):
-            try:
-                # All broadcast tracks are 192 kbps CBR MP3 (24,000 bytes/sec)
-                dur = max(1.5, os.path.getsize(tpath) / 24000.0)
-            except OSError:
-                dur = 99.0
+            dur = get_exact_track_duration(tpath, repo_root)
             if accum + dur > elapsed_sec:
                 playhead_index = idx
+                track_offset_sec = elapsed_sec - accum
+                track_dur_sec = dur
                 break
             accum += dur
         else:
@@ -357,14 +424,27 @@ def build_telemetry_snapshot(repo_root: Path, now_ts: float | None = None, force
     next_track = classify_track(tracks[(playhead_index + 1) % len(tracks)])
     recipe = CADENCE_RECIPES[playhead_index % len(CADENCE_RECIPES)]
     relay = REGIONAL_RELAYS[int(now // 300) % len(REGIONAL_RELAYS)]
-    ramp = compute_diagnostic_ramp(current_track, relay)
+
+    state = resolve_intentional_state(current_track, track_offset_sec, track_dur_sec, relay)
+    ramp = {
+        "mode": state["hud_mode"],
+        "crt_mode": state["crt_mode"],
+        "fault_code": state["crt_header"],
+        "line1": state["line1"],
+        "line2": state["line2"],
+        "line3": state["line3"],
+        "crt_header": state["crt_header"],
+        "crt_sub": state["crt_sub"],
+        "crt_body": state["crt_body"],
+        "crt_footer": state["crt_footer"],
+    }
 
     carrier_phase_deg = round(((now * 14.2001) % 1.0) * 360.0, 2)
     window_slot = int(now // 600)
     beacon_hash = hashlib.sha256(f"stardust-14.2hz|{window_slot}|{relay['code']}".encode()).hexdigest()[:12].upper()
 
     return {
-        "schema": "stardust.live.telemetry.v3",
+        "schema": "stardust.live.telemetry.v4",
         "timestamp_utc": datetime.datetime.fromtimestamp(now, tz=datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "simulated_1995_utc": datetime.datetime.fromtimestamp(
             788918400 + (now - BROADCAST_EPOCH), tz=datetime.timezone.utc
@@ -388,6 +468,8 @@ def build_telemetry_snapshot(repo_root: Path, now_ts: float | None = None, force
             "cycle": cycle_number,
             "playlist_index": playhead_index + 1,
             "playlist_total": max(1600, len(tracks)),
+            "track_offset_sec": round(track_offset_sec, 1),
+            "track_duration_sec": round(track_dur_sec, 1),
             "active_recipe": recipe,
             "current_track": current_track,
             "next_track": next_track,
@@ -404,41 +486,17 @@ def build_telemetry_snapshot(repo_root: Path, now_ts: float | None = None, force
                 "step_2_afsk_mask": "Demodulate rabbit_09 Bell-103 AX.25 frame -> Feistel permutation mask 0x3A5F",
                 "step_3_phase_salt": "Sum L+R on rabbit_10 (-0.94 phase null) -> 750 Hz CW egress salt 7704-AKASAKA",
                 "step_4_xor_synthesis": "XOR memory addresses (0x89B2B2D8 ^ 0x89B2D39A ^ 0x3A5F) + salt -> RESTORE 5 0x89B2-392C-7704-AKASAKA",
-                "step_5_two_voices_counterpoint": "Analyze Reel SD-0010 (Two Voices, Button 4) + 14.2 Hz Counterpoint Lock -> RESTORE 6 TWO-VOICES-1420-COUNTERPOINT",
+                "step_5_two_voices_counterpoint": "Analyze Reel SD-0010 (The Second Voice) + 14.2 Hz Counterpoint Lock -> RESTORE 6 TWO-VOICES-1420-COUNTERPOINT",
             },
         },
         "active_relay": relay,
     }
 
 
-def generate_ass_overlay(telemetry: dict) -> str:
-    ramp = telemetry["diagnostic_ramp"]
-    header = """[Script Info]
-Title: Project Stardust Live CRT Telemetry OSD
-ScriptType: v4.00+
-PlayResX: 1920
-PlayResY: 1080
-WrapStyle: 0
-ScaledBorderAndShadow: yes
-
-[V4+ Styles]
-Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: CRT_HUD,Courier New,22,&H0033FF33,&H0000FF00,&H00051505,&H80020802,-1,0,0,0,100,100,1,0,1,1.5,0,7,60,60,50,1
-
-[Events]
-Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
-"""
-    return (
-        header
-        + f"Dialogue: 0,0:00:00.00,9:59:59.00,CRT_HUD,,0,0,0,,{{\\pos(580,960)}}{ramp['line1']}\\N{ramp['line2']}\\N{ramp['line3']}\n"
-    )
-
-
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Project Stardust Livestream Telemetry & Diegetic HUD Synchronizer")
+    parser = argparse.ArgumentParser(description="Project Stardust Intentional ARG Visual & Telemetry Engine")
     parser.add_argument("--repo-root", type=Path, default=Path(__file__).resolve().parents[2])
     parser.add_argument("--out-json", type=Path, default=None)
-    parser.add_argument("--out-ass", type=Path, default=None)
     parser.add_argument("--out-hud-png", type=Path, default=None)
     parser.add_argument("--offline", action="store_true")
     parser.add_argument("--daemon", action="store_true")
@@ -446,26 +504,23 @@ def main() -> None:
 
     out_json = args.out_json or (args.repo_root / "site" / "assets" / "live_telemetry.json")
     out_forensics_json = args.repo_root / "site" / "forensics" / "live_telemetry.json"
-    out_ass = args.out_ass or (args.repo_root / "youtube" / "livestream" / "live_telemetry.ass")
     out_hud = args.out_hud_png or (args.repo_root / "youtube" / "livestream" / "live_hud.png")
+    assets_dir = args.repo_root / "youtube" / "livestream" / "assets_arg"
     out_json.parent.mkdir(parents=True, exist_ok=True)
-    out_ass.parent.mkdir(parents=True, exist_ok=True)
     out_hud.parent.mkdir(parents=True, exist_ok=True)
 
     while True:
-        snap = build_telemetry_snapshot(args.repo_root, force_offline=args.offline)
+        now = time.time()
+        snap = build_telemetry_snapshot(args.repo_root, now_ts=now, force_offline=args.offline)
         payload = json.dumps(snap, indent=2)
         out_json.write_text(payload, encoding="utf-8")
         if out_forensics_json.parent.exists():
             out_forensics_json.write_text(payload, encoding="utf-8")
-        out_ass.write_text(generate_ass_overlay(snap), encoding="utf-8")
-        render_crt_hud_png(out_hud, snap["diagnostic_ramp"])
+        render_full_arg_overlay_png(out_hud, snap["diagnostic_ramp"], assets_dir, now)
         if not args.daemon:
-            print(f"[SYNC_TELEMETRY] Status: {snap['stream_health']['status']}")
-            print(f"  -> HUD Ramp Mode: {snap['diagnostic_ramp']['mode']} ({snap['diagnostic_ramp']['fault_code']})")
-            print(f"  -> Wrote CRT HUD PNG: {out_hud} ({out_hud.stat().st_size} bytes)")
+            print(f"[SYNC_TELEMETRY] CRT Mode: {snap['diagnostic_ramp']['crt_mode']} | Track: {snap['playhead']['current_track']['filename']}")
             break
-        time.sleep(5)
+        time.sleep(1.0)
 
 
 if __name__ == "__main__":
