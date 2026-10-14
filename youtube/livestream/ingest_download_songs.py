@@ -35,7 +35,7 @@ def slugify(filename):
     cleaned = cleaned.strip('_')
     return f"radio_{cleaned}.mp3"
 
-# 1980s FM/AM Radio Broadcast DSP Chain with Precision Silence Trimming
+# 1980s FM/AM Radio Broadcast DSP Chain with Precision Silence Trimming & EBU R128 Loudness Matching
 RADIO_BROADCAST_FILTER = (
     "silenceremove=start_periods=1:start_duration=0.04:start_threshold=-30dB:detection=peak,"
     "areverse,silenceremove=start_periods=1:start_duration=0.08:start_threshold=-30dB:detection=peak,areverse,"
@@ -43,7 +43,7 @@ RADIO_BROADCAST_FILTER = (
     "equalizer=f=2800:width_type=o:width=1.5:g=3.2,"
     "equalizer=f=220:width_type=o:width=1.2:g=2.2,"
     "acompressor=threshold=-18dB:ratio=4.5:attack=6:release=70,"
-    "volume=1.4"
+    "loudnorm=I=-16:TP=-1.5:LRA=7"
 )
 
 from concurrent.futures import ThreadPoolExecutor

@@ -74,6 +74,7 @@ const REGIONAL_RELAYS = [
 ];
 
 const SAMPLE_BROADCAST_DECK = [
+  { filename: "radio_two_voices.mp3", kind: "vocal_song", display_title: "Two Voices (Sublevel B2 Broadcast Master)" },
   { filename: "radio_tape_of_us.mp3", kind: "vocal_song", display_title: "Tape Of Us (1989 Sublevel B2 Master)" },
   { filename: "rabbit_08_sstv_b2_schematic.mp3", kind: "arg_intercept", display_title: "ROBOT36 SSTV // SUBLEVEL B2 SCHEMATIC" },
   { filename: "radio_gasoline_heart.mp3", kind: "vocal_song", display_title: "Gasoline Heart (1985 Tokyo Master)" },

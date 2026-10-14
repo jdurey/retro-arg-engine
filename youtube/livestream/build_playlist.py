@@ -57,26 +57,37 @@ all_songs = [t for t in glob.glob(os.path.join(REAL_SONGS_DIR, "*.mp3")) if os.p
 if not all_songs:
     raise RuntimeError(f"No songs found in {REAL_SONGS_DIR}!")
 
-# 3. Identify newly added songs from Downloads folder (modified in the last 48 hours)
-recent_stems = set()
-now = time.time()
+# 3. Identify the most recently added song(s) in Downloads folder so the newest track plays first in Cycle 1
+newest_songs = []
 if os.path.exists(DOWNLOADS_DIR):
+    dl_files = []
     for f in os.listdir(DOWNLOADS_DIR):
         p = os.path.join(DOWNLOADS_DIR, f)
-        if os.path.isfile(p) and (now - os.path.getmtime(p) < 172800):  # within 48h
-            base = os.path.splitext(f)[0]
-            clean = re.sub(r'^\d+\s*[-_.]*\s*', '', base).lower()
-            clean = re.sub(r'[^a-z0-9]+', '_', clean).strip('_')
-            recent_stems.add(clean)
+        if os.path.isfile(p) and not f.startswith("."):
+            dl_files.append((os.path.getmtime(p), f))
+    dl_files.sort(reverse=True)
+    if dl_files:
+        latest_mtime, latest_fname = dl_files[0]
+        from ingest_download_songs import slugify
+        latest_slug = slugify(latest_fname)
+        for s in all_songs:
+            if os.path.basename(s) == latest_slug:
+                newest_songs.append(s)
+                break
 
-new_tracks = []
-classic_tracks = []
-for s in all_songs:
-    b = os.path.basename(s).replace('radio_', '').replace('.mp3', '')
-    if any(stem in b or b in stem for stem in recent_stems):
-        new_tracks.append(s)
-    else:
-        classic_tracks.append(s)
+# Read head of existing playlist.txt so rebuilding never immediately repeats the song that was just playing
+previously_playing = []
+if os.path.exists(out_file):
+    try:
+        with open(out_file, "r") as pf:
+            for line in pf:
+                m = re.search(r"file\s+'([^']+)'", line)
+                if m and "radio_master_songs" in m.group(1):
+                    previously_playing.append(m.group(1))
+                    if len(previously_playing) >= 15:
+                        break
+    except Exception:
+        pass
 
 # Use dynamic system randomness (no static seed)
 rng = random.Random()
@@ -118,17 +129,22 @@ print(f"  - Classified Orion Lab Tapes: {len(lab_pool)}")
 print(f"  - Deep ARG Signal Intercepts: {len(intercept_pool)}")
 
 # 10. Helper to generate a well-spaced single cycle containing every song exactly once
-def build_shuffled_cycle(song_list, avoid_recent=None):
+def build_shuffled_cycle(song_list, avoid_recent=None, pin_first=None):
     if avoid_recent is None:
         avoid_recent = []
-    avoid_roots = {get_base_root(s) for s in avoid_recent}
+    if pin_first is None:
+        pin_first = []
+    avoid_roots = {get_base_root(s) for s in avoid_recent if s not in pin_first}
+    remaining_pool = [s for s in song_list if s not in pin_first]
     
     for attempt in range(500):
-        cand = list(song_list)
-        rng.shuffle(cand)
+        cand_rest = list(remaining_pool)
+        rng.shuffle(cand_rest)
+        cand = list(pin_first) + cand_rest
         
-        # Ensure the opening of this cycle does not repeat the end of the previous cycle
-        if any(get_base_root(cand[i]) in avoid_roots for i in range(min(len(cand), len(avoid_recent)))):
+        # Ensure the opening of this cycle (after pinned new tracks) does not repeat the end of the previous cycle
+        check_slice = cand[len(pin_first):len(pin_first) + min(len(cand_rest), len(avoid_recent))]
+        if any(get_base_root(s) in avoid_roots for s in check_slice):
             continue
             
         # Verify internal spacing between any duplicate roots (e.g. movements)
@@ -142,16 +158,17 @@ def build_shuffled_cycle(song_list, avoid_recent=None):
             recent.append(r)
         if valid:
             return cand
-    return cand
+    return list(pin_first) + remaining_pool
 
-# 11. Build 8 distinct cycles (~44 hours of non-repeating fair rotation)
-# Every song in the 80-track catalog appears EXACTLY ONCE per cycle (~5.3 hours apart)
+# 11. Build 8 distinct cycles (~45 hours of non-repeating fair rotation)
+# Every song in the catalog appears EXACTLY ONCE per cycle (~5.6 hours apart)
 NUM_CYCLES = 8
 cycles = []
-last_tail = []
+last_tail = previously_playing
 
 for c_num in range(NUM_CYCLES):
-    next_cycle = build_shuffled_cycle(all_songs, avoid_recent=last_tail)
+    pin = newest_songs if c_num == 0 else []
+    next_cycle = build_shuffled_cycle(all_songs, avoid_recent=last_tail, pin_first=pin)
     cycles.append(next_cycle)
     last_tail = next_cycle[-30:]  # Protect the last 30 songs from appearing in the start of next cycle
 
@@ -240,8 +257,13 @@ with open(tmp_file, "w") as f:
         f.write(f"file '{t}'\n")
 os.replace(tmp_file, out_file)
 
-believers_count = sum(1 for s in ordered_songs if "calling_all_believers" in s)
+fresh_marker = os.path.join(HERE, ".playlist_fresh")
+with open(fresh_marker, "w") as fm:
+    fm.write(str(time.time()))
+
 print(f"\n✓ Generated Dynamic Live Stream Playlist with {len(full_playlist)} total tracks ({len(ordered_songs)} songs across {NUM_CYCLES} cycles) in {out_file}")
-print(f"✓ Every song in the 80-track catalog appears exactly once per cycle (~5.3 hours apart)!")
+if newest_songs:
+    print(f"✓ Pinned newest ingested track at #1: {os.path.basename(newest_songs[0])}")
+print(f"✓ Every song in the {len(all_songs)}-track catalog appears exactly once per cycle (~5.6 hours apart)!")
 print(f"✓ Interstitial diversity: Numbers Stations, Classified Lab Tapes, ARG Intercepts, Bulletins, Morse Beacons, and MIDI Stingers all actively rotating!")
 

@@ -38,6 +38,15 @@ def get_duration(filepath):
         return 200.0 # fallback
 
 def rotate():
+    fresh_marker = os.path.join(DIR, ".playlist_fresh")
+    if os.path.exists(fresh_marker):
+        try:
+            os.remove(fresh_marker)
+        except OSError:
+            pass
+        print("✓ Freshly built playlist detected; starting directly at newly queued Track #1.")
+        return
+
     elapsed = get_last_elapsed_seconds()
     print(f"Last stream session elapsed time: {elapsed:.1f}s ({elapsed/60:.1f} minutes)")
     
