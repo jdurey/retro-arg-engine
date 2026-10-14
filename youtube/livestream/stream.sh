@@ -37,9 +37,14 @@ select_video_encoder() {
 }
 
 while true; do
+  # 0. Cap stream.log at 10 MB (keep last 2 MB) AFTER rotate_playlist reads elapsed time
   # 1. Rotate completed tracks to tail so the stream NEVER rewinds to Track 1
   if [ -f "$SCRIPT_DIR/rotate_playlist.py" ]; then
     python3 "$SCRIPT_DIR/rotate_playlist.py" >> "$LOG_FILE" 2>&1 || true
+  fi
+
+  if [ -f "$LOG_FILE" ] && [ "$(stat -f%z "$LOG_FILE" 2>/dev/null || echo 0)" -gt 10485760 ]; then
+    tail -c 2097152 "$LOG_FILE" > "${LOG_FILE}.tmp" && mv "${LOG_FILE}.tmp" "$LOG_FILE"
   fi
 
   # 2. Refresh live telemetry & render initial CRT HUD PNG (live_hud.png)
@@ -47,82 +52,47 @@ while true; do
     python3 "$SCRIPT_DIR/sync_telemetry.py" --repo-root "$REPO_ROOT" >> "$LOG_FILE" 2>&1 || true
   fi
 
-  VENC_FLAGS="$(select_video_encoder)"
-  echo "[$(date '+%Y-%m-%d %H:%M:%S')] [STREAM.SH] Selected encoder: ${VENC_FLAGS}" >> "$LOG_FILE"
+  VF_FILTER="[1:a]aresample=44100:async=1,aformat=sample_fmts=fltp:sample_rates=44100:channel_layouts=stereo,alimiter=limit=0.87:level=disabled,asplit=2[a_out][a_viz];[a_viz]showwaves=s=404x214:mode=line:rate=30:colors=lime[waves];[0:v][waves]overlay=x=731:y=456:format=auto,scale=1280:720:flags=bilinear,format=yuv420p[v_out]"
 
-  if [ -f "$HUD_PNG" ]; then
-    VF_FILTER="[2:a]aresample=async=1:first_pts=0,alimiter=limit=0.87:level=disabled,asplit=2[a_out][a_viz];[a_viz]showwaves=s=404x214:mode=line:rate=30:colors=lime[waves];[0:v][waves]overlay=x=731:y=456:format=auto[v_osc];[v_osc][1:v]overlay=x=580:y=960:format=auto,format=yuv420p[v_out]"
-    caffeinate -d -i -m -s -u ffmpeg \
-      -hide_banner \
-      -loglevel info \
-      -fflags +genpts+igndts+discardcorrupt \
-      -stream_loop -1 \
-      -i "$BACKDROP" \
-      -loop 1 \
-      -i "$HUD_PNG" \
-      -readrate 1.0 \
-      -readrate_initial_burst 15.0 \
-      -readrate_catchup 1.3 \
-      -f concat \
-      -safe 0 \
-      -i "$PLAYLIST" \
-      -filter_complex "$VF_FILTER" \
-      -map "[v_out]" \
-      -map "[a_out]" \
-      $VENC_FLAGS \
-      -b:v 3800k \
-      -maxrate 4200k \
-      -bufsize 8000k \
-      -pix_fmt yuv420p \
-      -r 30 \
-      -g 60 \
-      -keyint_min 60 \
-      -c:a aac \
-      -b:a 192k \
-      -ar 44100 \
-      -ac 2 \
-      -flvflags no_duration_filesize \
-      -rtmp_buffer 8000 \
-      -rtmp_live live \
-      -rw_timeout 15000000 \
-      -f flv \
-      "${RTMP_URL}/${STREAM_KEY}" >> "$LOG_FILE" 2>&1
-  else
-    VF_FILTER="[1:a]aresample=async=1:first_pts=0,alimiter=limit=0.87:level=disabled,asplit=2[a_out][a_viz];[a_viz]showwaves=s=404x214:mode=line:rate=30:colors=lime[waves];[0:v][waves]overlay=x=731:y=456:format=auto,format=yuv420p[v_out]"
-    caffeinate -d -i -m -s -u ffmpeg \
-      -hide_banner \
-      -loglevel info \
-      -fflags +genpts+igndts+discardcorrupt \
-      -stream_loop -1 \
-      -i "$BACKDROP" \
-      -readrate 1.0 \
-      -readrate_initial_burst 15.0 \
-      -readrate_catchup 1.3 \
-      -f concat \
-      -safe 0 \
-      -i "$PLAYLIST" \
-      -filter_complex "$VF_FILTER" \
-      -map "[v_out]" \
-      -map "[a_out]" \
-      $VENC_FLAGS \
-      -b:v 3800k \
-      -maxrate 4200k \
-      -bufsize 8000k \
-      -pix_fmt yuv420p \
-      -r 30 \
-      -g 60 \
-      -keyint_min 60 \
-      -c:a aac \
-      -b:a 192k \
-      -ar 44100 \
-      -ac 2 \
-      -flvflags no_duration_filesize \
-      -rtmp_buffer 8000 \
-      -rtmp_live live \
-      -rw_timeout 15000000 \
-      -f flv \
-      "${RTMP_URL}/${STREAM_KEY}" >> "$LOG_FILE" 2>&1
-  fi
+  echo "[$(date '+%Y-%m-%d %H:%M:%S')] [STREAM.SH] Selected encoder: 720p30 ultra-stable CBR (450k video + 160k audio)" >> "$LOG_FILE"
+
+  caffeinate -d -i -m -s -u ffmpeg \
+    -nostdin \
+    -hide_banner \
+    -loglevel info \
+    -reinit_filter 0 \
+    -fflags +genpts+igndts+discardcorrupt \
+    -stream_loop -1 \
+    -i "$BACKDROP" \
+    -readrate 1.0 \
+    -readrate_initial_burst 3.0 \
+    -readrate_catchup 1.15 \
+    -f concat \
+    -safe 0 \
+    -i "$PLAYLIST" \
+    -filter_complex "$VF_FILTER" \
+    -map "[v_out]" \
+    -map "[a_out]" \
+    -c:v libx264 \
+    -preset veryfast \
+    -tune zerolatency \
+    -b:v 450k \
+    -maxrate 550k \
+    -bufsize 1100k \
+    -pix_fmt yuv420p \
+    -r 30 \
+    -g 60 \
+    -keyint_min 60 \
+    -c:a aac \
+    -b:a 160k \
+    -ar 44100 \
+    -ac 2 \
+    -flvflags no_duration_filesize \
+    -rtmp_buffer 3000 \
+    -rtmp_live live \
+    -rw_timeout 15000000 \
+    -f flv \
+    "${RTMP_URL}/${STREAM_KEY}" >> "$LOG_FILE" 2>&1
 
   EXIT_CODE=$?
   echo "[$(date '+%Y-%m-%d %H:%M:%S')] [STREAM.SH] FFmpeg exited with code ${EXIT_CODE}. Rotating playhead & reconnecting in 2s..." >> "$LOG_FILE"

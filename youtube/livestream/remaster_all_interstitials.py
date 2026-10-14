@@ -87,7 +87,7 @@ def render_one_numbers_station(i):
             "-filter_complex",
             f"[0:a]{NORM},volume=0.8[chime];[1:a]{NORM},highpass=f=250,lowpass=f=3600,volume=1.8[v];[chime][v]concat=n=2:v=0:a=1,loudnorm=I=-16:TP=-1.5:LRA=7[out]",
             "-map", "[out]",
-            "-c:a", "libmp3lame", "-b:a", "192k",
+            "-c:a", "libmp3lame", "-b:a", "192k", "-ar", "44100", "-ac", "2",
             out_path
         ]
         subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
@@ -121,7 +121,7 @@ def render_one_lab_tape(i):
             "-filter_complex",
             f"[0:a]{NORM},volume=0.6[t];[1:a]{NORM},highpass=f=200,lowpass=f=4200,aecho=0.6:0.3:25:0.1,volume=1.5[v];[t][v]concat=n=2:v=0:a=1,loudnorm=I=-16:TP=-1.5:LRA=7[out]",
             "-map", "[out]",
-            "-c:a", "libmp3lame", "-b:a", "192k",
+            "-c:a", "libmp3lame", "-b:a", "192k", "-ar", "44100", "-ac", "2",
             out_path
         ]
         subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)

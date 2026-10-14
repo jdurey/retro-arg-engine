@@ -15,21 +15,44 @@ LOG_FILE = os.path.join(DIR, "stream.log")
 
 def get_last_elapsed_seconds():
     if not os.path.exists(LOG_FILE):
-        return 0.0
+        return 0.0, ""
     
-    # Read the tail of stream.log to find the last time=HH:MM:SS string
+    # Read the last 512 KB of stream.log so warning lines never obscure time=HH:MM:SS
     try:
-        res = subprocess.run(["tail", "-n", "100", LOG_FILE], capture_output=True, text=True)
-        matches = re.findall(r"time=(\d+):(\d+):(\d+(?:\.\d+)?)", res.stdout)
+        with open(LOG_FILE, "rb") as f:
+            f.seek(0, os.SEEK_END)
+            size = f.tell()
+            f.seek(max(0, size - 524288))
+            chunk = f.read().decode("utf-8", errors="ignore")
+        # Isolate only the most recent FFmpeg session after the last Selected encoder marker
+        parts = chunk.split("[STREAM.SH] Selected encoder:")
+        session_chunk = parts[-1] if parts else chunk
+        session_id = ""
+        if len(parts) > 1:
+            prev_lines = parts[-2].splitlines()
+            if prev_lines:
+                session_id = prev_lines[-1][-30:] + f"_len{len(session_chunk)}"
+        matches = re.findall(r"time=(\d+):(\d+):(\d+(?:\.\d+)?)", session_chunk)
         if matches:
-            last = matches[-1]
-            h, m, s = float(last[0]), float(last[1]), float(last[2])
-            return h * 3600.0 + m * 60.0 + s
+            # Take the maximum elapsed timestamp recorded in the session (ignoring 00:00:00.05 glitches)
+            best = 0.0
+            for m in matches[-50:]:
+                sec = float(m[0]) * 3600.0 + float(m[1]) * 60.0 + float(m[2])
+                if sec > best:
+                    best = sec
+            return best, session_id
     except Exception as e:
         print(f"Warning: could not parse elapsed time from log: {e}")
-    return 0.0
+    return 0.0, ""
 
 def get_duration(filepath):
+    try:
+        # All broadcast MP3s are 192 kbps CBR (24,000 bytes/sec)
+        sz = os.path.getsize(filepath)
+        if sz > 4096:
+            return sz / 24000.0
+    except Exception:
+        pass
     try:
         cmd = ["ffprobe", "-i", filepath, "-show_entries", "format=duration", "-v", "quiet", "-of", "csv=p=0"]
         out = subprocess.check_output(cmd, text=True).strip()
@@ -38,21 +61,42 @@ def get_duration(filepath):
         return 200.0 # fallback
 
 def rotate():
+    elapsed, session_id = get_last_elapsed_seconds()
+    last_rot_file = os.path.join(DIR, ".last_rotated_session")
+
     fresh_marker = os.path.join(DIR, ".playlist_fresh")
     if os.path.exists(fresh_marker):
         try:
             os.remove(fresh_marker)
         except OSError:
             pass
+        if session_id:
+            try:
+                with open(last_rot_file, "w") as lf:
+                    lf.write(f"{session_id}:{int(elapsed)}")
+            except Exception:
+                pass
         print("✓ Freshly built playlist detected; starting directly at newly queued Track #1.")
         return
 
-    elapsed = get_last_elapsed_seconds()
     print(f"Last stream session elapsed time: {elapsed:.1f}s ({elapsed/60:.1f} minutes)")
     
     if elapsed < 15.0:
         print("Stream ran for less than 15s; keeping current playhead.")
         return
+    if session_id and os.path.exists(last_rot_file):
+        try:
+            if open(last_rot_file).read().strip() == f"{session_id}:{int(elapsed)}":
+                print("Session already rotated; skipping duplicate rotation.")
+                return
+        except Exception:
+            pass
+    if session_id:
+        try:
+            with open(last_rot_file, "w") as lf:
+                lf.write(f"{session_id}:{int(elapsed)}")
+        except Exception:
+            pass
 
     if not os.path.exists(PLAYLIST):
         print("playlist.txt does not exist; skipping rotation.")

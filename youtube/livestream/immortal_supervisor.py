@@ -68,7 +68,7 @@ def read_latest_frame_and_age(log_path: Path) -> tuple[int, float, float]:
         with open(log_path, "rb") as f:
             f.seek(0, os.SEEK_END)
             size = f.tell()
-            f.seek(max(0, size - 8192))
+            f.seek(max(0, size - 65536))
             tail = f.read().decode("utf-8", errors="ignore")
         frames = FRAME_RE.findall(tail)
         speeds = SPEED_RE.findall(tail)
@@ -168,7 +168,6 @@ def supervise(repo_root: Path, stall_timeout_sec: float = 25.0) -> None:
                 log(f"stream.sh exited with code {stream_proc.returncode}. Preparing instant self-heal...")
                 restart_count += 1
 
-            run_rotate_playlist(repo_root)
             valid_count = sanitize_playlist(playlist_path)
             run_sync_telemetry(repo_root)
 
