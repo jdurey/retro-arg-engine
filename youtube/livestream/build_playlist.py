@@ -52,8 +52,16 @@ def get_base_root(path):
     b = re.sub(r'[^a-z0-9]', '', b)
     return b
 
-# 2. Collect all unique master vocal songs
-all_songs = [t for t in glob.glob(os.path.join(REAL_SONGS_DIR, "*.mp3")) if os.path.isfile(t)]
+# 2. Collect all unique master vocal songs (excluding removed items)
+EXCLUDED_SONGS = {
+    "radio_two_voices.mp3",
+    "radio_synthetic_dawn_retro.mp3",
+    "radio_end_like_that.mp3",
+}
+all_songs = [
+    t for t in glob.glob(os.path.join(REAL_SONGS_DIR, "*.mp3"))
+    if os.path.isfile(t) and os.path.basename(t) not in EXCLUDED_SONGS
+]
 if not all_songs:
     raise RuntimeError(f"No songs found in {REAL_SONGS_DIR}!")
 
@@ -69,9 +77,8 @@ if os.path.exists(DOWNLOADS_DIR):
 core_nova_songs = [s for s in all_songs if os.path.basename(s) not in for_livestream_slugs]
 for_livestream_songs = [s for s in all_songs if os.path.basename(s) in for_livestream_slugs]
 
-# Identify priority opening lineup for Cycle 1: Two Voices + newly restored Nova Hart singles + classics
+# Identify priority opening lineup for Cycle 1: newly restored Nova Hart singles + classics
 PRIORITY_OPENERS = [
-    "radio_two_voices.mp3",
     "radio_the_second_voice.mp3",
     "radio_crossing_this_line_remastered.mp3",
     "radio_echoes_of_tomorrow_80s_hard_rock_remix.mp3",

@@ -48,10 +48,18 @@ RADIO_BROADCAST_FILTER = (
 
 from concurrent.futures import ThreadPoolExecutor
 
+EXCLUDED_SLUGS = {
+    "radio_two_voices.mp3",
+    "radio_synthetic_dawn_retro.mp3",
+    "radio_end_like_that.mp3",
+}
+
 def process_one_track(item):
     fname, force = item
     src_path = os.path.join(DOWNLOADS_DIR, fname)
     dest_filename = slugify(fname)
+    if dest_filename in EXCLUDED_SLUGS:
+        return None
     dest_path = os.path.join(DEST_DIR, dest_filename)
 
     src_mtime = os.path.getmtime(src_path)
