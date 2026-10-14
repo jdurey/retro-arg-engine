@@ -175,6 +175,14 @@ def compute_diagnostic_ramp(current_track: dict, relay: dict) -> dict:
             "line2": "330/495/990 HZ CALIBRATION TRIAD CANCELS UNDER L+R MONO SUMMATION",
             "line3": "ISOLATE 750 HZ BIAS CW SALT -> stardust-archive.net/forensics/index.html",
         }
+    if "two_voices" in stem or "only_we_remain" in stem:
+        return {
+            "mode": "ANOMALY_WARN",
+            "fault_code": "SIGNAL 0x0B // SD-0010 COUNTERPOINT",
+            "line1": f"[! SIGNAL 0x0B] REEL SD-0010 DUAL-CARRIER COUNTERPOINT: {current_track['display_title'][:28].upper()}",
+            "line2": "14.2001 HZ HETERODYNE BEAT LOCKED -> ANALYZE BUTTON 4 IN /forensics/signal_lab.html",
+            "line3": "UNSEAL SECTOR 6 EPILOGUE IN TERMINAL -> stardust-archive.net/forensics/index.html",
+        }
     return {
         "mode": "NOMINAL",
         "fault_code": "PARITY NOMINAL",
@@ -329,11 +337,21 @@ def build_telemetry_snapshot(repo_root: Path, now_ts: float | None = None, force
     elapsed_sec = stream_metrics.get("elapsed_sec") or 0.0
 
     cycle_number = int(total_uptime_sec // CYCLE_DURATION_SEC) + 1
-    avg_item_sec = 99.0
-    if is_live and elapsed_sec > 0:
-        playhead_index = int(elapsed_sec // avg_item_sec) % len(tracks)
-    else:
-        playhead_index = 0
+    playhead_index = 0
+    if is_live and elapsed_sec > 0 and tracks:
+        accum = 0.0
+        for idx, tpath in enumerate(tracks):
+            try:
+                # All broadcast tracks are 192 kbps CBR MP3 (24,000 bytes/sec)
+                dur = max(1.5, os.path.getsize(tpath) / 24000.0)
+            except OSError:
+                dur = 99.0
+            if accum + dur > elapsed_sec:
+                playhead_index = idx
+                break
+            accum += dur
+        else:
+            playhead_index = int(elapsed_sec // 99.0) % len(tracks)
 
     current_track = classify_track(tracks[playhead_index])
     next_track = classify_track(tracks[(playhead_index + 1) % len(tracks)])
@@ -385,7 +403,8 @@ def build_telemetry_snapshot(repo_root: Path, now_ts: float | None = None, force
                 "step_1_sstv_anchors": "Demodulate rabbit_08 VIS-1200Hz raster -> DMA anchors tokyo-garden-1420 & siliconvalley-lab-1984",
                 "step_2_afsk_mask": "Demodulate rabbit_09 Bell-103 AX.25 frame -> Feistel permutation mask 0x3A5F",
                 "step_3_phase_salt": "Sum L+R on rabbit_10 (-0.94 phase null) -> 750 Hz CW egress salt 7704-AKASAKA",
-                "step_4_xor_synthesis": "XOR memory addresses (0x89B2B2D8 ^ 0x89B2D39A ^ 0x3A5F) + salt -> RESTORE 5 0x89B2-5BC8-7704-AKASAKA",
+                "step_4_xor_synthesis": "XOR memory addresses (0x89B2B2D8 ^ 0x89B2D39A ^ 0x3A5F) + salt -> RESTORE 5 0x89B2-392C-7704-AKASAKA",
+                "step_5_two_voices_counterpoint": "Analyze Reel SD-0010 (Two Voices, Button 4) + 14.2 Hz Counterpoint Lock -> RESTORE 6 TWO-VOICES-1420-COUNTERPOINT",
             },
         },
         "active_relay": relay,
@@ -426,6 +445,7 @@ def main() -> None:
     args = parser.parse_args()
 
     out_json = args.out_json or (args.repo_root / "site" / "assets" / "live_telemetry.json")
+    out_forensics_json = args.repo_root / "site" / "forensics" / "live_telemetry.json"
     out_ass = args.out_ass or (args.repo_root / "youtube" / "livestream" / "live_telemetry.ass")
     out_hud = args.out_hud_png or (args.repo_root / "youtube" / "livestream" / "live_hud.png")
     out_json.parent.mkdir(parents=True, exist_ok=True)
@@ -434,7 +454,10 @@ def main() -> None:
 
     while True:
         snap = build_telemetry_snapshot(args.repo_root, force_offline=args.offline)
-        out_json.write_text(json.dumps(snap, indent=2), encoding="utf-8")
+        payload = json.dumps(snap, indent=2)
+        out_json.write_text(payload, encoding="utf-8")
+        if out_forensics_json.parent.exists():
+            out_forensics_json.write_text(payload, encoding="utf-8")
         out_ass.write_text(generate_ass_overlay(snap), encoding="utf-8")
         render_crt_hud_png(out_hud, snap["diagnostic_ramp"])
         if not args.daemon:

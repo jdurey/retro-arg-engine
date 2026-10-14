@@ -2,14 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>ASHFORD POLYTECHNIC // 14.2 HZ SSTV &amp; AFSK SIGNAL DECODER (1995)</title>
-  <meta name="description" content="Orion Records &amp; Ashford Polytechnic Sub-Carrier Signal Demodulation Laboratory: Robot36 SSTV, Bell 103 AFSK, and 14.2001 Hz Phase Inversion Console.">
+  <title>ASHFORD POLYTECHNIC // 14.2 HZ SSTV, AFSK &amp; COUNTERPOINT SIGNAL DECODER v3.0 (1995)</title>
+  <meta name="description" content="Orion Records &amp; Ashford Polytechnic Sub-Carrier Signal Demodulation Laboratory: Robot36 SSTV, Bell 103 AFSK, 180-Deg Phase Null, and SD-0010 Two Voices Counterpoint Analyzer.">
   <style>
     :root {
       --bg: #040804;
       --fg: #33ff33;
       --dim: #166816;
       --amber: #ffb000;
+      --cyan: #33ffff;
       --panel: #071107;
     }
     * { box-sizing: border-box; }
@@ -22,7 +23,7 @@
       line-height: 1.45;
     }
     .wrap {
-      max-width: 1080px;
+      max-width: 1120px;
       margin: 0 auto;
       border: 2px solid var(--fg);
       background: var(--panel);
@@ -48,6 +49,9 @@
       gap: 16px;
       margin-top: 12px;
     }
+    @media (max-width: 800px) {
+      .grid { grid-template-columns: 1fr; }
+    }
     .card {
       border: 1px solid var(--dim);
       padding: 12px;
@@ -71,7 +75,7 @@
       background: #041604;
       color: var(--fg);
       border: 1px solid var(--fg);
-      padding: 7px 12px;
+      padding: 7px 11px;
       font-family: inherit;
       font-size: 12px;
       cursor: pointer;
@@ -82,8 +86,16 @@
       color: #000;
       font-weight: bold;
     }
+    button.amber-btn {
+      border-color: var(--amber);
+      color: var(--amber);
+    }
+    button.amber-btn:hover, button.amber-btn.active {
+      background: var(--amber);
+      color: #000;
+    }
     .log {
-      height: 165px;
+      height: 185px;
       overflow-y: auto;
       background: #010301;
       border: 1px solid var(--dim);
@@ -102,57 +114,65 @@
       font-size: 12px;
       margin-bottom: 12px;
     }
-    a { color: var(--amber); }
+    a { color: var(--amber); text-decoration: underline; }
+    a:hover { color: #ffffff; }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <h1>ASHFORD POLYTECHNIC DSP LAB // SUB-CARRIER DEMODULATOR v2.4 (OCT 1995)</h1>
+    <h1>ASHFORD POLYTECHNIC DSP LAB // SUB-CARRIER &amp; COUNTERPOINT DEMODULATOR v3.0 (OCT 1995)</h1>
     <div class="sub">
-      COOPERATIVE TELEMETRY NODE: <a href="/forensics/index.html">RETURN TO MARCUS HALE TERMINAL</a> |
-      CARRIER LOCK: <strong>14.2001 HZ</strong> |
-      FEDERATION LINKS: <a href="/federation/ashford-poly.org/index.html">ASHFORD-POLY</a> &middot;
-      <a href="/federation/kamome-net.org/index.html">KAMOME-NET</a> &middot;
-      <a href="/federation/relcom-node08.org/index.html">RELCOM-08</a> &middot;
-      <a href="/federation/redcoyoacan.org/index.html">RED-COYOACAN</a>
+      COOPERATIVE TELEMETRY NODE: <a href="/forensics/index.html"><strong>&gt;&gt; OPEN MARCUS HALE VT100 TERMINAL &lt;&lt;</strong></a> |
+      CARRIER LOCK: <strong>14.2001 HZ</strong><br>
+      FEDERATED LAB DOSSIERS:
+      <a href="/forensics/ashford_poly.html">ASHFORD-POLY (STAGE III)</a> &middot;
+      <a href="/forensics/kamome_net.html">KAMOME-NET (STAGE I)</a> &middot;
+      <a href="/forensics/relcom_node08.html">RELCOM-08 (STAGE II)</a> &middot;
+      <a href="/forensics/red_coyoacan.html">RED-COYOACAN (STAGE IV)</a> &middot;
+      <a href="/forensics/usenet_1995_feed.html">1995 USENET SPOOL</a> &middot;
+      <a href="/index.html">MAIN PORTAL</a>
     </div>
 
     <div class="telemetry-bar" id="live-bar">
-      <span id="live-track">LIVE STREAM PLAYHEAD: SYNCING...</span>
+      <span id="live-track">BROADCAST MONITOR: SYNCING...</span>
       <span id="live-relay">ACTIVE RELAY: NODE #07 ASHFORD-POLY (4880 kHz)</span>
-      <span id="live-beacon">BEACON KEY: STANDBY</span>
+      <span id="live-beacon">DIAGNOSTIC BUS: FAULT 0x08 / 0x09 / 0x0A / 0x0B ARMED</span>
     </div>
 
     <div class="btn-row">
-      <button id="btn-sstv" onclick="loadIntercept('sstv')">1. LOAD RABBIT-08 (SSTV B2 SCHEMATIC)</button>
-      <button id="btn-afsk" onclick="loadIntercept('afsk')">2. LOAD RABBIT-09 (BELL-103 RELCOM PACKET)</button>
-      <button id="btn-phase" onclick="loadIntercept('phase')">3. LOAD RABBIT-10 (180&deg; PHASE-INVERTED STEM)</button>
-      <button id="btn-cancel" onclick="togglePhaseCancel()">PHASE CANCELLATION (L+R MONO SUM): OFF</button>
-      <button onclick="stopLabAudio()">STOP SIGNAL</button>
+      <button id="btn-sstv" onclick="loadIntercept('sstv')">1. DEMODULATE RABBIT-08 (VIS-1200HZ RASTER)</button>
+      <button id="btn-afsk" onclick="loadIntercept('afsk')">2. DEMODULATE RABBIT-09 (BELL-103 AX.25 FRAME)</button>
+      <button id="btn-phase" onclick="loadIntercept('phase')">3. LOAD RABBIT-10 (CORR -0.94 DIFFERENTIAL STEM)</button>
+      <button id="btn-cancel" onclick="togglePhaseCancel()">DIFFERENTIAL PHASE NULL (L+R MONO SUM): OFF</button>
+      <button id="btn-twovoices" class="amber-btn" onclick="loadIntercept('twovoices')">4. ANALYZE REEL SD-0010: "TWO VOICES" (DUAL-CARRIER)</button>
+      <button id="btn-counterpoint" class="amber-btn" onclick="toggleCounterpointLock()">HARMONIC COUNTERPOINT LOCK (14.2 HZ): OFF</button>
+      <button onclick="stopLabAudio()">HALT SIGNAL</button>
     </div>
 
     <div class="grid">
       <div class="card">
-        <h2>REAL-TIME FFT WATERFALL &amp; CARRIER SPECTRUM (180–4800 HZ)</h2>
+        <h2>REAL-TIME FFT WATERFALL &amp; SUB-CARRIER SPECTRUM (180–6400 HZ)</h2>
         <canvas id="waterfall" width="480" height="220"></canvas>
       </div>
       <div class="card">
-        <h2>SSTV SCANLINE RASTERIZER (ROBOT36 / 1500–2300 HZ LUMINANCE)</h2>
+        <h2 id="right-canvas-title">VIS-1200HZ SCANLINE RASTERIZER / LISSAJOUS X-Y VECTORSCOPE</h2>
         <canvas id="sstv-canvas" width="256" height="220"></canvas>
       </div>
     </div>
 
     <div class="grid">
       <div class="card">
-        <h2>BELL-103 AFSK (1270/1070 HZ) &amp; MORSE TELEMETRY BUFFER</h2>
-        <div class="log" id="afsk-log">[READY]: Select an intercept above to initialize Web Audio FFT &amp; zero-crossing demodulator...</div>
+        <h2>DEMODULATOR BUFFER (BELL-103 AFSK, 750 HZ CW &amp; DUAL-VOCAL HARMONICS)</h2>
+        <div class="log" id="afsk-log">[READY]: Select a captured broadcast anomaly (1–4) above to initialize Web Audio FFT, Lissajous phase analyzer &amp; zero-crossing demodulator...</div>
       </div>
       <div class="card">
-        <h2>PHASE CANCELLATION &amp; SECTOR 5 RECONSTRUCTION INSTRUCTIONS</h2>
-        <div class="log" id="guide-log">1. RABBIT-08 (SSTV): Decodes the 1200 Hz horizontal sync pulses and 1500-2300 Hz scanlines into the Sublevel B2-114 Vault &amp; Nevada dish diagram.
-2. RABBIT-09 (BELL-103 AFSK): Demodulates the Relcom Node-08 AX.25 packet containing the XOR dyad seed (0x3A5F).
-3. RABBIT-10 (PHASE STEM): Contains a loud 180-degree out-of-phase masking chord across Left/Right channels. Click [PHASE CANCELLATION (L+R MONO SUM)] to cancel the masking carrier and isolate the 750 Hz Morse key for Sector 5:
-   -> RESTORE 5 ASHFORD-KAMOME-1420</div>
+        <h2>LAB NOTEBOOK // DR. MEI-LING CHEN (<a href="/forensics/ashford_poly.html">ASHFORD POLYTECHNIC</a>, OCT 1995)</h2>
+        <div class="log" id="guide-log">OBSERVATION LOG — SUBLEVEL B2 EMERGENCY EGRESS &amp; REEL SD-0010 ("TWO VOICES"):
+1. [STAGE I — <a href="/forensics/kamome_net.html">KAMOME-NET</a>]: Rasterize rabbit_08 (Button 1) to identify the two GeoCities DMA anchor slugs.
+2. [STAGE II — <a href="/forensics/relcom_node08.html">RELCOM-08</a>]: Demodulate rabbit_09 (Button 2) to extract the 16-bit Feistel permutation mask.
+3. [STAGE III — <a href="/forensics/ashford_poly.html">ASHFORD-POLY</a>]: Load rabbit_10 (Button 3) and engage [DIFFERENTIAL PHASE NULL (L+R MONO SUM)] to cancel the -0.94 triad and isolate the 750 Hz CW egress salt.
+4. [STAGE IV — <a href="/forensics/red_coyoacan.html">RED-COYOACAN</a>]: Run XOR &lt;ANCHOR_A&gt; &lt;ANCHOR_B&gt; &lt;MASK&gt; in the <a href="/forensics/index.html">VT100 Terminal</a> to unlock Sector 5.
+5. [STAGE V — REEL SD-0010 "TWO VOICES"]: Load Button 4 ("Two Voices") and engage [HARMONIC COUNTERPOINT LOCK (14.2 HZ)] while monitoring the Lissajous X-Y scope to extract the Sector 6 Counterpoint Key!</div>
       </div>
     </div>
   </div>
@@ -163,9 +183,11 @@
     let audioCtx = null;
     let analyser = null;
     let sourceNode = null;
+    let synthSource = null;
     let splitter = null;
     let merger = null;
     let phaseSumActive = false;
+    let counterpointLocked = false;
     let currentMode = null;
     let sstvRow = 0;
     let decodeTimer = null;
@@ -176,29 +198,31 @@
     const sstvCtx = sstvCanvas.getContext("2d");
     const afskLog = document.getElementById("afsk-log");
     const audioEl = document.getElementById("lab-audio");
+    const rightTitle = document.getElementById("right-canvas-title");
 
     const INTERCEPT_URLS = {
-      sstv: "/assets/audio/forensics/rabbit_08_sstv_b2_schematic.mp3",
-      afsk: "/assets/audio/forensics/rabbit_09_bell103_relcom_packet.mp3",
-      phase: "/assets/audio/forensics/rabbit_10_phase_inverted_hart_stem.mp3"
+      sstv: ["/forensics/rabbit_08_sstv_b2_schematic.mp3", "/assets/audio/forensics/rabbit_08_sstv_b2_schematic.mp3"],
+      afsk: ["/forensics/rabbit_09_bell103_relcom_packet.mp3", "/assets/audio/forensics/rabbit_09_bell103_relcom_packet.mp3"],
+      phase: ["/forensics/rabbit_10_phase_inverted_hart_stem.mp3", "/assets/audio/forensics/rabbit_10_phase_inverted_hart_stem.mp3"],
+      twovoices: ["/assets/audio/forensics/radio_two_voices.mp3", "/assets/audio/streams/two_voices_14k.mp3"]
     };
 
     const B2_BITMAP = [
       "################",
-      "#..............#",
+      "#B2-DMA-MAP-89.#",
       "#.####...####..#",
       "#.#...#.#....#.#",
       "#.####......#..#",
       "#.#...#...##...#",
       "#.####...######.",
       "#..............#",
-      "#..14.2001.HZ..#",
-      "#...*......*...#",
-      "#....*....*....#",
-      "#.....****.....#",
-      "#......**......#",
+      "#A:TOKYO/1420..#",
+      "#B:SV-LAB/1984.#",
+      "#..............#",
+      "#..*........*..#",
+      "#...*..**..*...#",
       "#....******....#",
-      "#..37.242N.....#",
+      "#..XOR->RELCOM.#",
       "################"
     ];
 
@@ -215,26 +239,26 @@
         sourceNode = audioCtx.createMediaElementSource(audioEl);
         splitter = audioCtx.createChannelSplitter(2);
         merger = audioCtx.createChannelMerger(2);
-        rebuildRouting();
-        requestAnimationFrame(renderWaterfall);
+        rebuildRouting(sourceNode);
+        requestAnimationFrame(renderWaterfallAndScope);
       }
       if (audioCtx.state === "suspended") audioCtx.resume();
     }
 
-    function rebuildRouting() {
-      if (!sourceNode) return;
-      try { sourceNode.disconnect(); } catch (e) {}
+    function rebuildRouting(activeSource) {
+      const src = activeSource || synthSource || sourceNode;
+      if (!src || !audioCtx) return;
+      try { src.disconnect(); } catch (e) {}
       try { splitter.disconnect(); } catch (e) {}
       try { merger.disconnect(); } catch (e) {}
       try { analyser.disconnect(); } catch (e) {}
 
       if (phaseSumActive) {
-        // Sum Left + Right equally into both ears so 180-degree out-of-phase masking cancels out!
         const gainL = audioCtx.createGain();
         const gainR = audioCtx.createGain();
         gainL.gain.value = 0.5;
         gainR.gain.value = 0.5;
-        sourceNode.connect(splitter);
+        src.connect(splitter);
         splitter.connect(gainL, 0);
         splitter.connect(gainR, 1);
         gainL.connect(merger, 0, 0);
@@ -244,22 +268,87 @@
         merger.connect(analyser);
         analyser.connect(audioCtx.destination);
       } else {
-        sourceNode.connect(analyser);
+        src.connect(analyser);
         analyser.connect(audioCtx.destination);
       }
+    }
+
+    function startProceduralSignal(mode) {
+      if (!audioCtx) return;
+      if (synthSource) {
+        try { synthSource.stop(); synthSource.disconnect(); } catch (e) {}
+        synthSource = null;
+      }
+      const sr = audioCtx.sampleRate;
+      const dur = 14;
+      const buf = audioCtx.createBuffer(2, sr * dur, sr);
+      const L = buf.getChannelData(0);
+      const R = buf.getChannelData(1);
+      let phase = 0;
+
+      for (let i = 0; i < L.length; i++) {
+        const t = i / sr;
+        if (mode === "sstv") {
+          const lineT = t % 0.4;
+          const freq = t < 0.4 ? 1900 : (lineT < 0.035 ? 1200 : 1500 + ((Math.sin(t * 47) + 1) * 400));
+          phase += (2 * Math.PI * freq) / sr;
+          const s = 0.25 * Math.sin(phase);
+          L[i] = s; R[i] = s;
+        } else if (mode === "afsk") {
+          const bit = Math.floor(t * 110) % 2;
+          const freq = bit ? 1270 : 1070;
+          phase += (2 * Math.PI * freq) / sr;
+          const s = 0.25 * Math.sin(phase);
+          L[i] = s; R[i] = s;
+        } else if (mode === "twovoices") {
+          // Dual-vocal counterpoint harmonic synthesis (Voice A: 440/880 Hz, Voice B: 554.37/659.25 Hz + 14.2 Hz beat)
+          const vA = 0.22 * Math.sin(2 * Math.PI * 440 * t) + 0.11 * Math.sin(2 * Math.PI * 880 * t);
+          const vB = 0.22 * Math.sin(2 * Math.PI * (440 + 14.2001) * t) + 0.12 * Math.sin(2 * Math.PI * 659.25 * t);
+          L[i] = vA;
+          R[i] = vB;
+        } else {
+          const mask = 0.22 * Math.sin(2 * Math.PI * 330 * t) + 0.16 * Math.sin(2 * Math.PI * 495 * t) + 0.12 * Math.sin(2 * Math.PI * 990 * t);
+          const cwOn = (Math.floor(t * 14) % 3 !== 0) ? 1 : 0;
+          const cw = 0.18 * cwOn * Math.sin(2 * Math.PI * 750 * t);
+          L[i] = cw + mask;
+          R[i] = cw - mask;
+        }
+      }
+      synthSource = audioCtx.createBufferSource();
+      synthSource.buffer = buf;
+      rebuildRouting(synthSource);
+      synthSource.start();
     }
 
     function togglePhaseCancel() {
       ensureAudioGraph();
       phaseSumActive = !phaseSumActive;
       const btn = document.getElementById("btn-cancel");
-      btn.textContent = `PHASE CANCELLATION (L+R MONO SUM): ${phaseSumActive ? "ACTIVE [MASK CANCELLED]" : "OFF"}`;
+      btn.textContent = `DIFFERENTIAL PHASE NULL (L+R MONO SUM): ${phaseSumActive ? "ACTIVE [TRIAD CANCELLED]" : "OFF"}`;
       btn.classList.toggle("active", phaseSumActive);
-      rebuildRouting();
+      rebuildRouting(synthSource || sourceNode);
       if (phaseSumActive && currentMode === "phase") {
-        appendLog("[PHASE NULL LOCKED]: 180-deg masking chord cancelled (-42 dB).");
-        appendLog("[750 HZ MORSE ISOLATED]: ... . -.-. - --- .-. / ..... / -.- . -.-- / .- ... .... ..-. --- .-. -.. -....- -.- .- -- --- -- . -....- .---- ....- ..--- -----");
-        appendLog("[DECODED PLAINTEXT]: SECTOR 5 KEY: ASHFORD-KAMOME-1420");
+        appendLog("[PHASE NULL LOCKED]: 180-deg 330/495/990 Hz calibration triad attenuated by -42.4 dB.");
+        appendLog("[750 HZ CW BIAS CARRIER ISOLATED]: -... ..--- / . --. .-. . ... ... / ... .- .-.. - / --... --... ----- ....- / .- -.- .- ... .- -.- .-");
+        appendLog("[DEMODULATED CW INSCRIPTION]: B2 EGRESS SALT 7704 AKASAKA");
+      }
+    }
+
+    function toggleCounterpointLock() {
+      ensureAudioGraph();
+      counterpointLocked = !counterpointLocked;
+      const btn = document.getElementById("btn-counterpoint");
+      btn.textContent = `HARMONIC COUNTERPOINT LOCK (14.2 HZ): ${counterpointLocked ? "LOCKED [DUAL-VOICE SYNC]" : "OFF"}`;
+      btn.classList.toggle("active", counterpointLocked);
+      if (counterpointLocked && currentMode === "twovoices") {
+        appendLog("\n[14.2001 HZ HETERODYNE LOCK ACHIEVED ON REEL SD-0010 'TWO VOICES']:");
+        appendLog("  • Voice Bus A (Studio Vocal — Nova Hart): 2,800 Hz Formant Peak Locked");
+        appendLog("  • Voice Bus B (Worldnet Return — Marcus Hale): 14.2001 Hz Inter-Channel Beat Isolated");
+        appendLog("  • Counterpoint Runout Matrix: TWO-VOICES-1420-COUNTERPOINT");
+        appendLog("  -> Open VT100 Terminal (/forensics/index.html) and execute:");
+        appendLog("     RESTORE 6 TWO-VOICES-1420-COUNTERPOINT");
+      } else if (counterpointLocked) {
+        appendLog("[NOTICE]: Load Button 4 ('ANALYZE REEL SD-0010: TWO VOICES') to lock onto the dual-vocal counterpoint stem.");
       }
     }
 
@@ -268,34 +357,46 @@
       currentMode = mode;
       sstvRow = 0;
       if (decodeTimer) clearInterval(decodeTimer);
+      if (synthSource) {
+        try { synthSource.stop(); synthSource.disconnect(); } catch (e) {}
+        synthSource = null;
+      }
       sstvCtx.fillStyle = "#000";
       sstvCtx.fillRect(0, 0, sstvCanvas.width, sstvCanvas.height);
 
-      audioEl.src = INTERCEPT_URLS[mode];
+      const candidates = INTERCEPT_URLS[mode];
+      audioEl.src = candidates[0];
+      rebuildRouting(sourceNode);
       audioEl.play().catch(() => {
-        appendLog("[SYNTHESIS FALLBACK]: Rendering procedural DSP stream in Web Audio...");
+        audioEl.src = candidates[1];
+        audioEl.play().catch(() => {
+          startProceduralSignal(mode);
+        });
       });
 
       if (mode === "sstv") {
-        appendLog("\n[VIS HEADER DETECTED]: 1900 Hz Leader -> 1200 Hz Sync -> Robot36 Grayscale");
+        rightTitle.textContent = "VIS-1200HZ SCANLINE RASTERIZER (1500–2300 HZ LUMINANCE)";
+        appendLog("\n[VIS HEADER DETECTED]: 1900 Hz Leader -> 1200 Hz Sync -> Sublevel B2 DMA Raster");
         decodeTimer = setInterval(() => {
           if (sstvRow >= 16) {
             clearInterval(decodeTimer);
-            appendLog("[SSTV FRAME COMPLETE]: Sublevel B2-114 Vault & 37.242N -115.810W Uplink Verified.");
+            appendLog("[RASTER COMPLETE]: Partition Anchor A = tokyo-garden-1420 | Anchor B = siliconvalley-lab-1984");
+            appendLog("[CW TAIL]: DMA ANCHORS TOKYO 1420 SV 1984 (Check X-Stardust-Memory-Addr headers or run XOR in terminal)");
             return;
           }
           drawSstvScanline(sstvRow);
           sstvRow++;
         }, 420);
       } else if (mode === "afsk") {
-        appendLog("\n[BELL-103 CARRIER DETECTED]: Mark=1270 Hz | Space=1070 Hz | Baud=110");
+        rightTitle.textContent = "BELL-103 AX.25 PHASE CONSTELLATION (1270 / 1070 HZ)";
+        appendLog("\n[BELL-103 CARRIER DETECTED]: Mark=1270 Hz | Space=1070 Hz | Baud=110 (Relcom Node-08)");
         const frames = [
-          "RX AX.25: FM RELCOM-08 TO ASHFORD-07 UI PID=F0",
-          "0000: 52 45 4C 43 4F 4D 2D 4E 4F 44 45 30 38 20 46 52  RELCOM-NODE08 FR",
-          "0010: 41 4D 45 20 2F 2F 20 58 4F 52 2D 44 59 41 44 3A  AME // XOR-DYAD:",
-          "0020: 20 30 78 33 41 35 46 20 2F 2F 20 53 45 43 54 4F   0x3A5F // SECTO",
-          "0030: 52 2D 35 2D 4B 45 59 3A 20 41 53 48 46 4F 52 44  R-5-KEY: ASHFORD",
-          "0040: 2D 4B 41 4D 4F 4D 45 2D 31 34 32 30 0D 0A        -KAMOME-1420.."
+          "RX AX.25: FM RELCOM-08 TO ASHPOLY-07 UI PID=F0",
+          "0000: 53 45 51 3A 20 38 39 2D 30 39 2D 30 39 54 30 33  SEQ: 89-09-09T03",
+          "0010: 3A 35 39 5A 20 2F 2F 20 46 45 49 53 54 45 4C 2D  :59Z // FEISTEL-",
+          "0020: 4D 41 53 4B 3A 20 30 78 33 41 35 46 20 2F 2F 20  MASK: 0x3A5F // ",
+          "0030: 4E 55 4C 4C 20 43 48 2D 4C 2B 43 48 2D 52 20 4F  NULL CH-L+CH-R O",
+          "0040: 4E 20 52 45 45 4C 20 53 44 2D 30 30 30 39 0D 0A  N REEL SD-0009.."
         ];
         let idx = 0;
         decodeTimer = setInterval(() => {
@@ -306,11 +407,21 @@
           }
         }, 650);
       } else if (mode === "phase") {
-        appendLog("\n[STEREO DIFFERENTIAL DETECTED]: Left/Right correlation = -0.94 (180-deg out-of-phase masking carrier).");
+        rightTitle.textContent = "LISSAJOUS X-Y PHASE VECTORSCOPE (CH-L vs CH-R)";
+        appendLog("\n[STEREO DIFFERENTIAL DETECTED]: Ch-L / Ch-R phase correlation = -0.94 (330/495/990 Hz calibration triad).");
         if (!phaseSumActive) {
-          appendLog("[HINT]: Click 'PHASE CANCELLATION (L+R MONO SUM)' above to cancel the 330/495/990 Hz masking chord.");
+          appendLog("[DIAGNOSTIC]: 750 Hz bias CW is buried -18 dB under the out-of-phase triad. Engage DIFFERENTIAL PHASE NULL (L+R MONO SUM) to cancel the mask.");
         } else {
-          appendLog("[DECODED PLAINTEXT]: SECTOR 5 KEY: ASHFORD-KAMOME-1420");
+          appendLog("[DEMODULATED CW INSCRIPTION]: B2 EGRESS SALT 7704 AKASAKA");
+        }
+      } else if (mode === "twovoices") {
+        rightTitle.textContent = "DUAL-CARRIER LISSAJOUS COUNTERPOINT SCOPE (SD-0010)";
+        appendLog("\n[REEL SD-0010 LOADED]: 'Two Voices' (Sublevel B2 Broadcast Master // -16.1 LUFS)");
+        appendLog("[SPECTRAL TELEMETRY]: Dual interleaved vocal formants detected with a 14.2001 Hz phase-locked sub-carrier beat.");
+        if (!counterpointLocked) {
+          appendLog("[ACTION REQUIRED]: Click 'HARMONIC COUNTERPOINT LOCK (14.2 HZ)' above to heterodyne the two vocal stems and extract the Sector 6 key.");
+        } else {
+          appendLog("[COUNTERPOINT KEY EXTRACTED]: TWO-VOICES-1420-COUNTERPOINT (Run 'RESTORE 6 TWO-VOICES-1420-COUNTERPOINT' in VT100 Terminal)");
         }
       }
     }
@@ -327,24 +438,30 @@
       }
       sstvCtx.fillStyle = "#ffffff";
       sstvCtx.font = "10px Courier New";
-      if (rowIdx === 8) sstvCtx.fillText("14.2001 HZ", 68, rowIdx * rowH + 10);
-      if (rowIdx === 14) sstvCtx.fillText("B2 -> 37.242N", 56, rowIdx * rowH + 10);
+      if (rowIdx === 1) sstvCtx.fillText("B2-DMA-MAP-89", 42, rowIdx * rowH + 10);
+      if (rowIdx === 8) sstvCtx.fillText("A: tokyo-garden-1420", 36, rowIdx * rowH + 10);
+      if (rowIdx === 9) sstvCtx.fillText("B: siliconvalley-lab-1984", 24, rowIdx * rowH + 10);
+      if (rowIdx === 14) sstvCtx.fillText("MASK -> RELCOM-08", 42, rowIdx * rowH + 10);
     }
 
     function stopLabAudio() {
       audioEl.pause();
+      if (synthSource) {
+        try { synthSource.stop(); synthSource.disconnect(); } catch (e) {}
+        synthSource = null;
+      }
       if (decodeTimer) clearInterval(decodeTimer);
       appendLog("[SIGNAL HALTED]");
     }
 
-    function renderWaterfall() {
-      requestAnimationFrame(renderWaterfall);
+    let scopePhase = 0;
+    function renderWaterfallAndScope() {
+      requestAnimationFrame(renderWaterfallAndScope);
       if (!analyser) return;
       const bins = analyser.frequencyBinCount;
       const data = new Uint8Array(bins);
       analyser.getByteFrequencyData(data);
 
-      // Scroll waterfall down 1px
       const img = wfCtx.getImageData(0, 0, wfCanvas.width, wfCanvas.height - 1);
       wfCtx.putImageData(img, 0, 1);
 
@@ -354,20 +471,77 @@
         wfCtx.fillStyle = `rgb(${v > 190 ? v : 0}, ${Math.min(255, v + 25)}, ${v > 220 ? 120 : 0})`;
         wfCtx.fillRect(x, 0, 1, 1);
       }
+
+      // Render live Lissajous X-Y vectorscope when in phase, afsk, or twovoices mode
+      if (currentMode === "phase" || currentMode === "twovoices" || currentMode === "afsk") {
+        const timeData = new Uint8Array(bins);
+        analyser.getByteTimeDomainData(timeData);
+        sstvCtx.fillStyle = "rgba(0, 8, 0, 0.22)";
+        sstvCtx.fillRect(0, 0, sstvCanvas.width, sstvCanvas.height);
+
+        // Draw crosshairs
+        sstvCtx.strokeStyle = "#113311";
+        sstvCtx.lineWidth = 1;
+        sstvCtx.beginPath();
+        sstvCtx.moveTo(128, 0); sstvCtx.lineTo(128, 220);
+        sstvCtx.moveTo(0, 110); sstvCtx.lineTo(256, 110);
+        sstvCtx.stroke();
+
+        sstvCtx.strokeStyle = (currentMode === "twovoices" && counterpointLocked) ? "#ffb000" : "#33ff33";
+        sstvCtx.lineWidth = 1.6;
+        sstvCtx.beginPath();
+        scopePhase += 0.04;
+        for (let i = 0; i < 180; i++) {
+          const sample = (timeData[i] - 128) / 128.0;
+          const delayed = (timeData[(i + 19) % bins] - 128) / 128.0;
+          let x, y;
+          if (currentMode === "phase" && !phaseSumActive) {
+            // Anti-phase diagonal (r = -0.94)
+            x = 128 + sample * 95;
+            y = 110 - sample * 85 + delayed * 14;
+          } else if (currentMode === "phase" && phaseSumActive) {
+            // In-phase vertical mono sum (750 Hz CW isolated)
+            x = 128 + delayed * 8;
+            y = 110 + sample * 90;
+          } else if (currentMode === "twovoices") {
+            const ang = (i / 180) * Math.PI * 4 + scopePhase;
+            const r = counterpointLocked ? (68 + sample * 45) : (48 + sample * 70);
+            x = 128 + Math.cos(ang) * r;
+            y = 110 + Math.sin(ang * (counterpointLocked ? 1.5 : 1.07)) * (r * 0.82);
+          } else {
+            x = 128 + sample * 90;
+            y = 110 + delayed * 80;
+          }
+          if (i === 0) sstvCtx.moveTo(x, y);
+          else sstvCtx.lineTo(x, y);
+        }
+        sstvCtx.stroke();
+
+        sstvCtx.fillStyle = "#ffb000";
+        sstvCtx.font = "10px Courier New";
+        if (currentMode === "phase") {
+          sstvCtx.fillText(phaseSumActive ? "CORR: +1.00 [750HZ CW ISOLATED]" : "CORR: -0.94 [180-DEG ANTI-PHASE]", 8, 14);
+        } else if (currentMode === "twovoices") {
+          sstvCtx.fillText(counterpointLocked ? "14.2001 HZ COUNTERPOINT: LOCKED" : "DUAL-CARRIER STEM: UNLOCKED", 8, 14);
+        }
+      }
     }
 
     async function pollLiveTelemetry() {
-      try {
-        const res = await fetch("/api/telemetry", { cache: "no-store" }).catch(() => fetch("/assets/live_telemetry.json", { cache: "no-store" }));
-        if (!res || !res.ok) return;
-        const t = await res.json();
-        document.getElementById("live-track").textContent =
-          `LIVE #${t.playhead.playlist_index}: ${t.playhead.current_track.display_title}`;
-        document.getElementById("live-relay").textContent =
-          `RELAY: NODE #${String(t.active_relay.node).padStart(2, "0")} ${t.active_relay.code} (${t.active_relay.freq_khz} kHz)`;
-        document.getElementById("live-beacon").textContent =
-          `BEACON: ${t.carrier_14_2hz.ephemeral_beacon_key} [${t.carrier_14_2hz.sstv_forensic_window_open ? "SSTV OPEN" : "LOCKED"}]`;
-      } catch (e) {}
+      for (const url of ["/forensics/live_telemetry.json", "/assets/live_telemetry.json", "/api/telemetry"]) {
+        try {
+          const res = await fetch(url, { cache: "no-store" });
+          if (!res || !res.ok) continue;
+          const t = await res.json();
+          document.getElementById("live-track").textContent =
+            `PLAYHEAD #${t.playhead.playlist_index}: ${t.playhead.current_track.display_title}`;
+          document.getElementById("live-relay").textContent =
+            `RELAY: NODE #${String(t.active_relay.node).padStart(2, "0")} ${t.active_relay.code} (${t.active_relay.freq_khz} kHz)`;
+          document.getElementById("live-beacon").textContent =
+            `DIAGNOSTIC: ${t.diagnostic_ramp ? t.diagnostic_ramp.fault_code : t.carrier_14_2hz.ephemeral_beacon_key}`;
+          return;
+        } catch (e) {}
+      }
     }
     pollLiveTelemetry();
     setInterval(pollLiveTelemetry, 10000);

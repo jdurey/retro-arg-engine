@@ -191,6 +191,11 @@ C     SUBLEVEL B2 DMA JUMP VECTOR.
     XOR &lt;ANCHOR_SLUG_A&gt; &lt;ANCHOR_SLUG_B&gt; &lt;FEISTEL_MASK_HEX&gt;
   to compute the 16-bit DMA offset, then restore Sector 5:
     RESTORE 5 0x89B2-&lt;DMA_OFFSET&gt;-&lt;CW_SALT&gt;
+
+[STAGE V TECHNICAL NOTE // REEL SD-0010 "TWO VOICES" COUNTERPOINT BUS]:
+  Reel SD-0010 ("Two Voices") carries a dual-vocal counterpoint stem locked to
+  a 14.2001 Hz heterodyne beat. Load Button 4 in /forensics/signal_lab.html and
+  engage [HARMONIC COUNTERPOINT LOCK (14.2 HZ)] to extract the Sector 6 key.
 </PRE>
 <P>
   <B>PRIMARY ARCHIVE LINKS:</B>

@@ -259,14 +259,47 @@ ASHPOLY-07 specifying the 16-bit Feistel permutation mask.
 Demodulate rabbit_09 in /forensics/signal_lab.html, then run:
   XOR &lt;ANCHOR_A&gt; &lt;ANCHOR_B&gt; &lt;MASK&gt;
 in the VT100 Terminal (/forensics/index.html).</pre>
+
+    <h2>[SPOOL #904 // alt.fan.nova-hart] Unlisted Reel SD-0010 ("Two Voices") on Sublevel B2 Bus</h2>
+    <pre>From: elena@redcoyoacan.org (Elena Villalobos // Red Coyoacan Tape Exchange)
+Newsgroups: alt.fan.nova-hart,comp.dsp
+Date: Sat, 14 Oct 1995 09:10:04 GMT
+Message-ID: &lt;1995Oct14.091004.7345@redcoyoacan.org&gt;
+
+A tenth master reel just surfaced on the 24/7 satellite trunk: Reel SD-0010 ("Two Voices").
+Unlike the solo studio takes from 1988, this recording carries two interleaved vocal
+carriers separated by a 14.2001 Hz heterodyne offset.
+When you load Button 4 ("ANALYZE REEL SD-0010: TWO VOICES") in /forensics/signal_lab.html
+and engage [HARMONIC COUNTERPOINT LOCK (14.2 HZ)], the Lissajous X-Y vectorscope locks
+onto the counterpoint runout key for Sector 6 in /forensics/index.html!</pre>
     <div class="meta">INN 1.4unoff3 // Synchronized with 24/7 Broadcast Monitor (14.2001 Hz)</div>
   </div>
 </body>
 </html>
 """
     (forensics_dir / "usenet_1995_feed.html").write_text(usenet_feed_html, encoding="utf-8")
-    print("[BUILD_FORENSICS_DOSSIERS] Generated 5 verified HTML pages in", forensics_dir)
+
+    # Ensure forensic audio files and live_telemetry.json are mirrored into site/forensics/
+    import shutil
+    repo_root = site_dir.parent
+    for fname in (
+        "rabbit_08_sstv_b2_schematic.mp3",
+        "rabbit_09_bell103_relcom_packet.mp3",
+        "rabbit_10_phase_inverted_hart_stem.mp3",
+    ):
+        src_audio = repo_root / "assets" / "audio" / "forensics" / fname
+        if src_audio.exists():
+            shutil.copy2(src_audio, forensics_dir / fname)
+    tel_src = site_dir / "assets" / "live_telemetry.json"
+    if tel_src.exists():
+        shutil.copy2(tel_src, forensics_dir / "live_telemetry.json")
+
+    print("[BUILD_FORENSICS_DOSSIERS] Generated 5 verified HTML pages + forensic assets in", forensics_dir)
 
 
 if __name__ == "__main__":
-    build_all(Path("/tmp/stardust_expansion/site"))
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--repo-root", type=Path, default=Path(__file__).resolve().parents[1])
+    args = parser.parse_args()
+    build_all(args.repo_root / "site")
