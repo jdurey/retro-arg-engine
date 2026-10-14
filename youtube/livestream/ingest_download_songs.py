@@ -52,6 +52,19 @@ EXCLUDED_SLUGS = {
     "radio_two_voices.mp3",
     "radio_synthetic_dawn_retro.mp3",
     "radio_end_like_that.mp3",
+    "radio_tape_of_us_1989_rough_mix.mp3",
+    "radio_the_second_voice_1.mp3",
+    "radio_echoes_of_tomorrow_80s_hard_rock_remix.mp3",
+    "radio_faint_residual_(the_upload).mp3",
+    "radio_11_ghost_transit.mp3",
+    "radio_memory_hatch_reconstruction.mp3",
+    "radio_03_only_we_remain_1989_tokyo_master.mp3",
+    "radio_someone_else_s_memories_old.mp3",
+    "radio_the_world_moves_without_me_old.mp3",
+    "radio_nh_synthetic_dawn_1985_synth_original_mix.mp3",
+    "radio_abandoned_shell_es.mp3",
+    "radio_asset_loss_kr.mp3",
+    "radio_03_corridor_dreams.mp3",
 }
 
 def process_one_track(item):

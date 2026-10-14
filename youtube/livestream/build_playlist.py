@@ -40,28 +40,50 @@ out_file = os.path.join(HERE, "playlist.txt")
 def get_base_root(path):
     b = os.path.basename(path).lower()
     b = re.sub(r'^radio_', '', b)
-    b = re.sub(r'^\d+_', '', b)
+    b = b.replace('’', '_')
+    b = re.sub(r'^(?:\d+[a-z]?_|b_|nh_)', '', b)
     b = re.sub(r'\.mp3$', '', b)
-    b = re.sub(r'_old$', '', b)
-    b = re.sub(r'_\d+$', '', b)
-    b = re.sub(r'_v\d+$', '', b)
-    b = re.sub(r'_\d{4}_tokyo_master$', '', b)
-    b = re.sub(r'_movement_\d+$', '', b)
-    b = re.sub(r'_\(the_upload\)$', '', b)
-    b = re.sub(r'_reconstruction$', '', b)
+    b = re.sub(
+        r'(_19\d\d.*|_80s.*|_old|_1|_\(the_upload\)|_remastered|_v\d+|_es|_kr|_the_dead_hand|_marcus_and_nova_duet.*|_bonus_track|_final.*|_reconstruction|_retro)$',
+        '',
+        b,
+    )
     b = re.sub(r'[^a-z0-9]', '', b)
     return b
 
-# 2. Collect all unique master vocal songs (excluding removed items)
+# 2. Collect all unique master vocal songs (excluding removed items and duplicates)
 EXCLUDED_SONGS = {
     "radio_two_voices.mp3",
     "radio_synthetic_dawn_retro.mp3",
     "radio_end_like_that.mp3",
+    "radio_tape_of_us_1989_rough_mix.mp3",
+    "radio_the_second_voice_1.mp3",
+    "radio_echoes_of_tomorrow_80s_hard_rock_remix.mp3",
+    "radio_faint_residual_(the_upload).mp3",
+    "radio_11_ghost_transit.mp3",
+    "radio_memory_hatch_reconstruction.mp3",
+    "radio_03_only_we_remain_1989_tokyo_master.mp3",
+    "radio_someone_else_s_memories_old.mp3",
+    "radio_the_world_moves_without_me_old.mp3",
+    "radio_nh_synthetic_dawn_1985_synth_original_mix.mp3",
+    "radio_abandoned_shell_es.mp3",
+    "radio_asset_loss_kr.mp3",
+    "radio_03_corridor_dreams.mp3",
 }
-all_songs = [
+raw_songs = sorted(
     t for t in glob.glob(os.path.join(REAL_SONGS_DIR, "*.mp3"))
-    if os.path.isfile(t) and os.path.basename(t) not in EXCLUDED_SONGS
-]
+    if os.path.isfile(t)
+    and os.path.basename(t) not in EXCLUDED_SONGS
+    and os.path.getsize(t) > 50000  # Ignore 50ms bridge stubs
+)
+all_songs = []
+seen_roots = set()
+for s in raw_songs:
+    root = get_base_root(s)
+    if root not in seen_roots:
+        seen_roots.add(root)
+        all_songs.append(s)
+
 if not all_songs:
     raise RuntimeError(f"No songs found in {REAL_SONGS_DIR}!")
 
@@ -81,14 +103,14 @@ for_livestream_songs = [s for s in all_songs if os.path.basename(s) in for_lives
 PRIORITY_OPENERS = [
     "radio_the_second_voice.mp3",
     "radio_crossing_this_line_remastered.mp3",
-    "radio_echoes_of_tomorrow_80s_hard_rock_remix.mp3",
+    "radio_echoes_of_tomorrow.mp3",
     "radio_letting_go_of_the_flame.mp3",
     "radio_to_the_ends_of_forever.mp3",
     "radio_tape_of_us.mp3",
     "radio_asset_loss_the_dead_hand.mp3",
     "radio_abandoned_shell.mp3",
     "radio_the_world_moves_without_me.mp3",
-    "radio_nh_synthetic_dawn_1985_synth_original_mix.mp3",
+    "radio_04_synthetic_dawn.mp3",
 ]
 song_by_name = {os.path.basename(s): s for s in all_songs}
 newest_songs = [song_by_name[name] for name in PRIORITY_OPENERS if name in song_by_name]
@@ -152,7 +174,7 @@ def build_shuffled_cycle(song_list, avoid_recent=None, pin_first=None):
         avoid_recent = []
     if pin_first is None:
         pin_first = []
-    avoid_roots = {get_base_root(s) for s in avoid_recent[-8:] if s not in pin_first}
+    avoid_roots = {get_base_root(s) for s in avoid_recent[-25:] if s not in pin_first}
     pin_set = set(pin_first)
 
     core_rest = [s for s in core_nova_songs if s not in pin_set]
@@ -175,7 +197,6 @@ def build_shuffled_cycle(song_list, avoid_recent=None, pin_first=None):
         # Interleave pinned Nova Hart openers with shuffled tracks so both pools play right away
         opening = []
         p_copy = list(pin_first)
-        # Keep Track #1 (Two Voices) at index 0, then alternate pinned classics with other tracks
         opening.append(p_copy[0])
         p_idx = 1
         i_idx = 0
@@ -193,17 +214,17 @@ def build_shuffled_cycle(song_list, avoid_recent=None, pin_first=None):
     for attempt in range(400):
         cand = make_interleaved()
         score = 0
-        # Penalize repeating end of previous cycle in the first 8 songs
-        check_slice = cand[len(pin_first):len(pin_first) + 8]
+        # Penalize repeating end of previous cycle in the first 25 songs
+        check_slice = cand[len(pin_first):len(pin_first) + 25]
         for s in check_slice:
             if get_base_root(s) in avoid_roots:
                 score -= 50
 
-        # Penalize duplicate roots (e.g. movements or _old versions) being closer than 12 songs apart
+        # Penalize duplicate roots (e.g. movements) being closer than 15 songs apart
         recent = []
         for s in cand:
             r = get_base_root(s)
-            if r in recent[-12:]:
+            if r in recent[-15:]:
                 score -= 20
             recent.append(r)
 
@@ -224,7 +245,7 @@ for c_num in range(NUM_CYCLES):
     pin = newest_songs if c_num == 0 else []
     next_cycle = build_shuffled_cycle(all_songs, avoid_recent=last_tail, pin_first=pin)
     cycles.append(next_cycle)
-    last_tail = next_cycle[-10:]  # Protect the last 10 songs from appearing in the start of next cycle
+    last_tail = next_cycle[-25:]  # Protect the last 25 songs from appearing in the start of next cycle
 
 # Combine all cycles into ordered songs list
 ordered_songs = []
