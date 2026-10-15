@@ -17,6 +17,14 @@ def get_last_elapsed_seconds():
     if not os.path.exists(LOG_FILE):
         return 0.0, ""
     
+    last_rot_file = os.path.join(DIR, ".last_rotated_session")
+    already_rotated = ""
+    if os.path.exists(last_rot_file):
+        try:
+            already_rotated = open(last_rot_file).read().strip()
+        except Exception:
+            pass
+
     # Read the last 512 KB of stream.log so warning lines never obscure time=HH:MM:SS
     try:
         with open(LOG_FILE, "rb") as f:
@@ -24,23 +32,22 @@ def get_last_elapsed_seconds():
             size = f.tell()
             f.seek(max(0, size - 524288))
             chunk = f.read().decode("utf-8", errors="ignore")
-        # Isolate only the most recent FFmpeg session after the last Selected encoder marker
+        # Walk backwards through recent FFmpeg sessions so a brief <15s reconnect never masks a longer session
         parts = chunk.split("[STREAM.SH] Selected encoder:")
-        session_chunk = parts[-1] if parts else chunk
-        session_id = ""
-        if len(parts) > 1:
-            prev_lines = parts[-2].splitlines()
-            if prev_lines:
-                session_id = prev_lines[-1][-30:] + f"_len{len(session_chunk)}"
-        matches = re.findall(r"time=(\d+):(\d+):(\d+(?:\.\d+)?)", session_chunk)
-        if matches:
-            # Take the maximum elapsed timestamp recorded in the session (ignoring 00:00:00.05 glitches)
-            best = 0.0
-            for m in matches[-50:]:
-                sec = float(m[0]) * 3600.0 + float(m[1]) * 60.0 + float(m[2])
-                if sec > best:
-                    best = sec
-            return best, session_id
+        for idx in range(len(parts) - 1, 0, -1):
+            session_chunk = parts[idx]
+            prev_lines = parts[idx - 1].splitlines()
+            hdr_stamp = prev_lines[-1][:21] if prev_lines else f"idx{idx}"
+            matches = re.findall(r"time=(\d+):(\d+):(\d+(?:\.\d+)?)", session_chunk)
+            if matches:
+                best = 0.0
+                for m in matches[-50:]:
+                    sec = float(m[0]) * 3600.0 + float(m[1]) * 60.0 + float(m[2])
+                    if sec > best:
+                        best = sec
+                session_id = f"{hdr_stamp}:{int(best)}"
+                if best >= 15.0 and session_id != already_rotated:
+                    return best, session_id
     except Exception as e:
         print(f"Warning: could not parse elapsed time from log: {e}")
     return 0.0, ""
@@ -89,7 +96,7 @@ def rotate():
         if session_id:
             try:
                 with open(last_rot_file, "w") as lf:
-                    lf.write(f"{session_id}:{int(elapsed)}")
+                    lf.write(session_id)
             except Exception:
                 pass
         print("✓ Freshly built playlist detected; starting directly at newly queued Track #1.")
@@ -102,7 +109,7 @@ def rotate():
         return
     if session_id and os.path.exists(last_rot_file):
         try:
-            if open(last_rot_file).read().strip() == f"{session_id}:{int(elapsed)}":
+            if open(last_rot_file).read().strip() == session_id:
                 print("Session already rotated; skipping duplicate rotation.")
                 return
         except Exception:
@@ -110,7 +117,7 @@ def rotate():
     if session_id:
         try:
             with open(last_rot_file, "w") as lf:
-                lf.write(f"{session_id}:{int(elapsed)}")
+                lf.write(session_id)
         except Exception:
             pass
 

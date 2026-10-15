@@ -81,9 +81,13 @@ REGIONAL_RELAYS = [
 SCALE = 2
 LOGICAL_W, LOGICAL_H = 960, 540
 FRAME_W, FRAME_H = LOGICAL_W * SCALE, LOGICAL_H * SCALE
-# Front-facing symmetrical CRT glass interior in logical 960x540 coordinates (physical 1080p: 448x384 at x=732, y=332)
-CRT_X, CRT_Y, CRT_W, CRT_H = 366, 166, 224, 192
-MON_X, MON_Y, MON_W, MON_H = 215, 95, 450, 355
+# Logical internal coordinate space used by CRT drawing routines (224x192)
+CRT_X, CRT_Y, CRT_W, CRT_H = 308, 89, 224, 192
+# Physical 1080p coordinates of the 2x-larger CRT glass interior (688x488 at x=616..1304, y=204..692)
+CRT_PX_X, CRT_PX_Y, CRT_PX_W, CRT_PX_H = 616, 204, 688, 488
+CRT_SX = CRT_PX_W / float(CRT_W)
+CRT_SY = CRT_PX_H / float(CRT_H)
+MON_X, MON_Y, MON_W, MON_H = 202, 6, 555, 468
 
 TIME_RE = re.compile(r"time=(\d+):(\d+):(\d+(?:\.\d+)?)")
 SPEED_RE = re.compile(r"speed=\s*([0-9.]+)x")
@@ -93,17 +97,17 @@ BITRATE_RE = re.compile(r"bitrate=\s*([0-9.]+kbits/s)")
 FILE_RE = re.compile(r"file\s+'([^']+)'")
 
 try:
-    FONT_CRT_8 = ImageFont.truetype("/System/Library/Fonts/Menlo.ttc", 20, index=1)
-    FONT_CRT_9 = ImageFont.truetype("/System/Library/Fonts/Menlo.ttc", 21, index=1)
-    FONT_CRT_10 = ImageFont.truetype("/System/Library/Fonts/Menlo.ttc", 24, index=1)
+    FONT_CRT_8 = ImageFont.truetype("/System/Library/Fonts/Menlo.ttc", 28, index=1)
+    FONT_CRT_9 = ImageFont.truetype("/System/Library/Fonts/Menlo.ttc", 30, index=1)
+    FONT_CRT_10 = ImageFont.truetype("/System/Library/Fonts/Menlo.ttc", 34, index=1)
     FONT_HUD_9 = ImageFont.truetype("/System/Library/Fonts/Menlo.ttc", 20, index=1)
     FONT_HUD_10 = ImageFont.truetype("/System/Library/Fonts/Menlo.ttc", 22, index=1)
     FONT_HUD_11 = ImageFont.truetype("/System/Library/Fonts/Menlo.ttc", 24, index=1)
 except Exception:
     try:
-        FONT_CRT_8 = ImageFont.truetype("/System/Library/Fonts/Supplemental/Courier New Bold.ttf", 20)
-        FONT_CRT_9 = ImageFont.truetype("/System/Library/Fonts/Supplemental/Courier New Bold.ttf", 22)
-        FONT_CRT_10 = ImageFont.truetype("/System/Library/Fonts/Supplemental/Courier New Bold.ttf", 24)
+        FONT_CRT_8 = ImageFont.truetype("/System/Library/Fonts/Supplemental/Courier New Bold.ttf", 28)
+        FONT_CRT_9 = ImageFont.truetype("/System/Library/Fonts/Supplemental/Courier New Bold.ttf", 30)
+        FONT_CRT_10 = ImageFont.truetype("/System/Library/Fonts/Supplemental/Courier New Bold.ttf", 34)
         FONT_HUD_9 = ImageFont.truetype("/System/Library/Fonts/Supplemental/Courier New Bold.ttf", 20)
         FONT_HUD_10 = ImageFont.truetype("/System/Library/Fonts/Supplemental/Courier New Bold.ttf", 22)
         FONT_HUD_11 = ImageFont.truetype("/System/Library/Fonts/Supplemental/Courier New Bold.ttf", 24)
@@ -113,32 +117,39 @@ except Exception:
 
 
 class _HiDPIDraw:
-    """Renders logical 960x540 layout coordinates natively at 1920x1080 (2x) with crisp glyph outlines."""
+    """Renders logical layout coordinates natively at 1920x1080 (or enlarged CRT scale) with crisp glyph outlines."""
 
-    def __init__(self, raw_draw: ImageDraw.ImageDraw, scale: int = SCALE) -> None:
+    def __init__(self, raw_draw: ImageDraw.ImageDraw, scale: float = SCALE, scale_y: float | None = None) -> None:
         self._d = raw_draw
-        self._s = scale
+        self._sx = float(scale)
+        self._sy = float(scale_y if scale_y is not None else scale)
 
     def _sc(self, coords):
-        s = self._s
+        sx, sy = self._sx, self._sy
         if isinstance(coords, (list, tuple)):
             if coords and isinstance(coords[0], (list, tuple)):
-                return [(int(round(p[0] * s)), int(round(p[1] * s))) for p in coords]
-            return [int(round(v * s)) for v in coords]
+                return [(int(round(p[0] * sx)), int(round(p[1] * sy))) for p in coords]
+            if len(coords) == 4:
+                return [
+                    int(round(coords[0] * sx)),
+                    int(round(coords[1] * sy)),
+                    int(round(coords[2] * sx)),
+                    int(round(coords[3] * sy)),
+                ]
+            return [int(round(v * sx)) for v in coords]
         return coords
 
     def rectangle(self, xy, fill=None, outline=None, width: int = 1) -> None:
-        self._d.rectangle(self._sc(xy), fill=fill, outline=outline, width=max(1, width * self._s))
+        self._d.rectangle(self._sc(xy), fill=fill, outline=outline, width=max(1, int(round(width * self._sx))))
 
     def line(self, xy, fill=None, width: int = 1) -> None:
-        self._d.line(self._sc(xy), fill=fill, width=max(1, width * self._s))
+        self._d.line(self._sc(xy), fill=fill, width=max(1, int(round(width * self._sx))))
 
     def ellipse(self, xy, fill=None, outline=None, width: int = 1) -> None:
-        self._d.ellipse(self._sc(xy), fill=fill, outline=outline, width=max(1, width * self._s))
+        self._d.ellipse(self._sc(xy), fill=fill, outline=outline, width=max(1, int(round(width * self._sx))))
 
     def text(self, xy, text: str, fill=None, font=None) -> None:
-        s = self._s
-        px, py = int(round(xy[0] * s)), int(round(xy[1] * s))
+        px, py = int(round(xy[0] * self._sx)), int(round(xy[1] * self._sy))
         is_dark_fg = isinstance(fill, (tuple, list)) and (fill[0] + fill[1] + fill[2]) < 180
         if is_dark_fg:
             self._d.text((px, py), text, fill=fill, font=font)
@@ -164,18 +175,15 @@ def _get_front_monitor_patch(assets_dir: Path) -> Image.Image | None:
 
 def _get_crt_geometry() -> dict[str, np.ndarray]:
     """
-    Precomputes the front-facing 0-degree symmetrical CRT glass mask at native 1080p (`448x384` at `x=732..1180, y=332..716`),
-    staying strictly inside the monitor's natural amber border.
+    Precomputes the front-facing 0-degree symmetrical CRT glass mask at native 1080p (`688x496` at `x=616..1304, y=178..674`),
+    staying strictly inside the giant monitor's natural amber border.
     """
     global _CRT_GEOM_CACHE
-    pw, ph = CRT_W * SCALE, CRT_H * SCALE
+    pw, ph = CRT_PX_W, CRT_PX_H
     if _CRT_GEOM_CACHE is not None and _CRT_GEOM_CACHE["vig"].shape[:2] == (ph, pw):
         return _CRT_GEOM_CACHE
 
     yy, xx = np.mgrid[0:ph, 0:pw]
-    gx = CRT_X + (xx / float(SCALE))
-    gy = CRT_Y + (yy / float(SCALE))
-
     u = (xx - (pw * 0.5)) / (pw * 0.5)
     v = (yy - (ph * 0.5)) / (ph * 0.5)
 
@@ -184,9 +192,9 @@ def _get_crt_geometry() -> dict[str, np.ndarray]:
     vig = np.clip(1.0 - 0.14 * (dist**3), 0.45, 1.0)[:, :, None].astype(np.float32)
     edge_alpha = np.clip((1.0 - dist) / 0.04, 0.0, 1.0).astype(np.float32)
 
-    # Central `showwaves` passthrough window (`gx in 372..566, gy in 228..334`)
-    wx = np.clip(1.0 - np.maximum(0.0, (np.abs(gx - 469.0) - 91.0) / 6.0), 0.0, 1.0)
-    wy = np.clip(1.0 - np.maximum(0.0, (np.abs(gy - 281.0) - 47.0) / 5.0), 0.0, 1.0)
+    # Central `showwaves` passthrough window inside the 688x496 CRT glass
+    wx = np.clip(1.0 - np.maximum(0.0, (np.abs(u) - 0.84) / 0.06), 0.0, 1.0)
+    wy = np.clip(1.0 - np.maximum(0.0, (np.abs(v) - 0.68) / 0.06), 0.0, 1.0)
     wave_window = (wx * wy).astype(np.float32)
 
     _CRT_GEOM_CACHE = {
@@ -198,8 +206,8 @@ def _get_crt_geometry() -> dict[str, np.ndarray]:
 
 
 def load_fullscreen_crt_asset(asset_path: Path, zoom: float = 1.00) -> np.ndarray:
-    """Loads a CRT graphic (face, eye, second voice) and fits it cleanly into the `448x384` 1080p CRT screen."""
-    pw, ph = CRT_W * SCALE, CRT_H * SCALE
+    """Loads a CRT graphic (face, eye, second voice) and fits it cleanly into the `688x496` 1080p CRT screen."""
+    pw, ph = CRT_PX_W, CRT_PX_H
     key = f"fs_front:{asset_path}:{zoom}:{pw}x{ph}"
     if key in _ASSET_CACHE:
         return _ASSET_CACHE[key]
@@ -233,8 +241,8 @@ def _clean_crt_text(text: str, max_chars: int = 32) -> str:
     t = text.strip()
     if len(t) <= max_chars:
         return t.rstrip(" /")
-    # If the string has '->' (e.g., 'CLUE -> /url'), keep the primary side that fits cleanly
-    if "->" in t:
+    # If the string has '->' on a narrow CRT pill (max_chars <= 36), keep the primary side that fits cleanly
+    if max_chars <= 36 and "->" in t:
         lhs, rhs = [p.strip() for p in t.split("->", 1)]
         if len(lhs) <= max_chars:
             return lhs
@@ -303,7 +311,7 @@ def _draw_crt_chrome(
 
 def render_crt_window_patch(state: dict, relay: dict, assets_dir: Path, now_ts: float) -> Image.Image:
     """
-    Renders the `448x384` (2x 1080p) front-facing CRT screen patch at native pixel resolution.
+    Renders the `688x496` (2x-larger 1080p) front-facing CRT screen patch at native pixel resolution.
     """
     mode = state["crt_mode"]
     is_warn = (state.get("hud_mode") or state.get("mode")) == "ANOMALY_WARN"
@@ -311,8 +319,8 @@ def render_crt_window_patch(state: dict, relay: dict, assets_dir: Path, now_ts: 
     fg_amber = (255, 195, 45, 255)
     fg_green = (95, 255, 115, 255)
 
-    virt = Image.new("RGBA", (CRT_W * SCALE, CRT_H * SCALE), (3, 10, 5, 130))
-    draw = _HiDPIDraw(ImageDraw.Draw(virt), scale=SCALE)
+    virt = Image.new("RGBA", (CRT_PX_W, CRT_PX_H), (3, 10, 5, 130))
+    draw = _HiDPIDraw(ImageDraw.Draw(virt), scale=CRT_SX, scale_y=CRT_SY)
 
     # Subtle internal CRT graticule grid strictly inside the safe zone (x=8..216, y=26..166)
     grid_col = (22, 14, 5, 130) if is_warn else (6, 24, 10, 130)
@@ -332,19 +340,23 @@ def render_crt_window_patch(state: dict, relay: dict, assets_dir: Path, now_ts: 
             rgb = load_fullscreen_crt_asset(apath, zoom=zoom).copy()
             if mode == "NOVA_FACE":
                 if int(now_ts * 2) % 9 == 0:
-                    rgb[68 * SCALE : 80 * SCALE, 88 * SCALE : 136 * SCALE, :] *= 0.20
-                    rgb[73 * SCALE : 75 * SCALE, 92 * SCALE : 132 * SCALE, :] = np.array([75, 240, 120], dtype=np.float32)
+                    y0, y1 = int(68 * CRT_SY), int(80 * CRT_SY)
+                    x0, x1 = int(88 * CRT_SX), int(136 * CRT_SX)
+                    ym0, ym1 = int(73 * CRT_SY), int(75 * CRT_SY)
+                    xm0, xm1 = int(92 * CRT_SX), int(132 * CRT_SX)
+                    rgb[y0:y1, x0:x1, :] *= 0.20
+                    rgb[ym0:ym1, xm0:xm1, :] = np.array([75, 240, 120], dtype=np.float32)
             elif mode == "SECOND_VOICE":
-                shift = int(3.0 * SCALE * math.sin(now_ts * 2.4))
-                rgb[26 * SCALE : 166 * SCALE, 16 * SCALE : -16 * SCALE] = np.roll(
-                    rgb[26 * SCALE : 166 * SCALE, 16 * SCALE : -16 * SCALE], shift, axis=1
-                )
+                shift = int(3.0 * CRT_SX * math.sin(now_ts * 2.4))
+                sy0, sy1 = int(26 * CRT_SY), int(166 * CRT_SY)
+                sx0, sx1 = int(16 * CRT_SX), -int(16 * CRT_SX)
+                rgb[sy0:sy1, sx0:sx1] = np.roll(rgb[sy0:sy1, sx0:sx1], shift, axis=1)
 
             lum = (rgb[:, :, 0] * 0.299 + rgb[:, :, 1] * 0.587 + rgb[:, :, 2] * 0.114) / 255.0
             a_chan = np.clip(135.0 + lum * 120.0, 135.0, 255.0).astype(np.uint8)
             art_im = Image.fromarray(np.dstack([np.clip(rgb, 0, 255).astype(np.uint8), a_chan]))
             virt.paste(art_im, (0, 0))
-            draw = _HiDPIDraw(ImageDraw.Draw(virt), scale=SCALE)
+            draw = _HiDPIDraw(ImageDraw.Draw(virt), scale=CRT_SX, scale_y=CRT_SY)
 
             if mode == "NOVA_FACE":
                 bcol = (75, 255, 105, 225)
@@ -369,7 +381,7 @@ def render_crt_window_patch(state: dict, relay: dict, assets_dir: Path, now_ts: 
             lum = (amber_rgb[:, :, 0] * 0.3 + amber_rgb[:, :, 1] * 0.6) / 255.0
             a_chan = np.clip(135.0 + lum * 120.0, 135.0, 255.0).astype(np.uint8)
             virt.paste(Image.fromarray(np.dstack([np.clip(amber_rgb, 0, 255).astype(np.uint8), a_chan])), (0, 0))
-            draw = _HiDPIDraw(ImageDraw.Draw(virt), scale=SCALE)
+            draw = _HiDPIDraw(ImageDraw.Draw(virt), scale=CRT_SX, scale_y=CRT_SY)
 
         scan_y = 30 + int((now_ts * 24) % 110)
         draw.line([(12, scan_y), (CRT_W - 12, scan_y)], fill=(255, 90, 30, 250), width=2)
@@ -398,9 +410,10 @@ def render_crt_window_patch(state: dict, relay: dict, assets_dir: Path, now_ts: 
                 col = (95, 255, 115, 255)
             draw.text((13, ry + 2), f"{unit}  {reg}  {desc}", fill=col, font=FONT_CRT_8)
 
+        u_code = state.get("unlock_code", "0x1983")
         draw.rectangle([8, 132, CRT_W - 8, 165], fill=(6, 22, 9, 235), outline=(255, 190, 35, 245))
-        draw.text((13, 135), "XOR PARITY -> CODE: 0x1983", fill=fg_amber, font=FONT_CRT_8)
-        draw.text((13, 149), "UNLOCK 1983 TAPE: /forensics/", fill=(135, 255, 150, 255), font=FONT_CRT_8)
+        draw.text((13, 135), _clean_crt_text(state.get("crt_sub", f"XOR PARITY -> {u_code}"), 32), fill=fg_amber, font=FONT_CRT_8)
+        draw.text((13, 149), f"UNLOCK TAPE: /forensics/", fill=(135, 255, 150, 255), font=FONT_CRT_8)
 
     elif mode == "FRACTAL_RADAR":
         cx, cy, r = 54, 84, 36
@@ -430,7 +443,7 @@ def render_crt_window_patch(state: dict, relay: dict, assets_dir: Path, now_ts: 
             draw.text((106, 32 + idx * 17), line, fill=col, font=FONT_CRT_8)
 
         draw.rectangle([8, 144, CRT_W - 8, 165], fill=(16, 36, 18, 250), outline=fg_amber)
-        draw.text((13, 148), "UNLOCK CODE: 7SIGMA-MARCUS", fill=fg_amber, font=FONT_CRT_8)
+        draw.text((13, 148), _clean_crt_text(state.get("crt_sub", "CARRIER 14.2001 HZ LOCKED"), 32), fill=fg_amber, font=FONT_CRT_8)
 
     elif mode == "OUROBOROS_TORUS":
         cx, cy = CRT_W // 2, 78
@@ -459,9 +472,10 @@ def render_crt_window_patch(state: dict, relay: dict, assets_dir: Path, now_ts: 
         px, py = pts_outer[p_idx]
         draw.ellipse([px - 4, py - 4, px + 4, py + 4], fill=(255, 240, 130, 255))
 
+        u_code = state.get("unlock_code", "0x1983-09A6")
         draw.rectangle([8, 132, CRT_W - 8, 165], fill=(22, 10, 4, 250), outline=fg_amber)
-        draw.text((13, 135), "0x2025 ^ 0x1983 = 0x09A6", fill=fg_amber, font=FONT_CRT_8)
-        draw.text((13, 149), "UNLOCK CODE: 0x1983-09A6", fill=(135, 255, 150, 255), font=FONT_CRT_8)
+        draw.text((13, 135), _clean_crt_text(state.get("crt_sub", "0x2025 ^ 0x1983 = 0x09A6"), 32), fill=fg_amber, font=FONT_CRT_8)
+        draw.text((13, 149), f"PASSKEY: {u_code}", fill=(135, 255, 150, 255), font=FONT_CRT_8)
 
     elif mode == "MORSE_DECODER":
         draw.rectangle([8, 28, CRT_W - 8, 68], fill=(5, 22, 8, 250), outline=(60, 210, 80, 240))
@@ -745,7 +759,7 @@ def render_full_arg_overlay_png(
 
     # 1. Composite Front-Facing CRT Screen Content strictly inside the amber border at 1080p
     crt_patch = render_crt_window_patch(state, relay, assets_dir, now_ts)
-    canvas.alpha_composite(crt_patch, (CRT_X * SCALE, CRT_Y * SCALE))
+    canvas.alpha_composite(crt_patch, (CRT_PX_X, CRT_PX_Y))
 
     # 2. Draw Diegetic Control Room Hardware Animations & 3-Module Console at 1080p
     draw = _HiDPIDraw(ImageDraw.Draw(canvas), scale=SCALE)

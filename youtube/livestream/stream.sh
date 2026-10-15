@@ -46,7 +46,7 @@ while true; do
     /usr/bin/python3 "$SCRIPT_DIR/sync_telemetry.py" --repo-root "$REPO_ROOT" >> "$LOG_FILE" 2>&1 || true
   fi
 
-  VF_FILTER="[1:a]aresample=44100:async=1,aformat=sample_fmts=fltp:sample_rates=44100:channel_layouts=stereo,alimiter=limit=0.87:level=disabled,asplit=2[a_out][a_viz];[a_viz]showwaves=s=404x216:mode=line:rate=30:colors=lime,colorkey=0x000000:0.06:0.08[waves];[0:v][waves]overlay=x=754:y=436:format=auto[v_osc];[v_osc][2:v]overlay=x=0:y=0:format=auto:eof_action=repeat,format=yuv420p[v_out]"
+  VF_FILTER="[1:a]aresample=44100:async=1,aformat=sample_fmts=fltp:sample_rates=44100:channel_layouts=stereo,alimiter=limit=0.87:level=disabled,asplit=2[a_out][a_viz];[a_viz]showwaves=s=656x340:mode=line:rate=30:colors=lime,colorkey=0x000000:0.06:0.08[waves];[0:v][waves]overlay=x=632:y=278:format=auto[v_osc];[v_osc][2:v]overlay=x=0:y=0:format=auto:eof_action=repeat,format=yuv420p[v_out]"
 
   echo "[$(date '+%Y-%m-%d %H:%M:%S')] [STREAM.SH] Selected encoder: 1080p30 Full HD Intentional ARG CRT/HUD Engine (2800k video + 160k audio)" >> "$LOG_FILE"
 

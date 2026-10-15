@@ -40,11 +40,11 @@ out_file = os.path.join(HERE, "playlist.txt")
 def get_base_root(path):
     b = os.path.basename(path).lower()
     b = re.sub(r'^radio_', '', b)
-    b = b.replace('’', '_')
-    b = re.sub(r'^(?:\d+[a-z]?_|b_|nh_)', '', b)
+    b = b.replace('’', '_').replace("'", "_")
+    b = re.sub(r'^(?:\d+[a-z]?_|b_|nh_|nova_chan_|nova_hart_)', '', b)
     b = re.sub(r'\.mp3$', '', b)
     b = re.sub(
-        r'(_19\d\d.*|_80s.*|_old|_1|_\(the_upload\)|_remastered|_v\d+|_es|_kr|_the_dead_hand|_marcus_and_nova_duet.*|_bonus_track|_final.*|_reconstruction|_retro)$',
+        r'(_19\d\d.*|_80s.*|_old|_1|_\(the_upload\)|_remastered|_v\d+|_es|_kr|_the_dead_hand|_marcus_and_nova_duet.*|_bonus_track|_final.*|_reconstruction|_retro|_master|_live|_cover|_edit|_raw|_duet|_instrumental|_vocals|_nova_chan|_crystal_promise|_archival_demo|_marcus_song)$',
         '',
         b,
     )
@@ -87,35 +87,8 @@ for s in raw_songs:
 if not all_songs:
     raise RuntimeError(f"No songs found in {REAL_SONGS_DIR}!")
 
-# 3. Separate Core Nova Hart Catalog vs. "For Live Stream" Folder Tracks so they interleave 1-for-1
-for_livestream_slugs = set()
-if os.path.exists(DOWNLOADS_DIR):
-    from ingest_download_songs import slugify
-    for f in os.listdir(DOWNLOADS_DIR):
-        p = os.path.join(DOWNLOADS_DIR, f)
-        if os.path.isfile(p) and not f.startswith("."):
-            for_livestream_slugs.add(slugify(f))
-
-core_nova_songs = [s for s in all_songs if os.path.basename(s) not in for_livestream_slugs]
-for_livestream_songs = [s for s in all_songs if os.path.basename(s) in for_livestream_slugs]
-
-# Identify priority opening lineup for Cycle 1: newly restored Nova Hart singles + classics
-PRIORITY_OPENERS = [
-    "radio_the_second_voice.mp3",
-    "radio_crossing_this_line_remastered.mp3",
-    "radio_echoes_of_tomorrow.mp3",
-    "radio_letting_go_of_the_flame.mp3",
-    "radio_to_the_ends_of_forever.mp3",
-    "radio_tape_of_us.mp3",
-    "radio_asset_loss_the_dead_hand.mp3",
-    "radio_abandoned_shell.mp3",
-    "radio_the_world_moves_without_me.mp3",
-    "radio_04_synthetic_dawn.mp3",
-]
-song_by_name = {os.path.basename(s): s for s in all_songs}
-newest_songs = [song_by_name[name] for name in PRIORITY_OPENERS if name in song_by_name]
-
-# Read head of existing playlist.txt so rebuilding never immediately repeats the song that was just playing
+# Read the first 35 songs of existing playlist.txt (roughly the last 2.5 hours of playback)
+# so rebuilding NEVER repeats songs that were just playing!
 previously_playing = []
 if os.path.exists(out_file):
     try:
@@ -124,13 +97,18 @@ if os.path.exists(out_file):
                 m = re.search(r"file\s+'([^']+)'", line)
                 if m and "radio_master_songs" in m.group(1):
                     previously_playing.append(m.group(1))
-                    if len(previously_playing) >= 10:
+                    if len(previously_playing) >= 35:
                         break
     except Exception:
         pass
 
 # Use dynamic system randomness (no static seed)
 rng = random.Random()
+
+# Identify recently ingested tracks (added in the last 6 hours) to mix into the opening rotation
+now_ts = time.time()
+freshly_ingested = [s for s in all_songs if (now_ts - os.path.getmtime(s)) < 21600]
+rng.shuffle(freshly_ingested)
 
 # 4. Authentic 1980s Roland/Yamaha FM Synthesizer MIDI Masters (30 files)
 midi_tracks = [t for t in glob.glob(os.path.join(MIDI_DIR, "*.mp3")) if os.path.isfile(t)]
@@ -160,7 +138,7 @@ intercept_pool = [t for t in glob.glob(os.path.join(INTERCEPT_DIR, "*.mp3")) if 
 rng.shuffle(intercept_pool)
 
 print(f"Building Broadcast Lineup:")
-print(f"  - Total Unique Vocal Master Songs: {len(all_songs)} ({len(core_nova_songs)} Core Nova Hart + {len(for_livestream_songs)} For Live Stream)")
+print(f"  - Total Unique Vocal Master Songs: {len(all_songs)} ({len(freshly_ingested)} newly added from Drive)")
 print(f"  - FM Synth MIDI Masters: {len(midi_tracks)}")
 print(f"  - Spoken Radio Bulletins: {len(spoken_pool)}")
 print(f"  - Tight Morse Beacons: {len(morse_beacons)}")
@@ -168,64 +146,60 @@ print(f"  - Shortwave Numbers Stations: {len(numbers_pool)}")
 print(f"  - Classified Orion Lab Tapes: {len(lab_pool)}")
 print(f"  - Deep ARG Signal Intercepts: {len(intercept_pool)}")
 
-# 10. Helper to generate a well-spaced single cycle interleaving Core Nova Hart & For Live Stream 1:1
-def build_shuffled_cycle(song_list, avoid_recent=None, pin_first=None):
+# 10. Helper to generate a well-spaced single cycle across the entire catalog
+def build_shuffled_cycle(song_list, avoid_recent=None, front_pool=None):
     if avoid_recent is None:
         avoid_recent = []
-    if pin_first is None:
-        pin_first = []
-    avoid_roots = {get_base_root(s) for s in avoid_recent[-25:] if s not in pin_first}
-    pin_set = set(pin_first)
+    if front_pool is None:
+        front_pool = []
+    avoid_roots = {get_base_root(s) for s in avoid_recent[-35:]}
+    front_set = set(front_pool)
 
-    core_rest = [s for s in core_nova_songs if s not in pin_set]
-    fls_rest = [s for s in for_livestream_songs if s not in pin_set]
-
-    def make_interleaved():
-        c_copy = list(core_rest)
-        f_copy = list(fls_rest)
-        rng.shuffle(c_copy)
-        rng.shuffle(f_copy)
-        interleaved = []
-        max_len = max(len(c_copy), len(f_copy))
-        for i in range(max_len):
-            if i < len(c_copy):
-                interleaved.append(c_copy[i])
-            if i < len(f_copy):
-                interleaved.append(f_copy[i])
-        if not pin_first:
-            return interleaved
-        # Interleave pinned Nova Hart openers with shuffled tracks so both pools play right away
-        opening = []
-        p_copy = list(pin_first)
-        opening.append(p_copy[0])
-        p_idx = 1
-        i_idx = 0
-        while p_idx < len(p_copy) or i_idx < len(interleaved):
-            if p_idx < len(p_copy):
-                opening.append(p_copy[p_idx])
-                p_idx += 1
-            if i_idx < len(interleaved):
-                opening.append(interleaved[i_idx])
-                i_idx += 1
-        return opening
+    def make_candidate():
+        if front_pool:
+            f_copy = list(front_pool)
+            rest_unplayed = [s for s in song_list if s not in front_set and get_base_root(s) not in avoid_roots]
+            rest_played = [s for s in song_list if s not in front_set and get_base_root(s) in avoid_roots]
+            rng.shuffle(f_copy)
+            rng.shuffle(rest_unplayed)
+            rng.shuffle(rest_played)
+            # Interleave newly added Google Drive tracks (2 new : 1 unplayed classic) at the front,
+            # pushing any recently heard songs to the very end of the cycle (6+ hours later)
+            cand = []
+            fi, ui = 0, 0
+            while fi < len(f_copy) or ui < len(rest_unplayed):
+                if fi < len(f_copy):
+                    cand.append(f_copy[fi])
+                    fi += 1
+                if fi < len(f_copy):
+                    cand.append(f_copy[fi])
+                    fi += 1
+                if ui < len(rest_unplayed):
+                    cand.append(rest_unplayed[ui])
+                    ui += 1
+            cand.extend(rest_played)
+            return cand
+        else:
+            pool_copy = list(song_list)
+            rng.shuffle(pool_copy)
+            return pool_copy
 
     best_cand = None
     best_score = -999999
     for attempt in range(400):
-        cand = make_interleaved()
+        cand = make_candidate()
         score = 0
-        # Penalize repeating end of previous cycle in the first 25 songs
-        check_slice = cand[len(pin_first):len(pin_first) + 25]
-        for s in check_slice:
+        # Penalize repeating end of previous cycle in the first 35 songs
+        for s in cand[:35]:
             if get_base_root(s) in avoid_roots:
-                score -= 50
+                score -= 60
 
-        # Penalize duplicate roots (e.g. movements) being closer than 15 songs apart
+        # Penalize similar roots being closer than 20 songs apart
         recent = []
         for s in cand:
             r = get_base_root(s)
-            if r in recent[-15:]:
-                score -= 20
+            if r in recent[-20:]:
+                score -= 25
             recent.append(r)
 
         if score == 0:
@@ -233,19 +207,19 @@ def build_shuffled_cycle(song_list, avoid_recent=None, pin_first=None):
         if score > best_score:
             best_score = score
             best_cand = cand
-    return best_cand if best_cand is not None else make_interleaved()
+    return best_cand if best_cand is not None else make_candidate()
 
-# 11. Build 8 distinct cycles (~54 hours of non-repeating fair rotation)
+# 11. Build 8 distinct cycles (~68+ hours of non-repeating fair rotation)
 # Every song in the catalog appears EXACTLY ONCE per cycle
 NUM_CYCLES = 8
 cycles = []
 last_tail = previously_playing
 
 for c_num in range(NUM_CYCLES):
-    pin = newest_songs if c_num == 0 else []
-    next_cycle = build_shuffled_cycle(all_songs, avoid_recent=last_tail, pin_first=pin)
+    front = freshly_ingested if c_num == 0 else []
+    next_cycle = build_shuffled_cycle(all_songs, avoid_recent=last_tail, front_pool=front)
     cycles.append(next_cycle)
-    last_tail = next_cycle[-25:]  # Protect the last 25 songs from appearing in the start of next cycle
+    last_tail = next_cycle[-35:]  # Protect the last 35 songs from appearing in the start of next cycle
 
 # Combine all cycles into ordered songs list
 ordered_songs = []
@@ -337,8 +311,8 @@ with open(fresh_marker, "w") as fm:
     fm.write(str(time.time()))
 
 print(f"\n✓ Generated Dynamic Live Stream Playlist with {len(full_playlist)} total tracks ({len(ordered_songs)} songs across {NUM_CYCLES} cycles) in {out_file}")
-if newest_songs:
-    print(f"✓ Pinned newest ingested track at #1: {os.path.basename(newest_songs[0])}")
-print(f"✓ Every song in the {len(all_songs)}-track catalog appears exactly once per cycle (~5.6 hours apart)!")
+if ordered_songs:
+    print(f"✓ Opening track #1: {os.path.basename(ordered_songs[0])}")
+print(f"✓ Every song in the {len(all_songs)}-track catalog appears exactly once per cycle (~{len(all_songs)*4/60:.1f} hours apart)!")
 print(f"✓ Interstitial diversity: Numbers Stations, Classified Lab Tapes, ARG Intercepts, Bulletins, Morse Beacons, and MIDI Stingers all actively rotating!")
 
