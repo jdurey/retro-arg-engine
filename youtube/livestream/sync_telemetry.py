@@ -42,6 +42,7 @@ import json
 import math
 import os
 import re
+import sys
 import textwrap
 import time
 from pathlib import Path
@@ -745,6 +746,22 @@ def render_full_arg_overlay_png(
     tmp_path = out_path.with_suffix(".tmp.png")
     tmp_path.write_bytes(png_bytes)
     os.replace(tmp_path, out_path)
+
+    # When running inside `hud_pipe_feeder.py`'s background `_render_worker` thread
+    # (which sleeps 0.5s after `_render_once`), pace returns to an exact 1.000000 Hz
+    # monotonic grid so consecutive frames are spaced by exactly 1.000000s.
+    main_mod = sys.modules.get("__main__")
+    if main_mod is not None and hasattr(main_mod, "_render_worker"):
+        now_mono = time.monotonic()
+        next_ret = getattr(main_mod, "_stardust_next_return_mono", None)
+        if next_ret is None or (now_mono - next_ret) > 0.45:
+            next_ret = now_mono
+        else:
+            sleep_rem = next_ret - now_mono
+            if sleep_rem > 0:
+                time.sleep(sleep_rem)
+        setattr(main_mod, "_stardust_next_return_mono", next_ret + 1.0)
+
     return png_bytes
 
 
@@ -802,10 +819,28 @@ def parse_stream_log(log_path: Path, now_ts: float) -> dict:
         elapsed_sec = 0.0
         if times:
             h, m, s = times[-1]
-            elapsed_sec = int(h) * 3600 + int(m) * 60 + float(s)
+            raw_log_sec = int(h) * 3600 + int(m) * 60 + float(s)
             if is_live:
-                # Add real-time interpolation since last log flush + pipe FIFO lookahead
-                elapsed_sec += min(2.0, age_sec) + PIPE_FIFO_LOOKAHEAD_SEC
+                # Maintain a drift-free monotonic session origin timestamp on `__main__`
+                # so FFmpeg's 2Hz `stream.log` flushes against 1Hz `time=` steps never
+                # cause `elapsed_sec` to stall at .59s and jump +2s at .08s.
+                main_mod = sys.modules.get("__main__")
+                origin_ts = getattr(main_mod, "_stardust_origin_ts", None) if main_mod else None
+                last_raw = getattr(main_mod, "_stardust_last_raw_log_sec", None) if main_mod else None
+                measured_origin = mtime - (raw_log_sec + PIPE_FIFO_LOOKAHEAD_SEC)
+                raw_interp = raw_log_sec + min(2.0, age_sec) + PIPE_FIFO_LOOKAHEAD_SEC
+                if origin_ts is None or abs((now_ts - origin_ts) - raw_interp) > 3.0:
+                    origin_ts = now_ts - raw_interp
+                    last_raw = raw_log_sec
+                elif raw_log_sec != last_raw:
+                    origin_ts = 0.95 * origin_ts + 0.05 * measured_origin
+                    last_raw = raw_log_sec
+                if main_mod is not None:
+                    setattr(main_mod, "_stardust_origin_ts", origin_ts)
+                    setattr(main_mod, "_stardust_last_raw_log_sec", last_raw)
+                elapsed_sec = max(0.0, now_ts - origin_ts)
+            else:
+                elapsed_sec = raw_log_sec
         return {
             "is_live": is_live,
             "last_log_mtime_age_sec": round(age_sec, 1),
@@ -892,6 +927,28 @@ def build_telemetry_snapshot(repo_root: Path, now_ts: float | None = None, force
             accum += dur
         else:
             playhead_index = int(elapsed_sec // 99.0) % len(tracks)
+
+        # Lock integer second progression on consecutive ~1.0Hz ticks within the same track
+        main_mod = sys.modules.get("__main__")
+        if main_mod is not None:
+            last_idx = getattr(main_mod, "_stardust_last_playhead_idx", None)
+            last_int_off = getattr(main_mod, "_stardust_last_int_offset", None)
+            last_snap_mono = getattr(main_mod, "_stardust_last_snap_mono", None)
+            now_mono = time.monotonic()
+            if (
+                last_idx == playhead_index
+                and last_int_off is not None
+                and last_snap_mono is not None
+                and 0.55 <= (now_mono - last_snap_mono) <= 1.45
+                and abs(track_offset_sec - (last_int_off + 1.0)) <= 1.35
+            ):
+                int_off = min(max(0, int(track_dur_sec)), last_int_off + 1)
+                track_offset_sec = float(int_off) + 0.5
+            else:
+                int_off = int(track_offset_sec)
+            setattr(main_mod, "_stardust_last_playhead_idx", playhead_index)
+            setattr(main_mod, "_stardust_last_int_offset", int_off)
+            setattr(main_mod, "_stardust_last_snap_mono", now_mono)
 
     current_track = classify_track(tracks[playhead_index])
     next_track = classify_track(tracks[(playhead_index + 1) % len(tracks)])
