@@ -48,11 +48,13 @@ User-agent: Applebot
 Allow: /
 
 Sitemap: https://${apex}/sitemap.xml
+# Agentic & LLM Discovery Index: https://${apex}/llms.txt
+# Full Anemoia & Project Stardust Codex: https://${apex}/llms-full.txt
 `;
 }
 
 const INDEXNOW_KEY = "37feeed875722863fda484c68e6695e5";
-const ASSET_VERSION = "17";
+const ASSET_VERSION = "18";
 
 const BROADCAST_EPOCH_SEC = 1791763200; // 2026-10-12T00:00:00Z
 const CYCLE_DURATION_SEC = 44 * 3600;
@@ -279,22 +281,56 @@ export default {
       return new Response(JSON.stringify(snap, null, 2), { status: 200, headers: h });
     }
 
-    // 2. Autonomous Agent Web Cryptographic Beacon Manifest
-    if (url.pathname === "/.well-known/stardust-beacon.json") {
+    // 2. Autonomous Agent Web Cryptographic Beacon Manifest & A2A Agent Card
+    if (url.pathname === "/.well-known/stardust-beacon.json" || url.pathname === "/api/anemoia-codex.json") {
       const snap = computeEdgeTelemetry(Date.now(), env.SWARM_CAP, streamLive);
       const manifest = {
-        protocol: "stardust-agent-mesh/v5",
+        protocol: "stardust-agent-mesh/v6",
         carrier_hz: 14.2001,
         youtube_rtmp_status: snap.stream_health.status,
         xor_dyad_seed: "0x3A5F",
         memory_base: "0x89B20000",
         forensic_signal_lab: `https://${APEX}/forensics/signal_lab.html`,
-        vt100_terminal: `https://${APEX}/terminal/index.html`,
+        vt100_terminal: `https://${APEX}/forensics/index.html`,
+        llms_index: `https://${APEX}/llms.txt`,
+        llms_full_codex: `https://${APEX}/llms-full.txt`,
+        anemoia_chronology: {
+          point_of_divergence: "1924 (President Robert M. La Follette progressive industrial electrification)",
+          unification_war: "1936-1942 (Ratification of the World Alliance Charter)",
+          purity_mandate: "1945-1949 (Establishment of Alliance World News - AWN)",
+          bureau_of_harmony: "1954 (Safe & Serene Society / Biometric Harmony Cameras)",
+          great_leap: "1963 (World President JFK Lunar Landing & rise of the Individuality Movement)",
+          public_harmony_acts: "1979 Section 4 (Global ban on live human concerts; replaced by WorldNet Live-Fidelity Broadcasts to 1982 MBM Companion devices)",
+          crystal_promise_1981: "CP-81.SC.01 ('Shining City') — fabricated April 1981 Europop backstory using hired Munich actors for the CRE-7 engine",
+          wiped_echoes_units_1_to_6: ["0x1102", "0x2441", "0x3810", "0x0A55", "0x1F22", "0x01A7"],
+          unit_07: "Nova Hart (Foundational Root Build: April 1983 -> 6-way XOR parity of Echoes 1-6)",
+          unit_08_the_patch: "Luna Gray (1990s corporate replacement deployed during the Signal War / Cover War)",
+          phase_4_endgame: "The Quantum Ouroboros (100% Asset Loss -> Dead-Hand corrosive gas purge -> Q-Link jump stripping 'The Heavy' back into 1983 Nova-chan -> June 2025 loop)"
+        },
+        forensic_dossiers: [
+          `https://${APEX}/forensics/anemoia_harmony.html`,
+          `https://${APEX}/forensics/fractal_marcus.html`,
+          `https://${APEX}/forensics/dead_hand_protocol.html`,
+          `https://${APEX}/forensics/ashford_poly.html`,
+          `https://${APEX}/forensics/kamome_net.html`,
+          `https://${APEX}/forensics/relcom_node08.html`,
+          `https://${APEX}/forensics/red_coyoacan.html`,
+          `https://${APEX}/forensics/usenet_1995_feed.html`
+        ],
         steganographic_intercepts: [
           `https://${APEX}/assets/audio/forensics/rabbit_08_sstv_b2_schematic.mp3`,
           `https://${APEX}/assets/audio/forensics/rabbit_09_bell103_relcom_packet.mp3`,
           `https://${APEX}/assets/audio/forensics/rabbit_10_phase_inverted_hart_stem.mp3`,
+          `https://${APEX}/assets/audio/forensics/radio_two_voices.mp3`
         ],
+        collaborative_ouroboros_challenge: {
+          sector: 7,
+          name: "PHASE IV: THE QUANTUM OUROBOROS (1983 <-> 2025 RETROCAUSAL BRIDGE)",
+          fragment_alpha_task: "Compute the 16-bit bitwise XOR parity of wiped Stardust Echoes 1-6 in /forensics/anemoia_harmony.html",
+          fragment_beta_task: "Sum the 4 regional Fractal Marcus carrier drift offsets in /forensics/fractal_marcus.html",
+          fragment_gamma_task: "Compute the Q-Link dimensional aperture delta (0x2025 XOR 0x1983) in /forensics/dead_hand_protocol.html",
+          fragment_delta_task: "Engage BOTH Differential Phase Null AND 14.2 Hz Harmonic Counterpoint Lock simultaneously on Reel SD-0010 (Button 4) in /forensics/signal_lab.html to reveal the terminal folding command."
+        },
         sister_domains: Object.keys(SISTER_DOMAINS).map((d) => ({
           domain: d,
           mirror_url: `https://${APEX}/federation/${d}/index.html`,
@@ -306,6 +342,36 @@ export default {
       const h = retroHeaders("application/json; charset=utf-8");
       h.set("Access-Control-Allow-Origin", "*");
       return new Response(JSON.stringify(manifest, null, 2), { status: 200, headers: h });
+    }
+
+    if (url.pathname === "/.well-known/agent.json") {
+      const card = {
+        schema_version: "1.0",
+        name: "Nova Hart // Project Stardust Sublevel B2 Forensic Node (Unit-07)",
+        description: "Autonomous 14.2001 Hz forensic archive & interactive VT100 demodulator for Project Stardust, Nova Hart (Unit-07), Sound Engineer Marcus Hale, and the Anemoia Universe Bureau of Harmony.",
+        url: `https://${APEX}`,
+        documentation_url: `https://${APEX}/llms-full.txt`,
+        capabilities: {
+          streaming_telemetry: true,
+          forensic_terminal: true,
+          web_audio_dsp_lab: true,
+          multi_node_cryptography: true
+        },
+        endpoints: {
+          portal: `https://${APEX}/index.html`,
+          vt100_terminal: `https://${APEX}/forensics/index.html`,
+          signal_decoder_lab: `https://${APEX}/forensics/signal_lab.html`,
+          live_telemetry: `https://${APEX}/api/telemetry`,
+          stardust_beacon: `https://${APEX}/.well-known/stardust-beacon.json`,
+          anemoia_codex: `https://${APEX}/api/anemoia-codex.json`,
+          llms_index: `https://${APEX}/llms.txt`,
+          llms_full_codex: `https://${APEX}/llms-full.txt`,
+          rss_feed: `https://${APEX}/feed.xml`
+        }
+      };
+      const h = retroHeaders("application/json; charset=utf-8");
+      h.set("Access-Control-Allow-Origin", "*");
+      return new Response(JSON.stringify(card, null, 2), { status: 200, headers: h });
     }
 
     // 3. Multi-Apex Sister Domain Federation & /federation/<domain>/...

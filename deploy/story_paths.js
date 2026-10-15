@@ -1,5 +1,18 @@
 // Auto-generated list of story-bearing site-relative paths.
 export default [
+  "forensics/index.html",
+  "forensics/signal_lab.html",
+  "forensics/anemoia_harmony.html",
+  "forensics/fractal_marcus.html",
+  "forensics/dead_hand_protocol.html",
+  "forensics/ashford_poly.html",
+  "forensics/kamome_net.html",
+  "forensics/relcom_node08.html",
+  "forensics/red_coyoacan.html",
+  "forensics/usenet_1995_feed.html",
+  "llms.txt",
+  "llms-full.txt",
+  "feed.xml",
   "ftp/ashford-poly/echoes_notice.txt",
   "ftp/ashford-poly/hale_telemetry_1989-09.log",
   "ftp/ashford-poly/harrison_audit.txt",

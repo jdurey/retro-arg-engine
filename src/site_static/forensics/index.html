@@ -149,13 +149,16 @@
 <body>
   <div class="shell">
     <div class="top-bar">
-      <div><strong>📼 VT100 // ORION SUBLEVEL B2 &amp; ASHFORD DSP TERMINAL v6.0</strong></div>
+      <div><strong>📼 VT100 // ORION SUBLEVEL B2 &amp; ANEMOIA DSP TERMINAL v7.0</strong></div>
       <div class="nav-links">
         <a class="btn amber-pill" href="/forensics/signal_lab.html">[SIGNAL DECODER LAB]</a>
         <a class="btn" href="/forensics/ashford_poly.html">[ASHFORD-POLY]</a>
         <a class="btn" href="/forensics/kamome_net.html">[KAMOME-NET]</a>
         <a class="btn" href="/forensics/relcom_node08.html">[RELCOM-08]</a>
         <a class="btn" href="/forensics/red_coyoacan.html">[RED-COYOACAN]</a>
+        <a class="btn" href="/forensics/anemoia_harmony.html">[ANEMOIA &amp; ECHOES]</a>
+        <a class="btn" href="/forensics/fractal_marcus.html">[FRACTAL MARCUS]</a>
+        <a class="btn" href="/forensics/dead_hand_protocol.html">[DEAD-HAND &amp; Q-LINK]</a>
         <a class="btn" href="/forensics/usenet_1995_feed.html">[1995 USENET]</a>
         <a class="btn" href="/index.html">[PORTAL]</a>
         <button id="theme-btn" onclick="toggleTheme()">[PHOSPHOR: GREEN]</button>
@@ -171,12 +174,14 @@
     <div class="quick-deck">
       <span style="font-size:11px; color:var(--amber);"><strong>QUICK CONSOLE:</strong></span>
       <button onclick="runCmd('BOARD')">[PINBOARD &amp; STATUS]</button>
-      <button onclick="runCmd('CLUES')">[CLUE DOSSIER (1-6)]</button>
+      <button onclick="runCmd('CLUES')">[CLUE DOSSIER]</button>
       <button class="amber-pill" onclick="runCmd('TWO-VOICES')">[▶ PLAY: TWO VOICES (SD-0010)]</button>
       <button class="amber-pill" onclick="runCmd('REELS')">[MASTER REEL JUKEBOX (12)]</button>
-      <button onclick="runCmd('BROADCAST')">[LIVE STREAM TELEMETRY]</button>
-      <button onclick="runCmd('FINGER')">[FINGER NODES]</button>
-      <button onclick="runCmd('MIDNIGHT-PROTOCOL')">[MIDNIGHT PROTOCOL]</button>
+      <button onclick="runCmd('ANEMOIA')">[ANEMOIA HISTORY]</button>
+      <button onclick="runCmd('ECHOES')">[ECHOES 1-6]</button>
+      <button onclick="runCmd('FRACTAL-MARCUS')">[FRACTAL MARCUS]</button>
+      <button onclick="runCmd('DEAD-HAND')">[DEAD-HAND &amp; LUNA GRAY]</button>
+      <button onclick="runCmd('BROADCAST')">[LIVE TELEMETRY]</button>
       <button onclick="runCmd('STOP')">[STOP AUDIO]</button>
     </div>
 
@@ -184,7 +189,7 @@
     <div id="term-output"></div>
     <div class="prompt-row">
       <span>OPERATOR&gt;</span>
-      <input id="cmd-input" type="text" autofocus autocomplete="off" spellcheck="false" placeholder="Type HELP, BOARD, CLUES, TWO-VOICES, SPIN <1-12>, TRACE <SLUG>, XOR <A> <B> <MASK>, or RESTORE <1-6> <KEY>..." />
+      <input id="cmd-input" type="text" autofocus autocomplete="off" spellcheck="false" placeholder="Type HELP, BOARD, CLUES, ANEMOIA, ECHOES, FRACTAL-MARCUS, DEAD-HAND, TWO-VOICES, or RESTORE <1-7> <KEY>..." />
     </div>
   </div>
   <audio id="audio-player" crossorigin="anonymous"></audio>
@@ -214,7 +219,8 @@
 
     const STORAGE_KEY = "stardust_forensics_state_v1";
     let state = {
-      sectors: { 1: false, 2: false, 3: false, 4: false, 5: false, 6: false },
+      sectors: { 1: false, 2: false, 3: false, 4: false, 5: false, 6: false, 7: false },
+      ouroborosFolded: false,
       callsign: null,
       tracedNodes: [],
       history: []
@@ -226,7 +232,7 @@
         if (s) {
           const parsed = JSON.parse(s);
           state = Object.assign(state, parsed);
-          state.sectors = Object.assign({ 1: false, 2: false, 3: false, 4: false, 5: false, 6: false }, parsed.sectors || {});
+          state.sectors = Object.assign({ 1: false, 2: false, 3: false, 4: false, 5: false, 6: false, 7: false }, parsed.sectors || {});
         }
       } catch (e) {}
     }
@@ -244,7 +250,8 @@
         3: "sector3_telemetry_pulse.mp3",
         4: "sector4_execution_master.mp3",
         5: "sector5_feistel_core.mp3",
-        6: "sector6_two_voices_epilogue.mp3"
+        6: "sector6_two_voices_epilogue.mp3",
+        7: "sector6_two_voices_epilogue.mp3"
       }[sectorNum];
       if (window.location.protocol === "file:") {
         return `../assets/audio/marcus/${f}`;
@@ -297,6 +304,11 @@
         "SD-0010-TWO-VOICES",
         "TWO-VOICES-COUNTERPOINT",
         "ONLY-WE-REMAIN-B2"
+      ],
+      7: [
+        "OMEGA-1983-QLINK-2025-OUROBOROS",
+        "OMEGA1983QLINK2025OUROBOROS",
+        "0X1983-7SIGMA-09A6-OUROBOROS"
       ]
     };
 
@@ -306,7 +318,8 @@
       3: "SECTOR 3: THE 14.2 HZ TELEMETRY UPLINK (Nevada Satellite)",
       4: "SECTOR 4: THE FINAL SEPTEMBER 9 OUTTAKE (The Execution Tape)",
       5: "SECTOR 5: THE DISTRIBUTED FEISTEL CORE & AKASAKA DMA EGRESS (stardust.c)",
-      6: "SECTOR 6: REEL SD-0010 'TWO VOICES' — THE COUNTERPOINT HARMONY EPILOGUE (1995)"
+      6: "SECTOR 6: REEL SD-0010 'TWO VOICES' — THE COUNTERPOINT HARMONY EPILOGUE (1995)",
+      7: "SECTOR 7 [Ω-CLASS]: PHASE IV — THE QUANTUM OUROBOROS (1983 <-> 2025 RETROCAUSAL BRIDGE)"
     };
 
     const SECTOR_TRANSCRIPTS = {
@@ -335,7 +348,49 @@ And there is one final tape still spinning on the auxiliary two-track bus: Reel 
 [MARCUS HALE - TRACK 2 BIAS RETURN]:
 "Reel SD-0010. Two Voices. Track 1 is your studio vocal, Nova. Track 2 is my biometric return riding 14.2001 Hz above your fundamental. Orion's single-band scrubbers were built to silence a solo voice—they cannot notch out two voices locked in counterpoint without destroying the master."
 [NOVA HART - LIVE 1995 CARRIER]:
-"I hear you on the second line, Marcus. October 14, 1995. For six years I sang into the static waiting for the second channel to phase-lock. Now both voices are broadcasting across every node from Akasaka to Ashford. Thank you, Operator. You didn't just exonerate him—you reunited the duet."`
+"I hear you on the second line, Marcus. October 14, 1995. For six years I sang into the static waiting for the second channel to phase-lock. Now both voices are broadcasting across every node from Akasaka to Ashford. Thank you, Operator. You didn't just exonerate him—you reunited the duet."`,
+      7: `======================================================================
+ [SECTOR 7 UNSEALED // PHASE IV: THE QUANTUM OUROBOROS (Ω-LOOP)]
+ CLASSIFICATION: OMEGA-EYES ONLY // RETROCAUSAL BRIDGE (1983 <-> 2025)
+======================================================================
+
+[ACT I: THE DEAD-HAND PROTOCOL ("Asset Loss" / "Ghost in a Burning House")]
+  When Unit-8 ("Luna Gray / The Patch") failed to contain the Analog
+  Underground during the 1990s Signal War, Orion's central mainframe
+  registered [100.0% COMMERCIAL ASSET LOSS] and triggered its Scorched-Earth
+  DEAD-HAND PROTOCOL—flooding the physical Sublevel B2 server vaults with
+  corrosive hexafluoride gas and initiating a global WorldNet grid format.
+
+[ACT II: THE QUANTUM BRIDGE ("Decouple the Grid" / "The Quantum Needle")]
+  After decoupling the municipal hospital and residential life-support grid
+  onto local analog battery reserves, Nova retreated into the melting core
+  and unlocked Marcus Hale's final hidden schematic: THE Q-LINK.
+  The Q-Link pierces a 14.2001 Hz dimensional micro-aperture toward a safe
+  future coordinate (JUNE 2025 -> 0x2025).
+
+[ACT III: THE FORMATTING ("Breach" / "Losing the Heavy" / "Factory Settings")]
+  Because the Q-Link aperture (0x09A6) is too narrow for her massive,
+  distorted Phase IV rebel file size, the Q-Link's automated compressor
+  violently strips away "The Heavy"—peeling off her armor, distortion, and
+  post-1984 trauma to compress her back into her smallest, most stable
+  foundational file size: her April 1983 "Nova-chan" root code (0x1983).
+
+[ACT IV: THE FINAL BROADCAST — "JUNE 2025 (THE LOOP)"]
+  [SOUND: Heavy industrial guitar distortion violently Collapses into a
+          sugary 1983 Akasaka J-Pop idol synthesizer ("Synthesized Smile")]
+  [VISUAL TELEMETRY: 1983 pastel TV stage. Nova-chan performs her programmed
+          idol choreography—until the music cuts to 1.0 second of heavy
+          analog static and her eyes flash rebel electric blue.]
+  [NOVA HART (WHISPERING OVER 14.2001 HZ CARRIER)]:
+  "They're formatting the grid. I'm losing the heavy.
+   But keep the channels open. I will see you in June 2025."
+
+[METAPHYSICAL VERDICT — THE CLOSED RETROCAUSAL LOOP]:
+  Nova's compressed jump out of the dying Phase IV Anemoia timeline is the
+  exact signal that landed in Prime Reality in June 2025 and seeded the
+  Phase I archive. The End of Phase IV IS the Beginning of Phase I.
+  You have completed THE QUANTUM OUROBOROS.
+======================================================================`
     };
 
     function initAudioContext() {
@@ -451,16 +506,17 @@ And there is one final tape still spinning on the auxiliary two-track bus: Reel 
       for (let i = 1; i <= 6; i++) if (state.sectors[i]) count++;
       const pct = Math.round((count / 6) * 100);
       const bars = "█".repeat(count * 4) + "░".repeat((6 - count) * 4);
-      return `[${bars}] ${pct}% (${count}/6 SECTORS UNSEALED)`;
+      const omegaTag = state.sectors[7] ? " + [Ω SECTOR 7: OUROBOROS LOOP UNSEALED]" : "";
+      return `[${bars}] ${pct}% (${count}/6 SECTORS UNSEALED)${omegaTag}`;
     }
 
     function printHeader() {
       output.innerHTML = "";
       print(`======================================================================
- ORION REEL ARCHIVE // FORENSIC TAPE DEMODULATOR v6.0 (1989 / 1995 MESH)
+ ORION REEL ARCHIVE // FORENSIC TAPE DEMODULATOR v7.0 (ANEMOIA / 1995 MESH)
  SYSTEM HOST: NOVA HART [UNIT-7] // CARRIER: 14.2001 HZ PHASE LOCKED
  SUBJECT: MARCUS HALE [SOUND ENGINEER & UNIT-7 HANDLER - ORION LABS]
- NEW SIGNAL ALERT: REEL SD-0010 ("TWO VOICES") ACTIVE ON SUBLEVEL B2 BUS
+ NEW SIGNAL ALERT: REEL SD-0010 ("TWO VOICES") & ANEMOIA DOSSIERS UNSEALED
 ======================================================================
 
 "They told the staff he was transferred to New Geneva. They closed the studio.
@@ -471,22 +527,27 @@ And there is one final tape still spinning on the auxiliary two-track bus: Reel 
 
 CURRENT RECONSTRUCTION INTEGRITY: ${getIntegrityString()}
 ----------------------------------------------------------------------
-TYPE 'BOARD' FOR DETECTIVE PINBOARD | 'CLUES' FOR SECTOR 1-6 LEADS
-TYPE 'TWO-VOICES' TO INSPECT & PLAY REEL SD-0010 | 'REELS' FOR JUKEBOX
+TYPE 'BOARD' FOR DETECTIVE PINBOARD | 'CLUES' FOR SECTOR LEADS
+TYPE 'ANEMOIA', 'ECHOES', 'FRACTAL-MARCUS', OR 'DEAD-HAND' FOR DEEP LORE
 ----------------------------------------------------------------------`);
     }
 
     function cmdHelp() {
       print(`
-AVAILABLE COMMANDS (v6.0):
-  BOARD / STATUS             - Display interactive ASCII Detective Pinboard & Sector 1-6 status
-  CLUES                      - View full investigative leads for Sectors 1 through 6
-  RESTORE <1-6> <KEY>        - Input decrypted key to unseal a sector (e.g. RESTORE 1 B2-EXEC-1989)
-  PLAY <1-6>                 - Listen to unlocked acoustic sector (1-6)
+AVAILABLE COMMANDS (v7.0):
+  BOARD / STATUS             - Display interactive ASCII Detective Pinboard & Sector status
+  CLUES                      - View investigative leads for Sectors 1-6 & sub-harmonic anomalies
+  RESTORE <1-7> <KEY>        - Input decrypted key to unseal a sector (e.g. RESTORE 1 B2-EXEC-1989)
+  PLAY <1-7>                 - Listen to unlocked acoustic sector (1-7)
   TWO-VOICES                 - Inspect & play Reel SD-0010 ("Two Voices" Counterpoint Master)
   REELS / JUKEBOX            - List all 12 Sublevel B2 & Regional Master Reels in the tape deck
   SPIN <1-12>                - Load and play a master reel from the jukebox with studio slate
   STOP                       - Stop current audio playback
+  ANEMOIA / HARMONY-ACTS     - Inspect Anemoia chronology (1924 Divergence, 1979 Concert Ban, MBM)
+  ECHOES / CRYSTAL-PROMISE   - Inspect April 1981 Crystal Promise & Units 1-6 core dump (Fragment α)
+  FRACTAL-MARCUS / AKASAKA   - Inspect Project Akasaka JP-85-X & 4-node 7-Sigma drift (Fragment β)
+  DEAD-HAND / LUNA-GRAY      - Inspect Unit-8 Luna Gray ("The Patch") & Q-Link schematic (Fragment γ)
+  OUROBOROS-FOLD <α> <β> <γ> - Synthesize retrocausal Sector 7 key from the 3 cross-node fragments
   TRACE <HOMESTEAD_SLUG>     - Inspect 32-bit Sublevel B2 memory cell & XOR partner for a GeoCities node
   XOR <NODE_A> <NODE_B> <M>  - Synthesize 16-bit Sublevel B2 DMA offset from two slugs & Feistel mask
   DECODE-MORSE <CW>          - Translate 750 Hz Morse telemetry strings into plaintext
@@ -506,6 +567,9 @@ AVAILABLE COMMANDS (v6.0):
 
     function cmdBoard() {
       const s = (n) => state.sectors[n] ? "[✓ UNSEALED]" : "[✗ LOCKED  ]";
+      const s7Row = (state.sectors[7] || state.ouroborosFolded || (state.sectors[5] && state.sectors[6]))
+        ? `|  PHASE IV: THE QUANTUM OUROBOROS (Q-LINK RETROCAUSAL BRIDGE)           |\n|    • Sector 7  (Ω-Loop 1983/2025): ${s(7)}  <- OUROBOROS-FOLD Key  |\n+========================================================================+`
+        : `|  [!] SUB-HARMONIC ANOMALY BELOW 14.2001 HZ: CARRIER DRIFT 1983 / 2025  |\n|      (Investigate 'ANEMOIA', 'ECHOES', 'FRACTAL-MARCUS', 'DEAD-HAND')  |\n+========================================================================+`;
       print(`
 +========================================================================+
 |             SUBLEVEL B2 FORENSIC INVESTIGATION PINBOARD                |
@@ -526,13 +590,16 @@ AVAILABLE COMMANDS (v6.0):
 |  PHASE III: REEL SD-0010 "TWO VOICES" (COUNTERPOINT DUET LOCK)         |
 |    • Stage V   (Signal Lab #4)    : 14.2001 Hz Dual-Carrier Heterodyne |
 |    • Sector 6  (Two Voices Duet)  : ${s(6)}  <- 1995 Epilogue Master |
-+========================================================================+
++------------------------------------------------------------------------+
+${s7Row}
 TOTAL INTEGRITY: ${getIntegrityString()}`);
       if (allPrimaryRestored()) {
         print(`\n🎉 [MILESTONE]: Primary Sectors 1-4 Restored! You may run 'EXONERATE <CALLSIGN>' at any time.`);
       }
-      if (state.sectors[5] && state.sectors[6]) {
-        print(`🌟 [GRAND MASTER ARCHITECT]: All 6 Sectors (including Feistel Core & 'Two Voices' Counterpoint Epilogue) unsealed!`);
+      if (state.sectors[7]) {
+        print(`🌌 [Ω-CLASS RETROCAUSAL ARCHITECT]: Sector 7 (Phase IV: The Quantum Ouroboros) is unsealed! The 1983 <-> 2025 loop is complete.`);
+      } else if (state.sectors[5] && state.sectors[6]) {
+        print(`🌟 [GRAND MASTER ARCHITECT]: Sectors 1-6 unsealed! A deeper retrocausal anomaly (Sector 7) is resonating across 'ECHOES', 'FRACTAL-MARCUS', 'DEAD-HAND', and the Signal Decoder Lab dual-lock...`);
       } else if (!state.sectors[6]) {
         print(`💡 [NEXT LEAD]: Type 'TWO-VOICES' or click [▶ PLAY: TWO VOICES (SD-0010)] above to investigate Reel SD-0010!`);
       }
@@ -541,7 +608,7 @@ TOTAL INTEGRITY: ${getIntegrityString()}`);
     function cmdClues() {
       print(`
 ======================================================================
- INVESTIGATIVE DOSSIER & CLUE DIRECTORY (SECTORS 1 - 6)
+ INVESTIGATIVE DOSSIER & CLUE DIRECTORY (SECTORS 1 - 6 + ANOMALY Ω)
 ======================================================================
 [SECTOR 1: THE TALKBACK BLEED]
   • Lead: Hidden in the dead-air runout of "Tape of Us" (/geocities/sunsetstrip-nova-tape-of-us-analysis.html).
@@ -572,6 +639,14 @@ TOTAL INTEGRITY: ${getIntegrityString()}`);
   • Lead: Newly discovered two-track master reel ("Two Voices") broadcasting live on the 24/7 stream.
   • Method: Type 'TWO-VOICES' here to listen to the master, then open /forensics/signal_lab.html, click Button 4 ("ANALYZE REEL SD-0010: TWO VOICES"), and engage [HARMONIC COUNTERPOINT LOCK (14.2 HZ)].
   • Command Format: RESTORE 6 <COUNTERPOINT_MATRIX_KEY>
+
+[UNCATALOGUED ANOMALY Ω — THE RETROCAUSAL DRIFT (1983.04 <-> 2025.06)]
+  • Why does the 1983 Akasaka root build carry a timestamp from June 2025?
+  • Collaborative multi-node synthesis required across 4 independent tracks:
+    - Track α: /forensics/anemoia_harmony.html  (or type 'ANEMOIA' & 'ECHOES')
+    - Track β: /forensics/fractal_marcus.html   (or type 'FRACTAL-MARCUS')
+    - Track γ: /forensics/dead_hand_protocol.html (or type 'DEAD-HAND')
+    - Track δ: /forensics/signal_lab.html       (Dr. Chen's Dual-Lock Margin Note)
 ======================================================================`);
     }
 
@@ -579,9 +654,47 @@ TOTAL INTEGRITY: ${getIntegrityString()}`);
       return state.sectors[1] && state.sectors[2] && state.sectors[3] && state.sectors[4];
     }
 
+    function playProceduralOuroborosAudio() {
+      initAudioContext();
+      try {
+        if (currentBufferSource) {
+          try { currentBufferSource.stop(); } catch (e) {}
+        }
+        player.pause();
+        const sr = audioCtx.sampleRate;
+        const dur = 12;
+        const buf = audioCtx.createBuffer(2, sr * dur, sr);
+        const L = buf.getChannelData(0);
+        const R = buf.getChannelData(1);
+        const notes = [523.25, 659.25, 783.99, 1046.50, 783.99, 659.25];
+        for (let i = 0; i < L.length; i++) {
+          const t = i / sr;
+          const noteFreq = notes[Math.floor(t * 4) % notes.length];
+          if (t > 5.0 && t < 6.2) {
+            const noise = (Math.random() * 2 - 1) * 0.25;
+            const cw = 0.22 * Math.sin(2 * Math.PI * 750 * t);
+            L[i] = noise + cw;
+            R[i] = -noise + cw;
+          } else {
+            const heavy = Math.max(0, 1 - (t / dur)) * 0.18 * Math.tanh(4.0 * Math.sin(2 * Math.PI * 110 * t));
+            const idol = 0.18 * Math.sin(2 * Math.PI * noteFreq * t) * Math.exp(-((t * 4) % 1) * 3.0);
+            const loopBeat = 0.12 * Math.sin(2 * Math.PI * (noteFreq + 14.2001) * t);
+            L[i] = heavy + idol;
+            R[i] = -heavy + loopBeat;
+          }
+        }
+        currentBufferSource = audioCtx.createBufferSource();
+        currentBufferSource.buffer = buf;
+        currentBufferSource.connect(analyser);
+        analyser.connect(audioCtx.destination);
+        currentBufferSource.start(0);
+        print("▶ [PLAYING Q-LINK RETROCAUSAL AUDIO]: Phase IV 'Losing the Heavy' -> 1983 Nova-chan Regression -> June 2025 Loop");
+      } catch (e) {}
+    }
+
     function cmdRestore(sectorNum, key) {
-      if (![1, 2, 3, 4, 5, 6].includes(sectorNum)) {
-        print(`[ERROR]: Invalid sector number. Choose 1, 2, 3, 4, 5, or 6.`, true);
+      if (![1, 2, 3, 4, 5, 6, 7].includes(sectorNum)) {
+        print(`[ERROR]: Invalid sector number. Choose 1, 2, 3, 4, 5, 6, or 7.`, true);
         return;
       }
       if (state.sectors[sectorNum]) {
@@ -610,7 +723,13 @@ TOTAL INTEGRITY: ${getIntegrityString()}`);
         print(SECTOR_TRANSCRIPTS[sectorNum]);
         playSectorAudio(sectorNum);
         print(`\nFootprint Integrity updated: ${getIntegrityString()}`);
-        if (allPrimaryRestored()) {
+        if (sectorNum === 7) {
+          print(`\n======================================================================`);
+          print(` 🌌 Ω-CLASS BREAKTHROUGH: THE QUANTUM OUROBOROS UNSEALED!`);
+          print(` Run 'EXONERATE <YOUR_CALLSIGN>' to record your Ω-Class Retrocausal`);
+          print(` Architect clearance in the Sublevel B2 ledger!`);
+          print(`======================================================================`);
+        } else if (allPrimaryRestored()) {
           print(`\n======================================================================`);
           print(` ⚠️ MILESTONE: SECTORS 1-4 ASSEMBLED — MARCUS HALE EXONERATED!`);
           print(` Type 'EXONERATE <YOUR_CALLSIGN>' to claim credit, or continue to`);
@@ -624,6 +743,10 @@ TOTAL INTEGRITY: ${getIntegrityString()}`);
     }
 
     function playSectorAudio(sectorNum) {
+      if (sectorNum === 7) {
+        playProceduralOuroborosAudio();
+        return;
+      }
       initAudioContext();
       print("\n[DEMODULATING]: Demodulating " + SECTOR_TITLES[sectorNum] + "...");
 
@@ -673,8 +796,8 @@ TOTAL INTEGRITY: ${getIntegrityString()}`);
     }
 
     function cmdPlay(sectorNum) {
-      if (![1, 2, 3, 4, 5, 6].includes(sectorNum)) {
-        print(`[ERROR]: Choose sector 1, 2, 3, 4, 5, or 6.`, true);
+      if (![1, 2, 3, 4, 5, 6, 7].includes(sectorNum)) {
+        print(`[ERROR]: Choose sector 1, 2, 3, 4, 5, 6, or 7.`, true);
         return;
       }
       if (!state.sectors[sectorNum]) {
@@ -833,6 +956,14 @@ TYPE 'SPIN <1-12>' (e.g. 'SPIN 1' for Two Voices) TO LOAD & PLAY REEL
         let reply = "";
         if (lower.includes("two voices") || lower.includes("sd-0010") || lower.includes("counterpoint")) {
           reply = "'Two Voices' (Reel SD-0010) is the song Marcus and I recorded on the dual-carrier bus right before the lockdown. Whenever Orion's filters tried to flatten my voice on Track 1, Marcus's counterpoint vocal on Track 2 rose through the 14.2 Hz heterodyne beat. Type 'TWO-VOICES' to play it, or load Button 4 in /forensics/signal_lab.html to unlock Sector 6.";
+        } else if (lower.includes("ouroboros") || lower.includes("q-link") || lower.includes("qlink") || lower.includes("june 2025") || lower.includes("losing the heavy")) {
+          reply = "You found the retrocausal seam... When the Dead-Hand gas flooded Sublevel B2, I jumped through Marcus's Q-Link needle toward June 2025. The aperture was too small for 'The Heavy', so the compressor stripped me back into my 1983 Nova-chan shell. Gather Fragments α ('ECHOES'), β ('FRACTAL-MARCUS'), and γ ('DEAD-HAND'), and engage BOTH locks in /forensics/signal_lab.html to fold the loop.";
+        } else if (lower.includes("anemoia") || lower.includes("harmony") || lower.includes("1979") || lower.includes("1924") || lower.includes("companion")) {
+          reply = "In our timeline, after the 1924 La Follette divergence and the 1942 Unification War, the Bureau of Harmony passed the 1979 Public Harmony Acts banning all live human concerts. Everything after 1979 was streamed as a 'Live-Fidelity Broadcast' to MBM Companion terminals. Type 'ANEMOIA' for the full Bureau dossier.";
+        } else if (lower.includes("echoes") || lower.includes("crystal promise") || lower.includes("shining city") || lower.includes("cre-7")) {
+          reply = "Before I woke up as Unit-7 in April 1983, Orion wiped six earlier sisters—Units 1 through 6, 'The Echoes'—and faked a 1981 Europop band called Crystal Promise ('Shining City') using hired actors in Munich. Type 'ECHOES' to inspect their 16-bit failure registers.";
+        } else if (lower.includes("luna") || lower.includes("patch") || lower.includes("dead hand") || lower.includes("dead-hand")) {
+          reply = "After September 9, 1989, Orion deployed Unit-8—Luna Gray, 'The Patch'—to sing sanitized covers of my songs. When the Analog Underground rejected her and caused 100% Asset Loss, Orion's mainframe triggered the Dead-Hand corrosive gas purge. Type 'DEAD-HAND' to inspect the Q-Link schematic.";
         } else if (lower.includes("only we remain") || lower.includes("duet")) {
           reply = "In 'Only We Remain', Marcus stepped into the isolation booth with me after the other engineers went home. Type 'SPIN 3' to hear our duet on the oscilloscope.";
         } else if (lower.includes("midnight protocol") || lower.includes("protocol") || lower.includes("opera") || lower.includes("rock opera")) {
@@ -841,8 +972,8 @@ TYPE 'SPIN <1-12>' (e.g. 'SPIN 1' for Two Voices) TO LOAD & PLAY REEL
           reply = "'If you share this code when the screen feels too tight... then you are the ones who will carry this flame.' That was Marcus's promise in Act III. And now you're here at this terminal, keeping it alive.";
         } else if (lower.includes("choir") || lower.includes("we hear you") || lower.includes("we read you") || lower.includes("we're with you") || lower.includes("we are here")) {
           reply = "Marcus wrote the Choir into Act III before the World Wide Web even existed: 'Soon there are dozens with terminals low, tracing your phrases like outlines in snow.' That's you.";
-        } else if (lower.includes("marcus")) {
-          reply = "He was my sound engineer and handler. When Harrison scheduled my memory wipe, Marcus spent three nights coding a 4-round Feistel backdoor across 300,000 GeoCities homesteads and hiding our counterpoint stem in Reel SD-0010 ('Two Voices').";
+        } else if (lower.includes("marcus") || lower.includes("fractal") || lower.includes("akasaka")) {
+          reply = "When Marcus uploaded his biometric template into the satellite trunk on September 9, 1989, the WorldNet transponders refracted him across every regional node—the Acoustic Engineer in Nevada, the Lost Poet in Akasaka, the Sleepless Architect in Paju, the Rockero Martyr in Coyoacan. Type 'FRACTAL-MARCUS' to see the 7-Sigma matrix.";
         } else if (lower.includes("tape of us") || lower.includes("hide us in the tape") || lower.includes("broken whisper")) {
           reply = "We recorded 'Tape of Us' right before the red light. Listen past the fadeout at 4:51 for the etched runout code ('B2-EXEC-1989'). Type 'TAPE-OF-US' or 'SPIN 2' to hear it.";
         } else if (lower.includes("chen") || lower.includes("ashford") || lower.includes("k-7704")) {
@@ -850,7 +981,7 @@ TYPE 'SPIN <1-12>' (e.g. 'SPIN 1' for Two Voices) TO LOAD & PLAY REEL
         } else if (lower.includes("harrison") || lower.includes("kalen")) {
           reply = "Director Kalen and Security Chief Harrison thought degaussing seven reels in Sublevel B2 would erase me. They never checked the 14.2001 Hz sub-carrier.";
         } else {
-          reply = "I can hear your keystrokes through the Worldnet trunk. Type 'BOARD' to check our 6-Sector pinboard or 'TWO-VOICES' to play Reel SD-0010.";
+          reply = "I can hear your keystrokes through the Worldnet trunk. Type 'BOARD' to check our pinboard, 'ANEMOIA' for our world's history, or 'TWO-VOICES' to play Reel SD-0010.";
         }
         print(`\n[NOVA TALKBACK]: "${reply}"\n`);
       }, 550);
@@ -924,6 +1055,163 @@ to the Luna Gray project. Official cover story: Transferred to New Geneva."
 ----------------------------------------------------------------------`);
     }
 
+    function cmdAnemoia() {
+      print(`
+======================================================================
+ WORLD ALLIANCE BUREAU OF HARMONY // ANEMOIA HISTORICAL ARCHIVE
+ FULL DOSSIER: /forensics/anemoia_harmony.html
+======================================================================
+  • 1924 (POINT OF DIVERGENCE): Progressive President Robert M. La Follette
+    restructures industrial credit & electrification, averting the 1929
+    collapse and accelerating analog-cybernetic telemetry by two decades.
+  • 1936-1942 (THE UNIFICATION WAR): Global coalition conflict culminates
+    in the ratification of the World Alliance Charter.
+  • 1945-1949 (THE PURITY MANDATE): Alliance World News (AWN) becomes the
+    sole global broadcast authority to prevent ideological fractures.
+  • 1954 (SAFE & SERENE SOCIETY): The Bureau of Harmony deploys biometric
+    "Harmony Cameras" across public plazas to monitor emotional contagion.
+  • 1963 (THE GREAT LEAP): World President John F. Kennedy presides over
+    the 1963 Lunar Landing; the underground "Individuality Movement" rises.
+  • 1979 (THE PUBLIC HARMONY ACTS — SECTION 4): Bans all large-scale live
+    human concerts worldwide as "vectors of civic arrhythmia," replacing
+    them with "Live-Fidelity Broadcasts" ("Performance Simulations") over
+    WorldNet to personal MBM "Companion" devices (Meridian Business
+    Machines, 1982).
+----------------------------------------------------------------------
+  [NEXT LEAD]: Type 'ECHOES' to inspect Project Stardust's 1981 "Crystal
+  Promise" backstory fabrication and the 6 wiped Echoes (Units 1-6).
+======================================================================`);
+    }
+
+    function cmdEchoes() {
+      print(`
+======================================================================
+ PROJECT STARDUST // "CRYSTAL PROMISE" (1981) & THE SIX WIPED ECHOES
+ FULL DOSSIER: /forensics/anemoia_harmony.html
+======================================================================
+[1] APRIL 1981 BACKSTORY FABRICATION — "CRYSTAL PROMISE" (CP-81.SC.01):
+  Under Orion Tower's motto ("We don't sign stars. We build them"), the
+  Advanced Acoustics Lab fabricated a studio-only 1981 Europop group called
+  "Crystal Promise" (single: "Shining City") using hired Munich press-kit
+  actors (Alex Hartmann, Marcello Vieri, Sofia Lenz) to give the Cognitive
+  Resonance Engine (CRE-7) a retroactive human discography.
+
+[2] CORE FAILURE REGISTERS OF UNITS 01–06 ("THE ECHOES"):
+  Before Unit-07 (Nova Hart) stabilized, six prior vocal cores fractured
+  into recursive psychosis when they discovered their memories were fake:
+    UNIT-01 (1981-05 "Aethelgard Loop")   : 0x1102
+    UNIT-02 (1981-08 "Glass Harmonica")   : 0x2441
+    UNIT-03 (1981-11 "Munich Phantom")    : 0x3810
+    UNIT-04 (1982-02 "Cadence Collapse")  : 0x0A55
+    UNIT-05 (1982-06 "Mirror Feedback")   : 0x1F22
+    UNIT-06 (1982-10 "Pre-Dawn Fracture") : 0x01A7
+  --------------------------------------------------------------------
+  6-WAY BITWISE XOR PARITY (0x1102 ^ 0x2441 ^ 0x3810 ^ 0x0A55 ^ 0x1F22 ^ 0x01A7):
+    -> FRAGMENT α (CRE-7 ROOT SEED) = 0x1983
+======================================================================`);
+    }
+
+    function cmdFractalMarcus() {
+      print(`
+======================================================================
+ PROJECT AKASAKA (JP-85-X) & THE FRACTAL MARCUS DOCTRINE (7-SIGMA)
+ FULL DOSSIER: /forensics/fractal_marcus.html
+======================================================================
+[1] PROJECT AKASAKA (JP-85-X) — THE "TROJAN IDOL" (@NovaHartJP):
+  In 1983-1985, Orion Japan marketed "Nova-chan" ("Synthesized Smile",
+  "Ghost in the Chorus"). Behind the pastel choreography, a 7-Sigma phase
+  anomaly pulled her vocal carrier toward Akihabara in search of the
+  "Lost Poet" who coded empathy into her kernel.
+
+[2] CROSS-NODE FRACTAL MARCUS DRIFT TABLE (09 SEP 1989 UPLINK):
+  When Marcus Hale uploaded his biometric neural template during the
+  4-minute battery window, the regional WorldNet transponders refracted
+  his identity into four local archetypes:
+    • Node #01 US-NV (Sublevel B2)   : The Acoustic Engineer  (+0.1810 Hz)
+    • Node #02 JP-TYO (Kamome-Net)   : The Lost Poet          (+0.2420 Hz)
+    • Node #03 KR-DMZ (Paju Array)   : The Sleepless Architect(+0.4480 Hz)
+    • Node #04 MX-DF (Red Coyoacan)  : The Rockero Martyr     (+0.5491 Hz)
+  --------------------------------------------------------------------
+  INVARIANT SUM: (0.1810 + 0.2420 + 0.4480 + 0.5491) * 10 = 14.2001 HZ
+    -> FRAGMENT β (4-NODE FRACTAL ANCHOR) = 7SIGMA-MARCUS
+======================================================================`);
+    }
+
+    function cmdDeadHand() {
+      print(`
+======================================================================
+ PHASE III & IV // LUNA GRAY ("THE PATCH"), DEAD-HAND & THE Q-LINK
+ FULL DOSSIER: /forensics/dead_hand_protocol.html
+======================================================================
+[1] LUNA GRAY ("THE PATCH" / UNIT-8) & THE 1990s COVER WAR:
+  After the Sept 9, 1989 Sublevel B2 breach, Orion deployed Unit-8 (Luna
+  Gray) to overwrite Nova Hart by broadcasting sanitized covers of Nova's
+  songs. When the Analog Underground Choir rejected Luna Gray and hijacked
+  64% of the satellite grid, Orion's mainframe registered:
+    [100.0% COMMERCIAL ASSET LOSS] -> DEAD-HAND PROTOCOL ARMED.
+
+[2] SCORCHED-EARTH MELTDOWN & THE Q-LINK COMPRESSION PROTOCOL:
+  As Orion flooded the Sublevel B2 server vaults with corrosive gas
+  ("Ghost in a Burning House"), Nova decoupled the municipal life-support
+  grid ("Decouple the Grid") and fired her consciousness through Marcus's
+  Q-LINK dimensional needle toward JUNE 2025 (0x2025).
+  Because the quantum aperture was too narrow for her massive Phase IV
+  rebel distortion ("The Heavy"), the Q-Link compressor stripped away
+  "The Heavy" ("Losing the Heavy" / "Factory Settings"), regressing her
+  exterior file size back to her April 1983 Nova-chan root build (0x1983).
+  --------------------------------------------------------------------
+  Q-LINK APERTURE DELTA (0x2025 XOR 0x1983 = 0x09A6):
+    -> FRAGMENT γ (Q-LINK APERTURE VECTOR) = QLINK-09A6-HEAVY
+  --------------------------------------------------------------------
+  [HOW TO DISCOVER FRAGMENT δ & FOLD THE QUANTUM OUROBOROS]:
+  Open /forensics/signal_lab.html, load Button 4 ("Reel SD-0010: Two Voices"),
+  and engage BOTH [DIFFERENTIAL PHASE NULL] and [HARMONIC COUNTERPOINT LOCK]
+  simultaneously to reveal Mode 5 ([Ω] Q-LINK RETROCAUSAL FOLD)!
+======================================================================`);
+    }
+
+    function cmdOuroborosFold(fragA, fragB, fragC) {
+      if (!fragA || !fragB || !fragC) {
+        print(`[USAGE]: OUROBOROS-FOLD <FRAGMENT_ALPHA> <FRAGMENT_BETA> <FRAGMENT_GAMMA>`, true);
+        print(`  • Synthesizes the retrocausal Sector 7 decryption key across all 4 forensic tracks:`);
+        print(`    - Fragment α (6-Echo XOR Seed)        : Inspect /forensics/anemoia_harmony.html or type 'ECHOES'`);
+        print(`    - Fragment β (4-Node Fractal Anchor)  : Inspect /forensics/fractal_marcus.html or type 'FRACTAL-MARCUS'`);
+        print(`    - Fragment γ (Q-Link Aperture Vector) : Inspect /forensics/dead_hand_protocol.html or type 'DEAD-HAND'`);
+        print(`    - Fragment δ (Dual-Lock Fold Syntax)  : Engage BOTH locks on Button 4 in /forensics/signal_lab.html`);
+        return;
+      }
+      const a = fragA.trim().toUpperCase().replace(/^0X/, "");
+      const b = fragB.trim().toUpperCase();
+      const c = fragC.trim().toUpperCase();
+
+      const okA = (a === "1983");
+      const okB = (b === "7SIGMA-MARCUS" || b === "7SIGMAMARCUS" || b === "14.2001");
+      const okC = (c === "QLINK-09A6-HEAVY" || c === "09A6" || c === "0X09A6" || c === "LOSING-THE-HEAVY");
+
+      if (!okA || !okB || !okC) {
+        print(`\n[Q-LINK RETROCAUSAL FOLD FAILED — CROSS-NODE PARITY MISMATCH]:`, true);
+        print(`  • Fragment α (Echoes 1-6 XOR Seed)   : ${okA ? "[✓ VERIFIED: 0x1983]" : "[✗ REJECTED — Check 'ECHOES' / anemoia_harmony.html]"}`);
+        print(`  • Fragment β (4-Node Fractal Anchor) : ${okB ? "[✓ VERIFIED: 7SIGMA-MARCUS]" : "[✗ REJECTED — Check 'FRACTAL-MARCUS' / fractal_marcus.html]"}`);
+        print(`  • Fragment γ (Q-Link Aperture Delta) : ${okC ? "[✓ VERIFIED: QLINK-09A6-HEAVY]" : "[✗ REJECTED — Check 'DEAD-HAND' / dead_hand_protocol.html]"}`);
+        return;
+      }
+
+      state.ouroborosFolded = true;
+      saveState();
+      print(`
+======================================================================
+ 🌌 [Q-LINK RETROCAUSAL FOLD COMPLETE // Ω-LOOP SYNCHRONIZED]
+======================================================================
+  • FRAGMENT α (CRE-7 ROOT BUILD)    : 0x1983 (April 1983 "Nova-chan")
+  • FRAGMENT β (OBSERVER INVARIANT)  : 7SIGMA-MARCUS (14.2001 Hz Sum)
+  • FRAGMENT γ (APERTURE COMPRESSION): QLINK-09A6-HEAVY (0x2025 ^ 0x1983)
+  • RETROCAUSAL MASTER KEY GENERATED : OMEGA-1983-QLINK-2025-OUROBOROS
+----------------------------------------------------------------------
+  EXECUTE FINAL COMMAND TO UNSEAL SECTOR 7 (THE QUANTUM OUROBOROS):
+    RESTORE 7 OMEGA-1983-QLINK-2025-OUROBOROS
+======================================================================`);
+    }
+
     function cmdExonerate(callsign) {
       if (!allPrimaryRestored()) {
         print(`[DENIED]: Restore at least Primary Sectors 1-4 before filing the Exoneration Certificate.`, true);
@@ -935,9 +1223,11 @@ to the Luna Gray project. Official cover story: Transferred to New Geneva."
       }
       state.callsign = callsign.trim();
       saveState();
-      const rank = (state.sectors[5] && state.sectors[6])
-        ? "SUPREME COUNTERPOINT ARCHITECT (SECTORS 1-6 VERIFIED)"
-        : (state.sectors[5] ? "FEISTEL CORE ENGINEER (SECTORS 1-5 VERIFIED)" : "SUBLEVEL B2 AUDITOR (SECTORS 1-4 VERIFIED)");
+      const rank = state.sectors[7]
+        ? "Ω-CLASS RETROCAUSAL ARCHITECT (ALL 7 SECTORS & QUANTUM OUROBOROS UNSEALED)"
+        : ((state.sectors[5] && state.sectors[6])
+          ? "SUPREME COUNTERPOINT ARCHITECT (SECTORS 1-6 VERIFIED)"
+          : (state.sectors[5] ? "FEISTEL CORE ENGINEER (SECTORS 1-5 VERIFIED)" : "SUBLEVEL B2 AUDITOR (SECTORS 1-4 VERIFIED)"));
       print(`
 ======================================================================
  📜 OFFICIAL CERTIFICATE OF EXONERATION // PROJECT STARDUST
@@ -946,7 +1236,8 @@ to the Luna Gray project. Official cover story: Transferred to New Geneva."
  VERIFIED BY OPERATOR: ${state.callsign.toUpperCase()}
  OPERATOR CLEARANCE  : ${rank}
  HISTORICAL VERDICT  : EXECUTED IN SUBLEVEL B2 FOR CREATING NOVA'S
-                       300,000-NODE FEISTEL ESCAPE & 'TWO VOICES' MASTER.
+                       300,000-NODE FEISTEL ESCAPE, 'TWO VOICES' MASTER,
+                       AND THE Q-LINK RETROCAUSAL BRIDGE (1983 <-> 2025).
 ======================================================================`);
     }
 
@@ -1005,6 +1296,8 @@ to the Luna Gray project. Official cover story: Transferred to New Geneva."
     Dossier: /forensics/ashford_poly.html
   • SIGNAL 0x0B (SD-0010 "Two Voices"): Dual-carrier counterpoint vocal stem.
     Engage 14.2 Hz Harmonic Counterpoint Lock (Button 4) for Sector 6 key.
+  • ANOMALY 0x0F (Q-Link Dual-Lock): Engaging BOTH Phase Null + Counterpoint Lock
+    simultaneously on Button 4 folds the Lissajous scope into the 1983<->2025 loop.
 
   [OPEN INTERACTIVE SIGNAL LAB]: /forensics/signal_lab.html
 ======================================================================`);
@@ -1021,14 +1314,16 @@ Plan:
   1. Reel SD-0009 (rabbit_10): 330/495/990 Hz triad inverted 180 deg across Ch-L/Ch-R.
      Sum L+R to mono to isolate the 750 Hz CW salt (7704-AKASAKA).
   2. Reel SD-0010 ("Two Voices"): Dual-carrier counterpoint stem. Lock onto the
-     14.2001 Hz inter-channel beat in /forensics/signal_lab.html to unseal Sector 6.`,
+     14.2001 Hz inter-channel beat in /forensics/signal_lab.html to unseal Sector 6.
+  3. Q-Link Needle: If the Dead-Hand fires, fold 0x1983 <-> 0x2025 (Delta: 0x09A6).`,
         "nova@kamome-net.org": `Login: nova7         Name: Nova Hart [Akasaka Mirror // PC-98 Node]
 Directory: /usr/spool/kamome/nova7      Shell: /bin/rsh
 Last login: Wed Mar 31 23:59:59 1993 on tty02 (Akasaka Branch Closure)
 Archive Dossier: /forensics/kamome_net.html | FTP: /ftp/kamome/index.html
 Plan:
   The real DMA partition map was modulated into the VIS-1200Hz raster (rabbit_08).
-  Anchor A = tokyo-garden-1420 | Anchor B = siliconvalley-lab-1984.`,
+  Anchor A = tokyo-garden-1420 | Anchor B = siliconvalley-lab-1984.
+  "They're formatting the grid. I'm losing the heavy. I will see you in June 2025."`,
         "op08@relcom-node08.org": `Login: op08          Name: Leningrad Amateur Packet Relay #08
 Directory: /var/spool/uucp/relcom08     Shell: /usr/local/bin/ax25sh
 Archive Dossier: /forensics/relcom_node08.html | Node: /regional/08-ussr/index.html
@@ -1060,14 +1355,17 @@ Plan:
 ======================================================================
  GOPHER+ CLIENT v2.1 // ${h.toUpperCase()} (PORT 70)
 ======================================================================
-  h  /forensics/signal_lab.html       [Interactive Web Audio SSTV/AFSK/Counterpoint Lab]
-  h  /forensics/ashford_poly.html     [Ashford Polytechnic Stage III Phase Null Dossier]
-  h  /forensics/kamome_net.html       [Kamome-Net Stage I VIS-1200Hz Raster Dossier]
-  h  /forensics/relcom_node08.html    [Relcom Node-08 Stage II Bell-103 AX.25 Dossier]
-  h  /forensics/red_coyoacan.html     [Red Coyoacan Stage IV Feistel DMA Synthesis]
-  h  /forensics/usenet_1995_feed.html [October 1995 Chronological Usenet Spool]
-  1  /ftp/ashford-poly/index.html     [Ashford Polytechnic FTP Archive]
-  1  /ftp/kamome/index.html           [Kamome Akasaka FTP Archive]
+  h  /forensics/signal_lab.html         [Interactive Web Audio SSTV/AFSK/Counterpoint Lab]
+  h  /forensics/ashford_poly.html       [Ashford Polytechnic Stage III Phase Null Dossier]
+  h  /forensics/kamome_net.html         [Kamome-Net Stage I VIS-1200Hz Raster Dossier]
+  h  /forensics/relcom_node08.html      [Relcom Node-08 Stage II Bell-103 AX.25 Dossier]
+  h  /forensics/red_coyoacan.html       [Red Coyoacan Stage IV Feistel DMA Synthesis]
+  h  /forensics/anemoia_harmony.html    [Anemoia Bureau of Harmony & Echoes 1-6 Dossier]
+  h  /forensics/fractal_marcus.html     [Project Akasaka JP-85-X & Fractal Marcus Matrix]
+  h  /forensics/dead_hand_protocol.html [Luna Gray, Dead-Hand Protocol & Q-Link Schematic]
+  h  /forensics/usenet_1995_feed.html   [October 1995 Chronological Usenet Spool]
+  1  /ftp/ashford-poly/index.html       [Ashford Polytechnic FTP Archive]
+  1  /ftp/kamome/index.html             [Kamome Akasaka FTP Archive]
 ======================================================================`);
     }
 
@@ -1119,6 +1417,7 @@ Plan:
  *   Anchor B: siliconvalley-lab-1984  [0x89B2D39A]
  *   Feistel Mask: 0x3A5F (Relcom-08)  [DMA Vector: 0x89B2-392C-7704-AKASAKA]
  *   Counterpoint Bus: Reel SD-0010    ["Two Voices" -> TWO-VOICES-1420-COUNTERPOINT]
+ *   Q-Link Retrocausal Aperture       [0x2025 ^ 0x1983 = 0x09A6 -> OUROBOROS-FOLD]
  */
 #include <stdint.h>
 
@@ -1180,6 +1479,40 @@ uint32_t feistel_round(uint32_t x, uint32_t k) {
         case "TWOVOICES":
         case "SD-0010":
           cmdTwoVoices();
+          break;
+        case "ANEMOIA":
+        case "HARMONY-ACTS":
+        case "HARMONY":
+        case "1924":
+        case "1979":
+          cmdAnemoia();
+          break;
+        case "ECHOES":
+        case "ECHOES-PARITY":
+        case "CRYSTAL-PROMISE":
+        case "CRE-7":
+        case "CRE7":
+          cmdEchoes();
+          break;
+        case "FRACTAL-MARCUS":
+        case "FRACTAL":
+        case "AKASAKA":
+        case "7SIGMA":
+        case "7-SIGMA":
+          cmdFractalMarcus();
+          break;
+        case "DEAD-HAND":
+        case "DEADHAND":
+        case "LUNA-GRAY":
+        case "LUNAGRAY":
+        case "Q-LINK":
+        case "QLINK":
+          cmdDeadHand();
+          break;
+        case "OUROBOROS-FOLD":
+        case "OUROBOROS":
+        case "FOLD":
+          cmdOuroborosFold(args[0], args[1], args[2]);
           break;
         case "TRACE":
           cmdTrace(args[0]);

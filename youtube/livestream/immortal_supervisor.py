@@ -130,10 +130,12 @@ def supervise(repo_root: Path, stall_timeout_sec: float = 25.0) -> None:
     playlist_path = livestream_dir / "playlist.txt"
     log_path = livestream_dir / "stream.log"
     watcher_script = livestream_dir / "watch_downloads_folder.py"
+    promoter_script = livestream_dir / "agent_autonomous_promoter.py"
     health_path = livestream_dir / "supervisor_health.json"
 
     stream_proc: subprocess.Popen | None = None
     watcher_proc: subprocess.Popen | None = None
+    promoter_proc: subprocess.Popen | None = None
 
     last_frame = -1
     last_frame_advance_ts = time.time()
@@ -143,6 +145,7 @@ def supervise(repo_root: Path, stall_timeout_sec: float = 25.0) -> None:
         log(f"Received signal {signum}, shutting down child processes cleanly...")
         terminate_process_group(stream_proc)
         terminate_process_group(watcher_proc)
+        terminate_process_group(promoter_proc)
         sys.exit(0)
 
     signal.signal(signal.SIGINT, handle_exit)
@@ -151,11 +154,21 @@ def supervise(repo_root: Path, stall_timeout_sec: float = 25.0) -> None:
     log(f"Starting Immortal 24/7 Broadcast Supervisor in {repo_root}")
 
     while True:
-        # 1. Keep Downloads Folder Watcher alive
+        # 1. Keep Downloads Folder Watcher & Agentic Seeding Daemon alive
         if watcher_script.exists() and (watcher_proc is None or watcher_proc.poll() is not None):
             log("Starting watch_downloads_folder.py daemon...")
             watcher_proc = subprocess.Popen(
                 [sys.executable, str(watcher_script)],
+                cwd=str(repo_root),
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+                start_new_session=True,
+            )
+
+        if promoter_script.exists() and (promoter_proc is None or promoter_proc.poll() is not None):
+            log("Starting agent_autonomous_promoter.py daemon...")
+            promoter_proc = subprocess.Popen(
+                [sys.executable, str(promoter_script)],
                 cwd=str(repo_root),
                 stdout=subprocess.DEVNULL,
                 stderr=subprocess.DEVNULL,
