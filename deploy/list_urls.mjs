@@ -22,6 +22,7 @@ walk(siteDir);
 const out = ["site_path,public_url"];
 for (const sp of rows.sort()) {
   if (sp.startsWith("assets/") || sp === "sitemap.xml" || sp === "robots.txt" ||
+      sp === "llms.txt" || sp === "llms-full.txt" || sp === "feed.xml" ||
       sp.startsWith("terminal/") || sp.startsWith("reconstruction/") || sp.startsWith("forensics/") ||
       sp.startsWith(".well-known/") || sp.startsWith("federation/") || sp === "usenet/live_1995_feed.html" ||
       /^usenet\/[^/]+\/s0090\d\.txt$/.test(sp)) continue;
