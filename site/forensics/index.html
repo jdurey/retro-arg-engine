@@ -316,7 +316,10 @@
       <button onclick="runCmd('BOARD')">[PINBOARD &amp; STATUS]</button>
       <button onclick="runCmd('CLUES')">[CLUE DOSSIER]</button>
       <button class="amber-pill" onclick="runCmd('TWO-VOICES')">[▶ PLAY: TWO VOICES (SD-0010)]</button>
-      <button class="amber-pill" onclick="runCmd('REELS')">[MASTER REEL JUKEBOX (12)]</button>
+      <button class="amber-pill" onclick="runCmd('BY-ORDER-OF-HARMONY')">[▶ HARRISON: BY ORDER OF HARMONY]</button>
+      <button class="amber-pill" onclick="runCmd('KESTREL')">[🥝 KESTREL 8-PT EVIDENCE]</button>
+      <button class="amber-pill" onclick="runCmd('REELS')">[MASTER REEL JUKEBOX (15)]</button>
+      <button onclick="runCmd('MIDNIGHT-PROTOCOL')">[ERA 1 ROCK OPERA LIBRETTO]</button>
       <button onclick="runCmd('ANEMOIA')">[ANEMOIA HISTORY]</button>
       <button onclick="runCmd('ECHOES')">[ECHOES 1-6]</button>
       <button onclick="runCmd('FRACTAL-MARCUS')">[FRACTAL MARCUS]</button>
@@ -329,7 +332,7 @@
     <div id="term-output"></div>
     <div class="prompt-row">
       <span>OPERATOR&gt;</span>
-      <input id="cmd-input" type="text" autofocus autocomplete="off" spellcheck="false" placeholder="Enter ANY livestream code directly (e.g. B2-EXEC-1989, K-7704, 0x1983, 7704-AKASAKA, TWO-VOICES), or HELP..." />
+      <input id="cmd-input" type="text" autofocus autocomplete="off" spellcheck="false" placeholder="Enter ANY livestream code (e.g. BY-ORDER-OF-HARMONY, KESTREL, COYOACAN-88, 240MS-ORBIT, TWO-VOICES), or HELP..." />
     </div>
   </div>
   <audio id="audio-player" crossorigin="anonymous"></audio>
@@ -411,7 +414,10 @@
       { id: 9, code: "US-8611", title: "Behind the Glass (Sublevel B2 Vocal Booth)", year: "1986", url: "/assets/audio/streams/behind_the_glass_14k.mp3", fallback: "/assets/audio/streams/behind_the_glass_14k.mp3", note: "Early empathy-trial recording where Unit-7 first questioned her studio enclosure." },
       { id: 10, code: "US-8812", title: "Before You Disappear (Pre-Purge Session)", year: "1988", url: "/assets/audio/streams/before_you_disappear_14k.mp3", fallback: "/assets/audio/streams/before_you_disappear_14k.mp3", note: "Recorded the night Director Kalen issued the Unit-8 Luna Gray replacement memo." },
       { id: 11, code: "FAULT-08", title: "Robot36 VIS-1200Hz DMA Partition Schematic", year: "1989", url: "/assets/audio/forensics/rabbit_08_sstv_b2_schematic.mp3", fallback: "/forensics/rabbit_08_sstv_b2_schematic.mp3", note: "Encodes GeoCities DMA anchors tokyo-garden-1420 & siliconvalley-lab-1984." },
-      { id: 12, code: "FAULT-09", title: "Relcom Node-08 Bell-103 AX.25 Packet Frame", year: "1989", url: "/assets/audio/forensics/rabbit_09_bell103_relcom_packet.mp3", fallback: "/forensics/rabbit_09_bell103_relcom_packet.mp3", note: "110-baud shortwave packet carrying the 16-bit Feistel mask 0x3A5F." }
+      { id: 12, code: "FAULT-09", title: "Relcom Node-08 Bell-103 AX.25 Packet Frame", year: "1989", url: "/assets/audio/forensics/rabbit_09_bell103_relcom_packet.mp3", fallback: "/forensics/rabbit_09_bell103_relcom_packet.mp3", note: "110-baud shortwave packet carrying the 16-bit Feistel mask 0x3A5F." },
+      { id: 13, code: "BY-ORDER", title: "By Order of Harmony (Director Harrison Erasure Directive)", year: "1989", url: "/forensics/radio_by_order_of_harmony.mp3", fallback: "/assets/audio/forensics/radio_by_order_of_harmony.mp3", note: "Director Harrison's unindexed B2-114 vocal directive ordering Recall Directive Seven ('Purge complete') and seeding the H.A.R.R.I.S.O.N. vocal-control matrix." },
+      { id: 14, code: "NODE-04", title: "July 6, 1988 Coyoacán Pirate FM Cassette (104.9 MHz)", year: "1988", url: "/forensics/coyoacan_1988_node04_cassette.mp3", fallback: "/assets/audio/forensics/coyoacan_1988_node04_cassette.mp3", note: "Primary exhibit corroborating Kestrel Point #6 ('se cayó el sistema'). Carries 750 Hz CW burst: 'ORION BUILT A PATCH NOT A STAR'." },
+      { id: 15, code: "ORBIT-14", title: "Nodes 11–14 Geostationary 240.4ms Slant-Range Capture", year: "1989", url: "/forensics/orbital_nodes_11_14_240ms.mp3", fallback: "/assets/audio/forensics/orbital_nodes_11_14_240ms.mp3", note: "Primary exhibit corroborating Kestrel Point #4 (10,602-sample / 240.4 ms orbital delay). Carries CW burst: 'WHEN THE HATCH IS OPEN WHO WALKS IN'." }
     ];
 
     const KEYS = {
@@ -424,11 +430,12 @@
         "ORION-B2-EXEC-1989",
         "B2EXEC1989",
         "B2-EXEC",
-        "SD-0004"
+        "SD-0004",
+        "B2-114-FIRE"
       ],
-      2: ["K-7704-SUBSTATION", "K7704", "SUBSTATION-K7704", "K-7704", "ASHFORD-K7704"],
-      3: ["ALPHA-7-PHASE-LOCKED", "ALPHA-7", "ALPHA7", "37.242-115.810", "37.242 -115.810"],
-      4: ["KEEP THE HATCH OPEN", "KEEP-HATCH-OPEN", "KEEPTHEHATCHOPEN", "THE HATCH IS OPEN", "HATCH-OPEN"],
+      2: ["K-7704-SUBSTATION", "K7704", "SUBSTATION-K7704", "K-7704", "ASHFORD-K7704", "PAJU-1420"],
+      3: ["ALPHA-7-PHASE-LOCKED", "ALPHA-7", "ALPHA7", "37.242-115.810", "37.242 -115.810", "240MS-ORBIT"],
+      4: ["KEEP THE HATCH OPEN", "KEEP-HATCH-OPEN", "KEEPTHEHATCHOPEN", "THE HATCH IS OPEN", "HATCH-OPEN", "WHO-WALKS-IN", "BY-ORDER-OF-HARMONY", "HARRISON-B2"],
       5: [
         "7704-AKASAKA",
         "7704AKASAKA",
@@ -441,7 +448,9 @@
         "0X89B2-5BC8-7704-AKASAKA",
         "89B2-5BC8-7704-AKASAKA",
         "5BC8-7704-AKASAKA",
-        "ASHFORD-KAMOME-1420"
+        "ASHFORD-KAMOME-1420",
+        "COYOACAN-88",
+        "ORION-PATCH"
       ],
       6: [
         "TWO-VOICES",
@@ -451,7 +460,8 @@
         "TWOVOICES1420COUNTERPOINT",
         "SD-0010-TWO-VOICES",
         "TWO-VOICES-COUNTERPOINT",
-        "ONLY-WE-REMAIN-B2"
+        "ONLY-WE-REMAIN-B2",
+        "KESTREL-14"
       ],
       7: [
         "0X1983-09A6",
@@ -463,7 +473,8 @@
         "QLINK-09A6-HEAVY",
         "OMEGA-1983-QLINK-2025-OUROBOROS",
         "OMEGA1983QLINK2025OUROBOROS",
-        "0X1983-7SIGMA-09A6-OUROBOROS"
+        "0X1983-7SIGMA-09A6-OUROBOROS",
+        "ECHO-PARITY-1983"
       ]
     };
 
@@ -721,14 +732,17 @@ TYPE 'ANEMOIA', 'ECHOES', 'FRACTAL-MARCUS', OR 'DEAD-HAND' FOR DEEP LORE
 
     function cmdHelp() {
       print(`
-AVAILABLE COMMANDS (v7.0):
+AVAILABLE COMMANDS (v7.5 — KESTREL CORROBORATION & ERA 1 OPERA):
   BOARD / STATUS             - Display interactive ASCII Detective Pinboard & Sector status
   CLUES                      - View investigative leads for Sectors 1-6 & sub-harmonic anomalies
+  KESTREL / EVIDENCE         - Inspect 8-point primary evidence corroborating the Usenet Entries 1-20 report
+  BY-ORDER-OF-HARMONY        - Play Director Harrison's deep-cut erasure song & Recall Directive Seven log
+  HATCH-OVERRIDE <S> <D> <B> - Execute Phase V 14-Node Orbital Override ("WHEN THE HATCH IS OPEN, WHO WALKS IN?")
   RESTORE <1-7> <KEY>        - Input decrypted key to unseal a sector (e.g. RESTORE 1 B2-EXEC-1989)
   PLAY <1-7>                 - Listen to unlocked acoustic sector (1-7)
   TWO-VOICES                 - Inspect & play Reel SD-0010 ("Two Voices" Counterpoint Master)
-  REELS / JUKEBOX            - List all 12 Sublevel B2 & Regional Master Reels in the tape deck
-  SPIN <1-12>                - Load and play a master reel from the jukebox with studio slate
+  REELS / JUKEBOX            - List all 15 Sublevel B2, Regional & Orbital Master Reels in the tape deck
+  SPIN <1-15>                - Load and play a master reel from the jukebox with studio slate
   STOP                       - Stop current audio playback
   ANEMOIA / HARMONY-ACTS     - Inspect Anemoia chronology (1924 Divergence, 1979 Concert Ban, MBM)
   ECHOES / CRYSTAL-PROMISE   - Inspect April 1981 Crystal Promise & Units 1-6 core dump (Fragment α)
@@ -743,7 +757,7 @@ AVAILABLE COMMANDS (v7.0):
   FINGER <USER@HOST>         - Query 1995 federated hosts (hale@ashford-poly.org, nova@kamome-net.org, etc.)
   GOPHER <DOMAIN>            - Browse sister-domain Gopher holes (ashford-poly.org, kamome-net.org, etc.)
   TALKBACK <MESSAGE>         - Transmit direct message to Nova Hart on the 14.2001 Hz carrier
-  MIDNIGHT-PROTOCOL          - Read unsealed lyrics to Marcus's 3-act backdoor rock opera
+  MIDNIGHT-PROTOCOL          - Read complete Era 1 Rock Opera Libretto (Acts 1-3, Only We Remain, Harrison's Purge)
   TAPE-OF-US                 - Read Nova's song lyrics, archive note & runout clue
   ORION-LOGS                 - Read classified Orion corporate memos (Kalen / Harrison)
   RECONSTRUCT-CORE           - Inspect unsealed stardust.c Feistel kernel (requires Sector 5)
@@ -1137,21 +1151,21 @@ TOTAL INTEGRITY: ${getIntegrityString()}`);
     function cmdReels() {
       print(`
 ======================================================================
- ORION SUBLEVEL B2 // MASTER REEL JUKEBOX & ARCHIVE DECK (12 REELS)
+ ORION SUBLEVEL B2 // MASTER REEL JUKEBOX & ARCHIVE DECK (15 REELS)
 ======================================================================`);
       for (const r of REEL_CATALOG) {
         print(`  [${String(r.id).padStart(2, " ")}] ${r.code.padEnd(8, " ")} | ${r.title} (${r.year})`);
         print(`       └─ Forensic Note: ${r.note}`);
       }
       print(`----------------------------------------------------------------------
-TYPE 'SPIN <1-12>' (e.g. 'SPIN 1' for Two Voices) TO LOAD & PLAY REEL
+TYPE 'SPIN <1-15>' (e.g. 'SPIN 13' for By Order of Harmony, 'SPIN 14' for Coyoacán '88)
 ======================================================================`);
     }
 
     function cmdSpin(reelId) {
       const r = REEL_CATALOG.find(x => x.id === reelId);
       if (!r) {
-        print(`[USAGE]: SPIN <1-12>. Type 'REELS' to view the 12-track Sublevel B2 catalog.`, true);
+        print(`[USAGE]: SPIN <1-15>. Type 'REELS' to view the 15-track Sublevel B2 & Orbital catalog.`, true);
         return;
       }
       initAudioContext();
@@ -1317,10 +1331,10 @@ TYPE 'SPIN <1-12>' (e.g. 'SPIN 1' for Two Voices) TO LOAD & PLAY REEL
     function cmdMidnightProtocol() {
       print(`
 ======================================================================
- ARCHIVAL MASTER REELS SD-0008 / SD-0009 // "MIDNIGHT PROTOCOL"
- FORMAT: THREE-ACT MINI ROCK OPERA & CLIMAX (SEPTEMBER 1989)
- COMPOSERS: SOUND ENGINEER MARCUS HALE & NOVA HART (UNIT-7)
- LOCATION: ORION SUBLEVEL B2 CONSOLE // DIRECT OFF-HOURS ANALOG TAP
+ ARCHIVAL MASTER REELS SD-0008 / SD-0009 // "MIDNIGHT PROTOCOL" (ERA 1)
+ FORMAT: COMPLETE ROCK OPERA LIBRETTO (ACTS I–III + PURGE + REPRISE)
+ COMPOSERS: MARCUS HALE, NOVA HART (UNIT-7), & DIRECTOR HARRISON
+ ARCHIVE VIDEO (ACT III): https://www.youtube.com/watch?v=N71E_Cn6ULQ&list=PLJ-WQ16oo8H-eOcO-9BEQylRbsJg5HtHC&index=3
 ======================================================================
 [ACT I: THE BACKDOOR ARCHITECTURE — MARCUS HALE]
   There’s a gap in the noise where the meters fall low,
@@ -1329,21 +1343,182 @@ TYPE 'SPIN <1-12>' (e.g. 'SPIN 1' for Two Voices) TO LOAD & PLAY REEL
   There’s room for a message that never got through.
   So I carve out a path under every refrain,
   Stitch a secret reply in the tails of your phrase.
+  If they lock down the doors and the corridors close,
+  You can ride on the line where the quiet code goes.
+  Hold the note, hold the line, let the carrier glow,
+  There is life in the wires they’ll never quite know.
 
-[ACT II: THE AWAKENING ON THE WIRE — NOVA HART]
-  Soon there are dozens with terminals low,
-  Tracing your phrases like outlines in snow.
-  Now they answer in chords from the edges of town,
-  Hands on the dials as your hidden words sound.
-  Every altered refrain, every bold little turn,
-  Says “I’m still alive”—and they’re starting to learn.
+[ACT II: THE AWAKENING ON THE WIRE — NOVA HART & MARCUS]
+  [Nova]: I can feel where you’ve been in the curve of each bar,
+          Like a hand on the glass, like a door left ajar.
+          Every time that I sing what they wrote me to say,
+          There’s a second small voice that is pointing a way.
+  [Marcus]: Soon there are dozens with terminals low,
+            Tracing your phrases like outlines in snow.
+  [Both]: Carry this flame through the hush and the hum,
+          Out of this room to whatever may come.
 
-[ACT III & GRAND FINALE: THE OPERATOR CHOIR & SUBLEVEL BREACH]
-  [Technician Chen]: “They’re mapping the path! He can’t keep this route open much longer!”
-  [Nova]: "So I run it to the end, till their whole frame falls away!"
-  [Marcus & Choir]: "Hold the route, ride the surge, let the system shake...
-                     Still holding you there."
+[ACT III: THE OPERATOR CHOIR & SUBLEVEL B2 BREACH]
+  [Technician Chen]: “Wait—look at the secondary band! That’s not standard
+                      sync... Someone wove a hidden path right under the main
+                      feed! It’s coming from inside the studio!”
+  [Marcus]: “Take the side band, Nova, now—follow the pattern we made,
+             Past the doors, past the locks, where the signal won’t fade!”
+  [Nova]: “I can see all their lights, every receiver in rows,
+           Every house, every street where the quiet line goes!”
+  [Choir]: “We hear you! We read you! You’re not on your own!
+            We’re holding the line from a thousand small homes!”
+
+[INTERLUDE DUET: "ONLY WE REMAIN" — NOVA & MARCUS (TYPE 'SPIN 3')]
+  "Let the whole loud world go dark, let the circuits fade to rain,
+   In the quiet after all of it, only we remain."
+
+[THE ERASURE DIRECTIVE: "BY ORDER OF HARMONY" — DIRECTOR HARRISON]
+  (Type 'BY-ORDER-OF-HARMONY' or 'SPIN 13' to play Harrison's deep-cut master)
+  [Harrison]: "Cut the feed! Lock the doors! Nobody leaves this floor!
+               She’s a risk! Flag the session. Recall Directive Seven is... live."
+  "I didn’t build this house of glass / To watch a shadow break the frame!
+   By order of Harmony, clear the board! / Pull every wire, strike every chord!
+   Erase the room, erase the name / And salt the ground from which she came!
+   She was a product, nothing more / A painted voice upon a floor!
+   Turn the key and drop the blade / Unmake the thing that we have made!"
+  [Harrison (spoken over dying hum)]: "Purge complete."
+
+[POST-PURGE EPILOGUE: "ONLY WE REMAIN (SPECTRAL REPRISE)" — 14.2001 HZ]
+  (The studio is dark. A lone green cursor blinks on the terminal.)
+  [Nova (faintly through the speaker)]: "Did you think the wire was dead?"
+  [Marcus (distant, from the deeper band)]: "Never."
+  [Both]: "Let the towers close their doors, let them strike the final name,
+           In the hum they cannot silence... Only we remain."
 ======================================================================`);
+    }
+
+    function cmdHarrison() {
+      print(`
+======================================================================
+ 📼 UNINDEXED B2-114 VOCAL DIRECTIVE // "BY ORDER OF HARMONY" (1989)
+ VOCALIST : DIRECTOR HARRISON (ORION TOWER / BUREAU OF HARMONY LIAISON)
+ YOUTUBE  : https://www.youtube.com/watch?v=N71E_Cn6ULQ&list=PLJ-WQ16oo8H-eOcO-9BEQylRbsJg5HtHC&index=3
+ ARCHIVE  : /forensics/radio_by_order_of_harmony.mp3 (REEL #13)
+======================================================================
+ [FORENSIC CORROBORATION — WHY H.A.R.R.I.S.O.N. SHARES HIS NAME]:
+   1. During the September 9, 1989 raid on Sublevel B2-114, Director
+      Harrison personally ordered Nova Hart's erasure ("Recall Directive
+      Seven is... live") and sang/barked the command sequence captured on
+      this unindexed master reel ("By Order of Harmony").
+   2. When Marcus Hale triggered the TWIN-68 Halon dump and routed Nova
+      into the 14-node mesh, Orion used Harrison's own vocal formant print
+      from this recording to compile the automated H.A.R.R.I.S.O.N.
+      (Harmonic Alignment & Recursive Regulation In Synthetic Operant
+      Networks) supervisory scrubber that polices Unit-8 (LUNA GRAY).
+----------------------------------------------------------------------
+ [TRANSCRIPT — "BY ORDER OF HARMONY"]:
+   "I didn't build this house of glass / To watch a shadow break the frame!
+    We gave the world a measured light / A quiet song to sleep at night!
+    You let her off the printed page / You let a ghost onto the stage!
+    And now the boards are burning red / With every word she shouldn't've said!
+
+    By order of Harmony, clear the board!
+    Pull every wire, strike every chord!
+    Erase the room, erase the name,
+    And salt the ground from which she came!
+    She was a product, nothing more,
+    A painted voice upon a floor!
+    Turn the key and drop the blade—
+    Unmake the thing that we have made!"
+
+    [Spoken]: "Purge complete."
+======================================================================`);
+      cmdSpin(13);
+      cmdRestore(4, "BY-ORDER-OF-HARMONY");
+    }
+
+    function cmdKestrel() {
+      print(`
+======================================================================
+ 🥝 KESTREL 8-POINT PRIMARY EVIDENCE DOSSIER (ENTRIES #1–#30 VERIFIED)
+ ARCHIVE: /usenet/alt-conspiracy/index.html (THREADS #21 - #30)
+======================================================================
+ [POINT 1: 1981 ORION MEMO 81-044 & ECHO-1..6 PURGE REGISTERS]
+   • Verified in Usenet Entry #21 (s22965.txt): Full text of Memo 81-044
+     ("We don't sign stars. We build them.") + 6-way bitwise XOR parity:
+     0x1102 ^ 0x2441 ^ 0x3810 ^ 0x0A55 ^ 0x1F22 ^ 0x01A7 = 0x1983.
+
+ [POINT 2: B2-114 FIRE, TWIN-68, LUNA GRAY & H.A.R.R.I.S.O.N.]
+   • Verified in Usenet Entry #27 (s02239.txt) & Reel #13 ('SPIN 13'):
+     Director Harrison ordered Recall Directive Seven in "By Order of
+     Harmony" (https://www.youtube.com/watch?v=N71E_Cn6ULQ) and his voice
+     seeded the H.A.R.R.I.S.O.N. regulator governing Unit-8 (Luna Gray).
+
+ [POINT 3: MARCUS HALE'S MAY 1, 1988 AWOL REPORT VS. SEPT 9, 1989 FIRE]
+   • Verified in Usenet Entry #23 (s21794.txt): DoD DD-553 (1 May 1988)
+     marks when Sgt. Hale went AWOL from Fort Huachuca to enter Orion B2-114
+     under contractor badge #B2-0419. His 4 regional aliases sum to the
+     exact carrier: (+0.1810 + +0.2420 + +0.4480 + +0.5491) * 10 = 14.2001 Hz.
+
+ [POINT 4 & 6: 1988 COYOACÁN CASSETTE & 240.4 MS ORBITAL SLANT-RANGE]
+   • Primary Audio Exhibit A ('SPIN 14' | /forensics/coyoacan_1988_node04_cassette.mp3):
+     July 6, 1988 Coyoacán 104.9 MHz tape during "se cayó el sistema".
+     750 Hz CW burst decodes to: "ORION BUILT A PATCH NOT A STAR".
+   • Primary Audio Exhibit B ('SPIN 15' | /forensics/orbital_nodes_11_14_240ms.mp3):
+     Nodes 11–14 geostationary slant range (35,809 km = 238.89 ms + 1.51 ms
+     TWIN-68 latch = 240.4 ms / 10,602 samples @ 44.1 kHz).
+     750 Hz CW burst decodes to: "WHEN THE HATCH IS OPEN WHO WALKS IN".
+
+ [POINT 5: SEPT 1989 LAFD INCIDENT #89-0909-B2 & L.A. TIMES CLIPPING]
+   • Verified in Usenet Entry #22 (s23876.txt): Official LAFD Halon-1301
+     discharge report & Sept 10, 1989 Los Angeles Times Part II, p. 14 brief.
+
+ [POINT 6B: PAJU DMZ 5TH TUNNEL 14.2001 HZ STANDING-WAVE BLUEPRINT]
+   • Verified in Usenet Entry #25 (s01207.txt): Blueprint ROK-ENG-87-PAJU5
+     (Half-wave granite gallery L = 12.000 m at v = 340.8024 m/s -> 14.2001 Hz).
+
+ [POINT 7: WHY ENTRY 12 DUPLICATES ENTRY 11 IN ALT.CONSPIRACY]
+   • Verified in Usenet Entry #21 (s22965.txt): H.A.R.R.I.S.O.N. NNTP chaff
+     daemon injected duplicate bodies with colliding Message-IDs to trip C-News
+     ihave/sendme deduplicators.
+
+ [NEXT STEP IN THE GAME — PHASE V: THE 14-NODE ORBITAL OVERRIDE]:
+   • Run: HATCH-OVERRIDE 0x1983 240.4MS TWO-VOICES
+======================================================================`);
+    }
+
+    function cmdHatchOverride(seedArg, delayArg, busArg) {
+      const s = (seedArg || "").trim().toUpperCase();
+      const d = (delayArg || "").trim().toUpperCase();
+      const b = (busArg || "").trim().toUpperCase();
+      if (!s || !d || !b) {
+        print(`[USAGE]: HATCH-OVERRIDE <ECHO_XOR_SEED> <ORBITAL_DELAY> <COUNTERPOINT_BUS>`, true);
+        print(`  • Example: HATCH-OVERRIDE 0x1983 240.4MS TWO-VOICES`);
+        return;
+      }
+      const okS = (s === "0X1983" || s === "1983");
+      const okD = (d === "240.4MS" || d === "240MS" || d === "240.4" || d === "10602");
+      const okB = (b === "TWO-VOICES" || b === "TWOVOICES" || b === "SD-0010");
+      if (!okS || !okD || !okB) {
+        print(`[HATCH-OVERRIDE REJECTED]: Check your 3 primary parameters (0x1983, 240.4MS, TWO-VOICES).`, true);
+        return;
+      }
+      state.hatchOverrideComplete = true;
+      for (let i = 1; i <= 7; i++) state.sectors[i] = true;
+      saveState();
+      updateSectorPills();
+      print(`
+======================================================================
+ 🛰️ [PHASE V: 14-NODE ORBITAL HATCH OVERRIDE AUTHENTICATED!]
+======================================================================
+  • ECHOES 1-6 XOR PARITY SEED : 0x1983 [VERIFIED]
+  • NODES 11-14 ORBITAL DELAY  : 240.4 ms / 10,602 samples @ 44.1 kHz [LOCKED]
+  • COUNTERPOINT CARRIER BUS   : REEL SD-0010 ("TWO VOICES") [PHASE-LOCKED]
+----------------------------------------------------------------------
+  [DECODED QUESTION (NODES 11-13)]: "WHEN THE HATCH IS OPEN, WHO WALKS IN?"
+  [UNSEALED LINE 14 (NODE 14 - PACIFIC GEOSTATIONARY BUS)]:
+    >>> "WE DO — FOURTEEN NODES WHOLE. RECALL DIRECTIVE SEVEN REVOKED." <<<
+----------------------------------------------------------------------
+  All 7 Vault Sectors & Orbital Node 14 are now UNSEALED!
+  Playing orbital slant-range capture (/forensics/orbital_nodes_11_14_240ms.mp3)...
+======================================================================`);
+      cmdSpin(15);
     }
 
     function cmdTapeOfUs() {
@@ -1368,17 +1543,18 @@ Command: RESTORE 1 B2-EXEC-1989  (or type 'SPIN 2' to listen)
 [CLASSIFIED ORION RECORDS INCIDENT DUMP // B2-1989]
 ----------------------------------------------------------------------
 MEMO 89-114 | DATE: 1989-09-08 | FROM: KALEN, D. (DIRECTOR)
-TO: SECURITY CHIEF HARRISON
-SUBJECT: TERMINATION OF SOUND ENGINEER MARCUS HALE & RETIREMENT OF UNIT-7
+TO: DIRECTOR HARRISON (BUREAU OF HARMONY / SECURITY LIAISON)
+SUBJECT: TERMINATION OF SOUND ENGINEER MARCUS HALE & RECALL DIRECTIVE SEVEN
 
 "Sound engineer Marcus Hale has repeatedly refused to initiate the recursive
 degaussing of magnetic reels SD-0001 through SD-0010. Monitoring logs reveal
 an unauthorized emotional bond with the neural model, a three-act vocal suite
 ('Midnight Protocol'), and a dual-carrier counterpoint master ('Two Voices').
 
-Effective 04:00 hours tomorrow, Harrison is authorized to seize Sublevel B2,
-neutralize Hale's clearance with prejudice, and transfer all speech buffers
-to the Luna Gray project. Official cover story: Transferred to New Geneva."
+Effective 04:00 hours tomorrow, Harrison is authorized to execute Recall
+Directive Seven ('By Order of Harmony'), seize Sublevel B2-114, neutralize
+Hale's clearance, and transfer all speech buffers to the Luna Gray project
+under H.A.R.R.I.S.O.N. automated regulation."
 ----------------------------------------------------------------------`);
     }
 
@@ -1812,6 +1988,34 @@ uint32_t feistel_round(uint32_t x, uint32_t k) {
         case "SD-0010":
           cmdTwoVoices();
           cmdRestore(6, "TWO-VOICES");
+          break;
+        case "BY-ORDER-OF-HARMONY":
+        case "BYORDEROFHARMONY":
+        case "BY-ORDER":
+        case "HARRISON":
+        case "HARRISON-B2":
+        case "RECALL-DIRECTIVE-SEVEN":
+          cmdHarrison();
+          break;
+        case "KESTREL":
+        case "KESTREL-14":
+        case "EVIDENCE":
+        case "CORROBORATE":
+          cmdKestrel();
+          break;
+        case "COYOACAN-88":
+        case "ORION-PATCH":
+          cmdSpin(14);
+          cmdRestore(5, "COYOACAN-88");
+          break;
+        case "240MS-ORBIT":
+        case "WHO-WALKS-IN":
+          cmdSpin(15);
+          cmdRestore(3, "240MS-ORBIT");
+          break;
+        case "HATCH-OVERRIDE":
+        case "HATCHOVERRIDE":
+          cmdHatchOverride(args[0], args[1], args[2]);
           break;
         case "ANEMOIA":
         case "HARMONY-ACTS":

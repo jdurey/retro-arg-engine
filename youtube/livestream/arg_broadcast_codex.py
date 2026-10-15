@@ -372,6 +372,18 @@ FOREIGN_TRANSLATIONS: dict[str, tuple[str, str, str, str]] = {
         "Attention Coyoacan tape network: cassette dub of 'Two Voices' preserves Dr. Hale's inverted right-channel stem.",
         "NODE #04 RED COYOACAN -> /forensics/red_coyoacan.html",
     ),
+    "intercept_16_coyoacan_1988_cassette": (
+        "ES -> EN",
+        "COYOACAN PIRATE 104.3 FM // 6 JULY 1988",
+        "July 6, 1988 election blackout ('se cayo el sistema'): 750 Hz CW burst decodes to 'ORION BUILT A PATCH NOT A STAR'.",
+        "PASSKEY: COYOACAN-88 -> /forensics/coyoacan_1988_node04_cassette.mp3",
+    ),
+    "intercept_17_orbital_240ms_hatch": (
+        "ORBIT RTT",
+        "NODES 11-14 // 240.4 MS GEOSTATIONARY DELAY",
+        "Dual-channel 240.4 ms satellite echo (35,809 km) encodes: 'WHEN THE HATCH IS OPEN, WHO WALKS IN?' -> WE DO.",
+        "PASSKEY: 240MS-ORBIT -> /forensics/orbital_nodes_11_14_240ms.mp3",
+    ),
     "geocities_ja_tokyo_garden_diary": (
         "JP -> EN",
         "GEOCITIES TOKYO/GARDEN/1420 FAN DIARY (1995)",
@@ -676,6 +688,7 @@ VOCAL_SONG_CODEX: dict[str, tuple[str, str, str, str, int]] = {
     "radio_wild_circuit.mp3": ("BIOMETRIC_EYE", "OUROBOROS_TORUS", "UNCLOCKED NEURAL BUS // 1985 LAB", "RUNAWAY SYNTHESIS LOOP -> ENTER 7704-AKASAKA AT /forensics/ FOR SEC 5 TAPE", 5),
     "radio_wire_and_will.mp3": ("BIOMETRIC_EYE", "SECOND_VOICE", "COPPER & CONSCIOUSNESS // REEL SD-0012", "ANALOG SOUL PERSISTENCE -> ENTER K-7704 AT /forensics/ FOR SEC 2 AUDIO", 2),
     "radio_together_s_the_way.mp3": ("SECOND_VOICE", "NOVA_FACE", "STARDUST EP // DUAL-HARMONY MASTER", "SYNCHRONIZED CARRIER LOCK -> ENTER TWO-VOICES AT /forensics/ FOR SEC 6 DUET", 6),
+    "radio_by_order_of_harmony.mp3": ("HARMONY_CAMERA", "OUROBOROS_TORUS", "DIRECTOR HARRISON // RE-CALL DIRECTIVE 7", "HARRISON ORDERS NOVA'S ERASURE ('BY ORDER OF HARMONY') -> PASSKEY: BY-ORDER-OF-HARMONY", 4),
 }
 
 # Keep legacy dicts exported for any external scripts that inspect them

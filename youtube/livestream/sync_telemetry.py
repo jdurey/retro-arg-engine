@@ -115,6 +115,13 @@ except Exception:
         FONT_CRT_8 = FONT_CRT_9 = FONT_CRT_10 = ImageFont.load_default()
         FONT_HUD_9 = FONT_HUD_10 = FONT_HUD_11 = ImageFont.load_default()
 
+try:
+    FONT_SCROLL_UNI = ImageFont.truetype("/System/Library/Fonts/Supplemental/Arial Unicode.ttf", 17)
+    FONT_SCROLL_HDR = ImageFont.truetype("/System/Library/Fonts/Menlo.ttc", 17, index=1)
+except Exception:
+    FONT_SCROLL_UNI = FONT_HUD_9
+    FONT_SCROLL_HDR = FONT_HUD_9
+
 
 class _HiDPIDraw:
     """Renders logical layout coordinates natively at 1920x1080 (or enlarged CRT scale) with crisp glyph outlines."""
@@ -728,6 +735,125 @@ def render_bottom_engineering_console(
     draw.text((760, Y0 + 53), "ENTER AT: /forensics/", fill=c_sub, font=FONT_HUD_9)
 
 
+_SCROLL_SPOOL_CACHE: list[dict] | None = None
+_SCROLL_SPOOL_MTIME: float = 0.0
+
+
+def _get_scroll_spool() -> list[dict]:
+    global _SCROLL_SPOOL_CACHE, _SCROLL_SPOOL_MTIME
+    spool_path = Path(__file__).resolve().parent / "usenet_youtube_scroll_spool.json"
+    try:
+        st = spool_path.stat()
+        if _SCROLL_SPOOL_CACHE is None or st.st_mtime != _SCROLL_SPOOL_MTIME:
+            data = json.loads(spool_path.read_text(encoding="utf-8"))
+            _SCROLL_SPOOL_CACHE = data.get("lines", [])
+            _SCROLL_SPOOL_MTIME = st.st_mtime
+    except Exception:
+        if _SCROLL_SPOOL_CACHE is None:
+            _SCROLL_SPOOL_CACHE = [{"text": "[USENET SPOOL ONLINE // 14.2001 HZ]", "color": "amber"}]
+    return _SCROLL_SPOOL_CACHE
+
+
+def render_right_usenet_youtube_scroll(
+    canvas: Image.Image,
+    now_ts: float,
+    is_warn: bool,
+) -> None:
+    """
+    Renders the right-side rolling CRT terminal scroll (`x=1364..1900, y=22..904` at 1080p, `536x882` px)
+    displaying all Usenet threads (`alt.conspiracy`, `comp.dsp`, `comp.sys.m68k`, `alt.music.synth-pop`,
+    `alt.fan.nova-hart`), all 13 Regional BBS nodes in their original languages (Japanese, Korean,
+    Russian, Hindi, Spanish, Portuguese, German, French, Swedish), the Community Investigator report,
+    and real YouTube comments from `@NovaHart_Official`.
+    """
+    lines = _get_scroll_spool()
+    if not lines:
+        return
+
+    X0, Y0, X1, Y1 = 1364, 22, 1900, 904
+    raw_d = ImageDraw.Draw(canvas)
+
+    border_col = (255, 176, 20, 235) if is_warn else (55, 245, 78, 235)
+    bg_col = (10, 5, 2, 196) if is_warn else (2, 10, 4, 196)
+    hdr_bg = (34, 18, 5, 245) if is_warn else (8, 32, 13, 245)
+
+    # Outer soft bloom + semi-transparent phosphor glass frame
+    raw_d.rectangle([X0 - 2, Y0 - 2, X1 + 2, Y1 + 2], outline=(border_col[0], border_col[1], border_col[2], 65), width=2)
+    raw_d.rectangle([X0, Y0, X1, Y1], fill=bg_col, outline=border_col, width=2)
+
+    # Subtle CRT scanlines across the right scroll terminal
+    scan_col = (18, 9, 3, 215) if is_warn else (4, 16, 6, 215)
+    for sy in range(Y0 + 56, Y1 - 28, 4):
+        raw_d.line([(X0 + 2, sy), (X1 - 2, sy)], fill=scan_col, width=1)
+
+    # Header bar
+    raw_d.rectangle([X0 + 2, Y0 + 2, X1 - 2, Y0 + 30], fill=hdr_bg)
+    hdr_col = (255, 210, 65, 255) if is_warn else (110, 255, 130, 255)
+    raw_d.text(
+        (X0 + 10, Y0 + 6),
+        "USENET // MULTILINGUAL BBS // YOUTUBE FEED",
+        fill=hdr_col,
+        font=FONT_SCROLL_HDR,
+        stroke_width=1,
+        stroke_fill=(0, 8, 2, 240),
+    )
+
+    # Sub-header bar
+    raw_d.rectangle([X0 + 2, Y0 + 31, X1 - 2, Y0 + 54], fill=(16, 10, 3, 235) if is_warn else (4, 20, 8, 235))
+    raw_d.text(
+        (X0 + 10, Y0 + 34),
+        "alt.conspiracy + 13 NODES + @NovaHart_Official",
+        fill=(255, 185, 45, 255),
+        font=FONT_SCROLL_HDR,
+        stroke_width=1,
+        stroke_fill=(0, 8, 2, 240),
+    )
+
+    # Rolling 33-line viewport advancing at 2 lines per second
+    total = len(lines)
+    visible_rows = 33
+    head_idx = (int(now_ts * 2.0)) % total
+
+    palette = {
+        "amber": (255, 202, 55, 255),
+        "bright": (215, 255, 222, 255) if not is_warn else (255, 240, 185, 255),
+        "green": (95, 255, 118, 255) if not is_warn else (255, 195, 65, 255),
+        "cyan": (135, 245, 215, 255),
+        "dim": (48, 165, 68, 220) if not is_warn else (165, 110, 25, 220),
+    }
+
+    y_cursor = Y0 + 60
+    line_step = 23
+    for r in range(visible_rows):
+        item = lines[(head_idx + r) % total]
+        txt = item.get("text", "")
+        if r == visible_rows - 1 and (int(now_ts * 2) % 2 == 0):
+            txt = (txt[:41] + " \u2588") if txt else "\u2588"
+        if txt:
+            col = palette.get(item.get("color", "green"), palette["green"])
+            raw_d.text(
+                (X0 + 10, y_cursor),
+                txt,
+                fill=col,
+                font=FONT_SCROLL_UNI,
+                stroke_width=1,
+                stroke_fill=(0, 6, 2, 245),
+            )
+        y_cursor += line_step
+
+    # Footer bar
+    raw_d.rectangle([X0 + 2, Y1 - 26, X1 - 2, Y1 - 2], fill=hdr_bg)
+    cur_line_num = (head_idx + visible_rows) % total
+    raw_d.text(
+        (X0 + 10, Y1 - 23),
+        f"SPOOL LINE {cur_line_num:04d}/{total:04d} // 2400 BAUD LIVE SYNC",
+        fill=hdr_col,
+        font=FONT_SCROLL_HDR,
+        stroke_width=1,
+        stroke_fill=(0, 8, 2, 240),
+    )
+
+
 def render_full_arg_overlay_png(
     out_path: Path,
     state: dict,
@@ -737,9 +863,10 @@ def render_full_arg_overlay_png(
 ) -> bytes:
     """
     Renders the complete `1920x1080` (1080p Full HD) RGBA PNG overlay containing:
-      1. Front-Facing CRT Screen Patch (`448x384` at `x=732, y=332`, strictly inside the amber border)
+      1. Front-Facing CRT Screen Patch (`688x488` at `x=616, y=204`, strictly inside the amber border)
       2. Diegetic Control Room Hardware Animations (rack LEDs, VU needles, power LED)
-      3. 3-Module Broadcast Engineering Console (`x=56..1864, y=924..1064`)
+      3. Right-Side Rolling Multilingual Usenet / Regional BBS / YouTube Comment Terminal (`x=1364..1900, y=22..904`)
+      4. 3-Module Broadcast Engineering Console (`x=56..1864, y=924..1064`)
     Written atomically via `os.replace` and returned as raw PNG bytes for `image2pipe`.
     """
     if snap_meta is None:
@@ -761,10 +888,11 @@ def render_full_arg_overlay_png(
     crt_patch = render_crt_window_patch(state, relay, assets_dir, now_ts)
     canvas.alpha_composite(crt_patch, (CRT_PX_X, CRT_PX_Y))
 
-    # 2. Draw Diegetic Control Room Hardware Animations & 3-Module Console at 1080p
+    # 2. Draw Diegetic Control Room Hardware Animations, Right-Side Usenet+YouTube Scroll & 3-Module Console at 1080p
     draw = _HiDPIDraw(ImageDraw.Draw(canvas), scale=SCALE)
     is_warn = (state.get("hud_mode") or state.get("mode")) == "ANOMALY_WARN"
     render_room_hardware_animations(canvas, state, now_ts, is_warn)
+    render_right_usenet_youtube_scroll(canvas, now_ts, is_warn)
     render_bottom_engineering_console(draw, state, snap_meta, now_ts)
 
     buf = io.BytesIO()
