@@ -47,7 +47,7 @@ import textwrap
 import time
 from pathlib import Path
 import numpy as np
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
 from arg_broadcast_codex import resolve_intentional_state
 
@@ -399,8 +399,8 @@ def render_crt_window_patch(state: dict, relay: dict, assets_dir: Path, now_ts: 
             draw.text((13, ry + 2), f"{unit}  {reg}  {desc}", fill=col, font=FONT_CRT_8)
 
         draw.rectangle([8, 132, CRT_W - 8, 165], fill=(6, 22, 9, 235), outline=(255, 190, 35, 245))
-        draw.text((13, 135), "XOR PARITY (UNITS 01..06):", fill=fg_amber, font=FONT_CRT_8)
-        draw.text((13, 149), "FRAGMENT ALPHA = 0x1983", fill=(135, 255, 150, 255), font=FONT_CRT_8)
+        draw.text((13, 135), "XOR PARITY -> CODE: 0x1983", fill=fg_amber, font=FONT_CRT_8)
+        draw.text((13, 149), "UNLOCK 1983 TAPE: /forensics/", fill=(135, 255, 150, 255), font=FONT_CRT_8)
 
     elif mode == "FRACTAL_RADAR":
         cx, cy, r = 54, 84, 36
@@ -430,7 +430,7 @@ def render_crt_window_patch(state: dict, relay: dict, assets_dir: Path, now_ts: 
             draw.text((106, 32 + idx * 17), line, fill=col, font=FONT_CRT_8)
 
         draw.rectangle([8, 144, CRT_W - 8, 165], fill=(16, 36, 18, 250), outline=fg_amber)
-        draw.text((13, 148), "FRAGMENT BETA: 7SIGMA-MARCUS", fill=fg_amber, font=FONT_CRT_8)
+        draw.text((13, 148), "UNLOCK CODE: 7SIGMA-MARCUS", fill=fg_amber, font=FONT_CRT_8)
 
     elif mode == "OUROBOROS_TORUS":
         cx, cy = CRT_W // 2, 78
@@ -461,7 +461,7 @@ def render_crt_window_patch(state: dict, relay: dict, assets_dir: Path, now_ts: 
 
         draw.rectangle([8, 132, CRT_W - 8, 165], fill=(22, 10, 4, 250), outline=fg_amber)
         draw.text((13, 135), "0x2025 ^ 0x1983 = 0x09A6", fill=fg_amber, font=FONT_CRT_8)
-        draw.text((13, 149), "GAMMA: QLINK-09A6-HEAVY", fill=(135, 255, 150, 255), font=FONT_CRT_8)
+        draw.text((13, 149), "UNLOCK CODE: 0x1983-09A6", fill=(135, 255, 150, 255), font=FONT_CRT_8)
 
     elif mode == "MORSE_DECODER":
         draw.rectangle([8, 28, CRT_W - 8, 68], fill=(5, 22, 8, 250), outline=(60, 210, 80, 240))
@@ -495,9 +495,11 @@ def render_crt_window_patch(state: dict, relay: dict, assets_dir: Path, now_ts: 
         for i, j in edges:
             draw.line([pts[i], pts[j]], fill=(85, 255, 110, 255), width=1)
 
-        draw.text((76, 78), "CW LOCK : 750.0 HZ", fill=fg_green, font=FONT_CRT_8)
-        draw.text((76, 95), "FEISTEL : 0x3A5F", fill=fg_amber, font=FONT_CRT_8)
-        draw.text((76, 112), "ROOT HEX: 0x1983", fill=fg_green, font=FONT_CRT_8)
+        u_code = state.get("unlock_code", "7704-AKASAKA")
+        t_sec = state.get("target_sector", 5)
+        draw.text((76, 78), f"PASSKEY: {u_code}", fill=fg_amber, font=FONT_CRT_8)
+        draw.text((76, 95), f"REWARD : SEC {t_sec} TAPE", fill=fg_green, font=FONT_CRT_8)
+        draw.text((76, 112), "ENTER  : /forensics/", fill=fg_bright, font=FONT_CRT_8)
 
         draw.rectangle([8, 136, CRT_W - 8, 165], fill=(2, 10, 4, 85), outline=(50, 185, 70, 230))
         draw.text((13, 140), "LIVE 750 HZ CW WAVEFORM", fill=(80, 235, 100, 230), font=FONT_CRT_8)
@@ -533,88 +535,80 @@ def render_crt_window_patch(state: dict, relay: dict, assets_dir: Path, now_ts: 
 
 
 def render_room_hardware_animations(
-    draw: ImageDraw.ImageDraw | _HiDPIDraw,
+    canvas: Image.Image,
     state: dict,
     now_ts: float,
     is_warn: bool,
 ) -> None:
     """
-    Animates the physical studio hardware surrounding the front-facing CRT monitor:
-      1. Left-rack dual-row LED peak meter (`y=211..215` & `y=220..224`, `x=3..50`)
-         + 5 amber channel button lamps (`y=251..255`, `x=2..43`)
-      2. Left-rack analog VU meter needle (`pivot=(10, 360)`)
-      3. Right-rack status LED matrix (`y=272..281`, `x=860..906`), red warning lamp (`x=843..849, y=325..331`),
-         & dual analog VU needles (`pivots=(875, 343)` and `(903, 343)`)
-      4. Front-facing Broadcast Tech CRT monitor lower-right bezel power LED (`x=590..594, y=421..425`)
+    Animates the physical studio hardware surrounding the front-facing CRT monitor by
+    compositing Gaussian-blurred (`radius=4.5px`) lens-matched optical shadows and warm
+    halos at the EXACT sub-pixel centroids of the photographic bulbs in `backdrop_clean.png`.
+    When a bulb is ON, alpha is 0 so the genuine photographic bulb shines through untouched.
     """
-    # 1. Left-rack dual-row horizontal LED peak meter (8 physical segments at x = 3, 10, 17, 24, 30, 37, 44, 50)
-    led_xs = [3, 10, 17, 24, 30, 37, 44, 50]
-    level_l = int(4 + 3.8 * abs(math.sin(now_ts * 3.1 + 0.4)))
-    level_r = int(4 + 3.8 * abs(math.cos(now_ts * 2.7 + 1.1)))
+    # 1. Left Rack Patch (`x=0..140, y=410..530` in 1080p)
+    l_patch = Image.new("RGBA", (140, 120), (0, 0, 0, 0))
+    ld = ImageDraw.Draw(l_patch)
+
+    # Exact 1080p centroids measured from `backdrop_clean.png` (offset by y0=410)
+    left_upper = [(8, 19), (22, 19), (36, 20), (54, 20), (72, 20), (90, 21), (99, 21), (113, 21)]
+    left_lower = [(7, 37), (21, 37), (35, 38), (49, 39), (62, 39), (76, 40), (90, 41), (101, 42), (115, 42)]
+
+    level_u = int(4 + 3.8 * abs(math.sin(now_ts * 3.1 + 0.4)))
+    level_l = int(5 + 3.8 * abs(math.cos(now_ts * 2.7 + 1.1)))
     if is_warn:
-        level_l = max(level_l, 6)
-        level_r = max(level_r, 7)
+        level_u = max(level_u, 6)
+        level_l = max(level_l, 7)
 
-    for seg, lx in enumerate(led_xs):
-        if seg < 4:
-            on_col = (95, 255, 95, 210)
-        elif seg < 6:
-            on_col = (255, 210, 50, 220)
-        else:
-            on_col = (255, 70, 40, 235)
-        off_col = (12, 20, 12, 115)
-        draw.rectangle([lx, 211, lx + 4, 215], fill=on_col if seg <= level_l else off_col)
-        draw.rectangle([lx, 220, lx + 4, 224], fill=on_col if seg <= level_r else off_col)
+    # Subtractive optical dimming on segments above the current peak level
+    for idx, (gx, gy) in enumerate(left_upper):
+        if idx > level_u:
+            ld.ellipse([gx - 6, gy - 5, gx + 6, gy + 5], fill=(14, 16, 14, 185))
+    for idx, (gx, gy) in enumerate(left_lower):
+        if idx > level_l:
+            ld.ellipse([gx - 6, gy - 5, gx + 6, gy + 5], fill=(14, 16, 14, 185))
 
-    # Left-rack 5 amber channel selector lamps (`y=251..255`)
-    active_ch = int(now_ts * 0.8) % 5
-    for c_idx, cx in enumerate([2, 13, 23, 33, 43]):
-        if c_idx == active_ch:
-            draw.rectangle([cx, 251, cx + 4, 255], fill=(255, 220, 90, 220))
+    # Left rack 5 switch lamps at 1080p y=510 (patch y=100): gently dim non-active lamps
+    active_sw = int(now_ts * 0.8) % 5
+    for idx, (gx, gy) in enumerate([(6, 100), (31, 100), (52, 100), (68, 100), (89, 100)]):
+        if idx != active_sw:
+            ld.ellipse([gx - 7, gy - 5, gx + 7, gy + 5], fill=(16, 15, 13, 105))
 
-    # 2. Left-rack analog VU meter needle (`x=0..22, y=338..363`)
-    vu_ang = -0.48 + 0.92 * abs(math.sin(now_ts * 2.3))
-    piv_x, piv_y = 10, 360
-    tip_x = int(piv_x + 15 * math.sin(vu_ang))
-    tip_y = int(piv_y - 15 * math.cos(vu_ang))
-    draw.line([(piv_x, piv_y), (tip_x, tip_y)], fill=(210, 75, 25, 215), width=2)
+    l_blurred = l_patch.filter(ImageFilter.GaussianBlur(radius=4.5))
+    canvas.alpha_composite(l_blurred, (0, 410))
 
-    # 3. Right-rack status LED cluster (`y=272..281`, `x=860..906`)
-    r_leds = [
-        (860, 272, False),
-        (874, 272, True),
-        (884, 272, False),
-        (898, 272, False),
-        (904, 272, False),
-        (860, 278, False),
-        (874, 278, False),
-        (884, 278, False),
-        (898, 278, False),
-        (904, 278, False),
+    # 2. Right Rack Patch (`x=1640..1835, y=530..690` in 1080p)
+    r_patch = Image.new("RGBA", (195, 160), (0, 0, 0, 0))
+    rd = ImageDraw.Draw(r_patch)
+
+    # Exact 1080p centroids of the 10 right-rack status LEDs (offset by x0=1640, y0=530)
+    right_leds = [
+        (84, 17),
+        (118, 17),
+        (128, 17),
+        (163, 17),
+        (172, 17),
+        (83, 30),
+        (105, 31),
+        (129, 34),
+        (164, 30),
+        (173, 31),
     ]
-    for idx, (rx, ry, is_red_led) in enumerate(r_leds):
-        blink = ((int(now_ts * 2.5) + idx) % 3) != 0
-        if is_red_led:
-            col = (255, 75, 30, 235) if (is_warn or blink) else (90, 30, 15, 110)
-        else:
-            col = (110, 255, 80, 215) if blink else (25, 55, 20, 120)
-        draw.ellipse([rx, ry, rx + 4, ry + 4], fill=col)
+    for idx, (gx, gy) in enumerate(right_leds):
+        blink_on = ((int(now_ts * 2.2) + idx) % 3) != 0
+        if not blink_on:
+            rd.ellipse([gx - 6, gy - 6, gx + 6, gy + 6], fill=(15, 19, 15, 175))
 
-    # Right-rack red fault lamp at `(845, 327)`
-    if is_warn and (int(now_ts * 3) % 2 == 0):
-        draw.ellipse([843, 325, 849, 331], fill=(255, 65, 30, 235))
+    # Right-rack red fault lamp at exact 1080p center `(1664, 667)` -> patch `(24, 137)`
+    # Matches the photograph's warm muted brick-red bulb `RGB=(158, 85, 64)`
+    red_pulse_on = (int(now_ts * 2.0) % 2) == 0
+    if is_warn and red_pulse_on:
+        rd.ellipse([24 - 8, 137 - 8, 24 + 8, 137 + 8], fill=(168, 82, 58, 70))
+    elif not red_pulse_on:
+        rd.ellipse([24 - 7, 137 - 7, 24 + 7, 137 + 7], fill=(18, 14, 14, 135))
 
-    # Right-rack dual analog VU meter needles (`pivots=(875, 343)` and `(903, 343)`)
-    for m_idx, m_piv_x in enumerate((875, 903)):
-        m_piv_y = 343
-        m_ang = -0.45 + 0.85 * abs(math.sin(now_ts * 2.9 + m_idx * 0.8))
-        mx = int(m_piv_x + 10 * math.sin(m_ang))
-        my = int(m_piv_y - 10 * math.cos(m_ang))
-        draw.line([(m_piv_x, m_piv_y), (mx, my)], fill=(215, 85, 25, 215), width=1)
-
-    # 4. Front-Facing Broadcast Tech CRT Monitor Bezel Power LED (`x=590..594, y=421..425`)
-    pwr_col = (255, 175, 25, 255) if (is_warn and int(now_ts * 2) % 2 == 0) else (90, 255, 100, 255)
-    draw.ellipse([590, 421, 594, 425], fill=pwr_col)
+    r_blurred = r_patch.filter(ImageFilter.GaussianBlur(radius=4.5))
+    canvas.alpha_composite(r_blurred, (1640, 530))
 
 
 def render_bottom_engineering_console(
@@ -676,19 +670,35 @@ def render_bottom_engineering_console(
     draw.text((X0 + 8, Y0 + 52), state.get("phase_label", "14.2001 HZ LOCKED")[:26], fill=c_main, font=FONT_HUD_9)
 
     # --- BAY 2 (CENTER `x=226..750`): PRIMARY TELEPRINTER & TRANSLATION / CLUE FEED ---
+    target_sec = int(state.get("target_sector", 7))
+    default_codes = {
+        1: "B2-EXEC-1989",
+        2: "K-7704",
+        3: "ALPHA-7",
+        4: "KEEP-HATCH-OPEN",
+        5: "7704-AKASAKA",
+        6: "TWO-VOICES",
+        7: "0x1983-09A6",
+    }
+    unlock_code = state.get("unlock_code") or default_codes.get(target_sec, "B2-EXEC-1989")
+
     draw.rectangle([226, Y0 + 2, 750, Y0 + 18], fill=hdr_bg)
     badge = "[! INTERCEPT]" if is_warn else "[14.2001 HZ]"
     clean_l1 = re.sub(r"^\[PHASE [^\]]+\]\s*", "", state["line1"])
     draw.text((232, Y0 + 3), _clean_crt_text(f"{badge} {clean_l1}", 76), fill=c_main, font=FONT_HUD_10)
     draw.text((232, Y0 + 21), _clean_crt_text(state["line2"], 76), fill=c_bright, font=FONT_HUD_10)
     draw.text((232, Y0 + 38), _clean_crt_text(state["line3"], 76), fill=c_sub, font=FONT_HUD_10)
-    draw.text((232, Y0 + 54), "PORTAL: stardust-archive.net/forensics/ // SIGNAL LAB: /forensics/signal_lab.html", fill=c_main, font=FONT_HUD_9)
+    draw.text(
+        (232, Y0 + 54),
+        f"UNLOCK SECRET TAPES: Enter CODE [{unlock_code}] at stardust-archive.net/forensics",
+        fill=c_main,
+        font=FONT_HUD_9,
+    )
 
-    # --- BAY 3 (RIGHT `x=754..932`): SECTOR MATRIX & EPHEMERAL BEACON ---
+    # --- BAY 3 (RIGHT `x=754..932`): VAULT SECTOR UNLOCK & WORKING PASSKEY ---
     draw.rectangle([754, Y0 + 2, X1 - 2, Y0 + 18], fill=hdr_bg)
-    draw.text((760, Y0 + 4), "SECTOR TARGET MATRIX", fill=c_main, font=FONT_HUD_9)
+    draw.text((760, Y0 + 4), "VAULT SECTOR UNLOCK", fill=c_main, font=FONT_HUD_9)
 
-    target_sec = int(state.get("target_sector", 7))
     sec_labels = ["1", "2", "3", "4", "5", "6", "\u03a9"]
     for s_idx, s_lbl in enumerate(sec_labels, start=1):
         sx = 760 + (s_idx - 1) * 23
@@ -700,9 +710,8 @@ def render_bottom_engineering_console(
         draw.rectangle([sx, sy, sx + 19, sy + 14], fill=s_bg, outline=s_out)
         draw.text((sx + 6, sy + 1), s_lbl, fill=s_fg, font=FONT_HUD_9)
 
-    beacon_key = snap_meta.get("ephemeral_beacon_key", "B2-142001FA")
-    draw.text((760, Y0 + 40), f"KEY: {beacon_key[:17]}", fill=c_bright, font=FONT_HUD_9)
-    draw.text((760, Y0 + 53), "SYNC: 14.2001 HZ // LOCKED", fill=c_sub, font=FONT_HUD_9)
+    draw.text((760, Y0 + 40), f"CODE: {unlock_code[:17]}", fill=c_bright, font=FONT_HUD_9)
+    draw.text((760, Y0 + 53), "ENTER AT: /forensics/", fill=c_sub, font=FONT_HUD_9)
 
 
 def render_full_arg_overlay_png(
@@ -721,15 +730,13 @@ def render_full_arg_overlay_png(
     """
     if snap_meta is None:
         relay = REGIONAL_RELAYS[int(now_ts // 300) % len(REGIONAL_RELAYS)]
-        window_slot = int(now_ts // 600)
-        b_hash = hashlib.sha256(f"stardust-14.2hz|{window_slot}|{relay['code']}".encode()).hexdigest()[:10].upper()
         snap_meta = {
             "cycle": int(max(36900.0, now_ts - BROADCAST_EPOCH) // CYCLE_DURATION_SEC) + 1,
             "playlist_index": 1,
             "track_offset_sec": 45.0,
             "track_duration_sec": 180.0,
             "relay": relay,
-            "ephemeral_beacon_key": f"B2-{b_hash}",
+            "ephemeral_beacon_key": state.get("unlock_code", "B2-EXEC-1989"),
         }
     else:
         relay = snap_meta.get("relay", REGIONAL_RELAYS[0])
@@ -743,7 +750,7 @@ def render_full_arg_overlay_png(
     # 2. Draw Diegetic Control Room Hardware Animations & 3-Module Console at 1080p
     draw = _HiDPIDraw(ImageDraw.Draw(canvas), scale=SCALE)
     is_warn = (state.get("hud_mode") or state.get("mode")) == "ANOMALY_WARN"
-    render_room_hardware_animations(draw, state, now_ts, is_warn)
+    render_room_hardware_animations(canvas, state, now_ts, is_warn)
     render_bottom_engineering_console(draw, state, snap_meta, now_ts)
 
     buf = io.BytesIO()
@@ -963,8 +970,7 @@ def build_telemetry_snapshot(repo_root: Path, now_ts: float | None = None, force
 
     state = resolve_intentional_state(current_track, track_offset_sec, track_dur_sec, relay)
     carrier_phase_deg = round(((now * 14.2001) % 1.0) * 360.0, 2)
-    window_slot = int(now // 600)
-    beacon_hash = hashlib.sha256(f"stardust-14.2hz|{window_slot}|{relay['code']}".encode()).hexdigest()[:10].upper()
+    unlock_code = state.get("unlock_code", "B2-EXEC-1989")
 
     ramp = {
         "mode": state["hud_mode"],
@@ -972,6 +978,7 @@ def build_telemetry_snapshot(repo_root: Path, now_ts: float | None = None, force
         "crt_mode": state["crt_mode"],
         "phase_label": state.get("phase_label", "14.2001 HZ LOCKED"),
         "target_sector": state.get("target_sector", 7),
+        "unlock_code": unlock_code,
         "progress": state.get("progress", 0.0),
         "fault_code": state["crt_header"],
         "line1": state["line1"],
@@ -987,7 +994,7 @@ def build_telemetry_snapshot(repo_root: Path, now_ts: float | None = None, force
             "track_offset_sec": round(track_offset_sec, 1),
             "track_duration_sec": round(track_dur_sec, 1),
             "relay": relay,
-            "ephemeral_beacon_key": f"B2-{beacon_hash}",
+            "ephemeral_beacon_key": unlock_code,
         },
     }
 
@@ -1028,7 +1035,7 @@ def build_telemetry_snapshot(repo_root: Path, now_ts: float | None = None, force
             "phase_degrees": carrier_phase_deg,
             "phase_locked": True,
             "sstv_forensic_window_open": True,
-            "ephemeral_beacon_key": f"B2-{beacon_hash}",
+            "ephemeral_beacon_key": unlock_code,
         },
         "active_relay": relay,
     }

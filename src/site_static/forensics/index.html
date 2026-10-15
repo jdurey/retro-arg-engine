@@ -144,6 +144,113 @@
       text-shadow: 0 0 8px rgba(255, 68, 68, 0.6);
     }
     a { color: var(--amber); }
+    .vault-deck {
+      border: 2px solid var(--amber);
+      background: rgba(24, 16, 2, 0.72);
+      padding: 12px 14px;
+      margin-bottom: 12px;
+      box-shadow: inset 0 0 18px rgba(255, 176, 0, 0.14);
+    }
+    .vault-deck-hdr {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 6px;
+      color: var(--amber);
+      font-size: 13px;
+      font-weight: bold;
+    }
+    .vault-deck-sub {
+      font-size: 12px;
+      color: var(--fg);
+      margin-bottom: 8px;
+      line-height: 1.35;
+    }
+    .vault-input-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+    }
+    #cipher-input {
+      flex: 1;
+      min-width: 220px;
+      background: #020602;
+      border: 1px solid var(--amber);
+      color: var(--amber);
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: bold;
+      padding: 7px 10px;
+      outline: none;
+      text-transform: uppercase;
+    }
+    #cipher-input::placeholder {
+      color: rgba(255, 176, 0, 0.52);
+      text-transform: none;
+      font-weight: normal;
+    }
+    .sector-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+      font-size: 11px;
+    }
+    .sec-pill {
+      border: 1px solid var(--dim);
+      padding: 3px 7px;
+      cursor: pointer;
+      background: rgba(0, 16, 0, 0.6);
+      color: var(--fg);
+      font-size: 11px;
+    }
+    .sec-pill.unlocked {
+      border-color: var(--amber);
+      background: rgba(255, 176, 0, 0.2);
+      color: var(--amber);
+      font-weight: bold;
+    }
+    .reward-card {
+      display: none;
+      border: 2px solid var(--fg);
+      background: rgba(4, 22, 8, 0.92);
+      padding: 12px 14px;
+      margin-bottom: 12px;
+      box-shadow: 0 0 18px var(--glow);
+    }
+    .reward-card.active {
+      display: block;
+    }
+    .reward-hdr {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      border-bottom: 1px dashed var(--amber);
+      padding-bottom: 6px;
+      margin-bottom: 8px;
+    }
+    .reward-title {
+      color: var(--amber);
+      font-weight: bold;
+      font-size: 14px;
+    }
+    .reward-meta {
+      font-size: 12px;
+      line-height: 1.4;
+      margin-bottom: 8px;
+    }
+    .reward-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin-top: 8px;
+    }
   </style>
 </head>
 <body>
@@ -171,6 +278,39 @@
       <span id="hud-fault">CARRIER: 14.2001 HZ [LOCKED]</span>
     </div>
 
+    <div class="vault-deck" id="vault-unlock-deck">
+      <div class="vault-deck-hdr">
+        <span>🔓 LIVESTREAM CODE &amp; CIPHER UNLOCK DECK (UNSEALS DECLASSIFIED AUDIO REELS)</span>
+        <span id="live-onair-code" style="font-size:11px;">ACTIVE STREAM CODE: 7704-AKASAKA</span>
+      </div>
+      <div class="vault-deck-sub">
+        Watching the 24/7 YouTube Broadcast? Enter any <strong>Vault Code</strong> (from the bottom-right box), <strong>Hex Register</strong> (<code>0x1983</code>, <code>0x3A5F</code>, <code>0x09A6</code>), <strong>5-Digit Numbers Group</strong>, or <strong>Morse Passkey</strong> below to immediately unlock &amp; play secret Sublevel B2 and 1983 Akasaka recordings:
+      </div>
+      <div class="vault-input-row">
+        <input id="cipher-input" type="text" autocomplete="off" spellcheck="false" placeholder="Enter code from livestream (e.g. B2-EXEC-1989, K-7704, 7704-AKASAKA, TWO-VOICES, 0x1983-09A6, or 5-digit group)..." />
+        <button class="amber-pill" style="font-size:12px; padding:7px 14px; font-weight:bold;" onclick="submitCipherBox()">[🔓 DECODE &amp; PLAY SECRET TAPE]</button>
+      </div>
+      <div class="sector-pills" id="sector-pills-row">
+        <span style="color:var(--amber);"><strong>VAULT SECTORS:</strong></span>
+        <button class="sec-pill" id="sec-pill-1" onclick="quickUnlockSector(1, 'B2-EXEC-1989')">[SEC 1: B2-EXEC-1989]</button>
+        <button class="sec-pill" id="sec-pill-2" onclick="quickUnlockSector(2, 'K-7704')">[SEC 2: K-7704]</button>
+        <button class="sec-pill" id="sec-pill-3" onclick="quickUnlockSector(3, 'ALPHA-7')">[SEC 3: ALPHA-7]</button>
+        <button class="sec-pill" id="sec-pill-4" onclick="quickUnlockSector(4, 'KEEP-HATCH-OPEN')">[SEC 4: KEEP-HATCH-OPEN]</button>
+        <button class="sec-pill" id="sec-pill-5" onclick="quickUnlockSector(5, '7704-AKASAKA')">[SEC 5: 7704-AKASAKA]</button>
+        <button class="sec-pill" id="sec-pill-6" onclick="quickUnlockSector(6, 'TWO-VOICES')">[SEC 6: TWO-VOICES]</button>
+        <button class="sec-pill" id="sec-pill-7" onclick="quickUnlockSector(7, '0x1983-09A6')">[SEC 7 Ω: 0x1983-09A6]</button>
+      </div>
+    </div>
+
+    <div class="reward-card" id="vault-reward-card">
+      <div class="reward-hdr">
+        <span class="reward-title" id="reward-card-title">📼 DECLASSIFIED VAULT AUDIO UNSEALED</span>
+        <button onclick="document.getElementById('vault-reward-card').classList.remove('active')">[✕ HIDE CARD]</button>
+      </div>
+      <div class="reward-meta" id="reward-card-meta"></div>
+      <div class="reward-actions" id="reward-card-actions"></div>
+    </div>
+
     <div class="quick-deck">
       <span style="font-size:11px; color:var(--amber);"><strong>QUICK CONSOLE:</strong></span>
       <button onclick="runCmd('BOARD')">[PINBOARD &amp; STATUS]</button>
@@ -189,7 +329,7 @@
     <div id="term-output"></div>
     <div class="prompt-row">
       <span>OPERATOR&gt;</span>
-      <input id="cmd-input" type="text" autofocus autocomplete="off" spellcheck="false" placeholder="Type HELP, BOARD, CLUES, ANEMOIA, ECHOES, FRACTAL-MARCUS, DEAD-HAND, TWO-VOICES, or RESTORE <1-7> <KEY>..." />
+      <input id="cmd-input" type="text" autofocus autocomplete="off" spellcheck="false" placeholder="Enter ANY livestream code directly (e.g. B2-EXEC-1989, K-7704, 0x1983, 7704-AKASAKA, TWO-VOICES), or HELP..." />
     </div>
   </div>
   <audio id="audio-player" crossorigin="anonymous"></audio>
@@ -283,12 +423,17 @@
         "MATRIX: B2-EXEC-1989",
         "ORION-B2-EXEC-1989",
         "B2EXEC1989",
-        "B2-EXEC"
+        "B2-EXEC",
+        "SD-0004"
       ],
-      2: ["K-7704-SUBSTATION", "K7704", "SUBSTATION-K7704", "K-7704"],
-      3: ["ALPHA-7-PHASE-LOCKED", "ALPHA7", "37.242-115.810", "37.242 -115.810"],
-      4: ["KEEP THE HATCH OPEN", "KEEPTHEHATCHOPEN", "THE HATCH IS OPEN"],
+      2: ["K-7704-SUBSTATION", "K7704", "SUBSTATION-K7704", "K-7704", "ASHFORD-K7704"],
+      3: ["ALPHA-7-PHASE-LOCKED", "ALPHA-7", "ALPHA7", "37.242-115.810", "37.242 -115.810"],
+      4: ["KEEP THE HATCH OPEN", "KEEP-HATCH-OPEN", "KEEPTHEHATCHOPEN", "THE HATCH IS OPEN", "HATCH-OPEN"],
       5: [
+        "7704-AKASAKA",
+        "7704AKASAKA",
+        "0X3A5F",
+        "3A5F",
         "0X89B2-392C-7704-AKASAKA",
         "89B2-392C-7704-AKASAKA",
         "392C-7704-AKASAKA",
@@ -299,6 +444,9 @@
         "ASHFORD-KAMOME-1420"
       ],
       6: [
+        "TWO-VOICES",
+        "TWOVOICES",
+        "SD-0010",
         "TWO-VOICES-1420-COUNTERPOINT",
         "TWOVOICES1420COUNTERPOINT",
         "SD-0010-TWO-VOICES",
@@ -306,9 +454,48 @@
         "ONLY-WE-REMAIN-B2"
       ],
       7: [
+        "0X1983-09A6",
+        "1983-09A6",
+        "0X1983",
+        "0X09A6",
+        "7SIGMA-MARCUS",
+        "7SIGMAMARCUS",
+        "QLINK-09A6-HEAVY",
         "OMEGA-1983-QLINK-2025-OUROBOROS",
         "OMEGA1983QLINK2025OUROBOROS",
         "0X1983-7SIGMA-09A6-OUROBOROS"
+      ]
+    };
+
+    const SECTOR_BONUS_TAPES = {
+      1: [
+        { title: "1989 'Tape of Us' Sublevel B2 Rough Mix", url: "/assets/audio/tape_of_us_1989_rough_mix.mp3" },
+        { title: "Cassette #1 Whisper Static (TC 01:31)", url: "/assets/akasaka/audio/cassette1_tc0131_whisper_static.mp3" }
+      ],
+      2: [
+        { title: "1987 Ashford Breakdown Stem (Isolated)", url: "/assets/ashford/telemetry/brighter_than_sun_87_breakdown.mp3" },
+        { title: "Ghost Transit JANET Trunk Mix", url: "/assets/audio/streams/ghost_transit_14k.mp3" }
+      ],
+      3: [
+        { title: "Sept 9, 1989 Meridian Telemetry Uplink", url: "/assets/ashford/telemetry/hale_telemetry_890909_meridian.mp3" },
+        { title: "Memory Hatch 1986 Satellite Master", url: "/assets/audio/streams/memory_hatch_14k.mp3" }
+      ],
+      4: [
+        { title: "Before You Disappear (1988 Pre-Purge Session)", url: "/assets/audio/streams/before_you_disappear_14k.mp3" },
+        { title: "Relcom Node-08 Bell-103 AX.25 Packet Audio", url: "/assets/audio/forensics/rabbit_09_bell103_relcom_packet.mp3" }
+      ],
+      5: [
+        { title: "Phase-Inverted Nova Hart Vocal Stem (rabbit_10)", url: "/assets/audio/forensics/rabbit_10_phase_inverted_hart_stem.mp3" },
+        { title: "JP-85-X Akasaka Studio Slate Take 04 Drift", url: "/assets/akasaka/audio/jp-85-x_slate_take04_drift.mp3" }
+      ],
+      6: [
+        { title: "Reel SD-0010 'Two Voices' Full Counterpoint Master", url: "/assets/audio/forensics/radio_two_voices.mp3" },
+        { title: "Only We Remain (Marcus & Nova Studio Duet)", url: "/assets/audio/streams/only_we_remain_14k.mp3" }
+      ],
+      7: [
+        { title: "Unit-07 Voiceprint Gen-3 Calibration (1983)", url: "/assets/akasaka/audio/unit7_voice_print_gen3_calibration.mp3" },
+        { title: "Ghost in the Chorus (1985 Akasaka Outtake)", url: "/assets/akasaka/audio/ghost_in_the_chorus.mp3" },
+        { title: "Synthesized Smile (1983 Trojan Idol Master)", url: "/assets/akasaka/audio/synthesized_smile.mp3" }
       ]
     };
 
@@ -692,13 +879,151 @@ TOTAL INTEGRITY: ${getIntegrityString()}`);
       } catch (e) {}
     }
 
+    function updateSectorPills() {
+      const codes = { 1: "B2-EXEC-1989", 2: "K-7704", 3: "ALPHA-7", 4: "KEEP-HATCH-OPEN", 5: "7704-AKASAKA", 6: "TWO-VOICES", 7: "0x1983-09A6" };
+      for (let i = 1; i <= 7; i++) {
+        const el = document.getElementById(`sec-pill-${i}`);
+        if (!el) continue;
+        const lbl = i === 7 ? "SEC 7 Ω" : `SEC ${i}`;
+        if (state.sectors[i]) {
+          el.classList.add("unlocked");
+          el.textContent = `[✓ ${lbl} UNSEALED: ▶ PLAY]`;
+        } else {
+          el.classList.remove("unlocked");
+          el.textContent = `[${lbl}: ${codes[i]}]`;
+        }
+      }
+    }
+
+    function playBonusUrl(url, title) {
+      initAudioContext();
+      if (currentBufferSource) {
+        try { currentBufferSource.stop(); } catch (e) {}
+        currentBufferSource = null;
+      }
+      player.src = url;
+      player.play().then(() => {
+        print(`▶ [PLAYING DECLASSIFIED BONUS REEL]: ${title} (${url})`);
+      }).catch(() => {
+        print(`[AUDIO READY]: Click play to listen to ${title}.`);
+      });
+    }
+
+    function showRewardCard(sectorNum, enteredCode, customNote) {
+      const card = document.getElementById("vault-reward-card");
+      const titleEl = document.getElementById("reward-card-title");
+      const metaEl = document.getElementById("reward-card-meta");
+      const actEl = document.getElementById("reward-card-actions");
+      if (!card || !titleEl || !metaEl || !actEl) return;
+
+      const dlUrl = sectorNum === 7
+        ? "/assets/akasaka/audio/unit7_voice_print_gen3_calibration.mp3"
+        : getAudioUrl(sectorNum);
+      const bonuses = SECTOR_BONUS_TAPES[sectorNum] || [];
+
+      titleEl.textContent = `🔓 UNSEALED VAULT REEL // ${SECTOR_TITLES[sectorNum]}`;
+      metaEl.innerHTML =
+        `<div><strong>AUTHENTICATED CODE:</strong> <code>${enteredCode}</code> ${customNote ? `— <em>${customNote}</em>` : ""}</div>` +
+        `<div style="margin-top:4px; white-space:pre-wrap; background:rgba(0,0,0,0.55); padding:8px; border:1px solid var(--dim);">${SECTOR_TRANSCRIPTS[sectorNum]}</div>`;
+
+      let btnsHtml =
+        `<button class="amber-pill" onclick="playSectorAudio(${sectorNum})">[▶ PLAY PRIMARY VAULT TAPE]</button>` +
+        `<a class="btn amber-pill" href="${dlUrl}" download>[⬇ DOWNLOAD DECLASSIFIED MP3]</a>`;
+
+      for (const b of bonuses) {
+        const safeTitle = b.title.replace(/'/g, "\\'");
+        btnsHtml +=
+          `<button onclick="playBonusUrl('${b.url}', '${safeTitle}')">[▶ BONUS: ${b.title}]</button>` +
+          `<a class="btn" href="${b.url}" download>[⬇ MP3]</a>`;
+      }
+      actEl.innerHTML = btnsHtml;
+      card.classList.add("active");
+      updateSectorPills();
+    }
+
+    function quickUnlockSector(secNum, code) {
+      initAudioContext();
+      const box = document.getElementById("cipher-input");
+      if (box) box.value = code;
+      cmdRestore(secNum, code);
+    }
+
+    function submitCipherBox() {
+      initAudioContext();
+      const box = document.getElementById("cipher-input");
+      if (!box) return;
+      const val = box.value.trim();
+      if (!val) {
+        quickUnlockSector(5, "7704-AKASAKA");
+        return;
+      }
+      if (!unlockByAnyCode(val)) {
+        handleCommand(val);
+      }
+    }
+
+    function unlockByAnyCode(rawInput) {
+      const clean = (rawInput || "").trim().toUpperCase();
+      if (!clean) return false;
+      const alphanum = clean.replace(/[^A-Z0-9]/g, "");
+
+      // 1. Check direct match against any Sector 1..7 key
+      for (let s = 1; s <= 7; s++) {
+        const isMatch = KEYS[s].some(k => {
+          const kAlpha = k.replace(/[^A-Z0-9]/g, "");
+          return clean === k || clean.includes(k) || (kAlpha.length >= 4 && alphanum === kAlpha);
+        });
+        if (isMatch) {
+          cmdRestore(s, clean);
+          return true;
+        }
+      }
+
+      // 2. Check Echoes Unit 01..06 hex registers (0x1102, 0x2441, 0x3810, 0x0A55, 0x1F22, 0x01A7, 0x2025)
+      const echoRegs = ["1102", "2441", "3810", "0A55", "1F22", "01A7", "2025", "09A6", "1983"];
+      if (echoRegs.some(r => clean === r || clean === `0X${r}` || alphanum === `0X${r}`)) {
+        print(`\n[HEX REGISTER AUTHENTICATED: ${clean}] -> XOR PARITY CONVERGES TO 0x1983 (SECTOR 7 UNSEALED)`);
+        cmdRestore(7, "0x1983-09A6");
+        showRewardCard(7, clean, "1983 Pre-Nova Echoes Register & Calibration Outtake Unsealed");
+        playBonusUrl("/assets/akasaka/audio/unit7_voice_print_gen3_calibration.mp3", "Unit-07 Voiceprint Gen-3 Calibration (1983)");
+        return true;
+      }
+
+      // 3. Check 5-digit Numbers Station groups (e.g. "48291" or "48291 73044 19283")
+      const fiveDigitMatch = clean.match(/\b(\d{5})\b/);
+      if (fiveDigitMatch) {
+        const grp = parseInt(fiveDigitMatch[1], 10);
+        const xored = (grp ^ 0x3A5F) & 0xFFFF;
+        const sec = (grp % 7) + 1;
+        const canonical = { 1: "B2-EXEC-1989", 2: "K-7704", 3: "ALPHA-7", 4: "KEEP-HATCH-OPEN", 5: "7704-AKASAKA", 6: "TWO-VOICES", 7: "0x1983-09A6" }[sec];
+        print(`\n[SHORTWAVE NUMBERS STATION OTP DECODER]:`);
+        print(`  • 5-DIGIT GROUP : ${grp}`);
+        print(`  • OTP XOR 0x3A5F: 0x${xored.toString(16).toUpperCase().padStart(4, "0")} -> DECODES TO SECTOR ${sec} KEY [${canonical}]`);
+        cmdRestore(sec, canonical);
+        showRewardCard(sec, `${grp} -> ${canonical}`, `Decrypted via One-Time Pad XOR 0x3A5F`);
+        return true;
+      }
+
+      // 4. Check Morse dots/dashes directly
+      if (/^[.\-\/\s]+$/.test(clean) && (clean.includes(".") || clean.includes("-"))) {
+        cmdDecodeMorse(clean);
+        cmdRestore(5, "7704-AKASAKA");
+        return true;
+      }
+
+      // 5. Check any B2-... ephemeral beacon key from the livestream
+      if (clean.startsWith("B2-") || clean.startsWith("ORION") || clean.includes("STARDUST")) {
+        cmdRestore(1, "B2-EXEC-1989");
+        showRewardCard(1, clean, "Sublevel B2 Broadcast Beacon Authenticated");
+        return true;
+      }
+
+      return false;
+    }
+
     function cmdRestore(sectorNum, key) {
       if (![1, 2, 3, 4, 5, 6, 7].includes(sectorNum)) {
         print(`[ERROR]: Invalid sector number. Choose 1, 2, 3, 4, 5, 6, or 7.`, true);
-        return;
-      }
-      if (state.sectors[sectorNum]) {
-        print(`[NOTICE]: Sector ${sectorNum} is already restored. Type 'PLAY ${sectorNum}' to replay its audio.`);
         return;
       }
       if (!key) {
@@ -718,9 +1043,11 @@ TOTAL INTEGRITY: ${getIntegrityString()}`);
       if (isMatch) {
         state.sectors[sectorNum] = true;
         saveState();
+        updateSectorPills();
         print(`\n[SUCCESS]: SECTOR ${sectorNum} DECRYPTION MATRIX AUTHENTICATED!`, false);
         print(`Acoustic residue stabilized. Demodulating magnetic voice bias...\n`);
         print(SECTOR_TRANSCRIPTS[sectorNum]);
+        showRewardCard(sectorNum, cleanKey, `Sector ${sectorNum} Declassified Master Audio Unsealed`);
         playSectorAudio(sectorNum);
         print(`\nFootprint Integrity updated: ${getIntegrityString()}`);
         if (sectorNum === 7) {
@@ -744,7 +1071,7 @@ TOTAL INTEGRITY: ${getIntegrityString()}`);
 
     function playSectorAudio(sectorNum) {
       if (sectorNum === 7) {
-        playProceduralOuroborosAudio();
+        playBonusUrl("/assets/akasaka/audio/unit7_voice_print_gen3_calibration.mp3", "SECTOR 7: 1983 Unit-07 Voiceprint Calibration & Ouroboros Loop");
         return;
       }
       initAudioContext();
@@ -1461,7 +1788,12 @@ uint32_t feistel_round(uint32_t x, uint32_t k) {
         case "RESTORE":
         case "DEMODULATE":
         case "DECODE":
-          cmdRestore(parseInt(args[0], 10), args.slice(1).join(" "));
+        case "UNLOCK":
+          if ([1, 2, 3, 4, 5, 6, 7].includes(parseInt(args[0], 10)) && args.length > 1) {
+            cmdRestore(parseInt(args[0], 10), args.slice(1).join(" "));
+          } else if (!unlockByAnyCode(args.join(" "))) {
+            cmdRestore(parseInt(args[0], 10), args.slice(1).join(" "));
+          }
           break;
         case "PLAY":
         case "LISTEN":
@@ -1479,6 +1811,7 @@ uint32_t feistel_round(uint32_t x, uint32_t k) {
         case "TWOVOICES":
         case "SD-0010":
           cmdTwoVoices();
+          cmdRestore(6, "TWO-VOICES");
           break;
         case "ANEMOIA":
         case "HARMONY-ACTS":
@@ -1588,7 +1921,9 @@ uint32_t feistel_round(uint32_t x, uint32_t k) {
           printHeader();
           break;
         default:
-          print(`[UNKNOWN COMMAND]: '${cmd}'. Type 'HELP' or click a button on the Quick Console above.`, true);
+          if (!unlockByAnyCode(trimmed)) {
+            print(`[UNKNOWN COMMAND OR CODE]: '${trimmed}'. Enter any livestream code (e.g. B2-EXEC-1989, K-7704, ALPHA-7, KEEP-HATCH-OPEN, 7704-AKASAKA, TWO-VOICES, 0x1983-09A6) or type 'HELP'.`, true);
+          }
           break;
       }
     }
@@ -1604,6 +1939,18 @@ uint32_t feistel_round(uint32_t x, uint32_t k) {
       }
     });
 
+    const cipherBoxEl = document.getElementById("cipher-input");
+    if (cipherBoxEl) {
+      cipherBoxEl.addEventListener("keydown", (e) => {
+        initAudioContext();
+        if (e.key === "Enter") {
+          submitCipherBox();
+        } else {
+          playKeyClick();
+        }
+      });
+    }
+
     async function pollBannerTelemetry() {
       for (const url of ["/forensics/live_telemetry.json", "/assets/live_telemetry.json", "/api/telemetry"]) {
         try {
@@ -1616,12 +1963,19 @@ uint32_t feistel_round(uint32_t x, uint32_t k) {
             `ACTIVE RELAY: NODE #${String(t.active_relay.node).padStart(2, "0")} ${t.active_relay.code} (${t.active_relay.freq_khz} kHz)`;
           document.getElementById("hud-fault").textContent =
             `BUS: ${t.diagnostic_ramp ? t.diagnostic_ramp.fault_code : "14.2001 HZ LOCKED"}`;
+          const liveCode = (t.diagnostic_ramp && t.diagnostic_ramp.unlock_code) ||
+            (t.carrier_14_2hz && t.carrier_14_2hz.ephemeral_beacon_key) || "7704-AKASAKA";
+          const codeEl = document.getElementById("live-onair-code");
+          if (codeEl) {
+            codeEl.innerHTML = `ACTIVE STREAM CODE: <a href="#" onclick="quickUnlockSector(${(t.diagnostic_ramp && t.diagnostic_ramp.target_sector) || 5}, '${liveCode}'); return false;">[${liveCode}]</a>`;
+          }
           return;
         } catch (e) {}
       }
     }
 
     loadState();
+    updateSectorPills();
     printHeader();
     pollBannerTelemetry();
     setInterval(pollBannerTelemetry, 10000);

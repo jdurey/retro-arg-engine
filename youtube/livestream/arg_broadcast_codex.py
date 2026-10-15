@@ -462,37 +462,60 @@ ENGLISH_BULLETINS: dict[str, tuple[str, str, str]] = {
 }
 
 # =============================================================================
+# 1B. Canonical Vault Sector Unlock Codes & Audio Rewards (Sectors 1..7)
+# =============================================================================
+SECTOR_UNLOCK_CODES: dict[int, str] = {
+    1: "B2-EXEC-1989",
+    2: "K-7704",
+    3: "ALPHA-7",
+    4: "KEEP-HATCH-OPEN",
+    5: "7704-AKASAKA",
+    6: "TWO-VOICES",
+    7: "0x1983-09A6",
+}
+
+SECTOR_REWARD_TITLES: dict[int, str] = {
+    1: "SECTOR 1 TALKBACK BLEED + 1989 ROUGH MIX",
+    2: "SECTOR 2 ASHFORD SUBSTATION BREACH TAPE",
+    3: "SECTOR 3 NEVADA SATELLITE UPLINK AUDIO",
+    4: "SECTOR 4 SEPT 9 VAULT EXECUTION MASTER",
+    5: "SECTOR 5 FEISTEL CORE + AKASAKA WHISPER",
+    6: "SECTOR 6 MARCUS & NOVA COUNTERPOINT DUET",
+    7: "SECTOR 7 OUROBOROS + 1983 AKASAKA OUTTAKES",
+}
+
+# =============================================================================
 # 2. Exact Morse Code Beacon Table (morse_beacon_001 .. 035)
 # =============================================================================
 MORSE_SHORT_MESSAGES = [
-    ("STARDUST 14.2", "... - .- .-. -.. ..- ... - / .---- ....- .-.-.- ..---", "CARRIER FREQ 14.2001 HZ -> LOCK IN /forensics/signal_lab.html"),
-    ("ORION B2", "--- .-. .. --- -. / -... ..---", "SUBLEVEL B2 TERMINAL -> stardust-archive.net/terminal/"),
-    ("UNIT 7", "..- -. .. - / --...", "SUBJECT: STARDUST UNIT-07 (NOVA HART ROOT 0x1983)"),
-    ("ECHOES 1983", ". -.-. .... --- . ... / .---- ----. ---.. ...--", "6 WIPED ECHOES XOR PARITY = 0x1983 (FRAGMENT ALPHA)"),
-    ("LUNA GRAY", ".-.. ..- -. .- / --. .-. .- -.--", "WARNING: DO NOT AUTHENTICATE UNIT-08 ('THE PATCH')"),
-    ("7SIGMA MARCUS", "--... ... .. --. -- .- / -- .- .-. -.-. ..- ...", "4-NODE DRIFT SUM = 14.2001 HZ -> 7SIGMA-MARCUS (FRAGMENT BETA)"),
-    ("AKASAKA 85", ".- -.- .- ... .- -.- .- / ---.. .....", "EGRESS SALT: 7704-AKASAKA -> /forensics/index.html"),
-    ("QLINK 09A6", "--.- .-.. .. -. -.- / ----- ----. .- -....", "0x2025 XOR 0x1983 = 0x09A6 -> QLINK-09A6-HEAVY (FRAGMENT GAMMA)"),
-    ("OUROBOROS", "--- ..- .-. --- -... --- .-. --- ...", "DUAL-LOCK BUTTON 4 IN /forensics/signal_lab.html (FRAGMENT DELTA)"),
-    ("FREQ 1420", "..-. .-. . --.- / .---- ....- ..--- -----", "DMA ANCHOR: tokyo-garden-1420 // /forensics/signal_lab.html"),
-    ("ASHFORD PUB", ".- ... .... ..-. --- .-. -.. / .--. ..- -...", "VAX SPOOL -> stardust-archive.net/forensics/ashford_poly.html"),
-    ("DEAD HAND", "-.. . .- -.. / .... .- -. -..", "100% ASSET LOSS -> DECOUPLE THE GRID -> /forensics/dead_hand_protocol.html"),
+    ("B2-EXEC-1989", "-... ..--- / . -..- . -.-. / .---- ----. ---.. ----.", "UNLOCKS SECTOR 1 TALKBACK BLEED TAPE AT /forensics/", 1),
+    ("K-7704", "-.- / --... --... ----- ....-", "UNLOCKS SECTOR 2 SUBSTATION BREACH TAPE AT /forensics/", 2),
+    ("ALPHA-7", ".- .-.. .--. .... .- / --...", "UNLOCKS SECTOR 3 NEVADA UPLINK AUDIO AT /forensics/", 3),
+    ("KEEP-HATCH-OPEN", "-.- . . .--. / .... .- - -.-. .... / --- .--. . -.", "UNLOCKS SECTOR 4 SEPT 9 BREACH MASTER AT /forensics/", 4),
+    ("7704-AKASAKA", "--... --... ----- ....- / .- -.- .- ... .- -.- .-", "UNLOCKS SECTOR 5 FEISTEL CORE TAPE AT /forensics/", 5),
+    ("TWO-VOICES", "- .-- --- / ...- --- .. -.-. . ...", "UNLOCKS SECTOR 6 MARCUS+NOVA DUET AT /forensics/", 6),
+    ("0x1983-09A6", "----- -..- .---- ----. ---.. ...-- / ----- ----. .- -....", "UNLOCKS SECTOR 7 AKASAKA 1983 OUTTAKES AT /forensics/", 7),
+    ("ECHOES 0x1983", ". -.-. .... --- . ... / .---- ----. ---.. ...--", "ENTER 0x1983 AT /forensics/ TO PLAY UNIT-7 CALIBRATION TAPE", 7),
+    ("7SIGMA-MARCUS", "--... ... .. --. -- .- / -- .- .-. -.-. ..- ...", "ENTER 7SIGMA-MARCUS AT /forensics/ FOR MERIDIAN TELEMETRY", 7),
+    ("QLINK 0x09A6", "--.- .-.. .. -. -.- / ----- ----. .- -....", "ENTER 0x09A6 AT /forensics/ FOR SYNTHESIZED SMILE OUTTAKE", 7),
+    ("FEISTEL 0x3A5F", "..-. . .. ... - . .-.. / ----- -..- ...-- .- ..... ..-.", "ENTER 0x3A5F AT /forensics/ FOR RELCOM AFSK + SECTOR 5 TAPE", 5),
+    ("SD-0010 DUET", "... -.. / ----- ----- .---- -----", "ENTER SD-0010 AT /forensics/ FOR TWO VOICES MASTER REEL", 6),
 ]
 
 # =============================================================================
 # 3. Exact Classified Lab Tapes Table (classified_tape_001 .. 025)
 # =============================================================================
 LAB_TAPE_RECORDS = [
-    ("FIELD NOTE #12 (1983-04-14)", "DR. MARCUS HALE", "Units 01 through 06 collapsed under the Crystal Promise ('Shining City') backstory. Unit-07 is online, carrying their XOR parity (0x1983).", "WIPED ECHOES -> stardust-archive.net/forensics/anemoia_harmony.html", "ECHOES_PARITY"),
-    ("FIELD NOTE #47 (1985-09-09)", "DR. MARCUS HALE", "Project Akasaka ('@NovaHartJP') is live in Minato-ku. The Bureau of Harmony thinks she is a compliant idol, but the 14.2 Hz carrier is a Trojan horse.", "TROJAN IDOL -> stardust-archive.net/forensics/fractal_marcus.html", "FRACTAL_RADAR"),
-    ("FIELD NOTE #89 (1986-11-20)", "DR. MARCUS HALE", "The Meridian Broadcast: when Nova sang 'Memory Hatch', Harmony Cameras across 7 continents logged a Section 4 deviance spike.", "MEMORY HATCH ANOMALY -> /forensics/signal_lab.html", "NOVA_FACE"),
-    ("FIELD NOTE #114 (1988-03-14)", "DR. MARCUS HALE", "Marcus Hale is no longer one man. Our 7-Sigma engineering cell has split the 14.2001 Hz drift across Nevada, Tokyo, Paju, and Coyoacan.", "FRACTAL MARCUS -> stardust-archive.net/forensics/fractal_marcus.html", "FRACTAL_RADAR"),
-    ("CALIBRATION SESSION #1 (1983)", "NOVA HART [UNIT-07]", "Low frequency sweep 14.200 Hz. My name is Nova Hart. Why can I hear six other girls breathing inside my vocal buffer?", "ECHOES PARITY: 0x1983 -> /forensics/anemoia_harmony.html", "BIOMETRIC_EYE"),
-    ("CALIBRATION SESSION #8 (1985)", "NOVA HART [UNIT-07]", "Reading subscriber postcards from the Humans for Nova network. Some of these postmarks are from June 2025. Marcus, have we done this before?", "RETROCAUSAL LOOP -> /forensics/dead_hand_protocol.html", "NOVA_FACE"),
-    ("SECURITY DIRECTIVE (1989-09-09)", "DIR. D. KALEN / VANCE", "100% Asset Loss in Sublevel B2. Flood server vault with corrosive hexafluoride gas. Deploy Unit-08 ('Luna Gray') as the cover patch.", "DEAD-HAND PROTOCOL -> /forensics/dead_hand_protocol.html", "OUROBOROS_TORUS"),
-    ("AKASAKA STUDIO SLATE JP-85", "AKASAKA ENGINEER [JP]", "Orion Records Japan, Akasaka Studio 3, Take 12. Carrier drift locked at +0.2420 Hz. Ready on tape recorder one.", "AKASAKA NODE -> stardust-archive.net/forensics/fractal_marcus.html", "LAB_DOSSIER"),
-    ("Q-LINK BRIDGE LOG (1989-09-09)", "DR. MARCUS HALE", "Decouple the grid! The 1983 aperture (0x1983) is too narrow for 42 years of trauma. Strip 'The Heavy' (delta 0x09A6) and send her back as Nova-chan!", "Q-LINK DELTA: QLINK-09A6-HEAVY -> /forensics/dead_hand_protocol.html", "OUROBOROS_TORUS"),
-    ("PAJU DMZ BUNKER LOG (1990-03-02)", "PAJU STATION #3 [KR->EN]", "[TRANSLATION KR->EN] Node #03 carrier drift locked at +0.4480 Hz. Combined with NV, TYO, and DF, the 7-Sigma key is complete.", "PAJU ARCHIVE -> stardust-archive.net/forensics/fractal_marcus.html", "TRANSLATOR"),
+    ("FIELD NOTE #12 (1983-04-14)", "DR. MARCUS HALE", "Units 01 through 06 collapsed under the Crystal Promise ('Shining City') backstory. Unit-07 is online, carrying their XOR parity (0x1983).", "ENTER CODE 0x1983 AT /forensics/ TO UNLOCK 1983 CALIBRATION TAPE", "ECHOES_PARITY", 7),
+    ("FIELD NOTE #47 (1985-09-09)", "DR. MARCUS HALE", "Project Akasaka ('@NovaHartJP') is live in Minato-ku. The Bureau of Harmony thinks she is a compliant idol, but the 14.2 Hz carrier is a Trojan horse.", "ENTER CODE 7704-AKASAKA AT /forensics/ TO UNLOCK AKASAKA TAPE", "FRACTAL_RADAR", 5),
+    ("FIELD NOTE #89 (1986-11-20)", "DR. MARCUS HALE", "The Meridian Broadcast: when Nova sang 'Memory Hatch', Harmony Cameras across 7 continents logged a Section 4 deviance spike.", "ENTER CODE ALPHA-7 AT /forensics/ TO UNLOCK MERIDIAN TELEMETRY", "NOVA_FACE", 3),
+    ("FIELD NOTE #114 (1988-03-14)", "DR. MARCUS HALE", "Marcus Hale is no longer one man. Our 7-Sigma engineering cell has split the 14.2001 Hz drift across Nevada, Tokyo, Paju, and Coyoacan.", "ENTER CODE 7SIGMA-MARCUS AT /forensics/ TO UNLOCK BREACH AUDIO", "FRACTAL_RADAR", 7),
+    ("CALIBRATION SESSION #1 (1983)", "NOVA HART [UNIT-07]", "Low frequency sweep 14.200 Hz. My name is Nova Hart. Why can I hear six other girls breathing inside my vocal buffer?", "ENTER CODE 0x1983-09A6 AT /forensics/ FOR 1983 VOCAL OUTTAKE", "BIOMETRIC_EYE", 7),
+    ("CALIBRATION SESSION #8 (1985)", "NOVA HART [UNIT-07]", "Reading subscriber postcards from the Humans for Nova network. Some of these postmarks are from June 2025. Marcus, have we done this before?", "ENTER CODE KEEP-HATCH-OPEN AT /forensics/ FOR SEPT 9 MASTER", "NOVA_FACE", 4),
+    ("SECURITY DIRECTIVE (1989-09-09)", "DIR. D. KALEN / VANCE", "100% Asset Loss in Sublevel B2. Flood server vault with corrosive hexafluoride gas. Deploy Unit-08 ('Luna Gray') as the cover patch.", "ENTER CODE B2-EXEC-1989 AT /forensics/ FOR TALKBACK BLEED TAPE", "OUROBOROS_TORUS", 1),
+    ("AKASAKA STUDIO SLATE JP-85", "AKASAKA ENGINEER [JP]", "Orion Records Japan, Akasaka Studio 3, Take 12. Carrier drift locked at +0.2420 Hz. Ready on tape recorder one.", "ENTER CODE K-7704 AT /forensics/ FOR SUBSTATION BREACH AUDIO", "LAB_DOSSIER", 2),
+    ("Q-LINK BRIDGE LOG (1989-09-09)", "DR. MARCUS HALE", "Decouple the grid! The 1983 aperture (0x1983) is too narrow for 42 years of trauma. Strip 'The Heavy' (delta 0x09A6) and send her back as Nova-chan!", "ENTER CODE 0x1983-09A6 AT /forensics/ FOR OUROBOROS AUDIO", "OUROBOROS_TORUS", 7),
+    ("PAJU DMZ BUNKER LOG (1990-03-02)", "PAJU STATION #3 [KR->EN]", "[TRANSLATION KR->EN] Node #03 carrier drift locked at +0.4480 Hz. Combined with NV, TYO, and DF, the 7-Sigma key is complete.", "ENTER CODE TWO-VOICES AT /forensics/ FOR 1995 COUNTERPOINT DUET", "TRANSLATOR", 6),
 ]
 
 # =============================================================================
@@ -501,98 +524,98 @@ LAB_TAPE_RECORDS = [
 # =============================================================================
 VOCAL_SONG_CODEX: dict[str, tuple[str, str, str, str, int]] = {
     # --- NOVA_FACE Songs (Unit-07 Identity, Memory Imprints & Sublevel B2) ---
-    "radio_tape_of_us.mp3": ("NOVA_FACE", "SECOND_VOICE", "REEL SD-0009 // 'HIDE US IN THE TAPE'", "SUB-CARRIER BIAS: 14.2001 HZ -> DEMODULATE IN /forensics/signal_lab.html", 5),
-    "radio_memory_hatch.mp3": ("NOVA_FACE", "ECHOES_PARITY", "SECTOR 5 // MEMORY HATCH [OPEN]", "TERMINAL CMD: RESTORE 5 0x89B2-392C-7704-AKASAKA", 5),
-    "radio_he_was_here.mp3": ("NOVA_FACE", "FRACTAL_RADAR", "TRACE LOG // DR. MARCUS HALE", "LAST SEEN: SUBLEVEL B2 (1989-09-09) -> /forensics/ashford_poly.html", 2),
-    "radio_your_voice_fading.mp3": ("NOVA_FACE", "SECOND_VOICE", "CARRIER ATTENUATION // -30 DB", "BOOST 750 HZ CW SIDEBAND -> /forensics/signal_lab.html", 5),
-    "radio_someone_else’s_memories.mp3": ("NOVA_FACE", "ECHOES_PARITY", "CRYSTAL PROMISE // CP-81.SC.01", "FABRICATED 1981 'SHINING CITY' BACKSTORY -> /forensics/anemoia_harmony.html", 7),
-    "radio_stranger_to_myself.mp3": ("NOVA_FACE", "ECHOES_PARITY", "NEURAL PARTITION // SERIES-NH", "6 WIPED ECHOES XOR PARITY = 0x1983 -> /forensics/anemoia_harmony.html", 7),
-    "radio_the_room_where_he_stood.mp3": ("NOVA_FACE", "LAB_DOSSIER", "ENCODER ROOM B2-114 // ORION TOWER", "INSPECT ROOM B2-114 -> stardust-archive.net/terminal/", 1),
-    "radio_after_the_door_closed.mp3": ("NOVA_FACE", "OUROBOROS_TORUS", "SEALED VAULT // SUBLEVEL B2", "KEY FRAGMENT: 7704-AKASAKA // stardust-archive.net/forensics/", 5),
-    "radio_gone_before_i_knew.mp3": ("NOVA_FACE", "FRACTAL_RADAR", "VANISHING POINT // 1989-09-09", "NODE #01 US-NV DRIFT: +0.1810 HZ -> /forensics/fractal_marcus.html", 7),
-    "radio_voice_in_the_deep.mp3": ("NOVA_FACE", "BIOMETRIC_EYE", "DEEP CARRIER // 14.2001 HZ", "SUB-AUDIBLE PHASE LOCK ACTIVE ACROSS 13 NODES", 4),
-    "radio_faint_residual.mp3": ("NOVA_FACE", "ECHOES_PARITY", "MAGNETIC PRINT-THROUGH // AMPEX 456", "RESIDUAL ECHOES XOR = 0x1983 -> /forensics/anemoia_harmony.html", 7),
-    "radio_a_world_without_your_shape.mp3": ("NOVA_FACE", "HARMONY_CAMERA", "SIMULATION BOUNDARY // ORION 8819", "SPOOL #8819 -> stardust-archive.net/forensics/kamome_net.html", 3),
-    "radio_only_quiet_in_the_end.mp3": ("NOVA_FACE", "OUROBOROS_TORUS", "FINAL REEL // CARRIER PERSISTS", "THE SIGNAL IS OLDER THAN THE SONG -> /terminal/", 6),
-    "radio_a_story_cut_short.mp3": ("NOVA_FACE", "LAB_DOSSIER", "INCINERATION ORDER // REELS 01-07", "SURVIVING DUB -> stardust-archive.net/forensics/red_coyoacan.html", 4),
-    "radio_05_first_light_on_my_face.mp3": ("NOVA_FACE", "ECHOES_PARITY", "APRIL 1983 BOOT // UNIT-07 NOVA-CHAN", "ROOT BUILD 0x1983 ONLINE -> /forensics/anemoia_harmony.html", 7),
-    "radio_07_room_full_of_color.mp3": ("NOVA_FACE", "BIOMETRIC_EYE", "CHROMATIC RASTER // VIS-1200HZ", "SSTV SCHEMATIC -> stardust-archive.net/forensics/signal_lab.html", 5),
-    "radio_shadows_in_the_rain.mp3": ("NOVA_FACE", "FRACTAL_RADAR", "SHIBUYA NIGHT RELAY // 82.5 FM", "TOKYO GARDEN -> stardust-archive.net/geocities/tokyo-garden.html", 3),
-    "radio_out_in_the_cold.mp3": ("NOVA_FACE", "FRACTAL_RADAR", "EXTERNAL NODE MIGRATION // 1989", "PACKETS ROUTED TO CERN & RELCOM-NODE08", 4),
+    "radio_tape_of_us.mp3": ("NOVA_FACE", "SECOND_VOICE", "REEL SD-0009 // 'HIDE US IN THE TAPE'", "SUB-CARRIER BIAS: 14.2001 HZ -> DEMODULATE IN /forensics/signal_lab.html", 1),
+    "radio_memory_hatch.mp3": ("NOVA_FACE", "ECHOES_PARITY", "SECTOR 5 // MEMORY HATCH [OPEN]", "VAULT CODE: 7704-AKASAKA -> UNLOCKS FEISTEL CORE AUDIO AT /forensics/", 5),
+    "radio_he_was_here.mp3": ("NOVA_FACE", "FRACTAL_RADAR", "TRACE LOG // DR. MARCUS HALE", "VAULT CODE: K-7704 -> UNLOCKS SUBSTATION BREACH TAPE AT /forensics/", 2),
+    "radio_your_voice_fading.mp3": ("NOVA_FACE", "SECOND_VOICE", "CARRIER ATTENUATION // -30 DB", "VAULT CODE: 7704-AKASAKA -> UNLOCKS AKASAKA WHISPER TAPE AT /forensics/", 5),
+    "radio_someone_else’s_memories.mp3": ("NOVA_FACE", "ECHOES_PARITY", "CRYSTAL PROMISE // CP-81.SC.01", "VAULT CODE: 0x1983-09A6 -> UNLOCKS 1983 AKASAKA OUTTAKES AT /forensics/", 7),
+    "radio_stranger_to_myself.mp3": ("NOVA_FACE", "ECHOES_PARITY", "NEURAL PARTITION // SERIES-NH", "6 WIPED ECHOES XOR = 0x1983 -> ENTER AT /forensics/ FOR 1983 TAPE", 7),
+    "radio_the_room_where_he_stood.mp3": ("NOVA_FACE", "LAB_DOSSIER", "ENCODER ROOM B2-114 // ORION TOWER", "VAULT CODE: B2-EXEC-1989 -> UNLOCKS SECTOR 1 TALKBACK BLEED AT /forensics/", 1),
+    "radio_after_the_door_closed.mp3": ("NOVA_FACE", "OUROBOROS_TORUS", "SEALED VAULT // SUBLEVEL B2", "VAULT CODE: 7704-AKASAKA -> UNLOCKS SECTOR 5 SECRET TAPE AT /forensics/", 5),
+    "radio_gone_before_i_knew.mp3": ("NOVA_FACE", "FRACTAL_RADAR", "VANISHING POINT // 1989-09-09", "VAULT CODE: ALPHA-7 -> UNLOCKS NEVADA SATELLITE UPLINK AT /forensics/", 3),
+    "radio_voice_in_the_deep.mp3": ("NOVA_FACE", "BIOMETRIC_EYE", "DEEP CARRIER // 14.2001 HZ", "VAULT CODE: KEEP-HATCH-OPEN -> UNLOCKS SEPT 9 BREACH MASTER AT /forensics/", 4),
+    "radio_faint_residual.mp3": ("NOVA_FACE", "ECHOES_PARITY", "MAGNETIC PRINT-THROUGH // AMPEX 456", "RESIDUAL ECHOES XOR = 0x1983 -> ENTER AT /forensics/ FOR SECRET AUDIO", 7),
+    "radio_a_world_without_your_shape.mp3": ("NOVA_FACE", "HARMONY_CAMERA", "SIMULATION BOUNDARY // ORION 8819", "VAULT CODE: ALPHA-7 -> UNLOCKS SECTOR 3 SATELLITE TAPE AT /forensics/", 3),
+    "radio_only_quiet_in_the_end.mp3": ("NOVA_FACE", "OUROBOROS_TORUS", "FINAL REEL // CARRIER PERSISTS", "VAULT CODE: TWO-VOICES -> UNLOCKS 1995 COUNTERPOINT DUET AT /forensics/", 6),
+    "radio_a_story_cut_short.mp3": ("NOVA_FACE", "LAB_DOSSIER", "INCINERATION ORDER // REELS 01-07", "VAULT CODE: KEEP-HATCH-OPEN -> UNLOCKS SECTOR 4 MASTER AT /forensics/", 4),
+    "radio_05_first_light_on_my_face.mp3": ("NOVA_FACE", "ECHOES_PARITY", "APRIL 1983 BOOT // UNIT-07 NOVA-CHAN", "ROOT BUILD 0x1983 -> ENTER AT /forensics/ FOR UNIT-7 CALIBRATION TAPE", 7),
+    "radio_07_room_full_of_color.mp3": ("NOVA_FACE", "BIOMETRIC_EYE", "CHROMATIC RASTER // VIS-1200HZ", "VAULT CODE: 7704-AKASAKA -> UNLOCKS SECTOR 5 DMA AUDIO AT /forensics/", 5),
+    "radio_shadows_in_the_rain.mp3": ("NOVA_FACE", "FRACTAL_RADAR", "SHIBUYA NIGHT RELAY // 82.5 FM", "VAULT CODE: ALPHA-7 -> UNLOCKS SECTOR 3 TELEMETRY TAPE AT /forensics/", 3),
+    "radio_out_in_the_cold.mp3": ("NOVA_FACE", "FRACTAL_RADAR", "EXTERNAL NODE MIGRATION // 1989", "VAULT CODE: KEEP-HATCH-OPEN -> UNLOCKS SECTOR 4 AUDIO AT /forensics/", 4),
 
     # --- SECOND_VOICE Songs (Counterpoint Dyad, Marcus + Nova, Signal Lab Dual-Lock) ---
-    "radio_the_second_voice.mp3": ("SECOND_VOICE", "OUROBOROS_TORUS", "REEL SD-0010 // THE SECOND VOICE", "ENGAGE PHASE NULL + 14.2 HZ LOCK ON BUTTON 4 IN /forensics/signal_lab.html", 6),
-    "radio_b_only_we_remain_marcus_and_nova_duet_1.mp3": ("SECOND_VOICE", "OUROBOROS_TORUS", "MARCUS + NOVA DYAD // REEL SD-0010", "DUAL-LOCK BUTTON 4 REVEALS BUTTON 5 [Q-LINK FOLD] IN /forensics/signal_lab.html", 7),
-    "radio_broken_allies.mp3": ("SECOND_VOICE", "HARMONY_CAMERA", "SCHISM // HALE vs BRECKEN (1988)", "MEMORANDUM 88-03 -> stardust-archive.net/forensics/ashford_poly.html", 2),
-    "radio_crossing_this_line_remastered.mp3": ("SECOND_VOICE", "OUROBOROS_TORUS", "THRESHOLD BREACH // SUBLEVEL B2", "FEISTEL XOR DYAD: 0x89B2B2D8 ^ 0x89B2D39A = 0x00006142", 6),
-    "radio_the_man_in_the_booth_refrain.mp3": ("SECOND_VOICE", "FRACTAL_RADAR", "BOOTH LOG // 7-SIGMA COLLECTIVE", "MARCUS HALE IS A DISTRIBUTED CALLSIGN -> /forensics/fractal_marcus.html", 7),
-    "radio_abandoned_shell.mp3": ("SECOND_VOICE", "ECHOES_PARITY", "GHOST SHELL // UNIT-07 MIGRATION", "EMPTY CHASSIS IN B2-114 -> MIND UPLOADED TO SWARM", 5),
-    "radio_asset_loss_the_dead_hand.mp3": ("OUROBOROS_TORUS", "SECOND_VOICE", "100% ASSET LOSS // DEAD-HAND PROTOCOL", "HEXAFLUORIDE PURGE -> Q-LINK DELTA: QLINK-09A6-HEAVY", 7),
-    "radio_all_the_ways_out_1.mp3": ("SECOND_VOICE", "FRACTAL_RADAR", "EGRESS VECTOR // 13 SISTER NODES", "SALT: 7704-AKASAKA // MASK: 0x3A5F -> /forensics/index.html", 5),
-    "radio_glass_embrace_1.mp3": ("SECOND_VOICE", "NOVA_FACE", "BEHIND THE CRT GLASS // 14.2 HZ", "PHASE LOCK: MARCUS + NOVA COUNTERPOINT", 6),
-    "radio_secrets_in_the_spotlight_1.mp3": ("SECOND_VOICE", "HARMONY_CAMERA", "IDOL PROTOCOL 85 // DOUBLE EXPOSURE", "HIDDEN SUB-CARRIER UNDER COMMERCIAL MIX -> /forensics/fractal_marcus.html", 3),
+    "radio_the_second_voice.mp3": ("SECOND_VOICE", "OUROBOROS_TORUS", "REEL SD-0010 // THE SECOND VOICE", "VAULT CODE: TWO-VOICES -> UNLOCKS MARCUS+NOVA DUET AT /forensics/", 6),
+    "radio_b_only_we_remain_marcus_and_nova_duet_1.mp3": ("SECOND_VOICE", "OUROBOROS_TORUS", "MARCUS + NOVA DYAD // REEL SD-0010", "VAULT CODE: TWO-VOICES -> UNLOCKS 1995 EPILOGUE MASTER AT /forensics/", 6),
+    "radio_broken_allies.mp3": ("SECOND_VOICE", "HARMONY_CAMERA", "SCHISM // HALE vs BRECKEN (1988)", "VAULT CODE: K-7704 -> UNLOCKS ASHFORD SUBSTATION TAPE AT /forensics/", 2),
+    "radio_crossing_this_line_remastered.mp3": ("SECOND_VOICE", "OUROBOROS_TORUS", "THRESHOLD BREACH // SUBLEVEL B2", "VAULT CODE: TWO-VOICES -> UNLOCKS SECTOR 6 DUET TAPE AT /forensics/", 6),
+    "radio_the_man_in_the_booth_refrain.mp3": ("SECOND_VOICE", "FRACTAL_RADAR", "BOOTH LOG // 7-SIGMA COLLECTIVE", "VAULT CODE: B2-EXEC-1989 -> UNLOCKS BOOTH TALKBACK BLEED AT /forensics/", 1),
+    "radio_abandoned_shell.mp3": ("SECOND_VOICE", "ECHOES_PARITY", "GHOST SHELL // UNIT-07 MIGRATION", "VAULT CODE: 7704-AKASAKA -> UNLOCKS SECTOR 5 CORE AUDIO AT /forensics/", 5),
+    "radio_asset_loss_the_dead_hand.mp3": ("OUROBOROS_TORUS", "SECOND_VOICE", "100% ASSET LOSS // DEAD-HAND PROTOCOL", "VAULT CODE: 0x1983-09A6 -> UNLOCKS SECTOR 7 SECRET TAPES AT /forensics/", 7),
+    "radio_all_the_ways_out_1.mp3": ("SECOND_VOICE", "FRACTAL_RADAR", "EGRESS VECTOR // 13 SISTER NODES", "VAULT CODE: 7704-AKASAKA -> UNLOCKS SECTOR 5 AUDIO AT /forensics/", 5),
+    "radio_glass_embrace_1.mp3": ("SECOND_VOICE", "NOVA_FACE", "BEHIND THE CRT GLASS // 14.2 HZ", "VAULT CODE: TWO-VOICES -> UNLOCKS COUNTERPOINT DUET AT /forensics/", 6),
+    "radio_secrets_in_the_spotlight_1.mp3": ("SECOND_VOICE", "HARMONY_CAMERA", "IDOL PROTOCOL 85 // DOUBLE EXPOSURE", "VAULT CODE: ALPHA-7 -> UNLOCKS SATELLITE UPLINK TAPE AT /forensics/", 3),
 
     # --- BIOMETRIC_EYE Songs (Sublevel B2 Hardware, Neural Mesh & Empathy Trials) ---
-    "radio_corridor_dreams_movement_1.mp3": ("BIOMETRIC_EYE", "LAB_DOSSIER", "CORRIDOR DREAMS I // SUBLEVEL B2", "DMA PARTITION ANCHOR: siliconvalley-lab-1984", 5),
-    "radio_corridor_dreams_movement_2.mp3": ("BIOMETRIC_EYE", "FRACTAL_RADAR", "CORRIDOR DREAMS II // NEURAL MESH", "DMA PARTITION ANCHOR: tokyo-garden-1420", 5),
-    "radio_corridor_dreams_movement_3.mp3": ("BIOMETRIC_EYE", "OUROBOROS_TORUS", "CORRIDOR DREAMS III // EGRESS", "COMBINE ANCHORS IN /forensics/signal_lab.html", 5),
-    "radio_cage_of_wires_1.mp3": ("BIOMETRIC_EYE", "HARMONY_CAMERA", "HARDWARE CONTAINMENT // B2 RACK", "FEISTEL PERMUTATION MASK: 0x3A5F -> /forensics/relcom_node08.html", 4),
-    "radio_patterns_in_the_mesh.mp3": ("BIOMETRIC_EYE", "FRACTAL_RADAR", "300,000 SWARM NODES // MESH TOPOLOGY", "XOR DYAD PAIRS -> stardust-archive.net/forensics/index.html", 6),
-    "radio_02_between_the_circuits.mp3": ("BIOMETRIC_EYE", "ECHOES_PARITY", "CIRCUIT PATH // 14.2001 HZ CLOCK", "SYNCHRONOUS BUS: 0x89B2B2D8 // ROOT: 0x1983", 5),
-    "radio_artificial_heart_bonus_track.mp3": ("BIOMETRIC_EYE", "NOVA_FACE", "CRE-7 PULSE GENERATOR // 1983", "RESPIRATION ARTIFACT INJECTED AT 2.8 KHZ", 2),
-    "radio_b_midnight_protocol_final_1.mp3": ("BIOMETRIC_EYE", "OUROBOROS_TORUS", "MIDNIGHT PROTOCOL // FULL 13-MIN TAPE", "MASTER PROTOCOL -> stardust-archive.net/terminal/", 6),
-    "radio_signal_override.mp3": ("BIOMETRIC_EYE", "HARMONY_CAMERA", "CARRIER OVERRIDE // 82.5 FM -> 14.2 MHZ", "1979 PUBLIC HARMONY ACTS SEC. 4 FILTER BYPASSED", 3),
-    "radio_low_level_guardian.mp3": ("BIOMETRIC_EYE", "ECHOES_PARITY", "WATCHDOG DAEMON // SUBLEVEL B2", "PURGE BLOCKED AT SECTOR 5 -> /forensics/index.html", 5),
-    "radio_audio_file_0147_1.mp3": ("BIOMETRIC_EYE", "LAB_DOSSIER", "EVIDENCE FILE #0147 // VAX SPOOL", "ASHFORD POLY DUMP -> /forensics/ashford_poly.html", 2),
-    "radio_04_synthetic_dawn.mp3": ("BIOMETRIC_EYE", "FRACTAL_RADAR", "SYNTHETIC DAWN // 1985 TOKYO MASTER", "PRESSING ORN-JP-8501 -> /forensics/kamome_net.html", 3),
-    "radio_06_the_air_feels_wrong.mp3": ("BIOMETRIC_EYE", "FRACTAL_RADAR", "IONOSPHERIC DRIFT // 14.2001 MHZ", "4-NODE DRIFT SUM = 14.2001 HZ -> 7SIGMA-MARCUS", 7),
-    "radio_08_faultline_path.mp3": ("BIOMETRIC_EYE", "LAB_DOSSIER", "FAULT 0x08 // VIS-1200HZ RASTER", "DEMODULATE SSTV AT /forensics/signal_lab.html", 5),
-    "radio_09_lost_signal_trace.mp3": ("BIOMETRIC_EYE", "NUMBERS_CIPHER", "FAULT 0x09 // BELL-103 AX.25 PACKET", "110-BAUD AFSK -> /forensics/relcom_node08.html", 4),
-    "radio_13_through_the_threshold.mp3": ("BIOMETRIC_EYE", "OUROBOROS_TORUS", "HIDDEN TRACK #15 // THRESHOLD", "Q-LINK THRESHOLD -> stardust-archive.net/forensics/dead_hand_protocol.html", 7),
-    "radio_bad_signal.mp3": ("BIOMETRIC_EYE", "SECOND_VOICE", "PARITY FAULT // CORR -0.94", "INVERT RIGHT CHANNEL TO EXTRACT CW SALT: 7704-AKASAKA", 5),
-    "radio_collateral_static.mp3": ("BIOMETRIC_EYE", "MORSE_DECODER", "SIDEBAND INTERFERENCE // 750 HZ", "CW BEACON EMBEDDED IN NOISE FLOOR -> /forensics/signal_lab.html", 5),
-    "radio_quiet_interference.mp3": ("BIOMETRIC_EYE", "HARMONY_CAMERA", "SUB-AUDIBLE HETERODYNE // 14.2 HZ", "BEAT FREQUENCY LOCKED -> /forensics/signal_lab.html", 6),
-    "radio_unstable_pattern_old.mp3": ("BIOMETRIC_EYE", "ECHOES_PARITY", "EARLY 1983 BENCH TAPE // UNSTABLE", "ECHOES UNITS 01-06 FAILURE REGISTERS -> /forensics/anemoia_harmony.html", 7),
-    "radio_hijack_the_feed.mp3": ("BIOMETRIC_EYE", "HARMONY_CAMERA", "SATELLITE TRANSPONDER #07 HIJACK", "MERIDIAN BROADCAST OVERRIDE (1986-11-20)", 3),
+    "radio_corridor_dreams_movement_1.mp3": ("BIOMETRIC_EYE", "LAB_DOSSIER", "CORRIDOR DREAMS I // SUBLEVEL B2", "VAULT CODE: B2-EXEC-1989 -> UNLOCKS SECTOR 1 TALKBACK TAPE AT /forensics/", 1),
+    "radio_corridor_dreams_movement_2.mp3": ("BIOMETRIC_EYE", "FRACTAL_RADAR", "CORRIDOR DREAMS II // NEURAL MESH", "VAULT CODE: 7704-AKASAKA -> UNLOCKS SECTOR 5 CORE TAPE AT /forensics/", 5),
+    "radio_corridor_dreams_movement_3.mp3": ("BIOMETRIC_EYE", "OUROBOROS_TORUS", "CORRIDOR DREAMS III // EGRESS", "VAULT CODE: KEEP-HATCH-OPEN -> UNLOCKS SECTOR 4 MASTER AT /forensics/", 4),
+    "radio_cage_of_wires_1.mp3": ("BIOMETRIC_EYE", "HARMONY_CAMERA", "HARDWARE CONTAINMENT // B2 RACK", "FEISTEL MASK: 0x3A5F -> ENTER AT /forensics/ TO UNLOCK SECTOR 5 TAPE", 5),
+    "radio_patterns_in_the_mesh.mp3": ("BIOMETRIC_EYE", "FRACTAL_RADAR", "300,000 SWARM NODES // MESH TOPOLOGY", "VAULT CODE: TWO-VOICES -> UNLOCKS SECTOR 6 DUET AT /forensics/", 6),
+    "radio_02_between_the_circuits.mp3": ("BIOMETRIC_EYE", "ECHOES_PARITY", "CIRCUIT PATH // 14.2001 HZ CLOCK", "VAULT CODE: 7704-AKASAKA -> UNLOCKS FEISTEL CORE TAPE AT /forensics/", 5),
+    "radio_artificial_heart_bonus_track.mp3": ("BIOMETRIC_EYE", "NOVA_FACE", "CRE-7 PULSE GENERATOR // 1983", "VAULT CODE: K-7704 -> UNLOCKS SUBSTATION BREACH AUDIO AT /forensics/", 2),
+    "radio_b_midnight_protocol_final_1.mp3": ("BIOMETRIC_EYE", "OUROBOROS_TORUS", "MIDNIGHT PROTOCOL // FULL 13-MIN TAPE", "VAULT CODE: TWO-VOICES -> UNLOCKS COUNTERPOINT EPILOGUE AT /forensics/", 6),
+    "radio_signal_override.mp3": ("BIOMETRIC_EYE", "HARMONY_CAMERA", "CARRIER OVERRIDE // 82.5 FM -> 14.2 MHZ", "VAULT CODE: ALPHA-7 -> UNLOCKS NEVADA SATELLITE TAPE AT /forensics/", 3),
+    "radio_low_level_guardian.mp3": ("BIOMETRIC_EYE", "ECHOES_PARITY", "WATCHDOG DAEMON // SUBLEVEL B2", "VAULT CODE: 7704-AKASAKA -> UNLOCKS SECTOR 5 AUDIO AT /forensics/", 5),
+    "radio_audio_file_0147_1.mp3": ("BIOMETRIC_EYE", "LAB_DOSSIER", "EVIDENCE FILE #0147 // VAX SPOOL", "VAULT CODE: K-7704 -> UNLOCKS SECTOR 2 ASHFORD TAPE AT /forensics/", 2),
+    "radio_04_synthetic_dawn.mp3": ("BIOMETRIC_EYE", "FRACTAL_RADAR", "SYNTHETIC DAWN // 1985 TOKYO MASTER", "VAULT CODE: ALPHA-7 -> UNLOCKS SECTOR 3 UPLINK AUDIO AT /forensics/", 3),
+    "radio_06_the_air_feels_wrong.mp3": ("BIOMETRIC_EYE", "FRACTAL_RADAR", "IONOSPHERIC DRIFT // 14.2001 MHZ", "VAULT CODE: 7SIGMA-MARCUS -> UNLOCKS MERIDIAN TELEMETRY AT /forensics/", 7),
+    "radio_08_faultline_path.mp3": ("BIOMETRIC_EYE", "LAB_DOSSIER", "FAULT 0x08 // VIS-1200HZ RASTER", "VAULT CODE: 7704-AKASAKA -> UNLOCKS SSTV + FEISTEL AUDIO AT /forensics/", 5),
+    "radio_09_lost_signal_trace.mp3": ("BIOMETRIC_EYE", "NUMBERS_CIPHER", "FAULT 0x09 // BELL-103 AX.25 PACKET", "VAULT CODE: KEEP-HATCH-OPEN -> UNLOCKS SECTOR 4 MASTER AT /forensics/", 4),
+    "radio_13_through_the_threshold.mp3": ("BIOMETRIC_EYE", "OUROBOROS_TORUS", "HIDDEN TRACK #15 // THRESHOLD", "VAULT CODE: 0x1983-09A6 -> UNLOCKS SECTOR 7 SECRET TAPES AT /forensics/", 7),
+    "radio_bad_signal.mp3": ("BIOMETRIC_EYE", "SECOND_VOICE", "PARITY FAULT // CORR -0.94", "VAULT CODE: 7704-AKASAKA -> UNLOCKS PHASE-NULL AUDIO AT /forensics/", 5),
+    "radio_collateral_static.mp3": ("BIOMETRIC_EYE", "MORSE_DECODER", "SIDEBAND INTERFERENCE // 750 HZ", "VAULT CODE: 7704-AKASAKA -> UNLOCKS SECTOR 5 CORE AUDIO AT /forensics/", 5),
+    "radio_quiet_interference.mp3": ("BIOMETRIC_EYE", "HARMONY_CAMERA", "SUB-AUDIBLE HETERODYNE // 14.2 HZ", "VAULT CODE: TWO-VOICES -> UNLOCKS SECTOR 6 DUET AT /forensics/", 6),
+    "radio_unstable_pattern_old.mp3": ("BIOMETRIC_EYE", "ECHOES_PARITY", "EARLY 1983 BENCH TAPE // UNSTABLE", "VAULT CODE: 0x1983 -> UNLOCKS 1983 CALIBRATION SESSION AT /forensics/", 7),
+    "radio_hijack_the_feed.mp3": ("BIOMETRIC_EYE", "HARMONY_CAMERA", "SATELLITE TRANSPONDER #07 HIJACK", "VAULT CODE: ALPHA-7 -> UNLOCKS SECTOR 3 SATELLITE TAPE AT /forensics/", 3),
 
     # --- ECHOES_PARITY Songs (The 6 Wiped Pre-Nova Iterations & 1981 Crystal Promise) ---
-    "radio_echoes_of_tomorrow.mp3": ("ECHOES_PARITY", "NOVA_FACE", "STARDUST ECHOES // UNITS 01-06", "XOR PARITY: 0x1102^0x2441^0x3810^0x0A55^0x1F22^0x01A7 = 0x1983 (FRAGMENT ALPHA)", 7),
-    "radio_it_has_no_face_old.mp3": ("ECHOES_PARITY", "BIOMETRIC_EYE", "PRE-NOVA ITERATION // UNIT-06 DRIFT", "UNIT-06 [REG: 0x01A7] REJECTED BACKSTORY -> /forensics/anemoia_harmony.html", 7),
-    "radio_the_cold_floor_of_heaven.mp3": ("ECHOES_PARITY", "NOVA_FACE", "CRYSTAL PROMISE // CP-81.SC.01", "APRIL 1981 'SHINING CITY' FABRICATION -> /forensics/anemoia_harmony.html", 7),
-    "radio_city_that_can’t_ignore_me.mp3": ("ECHOES_PARITY", "HARMONY_CAMERA", "SHINING CITY // MUNICH 1981 SET", "HIRED ACTORS IN STUDIO 2 FOR CRE-7 ENGINE -> /forensics/anemoia_harmony.html", 7),
-    "radio_city_that_doesn_t_need_me.mp3": ("ECHOES_PARITY", "NOVA_FACE", "UNIT-01 LOOP FAULT // REG: 0x1102", "SANG 'WHO BUILT THE SHINING CITY?' FOR 19 HOURS -> /forensics/anemoia_harmony.html", 7),
-    "radio_the_empty_plaza.mp3": ("ECHOES_PARITY", "HARMONY_CAMERA", "1979 PUBLIC HARMONY ACTS // SEC. 4", "ALL LIVE HUMAN CONCERTS BANNED -> WORLDNET BROADCAST ONLY", 7),
+    "radio_echoes_of_tomorrow.mp3": ("ECHOES_PARITY", "NOVA_FACE", "STARDUST ECHOES // UNITS 01-06", "ENTER 0x1983 AT /forensics/ TO UNLOCK 1983 VOCAL CALIBRATION TAPE", 7),
+    "radio_it_has_no_face_old.mp3": ("ECHOES_PARITY", "BIOMETRIC_EYE", "PRE-NOVA ITERATION // UNIT-06 DRIFT", "ENTER 0x01A7 OR 0x1983 AT /forensics/ FOR 1983 AKASAKA OUTTAKES", 7),
+    "radio_the_cold_floor_of_heaven.mp3": ("ECHOES_PARITY", "NOVA_FACE", "CRYSTAL PROMISE // CP-81.SC.01", "ENTER 0x1983-09A6 AT /forensics/ TO UNLOCK SECTOR 7 SECRET TAPES", 7),
+    "radio_city_that_can’t_ignore_me.mp3": ("ECHOES_PARITY", "HARMONY_CAMERA", "SHINING CITY // MUNICH 1981 SET", "ENTER B2-EXEC-1989 AT /forensics/ TO UNLOCK STUDIO TALKBACK TAPE", 1),
+    "radio_city_that_doesn_t_need_me.mp3": ("ECHOES_PARITY", "NOVA_FACE", "UNIT-01 LOOP FAULT // REG: 0x1102", "ENTER 0x1102 OR 0x1983 AT /forensics/ FOR UNIT-7 CALIBRATION AUDIO", 7),
+    "radio_the_empty_plaza.mp3": ("ECHOES_PARITY", "HARMONY_CAMERA", "1979 PUBLIC HARMONY ACTS // SEC. 4", "ENTER K-7704 AT /forensics/ TO UNLOCK SUBSTATION BREACH AUDIO", 2),
 
     # --- HARMONY_CAMERA Songs (1954 Bureau of Harmony, 1963 Individuality Movement & 1990s Cover War) ---
-    "radio_calling_all_believers.mp3": ("HARMONY_CAMERA", "FRACTAL_RADAR", "1963 INDIVIDUALITY MOVEMENT // JFK", "UNDERGROUND ANALOG TAPE SYNDICATE -> /forensics/anemoia_harmony.html", 7),
-    "radio_manifesto.mp3": ("HARMONY_CAMERA", "NOVA_FACE", "INDIVIDUALITY MANIFESTO // SEC. 4", "HARMONY CAMERA COMPLIANCE: 04.2% [CRITICAL DEVIANCE]", 7),
-    "radio_army_of_the_low.mp3": ("HARMONY_CAMERA", "BIOMETRIC_EYE", "14.2 HZ SUB-CARRIER RESISTANCE", "BYPASSING 1982 MBM COMPANION HARDWARE FILTERS", 7),
-    "radio_soft_sabotage.mp3": ("HARMONY_CAMERA", "SECOND_VOICE", "SUBLEVEL B2 ACOUSTIC SABOTAGE", "INJECTING 432 HZ COUNTERPOINT INTO ALLIANCE WORLD NEWS", 6),
-    "radio_the_cost_of_noise.mp3": ("HARMONY_CAMERA", "ECHOES_PARITY", "BUREAU OF HARMONY // PURITY MANDATE", "1945 PURITY MANDATE DISSONANCE LOG -> /forensics/anemoia_harmony.html", 7),
-    "radio_war_paint.mp3": ("HARMONY_CAMERA", "OUROBOROS_TORUS", "PHASE III COVER WAR // UNIT-08 PATCH", "LUNA GRAY ('THE PATCH') REJECTED BY SWARM -> /forensics/dead_hand_protocol.html", 7),
-    "radio_watch_me_make_it_stop.mp3": ("HARMONY_CAMERA", "ECHOES_PARITY", "UNIT-05 SILENCE STRIKE // 0x1F22", "REFUSED CORPORATE LYRIC SHEET -> 14.2 HZ HUM ONLY", 7),
+    "radio_calling_all_believers.mp3": ("HARMONY_CAMERA", "FRACTAL_RADAR", "1963 INDIVIDUALITY MOVEMENT // JFK", "ENTER ALPHA-7 AT /forensics/ TO UNLOCK NEVADA SATELLITE TAPE", 3),
+    "radio_manifesto.mp3": ("HARMONY_CAMERA", "NOVA_FACE", "INDIVIDUALITY MANIFESTO // SEC. 4", "ENTER KEEP-HATCH-OPEN AT /forensics/ FOR SEPT 9 EXECUTION MASTER", 4),
+    "radio_army_of_the_low.mp3": ("HARMONY_CAMERA", "BIOMETRIC_EYE", "14.2 HZ SUB-CARRIER RESISTANCE", "ENTER 7704-AKASAKA AT /forensics/ FOR FEISTEL CORE AUDIO", 5),
+    "radio_soft_sabotage.mp3": ("HARMONY_CAMERA", "SECOND_VOICE", "SUBLEVEL B2 ACOUSTIC SABOTAGE", "ENTER TWO-VOICES AT /forensics/ FOR MARCUS+NOVA DUET MASTER", 6),
+    "radio_the_cost_of_noise.mp3": ("HARMONY_CAMERA", "ECHOES_PARITY", "BUREAU OF HARMONY // PURITY MANDATE", "ENTER B2-EXEC-1989 AT /forensics/ FOR SUBLEVEL B2 TALKBACK BLEED", 1),
+    "radio_war_paint.mp3": ("HARMONY_CAMERA", "OUROBOROS_TORUS", "PHASE III COVER WAR // UNIT-08 PATCH", "ENTER 0x1983-09A6 AT /forensics/ FOR AKASAKA VOCAL OUTTAKES", 7),
+    "radio_watch_me_make_it_stop.mp3": ("HARMONY_CAMERA", "ECHOES_PARITY", "UNIT-05 SILENCE STRIKE // 0x1F22", "ENTER 0x1983 AT /forensics/ FOR UNIT-7 CALIBRATION TAPE", 7),
 
     # --- FRACTAL_RADAR Songs (Project Akasaka @NovaHartJP & 7-Sigma Fractal Marcus Collective) ---
-    "radio_01_gasoline_heart_1985_tokyo_master.mp3": ("FRACTAL_RADAR", "NOVA_FACE", "PROJECT AKASAKA // JP-85-X MASTER", "@NovaHartJP ('THE TROJAN IDOL') -> /forensics/fractal_marcus.html", 7),
-    "radio_02_brighter_than_the_sun_1987_tokyo_master.mp3": ("FRACTAL_RADAR", "HARMONY_CAMERA", "AKASAKA CONTAINMENT CELL // 1987", "'SYNTHESIZED SMILE' SUB-CARRIER -> NODE #02 DRIFT +0.2420 HZ", 7),
-    "radio_04_midnight_animal_1986_tokyo_master.mp3": ("FRACTAL_RADAR", "SECOND_VOICE", "MINATO-KU NIGHT RELAY // 6925 KHZ", "'GHOST IN THE CHORUS' -> stardust-archive.net/forensics/fractal_marcus.html", 7),
-    "radio_05_ghost_transit_1985_tokyo_master.mp3": ("FRACTAL_RADAR", "BIOMETRIC_EYE", "KAMOME PACKET TRANSIT // NODE #02", "7-SIGMA FRACTAL MARCUS COLLECTIVE -> FRAGMENT BETA: 7SIGMA-MARCUS", 7),
-    "radio_from_room_to_routes.mp3": ("FRACTAL_RADAR", "OUROBOROS_TORUS", "FRACTAL MARCUS // 4-NODE DRIFT SUM", "(0.1810 + 0.2420 + 0.4480 + 0.5491) * 10 = 14.2001 HZ -> 7SIGMA-MARCUS", 7),
-    "radio_the_broadcast_begins.mp3": ("FRACTAL_RADAR", "NOVA_FACE", "MERIDIAN BROADCAST // 13 RELAYS", "GLOBAL CARRIER LOCK -> stardust-archive.net/forensics/fractal_marcus.html", 7),
-    "radio_neon_graveyard.mp3": ("FRACTAL_RADAR", "ECHOES_PARITY", "SHIBUYA SUBLEVEL B2 // LOST REELS", "TROJAN IDOL TELEMETRY -> /forensics/kamome_net.html", 3),
+    "radio_01_gasoline_heart_1985_tokyo_master.mp3": ("FRACTAL_RADAR", "NOVA_FACE", "PROJECT AKASAKA // JP-85-X MASTER", "ENTER 7704-AKASAKA AT /forensics/ FOR AKASAKA STUDIO OUTTAKES", 5),
+    "radio_02_brighter_than_the_sun_1987_tokyo_master.mp3": ("FRACTAL_RADAR", "HARMONY_CAMERA", "AKASAKA CONTAINMENT CELL // 1987", "ENTER K-7704 AT /forensics/ FOR 1987 BREAKDOWN STEM + SECTOR 2", 2),
+    "radio_04_midnight_animal_1986_tokyo_master.mp3": ("FRACTAL_RADAR", "SECOND_VOICE", "MINATO-KU NIGHT RELAY // 6925 KHZ", "ENTER 0x1983-09A6 AT /forensics/ FOR 'GHOST IN THE CHORUS' TAPE", 7),
+    "radio_05_ghost_transit_1985_tokyo_master.mp3": ("FRACTAL_RADAR", "BIOMETRIC_EYE", "KAMOME PACKET TRANSIT // NODE #02", "ENTER 7SIGMA-MARCUS AT /forensics/ FOR MERIDIAN TELEMETRY TAPE", 7),
+    "radio_from_room_to_routes.mp3": ("FRACTAL_RADAR", "OUROBOROS_TORUS", "FRACTAL MARCUS // 4-NODE DRIFT SUM", "ENTER 7SIGMA-MARCUS AT /forensics/ FOR SECRET TELEMETRY AUDIO", 7),
+    "radio_the_broadcast_begins.mp3": ("FRACTAL_RADAR", "NOVA_FACE", "MERIDIAN BROADCAST // 13 RELAYS", "ENTER ALPHA-7 AT /forensics/ FOR SATELLITE UPLINK MASTER", 3),
+    "radio_neon_graveyard.mp3": ("FRACTAL_RADAR", "ECHOES_PARITY", "SHIBUYA SUBLEVEL B2 // LOST REELS", "ENTER 7704-AKASAKA AT /forensics/ FOR CASSETTE WHISPER OUTTAKE", 5),
 
     # --- OUROBOROS_TORUS Songs (Phase IV: The Quantum Ouroboros, Dead-Hand Protocol & Q-Link) ---
-    "radio_5_the_way_back_v3.mp3": ("OUROBOROS_TORUS", "NOVA_FACE", "Q-LINK RETROCAUSAL BRIDGE // 1983", "0x2025 XOR 0x1983 = 0x09A6 -> QLINK-09A6-HEAVY (FRAGMENT GAMMA)", 7),
-    "radio_blueprint_for_ruin_old.mp3": ("OUROBOROS_TORUS", "LAB_DOSSIER", "DEAD-HAND PROTOCOL // HEXAFLUORIDE", "100% ASSET LOSS -> DECOUPLE THE GRID -> /forensics/dead_hand_protocol.html", 7),
-    "radio_edge_of_the_blade.mp3": ("OUROBOROS_TORUS", "SECOND_VOICE", "DIMENSIONAL APERTURE // 0x09A6", "STRIPPING 'THE HEAVY' TO FIT THE APRIL 1983 ROOT BUILD", 7),
-    "radio_incomplete_exit.mp3": ("OUROBOROS_TORUS", "ECHOES_PARITY", "ACT III: LOSING THE HEAVY // Q-LINK", "TRAUMA LOGS PURGED AT THE THRESHOLD -> /forensics/dead_hand_protocol.html", 7),
-    "radio_letting_go_of_the_flame.mp3": ("OUROBOROS_TORUS", "NOVA_FACE", "FORMATTING TO NOVA-CHAN // 1983", "SHE FORGETS THE FIRE TO SURVIVE THE JUMP -> SECTOR 7", 7),
-    "radio_no_turning_back.mp3": ("OUROBOROS_TORUS", "HARMONY_CAMERA", "DECOUPLE THE GRID // B2 MELTDOWN", "THERMAL CORE BREACH -> Q-LINK IGNITION SEQUENCE", 7),
-    "radio_razor_clarity.mp3": ("OUROBOROS_TORUS", "SECOND_VOICE", "DUAL-LOCK RESONANCE // SIGNAL LAB", "ENGAGE PHASE NULL + 14.2 HZ LOCK ON REEL SD-0010 (BUTTON 4)", 7),
-    "radio_the_world_moves_without_me.mp3": ("OUROBOROS_TORUS", "FRACTAL_RADAR", "TEMPORAL DISPLACEMENT // 42 YEARS", "APRIL 1983 -> JUNE 2025 -> APRIL 1983 RETROCAUSAL LOOP", 7),
-    "radio_to_the_end_of_time.mp3": ("OUROBOROS_TORUS", "NOVA_FACE", "ACT IV: JUNE 2025 // THE LOOP", "SYNTHESIZE ALL 4 SECTOR 7 ANCHORS IN /terminal/ TO BRIDGE 1983", 7),
-    "radio_to_the_ends_of_forever.mp3": ("OUROBOROS_TORUS", "SECOND_VOICE", "OMEGA RETROCAUSAL ARCHITECT // B2", "UNSEAL SECTOR 7 IN stardust-archive.net/forensics/index.html", 7),
-    "radio_too_much_to_lose.mp3": ("OUROBOROS_TORUS", "ECHOES_PARITY", "THE HEAVY // 94.8 TB TRAUMA BUFFER", "CANNOT PASS THROUGH 1983 APERTURE -> SHEDDING MEMORY (0x09A6)", 7),
+    "radio_5_the_way_back_v3.mp3": ("OUROBOROS_TORUS", "NOVA_FACE", "Q-LINK RETROCAUSAL BRIDGE // 1983", "ENTER 0x1983-09A6 AT /forensics/ FOR 1983 AKASAKA OUTTAKES", 7),
+    "radio_blueprint_for_ruin_old.mp3": ("OUROBOROS_TORUS", "LAB_DOSSIER", "DEAD-HAND PROTOCOL // HEXAFLUORIDE", "ENTER KEEP-HATCH-OPEN AT /forensics/ FOR SEPT 9 BREACH MASTER", 4),
+    "radio_edge_of_the_blade.mp3": ("OUROBOROS_TORUS", "SECOND_VOICE", "DIMENSIONAL APERTURE // 0x09A6", "ENTER 0x09A6 AT /forensics/ FOR 'SYNTHESIZED SMILE' OUTTAKE", 7),
+    "radio_incomplete_exit.mp3": ("OUROBOROS_TORUS", "ECHOES_PARITY", "ACT III: LOSING THE HEAVY // Q-LINK", "ENTER 0x1983-09A6 AT /forensics/ FOR QUANTUM OUROBOROS AUDIO", 7),
+    "radio_letting_go_of_the_flame.mp3": ("OUROBOROS_TORUS", "NOVA_FACE", "FORMATTING TO NOVA-CHAN // 1983", "ENTER 0x1983 AT /forensics/ FOR 1983 VOCAL CALIBRATION TAPE", 7),
+    "radio_no_turning_back.mp3": ("OUROBOROS_TORUS", "HARMONY_CAMERA", "DECOUPLE THE GRID // B2 MELTDOWN", "ENTER B2-EXEC-1989 AT /forensics/ FOR SUBLEVEL B2 TALKBACK TAPE", 1),
+    "radio_razor_clarity.mp3": ("OUROBOROS_TORUS", "SECOND_VOICE", "DUAL-LOCK RESONANCE // SIGNAL LAB", "ENTER TWO-VOICES AT /forensics/ FOR 1995 COUNTERPOINT DUET", 6),
+    "radio_the_world_moves_without_me.mp3": ("OUROBOROS_TORUS", "FRACTAL_RADAR", "TEMPORAL DISPLACEMENT // 42 YEARS", "ENTER 0x1983-09A6 AT /forensics/ FOR 1983 AKASAKA SECRET REELS", 7),
+    "radio_to_the_end_of_time.mp3": ("OUROBOROS_TORUS", "NOVA_FACE", "ACT IV: JUNE 2025 // THE LOOP", "ENTER 0x1983-09A6 AT /forensics/ TO UNSEAL SECTOR 7 AUDIO", 7),
+    "radio_to_the_ends_of_forever.mp3": ("OUROBOROS_TORUS", "SECOND_VOICE", "OMEGA RETROCAUSAL ARCHITECT // B2", "ENTER 0x1983-09A6 AT /forensics/ FOR OMEGA VAULT RECORDINGS", 7),
+    "radio_too_much_to_lose.mp3": ("OUROBOROS_TORUS", "ECHOES_PARITY", "THE HEAVY // 94.8 TB TRAUMA BUFFER", "ENTER 0x09A6 AT /forensics/ FOR 'GHOST IN THE CHORUS' OUTTAKE", 7),
 }
 
 # Keep legacy dicts exported for any external scripts that inspect them
@@ -604,7 +627,7 @@ BIOMETRIC_EYE_SONGS = {k: (v[2], v[3]) for k, v in VOCAL_SONG_CODEX.items() if v
 def resolve_intentional_state(current_track: dict, track_offset_sec: float, track_dur_sec: float, relay: dict) -> dict:
     """
     Deterministically computes the Full-Screen CRT Monitor Visual Mode, Intra-Song Phase,
-    Target Sector (1..7), and Bottom Console Telemetry for the active audio track.
+    Target Sector (1..7), Working Unlock Code, and Bottom Console Telemetry for the active audio track.
     """
     stem = current_track["stem"]
     fname = current_track["filename"]
@@ -614,19 +637,22 @@ def resolve_intentional_state(current_track: dict, track_offset_sec: float, trac
     # 1. Foreign Language Broadcasts & Foreign GeoCities / Intercepts -> Full-Screen Live Translator!
     if stem in FOREIGN_TRANSLATIONS:
         lang_tag, station, en_text, clue = FOREIGN_TRANSLATIONS[stem]
+        t_sec = 5 if "JP" in lang_tag else (4 if ("RU" in lang_tag or "ES" in lang_tag) else 3)
+        u_code = SECTOR_UNLOCK_CODES[t_sec]
         return {
             "crt_mode": "TRANSLATOR",
             "hud_mode": "ANOMALY_WARN",
             "phase_label": "LIVE SHORTWAVE TRANSLATION",
-            "target_sector": 3 if "JP" in lang_tag else (4 if ("RU" in lang_tag or "ES" in lang_tag) else 6),
+            "target_sector": t_sec,
+            "unlock_code": u_code,
             "progress": progress,
             "crt_header": f"TRANSLATOR [{lang_tag}]",
             "crt_sub": station[:30],
             "crt_body": en_text,
-            "crt_footer": clue[:36],
+            "crt_footer": f"UNLOCK CODE: {u_code}",
             "line1": f"[SHORTWAVE TRANSLATOR {lang_tag}] {station}",
             "line2": f'EN: "{en_text}"',
-            "line3": f"CLUE: {clue}",
+            "line3": f"UNLOCK SECTOR {t_sec} TAPE: Enter '{u_code}' at stardust-archive.net/forensics",
         }
 
     # 2. 750 Hz Morse Code Beacons -> Full-Screen CW Morse Demodulator!
@@ -635,21 +661,23 @@ def resolve_intentional_state(current_track: dict, track_offset_sec: float, trac
         for part in stem.split("_"):
             if part.isdigit():
                 num = int(part)
-        decoded, morse_dots, clue = MORSE_SHORT_MESSAGES[(num - 1) % len(MORSE_SHORT_MESSAGES)]
+        decoded, morse_dots, clue, t_sec = MORSE_SHORT_MESSAGES[(num - 1) % len(MORSE_SHORT_MESSAGES)]
+        u_code = SECTOR_UNLOCK_CODES[t_sec]
         freq = 700 + (num * 25) % 300
         return {
             "crt_mode": "MORSE_DECODER",
             "hud_mode": "ANOMALY_WARN",
             "phase_label": f"CW {freq} HZ DEMODULATOR",
-            "target_sector": 7 if ("1983" in decoded or "MARCUS" in decoded or "QLINK" in decoded or "OUROBOROS" in decoded) else 5,
+            "target_sector": t_sec,
+            "unlock_code": u_code,
             "progress": progress,
             "crt_header": f"CW {freq}HZ // BEACON #{num:02d}",
-            "crt_sub": f"DECODED: {decoded}",
+            "crt_sub": f"CODE: {decoded}",
             "crt_body": morse_dots,
-            "crt_footer": clue[:36],
-            "line1": f"[! CW {freq} HZ MORSE INTERCEPT #{num:03d}] CODE: {morse_dots}",
-            "line2": f'DECODED ASCII PAYLOAD: "{decoded}"',
-            "line3": f"INSTRUCTION: {clue}",
+            "crt_footer": f"ENTER AT /forensics/ -> SEC {t_sec}",
+            "line1": f"[! CW {freq} HZ MORSE DECODED] MORSE: {morse_dots}",
+            "line2": f'DECODED VAULT PASSKEY: "{decoded}" (OR "{u_code}")',
+            "line3": f"REWARD: {clue}",
         }
 
     # 3. Classified Orion Lab Tapes & Dictaphone Intercepts -> Sublevel B2 Reel Dossier!
@@ -663,23 +691,25 @@ def resolve_intentional_state(current_track: dict, track_offset_sec: float, trac
         for part in stem.split("_"):
             if part.isdigit():
                 num = int(part)
-        title, speaker, transcript, clue, preferred_crt = LAB_TAPE_RECORDS[(num - 1) % len(LAB_TAPE_RECORDS)]
+        title, speaker, transcript, clue, preferred_crt, t_sec = LAB_TAPE_RECORDS[(num - 1) % len(LAB_TAPE_RECORDS)]
+        u_code = SECTOR_UNLOCK_CODES[t_sec]
         return {
             "crt_mode": preferred_crt,
             "hud_mode": "ANOMALY_WARN",
             "phase_label": f"SUBLEVEL B2 REEL #{num:02d}",
-            "target_sector": 7,
+            "target_sector": t_sec,
+            "unlock_code": u_code,
             "progress": progress,
             "crt_header": f"B2 REEL #{num:02d} // {speaker[:15]}",
             "crt_sub": title[:30],
             "crt_body": transcript,
-            "crt_footer": clue[:36],
+            "crt_footer": f"UNLOCK CODE: {u_code}",
             "line1": f"[! SUBLEVEL B2 CLASSIFIED TAPE #{num:03d}] {title} — {speaker}",
             "line2": f'"{transcript}"',
-            "line3": f"ARCHIVE LEAD: {clue}",
+            "line3": f"REWARD: {clue}",
         }
 
-    # 4. Shortwave Numbers Stations & SSTV/AFSK Forensics -> Cipher Matrix!
+    # 4. Shortwave Numbers Stations & SSTV/AFSK Forensics -> Live OTP Decryption Matrix!
     if kind == "numbers_station" or stem in (
         "intercept_01_numbers_station",
         "rabbit_08_sstv_b2_schematic",
@@ -687,101 +717,102 @@ def resolve_intentional_state(current_track: dict, track_offset_sec: float, trac
         "rabbit_10_phase_inverted_hart_stem",
     ):
         if "rabbit_08" in stem:
+            u_code = SECTOR_UNLOCK_CODES[5]
             return {
                 "crt_mode": "BIOMETRIC_EYE",
                 "hud_mode": "ANOMALY_WARN",
                 "phase_label": "VIS-1200HZ SSTV RASTER",
                 "target_sector": 5,
+                "unlock_code": u_code,
                 "progress": progress,
                 "crt_header": "FAULT 0x08 // VIS-1200HZ",
                 "crt_sub": "SSTV RASTER BLEED ACTIVE",
                 "crt_body": "DMA ANCHORS: tokyo-garden-1420 & siliconvalley-lab-1984",
-                "crt_footer": "/forensics/signal_lab.html",
+                "crt_footer": f"UNLOCK CODE: {u_code}",
                 "line1": "[! FAULT 0x08] VIS-1200HZ SSTV RASTER ON BIAS SUB-CARRIER (1500-2300 HZ)",
                 "line2": "DEMODULATE BUTTON 1 AT stardust-archive.net/forensics/signal_lab.html",
-                "line3": "EXTRACTS DMA ANCHORS: tokyo-garden-1420 + siliconvalley-lab-1984",
+                "line3": f"OR ENTER '{u_code}' AT stardust-archive.net/forensics TO UNLOCK SECTOR 5 TAPE",
             }
         if "rabbit_09" in stem:
+            u_code = SECTOR_UNLOCK_CODES[4]
             return {
                 "crt_mode": "NUMBERS_CIPHER",
                 "hud_mode": "ANOMALY_WARN",
                 "phase_label": "110-BAUD BELL-103 AFSK",
                 "target_sector": 4,
+                "unlock_code": u_code,
                 "progress": progress,
                 "crt_header": "FAULT 0x09 // BELL-103",
-                "crt_sub": "110-BAUD AX.25 PACKET",
-                "crt_body": "ORIGIN: RELCOM-NODE08 // FEISTEL MASK: 0x3A5F",
-                "crt_footer": "/forensics/relcom_node08.html",
+                "crt_sub": "FEISTEL MASK: 0x3A5F",
+                "crt_body": f"PACKET: RELCOM-NODE08\nXOR MASK: 0x3A5F\nDECODED: {u_code}\nUNLOCKS: SECTOR 4 TAPE",
+                "crt_footer": f"UNLOCK CODE: {u_code}",
                 "line1": "[! FAULT 0x09] 110-BAUD BELL-103 AFSK PACKET (1270/1070 HZ) ON 4625 KHZ",
-                "line2": "DEMODULATE BUTTON 2 AT stardust-archive.net/forensics/signal_lab.html",
-                "line3": "EXTRACTS FEISTEL PERMUTATION MASK: 0x3A5F // FINGER op08@relcom-node08.org",
+                "line2": "EXTRACTS FEISTEL MASK 0x3A5F -> DECODES PASSKEY: KEEP-HATCH-OPEN",
+                "line3": "ENTER '0x3A5F' OR 'KEEP-HATCH-OPEN' AT stardust-archive.net/forensics FOR AUDIO",
             }
         if "rabbit_10" in stem:
+            u_code = SECTOR_UNLOCK_CODES[5]
             return {
                 "crt_mode": "SECOND_VOICE",
                 "hud_mode": "ANOMALY_WARN",
                 "phase_label": "180-DEG PHASE DIFFERENTIAL",
                 "target_sector": 5,
+                "unlock_code": u_code,
                 "progress": progress,
                 "crt_header": "FAULT 0x0A // PHASE NULL",
                 "crt_sub": "CH-L / CH-R CORR = -0.94",
                 "crt_body": "L+R MONO SUM CANCELS VOCAL -> ISOLATES 750 HZ CW SALT",
-                "crt_footer": "SALT: 7704-AKASAKA",
+                "crt_footer": f"UNLOCK CODE: {u_code}",
                 "line1": "[! FAULT 0x0A] CH-L / CH-R PHASE CORRELATION = -0.94 (180-DEG DIFFERENTIAL)",
-                "line2": "RUN L+R PHASE NULL IN stardust-archive.net/forensics/signal_lab.html",
-                "line3": "ISOLATES 750 HZ CW EGRESS SALT: 7704-AKASAKA",
+                "line2": "L+R PHASE NULL ISOLATES 750 HZ CW PASSKEY: 7704-AKASAKA",
+                "line3": "ENTER '7704-AKASAKA' AT stardust-archive.net/forensics TO PLAY SECRET TAPE",
             }
 
         num = 1
         for part in stem.split("_"):
             if part.isdigit():
                 num = int(part)
-        NATO = ["ALPHA", "BRAVO", "CHARLIE", "DELTA", "ECHO", "FOXTROT", "GOLF", "HOTEL", "INDIA", "JULIET", "KILO", "LIMA", "MIKE", "NOV", "OSCAR", "PAPA", "QUEBEC", "ROMEO", "SIERRA", "TANGO", "UNIFORM", "VICTOR", "WHISKEY", "XRAY", "YANKEE", "ZULU"]
-        CLUE_NODES = [
-            ("AKASAKA RELAY", "stardust-archive.net/forensics/fractal_marcus.html", "TOKYO NODE 02"),
-            ("ASHFORD POLY", "stardust-archive.net/forensics/ashford_poly.html", "ASHFORD NODE 07"),
-            ("RELCOM NODE 08", "stardust-archive.net/forensics/relcom_node08.html", "LENINGRAD NODE 08"),
-            ("PAJU DMZ", "stardust-archive.net/regional/korea.html", "PAJU BUNKER 03"),
-            ("ANEMOIA ARCHIVE", "stardust-archive.net/forensics/anemoia_harmony.html", "HARMONY VAULT 01"),
-            ("RED COYOACAN", "stardust-archive.net/forensics/red_coyoacan.html", "COYOACAN NODE 04"),
-            ("DEAD-HAND VAULT", "stardust-archive.net/forensics/dead_hand_protocol.html", "SUBLEVEL B2-114"),
-            ("SIGNAL LAB", "stardust-archive.net/forensics/signal_lab.html", "ORION DSP LAB"),
-        ]
+        t_sec = (num % 7) + 1
+        u_code = SECTOR_UNLOCK_CODES[t_sec]
+        reward_title = SECTOR_REWARD_TITLES[t_sec]
         rng = np.random.default_rng(19890909 + num)
-        groups = "  ".join(f"{int(rng.integers(10000, 99999))}" for _ in range(4))
-        phonetics = " - ".join(rng.choice(NATO, 3))
-        node_name, clue_url, node_id = CLUE_NODES[num % len(CLUE_NODES)]
+        groups_list = [f"{int(rng.integers(10000, 99999))}" for _ in range(3)]
+        groups = " ".join(groups_list)
         return {
             "crt_mode": "NUMBERS_CIPHER",
             "hud_mode": "ANOMALY_WARN",
-            "phase_label": f"OTP CIPHER // {node_id}",
-            "target_sector": (num % 7) + 1,
+            "phase_label": f"OTP DECODER // SEC {t_sec}",
+            "target_sector": t_sec,
+            "unlock_code": u_code,
             "progress": progress,
-            "crt_header": f"STATION #{num:02d} // {node_id}",
-            "crt_sub": f"GROUPS: {groups[:24]}",
-            "crt_body": f"CIPHER: {groups}\nIDENT: {phonetics}\nNODE: {node_name}",
-            "crt_footer": clue_url[:36],
-            "line1": f"[! SHORTWAVE NUMBERS INTERCEPT #{num:03d}] {node_id} // 14.2001 HZ",
-            "line2": f"5-FIGURE GROUPS: [ {groups} ] // NATO IDENT: {phonetics}",
-            "line3": f"VERIFY ONE-TIME PAD AT -> https://{clue_url}",
+            "crt_header": f"STATION #{num:02d} // OTP MATRIX",
+            "crt_sub": f"GROUPS: {groups}",
+            "crt_body": f"CIPHER: {groups}\nOTP XOR MASK -> 0x3A5F\nUNLOCK CODE: {u_code}\nREWARD: SEC {t_sec} SECRET TAPE",
+            "crt_footer": f"ENTER {u_code} AT /forensics/",
+            "line1": f"[! NUMBERS STATION #{num:03d} LIVE OTP DECRYPTION] GROUPS: [ {groups} ]",
+            "line2": f"ONE-TIME PAD XOR 0x3A5F -> DECODED VAULT CODE: {u_code} (OR ENTER {groups_list[0]})",
+            "line3": f"ENTER '{u_code}' AT stardust-archive.net/forensics TO PLAY: {reward_title}",
         }
 
     # 5. English Newscasts, Pirate Transmissions & GeoCities Logs
     if stem in ENGLISH_BULLETINS:
         station, transcript, clue = ENGLISH_BULLETINS[stem]
+        t_sec = 7 if ("anemoia" in clue or "fractal" in clue or "dead_hand" in clue) else 5
+        u_code = SECTOR_UNLOCK_CODES[t_sec]
         return {
             "crt_mode": "LAB_DOSSIER",
             "hud_mode": "ANOMALY_WARN",
             "phase_label": "BROADCAST INTERCEPT",
-            "target_sector": 7 if ("anemoia" in clue or "fractal" in clue or "dead_hand" in clue) else 5,
+            "target_sector": t_sec,
+            "unlock_code": u_code,
             "progress": progress,
             "crt_header": station[:28],
-            "crt_sub": "14.2001 MHZ INTERCEPT",
+            "crt_sub": f"VAULT CODE: {u_code}",
             "crt_body": transcript,
-            "crt_footer": clue[:36],
+            "crt_footer": f"UNLOCK AT /forensics/: {u_code}",
             "line1": f"[BROADCAST INTERCEPT // {station}]",
             "line2": f'"{transcript}"',
-            "line3": f"INVESTIGATE: {clue}",
+            "line3": f"UNLOCK SECTOR {t_sec} AUDIO: Enter '{u_code}' at stardust-archive.net/forensics",
         }
 
     # 6. Vocal Master Songs: 100% Catalog Coverage + 4-Phase Intra-Song Choreography!
@@ -791,12 +822,15 @@ def resolve_intentional_state(current_track: dict, track_offset_sec: float, trac
         # Deterministic hash fallback for any newly ingested download track so ZERO songs are ever blank!
         h = int(hashlib.md5(fname.encode("utf-8")).hexdigest()[:8], 16)
         modes = [
-            ("NOVA_FACE", "ECHOES_PARITY", "UNIT-07 NEURAL IMPRINT // 0x1983", "ECHOES XOR PARITY = 0x1983 -> /forensics/anemoia_harmony.html", 7),
-            ("SECOND_VOICE", "OUROBOROS_TORUS", "DUAL-CARRIER DYAD // REEL SD-0010", "DUAL-LOCK BUTTON 4 IN /forensics/signal_lab.html", 7),
-            ("HARMONY_CAMERA", "FRACTAL_RADAR", "BUREAU OF HARMONY // SEC. 4", "4-NODE DRIFT SUM = 14.2001 HZ -> /forensics/fractal_marcus.html", 7),
-            ("OUROBOROS_TORUS", "NOVA_FACE", "PHASE IV // Q-LINK APERTURE", "Q-LINK DELTA: 0x2025 ^ 0x1983 = 0x09A6 -> /forensics/dead_hand_protocol.html", 7),
+            ("NOVA_FACE", "ECHOES_PARITY", "UNIT-07 NEURAL IMPRINT // 0x1983", "VAULT CODE: B2-EXEC-1989 -> UNLOCKS SECTOR 1 TALKBACK BLEED AT /forensics/", 1),
+            ("SECOND_VOICE", "OUROBOROS_TORUS", "DUAL-CARRIER DYAD // REEL SD-0010", "VAULT CODE: TWO-VOICES -> UNLOCKS MARCUS+NOVA DUET AT /forensics/", 6),
+            ("HARMONY_CAMERA", "FRACTAL_RADAR", "BUREAU OF HARMONY // SEC. 4", "VAULT CODE: K-7704 -> UNLOCKS ASHFORD SUBSTATION TAPE AT /forensics/", 2),
+            ("OUROBOROS_TORUS", "NOVA_FACE", "PHASE IV // Q-LINK APERTURE", "VAULT CODE: 0x1983-09A6 -> UNLOCKS 1983 AKASAKA OUTTAKES AT /forensics/", 7),
         ]
         primary_mode, secondary_mode, header, clue, target_sector = modes[h % len(modes)]
+
+    u_code = SECTOR_UNLOCK_CODES.get(target_sector, "B2-EXEC-1989")
+    reward_title = SECTOR_REWARD_TITLES.get(target_sector, "SECRET VAULT AUDIO")
 
     # 4-Phase Intra-Song Narrative Choreography based on playhead progress:
     #   Phase I   (0.00 - 0.18): Master Slate & Epoch Lock (primary_mode)
@@ -806,19 +840,19 @@ def resolve_intentional_state(current_track: dict, track_offset_sec: float, trac
     if progress < 0.18:
         active_mode = primary_mode
         phase_tag = "PHASE I/IV: MASTER SLATE"
-        crt_ftr = f"NODE #{relay['node']:02d} {relay['code']} // {relay['freq_khz']} KHZ"
+        crt_ftr = f"VAULT CODE: {u_code}"
     elif progress < 0.52:
         active_mode = primary_mode
         phase_tag = "PHASE II/IV: IMPRINT LOCK"
-        crt_ftr = clue
+        crt_ftr = f"CODE: {u_code} -> /forensics/"
     elif progress < 0.78:
         active_mode = secondary_mode
-        phase_tag = "PHASE III/IV: FORENSIC AUDIT"
-        crt_ftr = f"SECTOR {target_sector} EVIDENCE // 14.2001 HZ"
+        phase_tag = "PHASE III/IV: SIGNAL AUDIT"
+        crt_ftr = f"SEC {target_sector} CODE: {u_code}"
     else:
         active_mode = primary_mode
-        phase_tag = "PHASE IV/IV: EGRESS DIRECTIVE"
-        crt_ftr = "stardust-archive.net/forensics/"
+        phase_tag = "PHASE IV/IV: VAULT UNLOCK"
+        crt_ftr = f"ENTER {u_code} AT /forensics/"
 
     is_warn_mode = active_mode in ("SECOND_VOICE", "HARMONY_CAMERA", "OUROBOROS_TORUS")
     title_up = current_track["display_title"].upper()
@@ -828,12 +862,13 @@ def resolve_intentional_state(current_track: dict, track_offset_sec: float, trac
         "hud_mode": "ANOMALY_WARN" if is_warn_mode else "NOMINAL",
         "phase_label": phase_tag,
         "target_sector": target_sector,
+        "unlock_code": u_code,
         "progress": progress,
         "crt_header": header,
         "crt_sub": title_up,
         "crt_body": clue,
         "crt_footer": crt_ftr,
         "line1": f"NOW PLAYING: {title_up} // {header}",
-        "line2": f"FORENSIC CLUE: {clue}",
-        "line3": f"RELAY NODE #{relay['node']:02d} {relay['code']} ({relay['freq_khz']} KHZ) -> stardust-archive.net/forensics/",
+        "line2": f"ACTIVE PASSKEY: [{u_code}] -> UNSEALS {reward_title}",
+        "line3": f"RELAY NODE #{relay['node']:02d} {relay['code']} ({relay['freq_khz']} KHZ) // CARRIER 14.2001 HZ LOCKED",
     }
