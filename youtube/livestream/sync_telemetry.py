@@ -265,7 +265,7 @@ def render_crt_window_patch(state: dict, relay: dict, assets_dir: Path, now_ts: 
 
     if mode in ("NOVA_FACE", "BIOMETRIC_EYE", "SECOND_VOICE"):
         asset_map = {
-            "NOVA_FACE": (assets_dir / "crt_nova_face.jpg", 1.04),
+            "NOVA_FACE": (assets_dir / "crt_nova_face.jpg", 1.00),
             "BIOMETRIC_EYE": (assets_dir / "crt_neural_eye.jpg", 1.02),
             "SECOND_VOICE": (assets_dir / "crt_second_voice.jpg", 1.04),
         }
@@ -274,8 +274,8 @@ def render_crt_window_patch(state: dict, relay: dict, assets_dir: Path, now_ts: 
             rgb = load_fullscreen_crt_asset(apath, zoom=zoom).copy()
             if mode == "NOVA_FACE":
                 if int(now_ts * 2) % 9 == 0:
-                    rgb[74:102, 74:172, :] *= 0.18
-                    rgb[86:89, 80:166, :] = np.array([50, 230, 75], dtype=np.float32)
+                    rgb[88:100, 98:148, :] *= 0.20
+                    rgb[93:95, 102:144, :] = np.array([75, 240, 120], dtype=np.float32)
             elif mode == "SECOND_VOICE":
                 shift = int(3.0 * math.sin(now_ts * 2.4))
                 rgb[46:192, 10:-10] = np.roll(rgb[46:192, 10:-10], shift, axis=1)
@@ -288,11 +288,11 @@ def render_crt_window_patch(state: dict, relay: dict, assets_dir: Path, now_ts: 
 
             if mode == "NOVA_FACE":
                 bcol = (65, 255, 95, 235)
-                for bx, by, sx, sy in [(24, 54, 1, 1), (CRT_W - 24, 54, -1, 1), (24, 184, 1, -1), (CRT_W - 24, 184, -1, -1)]:
+                for bx, by, sx, sy in [(24, 50, 1, 1), (CRT_W - 24, 50, -1, 1), (24, 186, 1, -1), (CRT_W - 24, 186, -1, -1)]:
                     draw.line([(bx, by), (bx + sx * 14, by)], fill=bcol, width=1)
                     draw.line([(bx, by), (bx, by + sy * 14)], fill=bcol, width=1)
-                draw.rectangle([26, 171, 162, 184], fill=(4, 16, 6, 235))
-                draw.text((28, 172), "UNIT-07 // ROOT: 0x1983", fill=fg_amber, font=FONT_CRT_8)
+                draw.rectangle([26, 173, 162, 186], fill=(4, 16, 6, 235))
+                draw.text((28, 174), "UNIT-07 // ROOT: 0x1983", fill=fg_amber, font=FONT_CRT_8)
             elif mode == "BIOMETRIC_EYE":
                 cx, cy, r = CRT_W // 2, 118, 42
                 ang = now_ts * 1.2
@@ -308,7 +308,7 @@ def render_crt_window_patch(state: dict, relay: dict, assets_dir: Path, now_ts: 
     elif mode == "HARMONY_CAMERA":
         apath = assets_dir / "crt_nova_face.jpg"
         if apath.exists():
-            rgb = load_fullscreen_crt_asset(apath, zoom=1.04).copy() * 0.48
+            rgb = load_fullscreen_crt_asset(apath, zoom=1.00).copy() * 0.55
             amber_rgb = np.zeros_like(rgb)
             amber_rgb[:, :, 0] = rgb[:, :, 1] * 1.15
             amber_rgb[:, :, 1] = rgb[:, :, 1] * 0.72
