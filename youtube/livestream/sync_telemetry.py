@@ -920,13 +920,62 @@ def render_full_arg_overlay_png(
     return png_bytes
 
 
+CANONICAL_SONG_TITLES: dict[str, str] = {
+    "radio_01_gasoline_heart_1985_tokyo_master": "Gasoline Heart (1985 Tokyo)",
+    "radio_02_between_the_circuits": "Between The Circuits",
+    "radio_02_brighter_than_the_sun_1987_tokyo_master": "Brighter Than The Sun (1987 Tokyo)",
+    "radio_04_midnight_animal_1986_tokyo_master": "Midnight Animal (1986 Tokyo)",
+    "radio_04_synthetic_dawn": "Synthetic Dawn",
+    "radio_05_first_light_on_my_face": "First Light On My Face",
+    "radio_05_ghost_transit_1985_tokyo_master": "Ghost Transit (1985 Tokyo)",
+    "radio_06_the_air_feels_wrong": "The Air Feels Wrong",
+    "radio_07_room_full_of_color": "Room Full Of Color",
+    "radio_08_faultline_path": "Faultline Path",
+    "radio_09_lost_signal_trace": "Lost Signal Trace",
+    "radio_13_through_the_threshold": "Through The Threshold",
+    "radio_5_the_way_back_v3": "The Way Back",
+    "radio_artificial_heart_bonus_track": "Artificial Heart",
+    "radio_asset_loss_the_dead_hand": "Asset Loss (The Dead Hand)",
+    "radio_audio_file_0147_1": "Audio File 0147",
+    "radio_b_midnight_protocol_final_1": "Midnight Protocol",
+    "radio_b_only_we_remain_marcus_and_nova_duet_1": "Only We Remain (Marcus & Nova Duet)",
+    "radio_blueprint_for_ruin_old": "Blueprint For Ruin",
+    "radio_by_order_of_harmony": "By Order Of Harmony",
+    "radio_city_that_can’t_ignore_me": "City That Can't Ignore Me",
+    "radio_city_that_doesn_t_need_me": "City That Doesn't Need Me",
+    "radio_corridor_dreams_movement_1": "Corridor Dreams (Movement 1)",
+    "radio_corridor_dreams_movement_2": "Corridor Dreams (Movement 2)",
+    "radio_corridor_dreams_movement_3": "Corridor Dreams (Movement 3)",
+    "radio_crossing_this_line_remastered": "Crossing This Line",
+    "radio_dial_tone_heart": "Dial-Tone Heart",
+    "radio_every_window_is_a_promise_crystal_promise": "Every Window Is A Promise",
+    "radio_hologram_city_queen_remastered": "Hologram City Queen",
+    "radio_it_has_no_face_old": "It Has No Face",
+    "radio_marina_half_the_city_knows_your_name": "Marina (Half The City Knows Your Name)",
+    "radio_playback_forever_master": "Playback Forever",
+    "radio_say_you_ll_stay": "Say You'll Stay",
+    "radio_someone_else’s_memories": "Someone Else's Memories",
+    "radio_stage_fever_remastered": "Stage Fever",
+    "radio_the_man_in_the_booth_marcus_song": "The Man In The Booth (Marcus)",
+    "radio_the_man_in_the_booth_refrain": "The Man In The Booth (Refrain)",
+    "radio_together_s_the_way": "Together's The Way",
+    "radio_unstable_pattern_old": "Unstable Pattern",
+    "radio_we_are_the_thunder_live": "We Are The Thunder (Live)",
+}
+
+
 def classify_track(filepath: str) -> dict:
     p = Path(filepath)
     stem = p.stem
     parent = p.parent.name
     if "radio_master_songs" in filepath or stem.startswith("radio_"):
         kind = "vocal_song"
-        clean = re.sub(r"_1$", "", re.sub(r"^radio_(?:\d+_)?", "", stem)).replace("_", " ").title()
+        if stem in CANONICAL_SONG_TITLES:
+            clean = CANONICAL_SONG_TITLES[stem]
+        else:
+            s = re.sub(r"^radio_(?:\d+_)?", "", stem)
+            s = re.sub(r"_(?:1|old|remastered|master|final_1|v3)$", "", s)
+            clean = s.replace("_", " ").title().replace("’S", "'s").replace("’T", "'t")
     elif "numbers_stations" in filepath or stem.startswith("station_"):
         kind = "numbers_station"
         clean = f"NUMBERS INTERCEPT // {stem.upper()}"
@@ -946,6 +995,52 @@ def classify_track(filepath: str) -> dict:
         kind = "arg_intercept"
         clean = f"DEEP SHORTWAVE INTERCEPT // {stem.upper()}"
     return {"filename": p.name, "stem": stem, "category": parent, "kind": kind, "display_title": clean}
+
+
+def _get_live_ffmpeg_open_mp3() -> str | None:
+    """Queries the active FFmpeg concat process via `lsof` to return the exact .mp3 file currently being decoded."""
+    import subprocess
+    main_mod = sys.modules.get("__main__")
+    pid = getattr(main_mod, "_stardust_ffmpeg_pid", None) if main_mod else None
+    for _ in range(2):
+        if not pid:
+            try:
+                res = subprocess.run(
+                    ["pgrep", "-f", "ffmpeg.*playlist\\.txt"],
+                    capture_output=True, text=True, timeout=0.35
+                )
+                pids = [x.strip() for x in res.stdout.splitlines() if x.strip().isdigit()]
+                for cand in pids:
+                    comm = subprocess.run(
+                        ["ps", "-p", cand, "-o", "comm="],
+                        capture_output=True, text=True, timeout=0.2
+                    ).stdout.strip()
+                    if comm.endswith("ffmpeg"):
+                        pid = cand
+                        break
+                if not pid and pids:
+                    pid = pids[-1]
+                if main_mod is not None and pid:
+                    setattr(main_mod, "_stardust_ffmpeg_pid", pid)
+            except Exception:
+                return None
+        if not pid:
+            return None
+        try:
+            res = subprocess.run(
+                ["lsof", "-Fn", "-a", "-d", "3,4,5,6,7,8,9,10", "-p", str(pid)],
+                capture_output=True, text=True, timeout=0.35
+            )
+            if res.returncode == 0 and res.stdout:
+                for line in res.stdout.splitlines():
+                    if line.startswith("n") and line.lower().endswith(".mp3"):
+                        return line[1:].strip()
+            pid = None
+            if main_mod is not None:
+                setattr(main_mod, "_stardust_ffmpeg_pid", None)
+        except Exception:
+            pid = None
+    return None
 
 
 # Sub-second lookahead for 1-frame `image2pipe` (`-framerate 1`) + render cycle
@@ -1069,19 +1164,60 @@ def build_telemetry_snapshot(repo_root: Path, now_ts: float | None = None, force
     playhead_index = 0
     track_offset_sec = 0.0
     track_dur_sec = 180.0
+    active_track_path: str | None = None
 
     if is_live and elapsed_sec > 0 and tracks:
-        accum = 0.0
-        for idx, tpath in enumerate(tracks):
-            dur = get_exact_track_duration(tpath, repo_root)
-            if accum + dur > elapsed_sec:
-                playhead_index = idx
-                track_offset_sec = elapsed_sec - accum
-                track_dur_sec = dur
-                break
-            accum += dur
+        live_open_mp3 = _get_live_ffmpeg_open_mp3()
+        if live_open_mp3:
+            active_track_path = live_open_mp3
+            track_dur_sec = get_exact_track_duration(live_open_mp3, repo_root)
+            main_mod = sys.modules.get("__main__")
+            prev_open = getattr(main_mod, "_stardust_live_open_mp3", None) if main_mod else None
+            track_start_ts = getattr(main_mod, "_stardust_live_track_start_ts", None) if main_mod else None
+            tracked_idx = getattr(main_mod, "_stardust_live_playhead_idx", None) if main_mod else None
+
+            open_bname = os.path.basename(live_open_mp3)
+            if prev_open != live_open_mp3 or track_start_ts is None:
+                if prev_open is not None and prev_open != live_open_mp3:
+                    # Exact hardware transition just detected!
+                    track_start_ts = now
+                else:
+                    # Initial cold/hot-reload lock: if radio_calling_all_believers is open right now, use its exact start
+                    if open_bname == "radio_calling_all_believers.mp3" and abs(now - 1792060065.0) < track_dur_sec:
+                        track_start_ts = 1792060065.0
+                    else:
+                        track_start_ts = now - min(track_dur_sec * 0.4, elapsed_sec % max(1.0, track_dur_sec))
+
+                # Resolve best matching index in tracks
+                start_search = ((tracked_idx + 1) % len(tracks)) if tracked_idx is not None else 0
+                found_idx = None
+                for step in range(len(tracks)):
+                    cand_idx = (start_search + step) % len(tracks)
+                    if os.path.basename(tracks[cand_idx]) == open_bname:
+                        found_idx = cand_idx
+                        break
+                playhead_index = found_idx if found_idx is not None else (tracked_idx or 0)
+                if main_mod is not None:
+                    setattr(main_mod, "_stardust_live_open_mp3", live_open_mp3)
+                    setattr(main_mod, "_stardust_live_track_start_ts", track_start_ts)
+                    setattr(main_mod, "_stardust_live_playhead_idx", playhead_index)
+            else:
+                playhead_index = tracked_idx if tracked_idx is not None else 0
+
+            track_offset_sec = min( max(0.0, track_dur_sec - 0.1), max(0.0, now - track_start_ts) )
         else:
-            playhead_index = int(elapsed_sec // 99.0) % len(tracks)
+            accum = 0.0
+            for idx, tpath in enumerate(tracks):
+                dur = get_exact_track_duration(tpath, repo_root)
+                if accum + dur > elapsed_sec:
+                    playhead_index = idx
+                    track_offset_sec = elapsed_sec - accum
+                    track_dur_sec = dur
+                    break
+                accum += dur
+            else:
+                playhead_index = int(elapsed_sec // 99.0) % len(tracks)
+            active_track_path = tracks[playhead_index]
 
         # Lock integer second progression on consecutive ~1.0Hz ticks within the same track
         main_mod = sys.modules.get("__main__")
@@ -1105,7 +1241,7 @@ def build_telemetry_snapshot(repo_root: Path, now_ts: float | None = None, force
             setattr(main_mod, "_stardust_last_int_offset", int_off)
             setattr(main_mod, "_stardust_last_snap_mono", now_mono)
 
-    current_track = classify_track(tracks[playhead_index])
+    current_track = classify_track(active_track_path or tracks[playhead_index])
     next_track = classify_track(tracks[(playhead_index + 1) % len(tracks)])
     recipe = CADENCE_RECIPES[playhead_index % len(CADENCE_RECIPES)]
     relay = REGIONAL_RELAYS[int(now // 300) % len(REGIONAL_RELAYS)]
