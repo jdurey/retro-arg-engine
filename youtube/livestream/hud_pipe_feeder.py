@@ -85,12 +85,37 @@ def _render_worker(repo_root: Path, out_json: Path, out_forensics_json: Path, ou
             _latest_png_bytes = _render_once(repo_root, out_json, out_forensics_json, out_hud, assets_dir)
         except Exception:
             pass
-        time.sleep(1.0)
+        time.sleep(0.5)
+
+
+def _get_live_ffmpeg_mux_sec(log_path: Path) -> float:
+    """Returns FFmpeg's current muxer timestamp (`time=HH:MM:SS.xx`) from stream.log."""
+    if not log_path.exists():
+        return 0.0
+    try:
+        mtime = log_path.stat().st_mtime
+        age = max(0.0, time.time() - mtime)
+        if age > 15.0:
+            return 0.0
+        with open(log_path, "rb") as f:
+            f.seek(0, os.SEEK_END)
+            sz = f.tell()
+            f.seek(max(0, sz - 65536))
+            chunk = f.read().decode("utf-8", errors="ignore")
+        parts = chunk.split("[STREAM.SH] Selected encoder:")
+        tail = parts[-1] if parts else chunk
+        times = sync_telemetry.TIME_RE.findall(tail)
+        if not times:
+            return 0.0
+        h, m, s = times[-1]
+        return int(h) * 3600 + int(m) * 60 + float(s) + min(1.0, age)
+    except Exception:
+        return 0.0
 
 
 def main() -> None:
     global _latest_png_bytes
-    parser = argparse.ArgumentParser(description="Project Stardust 1.0 Hz HUD Pipe Feeder v2.0")
+    parser = argparse.ArgumentParser(description="Project Stardust Closed-Loop Zero-Lag HUD Pipe Feeder v2.2")
     parser.add_argument("--repo-root", type=Path, default=SCRIPT_DIR.parents[1])
     args = parser.parse_args()
 
@@ -99,6 +124,7 @@ def main() -> None:
     out_forensics_json = repo_root / "site" / "forensics" / "live_telemetry.json"
     out_hud = repo_root / "youtube" / "livestream" / "live_hud.png"
     assets_dir = repo_root / "youtube" / "livestream" / "assets_arg"
+    log_path = repo_root / "youtube" / "livestream" / "stream.log"
     out_json.parent.mkdir(parents=True, exist_ok=True)
     out_hud.parent.mkdir(parents=True, exist_ok=True)
 
@@ -115,7 +141,8 @@ def main() -> None:
     t.start()
 
     try:
-        for _ in range(6):
+        # With `-threads 1` on FFmpeg's image2pipe PNG decoder, only 2 initial frames are needed!
+        for _ in range(2):
             sys.stdout.buffer.write(_latest_png_bytes)
         sys.stdout.buffer.flush()
 

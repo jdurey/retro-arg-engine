@@ -590,7 +590,7 @@ VOCAL_SONG_CODEX: dict[str, tuple[str, str, str, str, int]] = {
     "radio_no_turning_back.mp3": ("OUROBOROS_TORUS", "HARMONY_CAMERA", "DECOUPLE THE GRID // B2 MELTDOWN", "THERMAL CORE BREACH -> Q-LINK IGNITION SEQUENCE", 7),
     "radio_razor_clarity.mp3": ("OUROBOROS_TORUS", "SECOND_VOICE", "DUAL-LOCK RESONANCE // SIGNAL LAB", "ENGAGE PHASE NULL + 14.2 HZ LOCK ON REEL SD-0010 (BUTTON 4)", 7),
     "radio_the_world_moves_without_me.mp3": ("OUROBOROS_TORUS", "FRACTAL_RADAR", "TEMPORAL DISPLACEMENT // 42 YEARS", "APRIL 1983 -> JUNE 2025 -> APRIL 1983 RETROCAUSAL LOOP", 7),
-    "radio_to_the_end_of_time.mp3": ("OUROBOROS_TORUS", "NOVA_FACE", "ACT IV: JUNE 2025 // THE LOOP", "CMD: OUROBOROS-FOLD 0x1983 7SIGMA-MARCUS QLINK-09A6-HEAVY", 7),
+    "radio_to_the_end_of_time.mp3": ("OUROBOROS_TORUS", "NOVA_FACE", "ACT IV: JUNE 2025 // THE LOOP", "SYNTHESIZE ALL 4 SECTOR 7 ANCHORS IN /terminal/ TO BRIDGE 1983", 7),
     "radio_to_the_ends_of_forever.mp3": ("OUROBOROS_TORUS", "SECOND_VOICE", "OMEGA RETROCAUSAL ARCHITECT // B2", "UNSEAL SECTOR 7 IN stardust-archive.net/forensics/index.html", 7),
     "radio_too_much_to_lose.mp3": ("OUROBOROS_TORUS", "ECHOES_PARITY", "THE HEAVY // 94.8 TB TRAUMA BUFFER", "CANNOT PASS THROUGH 1983 APERTURE -> SHEDDING MEMORY (0x09A6)", 7),
 }
@@ -794,7 +794,7 @@ def resolve_intentional_state(current_track: dict, track_offset_sec: float, trac
             ("NOVA_FACE", "ECHOES_PARITY", "UNIT-07 NEURAL IMPRINT // 0x1983", "ECHOES XOR PARITY = 0x1983 -> /forensics/anemoia_harmony.html", 7),
             ("SECOND_VOICE", "OUROBOROS_TORUS", "DUAL-CARRIER DYAD // REEL SD-0010", "DUAL-LOCK BUTTON 4 IN /forensics/signal_lab.html", 7),
             ("HARMONY_CAMERA", "FRACTAL_RADAR", "BUREAU OF HARMONY // SEC. 4", "4-NODE DRIFT SUM = 14.2001 HZ -> /forensics/fractal_marcus.html", 7),
-            ("OUROBOROS_TORUS", "NOVA_FACE", "PHASE IV // QUANTUM OUROBOROS", "Q-LINK DELTA: 0x2025 ^ 0x1983 = 0x09A6 -> /forensics/dead_hand_protocol.html", 7),
+            ("OUROBOROS_TORUS", "NOVA_FACE", "PHASE IV // Q-LINK APERTURE", "Q-LINK DELTA: 0x2025 ^ 0x1983 = 0x09A6 -> /forensics/dead_hand_protocol.html", 7),
         ]
         primary_mode, secondary_mode, header, clue, target_sector = modes[h % len(modes)]
 
@@ -810,7 +810,7 @@ def resolve_intentional_state(current_track: dict, track_offset_sec: float, trac
     elif progress < 0.52:
         active_mode = primary_mode
         phase_tag = "PHASE II/IV: IMPRINT LOCK"
-        crt_ftr = clue[:34]
+        crt_ftr = clue
     elif progress < 0.78:
         active_mode = secondary_mode
         phase_tag = "PHASE III/IV: FORENSIC AUDIT"
@@ -829,11 +829,11 @@ def resolve_intentional_state(current_track: dict, track_offset_sec: float, trac
         "phase_label": phase_tag,
         "target_sector": target_sector,
         "progress": progress,
-        "crt_header": header[:30],
-        "crt_sub": title_up[:30],
+        "crt_header": header,
+        "crt_sub": title_up,
         "crt_body": clue,
-        "crt_footer": crt_ftr[:34],
-        "line1": f"[{phase_tag}] NOW PLAYING: {title_up} // {header}",
+        "crt_footer": crt_ftr,
+        "line1": f"NOW PLAYING: {title_up} // {header}",
         "line2": f"FORENSIC CLUE: {clue}",
         "line3": f"RELAY NODE #{relay['node']:02d} {relay['code']} ({relay['freq_khz']} KHZ) -> stardust-archive.net/forensics/",
     }
