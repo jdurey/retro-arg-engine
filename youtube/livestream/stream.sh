@@ -24,11 +24,11 @@ export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 
 RTMP_URL="${YOUTUBE_RTMP_URL:-rtmp://a.rtmp.youtube.com/live2}"
 STREAM_KEY="${YOUTUBE_STREAM_KEY:-d579-7bua-q3b7-sjmm-973s}"
-BACKDROP="$SCRIPT_DIR/backdrop_loop_540p.mp4"
+BACKDROP="$SCRIPT_DIR/backdrop_loop.mp4"
 PLAYLIST="$SCRIPT_DIR/playlist.txt"
 LOG_FILE="$SCRIPT_DIR/stream.log"
 
-echo "[$(date '+%Y-%m-%d %H:%M:%S')] [STREAM.SH] Initializing hardened 24/7 intentional ARG broadcast loop (540p30)..." >> "$LOG_FILE"
+echo "[$(date '+%Y-%m-%d %H:%M:%S')] [STREAM.SH] Initializing hardened 24/7 intentional ARG broadcast loop (1080p30 Full HD)..." >> "$LOG_FILE"
 
 while true; do
   # 1. Rotate completed tracks to tail BEFORE truncating stream.log so the stream NEVER rewinds to Track 1
@@ -46,9 +46,9 @@ while true; do
     /usr/bin/python3 "$SCRIPT_DIR/sync_telemetry.py" --repo-root "$REPO_ROOT" >> "$LOG_FILE" 2>&1 || true
   fi
 
-  VF_FILTER="[1:a]aresample=44100:async=1,aformat=sample_fmts=fltp:sample_rates=44100:channel_layouts=stereo,alimiter=limit=0.87:level=disabled,asplit=2[a_out][a_viz];[a_viz]showwaves=s=202x108:mode=line:rate=30:colors=lime,colorkey=0x000000:0.06:0.08[waves];[0:v][waves]overlay=x=377:y=218:format=auto[v_osc];[v_osc][2:v]overlay=x=0:y=0:format=auto:eof_action=repeat,format=yuv420p[v_out]"
+  VF_FILTER="[1:a]aresample=44100:async=1,aformat=sample_fmts=fltp:sample_rates=44100:channel_layouts=stereo,alimiter=limit=0.87:level=disabled,asplit=2[a_out][a_viz];[a_viz]showwaves=s=404x216:mode=line:rate=30:colors=lime,colorkey=0x000000:0.06:0.08[waves];[0:v][waves]overlay=x=754:y=436:format=auto[v_osc];[v_osc][2:v]overlay=x=0:y=0:format=auto:eof_action=repeat,format=yuv420p[v_out]"
 
-  echo "[$(date '+%Y-%m-%d %H:%M:%S')] [STREAM.SH] Selected encoder: 540p30 Intentional ARG CRT/HUD Engine (260k video + 160k audio)" >> "$LOG_FILE"
+  echo "[$(date '+%Y-%m-%d %H:%M:%S')] [STREAM.SH] Selected encoder: 1080p30 Full HD Intentional ARG CRT/HUD Engine (2800k video + 160k audio)" >> "$LOG_FILE"
 
   /usr/bin/python3 -u "$SCRIPT_DIR/hud_pipe_feeder.py" --repo-root "$REPO_ROOT" | caffeinate -d -i -m -s -u ffmpeg \
     -hide_banner \
@@ -77,9 +77,9 @@ while true; do
     -c:v libx264 \
     -preset veryfast \
     -tune zerolatency \
-    -b:v 260k \
-    -maxrate 300k \
-    -bufsize 600k \
+    -b:v 2800k \
+    -maxrate 3200k \
+    -bufsize 6400k \
     -pix_fmt yuv420p \
     -r 30 \
     -g 60 \
