@@ -171,7 +171,7 @@ build_intercept(
 build_intercept(
     name="Paju DMZ Sub-Carrier",
     voice_configs=[
-        ("여기는 파주 제3수신소. 십사점 이 킬로헤르츠 변조 신호 확인. 발신처 미상... 패킷 스풀 번호 팔천팔백십구. 게이트웨이 접속 시도.", "Yuna"),
+        ("여기는 파주 제3수신소. 십사점 이 킬로헤르츠 변조 신호 확인. 발신처 미상... 패킷 스풀 번호 팔-팔-일-구. 게이트웨이 접속 시도.", "Yuna"),
         ("Packet spool eight-eight-one-nine synchronized. Node mirror verified at kamome dash net dot org slash archive slash paju.", "Zarvox")
     ],
     extra_audio_fn=lambda: generate_morse("PAJU 14.2", wpm=20),
@@ -203,7 +203,7 @@ build_intercept(
 build_intercept(
     name="CERN Quantum Echo",
     voice_configs=[
-        ("They are formatting the grid. I am losing the heavy. But keep the channels open. I will see you in June 2025. Archive thirty-two-eight-nine-four-two-nine. The hatch is open.", "Whisper")
+        ("They are formatting the grid. I am losing the heavy. But keep the channels open. I will see you in June twenty twenty-five. Archive three-two-eight-nine-four-two-nine. The hatch is open.", "Whisper")
     ],
     extra_audio_fn=lambda: generate_dtmf("142001", dur=0.18, pause=0.08),
     filter_complex=f"""

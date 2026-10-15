@@ -154,15 +154,23 @@ def generate_song_variations():
 # =============================================================================
 # PART 2: 60 Procedural Numbers Station & Packet Relay Intercepts
 # =============================================================================
+DIGIT_WORDS = {
+    "0": "zero", "1": "one", "2": "two", "3": "three", "4": "four",
+    "5": "five", "6": "six", "7": "seven", "8": "eight", "9": "nine",
+}
+
+def spell_digits(val) -> str:
+    return "-".join(DIGIT_WORDS[c] for c in str(val) if c in DIGIT_WORDS)
+
 CLUE_NODES = [
-    ("Akasaka Relay", "kamome-net.org/archive/akasaka", "Kyoko", "ja_JP", "Tokyo Node 01"),
-    ("Ashford Polytechnic", "stardust-archive.net/ftp/ashford-poly", "Ralph", "en_US", "Northvale Node 04"),
-    ("Soviet Relcom Node 08", "stardust-archive.net/usenet/relcom", "Milena", "ru_RU", "Moscow Node 08"),
-    ("Paju DMZ Sub-Station", "kamome-net.org/archive/paju", "Yuna", "ko_KR", "Paju Bunker Node 03"),
-    ("Area 51 Geocities Vault", "stardust-archive.net/geocities/area51-vault-7004.html", "Fred", "en_US", "Groom Lake Link"),
-    ("Coyoacan Packet Mirror", "redcoyoacan.org/spool", "Eddy (Spanish (Mexico))", "es_MX", "Coyoacan Node 07"),
-    ("Hamburg Elbe Node", "stardust-archive.net/regional/hamburg", "Anna", "de_DE", "Hamburg Node 05"),
-    ("Montreal McGill Archive", "stardust-archive.net/regional/montreal", "Amélie", "fr_CA", "Montreal Node 11"),
+    ("Akasaka Relay", "kamome-net dot org slash archive slash akasaka", "Samantha", "en_US", "Tokyo Node zero-one"),
+    ("Ashford Polytechnic", "stardust-archive dot net slash F-T-P slash ashford-poly", "Ralph", "en_US", "Northvale Node zero-four"),
+    ("Soviet Relcom Node 08", "stardust-archive dot net slash usenet slash relcom", "Daniel", "en_GB", "Moscow Node zero-eight"),
+    ("Paju DMZ Sub-Station", "kamome-net dot org slash archive slash paju", "Moira", "en_IE", "Paju Bunker Node zero-three"),
+    ("Area 51 Geocities Vault", "stardust-archive dot net slash geocities slash area-fifty-one-vault-seven-zero-zero-four dot html", "Fred", "en_US", "Groom Lake Link"),
+    ("Coyoacan Packet Mirror", "redcoyoacan dot org slash spool", "Karen", "en_AU", "Coyoacan Node zero-seven"),
+    ("Hamburg Elbe Node", "stardust-archive dot net slash regional slash hamburg", "Tessa", "en_ZA", "Hamburg Node zero-five"),
+    ("Montreal McGill Archive", "stardust-archive dot net slash regional slash montreal", "Samantha", "en_US", "Montreal Node one-one"),
 ]
 
 def generate_numbers_stations(target_count=60):
@@ -179,15 +187,17 @@ def generate_numbers_stations(target_count=60):
             
         node_name, clue_url, voice, lang, node_id = CLUE_NODES[i % len(CLUE_NODES)]
         
-        # Generate 5-figure groups
+        # Generate 5-figure groups spoken digit-by-digit
         groups = [f"{rng.integers(10000, 99999)}" for _ in range(4)]
-        groups_str = " . ".join(groups)
+        groups_str = " . ".join(spell_digits(g) for g in groups)
         
         # Phonetic letters
         phonetics = " . ".join(rng.choice(NATO, 3))
-        carrier_freq = f"14.{rng.integers(1990, 2015)}"
+        freq_dec = rng.integers(1990, 2015)
+        carrier_freq = f"fourteen point {spell_digits(freq_dec)}"
+        tx_num = spell_digits(f"{i:02d}")
         
-        text = f"Attention signal monitors. {node_id}. Transmission {i}. Frequency {carrier_freq} Hertz. Code groups: {groups_str}. Identifiers: {phonetics}. Packet archive verified at {clue_url}. Out."
+        text = f"Attention signal monitors. {node_id}. Transmission {tx_num}. Frequency {carrier_freq} Hertz. Code groups: {groups_str}. Identifiers: {phonetics}. Packet archive verified at {clue_url}. Out."
         
         # Render TTS
         with tempfile.TemporaryDirectory() as tmpdir:

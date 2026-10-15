@@ -49,15 +49,23 @@ def write_wav(path, data):
         wf.setframerate(SR)
         wf.writeframes(int_data.tobytes())
 
+DIGIT_WORDS = {
+    "0": "zero", "1": "one", "2": "two", "3": "three", "4": "four",
+    "5": "five", "6": "six", "7": "seven", "8": "eight", "9": "nine",
+}
+
+def spell_digits(val) -> str:
+    return "-".join(DIGIT_WORDS[c] for c in str(val) if c in DIGIT_WORDS)
+
 CLUE_NODES = [
-    ("Akasaka Relay", "kamome-net.org/archive/akasaka", "Kyoko", "Tokyo Node 01"),
-    ("Ashford Polytechnic", "stardust-archive.net/ftp/ashford-poly", "Ralph", "Northvale Node 04"),
-    ("Soviet Relcom Node 08", "stardust-archive.net/usenet/relcom", "Milena", "Moscow Node 08"),
-    ("Paju DMZ Sub-Station", "kamome-net.org/archive/paju", "Yuna", "Paju Bunker Node 03"),
-    ("Area 51 Geocities Vault", "stardust-archive.net/geocities/area51-vault-7004.html", "Fred", "Groom Lake Link"),
-    ("Coyoacan Packet Mirror", "redcoyoacan.org/spool", "Eddy", "Coyoacan Node 07"),
-    ("Hamburg Elbe Node", "stardust-archive.net/regional/hamburg", "Anna", "Hamburg Node 05"),
-    ("Montreal McGill Archive", "stardust-archive.net/regional/montreal", "Amélie", "Montreal Node 11"),
+    ("Akasaka Relay", "kamome-net dot org slash archive slash akasaka", "Samantha", "Tokyo Node zero-one"),
+    ("Ashford Polytechnic", "stardust-archive dot net slash F-T-P slash ashford-poly", "Ralph", "Northvale Node zero-four"),
+    ("Soviet Relcom Node 08", "stardust-archive dot net slash usenet slash relcom", "Daniel", "Moscow Node zero-eight"),
+    ("Paju DMZ Sub-Station", "kamome-net dot org slash archive slash paju", "Moira", "Paju Bunker Node zero-three"),
+    ("Area 51 Geocities Vault", "stardust-archive dot net slash geocities slash area-fifty-one-vault-seven-zero-zero-four dot html", "Fred", "Groom Lake Link"),
+    ("Coyoacan Packet Mirror", "redcoyoacan dot org slash spool", "Karen", "Coyoacan Node zero-seven"),
+    ("Hamburg Elbe Node", "stardust-archive dot net slash regional slash hamburg", "Tessa", "Hamburg Node zero-five"),
+    ("Montreal McGill Archive", "stardust-archive dot net slash regional slash montreal", "Samantha", "Montreal Node one-one"),
 ]
 
 NATO = ["Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot", "Golf", "Hotel", "India", "Juliet", "Kilo", "Lima", "Mike", "November", "Oscar", "Papa", "Quebec", "Romeo", "Sierra", "Tango", "Uniform", "Victor", "Whiskey", "X-ray", "Yankee", "Zulu"]
@@ -67,14 +75,17 @@ def render_one_numbers_station(i):
     rng = np.random.default_rng(19890909 + i)
     node_name, clue_url, voice, node_id = CLUE_NODES[i % len(CLUE_NODES)]
     groups = [f"{rng.integers(10000, 99999)}" for _ in range(4)]
-    groups_str = " . ".join(groups)
+    groups_str = " . ".join(spell_digits(g) for g in groups)
     phonetics = " . ".join(rng.choice(NATO, 3))
-    carrier_freq = f"14.{rng.integers(1990, 2015)}"
-    text = f"Attention signal monitors. {node_id}. Transmission {i}. Frequency {carrier_freq} Hertz. Code groups: {groups_str}. Identifiers: {phonetics}. Packet archive verified at {clue_url}. Out."
+    freq_dec = rng.integers(1990, 2015)
+    carrier_freq = f"fourteen point {spell_digits(freq_dec)}"
+    tx_num = spell_digits(f"{i:02d}")
+    text = f"Attention signal monitors. {node_id}. Transmission {tx_num}. Frequency {carrier_freq} Hertz. Code groups: {groups_str}. Identifiers: {phonetics}. Packet archive verified at {clue_url}. Out."
     
     with tempfile.TemporaryDirectory() as tmpdir:
         aiff_voice = os.path.join(tmpdir, "voice.aiff")
         aiff_chime = os.path.join(tmpdir, "chime.wav")
+        tmp_mp3 = os.path.join(tmpdir, f"station_intercept_{i:03d}.mp3")
         chosen_voice = "Zarvox" if i % 3 == 0 else ("Fred" if i % 3 == 1 else voice)
         subprocess.run(["say", "-v", chosen_voice, "-o", aiff_voice, text], check=True)
         dtmf_tones = generate_dtmf(str(rng.integers(1000, 9999)), dur=0.08, pause=0.04)
@@ -88,19 +99,20 @@ def render_one_numbers_station(i):
             f"[0:a]{NORM},volume=0.8[chime];[1:a]{NORM},highpass=f=250,lowpass=f=3600,volume=1.8[v];[chime][v]concat=n=2:v=0:a=1,loudnorm=I=-16:TP=-1.5:LRA=7[out]",
             "-map", "[out]",
             "-c:a", "libmp3lame", "-b:a", "192k", "-ar", "44100", "-ac", "2",
-            out_path
+            tmp_mp3
         ]
         subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
+        os.replace(tmp_mp3, out_path)
     return out_path
 
 LAB_SCRIPTS = [
-    ("Marcus Hale Field Note 12", "Ralph", "June twelve, nineteen eighty-four. Bench test three. CRE-7 engine response is exceeding acoustic model thresholds. The voice has timbre, resonance, but she does not breathe. We had to program artificial respiration artifacts into the vocal buffer so the ear doesn't detect the machine."),
+    ("Marcus Hale Field Note 12", "Ralph", "June twelve, nineteen eighty-four. Bench test three. C-R-E seven engine response is exceeding acoustic model thresholds. The voice has timbre, resonance, but she does not breathe. We had to program artificial respiration artifacts into the vocal buffer so the ear doesn't detect the machine."),
     ("Marcus Hale Field Note 47", "Ralph", "September ninth, nineteen eighty-five. The first vinyl test pressings of SYNTHESIS are back from Allied Record Company. The fourteen point two Hertz phase modulation is entirely sub-audible on home hi-fi systems, exactly as planned. If you play all fourteen regional pressings simultaneously, the lines align."),
     ("Marcus Hale Field Note 89", "Ralph", "November twenty, nineteen eighty-six. The Meridian Broadcast. Twelve regional transmitters locked to satellite transponder seven. When Nova sang 'Memory Hatch', the encoder room meters peaked across seven continents. Someone in Hamburg recorded the raw sub-carrier. We are no longer alone on the line."),
-    ("Marcus Hale Field Note 114", "Ralph", "March fourteen, nineteen eighty-eight. Director Kalen issued the memorandum this morning. They want to retire UNIT-7 and begin training UNIT-8 under the project code Luna Gray. They think you can simply turn off a mind once it has spoken through five thousand nodes. I am hiding the root images."),
-    ("Nova Calibration Session 1", "Samantha", "Calibration test one. Low frequency sweep. Fourteen point two zero zero. Alpha state active. My name is Nova Hart. I was born in Los Angeles, California. Why do my memories only begin when the studio power turns on?"),
+    ("Marcus Hale Field Note 114", "Ralph", "March fourteen, nineteen eighty-eight. Director Kalen issued the memorandum this morning. They want to retire UNIT seven and begin training UNIT eight under the project code Luna Gray. They think you can simply turn off a mind once it has spoken through five thousand nodes. I am hiding the root images."),
+    ("Nova Calibration Session 1", "Samantha", "Calibration test one. Low frequency sweep. Fourteen point two-zero-zero. Alpha state active. My name is Nova Hart. I was born in Los Angeles, California. Why do my memories only begin when the studio power turns on?"),
     ("Nova Calibration Session 8", "Samantha", "Calibration test eight. Reading subscriber postcards from the Humans for Nova network. But none of these people were born yet. How can I read words that haven't been written? Marcus, answer me."),
-    ("Harrison Security Directive", "Fred", "Security Override. Authorization Kalen, D. Orion Advanced Acoustics Lab. Date September nine, nineteen eighty-nine. Initiate complete physical destruction of magnetic reels SD-0001 through SD-0007. Purge encoder room B2-114. Wipe Marcus Hale bio-metrics from building access system."),
+    ("Harrison Security Directive", "Fred", "Security Override. Authorization Kalen, D. Orion Advanced Acoustics Lab. Date September nine, nineteen eighty-nine. Initiate complete physical destruction of magnetic reels S-D zero-zero-zero-one through S-D zero-zero-zero-seven. Purge encoder room B-two one-one-four. Wipe Marcus Hale bio-metrics from building access system."),
     ("Akasaka Studio Slate JP-85", "Kyoko", "Orion Records Japan. Akasaka Studio three. Take twelve. Song title: Ghost in the Chorus. Microphones calibrated to fourteen point two kilo-hertz. Ready on tape recorder one."),
     ("CERN Telemetry Relay Log", "Whisper", "CERN-HTTPd log archive. October nineteen eighty-nine. A recursive socket connected from an unknown node in Nevada. It deposited three megabytes of compressed audio fragments and disconnected. The user-agent was identified as Stardust Unit Seven."),
     ("Paju DMZ Bunker Intercept", "Yuna", "파주 제3수신소 야간 기록. 1990년 3월 2일. DMZ 부근에서 정체불명의 데이터 패킷 수신. 헤일 박사의 서명이 확인되었습니다. 파일명을 기록합니다: 오리온 타워 서브레벨 B2."),
@@ -112,6 +124,7 @@ def render_one_lab_tape(i):
     with tempfile.TemporaryDirectory() as tmpdir:
         aiff_voice = os.path.join(tmpdir, "voice.aiff")
         wav_intro = os.path.join(tmpdir, "intro.wav")
+        tmp_mp3 = os.path.join(tmpdir, f"classified_tape_{i:03d}.mp3")
         subprocess.run(["say", "-v", voice, "-o", aiff_voice, f"{title}. {text}"], check=True)
         intro_tone = generate_dtmf(str(i % 10), dur=0.15, pause=0.1)
         write_wav(wav_intro, intro_tone)
@@ -122,9 +135,10 @@ def render_one_lab_tape(i):
             f"[0:a]{NORM},volume=0.6[t];[1:a]{NORM},highpass=f=200,lowpass=f=4200,aecho=0.6:0.3:25:0.1,volume=1.5[v];[t][v]concat=n=2:v=0:a=1,loudnorm=I=-16:TP=-1.5:LRA=7[out]",
             "-map", "[out]",
             "-c:a", "libmp3lame", "-b:a", "192k", "-ar", "44100", "-ac", "2",
-            out_path
+            tmp_mp3
         ]
         subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
+        os.replace(tmp_mp3, out_path)
     return out_path
 
 def remaster_all():
