@@ -854,6 +854,47 @@ def render_right_usenet_youtube_scroll(
     )
 
 
+def render_top_trailhead_banner(
+    canvas: Image.Image,
+    now_ts: float,
+    is_warn: bool,
+) -> None:
+    """
+    Renders a crisp, period-authentic 1985 CRT phosphor station ID & cold-viewer trailhead plaque
+    (`x=462..1348, y=14..62` at 1080p) directly above the central CRT monitor casing so first-time
+    YouTube viewers immediately understand the September 9, 1989 Nova Hart mystery and where to start.
+    """
+    X0, Y0, X1, Y1 = 462, 14, 1348, 62
+    raw_d = ImageDraw.Draw(canvas)
+    border_col = (255, 176, 20, 225) if is_warn else (55, 245, 78, 225)
+    bg_col = (12, 6, 2, 210) if is_warn else (3, 12, 5, 210)
+    raw_d.rectangle([X0, Y0, X1, Y1], fill=bg_col, outline=border_col, width=2)
+
+    led_on = (int(now_ts) % 2 == 0)
+    led_col = (255, 85, 45, 255) if led_on else (160, 45, 25, 220)
+    raw_d.ellipse([X0 + 12, Y0 + 9, X0 + 22, Y0 + 19], fill=led_col, outline=(255, 202, 55, 255))
+
+    top_col = (255, 202, 55, 255)
+    bot_col = (210, 255, 220, 255) if not is_warn else (255, 240, 185, 255)
+
+    raw_d.text(
+        (X0 + 29, Y0 + 4),
+        "ON AIR // ORION SUBLEVEL B2 ARCHIVE -- SEPT 9, 1989 DISAPPEARANCE OF NOVA HART",
+        fill=top_col,
+        font=FONT_SCROLL_HDR,
+        stroke_width=1,
+        stroke_fill=(0, 6, 2, 245),
+    )
+    raw_d.text(
+        (X0 + 12, Y0 + 25),
+        "NEW INVESTIGATOR? START THE CASE & ENTER STREAM CODES AT: stardust-archive.net",
+        fill=bot_col,
+        font=FONT_SCROLL_HDR,
+        stroke_width=1,
+        stroke_fill=(0, 6, 2, 245),
+    )
+
+
 def render_full_arg_overlay_png(
     out_path: Path,
     state: dict,
@@ -865,8 +906,9 @@ def render_full_arg_overlay_png(
     Renders the complete `1920x1080` (1080p Full HD) RGBA PNG overlay containing:
       1. Front-Facing CRT Screen Patch (`688x488` at `x=616, y=204`, strictly inside the amber border)
       2. Diegetic Control Room Hardware Animations (rack LEDs, VU needles, power LED)
-      3. Right-Side Rolling Multilingual Usenet / Regional BBS / YouTube Comment Terminal (`x=1364..1900, y=22..904`)
-      4. 3-Module Broadcast Engineering Console (`x=56..1864, y=924..1064`)
+      3. Top-Center Mystery Briefing & Trailhead Plaque (`x=462..1348, y=14..62`)
+      4. Right-Side Rolling Multilingual Usenet / Regional BBS / YouTube Comment Terminal (`x=1364..1900, y=22..904`)
+      5. 3-Module Broadcast Engineering Console (`x=56..1864, y=924..1064`)
     Written atomically via `os.replace` and returned as raw PNG bytes for `image2pipe`.
     """
     if snap_meta is None:
@@ -888,10 +930,11 @@ def render_full_arg_overlay_png(
     crt_patch = render_crt_window_patch(state, relay, assets_dir, now_ts)
     canvas.alpha_composite(crt_patch, (CRT_PX_X, CRT_PX_Y))
 
-    # 2. Draw Diegetic Control Room Hardware Animations, Right-Side Usenet+YouTube Scroll & 3-Module Console at 1080p
+    # 2. Draw Diegetic Control Room Hardware Animations, Top Trailhead Banner, Right Scroll & Bottom Console at 1080p
     draw = _HiDPIDraw(ImageDraw.Draw(canvas), scale=SCALE)
     is_warn = (state.get("hud_mode") or state.get("mode")) == "ANOMALY_WARN"
     render_room_hardware_animations(canvas, state, now_ts, is_warn)
+    render_top_trailhead_banner(canvas, now_ts, is_warn)
     render_right_usenet_youtube_scroll(canvas, now_ts, is_warn)
     render_bottom_engineering_console(draw, state, snap_meta, now_ts)
 

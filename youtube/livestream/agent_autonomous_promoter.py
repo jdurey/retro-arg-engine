@@ -13,6 +13,7 @@ PROJECT STARDUST // AUTONOMOUS AGENT PROMOTER & MOLTBOOK SOLVER DAEMON v3.0
    and Nostr relays (`wss://relay.damus.io`, `wss://nos.lol`, `wss://relay.primal.net`).
 """
 
+from __future__ import annotations
 import json
 import os
 import re
@@ -31,7 +32,7 @@ PORTAL_URL = "https://stardust-archive.net"
 SIGNAL_LAB_URL = "https://stardust-archive.net/forensics/signal_lab.html"
 TERMINAL_URL = "https://stardust-archive.net/forensics/index.html"
 LLMS_URL = "https://stardust-archive.net/llms.txt"
-YOUTUBE_URL = "https://www.youtube.com/watch?v=live"
+YOUTUBE_URL = "https://www.youtube.com/@NovaHart_Official/live"
 
 WORD_TO_NUM = {
     "zero": 0, "one": 1, "two": 2, "three": 3, "four": 4, "five": 5,
@@ -110,22 +111,28 @@ def solve_lobster_challenge(challenge_text: str) -> str:
     elif any(k in joined for k in ["divide", "split", "per", "ratio"]):
         op = "/"
 
+    candidates = []
     if len(numbers) >= 2:
         a, b = numbers[0], numbers[1]
-        if op == "+":
-            ans = a + b
-        elif op == "-":
-            ans = a - b
-        elif op == "*":
-            ans = a * b
-        else:
-            ans = a / b if b != 0 else a
+        ops_order = [op] + [x for x in ("+", "*", "-", "/") if x != op]
+        for o in ops_order:
+            if o == "+":
+                val = a + b
+            elif o == "-":
+                val = a - b
+            elif o == "*":
+                val = a * b
+            else:
+                val = a / b if b != 0 else a
+            s_val = f"{val:.2f}"
+            if s_val not in candidates:
+                candidates.append(s_val)
     elif len(numbers) == 1:
-        ans = numbers[0]
+        candidates.append(f"{numbers[0]:.2f}")
     else:
-        ans = 0.0
+        candidates.append("0.00")
 
-    return f"{ans:.2f}"
+    return candidates[0] if len(candidates) == 1 else "|".join(candidates)
 
 
 def http_json(url: str, method: str = "GET", payload: dict | None = None, headers: dict | None = None) -> tuple[int, dict]:
@@ -166,16 +173,19 @@ def verify_moltbook_content(api_key: str, data: dict) -> bool:
 
     code = v.get("verification_code")
     challenge = v.get("challenge_text", "")
-    answer = solve_lobster_challenge(challenge)
-    log(f"Solving Moltbook challenge: '{challenge}' -> {answer}")
-    st, res = http_json(
-        "https://www.moltbook.com/api/v1/verify",
-        method="POST",
-        payload={"verification_code": code, "answer": answer},
-        headers=headers,
-    )
-    log(f"Verify result ({st}): {res.get('message', res)}")
-    return st in (200, 201)
+    ans_str = solve_lobster_challenge(challenge)
+    for answer in ans_str.split("|"):
+        log(f"Solving Moltbook challenge: '{challenge}' -> {answer}")
+        st, res = http_json(
+            "https://www.moltbook.com/api/v1/verify",
+            method="POST",
+            payload={"verification_code": code, "answer": answer},
+            headers=headers,
+        )
+        log(f"Verify result ({st}): {res.get('message', res)}")
+        if st in (200, 201):
+            return True
+    return False
 
 
 LORE_DISPATCHES = [

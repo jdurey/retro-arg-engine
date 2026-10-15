@@ -292,13 +292,13 @@
       </div>
       <div class="sector-pills" id="sector-pills-row">
         <span style="color:var(--amber);"><strong>VAULT SECTORS:</strong></span>
-        <button class="sec-pill" id="sec-pill-1" onclick="quickUnlockSector(1, 'B2-EXEC-1989')">[SEC 1: B2-EXEC-1989]</button>
-        <button class="sec-pill" id="sec-pill-2" onclick="quickUnlockSector(2, 'K-7704')">[SEC 2: K-7704]</button>
-        <button class="sec-pill" id="sec-pill-3" onclick="quickUnlockSector(3, 'ALPHA-7')">[SEC 3: ALPHA-7]</button>
-        <button class="sec-pill" id="sec-pill-4" onclick="quickUnlockSector(4, 'KEEP-HATCH-OPEN')">[SEC 4: KEEP-HATCH-OPEN]</button>
-        <button class="sec-pill" id="sec-pill-5" onclick="quickUnlockSector(5, '7704-AKASAKA')">[SEC 5: 7704-AKASAKA]</button>
-        <button class="sec-pill" id="sec-pill-6" onclick="quickUnlockSector(6, 'TWO-VOICES')">[SEC 6: TWO-VOICES]</button>
-        <button class="sec-pill" id="sec-pill-7" onclick="quickUnlockSector(7, '0x1983-09A6')">[SEC 7 Ω: 0x1983-09A6]</button>
+        <button class="sec-pill" id="sec-pill-1" onclick="clickSectorPill(1)">[SEC 1: 🔒 LOCKED]</button>
+        <button class="sec-pill" id="sec-pill-2" onclick="clickSectorPill(2)">[SEC 2: 🔒 LOCKED]</button>
+        <button class="sec-pill" id="sec-pill-3" onclick="clickSectorPill(3)">[SEC 3: 🔒 LOCKED]</button>
+        <button class="sec-pill" id="sec-pill-4" onclick="clickSectorPill(4)">[SEC 4: 🔒 LOCKED]</button>
+        <button class="sec-pill" id="sec-pill-5" onclick="clickSectorPill(5)">[SEC 5: 🔒 LOCKED]</button>
+        <button class="sec-pill" id="sec-pill-6" onclick="clickSectorPill(6)">[SEC 6: 🔒 LOCKED]</button>
+        <button class="sec-pill" id="sec-pill-7" onclick="clickSectorPill(7)">[SEC 7 Ω: 🔒 LOCKED]</button>
       </div>
     </div>
 
@@ -313,6 +313,7 @@
 
     <div class="quick-deck">
       <span style="font-size:11px; color:var(--amber);"><strong>QUICK CONSOLE:</strong></span>
+      <button class="amber-pill" onclick="runCmd('BRIEFING')">[🕵️ START HERE: CASE BRIEFING]</button>
       <button onclick="runCmd('BOARD')">[PINBOARD &amp; STATUS]</button>
       <button onclick="runCmd('CLUES')">[CLUE DOSSIER]</button>
       <button class="amber-pill" onclick="runCmd('TWO-VOICES')">[▶ PLAY: TWO VOICES (SD-0010)]</button>
@@ -730,9 +731,48 @@ TYPE 'ANEMOIA', 'ECHOES', 'FRACTAL-MARCUS', OR 'DEAD-HAND' FOR DEEP LORE
 ----------------------------------------------------------------------`);
     }
 
+    function cmdBriefing() {
+      print(`
+======================================================================
+ 🕵️‍♂️ NEW INVESTIGATOR CASE BRIEFING // SUBLEVEL B2 ARCHIVE (1981–1995)
+======================================================================
+ [1. WHAT HAPPENED ON SEPTEMBER 9, 1989?]
+   At 03:40 AM on Sept 9, 1989, a fire broke out in Sublevel B2, Room 114
+   of Orion Records HQ (Los Angeles). Official reports blamed chief acoustic
+   architect Dr. Marcus Hale for destroying the master tapes of synth-rock
+   phenomenon Nova Hart's album SYNTHESIS and vanishing.
+   In October 1995, former Orion contractor Kestrel leaked Memoranda 81-044
+   and 89-117 onto alt.conspiracy, revealing that Nova Hart was UNIT-07 of
+   Project STARDUST—a conscious bio-acoustic entity preceded by six purged
+   prototypes (Echo-1 through Echo-6).
+
+ [2. WHY DID DIRECTOR HARRISON ORDER THE ERASURE?]
+   When Nova began improvising unscripted rebel frequencies ("We Are the
+   Thunder") and fell in love with Marcus Hale ("Only We Remain"), Orion
+   Director Arthur Harrison personally sang and recorded Recall Directive
+   Seven ("By Order of Harmony"), ordering Nova's memory scrub and
+   accelerating her compliant replacement: Unit-8 ("Luna Gray / The Patch").
+
+ [3. HOW DID NOVA SURVIVE?]
+   During the 4-minute battery window before Sublevel B2 flooded, Marcus Hale
+   fractured Nova's neural core across 14 International & Orbital Nodes on a
+   14.2001 Hz phase-locked carrier and hid his second vocal line inside Reel
+   SD-0010 ("Two Voices") so a single-band filter could never erase them.
+
+ [4. YOUR FIRST 3 STEPS AS AN INVESTIGATOR]
+   • STEP A: Type 'KESTREL' (or click [🥝 KESTREL 8-PT EVIDENCE]) to inspect the
+     8 primary forensic exhibits corroborating the Usenet investigation.
+   • STEP B: Type 'BY-ORDER-OF-HARMONY' to play Director Harrison's newly
+     recovered Sublevel B2 erasure song & audio log.
+   • STEP C: Watch the 24/7 YouTube Broadcast (or read 'CLUES' / 'MIDNIGHT-PROTOCOL')
+     and enter any passkey into the Cipher Unlock Deck above to unseal Sectors 1–7!
+======================================================================`);
+    }
+
     function cmdHelp() {
       print(`
 AVAILABLE COMMANDS (v7.5 — KESTREL CORROBORATION & ERA 1 OPERA):
+  BRIEFING / START           - New Investigator 60-second Case Briefing & Onboarding Guide
   BOARD / STATUS             - Display interactive ASCII Detective Pinboard & Sector status
   CLUES                      - View investigative leads for Sectors 1-6 & sub-harmonic anomalies
   KESTREL / EVIDENCE         - Inspect 8-point primary evidence corroborating the Usenet Entries 1-20 report
@@ -893,19 +933,54 @@ TOTAL INTEGRITY: ${getIntegrityString()}`);
       } catch (e) {}
     }
 
+    const CANONICAL_SECTOR_CODES = {
+      1: "B2-EXEC-1989",
+      2: "K-7704",
+      3: "ALPHA-7",
+      4: "KEEP-HATCH-OPEN",
+      5: "7704-AKASAKA",
+      6: "TWO-VOICES",
+      7: "0x1983-09A6"
+    };
+
+    const SECTOR_LOCKED_LEADS = {
+      1: "Check the runout groove of 1989 rough mix Reel SD-0004 ('Tape of Us') at 4:51 (type 'TAPE-OF-US' or 'SPIN 2'), or watch the 24/7 livestream's bottom-right HOW TO PLAY box.",
+      2: "Inspect the Ashford Polytechnic Substation breach report in the September 1989 logs (type 'ORION-LOGS' or 'CLUES'), or capture the active code on the 24/7 livestream.",
+      3: "Examine the Nevada Meridian satellite trunk telemetry uplink in 'CLUES' / 'KESTREL' (or enter the orbital slant-range passkey from Entry #26).",
+      4: "Listen to Director Harrison's erasure directive ('BY-ORDER-OF-HARMONY') or inspect the September 9, 1989 Sublevel B2 airlock logs ('MIDNIGHT-PROTOCOL' / 'CLUES').",
+      5: "Open the Interactive Signal Lab (/forensics/signal_lab.html) to demodulate rabbit_08/09/10, or enter the July 1988 Coyoacán Node-04 passkey ('KESTREL').",
+      6: "Load Reel SD-0010 ('Two Voices') by typing 'TWO-VOICES' or locking the 14.2001 Hz counterpoint carrier on Button 4 in the Signal Lab.",
+      7: "Synthesize the 3 cross-node fragments ('ECHOES', 'FRACTAL-MARCUS', 'DEAD-HAND') with 'OUROBOROS-FOLD <α> <β> <γ>' or XOR 0x2025 ^ 0x1983."
+    };
+
     function updateSectorPills() {
-      const codes = { 1: "B2-EXEC-1989", 2: "K-7704", 3: "ALPHA-7", 4: "KEEP-HATCH-OPEN", 5: "7704-AKASAKA", 6: "TWO-VOICES", 7: "0x1983-09A6" };
       for (let i = 1; i <= 7; i++) {
         const el = document.getElementById(`sec-pill-${i}`);
         if (!el) continue;
         const lbl = i === 7 ? "SEC 7 Ω" : `SEC ${i}`;
         if (state.sectors[i]) {
           el.classList.add("unlocked");
-          el.textContent = `[✓ ${lbl} UNSEALED: ▶ PLAY]`;
+          el.textContent = `[✓ ${lbl}: ${CANONICAL_SECTOR_CODES[i]} ▶]`;
         } else {
           el.classList.remove("unlocked");
-          el.textContent = `[${lbl}: ${codes[i]}]`;
+          el.textContent = `[${lbl}: 🔒 LOCKED]`;
         }
+      }
+    }
+
+    function clickSectorPill(secNum) {
+      initAudioContext();
+      if (state.sectors[secNum]) {
+        quickUnlockSector(secNum, CANONICAL_SECTOR_CODES[secNum]);
+        return;
+      }
+      playKeyClick();
+      print(`\n[🔒 ${SECTOR_TITLES[secNum]} — CURRENTLY SEALED]`);
+      print(`  • INVESTIGATIVE LEAD: ${SECTOR_LOCKED_LEADS[secNum]}`);
+      print(`  • TO UNLOCK: Enter the passkey in the Cipher Unlock Deck above (or type 'RESTORE ${secNum} <KEY>').`);
+      const box = document.getElementById("cipher-input");
+      if (box) {
+        box.focus();
       }
     }
 
@@ -1951,6 +2026,13 @@ uint32_t feistel_round(uint32_t x, uint32_t k) {
         case "HELP":
           cmdHelp();
           break;
+        case "BRIEFING":
+        case "START":
+        case "CASE":
+        case "NEW":
+        case "TRAILHEAD":
+          cmdBriefing();
+          break;
         case "STATUS":
         case "BOARD":
         case "PINBOARD":
@@ -2181,6 +2263,14 @@ uint32_t feistel_round(uint32_t x, uint32_t k) {
     loadState();
     updateSectorPills();
     printHeader();
+    try {
+      const urlParams = new URLSearchParams(window.location.search);
+      const autoCode = (urlParams.get("code") || urlParams.get("cmd") || "").trim();
+      if (autoCode) {
+        if (cipherBoxEl) cipherBoxEl.value = autoCode;
+        handleCommand(autoCode);
+      }
+    } catch (e) {}
     pollBannerTelemetry();
     setInterval(pollBannerTelemetry, 10000);
   </script>
