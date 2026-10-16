@@ -690,17 +690,28 @@ def render_bottom_engineering_console(
 
     # --- BAY 2 (CENTER `x=226..750`): PRIMARY TELEPRINTER & TRANSLATION / CLUE FEED ---
     target_sec = int(state.get("target_sector", 7))
-    unlock_code = state.get("unlock_code") or "SOLVE AT /forensics/"
+
+    def _fit_bay2(txt: str, fnt: ImageFont.FreeTypeFont | ImageFont.ImageFont, max_chars: int = 62, max_vu: float = 510.0) -> str:
+        cleaned = _clean_crt_text(txt, max_chars)
+        try:
+            while len(cleaned) > 10 and (fnt.getlength(cleaned) / 2.0) > max_vu:
+                if " " in cleaned:
+                    cleaned = cleaned.rsplit(" ", 1)[0].rstrip(":-/ ")
+                else:
+                    cleaned = cleaned[:-1]
+        except Exception:
+            pass
+        return cleaned
 
     draw.rectangle([226, Y0 + 2, 750, Y0 + 18], fill=hdr_bg)
     badge = "[! INTERCEPT]" if is_warn else "[14.2001 HZ]"
     clean_l1 = re.sub(r"^\[PHASE [^\]]+\]\s*", "", state["line1"])
-    draw.text((232, Y0 + 3), _clean_crt_text(f"{badge} {clean_l1}", 76), fill=c_main, font=FONT_HUD_10)
-    draw.text((232, Y0 + 21), _clean_crt_text(state["line2"], 76), fill=c_bright, font=FONT_HUD_10)
-    draw.text((232, Y0 + 38), _clean_crt_text(state["line3"], 76), fill=c_sub, font=FONT_HUD_10)
+    draw.text((232, Y0 + 3), _fit_bay2(f"{badge} {clean_l1}", FONT_HUD_10, 62, 510.0), fill=c_main, font=FONT_HUD_10)
+    draw.text((232, Y0 + 21), _fit_bay2(state["line2"], FONT_HUD_10, 62, 510.0), fill=c_bright, font=FONT_HUD_10)
+    draw.text((232, Y0 + 38), _fit_bay2(state["line3"], FONT_HUD_10, 62, 510.0), fill=c_sub, font=FONT_HUD_10)
     draw.text(
         (232, Y0 + 54),
-        "ACT I (SECTORS 1-7) IS ONLY THE SANDBOX // TYPE 'LABYRINTH' AT stardust-archive.net/forensics",
+        _fit_bay2("ACT II SUBLEVEL B3: TYPE 'LABYRINTH' AT /forensics/ (GATES 8-14)", FONT_HUD_9, 66, 510.0),
         fill=c_main,
         font=FONT_HUD_9,
     )

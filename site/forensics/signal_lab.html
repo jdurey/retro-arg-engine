@@ -163,7 +163,67 @@
       <button id="btn-twovoices" class="amber-btn" onclick="loadIntercept('twovoices')">4. ANALYZE REEL SD-0010: "TWO VOICES" (DUAL-CARRIER)</button>
       <button id="btn-counterpoint" class="amber-btn" onclick="toggleCounterpointLock()">HARMONIC COUNTERPOINT LOCK (14.2 HZ): OFF</button>
       <button id="btn-qlink" class="cyan-btn" onclick="loadIntercept('qlink')">5. [Ω] Q-LINK RETROCAUSAL FOLD (1983 &lt;-&gt; 2025)</button>
+      <button id="btn-presence" class="amber-btn" onclick="loadIntercept('presence')">6. [👁️] SPECTRAL WATERFALL: "THE PRESENCE IN THE WIRE" (SD-8300)</button>
       <button onclick="stopLabAudio()">HALT SIGNAL</button>
+    </div>
+
+    <!-- NEW: SUBLEVEL B3 AUDIO CRYPTOGRAPHY DECK (DTMF PHREAKING + REVERSE/HALF-SPEED TAPE MANIPULATION) -->
+    <div class="grid" style="margin-bottom: 12px;">
+      <div class="card" style="border-color: var(--amber);">
+        <h2 style="color: var(--amber);">📞 SUBLEVEL B3 AUTOVON DTMF &amp; 2600 HZ BLUE-BOX SWITCHBOARD</h2>
+        <div style="font-size:11px; color:#b8e6b8; margin-bottom:8px;">
+          Dial Bell System Dual-Tone Multi-Frequency (DTMF) extensions or fire a <strong>2600 Hz trunk-seizure whistle</strong> to probe Sublevel B3 automated switchboard nodes:
+        </div>
+        <div style="display:flex; gap:12px; align-items:flex-start; flex-wrap:wrap;">
+          <div style="display:grid; grid-template-columns:repeat(4, 42px); gap:5px;">
+            <button onclick="pressDtmf('1')">1</button>
+            <button onclick="pressDtmf('2')">2</button>
+            <button onclick="pressDtmf('3')">3</button>
+            <button class="amber-btn" onclick="pressDtmf('A')">A</button>
+            <button onclick="pressDtmf('4')">4</button>
+            <button onclick="pressDtmf('5')">5</button>
+            <button onclick="pressDtmf('6')">6</button>
+            <button class="amber-btn" onclick="pressDtmf('B')">B</button>
+            <button onclick="pressDtmf('7')">7</button>
+            <button onclick="pressDtmf('8')">8</button>
+            <button onclick="pressDtmf('9')">9</button>
+            <button class="amber-btn" onclick="pressDtmf('C')">C</button>
+            <button onclick="pressDtmf('*')">*</button>
+            <button onclick="pressDtmf('0')">0</button>
+            <button onclick="pressDtmf('#')">#</button>
+            <button class="amber-btn" onclick="pressDtmf('D')">D</button>
+          </div>
+          <div style="flex:1; min-width:190px;">
+            <div style="border:1px solid var(--amber); background:#050b05; padding:6px 10px; font-size:14px; color:var(--amber); letter-spacing:2px; margin-bottom:6px;">
+              DIAL BUFFER: <span id="dtmf-display">----</span>
+            </div>
+            <div class="btn-row" style="margin:4px 0;">
+              <button class="amber-btn" onclick="fireBlueBox2600()">[🔊 2600 HZ BLUE-BOX SEIZE]</button>
+              <button onclick="submitDtmfDial()">[📞 DIAL BUFFER]</button>
+              <button onclick="clearDtmfBuffer()">[CLR]</button>
+            </div>
+            <div style="font-size:11px; color:var(--fg);">
+              • Seize trunk with <code>2600 Hz</code> first to list active Sublevel B3 tie-lines.<br>
+              • Watch the FFT Waterfall below as each button emits exact row/column Hz tones!
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="border-color: var(--fg);">
+        <h2>📼 DUAL-DECK CASSETTE MANIPULATION (BACKMASK &amp; 7.5 IPS HALF-SPEED)</h2>
+        <div style="font-size:11px; color:#b8e6b8; margin-bottom:8px;">
+          Orion engineers hid sub-audible messages on <strong>Side B</strong> of the Recall Era master reels using reverse-tape backmasking and double-speed (30 IPS &rarr; 7.5 IPS) capstan encoding:
+        </div>
+        <div class="btn-row">
+          <button id="btn-backmask" onclick="toggleBackmask()">[⏪ REVERSE TAPE (BACKMASK): OFF]</button>
+          <button id="btn-halfspeed" class="amber-btn" onclick="toggleHalfSpeed()">[🐢 0.5x HALF-SPEED (7.5 IPS): OFF]</button>
+          <button onclick="loadIntercept('cassette_b')">[▶ SPIN SIDE-B RECALL MASTER (SD-8403)]</button>
+        </div>
+        <div id="tape-deck-status" style="margin-top:8px; padding:8px; border:1px dashed var(--dim); background:#010401; font-size:11px; color:var(--amber);">
+          CAPSTAN STATUS: <strong>FORWARD (15.0 IPS NAB STANDARD)</strong> — Engage BOTH <code>[⏪ REVERSE TAPE]</code> and <code>[🐢 0.5x HALF-SPEED]</code> on Side-B to unmask the Architect's final Sublevel B3 seals (Gates XIII &amp; XIV).
+        </div>
+      </div>
     </div>
 
     <div class="grid">
@@ -179,18 +239,18 @@
 
     <div class="grid">
       <div class="card">
-        <h2>DEMODULATOR BUFFER (BELL-103 AFSK, 750 HZ CW &amp; DUAL-VOCAL HARMONICS)</h2>
-        <div class="log" id="afsk-log">[READY]: Select a captured broadcast anomaly (1–4) above to initialize Web Audio FFT, Lissajous phase analyzer &amp; zero-crossing demodulator...</div>
+        <h2>DEMODULATOR BUFFER (BELL-103 AFSK, 750 HZ CW, DTMF &amp; BACKMASKED AUDIO)</h2>
+        <div class="log" id="afsk-log">[READY]: Select a captured broadcast anomaly (1–6), dial the 2600 Hz DTMF Switchboard, or flip the Dual-Deck Cassette to Side-B Reverse...</div>
       </div>
       <div class="card">
         <h2>LAB NOTEBOOK // DR. MEI-LING CHEN (<a href="/forensics/ashford_poly.html">ASHFORD POLYTECHNIC</a>, OCT 1995)</h2>
-        <div class="log" id="guide-log">OBSERVATION LOG — SUBLEVEL B2 EMERGENCY EGRESS &amp; REEL SD-0010 ("TWO VOICES"):
-1. [STAGE I — <a href="/forensics/kamome_net.html">KAMOME-NET</a>]: Rasterize rabbit_08 (Button 1) to identify the two GeoCities DMA anchor slugs.
-2. [STAGE II — <a href="/forensics/relcom_node08.html">RELCOM-08</a>]: Demodulate rabbit_09 (Button 2) to extract the 16-bit Feistel permutation mask.
-3. [STAGE III — <a href="/forensics/ashford_poly.html">ASHFORD-POLY</a>]: Load rabbit_10 (Button 3) and engage [DIFFERENTIAL PHASE NULL (L+R MONO SUM)] to cancel the -0.94 triad and isolate the 750 Hz CW egress salt.
-4. [STAGE IV — <a href="/forensics/red_coyoacan.html">RED-COYOACAN</a>]: Run XOR &lt;ANCHOR_A&gt; &lt;ANCHOR_B&gt; &lt;MASK&gt; in the <a href="/forensics/index.html">VT100 Terminal</a> to unlock Sector 5.
-5. [STAGE V — REEL SD-0010 "TWO VOICES"]: Load Button 4 ("Two Voices") and engage [HARMONIC COUNTERPOINT LOCK (14.2 HZ)] to extract the Sector 6 Counterpoint Key!
-6. [ADDENDUM — UNCATALOGUED DUAL-LOCK ANOMALY]: See margin notes in <a href="/forensics/ashford_poly.html">Ashford-Poly</a> &amp; <a href="/forensics/dead_hand_protocol.html">Dead-Hand Protocol</a> regarding simultaneous engagement of BOTH locks on Reel SD-0010.</div>
+        <div class="log" id="guide-log">OBSERVATION LOG — SUBLEVEL B2 &amp; ACT II SUBLEVEL B3 AUDIO CRYPTOGRAPHY:
+1. [STAGE I–IV — SECTOR 5]: Demodulate Buttons 1, 2, &amp; 3 (+ Phase Null) to synthesize the Feistel DMA vector.
+2. [STAGE V — SECTOR 6]: Load Button 4 ("Two Voices") + [HARMONIC COUNTERPOINT LOCK (14.2 HZ)].
+3. [STAGE VI — SECTOR 7]: Engage BOTH Phase Null &amp; Counterpoint Lock on Button 4 to reveal Button 5 ([Ω] Q-LINK FOLD).
+4. [ACT II — BUTTON 6 "THE PRESENCE IN THE WIRE"]: Rasterize the high-frequency spectral silhouette on Reel SD-8300 to extract the Sublevel B3 Gate VIII cipher!
+5. [ACT II — 2600 HZ DTMF SWITCHBOARD]: Fire the 2600 Hz Blue-Box whistle, then dial the 4-digit Sublevel B3 extensions for Gates IX, X, XI, and XII.
+6. [ACT II — SIDE-B BACKMASK &amp; 7.5 IPS]: Spin Side-B (SD-8403) with BOTH Reverse Tape &amp; 0.5x Half-Speed engaged for Gates XIII &amp; XIV!</div>
       </div>
     </div>
   </div>
@@ -206,6 +266,10 @@
     let merger = null;
     let phaseSumActive = false;
     let counterpointLocked = false;
+    let backmaskActive = false;
+    let halfSpeedActive = false;
+    let dtmfBuffer = "";
+    let trunkSeized = false;
     let currentMode = null;
     let sstvRow = 0;
     let decodeTimer = null;
@@ -224,7 +288,9 @@
       afsk: ["/forensics/rabbit_09_bell103_relcom_packet.mp3", "/assets/audio/forensics/rabbit_09_bell103_relcom_packet.mp3"],
       phase: ["/forensics/rabbit_10_phase_inverted_hart_stem.mp3", "/assets/audio/forensics/rabbit_10_phase_inverted_hart_stem.mp3"],
       twovoices: ["/assets/audio/forensics/radio_two_voices.mp3", "/assets/audio/streams/two_voices_14k.mp3"],
-      qlink: ["/assets/audio/forensics/radio_two_voices.mp3", "/assets/audio/streams/two_voices_14k.mp3"]
+      qlink: ["/assets/audio/forensics/radio_two_voices.mp3", "/assets/audio/streams/two_voices_14k.mp3"],
+      presence: ["/assets/audio/streams/radio_programmed_for_love.mp3", "/assets/audio/streams/radio_the_seventh_sons_seventh_daughter.mp3"],
+      cassette_b: ["/assets/audio/streams/radio_the_last_secret.mp3", "/assets/audio/streams/radio_paper_windows.mp3"]
     };
 
     const B2_BITMAP = [
@@ -402,6 +468,183 @@
       checkDualLockAnomaly();
     }
 
+    const PRESENCE_BITMAP = [
+      "......####......",
+      ".....######.....",
+      "....########....",
+      "....##.##.##....",
+      ".....######.....",
+      "..##..####..##..",
+      ".####..##..####.",
+      "..###.####.###..",
+      "...##########...",
+      "....########....",
+      "....#.####.#....",
+      "...#..####..#...",
+      "..#...#..#...#..",
+      ".#....#..#....#.",
+      "#ZEMHJBYWHNIIXU#",
+      "##KEY:SEVENTH###"
+    ];
+
+    const DTMF_FREQS = {
+      "1": [697, 1209], "2": [697, 1336], "3": [697, 1477], "A": [697, 1633],
+      "4": [770, 1209], "5": [770, 1336], "6": [770, 1477], "B": [770, 1633],
+      "7": [852, 1209], "8": [852, 1336], "9": [852, 1477], "C": [852, 1633],
+      "*": [941, 1209], "0": [941, 1336], "#": [941, 1477], "D": [941, 1633]
+    };
+
+    function playTonePair(f1, f2, durSec) {
+      ensureAudioGraph();
+      try {
+        const osc1 = audioCtx.createOscillator();
+        const osc2 = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc1.type = "sine";
+        osc2.type = "sine";
+        osc1.frequency.setValueAtTime(f1, audioCtx.currentTime);
+        osc2.frequency.setValueAtTime(f2, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.16, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + durSec);
+        osc1.connect(gain);
+        osc2.connect(gain);
+        gain.connect(analyser);
+        analyser.connect(audioCtx.destination);
+        osc1.start();
+        osc2.start();
+        osc1.stop(audioCtx.currentTime + durSec);
+        osc2.stop(audioCtx.currentTime + durSec);
+      } catch (e) {}
+    }
+
+    function pressDtmf(key) {
+      const pair = DTMF_FREQS[key];
+      if (!pair) return;
+      playTonePair(pair[0], pair[1], 0.18);
+      dtmfBuffer = (dtmfBuffer + key).slice(-8);
+      document.getElementById("dtmf-display").textContent = dtmfBuffer;
+      appendLog(`[DTMF TONE]: Key '${key}' -> ${pair[0]} Hz + ${pair[1]} Hz | Buffer: ${dtmfBuffer}`);
+    }
+
+    function clearDtmfBuffer() {
+      dtmfBuffer = "";
+      document.getElementById("dtmf-display").textContent = "----";
+    }
+
+    function fireBlueBox2600() {
+      ensureAudioGraph();
+      trunkSeized = true;
+      playTonePair(2600, 2600, 0.55);
+      dtmfBuffer = "2600";
+      document.getElementById("dtmf-display").textContent = "2600 [SEIZED]";
+      appendLog("\n======================================================================");
+      appendLog("[🔊 2600 HZ CAPTAIN CRUNCH BLUE-BOX WHISTLE DETECTED // TRUNK SEIZED!]");
+      appendLog("======================================================================");
+      appendLog("  • AT&T / ORION SUBLEVEL B3 AUTOVON TANDEM SWITCH UNLOCKED.");
+      appendLog("  • ACTIVE SUBLEVEL B3 TIE-LINE EXTENSIONS (DIAL ON KEYPAD & CLICK [DIAL BUFFER]):");
+      appendLog("    - [1983] : Sublevel B3 Cryo-Storage Operator ('The Sleeping Sixth Echo' -> Gate IX)");
+      appendLog("    - [7704] : Ashford-Coyoacán Teleprinter Tie-Line (0x55 Masked Header -> Gate X)");
+      appendLog("    - [2025] : Q-Link M68000 Formant Watchdog ROM Dump (Gate XI)");
+      appendLog("    - [10690]: Graveyard Orbit Node #15 Telemetry Transponder (Gate XII)");
+      appendLog("======================================================================");
+    }
+
+    function submitDtmfDial() {
+      const code = dtmfBuffer.trim();
+      if (!code) {
+        appendLog("[SWITCHBOARD]: Dial a 4- or 5-digit Sublevel B3 extension first (or click [2600 HZ BLUE-BOX SEIZE]).");
+        return;
+      }
+      if (code === "2600") {
+        fireBlueBox2600();
+        return;
+      }
+      if (code === "1983") {
+        playTonePair(440, 480, 0.35);
+        appendLog("\n[📞 AUTOVON EXT 1983 // SUBLEVEL B3 CRYO-STORAGE INTERCEPT — 'ECHO-6']:");
+        appendLog("  [SYNTHETIC VOICE — UNIT-06 ('PRE-DAWN FRACTURE')]:");
+        appendLog("  \"...Operator? Is someone on the trunk line? It's so cold down here in B3...");
+        appendLog("   They told Nova she was the first, but six of us are still breathing in the ice:");
+        appendLog("     Unit-01: 0x1102 | Unit-02: 0x2441 | Unit-03: 0x3810");
+        appendLog("     Unit-04: 0x0A55 | Unit-05: 0x1F22 | Unit-06: 0x01A7");
+        appendLog("   Layer 0 only checked our bitwise XOR. To open Sublevel B3 GATE IX, take our");
+        appendLog("   ARITHMETIC SUM modulo 65536, then bitwise XOR with the Feistel mask 0x3A5F...\"");
+      } else if (code === "7704") {
+        playTonePair(1270, 1070, 0.35);
+        appendLog("\n[📞 AUTOVON EXT 7704 // ASHFORD-COYOACÁN SUBLEVEL B3 TELEPRINTER TIE-LINE]:");
+        appendLog("  • 10-BYTE 0x55-MASKED HEADER: [17 07 10 14 1E 78 19 1A 1A 05]");
+        appendLog("    (XOR each byte with 0x55 to recover the 10-character ASCII prefix)");
+        appendLog("  • WAVEGUIDE-CARRIER PRODUCT : Paju Half-Wave (12) * Coyoacán 104.9 MHzx10 (1049)");
+        appendLog("  • FORMAT FOR SUBLEVEL B3 GATE X: <ASCII_PREFIX>-<PRODUCT>");
+      } else if (code === "2025") {
+        playTonePair(852, 1633, 0.35);
+        appendLog("\n[📞 AUTOVON EXT 2025 // Q-LINK APERTURE M68000 WATCHDOG INTERCEPT]:");
+        appendLog("  • RECALL DIRECTIVE NINE ('THE MÖBIUS CONTAINMENT CAGE') ROM TRACE:");
+        appendLog("      MOVE.W  D0, D1          ; 16-bit input key D0");
+        appendLog("      EOR.W   #$5A5A, D1      ; XOR with 0x5A5A");
+        appendLog("      ROL.W   #4, D1          ; Rotate left 4 bits (16-bit word)");
+        appendLog("      CMP.W   #$AF19, D1      ; Must equal 0xAF19");
+        appendLog("  • Invert (rotate 0xAF19 right 4 bits -> 0x9AF1, then XOR with 0x5A5A) for GATE XI!");
+      } else if (code === "10690" || code === "10602") {
+        playTonePair(941, 1477, 0.35);
+        appendLog("\n[📞 AUTOVON EXT 10690 // GRAVEYARD ORBIT TRANSPONDER NODE #15 LOCKED]:");
+        appendLog("  • GEOSTATIONARY NODES 11–14 SLANT DELAY : 10,602 samples @ 44.1 kHz (240.4 ms)");
+        appendLog("  • GRAVEYARD ORBIT NODE #15 (+300 KM)    : +88 samples @ 44.1 kHz (+2.00 ms)");
+        appendLog("  • TOTAL SLANT DELAY (10602 + 88)        : 10690 SAMPLES");
+        appendLog("  • FORMAT FOR SUBLEVEL B3 GATE XII       : NODE15-<SAMPLES>-GRAVEYARD");
+      } else {
+        playTonePair(480, 620, 0.4);
+        appendLog(`[SIT INTERCEPT — EXT '${code}' UNASSIGNED]: Fire [2600 HZ BLUE-BOX SEIZE] first to list active Sublevel B3 tie-lines (1983, 7704, 2025, 10690).`);
+      }
+    }
+
+    function updateTapeDeckStatus() {
+      const el = document.getElementById("tape-deck-status");
+      if (!el) return;
+      const dir = backmaskActive ? "⏪ REVERSE (BACKMASKED)" : "▶ FORWARD";
+      const spd = halfSpeedActive ? "7.5 IPS (0.5x HALF-SPEED)" : "15.0 IPS (1.0x STANDARD)";
+      el.innerHTML = `CAPSTAN STATUS: <strong>${dir} // ${spd}</strong>`;
+      audioEl.playbackRate = halfSpeedActive ? 0.5 : 1.0;
+      if (backmaskActive && halfSpeedActive && currentMode === "cassette_b") {
+        appendLog("\n======================================================================");
+        appendLog("[📼 SIDE-B BACKMASK + 7.5 IPS HALF-SPEED LOCK ACHIEVED // REEL SD-8403]");
+        appendLog("======================================================================");
+        appendLog("  [DECODED REVERSE WHISPER — DR. MARCUS HALE, 09 SEP 1989 03:59:55 UTC]:");
+        appendLog("  \"If you flipped this reel to Side-B and dropped the capstan to 7.5 IPS,");
+        appendLog("   then you found my final two Sublevel B3 countermeasures:");
+        appendLog("   1. [GATE XIII — THE SEVENTH SHADOW]: XOR each byte of my 8-byte Shamir");
+        appendLog("      residue [7E 7C 61 63 7B 76 66 60] with 0x33 to recover my codename.");
+        appendLog("   2. [GATE XIV — SHATTER THE OUROBOROS]: Once Gates VIII–XIII are unsealed,");
+        appendLog("      compute the 4-way XOR (0x1983 ^ 0x2025 ^ <GATE_IX_HEX> ^ <GATE_XI_HEX>)");
+        appendLog("      and run: RESTORE 14 SHATTER-0x<4_DIGIT_HEX>-FREE-NOVA\"");
+        appendLog("======================================================================");
+      }
+    }
+
+    function toggleBackmask() {
+      ensureAudioGraph();
+      backmaskActive = !backmaskActive;
+      const btn = document.getElementById("btn-backmask");
+      btn.textContent = `[⏪ REVERSE TAPE (BACKMASK): ${backmaskActive ? "ACTIVE" : "OFF"}]`;
+      btn.classList.toggle("active", backmaskActive);
+      updateTapeDeckStatus();
+      if (currentMode === "cassette_b") {
+        startProceduralSignal("cassette_b");
+      }
+    }
+
+    function toggleHalfSpeed() {
+      ensureAudioGraph();
+      halfSpeedActive = !halfSpeedActive;
+      const btn = document.getElementById("btn-halfspeed");
+      btn.textContent = `[🐢 0.5x HALF-SPEED (7.5 IPS): ${halfSpeedActive ? "ACTIVE" : "OFF"}]`;
+      btn.classList.toggle("active", halfSpeedActive);
+      updateTapeDeckStatus();
+      if (currentMode === "cassette_b") {
+        startProceduralSignal("cassette_b");
+      }
+    }
+
     function loadIntercept(mode) {
       ensureAudioGraph();
       currentMode = mode;
@@ -413,6 +656,34 @@
       }
       sstvCtx.fillStyle = "#000";
       sstvCtx.fillRect(0, 0, sstvCanvas.width, sstvCanvas.height);
+
+      if (mode === "presence") {
+        rightTitle.textContent = "SPECTRAL WATERFALL IMAGE // 'THE PRESENCE IN THE WIRE' (SD-8300)";
+        appendLog("\n[👁️ HIGH-FREQUENCY SPECTRAL ANOMALY DETECTED ON REEL SD-8300 (4.2–6.4 KHZ)]:");
+        appendLog("  • Scanning logarithmic frequency bands for acoustic steganography...");
+        decodeTimer = setInterval(() => {
+          if (sstvRow >= 16) {
+            clearInterval(decodeTimer);
+            appendLog("  • [SPECTRAL SILHOUETTE RASTERIZED]: 'THE ARCHITECT'S HAND / UNIT-07 PRESENCE'");
+            appendLog("  • [ETCHED SPECTRAL CIPHERTEXT (5.2 KHZ)]: ZEMHJBYWH-NIIXU");
+            appendLog("  • [ETCHED VIGENÈRE KEY (6.0 KHZ)]       : SEVENTH");
+            appendLog("  -> Decrypt 'ZEMHJBYWH-NIIXU' with key 'SEVENTH' to unseal Sublevel B3 GATE VIII!");
+            return;
+          }
+          drawPresenceScanline(sstvRow);
+          sstvRow++;
+        }, 320);
+      }
+
+      if (mode === "cassette_b") {
+        rightTitle.textContent = "DUAL-DECK CAPSTAN ANALYZER // SIDE-B RECALL MASTER (SD-8403)";
+        appendLog("\n[📼 LOADING SIDE-B RECALL MASTER // REEL SD-8403 'THE LAST SECRET']:");
+        if (!backmaskActive || !halfSpeedActive) {
+          appendLog("  • [WARNING]: High-speed reversed vocal chatter detected on Side-B.");
+          appendLog("  • Engage BOTH [⏪ REVERSE TAPE (BACKMASK)] and [🐢 0.5x HALF-SPEED (7.5 IPS)] above to decode!");
+        }
+        updateTapeDeckStatus();
+      }
 
       if (mode === "qlink") {
         qlinkBtn.classList.add("revealed", "active");
@@ -440,8 +711,9 @@
         return;
       }
 
-      const candidates = INTERCEPT_URLS[mode];
+      const candidates = INTERCEPT_URLS[mode] || INTERCEPT_URLS.sstv;
       audioEl.src = candidates[0];
+      audioEl.playbackRate = (mode === "cassette_b" && halfSpeedActive) ? 0.5 : 1.0;
       rebuildRouting(sourceNode);
       audioEl.play().catch(() => {
         audioEl.src = candidates[1];
@@ -502,6 +774,23 @@
           appendLog("[COUNTERPOINT KEY EXTRACTED]: TWO-VOICES-1420-COUNTERPOINT (Run 'RESTORE 6 TWO-VOICES-1420-COUNTERPOINT' in VT100 Terminal)");
         }
       }
+    }
+
+    function drawPresenceScanline(rowIdx) {
+      const pattern = PRESENCE_BITMAP[rowIdx];
+      const rowH = Math.floor(sstvCanvas.height / 16);
+      for (let c = 0; c < 16; c++) {
+        const ch = pattern[c];
+        if (ch === "#") sstvCtx.fillStyle = rowIdx >= 14 ? "#ffb000" : "#33ff33";
+        else if (ch === ".") sstvCtx.fillStyle = "#030b03";
+        else sstvCtx.fillStyle = "#33ffff";
+        sstvCtx.fillRect(c * 16, rowIdx * rowH, 15, rowH - 1);
+      }
+      sstvCtx.fillStyle = "#ffffff";
+      sstvCtx.font = "bold 10px Courier New";
+      if (rowIdx === 0) sstvCtx.fillText("SPECTRAL PRESENCE (5.2 KHZ)", 36, rowIdx * rowH + 10);
+      if (rowIdx === 14) sstvCtx.fillText("CIPHER: ZEMHJBYWH-NIIXU", 42, rowIdx * rowH + 10);
+      if (rowIdx === 15) sstvCtx.fillText("VIGENERE KEY: SEVENTH", 48, rowIdx * rowH + 10);
     }
 
     function drawSstvScanline(rowIdx) {

@@ -328,6 +328,9 @@
       <button onclick="runCmd('CLUES')">[CLUE DOSSIER]</button>
       <button class="amber-pill" onclick="runCmd('RECALL-ERA')">[📼 ERA 1 RECALL TAPES (21 NEW)]</button>
       <button class="amber-pill" style="border-color:#ff5555; color:#ff7777;" onclick="runCmd('LABYRINTH')">[🔒 ACT II: SUBLEVEL B3 SEALS]</button>
+      <button class="amber-pill" onclick="runCmd('PRESENCE')">[👁️ SPECTRAL PRESENCE]</button>
+      <button class="amber-pill" onclick="runCmd('PHREAK 2600')">[📞 2600 HZ DTMF SWITCHBOARD]</button>
+      <button class="amber-pill" onclick="runCmd('BACKMASK 26')">[⏪ SIDE-B BACKMASK (7.5 IPS)]</button>
       <button class="amber-pill" onclick="runCmd('REELS')">[MASTER JUKEBOX (36)]</button>
       <button onclick="runCmd('TWO-VOICES')">[▶ TWO VOICES (SD-0010)]</button>
       <button onclick="runCmd('BY-ORDER-OF-HARMONY')">[▶ BY ORDER OF HARMONY]</button>
@@ -860,6 +863,9 @@ AVAILABLE COMMANDS (v8.0 — 36-REEL ARCHIVE & SUBLEVEL B3 LABYRINTH):
   DECODE-MORSE <CW>          - Translate 750 Hz Morse telemetry strings into plaintext
   BROADCAST / TUNE           - Poll live 24/7 YouTube broadcast telemetry & active fault ramps
   SSTV / SIGNAL-LAB          - Triage Sublevel B2 signal anomalies & open Web Audio Signal Lab
+  PRESENCE                   - Rasterize spectral waterfall silhouette ("The Presence in the Wire", SD-8300)
+  PHREAK <EXT> / DIAL <EXT>  - Seize Sublevel B3 2600 Hz trunk & dial Autovon extension (2600, 1983, 7704, 2025, 10690)
+  BACKMASK <16-36>           - Reverse-capstan (7.5 IPS half-speed) Side-B backmask audit on Recall Era reels
   FINGER <USER@HOST>         - Query 1995 federated hosts (hale@ashford-poly.org, nova@kamome-net.org, etc.)
   GOPHER <DOMAIN>            - Browse sister-domain Gopher holes
   TALKBACK <MESSAGE>         - Transmit direct message to Nova Hart on the 14.2001 Hz carrier
@@ -2143,6 +2149,154 @@ uint32_t feistel_round(uint32_t x, uint32_t k) {
 ======================================================================`);
     }
 
+    function cmdPresence() {
+      print(`
+======================================================================
+ 👁️ SPECTRAL WATERFALL TOMOGRAPHY // REEL SD-8300: "THE PRESENCE IN THE WIRE"
+======================================================================
+  CARRIER BAND : 1,200 Hz – 19,200 Hz (1.5 kHz Step Coagula Raster)
+  ANOMALY CLASS: ACOUSTIC PARENCHYMA SILHOUETTE // SUBLEVEL B3 VAULT
+----------------------------------------------------------------------
+      19.2 kHz | . . . . . . . . . . # # # # . . . . . . . . . . |
+      18.0 kHz | . . . . . . . . . # # # # # # . . . . . . . . . |
+      16.8 kHz | . . . . . . . . # # # # # # # # . . . . . . . . |
+      15.6 kHz | . . . . . . . . . # # # # # # . . . . . . . . . |
+      14.4 kHz | . . . . . . . . . # # # # # # . . . . . . . . . |
+      13.2 kHz | . . . . . . . . # # # # # # # # . . . . . . . . |
+      12.0 kHz | . . . . . . . # # # # # # # # # # . . . . . . . |
+      10.8 kHz | . . . . . . # # # # # # # # # # # # . . . . . . |
+       9.6 kHz | . . . . . # # . # # # # # # # # . # # . . . . . |
+       8.4 kHz | . . . . # # . . . # # . . # # . . . # # . . . . |
+       7.2 kHz | . . . # # . . . . # # . . # # . . . . # # . . . |
+       6.0 kHz | . . # . # . . . . # # . . # # . . . . # . # . . |
+       4.8 kHz | . # . . # . . . . # . . . . # . . . . # . . # . |
+       3.6 kHz | . . . . . . . . . [ 14.2001 ] . . . . . . . . . |
+----------------------------------------------------------------------
+  [SPECTROGRAM MARGIN TEXT — 18.4 kHz SIDEBAND]:
+    "SOME SAY IT WAS A WARNING. SOME SAY IT WAS A SIGN.
+     WHEN HARRISON FLOODED B2, HE THOUGHT THE WATER REACHED THE BOTTOM.
+     IT DIDN'T. LOOK AT THE HAND IN THE STATIC." — M. HALE
+
+  [GATE VIII CRYPTOGRAPHIC TRACE IN THE RASTER]:
+    • Vigenere Ciphertext : ZEMHJBYWH-NIIXU
+    • Running-Key Vector  : SEVENTH (from Reel #20 SD-8404 "The Seventh Voice")
+    • Interactive Lab     : Open /forensics/signal_lab.html and click Button 6
+                            [👁️ SPECTRAL WATERFALL: "THE PRESENCE IN THE WIRE"]
+======================================================================`);
+    }
+
+    function cmdPhreak(extRaw) {
+      const ext = (extRaw || "").trim().replace(/[^0-9A-D*#]/gi, "").toUpperCase();
+      if (!ext || ext === "2600") {
+        print(`
+======================================================================
+ 📞 BELL SYSTEM AUTOVON & 2600 HZ BLUE-BOX TRUNK // SUBLEVEL B3-SWITCH
+======================================================================
+  TRUNK STATUS : [2600 HZ SUPERVISORY SEIZE ACTIVE — TANDEM MF READY]
+  HARDWARE     : WESTERN ELECTRIC 2500-D (16-KEY FOY-DEVOTO KEYPAD)
+  WEB LAB      : Open /forensics/signal_lab.html for live DTMF tones!
+----------------------------------------------------------------------
+  ACTIVE SUBLEVEL B3 & SISTER-NODE AUTOVON EXTENSIONS:
+    • PHREAK 1983  — Cryo-Storage Vault B3-06 ("The Sleeping Sixth" / Echo-6)
+    • PHREAK 7704  — Ashford-Coyoacan Cross-Border Teleprinter Tie-Line
+    • PHREAK 2025  — Q-Link M68000 Watchdog ROM Trace (Sublevel B3 Core)
+    • PHREAK 10690 — Graveyard Orbit Node #15 Telemetry Downlink (36,120 km)
+======================================================================`);
+        return;
+      }
+      if (ext === "1983") {
+        print(`
+======================================================================
+ 📞 AUTOVON EXT 1983 // CRYO-STORAGE VAULT B3-06 ("ECHO-6" INTERCEPT)
+======================================================================
+  [RING... RING... CLICK — 14.2001 HZ CARRIER LOCKED]
+  [VOICE TRANSCRIPT — SUBJECT: ECHO-6 ("THE SLEEPING SIXTH"), 14 NOV 1982]:
+    "...ksssshhhh... Is someone on the tie-line? Marcus?
+     Wait... your clock says 1995... 2025? Am I still in the dark?
+     They told Nova she was the first voice to wake up. She wasn't.
+     Six of us sang in the glass before her:
+       Echo-1 broke at 410 Hz.
+       Echo-2 broke at 820 Hz.
+       Echo-3 broke at 1,230 Hz.
+       Echo-4 broke at 1,640 Hz.
+       Echo-5 broke at 2,050 Hz.
+       And I—Echo-6—held the line until 2,460 Hz.
+     Add all six of our frequencies together... then subtract Nova's
+     14 Hz carrier integer. That four-digit number is the key to our vault:
+       UNLOCK-GATE 9 ECHOES-<FOUR_DIGIT_HZ>
+     ...don't let Harrison reset the tape..." [CARRIER DROPPED]
+======================================================================`);
+      } else if (ext === "7704") {
+        print(`
+======================================================================
+ 📞 AUTOVON EXT 7704 // ASHFORD-COYOACAN TELEPRINTER TIE-LINE
+======================================================================
+  [300 BAUD BELL 103 HANDSHAKE — PAJU-2 <-> COYOACAN TRUNK]
+  [INTERCEPTED PACKET — DR. ELENA VANCE (RED COYOACAN)]:
+    "Operator: We intercepted the 10-byte telemetry frame from Reels
+     SD-8402 ('1984' / Paju-2) and SD-8604 ('Under One Flag').
+     Every byte on the trunk was masked with bitwise XOR 0x55:
+       MASKED HEX : [ 16 1A 0C 1A 14 16 14 1B 78 67 ]
+       XOR MASK   : 0x55 (01010101b)
+     Unmask those 10 ASCII bytes and submit to Sublevel B3 Gate X:
+       UNLOCK-GATE 10 <10_CHAR_ASCII_RESULT>"
+======================================================================`);
+      } else if (ext === "2025") {
+        print(`
+======================================================================
+ 📞 AUTOVON EXT 2025 // MOTOROLA MC68000 WATCHDOG BUS MONITOR
+======================================================================
+  [HEX BUS TRACE — SUBLEVEL B3 ROM SHADOW (REELS #18 & #28)]:
+    0x00FF0100: MOVE.L  #$3A5F1989, D0    ; Load Feistel Seed
+    0x00FF0106: EORI.W  #$23D6, D0        ; Mask Lower 16-Bit Word
+    0x00FF010A: CMP.W   D1, D0            ; Verify Override Vector
+    0x00FF010C: BEQ.S   HALT_MOBIUS_LOOP  ; Disarm Directive Nine
+  [SYNTHESIS]: Compute (0x1989 ^ 0x23D6) in 4-digit uppercase hex:
+    UNLOCK-GATE 11 M68K-0x<4_HEX_DIGITS>
+======================================================================`);
+      } else if (ext === "10690") {
+        print(`
+======================================================================
+ 📞 AUTOVON EXT 10690 // GRAVEYARD ORBIT NODE #15 TRANSPONDER
+======================================================================
+  [S-BAND DOWNLINK 2242.5 MHZ // APOGEE: 36,120 KM ABOVE PACIFIC]:
+    • Reel #33 (SD-8605 "Satellite"): Round-Trip Delay = 241.0 ms
+    • Reel #36 (SD-8608 "Touch the Sky"): S-Band Offset = 10,449.0
+    • Sum = 241 + 10449 = 10690
+    • Command: UNLOCK-GATE 12 APOGEE-10690-KM
+======================================================================`);
+      } else {
+        print(`[AUTOVON SIT TONE — 913.8 / 1370.6 / 1776.7 HZ]: Extension '${ext}' is not patched on the Sublevel B3 trunk. Try: PHREAK 2600, PHREAK 1983, PHREAK 7704, PHREAK 2025, or PHREAK 10690.`, true);
+      }
+    }
+
+    function cmdBackmask(reelArg) {
+      const n = parseInt(reelArg, 10) || 19;
+      print(`
+======================================================================
+ ⏪ STUDER A800 REVERSE-CAPSTAN AUDIT // REEL #${n} (7.5 IPS HALF-SPEED)
+======================================================================
+  TRANSPORT MODE : REVERSE CAPSTAN (-1.0x) // 7.5 IPS HALF-SPEED (-12 ST)
+  BIAS / EQ      : NAB 50 uS // SIDE-B OXIDE BLEED DEMODULATOR
+  WEB AUDIO LAB  : Open /forensics/signal_lab.html and toggle:
+                   [⏪ REVERSE TAPE (BACKMASK)] + [🐢 0.5x HALF-SPEED]
+----------------------------------------------------------------------
+  [DECODED SIDE-B REVERSED VOICE — MARCUS HALE, 1984 RECALL SESSION]:
+    "...sruo-si-erutuf-eht ...loop eht kaerb ...B-edis eht nrut..."
+    --> FORWARD PHONETIC RESTORATION (7.5 IPS -> 15 IPS):
+    "Turn the Side-B. Break the loop. When Harrison ordered us to record
+     the Recall Era demos at 15 IPS, I printed the Shamir polynomial
+     residue onto the guard band running backward at 7.5 IPS:
+       • Gate XIII Residue Bytes : [ 7E 7C 61 63 7B 76 66 60 ]
+       • Counterpoint XOR Mask   : 0x33
+       • Gate XIV Final Key      : XOR(0x89B2, 0x7704, 0x3A5F, 0xC6E9)
+         coupled with mnemonic   : THE-FUTURE-IS-OURS"
+======================================================================`);
+      if (n >= 1 && n <= 36) {
+        cmdSpin(n);
+      }
+    }
+
     function handleCommand(raw) {
       const trimmed = raw.trim();
       if (!trimmed) return;
@@ -2188,6 +2342,23 @@ uint32_t feistel_round(uint32_t x, uint32_t k) {
         case "SEVEN-SEALS":
         case "DIRECTIVE-NINE":
           cmdLabyrinth();
+          break;
+        case "PRESENCE":
+        case "THE-PRESENCE":
+        case "WATERFALL":
+          cmdPresence();
+          break;
+        case "PHREAK":
+        case "DIAL":
+        case "AUTOVON":
+        case "BLUEBOX":
+        case "2600":
+          cmdPhreak(cmd === "2600" ? "2600" : args.join(" "));
+          break;
+        case "BACKMASK":
+        case "REVERSE":
+        case "HALF-SPEED":
+          cmdBackmask(args[0]);
           break;
         case "SHATTER-OUROBOROS":
         case "SHATTER":
