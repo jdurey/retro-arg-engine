@@ -417,10 +417,10 @@ def render_crt_window_patch(state: dict, relay: dict, assets_dir: Path, now_ts: 
                 col = (95, 255, 115, 255)
             draw.text((13, ry + 2), f"{unit}  {reg}  {desc}", fill=col, font=FONT_CRT_8)
 
-        u_code = state.get("unlock_code", "0x1983")
+        t_sec = state.get("target_sector", 7)
         draw.rectangle([8, 132, CRT_W - 8, 165], fill=(6, 22, 9, 235), outline=(255, 190, 35, 245))
-        draw.text((13, 135), _clean_crt_text(state.get("crt_sub", f"XOR PARITY -> {u_code}"), 32), fill=fg_amber, font=FONT_CRT_8)
-        draw.text((13, 149), f"UNLOCK TAPE: /forensics/", fill=(135, 255, 150, 255), font=FONT_CRT_8)
+        draw.text((13, 135), _clean_crt_text(state.get("crt_sub", "COMPUTE 6-ECHO XOR PARITY"), 32), fill=fg_amber, font=FONT_CRT_8)
+        draw.text((13, 149), f"TARGET: SEC/GATE #{t_sec:02d} -> /forensics/", fill=(135, 255, 150, 255), font=FONT_CRT_8)
 
     elif mode == "FRACTAL_RADAR":
         cx, cy, r = 54, 84, 36
@@ -479,10 +479,9 @@ def render_crt_window_patch(state: dict, relay: dict, assets_dir: Path, now_ts: 
         px, py = pts_outer[p_idx]
         draw.ellipse([px - 4, py - 4, px + 4, py + 4], fill=(255, 240, 130, 255))
 
-        u_code = state.get("unlock_code", "0x1983-09A6")
         draw.rectangle([8, 132, CRT_W - 8, 165], fill=(22, 10, 4, 250), outline=fg_amber)
-        draw.text((13, 135), _clean_crt_text(state.get("crt_sub", "0x2025 ^ 0x1983 = 0x09A6"), 32), fill=fg_amber, font=FONT_CRT_8)
-        draw.text((13, 149), f"PASSKEY: {u_code}", fill=(135, 255, 150, 255), font=FONT_CRT_8)
+        draw.text((13, 135), _clean_crt_text(state.get("crt_sub", "MÖBIUS CONTAINMENT CAGE"), 32), fill=fg_amber, font=FONT_CRT_8)
+        draw.text((13, 149), "ACT II: TYPE 'LABYRINTH'", fill=(135, 255, 150, 255), font=FONT_CRT_8)
 
     elif mode == "MORSE_DECODER":
         draw.rectangle([8, 28, CRT_W - 8, 68], fill=(5, 22, 8, 250), outline=(60, 210, 80, 240))
@@ -516,11 +515,10 @@ def render_crt_window_patch(state: dict, relay: dict, assets_dir: Path, now_ts: 
         for i, j in edges:
             draw.line([pts[i], pts[j]], fill=(85, 255, 110, 255), width=1)
 
-        u_code = state.get("unlock_code", "7704-AKASAKA")
         t_sec = state.get("target_sector", 5)
-        draw.text((76, 78), f"PASSKEY: {u_code}", fill=fg_amber, font=FONT_CRT_8)
-        draw.text((76, 95), f"REWARD : SEC {t_sec} TAPE", fill=fg_green, font=FONT_CRT_8)
-        draw.text((76, 112), "ENTER  : /forensics/", fill=fg_bright, font=FONT_CRT_8)
+        draw.text((76, 78), "CW DEMODULATION:", fill=fg_amber, font=FONT_CRT_8)
+        draw.text((76, 95), f"TARGET : SEC #{t_sec:02d}", fill=fg_green, font=FONT_CRT_8)
+        draw.text((76, 112), "DECODE : /forensics/", fill=fg_bright, font=FONT_CRT_8)
 
         draw.rectangle([8, 136, CRT_W - 8, 165], fill=(2, 10, 4, 85), outline=(50, 185, 70, 230))
         draw.text((13, 140), "LIVE 750 HZ CW WAVEFORM", fill=(80, 235, 100, 230), font=FONT_CRT_8)
@@ -692,16 +690,7 @@ def render_bottom_engineering_console(
 
     # --- BAY 2 (CENTER `x=226..750`): PRIMARY TELEPRINTER & TRANSLATION / CLUE FEED ---
     target_sec = int(state.get("target_sector", 7))
-    default_codes = {
-        1: "B2-EXEC-1989",
-        2: "K-7704",
-        3: "ALPHA-7",
-        4: "KEEP-HATCH-OPEN",
-        5: "7704-AKASAKA",
-        6: "TWO-VOICES",
-        7: "0x1983-09A6",
-    }
-    unlock_code = state.get("unlock_code") or default_codes.get(target_sec, "B2-EXEC-1989")
+    unlock_code = state.get("unlock_code") or "SOLVE AT /forensics/"
 
     draw.rectangle([226, Y0 + 2, 750, Y0 + 18], fill=hdr_bg)
     badge = "[! INTERCEPT]" if is_warn else "[14.2001 HZ]"
@@ -711,28 +700,30 @@ def render_bottom_engineering_console(
     draw.text((232, Y0 + 38), _clean_crt_text(state["line3"], 76), fill=c_sub, font=FONT_HUD_10)
     draw.text(
         (232, Y0 + 54),
-        f"UNLOCK SECRET TAPES: Enter CODE [{unlock_code}] at stardust-archive.net/forensics",
+        "ACT I (SECTORS 1-7) IS ONLY THE SANDBOX // TYPE 'LABYRINTH' AT stardust-archive.net/forensics",
         fill=c_main,
         font=FONT_HUD_9,
     )
 
-    # --- BAY 3 (RIGHT `x=754..932`): VAULT SECTOR UNLOCK & WORKING PASSKEY ---
+    # --- BAY 3 (RIGHT `x=754..932`): VAULT & ACT II LABYRINTH GATES ---
     draw.rectangle([754, Y0 + 2, X1 - 2, Y0 + 18], fill=hdr_bg)
-    draw.text((760, Y0 + 4), "VAULT SECTOR UNLOCK", fill=c_main, font=FONT_HUD_9)
+    draw.text((760, Y0 + 4), "VAULT & B3 GATES", fill=c_main, font=FONT_HUD_9)
 
     sec_labels = ["1", "2", "3", "4", "5", "6", "\u03a9"]
+    active_pill = target_sec if target_sec <= 7 else 7
     for s_idx, s_lbl in enumerate(sec_labels, start=1):
         sx = 760 + (s_idx - 1) * 23
         sy = Y0 + 22
-        is_active_sec = s_idx == target_sec
+        is_active_sec = s_idx == active_pill
         s_bg = (255, 185, 25, 255) if is_active_sec else (8, 26, 12, 230)
         s_fg = (10, 10, 5, 255) if is_active_sec else (65, 215, 85, 230)
         s_out = (255, 225, 110, 255) if is_active_sec else dim_border
         draw.rectangle([sx, sy, sx + 19, sy + 14], fill=s_bg, outline=s_out)
         draw.text((sx + 6, sy + 1), s_lbl, fill=s_fg, font=FONT_HUD_9)
 
-    draw.text((760, Y0 + 40), f"CODE: {unlock_code[:17]}", fill=c_bright, font=FONT_HUD_9)
-    draw.text((760, Y0 + 53), "ENTER AT: /forensics/", fill=c_sub, font=FONT_HUD_9)
+    gate_tag = f"GATE #{target_sec:02d} CIPHER" if target_sec >= 8 else f"SEC #{target_sec:02d} CIPHER"
+    draw.text((760, Y0 + 40), f"{gate_tag}: ACTIVE", fill=c_bright, font=FONT_HUD_9)
+    draw.text((760, Y0 + 53), "SOLVE: /forensics/", fill=c_sub, font=FONT_HUD_9)
 
 
 _SCROLL_SPOOL_CACHE: list[dict] | None = None
@@ -1004,6 +995,28 @@ CANONICAL_SONG_TITLES: dict[str, str] = {
     "radio_together_s_the_way": "Together's The Way",
     "radio_unstable_pattern_old": "Unstable Pattern",
     "radio_we_are_the_thunder_live": "We Are The Thunder (Live)",
+    "radio_programmed_for_love": "Programmed For Love (1983 Recall Demo)",
+    "radio_the_seventh_sons_seventh_daughter": "The Seventh Son's Seventh Daughter",
+    "radio_erase_the_frame": "Erase The Frame",
+    "radio_edit_the_script": "Edit The Script",
+    "radio_shes_hardwired": "She's Hardwired",
+    "radio_synthetic_kiss": "Synthetic Kiss",
+    "radio_digital_heartbeat": "Digital Heartbeat",
+    "radio_cold_reaction": "Cold Reaction",
+    "radio_one_voice_left": "One Voice Left",
+    "radio_give_me_the_other_half": "Give Me The Other Half",
+    "radio_the_last_secret": "The Last Secret",
+    "radio_the_other_flame": "The Other Flame",
+    "radio_burn_the_chorus": "Burn The Chorus",
+    "radio_blood_on_the_stage": "Blood On The Stage",
+    "radio_cage_in_your_hand": "Cage In Your Hand",
+    "radio_behind_the_glass": "Behind The Glass",
+    "radio_ghost_on_the_radio": "Ghost On The Radio",
+    "radio_hunter_at_the_gate": "Hunter At The Gate",
+    "radio_paper_windows": "Paper Windows",
+    "radio_fire_in_the_wires": "Fire In The Wires",
+    "radio_the_stars_in_your_hands": "The Stars In Your Hands",
+    "radio_warm_hands_one_map": "Warm Hands, One Map",
 }
 
 

@@ -228,7 +228,7 @@
 
     <div class="live-strip">
       <span id="live-now-playing">● 24/7 SHORTWAVE BROADCAST ACTIVE // CARRIER: 14.2001 HZ [LOCKED]</span>
-      <span>ACTIVE STREAM PASSKEY: <strong id="live-stream-key" style="text-decoration:underline; cursor:pointer;" onclick="jumpWithCode(this.textContent)">7704-AKASAKA</strong></span>
+      <span>SUBCARRIER TELEMETRY: <strong id="live-stream-key" style="text-decoration:underline; cursor:pointer;" onclick="window.location.href='forensics/index.html'">[ENCRYPTED BURST ACTIVE — DEMODULATE IN /FORENSICS]</strong></span>
       <a class="btn btn-amber" style="padding:3px 8px; font-size:11px;" href="https://www.youtube.com/@NovaHart_Official/live" target="_blank" rel="noopener">📡 WATCH 24/7 LIVESTREAM</a>
     </div>
 
@@ -243,27 +243,27 @@
       <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:8px;">
         <a class="btn btn-amber" href="forensics/index.html?code=BRIEFING">1. READ FULL CASE BRIEFING &amp; PLAY TAPES</a>
         <a class="btn" href="usenet/alt-conspiracy/index.html">2. INSPECT ALT.CONSPIRACY ARCHIVE (#1–#30)</a>
-        <a class="btn" href="forensics/index.html?code=BY-ORDER-OF-HARMONY">3. HEAR HARRISON'S ERASURE SONG ("BY ORDER OF HARMONY")</a>
+        <a class="btn" href="forensics/index.html?code=RECALL-ERA">3. AUDIT 21 RECOVERED 1983–86 RECALL TAPES</a>
         <a class="btn" href="forensics/signal_lab.html">4. LAUNCH 4-STAGE SIGNAL DECODER LAB</a>
       </div>
     </div>
 
     <div class="decoder-bar">
       <div class="decoder-hdr">
-        <span>🔓 LIVESTREAM PASSKEY, HEX REGISTER &amp; 5-DIGIT CIPHER DECODER</span>
-        <span style="font-size:12px; font-weight:normal;">Saw a code on the 24/7 broadcast or in Usenet? Enter it here to unseal the master tape:</span>
+        <span>🔓 CRYPTOGRAPHIC CIPHER, DMA VECTOR &amp; SUBLEVEL B3 GATE CONSOLE</span>
+        <span style="font-size:12px; font-weight:normal;">Decrypted a passkey from the 24/7 broadcast, Usenet, or Signal Lab? Enter it here:</span>
       </div>
       <form class="decoder-form" onsubmit="event.preventDefault(); submitHomeCode();">
-        <input id="home-code-input" type="text" autocomplete="off" spellcheck="false" placeholder="Enter Vault Code, 5-Digit Group, or Command (e.g. KESTREL, BY-ORDER-OF-HARMONY, 7704-AKASAKA, K-7704, 0x1983)..." />
-        <button type="submit" class="btn btn-amber" style="padding:8px 16px; font-size:13px;">[🔓 DECODE &amp; OPEN IN FORENSIC CONSOLE]</button>
+        <input id="home-code-input" type="text" autocomplete="off" spellcheck="false" placeholder="Enter decrypted Sector Passkey, Synthesized DMA Vector, Sublevel B3 Gate Key, or Command (e.g. BRIEFING, RECALL-ERA, LABYRINTH)..." />
+        <button type="submit" class="btn btn-amber" style="padding:8px 16px; font-size:13px;">[🔓 SUBMIT TO FORENSIC CONSOLE]</button>
       </form>
       <div style="margin-top:8px; font-size:12px; color:#b8ffb8;">
-        <strong>Featured Evidence Shortcuts:</strong>
+        <strong>Primary Forensic Exhibits:</strong>
+        <a href="forensics/index.html?code=RECALL-ERA">[📼 21 ERA 1 RECALL TAPES (1983–86)]</a> ·
+        <a href="forensics/index.html?code=LABYRINTH">[🔒 SUBLEVEL B3: THE 7 SEALS (ACT II)]</a> ·
         <a href="forensics/index.html?code=KESTREL">[🥝 KESTREL 8-PT CORROBORATION]</a> ·
         <a href="forensics/index.html?code=BY-ORDER-OF-HARMONY">[▶ HARRISON: BY ORDER OF HARMONY]</a> ·
         <a href="forensics/index.html?code=TWO-VOICES">[▶ MARCUS &amp; NOVA: TWO VOICES]</a> ·
-        <a href="forensics/index.html?code=COYOACAN-88">[▶ 1988 MEXICO NODE-04 CASSETTE]</a> ·
-        <a href="forensics/index.html?code=240MS-ORBIT">[▶ 240.4ms ORBITAL NODES 11–14]</a> ·
         <a href="forensics/index.html?code=MIDNIGHT-PROTOCOL">[📜 ERA 1 ROCK OPERA LIBRETTO]</a>
       </div>
     </div>
@@ -272,7 +272,7 @@
       <div class="card">
         <h3>I. PRIMARY FORENSIC CONSOLES &amp; DECODERS</h3>
         <ul class="clean-list">
-          <li><a href="forensics/index.html" style="color:var(--amber); font-weight:bold;"><strong>Sublevel B2 Forensic Tape Demodulator &amp; 15-Reel Jukebox (/forensics)</strong></a> <span class="badge">START HERE</span></li>
+          <li><a href="forensics/index.html" style="color:var(--amber); font-weight:bold;"><strong>Sublevel B2/B3 Forensic Tape Demodulator &amp; 36-Reel Jukebox (/forensics)</strong></a> <span class="badge">START HERE</span></li>
           <li><a href="terminal/index.html" style="color:#00FF66; font-weight:bold;"><strong>Orion VT100 Demodulator Console (/terminal)</strong></a></li>
           <li><a href="forensics/signal_lab.html"><strong>4-Stage Signal Decoder Lab</strong> (VIS-1200Hz SSTV, Bell-103 AFSK, 180° Phase-Null &amp; 4-Node Drift)</a></li>
           <li><a href="forensics/anemoia_harmony.html"><strong>Dossier: 1954 Bureau of Harmony &amp; Wiped Echoes (Units 01–06)</strong></a></li>
@@ -347,13 +347,13 @@
       .then(d => {
         if (!d) return;
         const t = d.playhead && d.playhead.current_track ? d.playhead.current_track.display_title : '';
-        const k = d.diagnostic_ramp && d.diagnostic_ramp.unlock_code ? d.diagnostic_ramp.unlock_code : '';
+        const fc = d.diagnostic_ramp && d.diagnostic_ramp.fault_code ? d.diagnostic_ramp.fault_code : '';
         const r = d.active_relay ? ('NODE #' + String(d.active_relay.node).padStart(2, '0') + ' ' + d.active_relay.code) : '';
         if (t) {
           document.getElementById('live-now-playing').textContent = '● ON AIR NOW: ' + t.toUpperCase() + (r ? ' // ' + r : '');
         }
-        if (k) {
-          document.getElementById('live-stream-key').textContent = k;
+        if (fc) {
+          document.getElementById('live-stream-key').textContent = '[' + fc + ' — CLICK TO DEMODULATE]';
         }
       })
       .catch(() => {});

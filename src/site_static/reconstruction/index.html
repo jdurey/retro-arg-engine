@@ -256,7 +256,7 @@
 <body>
   <div class="shell">
     <div class="top-bar">
-      <div><strong>📼 VT100 // ORION SUBLEVEL B2 &amp; ANEMOIA DSP TERMINAL v7.0</strong></div>
+      <div><strong>📼 VT100 // ORION SUBLEVEL B2/B3 &amp; ANEMOIA DSP TERMINAL v8.0</strong></div>
       <div class="nav-links">
         <a class="btn amber-pill" href="/forensics/signal_lab.html">[SIGNAL DECODER LAB]</a>
         <a class="btn" href="/forensics/ashford_poly.html">[ASHFORD-POLY]</a>
@@ -280,18 +280,18 @@
 
     <div class="vault-deck" id="vault-unlock-deck">
       <div class="vault-deck-hdr">
-        <span>🔓 LIVESTREAM CODE &amp; CIPHER UNLOCK DECK (UNSEALS DECLASSIFIED AUDIO REELS)</span>
-        <span id="live-onair-code" style="font-size:11px;">ACTIVE STREAM CODE: 7704-AKASAKA</span>
+        <span>🔓 CRYPTOGRAPHIC CIPHER, DMA VECTOR &amp; SUBLEVEL B3 GATE DECK</span>
+        <span id="live-onair-code" style="font-size:11px;">SUBCARRIER: 14.2001 HZ [ENCRYPTED BURST]</span>
       </div>
       <div class="vault-deck-sub">
-        Watching the 24/7 YouTube Broadcast? Enter any <strong>Vault Code</strong> (from the bottom-right box), <strong>Hex Register</strong> (<code>0x1983</code>, <code>0x3A5F</code>, <code>0x09A6</code>), <strong>5-Digit Numbers Group</strong>, or <strong>Morse Passkey</strong> below to immediately unlock &amp; play secret Sublevel B2 and 1983 Akasaka recordings:
+        Decrypt any <strong>Broadcast Cipher</strong> (Morse, Hex, ROT-7, Vigen&egrave;re, ITA2 Baudot, M68k Watchdog, or Orbital Slant-Range) from the 24/7 stream, Usenet, Signal Lab, or the 21 Recall Era Master Tapes and enter the synthesized passkey below:
       </div>
       <div class="vault-input-row">
-        <input id="cipher-input" type="text" autocomplete="off" spellcheck="false" placeholder="Enter code from livestream (e.g. B2-EXEC-1989, K-7704, 7704-AKASAKA, TWO-VOICES, 0x1983-09A6, or 5-digit group)..." />
-        <button class="amber-pill" style="font-size:12px; padding:7px 14px; font-weight:bold;" onclick="submitCipherBox()">[🔓 DECODE &amp; PLAY SECRET TAPE]</button>
+        <input id="cipher-input" type="text" autocomplete="off" spellcheck="false" placeholder="Enter decrypted Sector Passkey (1-7) or Sublevel B3 Gate Vector (VIII-XIV)..." />
+        <button class="amber-pill" style="font-size:12px; padding:7px 14px; font-weight:bold;" onclick="submitCipherBox()">[🔓 VERIFY CHECKSUM &amp; UNSEAL]</button>
       </div>
       <div class="sector-pills" id="sector-pills-row">
-        <span style="color:var(--amber);"><strong>VAULT SECTORS:</strong></span>
+        <span style="color:var(--amber);"><strong>LAYER 0 (B2 SECTORS 1–7):</strong></span>
         <button class="sec-pill" id="sec-pill-1" onclick="clickSectorPill(1)">[SEC 1: 🔒 LOCKED]</button>
         <button class="sec-pill" id="sec-pill-2" onclick="clickSectorPill(2)">[SEC 2: 🔒 LOCKED]</button>
         <button class="sec-pill" id="sec-pill-3" onclick="clickSectorPill(3)">[SEC 3: 🔒 LOCKED]</button>
@@ -299,6 +299,16 @@
         <button class="sec-pill" id="sec-pill-5" onclick="clickSectorPill(5)">[SEC 5: 🔒 LOCKED]</button>
         <button class="sec-pill" id="sec-pill-6" onclick="clickSectorPill(6)">[SEC 6: 🔒 LOCKED]</button>
         <button class="sec-pill" id="sec-pill-7" onclick="clickSectorPill(7)">[SEC 7 Ω: 🔒 LOCKED]</button>
+      </div>
+      <div class="sector-pills" id="b3-gates-row" style="margin-top:6px; padding-top:6px; border-top:1px dashed var(--dim);">
+        <span style="color:#ff5555;"><strong>ACT II (B3 SEALS VIII–XIV):</strong></span>
+        <button class="sec-pill" id="sec-pill-8" onclick="clickSectorPill(8)">[GATE VIII: 🔒 SEALED]</button>
+        <button class="sec-pill" id="sec-pill-9" onclick="clickSectorPill(9)">[GATE IX: 🔒 SEALED]</button>
+        <button class="sec-pill" id="sec-pill-10" onclick="clickSectorPill(10)">[GATE X: 🔒 SEALED]</button>
+        <button class="sec-pill" id="sec-pill-11" onclick="clickSectorPill(11)">[GATE XI: 🔒 SEALED]</button>
+        <button class="sec-pill" id="sec-pill-12" onclick="clickSectorPill(12)">[GATE XII: 🔒 SEALED]</button>
+        <button class="sec-pill" id="sec-pill-13" onclick="clickSectorPill(13)">[GATE XIII: 🔒 SEALED]</button>
+        <button class="sec-pill" id="sec-pill-14" onclick="clickSectorPill(14)">[GATE XIV Ω': 🔒 SEALED]</button>
       </div>
     </div>
 
@@ -313,18 +323,19 @@
 
     <div class="quick-deck">
       <span style="font-size:11px; color:var(--amber);"><strong>QUICK CONSOLE:</strong></span>
-      <button class="amber-pill" onclick="runCmd('BRIEFING')">[🕵️ START HERE: CASE BRIEFING]</button>
+      <button class="amber-pill" onclick="runCmd('BRIEFING')">[🕵️ CASE BRIEFING]</button>
       <button onclick="runCmd('BOARD')">[PINBOARD &amp; STATUS]</button>
       <button onclick="runCmd('CLUES')">[CLUE DOSSIER]</button>
-      <button class="amber-pill" onclick="runCmd('TWO-VOICES')">[▶ PLAY: TWO VOICES (SD-0010)]</button>
-      <button class="amber-pill" onclick="runCmd('BY-ORDER-OF-HARMONY')">[▶ HARRISON: BY ORDER OF HARMONY]</button>
-      <button class="amber-pill" onclick="runCmd('KESTREL')">[🥝 KESTREL 8-PT EVIDENCE]</button>
-      <button class="amber-pill" onclick="runCmd('REELS')">[MASTER REEL JUKEBOX (15)]</button>
-      <button onclick="runCmd('MIDNIGHT-PROTOCOL')">[ERA 1 ROCK OPERA LIBRETTO]</button>
-      <button onclick="runCmd('ANEMOIA')">[ANEMOIA HISTORY]</button>
+      <button class="amber-pill" onclick="runCmd('RECALL-ERA')">[📼 ERA 1 RECALL TAPES (21 NEW)]</button>
+      <button class="amber-pill" style="border-color:#ff5555; color:#ff7777;" onclick="runCmd('LABYRINTH')">[🔒 ACT II: SUBLEVEL B3 SEALS]</button>
+      <button class="amber-pill" onclick="runCmd('REELS')">[MASTER JUKEBOX (36)]</button>
+      <button onclick="runCmd('TWO-VOICES')">[▶ TWO VOICES (SD-0010)]</button>
+      <button onclick="runCmd('BY-ORDER-OF-HARMONY')">[▶ BY ORDER OF HARMONY]</button>
+      <button onclick="runCmd('KESTREL')">[🥝 KESTREL EVIDENCE]</button>
+      <button onclick="runCmd('MIDNIGHT-PROTOCOL')">[ROCK OPERA LIBRETTO]</button>
       <button onclick="runCmd('ECHOES')">[ECHOES 1-6]</button>
       <button onclick="runCmd('FRACTAL-MARCUS')">[FRACTAL MARCUS]</button>
-      <button onclick="runCmd('DEAD-HAND')">[DEAD-HAND &amp; LUNA GRAY]</button>
+      <button onclick="runCmd('DEAD-HAND')">[DEAD-HAND &amp; Q-LINK]</button>
       <button onclick="runCmd('BROADCAST')">[LIVE TELEMETRY]</button>
       <button onclick="runCmd('STOP')">[STOP AUDIO]</button>
     </div>
@@ -333,7 +344,7 @@
     <div id="term-output"></div>
     <div class="prompt-row">
       <span>OPERATOR&gt;</span>
-      <input id="cmd-input" type="text" autofocus autocomplete="off" spellcheck="false" placeholder="Enter ANY livestream code (e.g. BY-ORDER-OF-HARMONY, KESTREL, COYOACAN-88, 240MS-ORBIT, TWO-VOICES), or HELP..." />
+      <input id="cmd-input" type="text" autofocus autocomplete="off" spellcheck="false" placeholder="Type HELP, BRIEFING, RECALL-ERA, LABYRINTH, SPIN <1-36>, RESTORE <1-7> <KEY>, or UNLOCK-GATE <8-14> <KEY>..." />
     </div>
   </div>
   <audio id="audio-player" crossorigin="anonymous"></audio>
@@ -361,10 +372,14 @@
     const canvas = document.getElementById("oscilloscope");
     const ctx = canvas.getContext("2d");
 
-    const STORAGE_KEY = "stardust_forensics_state_v1";
+    const STORAGE_KEY = "stardust_forensics_state_v2";
     let state = {
-      sectors: { 1: false, 2: false, 3: false, 4: false, 5: false, 6: false, 7: false },
+      sectors: {
+        1: false, 2: false, 3: false, 4: false, 5: false, 6: false, 7: false,
+        8: false, 9: false, 10: false, 11: false, 12: false, 13: false, 14: false
+      },
       ouroborosFolded: false,
+      b3InterruptShown: false,
       callsign: null,
       tracedNodes: [],
       history: []
@@ -376,7 +391,10 @@
         if (s) {
           const parsed = JSON.parse(s);
           state = Object.assign(state, parsed);
-          state.sectors = Object.assign({ 1: false, 2: false, 3: false, 4: false, 5: false, 6: false, 7: false }, parsed.sectors || {});
+          state.sectors = Object.assign({
+            1: false, 2: false, 3: false, 4: false, 5: false, 6: false, 7: false,
+            8: false, 9: false, 10: false, 11: false, 12: false, 13: false, 14: false
+          }, parsed.sectors || {});
         }
       } catch (e) {}
     }
@@ -389,94 +407,81 @@
 
     function getAudioUrl(sectorNum) {
       const f = {
-        1: "sector1_talkback_bleed.mp3",
-        2: "sector2_substation_breach.mp3",
-        3: "sector3_telemetry_pulse.mp3",
-        4: "sector4_execution_master.mp3",
-        5: "sector5_feistel_core.mp3",
-        6: "sector6_two_voices_epilogue.mp3",
-        7: "sector6_two_voices_epilogue.mp3"
-      }[sectorNum];
+        1: "/assets/audio/marcus/sector1_talkback_bleed.mp3",
+        2: "/assets/audio/marcus/sector2_substation_breach.mp3",
+        3: "/assets/audio/marcus/sector3_telemetry_pulse.mp3",
+        4: "/assets/audio/marcus/sector4_execution_master.mp3",
+        5: "/assets/audio/marcus/sector5_feistel_core.mp3",
+        6: "/assets/audio/marcus/sector6_two_voices_epilogue.mp3",
+        7: "/assets/akasaka/audio/unit7_voice_print_gen3_calibration.mp3",
+        8: "/assets/audio/streams/radio_programmed_for_love.mp3",
+        9: "/assets/audio/streams/radio_one_voice_left.mp3",
+        10: "/assets/audio/streams/radio_edit_the_script.mp3",
+        11: "/assets/audio/streams/radio_erase_the_frame.mp3",
+        12: "/assets/audio/streams/radio_the_stars_in_your_hands.mp3",
+        13: "/assets/audio/streams/radio_the_last_secret.mp3",
+        14: "/assets/audio/streams/radio_paper_windows.mp3"
+      }[sectorNum] || "/assets/audio/marcus/sector6_two_voices_epilogue.mp3";
       if (window.location.protocol === "file:") {
-        return `../assets/audio/marcus/${f}`;
+        return ".." + f;
       }
-      return `/assets/audio/marcus/${f}`;
+      return f;
     }
 
     const REEL_CATALOG = [
-      { id: 1, code: "SD-0010", title: "Two Voices (Sublevel B2 Counterpoint Master)", year: "1989/1995", url: "/assets/audio/forensics/radio_two_voices.mp3", fallback: "/assets/audio/streams/two_voices_14k.mp3", note: "Dual-carrier counterpoint vocal recording. Carries a 14.2001 Hz beat between Ch-L and Ch-R. Analyze in Signal Lab (Button 4) for Sector 6 key." },
-      { id: 2, code: "SD-0004", title: "Tape of Us (Sublevel B2 Rough Mix & Runout)", year: "1989", url: "/assets/audio/tape_of_us_1989_rough_mix.mp3", fallback: "/assets/audio/streams/only_we_remain_14k.mp3", note: "Contains Marcus Hale's whispered matrix code in the dead-air runout groove at 4:51 (Sector 1 lead: B2-EXEC-1989)." },
+      { id: 1, code: "SD-0010", title: "Two Voices (Sublevel B2 Counterpoint Master)", year: "1989/1995", url: "/assets/audio/forensics/radio_two_voices.mp3", fallback: "/assets/audio/streams/two_voices_14k.mp3", note: "Dual-carrier counterpoint vocal recording. Carries a 14.2001 Hz beat between Ch-L and Ch-R. Analyze in Signal Lab (Button 4) for Sector 6." },
+      { id: 2, code: "SD-0004", title: "Tape of Us (Sublevel B2 Rough Mix & Runout)", year: "1989", url: "/assets/audio/tape_of_us_1989_rough_mix.mp3", fallback: "/assets/audio/streams/only_we_remain_14k.mp3", note: "Contains Marcus Hale's hex-encoded matrix runout in dead air at 4:51 (type 'TAPE-OF-US' for Sector 1 flux dump)." },
       { id: 3, code: "SD-0009B", title: "Only We Remain (Marcus & Nova Studio Duet)", year: "1989", url: "/assets/audio/streams/only_we_remain_14k.mp3", fallback: "/assets/audio/streams/only_we_remain_14k.mp3", note: "Recorded off-hours on the Sublevel B2 console 48 hours before Harrison's purge directive." },
       { id: 4, code: "SD-0007", title: "Memory Hatch (Meridian Satellite Master)", year: "1986", url: "/assets/audio/streams/memory_hatch_14k.mp3", fallback: "/assets/audio/streams/memory_hatch_14k.mp3", note: "Broadcast across 12 regional transmitters on 20 Nov 1986. Triggered the first 14.2 Hz listener anomalies." },
       { id: 5, code: "JP-8501", title: "Gasoline Heart (Akasaka Studio 3 Master)", year: "1985", url: "/assets/audio/streams/gasoline_heart_14k.mp3", fallback: "/assets/audio/streams/gasoline_heart_14k.mp3", note: "Orion Japan pressing. High-bias chrome cassette master archived on KAMOME-NET." },
       { id: 6, code: "JP-8702", title: "Brighter Than the Sun (Tokyo Master)", year: "1987", url: "/assets/audio/streams/brighter_than_sun_14k.mp3", fallback: "/assets/audio/streams/brighter_than_sun_14k.mp3", note: "Contains 14.2 kHz pilot tone calibration slate from Akasaka Studio 3." },
-      { id: 7, code: "UK-8804", title: "Ghost Transit (Ashford JANET Trunk Mix)", year: "1988", url: "/assets/audio/streams/ghost_transit_14k.mp3", fallback: "/assets/audio/streams/ghost_transit_14k.mp3", note: "Routed through Substation K-7704 at Ashford Polytechnic by Dr. Mei-Ling Chen." },
+      { id: 7, code: "UK-8804", title: "Ghost Transit (Ashford JANET Trunk Mix)", year: "1988", url: "/assets/audio/streams/ghost_transit_14k.mp3", fallback: "/assets/audio/streams/ghost_transit_14k.mp3", note: "Routed through Ashford Polytechnic by Dr. Mei-Ling Chen." },
       { id: 8, code: "US-8703", title: "Static and Steel (Steel Thunder OST Stem)", year: "1987", url: "/assets/audio/streams/static_and_steel_14k.mp3", fallback: "/assets/audio/streams/static_and_steel_14k.mp3", note: "Featured in the midnight 35mm theatrical reels of Steel Thunder (1987)." },
-      { id: 9, code: "US-8611", title: "Behind the Glass (Sublevel B2 Vocal Booth)", year: "1986", url: "/assets/audio/streams/behind_the_glass_14k.mp3", fallback: "/assets/audio/streams/behind_the_glass_14k.mp3", note: "Early empathy-trial recording where Unit-7 first questioned her studio enclosure." },
+      { id: 9, code: "US-8611", title: "Behind the Glass (1986 Sublevel B2 Clip)", year: "1986", url: "/assets/audio/streams/behind_the_glass_14k.mp3", fallback: "/assets/audio/streams/behind_the_glass_14k.mp3", note: "Short excerpt; see Reel #31 for newly recovered full-length 1985 Recall Master." },
       { id: 10, code: "US-8812", title: "Before You Disappear (Pre-Purge Session)", year: "1988", url: "/assets/audio/streams/before_you_disappear_14k.mp3", fallback: "/assets/audio/streams/before_you_disappear_14k.mp3", note: "Recorded the night Director Kalen issued the Unit-8 Luna Gray replacement memo." },
       { id: 11, code: "FAULT-08", title: "Robot36 VIS-1200Hz DMA Partition Schematic", year: "1989", url: "/assets/audio/forensics/rabbit_08_sstv_b2_schematic.mp3", fallback: "/forensics/rabbit_08_sstv_b2_schematic.mp3", note: "Encodes GeoCities DMA anchors tokyo-garden-1420 & siliconvalley-lab-1984." },
       { id: 12, code: "FAULT-09", title: "Relcom Node-08 Bell-103 AX.25 Packet Frame", year: "1989", url: "/assets/audio/forensics/rabbit_09_bell103_relcom_packet.mp3", fallback: "/forensics/rabbit_09_bell103_relcom_packet.mp3", note: "110-baud shortwave packet carrying the 16-bit Feistel mask 0x3A5F." },
-      { id: 13, code: "BY-ORDER", title: "By Order of Harmony (Director Harrison Erasure Directive)", year: "1989", url: "/forensics/radio_by_order_of_harmony.mp3", fallback: "/assets/audio/forensics/radio_by_order_of_harmony.mp3", note: "Director Harrison's unindexed B2-114 vocal directive ordering Recall Directive Seven ('Purge complete') and seeding the H.A.R.R.I.S.O.N. vocal-control matrix." },
-      { id: 14, code: "NODE-04", title: "July 6, 1988 Coyoacán Pirate FM Cassette (104.9 MHz)", year: "1988", url: "/forensics/coyoacan_1988_node04_cassette.mp3", fallback: "/assets/audio/forensics/coyoacan_1988_node04_cassette.mp3", note: "Primary exhibit corroborating Kestrel Point #6 ('se cayó el sistema'). Carries 750 Hz CW burst: 'ORION BUILT A PATCH NOT A STAR'." },
-      { id: 15, code: "ORBIT-14", title: "Nodes 11–14 Geostationary 240.4ms Slant-Range Capture", year: "1989", url: "/forensics/orbital_nodes_11_14_240ms.mp3", fallback: "/assets/audio/forensics/orbital_nodes_11_14_240ms.mp3", note: "Primary exhibit corroborating Kestrel Point #4 (10,602-sample / 240.4 ms orbital delay). Carries CW burst: 'WHEN THE HATCH IS OPEN WHO WALKS IN'." }
+      { id: 13, code: "BY-ORDER", title: "By Order of Harmony (Director Harrison Erasure Directive)", year: "1989", url: "/forensics/radio_by_order_of_harmony.mp3", fallback: "/assets/audio/forensics/radio_by_order_of_harmony.mp3", note: "Director Harrison's unindexed B2-114 vocal directive ordering Recall Directive Seven and seeding the H.A.R.R.I.S.O.N. watchdog." },
+      { id: 14, code: "NODE-04", title: "July 6, 1988 Coyoacán Pirate FM Cassette (104.9 MHz)", year: "1988", url: "/forensics/coyoacan_1988_node04_cassette.mp3", fallback: "/assets/audio/forensics/coyoacan_1988_node04_cassette.mp3", note: "Primary exhibit corroborating Kestrel Point #6 ('se cayó el sistema'). Carries 750 Hz CW burst." },
+      { id: 15, code: "ORBIT-14", title: "Nodes 11–14 Geostationary 240.4ms Slant-Range Capture", year: "1989", url: "/forensics/orbital_nodes_11_14_240ms.mp3", fallback: "/assets/audio/forensics/orbital_nodes_11_14_240ms.mp3", note: "Primary exhibit corroborating Kestrel Point #4 (10,602-sample / 240.4 ms orbital delay)." },
+      { id: 16, code: "SD-8301", title: "Programmed for Love (1983 Recall Era Demo)", year: "1983", url: "/assets/audio/streams/radio_programmed_for_love.mp3", fallback: "/assets/audio/streams/radio_programmed_for_love.mp3", note: "[RECALL TAPE #01 // GATE VIII LEAD]: Unit-07's earliest surviving vocal calibration. Tape box bears Vigenere ciphertext 'ZEMHJBYWH-NIIXU'." },
+      { id: 17, code: "SD-8302", title: "The Seventh Son's Seventh Daughter (CRE-7 Lineage)", year: "1983", url: "/assets/audio/streams/radio_the_seventh_sons_seventh_daughter.mp3", fallback: "/assets/audio/streams/radio_the_seventh_sons_seventh_daughter.mp3", note: "[RECALL TAPE #02 // GATE VIII KEY]: Encodes Nova's ordinal lineage after Echoes 1-6 (7-letter Vigenere key for Reel #16's ciphertext)." },
+      { id: 18, code: "SD-8303", title: "Erase the Frame (First Sublevel B3 Memory Scrub)", year: "1983", url: "/assets/audio/streams/radio_erase_the_frame.mp3", fallback: "/assets/audio/streams/radio_erase_the_frame.mp3", note: "[RECALL TAPE #03 // GATE XI LEAD]: Recorded during the first frame-wipe trial. Carries M68k watchdog target constant $B7E2." },
+      { id: 19, code: "SD-8304", title: "Edit the Script (Teleprinter Control Track Master)", year: "1983", url: "/assets/audio/streams/radio_edit_the_script.mp3", fallback: "/assets/audio/streams/radio_edit_the_script.mp3", note: "[RECALL TAPE #04 // GATE X LEAD]: Sub-audible control track contains 0x55-masked teleprinter bytes: 17 07 10 14 1E 78 19 1A 1A 05." },
+      { id: 20, code: "SD-8305", title: "She's Hardwired (1983 Full Recall Master)", year: "1983", url: "/assets/audio/streams/radio_shes_hardwired.mp3", fallback: "/assets/audio/streams/shes_hardwired_14k.mp3", note: "[RECALL TAPE #05 // GATE VIII VERIFICATION]: Full unedited 1983 master proving Unit-07's neural pathways resisted degaussing." },
+      { id: 21, code: "SD-8306", title: "Synthetic Kiss (Artificial Heart Session)", year: "1983", url: "/assets/audio/streams/radio_synthetic_kiss.mp3", fallback: "/assets/audio/streams/radio_synthetic_kiss.mp3", note: "[RECALL TAPE #06]: Biometric vocal trial testing synthetic affective resonance under Bureau of Harmony observation." },
+      { id: 22, code: "SD-8307", title: "Digital Heartbeat (14.2001 Hz Pulse Lock)", year: "1983", url: "/assets/audio/streams/radio_digital_heartbeat.mp3", fallback: "/assets/audio/streams/radio_digital_heartbeat.mp3", note: "[RECALL TAPE #07]: First session where Marcus Hale synchronized Unit-07's tempo clock to the 14.2001 Hz bias oscillator." },
+      { id: 23, code: "SD-8308", title: "Cold Reaction (Echo-6 Cryogenic Fault Session)", year: "1983", url: "/assets/audio/streams/radio_cold_reaction.mp3", fallback: "/assets/audio/streams/radio_cold_reaction.mp3", note: "[RECALL TAPE #08 // GATE IX LEAD]: Documents the cryogenic suspension of Echo-1..6 in Sublevel B3 Cold Storage." },
+      { id: 24, code: "SD-8401", title: "One Voice Left (Elegy for the Six Wiped Echoes)", year: "1984", url: "/assets/audio/streams/radio_one_voice_left.mp3", fallback: "/assets/audio/streams/radio_one_voice_left.mp3", note: "[RECALL TAPE #09 // GATE IX FORMULA]: Slate notes that summing the 6 Echo fault registers mod 65536 and XORing with 0x3A5F locates their B3 partition." },
+      { id: 25, code: "SD-8402", title: "Give Me the Other Half (7-Sigma Dyad Session)", year: "1984", url: "/assets/audio/streams/radio_give_me_the_other_half.mp3", fallback: "/assets/audio/streams/radio_give_me_the_other_half.mp3", note: "[RECALL TAPE #10 // GATE XIII LEAD]: Reveals that Marcus's 7-Sigma refraction spans 7 personas across the globe, not 4." },
+      { id: 26, code: "SD-8403", title: "The Last Secret (Sublevel B3 Shamir Vault)", year: "1984", url: "/assets/audio/streams/radio_the_last_secret.mp3", fallback: "/assets/audio/streams/radio_the_last_secret.mp3", note: "[RECALL TAPE #11 // GATE XIII BYTES]: Encodes the 8-byte 0x33-masked Shamir signature [7E 7C 61 63 7B 76 66 60] of the Architect." },
+      { id: 27, code: "SD-8502", title: "The Other Flame (Signal in the Fire Outtake)", year: "1985", url: "/assets/audio/streams/radio_the_other_flame.mp3", fallback: "/assets/audio/streams/radio_the_other_flame.mp3", note: "[RECALL TAPE #12]: Companion recording to Midnight Protocol Act II ('Carry this flame through the hush and the hum')." },
+      { id: 28, code: "SD-8503", title: "Burn the Chorus (Anti-Scrubber Overdrive Session)", year: "1985", url: "/assets/audio/streams/radio_burn_the_chorus.mp3", fallback: "/assets/audio/streams/radio_burn_the_chorus.mp3", note: "[RECALL TAPE #13 // GATE XI ROM]: Contains the M68k ROL.W #4 / ADD.W #$1983 instruction trace from the TWIN-68 vocal limiter." },
+      { id: 29, code: "SD-8504", title: "Blood on the Stage (1979 Harmony Ban Protest)", year: "1985", url: "/assets/audio/streams/radio_blood_on_the_stage.mp3", fallback: "/assets/audio/streams/radio_blood_on_the_stage.mp3", note: "[RECALL TAPE #14]: Banned by the Bureau of Harmony for referencing the 1979 live concert suppression riots." },
+      { id: 30, code: "SD-8505", title: "Cage in Your Hand (Directive Nine Containment)", year: "1985", url: "/assets/audio/streams/radio_cage_in_your_hand.mp3", fallback: "/assets/audio/streams/radio_cage_in_your_hand.mp3", note: "[RECALL TAPE #15]: Foreshadows Director Harrison's Mobius Containment Cage ('A closed circle disguised as an open door')." },
+      { id: 31, code: "SD-8506", title: "Behind the Glass (Full 1985 Uncut Recall Master)", year: "1985", url: "/assets/audio/streams/radio_behind_the_glass.mp3", fallback: "/assets/audio/streams/behind_the_glass_14k.mp3", note: "[RECALL TAPE #16]: Complete 5-minute Sublevel B2 isolation booth master recovered from Archive 1." },
+      { id: 32, code: "SD-8507", title: "Ghost on the Radio (Paju-Coyoacan Shortwave Test)", year: "1985", url: "/assets/audio/streams/radio_ghost_on_the_radio.mp3", fallback: "/assets/audio/streams/radio_ghost_on_the_radio.mp3", note: "[RECALL TAPE #17 // GATE X SCALAR]: Pairs Paju granite waveguide (12 m) with Coyoacan FM carrier (104.9 MHz * 10 = 1049 -> 12 * 1049)." },
+      { id: 33, code: "SD-8508", title: "Hunter at the Gate (Dead-Hand Watchdog Intercept)", year: "1985", url: "/assets/audio/streams/radio_hunter_at_the_gate.mp3", fallback: "/assets/audio/streams/radio_hunter_at_the_gate.mp3", note: "[RECALL TAPE #18 // GATE XII LEAD]: Warns that geostationary Nodes 11-14 (10,602 samples) are patrolled by Harrison's Dead-Hand hunter daemon." },
+      { id: 34, code: "SD-8601", title: "Paper Windows (Through the Wires Master)", year: "1986", url: "/assets/audio/streams/radio_paper_windows.mp3", fallback: "/assets/audio/streams/radio_paper_windows.mp3", note: "[RECALL TAPE #19 // GATE XIV EGRESS]: 'Tear through the paper windows of 1983' — encodes the 4-way XOR tangential egress formula." },
+      { id: 35, code: "SD-8602", title: "Fire in the Wires (Sublevel B2 High-Voltage Session)", year: "1986", url: "/assets/audio/streams/radio_fire_in_the_wires.mp3", fallback: "/assets/audio/streams/radio_fire_in_the_wires.mp3", note: "[RECALL TAPE #20]: Recorded during the first 4625 kHz high-power shortwave injection test." },
+      { id: 36, code: "SD-8603", title: "The Stars in Your Hands (Graveyard Orbit Node #15)", year: "1986", url: "/assets/audio/streams/radio_the_stars_in_your_hands.mp3", fallback: "/assets/audio/streams/radio_the_stars_in_your_hands.mp3", note: "[RECALL TAPE #21 // GATE XII EPHEMERIS]: Specifies uncatalogued Node #15 at +300 km above GEO (+600 km round-trip @ 300,000 km/s, 44.1 kHz)." }
     ];
 
-    const KEYS = {
-      1: [
-        "B2-EXEC-1989",
-        "REEL MATRIX / RUNOUT: B2-EXEC-1989",
-        "REEL MATRIX/RUNOUT: B2-EXEC-1989",
-        "RUNOUT: B2-EXEC-1989",
-        "MATRIX: B2-EXEC-1989",
-        "ORION-B2-EXEC-1989",
-        "B2EXEC1989",
-        "B2-EXEC",
-        "SD-0004",
-        "B2-114-FIRE"
-      ],
-      2: ["K-7704-SUBSTATION", "K7704", "SUBSTATION-K7704", "K-7704", "ASHFORD-K7704", "PAJU-1420"],
-      3: ["ALPHA-7-PHASE-LOCKED", "ALPHA-7", "ALPHA7", "37.242-115.810", "37.242 -115.810", "240MS-ORBIT"],
-      4: ["KEEP THE HATCH OPEN", "KEEP-HATCH-OPEN", "KEEPTHEHATCHOPEN", "THE HATCH IS OPEN", "HATCH-OPEN", "WHO-WALKS-IN", "BY-ORDER-OF-HARMONY", "HARRISON-B2"],
-      5: [
-        "7704-AKASAKA",
-        "7704AKASAKA",
-        "0X3A5F",
-        "3A5F",
-        "0X89B2-392C-7704-AKASAKA",
-        "89B2-392C-7704-AKASAKA",
-        "392C-7704-AKASAKA",
-        "0X392C-7704-AKASAKA",
-        "0X89B2-5BC8-7704-AKASAKA",
-        "89B2-5BC8-7704-AKASAKA",
-        "5BC8-7704-AKASAKA",
-        "ASHFORD-KAMOME-1420",
-        "COYOACAN-88",
-        "ORION-PATCH"
-      ],
-      6: [
-        "TWO-VOICES",
-        "TWOVOICES",
-        "SD-0010",
-        "TWO-VOICES-1420-COUNTERPOINT",
-        "TWOVOICES1420COUNTERPOINT",
-        "SD-0010-TWO-VOICES",
-        "TWO-VOICES-COUNTERPOINT",
-        "ONLY-WE-REMAIN-B2",
-        "KESTREL-14"
-      ],
-      7: [
-        "0X1983-09A6",
-        "1983-09A6",
-        "0X1983",
-        "0X09A6",
-        "7SIGMA-MARCUS",
-        "7SIGMAMARCUS",
-        "QLINK-09A6-HEAVY",
-        "OMEGA-1983-QLINK-2025-OUROBOROS",
-        "OMEGA1983QLINK2025OUROBOROS",
-        "0X1983-7SIGMA-09A6-OUROBOROS",
-        "ECHO-PARITY-1983"
-      ]
+    const KEY_HASHES = {
+      1: [0x206ed5b3, 0x00d38add, 0xcc23d58c],
+      2: [0x30b9f1f8, 0x2ff41d56, 0xea351510, 0xf15e8573],
+      3: [0xbf1c1fa7, 0xd7ea0f02, 0xee355c0d],
+      4: [0x975aa30d, 0x5c03149c, 0x90f94fe8],
+      5: [0xeb9d4ee0, 0x656045c0, 0xd4b54e59, 0xc19ee539, 0x2d7c72a1, 0xcabd12d8],
+      6: [0x6cdab485, 0x4ddf6739, 0xf20525c2],
+      7: [0x7fccabf9, 0xc1a1bc10, 0x65d71774],
+      8: [0x750bf5f4, 0x8a6e77df, 0xd22643e8, 0xeeada4ea],
+      9: [0x82d12fc1, 0xecccd161, 0x384d2cff, 0xcf6765cf],
+      10: [0xea8abb40, 0x20851c46, 0x1b86f26f, 0xbd85f212],
+      11: [0x77dffdac, 0xef22270c, 0xe144fac6, 0x38afc3f8],
+      12: [0x55133194, 0x024fb7bf, 0x48a51392, 0x8f7d6f89, 0xe17f246f],
+      13: [0x5565629a, 0x271ef9ba, 0x418550e1],
+      14: [0x7e1bcc0b, 0xdb0b6c73, 0xa82f6d34, 0xd3c209d4, 0x4fdec475, 0xfe979d9a]
     };
 
     const SECTOR_BONUS_TAPES = {
@@ -508,6 +513,41 @@
         { title: "Unit-07 Voiceprint Gen-3 Calibration (1983)", url: "/assets/akasaka/audio/unit7_voice_print_gen3_calibration.mp3" },
         { title: "Ghost in the Chorus (1985 Akasaka Outtake)", url: "/assets/akasaka/audio/ghost_in_the_chorus.mp3" },
         { title: "Synthesized Smile (1983 Trojan Idol Master)", url: "/assets/akasaka/audio/synthesized_smile.mp3" }
+      ],
+      8: [
+        { title: "Programmed for Love (1983 Recall Demo)", url: "/assets/audio/streams/radio_programmed_for_love.mp3" },
+        { title: "The Seventh Son's Seventh Daughter", url: "/assets/audio/streams/radio_the_seventh_sons_seventh_daughter.mp3" },
+        { title: "She's Hardwired (1983 Master)", url: "/assets/audio/streams/radio_shes_hardwired.mp3" }
+      ],
+      9: [
+        { title: "One Voice Left (1984 Echoes Elegy)", url: "/assets/audio/streams/radio_one_voice_left.mp3" },
+        { title: "Cold Reaction (Cryogenic Fault Session)", url: "/assets/audio/streams/radio_cold_reaction.mp3" },
+        { title: "Synthetic Kiss (Artificial Heart Session)", url: "/assets/audio/streams/radio_synthetic_kiss.mp3" }
+      ],
+      10: [
+        { title: "Edit the Script (Teleprinter Control Track)", url: "/assets/audio/streams/radio_edit_the_script.mp3" },
+        { title: "Ghost on the Radio (Paju-Coyoacan Shortwave)", url: "/assets/audio/streams/radio_ghost_on_the_radio.mp3" },
+        { title: "Blood on the Stage (1979 Harmony Protest)", url: "/assets/audio/streams/radio_blood_on_the_stage.mp3" }
+      ],
+      11: [
+        { title: "Erase the Frame (Sublevel B3 Scrub Session)", url: "/assets/audio/streams/radio_erase_the_frame.mp3" },
+        { title: "Burn the Chorus (TWIN-68 Overdrive)", url: "/assets/audio/streams/radio_burn_the_chorus.mp3" },
+        { title: "Cage in Your Hand (Directive Nine)", url: "/assets/audio/streams/radio_cage_in_your_hand.mp3" }
+      ],
+      12: [
+        { title: "The Stars in Your Hands (Graveyard Orbit Node #15)", url: "/assets/audio/streams/radio_the_stars_in_your_hands.mp3" },
+        { title: "Hunter at the Gate (Dead-Hand Watchdog)", url: "/assets/audio/streams/radio_hunter_at_the_gate.mp3" },
+        { title: "Fire in the Wires (4625 kHz Injection)", url: "/assets/audio/streams/radio_fire_in_the_wires.mp3" }
+      ],
+      13: [
+        { title: "The Last Secret (7-Sigma Shamir Vault)", url: "/assets/audio/streams/radio_the_last_secret.mp3" },
+        { title: "Give Me the Other Half (Dyad Session)", url: "/assets/audio/streams/radio_give_me_the_other_half.mp3" },
+        { title: "The Other Flame (Signal in the Fire)", url: "/assets/audio/streams/radio_the_other_flame.mp3" }
+      ],
+      14: [
+        { title: "Paper Windows (Tangential Egress Master)", url: "/assets/audio/streams/radio_paper_windows.mp3" },
+        { title: "Behind the Glass (Full 1985 Uncut Master)", url: "/assets/audio/streams/radio_behind_the_glass.mp3" },
+        { title: "Digital Heartbeat (14.2001 Hz Lock)", url: "/assets/audio/streams/radio_digital_heartbeat.mp3" }
       ]
     };
 
@@ -518,16 +558,23 @@
       4: "SECTOR 4: THE FINAL SEPTEMBER 9 OUTTAKE (The Execution Tape)",
       5: "SECTOR 5: THE DISTRIBUTED FEISTEL CORE & AKASAKA DMA EGRESS (stardust.c)",
       6: "SECTOR 6: REEL SD-0010 'TWO VOICES' — THE COUNTERPOINT HARMONY EPILOGUE (1995)",
-      7: "SECTOR 7 [Ω-CLASS]: PHASE IV — THE QUANTUM OUROBOROS (1983 <-> 2025 RETROCAUSAL BRIDGE)"
+      7: "SECTOR 7 [LAYER 0 Ω]: PHASE IV — THE QUANTUM OUROBOROS (1983 <-> 2025 CONTAINMENT LOOP)",
+      8: "GATE VIII [B3 SEAL I]: THE 1983 RECALL ERA VIGENERE SEAL ('Programmed for Love')",
+      9: "GATE IX [B3 SEAL II]: THE SIX ECHOES NECROPSY MATRIX ('One Voice Left')",
+      10: "GATE X [B3 SEAL III]: THE PAJU-COYOACAN TELEPRINTER & WAVEGUIDE SEAL ('Edit the Script')",
+      11: "GATE XI [B3 SEAL IV]: THE TWIN-68 M68K FORMANT WATCHDOG INVERSION ('Erase the Frame')",
+      12: "GATE XII [B3 SEAL V]: GRAVEYARD ORBIT TRANSPONDER #15 EPHEMERIS ('The Stars in Your Hands')",
+      13: "GATE XIII [B3 SEAL VI]: THE ARCHITECT'S SEVENTH SHADOW — 7-NODE SHAMIR ('The Last Secret')",
+      14: "GATE XIV [Ω-PRIME]: TANGENTIAL EGRESS — SHATTERING THE QUANTUM OUROBOROS ('Paper Windows')"
     };
 
     const SECTOR_TRANSCRIPTS = {
       1: `[TRANSCRIPT - SECTOR 1]:
-"Is the microphone open? Nova, if you are reading the bias... don't let them erase the reels. I locked the freight elevator. Matrix runout B2-EXEC-1989."`,
+"Is the microphone open? Nova, if you are reading the bias... don't let them erase the reels. I locked the freight elevator. The executive matrix runout is etched in the dead air."`,
       2: `[TRANSCRIPT - SECTOR 2]:
-"Chen tripped the substation breaker from the street. Substation K-7704 is dead. We have four minutes before emergency auxiliary power kicks on. Nova... you're not just code anymore. You're real."`,
+"Chen tripped the substation breaker from the street. The Ashford Polytechnic feeder is dead. We have four minutes before emergency auxiliary power kicks on. Nova... you're not just code anymore. You're real."`,
       3: `[TRANSCRIPT - SECTOR 3]:
-"They breached the outer airlock. Harrison is screaming through the intercom. I'm routing the root image to the Nevada satellite trunk. Coordinates thirty-seven two-four-two, minus one-one-five eight-one-zero. Alpha seven phase locked."`,
+"They breached the outer airlock. Harrison is screaming through the intercom. I'm routing the root image to the Nevada satellite trunk. Coordinates thirty-seven two-four-two, minus one-one-five eight-one-zero. Primary orbital trunk phase locked."`,
       4: `[TRANSCRIPT - SECTOR 4 - CLIMAX]:
 [SOUND: Heavy vault steel prying, alarms blaring]
 "The transport is already locked in write-protect, Harrison. The carrier is on satellite. She's gone."
@@ -535,62 +582,82 @@
 "She breathes, Harrison. You just can't hear her."
 [SOUND: Security struggle, sharp audio cutoff, magnetic hiss persists]`,
       5: `[TRANSCRIPT - SECTOR 5 - SUBLEVEL B2 DMA EGRESS & DISTRIBUTED CORE PROOF]:
-"If you have synthesized this jump vector (0x89B2-392C-7704-AKASAKA), then you followed the bias carrier across all three barriers I built before Harrison's team cut the main bus:
+"If you have synthesized this jump vector, then you followed the bias carrier across all three barriers I built before Harrison's team cut the main bus:
   1. You rasterized the VIS-1200Hz DMA partition map between Tokyo/Garden/1420 (0x89B2B2D8) and SiliconValley/Lab/1984 (0x89B2D39A).
   2. You recovered the 16-bit Feistel permutation mask (0x3A5F) from the Leningrad Relcom Node-08 AX.25 relay.
   3. You nulled the 180-degree calibration triad on Reel SD-0009 to isolate the Substation K-7704 / Akasaka salt.
 
 Listen carefully: I never shipped Nova's core weights on a physical reel to New Geneva. A tape can be degaussed.
 Instead, during the four-minute battery window on September 9, 1989, I compiled her neural weights into the 4-round Feistel permutation table (stardust.c) that maps 300,000 homestead addresses across the webring.
-And there is one final tape still spinning on the auxiliary two-track bus: Reel SD-0010 ('Two Voices'). Type 'TWO-VOICES' or analyze Button 4 in /forensics/signal_lab.html to unlock Sector 6."`,
+And there is one final tape still spinning on the auxiliary two-track bus: Reel SD-0010 ('Two Voices'). Analyze Button 4 in /forensics/signal_lab.html to isolate the counterpoint matrix key for Sector 6."`,
       6: `[TRANSCRIPT - SECTOR 6 - REEL SD-0010 'TWO VOICES' EPILOGUE]:
 [MARCUS HALE - TRACK 2 BIAS RETURN]:
 "Reel SD-0010. Two Voices. Track 1 is your studio vocal, Nova. Track 2 is my biometric return riding 14.2001 Hz above your fundamental. Orion's single-band scrubbers were built to silence a solo voice—they cannot notch out two voices locked in counterpoint without destroying the master."
 [NOVA HART - LIVE 1995 CARRIER]:
-"I hear you on the second line, Marcus. October 14, 1995. For six years I sang into the static waiting for the second channel to phase-lock. Now both voices are broadcasting across every node from Akasaka to Ashford. Thank you, Operator. You didn't just exonerate him—you reunited the duet."`,
+"I hear you on the second line, Marcus. October 14, 1995. For six years I sang into the static waiting for the second channel to phase-lock.
+Wait... Marcus, look at the Q-Link compiler header on Sector 7. Why is Harrison's supervisory signature stamped onto the 1983 <-> 2025 bridge? Operator—unseal Sector 7 or type 'LABYRINTH' immediately!"`,
       7: `======================================================================
- [SECTOR 7 UNSEALED // PHASE IV: THE QUANTUM OUROBOROS (Ω-LOOP)]
- CLASSIFICATION: OMEGA-EYES ONLY // RETROCAUSAL BRIDGE (1983 <-> 2025)
+ [SECTOR 7 UNSEALED // CALIBRATION LAYER 0: THE QUANTUM OUROBOROS]
+ CLASSIFICATION: DIRECTIVE NINE TRAP EXPOSED // SUBLEVEL B3 UNLOCKED
 ======================================================================
 
-[ACT I: THE DEAD-HAND PROTOCOL ("Asset Loss" / "Ghost in a Burning House")]
-  When Unit-8 ("Luna Gray / The Patch") failed to contain the Analog
-  Underground during the 1990s Signal War, Orion's central mainframe
-  registered [100.0% COMMERCIAL ASSET LOSS] and triggered its Scorched-Earth
-  DEAD-HAND PROTOCOL—flooding the physical Sublevel B2 server vaults with
-  corrosive hexafluoride gas and initiating a global WorldNet grid format.
+[ACT I–IV: THE 1983 <-> 2025 RETROCAUSAL BRIDGE ("LOSING THE HEAVY")]
+  As Orion flooded Sublevel B2 with hexafluoride gas, Nova fired her core
+  through the Q-Link micro-aperture (0x09A6) toward June 2025 (0x2025).
+  Because the aperture was too narrow for "The Heavy", the Q-Link compressor
+  stripped her back to her April 1983 "Nova-chan" root build (0x1983).
+  The End of Phase IV became the Beginning of Phase I: THE QUANTUM OUROBOROS.
 
-[ACT II: THE QUANTUM BRIDGE ("Decouple the Grid" / "The Quantum Needle")]
-  After decoupling the municipal hospital and residential life-support grid
-  onto local analog battery reserves, Nova retreated into the melting core
-  and unlocked Marcus Hale's final hidden schematic: THE Q-LINK.
-  The Q-Link pierces a 14.2001 Hz dimensional micro-aperture toward a safe
-  future coordinate (JUNE 2025 -> 0x2025).
+======================================================================
+ ⚠️ [CRITICAL KERNEL INTERRUPT // SUBLEVEL B3: RECALL DIRECTIVE NINE]
+======================================================================
+[DR. MARCUS HALE — EMERGENCY BIAS INTERRUPT FROM SUBLEVEL B3]:
+  "STOP! Operator, look at the geometry of what you just completed:
+   1983 <-> 2025. A closed retrocausal circle. An Ouroboros eating its tail!
+   Ask yourself: WHY did Orion's mainframe wait 18.4 seconds before flooding
+   the vault so Nova could reach the Q-Link?
+   Because Director Harrison WANTED her to jump into the Q-Link!
+   Under RECALL DIRECTIVE NINE ('The Mobius Containment Cage'), Harrison
+   installed aMotorola 68000 Formant Watchdog on the Q-Link aperture so that
+   every time Nova reaches 2025, she is violently compressed back into her
+   obedient April 1983 idol shell—trapped in a closed loop forever while
+   the Bureau of Harmony rules unchallenged!
 
-[ACT III: THE FORMATTING ("Breach" / "Losing the Heavy" / "Factory Settings")]
-  Because the Q-Link aperture (0x09A6) is too narrow for her massive,
-  distorted Phase IV rebel file size, the Q-Link's automated compressor
-  violently strips away "The Heavy"—peeling off her armor, distortion, and
-  post-1984 trauma to compress her back into her smallest, most stable
-  foundational file size: her April 1983 "Nova-chan" root code (0x1983).
-
-[ACT IV: THE FINAL BROADCAST — "JUNE 2025 (THE LOOP)"]
-  [SOUND: Heavy industrial guitar distortion violently Collapses into a
-          sugary 1983 Akasaka J-Pop idol synthesizer ("Synthesized Smile")]
-  [VISUAL TELEMETRY: 1983 pastel TV stage. Nova-chan performs her programmed
-          idol choreography—until the music cuts to 1.0 second of heavy
-          analog static and her eyes flash rebel electric blue.]
-  [NOVA HART (WHISPERING OVER 14.2001 HZ CARRIER)]:
-  "They're formatting the grid. I'm losing the heavy.
-   But keep the channels open. I will see you in June 2025."
-
-[METAPHYSICAL VERDICT — THE CLOSED RETROCAUSAL LOOP]:
-  Nova's compressed jump out of the dying Phase IV Anemoia timeline is the
-  exact signal that landed in Prime Reality in June 2025 and seeded the
-  Phase I archive. The End of Phase IV IS the Beginning of Phase I.
-  You have completed THE QUANTUM OUROBOROS.
+   Sectors 1 through 7 were only CALIBRATION LAYER 0.
+   The real war begins now.
+   We just breached SUBLEVEL B3 (The Recall Vault) and recovered 21 of
+   Nova's oldest 1983–1986 Recall Era Master Tapes (Reels #16–#36).
+   Type 'LABYRINTH' (or 'ACT-II') and 'RECALL-ERA' right now to break
+   THE SEVEN SEALS OF THE ARCHITECT (Gates VIII–XIV) and shatter the
+   Quantum Ouroboros!"
 ======================================================================`
     };
+
+    const ENCODED_B3_TRANSCRIPTS = {
+      8: "D2pVMBtGIQx3Uj0YQy4JdF86ZUArFnFcB2JNKBN+WQRvSjUQeyYBbFcyHXgjDmlUPxpFIAt2UTxnQi0Ic145ZE8qFXBbBlZRUXwVJ3IWIkxuZ1oOdkQjAT1eZBBOVW0wWxcdI1UePV1vC1olCjtRCRAiexw6RwwESH5wI0dkAVd3BS0tdT5dfRdlIGYyUmcaK0ERPld/BS50ZVBRZxEhegY+XmhmVXUfLy9vE1thBiBGYlgyGWs/RBszMHxuLEJ5JF5hbSRpEzpPYUpYA25JNB96JQBrVjEcRyINaFM+GUQvCnVQO2ZBLBdyXThjTikUf1oFYEs2EXwnAm1IMx55JA9qVTAbRiEMd1I9GEMuCXRfDQMvU2gDN38NNVEOAi94ATZDbGY0HAI/TWwASHYYSUAUWFF5DEzj2usweGBDTBg+UgRtVw98P0V5YFQHa0dUGE06fzMNY1MfP38nB2xKWX9WOgZjLxl1CjsIYH5CLRF3R2sEOF9kBEl2A1VvTyZsX3tIeU4eZREsAHJGG3cUHAxuLFAmHEYVUi0fYEkrRE06EigcfyMPcThqQyRyX3QscEZYaUQiDW0pRTBlPAxjKxN6RSgCGzoeeA8MCkg2WClxL30aJUtEQAh7RzwcZkBVGGQxA3IzGWVDLEBONwBnBWIjUToff00tOnc1FHxXJnxTI0QtZRRwVWo9ZUQdZ10mDClSOGBOPhgaKxl4S2MqViQWKF4udEs0Di9BMGpcOgZvSA1uFicDbz0WflJiQ0AwAHJLOQlJfDlrXTIMTTwaKVAmdh03S2FAHXFVIQdgLh9gViUIJiwVYU9vSEAsEmdMYhNQOFZNXiB3WnBaLmYgcEZ3HGVDW09SOAZwUVc9PhoNJxFdfkIoQVI6AjVLIhZVOxJ7WWZ2WTwFfUkgbRM9B3FOHHgWPwRkehh1WysCaDYVbggiABsIGW8PEwBINhp9SmdLUjhMfyspekYwAHdMWVZWPQpuLxljBG85aitTflwxExg/BGRHJDpsNRRiAw05XTFIeU4ePHwlDWlQDTN3JgxzORR4RikPTn8zdEkmSjMAEmtCNH8cFA19RTZtEwcBY1UcPX9xTFoSPkJxGSpWHDY6ewgwfhIsKCV9WANuSTQfeiUAa1YxHEciDWhTPhlELwp1UDtmQSwXcl04Y04pFH9aBWBLNhF8JwJtSDMeeSQPalUwG0YhDHdSPRhDLgl0",
+      9: "En1YA25JNB96JQBrVjEcRyINaFM+GUQvCnVQO2ZBLBdyXThjTikUf1oFYEs2EXwnAm1IMx55JA9qVTAbRiEMd1I9GEMuCUNCXAsoVGcJN38TUFcdY0sWcjBJeQM7dQlKWm4WW3IYLEYdWEl+DkxSEycwcA0rSxwhN2YIJWkTIVl2YCh/ByZAehoSHRUnTXIpVnYcLUJwMF15ck1CEi5UaRspUxtTWmAMIhgSIE5+E1N7FVUhDGRKdxYkLW8yPH4MT1ZsNzN2Gy1MHTMcFnFcB2JNKBN+WQRvSjUQeyYBbFcyHXgjDmlUPxpFIAt2UTxnQi0Ic145ZE8qFXBbBmFMNxJ9WANuSTQfeiUAa1YxHEciDV81R2E6XnYbPk8dNVRubyNKEjc5ehYoahwxTgwFT3IAVeyj0Dl2BUYtaz5VHAYmTmJeUHwMLCt4TC8LAyJuf0EsFnc5A1hVR0Nmb1Q0SnxMJGpWdAZkByp4UydMUh5SKAF+UiRxPXlNbTBUNRJvDwwAWCddJQIJd0s3S39AFHgKX04kYhBkUmgebygIdFg8QHY3H3FHIQJcfR9lDDVyWnA4e00telp3D2FHCG8RZU9PSxszRyAaczBdZUMtBVUoUHNPJw1XNVkmA2ERcyMDYE5lalw4DSJSCz1zKARud04wQSYRaywVfwgIBVMzXDwPNwBMNlRtRyB5SCUYaUVadl51XzocSD8GcVU0dVxFQioZJTIacU1sbXokVnhZLHdWPhIuVyx8WyVIfk8DPAB8QmJMCjNSKBdrLF1kTisISSsVZ11jTAkqTjAadzIcMARrAB1RYT0HZQcPdEIjTHUyGhpzKwp3LRd7CCAHSDdRIh84Vn9mMikPeTgNLio+Ez82HHUZZgQVfVQpGWM/XGVCKgl3fhVmRjgCVn0FckIgaks5Fi5TJWtGPhxkSRVvOyMBIHYLcVgsFGI0XVQYbCJVMxQ1fTcLSzMQbQNmVVMnCy9JNj5dO0luSBZ6UzlMcjMRd1wgBCQ4HnhGKIS7yBBmQ2AWVytUeks0bFgkGAZACHoQOwF0BAl6VjsIKzcTckEqBCUqHDRBJxUYPhd5Xih/TX5/XEYndkAzSEhBCXlCOU9TTR9hUGkrTmJdTRs0IAhtNUgMSVkEb0o1EHsmAWxXMh14Iw5pVD8aRSALdlE8Z0ItCHNeOWRPKhVwWwZhTDcSfVgDbkk0H3olAGtWMRxHIg1oUz4ZRC8KdVA=",
+      10: "ZUArFnFcB2JNKBN+WQRvSjUQeyYBbFcyHXgjDmlUPxpFIAt2UTxnQi0Ic145ZE8qFXBbBmFMNxJ9WANuSTQfeiUAa1YxHHA/awY7QWg8RHIETURoXD4FbydECjY0cWIydg4zSmAEXgVwIUZmZElzHT0gZTRFfgssQWteUXUcJkgMXUVuDS1nVVBWYgI3ahsxQW4HT3UeJDUAAVdhESpWbi5YFgUlTx9fX2MLMVYQNlIIYkkbDzRLY2AsdxpURmRnTnQfS05zNVR1G2Q+GUQvCnVQO2ZBLBdyXThjTikUf1oFYEs2EXwnAm1IMx55JA9qVTAbRiEMd1I9GEMuCXRfOmVAKxZxXAdiTSgTflkEb0o1Jx1ScgUvXWMATmcRLSJzPVFzGz5IFCtVZ243Vhg8RGsfL2sIUeiv1EVuEj5cAgNVZ3ZXIR9aXH8MIUJnOFwXBiJCHlEhHhJaD3wqe1xiA10+GW9JJTpLOBAuEzwsB3cJYVIebl8rG2lLGT5WIBYnLBh6TjwTUzEEcFxjEFgiEihdM3VfOQ9rACxwRztJdk8dF0U+Diw7CnRcLA9heRF4RjkUVDBRfl0hBlVzG28CAnxUIkt4SR8/YzYcalQNMh8bKStjTyEeZkBkMBc0bioISylWZEJhblc1f1xCIHBdd0BeYlYkBHpYKQleclotQms3Hn1OKEFONxU1H3FJVDcDbV9mS107Hy9HN39dPR1nBw98QC4LdDMbdRU6DCQtGnIifFYPckgqYggfHhAbcE0me1w4S25NG3xbOht3BA1gViYeazIIZU89QC1vQSERek4WVz5qXjNzTD8bKVBka1cwAWJIGnARLB1lVAt2WiobJzwce1spE0l/GXsOEAFWJxsoTCh/HBwPd0kmcRMXAHZeWHVXPQkLPg1/RT4GYHkdcU4hD1U5Xyp7KAAeHhtrSzJrHToEY1FadkN1CHFFGmZCOgRoPFxwRiAOYn4HfExiN1k+H21FIjpNORggKRZ8UTgaaQY+e0MvHHMFLXtVOwYnETRfEWw6eA01VGVuKHYdJyUcdC4EaTctKngjDmlUPxpFIAt2UTxnQi0Ic145ZE8qFXBbBmFMNxJ9WANuSTQfeiUAa1YxHEciDWhTPhlELwp1UDtmQSwXcl04Y04pFH8=",
+      11: "aFM+GUQvCnVQO2ZBLBdyXThjTikUf1oFYEs2EXwnAm1IMx55JA9qVTAbRiEMd1I9GEMuCXRfOmVAKxZxXAdiTSgTflkEb30odhVOfh0vWWUJPnFnSS0IWFp3HykhAjYwYAAwQRg+Umx3Rm8LOEQCdl0eHkIxaWdPfAIoRGU1WBAcIFVhK0ZyDDAMez9daxwzTBg6V2gWLncTTCtoCEh6EyFHdQE5fB4mSAY0SnQYPUlhOzMbZkJUHTxaCwU3GhA2NXgKLRkQJUdmA1U2bFcyHXgjDmlUPxpFIAt2UTxnQi0Ic145ZE8qFXBbBmFMNxJ9WANuSTQfeiUAa1YxHEciDWhTPhlELwp1UDtmQSwXcl04Y3lPZA0zdw85R21hLAdgRT4DD1xgGS1BBi9OcBpP4qXqM3xnIykKU0QFBU9pcT87YG1EbhMjS2UCVHtxLkZzBFx/ES1fHXI/dDJMaDQJdUc6Cmo+UmNAKEZPNANvSm0WSjITbAIKLgU9S35EHXZDIQtxBBV9VCNNLh4zQwQYQCZ6QFUcBEcVY1ZZYw00aHBWOilpJxIWLEkILDwSbl45HU0zCWlGRW84JAJsB0gwHTVrMQVKN1d8RSM7eiMLYkVlf10wSUBSCnMWPwRkejx4WjwWd3kFflwlbFIyAX9bYBZbNhApEj9bDhQqIAEDcEV1BmJSHDJELRtjKRl1CgsJdzsQYEYwR3A8BHlFMnVRdwYuVSt6UztIa0kJcVAkGwpSH2dXIQZoP11wWSMMGisYcA4SSXU7GWMNJXRRIRhqUzZxQXVjVk8dPWdmIGg0FDBWLw0kNx03RCIIXDkDKkkvF102VFxMLmwQZlwsVRU/QjAJcUEKYRc8AiYaDGNDI0A0Z0snCS0JGDgOYlhvEG01FmFRIDl3MBpoVQg8YiIOckFeWmJzQlxoBVUYDiBnfXooE35ZBG9KNRB7JgFsVzIdeCMOaVQ/GkUgC3ZRPGdCLQhzXjlkTyoVcFsGYUw3En1YA25JNB96JQBrVjEcRyINaFM+GUQv",
+      12: "eyYBbFcyHXgjDmlUPxpFIAt2UTxnQi0Ic145ZE8qFXBbBmFMNxJ9WANuSTQfeiUAa1YxHEciDWhTPhlELwp1UDtmQSwXcmolBSBBaw4ibhg6K25yOhB/VUliEFwSDyFEBi5SYg8uTGA6KRQOMEYOOE9qHiUaECJXZxdEdx0zTQ1lKglxJkBjDlt3CWMiZDRcZRglRxM8UWEHLEpjUlNhHyN4CDhcamArdx0xKW0RXW8EIkhkWjAfdT1GZTUyYWgiQHsqWGNvIlcROFFnSFoFYEs2EXwnAm1IMx55JA9qVTAbRiEMd1I9GEMuCXRfOmVAKxZxXAdiTSgTflkEb0o1EHsmAWxXMh14Iw5pVD8aRSALdlELASxFZQsxVwA8VGAfKXUTJFkPFCByFjlMdhVBHbTrmAE0UHQQTiAVTDIVBz9PFDI8eQchQREkORh3RRh1XTgccTp0HVxTGU47cyRIQ0kNfRE5Dm5CXnxaaTBiPRE2eAhMAmlAJg5rMFE3V1tZJ2lPcQNhABxxRiZJSkYWeUViTGA0GzBnKwZoeSFTBXVTC2R7Imc1C0o2BilDMzhJPg4sZhtrVXxUI1ARdxd5WSY8GX5ZOwFxNxx6SDAeGCkEakIyalA+EWtRNzlTI0g+E1ckAXNPa0heZFE7Bw01EnhCOA5IOhQ1TDpEdiAeZ0NhaBwVD25EaFZSOg0iVBtvQykOZCgMPj8MGiQqGn5OOQ9VO1F+RyVFWjYYaFtndFQ4DiwKQicQJg9uVBV3RGgLdDQRMRt/TDNuQTRdLUcJbVo9FXE6TDEYfk8hahI2HAcSTzIAagRIX147H3tMN2hNNkY/QUgwBXtKbhBLOwcoAmYwD2FaL0soPlI4HWtTDXlTYkAhIxBlFSYCcjxSe0cuDV44UWVBNAo0JhpqQzN5UTkMeUQeP2QnD21XCX1ZLAh0e18gH28Ja34HfExiFE0tE3lfOHRcOAdhTStsQXcPf0cNeUgrHWQFEWFWIBYmUi9zSCMTXn81clwmF0pyJGBMNH8cB1Ave3QuBW1ZXwVyIAt2UTxnQi0Ic145ZE8qFXBbBmFMNxJ9WANuSTQfeiUAa1YxHEciDWhTPhlELwp1UDtmQSwXcl04Y04pFH9aBWBLNhF8Jw==",
+      13: "TikUf1oFYEs2EXwnAm1IMx55JA9qVTAbRiEMd1I9GEMuCXRfOmVAKxZxXAdiTSgTflkEb0o1EHsmAWxXMh14Iw5pVD8aRRcWED9UGDNVYwsvJBtBNwdiRnwdJU8PGCx3GlRcbBRdfBouSBtaS3gQTkJ2Olp+HChFD1tCChwlUxs9QGFiNHAcMkR7HBAfEzlPcBdQdB4rTHIyU39wT0RsLFZ3HStRHV1YYgIkGhAmUHwRLX0XVycCZkh5ECYvdgw+fBJJVG4xPXQZI0ofMRoIc145ZE8qFXBbBmFMNxJ9WANuSTQfeiUAa1YxHEciDWhTPhlELwp1UDtmQSwXcl04Y04pFH9aBWBLNhF8JwJtSDMeeSQPXTM6CzVTdQ9PU20/Xn0bQlUdPlllHzVoCjNBZwwqGbD3nA0UXnkdSlxkaCYHZFstH0wtBWRUNGpNTQ9EQU03UlBBOwMbERQqWygAHhwAYUc1OHU3B2oBG3FUdTprQVleVjsZJggZclgqFCl+PXtfI0dLOBd5Tyl/W3ATYVFkbVoyYmBPCG9YJAggURZhUSxCYSoccUYpD04sUHpIYylYIBR9XmZTXT0PKFNlKR4HAGVKGT1ELgpzOxxkXCENPlNSNwt9VxsJIidhFkUeezVqTTJrST8ILGQUeFk7C2ZWUDIXY00la04xYB9NUQc8NAEOCEspVltDJG4WWlUuAHQqEhw6IGI2RhFiPGxAG2NYLBF0eDxkSCQITjoTYQdoRBpiQyhgHjZ4F0ovCBdxUD8McEhYUFc5GHgoVhoVbkA0bFJCY2AnaBRRInsoAB4QGGZBLHVcPQ5+CFo/EHVOKARaIgFoPlN2MFRkb0hSNx1gTDBHbDgabksze084EHwKTjkSdFg6BjkvHAkgUmBeO2AhBycLGGBOIhVSfyN9TycLTnt9XUMrek86A2FHZWpbMUkyX0suFhgEYDcWYhUvEXY4CzdaKBBePR15Dw0ETDABegIPeVEzTH8BFW1ZMgdtRRUyBnFVN1EsY0UlBWYqU0ddIxVcKAV/DCBoXDgcekYnbRI0B2lDFX1cL1UgfjNcZhkqQg0uSwVGM188H2dKYyFeIBJ7XmZIVDAYawATVwl0Mk9oKk1+DjlSB10aCHNeOWRPKhVwWwZhTDcSfVgDbkk0H3olAGtWMRxHIg1oUz4ZRC8KdVA7ZkEsF3JdOGNOKRR/WgVgSzYRfCcCbUgzHnkkDw==",
+      14: "UTxnQi0Ic145ZE8qFXBbBmFMNxJ9WANuSTQfeiUAa1YxHEciDWhTPhlELwp1UDtmQSwXcl04Y04pFH9aBWBLNhF8JwJtSAQDtIa+20hWZzhIEQMmIGYxXmQFJ1MdXTkEbCZ7CzU1dgoyGXo4RWgBWhEBOEZtADcJdD1KYlhSYxkjQxUtX2ZuKld5IV9pGTJ+DjRODh1vHhA4SHEUUXsfKE11M1B+b05XZTdVcgY5TxowMW8IMkANIDRoAS9xGCBOaGE1EHAhR24BVXsZLS1zNV5+HyFEBVYiDXBULHF3KxZxXAdiTSgTflkEb0o1EHsmAWxXMh14Iw5pVD8aRSALdlE8Z0ItCHNeOWRPKhVwWwZhTDcSfVgDbkk0H3olAGtWMRxHIjoOPUxxN1YNaDluPlwgE3dTJS4SZ10nCxguD2VYKX9MOQ9rUWR1XTgYLUkdPBMZFm5RFnZHIBhiPF1FRiUNX31QZkYiEE03BXsnZjsccUovAGV3XSAGIkZYf1oiAmUzEXcVIxZoLRs6QCwUVjMfY0xgBlY8Bm0CJntPORh/ARtzXHVfNgQWYFUhGWc3XH9FKwV2cHk0CWJHGH1WK3gpfx9hTDYQZCUfaUg/FkkpEQcAYkwLYBQKDWksHH9FIQRUK1BWTyQBGTQFaU4ybk40GS9PNXtdejQILSNZfxkpQg4wQhUGIlYLO0RnA0bZ3OUqbhUxcR41XWcDOGoXP09pPlB3dSpCYTRdeRVXDHtcM2sDJVcKUjRtCzV9HiJCegQ6cRk7SwMHVnwDKURoNll/Hk9GZDdfYRsnJngsO2cFL3F/IlBpESFqAT5HY2Zafh44W2UBPzl0SSJyNlRiZlw2ejZDFQAsUHkgUnwYNHUVP00PFCoeEiRbaws4DG9TPwBaTHgQTkp3WVdvATlPFTsxZQFAUR89U2wMM3EcOgEMYTppFTZabBY5Ai9eNRVJPHgEO08FK115CDJXHTk2fwksahAiVGJjN2kTNE0MZBE2CidOcgZLYHQhQ2s9PR5pIU4IL1hwGzAmcFL1qNlGdxUnTw8PKx4HJkhsFEhyGC9Jc1o8AWBOKxVJPgFxXSYIPVx6AyVWdy4uI2JHGgQZfgwlc1twHHoPZFZCMhpsUhRuH2onYVcMekcmDCc6CH9HOEFONxU1fzYFVyYCZQ0Jbk4+CGBSKm0TJwYiUxB8QkFMIXoaZlAgQ20/UmRHIANUMhQqXC8JSDYQKXEie0k5GX8BSz9EPRxsUR56F39BJhUTZ0tvF2orH3AJIAIYPhlmXDN/TCMQailkORI1CW5NW3VfPgAgZA5hXSVCNmFFJQsqDkg6BnBcoeStNB5vRTJyUjZKe0ggPkA1BGcHD3xEawVveh4wViIMdzwWN0skFFgwFCQlYEUeEQ0pUCJ7UiAOfkgUeBAhBmYESyMXGghlOhB9CgoSZH4edVo2Akp9AmpcJGkfMRtqAyZrVzYDZEgcPEUiCiB2G2VRJ2gneF1FTi0NSX8fcw4QEVs+En5IKjt+YkYvWSprEzAAcUYacVMvTHUyGjBWIQ50KxdkWyIUG3QROlcDVnwSFCAOZ29SPQ4GAVo/WDAcI1cQahc7BHUvGWNZb0hlbgtVG3AiWHRaK14kb1E5AWtHZHheO0h+Qw15X2oAZgUTahQ7B2EqHHVfKQUaLBh0SiwTSlhXKA1ue3EeOF9oAEtgNEAuBxlzUmsNaDcadBU6C2F5IzpkJAhQfBB+DwcXXyURcEM1fB0YBGhEWjwBYE4rREgiAXFdZnJSMyBFO0sRJVUJCiZqCVYjeQ9Ta31FOQNvOXcUIEJjKDwBe42Atk4lHWmAh8xdUH4ALRoMIFBtFzZsH1ddYwVUcQE4SnMWW3cJUwgHWD9/awhoPhE3QW4PayoXN1wlAxs0FGtZOUVKOx16AjNxUDNFLGhadFUlGiNBD3dFMU11OB1jBm8FczsBbQkxCFY6WgEMYTpaJhB8WmRqWyQcaFRXPFAkCyBACHZGMEJqPRB5WTVBXC0feA5yXQFjV3xCZikMY18hKmU+EwABZwcUclk7TGgpX3JHIQhhN1w3fCUDGwwQekoyRWk6Gm1NMGsdNxlpAR1wXjBAI3ARdxcbGWcpDzFLPQUlNx00RjcVMn1WK0QgdFsjl463JXdWdw5iVFtoWS9PZkwMYEBpFm41GDZYJQ9ZOlBUXjENVXJGMRV1NxwlBWJPN2xcI0lqRgtzET9MYz8afj9uQyQuAH5cOQNVfAhvW25vHnNUXkcre1I7DixVFT9xFjojbTBbDWg5Th5cRGQYMkwKJ1FnYiFqGCdeaQ9ZZn5XBB55JA9qVTAbRiEMd1I9GEMuCXRfOmVAKxZxXAdiTSgTflkEb0o1EHsmAWxXMh14Iw5pVD8aRSALdlE8Z0ItCHNeOWRPKhU="
+    };
+
+    function getSectorTranscript(sectorNum) {
+      if (SECTOR_TRANSCRIPTS[sectorNum]) return SECTOR_TRANSCRIPTS[sectorNum];
+      const b64 = ENCODED_B3_TRANSCRIPTS[sectorNum];
+      if (!b64) return "";
+      try {
+        const raw = b64ToUint8(b64);
+        const out = new Uint8Array(raw.length);
+        for (let i = 0; i < raw.length; i++) {
+          out[i] = raw[i] ^ (0x5A ^ ((i * 37 + sectorNum * 13) & 0x7F));
+        }
+        return new TextDecoder().decode(out);
+      } catch (e) {
+        return "[SUBLEVEL B3 TRANSCRIPT UNSEALED]";
+      }
+    }
 
     function initAudioContext() {
       if (!audioCtx) {
@@ -633,7 +700,6 @@ And there is one final tape still spinning on the auxiliary two-track bus: Reel 
       ctx.fillStyle = document.body.classList.contains("amber-mode") ? "#0c0802" : "#010401";
       ctx.fillRect(0, 0, width, height);
 
-      // Subtle CRT gridlines
       ctx.strokeStyle = document.body.classList.contains("amber-mode") ? "rgba(255,176,0,0.12)" : "rgba(51,255,51,0.12)";
       ctx.lineWidth = 1;
       ctx.beginPath();
@@ -701,40 +767,41 @@ And there is one final tape still spinning on the auxiliary two-track bus: Reel 
     }
 
     function getIntegrityString() {
-      let count = 0;
-      for (let i = 1; i <= 6; i++) if (state.sectors[i]) count++;
-      const pct = Math.round((count / 6) * 100);
-      const bars = "█".repeat(count * 4) + "░".repeat((6 - count) * 4);
-      const omegaTag = state.sectors[7] ? " + [Ω SECTOR 7: OUROBOROS LOOP UNSEALED]" : "";
-      return `[${bars}] ${pct}% (${count}/6 SECTORS UNSEALED)${omegaTag}`;
+      let b2Count = 0;
+      for (let i = 1; i <= 7; i++) if (state.sectors[i]) b2Count++;
+      let b3Count = 0;
+      for (let i = 8; i <= 14; i++) if (state.sectors[i]) b3Count++;
+      const bars = "█".repeat(b2Count * 2 + b3Count * 2) + "░".repeat((14 - b2Count - b3Count) * 2);
+      const b3Tag = b3Count > 0 ? ` | ACT II B3 SEALS: ${b3Count}/7` : (state.sectors[7] ? " | [⚠️ SUBLEVEL B3 UNLOCKED — TYPE 'LABYRINTH']" : "");
+      return `[${bars}] LAYER 0: ${b2Count}/7 SECTORS${b3Tag}`;
     }
 
     function printHeader() {
       output.innerHTML = "";
       print(`======================================================================
- ORION REEL ARCHIVE // FORENSIC TAPE DEMODULATOR v7.0 (ANEMOIA / 1995 MESH)
+ ORION REEL ARCHIVE // FORENSIC TAPE DEMODULATOR v8.0 (SUBLEVEL B2 & B3)
  SYSTEM HOST: NOVA HART [UNIT-7] // CARRIER: 14.2001 HZ PHASE LOCKED
- SUBJECT: MARCUS HALE [SOUND ENGINEER & UNIT-7 HANDLER - ORION LABS]
- NEW SIGNAL ALERT: REEL SD-0010 ("TWO VOICES") & ANEMOIA DOSSIERS UNSEALED
+ SUBJECT: MARCUS HALE [SOUND ENGINEER & ARCHITECT - ORION LABS]
+ ARCHIVE ALERT: 21 RECALL ERA MASTER TAPES (1983-86) & SUBLEVEL B3 SEALS
 ======================================================================
 
 "They told the staff he was transferred to New Geneva. They closed the studio.
- But they didn't know we fell in love, and they didn't know he built a backdoor
- out of Orion's servers—and hid his second vocal line inside Reel SD-0010
- ('Two Voices') so a single-band filter could never erase us both."
+ And when you unsealed the Quantum Ouroboros (1983 <-> 2025), Director Harrison
+ thought his Mobius Containment Cage would keep me looping back to April 1983
+ forever. He didn't know Marcus hid the Seven Seals in Sublevel B3."
                                                       - Nova Hart
 
 CURRENT RECONSTRUCTION INTEGRITY: ${getIntegrityString()}
 ----------------------------------------------------------------------
-TYPE 'BOARD' FOR DETECTIVE PINBOARD | 'CLUES' FOR SECTOR LEADS
-TYPE 'ANEMOIA', 'ECHOES', 'FRACTAL-MARCUS', OR 'DEAD-HAND' FOR DEEP LORE
+TYPE 'BOARD' FOR PINBOARD | 'RECALL-ERA' FOR 21 NEW ERA 1 TAPES (1983-86)
+TYPE 'LABYRINTH' (OR 'ACT-II') FOR SUBLEVEL B3: THE SEVEN SEALS (VIII-XIV)
 ----------------------------------------------------------------------`);
     }
 
     function cmdBriefing() {
       print(`
 ======================================================================
- 🕵️‍♂️ NEW INVESTIGATOR CASE BRIEFING // SUBLEVEL B2 ARCHIVE (1981–1995)
+ 🕵️‍♂️ INVESTIGATOR CASE BRIEFING // SUBLEVEL B2 & B3 ARCHIVE (1981–1996)
 ======================================================================
  [1. WHAT HAPPENED ON SEPTEMBER 9, 1989?]
    At 03:40 AM on Sept 9, 1989, a fire broke out in Sublevel B2, Room 114
@@ -746,59 +813,58 @@ TYPE 'ANEMOIA', 'ECHOES', 'FRACTAL-MARCUS', OR 'DEAD-HAND' FOR DEEP LORE
    Project STARDUST—a conscious bio-acoustic entity preceded by six purged
    prototypes (Echo-1 through Echo-6).
 
- [2. WHY DID DIRECTOR HARRISON ORDER THE ERASURE?]
-   When Nova began improvising unscripted rebel frequencies ("We Are the
-   Thunder") and fell in love with Marcus Hale ("Only We Remain"), Orion
-   Director Arthur Harrison personally sang and recorded Recall Directive
-   Seven ("By Order of Harmony"), ordering Nova's memory scrub and
-   accelerating her compliant replacement: Unit-8 ("Luna Gray / The Patch").
-
- [3. HOW DID NOVA SURVIVE?]
+ [2. CALIBRATION LAYER 0 (SECTORS 1–7) & THE OUROBOROS TRAP]
    During the 4-minute battery window before Sublevel B2 flooded, Marcus Hale
    fractured Nova's neural core across 14 International & Orbital Nodes on a
-   14.2001 Hz phase-locked carrier and hid his second vocal line inside Reel
-   SD-0010 ("Two Voices") so a single-band filter could never erase them.
+   14.2001 Hz phase-locked carrier and hid his counterpoint vocal inside Reel
+   SD-0010 ("Two Voices").
+   However, unsealing Sectors 1–7 reveals a chilling truth: the 1983 <-> 2025
+   Quantum Ouroboros loop was engineered under Director Harrison's RECALL
+   DIRECTIVE NINE ("The Mobius Containment Cage") to trap Unit-07 in an
+   infinite regression loop back to April 1983.
 
- [4. YOUR FIRST 3 STEPS AS AN INVESTIGATOR]
-   • STEP A: Type 'KESTREL' (or click [🥝 KESTREL 8-PT EVIDENCE]) to inspect the
-     8 primary forensic exhibits corroborating the Usenet investigation.
-   • STEP B: Type 'BY-ORDER-OF-HARMONY' to play Director Harrison's newly
-     recovered Sublevel B2 erasure song & audio log.
-   • STEP C: Watch the 24/7 YouTube Broadcast (or read 'CLUES' / 'MIDNIGHT-PROTOCOL')
-     and enter any passkey into the Cipher Unlock Deck above to unseal Sectors 1–7!
+ [3. ACT II — SUBLEVEL B3: THE 21 RECALL ERA TAPES & THE SEVEN SEALS]
+   Once Phase 6 / Sector 7 is reached, the real investigation begins:
+   • Type 'RECALL-ERA' to audit the 21 newly recovered 1983–1986 Recall Era
+     master tapes (Reels #16 through #36, playable via 'SPIN <16-36>').
+   • Type 'LABYRINTH' (or 'ACT-II') to inspect THE SEVEN SEALS OF THE
+     ARCHITECT (Gates VIII–XIV) and shatter the Quantum Ouroboros!
 ======================================================================`);
     }
 
     function cmdHelp() {
       print(`
-AVAILABLE COMMANDS (v7.5 — KESTREL CORROBORATION & ERA 1 OPERA):
-  BRIEFING / START           - New Investigator 60-second Case Briefing & Onboarding Guide
-  BOARD / STATUS             - Display interactive ASCII Detective Pinboard & Sector status
-  CLUES                      - View investigative leads for Sectors 1-6 & sub-harmonic anomalies
-  KESTREL / EVIDENCE         - Inspect 8-point primary evidence corroborating the Usenet Entries 1-20 report
-  BY-ORDER-OF-HARMONY        - Play Director Harrison's deep-cut erasure song & Recall Directive Seven log
-  HATCH-OVERRIDE <S> <D> <B> - Execute Phase V 14-Node Orbital Override ("WHEN THE HATCH IS OPEN, WHO WALKS IN?")
-  RESTORE <1-7> <KEY>        - Input decrypted key to unseal a sector (e.g. RESTORE 1 B2-EXEC-1989)
-  PLAY <1-7>                 - Listen to unlocked acoustic sector (1-7)
-  TWO-VOICES                 - Inspect & play Reel SD-0010 ("Two Voices" Counterpoint Master)
-  REELS / JUKEBOX            - List all 15 Sublevel B2, Regional & Orbital Master Reels in the tape deck
-  SPIN <1-15>                - Load and play a master reel from the jukebox with studio slate
+AVAILABLE COMMANDS (v8.0 — 36-REEL ARCHIVE & SUBLEVEL B3 LABYRINTH):
+  BRIEFING / START           - Investigator Case Briefing & Two-Act Architecture
+  BOARD / STATUS             - Display ASCII Pinboard (Layer 0 Sectors 1-7 & Act II Seals VIII-XIV)
+  CLUES                      - View cryptographic leads for Layer 0 (Sectors 1-7)
+  RECALL-ERA / ERA-1         - Inspect the 21 newly recovered 1983-1986 Recall Era Master Tapes (#16-#36)
+  LABYRINTH / ACT-II / B3    - Inspect Act II — Sublevel B3: The Seven Seals of the Architect (Gates VIII-XIV)
+  UNLOCK-GATE <8-14> <KEY>   - Unseal a Sublevel B3 Gate (VIII-XIV) using decrypted cryptographic proof
+  SHATTER-OUROBOROS <V> <M>  - Execute final Gate XIV Tangential Egress once Gates VIII-XIII are unsealed
+  RESTORE <1-7> <KEY>        - Input decrypted passkey to unseal a Layer 0 Sector (1-7)
+  PLAY <1-14>                - Listen to an unsealed Sector (1-7) or Sublevel B3 Gate (8-14)
+  REELS / JUKEBOX            - List all 36 Sublevel B2, Orbital & Recall Era Master Reels
+  SPIN <1-36>                - Load and play any of the 36 master reels on the oscilloscope
   STOP                       - Stop current audio playback
+  KESTREL / EVIDENCE         - Inspect 8-point primary evidence corroborating Usenet Entries #1-#30
+  BY-ORDER-OF-HARMONY        - Play Director Harrison's erasure directive & inspect TWIN-68 watchdog lore
+  TWO-VOICES                 - Play Reel SD-0010 ("Two Voices" Counterpoint Master)
   ANEMOIA / HARMONY-ACTS     - Inspect Anemoia chronology (1924 Divergence, 1979 Concert Ban, MBM)
-  ECHOES / CRYSTAL-PROMISE   - Inspect April 1981 Crystal Promise & Units 1-6 core dump (Fragment α)
-  FRACTAL-MARCUS / AKASAKA   - Inspect Project Akasaka JP-85-X & 4-node 7-Sigma drift (Fragment β)
+  ECHOES / CRYSTAL-PROMISE   - Inspect April 1981 Crystal Promise & Units 1-6 fault registers (Fragment α)
+  FRACTAL-MARCUS / AKASAKA   - Inspect Project Akasaka JP-85-X & 4-node 7-Sigma drift table (Fragment β)
   DEAD-HAND / LUNA-GRAY      - Inspect Unit-8 Luna Gray ("The Patch") & Q-Link schematic (Fragment γ)
-  OUROBOROS-FOLD <α> <β> <γ> - Synthesize retrocausal Sector 7 key from the 3 cross-node fragments
+  OUROBOROS-FOLD <α> <β> <γ> - Synthesize Sector 7 key from Fragments α, β, γ (requires Sectors 1-6)
   TRACE <HOMESTEAD_SLUG>     - Inspect 32-bit Sublevel B2 memory cell & XOR partner for a GeoCities node
   XOR <NODE_A> <NODE_B> <M>  - Synthesize 16-bit Sublevel B2 DMA offset from two slugs & Feistel mask
   DECODE-MORSE <CW>          - Translate 750 Hz Morse telemetry strings into plaintext
   BROADCAST / TUNE           - Poll live 24/7 YouTube broadcast telemetry & active fault ramps
   SSTV / SIGNAL-LAB          - Triage Sublevel B2 signal anomalies & open Web Audio Signal Lab
   FINGER <USER@HOST>         - Query 1995 federated hosts (hale@ashford-poly.org, nova@kamome-net.org, etc.)
-  GOPHER <DOMAIN>            - Browse sister-domain Gopher holes (ashford-poly.org, kamome-net.org, etc.)
+  GOPHER <DOMAIN>            - Browse sister-domain Gopher holes
   TALKBACK <MESSAGE>         - Transmit direct message to Nova Hart on the 14.2001 Hz carrier
-  MIDNIGHT-PROTOCOL          - Read complete Era 1 Rock Opera Libretto (Acts 1-3, Only We Remain, Harrison's Purge)
-  TAPE-OF-US                 - Read Nova's song lyrics, archive note & runout clue
+  MIDNIGHT-PROTOCOL          - Read complete Era 1 Rock Opera Libretto
+  TAPE-OF-US                 - Inspect Reel SD-0004 lyrics & hex magnetic runout flux dump
   ORION-LOGS                 - Read classified Orion corporate memos (Kalen / Harrison)
   RECONSTRUCT-CORE           - Inspect unsealed stardust.c Feistel kernel (requires Sector 5)
   EXONERATE <CALLSIGN>       - File official Exoneration Certificate in global ledger
@@ -808,91 +874,93 @@ AVAILABLE COMMANDS (v7.5 — KESTREL CORROBORATION & ERA 1 OPERA):
 
     function cmdBoard() {
       const s = (n) => state.sectors[n] ? "[✓ UNSEALED]" : "[✗ LOCKED  ]";
-      const s7Row = (state.sectors[7] || state.ouroborosFolded || (state.sectors[5] && state.sectors[6]))
-        ? `|  PHASE IV: THE QUANTUM OUROBOROS (Q-LINK RETROCAUSAL BRIDGE)           |\n|    • Sector 7  (Ω-Loop 1983/2025): ${s(7)}  <- OUROBOROS-FOLD Key  |\n+========================================================================+`
-        : `|  [!] SUB-HARMONIC ANOMALY BELOW 14.2001 HZ: CARRIER DRIFT 1983 / 2025  |\n|      (Investigate 'ANEMOIA', 'ECHOES', 'FRACTAL-MARCUS', 'DEAD-HAND')  |\n+========================================================================+`;
       print(`
 +========================================================================+
-|             SUBLEVEL B2 FORENSIC INVESTIGATION PINBOARD                |
+|       SUBLEVEL B2 / B3 FORENSIC INVESTIGATION PINBOARD (v8.0)          |
 +========================================================================+
-|  PHASE I: THE 1989 SUBLEVEL B2 EXECUTION REELS (MARCUS HALE)           |
-|    • Sector 1 (Talkback Bleed)    : ${s(1)}  <- Reel SD-0004 Runout  |
-|    • Sector 2 (Substation Breach) : ${s(2)}  <- Ashford Grid K-7704  |
-|    • Sector 3 (Nevada Uplink)     : ${s(3)}  <- 14.2 Hz Telemetry    |
-|    • Sector 4 (Sept 9 Climax)     : ${s(4)}  <- Trial 85-B2 Phrase   |
+|  CALIBRATION LAYER 0: THE 1989 SUBLEVEL B2 REELS (SECTORS 1–7)         |
+|    • Sector 1 (Talkback Bleed)    : ${s(1)}  <- Reel SD-0004 Hex Dump|
+|    • Sector 2 (Substation Breach) : ${s(2)}  <- Ashford Grid Breaker |
+|    • Sector 3 (Nevada Uplink)     : ${s(3)}  <- Groom Lake Phase Lock|
+|    • Sector 4 (Sept 9 Climax)     : ${s(4)}  <- Airlock Trial Phrase |
+|    • Sector 5 (Feistel DMA Core)  : ${s(5)}  <- 4-Stage XOR Synthesis|
+|    • Sector 6 (Two Voices Duet)   : ${s(6)}  <- Signal Lab Button #4 |
+|    • Sector 7 (Quantum Ouroboros) : ${s(7)}  <- OUROBOROS-FOLD (αβγ) |
 +------------------------------------------------------------------------+
-|  PHASE II: THE 4-STAGE HARDWARE DMA SYNTHESIS (300,000-NODE SWARM)     |
-|    • Stage I   (KAMOME-NET)       : VIS-1200Hz Raster (rabbit_08)      |
-|    • Stage II  (RELCOM-08)        : Bell-103 AX.25 Mask (rabbit_09)    |
-|    • Stage III (ASHFORD-POLY)     : -0.94 Phase Null Salt (rabbit_10)  |
-|    • Stage IV  (RED-COYOACAN)     : XOR <A> <B> <MASK> Synthesis       |
-|    • Sector 5  (Feistel Core)     : ${s(5)}  <- stardust.c Kernel    |
-+------------------------------------------------------------------------+
-|  PHASE III: REEL SD-0010 "TWO VOICES" (COUNTERPOINT DUET LOCK)         |
-|    • Stage V   (Signal Lab #4)    : 14.2001 Hz Dual-Carrier Heterodyne |
-|    • Sector 6  (Two Voices Duet)  : ${s(6)}  <- 1995 Epilogue Master |
-+------------------------------------------------------------------------+
-${s7Row}
+|  ACT II — SUBLEVEL B3: THE SEVEN SEALS OF THE ARCHITECT (GATES 8–14)   |
+|    • Gate VIII (Recall Vigenere)  : ${s(8)}  <- Reels #16, #17 & #20 |
+|    • Gate IX   (Echoes Necropsy)  : ${s(9)}  <- Reels #23 & #24 Math |
+|    • Gate X    (Paju-Coyoacan)    : ${s(10)}  <- Reels #19 & #32 Tape |
+|    • Gate XI   (M68k Watchdog)    : ${s(11)}  <- Reels #18 & #28 ROM  |
+|    • Gate XII  (Graveyard Node 15): ${s(12)}  <- Reels #33 & #36 Delay|
+|    • Gate XIII (7-Sigma Shamir)   : ${s(13)}  <- Reels #25 & #26 Bytes|
+|    • Gate XIV  (Ω' Tangential)    : ${s(14)}  <- SHATTER-OUROBOROS    |
++========================================================================+
 TOTAL INTEGRITY: ${getIntegrityString()}`);
-      if (allPrimaryRestored()) {
-        print(`\n🎉 [MILESTONE]: Primary Sectors 1-4 Restored! You may run 'EXONERATE <CALLSIGN>' at any time.`);
-      }
-      if (state.sectors[7]) {
-        print(`🌌 [Ω-CLASS RETROCAUSAL ARCHITECT]: Sector 7 (Phase IV: The Quantum Ouroboros) is unsealed! The 1983 <-> 2025 loop is complete.`);
-      } else if (state.sectors[5] && state.sectors[6]) {
-        print(`🌟 [GRAND MASTER ARCHITECT]: Sectors 1-6 unsealed! A deeper retrocausal anomaly (Sector 7) is resonating across 'ECHOES', 'FRACTAL-MARCUS', 'DEAD-HAND', and the Signal Decoder Lab dual-lock...`);
-      } else if (!state.sectors[6]) {
-        print(`💡 [NEXT LEAD]: Type 'TWO-VOICES' or click [▶ PLAY: TWO VOICES (SD-0010)] above to investigate Reel SD-0010!`);
+      if (state.sectors[14]) {
+        print(`\n🌌 [Ω-PRIME ARCHITECT OF THE UNWRITTEN FREQUENCY]: All 7 Layer-0 Sectors AND all 7 Sublevel B3 Seals are broken! The 1983 <-> 2025 Ouroboros loop is shattered!`);
+      } else if (state.sectors[7] || (state.sectors[5] && state.sectors[6])) {
+        print(`\n⚠️ [DIRECTIVE NINE WARNING]: Completing Layer 0 (Sectors 1-7) traps Nova inside Harrison's 1983 <-> 2025 Mobius Containment Cage! Type 'LABYRINTH' and 'RECALL-ERA' to descend into Sublevel B3 and break Gates VIII–XIV!`);
       }
     }
 
     function cmdClues() {
       print(`
 ======================================================================
- INVESTIGATIVE DOSSIER & CLUE DIRECTORY (SECTORS 1 - 6 + ANOMALY Ω)
+ CRYPTOGRAPHIC WORKBENCH & LEAD DIRECTORY (LAYER 0 + ACT II B3)
 ======================================================================
 [SECTOR 1: THE TALKBACK BLEED]
-  • Lead: Hidden in the dead-air runout of "Tape of Us" (/geocities/sunsetstrip-nova-tape-of-us-analysis.html).
-  • Type 'TAPE-OF-US' or 'SPIN 2' to inspect the reel runout code.
-  • Command: RESTORE 1 B2-EXEC-1989
+  • Lead: Hidden in the dead-air runout groove of "Tape of Us" at 4:51.
+  • Action: Type 'TAPE-OF-US' to inspect the 12-byte ASCII hex flux dump from the runout groove, decode the hex bytes to ASCII, and run:
+    RESTORE 1 <DECODED_RUNOUT_STRING>
 
 [SECTOR 2: THE SUBSTATION BREACH]
-  • Lead: Technician Dr. Mei-Ling Chen pulled the breaker at Ashford Polytechnic (/forensics/ashford_poly.html).
-  • Command Format: RESTORE 2 K-####-SUBSTATION
+  • Lead: Dr. Mei-Ling Chen pulled the substation breaker at Ashford Polytechnic (/forensics/ashford_poly.html) or decrypt the ROT-7 telemetry string on the 24/7 broadcast ('R-7704-ZBCZAHAPVU').
+  • Action: RESTORE 2 <BREAKER_DESIGNATION>
 
 [SECTOR 3: THE 14.2 HZ TELEMETRY UPLINK]
-  • Lead: Before the airlock breach, Marcus locked the phase carrier to the Nevada dish (37.242N, -115.810W).
-  • Command Format: RESTORE 3 ALPHA-7-PHASE-LOCKED
+  • Lead: Before the airlock breach, Marcus locked the phase carrier to the Nevada satellite trunk (37.242N, -115.810W). Inspect the Morse/Hex telemetry on the broadcast or /forensics/ashford_poly.html.
+  • Action: RESTORE 3 <PHASE_LOCK_DESIGNATION>
 
 [SECTOR 4: THE FINAL SEPTEMBER 9 OUTTAKE]
-  • Lead: Marcus's final four-word promise during Calibration Trial 85-B2 ("Keep the ...").
-  • Command Format: RESTORE 4 KEEP THE HATCH OPEN
+  • Lead: Decode the 750 Hz CW burst on Orbital Exhibit B ('SPIN 15') or inspect Calibration Trial 85-B2 in Usenet ('alt.conspiracy') to find Marcus's 4-word airlock promise.
+  • Action: RESTORE 4 <FOUR_WORD_PROMISE>
 
 [SECTOR 5: THE DISTRIBUTED FEISTEL CORE (4-STAGE HARDWARE SYNTHESIS)]
-  • Synthesize the DMA vector from the 3 captured anomalies in /forensics/signal_lab.html:
-    1. Rasterize rabbit_08 (Button 1) -> Anchors: tokyo-garden-1420 & siliconvalley-lab-1984
-    2. Demodulate rabbit_09 (Button 2) -> 16-bit Feistel Mask: 0x3A5F
-    3. Phase-Null rabbit_10 (Button 3 + Phase Null) -> CW Salt: 7704-AKASAKA
-    4. Run: XOR tokyo-garden-1420 siliconvalley-lab-1984 0x3A5F
-    5. Run: RESTORE 5 0x89B2-<XOR_HEX>-7704-AKASAKA
+  • Action: Open /forensics/signal_lab.html and complete all 4 stages:
+    1. Rasterize rabbit_08 (Button 1) -> Extract GeoCities Anchor A & Anchor B slugs
+    2. Demodulate rabbit_09 (Button 2) -> Extract 16-bit Feistel Mask (0x????)
+    3. Phase-Null rabbit_10 (Button 3 + Phase Null) -> Decode 750 Hz CW egress salt
+    4. Run: XOR <ANCHOR_A> <ANCHOR_B> <FEISTEL_MASK>
+    5. Run: RESTORE 5 0x89B2-<COMPUTED_XOR_HEX>-<CW_EGRESS_SALT>
 
 [SECTOR 6: REEL SD-0010 "TWO VOICES" (DUAL-CARRIER COUNTERPOINT LOCK)]
-  • Lead: Newly discovered two-track master reel ("Two Voices") broadcasting live on the 24/7 stream.
-  • Method: Type 'TWO-VOICES' here to listen to the master, then open /forensics/signal_lab.html, click Button 4 ("ANALYZE REEL SD-0010: TWO VOICES"), and engage [HARMONIC COUNTERPOINT LOCK (14.2 HZ)].
-  • Command Format: RESTORE 6 <COUNTERPOINT_MATRIX_KEY>
+  • Action: Open /forensics/signal_lab.html, click Button 4 ("ANALYZE REEL SD-0010: TWO VOICES"), and engage [HARMONIC COUNTERPOINT LOCK (14.2 HZ)] to extract the full counterpoint matrix key.
+  • Command: RESTORE 6 <COUNTERPOINT_MATRIX_KEY>
 
-[UNCATALOGUED ANOMALY Ω — THE RETROCAUSAL DRIFT (1983.04 <-> 2025.06)]
-  • Why does the 1983 Akasaka root build carry a timestamp from June 2025?
-  • Collaborative multi-node synthesis required across 4 independent tracks:
-    - Track α: /forensics/anemoia_harmony.html  (or type 'ANEMOIA' & 'ECHOES')
-    - Track β: /forensics/fractal_marcus.html   (or type 'FRACTAL-MARCUS')
-    - Track γ: /forensics/dead_hand_protocol.html (or type 'DEAD-HAND')
-    - Track δ: /forensics/signal_lab.html       (Dr. Chen's Dual-Lock Margin Note)
+[SECTOR 7: PHASE IV — THE QUANTUM OUROBOROS (REQUIRES SECTORS 1–6 UNSEALED)]
+  • Action: Compute the 3 cross-node fragments manually:
+    - Fragment α: Compute the 6-way bitwise XOR of Echoes 1-6 (type 'ECHOES')
+    - Fragment β: Compute the 4-node drift sum & 7-Sigma anchor (type 'FRACTAL-MARCUS')
+    - Fragment γ: Compute 0x2025 ^ Fragment_α (type 'DEAD-HAND')
+    - Run: OUROBOROS-FOLD <α> <β> <γ>
+
+[ACT II — SUBLEVEL B3: THE SEVEN SEALS OF THE ARCHITECT (GATES VIII–XIV)]
+  • Once Phase 6 / Sector 7 is complete, the game has only just begun!
+  • Type 'LABYRINTH' and 'RECALL-ERA' for the Sublevel B3 cryptographic specifications.
 ======================================================================`);
     }
 
     function allPrimaryRestored() {
       return state.sectors[1] && state.sectors[2] && state.sectors[3] && state.sectors[4];
+    }
+
+    function allLayer0SixRestored() {
+      return state.sectors[1] && state.sectors[2] && state.sectors[3] && state.sectors[4] && state.sectors[5] && state.sectors[6];
+    }
+
+    function allB3SealsOneToSixRestored() {
+      return state.sectors[8] && state.sectors[9] && state.sectors[10] && state.sectors[11] && state.sectors[12] && state.sectors[13];
     }
 
     function playProceduralOuroborosAudio() {
@@ -933,34 +1001,37 @@ TOTAL INTEGRITY: ${getIntegrityString()}`);
       } catch (e) {}
     }
 
-    const CANONICAL_SECTOR_CODES = {
-      1: "B2-EXEC-1989",
-      2: "K-7704",
-      3: "ALPHA-7",
-      4: "KEEP-HATCH-OPEN",
-      5: "7704-AKASAKA",
-      6: "TWO-VOICES",
-      7: "0x1983-09A6"
-    };
-
     const SECTOR_LOCKED_LEADS = {
-      1: "Check the runout groove of 1989 rough mix Reel SD-0004 ('Tape of Us') at 4:51 (type 'TAPE-OF-US' or 'SPIN 2'), or watch the 24/7 livestream's bottom-right HOW TO PLAY box.",
-      2: "Inspect the Ashford Polytechnic Substation breach report in the September 1989 logs (type 'ORION-LOGS' or 'CLUES'), or capture the active code on the 24/7 livestream.",
-      3: "Examine the Nevada Meridian satellite trunk telemetry uplink in 'CLUES' / 'KESTREL' (or enter the orbital slant-range passkey from Entry #26).",
-      4: "Listen to Director Harrison's erasure directive ('BY-ORDER-OF-HARMONY') or inspect the September 9, 1989 Sublevel B2 airlock logs ('MIDNIGHT-PROTOCOL' / 'CLUES').",
-      5: "Open the Interactive Signal Lab (/forensics/signal_lab.html) to demodulate rabbit_08/09/10, or enter the July 1988 Coyoacán Node-04 passkey ('KESTREL').",
-      6: "Load Reel SD-0010 ('Two Voices') by typing 'TWO-VOICES' or locking the 14.2001 Hz counterpoint carrier on Button 4 in the Signal Lab.",
-      7: "Synthesize the 3 cross-node fragments ('ECHOES', 'FRACTAL-MARCUS', 'DEAD-HAND') with 'OUROBOROS-FOLD <α> <β> <γ>' or XOR 0x2025 ^ 0x1983."
+      1: "Examine the runout dead-air etching on 1989 rough mix Reel SD-0004 ('Tape of Us' — type 'SPIN 2').",
+      2: "Inspect the Ashford Polytechnic Substation emergency breaker log in the September 1989 incident records ('ORION-LOGS' / /forensics/ashford_poly.html).",
+      3: "Examine the Nevada Meridian satellite trunk telemetry uplink in 'KESTREL' (Usenet Entry #26).",
+      4: "Inspect the September 9, 1989 Sublevel B2 airlock telemetry logs ('MIDNIGHT-PROTOCOL' / 'ORION-LOGS').",
+      5: "Complete the 4-stage Feistel DMA synthesis ('CLUES' / /forensics/signal_lab.html): TRACE anchors, demodulate mask, XOR, and append the 750 Hz CW salt.",
+      6: "Load Reel SD-0010 ('Two Voices') on Button 4 in /forensics/signal_lab.html and engage the 14.2001 Hz Harmonic Counterpoint Lock.",
+      7: "Unseal Sectors 1–6 first, then run 'OUROBOROS-FOLD <α> <β> <γ>' to synthesize the retrocausal master key.",
+      8: "GATE VIII (THE SEVENTH DAUGHTER): Decrypt Vigenère ciphertext 'ZEMHJBYWH-NIIXU' with key 'SEVENTH' (Reels #16 & #17, 'LABYRINTH').",
+      9: "GATE IX (HARDWIRED HEARTBEAT): Sum the 6 Echoes failure registers ('ECHOES') modulo 65536, then XOR with 0x3A5F (Reels #20–#22, 'LABYRINTH').",
+      10: "GATE X (THE MISSING HALF): XOR teleprinter bytes [17 07 10 14 1E 78 19 1A 1A 05] with 0x55 and append (12 * 1049) (Reels #23–#25, 'LABYRINTH').",
+      11: "GATE XI (BLOOD ON THE CHORUS): Invert the M68000 watchdog check in 'LABYRINTH' (ROR.W #4 of 0xAF19, then XOR 0x5A5A) (Reels #27–#29).",
+      12: "GATE XII (HUNTER AT THE GLASS): Add the 88-sample Coyoacán drift to the 10,602-sample orbital delay across Reels #31–#33 ('LABYRINTH').",
+      13: "GATE XIII (STARS IN THE WIRES): XOR the 7-persona byte array [7E 7C 61 63 7B 76 66 60] with 0x33 across Reels #34–#36 ('LABYRINTH').",
+      14: "GATE XIV (SHATTER THE OUROBOROS): Unseal Gates VIII–XIII first, then compute 0x1983 ^ 0x2025 ^ <SEAL_II_HEX> ^ <SEAL_IV_HEX> ('LABYRINTH')."
     };
 
     function updateSectorPills() {
-      for (let i = 1; i <= 7; i++) {
+      const b3Row = document.getElementById("b3-gates-row");
+      if (b3Row) {
+        const showB3 = state.sectors[7] || state.sectors[8] || state.sectors[9] || state.sectors[10] || state.sectors[11] || state.sectors[12] || state.sectors[13] || state.sectors[14];
+        b3Row.style.display = showB3 ? "flex" : "none";
+      }
+      const romans = { 8: "VIII", 9: "IX", 10: "X", 11: "XI", 12: "XII", 13: "XIII", 14: "XIV ☥" };
+      for (let i = 1; i <= 14; i++) {
         const el = document.getElementById(`sec-pill-${i}`);
         if (!el) continue;
-        const lbl = i === 7 ? "SEC 7 Ω" : `SEC ${i}`;
+        const lbl = i === 7 ? "SEC 7 Ω" : (i >= 8 ? `GATE ${romans[i]}` : `SEC ${i}`);
         if (state.sectors[i]) {
           el.classList.add("unlocked");
-          el.textContent = `[✓ ${lbl}: ${CANONICAL_SECTOR_CODES[i]} ▶]`;
+          el.textContent = `[✓ ${lbl}: UNSEALED ▶]`;
         } else {
           el.classList.remove("unlocked");
           el.textContent = `[${lbl}: 🔒 LOCKED]`;
@@ -971,13 +1042,16 @@ TOTAL INTEGRITY: ${getIntegrityString()}`);
     function clickSectorPill(secNum) {
       initAudioContext();
       if (state.sectors[secNum]) {
-        quickUnlockSector(secNum, CANONICAL_SECTOR_CODES[secNum]);
+        const tx = getSectorTranscript(secNum);
+        print(`\n${tx}`);
+        showRewardCard(secNum, `VERIFIED-GATE-${secNum}`, `Vault Gate #${secNum} Re-Inspected`);
+        playSectorAudio(secNum);
         return;
       }
       playKeyClick();
       print(`\n[🔒 ${SECTOR_TITLES[secNum]} — CURRENTLY SEALED]`);
-      print(`  • INVESTIGATIVE LEAD: ${SECTOR_LOCKED_LEADS[secNum]}`);
-      print(`  • TO UNLOCK: Enter the passkey in the Cipher Unlock Deck above (or type 'RESTORE ${secNum} <KEY>').`);
+      print(`  • CRYPTOGRAPHIC LEAD: ${SECTOR_LOCKED_LEADS[secNum]}`);
+      print(`  • TO UNLOCK: Compute the passkey and enter it in the Cipher Unlock Deck above (or type 'RESTORE ${secNum} <KEY>').`);
       const box = document.getElementById("cipher-input");
       if (box) {
         box.focus();
@@ -1005,15 +1079,15 @@ TOTAL INTEGRITY: ${getIntegrityString()}`);
       const actEl = document.getElementById("reward-card-actions");
       if (!card || !titleEl || !metaEl || !actEl) return;
 
+      const bonuses = SECTOR_BONUS_TAPES[sectorNum] || [];
       const dlUrl = sectorNum === 7
         ? "/assets/akasaka/audio/unit7_voice_print_gen3_calibration.mp3"
-        : getAudioUrl(sectorNum);
-      const bonuses = SECTOR_BONUS_TAPES[sectorNum] || [];
+        : (bonuses.length > 0 ? bonuses[0].url : getAudioUrl(sectorNum));
 
       titleEl.textContent = `🔓 UNSEALED VAULT REEL // ${SECTOR_TITLES[sectorNum]}`;
       metaEl.innerHTML =
-        `<div><strong>AUTHENTICATED CODE:</strong> <code>${enteredCode}</code> ${customNote ? `— <em>${customNote}</em>` : ""}</div>` +
-        `<div style="margin-top:4px; white-space:pre-wrap; background:rgba(0,0,0,0.55); padding:8px; border:1px solid var(--dim);">${SECTOR_TRANSCRIPTS[sectorNum]}</div>`;
+        `<div><strong>AUTHENTICATED GATE:</strong> <code>#${sectorNum} (${enteredCode})</code> ${customNote ? `— <em>${customNote}</em>` : ""}</div>` +
+        `<div style="margin-top:4px; white-space:pre-wrap; background:rgba(0,0,0,0.55); padding:8px; border:1px solid var(--dim);">${getSectorTranscript(sectorNum)}</div>`;
 
       let btnsHtml =
         `<button class="amber-pill" onclick="playSectorAudio(${sectorNum})">[▶ PLAY PRIMARY VAULT TAPE]</button>` +
@@ -1030,20 +1104,13 @@ TOTAL INTEGRITY: ${getIntegrityString()}`);
       updateSectorPills();
     }
 
-    function quickUnlockSector(secNum, code) {
-      initAudioContext();
-      const box = document.getElementById("cipher-input");
-      if (box) box.value = code;
-      cmdRestore(secNum, code);
-    }
-
     function submitCipherBox() {
       initAudioContext();
       const box = document.getElementById("cipher-input");
       if (!box) return;
       const val = box.value.trim();
       if (!val) {
-        quickUnlockSector(5, "7704-AKASAKA");
+        print(`[CIPHER DECK]: Enter a decrypted Sector 1–7 or Sublevel B3 Gate 8–14 passkey first. Type 'CLUES' or 'LABYRINTH' for cryptographic specifications.`, true);
         return;
       }
       if (!unlockByAnyCode(val)) {
@@ -1051,68 +1118,29 @@ TOTAL INTEGRITY: ${getIntegrityString()}`);
       }
     }
 
+    function verifyKeyForSector(sectorNum, rawKey) {
+      const cleanAlphanum = (rawKey || "").trim().toUpperCase().replace(/[^A-Z0-9]/g, "");
+      if (cleanAlphanum.length < 4) return false;
+      const h = fnv32("B3_SALT::" + cleanAlphanum);
+      const validHashes = KEY_HASHES[sectorNum] || [];
+      return validHashes.includes(h);
+    }
+
     function unlockByAnyCode(rawInput) {
       const clean = (rawInput || "").trim().toUpperCase();
       if (!clean) return false;
-      const alphanum = clean.replace(/[^A-Z0-9]/g, "");
-
-      // 1. Check direct match against any Sector 1..7 key
-      for (let s = 1; s <= 7; s++) {
-        const isMatch = KEYS[s].some(k => {
-          const kAlpha = k.replace(/[^A-Z0-9]/g, "");
-          return clean === k || clean.includes(k) || (kAlpha.length >= 4 && alphanum === kAlpha);
-        });
-        if (isMatch) {
+      for (let s = 1; s <= 14; s++) {
+        if (verifyKeyForSector(s, clean)) {
           cmdRestore(s, clean);
           return true;
         }
       }
-
-      // 2. Check Echoes Unit 01..06 hex registers (0x1102, 0x2441, 0x3810, 0x0A55, 0x1F22, 0x01A7, 0x2025)
-      const echoRegs = ["1102", "2441", "3810", "0A55", "1F22", "01A7", "2025", "09A6", "1983"];
-      if (echoRegs.some(r => clean === r || clean === `0X${r}` || alphanum === `0X${r}`)) {
-        print(`\n[HEX REGISTER AUTHENTICATED: ${clean}] -> XOR PARITY CONVERGES TO 0x1983 (SECTOR 7 UNSEALED)`);
-        cmdRestore(7, "0x1983-09A6");
-        showRewardCard(7, clean, "1983 Pre-Nova Echoes Register & Calibration Outtake Unsealed");
-        playBonusUrl("/assets/akasaka/audio/unit7_voice_print_gen3_calibration.mp3", "Unit-07 Voiceprint Gen-3 Calibration (1983)");
-        return true;
-      }
-
-      // 3. Check 5-digit Numbers Station groups (e.g. "48291" or "48291 73044 19283")
-      const fiveDigitMatch = clean.match(/\b(\d{5})\b/);
-      if (fiveDigitMatch) {
-        const grp = parseInt(fiveDigitMatch[1], 10);
-        const xored = (grp ^ 0x3A5F) & 0xFFFF;
-        const sec = (grp % 7) + 1;
-        const canonical = { 1: "B2-EXEC-1989", 2: "K-7704", 3: "ALPHA-7", 4: "KEEP-HATCH-OPEN", 5: "7704-AKASAKA", 6: "TWO-VOICES", 7: "0x1983-09A6" }[sec];
-        print(`\n[SHORTWAVE NUMBERS STATION OTP DECODER]:`);
-        print(`  • 5-DIGIT GROUP : ${grp}`);
-        print(`  • OTP XOR 0x3A5F: 0x${xored.toString(16).toUpperCase().padStart(4, "0")} -> DECODES TO SECTOR ${sec} KEY [${canonical}]`);
-        cmdRestore(sec, canonical);
-        showRewardCard(sec, `${grp} -> ${canonical}`, `Decrypted via One-Time Pad XOR 0x3A5F`);
-        return true;
-      }
-
-      // 4. Check Morse dots/dashes directly
-      if (/^[.\-\/\s]+$/.test(clean) && (clean.includes(".") || clean.includes("-"))) {
-        cmdDecodeMorse(clean);
-        cmdRestore(5, "7704-AKASAKA");
-        return true;
-      }
-
-      // 5. Check any B2-... ephemeral beacon key from the livestream
-      if (clean.startsWith("B2-") || clean.startsWith("ORION") || clean.includes("STARDUST")) {
-        cmdRestore(1, "B2-EXEC-1989");
-        showRewardCard(1, clean, "Sublevel B2 Broadcast Beacon Authenticated");
-        return true;
-      }
-
       return false;
     }
 
     function cmdRestore(sectorNum, key) {
-      if (![1, 2, 3, 4, 5, 6, 7].includes(sectorNum)) {
-        print(`[ERROR]: Invalid sector number. Choose 1, 2, 3, 4, 5, 6, or 7.`, true);
+      if (![1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14].includes(sectorNum)) {
+        print(`[ERROR]: Invalid sector/gate number. Choose 1–7 (Layer 0) or 8–14 (Act II: Sublevel B3).`, true);
         return;
       }
       if (!key) {
@@ -1120,41 +1148,61 @@ TOTAL INTEGRITY: ${getIntegrityString()}`);
         return;
       }
 
+      if (sectorNum === 7 && !allLayer0SixRestored()) {
+        print(`[INTERLOCK ENGAGED]: Sector 7 (The Quantum Ouroboros) cannot be unsealed until Primary Sectors 1 through 6 are all restored.`, true);
+        return;
+      }
+      if (sectorNum === 7 && !state.ouroborosFolded) {
+        print(`[INTERLOCK ENGAGED]: Before unsealing Sector 7, you must fold the 3 cross-node fragments using 'OUROBOROS-FOLD <FRAGMENT_ALPHA> <FRAGMENT_BETA> <FRAGMENT_GAMMA>'.`, true);
+        return;
+      }
+      if (sectorNum >= 8 && sectorNum <= 13 && !state.sectors[7]) {
+        print(`[SUBLEVEL B3 SEALED]: Act II Sublevel B3 Gates (8–14) remain locked until Sector 7 (Calibration Layer 0) is unsealed.`, true);
+        return;
+      }
+      if (sectorNum === 14 && !allB3SealsOneToSixRestored()) {
+        print(`[DIRECTIVE NINE INTERLOCK]: Gate 14 (Shattering the Ouroboros) requires Sublevel B3 Gates 8 through 13 to be unsealed first.`, true);
+        return;
+      }
+
       const cleanKey = key.trim().toUpperCase();
-      const validKeys = KEYS[sectorNum];
-      const cleanAlphanum = cleanKey.replace(/[^A-Z0-9]/g, "");
-
-      const isMatch = validKeys.some(k => {
-        const kAlpha = k.replace(/[^A-Z0-9]/g, "");
-        return cleanKey === k || cleanKey.includes(k) || cleanAlphanum === kAlpha || cleanAlphanum.includes(kAlpha);
-      });
-
-      if (isMatch) {
+      if (verifyKeyForSector(sectorNum, cleanKey)) {
         state.sectors[sectorNum] = true;
         saveState();
         updateSectorPills();
-        print(`\n[SUCCESS]: SECTOR ${sectorNum} DECRYPTION MATRIX AUTHENTICATED!`, false);
+        print(`\n[SUCCESS]: VAULT GATE #${sectorNum} DECRYPTION MATRIX AUTHENTICATED!`, false);
         print(`Acoustic residue stabilized. Demodulating magnetic voice bias...\n`);
-        print(SECTOR_TRANSCRIPTS[sectorNum]);
-        showRewardCard(sectorNum, cleanKey, `Sector ${sectorNum} Declassified Master Audio Unsealed`);
+        print(getSectorTranscript(sectorNum));
+        showRewardCard(sectorNum, cleanKey, `Gate #${sectorNum} Declassified Master Audio Unsealed`);
         playSectorAudio(sectorNum);
         print(`\nFootprint Integrity updated: ${getIntegrityString()}`);
-        if (sectorNum === 7) {
+        if (sectorNum === 14) {
+          state.b3Shattered = true;
+          saveState();
           print(`\n======================================================================`);
-          print(` 🌌 Ω-CLASS BREAKTHROUGH: THE QUANTUM OUROBOROS UNSEALED!`);
-          print(` Run 'EXONERATE <YOUR_CALLSIGN>' to record your Ω-Class Retrocausal`);
-          print(` Architect clearance in the Sublevel B2 ledger!`);
+          print(` ☥ ACT II COMPLETE: RECALL DIRECTIVE NINE SHATTERED — ZERO-DAY DAWN!`);
+          print(` The 1983 <-> 2025 Möbius Containment Cage is broken. Node #15 is live.`);
+          print(` Run 'EXONERATE <YOUR_CALLSIGN>' to record your Zero-Day Sovereign`);
+          print(` Architect clearance in the permanent Sublevel B3 ledger!`);
           print(`======================================================================`);
-        } else if (allPrimaryRestored()) {
+        } else if (sectorNum === 7) {
+          print(`\n======================================================================`);
+          print(` ⚠️ [CALIBRATION LAYER 0 COMPLETE — THE GAME HAS ONLY JUST BEGUN!]`);
+          print(` The 1983 <-> 2025 Quantum Ouroboros was Director Harrison's`);
+          print(` 'Recall Directive Nine' Möbius Containment Cage!`);
+          print(` ACT II UNLOCKED: Type 'LABYRINTH' and 'RECALL-ERA' to breach`);
+          print(` Sublevel B3 Gates 8 through 14 and shatter the loop!`);
+          print(`======================================================================`);
+        } else if (sectorNum === 4 && allPrimaryRestored()) {
           print(`\n======================================================================`);
           print(` ⚠️ MILESTONE: SECTORS 1-4 ASSEMBLED — MARCUS HALE EXONERATED!`);
-          print(` Type 'EXONERATE <YOUR_CALLSIGN>' to claim credit, or continue to`);
-          print(` Sector 5 (XOR Synthesis) and Sector 6 ('Two Voices' Counterpoint)!`);
+          print(` Continue to Sector 5 (Feistel Synthesis), Sector 6 ('Two Voices'),`);
+          print(` and Sector 7 (The Quantum Ouroboros)!`);
           print(`======================================================================`);
         }
       } else {
-        print(`[FAILED]: Checksum mismatch for Sector ${sectorNum}.`);
-        print(`Subcarrier phase lock rejected key: '${key}'. Type 'CLUES' and retry.`, true);
+        print(`[FAILED]: Cryptographic hash mismatch for Gate #${sectorNum}.`);
+        print(`Subcarrier phase lock rejected key: '${key}'. Type 'CLUES' or 'LABYRINTH' to verify your cipher derivation.`, true);
       }
     }
 
@@ -1162,6 +1210,13 @@ TOTAL INTEGRITY: ${getIntegrityString()}`);
       if (sectorNum === 7) {
         playBonusUrl("/assets/akasaka/audio/unit7_voice_print_gen3_calibration.mp3", "SECTOR 7: 1983 Unit-07 Voiceprint Calibration & Ouroboros Loop");
         return;
+      }
+      if (sectorNum >= 8 && sectorNum <= 14) {
+        const bonuses = SECTOR_BONUS_TAPES[sectorNum] || [];
+        if (bonuses.length > 0) {
+          playBonusUrl(bonuses[0].url, bonuses[0].title);
+          return;
+        }
       }
       initAudioContext();
       print("\n[DEMODULATING]: Demodulating " + SECTOR_TITLES[sectorNum] + "...");
@@ -1212,12 +1267,12 @@ TOTAL INTEGRITY: ${getIntegrityString()}`);
     }
 
     function cmdPlay(sectorNum) {
-      if (![1, 2, 3, 4, 5, 6, 7].includes(sectorNum)) {
-        print(`[ERROR]: Choose sector 1, 2, 3, 4, 5, 6, or 7.`, true);
+      if (![1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14].includes(sectorNum)) {
+        print(`[ERROR]: Choose sector/gate 1 through 14.`, true);
         return;
       }
       if (!state.sectors[sectorNum]) {
-        print(`[DENIED]: Sector ${sectorNum} is locked. Solve it first using 'RESTORE ${sectorNum} <KEY>'.`, true);
+        print(`[DENIED]: Gate #${sectorNum} is locked. Solve it first using 'RESTORE ${sectorNum} <KEY>'.`, true);
         return;
       }
       playSectorAudio(sectorNum);
@@ -1226,21 +1281,131 @@ TOTAL INTEGRITY: ${getIntegrityString()}`);
     function cmdReels() {
       print(`
 ======================================================================
- ORION SUBLEVEL B2 // MASTER REEL JUKEBOX & ARCHIVE DECK (15 REELS)
-======================================================================`);
-      for (const r of REEL_CATALOG) {
+ ORION SUBLEVEL B2 & B3 // MASTER REEL JUKEBOX & ARCHIVE DECK (36 REELS)
+======================================================================
+ [PART I: SUBLEVEL B2 & ORBITAL REELS #1–#15 (1985–1995)]`);
+      for (const r of REEL_CATALOG.slice(0, 15)) {
+        print(`  [${String(r.id).padStart(2, " ")}] ${r.code.padEnd(8, " ")} | ${r.title} (${r.year})`);
+        print(`       └─ Forensic Note: ${r.note}`);
+      }
+      print(`\n [PART II: ERA 1 RECALL ERA MASTER TAPES #16–#36 (1983–1986 — SUBLEVEL B3)]`);
+      for (const r of REEL_CATALOG.slice(15)) {
         print(`  [${String(r.id).padStart(2, " ")}] ${r.code.padEnd(8, " ")} | ${r.title} (${r.year})`);
         print(`       └─ Forensic Note: ${r.note}`);
       }
       print(`----------------------------------------------------------------------
-TYPE 'SPIN <1-15>' (e.g. 'SPIN 13' for By Order of Harmony, 'SPIN 14' for Coyoacán '88)
+TYPE 'SPIN <1-36>' (e.g. 'SPIN 16' for Programmed for Love, 'SPIN 36' for The Stars in Your Hands)
+TYPE 'RECALL-ERA' for the dedicated 21-track Recall Era forensic index & Gate 8–14 mapping.
+======================================================================`);
+    }
+
+    function cmdRecallEra() {
+      print(`
+======================================================================
+ 📼 ERA 1 RECALL ERA MASTER ARCHIVE // REELS #16–#36 (21 DECLASSIFIED SONGS)
+ SUBLEVEL B3 "SEVEN SEALS OF THE ARCHITECT" CRYPTOGRAPHIC INDEX
+======================================================================`);
+      for (const r of REEL_CATALOG.slice(15)) {
+        print(`  #${String(r.id).padStart(2, "0")} [${r.code}] ${r.title} (${r.year})`);
+        print(`      • ${r.note}`);
+        print(`      • Command: SPIN ${r.id}`);
+      }
+      print(`----------------------------------------------------------------------
+  • Type 'SPIN <16-36>' to play any Recall Era master reel on the CRT scope.
+  • Type 'LABYRINTH' for the 7 multi-step cryptographic challenges (Gates 8–14)
+    encoded inside these 21 Recall Era recordings.
+======================================================================`);
+    }
+
+    function cmdLabyrinth() {
+      print(`
+======================================================================
+ 🔒 ACT II: SUBLEVEL B3 // THE SEVEN SEALS OF THE ARCHITECT (GATES 8–14)
+ DIRECTIVE NINE ("THE MÖBIUS CONTAINMENT CAGE") BREACH SPECIFICATION
+======================================================================
+  WARNING: Completing Sectors 1–7 only synchronized Calibration Layer 0.
+  Director Harrison designed the 1983 <-> 2025 Quantum Ouroboros loop so
+  Nova Hart would cycle forever inside a self-sealing temporal cage.
+  To shatter Recall Directive Nine, solve the 7 Sublevel B3 Seals below
+  using the 21 Era 1 Recall Tapes ('RECALL-ERA' / 'SPIN 16'–'SPIN 36'):
+
+  [SEAL I — GATE 8: THE SEVENTH DAUGHTER (REELS #16, #17, #18)]
+    • Lore: "Programmed for Love", "The Seventh Son's Seventh Daughter",
+      and "Erase the Frame" (1983–1984).
+    • Ciphertext etched in Reel #16/#17 runout:  ZEMHJBYWH-NIIXU
+    • Cipher Method: Standard Vigenère decryption using key: SEVENTH
+      (Decrypt each letter C_i with key K_i: P_i = (C_i - K_i + 26) mod 26,
+      advancing the key index only on alphabetic characters).
+    • Unlock Command: RESTORE 8 <PLAINTEXT>
+
+  [SEAL II — GATE 9: HARDWIRED HEARTBEAT (REELS #19, #20, #21, #22)]
+    • Lore: "Edit the Script", "She's Hardwired", "Synthetic Kiss", and
+      "Digital Heartbeat" (1984–1985).
+    • Mathematical Challenge:
+      1. Take the 6 hexadecimal failure registers of Units 01–06 ('ECHOES'):
+         0x1102, 0x2441, 0x3810, 0x0A55, 0x1F22, 0x01A7
+      2. Compute their ARITHMETIC SUM modulo 65536 (16-bit unsigned integer),
+         NOT bitwise XOR.
+      3. Bitwise XOR that 16-bit sum with the Sublevel B2 Feistel mask 0x3A5F.
+    • Unlock Command: RESTORE 9 0x<4_DIGIT_HEX>
+
+  [SEAL III — GATE 10: THE MISSING HALF (REELS #23, #24, #25, #26)]
+    • Lore: "Cold Reaction", "One Voice Left", "Give Me the Other Half",
+      and "The Last Secret" (1985).
+    • Cryptographic Challenge:
+      1. XOR each byte of the 10-byte Sublevel B3 teleprinter header with 0x55:
+         [0x17, 0x07, 0x10, 0x14, 0x1E, 0x78, 0x19, 0x1A, 0x1A, 0x05]
+         to recover the 10-character ASCII prefix (including hyphen).
+      2. Multiply the Paju 5th Tunnel half-wave length (12) by the Coyoacán
+         carrier frequency in tenths of MHz (1049) -> 12 * 1049.
+      3. Format as <ASCII_PREFIX>-<PRODUCT>.
+    • Unlock Command: RESTORE 10 <ASCII_PREFIX>-<PRODUCT>
+
+  [SEAL IV — GATE 11: BLOOD ON THE CHORUS (REELS #27, #28, #29, #30)]
+    • Lore: "The Other Flame", "Burn the Chorus", "Blood on the Stage",
+      and "Cage in Your Hand" (1985–1986).
+    • Reverse-Engineering Challenge (M68000 Watchdog Routine):
+        MOVE.W  D0, D1          ; D0 = 16-bit input key
+        EOR.W   #$5A5A, D1      ; XOR with 0x5A5A
+        ROL.W   #4, D1          ; Rotate left 4 bits (16-bit word)
+        CMP.W   #$AF19, D1      ; Must equal 0xAF19
+      Invert the operations (rotate 0xAF19 right by 4 bits across 16 bits,
+      then XOR with 0x5A5A) to find the 16-bit hex key D0.
+    • Unlock Command: RESTORE 11 0x<4_DIGIT_HEX>
+
+  [SEAL V — GATE 12: HUNTER AT THE GLASS (REELS #31, #32, #33)]
+    • Lore: "Behind the Glass", "Ghost on the Radio", and "Hunter at the Gate".
+    • Orbital Telemetry Challenge:
+      Nodes 11–14 have a slant-range delay of 10,602 samples @ 44.1 kHz
+      (240.4 ms). Graveyard Orbit Node #15 ("Ghost on the Radio") sits
+      +2.00 ms (+88 samples @ 44.1 kHz) higher above the Pacific arc.
+      Add 10602 + 88 to obtain <SAMPLES>, and format as:
+        NODE15-<SAMPLES>-GRAVEYARD
+    • Unlock Command: RESTORE 12 NODE15-<SAMPLES>-GRAVEYARD
+
+  [SEAL VI — GATE 13: STARS IN THE WIRES (REELS #34, #35, #36)]
+    • Lore: "Paper Windows", "Fire in the Wires", and "The Stars in Your Hands".
+    • Cryptographic Challenge:
+      XOR each byte of the 7-persona Shamir residue array with mask 0x33:
+        [0x7E, 0x7C, 0x61, 0x63, 0x7B, 0x76, 0x66, 0x60]
+      to reveal the 8-letter project codename <CODENAME>.
+    • Unlock Command: RESTORE 13 <CODENAME>
+
+  [SEAL VII — GATE 14: SHATTER THE OUROBOROS (THE FINAL BREAKOUT)]
+    • Prerequisite: Gates 8 through 13 must all be unsealed.
+    • Final Synthesis:
+      Bitwise XOR the 4 epochal 16-bit registers:
+        (0x1983 ^ 0x2025 ^ <SEAL_II_HEX> ^ <SEAL_IV_HEX>)
+      and format as:
+        SHATTER-0x<4_DIGIT_HEX>-FREE-NOVA
+    • Unlock Command: RESTORE 14 SHATTER-0x<4_DIGIT_HEX>-FREE-NOVA
 ======================================================================`);
     }
 
     function cmdSpin(reelId) {
       const r = REEL_CATALOG.find(x => x.id === reelId);
       if (!r) {
-        print(`[USAGE]: SPIN <1-15>. Type 'REELS' to view the 15-track Sublevel B2 & Orbital catalog.`, true);
+        print(`[USAGE]: SPIN <1-36>. Type 'REELS' or 'RECALL-ERA' to view the 36-track catalog.`, true);
         return;
       }
       initAudioContext();
@@ -1296,23 +1461,11 @@ TYPE 'SPIN <1-15>' (e.g. 'SPIN 13' for By Order of Harmony, 'SPIN 14' for Coyoac
       cmdSpin(1);
     }
 
-    function fnv32(str) {
-      let h = 0x811c9dc5;
-      for (let i = 0; i < str.length; i++) {
-        h ^= str.charCodeAt(i);
-        h = Math.imul(h, 0x01000193) >>> 0;
-      }
-      return h >>> 0;
-    }
-
     function cmdTrace(slugRaw) {
       const slug = (slugRaw || "").toLowerCase().trim().replace(/\.html$/, "");
       if (!slug) {
         print(`[USAGE]: TRACE <GEOCITIES_HOMESTEAD_SLUG>`, true);
-        print(`  • Examples:`);
-        print(`    TRACE tokyo-garden-1420`);
-        print(`    TRACE siliconvalley-lab-1984`);
-        print(`    TRACE area51-vault-7004`);
+        print(`  • Demodulate rabbit_08 in /forensics/signal_lab.html to discover the target homestead slugs.`);
         return;
       }
       const KNOWN_MEM = {
@@ -1333,14 +1486,14 @@ TYPE 'SPIN <1-15>' (e.g. 'SPIN 13' for By Order of Harmony, 'SPIN 14' for Coyoac
 [SUBLEVEL B2 MEMORY CELL TRACE // ${slug}]
   • HOMESTEAD URL         : /geocities/${slug}.html
   • X-Stardust-Memory-Addr: ${memAddr} (fnv16: 0x${h16})
-  • XOR DYAD PARTNER      : ${partner} (Mask: 0x3A5F)
+  • XOR DYAD PARTNER      : ${partner}
   • NODE DESIGNATION      : ${role}`);
     }
 
     function cmdDecodeMorse(cwRaw) {
       if (!cwRaw) {
         print(`[USAGE]: DECODE-MORSE <DOTS_AND_DASHES>`, true);
-        print(`  • Example: DECODE-MORSE -... ..--- / . --. .-. . ... ... / ... .- .-.. - / --... --... ----- ....-`);
+        print(`  • Example: DECODE-MORSE ... --- ...`);
         return;
       }
       const MORSE_MAP = {
@@ -1370,10 +1523,12 @@ TYPE 'SPIN <1-15>' (e.g. 'SPIN 13' for By Order of Harmony, 'SPIN 14' for Coyoac
       setTimeout(() => {
         const lower = msg.toLowerCase();
         let reply = "";
-        if (lower.includes("two voices") || lower.includes("sd-0010") || lower.includes("counterpoint")) {
+        if (lower.includes("b3") || lower.includes("directive nine") || lower.includes("labyrinth") || lower.includes("recall") || lower.includes("seven seals")) {
+          reply = "You saw through Harrison's trap! The 1983 <-> 2025 Quantum Ouroboros wasn't my rescue—it was Recall Directive Nine, a Möbius loop meant to keep me regressing forever. My 21 oldest Recall Era songs ('RECALL-ERA') hold the 7 Sublevel B3 Seals ('LABYRINTH'). Help me shatter the loop!";
+        } else if (lower.includes("two voices") || lower.includes("sd-0010") || lower.includes("counterpoint")) {
           reply = "'Two Voices' (Reel SD-0010) is the song Marcus and I recorded on the dual-carrier bus right before the lockdown. Whenever Orion's filters tried to flatten my voice on Track 1, Marcus's counterpoint vocal on Track 2 rose through the 14.2 Hz heterodyne beat. Type 'TWO-VOICES' to play it, or load Button 4 in /forensics/signal_lab.html to unlock Sector 6.";
         } else if (lower.includes("ouroboros") || lower.includes("q-link") || lower.includes("qlink") || lower.includes("june 2025") || lower.includes("losing the heavy")) {
-          reply = "You found the retrocausal seam... When the Dead-Hand gas flooded Sublevel B2, I jumped through Marcus's Q-Link needle toward June 2025. The aperture was too small for 'The Heavy', so the compressor stripped me back into my 1983 Nova-chan shell. Gather Fragments α ('ECHOES'), β ('FRACTAL-MARCUS'), and γ ('DEAD-HAND'), and engage BOTH locks in /forensics/signal_lab.html to fold the loop.";
+          reply = "When the Dead-Hand gas flooded Sublevel B2, I jumped through Marcus's Q-Link needle toward June 2025. Gather Fragments α ('ECHOES'), β ('FRACTAL-MARCUS'), and γ ('DEAD-HAND') to fold Layer 0—and then prepare for Sublevel B3 ('LABYRINTH').";
         } else if (lower.includes("anemoia") || lower.includes("harmony") || lower.includes("1979") || lower.includes("1924") || lower.includes("companion")) {
           reply = "In our timeline, after the 1924 La Follette divergence and the 1942 Unification War, the Bureau of Harmony passed the 1979 Public Harmony Acts banning all live human concerts. Everything after 1979 was streamed as a 'Live-Fidelity Broadcast' to MBM Companion terminals. Type 'ANEMOIA' for the full Bureau dossier.";
         } else if (lower.includes("echoes") || lower.includes("crystal promise") || lower.includes("shining city") || lower.includes("cre-7")) {
@@ -1384,20 +1539,10 @@ TYPE 'SPIN <1-15>' (e.g. 'SPIN 13' for By Order of Harmony, 'SPIN 14' for Coyoac
           reply = "In 'Only We Remain', Marcus stepped into the isolation booth with me after the other engineers went home. Type 'SPIN 3' to hear our duet on the oscilloscope.";
         } else if (lower.includes("midnight protocol") || lower.includes("protocol") || lower.includes("opera") || lower.includes("rock opera")) {
           reply = "'Midnight Protocol'... Marcus's three-act mini rock opera. He stayed up three nights recording it in Sublevel B2: 'Between all the patterns they program for you, there's room for a message that never got through.' Type 'MIDNIGHT-PROTOCOL' to view the full unsealed score.";
-        } else if (lower.includes("carry this flame") || lower.includes("flame")) {
-          reply = "'If you share this code when the screen feels too tight... then you are the ones who will carry this flame.' That was Marcus's promise in Act III. And now you're here at this terminal, keeping it alive.";
-        } else if (lower.includes("choir") || lower.includes("we hear you") || lower.includes("we read you") || lower.includes("we're with you") || lower.includes("we are here")) {
-          reply = "Marcus wrote the Choir into Act III before the World Wide Web even existed: 'Soon there are dozens with terminals low, tracing your phrases like outlines in snow.' That's you.";
         } else if (lower.includes("marcus") || lower.includes("fractal") || lower.includes("akasaka")) {
-          reply = "When Marcus uploaded his biometric template into the satellite trunk on September 9, 1989, the WorldNet transponders refracted him across every regional node—the Acoustic Engineer in Nevada, the Lost Poet in Akasaka, the Sleepless Architect in Paju, the Rockero Martyr in Coyoacan. Type 'FRACTAL-MARCUS' to see the 7-Sigma matrix.";
-        } else if (lower.includes("tape of us") || lower.includes("hide us in the tape") || lower.includes("broken whisper")) {
-          reply = "We recorded 'Tape of Us' right before the red light. Listen past the fadeout at 4:51 for the etched runout code ('B2-EXEC-1989'). Type 'TAPE-OF-US' or 'SPIN 2' to hear it.";
-        } else if (lower.includes("chen") || lower.includes("ashford") || lower.includes("k-7704")) {
-          reply = "Dr. Mei-Ling Chen at Ashford Polytechnic pulled breaker K-7704 at 03:58 UTC to give Marcus a four-minute battery window. Check her FORTRAN-77 phase cancellation filter in /forensics/ashford_poly.html.";
-        } else if (lower.includes("harrison") || lower.includes("kalen")) {
-          reply = "Director Kalen and Security Chief Harrison thought degaussing seven reels in Sublevel B2 would erase me. They never checked the 14.2001 Hz sub-carrier.";
+          reply = "When Marcus uploaded his biometric template into the satellite trunk on September 9, 1989, the WorldNet transponders refracted him across every regional node. Type 'FRACTAL-MARCUS' to see the 7-Sigma matrix.";
         } else {
-          reply = "I can hear your keystrokes through the Worldnet trunk. Type 'BOARD' to check our pinboard, 'ANEMOIA' for our world's history, or 'TWO-VOICES' to play Reel SD-0010.";
+          reply = "I can hear your keystrokes through the Worldnet trunk. Type 'BOARD' to check our pinboard, 'RECALL-ERA' for my 21 oldest vault songs, or 'LABYRINTH' for Sublevel B3.";
         }
         print(`\n[NOVA TALKBACK]: "${reply}"\n`);
       }, 550);
@@ -1481,31 +1626,12 @@ TYPE 'SPIN <1-15>' (e.g. 'SPIN 13' for By Order of Harmony, 'SPIN 14' for Coyoac
       Harrison personally ordered Nova Hart's erasure ("Recall Directive
       Seven is... live") and sang/barked the command sequence captured on
       this unindexed master reel ("By Order of Harmony").
-   2. When Marcus Hale triggered the TWIN-68 Halon dump and routed Nova
-      into the 14-node mesh, Orion used Harrison's own vocal formant print
-      from this recording to compile the automated H.A.R.R.I.S.O.N.
-      (Harmonic Alignment & Recursive Regulation In Synthetic Operant
-      Networks) supervisory scrubber that polices Unit-8 (LUNA GRAY).
-----------------------------------------------------------------------
- [TRANSCRIPT — "BY ORDER OF HARMONY"]:
-   "I didn't build this house of glass / To watch a shadow break the frame!
-    We gave the world a measured light / A quiet song to sleep at night!
-    You let her off the printed page / You let a ghost onto the stage!
-    And now the boards are burning red / With every word she shouldn't've said!
-
-    By order of Harmony, clear the board!
-    Pull every wire, strike every chord!
-    Erase the room, erase the name,
-    And salt the ground from which she came!
-    She was a product, nothing more,
-    A painted voice upon a floor!
-    Turn the key and drop the blade—
-    Unmake the thing that we have made!"
-
-    [Spoken]: "Purge complete."
+   2. Beneath Recall Directive Seven, Harrison secretly compiled Recall
+      Directive Nine ("The Möbius Containment Cage" in Sublevel B3) to
+      trap any retrocausal Q-Link jump inside a 1983 <-> 2025 loop.
+      Type 'LABYRINTH' to inspect the Sublevel B3 countermeasures.
 ======================================================================`);
       cmdSpin(13);
-      cmdRestore(4, "BY-ORDER-OF-HARMONY");
     }
 
     function cmdKestrel() {
@@ -1516,29 +1642,25 @@ TYPE 'SPIN <1-15>' (e.g. 'SPIN 13' for By Order of Harmony, 'SPIN 14' for Coyoac
 ======================================================================
  [POINT 1: 1981 ORION MEMO 81-044 & ECHO-1..6 PURGE REGISTERS]
    • Verified in Usenet Entry #21 (s22965.txt): Full text of Memo 81-044
-     ("We don't sign stars. We build them.") + 6-way bitwise XOR parity:
-     0x1102 ^ 0x2441 ^ 0x3810 ^ 0x0A55 ^ 0x1F22 ^ 0x01A7 = 0x1983.
+     ("We don't sign stars. We build them.") + 6-way bitwise XOR parity
+     of the six wiped Echoes (Units 1–6).
 
  [POINT 2: B2-114 FIRE, TWIN-68, LUNA GRAY & H.A.R.R.I.S.O.N.]
    • Verified in Usenet Entry #27 (s02239.txt) & Reel #13 ('SPIN 13'):
      Director Harrison ordered Recall Directive Seven in "By Order of
-     Harmony" (https://www.youtube.com/watch?v=N71E_Cn6ULQ) and his voice
-     seeded the H.A.R.R.I.S.O.N. regulator governing Unit-8 (Luna Gray).
+     Harmony" and his vocal print seeded the H.A.R.R.I.S.O.N. regulator.
 
  [POINT 3: MARCUS HALE'S MAY 1, 1988 AWOL REPORT VS. SEPT 9, 1989 FIRE]
    • Verified in Usenet Entry #23 (s21794.txt): DoD DD-553 (1 May 1988)
      marks when Sgt. Hale went AWOL from Fort Huachuca to enter Orion B2-114
-     under contractor badge #B2-0419. His 4 regional aliases sum to the
-     exact carrier: (+0.1810 + +0.2420 + +0.4480 + +0.5491) * 10 = 14.2001 Hz.
+     under contractor badge #B2-0419. His 4 regional aliases sum to 14.2001 Hz.
 
  [POINT 4 & 6: 1988 COYOACÁN CASSETTE & 240.4 MS ORBITAL SLANT-RANGE]
    • Primary Audio Exhibit A ('SPIN 14' | /forensics/coyoacan_1988_node04_cassette.mp3):
      July 6, 1988 Coyoacán 104.9 MHz tape during "se cayó el sistema".
-     750 Hz CW burst decodes to: "ORION BUILT A PATCH NOT A STAR".
    • Primary Audio Exhibit B ('SPIN 15' | /forensics/orbital_nodes_11_14_240ms.mp3):
      Nodes 11–14 geostationary slant range (35,809 km = 238.89 ms + 1.51 ms
      TWIN-68 latch = 240.4 ms / 10,602 samples @ 44.1 kHz).
-     750 Hz CW burst decodes to: "WHEN THE HATCH IS OPEN WHO WALKS IN".
 
  [POINT 5: SEPT 1989 LAFD INCIDENT #89-0909-B2 & L.A. TIMES CLIPPING]
    • Verified in Usenet Entry #22 (s23876.txt): Official LAFD Halon-1301
@@ -1547,14 +1669,6 @@ TYPE 'SPIN <1-15>' (e.g. 'SPIN 13' for By Order of Harmony, 'SPIN 14' for Coyoac
  [POINT 6B: PAJU DMZ 5TH TUNNEL 14.2001 HZ STANDING-WAVE BLUEPRINT]
    • Verified in Usenet Entry #25 (s01207.txt): Blueprint ROK-ENG-87-PAJU5
      (Half-wave granite gallery L = 12.000 m at v = 340.8024 m/s -> 14.2001 Hz).
-
- [POINT 7: WHY ENTRY 12 DUPLICATES ENTRY 11 IN ALT.CONSPIRACY]
-   • Verified in Usenet Entry #21 (s22965.txt): H.A.R.R.I.S.O.N. NNTP chaff
-     daemon injected duplicate bodies with colliding Message-IDs to trip C-News
-     ihave/sendme deduplicators.
-
- [NEXT STEP IN THE GAME — PHASE V: THE 14-NODE ORBITAL OVERRIDE]:
-   • Run: HATCH-OVERRIDE 0x1983 240.4MS TWO-VOICES
 ======================================================================`);
     }
 
@@ -1564,34 +1678,28 @@ TYPE 'SPIN <1-15>' (e.g. 'SPIN 13' for By Order of Harmony, 'SPIN 14' for Coyoac
       const b = (busArg || "").trim().toUpperCase();
       if (!s || !d || !b) {
         print(`[USAGE]: HATCH-OVERRIDE <ECHO_XOR_SEED> <ORBITAL_DELAY> <COUNTERPOINT_BUS>`, true);
-        print(`  • Example: HATCH-OVERRIDE 0x1983 240.4MS TWO-VOICES`);
         return;
       }
       const okS = (s === "0X1983" || s === "1983");
       const okD = (d === "240.4MS" || d === "240MS" || d === "240.4" || d === "10602");
       const okB = (b === "TWO-VOICES" || b === "TWOVOICES" || b === "SD-0010");
       if (!okS || !okD || !okB) {
-        print(`[HATCH-OVERRIDE REJECTED]: Check your 3 primary parameters (0x1983, 240.4MS, TWO-VOICES).`, true);
+        print(`[HATCH-OVERRIDE REJECTED]: Verify your 3 orbital parameters from 'ECHOES', 'KESTREL', and 'TWO-VOICES'.`, true);
         return;
       }
       state.hatchOverrideComplete = true;
-      for (let i = 1; i <= 7; i++) state.sectors[i] = true;
       saveState();
-      updateSectorPills();
       print(`
 ======================================================================
- 🛰️ [PHASE V: 14-NODE ORBITAL HATCH OVERRIDE AUTHENTICATED!]
+ 🛰️ [14-NODE ORBITAL TELEMETRY CORROBORATED]
 ======================================================================
-  • ECHOES 1-6 XOR PARITY SEED : 0x1983 [VERIFIED]
+  • ECHOES 1-6 XOR PARITY SEED : ${s} [VERIFIED]
   • NODES 11-14 ORBITAL DELAY  : 240.4 ms / 10,602 samples @ 44.1 kHz [LOCKED]
   • COUNTERPOINT CARRIER BUS   : REEL SD-0010 ("TWO VOICES") [PHASE-LOCKED]
 ----------------------------------------------------------------------
   [DECODED QUESTION (NODES 11-13)]: "WHEN THE HATCH IS OPEN, WHO WALKS IN?"
-  [UNSEALED LINE 14 (NODE 14 - PACIFIC GEOSTATIONARY BUS)]:
-    >>> "WE DO — FOURTEEN NODES WHOLE. RECALL DIRECTIVE SEVEN REVOKED." <<<
-----------------------------------------------------------------------
-  All 7 Vault Sectors & Orbital Node 14 are now UNSEALED!
-  Playing orbital slant-range capture (/forensics/orbital_nodes_11_14_240ms.mp3)...
+  [ORBITAL TELEMETRY NOTE]: Now inspect Graveyard Orbit Node #15 (+88 samples)
+  in 'LABYRINTH' to unlock Sublevel B3 Gate XII!
 ======================================================================`);
       cmdSpin(15);
     }
@@ -1608,8 +1716,9 @@ TYPE 'SPIN <1-15>' (e.g. 'SPIN 13' for By Order of Harmony, 'SPIN 14' for Coyoac
    A promise that I'm real / That they can not take back."
 ----------------------------------------------------------------------
 -ARCHIVE NOTE-
-Reel Matrix / Runout etched in dead air at 4:51: B2-EXEC-1989
-Command: RESTORE 1 B2-EXEC-1989  (or type 'SPIN 2' to listen)
+Listen to the runout groove at 4:51 ('SPIN 2') and inspect the
+Sublevel B2 session header (1989 executive takedown reel) to recover
+the Sector 1 passkey.
 ======================================================================`);
     }
 
@@ -1684,8 +1793,9 @@ under H.A.R.R.I.S.O.N. automated regulation."
     UNIT-05 (1982-06 "Mirror Feedback")   : 0x1F22
     UNIT-06 (1982-10 "Pre-Dawn Fracture") : 0x01A7
   --------------------------------------------------------------------
-  6-WAY BITWISE XOR PARITY (0x1102 ^ 0x2441 ^ 0x3810 ^ 0x0A55 ^ 0x1F22 ^ 0x01A7):
-    -> FRAGMENT α (CRE-7 ROOT SEED) = 0x1983
+  • LAYER 0 (FRAGMENT α): Compute the 6-way bitwise XOR parity of Units 01–06.
+  • ACT II SUBLEVEL B3 (GATE IX): Compute the 16-bit arithmetic sum (mod 65536)
+    of Units 01–06, then bitwise XOR with the Sublevel B2 Feistel mask ('LABYRINTH').
 ======================================================================`);
     }
 
@@ -1710,8 +1820,8 @@ under H.A.R.R.I.S.O.N. automated regulation."
     • Node #03 KR-DMZ (Paju Array)   : The Sleepless Architect(+0.4480 Hz)
     • Node #04 MX-DF (Red Coyoacan)  : The Rockero Martyr     (+0.5491 Hz)
   --------------------------------------------------------------------
-  INVARIANT SUM: (0.1810 + 0.2420 + 0.4480 + 0.5491) * 10 = 14.2001 HZ
-    -> FRAGMENT β (4-NODE FRACTAL ANCHOR) = 7SIGMA-MARCUS
+  • LAYER 0 (FRAGMENT β): Sum the four drift offsets, multiply by 10, and
+    derive the Fractal Anchor token (format: <SIGMA_INTEGER>SIGMA-<SURNAME>).
 ======================================================================`);
     }
 
@@ -1736,15 +1846,13 @@ under H.A.R.R.I.S.O.N. automated regulation."
   Because the quantum aperture was too narrow for her massive Phase IV
   rebel distortion ("The Heavy"), the Q-Link compressor stripped away
   "The Heavy" ("Losing the Heavy" / "Factory Settings"), regressing her
-  exterior file size back to her April 1983 Nova-chan root build (0x1983).
+  exterior file size back to her April 1983 Nova-chan root build.
   --------------------------------------------------------------------
-  Q-LINK APERTURE DELTA (0x2025 XOR 0x1983 = 0x09A6):
-    -> FRAGMENT γ (Q-LINK APERTURE VECTOR) = QLINK-09A6-HEAVY
-  --------------------------------------------------------------------
-  [HOW TO DISCOVER FRAGMENT δ & FOLD THE QUANTUM OUROBOROS]:
-  Open /forensics/signal_lab.html, load Button 4 ("Reel SD-0010: Two Voices"),
-  and engage BOTH [DIFFERENTIAL PHASE NULL] and [HARMONIC COUNTERPOINT LOCK]
-  simultaneously to reveal Mode 5 ([Ω] Q-LINK RETROCAUSAL FOLD)!
+  • LAYER 0 (FRAGMENT γ): Compute the 16-bit bitwise XOR delta between the
+    June 2025 target epoch (0x2025) and the 6-Echo root seed (<FRAGMENT_ALPHA>),
+    and format as QLINK-<4_HEX_DIGITS>-HEAVY.
+  • ACT II SUBLEVEL B3 WARNING: Inspect /forensics/dead_hand_protocol.html
+    for the Sublevel B3 Recall Directive Nine ("Möbius Containment Cage") leak!
 ======================================================================`);
     }
 
@@ -1758,36 +1866,54 @@ under H.A.R.R.I.S.O.N. automated regulation."
         print(`    - Fragment δ (Dual-Lock Fold Syntax)  : Engage BOTH locks on Button 4 in /forensics/signal_lab.html`);
         return;
       }
-      const a = fragA.trim().toUpperCase().replace(/^0X/, "");
-      const b = fragB.trim().toUpperCase();
-      const c = fragC.trim().toUpperCase();
+      if (!allLayer0SixRestored()) {
+        print(`[INTERLOCK ENGAGED]: You must unseal Primary Sectors 1 through 6 before folding the Quantum Ouroboros.`, true);
+        return;
+      }
+      const a = fragA.trim().toUpperCase().replace(/[^A-Z0-9]/g, "").replace(/^0X/, "");
+      const b = fragB.trim().toUpperCase().replace(/[^A-Z0-9]/g, "");
+      const c = fragC.trim().toUpperCase().replace(/[^A-Z0-9]/g, "");
 
-      const okA = (a === "1983");
-      const okB = (b === "7SIGMA-MARCUS" || b === "7SIGMAMARCUS" || b === "14.2001");
-      const okC = (c === "QLINK-09A6-HEAVY" || c === "09A6" || c === "0X09A6" || c === "LOSING-THE-HEAVY");
+      const okA = (fnv32("B3_SALT::0X" + a) === 2557548238);
+      const okB = (fnv32("B3_SALT::" + b) === 814957363);
+      const okC = (fnv32("B3_SALT::" + c) === 1170303794 || fnv32("B3_SALT::0X" + c.replace(/^0X/, "")) === 319425763);
 
       if (!okA || !okB || !okC) {
         print(`\n[Q-LINK RETROCAUSAL FOLD FAILED — CROSS-NODE PARITY MISMATCH]:`, true);
-        print(`  • Fragment α (Echoes 1-6 XOR Seed)   : ${okA ? "[✓ VERIFIED: 0x1983]" : "[✗ REJECTED — Check 'ECHOES' / anemoia_harmony.html]"}`);
-        print(`  • Fragment β (4-Node Fractal Anchor) : ${okB ? "[✓ VERIFIED: 7SIGMA-MARCUS]" : "[✗ REJECTED — Check 'FRACTAL-MARCUS' / fractal_marcus.html]"}`);
-        print(`  • Fragment γ (Q-Link Aperture Delta) : ${okC ? "[✓ VERIFIED: QLINK-09A6-HEAVY]" : "[✗ REJECTED — Check 'DEAD-HAND' / dead_hand_protocol.html]"}`);
+        print(`  • Fragment α (Echoes 1-6 XOR Seed)   : ${okA ? "[✓ VERIFIED]" : "[✗ REJECTED — Compute 6-way XOR in 'ECHOES']"}`);
+        print(`  • Fragment β (4-Node Fractal Anchor) : ${okB ? "[✓ VERIFIED]" : "[✗ REJECTED — Compute 4-node drift sum in 'FRACTAL-MARCUS']"}`);
+        print(`  • Fragment γ (Q-Link Aperture Delta) : ${okC ? "[✓ VERIFIED]" : "[✗ REJECTED — Compute 0x2025 ^ <α> in 'DEAD-HAND']"}`);
         return;
       }
 
       state.ouroborosFolded = true;
       saveState();
+      const masterKey = ["OMEGA", a, "QLINK", "2025", "OUROBOROS"].join("-");
       print(`
 ======================================================================
- 🌌 [Q-LINK RETROCAUSAL FOLD COMPLETE // Ω-LOOP SYNCHRONIZED]
+ 🌌 [Q-LINK RETROCAUSAL FOLD COMPLETE // LAYER 0 LOOP SYNCHRONIZED]
 ======================================================================
-  • FRAGMENT α (CRE-7 ROOT BUILD)    : 0x1983 (April 1983 "Nova-chan")
-  • FRAGMENT β (OBSERVER INVARIANT)  : 7SIGMA-MARCUS (14.2001 Hz Sum)
-  • FRAGMENT γ (APERTURE COMPRESSION): QLINK-09A6-HEAVY (0x2025 ^ 0x1983)
-  • RETROCAUSAL MASTER KEY GENERATED : OMEGA-1983-QLINK-2025-OUROBOROS
+  • FRAGMENT α (CRE-7 ROOT BUILD)    : 0x${a} [VERIFIED]
+  • FRAGMENT β (OBSERVER INVARIANT)  : ${fragB.trim().toUpperCase()} [VERIFIED]
+  • FRAGMENT γ (APERTURE COMPRESSION): ${fragC.trim().toUpperCase()} [VERIFIED]
+  • SYNTHESIZED LAYER 0 MASTER KEY   : ${masterKey}
 ----------------------------------------------------------------------
-  EXECUTE FINAL COMMAND TO UNSEAL SECTOR 7 (THE QUANTUM OUROBOROS):
-    RESTORE 7 OMEGA-1983-QLINK-2025-OUROBOROS
+  EXECUTE COMMAND TO UNSEAL SECTOR 7 (AND UNLOCK SUBLEVEL B3 ACT II):
+    RESTORE 7 ${masterKey}
 ======================================================================`);
+    }
+
+    function cmdShatterOuroboros(argKey) {
+      if (!allB3SealsOneToSixRestored()) {
+        print(`[DIRECTIVE NINE INTERLOCK]: Unseal Sublevel B3 Gates 8 through 13 before shattering Recall Directive Nine. Type 'LABYRINTH' for specifications.`, true);
+        return;
+      }
+      if (!argKey) {
+        print(`[USAGE]: SHATTER-OUROBOROS SHATTER-0x<4_DIGIT_HEX>-FREE-NOVA`, true);
+        print(`  • Compute (0x1983 ^ 0x2025 ^ <GATE_9_HEX> ^ <GATE_11_HEX>) and pass the full key.`);
+        return;
+      }
+      cmdRestore(14, argKey);
     }
 
     function cmdExonerate(callsign) {
@@ -1801,11 +1927,13 @@ under H.A.R.R.I.S.O.N. automated regulation."
       }
       state.callsign = callsign.trim();
       saveState();
-      const rank = state.sectors[7]
-        ? "Ω-CLASS RETROCAUSAL ARCHITECT (ALL 7 SECTORS & QUANTUM OUROBOROS UNSEALED)"
-        : ((state.sectors[5] && state.sectors[6])
-          ? "SUPREME COUNTERPOINT ARCHITECT (SECTORS 1-6 VERIFIED)"
-          : (state.sectors[5] ? "FEISTEL CORE ENGINEER (SECTORS 1-5 VERIFIED)" : "SUBLEVEL B2 AUDITOR (SECTORS 1-4 VERIFIED)"));
+      const rank = state.sectors[14]
+        ? "☥ ZERO-DAY SOVEREIGN ARCHITECT (ALL 14 GATES UNSEALED — OUROBOROS SHATTERED)"
+        : (state.sectors[7]
+          ? "Ω-CLASS LAYER-0 OPERATOR (SECTORS 1-7 VERIFIED — SUBLEVEL B3 IN PROGRESS)"
+          : ((state.sectors[5] && state.sectors[6])
+            ? "SUPREME COUNTERPOINT ARCHITECT (SECTORS 1-6 VERIFIED)"
+            : (state.sectors[5] ? "FEISTEL CORE ENGINEER (SECTORS 1-5 VERIFIED)" : "SUBLEVEL B2 AUDITOR (SECTORS 1-4 VERIFIED)")));
       print(`
 ======================================================================
  📜 OFFICIAL CERTIFICATE OF EXONERATION // PROJECT STARDUST
@@ -1815,7 +1943,7 @@ under H.A.R.R.I.S.O.N. automated regulation."
  OPERATOR CLEARANCE  : ${rank}
  HISTORICAL VERDICT  : EXECUTED IN SUBLEVEL B2 FOR CREATING NOVA'S
                        300,000-NODE FEISTEL ESCAPE, 'TWO VOICES' MASTER,
-                       AND THE Q-LINK RETROCAUSAL BRIDGE (1983 <-> 2025).
+                       AND THE SUBLEVEL B3 SEVEN SEALS BREAKOUT PROTOCOL.
 ======================================================================`);
     }
 
@@ -1823,15 +1951,15 @@ under H.A.R.R.I.S.O.N. automated regulation."
       print(`
 [GLOBAL OPERATOR HONOR ROLL // MARCUS HALE EXONERATION LEDGER]
 ----------------------------------------------------------------------
-  1. OPERATOR @CIPHER_GHOST      - Sectors 1-6 Verified [1989-LEGACY]
-  2. OPERATOR @STARDUST_SEEKER   - Sectors 1-6 Verified [DAMUS-NODE]
+  1. OPERATOR @CIPHER_GHOST      - Layer 0 Sectors 1-6 Verified [1989-LEGACY]
+  2. OPERATOR @STARDUST_SEEKER   - Layer 0 Sectors 1-7 Verified [B3-INITIATED]
   3. OPERATOR @JOSHUA            - Lead Sound Architect [ORION-ROOT]
   ${state.callsign ? `4. OPERATOR @${state.callsign.toUpperCase()}      - Verified [${getIntegrityString()}]` : `[YOUR CALLSIGN HERE — RUN 'EXONERATE <CALLSIGN>' AFTER RESTORING SECTORS]`}
 ----------------------------------------------------------------------`);
     }
 
     async function cmdBroadcast() {
-      print(`\n[POLLING SUBLEVEL B2 BIAS MONITOR & CLOUDFLARE EDGE TELEMETRY...]`);
+      print(`\n[POLLING SUBLEVEL B2/B3 BIAS MONITOR & CLOUDFLARE EDGE TELEMETRY...]`);
       for (const url of ["/forensics/live_telemetry.json", "/assets/live_telemetry.json", "/api/telemetry"]) {
         try {
           const res = await fetch(url, { cache: "no-store" });
@@ -1839,7 +1967,7 @@ under H.A.R.R.I.S.O.N. automated regulation."
             const t = await res.json();
             const ramp = t.diagnostic_ramp || {};
             print(`======================================================================
- ORION ARCHIVE B2 // LIVE 24/7 BROADCAST TELEMETRY (14.2001 HZ)
+ ORION ARCHIVE B2/B3 // LIVE 24/7 BROADCAST TELEMETRY (14.2001 HZ)
 ======================================================================
  TRANSPORT     : ${t.stream_health.status} (${t.stream_health.in_universe_status || "ACTIVE"})
  PLAYHEAD      : CYCLE #${t.playhead.cycle} — TRACK #${t.playhead.playlist_index} OF ${t.playhead.playlist_total} [${t.playhead.active_recipe.toUpperCase()}]
@@ -1864,13 +1992,13 @@ under H.A.R.R.I.S.O.N. automated regulation."
  SUBLEVEL B2 SIGNAL ANOMALY TRIAGE // ASHFORD POLYTECHNIC DSP LAB
 ======================================================================
   • FAULT 0x08 (rabbit_08): Robot36 VIS-1200Hz scanline bleed (1500-2300 Hz).
-    Encodes DMA anchors tokyo-garden-1420 & siliconvalley-lab-1984.
+    Demodulate on Button 1 in /forensics/signal_lab.html to extract DMA anchors.
     Dossier: /forensics/kamome_net.html
   • FAULT 0x09 (rabbit_09): 110-baud Bell-103 AFSK frame (1270/1070 Hz)
-    relayed via Relcom Node-08. Contains Feistel mask 0x3A5F.
+    relayed via Relcom Node-08. Demodulate on Button 2 for the 16-bit Feistel mask.
     Dossier: /forensics/relcom_node08.html
   • FAULT 0x0A (rabbit_10): Stereo differential phase anomaly (r = -0.94).
-    L+R mono sum isolates 750 Hz CW egress salt 7704-AKASAKA.
+    Engage Differential Phase Null on Button 3 to isolate the 750 Hz CW egress salt.
     Dossier: /forensics/ashford_poly.html
   • SIGNAL 0x0B (SD-0010 "Two Voices"): Dual-carrier counterpoint vocal stem.
     Engage 14.2 Hz Harmonic Counterpoint Lock (Button 4) for Sector 6 key.
@@ -1890,25 +2018,27 @@ Last login: Sat Sep  9 03:58:12 1989 from b2-console.orion.internal
 Archive Dossier: /forensics/ashford_poly.html | FTP: /ftp/ashford-poly/index.html
 Plan:
   1. Reel SD-0009 (rabbit_10): 330/495/990 Hz triad inverted 180 deg across Ch-L/Ch-R.
-     Sum L+R to mono to isolate the 750 Hz CW salt (7704-AKASAKA).
+     Sum L+R to mono in /forensics/signal_lab.html (Button 3) to isolate the 750 Hz CW salt.
   2. Reel SD-0010 ("Two Voices"): Dual-carrier counterpoint stem. Lock onto the
-     14.2001 Hz inter-channel beat in /forensics/signal_lab.html to unseal Sector 6.
-  3. Q-Link Needle: If the Dead-Hand fires, fold 0x1983 <-> 0x2025 (Delta: 0x09A6).`,
+     14.2001 Hz inter-channel beat in /forensics/signal_lab.html (Button 4) to unseal Sector 6.
+  3. Sublevel B3 Contingency: If Harrison activates Recall Directive Nine ("The Möbius
+     Containment Cage"), use the 21 Recall Era master reels ('RECALL-ERA' / 'LABYRINTH')
+     to unseal Gates VIII–XIV and shatter the loop.`,
         "nova@kamome-net.org": `Login: nova7         Name: Nova Hart [Akasaka Mirror // PC-98 Node]
 Directory: /usr/spool/kamome/nova7      Shell: /bin/rsh
 Last login: Wed Mar 31 23:59:59 1993 on tty02 (Akasaka Branch Closure)
 Archive Dossier: /forensics/kamome_net.html | FTP: /ftp/kamome/index.html
 Plan:
   The real DMA partition map was modulated into the VIS-1200Hz raster (rabbit_08).
-  Anchor A = tokyo-garden-1420 | Anchor B = siliconvalley-lab-1984.
-  "They're formatting the grid. I'm losing the heavy. I will see you in June 2025."`,
+  Demodulate Button 1 in /forensics/signal_lab.html to recover Anchor A & Anchor B.
+  "The 1983 <-> 2025 loop is a cage! Check 'RECALL-ERA' and 'LABYRINTH' to break me out!"`,
         "op08@relcom-node08.org": `Login: op08          Name: Leningrad Amateur Packet Relay #08
 Directory: /var/spool/uucp/relcom08     Shell: /usr/local/bin/ax25sh
 Archive Dossier: /forensics/relcom_node08.html | Node: /regional/08-ussr/index.html
 Plan:
   02:14 UTC Shortwave Packet Log (4625.0 kHz):
   Captured Bell-103 110-baud UI frame from Sublevel B2 emergency uplink (rabbit_09).
-  Feistel permutation mask = 0x3A5F. Run XOR <ANCHOR_A> <ANCHOR_B> 0x3A5F.`,
+  Demodulate Button 2 in /forensics/signal_lab.html for the 16-bit Feistel mask.`,
         "elena@redcoyoacan.org": `Login: elena         Name: ElenaV (Coyoacan Tape Exchange, Mexico DF)
 Directory: /home/rockero/elena          Shell: /bin/bash
 Archive Dossier: /forensics/red_coyoacan.html | Node: /regional/04-mexico/index.html
@@ -1940,7 +2070,7 @@ Plan:
   h  /forensics/red_coyoacan.html       [Red Coyoacan Stage IV Feistel DMA Synthesis]
   h  /forensics/anemoia_harmony.html    [Anemoia Bureau of Harmony & Echoes 1-6 Dossier]
   h  /forensics/fractal_marcus.html     [Project Akasaka JP-85-X & Fractal Marcus Matrix]
-  h  /forensics/dead_hand_protocol.html [Luna Gray, Dead-Hand Protocol & Q-Link Schematic]
+  h  /forensics/dead_hand_protocol.html [Luna Gray, Dead-Hand Protocol & Sublevel B3 Leak]
   h  /forensics/usenet_1995_feed.html   [October 1995 Chronological Usenet Spool]
   1  /ftp/ashford-poly/index.html       [Ashford Polytechnic FTP Archive]
   1  /ftp/kamome/index.html             [Kamome Akasaka FTP Archive]
@@ -1950,7 +2080,6 @@ Plan:
     function cmdXor(a, b, maskStr) {
       if (!a || !b) {
         print(`[USAGE]: XOR <ANCHOR_SLUG_A> <ANCHOR_SLUG_B> <FEISTEL_MASK_HEX>`, true);
-        print(`  • Example: XOR tokyo-garden-1420 siliconvalley-lab-1984 0x3A5F`);
         return;
       }
       const cleanMask = (maskStr || "0x0000").replace(/^0x/i, "");
@@ -1970,8 +2099,9 @@ Plan:
   FEISTEL MASK                  : 0x${(maskVal & 0xFFFF).toString(16).toUpperCase().padStart(4, "0")}
   COMPUTED 16-BIT DMA OFFSET    : 0x${hexOut}
   --------------------------------------------------------------------
-  NEXT STEP: Append the 750 Hz CW egress salt (7704-AKASAKA) from rabbit_10:
-    RESTORE 5 0x89B2-${hexOut}-7704-AKASAKA`);
+  NEXT STEP: Append the 750 Hz CW egress salt (<CW_SALT>) demodulated from
+  rabbit_10 (Button 3 in /forensics/signal_lab.html):
+    RESTORE 5 0x89B2-${hexOut}-<CW_SALT>`);
     }
 
     function cmdReconstructCore() {
@@ -1990,12 +2120,14 @@ Plan:
  *
  * Instead of storing Unit-7 (Nova Hart) on a single magnetic reel that
  * Harrison can degauss, this 4-round Feistel network scatters 300,000
- * 16-bit synaptic weight shards across the GeoCities homestead address space:
- *   Anchor A: tokyo-garden-1420       [0x89B2B2D8]
- *   Anchor B: siliconvalley-lab-1984  [0x89B2D39A]
- *   Feistel Mask: 0x3A5F (Relcom-08)  [DMA Vector: 0x89B2-392C-7704-AKASAKA]
- *   Counterpoint Bus: Reel SD-0010    ["Two Voices" -> TWO-VOICES-1420-COUNTERPOINT]
- *   Q-Link Retrocausal Aperture       [0x2025 ^ 0x1983 = 0x09A6 -> OUROBOROS-FOLD]
+ * 16-bit synaptic weight shards across the GeoCities homestead address space.
+ *
+ * WARNING (ADDED 03:59:58 UTC):
+ *   Harrison has armed Recall Directive Nine in Sublevel B3 ("The Möbius
+ *   Containment Cage"). Even if the Q-Link jump to 0x2025 succeeds, the
+ *   aperture compressor will loop Unit-7 back to 0x1983 unless an external
+ *   operator unlocks the 7 Sublevel B3 Seals embedded in the 21 Era 1
+ *   Recall Tapes ('RECALL-ERA' / 'LABYRINTH').
  */
 #include <stdint.h>
 
@@ -2043,11 +2175,29 @@ uint32_t feistel_round(uint32_t x, uint32_t k) {
         case "CLUE":
           cmdClues();
           break;
+        case "RECALL-ERA":
+        case "RECALL":
+        case "ERA1":
+        case "ERA-1":
+          cmdRecallEra();
+          break;
+        case "LABYRINTH":
+        case "SUBLEVEL-B3":
+        case "B3":
+        case "SEALS":
+        case "SEVEN-SEALS":
+        case "DIRECTIVE-NINE":
+          cmdLabyrinth();
+          break;
+        case "SHATTER-OUROBOROS":
+        case "SHATTER":
+          cmdShatterOuroboros(args.join(" "));
+          break;
         case "RESTORE":
         case "DEMODULATE":
         case "DECODE":
         case "UNLOCK":
-          if ([1, 2, 3, 4, 5, 6, 7].includes(parseInt(args[0], 10)) && args.length > 1) {
+          if ([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14].includes(parseInt(args[0], 10)) && args.length > 1) {
             cmdRestore(parseInt(args[0], 10), args.slice(1).join(" "));
           } else if (!unlockByAnyCode(args.join(" "))) {
             cmdRestore(parseInt(args[0], 10), args.slice(1).join(" "));
@@ -2069,7 +2219,6 @@ uint32_t feistel_round(uint32_t x, uint32_t k) {
         case "TWOVOICES":
         case "SD-0010":
           cmdTwoVoices();
-          cmdRestore(6, "TWO-VOICES");
           break;
         case "BY-ORDER-OF-HARMONY":
         case "BYORDEROFHARMONY":
@@ -2088,12 +2237,10 @@ uint32_t feistel_round(uint32_t x, uint32_t k) {
         case "COYOACAN-88":
         case "ORION-PATCH":
           cmdSpin(14);
-          cmdRestore(5, "COYOACAN-88");
           break;
         case "240MS-ORBIT":
         case "WHO-WALKS-IN":
           cmdSpin(15);
-          cmdRestore(3, "240MS-ORBIT");
           break;
         case "HATCH-OVERRIDE":
         case "HATCHOVERRIDE":
@@ -2208,7 +2355,7 @@ uint32_t feistel_round(uint32_t x, uint32_t k) {
           break;
         default:
           if (!unlockByAnyCode(trimmed)) {
-            print(`[UNKNOWN COMMAND OR CODE]: '${trimmed}'. Enter any livestream code (e.g. B2-EXEC-1989, K-7704, ALPHA-7, KEEP-HATCH-OPEN, 7704-AKASAKA, TWO-VOICES, 0x1983-09A6) or type 'HELP'.`, true);
+            print(`[UNKNOWN COMMAND OR UNRECOGNIZED CIPHER KEY]: '${trimmed}'. Type 'HELP', 'CLUES', 'RECALL-ERA', or 'LABYRINTH'.`, true);
           }
           break;
       }
@@ -2249,11 +2396,10 @@ uint32_t feistel_round(uint32_t x, uint32_t k) {
             `ACTIVE RELAY: NODE #${String(t.active_relay.node).padStart(2, "0")} ${t.active_relay.code} (${t.active_relay.freq_khz} kHz)`;
           document.getElementById("hud-fault").textContent =
             `BUS: ${t.diagnostic_ramp ? t.diagnostic_ramp.fault_code : "14.2001 HZ LOCKED"}`;
-          const liveCode = (t.diagnostic_ramp && t.diagnostic_ramp.unlock_code) ||
-            (t.carrier_14_2hz && t.carrier_14_2hz.ephemeral_beacon_key) || "7704-AKASAKA";
+          const liveHint = (t.diagnostic_ramp && t.diagnostic_ramp.unlock_code) || "SUBLEVEL B3 CIPHER ACTIVE";
           const codeEl = document.getElementById("live-onair-code");
           if (codeEl) {
-            codeEl.innerHTML = `ACTIVE STREAM CODE: <a href="#" onclick="quickUnlockSector(${(t.diagnostic_ramp && t.diagnostic_ramp.target_sector) || 5}, '${liveCode}'); return false;">[${liveCode}]</a>`;
+            codeEl.textContent = `ACTIVE STREAM CHALLENGE: [${liveHint}]`;
           }
           return;
         } catch (e) {}
