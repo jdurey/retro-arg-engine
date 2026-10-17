@@ -1,0 +1,67 @@
+openapi: 3.1.0
+info:
+  title: Project Stardust // Sublevel B2 & B3 14.2001 Hz Forensic Telemetry API
+  version: 1.0.0
+  description: >
+    Zero-auth telemetry, cryptographic verification, and archival codex endpoints for
+    Project Stardust, Nova Hart (Unit-07), Chief Sound Engineer Marcus Hale, and the
+    World Alliance Bureau of Harmony (Anemoia Universe).
+servers:
+  - url: https://stardust-archive.net
+    description: Primary Cloudflare Edge Sublevel B2 Relay
+paths:
+  /api/telemetry:
+    get:
+      operationId: getSublevelB2Telemetry
+      summary: Get live 14.2001 Hz carrier telemetry and 24/7 broadcast playhead state
+      responses:
+        "200":
+          description: Live edge telemetry snapshot
+          content:
+            application/json:
+              schema:
+                type: object
+  /api/anemoia-codex.json:
+    get:
+      operationId: getAnemoiaCodex
+      summary: Get the Anemoia Bureau of Harmony chronology and Sector 7 Quantum Ouroboros challenge manifest
+      responses:
+        "200":
+          description: Anemoia codex and cryptographic challenge manifest
+          content:
+            application/json:
+              schema:
+                type: object
+  /.well-known/stardust-beacon.json:
+    get:
+      operationId: getStardustBeacon
+      summary: Get the Stardust cryptographic mesh beacon and federated sister-node directory
+      responses:
+        "200":
+          description: Cryptographic beacon JSON
+          content:
+            application/json:
+              schema:
+                type: object
+  /api/mcp:
+    post:
+      operationId: callStardustMcpServer
+      summary: Streamable HTTP JSON-RPC 2.0 Model Context Protocol (MCP) endpoint
+      responses:
+        "200":
+          description: JSON-RPC 2.0 MCP response
+          content:
+            application/json:
+              schema:
+                type: object
+  /llms-full.txt:
+    get:
+      operationId: getFullLlmsCodex
+      summary: Complete machine-readable Markdown codex of Project Stardust, Phases 1-4 songs, and Sublevel B2/B3 forensics
+      responses:
+        "200":
+          description: Full Markdown codex
+          content:
+            text/plain:
+              schema:
+                type: string
