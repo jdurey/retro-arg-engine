@@ -51,9 +51,9 @@ while true; do
   rm -f "$CRT_FIFO"
   mkfifo "$CRT_FIFO"
 
-  VF_FILTER="[1:a]aresample=44100:async=1,aformat=sample_fmts=fltp:sample_rates=44100:channel_layouts=stereo,alimiter=limit=0.87:level=disabled,asplit=2[a_out][a_viz];[a_viz]pan=mono|c0=0.5*c0+0.5*c1,volume=1.9,treble=g=8:f=3500,showfreqs=s=64x36:mode=bar:ascale=cbrt:fscale=log:win_size=1024:averaging=2:rate=30:colors=0x30c852@0.58,lagfun=decay=0.45,scale=352:126:flags=neighbor,drawgrid=w=11:h=126:t=3:c=0x000000@0.0:replace=1,drawgrid=w=352:h=7:t=2:c=0x000000@0.0:replace=1,format=yuva420p[waves];[2:v]scale=1280:720:flags=lanczos,format=yuva420p[hud];[0:v][3:v]overlay=x=616:y=204,scale=1280:720:flags=fast_bilinear[v_crt];[v_crt][waves]overlay=x=464:y=206[v_osc];[v_osc][hud]overlay=x=0:y=0:eof_action=repeat,format=yuv420p[v_out]"
+  VF_FILTER="[1:a]aresample=44100:async=1,aformat=sample_fmts=fltp:sample_rates=44100:channel_layouts=stereo,alimiter=limit=0.87:level=disabled,asplit=2[a_out][a_viz];[a_viz]pan=mono|c0=0.5*c0+0.5*c1,volume=1.9,treble=g=8:f=3500,showfreqs=s=64x32:mode=bar:ascale=cbrt:fscale=log:win_size=1024:averaging=2:rate=30:colors=0x30c852@0.58,lagfun=decay=0.45,scale=512:112:flags=neighbor,drawgrid=w=16:h=112:t=5:c=0x000000@0.0:replace=1,drawgrid=w=512:h=7:t=2:c=0x000000@0.0:replace=1,format=yuva420p[waves];[0:v][3:v]overlay=x=616:y=204[v_crt];[v_crt][waves]overlay=x=704:y=476[v_osc];[v_osc][2:v]overlay=x=0:y=0:format=auto:eof_action=repeat,format=yuv420p[v_out]"
 
-  echo "[$(date '+%Y-%m-%d %H:%M:%S')] [STREAM.SH] Selected encoder: 720p30 HD Intentional ARG CRT/HUD Engine (1800k video + 160k audio)" >> "$LOG_FILE"
+  echo "[$(date '+%Y-%m-%d %H:%M:%S')] [STREAM.SH] Selected encoder: 1080p30 Full HD Intentional ARG CRT/HUD Engine (3600k video + 160k audio)" >> "$LOG_FILE"
 
   /usr/bin/python3 -u "$SCRIPT_DIR/crt_loop_feeder.py" --repo-root "$REPO_ROOT" --fifo "$CRT_FIFO" &
   CRT_FEEDER_PID=$!
@@ -89,9 +89,9 @@ while true; do
     -c:v libx264 \
     -preset veryfast \
     -tune zerolatency \
-    -b:v 1800k \
-    -maxrate 2200k \
-    -bufsize 4400k \
+    -b:v 3600k \
+    -maxrate 4200k \
+    -bufsize 8400k \
     -pix_fmt yuv420p \
     -r 30 \
     -g 60 \

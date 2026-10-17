@@ -123,11 +123,13 @@ except Exception:
         FONT_HUD_9 = FONT_HUD_10 = FONT_HUD_11 = ImageFont.load_default()
 
 try:
-    FONT_SCROLL_UNI = ImageFont.truetype("/System/Library/Fonts/Supplemental/Arial Unicode.ttf", 17)
+    FONT_SCROLL_UNI = ImageFont.truetype("/System/Library/Fonts/Supplemental/Arial Unicode.ttf", 18)
     FONT_SCROLL_HDR = ImageFont.truetype("/System/Library/Fonts/Menlo.ttc", 17, index=1)
+    FONT_SCROLL_BODY = ImageFont.truetype("/System/Library/Fonts/Menlo.ttc", 16, index=1)
 except Exception:
     FONT_SCROLL_UNI = FONT_HUD_9
     FONT_SCROLL_HDR = FONT_HUD_9
+    FONT_SCROLL_BODY = FONT_HUD_9
 
 
 class _HiDPIDraw:
@@ -486,8 +488,8 @@ def render_crt_window_patch(
     geom = _get_crt_geometry()
 
     if not is_vocal_song:
-        # INTERSTITIAL MODE: Transparent CRT viewport with sub-glass phosphor text so the
-        # 32-band 1980s EQ shines cleanly across the CRT without any black circle covering it!
+        # INTERSTITIAL MODE: Codes and transcript in upper zone (y=18..102),
+        # leaving y=106..152 completely open for the 32-band 1980s EQ above the y=158 footer!
         text_layer = Image.new("RGBA", (CRT_PX_W, CRT_PX_H), (0, 0, 0, 0))
         draw = _HiDPIDraw(ImageDraw.Draw(text_layer), scale=CRT_SX, scale_y=CRT_SY)
 
@@ -495,20 +497,20 @@ def render_crt_window_patch(
         sub_str = _clean_crt_text(state.get("crt_sub", "BROADCAST LOG"), 29)
         ftr_str = _clean_crt_text(f"CARRIER: 14.2001 HZ // {relay.get('code', 'US-NV')}", 29)
 
-        draw.text((24, 22), hdr_str, fill=fg_green, font=FONT_CRT_8)
-        draw.text((24, 42), sub_str, fill=fg_amber, font=FONT_CRT_8)
+        draw.text((24, 18), hdr_str, fill=fg_green, font=FONT_CRT_8)
+        draw.text((24, 34), sub_str, fill=fg_amber, font=FONT_CRT_8)
 
-        wrapped = textwrap.wrap(state.get("crt_body", ""), width=27)[:5]
+        wrapped = textwrap.wrap(state.get("crt_body", ""), width=28)[:4]
         for idx, line in enumerate(wrapped):
             if idx == len(wrapped) - 1 and (int(now_ts * 2) % 2 == 0):
-                line = line[:25] + " \u2588"
-            draw.text((24, 68 + idx * 18), line, fill=fg_bright, font=FONT_CRT_9)
+                line = line[:26] + " \u2588"
+            draw.text((24, 52 + idx * 13), line, fill=fg_bright, font=FONT_CRT_8)
 
-        draw.text((24, 156), ftr_str, fill=fg_green, font=FONT_CRT_8)
+        draw.text((24, 158), ftr_str, fill=fg_green, font=FONT_CRT_8)
         return _apply_crt_subglass_phosphor(text_layer, geom)
 
-    # VOCAL SONG MODE: Transparent viewport with sub-glass scanlined phosphor text so the
-    # 30fps looped 80s CRT computer graphics + 30fps `showwaves` run at full 30fps smoothness!
+    # VOCAL SONG MODE: Header & clue in upper zone (y=20..38), 32-band EQ in lower zone (y=106..152),
+    # and target sector footer at y=158 so the EQ never covers any text!
     text_layer = Image.new("RGBA", (CRT_PX_W, CRT_PX_H), (0, 0, 0, 0))
     draw = _HiDPIDraw(ImageDraw.Draw(text_layer), scale=CRT_SX, scale_y=CRT_SY)
 
@@ -522,9 +524,9 @@ def render_crt_window_patch(
     top_fg = (232, 180, 70, 230) if is_warn else (88, 226, 106, 230)
     clue_fg = (238, 192, 95, 235) if is_warn else (105, 235, 122, 235)
     bot_fg = (225, 162, 45, 225) if is_warn else (76, 214, 92, 225)
-    draw.text((24, 22), hdr_str, fill=top_fg, font=FONT_CRT_8)
-    draw.text((24, 138), clue_str, fill=clue_fg, font=FONT_CRT_8)
-    draw.text((24, 156), ftr_str, fill=bot_fg, font=FONT_CRT_8)
+    draw.text((24, 20), hdr_str, fill=top_fg, font=FONT_CRT_8)
+    draw.text((24, 38), clue_str, fill=clue_fg, font=FONT_CRT_8)
+    draw.text((24, 158), ftr_str, fill=bot_fg, font=FONT_CRT_8)
 
     return _apply_crt_subglass_phosphor(text_layer, geom)
 
@@ -883,16 +885,16 @@ def render_right_usenet_youtube_scroll(
     X0, Y0, X1, Y1 = 1364, 22, 1900, 904
     raw_d = ImageDraw.Draw(canvas)
 
-    border_col = (255, 176, 20, 235) if is_warn else (55, 245, 78, 235)
-    bg_col = (10, 5, 2, 196) if is_warn else (2, 10, 4, 196)
-    hdr_bg = (34, 18, 5, 245) if is_warn else (8, 32, 13, 245)
+    border_col = (255, 176, 20, 245) if is_warn else (55, 245, 78, 245)
+    bg_col = (10, 5, 2, 238) if is_warn else (2, 10, 4, 238)
+    hdr_bg = (34, 18, 5, 250) if is_warn else (8, 32, 13, 250)
 
-    # Outer soft bloom + semi-transparent phosphor glass frame
+    # Outer soft bloom + high-contrast phosphor glass frame
     raw_d.rectangle([X0 - 2, Y0 - 2, X1 + 2, Y1 + 2], outline=(border_col[0], border_col[1], border_col[2], 65), width=2)
     raw_d.rectangle([X0, Y0, X1, Y1], fill=bg_col, outline=border_col, width=2)
 
     # Subtle CRT scanlines across the right scroll terminal
-    scan_col = (18, 9, 3, 215) if is_warn else (4, 16, 6, 215)
+    scan_col = (18, 9, 3, 225) if is_warn else (4, 16, 6, 225)
     for sy in range(Y0 + 56, Y1 - 28, 4):
         raw_d.line([(X0 + 2, sy), (X1 - 2, sy)], fill=scan_col, width=1)
 
@@ -905,18 +907,18 @@ def render_right_usenet_youtube_scroll(
         fill=hdr_col,
         font=FONT_SCROLL_HDR,
         stroke_width=1,
-        stroke_fill=(0, 8, 2, 240),
+        stroke_fill=(0, 8, 2, 245),
     )
 
     # Sub-header bar
-    raw_d.rectangle([X0 + 2, Y0 + 31, X1 - 2, Y0 + 54], fill=(16, 10, 3, 235) if is_warn else (4, 20, 8, 235))
+    raw_d.rectangle([X0 + 2, Y0 + 31, X1 - 2, Y0 + 54], fill=(16, 10, 3, 245) if is_warn else (4, 20, 8, 245))
     raw_d.text(
         (X0 + 10, Y0 + 34),
         "alt.conspiracy + 13 NODES + @NovaHart_Official",
-        fill=(255, 185, 45, 255),
+        fill=(255, 195, 55, 255),
         font=FONT_SCROLL_HDR,
         stroke_width=1,
-        stroke_fill=(0, 8, 2, 240),
+        stroke_fill=(0, 8, 2, 245),
     )
 
     # Rolling 33-line viewport advancing at 2 lines per second
@@ -925,11 +927,11 @@ def render_right_usenet_youtube_scroll(
     head_idx = (int(now_ts * 2.0)) % total
 
     palette = {
-        "amber": (255, 202, 55, 255),
-        "bright": (215, 255, 222, 255) if not is_warn else (255, 240, 185, 255),
-        "green": (95, 255, 118, 255) if not is_warn else (255, 195, 65, 255),
-        "cyan": (135, 245, 215, 255),
-        "dim": (48, 165, 68, 220) if not is_warn else (165, 110, 25, 220),
+        "amber": (255, 212, 68, 255),
+        "bright": (225, 255, 232, 255) if not is_warn else (255, 244, 195, 255),
+        "green": (110, 255, 132, 255) if not is_warn else (255, 205, 75, 255),
+        "cyan": (150, 250, 225, 255),
+        "dim": (70, 195, 90, 235) if not is_warn else (195, 135, 40, 235),
     }
 
     y_cursor = Y0 + 60
@@ -941,13 +943,15 @@ def render_right_usenet_youtube_scroll(
             txt = (txt[:41] + " \u2588") if txt else "\u2588"
         if txt:
             col = palette.get(item.get("color", "green"), palette["green"])
+            needs_uni = any(ord(c) > 0x0370 and c not in "\u2588\u2500\u2550\u2192\u2022\u2014\u2013\u2018\u2019\u201c\u201d\u03a9" for c in txt)
+            fnt = FONT_SCROLL_UNI if needs_uni else FONT_SCROLL_BODY
             raw_d.text(
                 (X0 + 10, y_cursor),
                 txt,
                 fill=col,
-                font=FONT_SCROLL_UNI,
+                font=fnt,
                 stroke_width=1,
-                stroke_fill=(0, 6, 2, 245),
+                stroke_fill=(0, 6, 2, 250),
             )
         y_cursor += line_step
 
@@ -960,7 +964,7 @@ def render_right_usenet_youtube_scroll(
         fill=hdr_col,
         font=FONT_SCROLL_HDR,
         stroke_width=1,
-        stroke_fill=(0, 8, 2, 240),
+        stroke_fill=(0, 8, 2, 245),
     )
 
 
@@ -988,20 +992,20 @@ def render_left_lore_question_panel(
     X0, Y0, X1, Y1 = 20, 22, 446, 904
     raw_d = ImageDraw.Draw(canvas)
 
-    border_col = (255, 150, 30, 235) if is_b3 else ((255, 176, 20, 235) if is_warn else (55, 245, 78, 235))
-    dim_border = (165, 95, 20, 195) if (is_warn or is_b3) else (32, 145, 48, 195)
-    bg_col = (10, 5, 2, 194) if (is_warn or is_b3) else (2, 10, 4, 194)
-    hdr_bg = (36, 16, 5, 245) if (is_warn or is_b3) else (8, 32, 13, 245)
-    sec_hdr_bg = (24, 12, 4, 235) if (is_warn or is_b3) else (5, 22, 9, 235)
+    border_col = (255, 150, 30, 245) if is_b3 else ((255, 176, 20, 245) if is_warn else (55, 245, 78, 245))
+    dim_border = (165, 95, 20, 215) if (is_warn or is_b3) else (32, 145, 48, 215)
+    bg_col = (10, 5, 2, 238) if (is_warn or is_b3) else (2, 10, 4, 238)
+    hdr_bg = (36, 16, 5, 250) if (is_warn or is_b3) else (8, 32, 13, 250)
+    sec_hdr_bg = (24, 12, 4, 245) if (is_warn or is_b3) else (5, 22, 9, 245)
 
     c_hdr = (255, 210, 65, 255) if (is_warn or is_b3) else (110, 255, 130, 255)
-    c_amber = (255, 202, 55, 255)
-    c_bright = (255, 244, 195, 255) if (is_warn or is_b3) else (215, 255, 222, 255)
-    c_green = (105, 255, 125, 255)
-    c_cyan = (135, 245, 215, 255)
+    c_amber = (255, 212, 68, 255)
+    c_bright = (255, 246, 205, 255) if (is_warn or is_b3) else (225, 255, 232, 255)
+    c_green = (115, 255, 135, 255)
+    c_cyan = (150, 250, 225, 255)
 
     def _txt(px: int, py: int, s: str, col: tuple, fnt=FONT_SCROLL_HDR) -> None:
-        raw_d.text((px, py), s, fill=col, font=fnt, stroke_width=1, stroke_fill=(0, 6, 2, 245))
+        raw_d.text((px, py), s, fill=col, font=fnt, stroke_width=1, stroke_fill=(0, 6, 2, 250))
 
     def _fit_1080(s: str, max_px: float = 402.0) -> str:
         out = s.strip()
@@ -1035,86 +1039,143 @@ def render_left_lore_question_panel(
         ]:
             if not blk_txt:
                 continue
-            wrapped_blk = _wrap_px_1080p(blk_txt, FONT_SCROLL_UNI, 390.0, 6)
+            wrapped_blk = _wrap_px_1080p(blk_txt, FONT_SCROLL_BODY, 390.0, 6)
             for ln in wrapped_blk:
                 if y_cur <= Y1 - 40:
-                    _txt(X0 + 14, y_cur, ln, blk_col, FONT_SCROLL_UNI)
+                    _txt(X0 + 14, y_cur, ln, blk_col, FONT_SCROLL_BODY)
                     y_cur += 25
             y_cur += 14
         return
 
     lore = resolve_song_lore_panel(current_track, state, now_ts)
 
-    # Outer soft bloom + semi-transparent phosphor glass frame
+    # Outer soft bloom + high-contrast phosphor glass frame
     raw_d.rectangle([X0 - 2, Y0 - 2, X1 + 2, Y1 + 2], outline=(border_col[0], border_col[1], border_col[2], 65), width=2)
     raw_d.rectangle([X0, Y0, X1, Y1], fill=bg_col, outline=border_col, width=2)
 
     # Subtle CRT scanlines across the left case-file terminal
-    scan_col = (18, 9, 3, 210) if (is_warn or is_b3) else (4, 16, 6, 210)
+    scan_col = (18, 9, 3, 225) if (is_warn or is_b3) else (4, 16, 6, 225)
     for sy in range(Y0 + 56, Y1 - 28, 4):
         raw_d.line([(X0 + 2, sy), (X1 - 2, sy)], fill=scan_col, width=1)
 
     # Top Header Bar (`y=24..52`)
     raw_d.rectangle([X0 + 2, Y0 + 2, X1 - 2, Y0 + 30], fill=hdr_bg)
-    _txt(X0 + 10, Y0 + 6, "CANONICAL ARCHIVE // SONG LORE & CHAT", c_hdr)
+    _txt(X0 + 10, Y0 + 6, "CANONICAL ARCHIVE // SONG LORE DOSSIER", c_hdr)
 
     # Sub-Header Bar (`y=53..76`)
-    raw_d.rectangle([X0 + 2, Y0 + 31, X1 - 2, Y0 + 54], fill=(16, 10, 3, 235) if (is_warn or is_b3) else (4, 20, 8, 235))
+    raw_d.rectangle([X0 + 2, Y0 + 31, X1 - 2, Y0 + 54], fill=(16, 10, 3, 245) if (is_warn or is_b3) else (4, 20, 8, 245))
     _txt(X0 + 10, Y0 + 34, _fit_1080(lore["catalog_id"], 404.0), c_amber)
 
-    # --- SECTION I: TRACK CHRONOLOGY & BROADCAST ROLE (`y=82..174`) ---
-    B1_Y0, B1_Y1 = 82, 174
-    raw_d.rectangle([X0 + 8, B1_Y0, X1 - 8, B1_Y1], fill=(4, 14, 6, 185), outline=dim_border, width=1)
-    raw_d.rectangle([X0 + 9, B1_Y0 + 1, X1 - 9, B1_Y0 + 22], fill=sec_hdr_bg)
-    _txt(X0 + 14, B1_Y0 + 3, "I. TRACK CHRONOLOGY & BROADCAST ROLE", c_amber)
-    _txt(X0 + 14, B1_Y0 + 26, _fit_1080(f"SONG: {lore['title']}", 392.0), c_bright)
-    _txt(X0 + 14, B1_Y0 + 48, _fit_1080(f"ERA : {lore['timeline']}", 392.0), c_green)
-    _txt(X0 + 14, B1_Y0 + 70, _fit_1080(f"ROLE: {lore['pov']}", 392.0), c_amber)
+    # --- SECTION I: TRACK CHRONOLOGY & BROADCAST ROLE (`y=82..192`) ---
+    B1_Y0, B1_Y1 = 82, 192
+    raw_d.rectangle([X0 + 8, B1_Y0, X1 - 8, B1_Y1], fill=(4, 14, 6, 234), outline=dim_border, width=1)
+    raw_d.rectangle([X0 + 9, B1_Y0 + 1, X1 - 9, B1_Y0 + 24], fill=sec_hdr_bg)
+    _txt(X0 + 14, B1_Y0 + 4, "I. TRACK CHRONOLOGY & BROADCAST ROLE", c_amber)
+    _txt(X0 + 14, B1_Y0 + 30, _fit_1080(f"SONG: {lore['title']}", 392.0), c_bright)
+    _txt(X0 + 14, B1_Y0 + 56, _fit_1080(f"ERA : {lore['timeline']}", 392.0), c_green)
+    _txt(X0 + 14, B1_Y0 + 82, _fit_1080(f"ROLE: {lore['pov']}", 392.0), c_amber)
 
-    # --- SECTION II: VERBATIM LYRIC STANZA (`y=180..326`) ---
-    B2_Y0, B2_Y1 = 180, 326
-    raw_d.rectangle([X0 + 8, B2_Y0, X1 - 8, B2_Y1], fill=(4, 14, 6, 185), outline=dim_border, width=1)
-    raw_d.rectangle([X0 + 9, B2_Y0 + 1, X1 - 9, B2_Y0 + 22], fill=sec_hdr_bg)
+    # --- SECTION II: VERBATIM LYRIC STANZA (`y=202..424`) ---
+    B2_Y0, B2_Y1 = 202, 424
+    raw_d.rectangle([X0 + 8, B2_Y0, X1 - 8, B2_Y1], fill=(4, 14, 6, 234), outline=dim_border, width=1)
+    raw_d.rectangle([X0 + 9, B2_Y0 + 1, X1 - 9, B2_Y0 + 24], fill=sec_hdr_bg)
     status_tag = lore.get("lyric_status", "[VERBATIM]")
-    _txt(X0 + 14, B2_Y0 + 3, f"II. VERBATIM LYRICS {status_tag}", c_amber)
-    lyric_lines = _wrap_px_1080p(lore["lyric_excerpt"], FONT_SCROLL_UNI, 390.0, 5)
+    _txt(X0 + 14, B2_Y0 + 4, f"II. VERBATIM LYRICS {status_tag}", c_amber)
+    lyric_lines = _wrap_px_1080p(lore["lyric_excerpt"], FONT_SCROLL_HDR, 390.0, 7)
     for idx, ln in enumerate(lyric_lines):
-        _txt(X0 + 14, B2_Y0 + 27 + idx * 23, ln, c_cyan, FONT_SCROLL_UNI)
+        _txt(X0 + 14, B2_Y0 + 30 + idx * 26, ln, c_cyan, FONT_SCROLL_HDR)
 
-    # --- SECTION III: TRACK STORY & BROADCAST CONTEXT (`y=332..514`) ---
-    B3_Y0, B3_Y1 = 332, 514
-    raw_d.rectangle([X0 + 8, B3_Y0, X1 - 8, B3_Y1], fill=(4, 14, 6, 185), outline=dim_border, width=1)
-    raw_d.rectangle([X0 + 9, B3_Y0 + 1, X1 - 9, B3_Y0 + 22], fill=sec_hdr_bg)
-    _txt(X0 + 14, B3_Y0 + 3, "III. TRACK STORY & BROADCAST CONTEXT", c_amber)
-    meaning_lines = _wrap_px_1080p(lore["meaning"], FONT_SCROLL_UNI, 390.0, 7)
+    # --- SECTION III: TRACK STORY & BROADCAST CONTEXT (`y=434..684`) ---
+    B3_Y0, B3_Y1 = 434, 684
+    raw_d.rectangle([X0 + 8, B3_Y0, X1 - 8, B3_Y1], fill=(4, 14, 6, 234), outline=dim_border, width=1)
+    raw_d.rectangle([X0 + 9, B3_Y0 + 1, X1 - 9, B3_Y0 + 24], fill=sec_hdr_bg)
+    _txt(X0 + 14, B3_Y0 + 4, "III. TRACK STORY & BROADCAST CONTEXT", c_amber)
+    meaning_lines = _wrap_px_1080p(lore["meaning"], FONT_SCROLL_HDR, 390.0, 8)
     for idx, ln in enumerate(meaning_lines):
-        _txt(X0 + 14, B3_Y0 + 26 + idx * 22, ln, c_bright, FONT_SCROLL_UNI)
+        _txt(X0 + 14, B3_Y0 + 30 + idx * 26, ln, c_bright, FONT_SCROLL_HDR)
 
-    # --- SECTION IV: ARCHIVIST'S LOG & SOURCE NOTES (`y=520..644`) ---
-    B4_Y0, B4_Y1 = 520, 644
-    raw_d.rectangle([X0 + 8, B4_Y0, X1 - 8, B4_Y1], fill=(4, 14, 6, 185), outline=dim_border, width=1)
-    raw_d.rectangle([X0 + 9, B4_Y0 + 1, X1 - 9, B4_Y0 + 22], fill=sec_hdr_bg)
-    _txt(X0 + 14, B4_Y0 + 3, "IV. ARCHIVIST'S LOG & SOURCE NOTES", c_amber)
-    conn_lines = _wrap_px_1080p(lore["connections"], FONT_SCROLL_UNI, 390.0, 4)
+    # --- SECTION IV: ARCHIVIST'S LOG & SOURCE NOTES (`y=694..868`) ---
+    B4_Y0, B4_Y1 = 694, 868
+    raw_d.rectangle([X0 + 8, B4_Y0, X1 - 8, B4_Y1], fill=(4, 14, 6, 234), outline=dim_border, width=1)
+    raw_d.rectangle([X0 + 9, B4_Y0 + 1, X1 - 9, B4_Y0 + 24], fill=sec_hdr_bg)
+    _txt(X0 + 14, B4_Y0 + 4, "IV. ARCHIVIST'S LOG & SOURCE NOTES", c_amber)
+    clean_conn = re.sub(r"\s*\(Folder\s+[A-Za-z0-9_-]{12,}\)", "", lore["connections"])
+    conn_lines = _wrap_px_1080p(clean_conn, FONT_SCROLL_HDR, 390.0, 5)
     for idx, ln in enumerate(conn_lines):
-        _txt(X0 + 14, B4_Y0 + 27 + idx * 23, ln, c_green, FONT_SCROLL_UNI)
-
-    # --- SECTION V: LIVE CHAT SONG THEORY PROMPT (`y=650..872`) ---
-    B5_Y0, B5_Y1 = 650, 872
-    q_border = (255, 195, 45, 248)
-    q_bg = (22, 12, 3, 235)
-    raw_d.rectangle([X0 + 8, B5_Y0, X1 - 8, B5_Y1], fill=q_bg, outline=q_border, width=2)
-    raw_d.rectangle([X0 + 10, B5_Y0 + 2, X1 - 10, B5_Y0 + 26], fill=(48, 24, 6, 250))
-    q_hdr = f"[? LIVE CHAT SONG THEORY #{lore['question_index']}/{lore['question_total']}]"
-    _txt(X0 + 14, B5_Y0 + 5, q_hdr, (255, 225, 90, 255))
-
-    q_lines = _wrap_px_1080p(lore["question_text"], FONT_SCROLL_HDR, 388.0, 7)
-    for idx, ln in enumerate(q_lines):
-        _txt(X0 + 14, B5_Y0 + 33 + idx * 25, ln, (255, 245, 195, 255), FONT_SCROLL_HDR)
+        _txt(X0 + 14, B4_Y0 + 30 + idx * 26, ln, c_green, FONT_SCROLL_HDR)
 
     # Footer Bar (`y=876..902`)
     raw_d.rectangle([X0 + 2, Y1 - 26, X1 - 2, Y1 - 2], fill=hdr_bg)
     _txt(X0 + 10, Y1 - 23, _fit_1080(f"AUDIO ARCHIVE // 14.2 HZ // {status_tag}", 404.0), c_hdr)
+
+
+def render_center_live_chat_banner(
+    canvas: Image.Image,
+    current_track: dict,
+    state: dict,
+    now_ts: float,
+    is_warn: bool,
+) -> None:
+    """
+    Renders the Center-Stage High-Prominence Live Chat Discussion Prompt Banner
+    (`x=456..1354, y=758..904` at 1080p, `898x146` px) directly underneath the CRT monitor bezel:
+      - Full 898px width matching the Top Master Control Banner (`x=456..1354`)
+      - Bottom edge (`y=904`) aligned to the pixel with both Left and Right side panels
+      - Large 22px bold monospace text (`FONT_HUD_10`) with warm gold double-border and pulsing prompt badge.
+    """
+    X0, Y0, X1, Y1 = 456, 758, 1354, 904
+    raw_d = ImageDraw.Draw(canvas)
+
+    is_vocal_song = (current_track or {}).get("kind", "vocal_song") == "vocal_song"
+    if is_vocal_song:
+        lore = resolve_song_lore_panel(current_track, state, now_ts)
+        hdr_txt = f"[? LIVE CHAT SONG THEORY #{lore['question_index']}/{lore['question_total']} — DROP YOUR TAKE IN LIVE CHAT]"
+        body_txt = lore["question_text"]
+    else:
+        hdr_txt = f"[? LIVE CHAT SIGNAL DECODE — {state.get('crt_header', 'SHORTWAVE INTERCEPT')}]"
+        body_txt = (
+            f"INTERCEPT ACTIVE: {state.get('crt_body', '')} — Compare notes in Live Chat or test passkeys at "
+            f"stardust-archive.net/forensics/"
+        )
+
+    border_col = (255, 202, 48, 252)
+    bg_col = (20, 10, 3, 246)
+    hdr_bg = (56, 28, 6, 252)
+
+    # Outer soft amber glow + double-framed center banner
+    raw_d.rectangle([X0 - 3, Y0 - 3, X1 + 3, Y1 + 3], outline=(255, 195, 45, 85), width=2)
+    raw_d.rectangle([X0, Y0, X1, Y1], fill=bg_col, outline=border_col, width=2)
+    raw_d.rectangle([X0 + 2, Y0 + 2, X1 - 2, Y0 + 32], fill=hdr_bg)
+    raw_d.line([(X0 + 2, Y0 + 33), (X1 - 2, Y0 + 33)], fill=(255, 185, 40, 210), width=1)
+
+    # Subtle CRT scanlines inside the banner
+    for sy in range(Y0 + 36, Y1 - 3, 4):
+        raw_d.line([(X0 + 3, sy), (X1 - 3, sy)], fill=(12, 6, 2, 225), width=1)
+
+    # Pulsing gold beacon LED in header
+    pulse_on = (int(now_ts * 2) % 2) == 0
+    dot_fill = (255, 230, 75, 255) if pulse_on else (180, 115, 25, 235)
+    raw_d.ellipse([X0 + 12, Y0 + 11, X0 + 24, Y0 + 23], fill=dot_fill, outline=(255, 250, 190, 255))
+
+    raw_d.text(
+        (X0 + 32, Y0 + 6),
+        hdr_txt[:70],
+        fill=(255, 228, 85, 255),
+        font=FONT_HUD_9,
+        stroke_width=1,
+        stroke_fill=(0, 6, 2, 250),
+    )
+
+    q_lines = _wrap_px_1080p(body_txt, FONT_HUD_10, 864.0, 3)
+    for idx, ln in enumerate(q_lines):
+        raw_d.text(
+            (X0 + 16, Y0 + 42 + idx * 32),
+            ln,
+            fill=(255, 248, 208, 255),
+            font=FONT_HUD_10,
+            stroke_width=1,
+            stroke_fill=(0, 6, 2, 250),
+        )
 
 
 def render_top_trailhead_banner(
@@ -1213,10 +1274,11 @@ def render_full_arg_overlay_png(
     Renders the complete `1920x1080` (1080p Full HD) RGBA PNG overlay containing:
       1. Front-Facing CRT Screen Patch (`688x488` at `x=616, y=204`, strictly inside the amber border)
       2. Diegetic Control Room Hardware Animations (rack LEDs, VU needles, power LED)
-      3. Left-Side World-Building Case File & Viewer Investigation Question Panel (`x=20..446, y=22..904`)
+      3. Left-Side World-Building Case File Dossier (`x=20..446, y=22..904`)
       4. Top-Center Master Control Containment & Signal Intrusion Header (`x=456..1354, y=14..68`)
-      5. Right-Side Rolling Multilingual Usenet / Regional BBS / YouTube Comment Terminal (`x=1364..1900, y=22..904`)
-      6. 3-Module Broadcast Engineering Console (`x=20..1900, y=920..1068`)
+      5. Center-Stage Live Chat Discussion Prompt Banner (`x=456..1354, y=758..904`)
+      6. Right-Side Rolling Multilingual Usenet / Regional BBS / YouTube Comment Terminal (`x=1364..1900, y=22..904`)
+      7. 3-Module Broadcast Engineering Console (`x=20..1900, y=920..1068`)
     Written atomically via `os.replace` and returned as raw PNG bytes for `image2pipe`.
     """
     if snap_meta is None:
@@ -1251,12 +1313,13 @@ def render_full_arg_overlay_png(
     crt_patch = render_crt_window_patch(state, relay, assets_dir, now_ts, current_track=current_track)
     canvas.alpha_composite(crt_patch, (CRT_PX_X, CRT_PX_Y))
 
-    # 2. Draw Diegetic Control Room Hardware Animations, Left Lore Panel, Top Banner, Right Scroll & Bottom Console
+    # 2. Draw Diegetic Control Room Hardware Animations, Left Lore Panel, Top Banner, Center Live Chat Banner, Right Scroll & Bottom Console
     draw = _HiDPIDraw(ImageDraw.Draw(canvas), scale=SCALE)
     is_warn = (state.get("hud_mode") or state.get("mode")) == "ANOMALY_WARN" or int(state.get("target_sector", 7)) >= 8
     render_room_hardware_animations(canvas, state, now_ts, is_warn)
     render_left_lore_question_panel(canvas, current_track, state, now_ts, is_warn)
     render_top_trailhead_banner(canvas, state, snap_meta, now_ts, is_warn)
+    render_center_live_chat_banner(canvas, current_track, state, now_ts, is_warn)
     render_right_usenet_youtube_scroll(canvas, now_ts, is_warn)
     render_bottom_engineering_console(draw, state, snap_meta, now_ts)
 
