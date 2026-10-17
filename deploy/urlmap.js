@@ -130,9 +130,10 @@ export function publicUrl(sitePath) {
   if (p === "terminal" || p === "terminal/index.html") return `https://${apex}/terminal`;
   if (p === "forensics" || p === "forensics/index.html") return `https://${apex}/forensics`;
   if (p.startsWith("forensics/")) return `https://${apex}/${p}`;
-  if (p === "usenet/live_1995_feed.html") return `https://${apex}/${p}`;
-  if (p === "llms.txt" || p === "llms-full.txt" || p === "feed.xml") return `https://${apex}/${p}`;
-  if (p.startsWith(".well-known/")) return `https://${apex}/${p}`;
+  if (p === "usenet/live_1995_feed.html" || p === "usenet/comp-dsp.html") return `https://${apex}/${p}`;
+  if (/^regional\/[^/]+\.html$/.test(p) && p !== "regional/index.html") return `https://${apex}/${p}`;
+  if (p === "llms.txt" || p === "llms-full.txt" || p === "feed.xml" || p === "skill.md" || p === "SKILL.md" || p === "agents.txt") return `https://${apex}/${p}`;
+  if (p.startsWith(".well-known/") || p.startsWith("nodes/")) return `https://${apex}/${p}`;
   if (p.startsWith("federation/")) return `https://${apex}/${p}`;
   if (p === "reconstruction" || p === "reconstruction/index.html") return `https://${apex}/reconstruction`;
   const segs = p.split("/");
@@ -203,10 +204,16 @@ export function resolve(hostname, pathname) {
       sp.startsWith("reconstruction/") ||
       sp.startsWith("federation/") ||
       sp.startsWith(".well-known/") ||
+      sp.startsWith("nodes/") ||
+      (sp.startsWith("regional/") && /^regional\/[^/]+\.html$/.test(sp) && sp !== "regional/index.html") ||
       sp === "llms.txt" ||
       sp === "llms-full.txt" ||
       sp === "feed.xml" ||
-      sp === "usenet/live_1995_feed.html"
+      sp === "skill.md" ||
+      sp === "SKILL.md" ||
+      sp === "agents.txt" ||
+      sp === "usenet/live_1995_feed.html" ||
+      sp === "usenet/comp-dsp.html"
     ) {
       return { sitePath: sp, canonical: matchedApex !== PRIMARY_APEX ? `https://${PRIMARY_APEX}/${sp}` : null };
     }

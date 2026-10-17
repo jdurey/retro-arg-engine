@@ -46,9 +46,18 @@ while true; do
     /usr/bin/python3 "$SCRIPT_DIR/sync_telemetry.py" --repo-root "$REPO_ROOT" >> "$LOG_FILE" 2>&1 || true
   fi
 
-  VF_FILTER="[1:a]aresample=44100:async=1,aformat=sample_fmts=fltp:sample_rates=44100:channel_layouts=stereo,alimiter=limit=0.87:level=disabled,asplit=2[a_out][a_viz];[a_viz]showwaves=s=656x340:mode=line:rate=30:colors=lime,colorkey=0x000000:0.06:0.08[waves];[0:v][waves]overlay=x=632:y=278:format=auto[v_osc];[v_osc][2:v]overlay=x=0:y=0:format=auto:eof_action=repeat,format=yuv420p[v_out]"
+  CRT_FIFO="/tmp/stardust_crt_30fps.y4m"
+  pkill -f "crt_loop_feeder.py.*$CRT_FIFO" 2>/dev/null || true
+  rm -f "$CRT_FIFO"
+  mkfifo "$CRT_FIFO"
+
+  VF_FILTER="[1:a]aresample=44100:async=1,aformat=sample_fmts=fltp:sample_rates=44100:channel_layouts=stereo,alimiter=limit=0.87:level=disabled,asplit=2[a_out][a_viz];[a_viz]pan=mono|c0=0.5*c0+0.5*c1,volume=1.9,treble=g=8:f=3500,showfreqs=s=64x48:mode=bar:ascale=cbrt:fscale=log:win_size=1024:averaging=2:rate=30:colors=0x30c852@0.58,lagfun=decay=0.45,scale=536:190:flags=neighbor,drawgrid=w=16:h=190:t=5:c=0x000000@0.0:replace=1,drawgrid=w=536:h=7:t=2:c=0x000000@0.0:replace=1,format=rgba[waves];[0:v][3:v]overlay=x=616:y=204:format=auto[v_crt];[v_crt][waves]overlay=x=688:y=310:format=auto[v_osc];[v_osc][2:v]overlay=x=0:y=0:format=auto:eof_action=repeat,format=yuv420p[v_out]"
 
   echo "[$(date '+%Y-%m-%d %H:%M:%S')] [STREAM.SH] Selected encoder: 1080p30 Full HD Intentional ARG CRT/HUD Engine (2800k video + 160k audio)" >> "$LOG_FILE"
+
+  /usr/bin/python3 -u "$SCRIPT_DIR/crt_loop_feeder.py" --repo-root "$REPO_ROOT" --fifo "$CRT_FIFO" &
+  CRT_FEEDER_PID=$!
+  trap 'kill "$CRT_FEEDER_PID" 2>/dev/null || true' EXIT INT TERM
 
   /usr/bin/python3 -u "$SCRIPT_DIR/hud_pipe_feeder.py" --repo-root "$REPO_ROOT" | caffeinate -d -i -m -s -u ffmpeg \
     -hide_banner \
@@ -58,12 +67,12 @@ while true; do
     -stream_loop -1 \
     -i "$BACKDROP" \
     -readrate 1.0 \
-    -readrate_initial_burst 3.0 \
+    -readrate_initial_burst 0.5 \
     -readrate_catchup 1.15 \
     -f concat \
     -safe 0 \
     -i "$PLAYLIST" \
-    -thread_queue_size 8 \
+    -thread_queue_size 1 \
     -threads 1 \
     -probesize 32768 \
     -analyzeduration 0 \
@@ -71,6 +80,9 @@ while true; do
     -vcodec png \
     -framerate 1 \
     -i - \
+    -thread_queue_size 2 \
+    -f yuv4mpegpipe \
+    -i "$CRT_FIFO" \
     -filter_complex "$VF_FILTER" \
     -map "[v_out]" \
     -map "[a_out]" \
@@ -96,6 +108,7 @@ while true; do
     "${RTMP_URL}/${STREAM_KEY}" >> "$LOG_FILE" 2>&1
 
   EXIT_CODE=$?
+  kill "$CRT_FEEDER_PID" 2>/dev/null || true
   echo "[$(date '+%Y-%m-%d %H:%M:%S')] [STREAM.SH] FFmpeg exited with code ${EXIT_CODE}. Rotating playhead & reconnecting in 2s..." >> "$LOG_FILE"
   sleep 2
 done

@@ -20,15 +20,21 @@ jobs:
         with:
           python-version: "3.11"
 
+      - name: Install Python dependencies
+        run: pip install --upgrade pip numpy pillow
+
       - name: Advance Living Usenet Spool & Broadcast Telemetry Snapshot
         run: |
-          python3 src/living_usenet_daemon.py
-          python3 youtube/livestream/sync_telemetry.py --repo-root .
+          python3 src/living_usenet_daemon.py --site-dir src/site_static
+          python3 youtube/livestream/sync_telemetry.py --repo-root . --json-only
 
       - name: Commit and Push Chronological Spool Updates
         run: |
           git config user.name "stardust-relay-daemon"
           git config user.email "relay@stardust-archive.net"
-          git add site/usenet/ site/assets/live_telemetry.json
-          git diff --cached --quiet || git commit -m "chore(usenet): advance 1995 chronological spool & 02:14 UTC telemetry"
-          git push origin main
+          git add src/site_static/usenet/ src/site_static/assets/live_telemetry.json
+          if ! git diff --cached --quiet; then
+            git commit -m "chore(usenet): advance 1995 chronological spool & 02:14 UTC telemetry"
+            git pull --rebase --autostash origin main
+            git push origin main
+          fi

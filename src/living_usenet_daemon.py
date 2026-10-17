@@ -144,7 +144,36 @@ def build_living_usenet(site_dir: Path, now_ts: float | None = None) -> dict:
     usenet_root = site_dir / "usenet"
     usenet_root.mkdir(parents=True, exist_ok=True)
 
-    active_posts = [p for p in CHRONOLOGICAL_DISPATCHES if p["day_offset"] <= elapsed_days]
+    active_posts = [dict(p) for p in CHRONOLOGICAL_DISPATCHES if p["day_offset"] <= elapsed_days]
+    groups_cycle = [
+        ("comp.dsp", "m.chen@ee.ashford-poly.org (Dr. Mei-Ling Chen)", "ashpoly!uknet!uunet!comp.dsp"),
+        ("alt.fan.nova-hart", "kenji_t@kamome-net.org (Kenji Takahashi // PC-9801RA)", "kamome!twics!iiJnet!uunet!alt.fan.nova-hart"),
+        ("alt.conspiracy", "op08@relcom-node08.org (Dimitri V. // Leningrad AX.25 Relay)", "relcom08!demos!fuug!mcsun!uunet!alt.conspiracy"),
+        ("alt.music.heartstrike", "elena_v@redcoyoacan.org (Elena Villalobos // Mexico DF)", "coyoacan!unam!utexas!uunet!alt.music.heartstrike"),
+        ("comp.sys.ibm-pc.hardware", "b_keller@vienna-strasse.at (Bernd Keller)", "tuwien!mcsun!uunet!comp.sys.ibm-pc.hardware"),
+    ]
+    for d in range(3, elapsed_days + 1):
+        grp, sender, path_str = groups_cycle[d % len(groups_cycle)]
+        pdate_d = BASE_1995_DATE + datetime.timedelta(days=d)
+        phase_deg = round((d * 51.4285) % 360.0, 2)
+        sec_num = ((d - 1) % 7) + 1
+        active_posts.append({
+            "day_offset": d,
+            "group": grp,
+            "from": sender,
+            "subject": f"[1995-10-{12 + (d % 19):02d} LOG #{d:03d}] 14.2001 Hz Carrier Drift {phase_deg} deg // Sector {sec_num:02d} Parity Check",
+            "msgid": f"<1995Oct{12 + (d % 19):02d}.0214{d % 60:02d}.{1420 + d}@{sender.split('@')[1].split(' ')[0]}>",
+            "path": path_str,
+            "body": (
+                f"Automated 02:14 UTC Listening Night synchronization log (Day +{d} since Sublevel B2 lock):\n\n"
+                f"  * Carrier Frequency : 14.2001 Hz (Sublevel B3 Harmonic: 28.4002 Hz)\n"
+                f"  * Phase Offset      : {phase_deg} deg (Pearson r = -0.94 on Reel SD-0009)\n"
+                f"  * Active Sector     : Sector #{sec_num:02d} // Quantum Ouroboros Parity Verification\n\n"
+                f"Cross-check the live telemetry JSON at /api/telemetry and run the phase-null\n"
+                f"demodulator in /forensics/signal_lab.html to verify today's frame checksum."
+            ),
+        })
+
     written_files = []
 
     by_group: dict[str, list[tuple[str, dict, datetime.datetime]]] = {}
@@ -196,5 +225,9 @@ def build_living_usenet(site_dir: Path, now_ts: float | None = None) -> dict:
 
 
 if __name__ == "__main__":
-    out = build_living_usenet(Path("/tmp/stardust_expansion/site"))
+    import argparse
+    parser = argparse.ArgumentParser(description="Advance Living Usenet Spool")
+    parser.add_argument("--site-dir", type=Path, default=Path(__file__).resolve().parents[1] / "site")
+    args = parser.parse_args()
+    out = build_living_usenet(args.site_dir)
     print(json.dumps(out, indent=2))

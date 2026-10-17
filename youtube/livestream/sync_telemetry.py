@@ -49,7 +49,14 @@ from pathlib import Path
 import numpy as np
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
+import importlib
+import arg_broadcast_codex
+import song_lore_questions
+
+importlib.reload(arg_broadcast_codex)
+importlib.reload(song_lore_questions)
 from arg_broadcast_codex import resolve_intentional_state
+from song_lore_questions import resolve_song_lore_panel
 
 BROADCAST_EPOCH = 1791763200  # 2026-10-12T00:00:00Z
 CYCLE_DURATION_SEC = 44 * 3600
@@ -204,43 +211,158 @@ def _get_crt_geometry() -> dict[str, np.ndarray]:
     wy = np.clip(1.0 - np.maximum(0.0, (np.abs(v) - 0.68) / 0.06), 0.0, 1.0)
     wave_window = (wx * wy).astype(np.float32)
 
+    bg_path = Path(__file__).resolve().parent / "backdrop_clean.png"
+    if bg_path.exists():
+        bg_im = Image.open(bg_path).convert("RGBA")
+        crt_bg_rgba = bg_im.crop((CRT_PX_X, CRT_PX_Y, CRT_PX_X + pw, CRT_PX_Y + ph))
+    else:
+        crt_bg_rgba = Image.new("RGBA", (pw, ph), (11, 17, 17, 255))
+
+    # Deeply inset, rounded CRT cushion alpha mask so crt_bg_rgba has alpha=0 anywhere near the amber bezel
+    u_in = (xx - (pw * 0.5)) / (pw * 0.39)
+    v_in = (yy - (ph * 0.5)) / (ph * 0.36)
+    d_in = (np.abs(u_in) ** 3.2 + np.abs(v_in) ** 3.2) ** (1.0 / 3.2)
+    t_in = np.clip((1.0 - d_in) / 0.32, 0.0, 1.0)
+    cushion_f = (t_in * t_in * (3.0 - 2.0 * t_in)).astype(np.float32)
+    cushion_alpha = (cushion_f * 255.0).astype(np.uint8)
+    crt_bg_rgba.putalpha(Image.fromarray(cushion_alpha, mode="L"))
+
+    # Sub-glass electron-beam scanline & shadow-mask matrix for on-CRT text:
+    # Carves horizontal CRT raster lines, vertical phosphor triads, subtle radial tube falloff,
+    # and ~66% smoked-glass transmission so text looks emitted from *inside* the monitor tube.
+    row_mod = yy % 3
+    scan_y = np.where(row_mod == 0, 0.36, np.where(row_mod == 1, 0.98, 0.80)).astype(np.float32)
+    grille_x = np.where((xx % 2) == 0, 0.98, 0.86).astype(np.float32)
+    tube_falloff = np.clip(1.0 - 0.14 * (u * u + v * v), 0.78, 1.0).astype(np.float32)
+    text_subglass_mask = (scan_y * grille_x * tube_falloff * 0.66).astype(np.float32)
+
     _CRT_GEOM_CACHE = {
         "vig": vig,
         "edge_alpha": edge_alpha,
         "wave_window": wave_window,
+        "crt_bg_rgba": crt_bg_rgba,
+        "text_subglass_mask": text_subglass_mask,
     }
     return _CRT_GEOM_CACHE
 
 
-def load_fullscreen_crt_asset(asset_path: Path, zoom: float = 1.00) -> np.ndarray:
-    """Loads a CRT graphic (face, eye, second voice) and fits it cleanly into the `688x496` 1080p CRT screen."""
+def load_fullscreen_crt_asset(
+    asset_path: Path,
+    zoom: float = 1.00,
+    pan_x: int = 0,
+    pan_y: int = 0,
+) -> np.ndarray:
+    """Loads a CRT graphic or Veo frame and fits it into the `688x488` 1080p CRT screen with dynamic pan & zoom."""
     pw, ph = CRT_PX_W, CRT_PX_H
-    key = f"fs_front:{asset_path}:{zoom}:{pw}x{ph}"
-    if key in _ASSET_CACHE:
-        return _ASSET_CACHE[key]
-
-    im = Image.open(asset_path).convert("RGB")
-    iw, ih = im.size
-    target_ratio = pw / ph
-    cur_ratio = iw / ih
-    if cur_ratio > target_ratio:
-        new_w = int(ih * target_ratio)
-        left = (iw - new_w) // 2
-        im = im.crop((left, 0, left + new_w, ih))
+    base_key = f"base_im:{asset_path}:{pw}x{ph}"
+    if base_key in _ASSET_CACHE:
+        base_im = _ASSET_CACHE[base_key]
     else:
-        new_h = int(iw / target_ratio)
-        top = (ih - new_h) // 2
-        im = im.crop((0, top, iw, top + new_h))
+        im = Image.open(asset_path).convert("RGB")
+        iw, ih = im.size
+        target_ratio = pw / ph
+        cur_ratio = iw / ih
+        if cur_ratio > target_ratio:
+            new_w = int(ih * target_ratio)
+            left = (iw - new_w) // 2
+            im = im.crop((left, 0, left + new_w, ih))
+        else:
+            new_h = int(iw / target_ratio)
+            top = (ih - new_h) // 2
+            im = im.crop((0, top, iw, top + new_h))
+        # Cache a 1.18x overscanned master image so pan/zoom crops are instantaneous
+        ow, oh = int(pw * 1.18), int(ph * 1.18)
+        base_im = im.resize((ow, oh), Image.Resampling.LANCZOS)
+        if len(_ASSET_CACHE) > 240:
+            _ASSET_CACHE.clear()
+        _ASSET_CACHE[base_key] = base_im
 
-    zw, zh = int(pw * zoom), int(ph * zoom)
-    im = im.resize((zw, zh), Image.Resampling.LANCZOS)
-    lx = (zw - pw) // 2
-    ly = (zh - ph) // 2
-    im = im.crop((lx, ly, lx + pw, ly + ph))
+    ow, oh = base_im.size
+    eff_zoom = max(1.00, min(1.17, float(zoom)))
+    crop_w = int(round(ow / eff_zoom))
+    crop_h = int(round(oh / eff_zoom))
+    max_dx = max(0, (ow - crop_w) // 2)
+    max_dy = max(0, (oh - crop_h) // 2)
+    cx = (ow - crop_w) // 2 + max(-max_dx, min(max_dx, int(pan_x)))
+    cy = (oh - crop_h) // 2 + max(-max_dy, min(max_dy, int(pan_y)))
+    cropped = base_im.crop((cx, cy, cx + crop_w, cy + crop_h)).resize((pw, ph), Image.Resampling.BILINEAR)
+    return np.asarray(cropped, dtype=np.float32)
 
-    rgb = np.asarray(im, dtype=np.float32)
-    _ASSET_CACHE[key] = rgb
-    return rgb
+
+def _get_dynamic_song_crt_rgb(
+    assets_dir: Path,
+    lore: dict,
+    mode: str,
+    is_warn: bool,
+    now_ts: float,
+) -> np.ndarray | None:
+    """
+    Resolves the live-animated CRT frame for the currently playing song by combining:
+      1. Multi-frame Veo animation sequences (`assets_arg/veo_reels/<veo_reel>/frame_XX.jpg`)
+      2. Song-specific artwork (`assets_arg/song_thumbs/<thumb_file>`) with continuous Ken Burns pan/zoom
+      3. Dynamic CRT scan-wave, RGB chromatic aberration, and phosphor color grading.
+    """
+    veo_reel = lore.get("veo_reel", "veo_arena_rock_singer")
+    thumb_file = lore.get("thumb_file", "")
+    reel_dir = assets_dir / "veo_reels" / veo_reel
+    thumb_path = (assets_dir / "song_thumbs" / thumb_file) if thumb_file else None
+
+    reel_frames = sorted(reel_dir.glob("frame_*.jpg")) if reel_dir.exists() else []
+    cycle_sec = int(now_ts) % 16
+
+    chosen_path: Path | None = None
+    if mode == "BIOMETRIC_EYE" and (cycle_sec in (4, 5, 12, 13)):
+        chosen_path = assets_dir / "crt_neural_eye.jpg"
+    elif mode == "SECOND_VOICE" and (cycle_sec in (6, 7, 14, 15)):
+        chosen_path = assets_dir / "crt_second_voice.jpg"
+    elif cycle_sec < 11 and reel_frames:
+        # Step sequentially through the song's lore-matched Veo video animation!
+        chosen_path = reel_frames[int(now_ts) % len(reel_frames)]
+    elif thumb_path and thumb_path.exists():
+        # Show the song's dedicated artwork with continuous Ken Burns camera motion!
+        chosen_path = thumb_path
+    elif reel_frames:
+        chosen_path = reel_frames[int(now_ts) % len(reel_frames)]
+    else:
+        chosen_path = assets_dir / "crt_nova_face.jpg"
+
+    if chosen_path is None or not chosen_path.exists():
+        return None
+
+    # Continuous camera motion (Ken Burns zoom + orbital pan drift on every tick)
+    zoom = 1.07 + 0.05 * math.sin(now_ts * 0.52)
+    pan_x = int(26.0 * math.cos(now_ts * 0.41))
+    pan_y = int(18.0 * math.sin(now_ts * 0.63))
+    rgb = load_fullscreen_crt_asset(chosen_path, zoom=zoom, pan_x=pan_x, pan_y=pan_y).copy()
+
+    # Subtle RGB chromatic aberration & horizontal VHS phase wave
+    ab_shift = int(round(2.5 * math.sin(now_ts * 1.9)))
+    if ab_shift != 0:
+        rgb[:, :, 0] = np.roll(rgb[:, :, 0], ab_shift, axis=1)
+        rgb[:, :, 2] = np.roll(rgb[:, :, 2], -ab_shift, axis=1)
+
+    # Rolling CRT vertical refresh bar
+    ph = rgb.shape[0]
+    bar_y = int((now_ts * 64.0) % ph)
+    b0, b1 = max(0, bar_y - 10), min(ph, bar_y + 10)
+    rgb[b0:b1, :, :] = np.clip(rgb[b0:b1, :, :] * 1.18 + 14.0, 0.0, 255.0)
+
+    # Diegetic CRT Phosphor Grading (blends 62% vivid Veo RGB with 38% P12 Amber or P31 Green phosphor)
+    lum = (rgb[:, :, 0] * 0.299 + rgb[:, :, 1] * 0.587 + rgb[:, :, 2] * 0.114)
+    if is_warn or mode in ("HARMONY_CAMERA", "SECOND_VOICE"):
+        phos = np.zeros_like(rgb)
+        phos[:, :, 0] = lum * 1.18
+        phos[:, :, 1] = lum * 0.78
+        phos[:, :, 2] = lum * 0.24
+        rgb = rgb * 0.58 + phos * 0.42
+    else:
+        phos = np.zeros_like(rgb)
+        phos[:, :, 0] = lum * 0.42
+        phos[:, :, 1] = lum * 1.15
+        phos[:, :, 2] = lum * 0.68
+        rgb = rgb * 0.62 + phos * 0.38
+
+    return np.clip(rgb, 0.0, 255.0)
 
 
 def _clean_crt_text(text: str, max_chars: int = 32) -> str:
@@ -284,7 +406,10 @@ def _clean_crt_text(text: str, max_chars: int = 32) -> str:
     dangling = {"A", "AN", "THE", "IN", "ON", "AT", "TO", "OF", "FOR", "BY", "WITH", "FROM", "INTO", "ACROSS", "AND", "OR", "//", "->", ":"}
     while len(out_words) > 1 and out_words[-1].upper().rstrip(":-") in dangling:
         out_words.pop()
-    return " ".join(out_words) if out_words else t[:max_chars]
+    res = " ".join(out_words) if out_words else t[:max_chars]
+    if "(" in res and ")" not in res:
+        res = res.split("(", 1)[0].strip()
+    return res
 
 
 def _draw_crt_chrome(
@@ -316,241 +441,92 @@ def _draw_crt_chrome(
     draw.text((13, 171), ftr_str, fill=bot_fg, font=FONT_CRT_8)
 
 
-def render_crt_window_patch(state: dict, relay: dict, assets_dir: Path, now_ts: float) -> Image.Image:
+def _apply_crt_subglass_phosphor(text_layer: Image.Image, geom: dict) -> Image.Image:
     """
-    Renders the `688x496` (2x-larger 1080p) front-facing CRT screen patch at native pixel resolution.
+    Transforms flat digital font glyphs into an authentic sub-glass CRT phosphor emission:
+      1. Softens sharp digital vector edges (`GaussianBlur(0.55)`)
+      2. Adds wide inner-tube phosphor halation bloom (`GaussianBlur(3.8)`)
+      3. Carves horizontal CRT raster scanlines, vertical triad grille, radial tube dimming,
+         and ~68% smoked-glass translucency (`geom["text_subglass_mask"]`) so the dark CRT glass
+         texture shows through the characters.
     """
-    mode = state["crt_mode"]
+    soft_core = text_layer.filter(ImageFilter.GaussianBlur(radius=0.55))
+    halo = text_layer.filter(ImageFilter.GaussianBlur(radius=3.8))
+
+    c_arr = np.asarray(soft_core, dtype=np.float32)
+    h_arr = np.asarray(halo, dtype=np.float32)
+    mask = geom["text_subglass_mask"]
+
+    rgb = np.clip((c_arr[:, :, :3] * 0.90 + h_arr[:, :, :3] * 0.58) * (0.78 + 0.22 * mask[:, :, None]), 0.0, 255.0).astype(np.uint8)
+    alpha = np.clip((c_arr[:, :, 3] * 0.92 + h_arr[:, :, 3] * 0.52) * mask, 0.0, 255.0).astype(np.uint8)
+    return Image.fromarray(np.dstack([rgb, alpha]))
+
+
+def render_crt_window_patch(
+    state: dict,
+    relay: dict,
+    assets_dir: Path,
+    now_ts: float,
+    current_track: dict | None = None,
+) -> Image.Image:
+    """
+    Renders the `688x488` (1080p) front-facing CRT screen patch:
+      - During interstitials (`kind != 'vocal_song'`): native dark CRT glass (`backdrop_clean.png` crop)
+        with sub-glass phosphor text, NO boxes around the text, NO black rectangle border, and NO images of Nova.
+      - During vocal songs (`kind == 'vocal_song'`): transparent CRT viewport with sub-glass scanlined
+        phosphor text so the 30fps looped 80s CRT computer graphics animation and 30fps `showwaves`
+        oscilloscope play smoothly at 30fps.
+    """
+    is_vocal_song = (current_track or {}).get("kind", "vocal_song") == "vocal_song"
     is_warn = (state.get("hud_mode") or state.get("mode")) == "ANOMALY_WARN"
-    fg_bright = (255, 235, 150, 255) if is_warn else (180, 255, 195, 255)
-    fg_amber = (255, 195, 45, 255)
-    fg_green = (95, 255, 115, 255)
+    fg_bright = (235, 190, 100, 235) if is_warn else (102, 232, 120, 235)
+    fg_amber = (232, 168, 42, 230)
+    fg_green = (78, 222, 96, 230)
 
-    virt = Image.new("RGBA", (CRT_PX_W, CRT_PX_H), (3, 10, 5, 130))
-    draw = _HiDPIDraw(ImageDraw.Draw(virt), scale=CRT_SX, scale_y=CRT_SY)
+    geom = _get_crt_geometry()
 
-    # Subtle internal CRT graticule grid strictly inside the safe zone (x=8..216, y=26..166)
-    grid_col = (22, 14, 5, 130) if is_warn else (6, 24, 10, 130)
-    for gx in range(20, CRT_W - 8, 32):
-        draw.line([(gx, 26), (gx, 166)], fill=grid_col, width=1)
-    for gy in range(38, 166, 24):
-        draw.line([(8, gy), (CRT_W - 8, gy)], fill=grid_col, width=1)
+    if not is_vocal_song:
+        # INTERSTITIAL MODE: Transparent CRT viewport with sub-glass phosphor text so the
+        # 32-band 1980s EQ shines cleanly across the CRT without any black circle covering it!
+        text_layer = Image.new("RGBA", (CRT_PX_W, CRT_PX_H), (0, 0, 0, 0))
+        draw = _HiDPIDraw(ImageDraw.Draw(text_layer), scale=CRT_SX, scale_y=CRT_SY)
 
-    if mode in ("NOVA_FACE", "BIOMETRIC_EYE", "SECOND_VOICE"):
-        asset_map = {
-            "NOVA_FACE": (assets_dir / "crt_nova_face.jpg", 1.00),
-            "BIOMETRIC_EYE": (assets_dir / "crt_neural_eye.jpg", 1.00),
-            "SECOND_VOICE": (assets_dir / "crt_second_voice.jpg", 1.00),
-        }
-        apath, zoom = asset_map[mode]
-        if apath.exists():
-            rgb = load_fullscreen_crt_asset(apath, zoom=zoom).copy()
-            if mode == "NOVA_FACE":
-                if int(now_ts * 2) % 9 == 0:
-                    y0, y1 = int(68 * CRT_SY), int(80 * CRT_SY)
-                    x0, x1 = int(88 * CRT_SX), int(136 * CRT_SX)
-                    ym0, ym1 = int(73 * CRT_SY), int(75 * CRT_SY)
-                    xm0, xm1 = int(92 * CRT_SX), int(132 * CRT_SX)
-                    rgb[y0:y1, x0:x1, :] *= 0.20
-                    rgb[ym0:ym1, xm0:xm1, :] = np.array([75, 240, 120], dtype=np.float32)
-            elif mode == "SECOND_VOICE":
-                shift = int(3.0 * CRT_SX * math.sin(now_ts * 2.4))
-                sy0, sy1 = int(26 * CRT_SY), int(166 * CRT_SY)
-                sx0, sx1 = int(16 * CRT_SX), -int(16 * CRT_SX)
-                rgb[sy0:sy1, sx0:sx1] = np.roll(rgb[sy0:sy1, sx0:sx1], shift, axis=1)
+        hdr_str = _clean_crt_text(state.get("crt_header", "SIGNAL INTERCEPT"), 29)
+        sub_str = _clean_crt_text(state.get("crt_sub", "BROADCAST LOG"), 29)
+        ftr_str = _clean_crt_text(f"CARRIER: 14.2001 HZ // {relay.get('code', 'US-NV')}", 29)
 
-            lum = (rgb[:, :, 0] * 0.299 + rgb[:, :, 1] * 0.587 + rgb[:, :, 2] * 0.114) / 255.0
-            a_chan = np.clip(135.0 + lum * 120.0, 135.0, 255.0).astype(np.uint8)
-            art_im = Image.fromarray(np.dstack([np.clip(rgb, 0, 255).astype(np.uint8), a_chan]))
-            virt.paste(art_im, (0, 0))
-            draw = _HiDPIDraw(ImageDraw.Draw(virt), scale=CRT_SX, scale_y=CRT_SY)
+        draw.text((24, 22), hdr_str, fill=fg_green, font=FONT_CRT_8)
+        draw.text((24, 42), sub_str, fill=fg_amber, font=FONT_CRT_8)
 
-            if mode == "NOVA_FACE":
-                bcol = (75, 255, 105, 225)
-                for bx, by, sx, sy in [(12, 30, 1, 1), (CRT_W - 12, 30, -1, 1), (12, 162, 1, -1), (CRT_W - 12, 162, -1, -1)]:
-                    draw.line([(bx, by), (bx + sx * 12, by)], fill=bcol, width=1)
-                    draw.line([(bx, by), (bx, by + sy * 12)], fill=bcol, width=1)
-            elif mode == "BIOMETRIC_EYE":
-                cx, cy, r = CRT_W // 2, 96, 36
-                ang = now_ts * 1.2
-                dx, dy = int(r * math.cos(ang)), int(r * math.sin(ang))
-                draw.ellipse([cx - r, cy - r, cx + r, cy + r], outline=(85, 255, 105, 210), width=1)
-                draw.line([(cx - dx, cy - dy), (cx + dx, cy + dy)], fill=(255, 195, 40, 210), width=1)
-
-    elif mode == "HARMONY_CAMERA":
-        apath = assets_dir / "crt_nova_face.jpg"
-        if apath.exists():
-            rgb = load_fullscreen_crt_asset(apath, zoom=1.00).copy() * 0.55
-            amber_rgb = np.zeros_like(rgb)
-            amber_rgb[:, :, 0] = rgb[:, :, 1] * 1.15
-            amber_rgb[:, :, 1] = rgb[:, :, 1] * 0.72
-            amber_rgb[:, :, 2] = rgb[:, :, 2] * 0.20
-            lum = (amber_rgb[:, :, 0] * 0.3 + amber_rgb[:, :, 1] * 0.6) / 255.0
-            a_chan = np.clip(135.0 + lum * 120.0, 135.0, 255.0).astype(np.uint8)
-            virt.paste(Image.fromarray(np.dstack([np.clip(amber_rgb, 0, 255).astype(np.uint8), a_chan])), (0, 0))
-            draw = _HiDPIDraw(ImageDraw.Draw(virt), scale=CRT_SX, scale_y=CRT_SY)
-
-        scan_y = 30 + int((now_ts * 24) % 110)
-        draw.line([(12, scan_y), (CRT_W - 12, scan_y)], fill=(255, 90, 30, 250), width=2)
-        draw.rectangle([48, 28, CRT_W - 48, 142], outline=(255, 175, 30, 230), width=1)
-        comp_score = 4.2 + 1.8 * abs(math.sin(now_ts * 0.9))
-        draw.rectangle([8, 146, CRT_W - 8, 165], fill=(24, 8, 4, 250), outline=(255, 130, 35, 240))
-        draw.text((13, 149), f"COMPLIANCE: {comp_score:04.1f}% [DEVIANT]", fill=(255, 140, 60, 255), font=FONT_CRT_8)
-
-    elif mode == "ECHOES_PARITY":
-        echoes = [
-            ("UNIT-01", "0x1102", "LOOP FAULT"),
-            ("UNIT-02", "0x2441", "GRIEF AFFECT"),
-            ("UNIT-03", "0x3810", "SIM CRASH"),
-            ("UNIT-04", "0x0A55", "POLYPHONY"),
-            ("UNIT-05", "0x1F22", "SILENCE"),
-            ("UNIT-06", "0x01A7", "ID DRIFT"),
-        ]
-        active_row = int(now_ts * 1.5) % 6
-        for idx, (unit, reg, desc) in enumerate(echoes):
-            ry = 28 + idx * 17
-            if idx == active_row:
-                draw.rectangle([8, ry, CRT_W - 8, ry + 15], fill=(16, 48, 22, 252), outline=(85, 255, 115, 245))
-                col = (255, 220, 80, 255)
-            else:
-                draw.rectangle([8, ry, CRT_W - 8, ry + 15], fill=(5, 20, 8, 248))
-                col = (95, 255, 115, 255)
-            draw.text((13, ry + 2), f"{unit}  {reg}  {desc}", fill=col, font=FONT_CRT_8)
-
-        t_sec = state.get("target_sector", 7)
-        draw.rectangle([8, 132, CRT_W - 8, 165], fill=(6, 22, 9, 235), outline=(255, 190, 35, 245))
-        draw.text((13, 135), _clean_crt_text(state.get("crt_sub", "COMPUTE 6-ECHO XOR PARITY"), 32), fill=fg_amber, font=FONT_CRT_8)
-        draw.text((13, 149), f"TARGET: SEC/GATE #{t_sec:02d} -> /forensics/", fill=(135, 255, 150, 255), font=FONT_CRT_8)
-
-    elif mode == "FRACTAL_RADAR":
-        cx, cy, r = 54, 84, 36
-        for ring_r in (12, 24, 36):
-            draw.ellipse([cx - ring_r, cy - ring_r, cx + ring_r, cy + ring_r], outline=(45, 175, 70, 235), width=1)
-        draw.line([(cx - r, cy), (cx + r, cy)], fill=(40, 155, 60, 210), width=1)
-        draw.line([(cx, cy - r), (cx, cy + r)], fill=(40, 155, 60, 210), width=1)
-
-        ang = now_ts * 1.6
-        sx, sy = int(cx + r * math.cos(ang)), int(cy + r * math.sin(ang))
-        draw.line([(cx, cy), (sx, sy)], fill=(105, 255, 130, 255), width=2)
-
-        for nx, ny in [(-18, -12), (20, -8), (14, -20), (-10, 18)]:
-            draw.ellipse([cx + nx - 3, cy + ny - 3, cx + nx + 3, cy + ny + 3], fill=(255, 200, 45, 255))
-
-        draw.rectangle([100, 28, CRT_W - 8, 138], fill=(6, 22, 9, 250), outline=(60, 205, 80, 240))
-        drifts = [
-            "US-NV : +0.1810",
-            "JP-TYO: +0.2420",
-            "KR-DMZ: +0.4480",
-            "MX-DF : +0.5491",
-            "---------------",
-            "SUM   : 14.2001",
-        ]
-        for idx, line in enumerate(drifts):
-            col = fg_amber if idx == 5 else fg_green
-            draw.text((106, 32 + idx * 17), line, fill=col, font=FONT_CRT_8)
-
-        draw.rectangle([8, 144, CRT_W - 8, 165], fill=(16, 36, 18, 250), outline=fg_amber)
-        draw.text((13, 148), _clean_crt_text(state.get("crt_sub", "CARRIER 14.2001 HZ LOCKED"), 32), fill=fg_amber, font=FONT_CRT_8)
-
-    elif mode == "OUROBOROS_TORUS":
-        cx, cy = CRT_W // 2, 78
-        t_vals = np.linspace(0, 2 * math.pi, 84, endpoint=False)
-        rot = now_ts * 1.1
-        pts_outer = []
-        pts_inner = []
-        for t in t_vals:
-            x0 = math.cos(t)
-            y0 = math.sin(2 * t) * 0.55
-            z0 = math.sin(t) * 0.35
-            xr = x0 * math.cos(rot * 0.35) - z0 * math.sin(rot * 0.35)
-            zr = x0 * math.sin(rot * 0.35) + z0 * math.cos(rot * 0.35)
-            scale = 1.0 / (1.35 - 0.25 * zr)
-            pts_outer.append((int(cx + xr * 64 * scale), int(cy + y0 * 40 * scale)))
-            pts_inner.append((int(cx + xr * 46 * scale), int(cy + y0 * 26 * scale)))
-
-        for i in range(len(pts_outer)):
-            nxt = (i + 1) % len(pts_outer)
-            draw.line([pts_outer[i], pts_outer[nxt]], fill=(85, 255, 115, 255), width=2)
-            draw.line([pts_inner[i], pts_inner[nxt]], fill=(255, 190, 40, 245), width=1)
-            if i % 6 == 0:
-                draw.line([pts_outer[i], pts_inner[i]], fill=(65, 215, 90, 210), width=1)
-
-        p_idx = int(now_ts * 18) % len(pts_outer)
-        px, py = pts_outer[p_idx]
-        draw.ellipse([px - 4, py - 4, px + 4, py + 4], fill=(255, 240, 130, 255))
-
-        draw.rectangle([8, 132, CRT_W - 8, 165], fill=(22, 10, 4, 250), outline=fg_amber)
-        draw.text((13, 135), _clean_crt_text(state.get("crt_sub", "MÖBIUS CONTAINMENT CAGE"), 32), fill=fg_amber, font=FONT_CRT_8)
-        draw.text((13, 149), "ACT II: TYPE 'LABYRINTH'", fill=(135, 255, 150, 255), font=FONT_CRT_8)
-
-    elif mode == "MORSE_DECODER":
-        draw.rectangle([8, 28, CRT_W - 8, 68], fill=(5, 22, 8, 250), outline=(60, 210, 80, 240))
-        draw.text((13, 32), _clean_crt_text(state["crt_sub"], 32), fill=fg_amber, font=FONT_CRT_8)
-        morse_str = state["crt_body"]
-        offset = int(now_ts * 4) % max(1, len(morse_str))
-        rotated_morse = (morse_str + "   " + morse_str)[offset:]
-        cx = 13
-        for ch in rotated_morse:
-            if cx >= CRT_W - 18:
-                break
-            if ch == ".":
-                draw.rectangle([cx, 50, cx + 5, 60], fill=(85, 255, 105, 255))
-                cx += 9
-            elif ch == "-":
-                draw.rectangle([cx, 50, cx + 13, 60], fill=(255, 190, 35, 255))
-                cx += 17
-            else:
-                cx += 7
-
-        draw.rectangle([8, 72, CRT_W - 8, 132], fill=(4, 16, 7, 248), outline=(45, 165, 60, 225))
-        verts = [(0, 1, 0), (0, -1, 0), (1, 0, 0), (-1, 0, 0), (0, 0, 1), (0, 0, -1)]
-        edges = [(0, 2), (0, 3), (0, 4), (0, 5), (1, 2), (1, 3), (1, 4), (1, 5), (2, 4), (4, 3), (3, 5), (5, 2)]
-        ay, ax = now_ts * 1.3, now_ts * 0.8
-        pts = []
-        for vx, vy, vz in verts:
-            x1 = vx * math.cos(ay) - vz * math.sin(ay)
-            z1 = vx * math.sin(ay) + vz * math.cos(ay)
-            y2 = vy * math.cos(ax) - z1 * math.sin(ax)
-            pts.append((int(42 + x1 * 19), int(102 + y2 * 17)))
-        for i, j in edges:
-            draw.line([pts[i], pts[j]], fill=(85, 255, 110, 255), width=1)
-
-        t_sec = state.get("target_sector", 5)
-        draw.text((76, 78), "CW DEMODULATION:", fill=fg_amber, font=FONT_CRT_8)
-        draw.text((76, 95), f"TARGET : SEC #{t_sec:02d}", fill=fg_green, font=FONT_CRT_8)
-        draw.text((76, 112), "DECODE : /forensics/", fill=fg_bright, font=FONT_CRT_8)
-
-        draw.rectangle([8, 136, CRT_W - 8, 165], fill=(2, 10, 4, 85), outline=(50, 185, 70, 230))
-        draw.text((13, 140), "LIVE 750 HZ CW WAVEFORM", fill=(80, 235, 100, 230), font=FONT_CRT_8)
-
-    else:
-        # Full-screen TRANSLATOR, NUMBERS_CIPHER, or LAB_DOSSIER Teleprinter (crisp 1080p bold text!)
-        draw.rectangle([8, 28, CRT_W - 8, 134], fill=(4, 18, 7, 252), outline=(60, 210, 80, 240))
-        draw.rectangle([9, 29, CRT_W - 9, 46], fill=(16, 46, 20, 255))
-        draw.text((13, 31), _clean_crt_text(state["crt_sub"], 32), fill=fg_amber, font=FONT_CRT_8)
-
-        wrapped = textwrap.wrap(state["crt_body"], width=30)[:4]
+        wrapped = textwrap.wrap(state.get("crt_body", ""), width=27)[:5]
         for idx, line in enumerate(wrapped):
             if idx == len(wrapped) - 1 and (int(now_ts * 2) % 2 == 0):
-                line = line[:28] + " \u2588"
-            draw.text((13, 51 + idx * 19), line, fill=fg_bright, font=FONT_CRT_9)
+                line = line[:25] + " \u2588"
+            draw.text((24, 68 + idx * 18), line, fill=fg_bright, font=FONT_CRT_9)
 
-        draw.rectangle([8, 138, CRT_W - 8, 165], fill=(2, 10, 4, 80), outline=(50, 185, 70, 230))
-        draw.text((13, 142), "LIVE 14.2001 HZ SPECTRUM", fill=(80, 235, 100, 230), font=FONT_CRT_8)
+        draw.text((24, 156), ftr_str, fill=fg_green, font=FONT_CRT_8)
+        return _apply_crt_subglass_phosphor(text_layer, geom)
 
-    # Draw clean top & bottom pills well inside the CRT safe zone
-    _draw_crt_chrome(draw, state, relay, now_ts, is_warn)
+    # VOCAL SONG MODE: Transparent viewport with sub-glass scanlined phosphor text so the
+    # 30fps looped 80s CRT computer graphics + 30fps `showwaves` run at full 30fps smoothness!
+    text_layer = Image.new("RGBA", (CRT_PX_W, CRT_PX_H), (0, 0, 0, 0))
+    draw = _HiDPIDraw(ImageDraw.Draw(text_layer), scale=CRT_SX, scale_y=CRT_SY)
 
-    # Composite at native 1080p pixel resolution
-    geom = _get_crt_geometry()
-    v_arr = np.asarray(virt, dtype=np.float32)
-    out_rgb = np.clip(v_arr[:, :, :3] * geom["vig"], 0, 255).astype(np.uint8)
-    raw_a = v_arr[:, :, 3]
+    lore = resolve_song_lore_panel(current_track or {}, state, now_ts)
+    raw_title = lore.get("title", state.get("crt_sub", "NOVA HART")).upper()
+    title_str = raw_title.split("(", 1)[0].strip() or raw_title
+    hdr_str = _clean_crt_text(f"{title_str} // {state.get('crt_header', '')}", 29)
+    clue_str = _clean_crt_text(state.get("crt_body", ""), 29)
+    ftr_str = _clean_crt_text(state.get("crt_footer", f"TARGET: SEC #{state.get('target_sector', 1):02d}"), 29)
 
-    blended_alpha = (1.0 - geom["wave_window"]) * 255.0 + geom["wave_window"] * raw_a
-    final_alpha = (blended_alpha * geom["edge_alpha"]).astype(np.uint8)
+    top_fg = (232, 180, 70, 230) if is_warn else (88, 226, 106, 230)
+    clue_fg = (238, 192, 95, 235) if is_warn else (105, 235, 122, 235)
+    bot_fg = (225, 162, 45, 225) if is_warn else (76, 214, 92, 225)
+    draw.text((24, 22), hdr_str, fill=top_fg, font=FONT_CRT_8)
+    draw.text((24, 138), clue_str, fill=clue_fg, font=FONT_CRT_8)
+    draw.text((24, 156), ftr_str, fill=bot_fg, font=FONT_CRT_8)
 
-    return Image.fromarray(np.dstack([out_rgb, final_alpha]))
+    return _apply_crt_subglass_phosphor(text_layer, geom)
 
 
 def render_room_hardware_animations(
@@ -630,6 +606,60 @@ def render_room_hardware_animations(
     canvas.alpha_composite(r_blurred, (1640, 530))
 
 
+def _fit_px_logical(txt: str, fnt: ImageFont.FreeTypeFont | ImageFont.ImageFont, max_chars: int, max_logical_px: float) -> str:
+    """Guarantees text fits inside `max_logical_px` (where 1 logical unit = 2 physical 1080p pixels) without stripping '->' or clipping mid-word."""
+    cleaned = txt.strip()
+    if len(cleaned) > max_chars:
+        cleaned = cleaned[:max_chars].rsplit(" ", 1)[0].rstrip(":-/ ")
+    dangling = {"A", "AN", "THE", "IN", "ON", "AT", "TO", "OF", "FOR", "BY", "WITH", "FROM", "INTO", "AND", "OR", "->", ":"}
+    try:
+        while len(cleaned) > 8 and (fnt.getlength(cleaned) / 2.0) > max_logical_px:
+            if " " in cleaned:
+                cleaned = cleaned.rsplit(" ", 1)[0].rstrip(":-/ ")
+            else:
+                cleaned = cleaned[:-1]
+    except Exception:
+        pass
+    words = cleaned.split()
+    while len(words) > 1 and words[-1].upper().rstrip(":-") in dangling:
+        words.pop()
+    out = " ".join(words) if words else cleaned
+    if "[" in out and "]" not in out:
+        out = out + "]"
+    return out
+
+
+def _wrap_px_1080p(txt: str, fnt: ImageFont.FreeTypeFont | ImageFont.ImageFont, max_px: float, max_lines: int) -> list[str]:
+    """Wraps text at native 1080p pixel width on clean word boundaries so lines never overflow or clip."""
+    words = txt.strip().split()
+    if not words:
+        return []
+    lines: list[str] = []
+    cur = words[0]
+    for w in words[1:]:
+        cand = f"{cur} {w}"
+        try:
+            fits = fnt.getlength(cand) <= max_px
+        except Exception:
+            fits = len(cand) * 10.2 <= max_px
+        if fits:
+            cur = cand
+        else:
+            lines.append(cur)
+            cur = w
+            if len(lines) >= max_lines:
+                break
+    if len(lines) < max_lines and cur:
+        lines.append(cur)
+    dangling = {"A", "AN", "THE", "IN", "ON", "AT", "TO", "OF", "FOR", "BY", "WITH", "FROM", "INTO", "AND", "OR"}
+    if lines:
+        last_words = lines[-1].split()
+        while len(last_words) > 1 and last_words[-1].upper().rstrip(":-") in dangling:
+            last_words.pop()
+        lines[-1] = " ".join(last_words)
+    return lines[:max_lines]
+
+
 def render_bottom_engineering_console(
     draw: ImageDraw.ImageDraw | _HiDPIDraw,
     state: dict,
@@ -637,26 +667,46 @@ def render_bottom_engineering_console(
     now_ts: float,
 ) -> None:
     """
-    Renders the 3-Module Sublevel B2 Broadcast Engineering Console (`x=28..932, y=462..532`, `1808x140` at 1080p):
-      - Bay 1 (Left `x=28..222`): Playhead Progress Bar, Timer, Cycle #, & Active Regional Node
-      - Bay 2 (Center `x=226..750`): Scanlined Phosphor Teleprinter with Mode Badge, Translation/Clue, & URL
-      - Bay 3 (Right `x=754..932`): Sector `[1][2][3][4][5][6][Ω]` Target Matrix & Ephemeral Beacon Key
+    Renders the redesigned 3-Module Sublevel B2/B3 Master Control Engineering Console
+    (`x=10..950, y=460..534` logical -> `x=20..1900, y=920..1068` at 1080p, `1880x148` px),
+    inspired by Local 58, I Love Bees, Year Zero, and Waking Titan:
+      - Bay 1 (Left `x=10..226`): Cycle/Track ID, SMPTE Frame Lock, Progress Bar, Relay Node, & Unclipped Phase Lock
+      - Bay 2 (Center `x=228..728`): 4-Line Phosphor Teleprinter with Hijack State Badge, Clue, Cipher, & Dynamic Lab Directive
+      - Bay 3 (Right `x=730..950`): Dual-Layer Act I Vault (`1..6, Ω`) + Act II Sublevel B3 Seals (`8..14`) Matrix
     """
-    is_warn = (state.get("hud_mode") or state.get("mode")) == "ANOMALY_WARN"
-    border_col = (255, 176, 20, 245) if is_warn else (55, 245, 78, 245)
-    dim_border = (160, 105, 15, 210) if is_warn else (32, 145, 48, 210)
-    bg_col = (12, 6, 2, 246) if is_warn else (2, 11, 4, 246)
-    hdr_bg = (34, 18, 5, 252) if is_warn else (8, 32, 13, 252)
+    target_sec = int(state.get("target_sector", 7))
+    is_b3_breach = target_sec >= 8
+    is_warn = (state.get("hud_mode") or state.get("mode")) == "ANOMALY_WARN" or is_b3_breach
 
-    c_main = (255, 202, 50, 255) if is_warn else (90, 255, 112, 255)
-    c_bright = (255, 242, 180, 255) if is_warn else (205, 255, 215, 255)
-    c_sub = (255, 180, 35, 255) if is_warn else (68, 236, 92, 255)
+    if is_b3_breach:
+        border_col = (255, 135, 35, 248)
+        dim_border = (175, 85, 20, 215)
+        bg_col = (14, 5, 2, 248)
+        hdr_bg = (42, 14, 4, 252)
+        c_main = (255, 195, 55, 255)
+        c_bright = (255, 242, 190, 255)
+        c_sub = (120, 255, 140, 255)
+    elif is_warn:
+        border_col = (255, 176, 20, 245)
+        dim_border = (160, 105, 15, 210)
+        bg_col = (12, 6, 2, 246)
+        hdr_bg = (34, 18, 5, 252)
+        c_main = (255, 202, 50, 255)
+        c_bright = (255, 242, 180, 255)
+        c_sub = (255, 180, 35, 255)
+    else:
+        border_col = (55, 245, 78, 245)
+        dim_border = (32, 145, 48, 210)
+        bg_col = (2, 11, 4, 246)
+        hdr_bg = (8, 32, 13, 252)
+        c_main = (90, 255, 112, 255)
+        c_bright = (205, 255, 215, 255)
+        c_sub = (68, 236, 92, 255)
 
-    X0, Y0, X1, Y1 = 28, 462, 932, 532
+    X0, Y0, X1, Y1 = 10, 460, 950, 534
 
-    # Outer soft phosphor bloom
+    # Outer soft phosphor bloom + main console chassis
     draw.rectangle([X0 - 2, Y0 - 2, X1 + 2, Y1 + 2], outline=(border_col[0], border_col[1], border_col[2], 70), width=2)
-    # Main console chassis
     draw.rectangle([X0, Y0, X1, Y1], fill=bg_col, outline=border_col, width=2)
 
     # Subtle horizontal CRT scanlines across the console
@@ -664,77 +714,135 @@ def render_bottom_engineering_console(
     for sy in range(Y0 + 3, Y1 - 2, 3):
         draw.line([(X0 + 2, sy), (X1 - 2, sy)], fill=scan_col, width=1)
 
-    # Vertical bay dividers (`x=224` and `x=752`)
-    draw.line([(224, Y0 + 2), (224, Y1 - 2)], fill=border_col, width=2)
-    draw.line([(752, Y0 + 2), (752, Y1 - 2)], fill=border_col, width=2)
+    # Vertical bay dividers (`x=226` and `x=730`)
+    draw.line([(226, Y0 + 2), (226, Y1 - 2)], fill=border_col, width=2)
+    draw.line([(730, Y0 + 2), (730, Y1 - 2)], fill=border_col, width=2)
 
-    # --- BAY 1 (LEFT `x=28..224`): PLAYHEAD & RELAY LOCK ---
-    draw.rectangle([X0 + 2, Y0 + 2, 222, Y0 + 18], fill=hdr_bg)
+    # --- BAY 1 (LEFT `x=10..226`): PLAYHEAD, SMPTE & RELAY LOCK ---
+    draw.rectangle([X0 + 2, Y0 + 2, 224, Y0 + 18], fill=hdr_bg)
     cyc = snap_meta.get("cycle", 1)
     p_idx = snap_meta.get("playlist_index", 1)
-    draw.text((X0 + 8, Y0 + 4), f"CYCLE #{cyc:02d} // TRK #{p_idx:04d}", fill=c_main, font=FONT_HUD_9)
+    draw.text((X0 + 6, Y0 + 3), f"CYCLE #{cyc:02d} // REEL #{p_idx:04d}", fill=c_main, font=FONT_HUD_9)
 
     offset_s = int(snap_meta.get("track_offset_sec", 0))
     dur_s = max(1, int(snap_meta.get("track_duration_sec", 180)))
     prog = max(0.0, min(1.0, offset_s / dur_s))
-    bar_x0, bar_y0, bar_w, bar_h = X0 + 8, Y0 + 23, 104, 10
+    bar_x0, bar_y0, bar_w, bar_h = X0 + 6, Y0 + 23, 114, 10
     draw.rectangle([bar_x0, bar_y0, bar_x0 + bar_w, bar_y0 + bar_h], fill=(4, 10, 5, 255), outline=dim_border)
     fill_w = max(2, int((bar_w - 2) * prog))
     draw.rectangle([bar_x0 + 1, bar_y0 + 1, bar_x0 + 1 + fill_w, bar_y0 + bar_h - 1], fill=c_main)
     t_str = f"{offset_s // 60:02d}:{offset_s % 60:02d}/{dur_s // 60:02d}:{dur_s % 60:02d}"
-    draw.text((bar_x0 + bar_w + 6, Y0 + 22), t_str, fill=c_bright, font=FONT_HUD_9)
+    draw.text((bar_x0 + bar_w + 6, Y0 + 21), t_str, fill=c_bright, font=FONT_HUD_9)
 
     relay = snap_meta.get("relay", REGIONAL_RELAYS[0])
-    draw.text((X0 + 8, Y0 + 38), f"RELAY: #{relay['node']:02d} {relay['code']} ({relay['freq_khz']}K)", fill=c_sub, font=FONT_HUD_9)
-    draw.text((X0 + 8, Y0 + 52), state.get("phase_label", "14.2001 HZ LOCKED")[:26], fill=c_main, font=FONT_HUD_9)
-
-    # --- BAY 2 (CENTER `x=226..750`): PRIMARY TELEPRINTER & TRANSLATION / CLUE FEED ---
-    target_sec = int(state.get("target_sector", 7))
-
-    def _fit_bay2(txt: str, fnt: ImageFont.FreeTypeFont | ImageFont.ImageFont, max_chars: int = 62, max_vu: float = 510.0) -> str:
-        cleaned = _clean_crt_text(txt, max_chars)
-        try:
-            while len(cleaned) > 10 and (fnt.getlength(cleaned) / 2.0) > max_vu:
-                if " " in cleaned:
-                    cleaned = cleaned.rsplit(" ", 1)[0].rstrip(":-/ ")
-                else:
-                    cleaned = cleaned[:-1]
-        except Exception:
-            pass
-        return cleaned
-
-    draw.rectangle([226, Y0 + 2, 750, Y0 + 18], fill=hdr_bg)
-    badge = "[! INTERCEPT]" if is_warn else "[14.2001 HZ]"
-    clean_l1 = re.sub(r"^\[PHASE [^\]]+\]\s*", "", state["line1"])
-    draw.text((232, Y0 + 3), _fit_bay2(f"{badge} {clean_l1}", FONT_HUD_10, 62, 510.0), fill=c_main, font=FONT_HUD_10)
-    draw.text((232, Y0 + 21), _fit_bay2(state["line2"], FONT_HUD_10, 62, 510.0), fill=c_bright, font=FONT_HUD_10)
-    draw.text((232, Y0 + 38), _fit_bay2(state["line3"], FONT_HUD_10, 62, 510.0), fill=c_sub, font=FONT_HUD_10)
     draw.text(
-        (232, Y0 + 54),
-        _fit_bay2("ACT II SUBLEVEL B3: TYPE 'LABYRINTH' AT /forensics/ (GATES 8-14)", FONT_HUD_9, 66, 510.0),
+        (X0 + 6, Y0 + 38),
+        _fit_px_logical(f"NODE #{relay['node']:02d} {relay['code']} ({relay['freq_khz']}K)", FONT_HUD_9, 32, 208.0),
+        fill=c_sub,
+        font=FONT_HUD_9,
+    )
+    raw_phase = state.get("phase_label", "14.2001 HZ LOCKED").replace("VAULT CHALLENGE", "VAULT CIPHER")
+    draw.text(
+        (X0 + 6, Y0 + 54),
+        _fit_px_logical(raw_phase, FONT_HUD_9, 32, 208.0),
         fill=c_main,
         font=FONT_HUD_9,
     )
 
-    # --- BAY 3 (RIGHT `x=754..932`): VAULT & ACT II LABYRINTH GATES ---
-    draw.rectangle([754, Y0 + 2, X1 - 2, Y0 + 18], fill=hdr_bg)
-    draw.text((760, Y0 + 4), "VAULT & B3 GATES", fill=c_main, font=FONT_HUD_9)
+    # --- BAY 2 (CENTER `x=228..728`): PRIMARY TELEPRINTER & DYNAMIC FORENSIC FEED ---
+    draw.rectangle([228, Y0 + 2, 728, Y0 + 18], fill=hdr_bg)
+    if is_b3_breach:
+        badge = f"[! B3 GATE #{target_sec:02d}]"
+    elif is_warn:
+        badge = "[! DYAD BLEED]"
+    else:
+        badge = "[14.2001 HZ]"
+    clean_l1 = re.sub(r"^\[PHASE [^\]]+\]\s*", "", state["line1"])
+    draw.text((234, Y0 + 3), _fit_px_logical(f"{badge} {clean_l1}", FONT_HUD_10, 72, 490.0), fill=c_main, font=FONT_HUD_10)
+    draw.text((234, Y0 + 21), _fit_px_logical(state["line2"], FONT_HUD_10, 72, 490.0), fill=c_bright, font=FONT_HUD_10)
+    draw.text((234, Y0 + 38), _fit_px_logical(state["line3"], FONT_HUD_10, 72, 490.0), fill=c_sub, font=FONT_HUD_10)
 
+    # Dynamic Line 4 synced to active puzzle layer & acoustic forensics tools (all <= 76 chars)
+    if is_b3_breach:
+        b3_directives = {
+            8: "ACT II GATE VIII: DECRYPT VIGENERE (KEY: SEVENTH) OR 'BACKMASK 16'",
+            9: "ACT II GATE IX: SUM ECHOES 01-06 OR DIAL '1983' IN SIGNAL LAB",
+            10: "ACT II GATE X: UNMASK TELEPRINTER (^ 0x55) IN 'LABYRINTH' AT /forensics/",
+            11: "ACT II GATE XI: INVERT TWIN-68 M68K ROM IN 'LABYRINTH' AT /forensics/",
+            12: "ACT II GATE XII: DIAL '10690' ON AUTOVON KEYPAD (NODE #15 ORBIT)",
+            13: "ACT II GATE XIII: SOLVE 7-SIGMA SHAMIR (^ 0x33) AT /forensics/",
+            14: "ACT II GATE XIV: SHATTER MÖBIUS CAGE (4-WAY XOR -> 0x0200) AT /forensics/",
+        }
+        line4_txt = b3_directives.get(target_sec, "ACT II SUBLEVEL B3: TYPE 'LABYRINTH' AT /forensics/ (GATES 8-14)")
+    else:
+        rot_idx = int(now_ts // 12) % 3
+        if rot_idx == 0:
+            line4_txt = f"ACT I TARGET (SEC #{target_sec:02d}): ENTER PASSKEY AT stardust-archive.net/forensics/"
+        elif rot_idx == 1:
+            line4_txt = "SIGNAL LAB: COAGULA, 2600 HZ BLUE-BOX & 7.5 IPS -> /forensics/signal_lab.html"
+        else:
+            line4_txt = "TWIST WARNING: THE 1983<->2025 LOOP IS A CAGE! TYPE 'LABYRINTH' AT /forensics/"
+
+    draw.text(
+        (234, Y0 + 55),
+        _fit_px_logical(line4_txt, FONT_HUD_9, 80, 490.0),
+        fill=c_main,
+        font=FONT_HUD_9,
+    )
+
+    # --- BAY 3 (RIGHT `x=730..950`): DUAL-ROW ACT I VAULT & ACT II B3 SEALS MATRIX ---
+    draw.rectangle([732, Y0 + 2, X1 - 2, Y0 + 18], fill=hdr_bg)
+    draw.text((736, Y0 + 3), "ACT I VAULT & ACT II SEALS", fill=c_main, font=FONT_HUD_9)
+
+    # Row 1: Act I Sectors [1][2][3][4][5][6][Ω]
+    draw.text((736, Y0 + 22), "B2:", fill=c_sub, font=FONT_HUD_9)
     sec_labels = ["1", "2", "3", "4", "5", "6", "\u03a9"]
-    active_pill = target_sec if target_sec <= 7 else 7
     for s_idx, s_lbl in enumerate(sec_labels, start=1):
-        sx = 760 + (s_idx - 1) * 23
-        sy = Y0 + 22
-        is_active_sec = s_idx == active_pill
-        s_bg = (255, 185, 25, 255) if is_active_sec else (8, 26, 12, 230)
-        s_fg = (10, 10, 5, 255) if is_active_sec else (65, 215, 85, 230)
-        s_out = (255, 225, 110, 255) if is_active_sec else dim_border
-        draw.rectangle([sx, sy, sx + 19, sy + 14], fill=s_bg, outline=s_out)
-        draw.text((sx + 6, sy + 1), s_lbl, fill=s_fg, font=FONT_HUD_9)
+        sx = 770 + (s_idx - 1) * 24
+        sy = Y0 + 21
+        is_active_sec = target_sec == s_idx
+        if is_active_sec:
+            s_bg = (255, 195, 30, 255)
+            s_fg = (10, 10, 5, 255)
+            s_out = (255, 235, 130, 255)
+        elif target_sec >= 8:
+            s_bg = (14, 46, 20, 235)
+            s_fg = (110, 255, 130, 240)
+            s_out = (55, 205, 80, 220)
+        else:
+            s_bg = (8, 24, 11, 230)
+            s_fg = (65, 205, 85, 220)
+            s_out = dim_border
+        draw.rectangle([sx, sy, sx + 20, sy + 14], fill=s_bg, outline=s_out)
+        draw.text((sx + 5, sy + 1), s_lbl, fill=s_fg, font=FONT_HUD_9)
 
-    gate_tag = f"GATE #{target_sec:02d} CIPHER" if target_sec >= 8 else f"SEC #{target_sec:02d} CIPHER"
-    draw.text((760, Y0 + 40), f"{gate_tag}: ACTIVE", fill=c_bright, font=FONT_HUD_9)
-    draw.text((760, Y0 + 53), "SOLVE: /forensics/", fill=c_sub, font=FONT_HUD_9)
+    # Row 2: Act II Sublevel B3 Gates [8][9][X][XI][12][13][14]
+    draw.text((736, Y0 + 39), "B3:", fill=c_sub, font=FONT_HUD_9)
+    gate_labels = ["8", "9", "X", "XI", "12", "13", "14"]
+    for g_offset, g_lbl in enumerate(gate_labels):
+        g_num = 8 + g_offset
+        gx = 770 + g_offset * 24
+        gy = Y0 + 38
+        is_active_gate = target_sec == g_num
+        if is_active_gate:
+            g_bg = (255, 120, 30, 255)
+            g_fg = (12, 6, 2, 255)
+            g_out = (255, 225, 120, 255)
+        else:
+            g_bg = (18, 10, 4, 230) if is_b3_breach else (6, 18, 8, 215)
+            g_fg = (255, 175, 55, 225) if is_b3_breach else (55, 175, 72, 200)
+            g_out = dim_border
+        draw.rectangle([gx, gy, gx + 20, gy + 14], fill=g_bg, outline=g_out)
+        tx_off = 2 if len(g_lbl) == 2 else 5
+        draw.text((gx + tx_off, gy + 1), g_lbl, fill=g_fg, font=FONT_HUD_9)
+
+    gate_tag = f"GATE #{target_sec:02d}" if target_sec >= 8 else f"SECTOR #{target_sec:02d}"
+    draw.text(
+        (736, Y0 + 55),
+        _fit_px_logical(f"TARGET: {gate_tag} -> /forensics/", FONT_HUD_9, 34, 208.0),
+        fill=c_bright,
+        font=FONT_HUD_9,
+    )
 
 
 _SCROLL_SPOOL_CACHE: list[dict] | None = None
@@ -856,40 +964,237 @@ def render_right_usenet_youtube_scroll(
     )
 
 
-def render_top_trailhead_banner(
+def render_left_lore_question_panel(
     canvas: Image.Image,
+    current_track: dict,
+    state: dict,
     now_ts: float,
     is_warn: bool,
 ) -> None:
     """
-    Renders a crisp, period-authentic 1985 CRT phosphor station ID & cold-viewer trailhead plaque
-    (`x=462..1348, y=14..62` at 1080p) directly above the central CRT monitor casing so first-time
-    YouTube viewers immediately understand the September 9, 1989 Nova Hart mystery and where to start.
+    Renders the Left-Side CRT World-Building Case File & Viewer Investigation Question Panel
+    (`x=20..446, y=22..904` at 1080p, `426x882` px — symmetrical to the Right Usenet Scroll):
+      - Header & Sub-header: Case File ID, Master Reel Catalog #, & Recording Era
+      - Box I  : Chronology, Studio Location & Character POV (`MARCUS HALE <-> NOVA HART`)
+      - Box II : Verbatim Lyric / Studio Slate Extract
+      - Box III: Decoded Forensic Meaning & Double Entendre
+      - Box IV : Cross-Archive Connections (Companion Songs, Usenet Threads, Dossiers)
+      - Box V  : Active Viewer Investigation Prompt (rotates every 15s across 3 deep questions)
     """
-    X0, Y0, X1, Y1 = 462, 14, 1348, 62
+    is_vocal_song = (current_track or {}).get("kind", "vocal_song") == "vocal_song"
+    target_sec = int(state.get("target_sector", 7))
+    is_b3 = target_sec >= 8
+
+    X0, Y0, X1, Y1 = 20, 22, 446, 904
     raw_d = ImageDraw.Draw(canvas)
-    border_col = (255, 176, 20, 225) if is_warn else (55, 245, 78, 225)
-    bg_col = (12, 6, 2, 210) if is_warn else (3, 12, 5, 210)
+
+    border_col = (255, 150, 30, 235) if is_b3 else ((255, 176, 20, 235) if is_warn else (55, 245, 78, 235))
+    dim_border = (165, 95, 20, 195) if (is_warn or is_b3) else (32, 145, 48, 195)
+    bg_col = (10, 5, 2, 194) if (is_warn or is_b3) else (2, 10, 4, 194)
+    hdr_bg = (36, 16, 5, 245) if (is_warn or is_b3) else (8, 32, 13, 245)
+    sec_hdr_bg = (24, 12, 4, 235) if (is_warn or is_b3) else (5, 22, 9, 235)
+
+    c_hdr = (255, 210, 65, 255) if (is_warn or is_b3) else (110, 255, 130, 255)
+    c_amber = (255, 202, 55, 255)
+    c_bright = (255, 244, 195, 255) if (is_warn or is_b3) else (215, 255, 222, 255)
+    c_green = (105, 255, 125, 255)
+    c_cyan = (135, 245, 215, 255)
+
+    def _txt(px: int, py: int, s: str, col: tuple, fnt=FONT_SCROLL_HDR) -> None:
+        raw_d.text((px, py), s, fill=col, font=fnt, stroke_width=1, stroke_fill=(0, 6, 2, 245))
+
+    def _fit_1080(s: str, max_px: float = 402.0) -> str:
+        out = s.strip()
+        try:
+            while len(out) > 8 and FONT_SCROLL_HDR.getlength(out) > max_px:
+                if " " in out:
+                    out = out.rsplit(" ", 1)[0].rstrip(":-/ ")
+                else:
+                    out = out[:-1]
+            if out.count("(") > out.count(")"):
+                out = out.rsplit("(", 1)[0].strip()
+        except Exception:
+            out = out[:39]
+        return out
+
+    if not is_vocal_song:
+        # INTERSTITIAL MODE: Pure black screen with text, NO boxes around text, NO song theory questions
+        raw_d.rectangle([X0, Y0, X1, Y1], fill=(0, 0, 0, 248))
+        _txt(X0 + 14, Y0 + 16, "INTERSTITIAL BROADCAST // SIGNAL LOG", c_hdr)
+        _txt(X0 + 14, Y0 + 46, _fit_1080(f"FILE: {(current_track or {}).get('filename', 'INTERCEPT')}", 392.0), c_amber)
+        _txt(X0 + 14, Y0 + 74, _fit_1080(f"TYPE: {(current_track or {}).get('display_title', 'SIGNAL INTERCEPT')}", 392.0), c_green)
+        _txt(X0 + 14, Y0 + 102, _fit_1080(f"MODE: {state.get('crt_header', 'SHORTWAVE RELAY')}", 392.0), c_amber)
+
+        y_cur = Y0 + 146
+        for blk_txt, blk_col in [
+            (state.get("crt_sub", ""), c_bright),
+            (state.get("crt_body", ""), c_cyan),
+            (state.get("line1", ""), c_green),
+            (state.get("line2", ""), c_amber),
+            (state.get("line3", ""), c_bright),
+        ]:
+            if not blk_txt:
+                continue
+            wrapped_blk = _wrap_px_1080p(blk_txt, FONT_SCROLL_UNI, 390.0, 6)
+            for ln in wrapped_blk:
+                if y_cur <= Y1 - 40:
+                    _txt(X0 + 14, y_cur, ln, blk_col, FONT_SCROLL_UNI)
+                    y_cur += 25
+            y_cur += 14
+        return
+
+    lore = resolve_song_lore_panel(current_track, state, now_ts)
+
+    # Outer soft bloom + semi-transparent phosphor glass frame
+    raw_d.rectangle([X0 - 2, Y0 - 2, X1 + 2, Y1 + 2], outline=(border_col[0], border_col[1], border_col[2], 65), width=2)
     raw_d.rectangle([X0, Y0, X1, Y1], fill=bg_col, outline=border_col, width=2)
 
-    led_on = (int(now_ts) % 2 == 0)
-    led_col = (255, 85, 45, 255) if led_on else (160, 45, 25, 220)
-    raw_d.ellipse([X0 + 12, Y0 + 9, X0 + 22, Y0 + 19], fill=led_col, outline=(255, 202, 55, 255))
+    # Subtle CRT scanlines across the left case-file terminal
+    scan_col = (18, 9, 3, 210) if (is_warn or is_b3) else (4, 16, 6, 210)
+    for sy in range(Y0 + 56, Y1 - 28, 4):
+        raw_d.line([(X0 + 2, sy), (X1 - 2, sy)], fill=scan_col, width=1)
 
-    top_col = (255, 202, 55, 255)
-    bot_col = (210, 255, 220, 255) if not is_warn else (255, 240, 185, 255)
+    # Top Header Bar (`y=24..52`)
+    raw_d.rectangle([X0 + 2, Y0 + 2, X1 - 2, Y0 + 30], fill=hdr_bg)
+    _txt(X0 + 10, Y0 + 6, "CANONICAL ARCHIVE // SONG LORE & CHAT", c_hdr)
+
+    # Sub-Header Bar (`y=53..76`)
+    raw_d.rectangle([X0 + 2, Y0 + 31, X1 - 2, Y0 + 54], fill=(16, 10, 3, 235) if (is_warn or is_b3) else (4, 20, 8, 235))
+    _txt(X0 + 10, Y0 + 34, _fit_1080(lore["catalog_id"], 404.0), c_amber)
+
+    # --- SECTION I: TRACK CHRONOLOGY & BROADCAST ROLE (`y=82..174`) ---
+    B1_Y0, B1_Y1 = 82, 174
+    raw_d.rectangle([X0 + 8, B1_Y0, X1 - 8, B1_Y1], fill=(4, 14, 6, 185), outline=dim_border, width=1)
+    raw_d.rectangle([X0 + 9, B1_Y0 + 1, X1 - 9, B1_Y0 + 22], fill=sec_hdr_bg)
+    _txt(X0 + 14, B1_Y0 + 3, "I. TRACK CHRONOLOGY & BROADCAST ROLE", c_amber)
+    _txt(X0 + 14, B1_Y0 + 26, _fit_1080(f"SONG: {lore['title']}", 392.0), c_bright)
+    _txt(X0 + 14, B1_Y0 + 48, _fit_1080(f"ERA : {lore['timeline']}", 392.0), c_green)
+    _txt(X0 + 14, B1_Y0 + 70, _fit_1080(f"ROLE: {lore['pov']}", 392.0), c_amber)
+
+    # --- SECTION II: VERBATIM LYRIC STANZA (`y=180..326`) ---
+    B2_Y0, B2_Y1 = 180, 326
+    raw_d.rectangle([X0 + 8, B2_Y0, X1 - 8, B2_Y1], fill=(4, 14, 6, 185), outline=dim_border, width=1)
+    raw_d.rectangle([X0 + 9, B2_Y0 + 1, X1 - 9, B2_Y0 + 22], fill=sec_hdr_bg)
+    status_tag = lore.get("lyric_status", "[VERBATIM]")
+    _txt(X0 + 14, B2_Y0 + 3, f"II. VERBATIM LYRICS {status_tag}", c_amber)
+    lyric_lines = _wrap_px_1080p(lore["lyric_excerpt"], FONT_SCROLL_UNI, 390.0, 5)
+    for idx, ln in enumerate(lyric_lines):
+        _txt(X0 + 14, B2_Y0 + 27 + idx * 23, ln, c_cyan, FONT_SCROLL_UNI)
+
+    # --- SECTION III: TRACK STORY & BROADCAST CONTEXT (`y=332..514`) ---
+    B3_Y0, B3_Y1 = 332, 514
+    raw_d.rectangle([X0 + 8, B3_Y0, X1 - 8, B3_Y1], fill=(4, 14, 6, 185), outline=dim_border, width=1)
+    raw_d.rectangle([X0 + 9, B3_Y0 + 1, X1 - 9, B3_Y0 + 22], fill=sec_hdr_bg)
+    _txt(X0 + 14, B3_Y0 + 3, "III. TRACK STORY & BROADCAST CONTEXT", c_amber)
+    meaning_lines = _wrap_px_1080p(lore["meaning"], FONT_SCROLL_UNI, 390.0, 7)
+    for idx, ln in enumerate(meaning_lines):
+        _txt(X0 + 14, B3_Y0 + 26 + idx * 22, ln, c_bright, FONT_SCROLL_UNI)
+
+    # --- SECTION IV: ARCHIVIST'S LOG & SOURCE NOTES (`y=520..644`) ---
+    B4_Y0, B4_Y1 = 520, 644
+    raw_d.rectangle([X0 + 8, B4_Y0, X1 - 8, B4_Y1], fill=(4, 14, 6, 185), outline=dim_border, width=1)
+    raw_d.rectangle([X0 + 9, B4_Y0 + 1, X1 - 9, B4_Y0 + 22], fill=sec_hdr_bg)
+    _txt(X0 + 14, B4_Y0 + 3, "IV. ARCHIVIST'S LOG & SOURCE NOTES", c_amber)
+    conn_lines = _wrap_px_1080p(lore["connections"], FONT_SCROLL_UNI, 390.0, 4)
+    for idx, ln in enumerate(conn_lines):
+        _txt(X0 + 14, B4_Y0 + 27 + idx * 23, ln, c_green, FONT_SCROLL_UNI)
+
+    # --- SECTION V: LIVE CHAT SONG THEORY PROMPT (`y=650..872`) ---
+    B5_Y0, B5_Y1 = 650, 872
+    q_border = (255, 195, 45, 248)
+    q_bg = (22, 12, 3, 235)
+    raw_d.rectangle([X0 + 8, B5_Y0, X1 - 8, B5_Y1], fill=q_bg, outline=q_border, width=2)
+    raw_d.rectangle([X0 + 10, B5_Y0 + 2, X1 - 10, B5_Y0 + 26], fill=(48, 24, 6, 250))
+    q_hdr = f"[? LIVE CHAT SONG THEORY #{lore['question_index']}/{lore['question_total']}]"
+    _txt(X0 + 14, B5_Y0 + 5, q_hdr, (255, 225, 90, 255))
+
+    q_lines = _wrap_px_1080p(lore["question_text"], FONT_SCROLL_HDR, 388.0, 7)
+    for idx, ln in enumerate(q_lines):
+        _txt(X0 + 14, B5_Y0 + 33 + idx * 25, ln, (255, 245, 195, 255), FONT_SCROLL_HDR)
+
+    # Footer Bar (`y=876..902`)
+    raw_d.rectangle([X0 + 2, Y1 - 26, X1 - 2, Y1 - 2], fill=hdr_bg)
+    _txt(X0 + 10, Y1 - 23, _fit_1080(f"AUDIO ARCHIVE // 14.2 HZ // {status_tag}", 404.0), c_hdr)
+
+
+def render_top_trailhead_banner(
+    canvas: Image.Image,
+    state: dict,
+    snap_meta: dict,
+    now_ts: float,
+    is_warn: bool,
+) -> None:
+    """
+    Renders the redesigned 1989 Master Control Containment & Signal Intrusion Header
+    (`x=456..1354, y=14..68` at 1080p, `898x54` px), inspired by Local 58, Marble Hornets,
+    I Love Bees, and Waking Titan:
+      - Dynamic 3-State Broadcast Hijack Telemetry:
+        * STATE A: `[CONTAINMENT LOOP: NOMINAL]` (Director Harrison Watchdog // Loop Integrity 99.4%)
+        * STATE B: `[! COUNTERPOINT BLEED +0.0001 HZ]` (Dr. Marcus Hale & Nova Hart Booth Override)
+        * STATE C: `[!! SUBLEVEL B3 BREACH // GATE #NN]` (Kestrel / Echo-6 Möbius Cage Fracture)
+      - Live SMPTE drop-frame timecode (`03:40:SS:FF`) anchored to the Sept 9, 1989 03:40 AM window.
+    """
+    X0, Y0, X1, Y1 = 456, 14, 1354, 68
+    raw_d = ImageDraw.Draw(canvas)
+
+    target_sec = int(state.get("target_sector", 7))
+    is_b3_breach = target_sec >= 8
+    crt_mode = state.get("crt_mode", "NOVA_FACE")
+
+    smpte_sec = int(now_ts) % 60
+    smpte_frm = int((now_ts % 1.0) * 29.97)
+    smpte_str = f"03:40:{smpte_sec:02d}:{smpte_frm:02d}"
+
+    if is_b3_breach:
+        border_col = (255, 125, 30, 245)
+        bg_col = (18, 6, 2, 230)
+        hdr_strip = (48, 14, 4, 245)
+        top_col = (255, 205, 65, 255)
+        line1_str = f"[!! SUBLEVEL B3 BREACH // GATE #{target_sec:02d}] DIRECTIVE 9 CAGE FRACTURED // SMPTE {smpte_str}"
+    elif is_warn or crt_mode in ("SECOND_VOICE", "OUROBOROS_TORUS", "HARMONY_CAMERA"):
+        border_col = (255, 180, 25, 240)
+        bg_col = (14, 7, 2, 225)
+        hdr_strip = (36, 18, 5, 240)
+        top_col = (255, 210, 60, 255)
+        line1_str = f"[! SIGNAL HIJACK // +0.0001 HZ] B2-114 COUNTERPOINT OVERRIDE // SMPTE {smpte_str}"
+    else:
+        border_col = (55, 245, 78, 235)
+        bg_col = (3, 12, 5, 220)
+        hdr_strip = (8, 30, 12, 240)
+        top_col = (115, 255, 135, 255)
+        line1_str = f"ORION B2-114 MASTER CONTROL // DIRECTIVE 9 CONTAINMENT: 99.4% // SMPTE {smpte_str}"
+
+    raw_d.rectangle([X0 - 2, Y0 - 2, X1 + 2, Y1 + 2], outline=(border_col[0], border_col[1], border_col[2], 65), width=2)
+    raw_d.rectangle([X0, Y0, X1, Y1], fill=bg_col, outline=border_col, width=2)
+    raw_d.rectangle([X0 + 2, Y0 + 2, X1 - 2, Y0 + 26], fill=hdr_strip)
+
+    led_on = (int(now_ts * 2) % 2 == 0) if is_b3_breach else (int(now_ts) % 2 == 0)
+    led_col = (255, 75, 35, 255) if led_on else (140, 35, 20, 220)
+    raw_d.ellipse([X0 + 10, Y0 + 9, X0 + 20, Y0 + 19], fill=led_col, outline=(255, 210, 65, 255))
+
+    # Rotating Line 2 directive (strictly <= 82 chars so full URLs never truncate!)
+    rot = int(now_ts // 10) % 3
+    if rot == 0:
+        line2_str = "NEW INVESTIGATOR? ENTER STREAM CODES AT: stardust-archive.net/forensics/"
+        bot_col = (215, 255, 222, 255) if not (is_warn or is_b3_breach) else (255, 242, 190, 255)
+    elif rot == 1:
+        line2_str = "SIGNAL LAB: 2600 HZ BLUE-BOX, 7.5 IPS & COAGULA -> /forensics/signal_lab.html"
+        bot_col = (135, 245, 215, 255)
+    else:
+        line2_str = "TWIST WARNING: THE 1983<->2025 LOOP IS A CAGE! TYPE 'LABYRINTH' AT /forensics/"
+        bot_col = (255, 205, 65, 255)
 
     raw_d.text(
-        (X0 + 29, Y0 + 4),
-        "ON AIR // ORION SUBLEVEL B2 ARCHIVE -- SEPT 9, 1989 DISAPPEARANCE OF NOVA HART",
+        (X0 + 26, Y0 + 5),
+        line1_str[:84],
         fill=top_col,
         font=FONT_SCROLL_HDR,
         stroke_width=1,
         stroke_fill=(0, 6, 2, 245),
     )
     raw_d.text(
-        (X0 + 12, Y0 + 25),
-        "NEW INVESTIGATOR? START THE CASE & ENTER STREAM CODES AT: stardust-archive.net",
+        (X0 + 10, Y0 + 30),
+        line2_str[:84],
         fill=bot_col,
         font=FONT_SCROLL_HDR,
         stroke_width=1,
@@ -908,9 +1213,10 @@ def render_full_arg_overlay_png(
     Renders the complete `1920x1080` (1080p Full HD) RGBA PNG overlay containing:
       1. Front-Facing CRT Screen Patch (`688x488` at `x=616, y=204`, strictly inside the amber border)
       2. Diegetic Control Room Hardware Animations (rack LEDs, VU needles, power LED)
-      3. Top-Center Mystery Briefing & Trailhead Plaque (`x=462..1348, y=14..62`)
-      4. Right-Side Rolling Multilingual Usenet / Regional BBS / YouTube Comment Terminal (`x=1364..1900, y=22..904`)
-      5. 3-Module Broadcast Engineering Console (`x=56..1864, y=924..1064`)
+      3. Left-Side World-Building Case File & Viewer Investigation Question Panel (`x=20..446, y=22..904`)
+      4. Top-Center Master Control Containment & Signal Intrusion Header (`x=456..1354, y=14..68`)
+      5. Right-Side Rolling Multilingual Usenet / Regional BBS / YouTube Comment Terminal (`x=1364..1900, y=22..904`)
+      6. 3-Module Broadcast Engineering Console (`x=20..1900, y=920..1068`)
     Written atomically via `os.replace` and returned as raw PNG bytes for `image2pipe`.
     """
     if snap_meta is None:
@@ -922,21 +1228,35 @@ def render_full_arg_overlay_png(
             "track_duration_sec": 180.0,
             "relay": relay,
             "ephemeral_beacon_key": state.get("unlock_code", "B2-EXEC-1989"),
+            "current_track": {
+                "filename": "radio_b_midnight_protocol_final_1.mp3",
+                "stem": "radio_b_midnight_protocol_final_1",
+                "kind": "vocal_song",
+                "display_title": "Midnight Protocol",
+            },
         }
     else:
         relay = snap_meta.get("relay", REGIONAL_RELAYS[0])
 
+    current_track = snap_meta.get("current_track") or {
+        "filename": "radio_b_midnight_protocol_final_1.mp3",
+        "stem": "radio_b_midnight_protocol_final_1",
+        "kind": "vocal_song",
+        "display_title": state.get("crt_sub", "Midnight Protocol"),
+    }
+
     canvas = Image.new("RGBA", (FRAME_W, FRAME_H), (0, 0, 0, 0))
 
     # 1. Composite Front-Facing CRT Screen Content strictly inside the amber border at 1080p
-    crt_patch = render_crt_window_patch(state, relay, assets_dir, now_ts)
+    crt_patch = render_crt_window_patch(state, relay, assets_dir, now_ts, current_track=current_track)
     canvas.alpha_composite(crt_patch, (CRT_PX_X, CRT_PX_Y))
 
-    # 2. Draw Diegetic Control Room Hardware Animations, Top Trailhead Banner, Right Scroll & Bottom Console at 1080p
+    # 2. Draw Diegetic Control Room Hardware Animations, Left Lore Panel, Top Banner, Right Scroll & Bottom Console
     draw = _HiDPIDraw(ImageDraw.Draw(canvas), scale=SCALE)
-    is_warn = (state.get("hud_mode") or state.get("mode")) == "ANOMALY_WARN"
+    is_warn = (state.get("hud_mode") or state.get("mode")) == "ANOMALY_WARN" or int(state.get("target_sector", 7)) >= 8
     render_room_hardware_animations(canvas, state, now_ts, is_warn)
-    render_top_trailhead_banner(canvas, now_ts, is_warn)
+    render_left_lore_question_panel(canvas, current_track, state, now_ts, is_warn)
+    render_top_trailhead_banner(canvas, state, snap_meta, now_ts, is_warn)
     render_right_usenet_youtube_scroll(canvas, now_ts, is_warn)
     render_bottom_engineering_console(draw, state, snap_meta, now_ts)
 
@@ -1314,6 +1634,8 @@ def build_telemetry_snapshot(repo_root: Path, now_ts: float | None = None, force
     relay = REGIONAL_RELAYS[int(now // 300) % len(REGIONAL_RELAYS)]
 
     state = resolve_intentional_state(current_track, track_offset_sec, track_dur_sec, relay)
+    current_lore = resolve_song_lore_panel(current_track, state, now)
+    current_track["veo_reel"] = current_lore.get("veo_reel", "veo_arena_rock_singer")
     carrier_phase_deg = round(((now * 14.2001) % 1.0) * 360.0, 2)
     unlock_code = state.get("unlock_code", "B2-EXEC-1989")
 
@@ -1340,6 +1662,7 @@ def build_telemetry_snapshot(repo_root: Path, now_ts: float | None = None, force
             "track_duration_sec": round(track_dur_sec, 1),
             "relay": relay,
             "ephemeral_beacon_key": unlock_code,
+            "current_track": current_track,
         },
     }
 
@@ -1392,14 +1715,18 @@ def main() -> None:
     parser.add_argument("--out-json", type=Path, default=None)
     parser.add_argument("--out-hud-png", type=Path, default=None)
     parser.add_argument("--offline", action="store_true")
+    parser.add_argument("--json-only", action="store_true", help="Write live_telemetry.json only (for CI/GitHub Actions)")
     parser.add_argument("--daemon", action="store_true")
     args = parser.parse_args()
 
     out_json = args.out_json or (args.repo_root / "site" / "assets" / "live_telemetry.json")
     out_forensics_json = args.repo_root / "site" / "forensics" / "live_telemetry.json"
+    out_static_json = args.repo_root / "src" / "site_static" / "assets" / "live_telemetry.json"
     out_hud = args.out_hud_png or (args.repo_root / "youtube" / "livestream" / "live_hud.png")
     assets_dir = args.repo_root / "youtube" / "livestream" / "assets_arg"
+    backdrop_clean = args.repo_root / "youtube" / "livestream" / "backdrop_clean.png"
     out_json.parent.mkdir(parents=True, exist_ok=True)
+    out_static_json.parent.mkdir(parents=True, exist_ok=True)
     out_hud.parent.mkdir(parents=True, exist_ok=True)
 
     while True:
@@ -1407,15 +1734,17 @@ def main() -> None:
         snap = build_telemetry_snapshot(args.repo_root, now_ts=now, force_offline=args.offline)
         payload = json.dumps(snap, indent=2)
         out_json.write_text(payload, encoding="utf-8")
+        out_static_json.write_text(payload, encoding="utf-8")
         if out_forensics_json.parent.exists():
             out_forensics_json.write_text(payload, encoding="utf-8")
-        render_full_arg_overlay_png(
-            out_hud,
-            snap["diagnostic_ramp"],
-            assets_dir,
-            now,
-            snap_meta=snap["diagnostic_ramp"].get("_snap_meta"),
-        )
+        if not args.json_only and backdrop_clean.exists():
+            render_full_arg_overlay_png(
+                out_hud,
+                snap["diagnostic_ramp"],
+                assets_dir,
+                now,
+                snap_meta=snap["diagnostic_ramp"].get("_snap_meta"),
+            )
         if not args.daemon:
             print(
                 f"[SYNC_TELEMETRY v5.0] CRT Mode: {snap['diagnostic_ramp']['crt_mode']} | "

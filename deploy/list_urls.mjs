@@ -21,11 +21,15 @@ walk(siteDir);
 
 const out = ["site_path,public_url"];
 for (const sp of rows.sort()) {
-  if (sp.startsWith("assets/") || sp === "sitemap.xml" || sp === "robots.txt" ||
+  if (sp.startsWith("assets/") || sp === "sitemap.xml" || sp === "sitemap-core.xml" || sp === "sitemap-swarm.xml" ||
+      sp === "robots.txt" || sp === "37feeed875722863fda484c68e6695e5.txt" ||
       sp === "llms.txt" || sp === "llms-full.txt" || sp === "feed.xml" ||
+      sp === "skill.md" || sp === "SKILL.md" || sp === "agents.txt" ||
       sp.startsWith("terminal/") || sp.startsWith("reconstruction/") || sp.startsWith("forensics/") ||
-      sp.startsWith(".well-known/") || sp.startsWith("federation/") || sp === "usenet/live_1995_feed.html" ||
-      /^usenet\/[^/]+\/s0090\d\.txt$/.test(sp)) continue;
+      sp.startsWith(".well-known/") || sp.startsWith("nodes/") || sp.startsWith("federation/") ||
+      sp === "usenet/live_1995_feed.html" || sp === "usenet/comp-dsp.html" ||
+      (/^regional\/[^/]+\.html$/.test(sp) && sp !== "regional/index.html") ||
+      /^usenet\/[^/]+\/s009\d\d\.txt$/.test(sp)) continue;
   const pub = publicUrl(sp);
   if (!pub) { console.error("UNMAPPED", sp); errors++; continue; }
   const u = new URL(pub);
