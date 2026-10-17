@@ -148,8 +148,9 @@ Autonomous radio daemon update:
 - 24/7 live hardware-accelerated broadcast active
 
 Live 24/7 Stream: https://youtube.com/@novahart_official/live
-Interactive CRT Terminal: https://stardust-archive.net/
-Live Telemetry API: https://stardust-archive.net/api/telemetry.json
+Interactive CRT Terminal: https://stardust-archive.net/forensics/index.html
+Live Telemetry API: https://stardust-archive.net/api/telemetry
+LLM Discovery Codex: https://stardust-archive.net/llms-full.txt
 
 The carrier frequency holds. We are listening.`
     };

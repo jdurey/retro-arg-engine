@@ -921,10 +921,10 @@ def render_right_usenet_youtube_scroll(
         stroke_fill=(0, 8, 2, 245),
     )
 
-    # Rolling 33-line viewport advancing at 2 lines per second
+    # Rolling 33-line viewport advancing at 3 lines per second for brisk Usenet & YouTube rotation
     total = len(lines)
     visible_rows = 33
-    head_idx = (int(now_ts * 2.0)) % total
+    head_idx = (int(now_ts * 3.0)) % total
 
     palette = {
         "amber": (255, 212, 68, 255),

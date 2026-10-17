@@ -35,26 +35,38 @@ def log(msg: str) -> None:
     print(f"[{ts}] [IMMORTAL-SUPERVISOR] {msg}", flush=True)
 
 
-def sanitize_playlist(playlist_path: Path) -> int:
-    """Removes missing or corrupt (<2KB) files from playlist.txt so FFmpeg concat never aborts."""
+def sanitize_playlist(playlist_path: Path, repo_root: Path | None = None) -> int:
+    """
+    Removes missing or corrupt (<2KB) files from playlist.txt so FFmpeg concat never aborts,
+    and normalizes paths across Tailscale HA machines (e.g. /Users/joshuadurey -> /Users/2hl).
+    """
     if not playlist_path.exists():
         return 0
     lines = playlist_path.read_text(encoding="utf-8", errors="ignore").splitlines()
     valid_lines: list[str] = []
     removed = 0
+    rewrote = 0
     for line in lines:
         m = FILE_RE.match(line)
         if not m:
             if line.strip():
                 valid_lines.append(line)
             continue
-        fp = Path(m.group(1))
+        raw_p = m.group(1)
+        fp = Path(raw_p)
+        if not fp.exists() and repo_root is not None and "/retro_arg_engine/" in raw_p:
+            rel_part = raw_p.split("/retro_arg_engine/", 1)[1]
+            alt_fp = repo_root / rel_part
+            if alt_fp.exists():
+                fp = alt_fp
+                line = f"file '{fp}'"
+                rewrote += 1
         if fp.exists() and fp.stat().st_size >= 2048:
             valid_lines.append(line)
         else:
             removed += 1
             log(f"Removed missing/corrupt track from playlist: {fp}")
-    if removed > 0 and valid_lines:
+    if (removed > 0 or rewrote > 0) and valid_lines:
         playlist_path.write_text("\n".join(valid_lines) + "\n", encoding="utf-8")
     return len(valid_lines)
 
@@ -111,24 +123,78 @@ def run_sync_telemetry(repo_root: Path) -> None:
             pass
 
 
-def terminate_process_group(proc: subprocess.Popen | None) -> None:
-    if proc is None or proc.poll() is not None:
-        return
+def _push_primary_ha_lease(standby_ssh: str, standby_repo_root: str, playlist_path: Path, sync_playlist: bool) -> None:
+    """Pushes Primary node's active lease timestamp (and synced playlist playhead) over Tailscale SSH to Standby."""
     try:
-        os.killpg(os.getpgid(proc.pid), signal.SIGTERM)
-        proc.wait(timeout=5)
+        remote_dir = f"{standby_repo_root}/youtube/livestream"
+        now_str = f"{time.time():.2f}"
+        subprocess.run(
+            [
+                "ssh",
+                "-o",
+                "BatchMode=yes",
+                "-o",
+                "ConnectTimeout=3",
+                standby_ssh,
+                f"mkdir -p {remote_dir} && echo {now_str} > {remote_dir}/.primary_lease_ts",
+            ],
+            capture_output=True,
+            timeout=5,
+        )
+        if sync_playlist and playlist_path.exists():
+            subprocess.run(
+                [
+                    "scp",
+                    "-q",
+                    "-o",
+                    "BatchMode=yes",
+                    "-o",
+                    "ConnectTimeout=3",
+                    str(playlist_path),
+                    f"{standby_ssh}:{remote_dir}/playlist.txt",
+                ],
+                capture_output=True,
+                timeout=8,
+            )
     except Exception:
+        pass
+
+
+def _cleanup_orphaned_stream_children() -> None:
+    """Idempotently cleans up any stray crt_loop_feeder, hud_pipe_feeder, or ffmpeg processes before relaunch."""
+    for pat in ("crt_loop_feeder.py", "hud_pipe_feeder.py", "ffmpeg.*stardust_crt_30fps"):
         try:
-            os.killpg(os.getpgid(proc.pid), signal.SIGKILL)
+            subprocess.run(["pkill", "-f", pat], capture_output=True, timeout=3)
         except Exception:
             pass
 
 
-def supervise(repo_root: Path, stall_timeout_sec: float = 25.0) -> None:
+def terminate_process_group(proc: subprocess.Popen | None) -> None:
+    if proc is not None and proc.poll() is None:
+        try:
+            os.killpg(os.getpgid(proc.pid), signal.SIGTERM)
+            proc.wait(timeout=5)
+        except Exception:
+            try:
+                os.killpg(os.getpgid(proc.pid), signal.SIGKILL)
+            except Exception:
+                pass
+    _cleanup_orphaned_stream_children()
+
+
+def supervise(
+    repo_root: Path,
+    stall_timeout_sec: float = 25.0,
+    ha_role: str = "primary",
+    standby_ssh: str = "mini",
+    standby_repo_root: str = "/Users/2hl/.gemini/antigravity-ide/scratch/retro_arg_engine",
+    lease_timeout_sec: float = 35.0,
+) -> None:
     livestream_dir = repo_root / "youtube" / "livestream"
     stream_sh = livestream_dir / "stream.sh"
     playlist_path = livestream_dir / "playlist.txt"
     log_path = livestream_dir / "stream.log"
+    lease_file = livestream_dir / ".primary_lease_ts"
     watcher_script = livestream_dir / "watch_downloads_folder.py"
     promoter_script = livestream_dir / "agent_autonomous_promoter.py"
     health_path = livestream_dir / "supervisor_health.json"
@@ -139,49 +205,124 @@ def supervise(repo_root: Path, stall_timeout_sec: float = 25.0) -> None:
 
     last_frame = -1
     last_frame_advance_ts = time.time()
+    last_ha_push_ts = 0.0
+    last_playlist_sync_ts = 0.0
+    last_spool_refresh_ts = 0.0
+    spool_refresh_proc: subprocess.Popen | None = None
     restart_count = 0
 
     def handle_exit(signum, _frame):
         log(f"Received signal {signum}, shutting down child processes cleanly...")
         terminate_process_group(stream_proc)
-        terminate_process_group(watcher_proc)
-        terminate_process_group(promoter_proc)
+        if watcher_proc and watcher_proc.poll() is None:
+            try:
+                os.killpg(os.getpgid(watcher_proc.pid), signal.SIGTERM)
+            except Exception:
+                pass
+        if promoter_proc and promoter_proc.poll() is None:
+            try:
+                os.killpg(os.getpgid(promoter_proc.pid), signal.SIGTERM)
+            except Exception:
+                pass
         sys.exit(0)
 
     signal.signal(signal.SIGINT, handle_exit)
     signal.signal(signal.SIGTERM, handle_exit)
 
-    log(f"Starting Immortal 24/7 Broadcast Supervisor in {repo_root}")
+    log(f"Starting Immortal 24/7 Broadcast Supervisor in {repo_root} (HA role: {ha_role.upper()})")
+    _cleanup_orphaned_stream_children()
 
     while True:
-        # 1. Keep Downloads Folder Watcher & Agentic Seeding Daemon alive
-        if watcher_script.exists() and (watcher_proc is None or watcher_proc.poll() is not None):
-            log("Starting watch_downloads_folder.py daemon...")
-            watcher_proc = subprocess.Popen(
-                [sys.executable, str(watcher_script)],
-                cwd=str(repo_root),
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.DEVNULL,
-                start_new_session=True,
-            )
+        now = time.time()
 
-        if promoter_script.exists() and (promoter_proc is None or promoter_proc.poll() is not None):
-            log("Starting agent_autonomous_promoter.py daemon...")
-            promoter_proc = subprocess.Popen(
-                [sys.executable, str(promoter_script)],
-                cwd=str(repo_root),
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.DEVNULL,
-                start_new_session=True,
-            )
+        # STANDBY HA CHECK: If running as Standby node on Tailscale, check if Primary lease is active
+        if ha_role == "standby":
+            lease_age = 999999.0
+            if lease_file.exists():
+                try:
+                    lease_ts = float(lease_file.read_text(encoding="utf-8").strip())
+                    lease_age = max(0.0, now - lease_ts)
+                except Exception:
+                    lease_age = max(0.0, now - lease_file.stat().st_mtime)
+            if lease_age <= lease_timeout_sec:
+                if stream_proc is not None and stream_proc.poll() is None:
+                    log(
+                        f"Primary node lease renewed (age={lease_age:.1f}s <= {lease_timeout_sec:.0f}s). "
+                        "Standing down Standby failover stream and returning to HOT_STANDBY."
+                    )
+                    terminate_process_group(stream_proc)
+                    stream_proc = None
+                try:
+                    health_path.write_text(
+                        json.dumps(
+                            {
+                                "updated_at": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+                                "ha_role": "standby",
+                                "primary_lease_age_sec": round(lease_age, 1),
+                                "status": "HOT_STANDBY",
+                            },
+                            indent=2,
+                        ),
+                        encoding="utf-8",
+                    )
+                except Exception:
+                    pass
+                time.sleep(5)
+                continue
+
+        # 1. Keep Downloads Folder Watcher, Agentic Seeding Daemon, & 15-Minute Usenet/YouTube Spool Rotator alive (on Primary)
+        if ha_role == "primary":
+            if watcher_script.exists() and (watcher_proc is None or watcher_proc.poll() is not None):
+                log("Starting watch_downloads_folder.py daemon...")
+                watcher_proc = subprocess.Popen(
+                    [sys.executable, str(watcher_script)],
+                    cwd=str(repo_root),
+                    stdout=subprocess.DEVNULL,
+                    stderr=subprocess.DEVNULL,
+                    start_new_session=True,
+                )
+
+            if promoter_script.exists() and (promoter_proc is None or promoter_proc.poll() is not None):
+                log("Starting agent_autonomous_promoter.py daemon...")
+                promoter_proc = subprocess.Popen(
+                    [sys.executable, str(promoter_script)],
+                    cwd=str(repo_root),
+                    stdout=subprocess.DEVNULL,
+                    stderr=subprocess.DEVNULL,
+                    start_new_session=True,
+                )
+
+            spool_script = livestream_dir / "build_scroll_spool.py"
+            usenet_daemon = repo_root / "src" / "living_usenet_daemon.py"
+            if (
+                spool_script.exists()
+                and (now - last_spool_refresh_ts >= 900.0)
+                and (spool_refresh_proc is None or spool_refresh_proc.poll() is not None)
+            ):
+                log("Refreshing & rotating right-side Usenet + YouTube comment scroll spool (15-min cycle)...")
+                cmd_str = (
+                    f"{sys.executable} {usenet_daemon} --site-dir {repo_root / 'src' / 'site_static'} >/dev/null 2>&1; "
+                    f"{sys.executable} {spool_script} >/dev/null 2>&1"
+                )
+                spool_refresh_proc = subprocess.Popen(
+                    ["/bin/bash", "-c", cmd_str],
+                    cwd=str(repo_root),
+                    stdout=subprocess.DEVNULL,
+                    stderr=subprocess.DEVNULL,
+                    start_new_session=True,
+                )
+                last_spool_refresh_ts = now
 
         # 2. Check if stream.sh is running; if not, rotate playlist, sanitize, and launch
         if stream_proc is None or stream_proc.poll() is not None:
             if stream_proc is not None:
                 log(f"stream.sh exited with code {stream_proc.returncode}. Preparing instant self-heal...")
                 restart_count += 1
+            elif ha_role == "standby":
+                log("FAILOVER ACTIVATED: Primary node lease expired! Taking over 24/7 YouTube broadcast on Standby node...")
 
-            valid_count = sanitize_playlist(playlist_path)
+            _cleanup_orphaned_stream_children()
+            valid_count = sanitize_playlist(playlist_path, repo_root=repo_root)
             run_sync_telemetry(repo_root)
 
             log(f"Launching stream.sh (valid playlist tracks: {valid_count}, restart #{restart_count})...")
@@ -207,9 +348,18 @@ def supervise(repo_root: Path, stall_timeout_sec: float = 25.0) -> None:
 
         stall_duration = now - last_frame_advance_ts
 
+        # Push HA lease & synced playlist playhead to Tailscale Standby node when Primary is healthy
+        if ha_role == "primary" and stall_duration < stall_timeout_sec and standby_ssh and (now - last_ha_push_ts >= 10.0):
+            sync_pl = (now - last_playlist_sync_ts) >= 60.0
+            _push_primary_ha_lease(standby_ssh, standby_repo_root, playlist_path, sync_playlist=sync_pl)
+            last_ha_push_ts = now
+            if sync_pl:
+                last_playlist_sync_ts = now
+
         # Write machine-readable supervisor health status
         health_payload = {
             "updated_at": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+            "ha_role": ha_role,
             "stream_pid": stream_proc.pid,
             "watcher_pid": watcher_proc.pid if watcher_proc else None,
             "latest_frame": frame_num,
@@ -244,8 +394,23 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Project Stardust Immortal 24/7 Livestream Supervisor")
     parser.add_argument("--repo-root", type=Path, default=Path(__file__).resolve().parents[2])
     parser.add_argument("--stall-timeout", type=float, default=25.0, help="Seconds without frame advance before auto-heal")
+    parser.add_argument("--ha-role", choices=["primary", "standby"], default="primary")
+    parser.add_argument("--standby-ssh", type=str, default="mini")
+    parser.add_argument(
+        "--standby-repo-root",
+        type=str,
+        default="/Users/2hl/.gemini/antigravity-ide/scratch/retro_arg_engine",
+    )
+    parser.add_argument("--lease-timeout", type=float, default=35.0)
     args = parser.parse_args()
-    supervise(args.repo_root, stall_timeout_sec=args.stall_timeout)
+    supervise(
+        args.repo_root,
+        stall_timeout_sec=args.stall_timeout,
+        ha_role=args.ha_role,
+        standby_ssh=args.standby_ssh,
+        standby_repo_root=args.standby_repo_root,
+        lease_timeout_sec=args.lease_timeout,
+    )
 
 
 if __name__ == "__main__":

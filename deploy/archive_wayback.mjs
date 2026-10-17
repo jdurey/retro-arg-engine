@@ -14,6 +14,16 @@ const STATE_FILE = path.join(__dirname, "wayback_state.json");
 
 const CORE_PATHS = [
   "index.html",
+  "forensics/index.html",
+  "forensics/signal_lab.html",
+  "forensics/anemoia_harmony.html",
+  "forensics/fractal_marcus.html",
+  "forensics/dead_hand_protocol.html",
+  "llms.txt",
+  "llms-full.txt",
+  ".well-known/agent.json",
+  ".well-known/stardust-beacon.json",
+  "feed.xml",
   "ftp/ashford-poly/index.html",
   "ftp/kamome/index.html",
   "ftp/ashford-poly/hale_telemetry_1989-09.log",

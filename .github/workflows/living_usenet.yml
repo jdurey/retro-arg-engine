@@ -26,13 +26,14 @@ jobs:
       - name: Advance Living Usenet Spool & Broadcast Telemetry Snapshot
         run: |
           python3 src/living_usenet_daemon.py --site-dir src/site_static
+          python3 youtube/livestream/build_scroll_spool.py
           python3 youtube/livestream/sync_telemetry.py --repo-root . --json-only
 
       - name: Commit and Push Chronological Spool Updates
         run: |
           git config user.name "stardust-relay-daemon"
           git config user.email "relay@stardust-archive.net"
-          git add src/site_static/usenet/ src/site_static/assets/live_telemetry.json
+          git add src/site_static/usenet/ src/site_static/assets/live_telemetry.json youtube/livestream/usenet_youtube_scroll_spool.json
           if ! git diff --cached --quiet; then
             git commit -m "chore(usenet): advance 1995 chronological spool & 02:14 UTC telemetry"
             git pull --rebase --autostash origin main

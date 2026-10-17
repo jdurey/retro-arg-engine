@@ -26,6 +26,7 @@ if str(SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPT_DIR))
 
 import arg_broadcast_codex  # noqa: E402
+import song_lore_questions  # noqa: E402
 import sync_telemetry  # noqa: E402
 
 _latest_png_bytes: bytes = b""
@@ -33,17 +34,25 @@ _last_mtimes: dict[str, float] = {}
 
 
 def _hot_reload_if_needed() -> None:
-    """Hot-reloads arg_broadcast_codex and sync_telemetry if modified on disk."""
+    """Hot-reloads arg_broadcast_codex, song_lore_questions, and sync_telemetry if modified on disk."""
     global _last_mtimes
     try:
         codex_p = SCRIPT_DIR / "arg_broadcast_codex.py"
+        lore_p = SCRIPT_DIR / "song_lore_questions.py"
         sync_p = SCRIPT_DIR / "sync_telemetry.py"
         m1 = codex_p.stat().st_mtime if codex_p.exists() else 0.0
+        m_lore = lore_p.stat().st_mtime if lore_p.exists() else 0.0
         m2 = sync_p.stat().st_mtime if sync_p.exists() else 0.0
-        if _last_mtimes and (_last_mtimes.get("codex") != m1 or _last_mtimes.get("sync") != m2):
+        if _last_mtimes and (
+            _last_mtimes.get("codex") != m1
+            or _last_mtimes.get("lore") != m_lore
+            or _last_mtimes.get("sync") != m2
+        ):
             importlib.reload(arg_broadcast_codex)
+            importlib.reload(song_lore_questions)
             importlib.reload(sync_telemetry)
         _last_mtimes["codex"] = m1
+        _last_mtimes["lore"] = m_lore
         _last_mtimes["sync"] = m2
     except Exception:
         pass
@@ -141,7 +150,7 @@ def main() -> None:
     t.start()
 
     try:
-        # With `-threads 1` on FFmpeg's image2pipe PNG decoder, only 2 initial frames are needed!
+        # With `-threads 1` on FFmpeg's image2pipe PNG decoder, 2 initial frames initialize framesync
         for _ in range(2):
             sys.stdout.buffer.write(_latest_png_bytes)
         sys.stdout.buffer.flush()
@@ -151,6 +160,8 @@ def main() -> None:
             sleep_sec = next_tick - time.monotonic()
             if sleep_sec > 0:
                 time.sleep(sleep_sec)
+            elif sleep_sec < -1.0:
+                next_tick = time.monotonic()
             next_tick += 1.0
             sys.stdout.buffer.write(_latest_png_bytes)
             sys.stdout.buffer.flush()

@@ -46,7 +46,7 @@ def get_last_elapsed_seconds():
                     if sec > best:
                         best = sec
                 session_id = f"{hdr_stamp}:{int(best)}"
-                if best >= 15.0 and session_id != already_rotated:
+                if best >= 5.0 and session_id != already_rotated:
                     return best, session_id
     except Exception as e:
         print(f"Warning: could not parse elapsed time from log: {e}")
@@ -104,8 +104,8 @@ def rotate():
 
     print(f"Last stream session elapsed time: {elapsed:.1f}s ({elapsed/60:.1f} minutes)")
     
-    if elapsed < 15.0:
-        print("Stream ran for less than 15s; keeping current playhead.")
+    if elapsed < 5.0:
+        print("Stream ran for less than 5s; keeping current playhead.")
         return
     if session_id and os.path.exists(last_rot_file):
         try:
@@ -140,7 +140,8 @@ def rotate():
         else:
             paths.append(l)
 
-    # Accumulate durations up to elapsed
+    # Accumulate durations up to elapsed, and also advance past the currently playing track
+    # if at least 5 seconds of it have aired so restarts NEVER replay the same song from 0:00!
     accum = 0.0
     played_count = 0
     for i, path in enumerate(paths):
@@ -149,8 +150,12 @@ def rotate():
             accum += dur
             played_count = i + 1
         else:
-            # We are currently in the middle of track i, so everything before i has finished
-            played_count = i
+            in_track_sec = elapsed - accum
+            if in_track_sec >= 5.0 or i == 0:
+                played_count = i + 1
+                accum += in_track_sec
+            else:
+                played_count = i
             break
 
     if played_count > 0:

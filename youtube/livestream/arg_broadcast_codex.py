@@ -969,19 +969,19 @@ def resolve_intentional_state(current_track: dict, track_offset_sec: float, trac
     elif progress < 0.52:
         active_mode = primary_mode
         phase_tag = "PHASE II/IV: IMPRINT LOCK"
-        crt_ftr = f"CIPHER: {u_code[:24]}"
+        crt_ftr = u_code.split("(")[0].strip()
     elif progress < 0.78:
         active_mode = secondary_mode
         phase_tag = "PHASE III/IV: SIGNAL AUDIT"
         crt_ftr = f"SOLVE AT /forensics/ (#{target_sector:02d})"
     else:
         active_mode = primary_mode
-        phase_tag = "PHASE IV/IV: VAULT CHALLENGE"
+        phase_tag = "PHASE IV/IV: VAULT CIPHER"
         crt_ftr = "ACT II: TYPE 'LABYRINTH'"
 
     is_warn_mode = active_mode in ("SECOND_VOICE", "HARMONY_CAMERA", "OUROBOROS_TORUS")
-    title_up = current_track["display_title"].upper()[:26]
-    short_hdr = header[:24]
+    title_up = current_track["display_title"].upper()[:28]
+    short_hdr = header.split("//")[0].strip() if "//" in header else header[:22]
 
     return {
         "crt_mode": active_mode,
