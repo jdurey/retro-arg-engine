@@ -657,34 +657,73 @@ def _fit_px_logical(txt: str, fnt: ImageFont.FreeTypeFont | ImageFont.ImageFont,
 
 
 def _wrap_px_1080p(txt: str, fnt: ImageFont.FreeTypeFont | ImageFont.ImageFont, max_px: float, max_lines: int) -> list[str]:
-    """Wraps text at native 1080p pixel width on clean word boundaries so lines never overflow or clip."""
-    words = txt.strip().split()
-    if not words:
+    """Wraps text at native 1080p pixel width on clean word boundaries and ensures no sentence is ever cut off mid-sentence."""
+    cleaned_txt = txt.strip()
+    if not cleaned_txt:
         return []
-    lines: list[str] = []
-    cur = words[0]
-    for w in words[1:]:
-        cand = f"{cur} {w}"
-        try:
-            fits = fnt.getlength(cand) <= max_px
-        except Exception:
-            fits = len(cand) * 10.2 <= max_px
-        if fits:
-            cur = cand
-        else:
-            lines.append(cur)
-            cur = w
-            if len(lines) >= max_lines:
+
+    def _do_wrap(s: str) -> list[str]:
+        w_list = s.split()
+        if not w_list:
+            return []
+        out: list[str] = []
+        cur_ln = w_list[0]
+        for w in w_list[1:]:
+            cand = f"{cur_ln} {w}"
+            try:
+                fits = fnt.getlength(cand) <= max_px
+            except Exception:
+                fits = len(cand) * 10.2 <= max_px
+            if fits:
+                cur_ln = cand
+            else:
+                out.append(cur_ln)
+                cur_ln = w
+        if cur_ln:
+            out.append(cur_ln)
+        return out
+
+    all_lines = _do_wrap(cleaned_txt)
+    if len(all_lines) <= max_lines:
+        return all_lines
+
+    # If the text exceeds max_lines, trim back to the last complete sentence that fits within max_lines
+    sentences = [seg.strip() for seg in re.split(r"(?<=[.!?\"”])\s+", cleaned_txt) if seg.strip()]
+    if len(sentences) > 1:
+        kept: list[str] = []
+        for s_part in sentences:
+            cand_txt = " ".join(kept + [s_part])
+            if len(_do_wrap(cand_txt)) <= max_lines:
+                kept.append(s_part)
+            else:
                 break
-    if len(lines) < max_lines and cur:
-        lines.append(cur)
+        if kept:
+            return _do_wrap(" ".join(kept))
+
+    # Fallback for single long stanza/sentence: trim at slash or clause boundary and close cleanly
+    if "/" in cleaned_txt:
+        clauses = [c.strip() for c in cleaned_txt.split("/") if c.strip()]
+        kept_c: list[str] = []
+        for c_part in clauses:
+            cand_txt = " / ".join(kept_c + [c_part])
+            if len(_do_wrap(cand_txt)) <= max_lines:
+                kept_c.append(c_part)
+            else:
+                break
+        if kept_c:
+            return _do_wrap(" / ".join(kept_c))
+
+    trimmed = all_lines[:max_lines]
     dangling = {"A", "AN", "THE", "IN", "ON", "AT", "TO", "OF", "FOR", "BY", "WITH", "FROM", "INTO", "AND", "OR"}
-    if lines:
-        last_words = lines[-1].split()
-        while len(last_words) > 1 and last_words[-1].upper().rstrip(":-") in dangling:
+    if trimmed:
+        last_words = trimmed[-1].split()
+        while len(last_words) > 1 and last_words[-1].upper().rstrip(":-,;") in dangling:
             last_words.pop()
-        lines[-1] = " ".join(last_words)
-    return lines[:max_lines]
+        last_ln = " ".join(last_words).rstrip(" ,;:-—")
+        if last_ln and last_ln[-1] not in ".!?\"”']":
+            last_ln += "."
+        trimmed[-1] = last_ln
+    return trimmed
 
 
 def render_bottom_engineering_console(
@@ -1066,13 +1105,15 @@ def render_left_lore_question_panel(
         return out
 
     if not is_vocal_song:
-        raw_d.rectangle([X0, Y0, X1, Y1], fill=(0, 0, 0, 248))
-        _txt(X0 + 14, Y0 + 16, "INTERSTITIAL BROADCAST // SIGNAL LOG", c_hdr)
-        _txt(X0 + 14, Y0 + 46, _fit_1080(f"FILE: {(current_track or {}).get('filename', 'INTERCEPT')}", 418.0), c_amber)
+        raw_d.rectangle([X0, Y0, X1, Y1], fill=(0, 0, 0, 248), outline=border_col, width=2)
+        raw_d.rectangle([X0 + 2, Y0 + 2, X1 - 2, Y0 + 30], fill=hdr_bg)
+        _txt(X0 + 12, Y0 + 6, "INTERSTITIAL BROADCAST // SIGNAL LOG", c_hdr)
+        _txt(X0 + 14, Y0 + 46, _fit_1080("REEL: B2-INTERCEPT // 14.2001 HZ", 418.0), c_amber)
         _txt(X0 + 14, Y0 + 74, _fit_1080(f"TYPE: {(current_track or {}).get('display_title', 'SIGNAL INTERCEPT')}", 418.0), c_green)
         _txt(X0 + 14, Y0 + 102, _fit_1080(f"MODE: {state.get('crt_header', 'SHORTWAVE RELAY')}", 418.0), c_amber)
+        raw_d.line([(X0 + 14, Y0 + 132), (X1 - 14, Y0 + 132)], fill=dim_border, width=1)
 
-        y_cur = Y0 + 146
+        y_cur = Y0 + 148
         for blk_txt, blk_col in [
             (state.get("crt_sub", ""), c_bright),
             (state.get("crt_body", ""), c_cyan),
@@ -1088,19 +1129,21 @@ def render_left_lore_question_panel(
                     _txt(X0 + 14, y_cur, ln, blk_col, FONT_SCROLL_BODY)
                     y_cur += 25
             y_cur += 14
+        raw_d.rectangle([X0 + 2, Y1 - 26, X1 - 2, Y1 - 2], fill=hdr_bg)
+        _txt(X0 + 10, Y1 - 23, "SIGNAL INTERCEPT // stardust-archive.net", c_hdr)
         _LEFT_PANEL_CACHE["key"] = cache_key
         _LEFT_PANEL_CACHE["img"] = patch
         canvas.alpha_composite(patch, (14, 20))
         return
 
     lore = resolve_song_lore_panel(current_track, state, now_ts)
-    status_tag = lore.get("lyric_status", "[VERBATIM]")
+    status_tag = lore.get("lyric_status", "[STANZA 1/1]")
 
-    # Outer soft bloom + high-contrast phosphor glass frame
+    # Single clean outer phosphor glass frame (no nested boxes inside boxes)
     raw_d.rectangle([X0 - 2, Y0 - 2, X1 + 2, Y1 + 2], outline=(border_col[0], border_col[1], border_col[2], 65), width=2)
     raw_d.rectangle([X0, Y0, X1, Y1], fill=bg_col, outline=border_col, width=2)
 
-    # Subtle CRT scanlines across the left case-file terminal
+    # Subtle CRT scanlines across the left terminal
     scan_col = (18, 9, 3, 225) if (is_warn or is_b3) else (4, 16, 6, 225)
     for sy in range(Y0 + 56, Y1 - 28, 4):
         raw_d.line([(X0 + 2, sy), (X1 - 2, sy)], fill=scan_col, width=1)
@@ -1109,25 +1152,23 @@ def render_left_lore_question_panel(
     raw_d.rectangle([X0 + 2, Y0 + 2, X1 - 2, Y0 + 30], fill=hdr_bg)
     _txt(X0 + 10, Y0 + 6, "CANONICAL ARCHIVE // SONG LORE DOSSIER", c_hdr)
 
-    # Sub-Header Bar
+    # Sub-Header Bar (strictly in-universe reel ID, zero file/source names)
     raw_d.rectangle([X0 + 2, Y0 + 31, X1 - 2, Y0 + 54], fill=(16, 10, 3, 245) if (is_warn or is_b3) else (4, 20, 8, 245))
     _txt(X0 + 10, Y0 + 34, _fit_1080(lore["catalog_id"], 430.0), c_amber)
 
-    # --- TOP SUMMARY CARD: TRACK CHRONOLOGY & BROADCAST ROLE (`y=66..196`) ---
-    B1_Y0, B1_Y1 = Y0 + 66, Y0 + 196
-    raw_d.rectangle([X0 + 10, B1_Y0, X1 - 10, B1_Y1], fill=(4, 14, 6, 234), outline=dim_border, width=1)
-    raw_d.rectangle([X0 + 11, B1_Y0 + 1, X1 - 11, B1_Y0 + 26], fill=sec_hdr_bg)
-    _txt(X0 + 16, B1_Y0 + 4, "I. TRACK CHRONOLOGY & BROADCAST ROLE", c_amber)
-    _txt(X0 + 16, B1_Y0 + 36, _fit_1080(f"SONG: {lore['title']}", 412.0, FONT_HUD_9), c_bright, FONT_HUD_9)
-    _txt(X0 + 16, B1_Y0 + 66, _fit_1080(f"ERA : {lore['timeline']}", 412.0, FONT_HUD_9), c_green, FONT_HUD_9)
-    _txt(X0 + 16, B1_Y0 + 96, _fit_1080(f"ROLE: {lore['pov']}", 412.0, FONT_HUD_9), c_amber, FONT_HUD_9)
+    # --- TRACK METADATA (`y=66..152`, directly on dark scanlined CRT glass) ---
+    _txt(X0 + 14, Y0 + 66, _fit_1080(f"SONG : {lore['title']}", 422.0, FONT_HUD_9), c_bright, FONT_HUD_9)
+    _txt(X0 + 14, Y0 + 96, _fit_1080(f"ERA  : {lore['timeline']}", 422.0, FONT_HUD_9), c_green, FONT_HUD_9)
+    _txt(X0 + 14, Y0 + 126, _fit_1080(f"ROLE : {lore['pov']}", 422.0, FONT_HUD_9), c_amber, FONT_HUD_9)
 
-    # --- 3-TAB ROTATING DOSSIER BAR (`y=214..246`) ---
-    tab_y0, tab_y1 = Y0 + 214, Y0 + 246
+    raw_d.line([(X0 + 14, Y0 + 162), (X1 - 14, Y0 + 162)], fill=dim_border, width=1)
+
+    # --- 3-TAB ROTATING DOSSIER SELECTOR (`y=174..206`) ---
+    tab_y0, tab_y1 = Y0 + 174, Y0 + 206
     tabs = [
-        (X0 + 10, X0 + 144, "1. LYRICS"),
-        (X0 + 152, X0 + 286, "2. STORY"),
-        (X0 + 294, X1 - 10, "3. ARCHIVE"),
+        (X0 + 14, X0 + 146, "1. LYRICS"),
+        (X0 + 154, X0 + 286, "2. STORY"),
+        (X0 + 294, X1 - 14, "3. ARCHIVE"),
     ]
     for t_i, (tx0, tx1, t_lbl) in enumerate(tabs):
         is_act = t_i == card_idx
@@ -1138,38 +1179,43 @@ def render_left_lore_question_panel(
             raw_d.rectangle([tx0, tab_y0, tx1, tab_y1], fill=(6, 18, 9, 225), outline=dim_border, width=1)
             _txt(tx0 + 12, tab_y0 + 7, t_lbl, (95, 185, 108, 220), FONT_SCROLL_HDR)
 
-    # --- MAIN SPACIOUS ROTATING DOSSIER CARD (`y=258..690`) ---
-    MC_Y0, MC_Y1 = Y0 + 258, Y0 + 690
-    raw_d.rectangle([X0 + 10, MC_Y0, X1 - 10, MC_Y1], fill=(4, 14, 6, 238), outline=border_col, width=1)
-    raw_d.rectangle([X0 + 11, MC_Y0 + 1, X1 - 11, MC_Y0 + 30], fill=sec_hdr_bg)
-
+    # --- OPEN TERMINAL CONTENT AREA (`y=224..840`, single dedicated view per tab, zero extra cells underneath) ---
+    clean_conn = re.sub(r"\s*\(Folder\s+[A-Za-z0-9_-]{12,}\)", "", lore["connections"])
     if card_idx == 0:
-        card_hdr = f"II. VERBATIM LYRICS {status_tag}"
+        card_hdr = f"VERBATIM LYRICS // {status_tag}"
         card_body = lore["lyric_excerpt"]
         card_col = c_cyan
     elif card_idx == 1:
-        card_hdr = "II. TRACK STORY & BROADCAST CONTEXT"
+        card_hdr = "TRACK STORY & BROADCAST CONTEXT"
         card_body = lore["meaning"]
         card_col = c_bright
     else:
-        card_hdr = "II. ARCHIVIST'S LOG & SOURCE NOTES"
-        card_body = re.sub(r"\s*\(Folder\s+[A-Za-z0-9_-]{12,}\)", "", lore["connections"])
+        card_hdr = "SUBLEVEL B2 ARCHIVIST LOG"
+        card_body = clean_conn
         card_col = c_green
 
-    _txt(X0 + 16, MC_Y0 + 6, card_hdr, c_amber, FONT_SCROLL_HDR)
-    body_lines = _wrap_px_1080p(card_body, FONT_HUD_9, 408.0, 10)
-    for idx, ln in enumerate(body_lines):
-        _txt(X0 + 16, MC_Y0 + 44 + idx * 36, ln, card_col, FONT_HUD_9)
+    _txt(X0 + 14, Y0 + 224, card_hdr, c_amber, FONT_SCROLL_HDR)
+    raw_d.line([(X0 + 14, Y0 + 250), (X1 - 14, Y0 + 250)], fill=dim_border, width=1)
 
-    # Subtle lower status card (`y=776..846`) leaving `y=690..776` as clean dark scanlined CRT space
-    ST_Y0, ST_Y1 = Y0 + 776, Y0 + 846
-    raw_d.rectangle([X0 + 10, ST_Y0, X1 - 10, ST_Y1], fill=(4, 14, 6, 215), outline=dim_border, width=1)
-    _txt(X0 + 16, ST_Y0 + 10, f"DOSSIER CARD {card_idx + 1}/3 (ROTATES EVERY 20S)", c_amber, FONT_SCROLL_HDR)
-    _txt(X0 + 16, ST_Y0 + 38, "ARCHIVE: stardust-archive.net/forensics/", c_green, FONT_SCROLL_HDR)
+    if card_idx == 0 and "/" in card_body and not card_body.strip().startswith("["):
+        body_lines = []
+        for verse in [v.strip() for v in card_body.split("/") if v.strip()]:
+            v_wrapped = _wrap_px_1080p(verse, FONT_HUD_9, 420.0, 3)
+            if len(body_lines) + len(v_wrapped) <= 15:
+                body_lines.extend(v_wrapped)
+            else:
+                break
+    else:
+        body_lines = _wrap_px_1080p(card_body, FONT_HUD_9, 420.0, 15)
+
+    y_cur = Y0 + 266
+    for ln in body_lines:
+        _txt(X0 + 14, y_cur, ln, card_col, FONT_HUD_9)
+        y_cur += 36
 
     # Footer Bar
     raw_d.rectangle([X0 + 2, Y1 - 26, X1 - 2, Y1 - 2], fill=hdr_bg)
-    _txt(X0 + 10, Y1 - 23, _fit_1080(f"AUDIO ARCHIVE // 14.2 HZ // {status_tag}", 430.0), c_hdr)
+    _txt(X0 + 10, Y1 - 23, _fit_1080(f"DOSSIER {card_idx + 1}/3 (20S) // stardust-archive.net", 430.0), c_hdr)
 
     _LEFT_PANEL_CACHE["key"] = cache_key
     _LEFT_PANEL_CACHE["img"] = patch
