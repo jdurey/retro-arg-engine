@@ -242,7 +242,7 @@ def main() -> None:
             sleep_s = next_tick - time.monotonic()
             if sleep_s > 0:
                 time.sleep(sleep_s)
-            elif sleep_s < -0.02:
+            elif sleep_s < -0.25:
                 next_tick = time.monotonic()
     except (BrokenPipeError, KeyboardInterrupt, OSError):
         os._exit(0)

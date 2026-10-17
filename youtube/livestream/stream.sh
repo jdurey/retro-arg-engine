@@ -20,7 +20,15 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 cd "$REPO_ROOT"
 
-export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+export PATH="/opt/homebrew/bin:/usr/local/bin:/Library/Frameworks/Python.framework/Versions/3.11/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+
+PYTHON_BIN="/usr/bin/python3"
+for cand in "/opt/homebrew/bin/python3" "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3" "/usr/local/bin/python3" "/usr/bin/python3"; do
+  if [ -x "$cand" ] && "$cand" -c "import PIL, numpy" >/dev/null 2>&1; then
+    PYTHON_BIN="$cand"
+    break
+  fi
+done
 
 RTMP_URL="${YOUTUBE_RTMP_URL:-rtmp://a.rtmp.youtube.com/live2}"
 STREAM_KEY="${YOUTUBE_STREAM_KEY:-d579-7bua-q3b7-sjmm-973s}"
@@ -28,12 +36,35 @@ BACKDROP="$SCRIPT_DIR/backdrop_loop.mp4"
 PLAYLIST="$SCRIPT_DIR/playlist.txt"
 LOG_FILE="$SCRIPT_DIR/stream.log"
 
-echo "[$(date '+%Y-%m-%d %H:%M:%S')] [STREAM.SH] Initializing hardened 24/7 intentional ARG broadcast loop (1080p30 Full HD)..." >> "$LOG_FILE"
+echo "[$(date '+%Y-%m-%d %H:%M:%S')] [STREAM.SH] Initializing hardened 24/7 intentional ARG broadcast loop (1080p30 Full HD, python=$PYTHON_BIN)..." >> "$LOG_FILE"
 
 while true; do
+  # 0. Normalize playlist paths to local REPO_ROOT and filter out any missing files so FFmpeg concat never exits 254
+  "$PYTHON_BIN" -c '
+import re, sys
+from pathlib import Path
+pl = Path(sys.argv[1])
+root = Path(sys.argv[2])
+if pl.exists():
+    out = []
+    for ln in pl.read_text(encoding="utf-8", errors="ignore").splitlines():
+        m = re.match(r"^\s*file\s+\x27([^\x27]+)\x27", ln)
+        if m:
+            raw = m.group(1)
+            fp = Path(raw)
+            if not fp.exists() and "/retro_arg_engine/" in raw:
+                fp = root / raw.split("/retro_arg_engine/", 1)[1]
+            if fp.exists() and fp.stat().st_size >= 2048:
+                out.append(f"file \x27{fp}\x27")
+        elif ln.strip():
+            out.append(ln)
+    if out:
+        pl.write_text("\n".join(out) + "\n", encoding="utf-8")
+' "$PLAYLIST" "$REPO_ROOT" >> "$LOG_FILE" 2>&1 || true
+
   # 1. Rotate completed tracks to tail BEFORE truncating stream.log so the stream NEVER rewinds to Track 1
   if [ -f "$SCRIPT_DIR/rotate_playlist.py" ]; then
-    /usr/bin/python3 "$SCRIPT_DIR/rotate_playlist.py" >> "$LOG_FILE" 2>&1 || true
+    "$PYTHON_BIN" "$SCRIPT_DIR/rotate_playlist.py" >> "$LOG_FILE" 2>&1 || true
   fi
 
   # 2. Cap stream.log at 10 MB (keep last 2 MB) AFTER rotate_playlist reads elapsed time
@@ -43,7 +74,7 @@ while true; do
 
   # 3. Refresh initial telemetry & CRT/HUD overlay before pipeline launch
   if [ -f "$SCRIPT_DIR/sync_telemetry.py" ]; then
-    /usr/bin/python3 "$SCRIPT_DIR/sync_telemetry.py" --repo-root "$REPO_ROOT" >> "$LOG_FILE" 2>&1 || true
+    "$PYTHON_BIN" "$SCRIPT_DIR/sync_telemetry.py" --repo-root "$REPO_ROOT" >> "$LOG_FILE" 2>&1 || true
   fi
 
   CRT_FIFO="/tmp/stardust_crt_30fps.y4m"
@@ -55,11 +86,11 @@ while true; do
 
   echo "[$(date '+%Y-%m-%d %H:%M:%S')] [STREAM.SH] Selected encoder: 1080p30 Full HD Intentional ARG CRT/HUD Engine (3600k video + 160k audio)" >> "$LOG_FILE"
 
-  /usr/bin/python3 -u "$SCRIPT_DIR/crt_loop_feeder.py" --repo-root "$REPO_ROOT" --fifo "$CRT_FIFO" &
+  "$PYTHON_BIN" -u "$SCRIPT_DIR/crt_loop_feeder.py" --repo-root "$REPO_ROOT" --fifo "$CRT_FIFO" &
   CRT_FEEDER_PID=$!
   trap 'kill "$CRT_FEEDER_PID" 2>/dev/null || true' EXIT INT TERM
 
-  /usr/bin/python3 -u "$SCRIPT_DIR/hud_pipe_feeder.py" --repo-root "$REPO_ROOT" | caffeinate -d -i -m -s -u ffmpeg \
+  "$PYTHON_BIN" -u "$SCRIPT_DIR/hud_pipe_feeder.py" --repo-root "$REPO_ROOT" | caffeinate -d -i -m -s -u ffmpeg \
     -hide_banner \
     -loglevel info \
     -reinit_filter 0 \

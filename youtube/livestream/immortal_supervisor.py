@@ -96,7 +96,7 @@ def run_rotate_playlist(repo_root: Path) -> None:
     if rotate_script.exists():
         try:
             res = subprocess.run(
-                ["/usr/bin/python3", str(rotate_script)],
+                [sys.executable, str(rotate_script)],
                 cwd=str(repo_root),
                 capture_output=True,
                 text=True,
@@ -113,7 +113,7 @@ def run_sync_telemetry(repo_root: Path) -> None:
     if sync_script.exists():
         try:
             subprocess.run(
-                ["/usr/bin/python3", str(sync_script), "--repo-root", str(repo_root)],
+                [sys.executable, str(sync_script), "--repo-root", str(repo_root)],
                 cwd=str(repo_root),
                 capture_output=True,
                 text=True,
@@ -124,7 +124,7 @@ def run_sync_telemetry(repo_root: Path) -> None:
 
 
 def _push_primary_ha_lease(standby_ssh: str, standby_repo_root: str, playlist_path: Path, sync_playlist: bool) -> None:
-    """Pushes Primary node's active lease timestamp (and synced playlist playhead) over Tailscale SSH to Standby."""
+    """Pushes Primary node's active lease timestamp (and path-translated playlist playhead) over Tailscale SSH to Standby."""
     try:
         remote_dir = f"{standby_repo_root}/youtube/livestream"
         now_str = f"{time.time():.2f}"
@@ -142,6 +142,11 @@ def _push_primary_ha_lease(standby_ssh: str, standby_repo_root: str, playlist_pa
             timeout=5,
         )
         if sync_playlist and playlist_path.exists():
+            raw_pl = playlist_path.read_text(encoding="utf-8", errors="ignore")
+            local_root = str(playlist_path.resolve().parents[2])
+            remote_pl = raw_pl.replace(local_root, standby_repo_root)
+            tmp_pl = Path("/tmp/stardust_standby_playlist.txt")
+            tmp_pl.write_text(remote_pl, encoding="utf-8")
             subprocess.run(
                 [
                     "scp",
@@ -150,7 +155,7 @@ def _push_primary_ha_lease(standby_ssh: str, standby_repo_root: str, playlist_pa
                     "BatchMode=yes",
                     "-o",
                     "ConnectTimeout=3",
-                    str(playlist_path),
+                    str(tmp_pl),
                     f"{standby_ssh}:{remote_dir}/playlist.txt",
                 ],
                 capture_output=True,
@@ -182,6 +187,46 @@ def terminate_process_group(proc: subprocess.Popen | None) -> None:
     _cleanup_orphaned_stream_children()
 
 
+def _poll_remote_primary_health(primary_ssh: str, primary_repo_root: str, lease_file: Path, local_repo_root: Path, sync_code: bool) -> None:
+    """Allows a Standby laptop (MacBook Air) to poll the wall-powered Primary desktop (Mac Mini) over SSH."""
+    try:
+        res = subprocess.run(
+            [
+                "ssh",
+                "-o",
+                "BatchMode=yes",
+                "-o",
+                "ConnectTimeout=3",
+                primary_ssh,
+                f"cat {primary_repo_root}/youtube/livestream/supervisor_health.json",
+            ],
+            capture_output=True,
+            text=True,
+            timeout=5,
+        )
+        if res.returncode == 0 and res.stdout.strip():
+            data = json.loads(res.stdout)
+            if data.get("ha_role") == "primary" and data.get("status") == "HEALTHY" and float(data.get("log_age_sec", 99.0)) < 20.0:
+                lease_file.write_text(f"{time.time():.2f}", encoding="utf-8")
+                if sync_code:
+                    subprocess.run(
+                        [
+                            "rsync",
+                            "-az",
+                            "--include=*.py",
+                            "--include=*.sh",
+                            "--include=usenet_youtube_scroll_spool.json",
+                            "--exclude=*",
+                            f"{local_repo_root}/youtube/livestream/",
+                            f"{primary_ssh}:{primary_repo_root}/youtube/livestream/",
+                        ],
+                        capture_output=True,
+                        timeout=8,
+                    )
+    except Exception:
+        pass
+
+
 def supervise(
     repo_root: Path,
     stall_timeout_sec: float = 25.0,
@@ -189,6 +234,8 @@ def supervise(
     standby_ssh: str = "mini",
     standby_repo_root: str = "/Users/2hl/.gemini/antigravity-ide/scratch/retro_arg_engine",
     lease_timeout_sec: float = 35.0,
+    primary_ssh: str = "",
+    primary_repo_root: str = "/Users/2hl/.gemini/antigravity-ide/scratch/retro_arg_engine",
 ) -> None:
     livestream_dir = repo_root / "youtube" / "livestream"
     stream_sh = livestream_dir / "stream.sh"
@@ -237,6 +284,11 @@ def supervise(
 
         # STANDBY HA CHECK: If running as Standby node on Tailscale, check if Primary lease is active
         if ha_role == "standby":
+            if primary_ssh:
+                sync_code = (now - last_playlist_sync_ts) >= 20.0
+                _poll_remote_primary_health(primary_ssh, primary_repo_root, lease_file, repo_root, sync_code=sync_code)
+                if sync_code:
+                    last_playlist_sync_ts = now
             lease_age = 999999.0
             if lease_file.exists():
                 try:
@@ -407,6 +459,12 @@ def main() -> None:
         type=str,
         default="/Users/2hl/.gemini/antigravity-ide/scratch/retro_arg_engine",
     )
+    parser.add_argument("--primary-ssh", type=str, default="")
+    parser.add_argument(
+        "--primary-repo-root",
+        type=str,
+        default="/Users/2hl/.gemini/antigravity-ide/scratch/retro_arg_engine",
+    )
     parser.add_argument("--lease-timeout", type=float, default=35.0)
     args = parser.parse_args()
     supervise(
@@ -416,6 +474,8 @@ def main() -> None:
         standby_ssh=args.standby_ssh,
         standby_repo_root=args.standby_repo_root,
         lease_timeout_sec=args.lease_timeout,
+        primary_ssh=args.primary_ssh,
+        primary_repo_root=args.primary_repo_root,
     )
 
 
