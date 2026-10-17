@@ -1003,18 +1003,25 @@ def render_left_lore_question_panel(
 ) -> None:
     """
     Renders the Left-Side CRT World-Building Case File & Song Lore Dossier Panel
-    (`x=16..468, y=22..904` at 1080p, `452x882` px — 80px from left inner CRT bevel `x=548`,
-    matching Right Sidebar `x=1440..1904`'s 80px from right inner CRT bevel `x=1360`!).
+    (`x=16..468, y=22..904` at 1080p, `452x882` px — Option A Decluttered Layout):
+      - Top Card: Track Chronology & Broadcast Role (Song, Era, Role)
+      - 3-Tab Dossier Selector Strip (`[1. LYRICS]`, `[2. STORY]`, `[3. ARCHIVE]`)
+      - Single Spacious Active Dossier Card rotating every 20s with larger `FONT_HUD_9` (20px)
+        typography, 32px line spacing, and clean dark CRT breathing room.
     """
     is_vocal_song = (current_track or {}).get("kind", "vocal_song") == "vocal_song"
     target_sec = int(state.get("target_sector", 7))
     is_b3 = target_sec >= 8
+    card_idx = int(now_ts // 20) % 3
+    stanza_tick = int(now_ts // 18)
 
     cache_key = (
         (current_track or {}).get("filename", ""),
         is_vocal_song,
         is_warn,
         is_b3,
+        card_idx,
+        stanza_tick,
         state.get("crt_header", ""),
         state.get("crt_sub", "") if not is_vocal_song else "",
         state.get("crt_body", "") if not is_vocal_song else "",
@@ -1044,10 +1051,10 @@ def render_left_lore_question_panel(
     def _txt(px: int, py: int, s: str, col: tuple, fnt=FONT_SCROLL_HDR) -> None:
         raw_d.text((px, py), s, fill=col, font=fnt, stroke_width=1, stroke_fill=(0, 6, 2, 250))
 
-    def _fit_1080(s: str, max_px: float = 428.0) -> str:
+    def _fit_1080(s: str, max_px: float = 428.0, fnt=FONT_SCROLL_HDR) -> str:
         out = s.strip()
         try:
-            while len(out) > 8 and FONT_SCROLL_HDR.getlength(out) > max_px:
+            while len(out) > 8 and fnt.getlength(out) > max_px:
                 if " " in out:
                     out = out.rsplit(" ", 1)[0].rstrip(":-/ ")
                 else:
@@ -1087,6 +1094,7 @@ def render_left_lore_question_panel(
         return
 
     lore = resolve_song_lore_panel(current_track, state, now_ts)
+    status_tag = lore.get("lyric_status", "[VERBATIM]")
 
     # Outer soft bloom + high-contrast phosphor glass frame
     raw_d.rectangle([X0 - 2, Y0 - 2, X1 + 2, Y1 + 2], outline=(border_col[0], border_col[1], border_col[2], 65), width=2)
@@ -1105,43 +1113,59 @@ def render_left_lore_question_panel(
     raw_d.rectangle([X0 + 2, Y0 + 31, X1 - 2, Y0 + 54], fill=(16, 10, 3, 245) if (is_warn or is_b3) else (4, 20, 8, 245))
     _txt(X0 + 10, Y0 + 34, _fit_1080(lore["catalog_id"], 430.0), c_amber)
 
-    # --- SECTION I: TRACK CHRONOLOGY & BROADCAST ROLE (`y=62..172` inside patch) ---
-    B1_Y0, B1_Y1 = Y0 + 60, Y0 + 170
-    raw_d.rectangle([X0 + 8, B1_Y0, X1 - 8, B1_Y1], fill=(4, 14, 6, 234), outline=dim_border, width=1)
-    raw_d.rectangle([X0 + 9, B1_Y0 + 1, X1 - 9, B1_Y0 + 24], fill=sec_hdr_bg)
-    _txt(X0 + 14, B1_Y0 + 4, "I. TRACK CHRONOLOGY & BROADCAST ROLE", c_amber)
-    _txt(X0 + 14, B1_Y0 + 30, _fit_1080(f"SONG: {lore['title']}", 418.0), c_bright)
-    _txt(X0 + 14, B1_Y0 + 56, _fit_1080(f"ERA : {lore['timeline']}", 418.0), c_green)
-    _txt(X0 + 14, B1_Y0 + 82, _fit_1080(f"ROLE: {lore['pov']}", 418.0), c_amber)
+    # --- TOP SUMMARY CARD: TRACK CHRONOLOGY & BROADCAST ROLE (`y=66..196`) ---
+    B1_Y0, B1_Y1 = Y0 + 66, Y0 + 196
+    raw_d.rectangle([X0 + 10, B1_Y0, X1 - 10, B1_Y1], fill=(4, 14, 6, 234), outline=dim_border, width=1)
+    raw_d.rectangle([X0 + 11, B1_Y0 + 1, X1 - 11, B1_Y0 + 26], fill=sec_hdr_bg)
+    _txt(X0 + 16, B1_Y0 + 4, "I. TRACK CHRONOLOGY & BROADCAST ROLE", c_amber)
+    _txt(X0 + 16, B1_Y0 + 36, _fit_1080(f"SONG: {lore['title']}", 412.0, FONT_HUD_9), c_bright, FONT_HUD_9)
+    _txt(X0 + 16, B1_Y0 + 66, _fit_1080(f"ERA : {lore['timeline']}", 412.0, FONT_HUD_9), c_green, FONT_HUD_9)
+    _txt(X0 + 16, B1_Y0 + 96, _fit_1080(f"ROLE: {lore['pov']}", 412.0, FONT_HUD_9), c_amber, FONT_HUD_9)
 
-    # --- SECTION II: VERBATIM LYRIC STANZA (`y=182..404` inside patch) ---
-    B2_Y0, B2_Y1 = Y0 + 180, Y0 + 402
-    raw_d.rectangle([X0 + 8, B2_Y0, X1 - 8, B2_Y1], fill=(4, 14, 6, 234), outline=dim_border, width=1)
-    raw_d.rectangle([X0 + 9, B2_Y0 + 1, X1 - 9, B2_Y0 + 24], fill=sec_hdr_bg)
-    status_tag = lore.get("lyric_status", "[VERBATIM]")
-    _txt(X0 + 14, B2_Y0 + 4, f"II. VERBATIM LYRICS {status_tag}", c_amber)
-    lyric_lines = _wrap_px_1080p(lore["lyric_excerpt"], FONT_SCROLL_HDR, 416.0, 7)
-    for idx, ln in enumerate(lyric_lines):
-        _txt(X0 + 14, B2_Y0 + 30 + idx * 26, ln, c_cyan, FONT_SCROLL_HDR)
+    # --- 3-TAB ROTATING DOSSIER BAR (`y=214..246`) ---
+    tab_y0, tab_y1 = Y0 + 214, Y0 + 246
+    tabs = [
+        (X0 + 10, X0 + 144, "1. LYRICS"),
+        (X0 + 152, X0 + 286, "2. STORY"),
+        (X0 + 294, X1 - 10, "3. ARCHIVE"),
+    ]
+    for t_i, (tx0, tx1, t_lbl) in enumerate(tabs):
+        is_act = t_i == card_idx
+        if is_act:
+            raw_d.rectangle([tx0, tab_y0, tx1, tab_y1], fill=(255, 198, 42, 250), outline=(255, 240, 150, 255), width=2)
+            raw_d.text((tx0 + 12, tab_y0 + 7), t_lbl, fill=(10, 8, 2, 255), font=FONT_SCROLL_HDR)
+        else:
+            raw_d.rectangle([tx0, tab_y0, tx1, tab_y1], fill=(6, 18, 9, 225), outline=dim_border, width=1)
+            _txt(tx0 + 12, tab_y0 + 7, t_lbl, (95, 185, 108, 220), FONT_SCROLL_HDR)
 
-    # --- SECTION III: TRACK STORY & BROADCAST CONTEXT (`y=414..664` inside patch) ---
-    B3_Y0, B3_Y1 = Y0 + 412, Y0 + 662
-    raw_d.rectangle([X0 + 8, B3_Y0, X1 - 8, B3_Y1], fill=(4, 14, 6, 234), outline=dim_border, width=1)
-    raw_d.rectangle([X0 + 9, B3_Y0 + 1, X1 - 9, B3_Y0 + 24], fill=sec_hdr_bg)
-    _txt(X0 + 14, B3_Y0 + 4, "III. TRACK STORY & BROADCAST CONTEXT", c_amber)
-    meaning_lines = _wrap_px_1080p(lore["meaning"], FONT_SCROLL_HDR, 416.0, 8)
-    for idx, ln in enumerate(meaning_lines):
-        _txt(X0 + 14, B3_Y0 + 30 + idx * 26, ln, c_bright, FONT_SCROLL_HDR)
+    # --- MAIN SPACIOUS ROTATING DOSSIER CARD (`y=258..690`) ---
+    MC_Y0, MC_Y1 = Y0 + 258, Y0 + 690
+    raw_d.rectangle([X0 + 10, MC_Y0, X1 - 10, MC_Y1], fill=(4, 14, 6, 238), outline=border_col, width=1)
+    raw_d.rectangle([X0 + 11, MC_Y0 + 1, X1 - 11, MC_Y0 + 30], fill=sec_hdr_bg)
 
-    # --- SECTION IV: ARCHIVIST'S LOG & SOURCE NOTES (`y=674..848` inside patch) ---
-    B4_Y0, B4_Y1 = Y0 + 672, Y0 + 846
-    raw_d.rectangle([X0 + 8, B4_Y0, X1 - 8, B4_Y1], fill=(4, 14, 6, 234), outline=dim_border, width=1)
-    raw_d.rectangle([X0 + 9, B4_Y0 + 1, X1 - 9, B4_Y0 + 24], fill=sec_hdr_bg)
-    _txt(X0 + 14, B4_Y0 + 4, "IV. ARCHIVIST'S LOG & SOURCE NOTES", c_amber)
-    clean_conn = re.sub(r"\s*\(Folder\s+[A-Za-z0-9_-]{12,}\)", "", lore["connections"])
-    conn_lines = _wrap_px_1080p(clean_conn, FONT_SCROLL_HDR, 416.0, 5)
-    for idx, ln in enumerate(conn_lines):
-        _txt(X0 + 14, B4_Y0 + 30 + idx * 26, ln, c_green, FONT_SCROLL_HDR)
+    if card_idx == 0:
+        card_hdr = f"II. VERBATIM LYRICS {status_tag}"
+        card_body = lore["lyric_excerpt"]
+        card_col = c_cyan
+    elif card_idx == 1:
+        card_hdr = "II. TRACK STORY & BROADCAST CONTEXT"
+        card_body = lore["meaning"]
+        card_col = c_bright
+    else:
+        card_hdr = "II. ARCHIVIST'S LOG & SOURCE NOTES"
+        card_body = re.sub(r"\s*\(Folder\s+[A-Za-z0-9_-]{12,}\)", "", lore["connections"])
+        card_col = c_green
+
+    _txt(X0 + 16, MC_Y0 + 6, card_hdr, c_amber, FONT_SCROLL_HDR)
+    body_lines = _wrap_px_1080p(card_body, FONT_HUD_9, 408.0, 10)
+    for idx, ln in enumerate(body_lines):
+        _txt(X0 + 16, MC_Y0 + 44 + idx * 36, ln, card_col, FONT_HUD_9)
+
+    # Subtle lower status card (`y=776..846`) leaving `y=690..776` as clean dark scanlined CRT space
+    ST_Y0, ST_Y1 = Y0 + 776, Y0 + 846
+    raw_d.rectangle([X0 + 10, ST_Y0, X1 - 10, ST_Y1], fill=(4, 14, 6, 215), outline=dim_border, width=1)
+    _txt(X0 + 16, ST_Y0 + 10, f"DOSSIER CARD {card_idx + 1}/3 (ROTATES EVERY 20S)", c_amber, FONT_SCROLL_HDR)
+    _txt(X0 + 16, ST_Y0 + 38, "ARCHIVE: stardust-archive.net/forensics/", c_green, FONT_SCROLL_HDR)
 
     # Footer Bar
     raw_d.rectangle([X0 + 2, Y1 - 26, X1 - 2, Y1 - 2], fill=hdr_bg)
