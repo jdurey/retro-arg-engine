@@ -374,7 +374,13 @@ def supervise(
         except Exception:
             pass
 
-        run_sync_telemetry(repo_root)
+        telem_path = repo_root / "site" / "assets" / "live_telemetry.json"
+        try:
+            telem_age = now - telem_path.stat().st_mtime if telem_path.exists() else 999.0
+        except Exception:
+            telem_age = 999.0
+        if telem_age > 15.0:
+            run_sync_telemetry(repo_root)
 
         if stall_duration > stall_timeout_sec or (log_age > stall_timeout_sec and now - last_frame_advance_ts > stall_timeout_sec):
             log(

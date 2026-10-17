@@ -20,6 +20,8 @@ def clean_terminal_str(s: str) -> str:
     # Replace smart quotes/dashes, strip :shortcode: tokens, and strip non-BMP emoji characters
     s = s.replace("\r", " ").replace("’", "'").replace("‘", "'").replace("“", '"').replace("”", '"').replace("—", "--").replace("–", "-")
     s = re.sub(r":[a-zA-Z0-9_-]{3,32}:", "", s)
+    s = re.sub(r"\bGoogle\s+Drive\b", "Sublevel B2 Vault", s, flags=re.I)
+    s = re.sub(r"\bYouTube\b", "Shortwave Relay", s, flags=re.I)
     out = []
     for ch in s:
         cp = ord(ch)
@@ -334,7 +336,7 @@ def main() -> None:
         final_lines.extend(u_blk)
         if yt_comments:
             final_lines.append({"text": "=" * 44, "color": "dim"})
-            final_lines.append({"text": "[YOUTUBE LIVE COMMUNITY & COMMENT FEED]", "color": "amber"})
+            final_lines.append({"text": "[WORLDNET LISTENER & OPERATOR RELAY FEED]", "color": "amber"})
             final_lines.append({"text": "-" * 44, "color": "dim"})
             added_yt = 0
             tries = 0
@@ -351,7 +353,7 @@ def main() -> None:
                 max_ct = max(6, 36 - len(author))
                 if len(ct) > max_ct:
                     ct = ct[:max_ct].rstrip()
-                final_lines.append({"text": clean_terminal_str(f"[YT] {author} ({ct}):")[:44], "color": "amber"})
+                final_lines.append({"text": clean_terminal_str(f"[OP] {author} ({ct}):")[:44], "color": "amber"})
                 for wl in wrap_line(f'"{cleaned_body}"', 44)[:4]:
                     if wl:
                         final_lines.append({"text": wl, "color": "bright"})

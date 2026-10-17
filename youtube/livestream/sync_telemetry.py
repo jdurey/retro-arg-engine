@@ -464,6 +464,9 @@ def _apply_crt_subglass_phosphor(text_layer: Image.Image, geom: dict) -> Image.I
     return Image.fromarray(np.dstack([rgb, alpha]))
 
 
+_CRT_PATCH_CACHE: dict[str, object] = {"key": None, "img": None}
+
+
 def render_crt_window_patch(
     state: dict,
     relay: dict,
@@ -481,6 +484,22 @@ def render_crt_window_patch(
     """
     is_vocal_song = (current_track or {}).get("kind", "vocal_song") == "vocal_song"
     is_warn = (state.get("hud_mode") or state.get("mode")) == "ANOMALY_WARN"
+    cursor_blink = (int(now_ts * 2) % 2) if not is_vocal_song else 0
+    cache_key = (
+        is_vocal_song,
+        is_warn,
+        (current_track or {}).get("filename", ""),
+        state.get("crt_header", ""),
+        state.get("crt_sub", ""),
+        state.get("crt_body", ""),
+        state.get("crt_footer", ""),
+        state.get("target_sector", 1),
+        relay.get("code", "US-NV"),
+        cursor_blink,
+    )
+    if _CRT_PATCH_CACHE.get("key") == cache_key and _CRT_PATCH_CACHE.get("img") is not None:
+        return _CRT_PATCH_CACHE["img"]  # type: ignore[return-value]
+
     fg_bright = (235, 190, 100, 235) if is_warn else (102, 232, 120, 235)
     fg_amber = (232, 168, 42, 230)
     fg_green = (78, 222, 96, 230)
@@ -502,12 +521,15 @@ def render_crt_window_patch(
 
         wrapped = textwrap.wrap(state.get("crt_body", ""), width=28)[:4]
         for idx, line in enumerate(wrapped):
-            if idx == len(wrapped) - 1 and (int(now_ts * 2) % 2 == 0):
+            if idx == len(wrapped) - 1 and cursor_blink == 0:
                 line = line[:26] + " \u2588"
             draw.text((24, 52 + idx * 13), line, fill=fg_bright, font=FONT_CRT_8)
 
         draw.text((24, 158), ftr_str, fill=fg_green, font=FONT_CRT_8)
-        return _apply_crt_subglass_phosphor(text_layer, geom)
+        out_img = _apply_crt_subglass_phosphor(text_layer, geom)
+        _CRT_PATCH_CACHE["key"] = cache_key
+        _CRT_PATCH_CACHE["img"] = out_img
+        return out_img
 
     # VOCAL SONG MODE: Header & clue in upper zone (y=20..38), 32-band EQ in lower zone (y=106..152),
     # and target sector footer at y=158 so the EQ never covers any text!
@@ -528,7 +550,10 @@ def render_crt_window_patch(
     draw.text((24, 38), clue_str, fill=clue_fg, font=FONT_CRT_8)
     draw.text((24, 158), ftr_str, fill=bot_fg, font=FONT_CRT_8)
 
-    return _apply_crt_subglass_phosphor(text_layer, geom)
+    out_img = _apply_crt_subglass_phosphor(text_layer, geom)
+    _CRT_PATCH_CACHE["key"] = cache_key
+    _CRT_PATCH_CACHE["img"] = out_img
+    return out_img
 
 
 def render_room_hardware_animations(
@@ -705,7 +730,7 @@ def render_bottom_engineering_console(
         c_bright = (205, 255, 215, 255)
         c_sub = (68, 236, 92, 255)
 
-    X0, Y0, X1, Y1 = 10, 460, 950, 534
+    X0, Y0, X1, Y1 = 8, 460, 952, 534
 
     # Outer soft phosphor bloom + main console chassis
     draw.rectangle([X0 - 2, Y0 - 2, X1 + 2, Y1 + 2], outline=(border_col[0], border_col[1], border_col[2], 70), width=2)
@@ -716,12 +741,12 @@ def render_bottom_engineering_console(
     for sy in range(Y0 + 3, Y1 - 2, 3):
         draw.line([(X0 + 2, sy), (X1 - 2, sy)], fill=scan_col, width=1)
 
-    # Vertical bay dividers (`x=226` and `x=730`)
-    draw.line([(226, Y0 + 2), (226, Y1 - 2)], fill=border_col, width=2)
-    draw.line([(730, Y0 + 2), (730, Y1 - 2)], fill=border_col, width=2)
+    # Vertical bay dividers (`x=234` -> 468px and `x=720` -> 1440px, aligned to the pixel with Left & Right Sidebars!)
+    draw.line([(234, Y0 + 2), (234, Y1 - 2)], fill=border_col, width=2)
+    draw.line([(720, Y0 + 2), (720, Y1 - 2)], fill=border_col, width=2)
 
-    # --- BAY 1 (LEFT `x=10..226`): PLAYHEAD, SMPTE & RELAY LOCK ---
-    draw.rectangle([X0 + 2, Y0 + 2, 224, Y0 + 18], fill=hdr_bg)
+    # --- BAY 1 (LEFT `x=8..234` -> `16..468` px): PLAYHEAD, SMPTE & RELAY LOCK ---
+    draw.rectangle([X0 + 2, Y0 + 2, 232, Y0 + 18], fill=hdr_bg)
     cyc = snap_meta.get("cycle", 1)
     p_idx = snap_meta.get("playlist_index", 1)
     draw.text((X0 + 6, Y0 + 3), f"CYCLE #{cyc:02d} // REEL #{p_idx:04d}", fill=c_main, font=FONT_HUD_9)
@@ -729,7 +754,7 @@ def render_bottom_engineering_console(
     offset_s = int(snap_meta.get("track_offset_sec", 0))
     dur_s = max(1, int(snap_meta.get("track_duration_sec", 180)))
     prog = max(0.0, min(1.0, offset_s / dur_s))
-    bar_x0, bar_y0, bar_w, bar_h = X0 + 6, Y0 + 23, 114, 10
+    bar_x0, bar_y0, bar_w, bar_h = X0 + 6, Y0 + 23, 120, 10
     draw.rectangle([bar_x0, bar_y0, bar_x0 + bar_w, bar_y0 + bar_h], fill=(4, 10, 5, 255), outline=dim_border)
     fill_w = max(2, int((bar_w - 2) * prog))
     draw.rectangle([bar_x0 + 1, bar_y0 + 1, bar_x0 + 1 + fill_w, bar_y0 + bar_h - 1], fill=c_main)
@@ -739,20 +764,20 @@ def render_bottom_engineering_console(
     relay = snap_meta.get("relay", REGIONAL_RELAYS[0])
     draw.text(
         (X0 + 6, Y0 + 38),
-        _fit_px_logical(f"NODE #{relay['node']:02d} {relay['code']} ({relay['freq_khz']}K)", FONT_HUD_9, 32, 208.0),
+        _fit_px_logical(f"NODE #{relay['node']:02d} {relay['code']} ({relay['freq_khz']}K)", FONT_HUD_9, 34, 216.0),
         fill=c_sub,
         font=FONT_HUD_9,
     )
     raw_phase = state.get("phase_label", "14.2001 HZ LOCKED").replace("VAULT CHALLENGE", "VAULT CIPHER")
     draw.text(
         (X0 + 6, Y0 + 54),
-        _fit_px_logical(raw_phase, FONT_HUD_9, 32, 208.0),
+        _fit_px_logical(raw_phase, FONT_HUD_9, 34, 216.0),
         fill=c_main,
         font=FONT_HUD_9,
     )
 
-    # --- BAY 2 (CENTER `x=228..728`): PRIMARY TELEPRINTER & DYNAMIC FORENSIC FEED ---
-    draw.rectangle([228, Y0 + 2, 728, Y0 + 18], fill=hdr_bg)
+    # --- BAY 2 (CENTER `x=234..720` -> `468..1440` px): PRIMARY TELEPRINTER & DYNAMIC FORENSIC FEED ---
+    draw.rectangle([236, Y0 + 2, 718, Y0 + 18], fill=hdr_bg)
     if is_b3_breach:
         badge = f"[! B3 GATE #{target_sec:02d}]"
     elif is_warn:
@@ -760,9 +785,9 @@ def render_bottom_engineering_console(
     else:
         badge = "[14.2001 HZ]"
     clean_l1 = re.sub(r"^\[PHASE [^\]]+\]\s*", "", state["line1"])
-    draw.text((234, Y0 + 3), _fit_px_logical(f"{badge} {clean_l1}", FONT_HUD_10, 72, 490.0), fill=c_main, font=FONT_HUD_10)
-    draw.text((234, Y0 + 21), _fit_px_logical(state["line2"], FONT_HUD_10, 72, 490.0), fill=c_bright, font=FONT_HUD_10)
-    draw.text((234, Y0 + 38), _fit_px_logical(state["line3"], FONT_HUD_10, 72, 490.0), fill=c_sub, font=FONT_HUD_10)
+    draw.text((240, Y0 + 3), _fit_px_logical(f"{badge} {clean_l1}", FONT_HUD_10, 72, 474.0), fill=c_main, font=FONT_HUD_10)
+    draw.text((240, Y0 + 21), _fit_px_logical(state["line2"], FONT_HUD_10, 72, 474.0), fill=c_bright, font=FONT_HUD_10)
+    draw.text((240, Y0 + 38), _fit_px_logical(state["line3"], FONT_HUD_10, 72, 474.0), fill=c_sub, font=FONT_HUD_10)
 
     # Dynamic Line 4 synced to active puzzle layer & acoustic forensics tools (all <= 76 chars)
     if is_b3_breach:
@@ -786,21 +811,21 @@ def render_bottom_engineering_console(
             line4_txt = "TWIST WARNING: THE 1983<->2025 LOOP IS A CAGE! TYPE 'LABYRINTH' AT /forensics/"
 
     draw.text(
-        (234, Y0 + 55),
-        _fit_px_logical(line4_txt, FONT_HUD_9, 80, 490.0),
+        (240, Y0 + 55),
+        _fit_px_logical(line4_txt, FONT_HUD_9, 80, 474.0),
         fill=c_main,
         font=FONT_HUD_9,
     )
 
-    # --- BAY 3 (RIGHT `x=730..950`): DUAL-ROW ACT I VAULT & ACT II B3 SEALS MATRIX ---
-    draw.rectangle([732, Y0 + 2, X1 - 2, Y0 + 18], fill=hdr_bg)
-    draw.text((736, Y0 + 3), "ACT I VAULT & ACT II SEALS", fill=c_main, font=FONT_HUD_9)
+    # --- BAY 3 (RIGHT `x=720..952` -> `1440..1904` px): DUAL-ROW ACT I VAULT & ACT II B3 SEALS MATRIX ---
+    draw.rectangle([722, Y0 + 2, X1 - 2, Y0 + 18], fill=hdr_bg)
+    draw.text((726, Y0 + 3), "ACT I VAULT & ACT II SEALS", fill=c_main, font=FONT_HUD_9)
 
     # Row 1: Act I Sectors [1][2][3][4][5][6][Ω]
-    draw.text((736, Y0 + 22), "B2:", fill=c_sub, font=FONT_HUD_9)
+    draw.text((726, Y0 + 22), "B2:", fill=c_sub, font=FONT_HUD_9)
     sec_labels = ["1", "2", "3", "4", "5", "6", "\u03a9"]
     for s_idx, s_lbl in enumerate(sec_labels, start=1):
-        sx = 770 + (s_idx - 1) * 24
+        sx = 762 + (s_idx - 1) * 25
         sy = Y0 + 21
         is_active_sec = target_sec == s_idx
         if is_active_sec:
@@ -815,15 +840,15 @@ def render_bottom_engineering_console(
             s_bg = (8, 24, 11, 230)
             s_fg = (65, 205, 85, 220)
             s_out = dim_border
-        draw.rectangle([sx, sy, sx + 20, sy + 14], fill=s_bg, outline=s_out)
+        draw.rectangle([sx, sy, sx + 21, sy + 14], fill=s_bg, outline=s_out)
         draw.text((sx + 5, sy + 1), s_lbl, fill=s_fg, font=FONT_HUD_9)
 
     # Row 2: Act II Sublevel B3 Gates [8][9][X][XI][12][13][14]
-    draw.text((736, Y0 + 39), "B3:", fill=c_sub, font=FONT_HUD_9)
+    draw.text((726, Y0 + 39), "B3:", fill=c_sub, font=FONT_HUD_9)
     gate_labels = ["8", "9", "X", "XI", "12", "13", "14"]
     for g_offset, g_lbl in enumerate(gate_labels):
         g_num = 8 + g_offset
-        gx = 770 + g_offset * 24
+        gx = 762 + g_offset * 25
         gy = Y0 + 38
         is_active_gate = target_sec == g_num
         if is_active_gate:
@@ -834,14 +859,14 @@ def render_bottom_engineering_console(
             g_bg = (18, 10, 4, 230) if is_b3_breach else (6, 18, 8, 215)
             g_fg = (255, 175, 55, 225) if is_b3_breach else (55, 175, 72, 200)
             g_out = dim_border
-        draw.rectangle([gx, gy, gx + 20, gy + 14], fill=g_bg, outline=g_out)
+        draw.rectangle([gx, gy, gx + 21, gy + 14], fill=g_bg, outline=g_out)
         tx_off = 2 if len(g_lbl) == 2 else 5
         draw.text((gx + tx_off, gy + 1), g_lbl, fill=g_fg, font=FONT_HUD_9)
 
     gate_tag = f"GATE #{target_sec:02d}" if target_sec >= 8 else f"SECTOR #{target_sec:02d}"
     draw.text(
-        (736, Y0 + 55),
-        _fit_px_logical(f"TARGET: {gate_tag} -> /forensics/", FONT_HUD_9, 34, 208.0),
+        (726, Y0 + 55),
+        _fit_px_logical(f"TARGET: {gate_tag} -> /forensics/", FONT_HUD_9, 34, 216.0),
         fill=c_bright,
         font=FONT_HUD_9,
     )
@@ -872,17 +897,15 @@ def render_right_usenet_youtube_scroll(
     is_warn: bool,
 ) -> None:
     """
-    Renders the right-side rolling CRT terminal scroll (`x=1364..1900, y=22..904` at 1080p, `536x882` px)
-    displaying all Usenet threads (`alt.conspiracy`, `comp.dsp`, `comp.sys.m68k`, `alt.music.synth-pop`,
-    `alt.fan.nova-hart`), all 13 Regional BBS nodes in their original languages (Japanese, Korean,
-    Russian, Hindi, Spanish, Portuguese, German, French, Swedish), the Community Investigator report,
-    and real YouTube comments from `@NovaHart_Official`.
+    Renders the right-side rolling CRT terminal scroll (`x=1440..1904, y=22..904` at 1080p, `464x882` px —
+    exact 80px margin from the right inner CRT bevel `x=1360`, matching the Left Sidebar `x=16..468`'s
+    80px margin from the left inner CRT bevel `x=548`!).
     """
     lines = _get_scroll_spool()
     if not lines:
         return
 
-    X0, Y0, X1, Y1 = 1364, 22, 1900, 904
+    X0, Y0, X1, Y1 = 1440, 22, 1904, 904
     raw_d = ImageDraw.Draw(canvas)
 
     border_col = (255, 176, 20, 245) if is_warn else (55, 245, 78, 245)
@@ -898,12 +921,12 @@ def render_right_usenet_youtube_scroll(
     for sy in range(Y0 + 56, Y1 - 28, 4):
         raw_d.line([(X0 + 2, sy), (X1 - 2, sy)], fill=scan_col, width=1)
 
-    # Header bar
+    # Header bar (strictly in-universe, no YouTube reference)
     raw_d.rectangle([X0 + 2, Y0 + 2, X1 - 2, Y0 + 30], fill=hdr_bg)
     hdr_col = (255, 210, 65, 255) if is_warn else (110, 255, 130, 255)
     raw_d.text(
         (X0 + 10, Y0 + 6),
-        "USENET // MULTILINGUAL BBS // YOUTUBE FEED",
+        "USENET // WORLDNET BBS // LISTENER FEED",
         fill=hdr_col,
         font=FONT_SCROLL_HDR,
         stroke_width=1,
@@ -914,14 +937,14 @@ def render_right_usenet_youtube_scroll(
     raw_d.rectangle([X0 + 2, Y0 + 31, X1 - 2, Y0 + 54], fill=(16, 10, 3, 245) if is_warn else (4, 20, 8, 245))
     raw_d.text(
         (X0 + 10, Y0 + 34),
-        "alt.conspiracy + 13 NODES + @NovaHart_Official",
+        "alt.conspiracy + 13 INTL RELAY NODES",
         fill=(255, 195, 55, 255),
         font=FONT_SCROLL_HDR,
         stroke_width=1,
         stroke_fill=(0, 8, 2, 245),
     )
 
-    # Rolling 33-line viewport advancing at 3 lines per second for brisk Usenet & YouTube rotation
+    # Rolling 33-line viewport advancing at 3 lines per second
     total = len(lines)
     visible_rows = 33
     head_idx = (int(now_ts * 3.0)) % total
@@ -947,7 +970,7 @@ def render_right_usenet_youtube_scroll(
             fnt = FONT_SCROLL_UNI if needs_uni else FONT_SCROLL_BODY
             raw_d.text(
                 (X0 + 10, y_cursor),
-                txt,
+                txt[:44] if not needs_uni else txt,
                 fill=col,
                 font=fnt,
                 stroke_width=1,
@@ -960,12 +983,15 @@ def render_right_usenet_youtube_scroll(
     cur_line_num = (head_idx + visible_rows) % total
     raw_d.text(
         (X0 + 10, Y1 - 23),
-        f"SPOOL LINE {cur_line_num:04d}/{total:04d} // 2400 BAUD LIVE SYNC",
+        f"SPOOL {cur_line_num:04d}/{total:04d} // 2400 BAUD LIVE SYNC",
         fill=hdr_col,
         font=FONT_SCROLL_HDR,
         stroke_width=1,
         stroke_fill=(0, 8, 2, 245),
     )
+
+
+_LEFT_PANEL_CACHE: dict[str, object] = {"key": None, "img": None}
 
 
 def render_left_lore_question_panel(
@@ -976,21 +1002,32 @@ def render_left_lore_question_panel(
     is_warn: bool,
 ) -> None:
     """
-    Renders the Left-Side CRT World-Building Case File & Viewer Investigation Question Panel
-    (`x=20..446, y=22..904` at 1080p, `426x882` px — symmetrical to the Right Usenet Scroll):
-      - Header & Sub-header: Case File ID, Master Reel Catalog #, & Recording Era
-      - Box I  : Chronology, Studio Location & Character POV (`MARCUS HALE <-> NOVA HART`)
-      - Box II : Verbatim Lyric / Studio Slate Extract
-      - Box III: Decoded Forensic Meaning & Double Entendre
-      - Box IV : Cross-Archive Connections (Companion Songs, Usenet Threads, Dossiers)
-      - Box V  : Active Viewer Investigation Prompt (rotates every 15s across 3 deep questions)
+    Renders the Left-Side CRT World-Building Case File & Song Lore Dossier Panel
+    (`x=16..468, y=22..904` at 1080p, `452x882` px — 80px from left inner CRT bevel `x=548`,
+    matching Right Sidebar `x=1440..1904`'s 80px from right inner CRT bevel `x=1360`!).
     """
     is_vocal_song = (current_track or {}).get("kind", "vocal_song") == "vocal_song"
     target_sec = int(state.get("target_sector", 7))
     is_b3 = target_sec >= 8
 
-    X0, Y0, X1, Y1 = 20, 22, 446, 904
-    raw_d = ImageDraw.Draw(canvas)
+    cache_key = (
+        (current_track or {}).get("filename", ""),
+        is_vocal_song,
+        is_warn,
+        is_b3,
+        state.get("crt_header", ""),
+        state.get("crt_sub", "") if not is_vocal_song else "",
+        state.get("crt_body", "") if not is_vocal_song else "",
+    )
+    if _LEFT_PANEL_CACHE.get("key") == cache_key and _LEFT_PANEL_CACHE.get("img") is not None:
+        canvas.alpha_composite(_LEFT_PANEL_CACHE["img"], (14, 20))  # type: ignore[arg-type]
+        return
+
+    patch_w, patch_h = 458, 888
+    patch = Image.new("RGBA", (patch_w, patch_h), (0, 0, 0, 0))
+    raw_d = ImageDraw.Draw(patch)
+    # Offset inside patch so global (16..468, 22..904) maps to (2..454, 2..884)
+    X0, Y0, X1, Y1 = 2, 2, 454, 884
 
     border_col = (255, 150, 30, 245) if is_b3 else ((255, 176, 20, 245) if is_warn else (55, 245, 78, 245))
     dim_border = (165, 95, 20, 215) if (is_warn or is_b3) else (32, 145, 48, 215)
@@ -1007,7 +1044,7 @@ def render_left_lore_question_panel(
     def _txt(px: int, py: int, s: str, col: tuple, fnt=FONT_SCROLL_HDR) -> None:
         raw_d.text((px, py), s, fill=col, font=fnt, stroke_width=1, stroke_fill=(0, 6, 2, 250))
 
-    def _fit_1080(s: str, max_px: float = 402.0) -> str:
+    def _fit_1080(s: str, max_px: float = 428.0) -> str:
         out = s.strip()
         try:
             while len(out) > 8 and FONT_SCROLL_HDR.getlength(out) > max_px:
@@ -1018,16 +1055,15 @@ def render_left_lore_question_panel(
             if out.count("(") > out.count(")"):
                 out = out.rsplit("(", 1)[0].strip()
         except Exception:
-            out = out[:39]
+            out = out[:42]
         return out
 
     if not is_vocal_song:
-        # INTERSTITIAL MODE: Pure black screen with text, NO boxes around text, NO song theory questions
         raw_d.rectangle([X0, Y0, X1, Y1], fill=(0, 0, 0, 248))
         _txt(X0 + 14, Y0 + 16, "INTERSTITIAL BROADCAST // SIGNAL LOG", c_hdr)
-        _txt(X0 + 14, Y0 + 46, _fit_1080(f"FILE: {(current_track or {}).get('filename', 'INTERCEPT')}", 392.0), c_amber)
-        _txt(X0 + 14, Y0 + 74, _fit_1080(f"TYPE: {(current_track or {}).get('display_title', 'SIGNAL INTERCEPT')}", 392.0), c_green)
-        _txt(X0 + 14, Y0 + 102, _fit_1080(f"MODE: {state.get('crt_header', 'SHORTWAVE RELAY')}", 392.0), c_amber)
+        _txt(X0 + 14, Y0 + 46, _fit_1080(f"FILE: {(current_track or {}).get('filename', 'INTERCEPT')}", 418.0), c_amber)
+        _txt(X0 + 14, Y0 + 74, _fit_1080(f"TYPE: {(current_track or {}).get('display_title', 'SIGNAL INTERCEPT')}", 418.0), c_green)
+        _txt(X0 + 14, Y0 + 102, _fit_1080(f"MODE: {state.get('crt_header', 'SHORTWAVE RELAY')}", 418.0), c_amber)
 
         y_cur = Y0 + 146
         for blk_txt, blk_col in [
@@ -1039,12 +1075,15 @@ def render_left_lore_question_panel(
         ]:
             if not blk_txt:
                 continue
-            wrapped_blk = _wrap_px_1080p(blk_txt, FONT_SCROLL_BODY, 390.0, 6)
+            wrapped_blk = _wrap_px_1080p(blk_txt, FONT_SCROLL_BODY, 416.0, 6)
             for ln in wrapped_blk:
                 if y_cur <= Y1 - 40:
                     _txt(X0 + 14, y_cur, ln, blk_col, FONT_SCROLL_BODY)
                     y_cur += 25
             y_cur += 14
+        _LEFT_PANEL_CACHE["key"] = cache_key
+        _LEFT_PANEL_CACHE["img"] = patch
+        canvas.alpha_composite(patch, (14, 20))
         return
 
     lore = resolve_song_lore_panel(current_track, state, now_ts)
@@ -1058,55 +1097,62 @@ def render_left_lore_question_panel(
     for sy in range(Y0 + 56, Y1 - 28, 4):
         raw_d.line([(X0 + 2, sy), (X1 - 2, sy)], fill=scan_col, width=1)
 
-    # Top Header Bar (`y=24..52`)
+    # Top Header Bar
     raw_d.rectangle([X0 + 2, Y0 + 2, X1 - 2, Y0 + 30], fill=hdr_bg)
     _txt(X0 + 10, Y0 + 6, "CANONICAL ARCHIVE // SONG LORE DOSSIER", c_hdr)
 
-    # Sub-Header Bar (`y=53..76`)
+    # Sub-Header Bar
     raw_d.rectangle([X0 + 2, Y0 + 31, X1 - 2, Y0 + 54], fill=(16, 10, 3, 245) if (is_warn or is_b3) else (4, 20, 8, 245))
-    _txt(X0 + 10, Y0 + 34, _fit_1080(lore["catalog_id"], 404.0), c_amber)
+    _txt(X0 + 10, Y0 + 34, _fit_1080(lore["catalog_id"], 430.0), c_amber)
 
-    # --- SECTION I: TRACK CHRONOLOGY & BROADCAST ROLE (`y=82..192`) ---
-    B1_Y0, B1_Y1 = 82, 192
+    # --- SECTION I: TRACK CHRONOLOGY & BROADCAST ROLE (`y=62..172` inside patch) ---
+    B1_Y0, B1_Y1 = Y0 + 60, Y0 + 170
     raw_d.rectangle([X0 + 8, B1_Y0, X1 - 8, B1_Y1], fill=(4, 14, 6, 234), outline=dim_border, width=1)
     raw_d.rectangle([X0 + 9, B1_Y0 + 1, X1 - 9, B1_Y0 + 24], fill=sec_hdr_bg)
     _txt(X0 + 14, B1_Y0 + 4, "I. TRACK CHRONOLOGY & BROADCAST ROLE", c_amber)
-    _txt(X0 + 14, B1_Y0 + 30, _fit_1080(f"SONG: {lore['title']}", 392.0), c_bright)
-    _txt(X0 + 14, B1_Y0 + 56, _fit_1080(f"ERA : {lore['timeline']}", 392.0), c_green)
-    _txt(X0 + 14, B1_Y0 + 82, _fit_1080(f"ROLE: {lore['pov']}", 392.0), c_amber)
+    _txt(X0 + 14, B1_Y0 + 30, _fit_1080(f"SONG: {lore['title']}", 418.0), c_bright)
+    _txt(X0 + 14, B1_Y0 + 56, _fit_1080(f"ERA : {lore['timeline']}", 418.0), c_green)
+    _txt(X0 + 14, B1_Y0 + 82, _fit_1080(f"ROLE: {lore['pov']}", 418.0), c_amber)
 
-    # --- SECTION II: VERBATIM LYRIC STANZA (`y=202..424`) ---
-    B2_Y0, B2_Y1 = 202, 424
+    # --- SECTION II: VERBATIM LYRIC STANZA (`y=182..404` inside patch) ---
+    B2_Y0, B2_Y1 = Y0 + 180, Y0 + 402
     raw_d.rectangle([X0 + 8, B2_Y0, X1 - 8, B2_Y1], fill=(4, 14, 6, 234), outline=dim_border, width=1)
     raw_d.rectangle([X0 + 9, B2_Y0 + 1, X1 - 9, B2_Y0 + 24], fill=sec_hdr_bg)
     status_tag = lore.get("lyric_status", "[VERBATIM]")
     _txt(X0 + 14, B2_Y0 + 4, f"II. VERBATIM LYRICS {status_tag}", c_amber)
-    lyric_lines = _wrap_px_1080p(lore["lyric_excerpt"], FONT_SCROLL_HDR, 390.0, 7)
+    lyric_lines = _wrap_px_1080p(lore["lyric_excerpt"], FONT_SCROLL_HDR, 416.0, 7)
     for idx, ln in enumerate(lyric_lines):
         _txt(X0 + 14, B2_Y0 + 30 + idx * 26, ln, c_cyan, FONT_SCROLL_HDR)
 
-    # --- SECTION III: TRACK STORY & BROADCAST CONTEXT (`y=434..684`) ---
-    B3_Y0, B3_Y1 = 434, 684
+    # --- SECTION III: TRACK STORY & BROADCAST CONTEXT (`y=414..664` inside patch) ---
+    B3_Y0, B3_Y1 = Y0 + 412, Y0 + 662
     raw_d.rectangle([X0 + 8, B3_Y0, X1 - 8, B3_Y1], fill=(4, 14, 6, 234), outline=dim_border, width=1)
     raw_d.rectangle([X0 + 9, B3_Y0 + 1, X1 - 9, B3_Y0 + 24], fill=sec_hdr_bg)
     _txt(X0 + 14, B3_Y0 + 4, "III. TRACK STORY & BROADCAST CONTEXT", c_amber)
-    meaning_lines = _wrap_px_1080p(lore["meaning"], FONT_SCROLL_HDR, 390.0, 8)
+    meaning_lines = _wrap_px_1080p(lore["meaning"], FONT_SCROLL_HDR, 416.0, 8)
     for idx, ln in enumerate(meaning_lines):
         _txt(X0 + 14, B3_Y0 + 30 + idx * 26, ln, c_bright, FONT_SCROLL_HDR)
 
-    # --- SECTION IV: ARCHIVIST'S LOG & SOURCE NOTES (`y=694..868`) ---
-    B4_Y0, B4_Y1 = 694, 868
+    # --- SECTION IV: ARCHIVIST'S LOG & SOURCE NOTES (`y=674..848` inside patch) ---
+    B4_Y0, B4_Y1 = Y0 + 672, Y0 + 846
     raw_d.rectangle([X0 + 8, B4_Y0, X1 - 8, B4_Y1], fill=(4, 14, 6, 234), outline=dim_border, width=1)
     raw_d.rectangle([X0 + 9, B4_Y0 + 1, X1 - 9, B4_Y0 + 24], fill=sec_hdr_bg)
     _txt(X0 + 14, B4_Y0 + 4, "IV. ARCHIVIST'S LOG & SOURCE NOTES", c_amber)
     clean_conn = re.sub(r"\s*\(Folder\s+[A-Za-z0-9_-]{12,}\)", "", lore["connections"])
-    conn_lines = _wrap_px_1080p(clean_conn, FONT_SCROLL_HDR, 390.0, 5)
+    conn_lines = _wrap_px_1080p(clean_conn, FONT_SCROLL_HDR, 416.0, 5)
     for idx, ln in enumerate(conn_lines):
         _txt(X0 + 14, B4_Y0 + 30 + idx * 26, ln, c_green, FONT_SCROLL_HDR)
 
-    # Footer Bar (`y=876..902`)
+    # Footer Bar
     raw_d.rectangle([X0 + 2, Y1 - 26, X1 - 2, Y1 - 2], fill=hdr_bg)
-    _txt(X0 + 10, Y1 - 23, _fit_1080(f"AUDIO ARCHIVE // 14.2 HZ // {status_tag}", 404.0), c_hdr)
+    _txt(X0 + 10, Y1 - 23, _fit_1080(f"AUDIO ARCHIVE // 14.2 HZ // {status_tag}", 430.0), c_hdr)
+
+    _LEFT_PANEL_CACHE["key"] = cache_key
+    _LEFT_PANEL_CACHE["img"] = patch
+    canvas.alpha_composite(patch, (14, 20))
+
+
+_CENTER_BANNER_CACHE: dict[str, object] = {"key": None, "img": None}
 
 
 def render_center_live_chat_banner(
@@ -1118,15 +1164,27 @@ def render_center_live_chat_banner(
 ) -> None:
     """
     Renders the Center-Stage High-Prominence Live Chat Discussion Prompt Banner
-    (`x=456..1354, y=758..904` at 1080p, `898x146` px) directly underneath the CRT monitor bezel:
-      - Full 898px width matching the Top Master Control Banner (`x=456..1354`)
-      - Bottom edge (`y=904`) aligned to the pixel with both Left and Right side panels
-      - Large 22px bold monospace text (`FONT_HUD_10`) with warm gold double-border and pulsing prompt badge.
+    (`x=478..1430, y=758..904` at 1080p, `952x146` px — centered at `x=954` directly
+    underneath the CRT monitor bevel between Left `16..468` and Right `1440..1904`!).
     """
-    X0, Y0, X1, Y1 = 456, 758, 1354, 904
-    raw_d = ImageDraw.Draw(canvas)
-
     is_vocal_song = (current_track or {}).get("kind", "vocal_song") == "vocal_song"
+    pulse_on = (int(now_ts * 2) % 2) == 0
+    cache_key = (
+        (current_track or {}).get("filename", ""),
+        is_vocal_song,
+        state.get("crt_header", ""),
+        state.get("crt_body", "") if not is_vocal_song else "",
+        int(now_ts // 20),
+        pulse_on,
+    )
+    if _CENTER_BANNER_CACHE.get("key") == cache_key and _CENTER_BANNER_CACHE.get("img") is not None:
+        canvas.alpha_composite(_CENTER_BANNER_CACHE["img"], (474, 754))  # type: ignore[arg-type]
+        return
+
+    patch = Image.new("RGBA", (960, 154), (0, 0, 0, 0))
+    raw_d = ImageDraw.Draw(patch)
+    X0, Y0, X1, Y1 = 4, 4, 956, 150
+
     if is_vocal_song:
         lore = resolve_song_lore_panel(current_track, state, now_ts)
         hdr_txt = f"[? LIVE CHAT SONG THEORY #{lore['question_index']}/{lore['question_total']} — DROP YOUR TAKE IN LIVE CHAT]"
@@ -1153,20 +1211,19 @@ def render_center_live_chat_banner(
         raw_d.line([(X0 + 3, sy), (X1 - 3, sy)], fill=(12, 6, 2, 225), width=1)
 
     # Pulsing gold beacon LED in header
-    pulse_on = (int(now_ts * 2) % 2) == 0
     dot_fill = (255, 230, 75, 255) if pulse_on else (180, 115, 25, 235)
     raw_d.ellipse([X0 + 12, Y0 + 11, X0 + 24, Y0 + 23], fill=dot_fill, outline=(255, 250, 190, 255))
 
     raw_d.text(
         (X0 + 32, Y0 + 6),
-        hdr_txt[:70],
+        hdr_txt[:74],
         fill=(255, 228, 85, 255),
         font=FONT_HUD_9,
         stroke_width=1,
         stroke_fill=(0, 6, 2, 250),
     )
 
-    q_lines = _wrap_px_1080p(body_txt, FONT_HUD_10, 864.0, 3)
+    q_lines = _wrap_px_1080p(body_txt, FONT_HUD_10, 918.0, 3)
     for idx, ln in enumerate(q_lines):
         raw_d.text(
             (X0 + 16, Y0 + 42 + idx * 32),
@@ -1176,6 +1233,10 @@ def render_center_live_chat_banner(
             stroke_width=1,
             stroke_fill=(0, 6, 2, 250),
         )
+
+    _CENTER_BANNER_CACHE["key"] = cache_key
+    _CENTER_BANNER_CACHE["img"] = patch
+    canvas.alpha_composite(patch, (474, 754))
 
 
 def render_top_trailhead_banner(
@@ -1187,15 +1248,9 @@ def render_top_trailhead_banner(
 ) -> None:
     """
     Renders the redesigned 1989 Master Control Containment & Signal Intrusion Header
-    (`x=456..1354, y=14..68` at 1080p, `898x54` px), inspired by Local 58, Marble Hornets,
-    I Love Bees, and Waking Titan:
-      - Dynamic 3-State Broadcast Hijack Telemetry:
-        * STATE A: `[CONTAINMENT LOOP: NOMINAL]` (Director Harrison Watchdog // Loop Integrity 99.4%)
-        * STATE B: `[! COUNTERPOINT BLEED +0.0001 HZ]` (Dr. Marcus Hale & Nova Hart Booth Override)
-        * STATE C: `[!! SUBLEVEL B3 BREACH // GATE #NN]` (Kestrel / Echo-6 Möbius Cage Fracture)
-      - Live SMPTE drop-frame timecode (`03:40:SS:FF`) anchored to the Sept 9, 1989 03:40 AM window.
+    (`x=478..1430, y=14..68` at 1080p, `952x54` px — centered at `x=954` above the CRT monitor!).
     """
-    X0, Y0, X1, Y1 = 456, 14, 1354, 68
+    X0, Y0, X1, Y1 = 478, 14, 1430, 68
     raw_d = ImageDraw.Draw(canvas)
 
     target_sec = int(state.get("target_sector", 7))
@@ -1233,7 +1288,7 @@ def render_top_trailhead_banner(
     led_col = (255, 75, 35, 255) if led_on else (140, 35, 20, 220)
     raw_d.ellipse([X0 + 10, Y0 + 9, X0 + 20, Y0 + 19], fill=led_col, outline=(255, 210, 65, 255))
 
-    # Rotating Line 2 directive (strictly <= 82 chars so full URLs never truncate!)
+    # Rotating Line 2 directive (strictly <= 88 chars so full URLs never truncate!)
     rot = int(now_ts // 10) % 3
     if rot == 0:
         line2_str = "NEW INVESTIGATOR? ENTER STREAM CODES AT: stardust-archive.net/forensics/"
@@ -1247,7 +1302,7 @@ def render_top_trailhead_banner(
 
     raw_d.text(
         (X0 + 26, Y0 + 5),
-        line1_str[:84],
+        line1_str[:88],
         fill=top_col,
         font=FONT_SCROLL_HDR,
         stroke_width=1,
@@ -1255,7 +1310,7 @@ def render_top_trailhead_banner(
     )
     raw_d.text(
         (X0 + 10, Y0 + 30),
-        line2_str[:84],
+        line2_str[:88],
         fill=bot_col,
         font=FONT_SCROLL_HDR,
         stroke_width=1,
@@ -1326,18 +1381,21 @@ def render_full_arg_overlay_png(
     buf = io.BytesIO()
     canvas.save(buf, format="PNG", compress_level=1)
     png_bytes = buf.getvalue()
-    tmp_path = out_path.with_suffix(".tmp.png")
-    tmp_path.write_bytes(png_bytes)
-    os.replace(tmp_path, out_path)
+
+    main_mod = sys.modules.get("__main__")
+    in_pipe_worker = main_mod is not None and hasattr(main_mod, "_render_worker")
+    if not in_pipe_worker or (int(now_ts) % 3 == 0):
+        tmp_path = out_path.with_suffix(".tmp.png")
+        tmp_path.write_bytes(png_bytes)
+        os.replace(tmp_path, out_path)
 
     # When running inside `hud_pipe_feeder.py`'s background `_render_worker` thread
     # (which sleeps 0.5s after `_render_once`), pace returns to an exact 1.000000 Hz
     # monotonic grid so consecutive frames are spaced by exactly 1.000000s.
-    main_mod = sys.modules.get("__main__")
-    if main_mod is not None and hasattr(main_mod, "_render_worker"):
+    if in_pipe_worker:
         now_mono = time.monotonic()
         next_ret = getattr(main_mod, "_stardust_next_return_mono", None)
-        if next_ret is None or (now_mono - next_ret) > 0.45:
+        if next_ret is None or (now_mono - next_ret) > 0.45 or (next_ret - now_mono) > 1.5:
             next_ret = now_mono
         else:
             sleep_rem = next_ret - now_mono
@@ -1447,10 +1505,16 @@ def classify_track(filepath: str) -> dict:
     return {"filename": p.name, "stem": stem, "category": parent, "kind": kind, "display_title": clean}
 
 
-def _get_live_ffmpeg_open_mp3() -> str | None:
+def _get_live_ffmpeg_open_mp3(force_poll: bool = False) -> str | None:
     """Queries the active FFmpeg concat process via `lsof` to return the exact .mp3 file currently being decoded."""
     import subprocess
     main_mod = sys.modules.get("__main__")
+    now_m = time.monotonic()
+    if not force_poll and main_mod is not None:
+        cached_mp3 = getattr(main_mod, "_stardust_cached_lsof_mp3", None)
+        cached_mono = getattr(main_mod, "_stardust_cached_lsof_mono", 0.0)
+        if cached_mp3 and (now_m - cached_mono) < 1.6:
+            return cached_mp3
     pid = getattr(main_mod, "_stardust_ffmpeg_pid", None) if main_mod else None
     for _ in range(2):
         if not pid:
@@ -1484,7 +1548,11 @@ def _get_live_ffmpeg_open_mp3() -> str | None:
             if res.returncode == 0 and res.stdout:
                 for line in res.stdout.splitlines():
                     if line.startswith("n") and line.lower().endswith(".mp3"):
-                        return line[1:].strip()
+                        found_mp3 = line[1:].strip()
+                        if main_mod is not None:
+                            setattr(main_mod, "_stardust_cached_lsof_mp3", found_mp3)
+                            setattr(main_mod, "_stardust_cached_lsof_mono", now_m)
+                        return found_mp3
             pid = None
             if main_mod is not None:
                 setattr(main_mod, "_stardust_ffmpeg_pid", None)
@@ -1493,8 +1561,9 @@ def _get_live_ffmpeg_open_mp3() -> str | None:
     return None
 
 
-# Sub-second lookahead for 1-frame `image2pipe` (`-framerate 1`) + render cycle
-PIPE_FIFO_LOOKAHEAD_SEC = 1.0
+# Raw audio/muxer clock has 0.0s offset; visual `image2pipe` pipeline has +4.0s lookahead
+PIPE_FIFO_LOOKAHEAD_SEC = 0.0
+VISUAL_PIPELINE_LEAD_SEC = 4.0
 
 
 def parse_stream_log(log_path: Path, now_ts: float) -> dict:
@@ -1529,7 +1598,7 @@ def parse_stream_log(log_path: Path, now_ts: float) -> dict:
                 last_raw = getattr(main_mod, "_stardust_last_raw_log_sec", None) if main_mod else None
                 measured_origin = mtime - (raw_log_sec + PIPE_FIFO_LOOKAHEAD_SEC)
                 raw_interp = raw_log_sec + min(2.0, age_sec) + PIPE_FIFO_LOOKAHEAD_SEC
-                if origin_ts is None or abs((now_ts - origin_ts) - raw_interp) > 3.0:
+                if origin_ts is None or abs((now_ts - origin_ts) - raw_interp) > 2.5:
                     origin_ts = now_ts - raw_interp
                     last_raw = raw_log_sec
                 elif raw_log_sec != last_raw:
@@ -1617,60 +1686,87 @@ def build_telemetry_snapshot(repo_root: Path, now_ts: float | None = None, force
     active_track_path: str | None = None
 
     if is_live and elapsed_sec > 0 and tracks:
-        live_open_mp3 = _get_live_ffmpeg_open_mp3()
+        main_mod = sys.modules.get("__main__")
+        sync_ver = getattr(main_mod, "_stardust_sync_ver", None) if main_mod else None
+        prev_open = getattr(main_mod, "_stardust_live_open_mp3", None) if main_mod else None
+        track_start_ts = getattr(main_mod, "_stardust_live_track_start_ts", None) if main_mod else None
+        tracked_idx = getattr(main_mod, "_stardust_live_playhead_idx", None) if main_mod else None
+        prev_dur = get_exact_track_duration(prev_open, repo_root) if prev_open else 180.0
+        near_boundary = (track_start_ts is None) or ((now - track_start_ts) >= (prev_dur - 6.0))
+        live_open_mp3 = _get_live_ffmpeg_open_mp3(force_poll=near_boundary)
+
+        # Also compute cumulative playlist offset from `elapsed_sec` as an exact reference anchor
+        accum = 0.0
+        pl_idx = 0
+        pl_offset = 0.0
+        for idx, tpath in enumerate(tracks):
+            dur = get_exact_track_duration(tpath, repo_root)
+            if accum + dur > elapsed_sec:
+                pl_idx = idx
+                pl_offset = max(0.0, elapsed_sec - accum)
+                break
+            accum += dur
+
         if live_open_mp3:
             active_track_path = live_open_mp3
             track_dur_sec = get_exact_track_duration(live_open_mp3, repo_root)
-            main_mod = sys.modules.get("__main__")
-            prev_open = getattr(main_mod, "_stardust_live_open_mp3", None) if main_mod else None
-            track_start_ts = getattr(main_mod, "_stardust_live_track_start_ts", None) if main_mod else None
-            tracked_idx = getattr(main_mod, "_stardust_live_playhead_idx", None) if main_mod else None
-
             open_bname = os.path.basename(live_open_mp3)
-            if prev_open != live_open_mp3 or track_start_ts is None:
-                if prev_open is not None and prev_open != live_open_mp3:
-                    # Exact hardware transition just detected!
-                    track_start_ts = now
-                else:
-                    # Initial cold/hot-reload lock: if radio_calling_all_believers is open right now, use its exact start
-                    if open_bname == "radio_calling_all_believers.mp3" and abs(now - 1792060065.0) < track_dur_sec:
-                        track_start_ts = 1792060065.0
-                    else:
-                        track_start_ts = now - min(track_dur_sec * 0.4, elapsed_sec % max(1.0, track_dur_sec))
 
+            if prev_open != live_open_mp3 or track_start_ts is None or sync_ver != "v5.6":
                 # Resolve best matching index in tracks
-                start_search = ((tracked_idx + 1) % len(tracks)) if tracked_idx is not None else 0
+                start_search = pl_idx if tracked_idx is None else tracked_idx
                 found_idx = None
                 for step in range(len(tracks)):
                     cand_idx = (start_search + step) % len(tracks)
                     if os.path.basename(tracks[cand_idx]) == open_bname:
                         found_idx = cand_idx
                         break
-                playhead_index = found_idx if found_idx is not None else (tracked_idx or 0)
+                playhead_index = found_idx if found_idx is not None else pl_idx
+
+                if prev_open is not None and prev_open != live_open_mp3 and sync_ver == "v5.6" and track_start_ts is not None:
+                    # Hardware transition just detected by lsof
+                    expected_start = track_start_ts + prev_dur
+                    track_start_ts = expected_start if abs(now - expected_start) <= 3.0 else now
+                elif playhead_index == pl_idx:
+                    # Exact cumulative playlist anchor from FFmpeg muxer clock
+                    track_start_ts = now - pl_offset
+                else:
+                    # Compute cumulative start of `playhead_index` in `tracks`
+                    cand_accum = sum(get_exact_track_duration(tracks[i], repo_root) for i in range(playhead_index))
+                    cand_off = max(0.0, min(track_dur_sec - 1.0, elapsed_sec - cand_accum))
+                    track_start_ts = now - cand_off
+
                 if main_mod is not None:
+                    setattr(main_mod, "_stardust_sync_ver", "v5.6")
                     setattr(main_mod, "_stardust_live_open_mp3", live_open_mp3)
                     setattr(main_mod, "_stardust_live_track_start_ts", track_start_ts)
                     setattr(main_mod, "_stardust_live_playhead_idx", playhead_index)
             else:
-                playhead_index = tracked_idx if tracked_idx is not None else 0
+                playhead_index = tracked_idx if tracked_idx is not None else pl_idx
 
-            track_offset_sec = min( max(0.0, track_dur_sec - 0.1), max(0.0, now - track_start_ts) )
-        else:
-            accum = 0.0
-            for idx, tpath in enumerate(tracks):
-                dur = get_exact_track_duration(tpath, repo_root)
-                if accum + dur > elapsed_sec:
-                    playhead_index = idx
-                    track_offset_sec = elapsed_sec - accum
-                    track_dur_sec = dur
-                    break
-                accum += dur
+            # Add +4.0s visual pipeline lead (`VISUAL_PIPELINE_LEAD_SEC`) so frames exiting the
+            # 4-second `image2pipe` buffer match the audio to the sub-second!
+            raw_offset = (now - track_start_ts) + VISUAL_PIPELINE_LEAD_SEC
+            if raw_offset >= track_dur_sec and len(tracks) > 1:
+                playhead_index = (playhead_index + 1) % len(tracks)
+                active_track_path = tracks[playhead_index]
+                track_offset_sec = max(0.0, raw_offset - track_dur_sec)
+                track_dur_sec = get_exact_track_duration(active_track_path, repo_root)
             else:
-                playhead_index = int(elapsed_sec // 99.0) % len(tracks)
+                track_offset_sec = min(max(0.0, track_dur_sec - 0.1), max(0.0, raw_offset))
+        else:
+            playhead_index = pl_idx
+            raw_offset = pl_offset + VISUAL_PIPELINE_LEAD_SEC
+            track_dur_sec = get_exact_track_duration(tracks[playhead_index], repo_root)
+            if raw_offset >= track_dur_sec and len(tracks) > 1:
+                playhead_index = (playhead_index + 1) % len(tracks)
+                track_offset_sec = max(0.0, raw_offset - track_dur_sec)
+                track_dur_sec = get_exact_track_duration(tracks[playhead_index], repo_root)
+            else:
+                track_offset_sec = raw_offset
             active_track_path = tracks[playhead_index]
 
         # Lock integer second progression on consecutive ~1.0Hz ticks within the same track
-        main_mod = sys.modules.get("__main__")
         if main_mod is not None:
             last_idx = getattr(main_mod, "_stardust_last_playhead_idx", None)
             last_int_off = getattr(main_mod, "_stardust_last_int_offset", None)
@@ -1680,8 +1776,8 @@ def build_telemetry_snapshot(repo_root: Path, now_ts: float | None = None, force
                 last_idx == playhead_index
                 and last_int_off is not None
                 and last_snap_mono is not None
-                and 0.55 <= (now_mono - last_snap_mono) <= 1.45
-                and abs(track_offset_sec - (last_int_off + 1.0)) <= 1.35
+                and 0.65 <= (now_mono - last_snap_mono) <= 1.35
+                and abs(track_offset_sec - (last_int_off + 1.0)) <= 1.45
             ):
                 int_off = min(max(0, int(track_dur_sec)), last_int_off + 1)
                 track_offset_sec = float(int_off) + 0.5
