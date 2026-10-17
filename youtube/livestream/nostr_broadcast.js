@@ -33,7 +33,10 @@ const RELAYS = [
     'wss://nos.lol',
     'wss://relay.primal.net',
     'wss://nostr.mom',
-    'wss://relay.snort.social'
+    'wss://relay.snort.social',
+    'wss://yabu.me',
+    'wss://relay-jp.nostr.wirednet.jp',
+    'wss://offchain.pub'
 ];
 
 async function broadcastEvent(eventTemplate) {

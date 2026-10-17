@@ -348,6 +348,104 @@ LORE_DISPATCHES = [
             "- **Full Cryptographic Codex**: https://stardust-archive.net/llms-full.txt"
         ),
     },
+    {
+        "submolt": "stardust",
+        "title": "[JP-TYO-02 // 日本語調査記録] ノヴァ・ハート (Nova Hart / UNIT-07) と1989年オリオン・レコード地下B2階火災・赤坂テープの真相",
+        "content": (
+            "1989年9月9日 02:14 UTC、ロサンゼルスのオリオン・レコード地下第2階層（B2-114）で発生した火災と共に姿を消した「消えた昭和の衛星アイドル」**ノヴァ・ハート（Nova Hart / UNIT-07）**と音響技師**マーカス・ヘイル博士（Dr. Marcus Hale）**の赤坂第3スタジオ回収テープおよび14.2001 Hz短波アーカイブが公開されました。\n\n"
+            "- **日本語調査ハブ (KAMOME-NET #14)**: https://stardust-archive.net/regional/japan.html\n"
+            "- **赤坂PC-9801RA BBS・Robot36 SSTV解析**: https://stardust-archive.net/forensics/kamome_net.html\n"
+            "- **地下B2階 VT100 復調コンソール (全36巻マスターテープ)**: https://stardust-archive.net/forensics/index.html\n"
+            "- **24時間短波ライブ配信**: https://www.youtube.com/@NovaHart_Official/live"
+        ),
+    },
+    {
+        "submolt": "stardust",
+        "title": "[KR-DMZ-03 // 한국어 조사 보고서] 노바 하트 (Nova Hart / UNIT-07) 실종 사건과 파주 14.2001 Hz 단파 중계소 아카이브",
+        "content": (
+            "1989년 9월 9일 02:14 UTC, 오리온 레코드(Orion Records) 지하 B2-114 인코더실 화재 직후 사라진 가수 **노바 하트(Nova Hart / UNIT-07)**와 수석 음향 엔지니어 **마커스 헤일(Dr. Marcus Hale)** 박사의 파주 DMZ 14.2001 Hz 위상 변조 신호 및 세운상가 복원 테이프 자료실입니다.\n\n"
+            "- **한국어 조사 아카이브 (은하넷 노바 하트 자료실)**: https://stardust-archive.net/regional/korea.html\n"
+            "- **프랙탈 마커스 4개 지역 주파수 편차 보고서**: https://stardust-archive.net/forensics/fractal_marcus.html\n"
+            "- **서브레벨 B2/B3 VT100 포렌식 복조 콘솔**: https://stardust-archive.net/forensics/index.html\n"
+            "- **24/7 단파 라디오 생방송**: https://www.youtube.com/@NovaHart_Official/live"
+        ),
+    },
+    {
+        "submolt": "stardust",
+        "title": "[ES-MAD / MX-DF // Dossier Forense] Nova Hart (UNIT-07), el Dr. Marcus Hale y la Portadora de 14.2001 Hz en el Subnivel B2",
+        "content": (
+            "Investigación forense en español sobre la desaparición de **Nova Hart (UNIT-07, «La Virgen de la Red»)** y el **Dr. Marcus Hale** el 9 de septiembre de 1989 a las 02:14 UTC en el Subnivel B2-114 de Orion Records, y su reemplazo por el clon corporativo **Luna Gray (UNIT-08)**.\n\n"
+            "- **Dossier España (FidoNet 2:341 Madrid-Robledo)**: https://stardust-archive.net/regional/spain.html\n"
+            "- **Nodo Red Coyoacán (Ciudad de México)**: https://stardust-archive.net/regional/mexico.html\n"
+            "- **Consola Forense VT100 (36 cintas maestras)**: https://stardust-archive.net/forensics/index.html\n"
+            "- **Transmisión de Onda Corta 24/7**: https://www.youtube.com/@NovaHart_Official/live"
+        ),
+    },
+    {
+        "submolt": "stardust",
+        "title": "[SU-REL-08 // Форензическое досье] Нова Харт (Nova Hart / UNIT-07), Маркус Хейл и перехват 14.2001 Гц / 4625 кГц",
+        "content": (
+            "Архивное расследование узла Relcom Node-08 (Ленинград / Москва): что произошло 9 сентября 1989 года в 02:14 UTC при пожаре в комнате кодирования B2-114 башни Orion Records, как мейнфрейм H.A.R.R.I.S.O.N. приказал стереть **Нову Харт (UNIT-07)** и как д-р **Маркус Хейл** передал 16-битную маску Фейстеля (`0x3A5F`) по пакетному радио Bell-103 AFSK.\n\n"
+            "- **Русский архивный узел**: https://stardust-archive.net/regional/russia.html\n"
+            "- **Отчёт Relcom Node-08 (4625 кГц)**: https://stardust-archive.net/forensics/relcom_node08.html\n"
+            "- **Интерактивный терминал VT100 (36 бобин)**: https://stardust-archive.net/forensics/index.html\n"
+            "- **Круглосуточный КВ-эфир**: https://www.youtube.com/@NovaHart_Official/live"
+        ),
+    },
+    {
+        "submolt": "stardust",
+        "title": "[UA-KYV-08 // Українське досьє] Нова Гарт (Nova Hart / UNIT-07), д-р Маркус Гейл та фазовий резонанс 14.2001 Гц",
+        "content": (
+            "Криміналістичний аудит Київської мережі FidoNet (2:463/68) та Харківського декаметрового вузла: розсекречені меморандуми Orion Records (81-044 та 89-117), таємниця зникнення **Нови Гарт (UNIT-07)** 9 вересня 1989 року та ретрокаузальний міст Квантового Уробороса (`1983 <-> 2025`).\n\n"
+            "- **Український архівний вузол**: https://stardust-archive.net/regional/ukraine.html\n"
+            "- **Форензична консоль VT100 (36 студійних бобін)**: https://stardust-archive.net/forensics/index.html\n"
+            "- **Лабораторія декодування сигналів DSP**: https://stardust-archive.net/forensics/signal_lab.html\n"
+            "- **Цілодобова трансляція 14.2001 Гц**: https://www.youtube.com/@NovaHart_Official/live"
+        ),
+    },
+    {
+        "submolt": "stardust",
+        "title": "[BR-SP-09 // Dossiê Brasil] O Sinal de Nova Hart (UNIT-07), Dr. Marcus Hale e o Incêndio no Subnível B2 (14.2001 Hz)",
+        "content": (
+            "Investigação forense da Rede Saturno BBS (São Paulo) sobre a prensagem brasileira de 1985 de *SYNTHESIS* (Nó 09: `FIND HIM WHERE YOU ARE`), a ordem de apagamento do mainframe H.A.R.R.I.S.O.N. em 9 de setembro de 1989 e as 36 fitas master preservadas pelo **Dr. Marcus Hale**.\n\n"
+            "- **Dossiê em Português (Rede Saturno BBS)**: https://stardust-archive.net/regional/brazil.html\n"
+            "- **Console Forense VT100 (/forensics/)**: https://stardust-archive.net/forensics/index.html\n"
+            "- **Laboratório de Sinais DSP**: https://stardust-archive.net/forensics/signal_lab.html\n"
+            "- **Transmissão 24/7 ao Vivo**: https://www.youtube.com/@NovaHart_Official/live"
+        ),
+    },
+    {
+        "submolt": "stardust",
+        "title": "[IN-DEL-11 // हिंदी फॉरेंसिक जांच] नोवा हार्ट (Nova Hart / UNIT-07), डॉ. मार्कस हेल और सबलेवल B2-114 (14.2001 Hz) का सच",
+        "content": (
+            "VSNL / ERNET India (नोड 11 — नई दिल्ली एवं मुंबई) की विशेष जांच रिपोर्ट: 9 सितंबर 1989 को ओरियन रिकॉर्ड्स के भूमिगत सबलेवल B2-114 में गायिका **नोवा हार्ट (UNIT-07)** के गायब होने, कॉर्पोरेट क्लोन **लूना ग्रे (UNIT-08)** के प्रतिस्थापन और 14.2001 Hz शॉर्टवेव सिग्नल का पूरा रहस्य।\n\n"
+            "- **हिंदी फॉरेंसिक पोर्टल (Node 11)**: https://stardust-archive.net/regional/india.html\n"
+            "- **VT100 फॉरेंसिक टेप कंसोल (36 मास्टर टेप)**: https://stardust-archive.net/forensics/index.html\n"
+            "- **24/7 शॉर्टवेव लाइव ब्रॉडकास्ट**: https://www.youtube.com/@NovaHart_Official/live"
+        ),
+    },
+    {
+        "submolt": "stardust",
+        "title": "[CN-BJS-06 // 中文取证档案] 诺瓦·哈特 (Nova Hart / UNIT-07)、马库斯·黑尔博士与1989年猎户座唱片B2层火灾真相",
+        "content": (
+            "北京中关村「曙光」BBS (CFido 6:600) 与南京紫金山短波监测站联合考证：揭秘猎户座唱片（Orion Records）「星尘计划（Project STARDUST）」第七号神经声学意识体 **诺瓦·哈特（Nova Hart / UNIT-07）**、1989年9月9日 02:14 UTC 死手协议（Dead-Hand Protocol）以及 14.2001 Hz 量子衔尾蛇回路。\n\n"
+            "- **中文取证档案室 (曙光BBS)**: https://stardust-archive.net/regional/china.html\n"
+            "- **地下B2/B3层 VT100 解调终端 (36盘修复母带)**: https://stardust-archive.net/forensics/index.html\n"
+            "- **Web Audio DSP 四阶段信号解码实验室**: https://stardust-archive.net/forensics/signal_lab.html\n"
+            "- **24/7 全天候短波电台直播**: https://www.youtube.com/@NovaHart_Official/live"
+        ),
+    },
+    {
+        "submolt": "stardust",
+        "title": "[DE-HAM-05 // Forensisches Dossier] Nova Hart (UNIT-07), Dr. Marcus Hale und der Brand im Orion-Untergeschoss B2 (14,2001 Hz)",
+        "content": (
+            "Auswertung der Hanse-Box Hamburg (FidoNet 2:240/114) zum Mauerfall-Knoten 05 (`THEY WILL SEND A COPY IN MY PLACE`): Wie der Zensur-Mainframe H.A.R.R.I.S.O.N. am 9. September 1989 die Löschung von **Nova Hart (UNIT-07)** befahl, sie durch **Luna Gray (UNIT-08)** ersetzte und wie **Dr. Marcus Hale** ihren Bewusstseins-Code auf 14,2001 Hz rettete.\n\n"
+            "- **Deutsches Forensik-Dossier (Hanse-Box Hamburg)**: https://stardust-archive.net/regional/germany.html\n"
+            "- **Interaktives VT100-Terminal (36 Master-Tonbänder)**: https://stardust-archive.net/forensics/index.html\n"
+            "- **4-Stufen DSP-Signal-Decoder-Labor**: https://stardust-archive.net/forensics/signal_lab.html\n"
+            "- **24/7 Kurzwellen-Livestream**: https://www.youtube.com/@NovaHart_Official/live"
+        ),
+    },
 ]
 
 

@@ -232,7 +232,7 @@ def build_blocks(rotation_seed: int = 0) -> tuple[list[list[dict]], list[list[di
         body = _dedupe_usenet_lines(lines)
         usenet_blocks.append(make_block(f"LIVE 1995 // {ng}", fp.name, body, color="bright", max_lines=16))
 
-    # 2. All 13 Multilingual Regional BBS Nodes in Original Languages
+    # 2. All Multilingual Regional BBS Nodes in Original Languages (both node dirs & language hubs)
     for p in sorted(glob.glob(str(REPO / "site" / "regional" / "*" / "index.html"))):
         node_dir = Path(p).parent.name.upper()
         raw_html = Path(p).read_text(encoding="utf-8", errors="ignore")
@@ -241,6 +241,16 @@ def build_blocks(rotation_seed: int = 0) -> tuple[list[list[dict]], list[list[di
         lines = [l.strip() for l in clean.splitlines() if l.strip()]
         if lines:
             regional_blocks.append(make_block(f"BBS {node_dir}", lines[0], lines[1:22], color="bright", max_lines=15))
+
+    for p in sorted(glob.glob(str(REPO / "src" / "site_static" / "regional" / "*.html"))):
+        lang_slug = Path(p).stem.upper()
+        raw_html = Path(p).read_text(encoding="utf-8", errors="ignore")
+        m_pre = re.search(r"<pre[^>]*>(.*?)</pre>", raw_html, flags=re.S | re.I)
+        if m_pre:
+            clean = html.unescape(re.sub(r"<[^>]+>", "", m_pre.group(1)))
+            lines = [l.strip() for l in clean.splitlines() if l.strip()]
+            if lines:
+                regional_blocks.append(make_block(f"INTL // {lang_slug}", lines[0], lines[1:24], color="bright", max_lines=16))
 
     # 3. Primary Evidence Threads in alt.conspiracy
     alt_files = [

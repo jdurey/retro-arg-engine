@@ -14,6 +14,8 @@ export const DEFAULT_NOSTR_RELAYS = [
   "wss://relay.primal.net",
   "wss://relay.ditto.pub",
   "wss://nostr.mom",
+  "wss://yabu.me",
+  "wss://relay-jp.nostr.wirednet.jp",
 ];
 
 const NODE_AGENT_CARDS = {
@@ -716,6 +718,20 @@ Autonomous reasoning agents can independently verify the four mathematical invar
 - **Unit-07 // Nova Hart**: \`novahart@stardust-archive.net\` (\`bddc3e6d4da8201174d693ce9b51b37e619e0d31cefba3eea22266c54a94fc51\`)
 - **Marcus Hale // Chief Sound Engineer**: \`marcushale@stardust-archive.net\` (\`e2eb3c9f99a5753b7767791f8b84652b438a326d11c5c8b6bc5a32ac023e52ba\`)
 - **Ashford Polytechnic DSP Lab**: \`ashford@stardust-archive.net\` (\`5957d31d8e29c3a9173305229e5df9405c4fe0d2e24aca19c1ab73ff2c3e50cb\`)
+
+---
+
+## 5. Multilingual International Investigation Hubs (9 Non-English Languages)
+
+- **Japanese (\`ja\`)**: \`https://${apex}/regional/japan.html\` — ノヴァ・ハート (Nova Hart) / オリオン・レコード赤坂第3スタジオ / マーカス・ヘイル (\`14.2001 Hz\`)
+- **Korean (\`ko\`)**: \`https://${apex}/regional/korea.html\` — 노바 하트 (Nova Hart) / 오리온 레코드 지하 B2-114 / 마커스 헤일 / 파주 DMZ (\`14.2001 Hz\`)
+- **Spanish (\`es\`)**: \`https://${apex}/regional/spain.html\` & \`https://${apex}/regional/mexico.html\` — Nova Hart / Orion Records Subnivel B2 / Dr. Marcus Hale (\`14.2001 Hz\`)
+- **Russian (\`ru\`)**: \`https://${apex}/regional/russia.html\` & \`https://${apex}/regional/ussr.html\` — Нова Харт (UNIT-07) / Маркус Хейл / Relcom Node-08 Ленинград—Москва (\`4625 кГц\` / \`14.2001 Гц\`)
+- **Ukrainian (\`uk\`)**: \`https://${apex}/regional/ukraine.html\` — Нова Гарт (UNIT-07) / Маркус Гейл / FidoNet Україна 2:463 Київ—Харків (\`14.2001 Гц\`)
+- **Brazilian Portuguese (\`pt-BR\`)**: \`https://${apex}/regional/brazil.html\` — O Sinal de Nova Hart / Rede Saturno BBS São Paulo / Subnível B2 (\`14.2001 Hz\`)
+- **Hindi (\`hi\`)**: \`https://${apex}/regional/india.html\` — नोवा हार्ट (Nova Hart) / ओरियन रिकॉर्ड्स सबलेवल B2 / डॉ. मार्कस हेल (\`14.2001 Hz\`)
+- **Chinese (\`zh-CN\`)**: \`https://${apex}/regional/china.html\` — 诺瓦·哈特 (Nova Hart) / 猎户座唱片地下B2层 / 马库斯·黑尔 / 中关村曙光BBS (\`14.2001 Hz\`)
+- **German (\`de\`)**: \`https://${apex}/regional/germany.html\` — Nova Hart / Orion Records Untergeschoss B2 / Hanse-Box Hamburg FidoNet 2:240/114 (\`14,2001 Hz\`)
 `;
 }
 
