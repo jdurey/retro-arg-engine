@@ -901,57 +901,38 @@ def render_right_usenet_youtube_scroll(
     is_warn: bool,
 ) -> None:
     """
-    Renders the right-side rolling CRT terminal scroll (`x=1440..1904, y=22..904` at 1080p, `464x882` px —
-    exact 80px margin from the right inner CRT bevel `x=1360`, matching the Left Sidebar `x=16..468`'s
-    80px margin from the left inner CRT bevel `x=548`!).
+    Renders the decluttered full-height Right Feed Panel (`x=1440..1896, y=28..1052` at 1080p, `456x1024` px)
+    with a single header and spacious 36px line spacing (26 calm rows instead of 33 cramped rows).
     """
     lines = _get_scroll_spool()
     if not lines:
         return
 
-    X0, Y0, X1, Y1 = 1440, 22, 1904, 904
+    X0, Y0, X1, Y1 = 1440, 28, 1896, 1052
     raw_d = ImageDraw.Draw(canvas)
 
-    border_col = (255, 176, 20, 245) if is_warn else (55, 245, 78, 245)
-    bg_col = (10, 5, 2, 238) if is_warn else (2, 10, 4, 238)
-    hdr_bg = (34, 18, 5, 250) if is_warn else (8, 32, 13, 250)
+    border_col = (255, 176, 20, 240) if is_warn else (55, 245, 78, 240)
+    bg_col = (8, 4, 2, 232) if is_warn else (2, 9, 4, 232)
+    hdr_bg = (32, 16, 5, 248) if is_warn else (8, 30, 12, 248)
 
-    # Outer soft bloom + high-contrast phosphor glass frame
-    raw_d.rectangle([X0 - 2, Y0 - 2, X1 + 2, Y1 + 2], outline=(border_col[0], border_col[1], border_col[2], 65), width=2)
     raw_d.rectangle([X0, Y0, X1, Y1], fill=bg_col, outline=border_col, width=2)
 
-    # Subtle CRT scanlines across the right scroll terminal
-    scan_col = (18, 9, 3, 225) if is_warn else (4, 16, 6, 225)
-    for sy in range(Y0 + 56, Y1 - 28, 4):
-        raw_d.line([(X0 + 2, sy), (X1 - 2, sy)], fill=scan_col, width=1)
-
-    # Header bar (strictly in-universe, no YouTube reference)
-    raw_d.rectangle([X0 + 2, Y0 + 2, X1 - 2, Y0 + 30], fill=hdr_bg)
+    # Single clean header bar (no double sub-header)
+    raw_d.rectangle([X0 + 2, Y0 + 2, X1 - 2, Y0 + 34], fill=hdr_bg)
     hdr_col = (255, 210, 65, 255) if is_warn else (110, 255, 130, 255)
     raw_d.text(
-        (X0 + 10, Y0 + 6),
-        "USENET // WORLDNET BBS // LISTENER FEED",
+        (X0 + 14, Y0 + 8),
+        "WORLDNET BBS // LISTENER FEED",
         fill=hdr_col,
         font=FONT_SCROLL_HDR,
         stroke_width=1,
         stroke_fill=(0, 8, 2, 245),
     )
 
-    # Sub-header bar
-    raw_d.rectangle([X0 + 2, Y0 + 31, X1 - 2, Y0 + 54], fill=(16, 10, 3, 245) if is_warn else (4, 20, 8, 245))
-    raw_d.text(
-        (X0 + 10, Y0 + 34),
-        "alt.conspiracy + 13 INTL RELAY NODES",
-        fill=(255, 195, 55, 255),
-        font=FONT_SCROLL_HDR,
-        stroke_width=1,
-        stroke_fill=(0, 8, 2, 245),
-    )
-
-    # Rolling 33-line viewport advancing at 3 lines per second
+    # Spacious 26-line viewport advancing calmly at 2 lines per second
     total = len(lines)
-    visible_rows = 33
-    head_idx = (int(now_ts * 3.0)) % total
+    visible_rows = 26
+    head_idx = (int(now_ts * 2.0)) % total
 
     palette = {
         "amber": (255, 212, 68, 255),
@@ -961,20 +942,22 @@ def render_right_usenet_youtube_scroll(
         "dim": (70, 195, 90, 235) if not is_warn else (195, 135, 40, 235),
     }
 
-    y_cursor = Y0 + 60
-    line_step = 23
+    y_cursor = Y0 + 50
+    line_step = 36
     for r in range(visible_rows):
         item = lines[(head_idx + r) % total]
         txt = item.get("text", "")
+        if txt.startswith("===="):
+            txt = "─" * 36
         if r == visible_rows - 1 and (int(now_ts * 2) % 2 == 0):
-            txt = (txt[:41] + " \u2588") if txt else "\u2588"
+            txt = (txt[:40] + " \u2588") if txt else "\u2588"
         if txt:
             col = palette.get(item.get("color", "green"), palette["green"])
             needs_uni = any(ord(c) > 0x0370 and c not in "\u2588\u2500\u2550\u2192\u2022\u2014\u2013\u2018\u2019\u201c\u201d\u03a9" for c in txt)
             fnt = FONT_SCROLL_UNI if needs_uni else FONT_SCROLL_BODY
             raw_d.text(
-                (X0 + 10, y_cursor),
-                txt[:44] if not needs_uni else txt,
+                (X0 + 14, y_cursor),
+                txt[:42] if not needs_uni else txt,
                 fill=col,
                 font=fnt,
                 stroke_width=1,
@@ -982,12 +965,11 @@ def render_right_usenet_youtube_scroll(
             )
         y_cursor += line_step
 
-    # Footer bar
-    raw_d.rectangle([X0 + 2, Y1 - 26, X1 - 2, Y1 - 2], fill=hdr_bg)
-    cur_line_num = (head_idx + visible_rows) % total
+    # Clean footer bar
+    raw_d.rectangle([X0 + 2, Y1 - 30, X1 - 2, Y1 - 2], fill=hdr_bg)
     raw_d.text(
-        (X0 + 10, Y1 - 23),
-        f"SPOOL {cur_line_num:04d}/{total:04d} // 2400 BAUD LIVE SYNC",
+        (X0 + 14, Y1 - 25),
+        "14.2001 HZ RELAY // stardust-archive.net",
         fill=hdr_col,
         font=FONT_SCROLL_HDR,
         stroke_width=1,
@@ -1006,12 +988,8 @@ def render_left_lore_question_panel(
     is_warn: bool,
 ) -> None:
     """
-    Renders the Left-Side CRT World-Building Case File & Song Lore Dossier Panel
-    (`x=16..468, y=22..904` at 1080p, `452x882` px — Option A Decluttered Layout):
-      - Top Card: Track Chronology & Broadcast Role (Song, Era, Role)
-      - 3-Tab Dossier Selector Strip (`[1. LYRICS]`, `[2. STORY]`, `[3. ARCHIVE]`)
-      - Single Spacious Active Dossier Card rotating every 20s with larger `FONT_HUD_9` (20px)
-        typography, 32px line spacing, and clean dark CRT breathing room.
+    Renders the decluttered full-height Left Song Lore Dossier Panel
+    (`x=24..468, y=28..1052` at 1080p, `444x1024` px).
     """
     is_vocal_song = (current_track or {}).get("kind", "vocal_song") == "vocal_song"
     target_sec = int(state.get("target_sector", 7))
@@ -1031,20 +1009,18 @@ def render_left_lore_question_panel(
         state.get("crt_body", "") if not is_vocal_song else "",
     )
     if _LEFT_PANEL_CACHE.get("key") == cache_key and _LEFT_PANEL_CACHE.get("img") is not None:
-        canvas.alpha_composite(_LEFT_PANEL_CACHE["img"], (14, 20))  # type: ignore[arg-type]
+        canvas.alpha_composite(_LEFT_PANEL_CACHE["img"], (22, 26))  # type: ignore[arg-type]
         return
 
-    patch_w, patch_h = 458, 888
+    patch_w, patch_h = 450, 1030
     patch = Image.new("RGBA", (patch_w, patch_h), (0, 0, 0, 0))
     raw_d = ImageDraw.Draw(patch)
-    # Offset inside patch so global (16..468, 22..904) maps to (2..454, 2..884)
-    X0, Y0, X1, Y1 = 2, 2, 454, 884
+    X0, Y0, X1, Y1 = 2, 2, 446, 1026
 
-    border_col = (255, 150, 30, 245) if is_b3 else ((255, 176, 20, 245) if is_warn else (55, 245, 78, 245))
-    dim_border = (165, 95, 20, 215) if (is_warn or is_b3) else (32, 145, 48, 215)
-    bg_col = (10, 5, 2, 238) if (is_warn or is_b3) else (2, 10, 4, 238)
-    hdr_bg = (36, 16, 5, 250) if (is_warn or is_b3) else (8, 32, 13, 250)
-    sec_hdr_bg = (24, 12, 4, 245) if (is_warn or is_b3) else (5, 22, 9, 245)
+    border_col = (255, 150, 30, 240) if is_b3 else ((255, 176, 20, 240) if is_warn else (55, 245, 78, 240))
+    dim_border = (165, 95, 20, 210) if (is_warn or is_b3) else (32, 145, 48, 210)
+    bg_col = (8, 4, 2, 232) if (is_warn or is_b3) else (2, 9, 4, 232)
+    hdr_bg = (32, 16, 5, 248) if (is_warn or is_b3) else (8, 30, 12, 248)
 
     c_hdr = (255, 210, 65, 255) if (is_warn or is_b3) else (110, 255, 130, 255)
     c_amber = (255, 212, 68, 255)
@@ -1055,7 +1031,7 @@ def render_left_lore_question_panel(
     def _txt(px: int, py: int, s: str, col: tuple, fnt=FONT_SCROLL_HDR) -> None:
         raw_d.text((px, py), s, fill=col, font=fnt, stroke_width=1, stroke_fill=(0, 6, 2, 250))
 
-    def _fit_1080(s: str, max_px: float = 428.0, fnt=FONT_SCROLL_HDR) -> str:
+    def _fit_1080(s: str, max_px: float = 416.0, fnt=FONT_SCROLL_HDR) -> str:
         out = s.strip()
         try:
             while len(out) > 8 and fnt.getlength(out) > max_px:
@@ -1066,74 +1042,58 @@ def render_left_lore_question_panel(
             if out.count("(") > out.count(")"):
                 out = out.rsplit("(", 1)[0].strip()
         except Exception:
-            out = out[:42]
+            out = out[:40]
         return out
 
     if not is_vocal_song:
-        raw_d.rectangle([X0, Y0, X1, Y1], fill=(0, 0, 0, 248), outline=border_col, width=2)
-        raw_d.rectangle([X0 + 2, Y0 + 2, X1 - 2, Y0 + 30], fill=hdr_bg)
-        _txt(X0 + 12, Y0 + 6, "INTERSTITIAL BROADCAST // SIGNAL LOG", c_hdr)
-        _txt(X0 + 14, Y0 + 46, _fit_1080("REEL: B2-INTERCEPT // 14.2001 HZ", 418.0), c_amber)
-        _txt(X0 + 14, Y0 + 74, _fit_1080(f"TYPE: {(current_track or {}).get('display_title', 'SIGNAL INTERCEPT')}", 418.0), c_green)
-        _txt(X0 + 14, Y0 + 102, _fit_1080(f"MODE: {state.get('crt_header', 'SHORTWAVE RELAY')}", 418.0), c_amber)
-        raw_d.line([(X0 + 14, Y0 + 132), (X1 - 14, Y0 + 132)], fill=dim_border, width=1)
+        raw_d.rectangle([X0, Y0, X1, Y1], fill=bg_col, outline=border_col, width=2)
+        raw_d.rectangle([X0 + 2, Y0 + 2, X1 - 2, Y0 + 34], fill=hdr_bg)
+        _txt(X0 + 14, Y0 + 8, "SIGNAL INTERCEPT // LOG", c_hdr)
+        _txt(X0 + 16, Y0 + 54, _fit_1080(f"TYPE: {(current_track or {}).get('display_title', 'SIGNAL INTERCEPT')}"), c_green)
+        _txt(X0 + 16, Y0 + 86, _fit_1080(f"MODE: {state.get('crt_header', 'SHORTWAVE RELAY')}"), c_amber)
+        raw_d.line([(X0 + 16, Y0 + 120), (X1 - 16, Y0 + 120)], fill=dim_border, width=1)
 
-        y_cur = Y0 + 148
+        y_cur = Y0 + 142
         for blk_txt, blk_col in [
             (state.get("crt_sub", ""), c_bright),
             (state.get("crt_body", ""), c_cyan),
-            (state.get("line1", ""), c_green),
-            (state.get("line2", ""), c_amber),
-            (state.get("line3", ""), c_bright),
         ]:
             if not blk_txt:
                 continue
-            wrapped_blk = _wrap_px_1080p(blk_txt, FONT_SCROLL_BODY, 416.0, 6)
+            wrapped_blk = _wrap_px_1080p(blk_txt, FONT_HUD_9, 412.0, 8)
             for ln in wrapped_blk:
-                if y_cur <= Y1 - 40:
-                    _txt(X0 + 14, y_cur, ln, blk_col, FONT_SCROLL_BODY)
-                    y_cur += 25
-            y_cur += 14
-        raw_d.rectangle([X0 + 2, Y1 - 26, X1 - 2, Y1 - 2], fill=hdr_bg)
-        _txt(X0 + 10, Y1 - 23, "SIGNAL INTERCEPT // stardust-archive.net", c_hdr)
+                if y_cur <= Y1 - 48:
+                    _txt(X0 + 16, y_cur, ln, blk_col, FONT_HUD_9)
+                    y_cur += 34
+            y_cur += 18
+        raw_d.rectangle([X0 + 2, Y1 - 30, X1 - 2, Y1 - 2], fill=hdr_bg)
+        _txt(X0 + 14, Y1 - 25, "stardust-archive.net", c_hdr)
         _LEFT_PANEL_CACHE["key"] = cache_key
         _LEFT_PANEL_CACHE["img"] = patch
-        canvas.alpha_composite(patch, (14, 20))
+        canvas.alpha_composite(patch, (22, 26))
         return
 
     lore = resolve_song_lore_panel(current_track, state, now_ts)
     status_tag = lore.get("lyric_status", "[STANZA 1/1]")
+    reel_id = lore.get("catalog_id", "ORION-B2").replace("ARCHIVE REEL // ", "").strip()
 
-    # Single clean outer phosphor glass frame (no nested boxes inside boxes)
-    raw_d.rectangle([X0 - 2, Y0 - 2, X1 + 2, Y1 + 2], outline=(border_col[0], border_col[1], border_col[2], 65), width=2)
     raw_d.rectangle([X0, Y0, X1, Y1], fill=bg_col, outline=border_col, width=2)
 
-    # Subtle CRT scanlines across the left terminal
-    scan_col = (18, 9, 3, 225) if (is_warn or is_b3) else (4, 16, 6, 225)
-    for sy in range(Y0 + 56, Y1 - 28, 4):
-        raw_d.line([(X0 + 2, sy), (X1 - 2, sy)], fill=scan_col, width=1)
+    # Single clean top header
+    raw_d.rectangle([X0 + 2, Y0 + 2, X1 - 2, Y0 + 34], fill=hdr_bg)
+    _txt(X0 + 14, Y0 + 8, f"SONG DOSSIER // {reel_id}", c_hdr)
 
-    # Top Header Bar
-    raw_d.rectangle([X0 + 2, Y0 + 2, X1 - 2, Y0 + 30], fill=hdr_bg)
-    _txt(X0 + 10, Y0 + 6, "CANONICAL ARCHIVE // SONG LORE DOSSIER", c_hdr)
+    # Clean 3-row metadata block
+    _txt(X0 + 16, Y0 + 50, _fit_1080(f"SONG : {lore['title']}", 412.0, FONT_HUD_9), c_bright, FONT_HUD_9)
+    _txt(X0 + 16, Y0 + 84, _fit_1080(f"ERA  : {lore['timeline']}", 412.0, FONT_HUD_9), c_green, FONT_HUD_9)
+    _txt(X0 + 16, Y0 + 118, _fit_1080(f"ROLE : {lore['pov']}", 412.0, FONT_HUD_9), c_amber, FONT_HUD_9)
 
-    # Sub-Header Bar (strictly in-universe reel ID, zero file/source names)
-    raw_d.rectangle([X0 + 2, Y0 + 31, X1 - 2, Y0 + 54], fill=(16, 10, 3, 245) if (is_warn or is_b3) else (4, 20, 8, 245))
-    _txt(X0 + 10, Y0 + 34, _fit_1080(lore["catalog_id"], 430.0), c_amber)
-
-    # --- TRACK METADATA (`y=66..152`, directly on dark scanlined CRT glass) ---
-    _txt(X0 + 14, Y0 + 66, _fit_1080(f"SONG : {lore['title']}", 422.0, FONT_HUD_9), c_bright, FONT_HUD_9)
-    _txt(X0 + 14, Y0 + 96, _fit_1080(f"ERA  : {lore['timeline']}", 422.0, FONT_HUD_9), c_green, FONT_HUD_9)
-    _txt(X0 + 14, Y0 + 126, _fit_1080(f"ROLE : {lore['pov']}", 422.0, FONT_HUD_9), c_amber, FONT_HUD_9)
-
-    raw_d.line([(X0 + 14, Y0 + 162), (X1 - 14, Y0 + 162)], fill=dim_border, width=1)
-
-    # --- 3-TAB ROTATING DOSSIER SELECTOR (`y=174..206`) ---
-    tab_y0, tab_y1 = Y0 + 174, Y0 + 206
+    # 3-Tab Dossier Selector Strip
+    tab_y0, tab_y1 = Y0 + 162, Y0 + 194
     tabs = [
-        (X0 + 14, X0 + 146, "1. LYRICS"),
-        (X0 + 154, X0 + 286, "2. STORY"),
-        (X0 + 294, X1 - 14, "3. ARCHIVE"),
+        (X0 + 16, X0 + 144, "1. LYRICS"),
+        (X0 + 154, X0 + 282, "2. STORY"),
+        (X0 + 292, X1 - 16, "3. ARCHIVE"),
     ]
     for t_i, (tx0, tx1, t_lbl) in enumerate(tabs):
         is_act = t_i == card_idx
@@ -1144,47 +1104,46 @@ def render_left_lore_question_panel(
             raw_d.rectangle([tx0, tab_y0, tx1, tab_y1], fill=(6, 18, 9, 225), outline=dim_border, width=1)
             _txt(tx0 + 12, tab_y0 + 7, t_lbl, (95, 185, 108, 220), FONT_SCROLL_HDR)
 
-    # --- OPEN TERMINAL CONTENT AREA (`y=224..840`, single dedicated view per tab, zero extra cells underneath) ---
     clean_conn = re.sub(r"\s*\(Folder\s+[A-Za-z0-9_-]{12,}\)", "", lore["connections"])
     if card_idx == 0:
-        card_hdr = f"VERBATIM LYRICS // {status_tag}"
+        card_hdr = f"LYRICS // {status_tag}"
         card_body = lore["lyric_excerpt"]
         card_col = c_cyan
     elif card_idx == 1:
-        card_hdr = "TRACK STORY & BROADCAST CONTEXT"
+        card_hdr = "STORY & CONTEXT"
         card_body = lore["meaning"]
         card_col = c_bright
     else:
-        card_hdr = "SUBLEVEL B2 ARCHIVIST LOG"
+        card_hdr = "ARCHIVIST LOG"
         card_body = clean_conn
         card_col = c_green
 
-    _txt(X0 + 14, Y0 + 224, card_hdr, c_amber, FONT_SCROLL_HDR)
-    raw_d.line([(X0 + 14, Y0 + 250), (X1 - 14, Y0 + 250)], fill=dim_border, width=1)
+    _txt(X0 + 16, Y0 + 216, card_hdr, c_amber, FONT_SCROLL_HDR)
+    raw_d.line([(X0 + 16, Y0 + 242), (X1 - 16, Y0 + 242)], fill=dim_border, width=1)
 
     if card_idx == 0 and "/" in card_body and not card_body.strip().startswith("["):
         body_lines = []
         for verse in [v.strip() for v in card_body.split("/") if v.strip()]:
-            v_wrapped = _wrap_px_1080p(verse, FONT_HUD_9, 420.0, 3)
-            if len(body_lines) + len(v_wrapped) <= 15:
+            v_wrapped = _wrap_px_1080p(verse, FONT_HUD_9, 412.0, 3)
+            if len(body_lines) + len(v_wrapped) <= 17:
                 body_lines.extend(v_wrapped)
             else:
                 break
     else:
-        body_lines = _wrap_px_1080p(card_body, FONT_HUD_9, 420.0, 15)
+        body_lines = _wrap_px_1080p(card_body, FONT_HUD_9, 412.0, 17)
 
-    y_cur = Y0 + 266
+    y_cur = Y0 + 260
     for ln in body_lines:
-        _txt(X0 + 14, y_cur, ln, card_col, FONT_HUD_9)
-        y_cur += 36
+        _txt(X0 + 16, y_cur, ln, card_col, FONT_HUD_9)
+        y_cur += 38
 
-    # Footer Bar
-    raw_d.rectangle([X0 + 2, Y1 - 26, X1 - 2, Y1 - 2], fill=hdr_bg)
-    _txt(X0 + 10, Y1 - 23, _fit_1080(f"DOSSIER {card_idx + 1}/3 (20S) // stardust-archive.net", 430.0), c_hdr)
+    # Clean footer bar
+    raw_d.rectangle([X0 + 2, Y1 - 30, X1 - 2, Y1 - 2], fill=hdr_bg)
+    _txt(X0 + 14, Y1 - 25, f"DOSSIER {card_idx + 1}/3 // stardust-archive.net", c_hdr)
 
     _LEFT_PANEL_CACHE["key"] = cache_key
     _LEFT_PANEL_CACHE["img"] = patch
-    canvas.alpha_composite(patch, (14, 20))
+    canvas.alpha_composite(patch, (22, 26))
 
 
 _CENTER_BANNER_CACHE: dict[str, object] = {"key": None, "img": None}
@@ -1196,83 +1155,82 @@ def render_center_live_chat_banner(
     state: dict,
     now_ts: float,
     is_warn: bool,
+    snap_meta: dict | None = None,
 ) -> None:
     """
-    Renders the Center-Stage High-Prominence Live Chat Discussion Prompt Banner
-    (`x=478..1430, y=758..904` at 1080p, `952x146` px — centered at `x=954` directly
-    underneath the CRT monitor bevel between Left `16..468` and Right `1440..1904`!).
+    Renders the single sleek Bottom-Center Bar (`x=492..1416, y=916..1052` at 1080p, `924x136` px)
+    sitting cleanly at the bottom of the frame so the entire studio room and desk (`y=0..915`)
+    stay 100% open and unobstructed!
     """
     is_vocal_song = (current_track or {}).get("kind", "vocal_song") == "vocal_song"
-    pulse_on = (int(now_ts * 2) % 2) == 0
+    offset_s = int((snap_meta or {}).get("track_offset_sec", 0))
+    dur_s = max(1, int((snap_meta or {}).get("track_duration_sec", 180)))
     cache_key = (
         (current_track or {}).get("filename", ""),
         is_vocal_song,
         state.get("crt_header", ""),
         state.get("crt_body", "") if not is_vocal_song else "",
         int(now_ts // 20),
-        pulse_on,
+        offset_s,
+        dur_s,
     )
     if _CENTER_BANNER_CACHE.get("key") == cache_key and _CENTER_BANNER_CACHE.get("img") is not None:
-        canvas.alpha_composite(_CENTER_BANNER_CACHE["img"], (474, 754))  # type: ignore[arg-type]
+        canvas.alpha_composite(_CENTER_BANNER_CACHE["img"], (490, 914))  # type: ignore[arg-type]
         return
 
-    patch = Image.new("RGBA", (960, 154), (0, 0, 0, 0))
+    patch = Image.new("RGBA", (932, 142), (0, 0, 0, 0))
     raw_d = ImageDraw.Draw(patch)
-    X0, Y0, X1, Y1 = 4, 4, 956, 150
+    X0, Y0, X1, Y1 = 2, 2, 928, 138
 
     if is_vocal_song:
         lore = resolve_song_lore_panel(current_track, state, now_ts)
-        s_title = lore.get("title", "ACTIVE REEL").upper()
-        hdr_txt = f"LISTENER DISCUSSION #{lore['question_index']}/{lore['question_total']} // {s_title}"
+        hdr_txt = f"LISTENER PROMPT #{lore['question_index']}/{lore['question_total']}"
         body_txt = lore["question_text"]
     else:
-        hdr_txt = f"SHORTWAVE INTERCEPT LOG // {state.get('crt_header', 'SIGNAL RELAY')}"
-        body_txt = (
-            f"INTERCEPT ACTIVE: {state.get('crt_body', '')} — Archival terminal & signal logs at "
-            f"stardust-archive.net"
-        )
+        hdr_txt = f"SHORTWAVE INTERCEPT // {state.get('crt_header', 'SIGNAL RELAY')}"
+        body_txt = f"{state.get('crt_body', '')} — Archive & Signal Lab at stardust-archive.net"
 
-    border_col = (255, 202, 48, 252)
-    bg_col = (20, 10, 3, 246)
-    hdr_bg = (56, 28, 6, 252)
+    border_col = (255, 195, 45, 240) if is_warn else (55, 245, 78, 240)
+    bg_col = (12, 6, 2, 232) if is_warn else (2, 9, 4, 232)
+    hdr_bg = (36, 18, 5, 248) if is_warn else (8, 30, 12, 248)
+    hdr_col = (255, 215, 75, 255) if is_warn else (110, 255, 130, 255)
 
-    # Outer soft amber glow + double-framed center banner
-    raw_d.rectangle([X0 - 3, Y0 - 3, X1 + 3, Y1 + 3], outline=(255, 195, 45, 85), width=2)
     raw_d.rectangle([X0, Y0, X1, Y1], fill=bg_col, outline=border_col, width=2)
     raw_d.rectangle([X0 + 2, Y0 + 2, X1 - 2, Y0 + 32], fill=hdr_bg)
-    raw_d.line([(X0 + 2, Y0 + 33), (X1 - 2, Y0 + 33)], fill=(255, 185, 40, 210), width=1)
-
-    # Subtle CRT scanlines inside the banner
-    for sy in range(Y0 + 36, Y1 - 3, 4):
-        raw_d.line([(X0 + 3, sy), (X1 - 3, sy)], fill=(12, 6, 2, 225), width=1)
-
-    # Pulsing gold beacon LED in header
-    dot_fill = (255, 230, 75, 255) if pulse_on else (180, 115, 25, 235)
-    raw_d.ellipse([X0 + 12, Y0 + 11, X0 + 24, Y0 + 23], fill=dot_fill, outline=(255, 250, 190, 255))
 
     raw_d.text(
-        (X0 + 32, Y0 + 6),
-        hdr_txt[:74],
-        fill=(255, 228, 85, 255),
-        font=FONT_HUD_9,
+        (X0 + 16, Y0 + 6),
+        hdr_txt[:52],
+        fill=hdr_col,
+        font=FONT_SCROLL_HDR,
         stroke_width=1,
         stroke_fill=(0, 6, 2, 250),
     )
 
-    q_lines = _wrap_px_1080p(body_txt, FONT_HUD_10, 918.0, 3)
+    # Compact playhead progress bar + timer on the right side of the header bar
+    prog = max(0.0, min(1.0, offset_s / dur_s))
+    bar_w, bar_h = 160, 12
+    bar_x0, bar_y0 = X1 - 310, Y0 + 11
+    raw_d.rectangle([bar_x0, bar_y0, bar_x0 + bar_w, bar_y0 + bar_h], fill=(4, 10, 5, 255), outline=border_col)
+    fill_w = max(2, int((bar_w - 2) * prog))
+    raw_d.rectangle([bar_x0 + 1, bar_y0 + 1, bar_x0 + 1 + fill_w, bar_y0 + bar_h - 1], fill=hdr_col)
+    t_str = f"{offset_s // 60:02d}:{offset_s % 60:02d} / {dur_s // 60:02d}:{dur_s % 60:02d}"
+    raw_d.text((bar_x0 + bar_w + 12, Y0 + 6), t_str, fill=(225, 255, 232, 255), font=FONT_SCROLL_HDR)
+
+    q_lines = _wrap_px_1080p(body_txt, FONT_HUD_9, 892.0, 2)
     for idx, ln in enumerate(q_lines):
         raw_d.text(
-            (X0 + 16, Y0 + 42 + idx * 32),
+            (X0 + 16, Y0 + 44 + idx * 36),
             ln,
-            fill=(255, 248, 208, 255),
-            font=FONT_HUD_10,
+            fill=(255, 248, 215, 255) if is_warn else (225, 255, 232, 255),
+            font=FONT_HUD_9,
             stroke_width=1,
             stroke_fill=(0, 6, 2, 250),
         )
 
     _CENTER_BANNER_CACHE["key"] = cache_key
     _CENTER_BANNER_CACHE["img"] = patch
-    canvas.alpha_composite(patch, (474, 754))
+    canvas.alpha_composite(patch, (490, 914))
 
 
 def render_top_trailhead_banner(
@@ -1282,76 +1240,8 @@ def render_top_trailhead_banner(
     now_ts: float,
     is_warn: bool,
 ) -> None:
-    """
-    Renders the redesigned 1989 Master Control Containment & Signal Intrusion Header
-    (`x=478..1430, y=14..68` at 1080p, `952x54` px — centered at `x=954` above the CRT monitor!).
-    """
-    X0, Y0, X1, Y1 = 478, 14, 1430, 68
-    raw_d = ImageDraw.Draw(canvas)
-
-    target_sec = int(state.get("target_sector", 7))
-    is_b3_breach = target_sec >= 8
-    crt_mode = state.get("crt_mode", "NOVA_FACE")
-
-    smpte_sec = int(now_ts) % 60
-    smpte_frm = int((now_ts % 1.0) * 29.97)
-    smpte_str = f"03:40:{smpte_sec:02d}:{smpte_frm:02d}"
-
-    if is_b3_breach:
-        border_col = (255, 125, 30, 245)
-        bg_col = (18, 6, 2, 230)
-        hdr_strip = (48, 14, 4, 245)
-        top_col = (255, 205, 65, 255)
-        line1_str = f"[!! SUBLEVEL B3 BREACH // GATE #{target_sec:02d}] DIRECTIVE 9 CAGE FRACTURED // SMPTE {smpte_str}"
-    elif is_warn or crt_mode in ("SECOND_VOICE", "OUROBOROS_TORUS", "HARMONY_CAMERA"):
-        border_col = (255, 180, 25, 240)
-        bg_col = (14, 7, 2, 225)
-        hdr_strip = (36, 18, 5, 240)
-        top_col = (255, 210, 60, 255)
-        line1_str = f"[! SIGNAL HIJACK // +0.0001 HZ] B2-114 COUNTERPOINT OVERRIDE // SMPTE {smpte_str}"
-    else:
-        border_col = (55, 245, 78, 235)
-        bg_col = (3, 12, 5, 220)
-        hdr_strip = (8, 30, 12, 240)
-        top_col = (115, 255, 135, 255)
-        line1_str = f"ORION B2-114 MASTER CONTROL // DIRECTIVE 9 CONTAINMENT: 99.4% // SMPTE {smpte_str}"
-
-    raw_d.rectangle([X0 - 2, Y0 - 2, X1 + 2, Y1 + 2], outline=(border_col[0], border_col[1], border_col[2], 65), width=2)
-    raw_d.rectangle([X0, Y0, X1, Y1], fill=bg_col, outline=border_col, width=2)
-    raw_d.rectangle([X0 + 2, Y0 + 2, X1 - 2, Y0 + 26], fill=hdr_strip)
-
-    led_on = (int(now_ts * 2) % 2 == 0) if is_b3_breach else (int(now_ts) % 2 == 0)
-    led_col = (255, 75, 35, 255) if led_on else (140, 35, 20, 220)
-    raw_d.ellipse([X0 + 10, Y0 + 9, X0 + 20, Y0 + 19], fill=led_col, outline=(255, 210, 65, 255))
-
-    # Diegetic rotating Line 2 telemetry (strictly in-universe, no out-of-character puzzle spoilers)
-    rot = int(now_ts // 12) % 3
-    if rot == 0:
-        line2_str = "SUBLEVEL B2 ARCHIVAL RELAY // PUBLIC TERMINAL: stardust-archive.net"
-        bot_col = (215, 255, 222, 255) if not (is_warn or is_b3_breach) else (255, 242, 190, 255)
-    elif rot == 1:
-        line2_str = "ANOMALY MONITOR: SUB-AUDIBLE CARRIER LOCKED AT 14.2001 HZ (STUDIO B)"
-        bot_col = (135, 245, 215, 255)
-    else:
-        line2_str = "DECLASSIFIED ORION RECORDS VAULT & SIGNAL LOGS // stardust-archive.net"
-        bot_col = (255, 205, 65, 255)
-
-    raw_d.text(
-        (X0 + 26, Y0 + 5),
-        line1_str[:88],
-        fill=top_col,
-        font=FONT_SCROLL_HDR,
-        stroke_width=1,
-        stroke_fill=(0, 6, 2, 245),
-    )
-    raw_d.text(
-        (X0 + 10, Y0 + 30),
-        line2_str[:88],
-        fill=bot_col,
-        font=FONT_SCROLL_HDR,
-        stroke_width=1,
-        stroke_fill=(0, 6, 2, 245),
-    )
+    """No-op in the decluttered 3-panel layout so the top of the studio room stays open."""
+    return
 
 
 def render_full_arg_overlay_png(
@@ -1362,15 +1252,12 @@ def render_full_arg_overlay_png(
     snap_meta: dict | None = None,
 ) -> bytes:
     """
-    Renders the complete `1920x1080` (1080p Full HD) RGBA PNG overlay containing:
-      1. Front-Facing CRT Screen Patch (`688x488` at `x=616, y=204`, strictly inside the amber border)
-      2. Diegetic Control Room Hardware Animations (rack LEDs, VU needles, power LED)
-      3. Left-Side World-Building Case File Dossier (`x=20..446, y=22..904`)
-      4. Top-Center Master Control Containment & Signal Intrusion Header (`x=456..1354, y=14..68`)
-      5. Center-Stage Live Chat Discussion Prompt Banner (`x=456..1354, y=758..904`)
-      6. Right-Side Rolling Multilingual Usenet / Regional BBS / YouTube Comment Terminal (`x=1364..1900, y=22..904`)
-      7. 3-Module Broadcast Engineering Console (`x=20..1900, y=920..1068`)
-    Written atomically via `os.replace` and returned as raw PNG bytes for `image2pipe`.
+    Renders the decluttered 3-Panel `1920x1080` RGBA PNG overlay:
+      1. Front-Facing CRT Screen Patch (`688x488` at `x=616, y=204`)
+      2. Diegetic Control Room Hardware Animations (rack LEDs, fault lamps)
+      3. Left Song Lore Dossier Panel (`x=24..468, y=28..1052`)
+      4. Right WorldNet BBS & Listener Feed Panel (`x=1440..1896, y=28..1052`)
+      5. Single Bottom-Center Listener Prompt & Playhead Bar (`x=492..1416, y=916..1052`)
     """
     if snap_meta is None:
         relay = REGIONAL_RELAYS[int(now_ts // 300) % len(REGIONAL_RELAYS)]
@@ -1404,15 +1291,12 @@ def render_full_arg_overlay_png(
     crt_patch = render_crt_window_patch(state, relay, assets_dir, now_ts, current_track=current_track)
     canvas.alpha_composite(crt_patch, (CRT_PX_X, CRT_PX_Y))
 
-    # 2. Draw Diegetic Control Room Hardware Animations, Left Lore Panel, Top Banner, Center Live Chat Banner, Right Scroll & Bottom Console
-    draw = _HiDPIDraw(ImageDraw.Draw(canvas), scale=SCALE)
+    # 2. Draw Diegetic Control Room Hardware Animations + 3 Clean Framing Panels (Left, Right, Bottom-Center)
     is_warn = (state.get("hud_mode") or state.get("mode")) == "ANOMALY_WARN" or int(state.get("target_sector", 7)) >= 8
     render_room_hardware_animations(canvas, state, now_ts, is_warn)
     render_left_lore_question_panel(canvas, current_track, state, now_ts, is_warn)
-    render_top_trailhead_banner(canvas, state, snap_meta, now_ts, is_warn)
-    render_center_live_chat_banner(canvas, current_track, state, now_ts, is_warn)
+    render_center_live_chat_banner(canvas, current_track, state, now_ts, is_warn, snap_meta=snap_meta)
     render_right_usenet_youtube_scroll(canvas, now_ts, is_warn)
-    render_bottom_engineering_console(draw, state, snap_meta, now_ts)
 
     buf = io.BytesIO()
     canvas.save(buf, format="PNG", compress_level=1)
