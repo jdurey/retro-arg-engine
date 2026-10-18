@@ -1,0 +1,121 @@
+From yhughes@earthlink.net Mon Sep 25 17:13:19 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!earthlink!yhughes
+From: yhughes@earthlink.net (Yuki Hughes)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Sep25.171319.2257@earthlink.net>
+Date: Mon, 25 Sep 1995 17:13:19 GMT
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+Yuki Hughes | yhughes@earthlink.net
+PGP Key fingerprint: FCFC 1CE8 ADFC 143D
+"Keep the channels open."
+
+From amacdonald@berkeley.edu Mon Sep 25 18:51:19 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!berkeley!amacdonald
+From: amacdonald@berkeley.edu (Andrei MacDonald)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Sep25.185119.3800@berkeley.edu>
+Date: Mon, 25 Sep 1995 18:51:19 GMT
+References: <1995Sep25.171319.2257@earthlink.net>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1995Sep25.171319.2257@earthlink.net>, yhughes@earthlink.net (Yuki Hughes) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Andrei MacDonald
+Opinions expressed are solely my own and not those of UC Berkeley Department of EECS.
+------------------------------------------------------------
+
+From dlaurent@clari.net Tue Sep 26 12:40:19 1995
+Path: ashpoly!cascade!mxgate!coyoacan!clari!dlaurent
+From: dlaurent@clari.net (Dave Laurent)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Sep26.124019.4337@clari.net>
+Date: Tue, 26 Sep 1995 12:40:19 GMT
+References: <1995Sep25.171319.2257@earthlink.net>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Sep25.171319.2257@earthlink.net>, yhughes@earthlink.net (Yuki Hughes) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Dave Laurent
+Opinions expressed are solely my own and not those of ClariNet Communications Corp.
+------------------------------------------------------------
+
+From ttanaka@hanse.de Thu Sep 28 06:56:19 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!hanse!ttanaka
+From: ttanaka@hanse.de (Thiago Tanaka)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Sep28.065619.5963@hanse.de>
+Date: Thu, 28 Sep 1995 06:56:19 GMT
+References: <1995Sep25.171319.2257@earthlink.net>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Sep25.171319.2257@earthlink.net>, yhughes@earthlink.net (Yuki Hughes) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Thiago Tanaka -- Hanse-Netzwerk Hamburg
+"In theory there is no difference between theory and practice."
+
+From mlee@inria.fr Fri Sep 29 09:52:19 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!inria!mlee
+From: mlee@inria.fr (Mikhail Lee)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Sep29.095219.5074@inria.fr>
+Date: Fri, 29 Sep 1995 09:52:19 GMT
+References: <1995Sep25.171319.2257@earthlink.net> <1995Sep25.185119.3800@berkeley.edu>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Sep25.185119.3800@berkeley.edu>, amacdonald@berkeley.edu (Andrei MacDonald) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Mikhail Lee
+Tape trading list upon request. SASE required for international mail.
+

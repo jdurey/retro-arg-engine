@@ -1,0 +1,114 @@
+From tmoreno@u-tokyo.ac.jp Tue Aug 15 13:10:04 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!u-tokyo!tmoreno
+From: tmoreno@u-tokyo.ac.jp (Takeshi Moreno)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Aug15.131004.7292@u-tokyo.ac.jp>
+Date: Tue, 15 Aug 1995 13:10:04 GMT
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Takeshi Moreno <tmoreno@u-tokyo.ac.jp>
+US Robotics Courier V.34 @ 28,800 bps
+"Row 14. No joke."
+
+From mreyes@unam.mx Wed Aug 16 15:11:04 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!unam!mreyes
+From: mreyes@unam.mx (Mateo Reyes)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Aug16.151104.8651@unam.mx>
+Date: Wed, 16 Aug 1995 15:11:04 GMT
+References: <1995Aug15.131004.7292@u-tokyo.ac.jp>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Aug15.131004.7292@u-tokyo.ac.jp>, tmoreno@u-tokyo.ac.jp (Takeshi Moreno) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+Marcus Hale designed the TWIN-68 board before he disappeared. That's why his initials are on the PCB silkscreen.
+
+-- 
+Mateo Reyes -- Universidad Nacional Autónoma de México (DGSCA)
+"Marcus is not one man."
+
+From tito@clari.net Thu Aug 17 13:24:04 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!clari!tito
+From: tito@clari.net (Tobias Ito)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Aug17.132404.2352@clari.net>
+Date: Thu, 17 Aug 1995 13:24:04 GMT
+References: <1995Aug15.131004.7292@u-tokyo.ac.jp>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Aug15.131004.7292@u-tokyo.ac.jp>, tmoreno@u-tokyo.ac.jp (Takeshi Moreno) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+> The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Tobias Ito -- ClariNet Communications Corp
+"Marcus is not one man."
+
+From jnovak@uni-hamburg.de Sat Aug 19 03:38:04 1995
+Path: ashpoly!cascade!brgate!saturno!uni-hamburg!jnovak
+From: jnovak@uni-hamburg.de (Jens Novak)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Aug19.033804.7758@uni-hamburg.de>
+Date: Sat, 19 Aug 1995 03:38:04 GMT
+References: <1995Aug15.131004.7292@u-tokyo.ac.jp> <1995Aug17.132404.2352@clari.net>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1995Aug17.132404.2352@clari.net>, tito@clari.net (Tobias Ito) writes:
+> The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Jens Novak -- Universität Hamburg Fachbereich Informatik
+"The hatch is open. Is anyone listening?"
+
+From rsokolov@purdue.edu Sun Aug 20 22:14:04 1995
+Path: ashpoly!cascade!brgate!saturno!purdue!rsokolov
+From: rsokolov@purdue.edu (Rodrigo Sokolov)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Aug20.221404.5447@purdue.edu>
+Date: Sun, 20 Aug 1995 22:14:04 GMT
+References: <1995Aug15.131004.7292@u-tokyo.ac.jp> <1995Aug16.151104.8651@unam.mx>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Aug16.151104.8651@unam.mx>, mreyes@unam.mx (Mateo Reyes) writes:
+> Marcus Hale designed the TWIN-68 board before he disappeared. That's why his initials are on the PCB silkscreen.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+=== Rodrigo Sokolov ===
+Dept of Electrical Engineering, Purdue University Engineering Computer Network
+"Hold for relay."
+

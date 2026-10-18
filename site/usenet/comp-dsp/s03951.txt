@@ -1,0 +1,73 @@
+From tsuzuki@ox.ac.uk Tue Jul 02 03:54:48 1996
+Path: ashpoly!cascade!mxgate!coyoacan!ox!tsuzuki
+From: tsuzuki@ox.ac.uk (Takeshi Suzuki)
+Newsgroups: comp.dsp
+Subject: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jul02.035448.2208@ox.ac.uk>
+Date: Tue, 02 Jul 1996 03:54:48 GMT
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Takeshi Suzuki <tsuzuki@ox.ac.uk>
+Practical Peripherals 14.4 @ 14,400 bps
+"Tape doesn't lie at 02:14. Ears do."
+
+From msouza@unam.mx Wed Jul 03 13:10:48 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!unam!msouza
+From: msouza@unam.mx (Morag Souza)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jul03.131048.5310@unam.mx>
+Date: Wed, 03 Jul 1996 13:10:48 GMT
+References: <1996Jul02.035448.2208@ox.ac.uk>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Jul02.035448.2208@ox.ac.uk>, tsuzuki@ox.ac.uk (Takeshi Suzuki) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Morag Souza | msouza@unam.mx
+PGP Key fingerprint: 9D63 6C96 CF9B 6240
+"Keep the channels open."
+
+From kkuznetsov@rwth-aachen.de Fri Jul 05 09:55:48 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!rwth-aachen!kkuznetsov
+From: kkuznetsov@rwth-aachen.de (Kenji Kuznetsov)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jul05.095548.8079@rwth-aachen.de>
+Date: Fri, 05 Jul 1996 09:55:48 GMT
+References: <1996Jul02.035448.2208@ox.ac.uk> <1996Jul03.131048.5310@unam.mx>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1996Jul03.131048.5310@unam.mx>, msouza@unam.mx (Morag Souza) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Kenji Kuznetsov
+Opinions expressed are solely my own and not those of RWTH Aachen Informatik.
+------------------------------------------------------------
+

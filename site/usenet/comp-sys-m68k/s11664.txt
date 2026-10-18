@@ -1,0 +1,95 @@
+From kito@panix.com Sun Jun 04 07:28:44 1995
+Path: ashpoly!cascade!mxgate!coyoacan!panix!kito
+From: kito@panix.com (Karen Ito)
+Newsgroups: comp.sys.m68k
+Subject: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Jun04.072844.1263@panix.com>
+Date: Sun, 04 Jun 1995 07:28:44 GMT
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+Schematic diagram in ASCII uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/twin68_array.asc.
+
+-- 
+Karen Ito <kito@panix.com>
+*PLONK* filter active for trolls.
+Macintosh IIfx - NetBSD 1.0
+
+From fgarcia@ox.ac.uk Mon Jun 05 04:19:44 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!ox!fgarcia
+From: fgarcia@ox.ac.uk (Fiona García)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Jun05.041944.6435@ox.ac.uk>
+Date: Mon, 05 Jun 1995 04:19:44 GMT
+References: <1995Jun04.072844.1263@panix.com>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Jun04.072844.1263@panix.com>, kito@panix.com (Karen Ito) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Fiona García <fgarcia@ox.ac.uk>
+"Measuring a record you own is listening, not piracy."
+Atari TT030 / FreeBSD 2.1
+
+From mschneider@rwth-aachen.de Mon Jun 05 18:31:44 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!rwth-aachen!mschneider
+From: mschneider@rwth-aachen.de (Mikhail Schneider)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Jun05.183144.2947@rwth-aachen.de>
+Date: Mon, 05 Jun 1995 18:31:44 GMT
+References: <1995Jun04.072844.1263@panix.com> <1995Jun05.041944.6435@ox.ac.uk>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1995Jun05.041944.6435@ox.ac.uk>, fgarcia@ox.ac.uk (Fiona García) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+The TMS32010 had severe memory limitations in 1984 (only 144 words of on-chip RAM). Dual 68000s gave them full 16MB address space.
+
+-- 
+Mikhail Schneider
+Tape trading list upon request. SASE required for international mail.
+
+From ocampbell@cam.ac.uk Wed Jun 07 01:52:44 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!cam!ocampbell
+From: ocampbell@cam.ac.uk (Olga Campbell)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Jun07.015244.3999@cam.ac.uk>
+Date: Wed, 07 Jun 1995 01:52:44 GMT
+References: <1995Jun04.072844.1263@panix.com>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Jun04.072844.1263@panix.com>, kito@panix.com (Karen Ito) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Olga Campbell <ocampbell@cam.ac.uk>
+"A soul is not exclusive to biology."
+Atari Falcon 030 / Linux 1.2.13
+

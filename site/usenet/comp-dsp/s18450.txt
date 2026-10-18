@@ -1,0 +1,73 @@
+From slopez@u-tokyo.ac.jp Sun Jun 12 11:27:03 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!u-tokyo!slopez
+From: slopez@u-tokyo.ac.jp (Sven López)
+Newsgroups: comp.dsp
+Subject: WTB/WTT: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Jun12.112703.7814@u-tokyo.ac.jp>
+Date: Sun, 12 Jun 1994 11:27:03 GMT
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+What sampling rates are people using for their vinyl rips? 44.1 kHz or 48 kHz DAT?
+
+-- 
+Sven López <slopez@u-tokyo.ac.jp>
+"They will send a copy in my place."
+Pentium 90 (OS/2 Warp) / TOS 4.04
+
+From jramirez@u-tokyo.ac.jp Mon Jun 13 03:13:03 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!u-tokyo!jramirez
+From: jramirez@u-tokyo.ac.jp (Jen Ramírez)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Jun13.031303.7736@u-tokyo.ac.jp>
+Date: Mon, 13 Jun 1994 03:13:03 GMT
+References: <1994Jun12.112703.7814@u-tokyo.ac.jp>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1994Jun12.112703.7814@u-tokyo.ac.jp>, slopez@u-tokyo.ac.jp (Sven López) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Jen Ramírez | jramirez@u-tokyo.ac.jp
+PGP Key fingerprint: 35FF 291E 5979 198D
+"Keep the channels open."
+
+From hsato@cmu.edu Tue Jun 14 07:35:03 1994
+Path: ashpoly!cascade!bigsur!cmu!hsato
+From: hsato@cmu.edu (Hana Sato)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Jun14.073503.9263@cmu.edu>
+Date: Tue, 14 Jun 1994 07:35:03 GMT
+References: <1994Jun12.112703.7814@u-tokyo.ac.jp> <1994Jun13.031303.7736@u-tokyo.ac.jp>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1994Jun13.031303.7736@u-tokyo.ac.jp>, jramirez@u-tokyo.ac.jp (Jen Ramírez) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Hana Sato | hsato@cmu.edu
+PGP Key fingerprint: E8C9 E976 8FB2 2907
+"Keep the channels open."
+

@@ -1,0 +1,126 @@
+From kito@utexas.edu Wed Jul 20 03:04:53 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!utexas!kito
+From: kito@utexas.edu (Katrin Ito)
+Newsgroups: comp.sys.m68k
+Subject: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Jul20.030453.5346@utexas.edu>
+Date: Wed, 20 Jul 1994 03:04:53 GMT
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+
+Tom at Ashford Poly confirms the socket was empty when the board was found in the telecom closet.
+
+-- 
+Katrin Ito <kito@utexas.edu>
+"There are 14 nodes and only 10 countries. Count again."
+Decstation 5000/200 / FreeBSD 2.1
+
+From vmoreau@titech.ac.jp Fri Jul 22 00:48:53 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!titech!vmoreau
+From: vmoreau@titech.ac.jp (Valeria Moreau)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Jul22.004853.5972@titech.ac.jp>
+Date: Fri, 22 Jul 1994 00:48:53 GMT
+References: <1994Jul20.030453.5346@utexas.edu>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1994Jul20.030453.5346@utexas.edu>, kito@utexas.edu (Katrin Ito) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+> Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+
+Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Valeria Moreau <vmoreau@titech.ac.jp>
+"In theory there is no difference between theory and practice."
+Atari Falcon 030 / System 7.5.1
+
+From eduarte@stanford.edu Sun Jul 24 04:42:53 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!stanford!eduarte
+From: eduarte@stanford.edu (Emi Duarte)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Jul24.044253.5070@stanford.edu>
+Date: Sun, 24 Jul 1994 04:42:53 GMT
+References: <1994Jul20.030453.5346@utexas.edu> <1994Jul22.004853.5972@titech.ac.jp>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1994Jul22.004853.5972@titech.ac.jp>, vmoreau@titech.ac.jp (Valeria Moreau) writes:
+> Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+> Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+PGP Public key available via finger or upon request.
+
+-- 
+Emi Duarte
+Tape trading list upon request. SASE required for international mail.
+
+From isouza@delphi.com Mon Jul 25 11:21:53 1994
+Path: ashpoly!cascade!mxgate!coyoacan!delphi!isouza
+From: isouza@delphi.com (Ines Souza)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Jul25.112153.7301@delphi.com>
+Date: Mon, 25 Jul 1994 11:21:53 GMT
+References: <1994Jul20.030453.5346@utexas.edu> <1994Jul22.004853.5972@titech.ac.jp> <1994Jul24.044253.5070@stanford.edu>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1994Jul24.044253.5070@stanford.edu>, eduarte@stanford.edu (Emi Duarte) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Ines Souza <isouza@delphi.com>
+"Tape doesn't lie at 02:14. Ears do."
+Atari Falcon 030 / FreeBSD 2.1
+
+From swatanabe@utexas.edu Tue Jul 26 19:38:53 1994
+Path: ashpoly!cascade!mxgate!coyoacan!utexas!swatanabe
+From: swatanabe@utexas.edu (Steve Watanabe)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Jul26.193853.3388@utexas.edu>
+Date: Tue, 26 Jul 1994 19:38:53 GMT
+References: <1994Jul20.030453.5346@utexas.edu>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1994Jul20.030453.5346@utexas.edu>, kito@utexas.edu (Katrin Ito) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+> Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Steve Watanabe <swatanabe@utexas.edu>
+Zyxel U-1496E @ 33,600 bps
+"There are 14 nodes and only 10 countries. Count again."
+

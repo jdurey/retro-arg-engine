@@ -1,0 +1,48 @@
+From seriksson@rwth-aachen.de Mon Mar 11 16:07:01 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!rwth-aachen!seriksson
+From: seriksson@rwth-aachen.de (Sergei Eriksson)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Mar11.160701.7939@rwth-aachen.de>
+Date: Mon, 11 Mar 1996 16:07:01 GMT
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+=== Sergei Eriksson ===
+Dept of Electrical Engineering, RWTH Aachen Informatik
+"Measuring a record you own is listening, not piracy."
+
+From stanaka@stanford.edu Wed Mar 13 15:48:01 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!stanford!stanaka
+From: stanaka@stanford.edu (Steve Tanaka)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Mar13.154801.6751@stanford.edu>
+Date: Wed, 13 Mar 1996 15:48:01 GMT
+References: <1996Mar11.160701.7939@rwth-aachen.de>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Mar11.160701.7939@rwth-aachen.de>, seriksson@rwth-aachen.de (Sergei Eriksson) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+=== Steve Tanaka ===
+Dept of Electrical Engineering, Stanford University Computer Systems Lab
+"Marcus is not one man."
+

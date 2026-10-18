@@ -1,0 +1,117 @@
+From mnilsson@titech.ac.jp Sat Oct 07 18:21:04 1995
+Path: ashpoly!cascade!bigsur!titech!mnilsson
+From: mnilsson@titech.ac.jp (Mike Nilsson)
+Newsgroups: comp.dsp
+Subject: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Oct07.182104.8812@titech.ac.jp>
+Date: Sat, 07 Oct 1995 18:21:04 GMT
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+Version 1.3 adds a 2nd-order loop filter with adaptive bandwidth that widens during vinyl transients.
+
+Grab the source archive from ftp.ashford-poly.edu:/pub/telecom-archives/stardust/stardust-1.3.tar.gz.
+
+-- 
+Mike Nilsson <mnilsson@titech.ac.jp>
+"We don't sign stars. We build them."
+Amiga 3000T / TOS 4.04
+
+From fgonzalez@delphi.com Sun Oct 08 07:43:04 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!delphi!fgonzalez
+From: fgonzalez@delphi.com (Fiona González)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Oct08.074304.8415@delphi.com>
+Date: Sun, 08 Oct 1995 07:43:04 GMT
+References: <1995Oct07.182104.8812@titech.ac.jp>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Oct07.182104.8812@titech.ac.jp>, mnilsson@titech.ac.jp (Mike Nilsson) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Fiona González
+Opinions expressed are solely my own and not those of Delphi Internet Services.
+------------------------------------------------------------
+
+From hivanov@u-tokyo.ac.jp Tue Oct 10 04:06:04 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!u-tokyo!hivanov
+From: hivanov@u-tokyo.ac.jp (Hana Ivanov)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Oct10.040604.5767@u-tokyo.ac.jp>
+Date: Tue, 10 Oct 1995 04:06:04 GMT
+References: <1995Oct07.182104.8812@titech.ac.jp> <1995Oct08.074304.8415@delphi.com>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995Oct08.074304.8415@delphi.com>, fgonzalez@delphi.com (Fiona González) writes:
+> Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Hana Ivanov <hivanov@u-tokyo.ac.jp>
+"The carrier frequency does not drift by accident."
+Amiga 1200 (Blizzard 030/50) / Linux 1.2.13
+
+From rsantos@pacbell.net Tue Oct 10 11:45:04 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!pacbell!rsantos
+From: rsantos@pacbell.net (Raj Santos)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Oct10.114504.9515@pacbell.net>
+Date: Tue, 10 Oct 1995 11:45:04 GMT
+References: <1995Oct07.182104.8812@titech.ac.jp>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Oct07.182104.8812@titech.ac.jp>, mnilsson@titech.ac.jp (Mike Nilsson) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Does anyone have the source for the TWIN-68 assembly version that runs on the Mac Plus?
+
+-- 
+Raj Santos
+Opinions expressed are solely my own and not those of Pacific Bell Internet Services.
+------------------------------------------------------------
+
+From fstewart@cmu.edu Thu Oct 12 11:54:04 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!cmu!fstewart
+From: fstewart@cmu.edu (Freya Stewart)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Oct12.115404.9336@cmu.edu>
+Date: Thu, 12 Oct 1995 11:54:04 GMT
+References: <1995Oct07.182104.8812@titech.ac.jp> <1995Oct10.114504.9515@pacbell.net>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1995Oct10.114504.9515@pacbell.net>, rsantos@pacbell.net (Raj Santos) writes:
+> Does anyone have the source for the TWIN-68 assembly version that runs on the Mac Plus?
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Freya Stewart
+Tape trading list upon request. SASE required for international mail.
+

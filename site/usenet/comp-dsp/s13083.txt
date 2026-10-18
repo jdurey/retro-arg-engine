@@ -1,0 +1,115 @@
+From mlopez@clari.net Sun Jun 19 18:56:41 1994
+Path: ashpoly!cascade!mxgate!coyoacan!clari!mlopez
+From: mlopez@clari.net (Mathieu López)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Jun19.185641.7081@clari.net>
+Date: Sun, 19 Jun 1994 18:56:41 GMT
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Mathieu López
+Tape trading list upon request. SASE required for international mail.
+
+From mlaurent@earthlink.net Mon Jun 20 07:09:41 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!earthlink!mlaurent
+From: mlaurent@earthlink.net (Marisol Laurent)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Jun20.070941.7612@earthlink.net>
+Date: Mon, 20 Jun 1994 07:09:41 GMT
+References: <1994Jun19.185641.7081@clari.net>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1994Jun19.185641.7081@clari.net>, mlopez@clari.net (Mathieu López) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Marisol Laurent -- EarthLink Network
+"Do not worship the copy."
+
+From tgirard@demon.co.uk Mon Jun 20 08:40:41 1994
+Path: ashpoly!cascade!mxgate!coyoacan!demon!tgirard
+From: tgirard@demon.co.uk (Takeshi Girard)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Jun20.084041.2778@demon.co.uk>
+Date: Mon, 20 Jun 1994 08:40:41 GMT
+References: <1994Jun19.185641.7081@clari.net> <1994Jun20.070941.7612@earthlink.net>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Jun20.070941.7612@earthlink.net>, mlaurent@earthlink.net (Marisol Laurent) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+=== Takeshi Girard ===
+Dept of Electrical Engineering, Demon Internet Services UK
+"Do not worship the copy."
+
+From mnilsson@mindspring.com Mon Jun 20 12:48:41 1994
+Path: ashpoly!cascade!brgate!saturno!mindspring!mnilsson
+From: mnilsson@mindspring.com (Mateo Nilsson)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Jun20.124841.7433@mindspring.com>
+Date: Mon, 20 Jun 1994 12:48:41 GMT
+References: <1994Jun19.185641.7081@clari.net> <1994Jun20.070941.7612@earthlink.net>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Jun20.070941.7612@earthlink.net>, mlaurent@earthlink.net (Marisol Laurent) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+=== Mateo Nilsson ===
+Dept of Electrical Engineering, MindSpring Enterprises
+"We don't sign stars. We build them."
+
+From aokonkwo@tum.de Tue Jun 21 14:58:41 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!tum!aokonkwo
+From: aokonkwo@tum.de (Anja Okonkwo)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Jun21.145841.9862@tum.de>
+Date: Tue, 21 Jun 1994 14:58:41 GMT
+References: <1994Jun19.185641.7081@clari.net> <1994Jun20.070941.7612@earthlink.net> <1994Jun20.084041.2778@demon.co.uk>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1994Jun20.084041.2778@demon.co.uk>, tgirard@demon.co.uk (Takeshi Girard) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Anja Okonkwo
+Tape trading list upon request. SASE required for international mail.
+

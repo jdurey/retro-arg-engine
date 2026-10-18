@@ -1,0 +1,118 @@
+From klarsson@tum.de Tue Feb 06 06:41:18 1996
+Path: ashpoly!cascade!bigsur!tum!klarsson
+From: klarsson@tum.de (Kenji Larsson)
+Newsgroups: comp.sys.m68k
+Subject: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Feb06.064118.9714@tum.de>
+Date: Tue, 06 Feb 1996 06:41:18 GMT
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+Kenji Larsson -- Technische Universität München
+"Tape doesn't lie at 02:14. Ears do."
+
+From divanov@netcom.com Wed Feb 07 19:18:18 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!netcom!divanov
+From: divanov@netcom.com (Dong-hyun Ivanov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Feb07.191818.6994@netcom.com>
+Date: Wed, 07 Feb 1996 19:18:18 GMT
+References: <1996Feb06.064118.9714@tum.de>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1996Feb06.064118.9714@tum.de>, klarsson@tum.de (Kenji Larsson) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Dong-hyun Ivanov -- NETCOM On-Line Communication Services
+"Row 14. No joke."
+
+From rkowalski@mit.edu Fri Feb 09 13:50:18 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!mit!rkowalski
+From: rkowalski@mit.edu (Rodrigo Kowalski)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Feb09.135018.4437@mit.edu>
+Date: Fri, 09 Feb 1996 13:50:18 GMT
+References: <1996Feb06.064118.9714@tum.de>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1996Feb06.064118.9714@tum.de>, klarsson@tum.de (Kenji Larsson) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Rodrigo Kowalski | rkowalski@mit.edu
+PGP Key fingerprint: DF8A D093 408A BA97
+"Keep the channels open."
+
+From jhughes@berkeley.edu Sat Feb 10 11:27:18 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!berkeley!jhughes
+From: jhughes@berkeley.edu (Jens Hughes)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Feb10.112718.6348@berkeley.edu>
+Date: Sat, 10 Feb 1996 11:27:18 GMT
+References: <1996Feb06.064118.9714@tum.de>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Feb06.064118.9714@tum.de>, klarsson@tum.de (Kenji Larsson) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Jens Hughes <jhughes@berkeley.edu>
+"Hold for relay."
+Pentium 90 (OS/2 Warp) / TOS 4.04
+
+From cfournier@pipeline.com Sun Feb 11 21:10:18 1996
+Path: ashpoly!cascade!bigsur!pipeline!cfournier
+From: cfournier@pipeline.com (Callum Fournier)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Feb11.211018.7160@pipeline.com>
+Date: Sun, 11 Feb 1996 21:10:18 GMT
+References: <1996Feb06.064118.9714@tum.de> <1996Feb09.135018.4437@mit.edu>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Feb09.135018.4437@mit.edu>, rkowalski@mit.edu (Rodrigo Kowalski) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Callum Fournier <cfournier@pipeline.com>
+*PLONK* filter active for trolls.
+Atari TT030 - NetBSD 1.0
+

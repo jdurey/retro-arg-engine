@@ -1,0 +1,71 @@
+From opopov@mit.edu Thu Feb 09 11:33:39 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!mit!opopov
+From: opopov@mit.edu (Olga Popov)
+Newsgroups: comp.dsp
+Subject: [FLAME] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Feb09.113339.2636@mit.edu>
+Date: Thu, 09 Feb 1995 11:33:39 GMT
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+
+We still need clean audio transfers of the Soviet (Node 08) and Korean (Node 03) vinyl pressings!
+
+-- 
+Olga Popov -- Massachusetts Institute of Technology
+"Extraordinary claims require extraordinary spectra."
+
+From jtanaka@clari.net Thu Feb 09 21:49:39 1995
+Path: ashpoly!cascade!mxgate!coyoacan!clari!jtanaka
+From: jtanaka@clari.net (Jen Tanaka)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Feb09.214939.2629@clari.net>
+Date: Thu, 09 Feb 1995 21:49:39 GMT
+References: <1995Feb09.113339.2636@mit.edu>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Feb09.113339.2636@mit.edu>, opopov@mit.edu (Olga Popov) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Can you provide a pre-compiled DOS binary? Some of us don't have Linux or a C compiler installed on our machines.
+
+-- 
+=== Jen Tanaka ===
+Dept of Electrical Engineering, ClariNet Communications Corp
+"We don't sign stars. We build them."
+
+From fito@tum.de Sat Feb 11 15:46:39 1995
+Path: ashpoly!cascade!brgate!saturno!tum!fito
+From: fito@tum.de (Freya Ito)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Feb11.154639.6500@tum.de>
+Date: Sat, 11 Feb 1995 15:46:39 GMT
+References: <1995Feb09.113339.2636@mit.edu> <1995Feb09.214939.2629@clari.net>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Feb09.214939.2629@clari.net>, jtanaka@clari.net (Jen Tanaka) writes:
+> Can you provide a pre-compiled DOS binary? Some of us don't have Linux or a C compiler installed on our machines.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Freya Ito <fito@tum.de>
+*PLONK* filter active for trolls.
+Commodore Amiga 500 (1MB OCS) - NetBSD 1.0
+

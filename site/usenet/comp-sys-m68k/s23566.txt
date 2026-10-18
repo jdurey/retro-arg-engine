@@ -1,0 +1,118 @@
+From asokolov@pacbell.net Tue Apr 02 11:13:38 1996
+Path: ashpoly!cascade!brgate!saturno!pacbell!asokolov
+From: asokolov@pacbell.net (Anja Sokolov)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Apr02.111338.3344@pacbell.net>
+Date: Tue, 02 Apr 1996 11:13:38 GMT
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Anja Sokolov <asokolov@pacbell.net>
+"We don't sign stars. We build them."
+Sun SparcStation 20 / NEXTSTEP 3.3
+
+From toliveira@cmu.edu Wed Apr 03 11:00:38 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!cmu!toliveira
+From: toliveira@cmu.edu (Tomas Oliveira)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Apr03.110038.2029@cmu.edu>
+Date: Wed, 03 Apr 1996 11:00:38 GMT
+References: <1996Apr02.111338.3344@pacbell.net>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Apr02.111338.3344@pacbell.net>, asokolov@pacbell.net (Anja Sokolov) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+> Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Tomas Oliveira -- Carnegie Mellon University School of CS
+"They will send a copy in my place."
+
+From dbrennan@panix.com Wed Apr 03 13:03:38 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!panix!dbrennan
+From: dbrennan@panix.com (Dmitri Brennan)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Apr03.130338.7848@panix.com>
+Date: Wed, 03 Apr 1996 13:03:38 GMT
+References: <1996Apr02.111338.3344@pacbell.net> <1996Apr03.110038.2029@cmu.edu>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Apr03.110038.2029@cmu.edu>, toliveira@cmu.edu (Tomas Oliveira) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Dmitri Brennan <dbrennan@panix.com>
+*PLONK* filter active for trolls.
+Decstation 5000/200 - NetBSD 1.0
+
+From mperez@mit.edu Thu Apr 04 13:41:38 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!mit!mperez
+From: mperez@mit.edu (Mateo Pérez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Apr04.134138.1624@mit.edu>
+Date: Thu, 04 Apr 1996 13:41:38 GMT
+References: <1996Apr02.111338.3344@pacbell.net> <1996Apr03.110038.2029@cmu.edu> <1996Apr03.130338.7848@panix.com>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1996Apr03.130338.7848@panix.com>, dbrennan@panix.com (Dmitri Brennan) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Mateo Pérez | mperez@mit.edu
+PGP Key fingerprint: 8E57 B5E2 786B 3176
+"Keep the channels open."
+
+From olarsson@pacbell.net Sat Apr 06 06:12:38 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!pacbell!olarsson
+From: olarsson@pacbell.net (Olga Larsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Apr06.061238.5756@pacbell.net>
+Date: Sat, 06 Apr 1996 06:12:38 GMT
+References: <1996Apr02.111338.3344@pacbell.net> <1996Apr03.110038.2029@cmu.edu> <1996Apr03.130338.7848@panix.com>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Apr03.130338.7848@panix.com>, dbrennan@panix.com (Dmitri Brennan) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+=== Olga Larsson ===
+Dept of Electrical Engineering, Pacific Bell Internet Services
+"Tape doesn't lie at 02:14. Ears do."
+

@@ -1,0 +1,117 @@
+From bkuznetsov@inria.fr Fri Dec 13 14:01:10 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!inria!bkuznetsov
+From: bkuznetsov@inria.fr (Bastien Kuznetsov)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Dec13.140110.1882@inria.fr>
+Date: Fri, 13 Dec 1996 14:01:10 GMT
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Bastien Kuznetsov <bkuznetsov@inria.fr>
+*PLONK* filter active for trolls.
+Sun 3/60 (SunOS 4.1.1) - NetBSD 1.0
+
+From jschneider@titech.ac.jp Sat Dec 14 09:53:10 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!titech!jschneider
+From: jschneider@titech.ac.jp (Jens Schneider)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Dec14.095310.5065@titech.ac.jp>
+Date: Sat, 14 Dec 1996 09:53:10 GMT
+References: <1996Dec13.140110.1882@inria.fr>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Dec13.140110.1882@inria.fr>, bkuznetsov@inria.fr (Bastien Kuznetsov) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Jens Schneider <jschneider@titech.ac.jp>
+Zyxel U-1496E @ 9600 Telebit bps
+"Measuring a record you own is listening, not piracy."
+
+From lhernandez@demon.co.uk Mon Dec 16 08:01:10 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!demon!lhernandez
+From: lhernandez@demon.co.uk (Lucia Hernández)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Dec16.080110.8564@demon.co.uk>
+Date: Mon, 16 Dec 1996 08:01:10 GMT
+References: <1996Dec13.140110.1882@inria.fr> <1996Dec14.095310.5065@titech.ac.jp>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Dec14.095310.5065@titech.ac.jp>, jschneider@titech.ac.jp (Jens Schneider) writes:
+> The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Lucia Hernández <lhernandez@demon.co.uk>
+*PLONK* filter active for trolls.
+486DX2/66 (Linux 1.2.13) - NetBSD 1.0
+
+From ldubois@inria.fr Mon Dec 16 11:07:10 1996
+Path: ashpoly!cascade!brgate!saturno!inria!ldubois
+From: ldubois@inria.fr (Lars Dubois)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Dec16.110710.4074@inria.fr>
+Date: Mon, 16 Dec 1996 11:07:10 GMT
+References: <1996Dec13.140110.1882@inria.fr>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1996Dec13.140110.1882@inria.fr>, bkuznetsov@inria.fr (Bastien Kuznetsov) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+Marcus Hale designed the TWIN-68 board before he disappeared. That's why his initials are on the PCB silkscreen.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Lars Dubois <ldubois@inria.fr>
+US Robotics Courier V.34 @ ISDN 64k bps
+"The hatch is open. Is anyone listening?"
+
+From dfischer@unam.mx Tue Dec 17 08:31:10 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!unam!dfischer
+From: dfischer@unam.mx (Diego Fischer)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Dec17.083110.4716@unam.mx>
+Date: Tue, 17 Dec 1996 08:31:10 GMT
+References: <1996Dec13.140110.1882@inria.fr> <1996Dec14.095310.5065@titech.ac.jp>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1996Dec14.095310.5065@titech.ac.jp>, jschneider@titech.ac.jp (Jens Schneider) writes:
+> The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+-- 
+Diego Fischer
+Tape trading list upon request. SASE required for international mail.
+

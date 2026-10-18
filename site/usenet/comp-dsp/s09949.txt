@@ -1,0 +1,94 @@
+From sdubois@kiae.su Sun Nov 13 09:44:31 1994
+Path: ashpoly!cascade!bigsur!kiae!sdubois
+From: sdubois@kiae.su (Steve Dubois)
+Newsgroups: comp.dsp
+Subject: Data: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Nov13.094431.9792@kiae.su>
+Date: Sun, 13 Nov 1994 09:44:31 GMT
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+What sampling rates are people using for their vinyl rips? 44.1 kHz or 48 kHz DAT?
+
+-- 
+Steve Dubois <sdubois@kiae.su>
+*PLONK* filter active for trolls.
+Acorn RiscPC 600 - NetBSD 1.0
+
+From hramirez@demon.co.uk Mon Nov 14 16:58:31 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!demon!hramirez
+From: hramirez@demon.co.uk (Heather Ramírez)
+Newsgroups: comp.dsp
+Subject: Re: Data: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Nov14.165831.8361@demon.co.uk>
+Date: Mon, 14 Nov 1994 16:58:31 GMT
+References: <1994Nov13.094431.9792@kiae.su>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1994Nov13.094431.9792@kiae.su>, sdubois@kiae.su (Steve Dubois) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Heather Ramírez -- Demon Internet Services UK
+"When every node is whole, the channel opens."
+
+From ajohansson@netcom.com Tue Nov 15 08:37:31 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!netcom!ajohansson
+From: ajohansson@netcom.com (Anton Johansson)
+Newsgroups: comp.dsp
+Subject: Re: Data: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Nov15.083731.1077@netcom.com>
+Date: Tue, 15 Nov 1994 08:37:31 GMT
+References: <1994Nov13.094431.9792@kiae.su>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1994Nov13.094431.9792@kiae.su>, sdubois@kiae.su (Steve Dubois) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Anton Johansson <ajohansson@netcom.com>
+SupraFAXModem 28.8 @ 9600 Telebit bps
+"Tape doesn't lie at 02:14. Ears do."
+
+From hschneider@cam.ac.uk Wed Nov 16 05:10:31 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!cam!hschneider
+From: hschneider@cam.ac.uk (Hana Schneider)
+Newsgroups: comp.dsp
+Subject: Re: Data: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Nov16.051031.4943@cam.ac.uk>
+Date: Wed, 16 Nov 1994 05:10:31 GMT
+References: <1994Nov13.094431.9792@kiae.su>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1994Nov13.094431.9792@kiae.su>, sdubois@kiae.su (Steve Dubois) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Hana Schneider -- University of Cambridge Computer Laboratory
+"There are 14 nodes and only 10 countries. Count again."
+

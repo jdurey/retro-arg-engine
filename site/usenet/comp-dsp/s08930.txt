@@ -1,0 +1,91 @@
+From msantos@illinois.edu Tue Nov 19 00:51:34 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!illinois!msantos
+From: msantos@illinois.edu (Mike Santos)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Nov19.005134.2034@illinois.edu>
+Date: Tue, 19 Nov 1996 00:51:34 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Mike Santos -- University of Illinois Urbana-Champaign
+"When every node is whole, the channel opens."
+
+From rstewart@uu.net Wed Nov 20 21:52:34 1996
+Path: ashpoly!cascade!bigsur!uu!rstewart
+From: rstewart@uu.net (Raj Stewart)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Nov20.215234.7257@uu.net>
+Date: Wed, 20 Nov 1996 21:52:34 GMT
+References: <1996Nov19.005134.2034@illinois.edu>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Nov19.005134.2034@illinois.edu>, msantos@illinois.edu (Mike Santos) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+=== Raj Stewart ===
+Dept of Electrical Engineering, UUNET Technologies, Falls Church VA
+"5 sigma is a discovery. 7 is a question."
+
+From mdubois@cern.ch Thu Nov 21 16:06:34 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!cern!mdubois
+From: mdubois@cern.ch (Morag Dubois)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Nov21.160634.2884@cern.ch>
+Date: Thu, 21 Nov 1996 16:06:34 GMT
+References: <1996Nov19.005134.2034@illinois.edu> <1996Nov20.215234.7257@uu.net>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Nov20.215234.7257@uu.net>, rstewart@uu.net (Raj Stewart) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Morag Dubois | mdubois@cern.ch
+PGP Key fingerprint: C6D3 3818 9F91 F02A
+"Keep the channels open."
+
+From otanaka@mindspring.com Thu Nov 21 23:31:34 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!mindspring!otanaka
+From: otanaka@mindspring.com (Olga Tanaka)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Nov21.233134.9035@mindspring.com>
+Date: Thu, 21 Nov 1996 23:31:34 GMT
+References: <1996Nov19.005134.2034@illinois.edu> <1996Nov20.215234.7257@uu.net>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1996Nov20.215234.7257@uu.net>, rstewart@uu.net (Raj Stewart) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Olga Tanaka -- MindSpring Enterprises
+"The hatch is open. Is anyone listening?"
+

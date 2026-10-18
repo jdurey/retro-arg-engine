@@ -1,0 +1,122 @@
+From lgirard@u-tokyo.ac.jp Mon May 22 22:47:49 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!u-tokyo!lgirard
+From: lgirard@u-tokyo.ac.jp (Lisa Girard)
+Newsgroups: comp.dsp
+Subject: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995May22.224749.6024@u-tokyo.ac.jp>
+Date: Mon, 22 May 1995 22:47:49 GMT
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+What sampling rates are people using for their vinyl rips? 44.1 kHz or 48 kHz DAT?
+
+-- 
+Lisa Girard | lgirard@u-tokyo.ac.jp
+PGP Key fingerprint: 709A 9F71 BE1F 1985
+"Keep the channels open."
+
+From dkuznetsov@earthlink.net Tue May 23 08:12:49 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!earthlink!dkuznetsov
+From: dkuznetsov@earthlink.net (Dmitri Kuznetsov)
+Newsgroups: comp.dsp
+Subject: Re: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995May23.081249.8669@earthlink.net>
+Date: Tue, 23 May 1995 08:12:49 GMT
+References: <1995May22.224749.6024@u-tokyo.ac.jp>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1995May22.224749.6024@u-tokyo.ac.jp>, lgirard@u-tokyo.ac.jp (Lisa Girard) writes:
+> Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+> A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Dmitri Kuznetsov <dkuznetsov@earthlink.net>
+Zyxel U-1496E @ 33,600 bps
+"The hatch is open. Is anyone listening?"
+
+From hivanov@kth.se Wed May 24 10:27:49 1995
+Path: ashpoly!cascade!mxgate!coyoacan!kth!hivanov
+From: hivanov@kth.se (Heather Ivanov)
+Newsgroups: comp.dsp
+Subject: Re: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995May24.102749.9867@kth.se>
+Date: Wed, 24 May 1995 10:27:49 GMT
+References: <1995May22.224749.6024@u-tokyo.ac.jp> <1995May23.081249.8669@earthlink.net>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1995May23.081249.8669@earthlink.net>, dkuznetsov@earthlink.net (Dmitri Kuznetsov) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+> Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Heather Ivanov <hivanov@kth.se>
+Zyxel U-1496E @ 33,600 bps
+"Tape doesn't lie at 02:14. Ears do."
+
+From nsouza@berkeley.edu Fri May 26 13:42:49 1995
+Path: ashpoly!cascade!mxgate!coyoacan!berkeley!nsouza
+From: nsouza@berkeley.edu (Natalia Souza)
+Newsgroups: comp.dsp
+Subject: Re: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995May26.134249.9502@berkeley.edu>
+Date: Fri, 26 May 1995 13:42:49 GMT
+References: <1995May22.224749.6024@u-tokyo.ac.jp> <1995May23.081249.8669@earthlink.net>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995May23.081249.8669@earthlink.net>, dkuznetsov@earthlink.net (Dmitri Kuznetsov) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Natalia Souza
+Tape trading list upon request. SASE required for international mail.
+
+From mpark@uni-hamburg.de Fri May 26 22:38:49 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!uni-hamburg!mpark
+From: mpark@uni-hamburg.de (Mike Park)
+Newsgroups: comp.dsp
+Subject: Re: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995May26.223849.4668@uni-hamburg.de>
+Date: Fri, 26 May 1995 22:38:49 GMT
+References: <1995May22.224749.6024@u-tokyo.ac.jp> <1995May23.081249.8669@earthlink.net> <1995May24.102749.9867@kth.se>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995May24.102749.9867@kth.se>, hivanov@kth.se (Heather Ivanov) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+> If you are posting from AOL, please read RFC 1036 before posting again.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Mike Park <mpark@uni-hamburg.de>
+"They will send a copy in my place."
+Mac IIci / 68882 FPU / NEXTSTEP 3.3
+

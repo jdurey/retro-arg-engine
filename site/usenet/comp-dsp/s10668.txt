@@ -1,0 +1,47 @@
+From bsanchez@illinois.edu Thu Apr 20 04:09:45 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!illinois!bsanchez
+From: bsanchez@illinois.edu (Bruno Sánchez)
+Newsgroups: comp.dsp
+Subject: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Apr20.040945.4055@illinois.edu>
+Date: Thu, 20 Apr 1995 04:09:45 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Bruno Sánchez
+Opinions expressed are solely my own and not those of University of Illinois Urbana-Champaign.
+------------------------------------------------------------
+
+From asuzuki@pipeline.com Fri Apr 21 05:36:45 1995
+Path: ashpoly!cascade!bigsur!pipeline!asuzuki
+From: asuzuki@pipeline.com (Aiko Suzuki)
+Newsgroups: comp.dsp
+Subject: Re: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Apr21.053645.5233@pipeline.com>
+Date: Fri, 21 Apr 1995 05:36:45 GMT
+References: <1995Apr20.040945.4055@illinois.edu>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Apr20.040945.4055@illinois.edu>, bsanchez@illinois.edu (Bruno Sánchez) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Aiko Suzuki | asuzuki@pipeline.com
+PGP Key fingerprint: BBAD A9CF 64D8 4A32
+"Keep the channels open."
+

@@ -1,0 +1,120 @@
+From arodriguez@u-tokyo.ac.jp Fri Jan 05 04:26:01 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!u-tokyo!arodriguez
+From: arodriguez@u-tokyo.ac.jp (Anton Rodríguez)
+Newsgroups: comp.dsp
+Subject: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Jan05.042601.8579@u-tokyo.ac.jp>
+Date: Fri, 05 Jan 1996 04:26:01 GMT
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+Anton Rodríguez <arodriguez@u-tokyo.ac.jp>
+Zyxel U-1496E @ 33,600 bps
+"Measuring a record you own is listening, not piracy."
+
+From dkarlsson@cam.ac.uk Sat Jan 06 22:54:01 1996
+Path: ashpoly!cascade!brgate!saturno!cam!dkarlsson
+From: dkarlsson@cam.ac.uk (Dong-hyun Karlsson)
+Newsgroups: comp.dsp
+Subject: Re: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Jan06.225401.9918@cam.ac.uk>
+Date: Sat, 06 Jan 1996 22:54:01 GMT
+References: <1996Jan05.042601.8579@u-tokyo.ac.jp>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1996Jan05.042601.8579@u-tokyo.ac.jp>, arodriguez@u-tokyo.ac.jp (Anton Rodríguez) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Dong-hyun Karlsson <dkarlsson@cam.ac.uk>
+"They will send a copy in my place."
+Commodore Amiga 500 (1MB OCS) / AmigaOS 3.1
+
+From gkuznetsov@mit.edu Sun Jan 07 09:18:01 1996
+Path: ashpoly!cascade!bigsur!mit!gkuznetsov
+From: gkuznetsov@mit.edu (Graham Kuznetsov)
+Newsgroups: comp.dsp
+Subject: Re: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Jan07.091801.3425@mit.edu>
+Date: Sun, 07 Jan 1996 09:18:01 GMT
+References: <1996Jan05.042601.8579@u-tokyo.ac.jp>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Jan05.042601.8579@u-tokyo.ac.jp>, arodriguez@u-tokyo.ac.jp (Anton Rodríguez) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+> Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+-- 
+Graham Kuznetsov -- Massachusetts Institute of Technology
+"Row 14. No joke."
+
+From tduarte@netcom.com Tue Jan 09 01:31:01 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!netcom!tduarte
+From: tduarte@netcom.com (Tobias Duarte)
+Newsgroups: comp.dsp
+Subject: Re: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Jan09.013101.8933@netcom.com>
+Date: Tue, 09 Jan 1996 01:31:01 GMT
+References: <1996Jan05.042601.8579@u-tokyo.ac.jp> <1996Jan06.225401.9918@cam.ac.uk>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Jan06.225401.9918@cam.ac.uk>, dkarlsson@cam.ac.uk (Dong-hyun Karlsson) writes:
+> Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+> Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+That's how the 14 lines of the Stardust matrix are encoded. Each regional pressing contains one line of the decoded text.
+
+-- 
+Tobias Duarte -- NETCOM On-Line Communication Services
+"Row 14. No joke."
+
+From tkarlsson@uni-hamburg.de Wed Jan 10 06:36:01 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!uni-hamburg!tkarlsson
+From: tkarlsson@uni-hamburg.de (Thiago Karlsson)
+Newsgroups: comp.dsp
+Subject: Re: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Jan10.063601.6981@uni-hamburg.de>
+Date: Wed, 10 Jan 1996 06:36:01 GMT
+References: <1996Jan05.042601.8579@u-tokyo.ac.jp> <1996Jan07.091801.3425@mit.edu>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1996Jan07.091801.3425@mit.edu>, gkuznetsov@mit.edu (Graham Kuznetsov) writes:
+> You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Thiago Karlsson | tkarlsson@uni-hamburg.de
+PGP Key fingerprint: 2B25 B011 D8AD 339A
+"Keep the channels open."
+

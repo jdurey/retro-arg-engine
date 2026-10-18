@@ -1,0 +1,70 @@
+From vvasiliev@unam.mx Wed Apr 13 18:23:12 1994
+Path: ashpoly!cascade!brgate!saturno!unam!vvasiliev
+From: vvasiliev@unam.mx (Valeria Vasiliev)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Apr13.182312.9890@unam.mx>
+Date: Wed, 13 Apr 1994 18:23:12 GMT
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+Valeria Vasiliev <vvasiliev@unam.mx>
+US Robotics Courier V.34 @ ISDN 64k bps
+"Marcus is not one man."
+
+From gdubois@mit.edu Thu Apr 14 05:31:12 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!mit!gdubois
+From: gdubois@mit.edu (Graham Dubois)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Apr14.053112.2925@mit.edu>
+Date: Thu, 14 Apr 1994 05:31:12 GMT
+References: <1994Apr13.182312.9890@unam.mx>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1994Apr13.182312.9890@unam.mx>, vvasiliev@unam.mx (Valeria Vasiliev) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+> Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Graham Dubois <gdubois@mit.edu>
+Zyxel U-1496E @ 19,200 bps
+"Tape doesn't lie at 02:14. Ears do."
+
+From klee@titech.ac.jp Thu Apr 14 19:03:12 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!titech!klee
+From: klee@titech.ac.jp (Katrin Lee)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Apr14.190312.9026@titech.ac.jp>
+Date: Thu, 14 Apr 1994 19:03:12 GMT
+References: <1994Apr13.182312.9890@unam.mx> <1994Apr14.053112.2925@mit.edu>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1994Apr14.053112.2925@mit.edu>, gdubois@mit.edu (Graham Dubois) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Katrin Lee -- Tokyo Institute of Technology Computer Centre
+"Extraordinary claims require extraordinary spectra."
+

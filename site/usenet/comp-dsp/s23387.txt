@@ -1,0 +1,118 @@
+From fjohansson@kth.se Wed Nov 15 17:28:22 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!kth!fjohansson
+From: fjohansson@kth.se (Fiona Johansson)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Nov15.172822.2516@kth.se>
+Date: Wed, 15 Nov 1995 17:28:22 GMT
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Fiona Johansson <fjohansson@kth.se>
+*PLONK* filter active for trolls.
+Decstation 5000/200 - NetBSD 1.0
+
+From vpopov@panix.com Thu Nov 16 05:45:22 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!panix!vpopov
+From: vpopov@panix.com (Valeria Popov)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Nov16.054522.5982@panix.com>
+Date: Thu, 16 Nov 1995 05:45:22 GMT
+References: <1995Nov15.172822.2516@kth.se>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995Nov15.172822.2516@kth.se>, fjohansson@kth.se (Fiona Johansson) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Valeria Popov <vpopov@panix.com>
+"Do not worship the copy."
+PC-9821Ap2 (NEC) / TOS 4.04
+
+From kandersson@rwth-aachen.de Thu Nov 16 10:55:22 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!rwth-aachen!kandersson
+From: kandersson@rwth-aachen.de (Katrin Andersson)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Nov16.105522.4509@rwth-aachen.de>
+Date: Thu, 16 Nov 1995 10:55:22 GMT
+References: <1995Nov15.172822.2516@kth.se>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Nov15.172822.2516@kth.se>, fjohansson@kth.se (Fiona Johansson) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+=== Katrin Andersson ===
+Dept of Electrical Engineering, RWTH Aachen Informatik
+"Marcus is not one man."
+
+From sweber@mit.edu Sat Nov 18 12:52:22 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!mit!sweber
+From: sweber@mit.edu (Steve Weber)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Nov18.125222.2100@mit.edu>
+Date: Sat, 18 Nov 1995 12:52:22 GMT
+References: <1995Nov15.172822.2516@kth.se> <1995Nov16.105522.4509@rwth-aachen.de>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Nov16.105522.4509@rwth-aachen.de>, kandersson@rwth-aachen.de (Katrin Andersson) writes:
+> Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+Steve Weber <sweber@mit.edu>
+*PLONK* filter active for trolls.
+Sun SparcStation 20 - NetBSD 1.0
+
+From ilaurent@uu.net Sat Nov 18 19:10:22 1995
+Path: ashpoly!cascade!mxgate!coyoacan!uu!ilaurent
+From: ilaurent@uu.net (Ines Laurent)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Nov18.191022.8541@uu.net>
+Date: Sat, 18 Nov 1995 19:10:22 GMT
+References: <1995Nov15.172822.2516@kth.se> <1995Nov16.105522.4509@rwth-aachen.de> <1995Nov18.125222.2100@mit.edu>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Nov18.125222.2100@mit.edu>, sweber@mit.edu (Steve Weber) writes:
+> Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+Ines Laurent
+Tape trading list upon request. SASE required for international mail.
+

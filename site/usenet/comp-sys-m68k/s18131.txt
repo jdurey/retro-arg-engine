@@ -1,0 +1,117 @@
+From rreyes@pacbell.net Sun Mar 17 23:54:51 1996
+Path: ashpoly!cascade!bigsur!pacbell!rreyes
+From: rreyes@pacbell.net (Rodrigo Reyes)
+Newsgroups: comp.sys.m68k
+Subject: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Mar17.235451.8203@pacbell.net>
+Date: Sun, 17 Mar 1996 23:54:51 GMT
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+=== Rodrigo Reyes ===
+Dept of Electrical Engineering, Pacific Bell Internet Services
+"Hardware is temporary. The signal survives."
+
+From dwatanabe@titech.ac.jp Mon Mar 18 01:05:51 1996
+Path: ashpoly!cascade!bigsur!titech!dwatanabe
+From: dwatanabe@titech.ac.jp (Dave Watanabe)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Mar18.010551.2521@titech.ac.jp>
+Date: Mon, 18 Mar 1996 01:05:51 GMT
+References: <1996Mar17.235451.8203@pacbell.net>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Mar17.235451.8203@pacbell.net>, rreyes@pacbell.net (Rodrigo Reyes) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Dave Watanabe
+Tape trading list upon request. SASE required for international mail.
+
+From bnovak@clari.net Mon Mar 18 08:30:51 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!clari!bnovak
+From: bnovak@clari.net (Brian Novak)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Mar18.083051.9403@clari.net>
+Date: Mon, 18 Mar 1996 08:30:51 GMT
+References: <1996Mar17.235451.8203@pacbell.net>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Mar17.235451.8203@pacbell.net>, rreyes@pacbell.net (Rodrigo Reyes) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Brian Novak <bnovak@clari.net>
+*PLONK* filter active for trolls.
+Amiga 3000T - NetBSD 1.0
+
+From tandersson@cmu.edu Wed Mar 20 01:05:51 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!cmu!tandersson
+From: tandersson@cmu.edu (Tomas Andersson)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Mar20.010551.8917@cmu.edu>
+Date: Wed, 20 Mar 1996 01:05:51 GMT
+References: <1996Mar17.235451.8203@pacbell.net>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Mar17.235451.8203@pacbell.net>, rreyes@pacbell.net (Rodrigo Reyes) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Tomas Andersson <tandersson@cmu.edu>
+SupraFAXModem 28.8 @ 14,400 bps
+"Hold for relay."
+
+From hkim@u-tokyo.ac.jp Thu Mar 21 20:29:51 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!u-tokyo!hkim
+From: hkim@u-tokyo.ac.jp (Heather Kim)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Mar21.202951.4207@u-tokyo.ac.jp>
+Date: Thu, 21 Mar 1996 20:29:51 GMT
+References: <1996Mar17.235451.8203@pacbell.net> <1996Mar18.083051.9403@clari.net>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Mar18.083051.9403@clari.net>, bnovak@clari.net (Brian Novak) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+=== Heather Kim ===
+Dept of Electrical Engineering, University of Tokyo Department of Information Science
+"The hatch is open. Is anyone listening?"
+

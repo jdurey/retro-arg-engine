@@ -1,0 +1,92 @@
+From knovak@uni-hamburg.de Sat Nov 05 04:40:46 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!uni-hamburg!knovak
+From: knovak@uni-hamburg.de (Kirsty Novak)
+Newsgroups: comp.sys.m68k
+Subject: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Nov05.044046.6307@uni-hamburg.de>
+Date: Sat, 05 Nov 1994 04:40:46 GMT
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Did Marcus take the decryption EPROM with him when he left the lab?
+
+-- 
+=== Kirsty Novak ===
+Dept of Electrical Engineering, Universität Hamburg Fachbereich Informatik
+"Measuring a record you own is listening, not piracy."
+
+From boliveira@clari.net Sun Nov 06 12:53:46 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!clari!boliveira
+From: boliveira@clari.net (Brian Oliveira)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Nov06.125346.3848@clari.net>
+Date: Sun, 06 Nov 1994 12:53:46 GMT
+References: <1994Nov05.044046.6307@uni-hamburg.de>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Nov05.044046.6307@uni-hamburg.de>, knovak@uni-hamburg.de (Kirsty Novak) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+-- 
+Brian Oliveira
+Opinions expressed are solely my own and not those of ClariNet Communications Corp.
+------------------------------------------------------------
+
+From feriksson@cmu.edu Mon Nov 07 17:34:46 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!cmu!feriksson
+From: feriksson@cmu.edu (Freya Eriksson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Nov07.173446.5400@cmu.edu>
+Date: Mon, 07 Nov 1994 17:34:46 GMT
+References: <1994Nov05.044046.6307@uni-hamburg.de>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Nov05.044046.6307@uni-hamburg.de>, knovak@uni-hamburg.de (Kirsty Novak) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Freya Eriksson <feriksson@cmu.edu>
+Zyxel U-1496E @ 9600 Telebit bps
+"Hardware is temporary. The signal survives."
+
+From pschneider@uni-hamburg.de Tue Nov 08 22:19:46 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!uni-hamburg!pschneider
+From: pschneider@uni-hamburg.de (Pavel Schneider)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Nov08.221946.6410@uni-hamburg.de>
+Date: Tue, 08 Nov 1994 22:19:46 GMT
+References: <1994Nov05.044046.6307@uni-hamburg.de>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1994Nov05.044046.6307@uni-hamburg.de>, knovak@uni-hamburg.de (Kirsty Novak) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Pavel Schneider -- Universität Hamburg Fachbereich Informatik
+"In theory there is no difference between theory and practice."
+

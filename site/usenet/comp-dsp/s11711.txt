@@ -1,0 +1,93 @@
+From jtakahashi@illinois.edu Sat Nov 26 08:23:05 1994
+Path: ashpoly!cascade!brgate!saturno!illinois!jtakahashi
+From: jtakahashi@illinois.edu (Ji-woo Takahashi)
+Newsgroups: comp.dsp
+Subject: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Nov26.082305.2806@illinois.edu>
+Date: Sat, 26 Nov 1994 08:23:05 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Ji-woo Takahashi
+Opinions expressed are solely my own and not those of University of Illinois Urbana-Champaign.
+------------------------------------------------------------
+
+From tlarsson@kiae.su Mon Nov 28 00:51:05 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!kiae!tlarsson
+From: tlarsson@kiae.su (Takeshi Larsson)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Nov28.005105.6000@kiae.su>
+Date: Mon, 28 Nov 1994 00:51:05 GMT
+References: <1994Nov26.082305.2806@illinois.edu>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1994Nov26.082305.2806@illinois.edu>, jtakahashi@illinois.edu (Ji-woo Takahashi) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Takeshi Larsson -- Kurchatov Institute of Atomic Energy, Moscow
+"Measuring a record you own is listening, not piracy."
+
+From tmartinez@berkeley.edu Mon Nov 28 17:12:05 1994
+Path: ashpoly!cascade!brgate!saturno!berkeley!tmartinez
+From: tmartinez@berkeley.edu (Takeshi Martínez)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Nov28.171205.4967@berkeley.edu>
+Date: Mon, 28 Nov 1994 17:12:05 GMT
+References: <1994Nov26.082305.2806@illinois.edu>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1994Nov26.082305.2806@illinois.edu>, jtakahashi@illinois.edu (Ji-woo Takahashi) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Takeshi Martínez -- UC Berkeley Department of EECS
+"In theory there is no difference between theory and practice."
+
+From rwatanabe@rwth-aachen.de Wed Nov 30 16:39:05 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!rwth-aachen!rwatanabe
+From: rwatanabe@rwth-aachen.de (Rodrigo Watanabe)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Nov30.163905.2189@rwth-aachen.de>
+Date: Wed, 30 Nov 1994 16:39:05 GMT
+References: <1994Nov26.082305.2806@illinois.edu> <1994Nov28.171205.4967@berkeley.edu>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Nov28.171205.4967@berkeley.edu>, tmartinez@berkeley.edu (Takeshi Martínez) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Rodrigo Watanabe | rwatanabe@rwth-aachen.de
+PGP Key fingerprint: ABE3 A88C 5C1B 6F88
+"Keep the channels open."
+

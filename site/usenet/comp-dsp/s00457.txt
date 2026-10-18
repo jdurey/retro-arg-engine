@@ -1,0 +1,121 @@
+From breyes@berkeley.edu Mon Jun 10 18:53:09 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!berkeley!breyes
+From: breyes@berkeley.edu (Bruno Reyes)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jun10.185309.2345@berkeley.edu>
+Date: Mon, 10 Jun 1996 18:53:09 GMT
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Bruno Reyes <breyes@berkeley.edu>
+*PLONK* filter active for trolls.
+Acorn RiscPC 600 - NetBSD 1.0
+
+From ekang@clari.net Wed Jun 12 00:09:09 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!clari!ekang
+From: ekang@clari.net (Emi Kang)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jun12.000909.3364@clari.net>
+Date: Wed, 12 Jun 1996 00:09:09 GMT
+References: <1996Jun10.185309.2345@berkeley.edu>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1996Jun10.185309.2345@berkeley.edu>, breyes@berkeley.edu (Bruno Reyes) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+=== Emi Kang ===
+Dept of Electrical Engineering, ClariNet Communications Corp
+"5 sigma is a discovery. 7 is a question."
+
+From rrodriguez@clari.net Thu Jun 13 05:26:09 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!clari!rrodriguez
+From: rrodriguez@clari.net (Renata Rodríguez)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jun13.052609.6981@clari.net>
+Date: Thu, 13 Jun 1996 05:26:09 GMT
+References: <1996Jun10.185309.2345@berkeley.edu>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1996Jun10.185309.2345@berkeley.edu>, breyes@berkeley.edu (Bruno Reyes) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Renata Rodríguez | rrodriguez@clari.net
+PGP Key fingerprint: 3DAD 6B6D 0D05 2005
+"Keep the channels open."
+
+From mkim@stanford.edu Fri Jun 14 10:07:09 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!stanford!mkim
+From: mkim@stanford.edu (Marisol Kim)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jun14.100709.5060@stanford.edu>
+Date: Fri, 14 Jun 1996 10:07:09 GMT
+References: <1996Jun10.185309.2345@berkeley.edu> <1996Jun12.000909.3364@clari.net>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996Jun12.000909.3364@clari.net>, ekang@clari.net (Emi Kang) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+> Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Marisol Kim <mkim@stanford.edu>
+*PLONK* filter active for trolls.
+Mac IIci / 68882 FPU - NetBSD 1.0
+
+From brodriguez@stanford.edu Fri Jun 14 21:04:09 1996
+Path: ashpoly!cascade!bigsur!stanford!brodriguez
+From: brodriguez@stanford.edu (Bill Rodríguez)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jun14.210409.1863@stanford.edu>
+Date: Fri, 14 Jun 1996 21:04:09 GMT
+References: <1996Jun10.185309.2345@berkeley.edu>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Jun10.185309.2345@berkeley.edu>, breyes@berkeley.edu (Bruno Reyes) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Bill Rodríguez
+Opinions expressed are solely my own and not those of Stanford University Computer Systems Lab.
+------------------------------------------------------------
+

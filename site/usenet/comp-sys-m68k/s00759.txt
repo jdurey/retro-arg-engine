@@ -1,0 +1,121 @@
+From bkowalski@utexas.edu Sun Dec 10 10:43:29 1995
+Path: ashpoly!cascade!brgate!saturno!utexas!bkowalski
+From: bkowalski@utexas.edu (Bill Kowalski)
+Newsgroups: comp.sys.m68k
+Subject: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Dec10.104329.3074@utexas.edu>
+Date: Sun, 10 Dec 1995 10:43:29 GMT
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+Schematic diagram in ASCII uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/twin68_array.asc.
+
+-- 
+=== Bill Kowalski ===
+Dept of Electrical Engineering, University of Texas at Austin
+"5 sigma is a discovery. 7 is a question."
+
+From apopov@uu.net Mon Dec 11 16:12:29 1995
+Path: ashpoly!cascade!bigsur!uu!apopov
+From: apopov@uu.net (Andrei Popov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Dec11.161229.7736@uu.net>
+Date: Mon, 11 Dec 1995 16:12:29 GMT
+References: <1995Dec10.104329.3074@utexas.edu>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Dec10.104329.3074@utexas.edu>, bkowalski@utexas.edu (Bill Kowalski) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Andrei Popov | apopov@uu.net
+PGP Key fingerprint: 377E A483 0BBD 2ABD
+"Keep the channels open."
+
+From rkuznetsov@pacbell.net Tue Dec 12 11:43:29 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!pacbell!rkuznetsov
+From: rkuznetsov@pacbell.net (Renata Kuznetsov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Dec12.114329.2180@pacbell.net>
+Date: Tue, 12 Dec 1995 11:43:29 GMT
+References: <1995Dec10.104329.3074@utexas.edu> <1995Dec11.161229.7736@uu.net>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Dec11.161229.7736@uu.net>, apopov@uu.net (Andrei Popov) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+> If you are posting from AOL, please read RFC 1036 before posting again.
+
+Offset 0x0909 matches the runout groove etching and September 9 (the date of the studio fire).
+
+-- 
+Renata Kuznetsov
+Opinions expressed are solely my own and not those of Pacific Bell Internet Services.
+------------------------------------------------------------
+
+From sreyes@berkeley.edu Tue Dec 12 21:53:29 1995
+Path: ashpoly!cascade!bigsur!berkeley!sreyes
+From: sreyes@berkeley.edu (Seo-yeon Reyes)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Dec12.215329.5937@berkeley.edu>
+Date: Tue, 12 Dec 1995 21:53:29 GMT
+References: <1995Dec10.104329.3074@utexas.edu>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995Dec10.104329.3074@utexas.edu>, bkowalski@utexas.edu (Bill Kowalski) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+=== Seo-yeon Reyes ===
+Dept of Electrical Engineering, UC Berkeley Department of EECS
+"Row 14. No joke."
+
+From llindqvist@cern.ch Wed Dec 13 23:06:29 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!cern!llindqvist
+From: llindqvist@cern.ch (Lisa Lindqvist)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Dec13.230629.5663@cern.ch>
+Date: Wed, 13 Dec 1995 23:06:29 GMT
+References: <1995Dec10.104329.3074@utexas.edu> <1995Dec11.161229.7736@uu.net>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Dec11.161229.7736@uu.net>, apopov@uu.net (Andrei Popov) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+Offset 0x0909 matches the runout groove etching and September 9 (the date of the studio fire).
+
+-- 
+Lisa Lindqvist <llindqvist@cern.ch>
+Zyxel U-1496E @ 19,200 bps
+"The carrier frequency does not drift by accident."
+

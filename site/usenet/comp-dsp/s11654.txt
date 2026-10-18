@@ -1,0 +1,95 @@
+From rrodriguez@u-tokyo.ac.jp Wed Dec 13 13:24:06 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!u-tokyo!rrodriguez
+From: rrodriguez@u-tokyo.ac.jp (Rodrigo Rodríguez)
+Newsgroups: comp.dsp
+Subject: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Dec13.132406.6959@u-tokyo.ac.jp>
+Date: Wed, 13 Dec 1995 13:24:06 GMT
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+What sampling rates are people using for their vinyl rips? 44.1 kHz or 48 kHz DAT?
+
+-- 
+Rodrigo Rodríguez <rrodriguez@u-tokyo.ac.jp>
+"The hatch is open. Is anyone listening?"
+486DX4/100 (FreeBSD 2.0.5) / SunOS 4.1.4
+
+From jsanchez@kth.se Thu Dec 14 10:57:06 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!kth!jsanchez
+From: jsanchez@kth.se (Joachim Sánchez)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Dec14.105706.7372@kth.se>
+Date: Thu, 14 Dec 1995 10:57:06 GMT
+References: <1995Dec13.132406.6959@u-tokyo.ac.jp>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995Dec13.132406.6959@u-tokyo.ac.jp>, rrodriguez@u-tokyo.ac.jp (Rodrigo Rodríguez) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Joachim Sánchez -- Royal Institute of Technology, Stockholm
+"Marcus is not one man."
+
+From jsato@mit.edu Fri Dec 15 00:57:06 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!mit!jsato
+From: jsato@mit.edu (Jens Sato)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Dec15.005706.5190@mit.edu>
+Date: Fri, 15 Dec 1995 00:57:06 GMT
+References: <1995Dec13.132406.6959@u-tokyo.ac.jp> <1995Dec14.105706.7372@kth.se>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Dec14.105706.7372@kth.se>, jsanchez@kth.se (Joachim Sánchez) writes:
+> I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+=== Jens Sato ===
+Dept of Electrical Engineering, Massachusetts Institute of Technology
+"In theory there is no difference between theory and practice."
+
+From gpopov@cam.ac.uk Fri Dec 15 02:23:06 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!cam!gpopov
+From: gpopov@cam.ac.uk (Graham Popov)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Dec15.022306.7341@cam.ac.uk>
+Date: Fri, 15 Dec 1995 02:23:06 GMT
+References: <1995Dec13.132406.6959@u-tokyo.ac.jp> <1995Dec14.105706.7372@kth.se> <1995Dec15.005706.5190@mit.edu>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Dec15.005706.5190@mit.edu>, jsato@mit.edu (Jens Sato) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Graham Popov
+Opinions expressed are solely my own and not those of University of Cambridge Computer Laboratory.
+------------------------------------------------------------
+

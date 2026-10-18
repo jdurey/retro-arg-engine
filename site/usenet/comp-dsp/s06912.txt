@@ -1,0 +1,47 @@
+From hjohansson@earthlink.net Thu Nov 02 15:26:24 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!earthlink!hjohansson
+From: hjohansson@earthlink.net (Heather Johansson)
+Newsgroups: comp.dsp
+Subject: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Nov02.152624.6153@earthlink.net>
+Date: Thu, 02 Nov 1995 15:26:24 GMT
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Heather Johansson -- EarthLink Network
+"In theory there is no difference between theory and practice."
+
+From adubois@cam.ac.uk Sat Nov 04 10:13:24 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!cam!adubois
+From: adubois@cam.ac.uk (Andrei Dubois)
+Newsgroups: comp.dsp
+Subject: Re: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Nov04.101324.2315@cam.ac.uk>
+Date: Sat, 04 Nov 1995 10:13:24 GMT
+References: <1995Nov02.152624.6153@earthlink.net>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Nov02.152624.6153@earthlink.net>, hjohansson@earthlink.net (Heather Johansson) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Andrei Dubois <adubois@cam.ac.uk>
+*PLONK* filter active for trolls.
+Decstation 5000/200 - NetBSD 1.0
+

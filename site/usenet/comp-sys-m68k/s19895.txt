@@ -1,0 +1,70 @@
+From khughes@stanford.edu Mon Jan 09 08:13:57 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!stanford!khughes
+From: khughes@stanford.edu (Karen Hughes)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Jan09.081357.9015@stanford.edu>
+Date: Mon, 09 Jan 1995 08:13:57 GMT
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Karen Hughes
+Opinions expressed are solely my own and not those of Stanford University Computer Systems Lab.
+------------------------------------------------------------
+
+From lfischer@titech.ac.jp Tue Jan 10 10:58:57 1995
+Path: ashpoly!cascade!mxgate!coyoacan!titech!lfischer
+From: lfischer@titech.ac.jp (Lucia Fischer)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Jan10.105857.1053@titech.ac.jp>
+Date: Tue, 10 Jan 1995 10:58:57 GMT
+References: <1995Jan09.081357.9015@stanford.edu>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Jan09.081357.9015@stanford.edu>, khughes@stanford.edu (Karen Hughes) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Lucia Fischer -- Tokyo Institute of Technology Computer Centre
+"Marcus is not one man."
+
+From mlarsson@u-tokyo.ac.jp Wed Jan 11 07:01:57 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!u-tokyo!mlarsson
+From: mlarsson@u-tokyo.ac.jp (Matthias Larsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Jan11.070157.7253@u-tokyo.ac.jp>
+Date: Wed, 11 Jan 1995 07:01:57 GMT
+References: <1995Jan09.081357.9015@stanford.edu> <1995Jan10.105857.1053@titech.ac.jp>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Jan10.105857.1053@titech.ac.jp>, lfischer@titech.ac.jp (Lucia Fischer) writes:
+> The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Matthias Larsson
+Opinions expressed are solely my own and not those of University of Tokyo Department of Information Science.
+------------------------------------------------------------
+

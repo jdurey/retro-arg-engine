@@ -1,0 +1,95 @@
+From tlaurent@panix.com Mon Oct 09 18:29:46 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!panix!tlaurent
+From: tlaurent@panix.com (Tobias Laurent)
+Newsgroups: comp.dsp
+Subject: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Oct09.182946.3412@panix.com>
+Date: Mon, 09 Oct 1995 18:29:46 GMT
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Tobias Laurent
+Opinions expressed are solely my own and not those of Public Access Unix of New York.
+------------------------------------------------------------
+
+From bfournier@tum.de Tue Oct 10 03:23:46 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!tum!bfournier
+From: bfournier@tum.de (Bruno Fournier)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Oct10.032346.8380@tum.de>
+Date: Tue, 10 Oct 1995 03:23:46 GMT
+References: <1995Oct09.182946.3412@panix.com>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Oct09.182946.3412@panix.com>, tlaurent@panix.com (Tobias Laurent) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Bruno Fournier <bfournier@tum.de>
+US Robotics Courier V.34 @ 9600 Telebit bps
+"Tape doesn't lie at 02:14. Ears do."
+
+From jlarsson@utexas.edu Tue Oct 10 16:41:46 1995
+Path: ashpoly!cascade!bigsur!utexas!jlarsson
+From: jlarsson@utexas.edu (Julien Larsson)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Oct10.164146.6831@utexas.edu>
+Date: Tue, 10 Oct 1995 16:41:46 GMT
+References: <1995Oct09.182946.3412@panix.com> <1995Oct10.032346.8380@tum.de>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Oct10.032346.8380@tum.de>, bfournier@tum.de (Bruno Fournier) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Julien Larsson <jlarsson@utexas.edu>
+Hayes Optima 288 @ 9600 Telebit bps
+"Measuring a record you own is listening, not piracy."
+
+From mjohansson@pipeline.com Wed Oct 11 10:38:46 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!pipeline!mjohansson
+From: mjohansson@pipeline.com (Mei Johansson)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Oct11.103846.4013@pipeline.com>
+Date: Wed, 11 Oct 1995 10:38:46 GMT
+References: <1995Oct09.182946.3412@panix.com> <1995Oct10.032346.8380@tum.de> <1995Oct10.164146.6831@utexas.edu>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995Oct10.164146.6831@utexas.edu>, jlarsson@utexas.edu (Julien Larsson) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Mei Johansson | mjohansson@pipeline.com
+PGP Key fingerprint: B613 AA89 5C07 7D4D
+"Keep the channels open."
+

@@ -1,0 +1,72 @@
+From tkim@cam.ac.uk Sat Jul 22 23:11:02 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!cam!tkim
+From: tkim@cam.ac.uk (Tomas Kim)
+Newsgroups: comp.dsp
+Subject: [INFO] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jul22.231102.1740@cam.ac.uk>
+Date: Sat, 22 Jul 1995 23:11:02 GMT
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Tomas Kim <tkim@cam.ac.uk>
+"The hatch is open. Is anyone listening?"
+Amiga 3000T / NEXTSTEP 3.3
+
+From scampbell@kth.se Tue Jul 25 02:10:02 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!kth!scampbell
+From: scampbell@kth.se (Steve Campbell)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jul25.021002.2913@kth.se>
+Date: Tue, 25 Jul 1995 02:10:02 GMT
+References: <1995Jul22.231102.1740@cam.ac.uk>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Jul22.231102.1740@cam.ac.uk>, tkim@cam.ac.uk (Tomas Kim) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Steve Campbell <scampbell@kth.se>
+Practical Peripherals 14.4 @ 14,400 bps
+"Extraordinary claims require extraordinary spectra."
+
+From rlaurent@demon.co.uk Tue Jul 25 06:34:02 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!demon!rlaurent
+From: rlaurent@demon.co.uk (Renata Laurent)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jul25.063402.1168@demon.co.uk>
+Date: Tue, 25 Jul 1995 06:34:02 GMT
+References: <1995Jul22.231102.1740@cam.ac.uk>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Jul22.231102.1740@cam.ac.uk>, tkim@cam.ac.uk (Tomas Kim) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Renata Laurent <rlaurent@demon.co.uk>
+"In theory there is no difference between theory and practice."
+Amiga 1200 (Blizzard 030/50) / System 7.5.1
+

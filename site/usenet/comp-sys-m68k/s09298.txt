@@ -1,0 +1,48 @@
+From msilva@illinois.edu Wed Jun 01 12:51:46 1994
+Path: ashpoly!cascade!brgate!saturno!illinois!msilva
+From: msilva@illinois.edu (Mikhail Silva)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Jun01.125146.4255@illinois.edu>
+Date: Wed, 01 Jun 1994 12:51:46 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Mikhail Silva
+Opinions expressed are solely my own and not those of University of Illinois Urbana-Champaign.
+------------------------------------------------------------
+
+From tkowalski@delphi.com Fri Jun 03 00:31:46 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!delphi!tkowalski
+From: tkowalski@delphi.com (Tomas Kowalski)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Jun03.003146.4393@delphi.com>
+Date: Fri, 03 Jun 1994 00:31:46 GMT
+References: <1994Jun01.125146.4255@illinois.edu>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1994Jun01.125146.4255@illinois.edu>, msilva@illinois.edu (Mikhail Silva) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Tomas Kowalski <tkowalski@delphi.com>
+*PLONK* filter active for trolls.
+Acorn RiscPC 600 - NetBSD 1.0
+

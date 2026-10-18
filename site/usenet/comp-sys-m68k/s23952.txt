@@ -1,0 +1,115 @@
+From akuznetsov@demon.co.uk Mon Jan 23 16:53:04 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!demon!akuznetsov
+From: akuznetsov@demon.co.uk (Andrei Kuznetsov)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jan23.165304.3130@demon.co.uk>
+Date: Mon, 23 Jan 1995 16:53:04 GMT
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Andrei Kuznetsov
+Opinions expressed are solely my own and not those of Demon Internet Services UK.
+------------------------------------------------------------
+
+From mjohansson@u-tokyo.ac.jp Wed Jan 25 03:29:04 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!u-tokyo!mjohansson
+From: mjohansson@u-tokyo.ac.jp (Matthias Johansson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jan25.032904.3350@u-tokyo.ac.jp>
+Date: Wed, 25 Jan 1995 03:29:04 GMT
+References: <1995Jan23.165304.3130@demon.co.uk>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Jan23.165304.3130@demon.co.uk>, akuznetsov@demon.co.uk (Andrei Kuznetsov) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+=== Matthias Johansson ===
+Dept of Electrical Engineering, University of Tokyo Department of Information Science
+"Hold for relay."
+
+From htanaka@panix.com Wed Jan 25 18:06:04 1995
+Path: ashpoly!cascade!mxgate!coyoacan!panix!htanaka
+From: htanaka@panix.com (Hana Tanaka)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jan25.180604.6102@panix.com>
+Date: Wed, 25 Jan 1995 18:06:04 GMT
+References: <1995Jan23.165304.3130@demon.co.uk> <1995Jan25.032904.3350@u-tokyo.ac.jp>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1995Jan25.032904.3350@u-tokyo.ac.jp>, mjohansson@u-tokyo.ac.jp (Matthias Johansson) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Hana Tanaka
+Tape trading list upon request. SASE required for international mail.
+
+From fpetrov@delphi.com Fri Jan 27 10:59:04 1995
+Path: ashpoly!cascade!bigsur!delphi!fpetrov
+From: fpetrov@delphi.com (Fiona Petrov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jan27.105904.7883@delphi.com>
+Date: Fri, 27 Jan 1995 10:59:04 GMT
+References: <1995Jan23.165304.3130@demon.co.uk> <1995Jan25.032904.3350@u-tokyo.ac.jp>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Jan25.032904.3350@u-tokyo.ac.jp>, mjohansson@u-tokyo.ac.jp (Matthias Johansson) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+=== Fiona Petrov ===
+Dept of Electrical Engineering, Delphi Internet Services
+"When every node is whole, the channel opens."
+
+From ebrennan@delphi.com Sat Jan 28 05:07:04 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!delphi!ebrennan
+From: ebrennan@delphi.com (Elaine Brennan)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jan28.050704.4480@delphi.com>
+Date: Sat, 28 Jan 1995 05:07:04 GMT
+References: <1995Jan23.165304.3130@demon.co.uk> <1995Jan25.032904.3350@u-tokyo.ac.jp>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Jan25.032904.3350@u-tokyo.ac.jp>, mjohansson@u-tokyo.ac.jp (Matthias Johansson) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Elaine Brennan <ebrennan@delphi.com>
+"Hardware is temporary. The signal survives."
+Acorn RiscPC 600 / FreeBSD 2.1
+

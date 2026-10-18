@@ -1,0 +1,97 @@
+From mpark@panix.com Sat Jul 20 01:01:57 1996
+Path: ashpoly!cascade!mxgate!coyoacan!panix!mpark
+From: mpark@panix.com (Mateo Park)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jul20.010157.6313@panix.com>
+Date: Sat, 20 Jul 1996 01:01:57 GMT
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Mateo Park
+Opinions expressed are solely my own and not those of Public Access Unix of New York.
+------------------------------------------------------------
+
+From lnilsson@rwth-aachen.de Sun Jul 21 03:34:57 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!rwth-aachen!lnilsson
+From: lnilsson@rwth-aachen.de (Lars Nilsson)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jul21.033457.5212@rwth-aachen.de>
+Date: Sun, 21 Jul 1996 03:34:57 GMT
+References: <1996Jul20.010157.6313@panix.com>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1996Jul20.010157.6313@panix.com>, mpark@panix.com (Mateo Park) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Lars Nilsson <lnilsson@rwth-aachen.de>
+"A soul is not exclusive to biology."
+Commodore Amiga 500 (1MB OCS) / Linux 1.2.13
+
+From jsuzuki@stanford.edu Mon Jul 22 01:28:57 1996
+Path: ashpoly!cascade!bigsur!stanford!jsuzuki
+From: jsuzuki@stanford.edu (Jens Suzuki)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jul22.012857.6942@stanford.edu>
+Date: Mon, 22 Jul 1996 01:28:57 GMT
+References: <1996Jul20.010157.6313@panix.com> <1996Jul21.033457.5212@rwth-aachen.de>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1996Jul21.033457.5212@rwth-aachen.de>, lnilsson@rwth-aachen.de (Lars Nilsson) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Jens Suzuki
+Tape trading list upon request. SASE required for international mail.
+
+From mpark@panix.com Tue Jul 23 12:48:57 1996
+Path: ashpoly!cascade!mxgate!coyoacan!panix!mpark
+From: mpark@panix.com (Matthias Park)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jul23.124857.3996@panix.com>
+Date: Tue, 23 Jul 1996 12:48:57 GMT
+References: <1996Jul20.010157.6313@panix.com> <1996Jul21.033457.5212@rwth-aachen.de> <1996Jul22.012857.6942@stanford.edu>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996Jul22.012857.6942@stanford.edu>, jsuzuki@stanford.edu (Jens Suzuki) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+Matthias Park -- Public Access Unix of New York
+"Extraordinary claims require extraordinary spectra."
+

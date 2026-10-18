@@ -1,0 +1,119 @@
+From snilsson@kiae.su Fri Dec 22 12:24:58 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!kiae!snilsson
+From: snilsson@kiae.su (Sun-mi Nilsson)
+Newsgroups: comp.dsp
+Subject: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Dec22.122458.6202@kiae.su>
+Date: Fri, 22 Dec 1995 12:24:58 GMT
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+
+Grab the source archive from ftp.ashford-poly.edu:/pub/telecom-archives/stardust/stardust-1.3.tar.gz.
+
+-- 
+Sun-mi Nilsson | snilsson@kiae.su
+PGP Key fingerprint: 47EF 2465 6E52 16D7
+"Keep the channels open."
+
+From gnovak@purdue.edu Fri Dec 22 16:28:58 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!purdue!gnovak
+From: gnovak@purdue.edu (Göran Novak)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Dec22.162858.9513@purdue.edu>
+Date: Fri, 22 Dec 1995 16:28:58 GMT
+References: <1995Dec22.122458.6202@kiae.su>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Dec22.122458.6202@kiae.su>, snilsson@kiae.su (Sun-mi Nilsson) writes:
+> Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+> The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+-- 
+Göran Novak | gnovak@purdue.edu
+PGP Key fingerprint: 825E 9627 7A55 F174
+"Keep the channels open."
+
+From rfournier@titech.ac.jp Sat Dec 23 11:09:58 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!titech!rfournier
+From: rfournier@titech.ac.jp (Renata Fournier)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Dec23.110958.1409@titech.ac.jp>
+Date: Sat, 23 Dec 1995 11:09:58 GMT
+References: <1995Dec22.122458.6202@kiae.su> <1995Dec22.162858.9513@purdue.edu>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Dec22.162858.9513@purdue.edu>, gnovak@purdue.edu (Göran Novak) writes:
+> Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+=== Renata Fournier ===
+Dept of Electrical Engineering, Tokyo Institute of Technology Computer Centre
+"Extraordinary claims require extraordinary spectra."
+
+From dduarte@delphi.com Sat Dec 23 13:32:58 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!delphi!dduarte
+From: dduarte@delphi.com (Dmitri Duarte)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Dec23.133258.8551@delphi.com>
+Date: Sat, 23 Dec 1995 13:32:58 GMT
+References: <1995Dec22.122458.6202@kiae.su> <1995Dec22.162858.9513@purdue.edu> <1995Dec23.110958.1409@titech.ac.jp>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Dec23.110958.1409@titech.ac.jp>, rfournier@titech.ac.jp (Renata Fournier) writes:
+> Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+=== Dmitri Duarte ===
+Dept of Electrical Engineering, Delphi Internet Services
+"Marcus is not one man."
+
+From isouza@kiae.su Sat Dec 23 18:57:58 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!kiae!isouza
+From: isouza@kiae.su (Ines Souza)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Dec23.185758.5647@kiae.su>
+Date: Sat, 23 Dec 1995 18:57:58 GMT
+References: <1995Dec22.122458.6202@kiae.su> <1995Dec22.162858.9513@purdue.edu> <1995Dec23.110958.1409@titech.ac.jp> <1995Dec23.133258.8551@delphi.com>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995Dec23.133258.8551@delphi.com>, dduarte@delphi.com (Dmitri Duarte) writes:
+> Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Ines Souza | isouza@kiae.su
+PGP Key fingerprint: 87F0 C45E 5B24 792C
+"Keep the channels open."
+

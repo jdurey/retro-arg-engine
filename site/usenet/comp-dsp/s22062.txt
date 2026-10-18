@@ -1,0 +1,69 @@
+From dsmirnov@berkeley.edu Thu Feb 17 04:30:41 1994
+Path: ashpoly!cascade!brgate!saturno!berkeley!dsmirnov
+From: dsmirnov@berkeley.edu (Dave Smirnov)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Feb17.043041.5923@berkeley.edu>
+Date: Thu, 17 Feb 1994 04:30:41 GMT
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+=== Dave Smirnov ===
+Dept of Electrical Engineering, UC Berkeley Department of EECS
+"Hardware is temporary. The signal survives."
+
+From kmoreau@berkeley.edu Sat Feb 19 02:06:41 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!berkeley!kmoreau
+From: kmoreau@berkeley.edu (Katrin Moreau)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Feb19.020641.2290@berkeley.edu>
+Date: Sat, 19 Feb 1994 02:06:41 GMT
+References: <1994Feb17.043041.5923@berkeley.edu>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1994Feb17.043041.5923@berkeley.edu>, dsmirnov@berkeley.edu (Dave Smirnov) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Katrin Moreau -- UC Berkeley Department of EECS
+"They will send a copy in my place."
+
+From kchoi@demon.co.uk Mon Feb 21 05:47:41 1994
+Path: ashpoly!cascade!brgate!saturno!demon!kchoi
+From: kchoi@demon.co.uk (Katrin Choi)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Feb21.054741.4207@demon.co.uk>
+Date: Mon, 21 Feb 1994 05:47:41 GMT
+References: <1994Feb17.043041.5923@berkeley.edu>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Feb17.043041.5923@berkeley.edu>, dsmirnov@berkeley.edu (Dave Smirnov) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+=== Katrin Choi ===
+Dept of Electrical Engineering, Demon Internet Services UK
+"The carrier frequency does not drift by accident."
+

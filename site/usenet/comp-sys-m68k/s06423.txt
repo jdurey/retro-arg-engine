@@ -1,0 +1,91 @@
+From anovak@panix.com Wed Dec 18 04:29:23 1996
+Path: ashpoly!cascade!bigsur!panix!anovak
+From: anovak@panix.com (Andrei Novak)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Dec18.042923.4362@panix.com>
+Date: Wed, 18 Dec 1996 04:29:23 GMT
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Andrei Novak
+Tape trading list upon request. SASE required for international mail.
+
+From sbrennan@pipeline.com Wed Dec 18 23:25:23 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!pipeline!sbrennan
+From: sbrennan@pipeline.com (Sun-mi Brennan)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Dec18.232523.1992@pipeline.com>
+Date: Wed, 18 Dec 1996 23:25:23 GMT
+References: <1996Dec18.042923.4362@panix.com>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1996Dec18.042923.4362@panix.com>, anovak@panix.com (Andrei Novak) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+-- 
+Sun-mi Brennan
+Tape trading list upon request. SASE required for international mail.
+
+From mgirard@purdue.edu Fri Dec 20 09:19:23 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!purdue!mgirard
+From: mgirard@purdue.edu (Mateo Girard)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Dec20.091923.1587@purdue.edu>
+Date: Fri, 20 Dec 1996 09:19:23 GMT
+References: <1996Dec18.042923.4362@panix.com>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Dec18.042923.4362@panix.com>, anovak@panix.com (Andrei Novak) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Mateo Girard
+Opinions expressed are solely my own and not those of Purdue University Engineering Computer Network.
+------------------------------------------------------------
+
+From jhernandez@uu.net Sun Dec 22 12:57:23 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!uu!jhernandez
+From: jhernandez@uu.net (Jens Hernández)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Dec22.125723.6397@uu.net>
+Date: Sun, 22 Dec 1996 12:57:23 GMT
+References: <1996Dec18.042923.4362@panix.com> <1996Dec18.232523.1992@pipeline.com>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Dec18.232523.1992@pipeline.com>, sbrennan@pipeline.com (Sun-mi Brennan) writes:
+> Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Jens Hernández | jhernandez@uu.net
+PGP Key fingerprint: A999 5AD3 D275 1FA6
+"Keep the channels open."
+

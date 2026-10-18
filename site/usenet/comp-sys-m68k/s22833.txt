@@ -1,0 +1,47 @@
+From agarcia@illinois.edu Sun Feb 26 05:44:41 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!illinois!agarcia
+From: agarcia@illinois.edu (Astrid García)
+Newsgroups: comp.sys.m68k
+Subject: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Feb26.054441.8467@illinois.edu>
+Date: Sun, 26 Feb 1995 05:44:41 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+Does anyone have a 27C256 EPROM marked 'MH-U14' or 'ORION-CRYPTO'?
+
+-- 
+Astrid García <agarcia@illinois.edu>
+"Hardware is temporary. The signal survives."
+Decstation 5000/200 / FreeBSD 2.1
+
+From mweber@inria.fr Mon Feb 27 15:13:41 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!inria!mweber
+From: mweber@inria.fr (Mikhail Weber)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Feb27.151341.3249@inria.fr>
+Date: Mon, 27 Feb 1995 15:13:41 GMT
+References: <1995Feb26.054441.8467@illinois.edu>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Feb26.054441.8467@illinois.edu>, agarcia@illinois.edu (Astrid García) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Mikhail Weber -- INRIA Rocquencourt
+"Do not worship the copy."
+

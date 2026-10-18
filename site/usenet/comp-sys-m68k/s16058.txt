@@ -1,0 +1,122 @@
+From kweber@kiae.su Fri Nov 15 18:59:18 1996
+Path: ashpoly!cascade!brgate!saturno!kiae!kweber
+From: kweber@kiae.su (Katrin Weber)
+Newsgroups: comp.sys.m68k
+Subject: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Nov15.185918.1356@kiae.su>
+Date: Fri, 15 Nov 1996 18:59:18 GMT
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+Katrin Weber -- Kurchatov Institute of Atomic Energy, Moscow
+"In theory there is no difference between theory and practice."
+
+From agarcia@stanford.edu Sun Nov 17 01:55:18 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!stanford!agarcia
+From: agarcia@stanford.edu (Astrid García)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Nov17.015518.4638@stanford.edu>
+Date: Sun, 17 Nov 1996 01:55:18 GMT
+References: <1996Nov15.185918.1356@kiae.su>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 12
+
+In article <1996Nov15.185918.1356@kiae.su>, kweber@kiae.su (Katrin Weber) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Astrid García <agarcia@stanford.edu>
+"We don't sign stars. We build them."
+Mac IIci / 68882 FPU / NEXTSTEP 3.3
+
+From alarsson@purdue.edu Mon Nov 18 16:22:18 1996
+Path: ashpoly!cascade!brgate!saturno!purdue!alarsson
+From: alarsson@purdue.edu (Amy Larsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Nov18.162218.6869@purdue.edu>
+Date: Mon, 18 Nov 1996 16:22:18 GMT
+References: <1996Nov15.185918.1356@kiae.su> <1996Nov17.015518.4638@stanford.edu>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1996Nov17.015518.4638@stanford.edu>, agarcia@stanford.edu (Astrid García) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+> Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Amy Larsson
+Tape trading list upon request. SASE required for international mail.
+
+From lkang@titech.ac.jp Tue Nov 19 07:41:18 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!titech!lkang
+From: lkang@titech.ac.jp (Lars Kang)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Nov19.074118.3103@titech.ac.jp>
+Date: Tue, 19 Nov 1996 07:41:18 GMT
+References: <1996Nov15.185918.1356@kiae.su>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996Nov15.185918.1356@kiae.su>, kweber@kiae.su (Katrin Weber) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Lars Kang | lkang@titech.ac.jp
+PGP Key fingerprint: EC11 7868 B1D1 DA9D
+"Keep the channels open."
+
+From mandersson@cmu.edu Thu Nov 21 11:26:18 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!cmu!mandersson
+From: mandersson@cmu.edu (Min-jun Andersson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Nov21.112618.8776@cmu.edu>
+Date: Thu, 21 Nov 1996 11:26:18 GMT
+References: <1996Nov15.185918.1356@kiae.su>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996Nov15.185918.1356@kiae.su>, kweber@kiae.su (Katrin Weber) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+=== Min-jun Andersson ===
+Dept of Electrical Engineering, Carnegie Mellon University School of CS
+"We don't sign stars. We build them."
+

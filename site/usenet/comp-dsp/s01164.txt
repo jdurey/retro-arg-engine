@@ -1,0 +1,46 @@
+From sreyes@u-tokyo.ac.jp Tue Oct 15 07:35:22 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!u-tokyo!sreyes
+From: sreyes@u-tokyo.ac.jp (Steve Reyes)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Oct15.073522.6099@u-tokyo.ac.jp>
+Date: Tue, 15 Oct 1996 07:35:22 GMT
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Steve Reyes -- University of Tokyo Department of Information Science
+"Extraordinary claims require extraordinary spectra."
+
+From ttanaka@purdue.edu Thu Oct 17 09:20:22 1996
+Path: ashpoly!cascade!mxgate!coyoacan!purdue!ttanaka
+From: ttanaka@purdue.edu (Takeshi Tanaka)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Oct17.092022.5479@purdue.edu>
+Date: Thu, 17 Oct 1996 09:20:22 GMT
+References: <1996Oct15.073522.6099@u-tokyo.ac.jp>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Oct15.073522.6099@u-tokyo.ac.jp>, sreyes@u-tokyo.ac.jp (Steve Reyes) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Takeshi Tanaka
+Tape trading list upon request. SASE required for international mail.
+

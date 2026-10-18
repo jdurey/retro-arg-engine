@@ -1,0 +1,118 @@
+From jhernandez@titech.ac.jp Fri Jan 12 01:13:14 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!titech!jhernandez
+From: jhernandez@titech.ac.jp (Julien Hernández)
+Newsgroups: comp.dsp
+Subject: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Jan12.011314.6605@titech.ac.jp>
+Date: Fri, 12 Jan 1996 01:13:14 GMT
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+=== Julien Hernández ===
+Dept of Electrical Engineering, Tokyo Institute of Technology Computer Centre
+"Do not worship the copy."
+
+From mramirez@uni-hamburg.de Sat Jan 13 00:49:14 1996
+Path: ashpoly!cascade!bigsur!uni-hamburg!mramirez
+From: mramirez@uni-hamburg.de (Mike Ramírez)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Jan13.004914.1660@uni-hamburg.de>
+Date: Sat, 13 Jan 1996 00:49:14 GMT
+References: <1996Jan12.011314.6605@titech.ac.jp>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996Jan12.011314.6605@titech.ac.jp>, jhernandez@titech.ac.jp (Julien Hernández) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+> At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+=== Mike Ramírez ===
+Dept of Electrical Engineering, Universität Hamburg Fachbereich Informatik
+"We don't sign stars. We build them."
+
+From egarcia@panix.com Sun Jan 14 05:33:14 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!panix!egarcia
+From: egarcia@panix.com (Elaine García)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Jan14.053314.3883@panix.com>
+Date: Sun, 14 Jan 1996 05:33:14 GMT
+References: <1996Jan12.011314.6605@titech.ac.jp>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Jan12.011314.6605@titech.ac.jp>, jhernandez@titech.ac.jp (Julien Hernández) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+> At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Elaine García | egarcia@panix.com
+PGP Key fingerprint: A540 E298 AF44 FC41
+"Keep the channels open."
+
+From dperez@berkeley.edu Mon Jan 15 10:42:14 1996
+Path: ashpoly!cascade!brgate!saturno!berkeley!dperez
+From: dperez@berkeley.edu (Dong-hyun Pérez)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Jan15.104214.2278@berkeley.edu>
+Date: Mon, 15 Jan 1996 10:42:14 GMT
+References: <1996Jan12.011314.6605@titech.ac.jp> <1996Jan13.004914.1660@uni-hamburg.de>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1996Jan13.004914.1660@uni-hamburg.de>, mramirez@uni-hamburg.de (Mike Ramírez) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Dong-hyun Pérez
+Tape trading list upon request. SASE required for international mail.
+
+From snakamura@u-tokyo.ac.jp Tue Jan 16 22:56:14 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!u-tokyo!snakamura
+From: snakamura@u-tokyo.ac.jp (Sergei Nakamura)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Jan16.225614.7317@u-tokyo.ac.jp>
+Date: Tue, 16 Jan 1996 22:56:14 GMT
+References: <1996Jan12.011314.6605@titech.ac.jp>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1996Jan12.011314.6605@titech.ac.jp>, jhernandez@titech.ac.jp (Julien Hernández) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+> At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Sergei Nakamura | snakamura@u-tokyo.ac.jp
+PGP Key fingerprint: 5263 B516 0E6D 52F9
+"Keep the channels open."
+

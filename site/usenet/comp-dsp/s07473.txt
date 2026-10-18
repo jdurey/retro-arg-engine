@@ -1,0 +1,123 @@
+From mvasiliev@clari.net Tue Feb 01 11:40:33 1994
+Path: ashpoly!cascade!mxgate!coyoacan!clari!mvasiliev
+From: mvasiliev@clari.net (Min-jun Vasiliev)
+Newsgroups: comp.dsp
+Subject: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Feb01.114033.2023@clari.net>
+Date: Tue, 01 Feb 1994 11:40:33 GMT
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Min-jun Vasiliev
+Opinions expressed are solely my own and not those of ClariNet Communications Corp.
+------------------------------------------------------------
+
+From ksouza@utexas.edu Thu Feb 03 02:58:33 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!utexas!ksouza
+From: ksouza@utexas.edu (Kenji Souza)
+Newsgroups: comp.dsp
+Subject: Re: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Feb03.025833.9043@utexas.edu>
+Date: Thu, 03 Feb 1994 02:58:33 GMT
+References: <1994Feb01.114033.2023@clari.net>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1994Feb01.114033.2023@clari.net>, mvasiliev@clari.net (Min-jun Vasiliev) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Kenji Souza
+Opinions expressed are solely my own and not those of University of Texas at Austin.
+------------------------------------------------------------
+
+From msokolov@kiae.su Thu Feb 03 21:49:33 1994
+Path: ashpoly!cascade!mxgate!coyoacan!kiae!msokolov
+From: msokolov@kiae.su (Mikhail Sokolov)
+Newsgroups: comp.dsp
+Subject: Re: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Feb03.214933.8208@kiae.su>
+Date: Thu, 03 Feb 1994 21:49:33 GMT
+References: <1994Feb01.114033.2023@clari.net>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1994Feb01.114033.2023@clari.net>, mvasiliev@clari.net (Min-jun Vasiliev) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Mikhail Sokolov <msokolov@kiae.su>
+Zyxel U-1496E @ 14,400 bps
+"A soul is not exclusive to biology."
+
+From stakahashi@ox.ac.uk Fri Feb 04 04:00:33 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!ox!stakahashi
+From: stakahashi@ox.ac.uk (Sergei Takahashi)
+Newsgroups: comp.dsp
+Subject: Re: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Feb04.040033.1305@ox.ac.uk>
+Date: Fri, 04 Feb 1994 04:00:33 GMT
+References: <1994Feb01.114033.2023@clari.net>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1994Feb01.114033.2023@clari.net>, mvasiliev@clari.net (Min-jun Vasiliev) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Sergei Takahashi
+Opinions expressed are solely my own and not those of Oxford University Computing Laboratory.
+------------------------------------------------------------
+
+From geriksson@pipeline.com Fri Feb 04 15:10:33 1994
+Path: ashpoly!cascade!bigsur!pipeline!geriksson
+From: geriksson@pipeline.com (Graham Eriksson)
+Newsgroups: comp.dsp
+Subject: Re: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Feb04.151033.6843@pipeline.com>
+Date: Fri, 04 Feb 1994 15:10:33 GMT
+References: <1994Feb01.114033.2023@clari.net>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Feb01.114033.2023@clari.net>, mvasiliev@clari.net (Min-jun Vasiliev) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+=== Graham Eriksson ===
+Dept of Electrical Engineering, The Pipeline Internet Network
+"The hatch is open. Is anyone listening?"
+

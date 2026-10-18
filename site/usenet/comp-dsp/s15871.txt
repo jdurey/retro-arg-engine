@@ -1,0 +1,47 @@
+From srobertson@inria.fr Wed Oct 09 07:17:08 1996
+Path: ashpoly!cascade!bigsur!inria!srobertson
+From: srobertson@inria.fr (Sergei Robertson)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Oct09.071708.8633@inria.fr>
+Date: Wed, 09 Oct 1996 07:17:08 GMT
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Sergei Robertson
+Opinions expressed are solely my own and not those of INRIA Rocquencourt.
+------------------------------------------------------------
+
+From rlee@ox.ac.uk Wed Oct 09 09:17:08 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!ox!rlee
+From: rlee@ox.ac.uk (Renata Lee)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Oct09.091708.1083@ox.ac.uk>
+Date: Wed, 09 Oct 1996 09:17:08 GMT
+References: <1996Oct09.071708.8633@inria.fr>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Oct09.071708.8633@inria.fr>, srobertson@inria.fr (Sergei Robertson) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Renata Lee <rlee@ox.ac.uk>
+US Robotics Courier V.34 @ 19,200 bps
+"Extraordinary claims require extraordinary spectra."
+

@@ -1,0 +1,72 @@
+From lito@berkeley.edu Sat Sep 09 20:32:26 1995
+Path: ashpoly!cascade!mxgate!coyoacan!berkeley!lito
+From: lito@berkeley.edu (Lars Ito)
+Newsgroups: comp.dsp
+Subject: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Sep09.203226.1595@berkeley.edu>
+Date: Sat, 09 Sep 1995 20:32:26 GMT
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Lars Ito <lito@berkeley.edu>
+US Robotics Courier V.34 @ 19,200 bps
+"A soul is not exclusive to biology."
+
+From rpopov@panix.com Sun Sep 10 21:15:26 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!panix!rpopov
+From: rpopov@panix.com (Rodrigo Popov)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Sep10.211526.6092@panix.com>
+Date: Sun, 10 Sep 1995 21:15:26 GMT
+References: <1995Sep09.203226.1595@berkeley.edu>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Sep09.203226.1595@berkeley.edu>, lito@berkeley.edu (Lars Ito) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Rodrigo Popov | rpopov@panix.com
+PGP Key fingerprint: 3ED5 CF0E 478B 9316
+"Keep the channels open."
+
+From lsokolov@uu.net Mon Sep 11 23:45:26 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!uu!lsokolov
+From: lsokolov@uu.net (Lucia Sokolov)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Sep11.234526.7288@uu.net>
+Date: Mon, 11 Sep 1995 23:45:26 GMT
+References: <1995Sep09.203226.1595@berkeley.edu>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Sep09.203226.1595@berkeley.edu>, lito@berkeley.edu (Lars Ito) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Lucia Sokolov <lsokolov@uu.net>
+*PLONK* filter active for trolls.
+Amiga 1200 (Blizzard 030/50) - NetBSD 1.0
+

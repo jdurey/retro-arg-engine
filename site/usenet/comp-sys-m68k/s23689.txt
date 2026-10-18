@@ -1,0 +1,119 @@
+From dsilva@inria.fr Sun Oct 02 19:28:11 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!inria!dsilva
+From: dsilva@inria.fr (Dong-hyun Silva)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Oct02.192811.3037@inria.fr>
+Date: Sun, 02 Oct 1994 19:28:11 GMT
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+
+Does anyone have a 27C256 EPROM marked 'MH-U14' or 'ORION-CRYPTO'?
+
+-- 
+Dong-hyun Silva <dsilva@inria.fr>
+SupraFAXModem 28.8 @ 28,800 bps
+"There are 14 nodes and only 10 countries. Count again."
+
+From dlee@ox.ac.uk Tue Oct 04 17:09:11 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!ox!dlee
+From: dlee@ox.ac.uk (Diego Lee)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Oct04.170911.9723@ox.ac.uk>
+Date: Tue, 04 Oct 1994 17:09:11 GMT
+References: <1994Oct02.192811.3037@inria.fr>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1994Oct02.192811.3037@inria.fr>, dsilva@inria.fr (Dong-hyun Silva) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+> Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+=== Diego Lee ===
+Dept of Electrical Engineering, Oxford University Computing Laboratory
+"In theory there is no difference between theory and practice."
+
+From mreyes@inria.fr Thu Oct 06 01:41:11 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!inria!mreyes
+From: mreyes@inria.fr (Marta Reyes)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Oct06.014111.6138@inria.fr>
+Date: Thu, 06 Oct 1994 01:41:11 GMT
+References: <1994Oct02.192811.3037@inria.fr>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1994Oct02.192811.3037@inria.fr>, dsilva@inria.fr (Dong-hyun Silva) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+> Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Marta Reyes | mreyes@inria.fr
+PGP Key fingerprint: 792D 1325 7C8E 7425
+"Keep the channels open."
+
+From rsuzuki@uu.net Thu Oct 06 11:37:11 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!uu!rsuzuki
+From: rsuzuki@uu.net (Rodrigo Suzuki)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Oct06.113711.1439@uu.net>
+Date: Thu, 06 Oct 1994 11:37:11 GMT
+References: <1994Oct02.192811.3037@inria.fr> <1994Oct06.014111.6138@inria.fr>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1994Oct06.014111.6138@inria.fr>, mreyes@inria.fr (Marta Reyes) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Rodrigo Suzuki
+Opinions expressed are solely my own and not those of UUNET Technologies, Falls Church VA.
+------------------------------------------------------------
+
+From akarlsson@ox.ac.uk Fri Oct 07 10:02:11 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!ox!akarlsson
+From: akarlsson@ox.ac.uk (Aiko Karlsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Oct07.100211.5007@ox.ac.uk>
+Date: Fri, 07 Oct 1994 10:02:11 GMT
+References: <1994Oct02.192811.3037@inria.fr> <1994Oct06.014111.6138@inria.fr>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1994Oct06.014111.6138@inria.fr>, mreyes@inria.fr (Marta Reyes) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+-- 
+Aiko Karlsson -- Oxford University Computing Laboratory
+"When every node is whole, the channel opens."
+

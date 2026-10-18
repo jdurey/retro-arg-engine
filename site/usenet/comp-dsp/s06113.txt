@@ -1,0 +1,119 @@
+From smartinez@earthlink.net Wed Nov 01 22:56:40 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!earthlink!smartinez
+From: smartinez@earthlink.net (Sven Martínez)
+Newsgroups: comp.dsp
+Subject: [FLAME] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Nov01.225640.5792@earthlink.net>
+Date: Wed, 01 Nov 1995 22:56:40 GMT
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+Sven Martínez -- EarthLink Network
+"Marcus is not one man."
+
+From dtakahashi@earthlink.net Fri Nov 03 06:25:40 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!earthlink!dtakahashi
+From: dtakahashi@earthlink.net (Dave Takahashi)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Nov03.062540.7582@earthlink.net>
+Date: Fri, 03 Nov 1995 06:25:40 GMT
+References: <1995Nov01.225640.5792@earthlink.net>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995Nov01.225640.5792@earthlink.net>, smartinez@earthlink.net (Sven Martínez) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+=== Dave Takahashi ===
+Dept of Electrical Engineering, EarthLink Network
+"Hold for relay."
+
+From bhernandez@mindspring.com Sat Nov 04 16:40:40 1995
+Path: ashpoly!cascade!bigsur!mindspring!bhernandez
+From: bhernandez@mindspring.com (Bastien Hernández)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Nov04.164040.2132@mindspring.com>
+Date: Sat, 04 Nov 1995 16:40:40 GMT
+References: <1995Nov01.225640.5792@earthlink.net>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Nov01.225640.5792@earthlink.net>, smartinez@earthlink.net (Sven Martínez) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+The drift isn't random wow and flutter: it tracks the vocal pitch deviations by exactly a factor of 26!
+
+-- 
+Bastien Hernández <bhernandez@mindspring.com>
+"In theory there is no difference between theory and practice."
+Atari Falcon 030 / SunOS 4.1.4
+
+From hbrennan@clari.net Sun Nov 05 20:45:40 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!clari!hbrennan
+From: hbrennan@clari.net (Heather Brennan)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Nov05.204540.4562@clari.net>
+Date: Sun, 05 Nov 1995 20:45:40 GMT
+References: <1995Nov01.225640.5792@earthlink.net> <1995Nov03.062540.7582@earthlink.net>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Nov03.062540.7582@earthlink.net>, dtakahashi@earthlink.net (Dave Takahashi) writes:
+> Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+> Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+-- 
+Heather Brennan <hbrennan@clari.net>
+*PLONK* filter active for trolls.
+Atari TT030 - NetBSD 1.0
+
+From mjohansson@earthlink.net Tue Nov 07 02:59:40 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!earthlink!mjohansson
+From: mjohansson@earthlink.net (Mateo Johansson)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Nov07.025940.7736@earthlink.net>
+Date: Tue, 07 Nov 1995 02:59:40 GMT
+References: <1995Nov01.225640.5792@earthlink.net> <1995Nov04.164040.2132@mindspring.com>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Nov04.164040.2132@mindspring.com>, bhernandez@mindspring.com (Bastien Hernández) writes:
+> The drift isn't random wow and flutter: it tracks the vocal pitch deviations by exactly a factor of 26!
+
+Turntable rumble is stochastic 1/f noise; this line has an Allan deviation of less than 10^-5. It was generated by a quartz crystal clock.
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+Mateo Johansson
+Tape trading list upon request. SASE required for international mail.
+

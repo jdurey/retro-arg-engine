@@ -1,0 +1,96 @@
+From bsuzuki@unam.mx Tue Sep 26 02:01:32 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!unam!bsuzuki
+From: bsuzuki@unam.mx (Bill Suzuki)
+Newsgroups: comp.dsp
+Subject: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Sep26.020132.6793@unam.mx>
+Date: Tue, 26 Sep 1995 02:01:32 GMT
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+MATLAB script available upon request via email.
+
+-- 
+Bill Suzuki | bsuzuki@unam.mx
+PGP Key fingerprint: 1874 3053 C8CD 7263
+"Keep the channels open."
+
+From deriksson@stanford.edu Thu Sep 28 02:04:32 1995
+Path: ashpoly!cascade!bigsur!stanford!deriksson
+From: deriksson@stanford.edu (Dong-hyun Eriksson)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Sep28.020432.4406@stanford.edu>
+Date: Thu, 28 Sep 1995 02:04:32 GMT
+References: <1995Sep26.020132.6793@unam.mx>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 12
+
+In article <1995Sep26.020132.6793@unam.mx>, bsuzuki@unam.mx (Bill Suzuki) writes:
+> Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+> At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+PGP Public key available via finger or upon request.
+
+-- 
+=== Dong-hyun Eriksson ===
+Dept of Electrical Engineering, Stanford University Computer Systems Lab
+"We don't sign stars. We build them."
+
+From lkang@tum.de Thu Sep 28 10:51:32 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!tum!lkang
+From: lkang@tum.de (Lars Kang)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Sep28.105132.2145@tum.de>
+Date: Thu, 28 Sep 1995 10:51:32 GMT
+References: <1995Sep26.020132.6793@unam.mx>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Sep26.020132.6793@unam.mx>, bsuzuki@unam.mx (Bill Suzuki) writes:
+> Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+> At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Lars Kang
+Tape trading list upon request. SASE required for international mail.
+
+From dsilva@hanse.de Sat Sep 30 01:30:32 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!hanse!dsilva
+From: dsilva@hanse.de (Dmitri Silva)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Sep30.013032.5835@hanse.de>
+Date: Sat, 30 Sep 1995 01:30:32 GMT
+References: <1995Sep26.020132.6793@unam.mx> <1995Sep28.105132.2145@tum.de>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Sep28.105132.2145@tum.de>, lkang@tum.de (Lars Kang) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Dmitri Silva <dsilva@hanse.de>
+*PLONK* filter active for trolls.
+Decstation 5000/200 - NetBSD 1.0
+

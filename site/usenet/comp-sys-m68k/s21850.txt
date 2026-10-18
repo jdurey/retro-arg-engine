@@ -1,0 +1,120 @@
+From lcampbell@rwth-aachen.de Sat Aug 13 07:45:08 1994
+Path: ashpoly!cascade!mxgate!coyoacan!rwth-aachen!lcampbell
+From: lcampbell@rwth-aachen.de (Liam Campbell)
+Newsgroups: comp.sys.m68k
+Subject: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Aug13.074508.5022@rwth-aachen.de>
+Date: Sat, 13 Aug 1994 07:45:08 GMT
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Liam Campbell <lcampbell@rwth-aachen.de>
+"There are 14 nodes and only 10 countries. Count again."
+Sun SparcStation 20 / AmigaOS 3.1
+
+From hmuller@cern.ch Sat Aug 13 23:15:08 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!cern!hmuller
+From: hmuller@cern.ch (Heather Müller)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Aug13.231508.9962@cern.ch>
+Date: Sat, 13 Aug 1994 23:15:08 GMT
+References: <1994Aug13.074508.5022@rwth-aachen.de>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1994Aug13.074508.5022@rwth-aachen.de>, lcampbell@rwth-aachen.de (Liam Campbell) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Heather Müller
+Tape trading list upon request. SASE required for international mail.
+
+From apark@utexas.edu Mon Aug 15 05:08:08 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!utexas!apark
+From: apark@utexas.edu (Astrid Park)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Aug15.050808.8596@utexas.edu>
+Date: Mon, 15 Aug 1994 05:08:08 GMT
+References: <1994Aug13.074508.5022@rwth-aachen.de> <1994Aug13.231508.9962@cern.ch>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1994Aug13.231508.9962@cern.ch>, hmuller@cern.ch (Heather Müller) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+> Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Astrid Park <apark@utexas.edu>
+Practical Peripherals 14.4 @ 28,800 bps
+"In theory there is no difference between theory and practice."
+
+From ykang@tum.de Tue Aug 16 08:41:08 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!tum!ykang
+From: ykang@tum.de (Yuki Kang)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Aug16.084108.8868@tum.de>
+Date: Tue, 16 Aug 1994 08:41:08 GMT
+References: <1994Aug13.074508.5022@rwth-aachen.de> <1994Aug13.231508.9962@cern.ch>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1994Aug13.231508.9962@cern.ch>, hmuller@cern.ch (Heather Müller) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+> Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Yuki Kang
+Opinions expressed are solely my own and not those of Technische Universität München.
+------------------------------------------------------------
+
+From drobertson@uni-hamburg.de Tue Aug 16 22:36:08 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!uni-hamburg!drobertson
+From: drobertson@uni-hamburg.de (Dave Robertson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Aug16.223608.9139@uni-hamburg.de>
+Date: Tue, 16 Aug 1994 22:36:08 GMT
+References: <1994Aug13.074508.5022@rwth-aachen.de>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Aug13.074508.5022@rwth-aachen.de>, lcampbell@rwth-aachen.de (Liam Campbell) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Dave Robertson <drobertson@uni-hamburg.de>
+Practical Peripherals 14.4 @ 9600 Telebit bps
+"They will send a copy in my place."
+

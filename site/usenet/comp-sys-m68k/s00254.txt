@@ -1,0 +1,95 @@
+From fhernandez@ox.ac.uk Sun Nov 26 03:56:40 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!ox!fhernandez
+From: fhernandez@ox.ac.uk (Fiona Hernández)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Nov26.035640.2953@ox.ac.uk>
+Date: Sun, 26 Nov 1995 03:56:40 GMT
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+=== Fiona Hernández ===
+Dept of Electrical Engineering, Oxford University Computing Laboratory
+"Measuring a record you own is listening, not piracy."
+
+From glee@tum.de Tue Nov 28 01:31:40 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!tum!glee
+From: glee@tum.de (Göran Lee)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Nov28.013140.2110@tum.de>
+Date: Tue, 28 Nov 1995 01:31:40 GMT
+References: <1995Nov26.035640.2953@ox.ac.uk>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Nov26.035640.2953@ox.ac.uk>, fhernandez@ox.ac.uk (Fiona Hernández) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Göran Lee <glee@tum.de>
+"5 sigma is a discovery. 7 is a question."
+486DX2/66 (Linux 1.2.13) / System 7.5.1
+
+From nkarlsson@cmu.edu Wed Nov 29 16:56:40 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!cmu!nkarlsson
+From: nkarlsson@cmu.edu (Nadine Karlsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Nov29.165640.3399@cmu.edu>
+Date: Wed, 29 Nov 1995 16:56:40 GMT
+References: <1995Nov26.035640.2953@ox.ac.uk>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Nov26.035640.2953@ox.ac.uk>, fhernandez@ox.ac.uk (Fiona Hernández) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+> By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Nadine Karlsson -- Carnegie Mellon University School of CS
+"Row 14. No joke."
+
+From asuzuki@uu.net Fri Dec 01 12:34:40 1995
+Path: ashpoly!cascade!bigsur!uu!asuzuki
+From: asuzuki@uu.net (Amy Suzuki)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Dec01.123440.5216@uu.net>
+Date: Fri, 01 Dec 1995 12:34:40 GMT
+References: <1995Nov26.035640.2953@ox.ac.uk>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995Nov26.035640.2953@ox.ac.uk>, fhernandez@ox.ac.uk (Fiona Hernández) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Amy Suzuki
+Opinions expressed are solely my own and not those of UUNET Technologies, Falls Church VA.
+------------------------------------------------------------
+

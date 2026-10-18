@@ -1,0 +1,95 @@
+From jhughes@delphi.com Wed Nov 06 19:42:10 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!delphi!jhughes
+From: jhughes@delphi.com (Jen Hughes)
+Newsgroups: comp.dsp
+Subject: WTB/WTT: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996Nov06.194210.3773@delphi.com>
+Date: Wed, 06 Nov 1996 19:42:10 GMT
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+
+Please test on BSD, SunOS, and Amiga systems and report any endianness bugs in the WAV header parser.
+
+-- 
+Jen Hughes <jhughes@delphi.com>
+US Robotics Courier V.34 @ ISDN 64k bps
+"In theory there is no difference between theory and practice."
+
+From kmoreau@mit.edu Thu Nov 07 04:47:10 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!mit!kmoreau
+From: kmoreau@mit.edu (Kenji Moreau)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996Nov07.044710.9065@mit.edu>
+Date: Thu, 07 Nov 1996 04:47:10 GMT
+References: <1996Nov06.194210.3773@delphi.com>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996Nov06.194210.3773@delphi.com>, jhughes@delphi.com (Jen Hughes) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+> The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Kenji Moreau <kmoreau@mit.edu>
+"There are 14 nodes and only 10 countries. Count again."
+Decstation 5000/200 / System 7.5.1
+
+From ssilva@uu.net Thu Nov 07 08:28:10 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!uu!ssilva
+From: ssilva@uu.net (Sun-mi Silva)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996Nov07.082810.5388@uu.net>
+Date: Thu, 07 Nov 1996 08:28:10 GMT
+References: <1996Nov06.194210.3773@delphi.com>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996Nov06.194210.3773@delphi.com>, jhughes@delphi.com (Jen Hughes) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Sun-mi Silva -- UUNET Technologies, Falls Church VA
+"They will send a copy in my place."
+
+From nkowalski@hanse.de Fri Nov 08 21:03:10 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!hanse!nkowalski
+From: nkowalski@hanse.de (Nadine Kowalski)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996Nov08.210310.4436@hanse.de>
+Date: Fri, 08 Nov 1996 21:03:10 GMT
+References: <1996Nov06.194210.3773@delphi.com> <1996Nov07.082810.5388@uu.net>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Nov07.082810.5388@uu.net>, ssilva@uu.net (Sun-mi Silva) writes:
+> Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+Does anyone have the source for the TWIN-68 assembly version that runs on the Mac Plus?
+
+-- 
+Nadine Kowalski <nkowalski@hanse.de>
+SupraFAXModem 28.8 @ 28,800 bps
+"Hold for relay."
+

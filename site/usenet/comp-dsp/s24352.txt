@@ -1,0 +1,72 @@
+From lnovak@ox.ac.uk Fri May 19 17:28:37 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!ox!lnovak
+From: lnovak@ox.ac.uk (Lisa Novak)
+Newsgroups: comp.dsp
+Subject: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995May19.172837.6720@ox.ac.uk>
+Date: Fri, 19 May 1995 17:28:37 GMT
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+Lisa Novak | lnovak@ox.ac.uk
+PGP Key fingerprint: 651A C881 975E E8C8
+"Keep the channels open."
+
+From snilsson@ox.ac.uk Sun May 21 10:59:37 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!ox!snilsson
+From: snilsson@ox.ac.uk (Steve Nilsson)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995May21.105937.2214@ox.ac.uk>
+Date: Sun, 21 May 1995 10:59:37 GMT
+References: <1995May19.172837.6720@ox.ac.uk>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1995May19.172837.6720@ox.ac.uk>, lnovak@ox.ac.uk (Lisa Novak) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+> A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Steve Nilsson <snilsson@ox.ac.uk>
+"Do not worship the copy."
+Pentium 90 (OS/2 Warp) / SunOS 4.1.4
+
+From kgirard@mindspring.com Mon May 22 22:50:37 1995
+Path: ashpoly!cascade!bigsur!mindspring!kgirard
+From: kgirard@mindspring.com (Kirsty Girard)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995May22.225037.8939@mindspring.com>
+Date: Mon, 22 May 1995 22:50:37 GMT
+References: <1995May19.172837.6720@ox.ac.uk>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1995May19.172837.6720@ox.ac.uk>, lnovak@ox.ac.uk (Lisa Novak) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+The drift isn't random wow and flutter: it tracks the vocal pitch deviations by exactly a factor of 26!
+
+-- 
+Kirsty Girard
+Tape trading list upon request. SASE required for international mail.
+

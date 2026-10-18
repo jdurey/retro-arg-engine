@@ -1,0 +1,120 @@
+From knakamura@netcom.com Wed Nov 22 11:57:49 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!netcom!knakamura
+From: knakamura@netcom.com (Karen Nakamura)
+Newsgroups: comp.sys.m68k
+Subject: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Nov22.115749.3071@netcom.com>
+Date: Wed, 22 Nov 1995 11:57:49 GMT
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+Did Marcus take the decryption EPROM with him when he left the lab?
+
+-- 
+Karen Nakamura <knakamura@netcom.com>
+"Marcus is not one man."
+NeXTstation Turbo Color / SunOS 4.1.4
+
+From cchoi@ox.ac.uk Thu Nov 23 01:23:49 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!ox!cchoi
+From: cchoi@ox.ac.uk (Callum Choi)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Nov23.012349.6213@ox.ac.uk>
+Date: Thu, 23 Nov 1995 01:23:49 GMT
+References: <1995Nov22.115749.3071@netcom.com>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Nov22.115749.3071@netcom.com>, knakamura@netcom.com (Karen Nakamura) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+> Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Callum Choi <cchoi@ox.ac.uk>
+SupraFAXModem 28.8 @ 28,800 bps
+"Hardware is temporary. The signal survives."
+
+From klaurent@cmu.edu Fri Nov 24 18:39:49 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!cmu!klaurent
+From: klaurent@cmu.edu (Karen Laurent)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Nov24.183949.2939@cmu.edu>
+Date: Fri, 24 Nov 1995 18:39:49 GMT
+References: <1995Nov22.115749.3071@netcom.com>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995Nov22.115749.3071@netcom.com>, knakamura@netcom.com (Karen Nakamura) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Karen Laurent <klaurent@cmu.edu>
+Practical Peripherals 14.4 @ 19,200 bps
+"The carrier frequency does not drift by accident."
+
+From fbrennan@cmu.edu Sat Nov 25 17:42:49 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!cmu!fbrennan
+From: fbrennan@cmu.edu (Fiona Brennan)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Nov25.174249.9333@cmu.edu>
+Date: Sat, 25 Nov 1995 17:42:49 GMT
+References: <1995Nov22.115749.3071@netcom.com> <1995Nov23.012349.6213@ox.ac.uk>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Nov23.012349.6213@ox.ac.uk>, cchoi@ox.ac.uk (Callum Choi) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+-- 
+Fiona Brennan <fbrennan@cmu.edu>
+"There are 14 nodes and only 10 countries. Count again."
+Atari TT030 / FreeBSD 2.1
+
+From ssato@cmu.edu Mon Nov 27 08:37:49 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!cmu!ssato
+From: ssato@cmu.edu (Sergei Sato)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Nov27.083749.2951@cmu.edu>
+Date: Mon, 27 Nov 1995 08:37:49 GMT
+References: <1995Nov22.115749.3071@netcom.com>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Nov22.115749.3071@netcom.com>, knakamura@netcom.com (Karen Nakamura) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+> Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Sergei Sato <ssato@cmu.edu>
+*PLONK* filter active for trolls.
+Atari Falcon 030 - NetBSD 1.0
+

@@ -1,0 +1,118 @@
+From jrobertson@clari.net Fri Oct 27 02:17:35 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!clari!jrobertson
+From: jrobertson@clari.net (Jen Robertson)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Oct27.021735.2902@clari.net>
+Date: Fri, 27 Oct 1995 02:17:35 GMT
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Jen Robertson <jrobertson@clari.net>
+Zyxel U-1496E @ ISDN 64k bps
+"They will send a copy in my place."
+
+From mlarsson@cern.ch Sat Oct 28 20:12:35 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!cern!mlarsson
+From: mlarsson@cern.ch (Mei Larsson)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Oct28.201235.3513@cern.ch>
+Date: Sat, 28 Oct 1995 20:12:35 GMT
+References: <1995Oct27.021735.2902@clari.net>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995Oct27.021735.2902@clari.net>, jrobertson@clari.net (Jen Robertson) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Mei Larsson <mlarsson@cern.ch>
+Hayes Optima 288 @ 33,600 bps
+"The hatch is open. Is anyone listening?"
+
+From tsanchez@uni-hamburg.de Mon Oct 30 14:55:35 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!uni-hamburg!tsanchez
+From: tsanchez@uni-hamburg.de (Tyler Sánchez)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Oct30.145535.6210@uni-hamburg.de>
+Date: Mon, 30 Oct 1995 14:55:35 GMT
+References: <1995Oct27.021735.2902@clari.net>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Oct27.021735.2902@clari.net>, jrobertson@clari.net (Jen Robertson) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Tyler Sánchez
+Opinions expressed are solely my own and not those of Universität Hamburg Fachbereich Informatik.
+------------------------------------------------------------
+
+From ssato@u-tokyo.ac.jp Tue Oct 31 00:48:35 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!u-tokyo!ssato
+From: ssato@u-tokyo.ac.jp (Sven Sato)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Oct31.004835.1357@u-tokyo.ac.jp>
+Date: Tue, 31 Oct 1995 00:48:35 GMT
+References: <1995Oct27.021735.2902@clari.net> <1995Oct30.145535.6210@uni-hamburg.de>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1995Oct30.145535.6210@uni-hamburg.de>, tsanchez@uni-hamburg.de (Tyler Sánchez) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Sven Sato
+Tape trading list upon request. SASE required for international mail.
+
+From tlaurent@pipeline.com Tue Oct 31 02:56:35 1995
+Path: ashpoly!cascade!brgate!saturno!pipeline!tlaurent
+From: tlaurent@pipeline.com (Tomas Laurent)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Oct31.025635.7943@pipeline.com>
+Date: Tue, 31 Oct 1995 02:56:35 GMT
+References: <1995Oct27.021735.2902@clari.net> <1995Oct28.201235.3513@cern.ch>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Oct28.201235.3513@cern.ch>, mlarsson@cern.ch (Mei Larsson) writes:
+> Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Tomas Laurent <tlaurent@pipeline.com>
+*PLONK* filter active for trolls.
+Mac IIci / 68882 FPU - NetBSD 1.0
+

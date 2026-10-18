@@ -1,0 +1,120 @@
+From moliveira@illinois.edu Thu Jul 27 05:59:40 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!illinois!moliveira
+From: moliveira@illinois.edu (Mikhail Oliveira)
+Newsgroups: comp.dsp
+Subject: Observation: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jul27.055940.3116@illinois.edu>
+Date: Thu, 27 Jul 1995 05:59:40 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+Mikhail Oliveira <moliveira@illinois.edu>
+"Hardware is temporary. The signal survives."
+Macintosh IIfx / SunOS 4.1.4
+
+From icampbell@ox.ac.uk Fri Jul 28 20:34:40 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!ox!icampbell
+From: icampbell@ox.ac.uk (Ines Campbell)
+Newsgroups: comp.dsp
+Subject: Re: Observation: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jul28.203440.8142@ox.ac.uk>
+Date: Fri, 28 Jul 1995 20:34:40 GMT
+References: <1995Jul27.055940.3116@illinois.edu>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Jul27.055940.3116@illinois.edu>, moliveira@illinois.edu (Mikhail Oliveira) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+-- 
+Ines Campbell
+Tape trading list upon request. SASE required for international mail.
+
+From mschneider@mindspring.com Sat Jul 29 03:01:40 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!mindspring!mschneider
+From: mschneider@mindspring.com (Marta Schneider)
+Newsgroups: comp.dsp
+Subject: Re: Observation: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jul29.030140.1832@mindspring.com>
+Date: Sat, 29 Jul 1995 03:01:40 GMT
+References: <1995Jul27.055940.3116@illinois.edu>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1995Jul27.055940.3116@illinois.edu>, moliveira@illinois.edu (Mikhail Oliveira) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+> A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Marta Schneider | mschneider@mindspring.com
+PGP Key fingerprint: 396E 6FB0 F789 C9A7
+"Keep the channels open."
+
+From aweber@cmu.edu Sat Jul 29 11:23:40 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!cmu!aweber
+From: aweber@cmu.edu (Anton Weber)
+Newsgroups: comp.dsp
+Subject: Re: Observation: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jul29.112340.3162@cmu.edu>
+Date: Sat, 29 Jul 1995 11:23:40 GMT
+References: <1995Jul27.055940.3116@illinois.edu> <1995Jul28.203440.8142@ox.ac.uk>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995Jul28.203440.8142@ox.ac.uk>, icampbell@ox.ac.uk (Ines Campbell) writes:
+> Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Anton Weber | aweber@cmu.edu
+PGP Key fingerprint: 4B16 3A60 E5E0 6654
+"Keep the channels open."
+
+From tpetrov@inria.fr Sat Jul 29 15:39:40 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!inria!tpetrov
+From: tpetrov@inria.fr (Thiago Petrov)
+Newsgroups: comp.dsp
+Subject: Re: Observation: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jul29.153940.2849@inria.fr>
+Date: Sat, 29 Jul 1995 15:39:40 GMT
+References: <1995Jul27.055940.3116@illinois.edu>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Jul27.055940.3116@illinois.edu>, moliveira@illinois.edu (Mikhail Oliveira) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+-- 
+Thiago Petrov
+Opinions expressed are solely my own and not those of INRIA Rocquencourt.
+------------------------------------------------------------
+

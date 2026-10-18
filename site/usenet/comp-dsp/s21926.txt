@@ -1,0 +1,92 @@
+From arobertson@mit.edu Sun Mar 24 03:21:26 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!mit!arobertson
+From: arobertson@mit.edu (Anja Robertson)
+Newsgroups: comp.dsp
+Subject: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996Mar24.032126.6299@mit.edu>
+Date: Sun, 24 Mar 1996 03:21:26 GMT
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+Grab the source archive from ftp.ashford-poly.edu:/pub/telecom-archives/stardust/stardust-1.3.tar.gz.
+
+-- 
+Anja Robertson -- Massachusetts Institute of Technology
+"Extraordinary claims require extraordinary spectra."
+
+From alopez@netcom.com Mon Mar 25 09:00:26 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!netcom!alopez
+From: alopez@netcom.com (Astrid López)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996Mar25.090026.1984@netcom.com>
+Date: Mon, 25 Mar 1996 09:00:26 GMT
+References: <1996Mar24.032126.6299@mit.edu>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Mar24.032126.6299@mit.edu>, arobertson@mit.edu (Anja Robertson) writes:
+> Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+
+On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+-- 
+Astrid López <alopez@netcom.com>
+*PLONK* filter active for trolls.
+Decstation 5000/200 - NetBSD 1.0
+
+From nnakamura@hanse.de Wed Mar 27 12:59:26 1996
+Path: ashpoly!cascade!bigsur!hanse!nnakamura
+From: nnakamura@hanse.de (Natalia Nakamura)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996Mar27.125926.6527@hanse.de>
+Date: Wed, 27 Mar 1996 12:59:26 GMT
+References: <1996Mar24.032126.6299@mit.edu>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1996Mar24.032126.6299@mit.edu>, arobertson@mit.edu (Anja Robertson) writes:
+> Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+> Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Natalia Nakamura
+Opinions expressed are solely my own and not those of Hanse-Netzwerk Hamburg.
+------------------------------------------------------------
+
+From blarsson@kiae.su Thu Mar 28 16:34:26 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!kiae!blarsson
+From: blarsson@kiae.su (Bruno Larsson)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996Mar28.163426.3666@kiae.su>
+Date: Thu, 28 Mar 1996 16:34:26 GMT
+References: <1996Mar24.032126.6299@mit.edu> <1996Mar27.125926.6527@hanse.de>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1996Mar27.125926.6527@hanse.de>, nnakamura@hanse.de (Natalia Nakamura) writes:
+> Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Bruno Larsson -- Kurchatov Institute of Atomic Energy, Moscow
+"The carrier frequency does not drift by accident."
+

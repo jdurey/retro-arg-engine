@@ -1,0 +1,96 @@
+From aito@titech.ac.jp Sun Nov 05 12:35:10 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!titech!aito
+From: aito@titech.ac.jp (Aiko Ito)
+Newsgroups: comp.sys.m68k
+Subject: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Nov05.123510.7621@titech.ac.jp>
+Date: Sun, 05 Nov 1995 12:35:10 GMT
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Aiko Ito
+Tape trading list upon request. SASE required for international mail.
+
+From dgonzalez@unam.mx Mon Nov 06 01:29:10 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!unam!dgonzalez
+From: dgonzalez@unam.mx (Dong-hyun González)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Nov06.012910.9032@unam.mx>
+Date: Mon, 06 Nov 1995 01:29:10 GMT
+References: <1995Nov05.123510.7621@titech.ac.jp>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Nov05.123510.7621@titech.ac.jp>, aito@titech.ac.jp (Aiko Ito) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Dong-hyun González <dgonzalez@unam.mx>
+"In theory there is no difference between theory and practice."
+Amiga 1200 (Blizzard 030/50) / NEXTSTEP 3.3
+
+From bwatanabe@cern.ch Tue Nov 07 14:29:10 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!cern!bwatanabe
+From: bwatanabe@cern.ch (Bruno Watanabe)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Nov07.142910.7079@cern.ch>
+Date: Tue, 07 Nov 1995 14:29:10 GMT
+References: <1995Nov05.123510.7621@titech.ac.jp>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1995Nov05.123510.7621@titech.ac.jp>, aito@titech.ac.jp (Aiko Ito) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Bruno Watanabe <bwatanabe@cern.ch>
+"Row 14. No joke."
+Pentium 90 (OS/2 Warp) / SunOS 4.1.4
+
+From lgarcia@mindspring.com Tue Nov 07 22:10:10 1995
+Path: ashpoly!cascade!bigsur!mindspring!lgarcia
+From: lgarcia@mindspring.com (Lucia García)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Nov07.221010.9533@mindspring.com>
+Date: Tue, 07 Nov 1995 22:10:10 GMT
+References: <1995Nov05.123510.7621@titech.ac.jp> <1995Nov06.012910.9032@unam.mx>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Nov06.012910.9032@unam.mx>, dgonzalez@unam.mx (Dong-hyun González) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Lucia García <lgarcia@mindspring.com>
+*PLONK* filter active for trolls.
+Macintosh IIfx - NetBSD 1.0
+

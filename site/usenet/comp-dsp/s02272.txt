@@ -1,0 +1,119 @@
+From tandersson@netcom.com Sun Mar 03 06:51:09 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!netcom!tandersson
+From: tandersson@netcom.com (Tobias Andersson)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Mar03.065109.2205@netcom.com>
+Date: Sun, 03 Mar 1996 06:51:09 GMT
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Tobias Andersson <tandersson@netcom.com>
+"A soul is not exclusive to biology."
+Acorn RiscPC 600 / AmigaOS 3.1
+
+From jgarcia@mindspring.com Sun Mar 03 21:38:09 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!mindspring!jgarcia
+From: jgarcia@mindspring.com (Julien García)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Mar03.213809.9235@mindspring.com>
+Date: Sun, 03 Mar 1996 21:38:09 GMT
+References: <1996Mar03.065109.2205@netcom.com>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1996Mar03.065109.2205@netcom.com>, tandersson@netcom.com (Tobias Andersson) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+=== Julien García ===
+Dept of Electrical Engineering, MindSpring Enterprises
+"Measuring a record you own is listening, not piracy."
+
+From tkarlsson@utexas.edu Tue Mar 05 03:01:09 1996
+Path: ashpoly!cascade!mxgate!coyoacan!utexas!tkarlsson
+From: tkarlsson@utexas.edu (Thiago Karlsson)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Mar05.030109.1352@utexas.edu>
+Date: Tue, 05 Mar 1996 03:01:09 GMT
+References: <1996Mar03.065109.2205@netcom.com>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1996Mar03.065109.2205@netcom.com>, tandersson@netcom.com (Tobias Andersson) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Thiago Karlsson
+Opinions expressed are solely my own and not those of University of Texas at Austin.
+------------------------------------------------------------
+
+From mkuznetsov@illinois.edu Wed Mar 06 14:20:09 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!illinois!mkuznetsov
+From: mkuznetsov@illinois.edu (Mike Kuznetsov)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Mar06.142009.7472@illinois.edu>
+Date: Wed, 06 Mar 1996 14:20:09 GMT
+References: <1996Mar03.065109.2205@netcom.com> <1996Mar05.030109.1352@utexas.edu>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Mar05.030109.1352@utexas.edu>, tkarlsson@utexas.edu (Thiago Karlsson) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+Mike Kuznetsov | mkuznetsov@illinois.edu
+PGP Key fingerprint: 72B2 2192 FB32 9934
+"Keep the channels open."
+
+From mpark@cam.ac.uk Fri Mar 08 14:47:09 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!cam!mpark
+From: mpark@cam.ac.uk (Marta Park)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Mar08.144709.7697@cam.ac.uk>
+Date: Fri, 08 Mar 1996 14:47:09 GMT
+References: <1996Mar03.065109.2205@netcom.com>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1996Mar03.065109.2205@netcom.com>, tandersson@netcom.com (Tobias Andersson) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Marta Park | mpark@cam.ac.uk
+PGP Key fingerprint: 28BB 6C2D 2120 BEB8
+"Keep the channels open."
+

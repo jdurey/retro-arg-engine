@@ -1,0 +1,119 @@
+From dpetrov@uni-hamburg.de Tue Mar 14 20:55:57 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!uni-hamburg!dpetrov
+From: dpetrov@uni-hamburg.de (Dmitri Petrov)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Mar14.205557.2519@uni-hamburg.de>
+Date: Tue, 14 Mar 1995 20:55:57 GMT
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Dmitri Petrov | dpetrov@uni-hamburg.de
+PGP Key fingerprint: 301E E072 2034 7770
+"Keep the channels open."
+
+From asilva@inria.fr Thu Mar 16 00:10:57 1995
+Path: ashpoly!cascade!brgate!saturno!inria!asilva
+From: asilva@inria.fr (Amy Silva)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Mar16.001057.1914@inria.fr>
+Date: Thu, 16 Mar 1995 00:10:57 GMT
+References: <1995Mar14.205557.2519@uni-hamburg.de>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1995Mar14.205557.2519@uni-hamburg.de>, dpetrov@uni-hamburg.de (Dmitri Petrov) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+=== Amy Silva ===
+Dept of Electrical Engineering, INRIA Rocquencourt
+"Measuring a record you own is listening, not piracy."
+
+From hkowalski@panix.com Fri Mar 17 21:24:57 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!panix!hkowalski
+From: hkowalski@panix.com (Heather Kowalski)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Mar17.212457.2893@panix.com>
+Date: Fri, 17 Mar 1995 21:24:57 GMT
+References: <1995Mar14.205557.2519@uni-hamburg.de> <1995Mar16.001057.1914@inria.fr>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Mar16.001057.1914@inria.fr>, asilva@inria.fr (Amy Silva) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Heather Kowalski
+Tape trading list upon request. SASE required for international mail.
+
+From ssouza@earthlink.net Sat Mar 18 06:18:57 1995
+Path: ashpoly!cascade!bigsur!earthlink!ssouza
+From: ssouza@earthlink.net (Sven Souza)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Mar18.061857.4309@earthlink.net>
+Date: Sat, 18 Mar 1995 06:18:57 GMT
+References: <1995Mar14.205557.2519@uni-hamburg.de>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Mar14.205557.2519@uni-hamburg.de>, dpetrov@uni-hamburg.de (Dmitri Petrov) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Sven Souza
+Opinions expressed are solely my own and not those of EarthLink Network.
+------------------------------------------------------------
+
+From pperez@panix.com Mon Mar 20 06:33:57 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!panix!pperez
+From: pperez@panix.com (Pavel Pérez)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Mar20.063357.7321@panix.com>
+Date: Mon, 20 Mar 1995 06:33:57 GMT
+References: <1995Mar14.205557.2519@uni-hamburg.de>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Mar14.205557.2519@uni-hamburg.de>, dpetrov@uni-hamburg.de (Dmitri Petrov) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Pavel Pérez <pperez@panix.com>
+US Robotics Courier V.34 @ 9600 Telebit bps
+"A soul is not exclusive to biology."
+

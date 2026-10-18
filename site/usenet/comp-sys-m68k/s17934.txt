@@ -1,0 +1,92 @@
+From swatanabe@mindspring.com Sun Jan 15 16:09:55 1995
+Path: ashpoly!cascade!bigsur!mindspring!swatanabe
+From: swatanabe@mindspring.com (Sven Watanabe)
+Newsgroups: comp.sys.m68k
+Subject: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Jan15.160955.4371@mindspring.com>
+Date: Sun, 15 Jan 1995 16:09:55 GMT
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+
+Did Marcus take the decryption EPROM with him when he left the lab?
+
+-- 
+Sven Watanabe | swatanabe@mindspring.com
+PGP Key fingerprint: ADB9 9B97 475F D0E5
+"Keep the channels open."
+
+From ksato@inria.fr Sun Jan 15 17:34:55 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!inria!ksato
+From: ksato@inria.fr (Kirsty Sato)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Jan15.173455.8424@inria.fr>
+Date: Sun, 15 Jan 1995 17:34:55 GMT
+References: <1995Jan15.160955.4371@mindspring.com>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1995Jan15.160955.4371@mindspring.com>, swatanabe@mindspring.com (Sven Watanabe) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Kirsty Sato
+Tape trading list upon request. SASE required for international mail.
+
+From mnilsson@cam.ac.uk Mon Jan 16 04:00:55 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!cam!mnilsson
+From: mnilsson@cam.ac.uk (Marisol Nilsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Jan16.040055.2441@cam.ac.uk>
+Date: Mon, 16 Jan 1995 04:00:55 GMT
+References: <1995Jan15.160955.4371@mindspring.com>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Jan15.160955.4371@mindspring.com>, swatanabe@mindspring.com (Sven Watanabe) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+=== Marisol Nilsson ===
+Dept of Electrical Engineering, University of Cambridge Computer Laboratory
+"Hardware is temporary. The signal survives."
+
+From lperez@cam.ac.uk Tue Jan 17 04:35:55 1995
+Path: ashpoly!cascade!bigsur!cam!lperez
+From: lperez@cam.ac.uk (Liam Pérez)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Jan17.043555.5908@cam.ac.uk>
+Date: Tue, 17 Jan 1995 04:35:55 GMT
+References: <1995Jan15.160955.4371@mindspring.com> <1995Jan15.173455.8424@inria.fr>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Jan15.173455.8424@inria.fr>, ksato@inria.fr (Kirsty Sato) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+-- 
+Liam Pérez | lperez@cam.ac.uk
+PGP Key fingerprint: EB3C 6D7E 03B5 3A4E
+"Keep the channels open."
+

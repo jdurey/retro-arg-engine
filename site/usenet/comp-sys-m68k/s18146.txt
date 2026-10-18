@@ -1,0 +1,72 @@
+From lhernandez@u-tokyo.ac.jp Sun Oct 02 04:49:53 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!u-tokyo!lhernandez
+From: lhernandez@u-tokyo.ac.jp (Lisa Hernández)
+Newsgroups: comp.sys.m68k
+Subject: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Oct02.044953.3747@u-tokyo.ac.jp>
+Date: Sun, 02 Oct 1994 04:49:53 GMT
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Does anyone have a 27C256 EPROM marked 'MH-U14' or 'ORION-CRYPTO'?
+
+-- 
+Lisa Hernández
+Opinions expressed are solely my own and not those of University of Tokyo Department of Information Science.
+------------------------------------------------------------
+
+From msato@u-tokyo.ac.jp Mon Oct 03 02:48:53 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!u-tokyo!msato
+From: msato@u-tokyo.ac.jp (Matthias Sato)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Oct03.024853.1499@u-tokyo.ac.jp>
+Date: Mon, 03 Oct 1994 02:48:53 GMT
+References: <1994Oct02.044953.3747@u-tokyo.ac.jp>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Oct02.044953.3747@u-tokyo.ac.jp>, lhernandez@u-tokyo.ac.jp (Lisa Hernández) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Matthias Sato <msato@u-tokyo.ac.jp>
+Hayes Optima 288 @ 19,200 bps
+"Measuring a record you own is listening, not piracy."
+
+From bhernandez@netcom.com Mon Oct 03 07:15:53 1994
+Path: ashpoly!cascade!brgate!saturno!netcom!bhernandez
+From: bhernandez@netcom.com (Bill Hernández)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Oct03.071553.7555@netcom.com>
+Date: Mon, 03 Oct 1994 07:15:53 GMT
+References: <1994Oct02.044953.3747@u-tokyo.ac.jp>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1994Oct02.044953.3747@u-tokyo.ac.jp>, lhernandez@u-tokyo.ac.jp (Lisa Hernández) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Bill Hernández
+Opinions expressed are solely my own and not those of NETCOM On-Line Communication Services.
+------------------------------------------------------------
+

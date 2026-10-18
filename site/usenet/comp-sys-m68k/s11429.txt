@@ -1,0 +1,70 @@
+From mwatanabe@delphi.com Sat May 20 20:28:04 1995
+Path: ashpoly!cascade!mxgate!coyoacan!delphi!mwatanabe
+From: mwatanabe@delphi.com (Marisol Watanabe)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995May20.202804.7139@delphi.com>
+Date: Sat, 20 May 1995 20:28:04 GMT
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+Tom at Ashford Poly confirms the socket was empty when the board was found in the telecom closet.
+
+-- 
+=== Marisol Watanabe ===
+Dept of Electrical Engineering, Delphi Internet Services
+"Tape doesn't lie at 02:14. Ears do."
+
+From ksato@panix.com Sun May 21 17:20:04 1995
+Path: ashpoly!cascade!bigsur!panix!ksato
+From: ksato@panix.com (Katrin Sato)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995May21.172004.9950@panix.com>
+Date: Sun, 21 May 1995 17:20:04 GMT
+References: <1995May20.202804.7139@delphi.com>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995May20.202804.7139@delphi.com>, mwatanabe@delphi.com (Marisol Watanabe) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Katrin Sato | ksato@panix.com
+PGP Key fingerprint: 0429 CBAD BEDE A1BD
+"Keep the channels open."
+
+From jsmirnov@uni-hamburg.de Mon May 22 06:51:04 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!uni-hamburg!jsmirnov
+From: jsmirnov@uni-hamburg.de (Jens Smirnov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995May22.065104.2380@uni-hamburg.de>
+Date: Mon, 22 May 1995 06:51:04 GMT
+References: <1995May20.202804.7139@delphi.com> <1995May21.172004.9950@panix.com>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995May21.172004.9950@panix.com>, ksato@panix.com (Katrin Sato) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+=== Jens Smirnov ===
+Dept of Electrical Engineering, Universität Hamburg Fachbereich Informatik
+"Measuring a record you own is listening, not piracy."
+

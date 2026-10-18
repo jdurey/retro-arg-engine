@@ -1,0 +1,98 @@
+From akim@kiae.su Tue May 23 13:07:48 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!kiae!akim
+From: akim@kiae.su (Amy Kim)
+Newsgroups: comp.dsp
+Subject: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995May23.130748.5751@kiae.su>
+Date: Tue, 23 May 1995 13:07:48 GMT
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+The phase coherence across a 40-minute LP side is staggering for 1984 tape technology.
+
+-- 
+Amy Kim <akim@kiae.su>
+SupraFAXModem 28.8 @ 28,800 bps
+"The hatch is open. Is anyone listening?"
+
+From ehughes@mit.edu Wed May 24 02:09:48 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!mit!ehughes
+From: ehughes@mit.edu (Emi Hughes)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995May24.020948.7189@mit.edu>
+Date: Wed, 24 May 1995 02:09:48 GMT
+References: <1995May23.130748.5751@kiae.su>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995May23.130748.5751@kiae.su>, akim@kiae.su (Amy Kim) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Emi Hughes <ehughes@mit.edu>
+Zyxel U-1496E @ 28,800 bps
+"Marcus is not one man."
+
+From bsouza@purdue.edu Wed May 24 05:27:48 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!purdue!bsouza
+From: bsouza@purdue.edu (Bruno Souza)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995May24.052748.6357@purdue.edu>
+Date: Wed, 24 May 1995 05:27:48 GMT
+References: <1995May23.130748.5751@kiae.su>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995May23.130748.5751@kiae.su>, akim@kiae.su (Amy Kim) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+> A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+-- 
+Bruno Souza | bsouza@purdue.edu
+PGP Key fingerprint: DE76 2BD4 9698 FBF5
+"Keep the channels open."
+
+From csokolov@inria.fr Fri May 26 02:32:48 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!inria!csokolov
+From: csokolov@inria.fr (Callum Sokolov)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995May26.023248.3813@inria.fr>
+Date: Fri, 26 May 1995 02:32:48 GMT
+References: <1995May23.130748.5751@kiae.su>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995May23.130748.5751@kiae.su>, akim@kiae.su (Amy Kim) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+> A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Callum Sokolov
+Tape trading list upon request. SASE required for international mail.
+

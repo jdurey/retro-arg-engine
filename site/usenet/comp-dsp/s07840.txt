@@ -1,0 +1,116 @@
+From jschneider@ox.ac.uk Sun Sep 03 19:33:48 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!ox!jschneider
+From: jschneider@ox.ac.uk (Jen Schneider)
+Newsgroups: comp.dsp
+Subject: Data: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Sep03.193348.7784@ox.ac.uk>
+Date: Sun, 03 Sep 1995 19:33:48 GMT
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+
+Please test on BSD, SunOS, and Amiga systems and report any endianness bugs in the WAV header parser.
+
+-- 
+=== Jen Schneider ===
+Dept of Electrical Engineering, Oxford University Computing Laboratory
+"When every node is whole, the channel opens."
+
+From alaurent@uu.net Tue Sep 05 21:19:48 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!uu!alaurent
+From: alaurent@uu.net (Andrei Laurent)
+Newsgroups: comp.dsp
+Subject: Re: Data: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Sep05.211948.3160@uu.net>
+Date: Tue, 05 Sep 1995 21:19:48 GMT
+References: <1995Sep03.193348.7784@ox.ac.uk>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Sep03.193348.7784@ox.ac.uk>, jschneider@ox.ac.uk (Jen Schneider) writes:
+> Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+
+On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+-- 
+Andrei Laurent <alaurent@uu.net>
+*PLONK* filter active for trolls.
+486DX4/100 (FreeBSD 2.0.5) - NetBSD 1.0
+
+From jivanov@uni-hamburg.de Thu Sep 07 03:25:48 1995
+Path: ashpoly!cascade!mxgate!coyoacan!uni-hamburg!jivanov
+From: jivanov@uni-hamburg.de (Jens Ivanov)
+Newsgroups: comp.dsp
+Subject: Re: Data: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Sep07.032548.9408@uni-hamburg.de>
+Date: Thu, 07 Sep 1995 03:25:48 GMT
+References: <1995Sep03.193348.7784@ox.ac.uk>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Sep03.193348.7784@ox.ac.uk>, jschneider@ox.ac.uk (Jen Schneider) writes:
+> Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+> The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Jens Ivanov <jivanov@uni-hamburg.de>
+Zyxel U-1496E @ 28,800 bps
+"Hold for relay."
+
+From kcampbell@tum.de Thu Sep 07 16:31:48 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!tum!kcampbell
+From: kcampbell@tum.de (Kenji Campbell)
+Newsgroups: comp.dsp
+Subject: Re: Data: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Sep07.163148.9793@tum.de>
+Date: Thu, 07 Sep 1995 16:31:48 GMT
+References: <1995Sep03.193348.7784@ox.ac.uk> <1995Sep05.211948.3160@uu.net>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Sep05.211948.3160@uu.net>, alaurent@uu.net (Andrei Laurent) writes:
+> On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+-- 
+Kenji Campbell
+Tape trading list upon request. SASE required for international mail.
+
+From mito@pipeline.com Fri Sep 08 13:14:48 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!pipeline!mito
+From: mito@pipeline.com (Min-jun Ito)
+Newsgroups: comp.dsp
+Subject: Re: Data: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Sep08.131448.5094@pipeline.com>
+Date: Fri, 08 Sep 1995 13:14:48 GMT
+References: <1995Sep03.193348.7784@ox.ac.uk> <1995Sep05.211948.3160@uu.net> <1995Sep07.163148.9793@tum.de>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Sep07.163148.9793@tum.de>, kcampbell@tum.de (Kenji Campbell) writes:
+> Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+-- 
+Min-jun Ito
+Opinions expressed are solely my own and not those of The Pipeline Internet Network.
+------------------------------------------------------------
+

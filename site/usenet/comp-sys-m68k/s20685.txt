@@ -1,0 +1,96 @@
+From ktakahashi@kiae.su Thu Nov 14 21:51:21 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!kiae!ktakahashi
+From: ktakahashi@kiae.su (Kenji Takahashi)
+Newsgroups: comp.sys.m68k
+Subject: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Nov14.215121.1005@kiae.su>
+Date: Thu, 14 Nov 1996 21:51:21 GMT
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+Kenji Takahashi -- Kurchatov Institute of Atomic Energy, Moscow
+"In theory there is no difference between theory and practice."
+
+From treyes@ox.ac.uk Fri Nov 15 16:08:21 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!ox!treyes
+From: treyes@ox.ac.uk (Tyler Reyes)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Nov15.160821.1672@ox.ac.uk>
+Date: Fri, 15 Nov 1996 16:08:21 GMT
+References: <1996Nov14.215121.1005@kiae.su>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1996Nov14.215121.1005@kiae.su>, ktakahashi@kiae.su (Kenji Takahashi) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Tyler Reyes <treyes@ox.ac.uk>
+*PLONK* filter active for trolls.
+NeXTstation Turbo Color - NetBSD 1.0
+
+From dkang@delphi.com Sat Nov 16 12:27:21 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!delphi!dkang
+From: dkang@delphi.com (Diego Kang)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Nov16.122721.3779@delphi.com>
+Date: Sat, 16 Nov 1996 12:27:21 GMT
+References: <1996Nov14.215121.1005@kiae.su>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1996Nov14.215121.1005@kiae.su>, ktakahashi@kiae.su (Kenji Takahashi) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Diego Kang | dkang@delphi.com
+PGP Key fingerprint: 0188 7AD4 C86D F573
+"Keep the channels open."
+
+From npark@rwth-aachen.de Mon Nov 18 03:42:21 1996
+Path: ashpoly!cascade!brgate!saturno!rwth-aachen!npark
+From: npark@rwth-aachen.de (Nadia Park)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Nov18.034221.3137@rwth-aachen.de>
+Date: Mon, 18 Nov 1996 03:42:21 GMT
+References: <1996Nov14.215121.1005@kiae.su> <1996Nov15.160821.1672@ox.ac.uk>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Nov15.160821.1672@ox.ac.uk>, treyes@ox.ac.uk (Tyler Reyes) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Nadia Park <npark@rwth-aachen.de>
+"The hatch is open. Is anyone listening?"
+PC-9821Ap2 (NEC) / SunOS 4.1.4
+

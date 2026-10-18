@@ -1,0 +1,69 @@
+From ssmirnov@demon.co.uk Mon May 15 13:31:43 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!demon!ssmirnov
+From: ssmirnov@demon.co.uk (Seo-yeon Smirnov)
+Newsgroups: comp.dsp
+Subject: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May15.133143.5951@demon.co.uk>
+Date: Mon, 15 May 1995 13:31:43 GMT
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Seo-yeon Smirnov -- Demon Internet Services UK
+"The carrier frequency does not drift by accident."
+
+From jmoreno@u-tokyo.ac.jp Mon May 15 22:29:43 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!u-tokyo!jmoreno
+From: jmoreno@u-tokyo.ac.jp (Jens Moreno)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May15.222943.7608@u-tokyo.ac.jp>
+Date: Mon, 15 May 1995 22:29:43 GMT
+References: <1995May15.133143.5951@demon.co.uk>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995May15.133143.5951@demon.co.uk>, ssmirnov@demon.co.uk (Seo-yeon Smirnov) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Jens Moreno
+Tape trading list upon request. SASE required for international mail.
+
+From tandersson@stanford.edu Wed May 17 03:28:43 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!stanford!tandersson
+From: tandersson@stanford.edu (Tomas Andersson)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May17.032843.6128@stanford.edu>
+Date: Wed, 17 May 1995 03:28:43 GMT
+References: <1995May15.133143.5951@demon.co.uk>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995May15.133143.5951@demon.co.uk>, ssmirnov@demon.co.uk (Seo-yeon Smirnov) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+=== Tomas Andersson ===
+Dept of Electrical Engineering, Stanford University Computer Systems Lab
+"We don't sign stars. We build them."
+

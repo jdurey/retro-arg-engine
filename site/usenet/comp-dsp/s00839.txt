@@ -1,0 +1,46 @@
+From bperez@utexas.edu Mon Jan 16 21:56:57 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!utexas!bperez
+From: bperez@utexas.edu (Brian Pérez)
+Newsgroups: comp.dsp
+Subject: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jan16.215657.7540@utexas.edu>
+Date: Mon, 16 Jan 1995 21:56:57 GMT
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Brian Pérez
+Tape trading list upon request. SASE required for international mail.
+
+From jkang@hanse.de Tue Jan 17 08:30:57 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!hanse!jkang
+From: jkang@hanse.de (Julien Kang)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jan17.083057.9442@hanse.de>
+Date: Tue, 17 Jan 1995 08:30:57 GMT
+References: <1995Jan16.215657.7540@utexas.edu>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Jan16.215657.7540@utexas.edu>, bperez@utexas.edu (Brian Pérez) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+=== Julien Kang ===
+Dept of Electrical Engineering, Hanse-Netzwerk Hamburg
+"Hold for relay."
+

@@ -1,0 +1,117 @@
+From apetrov@mit.edu Sun Nov 10 14:06:10 1996
+Path: ashpoly!cascade!mxgate!coyoacan!mit!apetrov
+From: apetrov@mit.edu (Amy Petrov)
+Newsgroups: comp.sys.m68k
+Subject: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Nov10.140610.6723@mit.edu>
+Date: Sun, 10 Nov 1996 14:06:10 GMT
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Amy Petrov <apetrov@mit.edu>
+"Measuring a record you own is listening, not piracy."
+Commodore Amiga 500 (1MB OCS) / TOS 4.04
+
+From bgonzalez@pipeline.com Tue Nov 12 04:36:10 1996
+Path: ashpoly!cascade!bigsur!pipeline!bgonzalez
+From: bgonzalez@pipeline.com (Brian González)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Nov12.043610.1354@pipeline.com>
+Date: Tue, 12 Nov 1996 04:36:10 GMT
+References: <1996Nov10.140610.6723@mit.edu>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996Nov10.140610.6723@mit.edu>, apetrov@mit.edu (Amy Petrov) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Brian González | bgonzalez@pipeline.com
+PGP Key fingerprint: AE10 069C 2834 2C20
+"Keep the channels open."
+
+From jsokolov@pipeline.com Thu Nov 14 05:09:10 1996
+Path: ashpoly!cascade!bigsur!pipeline!jsokolov
+From: jsokolov@pipeline.com (Ji-woo Sokolov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Nov14.050910.7324@pipeline.com>
+Date: Thu, 14 Nov 1996 05:09:10 GMT
+References: <1996Nov10.140610.6723@mit.edu> <1996Nov12.043610.1354@pipeline.com>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Nov12.043610.1354@pipeline.com>, bgonzalez@pipeline.com (Brian González) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Ji-woo Sokolov <jsokolov@pipeline.com>
+"Measuring a record you own is listening, not piracy."
+Amiga 1200 (Blizzard 030/50) / AmigaOS 3.1
+
+From tmartinez@inria.fr Thu Nov 14 06:21:10 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!inria!tmartinez
+From: tmartinez@inria.fr (Tobias Martínez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Nov14.062110.8786@inria.fr>
+Date: Thu, 14 Nov 1996 06:21:10 GMT
+References: <1996Nov10.140610.6723@mit.edu> <1996Nov12.043610.1354@pipeline.com> <1996Nov14.050910.7324@pipeline.com>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Nov14.050910.7324@pipeline.com>, jsokolov@pipeline.com (Ji-woo Sokolov) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Tobias Martínez <tmartinez@inria.fr>
+"The carrier frequency does not drift by accident."
+Atari TT030 / AmigaOS 3.1
+
+From agarcia@uni-hamburg.de Thu Nov 14 14:48:10 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!uni-hamburg!agarcia
+From: agarcia@uni-hamburg.de (Astrid García)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Nov14.144810.4098@uni-hamburg.de>
+Date: Thu, 14 Nov 1996 14:48:10 GMT
+References: <1996Nov10.140610.6723@mit.edu> <1996Nov12.043610.1354@pipeline.com> <1996Nov14.050910.7324@pipeline.com> <1996Nov14.062110.8786@inria.fr>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Nov14.062110.8786@inria.fr>, tmartinez@inria.fr (Tobias Martínez) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Astrid García
+Opinions expressed are solely my own and not those of Universität Hamburg Fachbereich Informatik.
+------------------------------------------------------------
+

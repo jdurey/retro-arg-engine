@@ -1,0 +1,94 @@
+From esanchez@demon.co.uk Wed Jun 15 21:11:36 1994
+Path: ashpoly!cascade!mxgate!coyoacan!demon!esanchez
+From: esanchez@demon.co.uk (Elaine Sánchez)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Jun15.211136.3716@demon.co.uk>
+Date: Wed, 15 Jun 1994 21:11:36 GMT
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Elaine Sánchez | esanchez@demon.co.uk
+PGP Key fingerprint: E755 7628 B09B 25E0
+"Keep the channels open."
+
+From tsokolov@uni-hamburg.de Fri Jun 17 03:29:36 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!uni-hamburg!tsokolov
+From: tsokolov@uni-hamburg.de (Tyler Sokolov)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Jun17.032936.2088@uni-hamburg.de>
+Date: Fri, 17 Jun 1994 03:29:36 GMT
+References: <1994Jun15.211136.3716@demon.co.uk>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1994Jun15.211136.3716@demon.co.uk>, esanchez@demon.co.uk (Elaine Sánchez) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+> CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Tyler Sokolov | tsokolov@uni-hamburg.de
+PGP Key fingerprint: 5AE9 B088 90A5 6316
+"Keep the channels open."
+
+From jsokolov@hanse.de Sat Jun 18 19:05:36 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!hanse!jsokolov
+From: jsokolov@hanse.de (Julien Sokolov)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Jun18.190536.7330@hanse.de>
+Date: Sat, 18 Jun 1994 19:05:36 GMT
+References: <1994Jun15.211136.3716@demon.co.uk>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Jun15.211136.3716@demon.co.uk>, esanchez@demon.co.uk (Elaine Sánchez) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+> CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+-- 
+Julien Sokolov
+Tape trading list upon request. SASE required for international mail.
+
+From hgirard@ox.ac.uk Sun Jun 19 12:18:36 1994
+Path: ashpoly!cascade!brgate!saturno!ox!hgirard
+From: hgirard@ox.ac.uk (Hana Girard)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Jun19.121836.3302@ox.ac.uk>
+Date: Sun, 19 Jun 1994 12:18:36 GMT
+References: <1994Jun15.211136.3716@demon.co.uk> <1994Jun18.190536.7330@hanse.de>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Jun18.190536.7330@hanse.de>, jsokolov@hanse.de (Julien Sokolov) writes:
+> Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+Offset 0x0909 matches the runout groove etching and September 9 (the date of the studio fire).
+
+-- 
+=== Hana Girard ===
+Dept of Electrical Engineering, Oxford University Computing Laboratory
+"Marcus is not one man."
+

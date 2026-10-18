@@ -1,0 +1,114 @@
+From mkim@tum.de Thu Nov 09 17:59:35 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!tum!mkim
+From: mkim@tum.de (Mei Kim)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Nov09.175935.1951@tum.de>
+Date: Thu, 09 Nov 1995 17:59:35 GMT
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Mei Kim -- Technische Universität München
+"A soul is not exclusive to biology."
+
+From rpetrov@inria.fr Sat Nov 11 21:14:35 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!inria!rpetrov
+From: rpetrov@inria.fr (Renata Petrov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Nov11.211435.9475@inria.fr>
+Date: Sat, 11 Nov 1995 21:14:35 GMT
+References: <1995Nov09.175935.1951@tum.de>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Nov09.175935.1951@tum.de>, mkim@tum.de (Mei Kim) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+> By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Renata Petrov -- INRIA Rocquencourt
+"We don't sign stars. We build them."
+
+From sgarcia@berkeley.edu Sun Nov 12 16:30:35 1995
+Path: ashpoly!cascade!brgate!saturno!berkeley!sgarcia
+From: sgarcia@berkeley.edu (Sven García)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Nov12.163035.7465@berkeley.edu>
+Date: Sun, 12 Nov 1995 16:30:35 GMT
+References: <1995Nov09.175935.1951@tum.de> <1995Nov11.211435.9475@inria.fr>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Nov11.211435.9475@inria.fr>, rpetrov@inria.fr (Renata Petrov) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+=== Sven García ===
+Dept of Electrical Engineering, UC Berkeley Department of EECS
+"Tape doesn't lie at 02:14. Ears do."
+
+From bgonzalez@pipeline.com Mon Nov 13 01:02:35 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!pipeline!bgonzalez
+From: bgonzalez@pipeline.com (Bruno González)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Nov13.010235.8541@pipeline.com>
+Date: Mon, 13 Nov 1995 01:02:35 GMT
+References: <1995Nov09.175935.1951@tum.de> <1995Nov11.211435.9475@inria.fr> <1995Nov12.163035.7465@berkeley.edu>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1995Nov12.163035.7465@berkeley.edu>, sgarcia@berkeley.edu (Sven García) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Bruno González -- The Pipeline Internet Network
+"Measuring a record you own is listening, not piracy."
+
+From kramirez@berkeley.edu Wed Nov 15 04:26:35 1995
+Path: ashpoly!cascade!brgate!saturno!berkeley!kramirez
+From: kramirez@berkeley.edu (Katrin Ramírez)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Nov15.042635.7356@berkeley.edu>
+Date: Wed, 15 Nov 1995 04:26:35 GMT
+References: <1995Nov09.175935.1951@tum.de> <1995Nov11.211435.9475@inria.fr>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Nov11.211435.9475@inria.fr>, rpetrov@inria.fr (Renata Petrov) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Katrin Ramírez <kramirez@berkeley.edu>
+*PLONK* filter active for trolls.
+Atari TT030 - NetBSD 1.0
+

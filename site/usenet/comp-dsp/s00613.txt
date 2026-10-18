@@ -1,0 +1,92 @@
+From kmartinez@unam.mx Sat Dec 23 22:38:40 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!unam!kmartinez
+From: kmartinez@unam.mx (Karen Martínez)
+Newsgroups: comp.dsp
+Subject: [INFO] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Dec23.223840.6992@unam.mx>
+Date: Sat, 23 Dec 1995 22:38:40 GMT
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Karen Martínez
+Tape trading list upon request. SASE required for international mail.
+
+From kschneider@delphi.com Sun Dec 24 17:42:40 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!delphi!kschneider
+From: kschneider@delphi.com (Katrin Schneider)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Dec24.174240.9545@delphi.com>
+Date: Sun, 24 Dec 1995 17:42:40 GMT
+References: <1995Dec23.223840.6992@unam.mx>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Dec23.223840.6992@unam.mx>, kmartinez@unam.mx (Karen Martínez) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Katrin Schneider <kschneider@delphi.com>
+"Tape doesn't lie at 02:14. Ears do."
+Decstation 5000/200 / System 7.5.1
+
+From hwatanabe@tum.de Sun Dec 24 20:40:40 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!tum!hwatanabe
+From: hwatanabe@tum.de (Heather Watanabe)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Dec24.204040.6990@tum.de>
+Date: Sun, 24 Dec 1995 20:40:40 GMT
+References: <1995Dec23.223840.6992@unam.mx> <1995Dec24.174240.9545@delphi.com>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Dec24.174240.9545@delphi.com>, kschneider@delphi.com (Katrin Schneider) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Heather Watanabe
+Opinions expressed are solely my own and not those of Technische Universität München.
+------------------------------------------------------------
+
+From mfischer@purdue.edu Tue Dec 26 13:28:40 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!purdue!mfischer
+From: mfischer@purdue.edu (Mei Fischer)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Dec26.132840.8162@purdue.edu>
+Date: Tue, 26 Dec 1995 13:28:40 GMT
+References: <1995Dec23.223840.6992@unam.mx> <1995Dec24.174240.9545@delphi.com>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Dec24.174240.9545@delphi.com>, kschneider@delphi.com (Katrin Schneider) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Mei Fischer | mfischer@purdue.edu
+PGP Key fingerprint: EB11 B153 7C92 5C94
+"Keep the channels open."
+

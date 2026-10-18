@@ -1,0 +1,72 @@
+From mtakahashi@utexas.edu Sun Oct 01 06:14:19 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!utexas!mtakahashi
+From: mtakahashi@utexas.edu (Marisol Takahashi)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Oct01.061419.1779@utexas.edu>
+Date: Sun, 01 Oct 1995 06:14:19 GMT
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Marisol Takahashi <mtakahashi@utexas.edu>
+"Row 14. No joke."
+Mac IIci / 68882 FPU / AmigaOS 3.1
+
+From bmoreau@panix.com Tue Oct 03 03:53:19 1995
+Path: ashpoly!cascade!bigsur!panix!bmoreau
+From: bmoreau@panix.com (Bruno Moreau)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Oct03.035319.7006@panix.com>
+Date: Tue, 03 Oct 1995 03:53:19 GMT
+References: <1995Oct01.061419.1779@utexas.edu>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Oct01.061419.1779@utexas.edu>, mtakahashi@utexas.edu (Marisol Takahashi) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+=== Bruno Moreau ===
+Dept of Electrical Engineering, Public Access Unix of New York
+"Marcus is not one man."
+
+From dsmirnov@panix.com Wed Oct 04 14:17:19 1995
+Path: ashpoly!cascade!brgate!saturno!panix!dsmirnov
+From: dsmirnov@panix.com (Diego Smirnov)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Oct04.141719.7041@panix.com>
+Date: Wed, 04 Oct 1995 14:17:19 GMT
+References: <1995Oct01.061419.1779@utexas.edu>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Oct01.061419.1779@utexas.edu>, mtakahashi@utexas.edu (Marisol Takahashi) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+=== Diego Smirnov ===
+Dept of Electrical Engineering, Public Access Unix of New York
+"The carrier frequency does not drift by accident."
+

@@ -1,0 +1,71 @@
+From hnilsson@clari.net Thu Mar 14 17:28:58 1996
+Path: ashpoly!cascade!bigsur!clari!hnilsson
+From: hnilsson@clari.net (Hana Nilsson)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Mar14.172858.1398@clari.net>
+Date: Thu, 14 Mar 1996 17:28:58 GMT
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Hana Nilsson | hnilsson@clari.net
+PGP Key fingerprint: 16D2 7A86 BCA5 09D0
+"Keep the channels open."
+
+From hsokolov@kiae.su Fri Mar 15 20:26:58 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!kiae!hsokolov
+From: hsokolov@kiae.su (Hugo Sokolov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Mar15.202658.6833@kiae.su>
+Date: Fri, 15 Mar 1996 20:26:58 GMT
+References: <1996Mar14.172858.1398@clari.net>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1996Mar14.172858.1398@clari.net>, hnilsson@clari.net (Hana Nilsson) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Hugo Sokolov
+Opinions expressed are solely my own and not those of Kurchatov Institute of Atomic Energy, Moscow.
+------------------------------------------------------------
+
+From jjohansson@pacbell.net Sat Mar 16 09:24:58 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!pacbell!jjohansson
+From: jjohansson@pacbell.net (Jen Johansson)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Mar16.092458.9573@pacbell.net>
+Date: Sat, 16 Mar 1996 09:24:58 GMT
+References: <1996Mar14.172858.1398@clari.net> <1996Mar15.202658.6833@kiae.su>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Mar15.202658.6833@kiae.su>, hsokolov@kiae.su (Hugo Sokolov) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Jen Johansson | jjohansson@pacbell.net
+PGP Key fingerprint: 7816 8C37 6883 E474
+"Keep the channels open."
+

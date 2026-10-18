@@ -1,0 +1,119 @@
+From gsato@uni-hamburg.de Fri Nov 10 09:27:41 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!uni-hamburg!gsato
+From: gsato@uni-hamburg.de (Graham Sato)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Nov10.092741.7947@uni-hamburg.de>
+Date: Fri, 10 Nov 1995 09:27:41 GMT
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+
+Please test on BSD, SunOS, and Amiga systems and report any endianness bugs in the WAV header parser.
+
+-- 
+=== Graham Sato ===
+Dept of Electrical Engineering, Universität Hamburg Fachbereich Informatik
+"Hardware is temporary. The signal survives."
+
+From agonzalez@stanford.edu Sat Nov 11 08:25:41 1995
+Path: ashpoly!cascade!bigsur!stanford!agonzalez
+From: agonzalez@stanford.edu (Anja González)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Nov11.082541.3247@stanford.edu>
+Date: Sat, 11 Nov 1995 08:25:41 GMT
+References: <1995Nov10.092741.7947@uni-hamburg.de>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Nov10.092741.7947@uni-hamburg.de>, gsato@uni-hamburg.de (Graham Sato) writes:
+> Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+> Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+-- 
+Anja González | agonzalez@stanford.edu
+PGP Key fingerprint: CA45 08FF 0EE6 2FA1
+"Keep the channels open."
+
+From bkang@earthlink.net Sun Nov 12 03:38:41 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!earthlink!bkang
+From: bkang@earthlink.net (Brian Kang)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Nov12.033841.2511@earthlink.net>
+Date: Sun, 12 Nov 1995 03:38:41 GMT
+References: <1995Nov10.092741.7947@uni-hamburg.de> <1995Nov11.082541.3247@stanford.edu>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Nov11.082541.3247@stanford.edu>, agonzalez@stanford.edu (Anja González) writes:
+> Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Brian Kang -- EarthLink Network
+"Marcus is not one man."
+
+From csouza@purdue.edu Mon Nov 13 11:37:41 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!purdue!csouza
+From: csouza@purdue.edu (Camila Souza)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Nov13.113741.8409@purdue.edu>
+Date: Mon, 13 Nov 1995 11:37:41 GMT
+References: <1995Nov10.092741.7947@uni-hamburg.de> <1995Nov11.082541.3247@stanford.edu> <1995Nov12.033841.2511@earthlink.net>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Nov12.033841.2511@earthlink.net>, bkang@earthlink.net (Brian Kang) writes:
+> Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+> Top-posters will be placed in my ~/.killfile without notice.
+
+On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+-- 
+Camila Souza
+Opinions expressed are solely my own and not those of Purdue University Engineering Computer Network.
+------------------------------------------------------------
+
+From msilva@cam.ac.uk Mon Nov 13 12:27:41 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!cam!msilva
+From: msilva@cam.ac.uk (Marisol Silva)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Nov13.122741.3197@cam.ac.uk>
+Date: Mon, 13 Nov 1995 12:27:41 GMT
+References: <1995Nov10.092741.7947@uni-hamburg.de> <1995Nov11.082541.3247@stanford.edu>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Nov11.082541.3247@stanford.edu>, agonzalez@stanford.edu (Anja González) writes:
+> Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+=== Marisol Silva ===
+Dept of Electrical Engineering, University of Cambridge Computer Laboratory
+"Extraordinary claims require extraordinary spectra."
+

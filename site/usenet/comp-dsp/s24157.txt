@@ -1,0 +1,47 @@
+From kchoi@mit.edu Fri Jul 01 02:00:32 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!mit!kchoi
+From: kchoi@mit.edu (Kirsty Choi)
+Newsgroups: comp.dsp
+Subject: Data: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Jul01.020032.4798@mit.edu>
+Date: Fri, 01 Jul 1994 02:00:32 GMT
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+MATLAB script available upon request via email.
+
+-- 
+Kirsty Choi -- Massachusetts Institute of Technology
+"5 sigma is a discovery. 7 is a question."
+
+From glaurent@mindspring.com Fri Jul 01 06:58:32 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!mindspring!glaurent
+From: glaurent@mindspring.com (Graham Laurent)
+Newsgroups: comp.dsp
+Subject: Re: Data: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Jul01.065832.7398@mindspring.com>
+Date: Fri, 01 Jul 1994 06:58:32 GMT
+References: <1994Jul01.020032.4798@mit.edu>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1994Jul01.020032.4798@mit.edu>, kchoi@mit.edu (Kirsty Choi) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Graham Laurent <glaurent@mindspring.com>
+"A soul is not exclusive to biology."
+Pentium 90 (OS/2 Warp) / NEXTSTEP 3.3
+

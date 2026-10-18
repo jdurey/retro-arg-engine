@@ -1,0 +1,122 @@
+From nmuller@titech.ac.jp Mon Jun 24 15:37:26 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!titech!nmuller
+From: nmuller@titech.ac.jp (Natalia Müller)
+Newsgroups: comp.dsp
+Subject: [INFO] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Jun24.153726.3136@titech.ac.jp>
+Date: Mon, 24 Jun 1996 15:37:26 GMT
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+Natalia Müller | nmuller@titech.ac.jp
+PGP Key fingerprint: 2659 D4D4 7FB8 1FD3
+"Keep the channels open."
+
+From dpark@uu.net Tue Jun 25 18:35:26 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!uu!dpark
+From: dpark@uu.net (Dong-hyun Park)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Jun25.183526.4799@uu.net>
+Date: Tue, 25 Jun 1996 18:35:26 GMT
+References: <1996Jun24.153726.3136@titech.ac.jp>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1996Jun24.153726.3136@titech.ac.jp>, nmuller@titech.ac.jp (Natalia Müller) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+> Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Dong-hyun Park <dpark@uu.net>
+*PLONK* filter active for trolls.
+Sun 3/60 (SunOS 4.1.1) - NetBSD 1.0
+
+From dramirez@rwth-aachen.de Wed Jun 26 18:17:26 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!rwth-aachen!dramirez
+From: dramirez@rwth-aachen.de (Dave Ramírez)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Jun26.181726.1550@rwth-aachen.de>
+Date: Wed, 26 Jun 1996 18:17:26 GMT
+References: <1996Jun24.153726.3136@titech.ac.jp>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Jun24.153726.3136@titech.ac.jp>, nmuller@titech.ac.jp (Natalia Müller) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Dave Ramírez
+Tape trading list upon request. SASE required for international mail.
+
+From trodriguez@netcom.com Thu Jun 27 12:07:26 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!netcom!trodriguez
+From: trodriguez@netcom.com (Tomas Rodríguez)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Jun27.120726.9862@netcom.com>
+Date: Thu, 27 Jun 1996 12:07:26 GMT
+References: <1996Jun24.153726.3136@titech.ac.jp>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Jun24.153726.3136@titech.ac.jp>, nmuller@titech.ac.jp (Natalia Müller) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+> Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+-- 
+=== Tomas Rodríguez ===
+Dept of Electrical Engineering, NETCOM On-Line Communication Services
+"Marcus is not one man."
+
+From jmoreau@netcom.com Thu Jun 27 19:26:26 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!netcom!jmoreau
+From: jmoreau@netcom.com (Julien Moreau)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Jun27.192626.3255@netcom.com>
+Date: Thu, 27 Jun 1996 19:26:26 GMT
+References: <1996Jun24.153726.3136@titech.ac.jp> <1996Jun25.183526.4799@uu.net>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1996Jun25.183526.4799@uu.net>, dpark@uu.net (Dong-hyun Park) writes:
+> Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+> PGP Public key available via finger or upon request.
+
+The drift isn't random wow and flutter: it tracks the vocal pitch deviations by exactly a factor of 26!
+
+-- 
+Julien Moreau
+Opinions expressed are solely my own and not those of NETCOM On-Line Communication Services.
+------------------------------------------------------------
+

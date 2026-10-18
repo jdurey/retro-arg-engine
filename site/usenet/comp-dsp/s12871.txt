@@ -1,0 +1,48 @@
+From fandersson@inria.fr Tue Jan 09 05:35:19 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!inria!fandersson
+From: fandersson@inria.fr (Fiona Andersson)
+Newsgroups: comp.dsp
+Subject: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Jan09.053519.8458@inria.fr>
+Date: Tue, 09 Jan 1996 05:35:19 GMT
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+Fiona Andersson <fandersson@inria.fr>
+"When every node is whole, the channel opens."
+Pentium 90 (OS/2 Warp) / NEXTSTEP 3.3
+
+From esmirnov@delphi.com Tue Jan 09 10:41:19 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!delphi!esmirnov
+From: esmirnov@delphi.com (Emi Smirnov)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Jan09.104119.1583@delphi.com>
+Date: Tue, 09 Jan 1996 10:41:19 GMT
+References: <1996Jan09.053519.8458@inria.fr>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Jan09.053519.8458@inria.fr>, fandersson@inria.fr (Fiona Andersson) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+> Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Emi Smirnov <esmirnov@delphi.com>
+*PLONK* filter active for trolls.
+Acorn RiscPC 600 - NetBSD 1.0
+

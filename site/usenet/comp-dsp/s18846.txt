@@ -1,0 +1,97 @@
+From llee@mindspring.com Tue Dec 19 19:06:50 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!mindspring!llee
+From: llee@mindspring.com (Liam Lee)
+Newsgroups: comp.dsp
+Subject: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Dec19.190650.6559@mindspring.com>
+Date: Tue, 19 Dec 1995 19:06:50 GMT
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+
+Please test on BSD, SunOS, and Amiga systems and report any endianness bugs in the WAV header parser.
+
+-- 
+Liam Lee <llee@mindspring.com>
+Zyxel U-1496E @ 14,400 bps
+"Measuring a record you own is listening, not piracy."
+
+From tsantos@ox.ac.uk Thu Dec 21 13:02:50 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!ox!tsantos
+From: tsantos@ox.ac.uk (Takeshi Santos)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Dec21.130250.7734@ox.ac.uk>
+Date: Thu, 21 Dec 1995 13:02:50 GMT
+References: <1995Dec19.190650.6559@mindspring.com>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Dec19.190650.6559@mindspring.com>, llee@mindspring.com (Liam Lee) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+-- 
+Takeshi Santos <tsantos@ox.ac.uk>
+*PLONK* filter active for trolls.
+Acorn RiscPC 600 - NetBSD 1.0
+
+From swatanabe@inria.fr Fri Dec 22 15:22:50 1995
+Path: ashpoly!cascade!mxgate!coyoacan!inria!swatanabe
+From: swatanabe@inria.fr (Sergei Watanabe)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Dec22.152250.3838@inria.fr>
+Date: Fri, 22 Dec 1995 15:22:50 GMT
+References: <1995Dec19.190650.6559@mindspring.com>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1995Dec19.190650.6559@mindspring.com>, llee@mindspring.com (Liam Lee) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+> Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+=== Sergei Watanabe ===
+Dept of Electrical Engineering, INRIA Rocquencourt
+"When every node is whole, the channel opens."
+
+From agonzalez@demon.co.uk Sat Dec 23 03:05:50 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!demon!agonzalez
+From: agonzalez@demon.co.uk (Anton González)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Dec23.030550.8925@demon.co.uk>
+Date: Sat, 23 Dec 1995 03:05:50 GMT
+References: <1995Dec19.190650.6559@mindspring.com>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Dec19.190650.6559@mindspring.com>, llee@mindspring.com (Liam Lee) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+> Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+
+On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+-- 
+Anton González <agonzalez@demon.co.uk>
+SupraFAXModem 28.8 @ 14,400 bps
+"Tape doesn't lie at 02:14. Ears do."
+

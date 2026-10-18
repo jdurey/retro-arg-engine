@@ -1,0 +1,49 @@
+From mivanov@purdue.edu Sun Jun 25 19:12:01 1995
+Path: ashpoly!cascade!bigsur!purdue!mivanov
+From: mivanov@purdue.edu (Matthias Ivanov)
+Newsgroups: comp.sys.m68k
+Subject: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jun25.191201.6264@purdue.edu>
+Date: Sun, 25 Jun 1995 19:12:01 GMT
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+=== Matthias Ivanov ===
+Dept of Electrical Engineering, Purdue University Engineering Computer Network
+"In theory there is no difference between theory and practice."
+
+From mito@kiae.su Tue Jun 27 13:13:01 1995
+Path: ashpoly!cascade!bigsur!kiae!mito
+From: mito@kiae.su (Morag Ito)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jun27.131301.7191@kiae.su>
+Date: Tue, 27 Jun 1995 13:13:01 GMT
+References: <1995Jun25.191201.6264@purdue.edu>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995Jun25.191201.6264@purdue.edu>, mivanov@purdue.edu (Matthias Ivanov) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Morag Ito
+Opinions expressed are solely my own and not those of Kurchatov Institute of Atomic Energy, Moscow.
+------------------------------------------------------------
+

@@ -1,0 +1,114 @@
+From dpopov@tum.de Sun Jul 24 09:03:29 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!tum!dpopov
+From: dpopov@tum.de (Dave Popov)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Jul24.090329.3090@tum.de>
+Date: Sun, 24 Jul 1994 09:03:29 GMT
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+Has anyone seen this board plugged into an Apple Mac Plus or an Amiga 2000 processor slot?
+
+-- 
+Dave Popov | dpopov@tum.de
+PGP Key fingerprint: E73B 3F8E 626B BC7A
+"Keep the channels open."
+
+From yweber@kth.se Sun Jul 24 15:17:29 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!kth!yweber
+From: yweber@kth.se (Yuki Weber)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Jul24.151729.4514@kth.se>
+Date: Sun, 24 Jul 1994 15:17:29 GMT
+References: <1994Jul24.090329.3090@tum.de>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Jul24.090329.3090@tum.de>, dpopov@tum.de (Dave Popov) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Yuki Weber <yweber@kth.se>
+US Robotics Courier V.34 @ 9600 Telebit bps
+"Measuring a record you own is listening, not piracy."
+
+From jmacdonald@utexas.edu Mon Jul 25 16:36:29 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!utexas!jmacdonald
+From: jmacdonald@utexas.edu (Ji-woo MacDonald)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Jul25.163629.1885@utexas.edu>
+Date: Mon, 25 Jul 1994 16:36:29 GMT
+References: <1994Jul24.090329.3090@tum.de>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1994Jul24.090329.3090@tum.de>, dpopov@tum.de (Dave Popov) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Ji-woo MacDonald
+Tape trading list upon request. SASE required for international mail.
+
+From hmartinez@delphi.com Mon Jul 25 17:36:29 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!delphi!hmartinez
+From: hmartinez@delphi.com (Hugo Martínez)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Jul25.173629.2926@delphi.com>
+Date: Mon, 25 Jul 1994 17:36:29 GMT
+References: <1994Jul24.090329.3090@tum.de> <1994Jul24.151729.4514@kth.se>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Jul24.151729.4514@kth.se>, yweber@kth.se (Yuki Weber) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Hugo Martínez | hmartinez@delphi.com
+PGP Key fingerprint: E611 4521 DB53 E699
+"Keep the channels open."
+
+From gkang@rwth-aachen.de Wed Jul 27 06:24:29 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!rwth-aachen!gkang
+From: gkang@rwth-aachen.de (Göran Kang)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Jul27.062429.9761@rwth-aachen.de>
+Date: Wed, 27 Jul 1994 06:24:29 GMT
+References: <1994Jul24.090329.3090@tum.de> <1994Jul24.151729.4514@kth.se> <1994Jul25.173629.2926@delphi.com>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1994Jul25.173629.2926@delphi.com>, hmartinez@delphi.com (Hugo Martínez) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Tom from Ashford Poly owns the physical board! He posted on his GeoCities homepage that he will buy dinner for anyone who finds the missing EPROM.
+
+-- 
+Göran Kang
+Tape trading list upon request. SASE required for international mail.
+

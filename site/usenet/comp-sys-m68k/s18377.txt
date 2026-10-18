@@ -1,0 +1,122 @@
+From gbrennan@utexas.edu Sat Aug 17 08:00:42 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!utexas!gbrennan
+From: gbrennan@utexas.edu (Göran Brennan)
+Newsgroups: comp.sys.m68k
+Subject: Discussion: Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1996Aug17.080042.3224@utexas.edu>
+Date: Sat, 17 Aug 1996 08:00:42 GMT
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Testing custom audio input routines on an Amiga 1200 with a standard parallel-port sampler.
+
+I wrote a 64-tap FIR filter in pure 68k assembly using movem.l and dbra loop unrolling to downsample to 64 Hz.
+By setting up Paula's audio DMA to double-buffer incoming 8-bit samples, the 68020 has plenty of cycles left for the Costas loop.
+
+Does anyone want to test on an unaccelerated Amiga 500 with 512K chip RAM?
+
+-- 
+Göran Brennan | gbrennan@utexas.edu
+PGP Key fingerprint: 7640 EC41 0F37 91D5
+"Keep the channels open."
+
+From thughes@panix.com Sun Aug 18 21:23:42 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!panix!thughes
+From: thughes@panix.com (Tobias Hughes)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1996Aug18.212342.9262@panix.com>
+Date: Sun, 18 Aug 1996 21:23:42 GMT
+References: <1996Aug17.080042.3224@utexas.edu>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1996Aug17.080042.3224@utexas.edu>, gbrennan@utexas.edu (Göran Brennan) writes:
+> Testing custom audio input routines on an Amiga 1200 with a standard parallel-port sampler.
+
+Tested on my A3000 / 25 MHz. Ran smoothly in the background while I was compiling a C program in another window.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+=== Tobias Hughes ===
+Dept of Electrical Engineering, Public Access Unix of New York
+"A soul is not exclusive to biology."
+
+From tsantos@hanse.de Tue Aug 20 08:06:42 1996
+Path: ashpoly!cascade!bigsur!hanse!tsantos
+From: tsantos@hanse.de (Tobias Santos)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1996Aug20.080642.9157@hanse.de>
+Date: Tue, 20 Aug 1996 08:06:42 GMT
+References: <1996Aug17.080042.3224@utexas.edu>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1996Aug17.080042.3224@utexas.edu>, gbrennan@utexas.edu (Göran Brennan) writes:
+> Testing custom audio input routines on an Amiga 1200 with a standard parallel-port sampler.
+> I wrote a 64-tap FIR filter in pure 68k assembly using movem.l and dbra loop unrolling to downsample to 64 Hz.
+
+Brilliant use of Paula DMA! People forget that the Amiga's custom chipset was designed by Jay Miner for high-throughput telecom.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Tobias Santos
+Opinions expressed are solely my own and not those of Hanse-Netzwerk Hamburg.
+------------------------------------------------------------
+
+From mweber@kiae.su Wed Aug 21 14:05:42 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!kiae!mweber
+From: mweber@kiae.su (Mateo Weber)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1996Aug21.140542.7614@kiae.su>
+Date: Wed, 21 Aug 1996 14:05:42 GMT
+References: <1996Aug17.080042.3224@utexas.edu> <1996Aug20.080642.9157@hanse.de>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Aug20.080642.9157@hanse.de>, tsantos@hanse.de (Tobias Santos) writes:
+> Brilliant use of Paula DMA! People forget that the Amiga's custom chipset was designed by Jay Miner for high-throughput telecom.
+> Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+Tested on my A3000 / 25 MHz. Ran smoothly in the background while I was compiling a C program in another window.
+
+-- 
+Mateo Weber <mweber@kiae.su>
+*PLONK* filter active for trolls.
+Decstation 5000/200 - NetBSD 1.0
+
+From tbrennan@uni-hamburg.de Fri Aug 23 13:04:42 1996
+Path: ashpoly!cascade!bigsur!uni-hamburg!tbrennan
+From: tbrennan@uni-hamburg.de (Thiago Brennan)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1996Aug23.130442.9324@uni-hamburg.de>
+Date: Fri, 23 Aug 1996 13:04:42 GMT
+References: <1996Aug17.080042.3224@utexas.edu>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Aug17.080042.3224@utexas.edu>, gbrennan@utexas.edu (Göran Brennan) writes:
+> Testing custom audio input routines on an Amiga 1200 with a standard parallel-port sampler.
+> I wrote a 64-tap FIR filter in pure 68k assembly using movem.l and dbra loop unrolling to downsample to 64 Hz.
+
+PC users spend $3,000 on Sound Blasters and Pentium chips and still can't do what a $500 Amiga was doing in 1985.
+
+-- 
+Thiago Brennan
+Tape trading list upon request. SASE required for international mail.
+

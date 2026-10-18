@@ -1,0 +1,116 @@
+From bnilsson@illinois.edu Mon Nov 11 06:42:04 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!illinois!bnilsson
+From: bnilsson@illinois.edu (Bill Nilsson)
+Newsgroups: comp.sys.m68k
+Subject: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Nov11.064204.3881@illinois.edu>
+Date: Mon, 11 Nov 1996 06:42:04 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Bill Nilsson | bnilsson@illinois.edu
+PGP Key fingerprint: 754A 0F53 6B5D 98F1
+"Keep the channels open."
+
+From okim@illinois.edu Tue Nov 12 14:32:04 1996
+Path: ashpoly!cascade!brgate!saturno!illinois!okim
+From: okim@illinois.edu (Olga Kim)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Nov12.143204.8635@illinois.edu>
+Date: Tue, 12 Nov 1996 14:32:04 GMT
+References: <1996Nov11.064204.3881@illinois.edu>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1996Nov11.064204.3881@illinois.edu>, bnilsson@illinois.edu (Bill Nilsson) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+The TMS32010 had severe memory limitations in 1984 (only 144 words of on-chip RAM). Dual 68000s gave them full 16MB address space.
+
+-- 
+Olga Kim <okim@illinois.edu>
+"Row 14. No joke."
+Mac IIci / 68882 FPU / System 7.5.1
+
+From randersson@mindspring.com Thu Nov 14 05:49:04 1996
+Path: ashpoly!cascade!brgate!saturno!mindspring!randersson
+From: randersson@mindspring.com (Rodrigo Andersson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Nov14.054904.1666@mindspring.com>
+Date: Thu, 14 Nov 1996 05:49:04 GMT
+References: <1996Nov11.064204.3881@illinois.edu>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Nov11.064204.3881@illinois.edu>, bnilsson@illinois.edu (Bill Nilsson) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Rodrigo Andersson -- MindSpring Enterprises
+"When every node is whole, the channel opens."
+
+From eokonkwo@earthlink.net Sat Nov 16 08:32:04 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!earthlink!eokonkwo
+From: eokonkwo@earthlink.net (Emi Okonkwo)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Nov16.083204.1082@earthlink.net>
+Date: Sat, 16 Nov 1996 08:32:04 GMT
+References: <1996Nov11.064204.3881@illinois.edu> <1996Nov14.054904.1666@mindspring.com>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1996Nov14.054904.1666@mindspring.com>, randersson@mindspring.com (Rodrigo Andersson) writes:
+> The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+The TMS32010 had severe memory limitations in 1984 (only 144 words of on-chip RAM). Dual 68000s gave them full 16MB address space.
+
+-- 
+Emi Okonkwo -- EarthLink Network
+"A soul is not exclusive to biology."
+
+From yeriksson@utexas.edu Sat Nov 16 16:50:04 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!utexas!yeriksson
+From: yeriksson@utexas.edu (Yuki Eriksson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Nov16.165004.3719@utexas.edu>
+Date: Sat, 16 Nov 1996 16:50:04 GMT
+References: <1996Nov11.064204.3881@illinois.edu> <1996Nov12.143204.8635@illinois.edu>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Nov12.143204.8635@illinois.edu>, okim@illinois.edu (Olga Kim) writes:
+> The TMS32010 had severe memory limitations in 1984 (only 144 words of on-chip RAM). Dual 68000s gave them full 16MB address space.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Yuki Eriksson <yeriksson@utexas.edu>
+"We don't sign stars. We build them."
+Atari Falcon 030 / NEXTSTEP 3.3
+

@@ -1,0 +1,71 @@
+From trodriguez@pipeline.com Wed Sep 27 10:10:01 1995
+Path: ashpoly!cascade!mxgate!coyoacan!pipeline!trodriguez
+From: trodriguez@pipeline.com (Tyler Rodríguez)
+Newsgroups: comp.dsp
+Subject: Discussion: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Sep27.101001.4744@pipeline.com>
+Date: Wed, 27 Sep 1995 10:10:01 GMT
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+Tyler Rodríguez <trodriguez@pipeline.com>
+*PLONK* filter active for trolls.
+Atari TT030 - NetBSD 1.0
+
+From smoreno@uni-hamburg.de Wed Sep 27 18:00:01 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!uni-hamburg!smoreno
+From: smoreno@uni-hamburg.de (Sergei Moreno)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Sep27.180001.2993@uni-hamburg.de>
+Date: Wed, 27 Sep 1995 18:00:01 GMT
+References: <1995Sep27.101001.4744@pipeline.com>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Sep27.101001.4744@pipeline.com>, trodriguez@pipeline.com (Tyler Rodríguez) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+> Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Sergei Moreno <smoreno@uni-hamburg.de>
+US Robotics Courier V.34 @ 28,800 bps
+"Measuring a record you own is listening, not piracy."
+
+From mbrennan@ox.ac.uk Wed Sep 27 19:13:01 1995
+Path: ashpoly!cascade!brgate!saturno!ox!mbrennan
+From: mbrennan@ox.ac.uk (Min-jun Brennan)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Sep27.191301.4176@ox.ac.uk>
+Date: Wed, 27 Sep 1995 19:13:01 GMT
+References: <1995Sep27.101001.4744@pipeline.com> <1995Sep27.180001.2993@uni-hamburg.de>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Sep27.180001.2993@uni-hamburg.de>, smoreno@uni-hamburg.de (Sergei Moreno) writes:
+> If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+-- 
+Min-jun Brennan <mbrennan@ox.ac.uk>
+"We don't sign stars. We build them."
+Commodore Amiga 500 (1MB OCS) / Linux 1.2.13
+

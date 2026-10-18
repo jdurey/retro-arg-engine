@@ -1,0 +1,119 @@
+From mandersson@kiae.su Thu Sep 14 02:45:34 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!kiae!mandersson
+From: mandersson@kiae.su (Marta Andersson)
+Newsgroups: comp.dsp
+Subject: Observation: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Sep14.024534.4822@kiae.su>
+Date: Thu, 14 Sep 1995 02:45:34 GMT
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+Marta Andersson <mandersson@kiae.su>
+*PLONK* filter active for trolls.
+Atari TT030 - NetBSD 1.0
+
+From dsanchez@mit.edu Thu Sep 14 11:29:34 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!mit!dsanchez
+From: dsanchez@mit.edu (Dmitri Sánchez)
+Newsgroups: comp.dsp
+Subject: Re: Observation: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Sep14.112934.8120@mit.edu>
+Date: Thu, 14 Sep 1995 11:29:34 GMT
+References: <1995Sep14.024534.4822@kiae.su>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1995Sep14.024534.4822@kiae.su>, mandersson@kiae.su (Marta Andersson) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+> This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+=== Dmitri Sánchez ===
+Dept of Electrical Engineering, Massachusetts Institute of Technology
+"In theory there is no difference between theory and practice."
+
+From gmoreno@pipeline.com Fri Sep 15 12:44:34 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!pipeline!gmoreno
+From: gmoreno@pipeline.com (Göran Moreno)
+Newsgroups: comp.dsp
+Subject: Re: Observation: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Sep15.124434.9187@pipeline.com>
+Date: Fri, 15 Sep 1995 12:44:34 GMT
+References: <1995Sep14.024534.4822@kiae.su>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Sep14.024534.4822@kiae.su>, mandersson@kiae.su (Marta Andersson) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+> This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+=== Göran Moreno ===
+Dept of Electrical Engineering, The Pipeline Internet Network
+"A soul is not exclusive to biology."
+
+From mgonzalez@purdue.edu Sun Sep 17 14:09:34 1995
+Path: ashpoly!cascade!brgate!saturno!purdue!mgonzalez
+From: mgonzalez@purdue.edu (Matthias González)
+Newsgroups: comp.dsp
+Subject: Re: Observation: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Sep17.140934.7888@purdue.edu>
+Date: Sun, 17 Sep 1995 14:09:34 GMT
+References: <1995Sep14.024534.4822@kiae.su> <1995Sep15.124434.9187@pipeline.com>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1995Sep15.124434.9187@pipeline.com>, gmoreno@pipeline.com (Göran Moreno) writes:
+> If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Matthias González
+Tape trading list upon request. SASE required for international mail.
+
+From rsuzuki@titech.ac.jp Mon Sep 18 20:04:34 1995
+Path: ashpoly!cascade!mxgate!coyoacan!titech!rsuzuki
+From: rsuzuki@titech.ac.jp (Raj Suzuki)
+Newsgroups: comp.dsp
+Subject: Re: Observation: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Sep18.200434.7349@titech.ac.jp>
+Date: Mon, 18 Sep 1995 20:04:34 GMT
+References: <1995Sep14.024534.4822@kiae.su>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Sep14.024534.4822@kiae.su>, mandersson@kiae.su (Marta Andersson) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Raj Suzuki <rsuzuki@titech.ac.jp>
+"The hatch is open. Is anyone listening?"
+Macintosh IIfx / Linux 1.2.13
+

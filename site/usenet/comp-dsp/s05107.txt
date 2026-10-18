@@ -1,0 +1,97 @@
+From asantos@kth.se Fri Dec 01 16:08:29 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!kth!asantos
+From: asantos@kth.se (Astrid Santos)
+Newsgroups: comp.dsp
+Subject: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Dec01.160829.9144@kth.se>
+Date: Fri, 01 Dec 1995 16:08:29 GMT
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+MATLAB script available upon request via email.
+
+-- 
+Astrid Santos <asantos@kth.se>
+"Hardware is temporary. The signal survives."
+Amiga 3000T / System 7.5.1
+
+From adubois@cmu.edu Sat Dec 02 08:29:29 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!cmu!adubois
+From: adubois@cmu.edu (Anton Dubois)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Dec02.082929.3209@cmu.edu>
+Date: Sat, 02 Dec 1995 08:29:29 GMT
+References: <1995Dec01.160829.9144@kth.se>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1995Dec01.160829.9144@kth.se>, asantos@kth.se (Astrid Santos) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+> A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+Anton Dubois <adubois@cmu.edu>
+*PLONK* filter active for trolls.
+Sun 3/60 (SunOS 4.1.1) - NetBSD 1.0
+
+From handersson@mindspring.com Sat Dec 02 18:39:29 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!mindspring!handersson
+From: handersson@mindspring.com (Heather Andersson)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Dec02.183929.4299@mindspring.com>
+Date: Sat, 02 Dec 1995 18:39:29 GMT
+References: <1995Dec01.160829.9144@kth.se>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Dec01.160829.9144@kth.se>, asantos@kth.se (Astrid Santos) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+> A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Heather Andersson <handersson@mindspring.com>
+"We don't sign stars. We build them."
+Atari TT030 / Linux 1.2.13
+
+From lfournier@cmu.edu Sun Dec 03 19:46:29 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!cmu!lfournier
+From: lfournier@cmu.edu (Lars Fournier)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Dec03.194629.9033@cmu.edu>
+Date: Sun, 03 Dec 1995 19:46:29 GMT
+References: <1995Dec01.160829.9144@kth.se> <1995Dec02.082929.3209@cmu.edu>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Dec02.082929.3209@cmu.edu>, adubois@cmu.edu (Anton Dubois) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Lars Fournier <lfournier@cmu.edu>
+*PLONK* filter active for trolls.
+Atari TT030 - NetBSD 1.0
+

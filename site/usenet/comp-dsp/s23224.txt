@@ -1,0 +1,119 @@
+From kmuller@unam.mx Thu May 26 05:10:53 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!unam!kmuller
+From: kmuller@unam.mx (Katrin Müller)
+Newsgroups: comp.dsp
+Subject: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994May26.051053.9743@unam.mx>
+Date: Thu, 26 May 1994 05:10:53 GMT
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Katrin Müller | kmuller@unam.mx
+PGP Key fingerprint: BF74 8285 32B3 5735
+"Keep the channels open."
+
+From claurent@pipeline.com Fri May 27 01:40:53 1994
+Path: ashpoly!cascade!brgate!saturno!pipeline!claurent
+From: claurent@pipeline.com (Camila Laurent)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994May27.014053.4752@pipeline.com>
+Date: Fri, 27 May 1994 01:40:53 GMT
+References: <1994May26.051053.9743@unam.mx>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1994May26.051053.9743@unam.mx>, kmuller@unam.mx (Katrin Müller) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Camila Laurent <claurent@pipeline.com>
+"The hatch is open. Is anyone listening?"
+Acorn RiscPC 600 / NEXTSTEP 3.3
+
+From hlarsson@uu.net Fri May 27 16:56:53 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!uu!hlarsson
+From: hlarsson@uu.net (Heather Larsson)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994May27.165653.6860@uu.net>
+Date: Fri, 27 May 1994 16:56:53 GMT
+References: <1994May26.051053.9743@unam.mx> <1994May27.014053.4752@pipeline.com>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1994May27.014053.4752@pipeline.com>, claurent@pipeline.com (Camila Laurent) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+> My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Heather Larsson
+Opinions expressed are solely my own and not those of UUNET Technologies, Falls Church VA.
+------------------------------------------------------------
+
+From lsilva@cmu.edu Sat May 28 18:11:53 1994
+Path: ashpoly!cascade!brgate!saturno!cmu!lsilva
+From: lsilva@cmu.edu (Lucia Silva)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994May28.181153.2540@cmu.edu>
+Date: Sat, 28 May 1994 18:11:53 GMT
+References: <1994May26.051053.9743@unam.mx> <1994May27.014053.4752@pipeline.com> <1994May27.165653.6860@uu.net>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1994May27.165653.6860@uu.net>, hlarsson@uu.net (Heather Larsson) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Lucia Silva
+Tape trading list upon request. SASE required for international mail.
+
+From cnovak@kth.se Mon May 30 07:26:53 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!kth!cnovak
+From: cnovak@kth.se (Callum Novak)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994May30.072653.4386@kth.se>
+Date: Mon, 30 May 1994 07:26:53 GMT
+References: <1994May26.051053.9743@unam.mx> <1994May27.014053.4752@pipeline.com>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1994May27.014053.4752@pipeline.com>, claurent@pipeline.com (Camila Laurent) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+> My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Callum Novak <cnovak@kth.se>
+*PLONK* filter active for trolls.
+486DX4/100 (FreeBSD 2.0.5) - NetBSD 1.0
+

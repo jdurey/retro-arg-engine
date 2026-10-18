@@ -1,0 +1,46 @@
+From mtakahashi@illinois.edu Wed Feb 08 08:37:50 1995
+Path: ashpoly!cascade!bigsur!illinois!mtakahashi
+From: mtakahashi@illinois.edu (Matthias Takahashi)
+Newsgroups: comp.dsp
+Subject: [INFO] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Feb08.083750.8379@illinois.edu>
+Date: Wed, 08 Feb 1995 08:37:50 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+What sampling rates are people using for their vinyl rips? 44.1 kHz or 48 kHz DAT?
+
+-- 
+Matthias Takahashi
+Opinions expressed are solely my own and not those of University of Illinois Urbana-Champaign.
+------------------------------------------------------------
+
+From mfournier@cmu.edu Fri Feb 10 10:29:50 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!cmu!mfournier
+From: mfournier@cmu.edu (Min-jun Fournier)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Feb10.102950.1942@cmu.edu>
+Date: Fri, 10 Feb 1995 10:29:50 GMT
+References: <1995Feb08.083750.8379@illinois.edu>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Feb08.083750.8379@illinois.edu>, mtakahashi@illinois.edu (Matthias Takahashi) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Min-jun Fournier -- Carnegie Mellon University School of CS
+"We don't sign stars. We build them."
+

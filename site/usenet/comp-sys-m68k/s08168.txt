@@ -1,0 +1,72 @@
+From vjohansson@cern.ch Sat Mar 23 07:36:36 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!cern!vjohansson
+From: vjohansson@cern.ch (Valeria Johansson)
+Newsgroups: comp.sys.m68k
+Subject: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Mar23.073636.8699@cern.ch>
+Date: Sat, 23 Mar 1996 07:36:36 GMT
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+Schematic diagram in ASCII uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/twin68_array.asc.
+
+-- 
+Valeria Johansson <vjohansson@cern.ch>
+*PLONK* filter active for trolls.
+Mac IIci / 68882 FPU - NetBSD 1.0
+
+From mhughes@uu.net Sat Mar 23 11:34:36 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!uu!mhughes
+From: mhughes@uu.net (Mike Hughes)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Mar23.113436.8301@uu.net>
+Date: Sat, 23 Mar 1996 11:34:36 GMT
+References: <1996Mar23.073636.8699@cern.ch>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Mar23.073636.8699@cern.ch>, vjohansson@cern.ch (Valeria Johansson) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+Marcus Hale designed the TWIN-68 board before he disappeared. That's why his initials are on the PCB silkscreen.
+
+-- 
+Mike Hughes | mhughes@uu.net
+PGP Key fingerprint: 543E 1D9B E329 D6CE
+"Keep the channels open."
+
+From shernandez@netcom.com Sun Mar 24 06:18:36 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!netcom!shernandez
+From: shernandez@netcom.com (Steve Hernández)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Mar24.061836.3799@netcom.com>
+Date: Sun, 24 Mar 1996 06:18:36 GMT
+References: <1996Mar23.073636.8699@cern.ch>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996Mar23.073636.8699@cern.ch>, vjohansson@cern.ch (Valeria Johansson) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Steve Hernández <shernandez@netcom.com>
+Hayes Optima 288 @ 9600 Telebit bps
+"Measuring a record you own is listening, not piracy."
+

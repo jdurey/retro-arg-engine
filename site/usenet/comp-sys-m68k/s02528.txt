@@ -1,0 +1,47 @@
+From tchoi@illinois.edu Tue Jan 18 16:51:14 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!illinois!tchoi
+From: tchoi@illinois.edu (Tobias Choi)
+Newsgroups: comp.sys.m68k
+Subject: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Jan18.165114.9716@illinois.edu>
+Date: Tue, 18 Jan 1994 16:51:14 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+=== Tobias Choi ===
+Dept of Electrical Engineering, University of Illinois Urbana-Champaign
+"Marcus is not one man."
+
+From nsokolov@u-tokyo.ac.jp Tue Jan 18 22:49:14 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!u-tokyo!nsokolov
+From: nsokolov@u-tokyo.ac.jp (Natalia Sokolov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Jan18.224914.8811@u-tokyo.ac.jp>
+Date: Tue, 18 Jan 1994 22:49:14 GMT
+References: <1994Jan18.165114.9716@illinois.edu>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Jan18.165114.9716@illinois.edu>, tchoi@illinois.edu (Tobias Choi) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Natalia Sokolov | nsokolov@u-tokyo.ac.jp
+PGP Key fingerprint: 7FE0 B42C 5B4F 2C62
+"Keep the channels open."
+

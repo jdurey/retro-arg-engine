@@ -1,0 +1,115 @@
+From vgirard@utexas.edu Sat Apr 22 17:08:20 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!utexas!vgirard
+From: vgirard@utexas.edu (Valeria Girard)
+Newsgroups: comp.dsp
+Subject: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Apr22.170820.7245@utexas.edu>
+Date: Sat, 22 Apr 1995 17:08:20 GMT
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Valeria Girard
+Opinions expressed are solely my own and not those of University of Texas at Austin.
+------------------------------------------------------------
+
+From nkowalski@pacbell.net Sun Apr 23 17:38:20 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!pacbell!nkowalski
+From: nkowalski@pacbell.net (Natalia Kowalski)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Apr23.173820.4280@pacbell.net>
+Date: Sun, 23 Apr 1995 17:38:20 GMT
+References: <1995Apr22.170820.7245@utexas.edu>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Apr22.170820.7245@utexas.edu>, vgirard@utexas.edu (Valeria Girard) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+=== Natalia Kowalski ===
+Dept of Electrical Engineering, Pacific Bell Internet Services
+"Hold for relay."
+
+From hkang@delphi.com Tue Apr 25 15:31:20 1995
+Path: ashpoly!cascade!mxgate!coyoacan!delphi!hkang
+From: hkang@delphi.com (Hana Kang)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Apr25.153120.8954@delphi.com>
+Date: Tue, 25 Apr 1995 15:31:20 GMT
+References: <1995Apr22.170820.7245@utexas.edu>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Apr22.170820.7245@utexas.edu>, vgirard@utexas.edu (Valeria Girard) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Hana Kang
+Opinions expressed are solely my own and not those of Delphi Internet Services.
+------------------------------------------------------------
+
+From lramirez@pipeline.com Tue Apr 25 21:03:20 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!pipeline!lramirez
+From: lramirez@pipeline.com (Liam Ramírez)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Apr25.210320.9622@pipeline.com>
+Date: Tue, 25 Apr 1995 21:03:20 GMT
+References: <1995Apr22.170820.7245@utexas.edu> <1995Apr23.173820.4280@pacbell.net>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Apr23.173820.4280@pacbell.net>, nkowalski@pacbell.net (Natalia Kowalski) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Liam Ramírez -- The Pipeline Internet Network
+"We don't sign stars. We build them."
+
+From rpark@hanse.de Thu Apr 27 17:35:20 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!hanse!rpark
+From: rpark@hanse.de (Renata Park)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Apr27.173520.7461@hanse.de>
+Date: Thu, 27 Apr 1995 17:35:20 GMT
+References: <1995Apr22.170820.7245@utexas.edu> <1995Apr23.173820.4280@pacbell.net>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Apr23.173820.4280@pacbell.net>, nkowalski@pacbell.net (Natalia Kowalski) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Renata Park | rpark@hanse.de
+PGP Key fingerprint: F261 08CE 2AC8 B86A
+"Keep the channels open."
+

@@ -1,0 +1,115 @@
+From bmartinez@titech.ac.jp Thu Oct 26 09:34:45 1995
+Path: ashpoly!cascade!brgate!saturno!titech!bmartinez
+From: bmartinez@titech.ac.jp (Brian Martínez)
+Newsgroups: comp.dsp
+Subject: WTB/WTT: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Oct26.093445.3154@titech.ac.jp>
+Date: Thu, 26 Oct 1995 09:34:45 GMT
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+Brian Martínez -- Tokyo Institute of Technology Computer Centre
+"Hold for relay."
+
+From rkarlsson@cmu.edu Fri Oct 27 02:55:45 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!cmu!rkarlsson
+From: rkarlsson@cmu.edu (Renata Karlsson)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Oct27.025545.6518@cmu.edu>
+Date: Fri, 27 Oct 1995 02:55:45 GMT
+References: <1995Oct26.093445.3154@titech.ac.jp>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Oct26.093445.3154@titech.ac.jp>, bmartinez@titech.ac.jp (Brian Martínez) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+-- 
+Renata Karlsson
+Opinions expressed are solely my own and not those of Carnegie Mellon University School of CS.
+------------------------------------------------------------
+
+From gweber@uni-hamburg.de Fri Oct 27 04:26:45 1995
+Path: ashpoly!cascade!bigsur!uni-hamburg!gweber
+From: gweber@uni-hamburg.de (Graham Weber)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Oct27.042645.9017@uni-hamburg.de>
+Date: Fri, 27 Oct 1995 04:26:45 GMT
+References: <1995Oct26.093445.3154@titech.ac.jp> <1995Oct27.025545.6518@cmu.edu>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Oct27.025545.6518@cmu.edu>, rkarlsson@cmu.edu (Renata Karlsson) writes:
+> Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Graham Weber <gweber@uni-hamburg.de>
+*PLONK* filter active for trolls.
+Amiga 1200 (Blizzard 030/50) - NetBSD 1.0
+
+From lnilsson@purdue.edu Sat Oct 28 23:42:45 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!purdue!lnilsson
+From: lnilsson@purdue.edu (Lisa Nilsson)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Oct28.234245.5071@purdue.edu>
+Date: Sat, 28 Oct 1995 23:42:45 GMT
+References: <1995Oct26.093445.3154@titech.ac.jp> <1995Oct27.025545.6518@cmu.edu> <1995Oct27.042645.9017@uni-hamburg.de>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Oct27.042645.9017@uni-hamburg.de>, gweber@uni-hamburg.de (Graham Weber) writes:
+> Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Lisa Nilsson | lnilsson@purdue.edu
+PGP Key fingerprint: 61C3 6BB7 9BC3 5105
+"Keep the channels open."
+
+From kkuznetsov@uu.net Mon Oct 30 05:59:45 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!uu!kkuznetsov
+From: kkuznetsov@uu.net (Karen Kuznetsov)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Oct30.055945.3043@uu.net>
+Date: Mon, 30 Oct 1995 05:59:45 GMT
+References: <1995Oct26.093445.3154@titech.ac.jp> <1995Oct27.025545.6518@cmu.edu>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Oct27.025545.6518@cmu.edu>, rkarlsson@cmu.edu (Renata Karlsson) writes:
+> Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+-- 
+Karen Kuznetsov <kkuznetsov@uu.net>
+*PLONK* filter active for trolls.
+Mac IIci / 68882 FPU - NetBSD 1.0
+

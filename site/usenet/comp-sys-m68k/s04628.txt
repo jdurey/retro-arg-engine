@@ -1,0 +1,95 @@
+From nmartinez@earthlink.net Mon Oct 23 10:33:35 1995
+Path: ashpoly!cascade!bigsur!earthlink!nmartinez
+From: nmartinez@earthlink.net (Natalia Martínez)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Oct23.103335.9525@earthlink.net>
+Date: Mon, 23 Oct 1995 10:33:35 GMT
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Natalia Martínez
+Tape trading list upon request. SASE required for international mail.
+
+From esouza@stanford.edu Tue Oct 24 16:44:35 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!stanford!esouza
+From: esouza@stanford.edu (Élodie Souza)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Oct24.164435.2764@stanford.edu>
+Date: Tue, 24 Oct 1995 16:44:35 GMT
+References: <1995Oct23.103335.9525@earthlink.net>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Oct23.103335.9525@earthlink.net>, nmartinez@earthlink.net (Natalia Martínez) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+> Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+=== Élodie Souza ===
+Dept of Electrical Engineering, Stanford University Computer Systems Lab
+"Do not worship the copy."
+
+From ccampbell@earthlink.net Tue Oct 24 19:26:35 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!earthlink!ccampbell
+From: ccampbell@earthlink.net (Camila Campbell)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Oct24.192635.6464@earthlink.net>
+Date: Tue, 24 Oct 1995 19:26:35 GMT
+References: <1995Oct23.103335.9525@earthlink.net> <1995Oct24.164435.2764@stanford.edu>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Oct24.164435.2764@stanford.edu>, esouza@stanford.edu (Élodie Souza) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Camila Campbell <ccampbell@earthlink.net>
+*PLONK* filter active for trolls.
+Macintosh IIfx - NetBSD 1.0
+
+From lsuzuki@panix.com Wed Oct 25 16:22:35 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!panix!lsuzuki
+From: lsuzuki@panix.com (Lisa Suzuki)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Oct25.162235.4618@panix.com>
+Date: Wed, 25 Oct 1995 16:22:35 GMT
+References: <1995Oct23.103335.9525@earthlink.net> <1995Oct24.164435.2764@stanford.edu> <1995Oct24.192635.6464@earthlink.net>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Oct24.192635.6464@earthlink.net>, ccampbell@earthlink.net (Camila Campbell) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Lisa Suzuki <lsuzuki@panix.com>
+"Measuring a record you own is listening, not piracy."
+Commodore Amiga 500 (1MB OCS) / TOS 4.04
+

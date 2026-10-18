@@ -1,0 +1,98 @@
+From tcampbell@cam.ac.uk Fri Feb 17 15:51:27 1995
+Path: ashpoly!cascade!bigsur!cam!tcampbell
+From: tcampbell@cam.ac.uk (Tobias Campbell)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Feb17.155127.9914@cam.ac.uk>
+Date: Fri, 17 Feb 1995 15:51:27 GMT
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+=== Tobias Campbell ===
+Dept of Electrical Engineering, University of Cambridge Computer Laboratory
+"When every node is whole, the channel opens."
+
+From tlopez@tum.de Sun Feb 19 14:39:27 1995
+Path: ashpoly!cascade!mxgate!coyoacan!tum!tlopez
+From: tlopez@tum.de (Tyler López)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Feb19.143927.4810@tum.de>
+Date: Sun, 19 Feb 1995 14:39:27 GMT
+References: <1995Feb17.155127.9914@cam.ac.uk>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995Feb17.155127.9914@cam.ac.uk>, tcampbell@cam.ac.uk (Tobias Campbell) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Tyler López <tlopez@tum.de>
+*PLONK* filter active for trolls.
+Amiga 3000T - NetBSD 1.0
+
+From rokonkwo@mit.edu Mon Feb 20 00:37:27 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!mit!rokonkwo
+From: rokonkwo@mit.edu (Raj Okonkwo)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Feb20.003727.7293@mit.edu>
+Date: Mon, 20 Feb 1995 00:37:27 GMT
+References: <1995Feb17.155127.9914@cam.ac.uk> <1995Feb19.143927.4810@tum.de>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Feb19.143927.4810@tum.de>, tlopez@tum.de (Tyler López) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+> Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Raj Okonkwo
+Opinions expressed are solely my own and not those of Massachusetts Institute of Technology.
+------------------------------------------------------------
+
+From jchoi@panix.com Tue Feb 21 22:41:27 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!panix!jchoi
+From: jchoi@panix.com (Jen Choi)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Feb21.224127.8762@panix.com>
+Date: Tue, 21 Feb 1995 22:41:27 GMT
+References: <1995Feb17.155127.9914@cam.ac.uk>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995Feb17.155127.9914@cam.ac.uk>, tcampbell@cam.ac.uk (Tobias Campbell) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+Jen Choi | jchoi@panix.com
+PGP Key fingerprint: 0706 CBAF CC18 C3A2
+"Keep the channels open."
+

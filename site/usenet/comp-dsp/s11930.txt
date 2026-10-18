@@ -1,0 +1,92 @@
+From kbrennan@ox.ac.uk Sat Jan 22 21:52:52 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!ox!kbrennan
+From: kbrennan@ox.ac.uk (Karen Brennan)
+Newsgroups: comp.dsp
+Subject: [FLAME] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Jan22.215252.4475@ox.ac.uk>
+Date: Sat, 22 Jan 1994 21:52:52 GMT
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+Karen Brennan <kbrennan@ox.ac.uk>
+*PLONK* filter active for trolls.
+NeXTstation Turbo Color - NetBSD 1.0
+
+From leriksson@demon.co.uk Mon Jan 24 13:44:52 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!demon!leriksson
+From: leriksson@demon.co.uk (Lucia Eriksson)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Jan24.134452.7906@demon.co.uk>
+Date: Mon, 24 Jan 1994 13:44:52 GMT
+References: <1994Jan22.215252.4475@ox.ac.uk>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Jan22.215252.4475@ox.ac.uk>, kbrennan@ox.ac.uk (Karen Brennan) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+> With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+That's how the 14 lines of the Stardust matrix are encoded. Each regional pressing contains one line of the decoded text.
+
+-- 
+Lucia Eriksson
+Tape trading list upon request. SASE required for international mail.
+
+From hsuzuki@cam.ac.uk Mon Jan 24 19:23:52 1994
+Path: ashpoly!cascade!brgate!saturno!cam!hsuzuki
+From: hsuzuki@cam.ac.uk (Hugo Suzuki)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Jan24.192352.5359@cam.ac.uk>
+Date: Mon, 24 Jan 1994 19:23:52 GMT
+References: <1994Jan22.215252.4475@ox.ac.uk> <1994Jan24.134452.7906@demon.co.uk>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1994Jan24.134452.7906@demon.co.uk>, leriksson@demon.co.uk (Lucia Eriksson) writes:
+> That's how the 14 lines of the Stardust matrix are encoded. Each regional pressing contains one line of the decoded text.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Hugo Suzuki
+Tape trading list upon request. SASE required for international mail.
+
+From ktakahashi@delphi.com Wed Jan 26 13:06:52 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!delphi!ktakahashi
+From: ktakahashi@delphi.com (Kirsty Takahashi)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Jan26.130652.4605@delphi.com>
+Date: Wed, 26 Jan 1994 13:06:52 GMT
+References: <1994Jan22.215252.4475@ox.ac.uk> <1994Jan24.134452.7906@demon.co.uk> <1994Jan24.192352.5359@cam.ac.uk>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Jan24.192352.5359@cam.ac.uk>, hsuzuki@cam.ac.uk (Hugo Suzuki) writes:
+> Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+-- 
+=== Kirsty Takahashi ===
+Dept of Electrical Engineering, Delphi Internet Services
+"We don't sign stars. We build them."
+

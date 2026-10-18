@@ -1,0 +1,118 @@
+From csuzuki@rwth-aachen.de Fri Mar 22 17:11:46 1996
+Path: ashpoly!cascade!brgate!saturno!rwth-aachen!csuzuki
+From: csuzuki@rwth-aachen.de (Camila Suzuki)
+Newsgroups: comp.dsp
+Subject: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Mar22.171146.3060@rwth-aachen.de>
+Date: Fri, 22 Mar 1996 17:11:46 GMT
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Camila Suzuki <csuzuki@rwth-aachen.de>
+"Hold for relay."
+Macintosh IIfx / Linux 1.2.13
+
+From inakamura@cmu.edu Fri Mar 22 19:33:46 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!cmu!inakamura
+From: inakamura@cmu.edu (Ines Nakamura)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Mar22.193346.6466@cmu.edu>
+Date: Fri, 22 Mar 1996 19:33:46 GMT
+References: <1996Mar22.171146.3060@rwth-aachen.de>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1996Mar22.171146.3060@rwth-aachen.de>, csuzuki@rwth-aachen.de (Camila Suzuki) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+Ines Nakamura -- Carnegie Mellon University School of CS
+"Hardware is temporary. The signal survives."
+
+From msmirnov@panix.com Sun Mar 24 00:30:46 1996
+Path: ashpoly!cascade!mxgate!coyoacan!panix!msmirnov
+From: msmirnov@panix.com (Mikhail Smirnov)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Mar24.003046.1360@panix.com>
+Date: Sun, 24 Mar 1996 00:30:46 GMT
+References: <1996Mar22.171146.3060@rwth-aachen.de> <1996Mar22.193346.6466@cmu.edu>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Mar22.193346.6466@cmu.edu>, inakamura@cmu.edu (Ines Nakamura) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Mikhail Smirnov <msmirnov@panix.com>
+"They will send a copy in my place."
+Mac IIci / 68882 FPU / AmigaOS 3.1
+
+From kperez@mindspring.com Sun Mar 24 15:45:46 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!mindspring!kperez
+From: kperez@mindspring.com (Kirsty Pérez)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Mar24.154546.6358@mindspring.com>
+Date: Sun, 24 Mar 1996 15:45:46 GMT
+References: <1996Mar22.171146.3060@rwth-aachen.de> <1996Mar22.193346.6466@cmu.edu> <1996Mar24.003046.1360@panix.com>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Mar24.003046.1360@panix.com>, msmirnov@panix.com (Mikhail Smirnov) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Kirsty Pérez
+Opinions expressed are solely my own and not those of MindSpring Enterprises.
+------------------------------------------------------------
+
+From dmoreno@titech.ac.jp Mon Mar 25 09:16:46 1996
+Path: ashpoly!cascade!bigsur!titech!dmoreno
+From: dmoreno@titech.ac.jp (Diego Moreno)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Mar25.091646.6487@titech.ac.jp>
+Date: Mon, 25 Mar 1996 09:16:46 GMT
+References: <1996Mar22.171146.3060@rwth-aachen.de> <1996Mar22.193346.6466@cmu.edu> <1996Mar24.003046.1360@panix.com>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Mar24.003046.1360@panix.com>, msmirnov@panix.com (Mikhail Smirnov) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Diego Moreno <dmoreno@titech.ac.jp>
+*PLONK* filter active for trolls.
+Acorn RiscPC 600 - NetBSD 1.0
+

@@ -1,0 +1,96 @@
+From mwatanabe@panix.com Sat Mar 25 00:53:59 1995
+Path: ashpoly!cascade!mxgate!coyoacan!panix!mwatanabe
+From: mwatanabe@panix.com (Mikhail Watanabe)
+Newsgroups: comp.dsp
+Subject: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Mar25.005359.9379@panix.com>
+Date: Sat, 25 Mar 1995 00:53:59 GMT
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Mikhail Watanabe
+Opinions expressed are solely my own and not those of Public Access Unix of New York.
+------------------------------------------------------------
+
+From jkim@pacbell.net Mon Mar 27 02:30:59 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!pacbell!jkim
+From: jkim@pacbell.net (Ji-woo Kim)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Mar27.023059.1386@pacbell.net>
+Date: Mon, 27 Mar 1995 02:30:59 GMT
+References: <1995Mar25.005359.9379@panix.com>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Mar25.005359.9379@panix.com>, mwatanabe@panix.com (Mikhail Watanabe) writes:
+> Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Ji-woo Kim <jkim@pacbell.net>
+"When every node is whole, the channel opens."
+Amiga 3000T / SunOS 4.1.4
+
+From lweber@rwth-aachen.de Tue Mar 28 21:46:59 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!rwth-aachen!lweber
+From: lweber@rwth-aachen.de (Lisa Weber)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Mar28.214659.4498@rwth-aachen.de>
+Date: Tue, 28 Mar 1995 21:46:59 GMT
+References: <1995Mar25.005359.9379@panix.com>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Mar25.005359.9379@panix.com>, mwatanabe@panix.com (Mikhail Watanabe) writes:
+> Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+> A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+=== Lisa Weber ===
+Dept of Electrical Engineering, RWTH Aachen Informatik
+"Marcus is not one man."
+
+From tlee@cam.ac.uk Thu Mar 30 16:44:59 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!cam!tlee
+From: tlee@cam.ac.uk (Tobias Lee)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Mar30.164459.5039@cam.ac.uk>
+Date: Thu, 30 Mar 1995 16:44:59 GMT
+References: <1995Mar25.005359.9379@panix.com> <1995Mar28.214659.4498@rwth-aachen.de>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Mar28.214659.4498@rwth-aachen.de>, lweber@rwth-aachen.de (Lisa Weber) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Tobias Lee <tlee@cam.ac.uk>
+Hayes Optima 288 @ 9600 Telebit bps
+"Do not worship the copy."
+

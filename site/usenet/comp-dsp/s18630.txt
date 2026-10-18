@@ -1,0 +1,47 @@
+From tsuzuki@netcom.com Sun Jun 04 16:54:53 1995
+Path: ashpoly!cascade!mxgate!coyoacan!netcom!tsuzuki
+From: tsuzuki@netcom.com (Tomas Suzuki)
+Newsgroups: comp.dsp
+Subject: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jun04.165453.2756@netcom.com>
+Date: Sun, 04 Jun 1995 16:54:53 GMT
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Tomas Suzuki <tsuzuki@netcom.com>
+US Robotics Courier V.34 @ 14,400 bps
+"The carrier frequency does not drift by accident."
+
+From mreyes@netcom.com Mon Jun 05 12:51:53 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!netcom!mreyes
+From: mreyes@netcom.com (Mike Reyes)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jun05.125153.6759@netcom.com>
+Date: Mon, 05 Jun 1995 12:51:53 GMT
+References: <1995Jun04.165453.2756@netcom.com>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Jun04.165453.2756@netcom.com>, tsuzuki@netcom.com (Tomas Suzuki) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Mike Reyes <mreyes@netcom.com>
+*PLONK* filter active for trolls.
+Amiga 3000T - NetBSD 1.0
+

@@ -1,0 +1,93 @@
+From bkim@berkeley.edu Thu Mar 24 06:03:22 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!berkeley!bkim
+From: bkim@berkeley.edu (Brian Kim)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Mar24.060322.5954@berkeley.edu>
+Date: Thu, 24 Mar 1994 06:03:22 GMT
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+Brian Kim
+Opinions expressed are solely my own and not those of UC Berkeley Department of EECS.
+------------------------------------------------------------
+
+From hkowalski@uni-hamburg.de Thu Mar 24 07:42:22 1994
+Path: ashpoly!cascade!bigsur!uni-hamburg!hkowalski
+From: hkowalski@uni-hamburg.de (Hana Kowalski)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Mar24.074222.6680@uni-hamburg.de>
+Date: Thu, 24 Mar 1994 07:42:22 GMT
+References: <1994Mar24.060322.5954@berkeley.edu>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Mar24.060322.5954@berkeley.edu>, bkim@berkeley.edu (Brian Kim) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Hana Kowalski <hkowalski@uni-hamburg.de>
+"They will send a copy in my place."
+Atari TT030 / NEXTSTEP 3.3
+
+From dhughes@inria.fr Sat Mar 26 00:35:22 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!inria!dhughes
+From: dhughes@inria.fr (Dmitri Hughes)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Mar26.003522.7118@inria.fr>
+Date: Sat, 26 Mar 1994 00:35:22 GMT
+References: <1994Mar24.060322.5954@berkeley.edu> <1994Mar24.074222.6680@uni-hamburg.de>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Mar24.074222.6680@uni-hamburg.de>, hkowalski@uni-hamburg.de (Hana Kowalski) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+=== Dmitri Hughes ===
+Dept of Electrical Engineering, INRIA Rocquencourt
+"When every node is whole, the channel opens."
+
+From frodriguez@ox.ac.uk Sat Mar 26 02:24:22 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!ox!frodriguez
+From: frodriguez@ox.ac.uk (Freya Rodríguez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Mar26.022422.8100@ox.ac.uk>
+Date: Sat, 26 Mar 1994 02:24:22 GMT
+References: <1994Mar24.060322.5954@berkeley.edu> <1994Mar24.074222.6680@uni-hamburg.de>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Mar24.074222.6680@uni-hamburg.de>, hkowalski@uni-hamburg.de (Hana Kowalski) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Freya Rodríguez
+Opinions expressed are solely my own and not those of Oxford University Computing Laboratory.
+------------------------------------------------------------
+

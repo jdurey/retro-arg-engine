@@ -1,0 +1,47 @@
+From pschneider@cmu.edu Mon Aug 19 12:49:31 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!cmu!pschneider
+From: pschneider@cmu.edu (Pavel Schneider)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Aug19.124931.4365@cmu.edu>
+Date: Mon, 19 Aug 1996 12:49:31 GMT
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Pavel Schneider
+Opinions expressed are solely my own and not those of Carnegie Mellon University School of CS.
+------------------------------------------------------------
+
+From dokonkwo@cam.ac.uk Mon Aug 19 18:20:31 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!cam!dokonkwo
+From: dokonkwo@cam.ac.uk (Dave Okonkwo)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Aug19.182031.3037@cam.ac.uk>
+Date: Mon, 19 Aug 1996 18:20:31 GMT
+References: <1996Aug19.124931.4365@cmu.edu>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Aug19.124931.4365@cmu.edu>, pschneider@cmu.edu (Pavel Schneider) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Dave Okonkwo | dokonkwo@cam.ac.uk
+PGP Key fingerprint: 95E6 0A51 8B57 6666
+"Keep the channels open."
+

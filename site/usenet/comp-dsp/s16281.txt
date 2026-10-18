@@ -1,0 +1,93 @@
+From mmoreno@stanford.edu Tue May 02 15:18:50 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!stanford!mmoreno
+From: mmoreno@stanford.edu (Marisol Moreno)
+Newsgroups: comp.dsp
+Subject: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995May02.151850.4804@stanford.edu>
+Date: Tue, 02 May 1995 15:18:50 GMT
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+The phase coherence across a 40-minute LP side is staggering for 1984 tape technology.
+
+-- 
+Marisol Moreno -- Stanford University Computer Systems Lab
+"In theory there is no difference between theory and practice."
+
+From kfischer@rwth-aachen.de Wed May 03 02:37:50 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!rwth-aachen!kfischer
+From: kfischer@rwth-aachen.de (Karen Fischer)
+Newsgroups: comp.dsp
+Subject: Re: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995May03.023750.5658@rwth-aachen.de>
+Date: Wed, 03 May 1995 02:37:50 GMT
+References: <1995May02.151850.4804@stanford.edu>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1995May02.151850.4804@stanford.edu>, mmoreno@stanford.edu (Marisol Moreno) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+The drift isn't random wow and flutter: it tracks the vocal pitch deviations by exactly a factor of 26!
+
+-- 
+Karen Fischer -- RWTH Aachen Informatik
+"Do not worship the copy."
+
+From hwatanabe@pacbell.net Thu May 04 22:08:50 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!pacbell!hwatanabe
+From: hwatanabe@pacbell.net (Hugo Watanabe)
+Newsgroups: comp.dsp
+Subject: Re: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995May04.220850.9200@pacbell.net>
+Date: Thu, 04 May 1995 22:08:50 GMT
+References: <1995May02.151850.4804@stanford.edu>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995May02.151850.4804@stanford.edu>, mmoreno@stanford.edu (Marisol Moreno) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+> This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Hugo Watanabe
+Tape trading list upon request. SASE required for international mail.
+
+From kmacdonald@hanse.de Fri May 05 05:49:50 1995
+Path: ashpoly!cascade!bigsur!hanse!kmacdonald
+From: kmacdonald@hanse.de (Karen MacDonald)
+Newsgroups: comp.dsp
+Subject: Re: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995May05.054950.4615@hanse.de>
+Date: Fri, 05 May 1995 05:49:50 GMT
+References: <1995May02.151850.4804@stanford.edu> <1995May03.023750.5658@rwth-aachen.de>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995May03.023750.5658@rwth-aachen.de>, kfischer@rwth-aachen.de (Karen Fischer) writes:
+> The drift isn't random wow and flutter: it tracks the vocal pitch deviations by exactly a factor of 26!
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+-- 
+Karen MacDonald | kmacdonald@hanse.de
+PGP Key fingerprint: 8F30 AF98 A806 54B1
+"Keep the channels open."
+

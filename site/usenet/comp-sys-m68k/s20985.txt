@@ -1,0 +1,71 @@
+From hchoi@mindspring.com Sat Sep 09 14:31:44 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!mindspring!hchoi
+From: hchoi@mindspring.com (Hana Choi)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep09.143144.9372@mindspring.com>
+Date: Sat, 09 Sep 1995 14:31:44 GMT
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+Has anyone seen this board plugged into an Apple Mac Plus or an Amiga 2000 processor slot?
+
+-- 
+=== Hana Choi ===
+Dept of Electrical Engineering, MindSpring Enterprises
+"We don't sign stars. We build them."
+
+From hbrennan@kth.se Sat Sep 09 17:15:44 1995
+Path: ashpoly!cascade!bigsur!kth!hbrennan
+From: hbrennan@kth.se (Hana Brennan)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep09.171544.5752@kth.se>
+Date: Sat, 09 Sep 1995 17:15:44 GMT
+References: <1995Sep09.143144.9372@mindspring.com>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Sep09.143144.9372@mindspring.com>, hchoi@mindspring.com (Hana Choi) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Hana Brennan <hbrennan@kth.se>
+*PLONK* filter active for trolls.
+Amiga 3000T - NetBSD 1.0
+
+From dnilsson@panix.com Sun Sep 10 18:45:44 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!panix!dnilsson
+From: dnilsson@panix.com (Dmitri Nilsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep10.184544.1410@panix.com>
+Date: Sun, 10 Sep 1995 18:45:44 GMT
+References: <1995Sep09.143144.9372@mindspring.com>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Sep09.143144.9372@mindspring.com>, hchoi@mindspring.com (Hana Choi) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+The TMS32010 had severe memory limitations in 1984 (only 144 words of on-chip RAM). Dual 68000s gave them full 16MB address space.
+
+-- 
+Dmitri Nilsson | dnilsson@panix.com
+PGP Key fingerprint: F589 DF43 FFAF 87BF
+"Keep the channels open."
+

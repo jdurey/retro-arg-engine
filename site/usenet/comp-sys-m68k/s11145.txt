@@ -1,0 +1,95 @@
+From rreyes@cern.ch Thu Feb 23 11:51:37 1995
+Path: ashpoly!cascade!mxgate!coyoacan!cern!rreyes
+From: rreyes@cern.ch (Raj Reyes)
+Newsgroups: comp.sys.m68k
+Subject: WTB/WTT: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Feb23.115137.2080@cern.ch>
+Date: Thu, 23 Feb 1995 11:51:37 GMT
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+
+Did Marcus take the decryption EPROM with him when he left the lab?
+
+-- 
+Raj Reyes <rreyes@cern.ch>
+*PLONK* filter active for trolls.
+NeXTstation Turbo Color - NetBSD 1.0
+
+From schoi@uni-hamburg.de Fri Feb 24 11:15:37 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!uni-hamburg!schoi
+From: schoi@uni-hamburg.de (Sergei Choi)
+Newsgroups: comp.sys.m68k
+Subject: Re: WTB/WTT: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Feb24.111537.7868@uni-hamburg.de>
+Date: Fri, 24 Feb 1995 11:15:37 GMT
+References: <1995Feb23.115137.2080@cern.ch>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Feb23.115137.2080@cern.ch>, rreyes@cern.ch (Raj Reyes) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+=== Sergei Choi ===
+Dept of Electrical Engineering, Universität Hamburg Fachbereich Informatik
+"There are 14 nodes and only 10 countries. Count again."
+
+From tlaurent@u-tokyo.ac.jp Fri Feb 24 23:28:37 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!u-tokyo!tlaurent
+From: tlaurent@u-tokyo.ac.jp (Tomas Laurent)
+Newsgroups: comp.sys.m68k
+Subject: Re: WTB/WTT: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Feb24.232837.6518@u-tokyo.ac.jp>
+Date: Fri, 24 Feb 1995 23:28:37 GMT
+References: <1995Feb23.115137.2080@cern.ch>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Feb23.115137.2080@cern.ch>, rreyes@cern.ch (Raj Reyes) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Tomas Laurent <tlaurent@u-tokyo.ac.jp>
+*PLONK* filter active for trolls.
+Amiga 1200 (Blizzard 030/50) - NetBSD 1.0
+
+From tlee@delphi.com Sun Feb 26 06:58:37 1995
+Path: ashpoly!cascade!brgate!saturno!delphi!tlee
+From: tlee@delphi.com (Thiago Lee)
+Newsgroups: comp.sys.m68k
+Subject: Re: WTB/WTT: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Feb26.065837.9184@delphi.com>
+Date: Sun, 26 Feb 1995 06:58:37 GMT
+References: <1995Feb23.115137.2080@cern.ch> <1995Feb24.232837.6518@u-tokyo.ac.jp>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Feb24.232837.6518@u-tokyo.ac.jp>, tlaurent@u-tokyo.ac.jp (Tomas Laurent) writes:
+> Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Thiago Lee <tlee@delphi.com>
+"When every node is whole, the channel opens."
+Amiga 3000T / FreeBSD 2.1
+

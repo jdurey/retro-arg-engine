@@ -1,0 +1,125 @@
+From tokafor@ee.ashford-poly.edu Thu Sep 09 15:28:55 1993
+Path: ashpoly!cascade!bigsur!ee!tokafor
+From: tokafor@ee.ashford-poly.edu (Tom Okafor)
+Newsgroups: comp.sys.m68k
+Subject: Twin 68000 shared-bus arbitration - 1984 board, anyone recognise?
+Message-ID: <1993Sep09.152855.9994@ee.ashford-poly.edu>
+Date: Thu, 09 Sep 1993 15:28:55 GMT
+Organization: Ashford Polytechnic Institute, Dept. of Electrical Engineering
+NNTP-Posting-Host: ee.ashford-poly.edu
+X-Newsreader: NN version 6.4.16
+Lines: 12
+
+Got hold of a board from a surplus auction. Two MC68000P8s, a TMS32010,
+64K of dual-ported SRAM and a PAL16R4 doing bus arbitration. Silkscreen
+reads 'SD TWIN-68 REV C 1984 -- M.H.'. Reverse-engineered schematic is on
+ftp.ashford-poly.edu in /pub/telecom-archives/stardust/twin68_array.asc
+
+The odd part: the second 68000 never touches the DSP. It only drives a
+14.2 Hz reference oscillator through a 12-bit DAC. Why would you burn a
+whole CPU on that? One of the two EPROM sockets is empty.
+
+-- 
+Tom Okafor  | tokafor@ee.ashford-poly.edu | "The FFT never lies.
+Ashford EE   | Room 3-114, ext 4471          |  Interpreters do."
+
+From bfarrow@farrowsys.com Thu Sep 09 23:49:55 1993
+Path: ashpoly!cascade!bigsur!farrowsys!bfarrow
+From: bfarrow@farrowsys.com (Bill Farrow)
+Newsgroups: comp.sys.m68k
+Subject: Re: Twin 68000 shared-bus arbitration - 1984 board, anyone recognise?
+Message-ID: <1993Sep09.234955.1904@farrowsys.com>
+Date: Thu, 09 Sep 1993 23:49:55 GMT
+References: <1993Sep09.152855.9994@ee.ashford-poly.edu>
+Organization: Farrow Systems Consulting
+NNTP-Posting-Host: farrowsys.com
+X-Newsreader: TIN [version 1.1 PL8]
+Lines: 15
+
+In article <1993Sep09.152855.9994@ee.ashford-poly.edu>, tokafor@ee.ashford-poly.edu (Tom Okafor) writes:
+> Got hold of a board from a surplus auction. Two MC68000P8s, a TMS32010,
+> 64K of dual-ported SRAM and a PAL16R4 doing bus arbitration. Silkscreen
+> reads 'SD TWIN-68 REV C 1984 -- M.H.'. Reverse-engineered schematic is on
+
+Because you want the phase reference to be a deterministic function of
+a key, not a free-running crystal. CPU B runs a keystream; CPU A
+modulates against it. Without CPU B's ROM you can demodulate the
+carrier, but nodes keyed that way come out as noise.
+
+I designed arbitration PALs like that for a defense contractor in '83.
+I'd recognise that layout anywhere.
+
+-- 
+Bill Farrow -- 30 years of PALs, none of them friends
+
+From tokafor@ee.ashford-poly.edu Fri Sep 10 23:06:55 1993
+Path: ashpoly!cascade!bigsur!ee!tokafor
+From: tokafor@ee.ashford-poly.edu (Tom Okafor)
+Newsgroups: comp.sys.m68k
+Subject: Re: Twin 68000 shared-bus arbitration - 1984 board, anyone recognise?
+Message-ID: <1993Sep10.230655.3205@ee.ashford-poly.edu>
+Date: Fri, 10 Sep 1993 23:06:55 GMT
+References: <1993Sep09.152855.9994@ee.ashford-poly.edu> <1993Sep09.234955.1904@farrowsys.com>
+Organization: Ashford Polytechnic Institute, Dept. of Electrical Engineering
+NNTP-Posting-Host: ee.ashford-poly.edu
+X-Newsreader: TIN [version 1.1 PL8]
+Lines: 9
+
+In article <1993Sep09.234955.1904@farrowsys.com>, bfarrow@farrowsys.com (Bill Farrow) writes:
+> Because you want the phase reference to be a deterministic function of
+> a key, not a free-running crystal. CPU B runs a keystream; CPU A
+
+Which would explain why nodes 11-14 decode to garbage. We need the ROM.
+
+-- 
+Tom Okafor  | tokafor@ee.ashford-poly.edu | "The FFT never lies.
+Ashford EE   | Room 3-114, ext 4471          |  Interpreters do."
+
+From bfarrow@farrowsys.com Sun Sep 12 15:49:55 1993
+Path: ashpoly!cascade!bigsur!farrowsys!bfarrow
+From: bfarrow@farrowsys.com (Bill Farrow)
+Newsgroups: comp.sys.m68k
+Subject: Re: Twin 68000 shared-bus arbitration - 1984 board, anyone recognise?
+Message-ID: <1993Sep12.154955.5813@farrowsys.com>
+Date: Sun, 12 Sep 1993 15:49:55 GMT
+References: <1993Sep09.152855.9994@ee.ashford-poly.edu> <1993Sep09.234955.1904@farrowsys.com> <1993Sep10.230655.3205@ee.ashford-poly.edu>
+Organization: Farrow Systems Consulting
+NNTP-Posting-Host: farrowsys.com
+X-Newsreader: NN version 6.4.16
+Lines: 10
+
+In article <1993Sep10.230655.3205@ee.ashford-poly.edu>, tokafor@ee.ashford-poly.edu (Tom Okafor) writes:
+> Which would explain why nodes 11-14 decode to garbage. We need the ROM.
+
+You need the ROM, or a seed, or the man who wrote it.
+
+Look in the runout grooves. If I were hiding a seed in 1985 I'd put it
+where the cutting engineer etches the matrix number.
+
+-- 
+Bill Farrow -- 30 years of PALs, none of them friends
+
+From ytanabe@yokohama-pc.or.jp Mon Sep 13 04:03:55 1993
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!yokohama-pc!ytanabe
+From: ytanabe@yokohama-pc.or.jp (Yuki Tanabe)
+Newsgroups: comp.sys.m68k
+Subject: Re: Twin 68000 shared-bus arbitration - 1984 board, anyone recognise?
+Message-ID: <1993Sep13.040355.3951@yokohama-pc.or.jp>
+Date: Mon, 13 Sep 1993 04:03:55 GMT
+References: <1993Sep09.152855.9994@ee.ashford-poly.edu> <1993Sep09.234955.1904@farrowsys.com> <1993Sep10.230655.3205@ee.ashford-poly.edu> <1993Sep12.154955.5813@farrowsys.com>
+Organization: Yokohama PC-98 Users Circle
+NNTP-Posting-Host: yokohama-pc.or.jp
+X-Newsreader: NN version 6.4.16
+Lines: 10
+
+In article <1993Sep12.154955.5813@farrowsys.com>, bfarrow@farrowsys.com (Bill Farrow) writes:
+> You need the ROM, or a seed, or the man who wrote it.
+> Look in the runout grooves. If I were hiding a seed in 1985 I'd put it
+
+The 64 bytes in my runout groove! Hex dump is on ftp.ashford-poly as
+jp_runout_seed.hex. I will try as LFSR seed for CPU B this weekend.
+
+-- 
+Yuki Tanabe / Yokohama, Japan / PC-9801RA21
+KAMOME-NET ID: QZK04117
+

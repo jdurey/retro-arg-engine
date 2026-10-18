@@ -1,0 +1,116 @@
+From jjohansson@stanford.edu Tue Aug 20 18:01:09 1996
+Path: ashpoly!cascade!brgate!saturno!stanford!jjohansson
+From: jjohansson@stanford.edu (Julien Johansson)
+Newsgroups: comp.dsp
+Subject: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Aug20.180109.8352@stanford.edu>
+Date: Tue, 20 Aug 1996 18:01:09 GMT
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+Julien Johansson <jjohansson@stanford.edu>
+"We don't sign stars. We build them."
+Amiga 3000T / Linux 1.2.13
+
+From sfischer@inria.fr Wed Aug 21 03:41:09 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!inria!sfischer
+From: sfischer@inria.fr (Steve Fischer)
+Newsgroups: comp.dsp
+Subject: Re: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Aug21.034109.7936@inria.fr>
+Date: Wed, 21 Aug 1996 03:41:09 GMT
+References: <1996Aug20.180109.8352@stanford.edu>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Aug20.180109.8352@stanford.edu>, jjohansson@stanford.edu (Julien Johansson) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Steve Fischer <sfischer@inria.fr>
+*PLONK* filter active for trolls.
+Amiga 1200 (Blizzard 030/50) - NetBSD 1.0
+
+From mramirez@berkeley.edu Wed Aug 21 17:07:09 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!berkeley!mramirez
+From: mramirez@berkeley.edu (Mateo Ramírez)
+Newsgroups: comp.dsp
+Subject: Re: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Aug21.170709.1694@berkeley.edu>
+Date: Wed, 21 Aug 1996 17:07:09 GMT
+References: <1996Aug20.180109.8352@stanford.edu> <1996Aug21.034109.7936@inria.fr>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Aug21.034109.7936@inria.fr>, sfischer@inria.fr (Steve Fischer) writes:
+> Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+-- 
+Mateo Ramírez <mramirez@berkeley.edu>
+"In theory there is no difference between theory and practice."
+486DX4/100 (FreeBSD 2.0.5) / FreeBSD 2.1
+
+From kgirard@panix.com Wed Aug 21 19:08:09 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!panix!kgirard
+From: kgirard@panix.com (Kirsty Girard)
+Newsgroups: comp.dsp
+Subject: Re: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Aug21.190809.9415@panix.com>
+Date: Wed, 21 Aug 1996 19:08:09 GMT
+References: <1996Aug20.180109.8352@stanford.edu> <1996Aug21.034109.7936@inria.fr>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Aug21.034109.7936@inria.fr>, sfischer@inria.fr (Steve Fischer) writes:
+> Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Kirsty Girard <kgirard@panix.com>
+*PLONK* filter active for trolls.
+Amiga 3000T - NetBSD 1.0
+
+From tperez@stanford.edu Thu Aug 22 10:15:09 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!stanford!tperez
+From: tperez@stanford.edu (Takeshi Pérez)
+Newsgroups: comp.dsp
+Subject: Re: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Aug22.101509.5823@stanford.edu>
+Date: Thu, 22 Aug 1996 10:15:09 GMT
+References: <1996Aug20.180109.8352@stanford.edu> <1996Aug21.034109.7936@inria.fr> <1996Aug21.190809.9415@panix.com>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Aug21.190809.9415@panix.com>, kgirard@panix.com (Kirsty Girard) writes:
+> If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+=== Takeshi Pérez ===
+Dept of Electrical Engineering, Stanford University Computer Systems Lab
+"When every node is whole, the channel opens."
+

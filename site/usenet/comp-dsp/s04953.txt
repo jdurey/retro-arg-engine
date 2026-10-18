@@ -1,0 +1,47 @@
+From ysanchez@stanford.edu Sun Jun 09 06:07:35 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!stanford!ysanchez
+From: ysanchez@stanford.edu (Yuki Sánchez)
+Newsgroups: comp.dsp
+Subject: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jun09.060735.9838@stanford.edu>
+Date: Sun, 09 Jun 1996 06:07:35 GMT
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Yuki Sánchez
+Opinions expressed are solely my own and not those of Stanford University Computer Systems Lab.
+------------------------------------------------------------
+
+From akang@berkeley.edu Tue Jun 11 01:52:35 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!berkeley!akang
+From: akang@berkeley.edu (Aiko Kang)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jun11.015235.7898@berkeley.edu>
+Date: Tue, 11 Jun 1996 01:52:35 GMT
+References: <1996Jun09.060735.9838@stanford.edu>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Jun09.060735.9838@stanford.edu>, ysanchez@stanford.edu (Yuki Sánchez) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Aiko Kang <akang@berkeley.edu>
+"Hardware is temporary. The signal survives."
+486DX2/66 (Linux 1.2.13) / AmigaOS 3.1
+

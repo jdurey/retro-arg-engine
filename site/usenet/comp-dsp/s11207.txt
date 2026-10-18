@@ -1,0 +1,70 @@
+From rreyes@utexas.edu Fri Jan 13 21:03:41 1995
+Path: ashpoly!cascade!bigsur!utexas!rreyes
+From: rreyes@utexas.edu (Rodrigo Reyes)
+Newsgroups: comp.dsp
+Subject: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jan13.210341.8723@utexas.edu>
+Date: Fri, 13 Jan 1995 21:03:41 GMT
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Rodrigo Reyes <rreyes@utexas.edu>
+*PLONK* filter active for trolls.
+Acorn RiscPC 600 - NetBSD 1.0
+
+From jnakamura@ox.ac.uk Sat Jan 14 02:06:41 1995
+Path: ashpoly!cascade!bigsur!ox!jnakamura
+From: jnakamura@ox.ac.uk (Ji-woo Nakamura)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jan14.020641.6983@ox.ac.uk>
+Date: Sat, 14 Jan 1995 02:06:41 GMT
+References: <1995Jan13.210341.8723@utexas.edu>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Jan13.210341.8723@utexas.edu>, rreyes@utexas.edu (Rodrigo Reyes) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Ji-woo Nakamura <jnakamura@ox.ac.uk>
+Practical Peripherals 14.4 @ 28,800 bps
+"When every node is whole, the channel opens."
+
+From jpark@kiae.su Sun Jan 15 17:27:41 1995
+Path: ashpoly!cascade!mxgate!coyoacan!kiae!jpark
+From: jpark@kiae.su (Jen Park)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jan15.172741.8265@kiae.su>
+Date: Sun, 15 Jan 1995 17:27:41 GMT
+References: <1995Jan13.210341.8723@utexas.edu> <1995Jan14.020641.6983@ox.ac.uk>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Jan14.020641.6983@ox.ac.uk>, jnakamura@ox.ac.uk (Ji-woo Nakamura) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Jen Park <jpark@kiae.su>
+Practical Peripherals 14.4 @ 28,800 bps
+"They will send a copy in my place."
+

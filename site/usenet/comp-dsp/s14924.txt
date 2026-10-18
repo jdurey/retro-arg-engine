@@ -1,0 +1,93 @@
+From kmoreno@demon.co.uk Sat Jan 28 13:04:48 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!demon!kmoreno
+From: kmoreno@demon.co.uk (Katrin Moreno)
+Newsgroups: comp.dsp
+Subject: Discussion: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jan28.130448.7023@demon.co.uk>
+Date: Sat, 28 Jan 1995 13:04:48 GMT
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+Katrin Moreno -- Demon Internet Services UK
+"Hardware is temporary. The signal survives."
+
+From cpopov@illinois.edu Sun Jan 29 12:36:48 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!illinois!cpopov
+From: cpopov@illinois.edu (Callum Popov)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jan29.123648.2131@illinois.edu>
+Date: Sun, 29 Jan 1995 12:36:48 GMT
+References: <1995Jan28.130448.7023@demon.co.uk>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Jan28.130448.7023@demon.co.uk>, kmoreno@demon.co.uk (Katrin Moreno) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+-- 
+Callum Popov <cpopov@illinois.edu>
+US Robotics Courier V.34 @ 9600 Telebit bps
+"Row 14. No joke."
+
+From tokonkwo@uni-hamburg.de Tue Jan 31 13:15:48 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!uni-hamburg!tokonkwo
+From: tokonkwo@uni-hamburg.de (Thiago Okonkwo)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jan31.131548.3870@uni-hamburg.de>
+Date: Tue, 31 Jan 1995 13:15:48 GMT
+References: <1995Jan28.130448.7023@demon.co.uk>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Jan28.130448.7023@demon.co.uk>, kmoreno@demon.co.uk (Katrin Moreno) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+> This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Thiago Okonkwo
+Tape trading list upon request. SASE required for international mail.
+
+From atanaka@rwth-aachen.de Wed Feb 01 19:53:48 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!rwth-aachen!atanaka
+From: atanaka@rwth-aachen.de (Astrid Tanaka)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Feb01.195348.8362@rwth-aachen.de>
+Date: Wed, 01 Feb 1995 19:53:48 GMT
+References: <1995Jan28.130448.7023@demon.co.uk>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Jan28.130448.7023@demon.co.uk>, kmoreno@demon.co.uk (Katrin Moreno) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+> This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Astrid Tanaka <atanaka@rwth-aachen.de>
+"There are 14 nodes and only 10 countries. Count again."
+Atari TT030 / AmigaOS 3.1
+

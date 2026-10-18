@@ -1,0 +1,120 @@
+From veriksson@cmu.edu Wed Sep 06 10:25:23 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!cmu!veriksson
+From: veriksson@cmu.edu (Valeria Eriksson)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Sep06.102523.3518@cmu.edu>
+Date: Wed, 06 Sep 1995 10:25:23 GMT
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+
+Does anyone have a 27C256 EPROM marked 'MH-U14' or 'ORION-CRYPTO'?
+
+-- 
+Valeria Eriksson <veriksson@cmu.edu>
+*PLONK* filter active for trolls.
+Amiga 3000T - NetBSD 1.0
+
+From tnovak@inria.fr Thu Sep 07 07:26:23 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!inria!tnovak
+From: tnovak@inria.fr (Takeshi Novak)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Sep07.072623.6763@inria.fr>
+Date: Thu, 07 Sep 1995 07:26:23 GMT
+References: <1995Sep06.102523.3518@cmu.edu>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 12
+
+In article <1995Sep06.102523.3518@cmu.edu>, veriksson@cmu.edu (Valeria Eriksson) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+> The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Takeshi Novak <tnovak@inria.fr>
+Zyxel U-1496E @ 33,600 bps
+"The carrier frequency does not drift by accident."
+
+From jpopov@uni-hamburg.de Sat Sep 09 02:37:23 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!uni-hamburg!jpopov
+From: jpopov@uni-hamburg.de (Jen Popov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Sep09.023723.2714@uni-hamburg.de>
+Date: Sat, 09 Sep 1995 02:37:23 GMT
+References: <1995Sep06.102523.3518@cmu.edu>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Sep06.102523.3518@cmu.edu>, veriksson@cmu.edu (Valeria Eriksson) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Jen Popov <jpopov@uni-hamburg.de>
+Practical Peripherals 14.4 @ 33,600 bps
+"The carrier frequency does not drift by accident."
+
+From djohansson@cern.ch Sat Sep 09 16:20:23 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!cern!djohansson
+From: djohansson@cern.ch (Dave Johansson)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Sep09.162023.1073@cern.ch>
+Date: Sat, 09 Sep 1995 16:20:23 GMT
+References: <1995Sep06.102523.3518@cmu.edu> <1995Sep09.023723.2714@uni-hamburg.de>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Sep09.023723.2714@uni-hamburg.de>, jpopov@uni-hamburg.de (Jen Popov) writes:
+> Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+-- 
+Dave Johansson <djohansson@cern.ch>
+US Robotics Courier V.34 @ 19,200 bps
+"When every node is whole, the channel opens."
+
+From eandersson@cam.ac.uk Sat Sep 09 23:54:23 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!cam!eandersson
+From: eandersson@cam.ac.uk (Élodie Andersson)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Sep09.235423.4272@cam.ac.uk>
+Date: Sat, 09 Sep 1995 23:54:23 GMT
+References: <1995Sep06.102523.3518@cmu.edu> <1995Sep09.023723.2714@uni-hamburg.de>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Sep09.023723.2714@uni-hamburg.de>, jpopov@uni-hamburg.de (Jen Popov) writes:
+> Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Élodie Andersson
+Tape trading list upon request. SASE required for international mail.
+

@@ -1,0 +1,116 @@
+From dlaurent@kth.se Sun Dec 04 08:26:25 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!kth!dlaurent
+From: dlaurent@kth.se (Diego Laurent)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Dec04.082625.1575@kth.se>
+Date: Sun, 04 Dec 1994 08:26:25 GMT
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Diego Laurent <dlaurent@kth.se>
+Practical Peripherals 14.4 @ 9600 Telebit bps
+"Row 14. No joke."
+
+From ksilva@berkeley.edu Mon Dec 05 01:38:25 1994
+Path: ashpoly!cascade!brgate!saturno!berkeley!ksilva
+From: ksilva@berkeley.edu (Kenji Silva)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Dec05.013825.7704@berkeley.edu>
+Date: Mon, 05 Dec 1994 01:38:25 GMT
+References: <1994Dec04.082625.1575@kth.se>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Dec04.082625.1575@kth.se>, dlaurent@kth.se (Diego Laurent) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Kenji Silva
+Opinions expressed are solely my own and not those of UC Berkeley Department of EECS.
+------------------------------------------------------------
+
+From fokonkwo@kiae.su Tue Dec 06 15:10:25 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!kiae!fokonkwo
+From: fokonkwo@kiae.su (Fiona Okonkwo)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Dec06.151025.5348@kiae.su>
+Date: Tue, 06 Dec 1994 15:10:25 GMT
+References: <1994Dec04.082625.1575@kth.se> <1994Dec05.013825.7704@berkeley.edu>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Dec05.013825.7704@berkeley.edu>, ksilva@berkeley.edu (Kenji Silva) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Fiona Okonkwo <fokonkwo@kiae.su>
+"We don't sign stars. We build them."
+Amiga 3000T / Linux 1.2.13
+
+From esato@stanford.edu Thu Dec 08 08:34:25 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!stanford!esato
+From: esato@stanford.edu (Elaine Sato)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Dec08.083425.9176@stanford.edu>
+Date: Thu, 08 Dec 1994 08:34:25 GMT
+References: <1994Dec04.082625.1575@kth.se>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Dec04.082625.1575@kth.se>, dlaurent@kth.se (Diego Laurent) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Elaine Sato <esato@stanford.edu>
+"When every node is whole, the channel opens."
+NeXTstation Turbo Color / NEXTSTEP 3.3
+
+From fvasiliev@stanford.edu Sat Dec 10 00:14:25 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!stanford!fvasiliev
+From: fvasiliev@stanford.edu (Freya Vasiliev)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Dec10.001425.3943@stanford.edu>
+Date: Sat, 10 Dec 1994 00:14:25 GMT
+References: <1994Dec04.082625.1575@kth.se> <1994Dec05.013825.7704@berkeley.edu> <1994Dec06.151025.5348@kiae.su>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Dec06.151025.5348@kiae.su>, fokonkwo@kiae.su (Fiona Okonkwo) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+=== Freya Vasiliev ===
+Dept of Electrical Engineering, Stanford University Computer Systems Lab
+"Hardware is temporary. The signal survives."
+

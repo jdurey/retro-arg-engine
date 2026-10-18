@@ -1,0 +1,117 @@
+From rfischer@hanse.de Fri Sep 01 18:24:51 1995
+Path: ashpoly!cascade!bigsur!hanse!rfischer
+From: rfischer@hanse.de (Rodrigo Fischer)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Sep01.182451.8500@hanse.de>
+Date: Fri, 01 Sep 1995 18:24:51 GMT
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+Does anyone have a 27C256 EPROM marked 'MH-U14' or 'ORION-CRYPTO'?
+
+-- 
+Rodrigo Fischer -- Hanse-Netzwerk Hamburg
+"Tape doesn't lie at 02:14. Ears do."
+
+From eokonkwo@rwth-aachen.de Sat Sep 02 14:40:51 1995
+Path: ashpoly!cascade!bigsur!rwth-aachen!eokonkwo
+From: eokonkwo@rwth-aachen.de (Élodie Okonkwo)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Sep02.144051.4592@rwth-aachen.de>
+Date: Sat, 02 Sep 1995 14:40:51 GMT
+References: <1995Sep01.182451.8500@hanse.de>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Sep01.182451.8500@hanse.de>, rfischer@hanse.de (Rodrigo Fischer) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Élodie Okonkwo <eokonkwo@rwth-aachen.de>
+US Robotics Courier V.34 @ 14,400 bps
+"When every node is whole, the channel opens."
+
+From jcampbell@stanford.edu Mon Sep 04 01:52:51 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!stanford!jcampbell
+From: jcampbell@stanford.edu (Jen Campbell)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Sep04.015251.3247@stanford.edu>
+Date: Mon, 04 Sep 1995 01:52:51 GMT
+References: <1995Sep01.182451.8500@hanse.de> <1995Sep02.144051.4592@rwth-aachen.de>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995Sep02.144051.4592@rwth-aachen.de>, eokonkwo@rwth-aachen.de (Élodie Okonkwo) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+=== Jen Campbell ===
+Dept of Electrical Engineering, Stanford University Computer Systems Lab
+"There are 14 nodes and only 10 countries. Count again."
+
+From hdubois@stanford.edu Mon Sep 04 09:27:51 1995
+Path: ashpoly!cascade!brgate!saturno!stanford!hdubois
+From: hdubois@stanford.edu (Hugo Dubois)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Sep04.092751.9208@stanford.edu>
+Date: Mon, 04 Sep 1995 09:27:51 GMT
+References: <1995Sep01.182451.8500@hanse.de>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Sep01.182451.8500@hanse.de>, rfischer@hanse.de (Rodrigo Fischer) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Hugo Dubois
+Tape trading list upon request. SASE required for international mail.
+
+From jdubois@ox.ac.uk Tue Sep 05 09:29:51 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!ox!jdubois
+From: jdubois@ox.ac.uk (Ji-woo Dubois)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Sep05.092951.4885@ox.ac.uk>
+Date: Tue, 05 Sep 1995 09:29:51 GMT
+References: <1995Sep01.182451.8500@hanse.de> <1995Sep02.144051.4592@rwth-aachen.de> <1995Sep04.015251.3247@stanford.edu>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Sep04.015251.3247@stanford.edu>, jcampbell@stanford.edu (Jen Campbell) writes:
+> Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Ji-woo Dubois <jdubois@ox.ac.uk>
+*PLONK* filter active for trolls.
+Commodore Amiga 500 (1MB OCS) - NetBSD 1.0
+

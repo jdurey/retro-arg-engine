@@ -1,0 +1,93 @@
+From kmoreno@panix.com Tue Mar 19 00:32:33 1996
+Path: ashpoly!cascade!bigsur!panix!kmoreno
+From: kmoreno@panix.com (Karen Moreno)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Mar19.003233.8102@panix.com>
+Date: Tue, 19 Mar 1996 00:32:33 GMT
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Karen Moreno -- Public Access Unix of New York
+"When every node is whole, the channel opens."
+
+From fmuller@unam.mx Tue Mar 19 01:57:33 1996
+Path: ashpoly!cascade!bigsur!unam!fmuller
+From: fmuller@unam.mx (Freya Müller)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Mar19.015733.4059@unam.mx>
+Date: Tue, 19 Mar 1996 01:57:33 GMT
+References: <1996Mar19.003233.8102@panix.com>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996Mar19.003233.8102@panix.com>, kmoreno@panix.com (Karen Moreno) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+> The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Freya Müller <fmuller@unam.mx>
+Hayes Optima 288 @ 14,400 bps
+"In theory there is no difference between theory and practice."
+
+From cmoreau@utexas.edu Thu Mar 21 02:55:33 1996
+Path: ashpoly!cascade!bigsur!utexas!cmoreau
+From: cmoreau@utexas.edu (Callum Moreau)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Mar21.025533.7331@utexas.edu>
+Date: Thu, 21 Mar 1996 02:55:33 GMT
+References: <1996Mar19.003233.8102@panix.com>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Mar19.003233.8102@panix.com>, kmoreno@panix.com (Karen Moreno) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+> The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+-- 
+Callum Moreau
+Tape trading list upon request. SASE required for international mail.
+
+From tperez@mindspring.com Fri Mar 22 21:04:33 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!mindspring!tperez
+From: tperez@mindspring.com (Tobias Pérez)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Mar22.210433.3102@mindspring.com>
+Date: Fri, 22 Mar 1996 21:04:33 GMT
+References: <1996Mar19.003233.8102@panix.com> <1996Mar19.015733.4059@unam.mx>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Mar19.015733.4059@unam.mx>, fmuller@unam.mx (Freya Müller) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Tobias Pérez <tperez@mindspring.com>
+*PLONK* filter active for trolls.
+Atari Falcon 030 - NetBSD 1.0
+

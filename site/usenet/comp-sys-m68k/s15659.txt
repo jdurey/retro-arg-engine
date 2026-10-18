@@ -1,0 +1,94 @@
+From kito@utexas.edu Sat Oct 15 11:43:05 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!utexas!kito
+From: kito@utexas.edu (Kenji Ito)
+Newsgroups: comp.sys.m68k
+Subject: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Oct15.114305.3964@utexas.edu>
+Date: Sat, 15 Oct 1994 11:43:05 GMT
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Kenji Ito <kito@utexas.edu>
+"Measuring a record you own is listening, not piracy."
+Acorn RiscPC 600 / TOS 4.04
+
+From bkowalski@tum.de Mon Oct 17 10:45:05 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!tum!bkowalski
+From: bkowalski@tum.de (Bill Kowalski)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Oct17.104505.6599@tum.de>
+Date: Mon, 17 Oct 1994 10:45:05 GMT
+References: <1994Oct15.114305.3964@utexas.edu>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1994Oct15.114305.3964@utexas.edu>, kito@utexas.edu (Kenji Ito) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Bill Kowalski
+Opinions expressed are solely my own and not those of Technische Universität München.
+------------------------------------------------------------
+
+From tmoreno@uni-hamburg.de Wed Oct 19 02:20:05 1994
+Path: ashpoly!cascade!brgate!saturno!uni-hamburg!tmoreno
+From: tmoreno@uni-hamburg.de (Tyler Moreno)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Oct19.022005.1487@uni-hamburg.de>
+Date: Wed, 19 Oct 1994 02:20:05 GMT
+References: <1994Oct15.114305.3964@utexas.edu> <1994Oct17.104505.6599@tum.de>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1994Oct17.104505.6599@tum.de>, bkowalski@tum.de (Bill Kowalski) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Tyler Moreno -- Universität Hamburg Fachbereich Informatik
+"We don't sign stars. We build them."
+
+From shernandez@kth.se Thu Oct 20 21:01:05 1994
+Path: ashpoly!cascade!brgate!saturno!kth!shernandez
+From: shernandez@kth.se (Sergei Hernández)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Oct20.210105.3074@kth.se>
+Date: Thu, 20 Oct 1994 21:01:05 GMT
+References: <1994Oct15.114305.3964@utexas.edu>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1994Oct15.114305.3964@utexas.edu>, kito@utexas.edu (Kenji Ito) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Sergei Hernández <shernandez@kth.se>
+"There are 14 nodes and only 10 countries. Count again."
+Sun 3/60 (SunOS 4.1.1) / TOS 4.04
+

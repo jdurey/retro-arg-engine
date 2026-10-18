@@ -1,0 +1,117 @@
+From hnakamura@cam.ac.uk Thu Oct 12 04:23:31 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!cam!hnakamura
+From: hnakamura@cam.ac.uk (Hana Nakamura)
+Newsgroups: comp.dsp
+Subject: [FLAME] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Oct12.042331.3784@cam.ac.uk>
+Date: Thu, 12 Oct 1995 04:23:31 GMT
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+Hana Nakamura <hnakamura@cam.ac.uk>
+"Tape doesn't lie at 02:14. Ears do."
+Acorn RiscPC 600 / SunOS 4.1.4
+
+From epetrov@netcom.com Thu Oct 12 14:13:31 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!netcom!epetrov
+From: epetrov@netcom.com (Élodie Petrov)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Oct12.141331.5981@netcom.com>
+Date: Thu, 12 Oct 1995 14:13:31 GMT
+References: <1995Oct12.042331.3784@cam.ac.uk>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Oct12.042331.3784@cam.ac.uk>, hnakamura@cam.ac.uk (Hana Nakamura) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+> This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+-- 
+Élodie Petrov <epetrov@netcom.com>
+*PLONK* filter active for trolls.
+Decstation 5000/200 - NetBSD 1.0
+
+From dbrennan@hanse.de Fri Oct 13 02:18:31 1995
+Path: ashpoly!cascade!mxgate!coyoacan!hanse!dbrennan
+From: dbrennan@hanse.de (Dave Brennan)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Oct13.021831.2848@hanse.de>
+Date: Fri, 13 Oct 1995 02:18:31 GMT
+References: <1995Oct12.042331.3784@cam.ac.uk> <1995Oct12.141331.5981@netcom.com>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Oct12.141331.5981@netcom.com>, epetrov@netcom.com (Élodie Petrov) writes:
+> Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Dave Brennan
+Opinions expressed are solely my own and not those of Hanse-Netzwerk Hamburg.
+------------------------------------------------------------
+
+From fdubois@tum.de Fri Oct 13 04:10:31 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!tum!fdubois
+From: fdubois@tum.de (Freya Dubois)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Oct13.041031.8284@tum.de>
+Date: Fri, 13 Oct 1995 04:10:31 GMT
+References: <1995Oct12.042331.3784@cam.ac.uk> <1995Oct12.141331.5981@netcom.com> <1995Oct13.021831.2848@hanse.de>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Oct13.021831.2848@hanse.de>, dbrennan@hanse.de (Dave Brennan) writes:
+> If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+-- 
+=== Freya Dubois ===
+Dept of Electrical Engineering, Technische Universität München
+"A soul is not exclusive to biology."
+
+From lnilsson@pipeline.com Sat Oct 14 03:43:31 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!pipeline!lnilsson
+From: lnilsson@pipeline.com (Lucia Nilsson)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Oct14.034331.1099@pipeline.com>
+Date: Sat, 14 Oct 1995 03:43:31 GMT
+References: <1995Oct12.042331.3784@cam.ac.uk> <1995Oct12.141331.5981@netcom.com> <1995Oct13.021831.2848@hanse.de> <1995Oct13.041031.8284@tum.de>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Oct13.041031.8284@tum.de>, fdubois@tum.de (Freya Dubois) writes:
+> Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+That's how the 14 lines of the Stardust matrix are encoded. Each regional pressing contains one line of the decoded text.
+
+-- 
+Lucia Nilsson | lnilsson@pipeline.com
+PGP Key fingerprint: F8DD 5057 9A6E 4D26
+"Keep the channels open."
+

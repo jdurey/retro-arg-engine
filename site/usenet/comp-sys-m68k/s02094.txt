@@ -1,0 +1,116 @@
+From keriksson@titech.ac.jp Tue Nov 21 17:39:36 1995
+Path: ashpoly!cascade!bigsur!titech!keriksson
+From: keriksson@titech.ac.jp (Kenji Eriksson)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Nov21.173936.1942@titech.ac.jp>
+Date: Tue, 21 Nov 1995 17:39:36 GMT
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Kenji Eriksson -- Tokyo Institute of Technology Computer Centre
+"Hardware is temporary. The signal survives."
+
+From jwatanabe@rwth-aachen.de Thu Nov 23 10:04:36 1995
+Path: ashpoly!cascade!mxgate!coyoacan!rwth-aachen!jwatanabe
+From: jwatanabe@rwth-aachen.de (Ji-woo Watanabe)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Nov23.100436.8044@rwth-aachen.de>
+Date: Thu, 23 Nov 1995 10:04:36 GMT
+References: <1995Nov21.173936.1942@titech.ac.jp>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Nov21.173936.1942@titech.ac.jp>, keriksson@titech.ac.jp (Kenji Eriksson) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+=== Ji-woo Watanabe ===
+Dept of Electrical Engineering, RWTH Aachen Informatik
+"Measuring a record you own is listening, not piracy."
+
+From aschneider@pipeline.com Thu Nov 23 17:51:36 1995
+Path: ashpoly!cascade!bigsur!pipeline!aschneider
+From: aschneider@pipeline.com (Aiko Schneider)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Nov23.175136.4768@pipeline.com>
+Date: Thu, 23 Nov 1995 17:51:36 GMT
+References: <1995Nov21.173936.1942@titech.ac.jp> <1995Nov23.100436.8044@rwth-aachen.de>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1995Nov23.100436.8044@rwth-aachen.de>, jwatanabe@rwth-aachen.de (Ji-woo Watanabe) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Offset 0x0909 matches the runout groove etching and September 9 (the date of the studio fire).
+
+-- 
+Aiko Schneider -- The Pipeline Internet Network
+"They will send a copy in my place."
+
+From fnovak@berkeley.edu Fri Nov 24 05:16:36 1995
+Path: ashpoly!cascade!bigsur!berkeley!fnovak
+From: fnovak@berkeley.edu (Freya Novak)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Nov24.051636.3261@berkeley.edu>
+Date: Fri, 24 Nov 1995 05:16:36 GMT
+References: <1995Nov21.173936.1942@titech.ac.jp> <1995Nov23.100436.8044@rwth-aachen.de>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Nov23.100436.8044@rwth-aachen.de>, jwatanabe@rwth-aachen.de (Ji-woo Watanabe) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+> If you are posting from AOL, please read RFC 1036 before posting again.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+=== Freya Novak ===
+Dept of Electrical Engineering, UC Berkeley Department of EECS
+"Hold for relay."
+
+From thughes@cam.ac.uk Fri Nov 24 20:29:36 1995
+Path: ashpoly!cascade!brgate!saturno!cam!thughes
+From: thughes@cam.ac.uk (Takeshi Hughes)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Nov24.202936.1069@cam.ac.uk>
+Date: Fri, 24 Nov 1995 20:29:36 GMT
+References: <1995Nov21.173936.1942@titech.ac.jp> <1995Nov23.100436.8044@rwth-aachen.de> <1995Nov24.051636.3261@berkeley.edu>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1995Nov24.051636.3261@berkeley.edu>, fnovak@berkeley.edu (Freya Novak) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Takeshi Hughes
+Tape trading list upon request. SASE required for international mail.
+

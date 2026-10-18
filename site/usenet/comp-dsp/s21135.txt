@@ -1,0 +1,117 @@
+From kkowalski@uu.net Sat Jul 09 01:35:21 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!uu!kkowalski
+From: kkowalski@uu.net (Karen Kowalski)
+Newsgroups: comp.dsp
+Subject: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Jul09.013521.1665@uu.net>
+Date: Sat, 09 Jul 1994 01:35:21 GMT
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+Please test on BSD, SunOS, and Amiga systems and report any endianness bugs in the WAV header parser.
+
+-- 
+Karen Kowalski
+Opinions expressed are solely my own and not those of UUNET Technologies, Falls Church VA.
+------------------------------------------------------------
+
+From ckowalski@demon.co.uk Sat Jul 09 14:25:21 1994
+Path: ashpoly!cascade!mxgate!coyoacan!demon!ckowalski
+From: ckowalski@demon.co.uk (Camila Kowalski)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Jul09.142521.4493@demon.co.uk>
+Date: Sat, 09 Jul 1994 14:25:21 GMT
+References: <1994Jul09.013521.1665@uu.net>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Jul09.013521.1665@uu.net>, kkowalski@uu.net (Karen Kowalski) writes:
+> Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+-- 
+=== Camila Kowalski ===
+Dept of Electrical Engineering, Demon Internet Services UK
+"Row 14. No joke."
+
+From jlee@mindspring.com Sun Jul 10 19:06:21 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!mindspring!jlee
+From: jlee@mindspring.com (Julien Lee)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Jul10.190621.6177@mindspring.com>
+Date: Sun, 10 Jul 1994 19:06:21 GMT
+References: <1994Jul09.013521.1665@uu.net> <1994Jul09.142521.4493@demon.co.uk>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Jul09.142521.4493@demon.co.uk>, ckowalski@demon.co.uk (Camila Kowalski) writes:
+> Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+Can you provide a pre-compiled DOS binary? Some of us don't have Linux or a C compiler installed on our machines.
+
+-- 
+Julien Lee <jlee@mindspring.com>
+"A soul is not exclusive to biology."
+Macintosh IIfx / TOS 4.04
+
+From mnovak@earthlink.net Mon Jul 11 11:00:21 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!earthlink!mnovak
+From: mnovak@earthlink.net (Marisol Novak)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Jul11.110021.4385@earthlink.net>
+Date: Mon, 11 Jul 1994 11:00:21 GMT
+References: <1994Jul09.013521.1665@uu.net> <1994Jul09.142521.4493@demon.co.uk>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Jul09.142521.4493@demon.co.uk>, ckowalski@demon.co.uk (Camila Kowalski) writes:
+> Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+Tar.gz archive gave a CRC error with PKUNZIP. Make sure you upload in binary mode, not ASCII!
+
+-- 
+Marisol Novak | mnovak@earthlink.net
+PGP Key fingerprint: 32DA 09AC 0217 BD3A
+"Keep the channels open."
+
+From kwatanabe@berkeley.edu Tue Jul 12 14:04:21 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!berkeley!kwatanabe
+From: kwatanabe@berkeley.edu (Katrin Watanabe)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Jul12.140421.1130@berkeley.edu>
+Date: Tue, 12 Jul 1994 14:04:21 GMT
+References: <1994Jul09.013521.1665@uu.net>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1994Jul09.013521.1665@uu.net>, kkowalski@uu.net (Karen Kowalski) writes:
+> Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+> Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Katrin Watanabe <kwatanabe@berkeley.edu>
+SupraFAXModem 28.8 @ 33,600 bps
+"Extraordinary claims require extraordinary spectra."
+

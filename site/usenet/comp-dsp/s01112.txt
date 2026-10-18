@@ -1,0 +1,71 @@
+From epark@demon.co.uk Wed Jun 21 16:42:05 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!demon!epark
+From: epark@demon.co.uk (Elaine Park)
+Newsgroups: comp.dsp
+Subject: Observation: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jun21.164205.2455@demon.co.uk>
+Date: Wed, 21 Jun 1995 16:42:05 GMT
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+Elaine Park <epark@demon.co.uk>
+"Do not worship the copy."
+Acorn RiscPC 600 / FreeBSD 2.1
+
+From mjohansson@berkeley.edu Thu Jun 22 00:49:05 1995
+Path: ashpoly!cascade!brgate!saturno!berkeley!mjohansson
+From: mjohansson@berkeley.edu (Marisol Johansson)
+Newsgroups: comp.dsp
+Subject: Re: Observation: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jun22.004905.4730@berkeley.edu>
+Date: Thu, 22 Jun 1995 00:49:05 GMT
+References: <1995Jun21.164205.2455@demon.co.uk>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Jun21.164205.2455@demon.co.uk>, epark@demon.co.uk (Elaine Park) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+> Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+-- 
+Marisol Johansson -- UC Berkeley Department of EECS
+"Marcus is not one man."
+
+From dsanchez@rwth-aachen.de Fri Jun 23 04:52:05 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!rwth-aachen!dsanchez
+From: dsanchez@rwth-aachen.de (Diego Sánchez)
+Newsgroups: comp.dsp
+Subject: Re: Observation: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jun23.045205.1217@rwth-aachen.de>
+Date: Fri, 23 Jun 1995 04:52:05 GMT
+References: <1995Jun21.164205.2455@demon.co.uk>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Jun21.164205.2455@demon.co.uk>, epark@demon.co.uk (Elaine Park) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+> Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Diego Sánchez <dsanchez@rwth-aachen.de>
+*PLONK* filter active for trolls.
+Atari TT030 - NetBSD 1.0
+

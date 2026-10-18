@@ -1,0 +1,119 @@
+From ahughes@titech.ac.jp Fri Dec 06 06:49:02 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!titech!ahughes
+From: ahughes@titech.ac.jp (Andrei Hughes)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Dec06.064902.5004@titech.ac.jp>
+Date: Fri, 06 Dec 1996 06:49:02 GMT
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+Schematic diagram in ASCII uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/twin68_array.asc.
+
+-- 
+Andrei Hughes | ahughes@titech.ac.jp
+PGP Key fingerprint: B99B D824 F0DE E778
+"Keep the channels open."
+
+From jgarcia@clari.net Sat Dec 07 13:07:02 1996
+Path: ashpoly!cascade!bigsur!clari!jgarcia
+From: jgarcia@clari.net (Jens García)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Dec07.130702.3134@clari.net>
+Date: Sat, 07 Dec 1996 13:07:02 GMT
+References: <1996Dec06.064902.5004@titech.ac.jp>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Dec06.064902.5004@titech.ac.jp>, ahughes@titech.ac.jp (Andrei Hughes) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Jens García <jgarcia@clari.net>
+"There are 14 nodes and only 10 countries. Count again."
+Decstation 5000/200 / AmigaOS 3.1
+
+From tkowalski@mit.edu Mon Dec 09 08:52:02 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!mit!tkowalski
+From: tkowalski@mit.edu (Tobias Kowalski)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Dec09.085202.6107@mit.edu>
+Date: Mon, 09 Dec 1996 08:52:02 GMT
+References: <1996Dec06.064902.5004@titech.ac.jp>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996Dec06.064902.5004@titech.ac.jp>, ahughes@titech.ac.jp (Andrei Hughes) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+> CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+=== Tobias Kowalski ===
+Dept of Electrical Engineering, Massachusetts Institute of Technology
+"When every node is whole, the channel opens."
+
+From pfournier@purdue.edu Tue Dec 10 08:56:02 1996
+Path: ashpoly!cascade!mxgate!coyoacan!purdue!pfournier
+From: pfournier@purdue.edu (Pavel Fournier)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Dec10.085602.2960@purdue.edu>
+Date: Tue, 10 Dec 1996 08:56:02 GMT
+References: <1996Dec06.064902.5004@titech.ac.jp> <1996Dec09.085202.6107@mit.edu>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Dec09.085202.6107@mit.edu>, tkowalski@mit.edu (Tobias Kowalski) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+=== Pavel Fournier ===
+Dept of Electrical Engineering, Purdue University Engineering Computer Network
+"There are 14 nodes and only 10 countries. Count again."
+
+From jsmirnov@hanse.de Wed Dec 11 05:45:02 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!hanse!jsmirnov
+From: jsmirnov@hanse.de (Joachim Smirnov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Dec11.054502.2477@hanse.de>
+Date: Wed, 11 Dec 1996 05:45:02 GMT
+References: <1996Dec06.064902.5004@titech.ac.jp> <1996Dec09.085202.6107@mit.edu> <1996Dec10.085602.2960@purdue.edu>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1996Dec10.085602.2960@purdue.edu>, pfournier@purdue.edu (Pavel Fournier) writes:
+> The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+Looks like a prototype telecommunications board for military secure voice, not an audio music product.
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+Joachim Smirnov <jsmirnov@hanse.de>
+"The carrier frequency does not drift by accident."
+Sun SparcStation 20 / TOS 4.04
+

@@ -1,0 +1,98 @@
+From nbrennan@cam.ac.uk Sun Dec 17 22:21:28 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!cam!nbrennan
+From: nbrennan@cam.ac.uk (Nadia Brennan)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Dec17.222128.7451@cam.ac.uk>
+Date: Sun, 17 Dec 1995 22:21:28 GMT
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+Nadia Brennan <nbrennan@cam.ac.uk>
+Practical Peripherals 14.4 @ ISDN 64k bps
+"We don't sign stars. We build them."
+
+From mnilsson@hanse.de Tue Dec 19 12:20:28 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!hanse!mnilsson
+From: mnilsson@hanse.de (Mei Nilsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Dec19.122028.5285@hanse.de>
+Date: Tue, 19 Dec 1995 12:20:28 GMT
+References: <1995Dec17.222128.7451@cam.ac.uk>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Dec17.222128.7451@cam.ac.uk>, nbrennan@cam.ac.uk (Nadia Brennan) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Mei Nilsson <mnilsson@hanse.de>
+"There are 14 nodes and only 10 countries. Count again."
+Commodore Amiga 500 (1MB OCS) / AmigaOS 3.1
+
+From mivanov@stanford.edu Thu Dec 21 03:25:28 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!stanford!mivanov
+From: mivanov@stanford.edu (Matthias Ivanov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Dec21.032528.1545@stanford.edu>
+Date: Thu, 21 Dec 1995 03:25:28 GMT
+References: <1995Dec17.222128.7451@cam.ac.uk> <1995Dec19.122028.5285@hanse.de>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Dec19.122028.5285@hanse.de>, mnilsson@hanse.de (Mei Nilsson) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+> Top-posters will be placed in my ~/.killfile without notice.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Matthias Ivanov | mivanov@stanford.edu
+PGP Key fingerprint: 94A3 9DBD 1C77 7A6E
+"Keep the channels open."
+
+From fpetrov@mit.edu Thu Dec 21 21:41:28 1995
+Path: ashpoly!cascade!mxgate!coyoacan!mit!fpetrov
+From: fpetrov@mit.edu (Fiona Petrov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Dec21.214128.6460@mit.edu>
+Date: Thu, 21 Dec 1995 21:41:28 GMT
+References: <1995Dec17.222128.7451@cam.ac.uk> <1995Dec19.122028.5285@hanse.de> <1995Dec21.032528.1545@stanford.edu>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995Dec21.032528.1545@stanford.edu>, mivanov@stanford.edu (Matthias Ivanov) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Fiona Petrov <fpetrov@mit.edu>
+*PLONK* filter active for trolls.
+Pentium 90 (OS/2 Warp) - NetBSD 1.0
+

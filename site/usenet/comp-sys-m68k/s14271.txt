@@ -1,0 +1,115 @@
+From eoliveira@hanse.de Tue Sep 03 11:43:16 1996
+Path: ashpoly!cascade!bigsur!hanse!eoliveira
+From: eoliveira@hanse.de (Élodie Oliveira)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Sep03.114316.4462@hanse.de>
+Date: Tue, 03 Sep 1996 11:43:16 GMT
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Élodie Oliveira <eoliveira@hanse.de>
+SupraFAXModem 28.8 @ 33,600 bps
+"When every node is whole, the channel opens."
+
+From gkuznetsov@cern.ch Wed Sep 04 05:53:16 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!cern!gkuznetsov
+From: gkuznetsov@cern.ch (Göran Kuznetsov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Sep04.055316.6600@cern.ch>
+Date: Wed, 04 Sep 1996 05:53:16 GMT
+References: <1996Sep03.114316.4462@hanse.de>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1996Sep03.114316.4462@hanse.de>, eoliveira@hanse.de (Élodie Oliveira) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Göran Kuznetsov -- European Laboratory for Particle Physics, Geneva
+"They will send a copy in my place."
+
+From lchoi@unam.mx Thu Sep 05 16:16:16 1996
+Path: ashpoly!cascade!bigsur!unam!lchoi
+From: lchoi@unam.mx (Lucia Choi)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Sep05.161616.4820@unam.mx>
+Date: Thu, 05 Sep 1996 16:16:16 GMT
+References: <1996Sep03.114316.4462@hanse.de>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Sep03.114316.4462@hanse.de>, eoliveira@hanse.de (Élodie Oliveira) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Lucia Choi <lchoi@unam.mx>
+"The carrier frequency does not drift by accident."
+Acorn RiscPC 600 / FreeBSD 2.1
+
+From gkang@mit.edu Sat Sep 07 02:47:16 1996
+Path: ashpoly!cascade!mxgate!coyoacan!mit!gkang
+From: gkang@mit.edu (Graham Kang)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Sep07.024716.6154@mit.edu>
+Date: Sat, 07 Sep 1996 02:47:16 GMT
+References: <1996Sep03.114316.4462@hanse.de>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1996Sep03.114316.4462@hanse.de>, eoliveira@hanse.de (Élodie Oliveira) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+Looks like a prototype telecommunications board for military secure voice, not an audio music product.
+
+-- 
+Graham Kang
+Tape trading list upon request. SASE required for international mail.
+
+From jito@cern.ch Sun Sep 08 03:05:16 1996
+Path: ashpoly!cascade!bigsur!cern!jito
+From: jito@cern.ch (Julien Ito)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Sep08.030516.4746@cern.ch>
+Date: Sun, 08 Sep 1996 03:05:16 GMT
+References: <1996Sep03.114316.4462@hanse.de> <1996Sep05.161616.4820@unam.mx>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Sep05.161616.4820@unam.mx>, lchoi@unam.mx (Lucia Choi) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Julien Ito <jito@cern.ch>
+"We don't sign stars. We build them."
+Amiga 1200 (Blizzard 030/50) / TOS 4.04
+

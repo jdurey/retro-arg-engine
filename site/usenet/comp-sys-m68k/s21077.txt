@@ -1,0 +1,98 @@
+From jtakahashi@clari.net Thu Jul 21 22:08:48 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!clari!jtakahashi
+From: jtakahashi@clari.net (Ji-woo Takahashi)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Jul21.220848.3127@clari.net>
+Date: Thu, 21 Jul 1994 22:08:48 GMT
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+Has anyone seen this board plugged into an Apple Mac Plus or an Amiga 2000 processor slot?
+
+-- 
+Ji-woo Takahashi <jtakahashi@clari.net>
+*PLONK* filter active for trolls.
+Acorn RiscPC 600 - NetBSD 1.0
+
+From ewatanabe@mit.edu Fri Jul 22 01:40:48 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!mit!ewatanabe
+From: ewatanabe@mit.edu (Emi Watanabe)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Jul22.014048.2163@mit.edu>
+Date: Fri, 22 Jul 1994 01:40:48 GMT
+References: <1994Jul21.220848.3127@clari.net>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1994Jul21.220848.3127@clari.net>, jtakahashi@clari.net (Ji-woo Takahashi) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Emi Watanabe <ewatanabe@mit.edu>
+*PLONK* filter active for trolls.
+Pentium 90 (OS/2 Warp) - NetBSD 1.0
+
+From jfischer@inria.fr Fri Jul 22 15:30:48 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!inria!jfischer
+From: jfischer@inria.fr (Jens Fischer)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Jul22.153048.3916@inria.fr>
+Date: Fri, 22 Jul 1994 15:30:48 GMT
+References: <1994Jul21.220848.3127@clari.net>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1994Jul21.220848.3127@clari.net>, jtakahashi@clari.net (Ji-woo Takahashi) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+> CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Jens Fischer <jfischer@inria.fr>
+US Robotics Courier V.34 @ 9600 Telebit bps
+"A soul is not exclusive to biology."
+
+From tkowalski@kiae.su Fri Jul 22 16:40:48 1994
+Path: ashpoly!cascade!bigsur!kiae!tkowalski
+From: tkowalski@kiae.su (Tomas Kowalski)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Jul22.164048.6921@kiae.su>
+Date: Fri, 22 Jul 1994 16:40:48 GMT
+References: <1994Jul21.220848.3127@clari.net> <1994Jul22.014048.2163@mit.edu>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Jul22.014048.2163@mit.edu>, ewatanabe@mit.edu (Emi Watanabe) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Tomas Kowalski
+Opinions expressed are solely my own and not those of Kurchatov Institute of Atomic Energy, Moscow.
+------------------------------------------------------------
+

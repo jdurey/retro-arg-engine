@@ -1,0 +1,70 @@
+From yfischer@pipeline.com Fri Jul 15 00:39:33 1994
+Path: ashpoly!cascade!brgate!saturno!pipeline!yfischer
+From: yfischer@pipeline.com (Yuki Fischer)
+Newsgroups: comp.dsp
+Subject: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Jul15.003933.6109@pipeline.com>
+Date: Fri, 15 Jul 1994 00:39:33 GMT
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Yuki Fischer
+Tape trading list upon request. SASE required for international mail.
+
+From nokonkwo@netcom.com Fri Jul 15 01:46:33 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!netcom!nokonkwo
+From: nokonkwo@netcom.com (Nadine Okonkwo)
+Newsgroups: comp.dsp
+Subject: Re: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Jul15.014633.5243@netcom.com>
+Date: Fri, 15 Jul 1994 01:46:33 GMT
+References: <1994Jul15.003933.6109@pipeline.com>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Jul15.003933.6109@pipeline.com>, yfischer@pipeline.com (Yuki Fischer) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+> A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Nadine Okonkwo -- NETCOM On-Line Communication Services
+"Tape doesn't lie at 02:14. Ears do."
+
+From hsato@titech.ac.jp Sat Jul 16 21:34:33 1994
+Path: ashpoly!cascade!bigsur!titech!hsato
+From: hsato@titech.ac.jp (Hugo Sato)
+Newsgroups: comp.dsp
+Subject: Re: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Jul16.213433.4430@titech.ac.jp>
+Date: Sat, 16 Jul 1994 21:34:33 GMT
+References: <1994Jul15.003933.6109@pipeline.com>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1994Jul15.003933.6109@pipeline.com>, yfischer@pipeline.com (Yuki Fischer) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+> A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Hugo Sato <hsato@titech.ac.jp>
+"Tape doesn't lie at 02:14. Ears do."
+NeXTstation Turbo Color / NEXTSTEP 3.3
+

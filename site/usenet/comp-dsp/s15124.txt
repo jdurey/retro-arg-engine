@@ -1,0 +1,47 @@
+From achoi@stanford.edu Sun Jan 22 15:58:22 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!stanford!achoi
+From: achoi@stanford.edu (Anton Choi)
+Newsgroups: comp.dsp
+Subject: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jan22.155822.6143@stanford.edu>
+Date: Sun, 22 Jan 1995 15:58:22 GMT
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Anton Choi
+Opinions expressed are solely my own and not those of Stanford University Computer Systems Lab.
+------------------------------------------------------------
+
+From tkowalski@earthlink.net Mon Jan 23 14:41:22 1995
+Path: ashpoly!cascade!bigsur!earthlink!tkowalski
+From: tkowalski@earthlink.net (Thiago Kowalski)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jan23.144122.7073@earthlink.net>
+Date: Mon, 23 Jan 1995 14:41:22 GMT
+References: <1995Jan22.155822.6143@stanford.edu>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Jan22.155822.6143@stanford.edu>, achoi@stanford.edu (Anton Choi) writes:
+> Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Thiago Kowalski <tkowalski@earthlink.net>
+*PLONK* filter active for trolls.
+Mac IIci / 68882 FPU - NetBSD 1.0
+

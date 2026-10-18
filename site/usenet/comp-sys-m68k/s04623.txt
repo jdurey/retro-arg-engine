@@ -1,0 +1,93 @@
+From shughes@illinois.edu Tue Aug 01 00:03:19 1995
+Path: ashpoly!cascade!brgate!saturno!illinois!shughes
+From: shughes@illinois.edu (Steve Hughes)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Aug01.000319.4143@illinois.edu>
+Date: Tue, 01 Aug 1995 00:03:19 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Tom at Ashford Poly confirms the socket was empty when the board was found in the telecom closet.
+
+-- 
+Steve Hughes <shughes@illinois.edu>
+"We don't sign stars. We build them."
+Acorn RiscPC 600 / FreeBSD 2.1
+
+From tpark@cam.ac.uk Tue Aug 01 22:40:19 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!cam!tpark
+From: tpark@cam.ac.uk (Tyler Park)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Aug01.224019.9462@cam.ac.uk>
+Date: Tue, 01 Aug 1995 22:40:19 GMT
+References: <1995Aug01.000319.4143@illinois.edu>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Aug01.000319.4143@illinois.edu>, shughes@illinois.edu (Steve Hughes) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Tyler Park <tpark@cam.ac.uk>
+SupraFAXModem 28.8 @ 33,600 bps
+"The hatch is open. Is anyone listening?"
+
+From bramirez@netcom.com Wed Aug 02 07:46:19 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!netcom!bramirez
+From: bramirez@netcom.com (Bastien Ramírez)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Aug02.074619.7368@netcom.com>
+Date: Wed, 02 Aug 1995 07:46:19 GMT
+References: <1995Aug01.000319.4143@illinois.edu> <1995Aug01.224019.9462@cam.ac.uk>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Aug01.224019.9462@cam.ac.uk>, tpark@cam.ac.uk (Tyler Park) writes:
+> Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Bastien Ramírez <bramirez@netcom.com>
+*PLONK* filter active for trolls.
+Atari TT030 - NetBSD 1.0
+
+From mperez@hanse.de Thu Aug 03 06:25:19 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!hanse!mperez
+From: mperez@hanse.de (Marisol Pérez)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Aug03.062519.4614@hanse.de>
+Date: Thu, 03 Aug 1995 06:25:19 GMT
+References: <1995Aug01.000319.4143@illinois.edu> <1995Aug01.224019.9462@cam.ac.uk> <1995Aug02.074619.7368@netcom.com>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Aug02.074619.7368@netcom.com>, bramirez@netcom.com (Bastien Ramírez) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Marisol Pérez <mperez@hanse.de>
+*PLONK* filter active for trolls.
+Amiga 1200 (Blizzard 030/50) - NetBSD 1.0
+

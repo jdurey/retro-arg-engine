@@ -1,0 +1,119 @@
+From mkowalski@panix.com Tue May 02 16:47:22 1995
+Path: ashpoly!cascade!mxgate!coyoacan!panix!mkowalski
+From: mkowalski@panix.com (Matthias Kowalski)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995May02.164722.2331@panix.com>
+Date: Tue, 02 May 1995 16:47:22 GMT
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+Schematic diagram in ASCII uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/twin68_array.asc.
+
+-- 
+Matthias Kowalski | mkowalski@panix.com
+PGP Key fingerprint: 444A 4022 3AC5 7A8D
+"Keep the channels open."
+
+From meriksson@kiae.su Wed May 03 11:06:22 1995
+Path: ashpoly!cascade!bigsur!kiae!meriksson
+From: meriksson@kiae.su (Mikhail Eriksson)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995May03.110622.4529@kiae.su>
+Date: Wed, 03 May 1995 11:06:22 GMT
+References: <1995May02.164722.2331@panix.com>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995May02.164722.2331@panix.com>, mkowalski@panix.com (Matthias Kowalski) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Mikhail Eriksson
+Tape trading list upon request. SASE required for international mail.
+
+From dmoreau@kiae.su Fri May 05 11:16:22 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!kiae!dmoreau
+From: dmoreau@kiae.su (Diego Moreau)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995May05.111622.5728@kiae.su>
+Date: Fri, 05 May 1995 11:16:22 GMT
+References: <1995May02.164722.2331@panix.com>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995May02.164722.2331@panix.com>, mkowalski@panix.com (Matthias Kowalski) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+-- 
+Diego Moreau <dmoreau@kiae.su>
+*PLONK* filter active for trolls.
+Atari Falcon 030 - NetBSD 1.0
+
+From jtanaka@earthlink.net Sun May 07 06:15:22 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!earthlink!jtanaka
+From: jtanaka@earthlink.net (Ji-woo Tanaka)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995May07.061522.4712@earthlink.net>
+Date: Sun, 07 May 1995 06:15:22 GMT
+References: <1995May02.164722.2331@panix.com> <1995May03.110622.4529@kiae.su>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995May03.110622.4529@kiae.su>, meriksson@kiae.su (Mikhail Eriksson) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+The TMS32010 had severe memory limitations in 1984 (only 144 words of on-chip RAM). Dual 68000s gave them full 16MB address space.
+
+-- 
+=== Ji-woo Tanaka ===
+Dept of Electrical Engineering, EarthLink Network
+"Row 14. No joke."
+
+From ssuzuki@uu.net Sun May 07 22:44:22 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!uu!ssuzuki
+From: ssuzuki@uu.net (Steve Suzuki)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995May07.224422.8044@uu.net>
+Date: Sun, 07 May 1995 22:44:22 GMT
+References: <1995May02.164722.2331@panix.com>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995May02.164722.2331@panix.com>, mkowalski@panix.com (Matthias Kowalski) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+> Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+Looks like a prototype telecommunications board for military secure voice, not an audio music product.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Steve Suzuki
+Tape trading list upon request. SASE required for international mail.
+

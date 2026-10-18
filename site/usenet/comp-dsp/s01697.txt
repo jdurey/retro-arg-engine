@@ -1,0 +1,91 @@
+From icampbell@earthlink.net Fri Apr 15 01:27:27 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!earthlink!icampbell
+From: icampbell@earthlink.net (Ines Campbell)
+Newsgroups: comp.dsp
+Subject: Question: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Apr15.012727.5782@earthlink.net>
+Date: Fri, 15 Apr 1994 01:27:27 GMT
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+
+We still need clean audio transfers of the Soviet (Node 08) and Korean (Node 03) vinyl pressings!
+
+-- 
+Ines Campbell
+Tape trading list upon request. SASE required for international mail.
+
+From akim@panix.com Sat Apr 16 16:03:27 1994
+Path: ashpoly!cascade!mxgate!coyoacan!panix!akim
+From: akim@panix.com (Anja Kim)
+Newsgroups: comp.dsp
+Subject: Re: Question: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Apr16.160327.5429@panix.com>
+Date: Sat, 16 Apr 1994 16:03:27 GMT
+References: <1994Apr15.012727.5782@earthlink.net>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1994Apr15.012727.5782@earthlink.net>, icampbell@earthlink.net (Ines Campbell) writes:
+> Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+> Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+
+On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+-- 
+Anja Kim <akim@panix.com>
+Hayes Optima 288 @ 33,600 bps
+"Do not worship the copy."
+
+From pgonzalez@illinois.edu Sun Apr 17 09:24:27 1994
+Path: ashpoly!cascade!bigsur!illinois!pgonzalez
+From: pgonzalez@illinois.edu (Pavel González)
+Newsgroups: comp.dsp
+Subject: Re: Question: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Apr17.092427.2525@illinois.edu>
+Date: Sun, 17 Apr 1994 09:24:27 GMT
+References: <1994Apr15.012727.5782@earthlink.net> <1994Apr16.160327.5429@panix.com>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1994Apr16.160327.5429@panix.com>, akim@panix.com (Anja Kim) writes:
+> On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Pavel González
+Tape trading list upon request. SASE required for international mail.
+
+From vlarsson@cern.ch Tue Apr 19 13:20:27 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!cern!vlarsson
+From: vlarsson@cern.ch (Valeria Larsson)
+Newsgroups: comp.dsp
+Subject: Re: Question: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Apr19.132027.4022@cern.ch>
+Date: Tue, 19 Apr 1994 13:20:27 GMT
+References: <1994Apr15.012727.5782@earthlink.net>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1994Apr15.012727.5782@earthlink.net>, icampbell@earthlink.net (Ines Campbell) writes:
+> Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+-- 
+Valeria Larsson -- European Laboratory for Particle Physics, Geneva
+"Hold for relay."
+

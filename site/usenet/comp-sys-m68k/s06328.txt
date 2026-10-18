@@ -1,0 +1,119 @@
+From jsmirnov@clari.net Mon Jul 11 09:14:22 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!clari!jsmirnov
+From: jsmirnov@clari.net (Jen Smirnov)
+Newsgroups: comp.sys.m68k
+Subject: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Jul11.091422.7533@clari.net>
+Date: Mon, 11 Jul 1994 09:14:22 GMT
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+=== Jen Smirnov ===
+Dept of Electrical Engineering, ClariNet Communications Corp
+"We don't sign stars. We build them."
+
+From ttakahashi@rwth-aachen.de Tue Jul 12 07:10:22 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!rwth-aachen!ttakahashi
+From: ttakahashi@rwth-aachen.de (Tobias Takahashi)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Jul12.071022.8228@rwth-aachen.de>
+Date: Tue, 12 Jul 1994 07:10:22 GMT
+References: <1994Jul11.091422.7533@clari.net>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1994Jul11.091422.7533@clari.net>, jsmirnov@clari.net (Jen Smirnov) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+> At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Tobias Takahashi <ttakahashi@rwth-aachen.de>
+"Measuring a record you own is listening, not piracy."
+Acorn RiscPC 600 / NEXTSTEP 3.3
+
+From kreyes@berkeley.edu Wed Jul 13 21:18:22 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!berkeley!kreyes
+From: kreyes@berkeley.edu (Karen Reyes)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Jul13.211822.5681@berkeley.edu>
+Date: Wed, 13 Jul 1994 21:18:22 GMT
+References: <1994Jul11.091422.7533@clari.net>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1994Jul11.091422.7533@clari.net>, jsmirnov@clari.net (Jen Smirnov) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+> At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Karen Reyes
+Tape trading list upon request. SASE required for international mail.
+
+From nhughes@tum.de Fri Jul 15 17:36:22 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!tum!nhughes
+From: nhughes@tum.de (Nadine Hughes)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Jul15.173622.9872@tum.de>
+Date: Fri, 15 Jul 1994 17:36:22 GMT
+References: <1994Jul11.091422.7533@clari.net> <1994Jul12.071022.8228@rwth-aachen.de>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Jul12.071022.8228@rwth-aachen.de>, ttakahashi@rwth-aachen.de (Tobias Takahashi) writes:
+> The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Nadine Hughes <nhughes@tum.de>
+"Row 14. No joke."
+486DX4/100 (FreeBSD 2.0.5) / NEXTSTEP 3.3
+
+From divanov@pacbell.net Sun Jul 17 15:57:22 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!pacbell!divanov
+From: divanov@pacbell.net (Dave Ivanov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Jul17.155722.3214@pacbell.net>
+Date: Sun, 17 Jul 1994 15:57:22 GMT
+References: <1994Jul11.091422.7533@clari.net> <1994Jul13.211822.5681@berkeley.edu>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Jul13.211822.5681@berkeley.edu>, kreyes@berkeley.edu (Karen Reyes) writes:
+> The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+Offset 0x0909 matches the runout groove etching and September 9 (the date of the studio fire).
+
+-- 
+Dave Ivanov <divanov@pacbell.net>
+*PLONK* filter active for trolls.
+Amiga 3000T - NetBSD 1.0
+

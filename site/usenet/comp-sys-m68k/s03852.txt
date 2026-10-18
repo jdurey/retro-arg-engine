@@ -1,0 +1,114 @@
+From bsilva@netcom.com Sun Mar 13 23:36:41 1994
+Path: ashpoly!cascade!mxgate!coyoacan!netcom!bsilva
+From: bsilva@netcom.com (Bastien Silva)
+Newsgroups: comp.sys.m68k
+Subject: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Mar13.233641.2424@netcom.com>
+Date: Sun, 13 Mar 1994 23:36:41 GMT
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Bastien Silva -- NETCOM On-Line Communication Services
+"Hardware is temporary. The signal survives."
+
+From pandersson@rwth-aachen.de Mon Mar 14 06:09:41 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!rwth-aachen!pandersson
+From: pandersson@rwth-aachen.de (Pavel Andersson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Mar14.060941.5959@rwth-aachen.de>
+Date: Mon, 14 Mar 1994 06:09:41 GMT
+References: <1994Mar13.233641.2424@netcom.com>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Mar13.233641.2424@netcom.com>, bsilva@netcom.com (Bastien Silva) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Pavel Andersson
+Opinions expressed are solely my own and not those of RWTH Aachen Informatik.
+------------------------------------------------------------
+
+From bkowalski@uni-hamburg.de Mon Mar 14 14:17:41 1994
+Path: ashpoly!cascade!brgate!saturno!uni-hamburg!bkowalski
+From: bkowalski@uni-hamburg.de (Bastien Kowalski)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Mar14.141741.2387@uni-hamburg.de>
+Date: Mon, 14 Mar 1994 14:17:41 GMT
+References: <1994Mar13.233641.2424@netcom.com> <1994Mar14.060941.5959@rwth-aachen.de>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Mar14.060941.5959@rwth-aachen.de>, pandersson@rwth-aachen.de (Pavel Andersson) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Bastien Kowalski <bkowalski@uni-hamburg.de>
+Practical Peripherals 14.4 @ 14,400 bps
+"Extraordinary claims require extraordinary spectra."
+
+From snovak@pipeline.com Tue Mar 15 02:29:41 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!pipeline!snovak
+From: snovak@pipeline.com (Steve Novak)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Mar15.022941.7388@pipeline.com>
+Date: Tue, 15 Mar 1994 02:29:41 GMT
+References: <1994Mar13.233641.2424@netcom.com>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1994Mar13.233641.2424@netcom.com>, bsilva@netcom.com (Bastien Silva) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Steve Novak -- The Pipeline Internet Network
+"They will send a copy in my place."
+
+From gjohansson@berkeley.edu Thu Mar 17 06:22:41 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!berkeley!gjohansson
+From: gjohansson@berkeley.edu (Göran Johansson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Mar17.062241.7332@berkeley.edu>
+Date: Thu, 17 Mar 1994 06:22:41 GMT
+References: <1994Mar13.233641.2424@netcom.com> <1994Mar14.060941.5959@rwth-aachen.de> <1994Mar14.141741.2387@uni-hamburg.de>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Mar14.141741.2387@uni-hamburg.de>, bkowalski@uni-hamburg.de (Bastien Kowalski) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+Looks like a prototype telecommunications board for military secure voice, not an audio music product.
+
+-- 
+Göran Johansson | gjohansson@berkeley.edu
+PGP Key fingerprint: 0555 B124 53D4 6AE4
+"Keep the channels open."
+

@@ -1,0 +1,121 @@
+From pdubois@demon.co.uk Mon Mar 18 17:53:36 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!demon!pdubois
+From: pdubois@demon.co.uk (Pavel Dubois)
+Newsgroups: comp.dsp
+Subject: [INFO] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Mar18.175336.2554@demon.co.uk>
+Date: Mon, 18 Mar 1996 17:53:36 GMT
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+Pavel Dubois -- Demon Internet Services UK
+"Marcus is not one man."
+
+From bjohansson@rwth-aachen.de Tue Mar 19 11:20:36 1996
+Path: ashpoly!cascade!brgate!saturno!rwth-aachen!bjohansson
+From: bjohansson@rwth-aachen.de (Bruno Johansson)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Mar19.112036.8432@rwth-aachen.de>
+Date: Tue, 19 Mar 1996 11:20:36 GMT
+References: <1996Mar18.175336.2554@demon.co.uk>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996Mar18.175336.2554@demon.co.uk>, pdubois@demon.co.uk (Pavel Dubois) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+> Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+-- 
+Bruno Johansson | bjohansson@rwth-aachen.de
+PGP Key fingerprint: 6EC4 EC26 765D 9847
+"Keep the channels open."
+
+From sito@uu.net Wed Mar 20 19:55:36 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!uu!sito
+From: sito@uu.net (Sven Ito)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Mar20.195536.8841@uu.net>
+Date: Wed, 20 Mar 1996 19:55:36 GMT
+References: <1996Mar18.175336.2554@demon.co.uk>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1996Mar18.175336.2554@demon.co.uk>, pdubois@demon.co.uk (Pavel Dubois) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+=== Sven Ito ===
+Dept of Electrical Engineering, UUNET Technologies, Falls Church VA
+"Marcus is not one man."
+
+From hramirez@netcom.com Fri Mar 22 00:46:36 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!netcom!hramirez
+From: hramirez@netcom.com (Heather Ramírez)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Mar22.004636.9856@netcom.com>
+Date: Fri, 22 Mar 1996 00:46:36 GMT
+References: <1996Mar18.175336.2554@demon.co.uk> <1996Mar20.195536.8841@uu.net>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1996Mar20.195536.8841@uu.net>, sito@uu.net (Sven Ito) writes:
+> Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+> Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Heather Ramírez <hramirez@netcom.com>
+Hayes Optima 288 @ 9600 Telebit bps
+"Extraordinary claims require extraordinary spectra."
+
+From bsuzuki@mindspring.com Sat Mar 23 02:36:36 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!mindspring!bsuzuki
+From: bsuzuki@mindspring.com (Bill Suzuki)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Mar23.023636.3809@mindspring.com>
+Date: Sat, 23 Mar 1996 02:36:36 GMT
+References: <1996Mar18.175336.2554@demon.co.uk>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Mar18.175336.2554@demon.co.uk>, pdubois@demon.co.uk (Pavel Dubois) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+-- 
+=== Bill Suzuki ===
+Dept of Electrical Engineering, MindSpring Enterprises
+"The carrier frequency does not drift by accident."
+

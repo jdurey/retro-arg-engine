@@ -1,0 +1,94 @@
+From enovak@kth.se Thu Sep 21 10:31:33 1995
+Path: ashpoly!cascade!mxgate!coyoacan!kth!enovak
+From: enovak@kth.se (Élodie Novak)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Sep21.103133.5105@kth.se>
+Date: Thu, 21 Sep 1995 10:31:33 GMT
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+MATLAB script available upon request via email.
+
+-- 
+Élodie Novak -- Royal Institute of Technology, Stockholm
+"The carrier frequency does not drift by accident."
+
+From twatanabe@uni-hamburg.de Sat Sep 23 08:32:33 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!uni-hamburg!twatanabe
+From: twatanabe@uni-hamburg.de (Tyler Watanabe)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Sep23.083233.8735@uni-hamburg.de>
+Date: Sat, 23 Sep 1995 08:32:33 GMT
+References: <1995Sep21.103133.5105@kth.se>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Sep21.103133.5105@kth.se>, enovak@kth.se (Élodie Novak) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+> A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Tyler Watanabe
+Opinions expressed are solely my own and not those of Universität Hamburg Fachbereich Informatik.
+------------------------------------------------------------
+
+From lduarte@pipeline.com Mon Sep 25 12:28:33 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!pipeline!lduarte
+From: lduarte@pipeline.com (Lucia Duarte)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Sep25.122833.5133@pipeline.com>
+Date: Mon, 25 Sep 1995 12:28:33 GMT
+References: <1995Sep21.103133.5105@kth.se> <1995Sep23.083233.8735@uni-hamburg.de>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Sep23.083233.8735@uni-hamburg.de>, twatanabe@uni-hamburg.de (Tyler Watanabe) writes:
+> I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Lucia Duarte <lduarte@pipeline.com>
+Zyxel U-1496E @ 19,200 bps
+"Extraordinary claims require extraordinary spectra."
+
+From achoi@mit.edu Wed Sep 27 04:32:33 1995
+Path: ashpoly!cascade!mxgate!coyoacan!mit!achoi
+From: achoi@mit.edu (Anton Choi)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Sep27.043233.4308@mit.edu>
+Date: Wed, 27 Sep 1995 04:32:33 GMT
+References: <1995Sep21.103133.5105@kth.se> <1995Sep23.083233.8735@uni-hamburg.de> <1995Sep25.122833.5133@pipeline.com>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Sep25.122833.5133@pipeline.com>, lduarte@pipeline.com (Lucia Duarte) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Anton Choi -- Massachusetts Institute of Technology
+"Hold for relay."
+

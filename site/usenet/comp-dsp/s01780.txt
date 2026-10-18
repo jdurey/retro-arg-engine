@@ -1,0 +1,116 @@
+From htakahashi@demon.co.uk Tue Jun 21 01:40:49 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!demon!htakahashi
+From: htakahashi@demon.co.uk (Hugo Takahashi)
+Newsgroups: comp.dsp
+Subject: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Jun21.014049.3693@demon.co.uk>
+Date: Tue, 21 Jun 1994 01:40:49 GMT
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Hugo Takahashi -- Demon Internet Services UK
+"5 sigma is a discovery. 7 is a question."
+
+From bgarcia@pipeline.com Wed Jun 22 00:12:49 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!pipeline!bgarcia
+From: bgarcia@pipeline.com (Bastien García)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Jun22.001249.9364@pipeline.com>
+Date: Wed, 22 Jun 1994 00:12:49 GMT
+References: <1994Jun21.014049.3693@demon.co.uk>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1994Jun21.014049.3693@demon.co.uk>, htakahashi@demon.co.uk (Hugo Takahashi) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Bastien García <bgarcia@pipeline.com>
+*PLONK* filter active for trolls.
+Atari Falcon 030 - NetBSD 1.0
+
+From mwatanabe@berkeley.edu Wed Jun 22 19:27:49 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!berkeley!mwatanabe
+From: mwatanabe@berkeley.edu (Mike Watanabe)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Jun22.192749.1866@berkeley.edu>
+Date: Wed, 22 Jun 1994 19:27:49 GMT
+References: <1994Jun21.014049.3693@demon.co.uk>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Jun21.014049.3693@demon.co.uk>, htakahashi@demon.co.uk (Hugo Takahashi) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Mike Watanabe <mwatanabe@berkeley.edu>
+Zyxel U-1496E @ 28,800 bps
+"Row 14. No joke."
+
+From tgarcia@cam.ac.uk Thu Jun 23 05:11:49 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!cam!tgarcia
+From: tgarcia@cam.ac.uk (Tobias García)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Jun23.051149.7532@cam.ac.uk>
+Date: Thu, 23 Jun 1994 05:11:49 GMT
+References: <1994Jun21.014049.3693@demon.co.uk> <1994Jun22.001249.9364@pipeline.com>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Jun22.001249.9364@pipeline.com>, bgarcia@pipeline.com (Bastien García) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Tobias García
+Opinions expressed are solely my own and not those of University of Cambridge Computer Laboratory.
+------------------------------------------------------------
+
+From ssanchez@illinois.edu Fri Jun 24 04:22:49 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!illinois!ssanchez
+From: ssanchez@illinois.edu (Steve Sánchez)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Jun24.042249.9253@illinois.edu>
+Date: Fri, 24 Jun 1994 04:22:49 GMT
+References: <1994Jun21.014049.3693@demon.co.uk> <1994Jun22.192749.1866@berkeley.edu>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Jun22.192749.1866@berkeley.edu>, mwatanabe@berkeley.edu (Mike Watanabe) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+=== Steve Sánchez ===
+Dept of Electrical Engineering, University of Illinois Urbana-Champaign
+"Tape doesn't lie at 02:14. Ears do."
+

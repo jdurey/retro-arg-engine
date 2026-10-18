@@ -1,0 +1,117 @@
+From smartinez@u-tokyo.ac.jp Thu Jun 20 12:58:20 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!u-tokyo!smartinez
+From: smartinez@u-tokyo.ac.jp (Steve Martínez)
+Newsgroups: comp.sys.m68k
+Subject: Question: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Jun20.125820.6190@u-tokyo.ac.jp>
+Date: Thu, 20 Jun 1996 12:58:20 GMT
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Does anyone have a 27C256 EPROM marked 'MH-U14' or 'ORION-CRYPTO'?
+
+-- 
+Steve Martínez <smartinez@u-tokyo.ac.jp>
+Practical Peripherals 14.4 @ ISDN 64k bps
+"Measuring a record you own is listening, not piracy."
+
+From fduarte@inria.fr Sat Jun 22 02:19:20 1996
+Path: ashpoly!cascade!bigsur!inria!fduarte
+From: fduarte@inria.fr (Freya Duarte)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Jun22.021920.9469@inria.fr>
+Date: Sat, 22 Jun 1996 02:19:20 GMT
+References: <1996Jun20.125820.6190@u-tokyo.ac.jp>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Jun20.125820.6190@u-tokyo.ac.jp>, smartinez@u-tokyo.ac.jp (Steve Martínez) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Freya Duarte | fduarte@inria.fr
+PGP Key fingerprint: 7DDC 7F6A 3A06 3DF5
+"Keep the channels open."
+
+From moliveira@earthlink.net Sat Jun 22 22:47:20 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!earthlink!moliveira
+From: moliveira@earthlink.net (Mathieu Oliveira)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Jun22.224720.5155@earthlink.net>
+Date: Sat, 22 Jun 1996 22:47:20 GMT
+References: <1996Jun20.125820.6190@u-tokyo.ac.jp>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Jun20.125820.6190@u-tokyo.ac.jp>, smartinez@u-tokyo.ac.jp (Steve Martínez) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+-- 
+Mathieu Oliveira <moliveira@earthlink.net>
+"Extraordinary claims require extraordinary spectra."
+Atari TT030 / System 7.5.1
+
+From kokonkwo@pacbell.net Mon Jun 24 07:51:20 1996
+Path: ashpoly!cascade!mxgate!coyoacan!pacbell!kokonkwo
+From: kokonkwo@pacbell.net (Kirsty Okonkwo)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Jun24.075120.8890@pacbell.net>
+Date: Mon, 24 Jun 1996 07:51:20 GMT
+References: <1996Jun20.125820.6190@u-tokyo.ac.jp>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1996Jun20.125820.6190@u-tokyo.ac.jp>, smartinez@u-tokyo.ac.jp (Steve Martínez) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+
+Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+-- 
+Kirsty Okonkwo <kokonkwo@pacbell.net>
+*PLONK* filter active for trolls.
+Pentium 90 (OS/2 Warp) - NetBSD 1.0
+
+From cnovak@kiae.su Mon Jun 24 19:58:20 1996
+Path: ashpoly!cascade!mxgate!coyoacan!kiae!cnovak
+From: cnovak@kiae.su (Callum Novak)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Jun24.195820.3215@kiae.su>
+Date: Mon, 24 Jun 1996 19:58:20 GMT
+References: <1996Jun20.125820.6190@u-tokyo.ac.jp> <1996Jun22.021920.9469@inria.fr>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Jun22.021920.9469@inria.fr>, fduarte@inria.fr (Freya Duarte) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Callum Novak <cnovak@kiae.su>
+"Marcus is not one man."
+Acorn RiscPC 600 / System 7.5.1
+

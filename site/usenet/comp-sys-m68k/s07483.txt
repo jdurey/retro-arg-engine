@@ -1,0 +1,121 @@
+From brodriguez@delphi.com Mon Aug 21 10:26:10 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!delphi!brodriguez
+From: brodriguez@delphi.com (Bruno Rodríguez)
+Newsgroups: comp.sys.m68k
+Subject: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Aug21.102610.6936@delphi.com>
+Date: Mon, 21 Aug 1995 10:26:10 GMT
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Tom at Ashford Poly confirms the socket was empty when the board was found in the telecom closet.
+
+-- 
+Bruno Rodríguez
+Opinions expressed are solely my own and not those of Delphi Internet Services.
+------------------------------------------------------------
+
+From mmuller@cam.ac.uk Tue Aug 22 10:50:10 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!cam!mmuller
+From: mmuller@cam.ac.uk (Marisol Müller)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Aug22.105010.2055@cam.ac.uk>
+Date: Tue, 22 Aug 1995 10:50:10 GMT
+References: <1995Aug21.102610.6936@delphi.com>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995Aug21.102610.6936@delphi.com>, brodriguez@delphi.com (Bruno Rodríguez) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+> Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+Marisol Müller
+Tape trading list upon request. SASE required for international mail.
+
+From jgarcia@u-tokyo.ac.jp Wed Aug 23 03:42:10 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!u-tokyo!jgarcia
+From: jgarcia@u-tokyo.ac.jp (Ji-woo García)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Aug23.034210.5502@u-tokyo.ac.jp>
+Date: Wed, 23 Aug 1995 03:42:10 GMT
+References: <1995Aug21.102610.6936@delphi.com> <1995Aug22.105010.2055@cam.ac.uk>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Aug22.105010.2055@cam.ac.uk>, mmuller@cam.ac.uk (Marisol Müller) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+> Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Ji-woo García
+Tape trading list upon request. SASE required for international mail.
+
+From tmartinez@pacbell.net Thu Aug 24 00:01:10 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!pacbell!tmartinez
+From: tmartinez@pacbell.net (Tyler Martínez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Aug24.000110.8095@pacbell.net>
+Date: Thu, 24 Aug 1995 00:01:10 GMT
+References: <1995Aug21.102610.6936@delphi.com>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Aug21.102610.6936@delphi.com>, brodriguez@delphi.com (Bruno Rodríguez) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+> Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+=== Tyler Martínez ===
+Dept of Electrical Engineering, Pacific Bell Internet Services
+"5 sigma is a discovery. 7 is a question."
+
+From spopov@cmu.edu Thu Aug 24 13:55:10 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!cmu!spopov
+From: spopov@cmu.edu (Sven Popov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Aug24.135510.7639@cmu.edu>
+Date: Thu, 24 Aug 1995 13:55:10 GMT
+References: <1995Aug21.102610.6936@delphi.com> <1995Aug22.105010.2055@cam.ac.uk> <1995Aug23.034210.5502@u-tokyo.ac.jp>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995Aug23.034210.5502@u-tokyo.ac.jp>, jgarcia@u-tokyo.ac.jp (Ji-woo García) writes:
+> Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Sven Popov <spopov@cmu.edu>
+"Do not worship the copy."
+486DX2/66 (Linux 1.2.13) / System 7.5.1
+

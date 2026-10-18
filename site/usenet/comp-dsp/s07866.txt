@@ -1,0 +1,72 @@
+From mkowalski@cern.ch Sat Aug 03 04:14:05 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!cern!mkowalski
+From: mkowalski@cern.ch (Mike Kowalski)
+Newsgroups: comp.dsp
+Subject: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Aug03.041405.6330@cern.ch>
+Date: Sat, 03 Aug 1996 04:14:05 GMT
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+What sampling rates are people using for their vinyl rips? 44.1 kHz or 48 kHz DAT?
+
+-- 
+Mike Kowalski -- European Laboratory for Particle Physics, Geneva
+"Tape doesn't lie at 02:14. Ears do."
+
+From dmoreno@mit.edu Sun Aug 04 20:51:05 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!mit!dmoreno
+From: dmoreno@mit.edu (Dmitri Moreno)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Aug04.205105.9138@mit.edu>
+Date: Sun, 04 Aug 1996 20:51:05 GMT
+References: <1996Aug03.041405.6330@cern.ch>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1996Aug03.041405.6330@cern.ch>, mkowalski@cern.ch (Mike Kowalski) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Dmitri Moreno <dmoreno@mit.edu>
+*PLONK* filter active for trolls.
+Mac IIci / 68882 FPU - NetBSD 1.0
+
+From tkuznetsov@uni-hamburg.de Tue Aug 06 00:59:05 1996
+Path: ashpoly!cascade!brgate!saturno!uni-hamburg!tkuznetsov
+From: tkuznetsov@uni-hamburg.de (Takeshi Kuznetsov)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Aug06.005905.5408@uni-hamburg.de>
+Date: Tue, 06 Aug 1996 00:59:05 GMT
+References: <1996Aug03.041405.6330@cern.ch>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1996Aug03.041405.6330@cern.ch>, mkowalski@cern.ch (Mike Kowalski) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Takeshi Kuznetsov <tkuznetsov@uni-hamburg.de>
+Practical Peripherals 14.4 @ 14,400 bps
+"Extraordinary claims require extraordinary spectra."
+

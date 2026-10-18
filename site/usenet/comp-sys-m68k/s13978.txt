@@ -1,0 +1,124 @@
+From ktanaka@pipeline.com Fri Feb 17 14:44:07 1995
+Path: ashpoly!cascade!mxgate!coyoacan!pipeline!ktanaka
+From: ktanaka@pipeline.com (Katrin Tanaka)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Feb17.144407.8987@pipeline.com>
+Date: Fri, 17 Feb 1995 14:44:07 GMT
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Katrin Tanaka <ktanaka@pipeline.com>
+Hayes Optima 288 @ 33,600 bps
+"When every node is whole, the channel opens."
+
+From akarlsson@pacbell.net Sat Feb 18 07:15:07 1995
+Path: ashpoly!cascade!brgate!saturno!pacbell!akarlsson
+From: akarlsson@pacbell.net (Anja Karlsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Feb18.071507.2382@pacbell.net>
+Date: Sat, 18 Feb 1995 07:15:07 GMT
+References: <1995Feb17.144407.8987@pipeline.com>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Feb17.144407.8987@pipeline.com>, ktanaka@pipeline.com (Katrin Tanaka) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Anja Karlsson | akarlsson@pacbell.net
+PGP Key fingerprint: CABB 0FEE 63E1 3EEA
+"Keep the channels open."
+
+From jivanov@rwth-aachen.de Sat Feb 18 17:01:07 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!rwth-aachen!jivanov
+From: jivanov@rwth-aachen.de (Joachim Ivanov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Feb18.170107.1329@rwth-aachen.de>
+Date: Sat, 18 Feb 1995 17:01:07 GMT
+References: <1995Feb17.144407.8987@pipeline.com>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995Feb17.144407.8987@pipeline.com>, ktanaka@pipeline.com (Katrin Tanaka) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Joachim Ivanov
+Tape trading list upon request. SASE required for international mail.
+
+From mvasiliev@uni-hamburg.de Sun Feb 19 08:53:07 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!uni-hamburg!mvasiliev
+From: mvasiliev@uni-hamburg.de (Mathieu Vasiliev)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Feb19.085307.5664@uni-hamburg.de>
+Date: Sun, 19 Feb 1995 08:53:07 GMT
+References: <1995Feb17.144407.8987@pipeline.com>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995Feb17.144407.8987@pipeline.com>, ktanaka@pipeline.com (Katrin Tanaka) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Mathieu Vasiliev
+Tape trading list upon request. SASE required for international mail.
+
+From hweber@uni-hamburg.de Mon Feb 20 04:47:07 1995
+Path: ashpoly!cascade!brgate!saturno!uni-hamburg!hweber
+From: hweber@uni-hamburg.de (Heather Weber)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Feb20.044707.4606@uni-hamburg.de>
+Date: Mon, 20 Feb 1995 04:47:07 GMT
+References: <1995Feb17.144407.8987@pipeline.com>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 12
+
+In article <1995Feb17.144407.8987@pipeline.com>, ktanaka@pipeline.com (Katrin Tanaka) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Heather Weber <hweber@uni-hamburg.de>
+*PLONK* filter active for trolls.
+Macintosh IIfx - NetBSD 1.0
+

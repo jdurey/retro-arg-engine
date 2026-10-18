@@ -1,0 +1,95 @@
+From jmuller@pipeline.com Thu Mar 03 14:21:39 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!pipeline!jmuller
+From: jmuller@pipeline.com (Joachim Müller)
+Newsgroups: comp.sys.m68k
+Subject: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Mar03.142139.7598@pipeline.com>
+Date: Thu, 03 Mar 1994 14:21:39 GMT
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Joachim Müller -- The Pipeline Internet Network
+"The hatch is open. Is anyone listening?"
+
+From sgonzalez@kiae.su Sat Mar 05 03:41:39 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!kiae!sgonzalez
+From: sgonzalez@kiae.su (Sun-mi González)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Mar05.034139.7418@kiae.su>
+Date: Sat, 05 Mar 1994 03:41:39 GMT
+References: <1994Mar03.142139.7598@pipeline.com>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1994Mar03.142139.7598@pipeline.com>, jmuller@pipeline.com (Joachim Müller) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Sun-mi González | sgonzalez@kiae.su
+PGP Key fingerprint: 2871 8ABE DB33 E1BD
+"Keep the channels open."
+
+From ngirard@hanse.de Sat Mar 05 14:23:39 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!hanse!ngirard
+From: ngirard@hanse.de (Nadine Girard)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Mar05.142339.2582@hanse.de>
+Date: Sat, 05 Mar 1994 14:23:39 GMT
+References: <1994Mar03.142139.7598@pipeline.com>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1994Mar03.142139.7598@pipeline.com>, jmuller@pipeline.com (Joachim Müller) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Nadine Girard | ngirard@hanse.de
+PGP Key fingerprint: 3A30 47B5 8F6C F73E
+"Keep the channels open."
+
+From gperez@u-tokyo.ac.jp Sat Mar 05 16:45:39 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!u-tokyo!gperez
+From: gperez@u-tokyo.ac.jp (Göran Pérez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Mar05.164539.1930@u-tokyo.ac.jp>
+Date: Sat, 05 Mar 1994 16:45:39 GMT
+References: <1994Mar03.142139.7598@pipeline.com> <1994Mar05.142339.2582@hanse.de>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Mar05.142339.2582@hanse.de>, ngirard@hanse.de (Nadine Girard) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Göran Pérez | gperez@u-tokyo.ac.jp
+PGP Key fingerprint: DB6D 8ACC 8960 7ED5
+"Keep the channels open."
+

@@ -1,0 +1,92 @@
+From hwatanabe@mindspring.com Fri Mar 18 01:09:37 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!mindspring!hwatanabe
+From: hwatanabe@mindspring.com (Hugo Watanabe)
+Newsgroups: comp.dsp
+Subject: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Mar18.010937.9244@mindspring.com>
+Date: Fri, 18 Mar 1994 01:09:37 GMT
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Hugo Watanabe <hwatanabe@mindspring.com>
+*PLONK* filter active for trolls.
+Macintosh IIfx - NetBSD 1.0
+
+From oreyes@panix.com Sat Mar 19 01:20:37 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!panix!oreyes
+From: oreyes@panix.com (Olga Reyes)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Mar19.012037.7351@panix.com>
+Date: Sat, 19 Mar 1994 01:20:37 GMT
+References: <1994Mar18.010937.9244@mindspring.com>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1994Mar18.010937.9244@mindspring.com>, hwatanabe@mindspring.com (Hugo Watanabe) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Olga Reyes
+Tape trading list upon request. SASE required for international mail.
+
+From aandersson@pipeline.com Sat Mar 19 19:19:37 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!pipeline!aandersson
+From: aandersson@pipeline.com (Anton Andersson)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Mar19.191937.8668@pipeline.com>
+Date: Sat, 19 Mar 1994 19:19:37 GMT
+References: <1994Mar18.010937.9244@mindspring.com> <1994Mar19.012037.7351@panix.com>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Mar19.012037.7351@panix.com>, oreyes@panix.com (Olga Reyes) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+=== Anton Andersson ===
+Dept of Electrical Engineering, The Pipeline Internet Network
+"Tape doesn't lie at 02:14. Ears do."
+
+From bsouza@berkeley.edu Sun Mar 20 02:10:37 1994
+Path: ashpoly!cascade!brgate!saturno!berkeley!bsouza
+From: bsouza@berkeley.edu (Bastien Souza)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Mar20.021037.9420@berkeley.edu>
+Date: Sun, 20 Mar 1994 02:10:37 GMT
+References: <1994Mar18.010937.9244@mindspring.com> <1994Mar19.012037.7351@panix.com> <1994Mar19.191937.8668@pipeline.com>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Mar19.191937.8668@pipeline.com>, aandersson@pipeline.com (Anton Andersson) writes:
+> Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Bastien Souza <bsouza@berkeley.edu>
+"When every node is whole, the channel opens."
+Macintosh IIfx / System 7.5.1
+

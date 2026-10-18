@@ -1,0 +1,70 @@
+From tgonzalez@earthlink.net Thu May 26 19:11:38 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!earthlink!tgonzalez
+From: tgonzalez@earthlink.net (Tobias González)
+Newsgroups: comp.sys.m68k
+Subject: WTB/WTT: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994May26.191138.6744@earthlink.net>
+Date: Thu, 26 May 1994 19:11:38 GMT
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Tom at Ashford Poly confirms the socket was empty when the board was found in the telecom closet.
+
+-- 
+Tobias González
+Opinions expressed are solely my own and not those of EarthLink Network.
+------------------------------------------------------------
+
+From scampbell@purdue.edu Sat May 28 10:56:38 1994
+Path: ashpoly!cascade!brgate!saturno!purdue!scampbell
+From: scampbell@purdue.edu (Sun-mi Campbell)
+Newsgroups: comp.sys.m68k
+Subject: Re: WTB/WTT: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994May28.105638.5488@purdue.edu>
+Date: Sat, 28 May 1994 10:56:38 GMT
+References: <1994May26.191138.6744@earthlink.net>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994May26.191138.6744@earthlink.net>, tgonzalez@earthlink.net (Tobias González) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+=== Sun-mi Campbell ===
+Dept of Electrical Engineering, Purdue University Engineering Computer Network
+"Marcus is not one man."
+
+From lstewart@cern.ch Sat May 28 12:43:38 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!cern!lstewart
+From: lstewart@cern.ch (Lisa Stewart)
+Newsgroups: comp.sys.m68k
+Subject: Re: WTB/WTT: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994May28.124338.5678@cern.ch>
+Date: Sat, 28 May 1994 12:43:38 GMT
+References: <1994May26.191138.6744@earthlink.net>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994May26.191138.6744@earthlink.net>, tgonzalez@earthlink.net (Tobias González) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Lisa Stewart
+Opinions expressed are solely my own and not those of European Laboratory for Particle Physics, Geneva.
+------------------------------------------------------------
+

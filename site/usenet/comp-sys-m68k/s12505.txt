@@ -1,0 +1,94 @@
+From asato@panix.com Fri Jul 19 06:31:18 1996
+Path: ashpoly!cascade!brgate!saturno!panix!asato
+From: asato@panix.com (Aiko Sato)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Jul19.063118.1016@panix.com>
+Date: Fri, 19 Jul 1996 06:31:18 GMT
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+Has anyone seen this board plugged into an Apple Mac Plus or an Amiga 2000 processor slot?
+
+-- 
+Aiko Sato | asato@panix.com
+PGP Key fingerprint: 251A 2172 6DB0 2163
+"Keep the channels open."
+
+From olaurent@titech.ac.jp Sat Jul 20 22:29:18 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!titech!olaurent
+From: olaurent@titech.ac.jp (Olga Laurent)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Jul20.222918.1126@titech.ac.jp>
+Date: Sat, 20 Jul 1996 22:29:18 GMT
+References: <1996Jul19.063118.1016@panix.com>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1996Jul19.063118.1016@panix.com>, asato@panix.com (Aiko Sato) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+> At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Olga Laurent <olaurent@titech.ac.jp>
+*PLONK* filter active for trolls.
+Macintosh IIfx - NetBSD 1.0
+
+From trobertson@u-tokyo.ac.jp Mon Jul 22 22:37:18 1996
+Path: ashpoly!cascade!brgate!saturno!u-tokyo!trobertson
+From: trobertson@u-tokyo.ac.jp (Takeshi Robertson)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Jul22.223718.3345@u-tokyo.ac.jp>
+Date: Mon, 22 Jul 1996 22:37:18 GMT
+References: <1996Jul19.063118.1016@panix.com>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Jul19.063118.1016@panix.com>, asato@panix.com (Aiko Sato) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+> At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+Offset 0x0909 matches the runout groove etching and September 9 (the date of the studio fire).
+
+-- 
+Takeshi Robertson -- University of Tokyo Department of Information Science
+"Marcus is not one man."
+
+From dito@cam.ac.uk Wed Jul 24 06:55:18 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!cam!dito
+From: dito@cam.ac.uk (Dave Ito)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Jul24.065518.6643@cam.ac.uk>
+Date: Wed, 24 Jul 1996 06:55:18 GMT
+References: <1996Jul19.063118.1016@panix.com> <1996Jul20.222918.1126@titech.ac.jp>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Jul20.222918.1126@titech.ac.jp>, olaurent@titech.ac.jp (Olga Laurent) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Dave Ito
+Opinions expressed are solely my own and not those of University of Cambridge Computer Laboratory.
+------------------------------------------------------------
+

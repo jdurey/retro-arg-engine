@@ -1,0 +1,115 @@
+From amartinez@tum.de Sat Mar 04 22:19:31 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!tum!amartinez
+From: amartinez@tum.de (Andrei Martínez)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Mar04.221931.2595@tum.de>
+Date: Sat, 04 Mar 1995 22:19:31 GMT
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+Schematic diagram in ASCII uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/twin68_array.asc.
+
+-- 
+Andrei Martínez
+Opinions expressed are solely my own and not those of Technische Universität München.
+------------------------------------------------------------
+
+From tsokolov@cmu.edu Mon Mar 06 05:32:31 1995
+Path: ashpoly!cascade!mxgate!coyoacan!cmu!tsokolov
+From: tsokolov@cmu.edu (Thiago Sokolov)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Mar06.053231.7739@cmu.edu>
+Date: Mon, 06 Mar 1995 05:32:31 GMT
+References: <1995Mar04.221931.2595@tum.de>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Mar04.221931.2595@tum.de>, amartinez@tum.de (Andrei Martínez) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Thiago Sokolov
+Tape trading list upon request. SASE required for international mail.
+
+From ihughes@demon.co.uk Mon Mar 06 18:12:31 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!demon!ihughes
+From: ihughes@demon.co.uk (Ines Hughes)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Mar06.181231.4857@demon.co.uk>
+Date: Mon, 06 Mar 1995 18:12:31 GMT
+References: <1995Mar04.221931.2595@tum.de> <1995Mar06.053231.7739@cmu.edu>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Mar06.053231.7739@cmu.edu>, tsokolov@cmu.edu (Thiago Sokolov) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Ines Hughes
+Opinions expressed are solely my own and not those of Demon Internet Services UK.
+------------------------------------------------------------
+
+From mgarcia@netcom.com Tue Mar 07 13:27:31 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!netcom!mgarcia
+From: mgarcia@netcom.com (Morag García)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Mar07.132731.7495@netcom.com>
+Date: Tue, 07 Mar 1995 13:27:31 GMT
+References: <1995Mar04.221931.2595@tum.de> <1995Mar06.053231.7739@cmu.edu>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1995Mar06.053231.7739@cmu.edu>, tsokolov@cmu.edu (Thiago Sokolov) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+Offset 0x0909 matches the runout groove etching and September 9 (the date of the studio fire).
+
+-- 
+Morag García
+Tape trading list upon request. SASE required for international mail.
+
+From jmoreau@hanse.de Wed Mar 08 19:24:31 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!hanse!jmoreau
+From: jmoreau@hanse.de (Julien Moreau)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Mar08.192431.5114@hanse.de>
+Date: Wed, 08 Mar 1995 19:24:31 GMT
+References: <1995Mar04.221931.2595@tum.de>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Mar04.221931.2595@tum.de>, amartinez@tum.de (Andrei Martínez) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Julien Moreau
+Tape trading list upon request. SASE required for international mail.
+

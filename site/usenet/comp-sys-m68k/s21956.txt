@@ -1,0 +1,116 @@
+From rsuzuki@hanse.de Sat Aug 19 06:17:07 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!hanse!rsuzuki
+From: rsuzuki@hanse.de (Renata Suzuki)
+Newsgroups: comp.sys.m68k
+Subject: Discussion: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Aug19.061707.9588@hanse.de>
+Date: Sat, 19 Aug 1995 06:17:07 GMT
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+
+Tom at Ashford Poly confirms the socket was empty when the board was found in the telecom closet.
+
+-- 
+Renata Suzuki <rsuzuki@hanse.de>
+Zyxel U-1496E @ 19,200 bps
+"Row 14. No joke."
+
+From slopez@ox.ac.uk Sun Aug 20 08:28:07 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!ox!slopez
+From: slopez@ox.ac.uk (Sergei López)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Aug20.082807.9129@ox.ac.uk>
+Date: Sun, 20 Aug 1995 08:28:07 GMT
+References: <1995Aug19.061707.9588@hanse.de>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Aug19.061707.9588@hanse.de>, rsuzuki@hanse.de (Renata Suzuki) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+> The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Sergei López
+Tape trading list upon request. SASE required for international mail.
+
+From nperez@tum.de Mon Aug 21 05:10:07 1995
+Path: ashpoly!cascade!mxgate!coyoacan!tum!nperez
+From: nperez@tum.de (Nadia Pérez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Aug21.051007.1131@tum.de>
+Date: Mon, 21 Aug 1995 05:10:07 GMT
+References: <1995Aug19.061707.9588@hanse.de> <1995Aug20.082807.9129@ox.ac.uk>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Aug20.082807.9129@ox.ac.uk>, slopez@ox.ac.uk (Sergei López) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+-- 
+Nadia Pérez <nperez@tum.de>
+US Robotics Courier V.34 @ 28,800 bps
+"Measuring a record you own is listening, not piracy."
+
+From mmartinez@titech.ac.jp Tue Aug 22 21:39:07 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!titech!mmartinez
+From: mmartinez@titech.ac.jp (Mateo Martínez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Aug22.213907.9643@titech.ac.jp>
+Date: Tue, 22 Aug 1995 21:39:07 GMT
+References: <1995Aug19.061707.9588@hanse.de>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Aug19.061707.9588@hanse.de>, rsuzuki@hanse.de (Renata Suzuki) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+> The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Mateo Martínez -- Tokyo Institute of Technology Computer Centre
+"Marcus is not one man."
+
+From sivanov@inria.fr Wed Aug 23 21:14:07 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!inria!sivanov
+From: sivanov@inria.fr (Sergei Ivanov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Aug23.211407.9654@inria.fr>
+Date: Wed, 23 Aug 1995 21:14:07 GMT
+References: <1995Aug19.061707.9588@hanse.de> <1995Aug20.082807.9129@ox.ac.uk> <1995Aug21.051007.1131@tum.de>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Aug21.051007.1131@tum.de>, nperez@tum.de (Nadia Pérez) writes:
+> That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Sergei Ivanov <sivanov@inria.fr>
+US Robotics Courier V.34 @ 14,400 bps
+"A soul is not exclusive to biology."
+

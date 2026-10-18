@@ -1,0 +1,70 @@
+From mnakamura@stanford.edu Wed May 22 06:33:44 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!stanford!mnakamura
+From: mnakamura@stanford.edu (Mikhail Nakamura)
+Newsgroups: comp.dsp
+Subject: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996May22.063344.8119@stanford.edu>
+Date: Wed, 22 May 1996 06:33:44 GMT
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Mikhail Nakamura <mnakamura@stanford.edu>
+*PLONK* filter active for trolls.
+Macintosh IIfx - NetBSD 1.0
+
+From kkuznetsov@u-tokyo.ac.jp Thu May 23 00:06:44 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!u-tokyo!kkuznetsov
+From: kkuznetsov@u-tokyo.ac.jp (Kenji Kuznetsov)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996May23.000644.2014@u-tokyo.ac.jp>
+Date: Thu, 23 May 1996 00:06:44 GMT
+References: <1996May22.063344.8119@stanford.edu>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996May22.063344.8119@stanford.edu>, mnakamura@stanford.edu (Mikhail Nakamura) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Kenji Kuznetsov | kkuznetsov@u-tokyo.ac.jp
+PGP Key fingerprint: 2B93 5825 91E0 1F70
+"Keep the channels open."
+
+From bperez@titech.ac.jp Fri May 24 00:58:44 1996
+Path: ashpoly!cascade!brgate!saturno!titech!bperez
+From: bperez@titech.ac.jp (Bastien Pérez)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996May24.005844.8572@titech.ac.jp>
+Date: Fri, 24 May 1996 00:58:44 GMT
+References: <1996May22.063344.8119@stanford.edu> <1996May23.000644.2014@u-tokyo.ac.jp>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996May23.000644.2014@u-tokyo.ac.jp>, kkuznetsov@u-tokyo.ac.jp (Kenji Kuznetsov) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Bastien Pérez
+Opinions expressed are solely my own and not those of Tokyo Institute of Technology Computer Centre.
+------------------------------------------------------------
+

@@ -1,0 +1,93 @@
+From sdubois@cmu.edu Thu Aug 18 15:33:55 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!cmu!sdubois
+From: sdubois@cmu.edu (Seo-yeon Dubois)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Aug18.153355.4049@cmu.edu>
+Date: Thu, 18 Aug 1994 15:33:55 GMT
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+Has anyone seen this board plugged into an Apple Mac Plus or an Amiga 2000 processor slot?
+
+-- 
+Seo-yeon Dubois
+Opinions expressed are solely my own and not those of Carnegie Mellon University School of CS.
+------------------------------------------------------------
+
+From tnovak@inria.fr Sat Aug 20 12:49:55 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!inria!tnovak
+From: tnovak@inria.fr (Takeshi Novak)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Aug20.124955.3854@inria.fr>
+Date: Sat, 20 Aug 1994 12:49:55 GMT
+References: <1994Aug18.153355.4049@cmu.edu>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Aug18.153355.4049@cmu.edu>, sdubois@cmu.edu (Seo-yeon Dubois) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+-- 
+Takeshi Novak
+Opinions expressed are solely my own and not those of INRIA Rocquencourt.
+------------------------------------------------------------
+
+From aweber@u-tokyo.ac.jp Sat Aug 20 15:31:55 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!u-tokyo!aweber
+From: aweber@u-tokyo.ac.jp (Andrei Weber)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Aug20.153155.8975@u-tokyo.ac.jp>
+Date: Sat, 20 Aug 1994 15:31:55 GMT
+References: <1994Aug18.153355.4049@cmu.edu> <1994Aug20.124955.3854@inria.fr>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Aug20.124955.3854@inria.fr>, tnovak@inria.fr (Takeshi Novak) writes:
+> Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+=== Andrei Weber ===
+Dept of Electrical Engineering, University of Tokyo Department of Information Science
+"Marcus is not one man."
+
+From bfournier@uu.net Sun Aug 21 00:50:55 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!uu!bfournier
+From: bfournier@uu.net (Bill Fournier)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Aug21.005055.2811@uu.net>
+Date: Sun, 21 Aug 1994 00:50:55 GMT
+References: <1994Aug18.153355.4049@cmu.edu> <1994Aug20.124955.3854@inria.fr> <1994Aug20.153155.8975@u-tokyo.ac.jp>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Aug20.153155.8975@u-tokyo.ac.jp>, aweber@u-tokyo.ac.jp (Andrei Weber) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Bill Fournier <bfournier@uu.net>
+Zyxel U-1496E @ ISDN 64k bps
+"There are 14 nodes and only 10 countries. Count again."
+

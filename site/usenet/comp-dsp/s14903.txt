@@ -1,0 +1,74 @@
+From rnovak@netcom.com Sat Nov 02 22:58:38 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!netcom!rnovak
+From: rnovak@netcom.com (Renata Novak)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Nov02.225838.3523@netcom.com>
+Date: Sat, 02 Nov 1996 22:58:38 GMT
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Renata Novak <rnovak@netcom.com>
+SupraFAXModem 28.8 @ 33,600 bps
+"Do not worship the copy."
+
+From rkarlsson@unam.mx Mon Nov 04 04:41:38 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!unam!rkarlsson
+From: rkarlsson@unam.mx (Raj Karlsson)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Nov04.044138.3505@unam.mx>
+Date: Mon, 04 Nov 1996 04:41:38 GMT
+References: <1996Nov02.225838.3523@netcom.com>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1996Nov02.225838.3523@netcom.com>, rnovak@netcom.com (Renata Novak) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Raj Karlsson <rkarlsson@unam.mx>
+"We don't sign stars. We build them."
+Atari TT030 / TOS 4.04
+
+From mschneider@delphi.com Tue Nov 05 04:39:38 1996
+Path: ashpoly!cascade!mxgate!coyoacan!delphi!mschneider
+From: mschneider@delphi.com (Mike Schneider)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Nov05.043938.7173@delphi.com>
+Date: Tue, 05 Nov 1996 04:39:38 GMT
+References: <1996Nov02.225838.3523@netcom.com>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1996Nov02.225838.3523@netcom.com>, rnovak@netcom.com (Renata Novak) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Mike Schneider | mschneider@delphi.com
+PGP Key fingerprint: D728 74B8 1950 19C0
+"Keep the channels open."
+

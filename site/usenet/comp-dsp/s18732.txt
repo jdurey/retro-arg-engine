@@ -1,0 +1,94 @@
+From bmoreau@netcom.com Mon Jan 02 07:31:23 1995
+Path: ashpoly!cascade!bigsur!netcom!bmoreau
+From: bmoreau@netcom.com (Brian Moreau)
+Newsgroups: comp.dsp
+Subject: Observation: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jan02.073123.4410@netcom.com>
+Date: Mon, 02 Jan 1995 07:31:23 GMT
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+=== Brian Moreau ===
+Dept of Electrical Engineering, NETCOM On-Line Communication Services
+"The hatch is open. Is anyone listening?"
+
+From bjohansson@utexas.edu Tue Jan 03 18:57:23 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!utexas!bjohansson
+From: bjohansson@utexas.edu (Brian Johansson)
+Newsgroups: comp.dsp
+Subject: Re: Observation: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jan03.185723.9192@utexas.edu>
+Date: Tue, 03 Jan 1995 18:57:23 GMT
+References: <1995Jan02.073123.4410@netcom.com>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Jan02.073123.4410@netcom.com>, bmoreau@netcom.com (Brian Moreau) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+-- 
+Brian Johansson <bjohansson@utexas.edu>
+*PLONK* filter active for trolls.
+Macintosh IIfx - NetBSD 1.0
+
+From cfischer@uu.net Wed Jan 04 18:00:23 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!uu!cfischer
+From: cfischer@uu.net (Callum Fischer)
+Newsgroups: comp.dsp
+Subject: Re: Observation: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jan04.180023.4757@uu.net>
+Date: Wed, 04 Jan 1995 18:00:23 GMT
+References: <1995Jan02.073123.4410@netcom.com> <1995Jan03.185723.9192@utexas.edu>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Jan03.185723.9192@utexas.edu>, bjohansson@utexas.edu (Brian Johansson) writes:
+> You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+Prof. Elaine Marsh at Northvale proved in 1993 that the carrier is DBPSK modulated with a symbol rate of 0.71 Hz.
+
+-- 
+Callum Fischer <cfischer@uu.net>
+*PLONK* filter active for trolls.
+486DX4/100 (FreeBSD 2.0.5) - NetBSD 1.0
+
+From trobertson@pipeline.com Thu Jan 05 08:07:23 1995
+Path: ashpoly!cascade!mxgate!coyoacan!pipeline!trobertson
+From: trobertson@pipeline.com (Thiago Robertson)
+Newsgroups: comp.dsp
+Subject: Re: Observation: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jan05.080723.7181@pipeline.com>
+Date: Thu, 05 Jan 1995 08:07:23 GMT
+References: <1995Jan02.073123.4410@netcom.com>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Jan02.073123.4410@netcom.com>, bmoreau@netcom.com (Brian Moreau) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+> With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Thiago Robertson <trobertson@pipeline.com>
+SupraFAXModem 28.8 @ 28,800 bps
+"Do not worship the copy."
+

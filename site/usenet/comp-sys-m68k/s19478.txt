@@ -1,0 +1,74 @@
+From msilva@unam.mx Sat Oct 21 02:45:37 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!unam!msilva
+From: msilva@unam.mx (Matthias Silva)
+Newsgroups: comp.sys.m68k
+Subject: WTB/WTT: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Oct21.024537.2885@unam.mx>
+Date: Sat, 21 Oct 1995 02:45:37 GMT
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Matthias Silva <msilva@unam.mx>
+Hayes Optima 288 @ 28,800 bps
+"The hatch is open. Is anyone listening?"
+
+From hnilsson@pacbell.net Mon Oct 23 06:03:37 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!pacbell!hnilsson
+From: hnilsson@pacbell.net (Hugo Nilsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: WTB/WTT: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Oct23.060337.2089@pacbell.net>
+Date: Mon, 23 Oct 1995 06:03:37 GMT
+References: <1995Oct21.024537.2885@unam.mx>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1995Oct21.024537.2885@unam.mx>, msilva@unam.mx (Matthias Silva) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Hugo Nilsson <hnilsson@pacbell.net>
+SupraFAXModem 28.8 @ 33,600 bps
+"5 sigma is a discovery. 7 is a question."
+
+From tkuznetsov@illinois.edu Wed Oct 25 00:56:37 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!illinois!tkuznetsov
+From: tkuznetsov@illinois.edu (Thiago Kuznetsov)
+Newsgroups: comp.sys.m68k
+Subject: Re: WTB/WTT: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Oct25.005637.7662@illinois.edu>
+Date: Wed, 25 Oct 1995 00:56:37 GMT
+References: <1995Oct21.024537.2885@unam.mx> <1995Oct23.060337.2089@pacbell.net>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Oct23.060337.2089@pacbell.net>, hnilsson@pacbell.net (Hugo Nilsson) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+> Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+=== Thiago Kuznetsov ===
+Dept of Electrical Engineering, University of Illinois Urbana-Champaign
+"Hardware is temporary. The signal survives."
+

@@ -1,0 +1,92 @@
+From rsokolov@cam.ac.uk Sat Nov 09 05:26:17 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!cam!rsokolov
+From: rsokolov@cam.ac.uk (Rodrigo Sokolov)
+Newsgroups: comp.sys.m68k
+Subject: Observation: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Nov09.052617.3324@cam.ac.uk>
+Date: Sat, 09 Nov 1996 05:26:17 GMT
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Rodrigo Sokolov -- University of Cambridge Computer Laboratory
+"A soul is not exclusive to biology."
+
+From hsokolov@pipeline.com Sat Nov 09 15:54:17 1996
+Path: ashpoly!cascade!mxgate!coyoacan!pipeline!hsokolov
+From: hsokolov@pipeline.com (Hugo Sokolov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Nov09.155417.1268@pipeline.com>
+Date: Sat, 09 Nov 1996 15:54:17 GMT
+References: <1996Nov09.052617.3324@cam.ac.uk>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Nov09.052617.3324@cam.ac.uk>, rsokolov@cam.ac.uk (Rodrigo Sokolov) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Hugo Sokolov <hsokolov@pipeline.com>
+"In theory there is no difference between theory and practice."
+Macintosh IIfx / NEXTSTEP 3.3
+
+From sperez@rwth-aachen.de Sun Nov 10 05:20:17 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!rwth-aachen!sperez
+From: sperez@rwth-aachen.de (Sergei Pérez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Nov10.052017.6345@rwth-aachen.de>
+Date: Sun, 10 Nov 1996 05:20:17 GMT
+References: <1996Nov09.052617.3324@cam.ac.uk> <1996Nov09.155417.1268@pipeline.com>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Nov09.155417.1268@pipeline.com>, hsokolov@pipeline.com (Hugo Sokolov) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+Looks like a prototype telecommunications board for military secure voice, not an audio music product.
+
+-- 
+Sergei Pérez <sperez@rwth-aachen.de>
+SupraFAXModem 28.8 @ 9600 Telebit bps
+"The hatch is open. Is anyone listening?"
+
+From smuller@mit.edu Sun Nov 10 10:32:17 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!mit!smuller
+From: smuller@mit.edu (Sergei Müller)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Nov10.103217.2012@mit.edu>
+Date: Sun, 10 Nov 1996 10:32:17 GMT
+References: <1996Nov09.052617.3324@cam.ac.uk> <1996Nov09.155417.1268@pipeline.com> <1996Nov10.052017.6345@rwth-aachen.de>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Nov10.052017.6345@rwth-aachen.de>, sperez@rwth-aachen.de (Sergei Pérez) writes:
+> Looks like a prototype telecommunications board for military secure voice, not an audio music product.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+=== Sergei Müller ===
+Dept of Electrical Engineering, Massachusetts Institute of Technology
+"The carrier frequency does not drift by accident."
+

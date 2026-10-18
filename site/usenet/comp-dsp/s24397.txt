@@ -1,0 +1,48 @@
+From mgarcia@cmu.edu Tue Jul 23 14:58:04 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!cmu!mgarcia
+From: mgarcia@cmu.edu (Mateo García)
+Newsgroups: comp.dsp
+Subject: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jul23.145804.2749@cmu.edu>
+Date: Tue, 23 Jul 1996 14:58:04 GMT
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Mateo García <mgarcia@cmu.edu>
+Practical Peripherals 14.4 @ 19,200 bps
+"When every node is whole, the channel opens."
+
+From ooliveira@earthlink.net Thu Jul 25 17:42:04 1996
+Path: ashpoly!cascade!brgate!saturno!earthlink!ooliveira
+From: ooliveira@earthlink.net (Olga Oliveira)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jul25.174204.6724@earthlink.net>
+Date: Thu, 25 Jul 1996 17:42:04 GMT
+References: <1996Jul23.145804.2749@cmu.edu>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996Jul23.145804.2749@cmu.edu>, mgarcia@cmu.edu (Mateo García) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Olga Oliveira | ooliveira@earthlink.net
+PGP Key fingerprint: 72DF E48D 2847 88B2
+"Keep the channels open."
+

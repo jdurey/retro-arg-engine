@@ -1,0 +1,97 @@
+From ipopov@panix.com Wed Aug 09 08:10:30 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!panix!ipopov
+From: ipopov@panix.com (Ines Popov)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Aug09.081030.7684@panix.com>
+Date: Wed, 09 Aug 1995 08:10:30 GMT
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+Ines Popov | ipopov@panix.com
+PGP Key fingerprint: 3258 0CA6 4BA1 2F88
+"Keep the channels open."
+
+From hreyes@purdue.edu Fri Aug 11 09:43:30 1995
+Path: ashpoly!cascade!brgate!saturno!purdue!hreyes
+From: hreyes@purdue.edu (Hana Reyes)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Aug11.094330.8507@purdue.edu>
+Date: Fri, 11 Aug 1995 09:43:30 GMT
+References: <1995Aug09.081030.7684@panix.com>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Aug09.081030.7684@panix.com>, ipopov@panix.com (Ines Popov) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Hana Reyes | hreyes@purdue.edu
+PGP Key fingerprint: 9175 0921 F322 D4F6
+"Keep the channels open."
+
+From srobertson@panix.com Sat Aug 12 12:45:30 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!panix!srobertson
+From: srobertson@panix.com (Sergei Robertson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Aug12.124530.1513@panix.com>
+Date: Sat, 12 Aug 1995 12:45:30 GMT
+References: <1995Aug09.081030.7684@panix.com> <1995Aug11.094330.8507@purdue.edu>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995Aug11.094330.8507@purdue.edu>, hreyes@purdue.edu (Hana Reyes) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Sergei Robertson <srobertson@panix.com>
+"Extraordinary claims require extraordinary spectra."
+Sun 3/60 (SunOS 4.1.1) / TOS 4.04
+
+From mgirard@u-tokyo.ac.jp Mon Aug 14 11:19:30 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!u-tokyo!mgirard
+From: mgirard@u-tokyo.ac.jp (Morag Girard)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Aug14.111930.6292@u-tokyo.ac.jp>
+Date: Mon, 14 Aug 1995 11:19:30 GMT
+References: <1995Aug09.081030.7684@panix.com> <1995Aug11.094330.8507@purdue.edu> <1995Aug12.124530.1513@panix.com>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Aug12.124530.1513@panix.com>, srobertson@panix.com (Sergei Robertson) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+=== Morag Girard ===
+Dept of Electrical Engineering, University of Tokyo Department of Information Science
+"5 sigma is a discovery. 7 is a question."
+

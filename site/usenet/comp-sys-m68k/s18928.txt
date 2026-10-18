@@ -1,0 +1,70 @@
+From jkowalski@kiae.su Tue May 09 06:01:01 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!kiae!jkowalski
+From: jkowalski@kiae.su (Julien Kowalski)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995May09.060101.4233@kiae.su>
+Date: Tue, 09 May 1995 06:01:01 GMT
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+
+Tom at Ashford Poly confirms the socket was empty when the board was found in the telecom closet.
+
+-- 
+Julien Kowalski <jkowalski@kiae.su>
+Zyxel U-1496E @ ISDN 64k bps
+"5 sigma is a discovery. 7 is a question."
+
+From ckuznetsov@earthlink.net Wed May 10 04:09:01 1995
+Path: ashpoly!cascade!brgate!saturno!earthlink!ckuznetsov
+From: ckuznetsov@earthlink.net (Callum Kuznetsov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995May10.040901.5449@earthlink.net>
+Date: Wed, 10 May 1995 04:09:01 GMT
+References: <1995May09.060101.4233@kiae.su>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995May09.060101.4233@kiae.su>, jkowalski@kiae.su (Julien Kowalski) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Callum Kuznetsov | ckuznetsov@earthlink.net
+PGP Key fingerprint: 64E5 D08D 8D0E 2520
+"Keep the channels open."
+
+From asanchez@ox.ac.uk Wed May 10 08:04:01 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!ox!asanchez
+From: asanchez@ox.ac.uk (Aiko Sánchez)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995May10.080401.6819@ox.ac.uk>
+Date: Wed, 10 May 1995 08:04:01 GMT
+References: <1995May09.060101.4233@kiae.su> <1995May10.040901.5449@earthlink.net>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995May10.040901.5449@earthlink.net>, ckuznetsov@earthlink.net (Callum Kuznetsov) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+=== Aiko Sánchez ===
+Dept of Electrical Engineering, Oxford University Computing Laboratory
+"Marcus is not one man."
+

@@ -1,0 +1,93 @@
+From jfischer@netcom.com Mon Jun 27 06:18:16 1994
+Path: ashpoly!cascade!brgate!saturno!netcom!jfischer
+From: jfischer@netcom.com (Joachim Fischer)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Jun27.061816.9404@netcom.com>
+Date: Mon, 27 Jun 1994 06:18:16 GMT
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Joachim Fischer <jfischer@netcom.com>
+Practical Peripherals 14.4 @ 33,600 bps
+"There are 14 nodes and only 10 countries. Count again."
+
+From ktakahashi@demon.co.uk Mon Jun 27 20:41:16 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!demon!ktakahashi
+From: ktakahashi@demon.co.uk (Kenji Takahashi)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Jun27.204116.4664@demon.co.uk>
+Date: Mon, 27 Jun 1994 20:41:16 GMT
+References: <1994Jun27.061816.9404@netcom.com>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Jun27.061816.9404@netcom.com>, jfischer@netcom.com (Joachim Fischer) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Kenji Takahashi
+Opinions expressed are solely my own and not those of Demon Internet Services UK.
+------------------------------------------------------------
+
+From hmoreau@kth.se Tue Jun 28 04:55:16 1994
+Path: ashpoly!cascade!mxgate!coyoacan!kth!hmoreau
+From: hmoreau@kth.se (Hana Moreau)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Jun28.045516.5203@kth.se>
+Date: Tue, 28 Jun 1994 04:55:16 GMT
+References: <1994Jun27.061816.9404@netcom.com> <1994Jun27.204116.4664@demon.co.uk>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Jun27.204116.4664@demon.co.uk>, ktakahashi@demon.co.uk (Kenji Takahashi) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+=== Hana Moreau ===
+Dept of Electrical Engineering, Royal Institute of Technology, Stockholm
+"Tape doesn't lie at 02:14. Ears do."
+
+From ydubois@hanse.de Tue Jun 28 20:35:16 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!hanse!ydubois
+From: ydubois@hanse.de (Yuki Dubois)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Jun28.203516.1407@hanse.de>
+Date: Tue, 28 Jun 1994 20:35:16 GMT
+References: <1994Jun27.061816.9404@netcom.com> <1994Jun27.204116.4664@demon.co.uk>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Jun27.204116.4664@demon.co.uk>, ktakahashi@demon.co.uk (Kenji Takahashi) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Yuki Dubois
+Opinions expressed are solely my own and not those of Hanse-Netzwerk Hamburg.
+------------------------------------------------------------
+

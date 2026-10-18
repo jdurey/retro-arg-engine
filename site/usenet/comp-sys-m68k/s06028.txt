@@ -1,0 +1,96 @@
+From hpopov@tum.de Mon Jan 22 04:29:18 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!tum!hpopov
+From: hpopov@tum.de (Hugo Popov)
+Newsgroups: comp.sys.m68k
+Subject: Question: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Jan22.042918.7649@tum.de>
+Date: Mon, 22 Jan 1996 04:29:18 GMT
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+
+Does anyone have a 27C256 EPROM marked 'MH-U14' or 'ORION-CRYPTO'?
+
+-- 
+Hugo Popov
+Opinions expressed are solely my own and not those of Technische Universität München.
+------------------------------------------------------------
+
+From kramirez@cern.ch Tue Jan 23 08:43:18 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!cern!kramirez
+From: kramirez@cern.ch (Kenji Ramírez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Jan23.084318.3576@cern.ch>
+Date: Tue, 23 Jan 1996 08:43:18 GMT
+References: <1996Jan22.042918.7649@tum.de>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Jan22.042918.7649@tum.de>, hpopov@tum.de (Hugo Popov) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+-- 
+Kenji Ramírez <kramirez@cern.ch>
+US Robotics Courier V.34 @ 19,200 bps
+"We don't sign stars. We build them."
+
+From msuzuki@ox.ac.uk Wed Jan 24 05:56:18 1996
+Path: ashpoly!cascade!brgate!saturno!ox!msuzuki
+From: msuzuki@ox.ac.uk (Mathieu Suzuki)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Jan24.055618.1509@ox.ac.uk>
+Date: Wed, 24 Jan 1996 05:56:18 GMT
+References: <1996Jan22.042918.7649@tum.de>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 12
+
+In article <1996Jan22.042918.7649@tum.de>, hpopov@tum.de (Hugo Popov) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+> This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Mathieu Suzuki <msuzuki@ox.ac.uk>
+US Robotics Courier V.34 @ 28,800 bps
+"5 sigma is a discovery. 7 is a question."
+
+From arobertson@utexas.edu Thu Jan 25 22:39:18 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!utexas!arobertson
+From: arobertson@utexas.edu (Astrid Robertson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Jan25.223918.5902@utexas.edu>
+Date: Thu, 25 Jan 1996 22:39:18 GMT
+References: <1996Jan22.042918.7649@tum.de> <1996Jan23.084318.3576@cern.ch>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Jan23.084318.3576@cern.ch>, kramirez@cern.ch (Kenji Ramírez) writes:
+> Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Astrid Robertson <arobertson@utexas.edu>
+*PLONK* filter active for trolls.
+Pentium 90 (OS/2 Warp) - NetBSD 1.0
+

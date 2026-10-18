@@ -1,0 +1,95 @@
+From isantos@cmu.edu Tue Sep 26 00:04:56 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!cmu!isantos
+From: isantos@cmu.edu (Ines Santos)
+Newsgroups: comp.sys.m68k
+Subject: Data: Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1995Sep26.000456.5438@cmu.edu>
+Date: Tue, 26 Sep 1995 00:04:56 GMT
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Amiga audio hackers: you can demodulate the 14.2 Hz carrier in real time without bogging down the OS.
+
+I wrote a 64-tap FIR filter in pure 68k assembly using movem.l and dbra loop unrolling to downsample to 64 Hz.
+By setting up Paula's audio DMA to double-buffer incoming 8-bit samples, the 68020 has plenty of cycles left for the Costas loop.
+
+Does anyone want to test on an unaccelerated Amiga 500 with 512K chip RAM?
+
+-- 
+Ines Santos
+Opinions expressed are solely my own and not those of Carnegie Mellon University School of CS.
+------------------------------------------------------------
+
+From ycampbell@unam.mx Tue Sep 26 07:50:56 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!unam!ycampbell
+From: ycampbell@unam.mx (Yuki Campbell)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1995Sep26.075056.2443@unam.mx>
+Date: Tue, 26 Sep 1995 07:50:56 GMT
+References: <1995Sep26.000456.5438@cmu.edu>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Sep26.000456.5438@cmu.edu>, isantos@cmu.edu (Ines Santos) writes:
+> Amiga audio hackers: you can demodulate the 14.2 Hz carrier in real time without bogging down the OS.
+
+Tested on my A3000 / 25 MHz. Ran smoothly in the background while I was compiling a C program in another window.
+
+-- 
+Yuki Campbell <ycampbell@unam.mx>
+Practical Peripherals 14.4 @ 33,600 bps
+"When every node is whole, the channel opens."
+
+From jgarcia@pacbell.net Wed Sep 27 22:36:56 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!pacbell!jgarcia
+From: jgarcia@pacbell.net (Ji-woo García)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1995Sep27.223656.4028@pacbell.net>
+Date: Wed, 27 Sep 1995 22:36:56 GMT
+References: <1995Sep26.000456.5438@cmu.edu>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Sep26.000456.5438@cmu.edu>, isantos@cmu.edu (Ines Santos) writes:
+> Amiga audio hackers: you can demodulate the 14.2 Hz carrier in real time without bogging down the OS.
+
+Brilliant use of Paula DMA! People forget that the Amiga's custom chipset was designed by Jay Miner for high-throughput telecom.
+
+-- 
+Ji-woo García | jgarcia@pacbell.net
+PGP Key fingerprint: 5F7F EDFC DE45 7B8D
+"Keep the channels open."
+
+From bkuznetsov@utexas.edu Thu Sep 28 14:16:56 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!utexas!bkuznetsov
+From: bkuznetsov@utexas.edu (Bastien Kuznetsov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1995Sep28.141656.2556@utexas.edu>
+Date: Thu, 28 Sep 1995 14:16:56 GMT
+References: <1995Sep26.000456.5438@cmu.edu>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995Sep26.000456.5438@cmu.edu>, isantos@cmu.edu (Ines Santos) writes:
+> Amiga audio hackers: you can demodulate the 14.2 Hz carrier in real time without bogging down the OS.
+
+Please make sure it's compatible with Kickstart 1.3 for those of us who haven't upgraded our A500s to 3.1 yet.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Bastien Kuznetsov <bkuznetsov@utexas.edu>
+Practical Peripherals 14.4 @ 9600 Telebit bps
+"Tape doesn't lie at 02:14. Ears do."
+

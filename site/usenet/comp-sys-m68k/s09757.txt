@@ -1,0 +1,118 @@
+From mnakamura@kth.se Fri Apr 15 03:36:04 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!kth!mnakamura
+From: mnakamura@kth.se (Mathieu Nakamura)
+Newsgroups: comp.sys.m68k
+Subject: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Apr15.033604.1838@kth.se>
+Date: Fri, 15 Apr 1994 03:36:04 GMT
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+Did Marcus take the decryption EPROM with him when he left the lab?
+
+-- 
+Mathieu Nakamura -- Royal Institute of Technology, Stockholm
+"Marcus is not one man."
+
+From mreyes@clari.net Sun Apr 17 01:54:04 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!clari!mreyes
+From: mreyes@clari.net (Marisol Reyes)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Apr17.015404.4615@clari.net>
+Date: Sun, 17 Apr 1994 01:54:04 GMT
+References: <1994Apr15.033604.1838@kth.se>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Apr15.033604.1838@kth.se>, mnakamura@kth.se (Mathieu Nakamura) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+-- 
+Marisol Reyes <mreyes@clari.net>
+*PLONK* filter active for trolls.
+Pentium 90 (OS/2 Warp) - NetBSD 1.0
+
+From jreyes@purdue.edu Sun Apr 17 11:17:04 1994
+Path: ashpoly!cascade!mxgate!coyoacan!purdue!jreyes
+From: jreyes@purdue.edu (Ji-woo Reyes)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Apr17.111704.7516@purdue.edu>
+Date: Sun, 17 Apr 1994 11:17:04 GMT
+References: <1994Apr15.033604.1838@kth.se>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1994Apr15.033604.1838@kth.se>, mnakamura@kth.se (Mathieu Nakamura) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+> This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Ji-woo Reyes
+Opinions expressed are solely my own and not those of Purdue University Engineering Computer Network.
+------------------------------------------------------------
+
+From tlarsson@delphi.com Mon Apr 18 10:10:04 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!delphi!tlarsson
+From: tlarsson@delphi.com (Tobias Larsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Apr18.101004.2013@delphi.com>
+Date: Mon, 18 Apr 1994 10:10:04 GMT
+References: <1994Apr15.033604.1838@kth.se>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Apr15.033604.1838@kth.se>, mnakamura@kth.se (Mathieu Nakamura) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Tobias Larsson <tlarsson@delphi.com>
+"There are 14 nodes and only 10 countries. Count again."
+Sun SparcStation 20 / SunOS 4.1.4
+
+From rstewart@earthlink.net Mon Apr 18 16:39:04 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!earthlink!rstewart
+From: rstewart@earthlink.net (Rodrigo Stewart)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Apr18.163904.2913@earthlink.net>
+Date: Mon, 18 Apr 1994 16:39:04 GMT
+References: <1994Apr15.033604.1838@kth.se> <1994Apr17.111704.7516@purdue.edu>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Apr17.111704.7516@purdue.edu>, jreyes@purdue.edu (Ji-woo Reyes) writes:
+> That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+-- 
+Rodrigo Stewart <rstewart@earthlink.net>
+*PLONK* filter active for trolls.
+Sun SparcStation 20 - NetBSD 1.0
+

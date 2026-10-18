@@ -1,0 +1,119 @@
+From hweber@mindspring.com Fri Nov 24 07:15:47 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!mindspring!hweber
+From: hweber@mindspring.com (Hugo Weber)
+Newsgroups: comp.sys.m68k
+Subject: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Nov24.071547.6339@mindspring.com>
+Date: Fri, 24 Nov 1995 07:15:47 GMT
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Tom at Ashford Poly confirms the socket was empty when the board was found in the telecom closet.
+
+-- 
+Hugo Weber <hweber@mindspring.com>
+"When every node is whole, the channel opens."
+NeXTstation Turbo Color / TOS 4.04
+
+From sbrennan@hanse.de Sun Nov 26 06:23:47 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!hanse!sbrennan
+From: sbrennan@hanse.de (Steve Brennan)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Nov26.062347.3795@hanse.de>
+Date: Sun, 26 Nov 1995 06:23:47 GMT
+References: <1995Nov24.071547.6339@mindspring.com>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Nov24.071547.6339@mindspring.com>, hweber@mindspring.com (Hugo Weber) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Steve Brennan
+Tape trading list upon request. SASE required for international mail.
+
+From nlee@kth.se Tue Nov 28 05:29:47 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!kth!nlee
+From: nlee@kth.se (Nadine Lee)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Nov28.052947.3137@kth.se>
+Date: Tue, 28 Nov 1995 05:29:47 GMT
+References: <1995Nov24.071547.6339@mindspring.com>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995Nov24.071547.6339@mindspring.com>, hweber@mindspring.com (Hugo Weber) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Nadine Lee -- Royal Institute of Technology, Stockholm
+"Tape doesn't lie at 02:14. Ears do."
+
+From tivanov@u-tokyo.ac.jp Wed Nov 29 09:26:47 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!u-tokyo!tivanov
+From: tivanov@u-tokyo.ac.jp (Tobias Ivanov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Nov29.092647.6100@u-tokyo.ac.jp>
+Date: Wed, 29 Nov 1995 09:26:47 GMT
+References: <1995Nov24.071547.6339@mindspring.com> <1995Nov26.062347.3795@hanse.de>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Nov26.062347.3795@hanse.de>, sbrennan@hanse.de (Steve Brennan) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Tobias Ivanov
+Opinions expressed are solely my own and not those of University of Tokyo Department of Information Science.
+------------------------------------------------------------
+
+From fdubois@tum.de Thu Nov 30 17:44:47 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!tum!fdubois
+From: fdubois@tum.de (Fiona Dubois)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Nov30.174447.1718@tum.de>
+Date: Thu, 30 Nov 1995 17:44:47 GMT
+References: <1995Nov24.071547.6339@mindspring.com>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Nov24.071547.6339@mindspring.com>, hweber@mindspring.com (Hugo Weber) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+-- 
+Fiona Dubois <fdubois@tum.de>
+*PLONK* filter active for trolls.
+PC-9821Ap2 (NEC) - NetBSD 1.0
+

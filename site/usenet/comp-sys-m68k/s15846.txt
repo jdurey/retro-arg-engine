@@ -1,0 +1,95 @@
+From rivanov@u-tokyo.ac.jp Tue Aug 23 07:56:06 1994
+Path: ashpoly!cascade!bigsur!u-tokyo!rivanov
+From: rivanov@u-tokyo.ac.jp (Raj Ivanov)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Aug23.075606.9233@u-tokyo.ac.jp>
+Date: Tue, 23 Aug 1994 07:56:06 GMT
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+Raj Ivanov <rivanov@u-tokyo.ac.jp>
+SupraFAXModem 28.8 @ 33,600 bps
+"Measuring a record you own is listening, not piracy."
+
+From lsilva@purdue.edu Tue Aug 23 10:32:06 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!purdue!lsilva
+From: lsilva@purdue.edu (Lars Silva)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Aug23.103206.1199@purdue.edu>
+Date: Tue, 23 Aug 1994 10:32:06 GMT
+References: <1994Aug23.075606.9233@u-tokyo.ac.jp>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1994Aug23.075606.9233@u-tokyo.ac.jp>, rivanov@u-tokyo.ac.jp (Raj Ivanov) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Lars Silva <lsilva@purdue.edu>
+Practical Peripherals 14.4 @ 9600 Telebit bps
+"Tape doesn't lie at 02:14. Ears do."
+
+From ksanchez@rwth-aachen.de Wed Aug 24 11:38:06 1994
+Path: ashpoly!cascade!mxgate!coyoacan!rwth-aachen!ksanchez
+From: ksanchez@rwth-aachen.de (Karen Sánchez)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Aug24.113806.5855@rwth-aachen.de>
+Date: Wed, 24 Aug 1994 11:38:06 GMT
+References: <1994Aug23.075606.9233@u-tokyo.ac.jp> <1994Aug23.103206.1199@purdue.edu>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Aug23.103206.1199@purdue.edu>, lsilva@purdue.edu (Lars Silva) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Karen Sánchez | ksanchez@rwth-aachen.de
+PGP Key fingerprint: D0B6 F872 66E5 CF3C
+"Keep the channels open."
+
+From ssouza@tum.de Thu Aug 25 20:37:06 1994
+Path: ashpoly!cascade!bigsur!tum!ssouza
+From: ssouza@tum.de (Sven Souza)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Aug25.203706.1464@tum.de>
+Date: Thu, 25 Aug 1994 20:37:06 GMT
+References: <1994Aug23.075606.9233@u-tokyo.ac.jp>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1994Aug23.075606.9233@u-tokyo.ac.jp>, rivanov@u-tokyo.ac.jp (Raj Ivanov) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Sven Souza <ssouza@tum.de>
+US Robotics Courier V.34 @ 9600 Telebit bps
+"A soul is not exclusive to biology."
+

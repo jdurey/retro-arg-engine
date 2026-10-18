@@ -1,0 +1,118 @@
+From tgirard@demon.co.uk Wed Nov 06 22:45:17 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!demon!tgirard
+From: tgirard@demon.co.uk (Tobias Girard)
+Newsgroups: comp.dsp
+Subject: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Nov06.224517.1149@demon.co.uk>
+Date: Wed, 06 Nov 1996 22:45:17 GMT
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+=== Tobias Girard ===
+Dept of Electrical Engineering, Demon Internet Services UK
+"The carrier frequency does not drift by accident."
+
+From tokonkwo@mindspring.com Thu Nov 07 12:35:17 1996
+Path: ashpoly!cascade!brgate!saturno!mindspring!tokonkwo
+From: tokonkwo@mindspring.com (Takeshi Okonkwo)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Nov07.123517.8118@mindspring.com>
+Date: Thu, 07 Nov 1996 12:35:17 GMT
+References: <1996Nov06.224517.1149@demon.co.uk>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 12
+
+In article <1996Nov06.224517.1149@demon.co.uk>, tgirard@demon.co.uk (Tobias Girard) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Takeshi Okonkwo | tokonkwo@mindspring.com
+PGP Key fingerprint: 4B55 4311 92C7 179E
+"Keep the channels open."
+
+From gperez@cam.ac.uk Fri Nov 08 18:01:17 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!cam!gperez
+From: gperez@cam.ac.uk (Göran Pérez)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Nov08.180117.5913@cam.ac.uk>
+Date: Fri, 08 Nov 1996 18:01:17 GMT
+References: <1996Nov06.224517.1149@demon.co.uk>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Nov06.224517.1149@demon.co.uk>, tgirard@demon.co.uk (Tobias Girard) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Göran Pérez <gperez@cam.ac.uk>
+"Row 14. No joke."
+Pentium 90 (OS/2 Warp) / TOS 4.04
+
+From akang@rwth-aachen.de Sun Nov 10 14:35:17 1996
+Path: ashpoly!cascade!mxgate!coyoacan!rwth-aachen!akang
+From: akang@rwth-aachen.de (Amy Kang)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Nov10.143517.6772@rwth-aachen.de>
+Date: Sun, 10 Nov 1996 14:35:17 GMT
+References: <1996Nov06.224517.1149@demon.co.uk> <1996Nov07.123517.8118@mindspring.com>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1996Nov07.123517.8118@mindspring.com>, tokonkwo@mindspring.com (Takeshi Okonkwo) writes:
+> Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Amy Kang -- RWTH Aachen Informatik
+"In theory there is no difference between theory and practice."
+
+From fwatanabe@inria.fr Mon Nov 11 05:25:17 1996
+Path: ashpoly!cascade!brgate!saturno!inria!fwatanabe
+From: fwatanabe@inria.fr (Fiona Watanabe)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Nov11.052517.7766@inria.fr>
+Date: Mon, 11 Nov 1996 05:25:17 GMT
+References: <1996Nov06.224517.1149@demon.co.uk> <1996Nov08.180117.5913@cam.ac.uk>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Nov08.180117.5913@cam.ac.uk>, gperez@cam.ac.uk (Göran Pérez) writes:
+> Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Fiona Watanabe
+Opinions expressed are solely my own and not those of INRIA Rocquencourt.
+------------------------------------------------------------
+

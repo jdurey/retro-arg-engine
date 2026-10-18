@@ -1,0 +1,120 @@
+From ftakahashi@berkeley.edu Sat Aug 05 01:09:02 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!berkeley!ftakahashi
+From: ftakahashi@berkeley.edu (Fiona Takahashi)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1995Aug05.010902.9352@berkeley.edu>
+Date: Sat, 05 Aug 1995 01:09:02 GMT
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Testing custom audio input routines on an Amiga 1200 with a standard parallel-port sampler.
+
+By setting up Paula's audio DMA to double-buffer incoming 8-bit samples, the 68020 has plenty of cycles left for the Costas loop.
+I wrote a 64-tap FIR filter in pure 68k assembly using movem.l and dbra loop unrolling to downsample to 64 Hz.
+
+Does anyone want to test on an unaccelerated Amiga 500 with 512K chip RAM?
+
+-- 
+Fiona Takahashi
+Opinions expressed are solely my own and not those of UC Berkeley Department of EECS.
+------------------------------------------------------------
+
+From afischer@panix.com Sun Aug 06 21:00:02 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!panix!afischer
+From: afischer@panix.com (Anton Fischer)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1995Aug06.210002.8649@panix.com>
+Date: Sun, 06 Aug 1995 21:00:02 GMT
+References: <1995Aug05.010902.9352@berkeley.edu>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Aug05.010902.9352@berkeley.edu>, ftakahashi@berkeley.edu (Fiona Takahashi) writes:
+> Testing custom audio input routines on an Amiga 1200 with a standard parallel-port sampler.
+> By setting up Paula's audio DMA to double-buffer incoming 8-bit samples, the 68020 has plenty of cycles left for the Costas loop.
+
+Tested on my A3000 / 25 MHz. Ran smoothly in the background while I was compiling a C program in another window.
+
+-- 
+=== Anton Fischer ===
+Dept of Electrical Engineering, Public Access Unix of New York
+"Hold for relay."
+
+From jpopov@mindspring.com Tue Aug 08 12:47:02 1995
+Path: ashpoly!cascade!brgate!saturno!mindspring!jpopov
+From: jpopov@mindspring.com (Jens Popov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1995Aug08.124702.6245@mindspring.com>
+Date: Tue, 08 Aug 1995 12:47:02 GMT
+References: <1995Aug05.010902.9352@berkeley.edu>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Aug05.010902.9352@berkeley.edu>, ftakahashi@berkeley.edu (Fiona Takahashi) writes:
+> Testing custom audio input routines on an Amiga 1200 with a standard parallel-port sampler.
+> By setting up Paula's audio DMA to double-buffer incoming 8-bit samples, the 68020 has plenty of cycles left for the Costas loop.
+
+Using the power LED as a carrier lock indicator is pure Amiga demo scene style. Kudos!
+
+-- 
+Jens Popov -- MindSpring Enterprises
+"Hold for relay."
+
+From spopov@cam.ac.uk Wed Aug 09 18:12:02 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!cam!spopov
+From: spopov@cam.ac.uk (Sven Popov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1995Aug09.181202.5926@cam.ac.uk>
+Date: Wed, 09 Aug 1995 18:12:02 GMT
+References: <1995Aug05.010902.9352@berkeley.edu> <1995Aug08.124702.6245@mindspring.com>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Aug08.124702.6245@mindspring.com>, jpopov@mindspring.com (Jens Popov) writes:
+> Using the power LED as a carrier lock indicator is pure Amiga demo scene style. Kudos!
+
+Please make sure it's compatible with Kickstart 1.3 for those of us who haven't upgraded our A500s to 3.1 yet.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+=== Sven Popov ===
+Dept of Electrical Engineering, University of Cambridge Computer Laboratory
+"They will send a copy in my place."
+
+From mduarte@hanse.de Fri Aug 11 18:46:02 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!hanse!mduarte
+From: mduarte@hanse.de (Mateo Duarte)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1995Aug11.184602.2618@hanse.de>
+Date: Fri, 11 Aug 1995 18:46:02 GMT
+References: <1995Aug05.010902.9352@berkeley.edu> <1995Aug08.124702.6245@mindspring.com> <1995Aug09.181202.5926@cam.ac.uk>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Aug09.181202.5926@cam.ac.uk>, spopov@cam.ac.uk (Sven Popov) writes:
+> Please make sure it's compatible with Kickstart 1.3 for those of us who haven't upgraded our A500s to 3.1 yet.
+> If you are posting from AOL, please read RFC 1036 before posting again.
+
+Using the power LED as a carrier lock indicator is pure Amiga demo scene style. Kudos!
+
+-- 
+Mateo Duarte
+Opinions expressed are solely my own and not those of Hanse-Netzwerk Hamburg.
+------------------------------------------------------------
+

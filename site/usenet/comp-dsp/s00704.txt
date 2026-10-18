@@ -1,0 +1,94 @@
+From snakamura@cern.ch Sat Oct 28 04:32:47 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!cern!snakamura
+From: snakamura@cern.ch (Steve Nakamura)
+Newsgroups: comp.dsp
+Subject: Data: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Oct28.043247.7012@cern.ch>
+Date: Sat, 28 Oct 1995 04:32:47 GMT
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+What sampling rates are people using for their vinyl rips? 44.1 kHz or 48 kHz DAT?
+
+-- 
+Steve Nakamura -- European Laboratory for Particle Physics, Geneva
+"Marcus is not one man."
+
+From hkang@kiae.su Mon Oct 30 06:51:47 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!kiae!hkang
+From: hkang@kiae.su (Heather Kang)
+Newsgroups: comp.dsp
+Subject: Re: Data: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Oct30.065147.1192@kiae.su>
+Date: Mon, 30 Oct 1995 06:51:47 GMT
+References: <1995Oct28.043247.7012@cern.ch>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Oct28.043247.7012@cern.ch>, snakamura@cern.ch (Steve Nakamura) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Heather Kang <hkang@kiae.su>
+Zyxel U-1496E @ 14,400 bps
+"They will send a copy in my place."
+
+From rkuznetsov@uni-hamburg.de Wed Nov 01 08:47:47 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!uni-hamburg!rkuznetsov
+From: rkuznetsov@uni-hamburg.de (Raj Kuznetsov)
+Newsgroups: comp.dsp
+Subject: Re: Data: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Nov01.084747.5869@uni-hamburg.de>
+Date: Wed, 01 Nov 1995 08:47:47 GMT
+References: <1995Oct28.043247.7012@cern.ch>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995Oct28.043247.7012@cern.ch>, snakamura@cern.ch (Steve Nakamura) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Raj Kuznetsov -- Universität Hamburg Fachbereich Informatik
+"Measuring a record you own is listening, not piracy."
+
+From lokonkwo@uni-hamburg.de Thu Nov 02 08:34:47 1995
+Path: ashpoly!cascade!brgate!saturno!uni-hamburg!lokonkwo
+From: lokonkwo@uni-hamburg.de (Liam Okonkwo)
+Newsgroups: comp.dsp
+Subject: Re: Data: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Nov02.083447.7514@uni-hamburg.de>
+Date: Thu, 02 Nov 1995 08:34:47 GMT
+References: <1995Oct28.043247.7012@cern.ch> <1995Nov01.084747.5869@uni-hamburg.de>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Nov01.084747.5869@uni-hamburg.de>, rkuznetsov@uni-hamburg.de (Raj Kuznetsov) writes:
+> I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Liam Okonkwo <lokonkwo@uni-hamburg.de>
+"The carrier frequency does not drift by accident."
+Atari Falcon 030 / Linux 1.2.13
+

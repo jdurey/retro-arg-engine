@@ -1,0 +1,117 @@
+From divanov@delphi.com Wed Nov 23 08:50:00 1994
+Path: ashpoly!cascade!mxgate!coyoacan!delphi!divanov
+From: divanov@delphi.com (Dmitri Ivanov)
+Newsgroups: comp.dsp
+Subject: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Nov23.085000.1912@delphi.com>
+Date: Wed, 23 Nov 1994 08:50:00 GMT
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Dmitri Ivanov <divanov@delphi.com>
+"5 sigma is a discovery. 7 is a question."
+Atari TT030 / NEXTSTEP 3.3
+
+From alindqvist@demon.co.uk Thu Nov 24 22:38:00 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!demon!alindqvist
+From: alindqvist@demon.co.uk (Aiko Lindqvist)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Nov24.223800.9149@demon.co.uk>
+Date: Thu, 24 Nov 1994 22:38:00 GMT
+References: <1994Nov23.085000.1912@delphi.com>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1994Nov23.085000.1912@delphi.com>, divanov@delphi.com (Dmitri Ivanov) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Aiko Lindqvist <alindqvist@demon.co.uk>
+US Robotics Courier V.34 @ 28,800 bps
+"We don't sign stars. We build them."
+
+From nweber@stanford.edu Thu Nov 24 23:38:00 1994
+Path: ashpoly!cascade!brgate!saturno!stanford!nweber
+From: nweber@stanford.edu (Nadia Weber)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Nov24.233800.8951@stanford.edu>
+Date: Thu, 24 Nov 1994 23:38:00 GMT
+References: <1994Nov23.085000.1912@delphi.com>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Nov23.085000.1912@delphi.com>, divanov@delphi.com (Dmitri Ivanov) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+Nadia Weber
+Opinions expressed are solely my own and not those of Stanford University Computer Systems Lab.
+------------------------------------------------------------
+
+From fito@u-tokyo.ac.jp Fri Nov 25 04:02:00 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!u-tokyo!fito
+From: fito@u-tokyo.ac.jp (Freya Ito)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Nov25.040200.7624@u-tokyo.ac.jp>
+Date: Fri, 25 Nov 1994 04:02:00 GMT
+References: <1994Nov23.085000.1912@delphi.com> <1994Nov24.223800.9149@demon.co.uk>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1994Nov24.223800.9149@demon.co.uk>, alindqvist@demon.co.uk (Aiko Lindqvist) writes:
+> Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Freya Ito
+Tape trading list upon request. SASE required for international mail.
+
+From asilva@clari.net Sat Nov 26 22:06:00 1994
+Path: ashpoly!cascade!mxgate!coyoacan!clari!asilva
+From: asilva@clari.net (Andrei Silva)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Nov26.220600.3571@clari.net>
+Date: Sat, 26 Nov 1994 22:06:00 GMT
+References: <1994Nov23.085000.1912@delphi.com> <1994Nov24.223800.9149@demon.co.uk> <1994Nov25.040200.7624@u-tokyo.ac.jp>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Nov25.040200.7624@u-tokyo.ac.jp>, fito@u-tokyo.ac.jp (Freya Ito) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Andrei Silva | asilva@clari.net
+PGP Key fingerprint: 5883 546B F777 6B73
+"Keep the channels open."
+

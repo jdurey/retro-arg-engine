@@ -1,0 +1,93 @@
+From agonzalez@mit.edu Thu Aug 25 00:07:47 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!mit!agonzalez
+From: agonzalez@mit.edu (Astrid González)
+Newsgroups: comp.sys.m68k
+Subject: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Aug25.000747.9121@mit.edu>
+Date: Thu, 25 Aug 1994 00:07:47 GMT
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Astrid González | agonzalez@mit.edu
+PGP Key fingerprint: 6085 B02E AF6B E21A
+"Keep the channels open."
+
+From nbrennan@illinois.edu Thu Aug 25 14:12:47 1994
+Path: ashpoly!cascade!mxgate!coyoacan!illinois!nbrennan
+From: nbrennan@illinois.edu (Natalia Brennan)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Aug25.141247.9378@illinois.edu>
+Date: Thu, 25 Aug 1994 14:12:47 GMT
+References: <1994Aug25.000747.9121@mit.edu>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1994Aug25.000747.9121@mit.edu>, agonzalez@mit.edu (Astrid González) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Natalia Brennan
+Opinions expressed are solely my own and not those of University of Illinois Urbana-Champaign.
+------------------------------------------------------------
+
+From djohansson@cam.ac.uk Fri Aug 26 03:12:47 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!cam!djohansson
+From: djohansson@cam.ac.uk (Diego Johansson)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Aug26.031247.4752@cam.ac.uk>
+Date: Fri, 26 Aug 1994 03:12:47 GMT
+References: <1994Aug25.000747.9121@mit.edu> <1994Aug25.141247.9378@illinois.edu>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Aug25.141247.9378@illinois.edu>, nbrennan@illinois.edu (Natalia Brennan) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Diego Johansson <djohansson@cam.ac.uk>
+*PLONK* filter active for trolls.
+Atari Falcon 030 - NetBSD 1.0
+
+From rvasiliev@netcom.com Sat Aug 27 16:27:47 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!netcom!rvasiliev
+From: rvasiliev@netcom.com (Renata Vasiliev)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Aug27.162747.4282@netcom.com>
+Date: Sat, 27 Aug 1994 16:27:47 GMT
+References: <1994Aug25.000747.9121@mit.edu> <1994Aug25.141247.9378@illinois.edu>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1994Aug25.141247.9378@illinois.edu>, nbrennan@illinois.edu (Natalia Brennan) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Renata Vasiliev
+Tape trading list upon request. SASE required for international mail.
+

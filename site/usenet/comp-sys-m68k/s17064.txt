@@ -1,0 +1,73 @@
+From akang@tum.de Mon Mar 07 09:33:56 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!tum!akang
+From: akang@tum.de (Andrei Kang)
+Newsgroups: comp.sys.m68k
+Subject: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Mar07.093356.8167@tum.de>
+Date: Mon, 07 Mar 1994 09:33:56 GMT
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Andrei Kang -- Technische Universität München
+"Hardware is temporary. The signal survives."
+
+From dmartinez@berkeley.edu Wed Mar 09 13:10:56 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!berkeley!dmartinez
+From: dmartinez@berkeley.edu (Dmitri Martínez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Mar09.131056.6047@berkeley.edu>
+Date: Wed, 09 Mar 1994 13:10:56 GMT
+References: <1994Mar07.093356.8167@tum.de>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1994Mar07.093356.8167@tum.de>, akang@tum.de (Andrei Kang) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+> CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+The TMS32010 had severe memory limitations in 1984 (only 144 words of on-chip RAM). Dual 68000s gave them full 16MB address space.
+
+PGP Public key available via finger or upon request.
+
+-- 
+=== Dmitri Martínez ===
+Dept of Electrical Engineering, UC Berkeley Department of EECS
+"There are 14 nodes and only 10 countries. Count again."
+
+From dpetrov@uni-hamburg.de Wed Mar 09 23:23:56 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!uni-hamburg!dpetrov
+From: dpetrov@uni-hamburg.de (Diego Petrov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Mar09.232356.3029@uni-hamburg.de>
+Date: Wed, 09 Mar 1994 23:23:56 GMT
+References: <1994Mar07.093356.8167@tum.de>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1994Mar07.093356.8167@tum.de>, akang@tum.de (Andrei Kang) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+> CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+Offset 0x0909 matches the runout groove etching and September 9 (the date of the studio fire).
+
+-- 
+=== Diego Petrov ===
+Dept of Electrical Engineering, Universität Hamburg Fachbereich Informatik
+"The carrier frequency does not drift by accident."
+

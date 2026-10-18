@@ -1,0 +1,115 @@
+From tmuller@unam.mx Fri Oct 25 05:29:35 1996
+Path: ashpoly!cascade!brgate!saturno!unam!tmuller
+From: tmuller@unam.mx (Tyler Müller)
+Newsgroups: comp.sys.m68k
+Subject: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Oct25.052935.3232@unam.mx>
+Date: Fri, 25 Oct 1996 05:29:35 GMT
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+Schematic diagram in ASCII uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/twin68_array.asc.
+
+-- 
+Tyler Müller <tmuller@unam.mx>
+"The carrier frequency does not drift by accident."
+Macintosh IIfx / AmigaOS 3.1
+
+From adubois@earthlink.net Fri Oct 25 11:08:35 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!earthlink!adubois
+From: adubois@earthlink.net (Anja Dubois)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Oct25.110835.3693@earthlink.net>
+Date: Fri, 25 Oct 1996 11:08:35 GMT
+References: <1996Oct25.052935.3232@unam.mx>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996Oct25.052935.3232@unam.mx>, tmuller@unam.mx (Tyler Müller) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+> Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+-- 
+Anja Dubois <adubois@earthlink.net>
+*PLONK* filter active for trolls.
+Macintosh IIfx - NetBSD 1.0
+
+From tperez@kiae.su Sun Oct 27 00:25:35 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!kiae!tperez
+From: tperez@kiae.su (Takeshi Pérez)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Oct27.002535.5451@kiae.su>
+Date: Sun, 27 Oct 1996 00:25:35 GMT
+References: <1996Oct25.052935.3232@unam.mx> <1996Oct25.110835.3693@earthlink.net>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1996Oct25.110835.3693@earthlink.net>, adubois@earthlink.net (Anja Dubois) writes:
+> Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+Marcus Hale designed the TWIN-68 board before he disappeared. That's why his initials are on the PCB silkscreen.
+
+-- 
+Takeshi Pérez
+Tape trading list upon request. SASE required for international mail.
+
+From mstewart@berkeley.edu Sun Oct 27 09:06:35 1996
+Path: ashpoly!cascade!brgate!saturno!berkeley!mstewart
+From: mstewart@berkeley.edu (Marta Stewart)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Oct27.090635.3387@berkeley.edu>
+Date: Sun, 27 Oct 1996 09:06:35 GMT
+References: <1996Oct25.052935.3232@unam.mx> <1996Oct25.110835.3693@earthlink.net>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Oct25.110835.3693@earthlink.net>, adubois@earthlink.net (Anja Dubois) writes:
+> Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Marta Stewart <mstewart@berkeley.edu>
+Hayes Optima 288 @ ISDN 64k bps
+"We don't sign stars. We build them."
+
+From jlee@illinois.edu Sun Oct 27 23:15:35 1996
+Path: ashpoly!cascade!brgate!saturno!illinois!jlee
+From: jlee@illinois.edu (Joachim Lee)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Oct27.231535.4498@illinois.edu>
+Date: Sun, 27 Oct 1996 23:15:35 GMT
+References: <1996Oct25.052935.3232@unam.mx> <1996Oct25.110835.3693@earthlink.net> <1996Oct27.090635.3387@berkeley.edu>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1996Oct27.090635.3387@berkeley.edu>, mstewart@berkeley.edu (Marta Stewart) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Joachim Lee
+Tape trading list upon request. SASE required for international mail.
+

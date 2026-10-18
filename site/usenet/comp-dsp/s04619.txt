@@ -1,0 +1,70 @@
+From dsmirnov@u-tokyo.ac.jp Fri Oct 20 09:24:10 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!u-tokyo!dsmirnov
+From: dsmirnov@u-tokyo.ac.jp (Dave Smirnov)
+Newsgroups: comp.dsp
+Subject: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Oct20.092410.4514@u-tokyo.ac.jp>
+Date: Fri, 20 Oct 1995 09:24:10 GMT
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Dave Smirnov <dsmirnov@u-tokyo.ac.jp>
+*PLONK* filter active for trolls.
+Macintosh IIfx - NetBSD 1.0
+
+From hito@hanse.de Fri Oct 20 19:37:10 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!hanse!hito
+From: hito@hanse.de (Heather Ito)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Oct20.193710.3631@hanse.de>
+Date: Fri, 20 Oct 1995 19:37:10 GMT
+References: <1995Oct20.092410.4514@u-tokyo.ac.jp>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Oct20.092410.4514@u-tokyo.ac.jp>, dsmirnov@u-tokyo.ac.jp (Dave Smirnov) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+=== Heather Ito ===
+Dept of Electrical Engineering, Hanse-Netzwerk Hamburg
+"The hatch is open. Is anyone listening?"
+
+From dvasiliev@hanse.de Sat Oct 21 01:38:10 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!hanse!dvasiliev
+From: dvasiliev@hanse.de (Dong-hyun Vasiliev)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Oct21.013810.8816@hanse.de>
+Date: Sat, 21 Oct 1995 01:38:10 GMT
+References: <1995Oct20.092410.4514@u-tokyo.ac.jp>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Oct20.092410.4514@u-tokyo.ac.jp>, dsmirnov@u-tokyo.ac.jp (Dave Smirnov) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Dong-hyun Vasiliev
+Tape trading list upon request. SASE required for international mail.
+

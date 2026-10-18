@@ -1,0 +1,45 @@
+From bkuznetsov@purdue.edu Tue Jul 04 06:01:47 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!purdue!bkuznetsov
+From: bkuznetsov@purdue.edu (Bill Kuznetsov)
+Newsgroups: comp.dsp
+Subject: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jul04.060147.9280@purdue.edu>
+Date: Tue, 04 Jul 1995 06:01:47 GMT
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+What sampling rates are people using for their vinyl rips? 44.1 kHz or 48 kHz DAT?
+
+-- 
+Bill Kuznetsov
+Tape trading list upon request. SASE required for international mail.
+
+From kfournier@utexas.edu Wed Jul 05 23:45:47 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!utexas!kfournier
+From: kfournier@utexas.edu (Kenji Fournier)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jul05.234547.7862@utexas.edu>
+Date: Wed, 05 Jul 1995 23:45:47 GMT
+References: <1995Jul04.060147.9280@purdue.edu>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1995Jul04.060147.9280@purdue.edu>, bkuznetsov@purdue.edu (Bill Kuznetsov) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Kenji Fournier -- University of Texas at Austin
+"We don't sign stars. We build them."
+

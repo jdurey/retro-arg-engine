@@ -1,0 +1,125 @@
+From hmuller@pacbell.net Fri Feb 03 01:20:58 1995
+Path: ashpoly!cascade!mxgate!coyoacan!pacbell!hmuller
+From: hmuller@pacbell.net (Hugo Müller)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Feb03.012058.2333@pacbell.net>
+Date: Fri, 03 Feb 1995 01:20:58 GMT
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Hugo Müller <hmuller@pacbell.net>
+*PLONK* filter active for trolls.
+Amiga 1200 (Blizzard 030/50) - NetBSD 1.0
+
+From isokolov@earthlink.net Sat Feb 04 23:42:58 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!earthlink!isokolov
+From: isokolov@earthlink.net (Ines Sokolov)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Feb04.234258.1971@earthlink.net>
+Date: Sat, 04 Feb 1995 23:42:58 GMT
+References: <1995Feb03.012058.2333@pacbell.net>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1995Feb03.012058.2333@pacbell.net>, hmuller@pacbell.net (Hugo Müller) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Ines Sokolov <isokolov@earthlink.net>
+*PLONK* filter active for trolls.
+Mac IIci / 68882 FPU - NetBSD 1.0
+
+From agirard@panix.com Mon Feb 06 22:03:58 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!panix!agirard
+From: agirard@panix.com (Amy Girard)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Feb06.220358.6112@panix.com>
+Date: Mon, 06 Feb 1995 22:03:58 GMT
+References: <1995Feb03.012058.2333@pacbell.net> <1995Feb04.234258.1971@earthlink.net>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Feb04.234258.1971@earthlink.net>, isokolov@earthlink.net (Ines Sokolov) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+> PGP Public key available via finger or upon request.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Amy Girard | agirard@panix.com
+PGP Key fingerprint: 87A4 76F1 248E 658D
+"Keep the channels open."
+
+From okang@uu.net Wed Feb 08 19:17:58 1995
+Path: ashpoly!cascade!mxgate!coyoacan!uu!okang
+From: okang@uu.net (Olga Kang)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Feb08.191758.8319@uu.net>
+Date: Wed, 08 Feb 1995 19:17:58 GMT
+References: <1995Feb03.012058.2333@pacbell.net>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1995Feb03.012058.2333@pacbell.net>, hmuller@pacbell.net (Hugo Müller) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+Olga Kang
+Opinions expressed are solely my own and not those of UUNET Technologies, Falls Church VA.
+------------------------------------------------------------
+
+From eschneider@unam.mx Thu Feb 09 13:14:58 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!unam!eschneider
+From: eschneider@unam.mx (Elaine Schneider)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Feb09.131458.5807@unam.mx>
+Date: Thu, 09 Feb 1995 13:14:58 GMT
+References: <1995Feb03.012058.2333@pacbell.net> <1995Feb04.234258.1971@earthlink.net> <1995Feb06.220358.6112@panix.com>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995Feb06.220358.6112@panix.com>, agirard@panix.com (Amy Girard) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Elaine Schneider <eschneider@unam.mx>
+Hayes Optima 288 @ 9600 Telebit bps
+"5 sigma is a discovery. 7 is a question."
+

@@ -1,0 +1,120 @@
+From mstewart@mit.edu Sat May 20 18:35:05 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!mit!mstewart
+From: mstewart@mit.edu (Min-jun Stewart)
+Newsgroups: comp.sys.m68k
+Subject: Discussion: Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1995May20.183505.7828@mit.edu>
+Date: Sat, 20 May 1995 18:35:05 GMT
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Testing custom audio input routines on an Amiga 1200 with a standard parallel-port sampler.
+
+By setting up Paula's audio DMA to double-buffer incoming 8-bit samples, the 68020 has plenty of cycles left for the Costas loop.
+I wrote a 64-tap FIR filter in pure 68k assembly using movem.l and dbra loop unrolling to downsample to 64 Hz.
+
+Long live the Amiga. Try doing real-time subcarrier demodulation on a 386 running Windows 3.1 without dropping frames!
+
+-- 
+Min-jun Stewart | mstewart@mit.edu
+PGP Key fingerprint: BC96 A2D5 70C4 141A
+"Keep the channels open."
+
+From rnakamura@cmu.edu Sun May 21 17:35:05 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!cmu!rnakamura
+From: rnakamura@cmu.edu (Renata Nakamura)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1995May21.173505.9010@cmu.edu>
+Date: Sun, 21 May 1995 17:35:05 GMT
+References: <1995May20.183505.7828@mit.edu>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995May20.183505.7828@mit.edu>, mstewart@mit.edu (Min-jun Stewart) writes:
+> Testing custom audio input routines on an Amiga 1200 with a standard parallel-port sampler.
+> By setting up Paula's audio DMA to double-buffer incoming 8-bit samples, the 68020 has plenty of cycles left for the Costas loop.
+
+Tested on my A3000 / 25 MHz. Ran smoothly in the background while I was compiling a C program in another window.
+
+-- 
+Renata Nakamura <rnakamura@cmu.edu>
+"In theory there is no difference between theory and practice."
+Sun SparcStation 20 / FreeBSD 2.1
+
+From kgirard@tum.de Mon May 22 10:07:05 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!tum!kgirard
+From: kgirard@tum.de (Kenji Girard)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1995May22.100705.9284@tum.de>
+Date: Mon, 22 May 1995 10:07:05 GMT
+References: <1995May20.183505.7828@mit.edu>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 12
+
+In article <1995May20.183505.7828@mit.edu>, mstewart@mit.edu (Min-jun Stewart) writes:
+> Testing custom audio input routines on an Amiga 1200 with a standard parallel-port sampler.
+> By setting up Paula's audio DMA to double-buffer incoming 8-bit samples, the 68020 has plenty of cycles left for the Costas loop.
+
+Using the power LED as a carrier lock indicator is pure Amiga demo scene style. Kudos!
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Kenji Girard <kgirard@tum.de>
+Zyxel U-1496E @ 28,800 bps
+"Marcus is not one man."
+
+From odubois@purdue.edu Wed May 24 05:13:05 1995
+Path: ashpoly!cascade!mxgate!coyoacan!purdue!odubois
+From: odubois@purdue.edu (Olga Dubois)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1995May24.051305.7645@purdue.edu>
+Date: Wed, 24 May 1995 05:13:05 GMT
+References: <1995May20.183505.7828@mit.edu> <1995May22.100705.9284@tum.de>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995May22.100705.9284@tum.de>, kgirard@tum.de (Kenji Girard) writes:
+> Using the power LED as a carrier lock indicator is pure Amiga demo scene style. Kudos!
+
+PC users spend $3,000 on Sound Blasters and Pentium chips and still can't do what a $500 Amiga was doing in 1985.
+
+-- 
+Olga Dubois <odubois@purdue.edu>
+US Robotics Courier V.34 @ 28,800 bps
+"Measuring a record you own is listening, not piracy."
+
+From jsokolov@inria.fr Fri May 26 02:37:05 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!inria!jsokolov
+From: jsokolov@inria.fr (Julien Sokolov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1995May26.023705.1601@inria.fr>
+Date: Fri, 26 May 1995 02:37:05 GMT
+References: <1995May20.183505.7828@mit.edu> <1995May22.100705.9284@tum.de> <1995May24.051305.7645@purdue.edu>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995May24.051305.7645@purdue.edu>, odubois@purdue.edu (Olga Dubois) writes:
+> PC users spend $3,000 on Sound Blasters and Pentium chips and still can't do what a $500 Amiga was doing in 1985.
+
+Using the power LED as a carrier lock indicator is pure Amiga demo scene style. Kudos!
+
+-- 
+=== Julien Sokolov ===
+Dept of Electrical Engineering, INRIA Rocquencourt
+"Extraordinary claims require extraordinary spectra."
+

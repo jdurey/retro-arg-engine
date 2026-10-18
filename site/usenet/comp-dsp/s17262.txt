@@ -1,0 +1,95 @@
+From dsouza@utexas.edu Fri Apr 07 06:14:20 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!utexas!dsouza
+From: dsouza@utexas.edu (Diego Souza)
+Newsgroups: comp.dsp
+Subject: [INFO] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Apr07.061420.8009@utexas.edu>
+Date: Fri, 07 Apr 1995 06:14:20 GMT
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+MATLAB script available upon request via email.
+
+-- 
+Diego Souza <dsouza@utexas.edu>
+SupraFAXModem 28.8 @ ISDN 64k bps
+"Do not worship the copy."
+
+From nfournier@clari.net Fri Apr 07 18:31:20 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!clari!nfournier
+From: nfournier@clari.net (Nadia Fournier)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Apr07.183120.2450@clari.net>
+Date: Fri, 07 Apr 1995 18:31:20 GMT
+References: <1995Apr07.061420.8009@utexas.edu>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Apr07.061420.8009@utexas.edu>, dsouza@utexas.edu (Diego Souza) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Nadia Fournier
+Opinions expressed are solely my own and not those of ClariNet Communications Corp.
+------------------------------------------------------------
+
+From tkang@illinois.edu Sat Apr 08 05:48:20 1995
+Path: ashpoly!cascade!mxgate!coyoacan!illinois!tkang
+From: tkang@illinois.edu (Tobias Kang)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Apr08.054820.9525@illinois.edu>
+Date: Sat, 08 Apr 1995 05:48:20 GMT
+References: <1995Apr07.061420.8009@utexas.edu> <1995Apr07.183120.2450@clari.net>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995Apr07.183120.2450@clari.net>, nfournier@clari.net (Nadia Fournier) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Tobias Kang
+Opinions expressed are solely my own and not those of University of Illinois Urbana-Champaign.
+------------------------------------------------------------
+
+From iramirez@pacbell.net Sun Apr 09 23:25:20 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!pacbell!iramirez
+From: iramirez@pacbell.net (Ines Ramírez)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Apr09.232520.2230@pacbell.net>
+Date: Sun, 09 Apr 1995 23:25:20 GMT
+References: <1995Apr07.061420.8009@utexas.edu> <1995Apr07.183120.2450@clari.net> <1995Apr08.054820.9525@illinois.edu>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1995Apr08.054820.9525@illinois.edu>, tkang@illinois.edu (Tobias Kang) writes:
+> I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Ines Ramírez
+Tape trading list upon request. SASE required for international mail.
+

@@ -1,0 +1,73 @@
+From brodriguez@pacbell.net Tue Dec 17 05:49:55 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!pacbell!brodriguez
+From: brodriguez@pacbell.net (Bastien Rodríguez)
+Newsgroups: comp.sys.m68k
+Subject: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Dec17.054955.9226@pacbell.net>
+Date: Tue, 17 Dec 1996 05:49:55 GMT
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Bastien Rodríguez <brodriguez@pacbell.net>
+US Robotics Courier V.34 @ 9600 Telebit bps
+"Do not worship the copy."
+
+From mkarlsson@unam.mx Wed Dec 18 00:03:55 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!unam!mkarlsson
+From: mkarlsson@unam.mx (Marisol Karlsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Dec18.000355.6284@unam.mx>
+Date: Wed, 18 Dec 1996 00:03:55 GMT
+References: <1996Dec17.054955.9226@pacbell.net>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1996Dec17.054955.9226@pacbell.net>, brodriguez@pacbell.net (Bastien Rodríguez) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+> By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Marisol Karlsson <mkarlsson@unam.mx>
+Practical Peripherals 14.4 @ 28,800 bps
+"When every node is whole, the channel opens."
+
+From kchoi@mindspring.com Thu Dec 19 11:44:55 1996
+Path: ashpoly!cascade!brgate!saturno!mindspring!kchoi
+From: kchoi@mindspring.com (Karen Choi)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Dec19.114455.8032@mindspring.com>
+Date: Thu, 19 Dec 1996 11:44:55 GMT
+References: <1996Dec17.054955.9226@pacbell.net> <1996Dec18.000355.6284@unam.mx>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Dec18.000355.6284@unam.mx>, mkarlsson@unam.mx (Marisol Karlsson) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Karen Choi | kchoi@mindspring.com
+PGP Key fingerprint: FC3F 6F2D 94C1 4726
+"Keep the channels open."
+

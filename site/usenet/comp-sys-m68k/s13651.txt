@@ -1,0 +1,120 @@
+From lrobertson@rwth-aachen.de Mon Jan 10 05:35:31 1994
+Path: ashpoly!cascade!brgate!saturno!rwth-aachen!lrobertson
+From: lrobertson@rwth-aachen.de (Lars Robertson)
+Newsgroups: comp.sys.m68k
+Subject: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Jan10.053531.4844@rwth-aachen.de>
+Date: Mon, 10 Jan 1994 05:35:31 GMT
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+Lars Robertson <lrobertson@rwth-aachen.de>
+Hayes Optima 288 @ ISDN 64k bps
+"Extraordinary claims require extraordinary spectra."
+
+From hsilva@unam.mx Tue Jan 11 15:46:31 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!unam!hsilva
+From: hsilva@unam.mx (Heather Silva)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Jan11.154631.6714@unam.mx>
+Date: Tue, 11 Jan 1994 15:46:31 GMT
+References: <1994Jan10.053531.4844@rwth-aachen.de>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1994Jan10.053531.4844@rwth-aachen.de>, lrobertson@rwth-aachen.de (Lars Robertson) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Heather Silva <hsilva@unam.mx>
+*PLONK* filter active for trolls.
+Sun SparcStation 20 - NetBSD 1.0
+
+From cmoreno@u-tokyo.ac.jp Tue Jan 11 21:21:31 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!u-tokyo!cmoreno
+From: cmoreno@u-tokyo.ac.jp (Callum Moreno)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Jan11.212131.3829@u-tokyo.ac.jp>
+Date: Tue, 11 Jan 1994 21:21:31 GMT
+References: <1994Jan10.053531.4844@rwth-aachen.de> <1994Jan11.154631.6714@unam.mx>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1994Jan11.154631.6714@unam.mx>, hsilva@unam.mx (Heather Silva) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+> Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Callum Moreno <cmoreno@u-tokyo.ac.jp>
+*PLONK* filter active for trolls.
+486DX2/66 (Linux 1.2.13) - NetBSD 1.0
+
+From mmuller@pacbell.net Tue Jan 11 23:19:31 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!pacbell!mmuller
+From: mmuller@pacbell.net (Mathieu Müller)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Jan11.231931.6001@pacbell.net>
+Date: Tue, 11 Jan 1994 23:19:31 GMT
+References: <1994Jan10.053531.4844@rwth-aachen.de> <1994Jan11.154631.6714@unam.mx> <1994Jan11.212131.3829@u-tokyo.ac.jp>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Jan11.212131.3829@u-tokyo.ac.jp>, cmoreno@u-tokyo.ac.jp (Callum Moreno) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Mathieu Müller <mmuller@pacbell.net>
+"Extraordinary claims require extraordinary spectra."
+Acorn RiscPC 600 / AmigaOS 3.1
+
+From jlopez@netcom.com Thu Jan 13 14:05:31 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!netcom!jlopez
+From: jlopez@netcom.com (Jens López)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Jan13.140531.6544@netcom.com>
+Date: Thu, 13 Jan 1994 14:05:31 GMT
+References: <1994Jan10.053531.4844@rwth-aachen.de> <1994Jan11.154631.6714@unam.mx> <1994Jan11.212131.3829@u-tokyo.ac.jp> <1994Jan11.231931.6001@pacbell.net>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Jan11.231931.6001@pacbell.net>, mmuller@pacbell.net (Mathieu Müller) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+=== Jens López ===
+Dept of Electrical Engineering, NETCOM On-Line Communication Services
+"5 sigma is a discovery. 7 is a question."
+

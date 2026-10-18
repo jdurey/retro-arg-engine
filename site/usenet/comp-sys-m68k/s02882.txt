@@ -1,0 +1,94 @@
+From dkowalski@kth.se Tue Nov 28 04:34:33 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!kth!dkowalski
+From: dkowalski@kth.se (Diego Kowalski)
+Newsgroups: comp.sys.m68k
+Subject: Question: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Nov28.043433.9000@kth.se>
+Date: Tue, 28 Nov 1995 04:34:33 GMT
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+
+Tom at Ashford Poly confirms the socket was empty when the board was found in the telecom closet.
+
+-- 
+Diego Kowalski -- Royal Institute of Technology, Stockholm
+"The carrier frequency does not drift by accident."
+
+From iwatanabe@u-tokyo.ac.jp Wed Nov 29 20:17:33 1995
+Path: ashpoly!cascade!brgate!saturno!u-tokyo!iwatanabe
+From: iwatanabe@u-tokyo.ac.jp (Ines Watanabe)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Nov29.201733.5253@u-tokyo.ac.jp>
+Date: Wed, 29 Nov 1995 20:17:33 GMT
+References: <1995Nov28.043433.9000@kth.se>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Nov28.043433.9000@kth.se>, dkowalski@kth.se (Diego Kowalski) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Ines Watanabe -- University of Tokyo Department of Information Science
+"We don't sign stars. We build them."
+
+From fbrennan@illinois.edu Wed Nov 29 22:07:33 1995
+Path: ashpoly!cascade!bigsur!illinois!fbrennan
+From: fbrennan@illinois.edu (Fiona Brennan)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Nov29.220733.5569@illinois.edu>
+Date: Wed, 29 Nov 1995 22:07:33 GMT
+References: <1995Nov28.043433.9000@kth.se>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Nov28.043433.9000@kth.se>, dkowalski@kth.se (Diego Kowalski) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Fiona Brennan <fbrennan@illinois.edu>
+"5 sigma is a discovery. 7 is a question."
+Amiga 3000T / FreeBSD 2.1
+
+From doliveira@u-tokyo.ac.jp Thu Nov 30 19:25:33 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!u-tokyo!doliveira
+From: doliveira@u-tokyo.ac.jp (Dave Oliveira)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Nov30.192533.3572@u-tokyo.ac.jp>
+Date: Thu, 30 Nov 1995 19:25:33 GMT
+References: <1995Nov28.043433.9000@kth.se> <1995Nov29.201733.5253@u-tokyo.ac.jp>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Nov29.201733.5253@u-tokyo.ac.jp>, iwatanabe@u-tokyo.ac.jp (Ines Watanabe) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+-- 
+Dave Oliveira <doliveira@u-tokyo.ac.jp>
+"We don't sign stars. We build them."
+486DX2/66 (Linux 1.2.13) / NEXTSTEP 3.3
+

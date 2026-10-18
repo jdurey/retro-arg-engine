@@ -1,0 +1,92 @@
+From nsantos@purdue.edu Sun Mar 19 04:40:37 1995
+Path: ashpoly!cascade!bigsur!purdue!nsantos
+From: nsantos@purdue.edu (Natalia Santos)
+Newsgroups: comp.sys.m68k
+Subject: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Mar19.044037.6988@purdue.edu>
+Date: Sun, 19 Mar 1995 04:40:37 GMT
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Natalia Santos <nsantos@purdue.edu>
+SupraFAXModem 28.8 @ 14,400 bps
+"They will send a copy in my place."
+
+From msanchez@u-tokyo.ac.jp Mon Mar 20 18:57:37 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!u-tokyo!msanchez
+From: msanchez@u-tokyo.ac.jp (Morag Sánchez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Mar20.185737.6151@u-tokyo.ac.jp>
+Date: Mon, 20 Mar 1995 18:57:37 GMT
+References: <1995Mar19.044037.6988@purdue.edu>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Mar19.044037.6988@purdue.edu>, nsantos@purdue.edu (Natalia Santos) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Morag Sánchez -- University of Tokyo Department of Information Science
+"Measuring a record you own is listening, not piracy."
+
+From rkarlsson@pacbell.net Tue Mar 21 00:29:37 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!pacbell!rkarlsson
+From: rkarlsson@pacbell.net (Renata Karlsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Mar21.002937.3675@pacbell.net>
+Date: Tue, 21 Mar 1995 00:29:37 GMT
+References: <1995Mar19.044037.6988@purdue.edu> <1995Mar20.185737.6151@u-tokyo.ac.jp>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Mar20.185737.6151@u-tokyo.ac.jp>, msanchez@u-tokyo.ac.jp (Morag Sánchez) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+=== Renata Karlsson ===
+Dept of Electrical Engineering, Pacific Bell Internet Services
+"When every node is whole, the channel opens."
+
+From fmuller@panix.com Thu Mar 23 03:56:37 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!panix!fmuller
+From: fmuller@panix.com (Freya Müller)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Mar23.035637.8361@panix.com>
+Date: Thu, 23 Mar 1995 03:56:37 GMT
+References: <1995Mar19.044037.6988@purdue.edu> <1995Mar20.185737.6151@u-tokyo.ac.jp> <1995Mar21.002937.3675@pacbell.net>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Mar21.002937.3675@pacbell.net>, rkarlsson@pacbell.net (Renata Karlsson) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Freya Müller <fmuller@panix.com>
+US Robotics Courier V.34 @ 19,200 bps
+"There are 14 nodes and only 10 countries. Count again."
+

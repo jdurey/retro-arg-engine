@@ -1,0 +1,99 @@
+From mbrennan@utexas.edu Fri Sep 02 11:08:18 1994
+Path: ashpoly!cascade!bigsur!utexas!mbrennan
+From: mbrennan@utexas.edu (Mei Brennan)
+Newsgroups: comp.dsp
+Subject: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Sep02.110818.5626@utexas.edu>
+Date: Fri, 02 Sep 1994 11:08:18 GMT
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+Mei Brennan <mbrennan@utexas.edu>
+US Robotics Courier V.34 @ 28,800 bps
+"The carrier frequency does not drift by accident."
+
+From msuzuki@utexas.edu Sat Sep 03 22:48:18 1994
+Path: ashpoly!cascade!bigsur!utexas!msuzuki
+From: msuzuki@utexas.edu (Matthias Suzuki)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Sep03.224818.4933@utexas.edu>
+Date: Sat, 03 Sep 1994 22:48:18 GMT
+References: <1994Sep02.110818.5626@utexas.edu>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1994Sep02.110818.5626@utexas.edu>, mbrennan@utexas.edu (Mei Brennan) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Matthias Suzuki <msuzuki@utexas.edu>
+*PLONK* filter active for trolls.
+Commodore Amiga 500 (1MB OCS) - NetBSD 1.0
+
+From smoreno@unam.mx Sun Sep 04 14:36:18 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!unam!smoreno
+From: smoreno@unam.mx (Seo-yeon Moreno)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Sep04.143618.5995@unam.mx>
+Date: Sun, 04 Sep 1994 14:36:18 GMT
+References: <1994Sep02.110818.5626@utexas.edu> <1994Sep03.224818.4933@utexas.edu>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1994Sep03.224818.4933@utexas.edu>, msuzuki@utexas.edu (Matthias Suzuki) writes:
+> Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+> Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Seo-yeon Moreno <smoreno@unam.mx>
+"Tape doesn't lie at 02:14. Ears do."
+486DX4/100 (FreeBSD 2.0.5) / System 7.5.1
+
+From shernandez@kiae.su Tue Sep 06 09:58:18 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!kiae!shernandez
+From: shernandez@kiae.su (Seo-yeon Hernández)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Sep06.095818.3968@kiae.su>
+Date: Tue, 06 Sep 1994 09:58:18 GMT
+References: <1994Sep02.110818.5626@utexas.edu> <1994Sep03.224818.4933@utexas.edu>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1994Sep03.224818.4933@utexas.edu>, msuzuki@utexas.edu (Matthias Suzuki) writes:
+> Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+> Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Seo-yeon Hernández
+Opinions expressed are solely my own and not those of Kurchatov Institute of Atomic Energy, Moscow.
+------------------------------------------------------------
+

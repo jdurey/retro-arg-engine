@@ -1,0 +1,120 @@
+From kfischer@illinois.edu Mon Oct 07 05:06:06 1996
+Path: ashpoly!cascade!bigsur!illinois!kfischer
+From: kfischer@illinois.edu (Kenji Fischer)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Oct07.050606.8923@illinois.edu>
+Date: Mon, 07 Oct 1996 05:06:06 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+=== Kenji Fischer ===
+Dept of Electrical Engineering, University of Illinois Urbana-Champaign
+"Tape doesn't lie at 02:14. Ears do."
+
+From stanaka@panix.com Tue Oct 08 01:57:06 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!panix!stanaka
+From: stanaka@panix.com (Sun-mi Tanaka)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Oct08.015706.7120@panix.com>
+Date: Tue, 08 Oct 1996 01:57:06 GMT
+References: <1996Oct07.050606.8923@illinois.edu>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Oct07.050606.8923@illinois.edu>, kfischer@illinois.edu (Kenji Fischer) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+Sun-mi Tanaka | stanaka@panix.com
+PGP Key fingerprint: 698D 8831 2763 B069
+"Keep the channels open."
+
+From rkarlsson@berkeley.edu Wed Oct 09 22:24:06 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!berkeley!rkarlsson
+From: rkarlsson@berkeley.edu (Renata Karlsson)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Oct09.222406.7655@berkeley.edu>
+Date: Wed, 09 Oct 1996 22:24:06 GMT
+References: <1996Oct07.050606.8923@illinois.edu> <1996Oct08.015706.7120@panix.com>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Oct08.015706.7120@panix.com>, stanaka@panix.com (Sun-mi Tanaka) writes:
+> Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Renata Karlsson <rkarlsson@berkeley.edu>
+*PLONK* filter active for trolls.
+Amiga 1200 (Blizzard 030/50) - NetBSD 1.0
+
+From mcampbell@hanse.de Thu Oct 10 13:15:06 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!hanse!mcampbell
+From: mcampbell@hanse.de (Mikhail Campbell)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Oct10.131506.8159@hanse.de>
+Date: Thu, 10 Oct 1996 13:15:06 GMT
+References: <1996Oct07.050606.8923@illinois.edu>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1996Oct07.050606.8923@illinois.edu>, kfischer@illinois.edu (Kenji Fischer) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Mikhail Campbell
+Opinions expressed are solely my own and not those of Hanse-Netzwerk Hamburg.
+------------------------------------------------------------
+
+From tcampbell@titech.ac.jp Fri Oct 11 13:32:06 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!titech!tcampbell
+From: tcampbell@titech.ac.jp (Tyler Campbell)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Oct11.133206.3804@titech.ac.jp>
+Date: Fri, 11 Oct 1996 13:32:06 GMT
+References: <1996Oct07.050606.8923@illinois.edu> <1996Oct08.015706.7120@panix.com> <1996Oct09.222406.7655@berkeley.edu>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1996Oct09.222406.7655@berkeley.edu>, rkarlsson@berkeley.edu (Renata Karlsson) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Tyler Campbell -- Tokyo Institute of Technology Computer Centre
+"Measuring a record you own is listening, not piracy."
+

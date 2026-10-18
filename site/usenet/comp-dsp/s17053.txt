@@ -1,0 +1,96 @@
+From bgarcia@tum.de Fri May 12 03:43:54 1995
+Path: ashpoly!cascade!mxgate!coyoacan!tum!bgarcia
+From: bgarcia@tum.de (Bill García)
+Newsgroups: comp.dsp
+Subject: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May12.034354.3002@tum.de>
+Date: Fri, 12 May 1995 03:43:54 GMT
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Bill García -- Technische Universität München
+"Measuring a record you own is listening, not piracy."
+
+From rlarsson@mit.edu Fri May 12 22:56:54 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!mit!rlarsson
+From: rlarsson@mit.edu (Rodrigo Larsson)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May12.225654.2240@mit.edu>
+Date: Fri, 12 May 1995 22:56:54 GMT
+References: <1995May12.034354.3002@tum.de>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995May12.034354.3002@tum.de>, bgarcia@tum.de (Bill García) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Rodrigo Larsson
+Tape trading list upon request. SASE required for international mail.
+
+From mmoreno@ox.ac.uk Sun May 14 15:18:54 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!ox!mmoreno
+From: mmoreno@ox.ac.uk (Morag Moreno)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May14.151854.5679@ox.ac.uk>
+Date: Sun, 14 May 1995 15:18:54 GMT
+References: <1995May12.034354.3002@tum.de> <1995May12.225654.2240@mit.edu>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995May12.225654.2240@mit.edu>, rlarsson@mit.edu (Rodrigo Larsson) writes:
+> Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Morag Moreno <mmoreno@ox.ac.uk>
+*PLONK* filter active for trolls.
+486DX2/66 (Linux 1.2.13) - NetBSD 1.0
+
+From lmoreno@titech.ac.jp Mon May 15 04:01:54 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!titech!lmoreno
+From: lmoreno@titech.ac.jp (Lars Moreno)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May15.040154.4216@titech.ac.jp>
+Date: Mon, 15 May 1995 04:01:54 GMT
+References: <1995May12.034354.3002@tum.de> <1995May12.225654.2240@mit.edu>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995May12.225654.2240@mit.edu>, rlarsson@mit.edu (Rodrigo Larsson) writes:
+> Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+Lars Moreno | lmoreno@titech.ac.jp
+PGP Key fingerprint: 4A68 2B44 B0FB 4667
+"Keep the channels open."
+

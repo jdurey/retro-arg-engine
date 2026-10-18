@@ -1,0 +1,94 @@
+From fdubois@purdue.edu Wed Jan 18 05:02:17 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!purdue!fdubois
+From: fdubois@purdue.edu (Freya Dubois)
+Newsgroups: comp.dsp
+Subject: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jan18.050217.7804@purdue.edu>
+Date: Wed, 18 Jan 1995 05:02:17 GMT
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Freya Dubois
+Opinions expressed are solely my own and not those of Purdue University Engineering Computer Network.
+------------------------------------------------------------
+
+From mtanaka@kth.se Fri Jan 20 04:06:17 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!kth!mtanaka
+From: mtanaka@kth.se (Mathieu Tanaka)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jan20.040617.3765@kth.se>
+Date: Fri, 20 Jan 1995 04:06:17 GMT
+References: <1995Jan18.050217.7804@purdue.edu>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Jan18.050217.7804@purdue.edu>, fdubois@purdue.edu (Freya Dubois) writes:
+> Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Mathieu Tanaka <mtanaka@kth.se>
+*PLONK* filter active for trolls.
+486DX4/100 (FreeBSD 2.0.5) - NetBSD 1.0
+
+From mramirez@illinois.edu Fri Jan 20 21:41:17 1995
+Path: ashpoly!cascade!brgate!saturno!illinois!mramirez
+From: mramirez@illinois.edu (Marta Ramírez)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jan20.214117.1641@illinois.edu>
+Date: Fri, 20 Jan 1995 21:41:17 GMT
+References: <1995Jan18.050217.7804@purdue.edu> <1995Jan20.040617.3765@kth.se>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Jan20.040617.3765@kth.se>, mtanaka@kth.se (Mathieu Tanaka) writes:
+> I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+=== Marta Ramírez ===
+Dept of Electrical Engineering, University of Illinois Urbana-Champaign
+"Do not worship the copy."
+
+From mito@kiae.su Sun Jan 22 23:52:17 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!kiae!mito
+From: mito@kiae.su (Min-jun Ito)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jan22.235217.1118@kiae.su>
+Date: Sun, 22 Jan 1995 23:52:17 GMT
+References: <1995Jan18.050217.7804@purdue.edu> <1995Jan20.040617.3765@kth.se>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Jan20.040617.3765@kth.se>, mtanaka@kth.se (Mathieu Tanaka) writes:
+> I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Min-jun Ito
+Tape trading list upon request. SASE required for international mail.
+

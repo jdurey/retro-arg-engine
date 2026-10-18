@@ -1,0 +1,49 @@
+From hlaurent@purdue.edu Wed Apr 26 16:06:38 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!purdue!hlaurent
+From: hlaurent@purdue.edu (Hana Laurent)
+Newsgroups: comp.dsp
+Subject: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Apr26.160638.9558@purdue.edu>
+Date: Wed, 26 Apr 1995 16:06:38 GMT
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+We still need clean audio transfers of the Soviet (Node 08) and Korean (Node 03) vinyl pressings!
+
+-- 
+Hana Laurent -- Purdue University Engineering Computer Network
+"Row 14. No joke."
+
+From ehughes@kiae.su Fri Apr 28 15:10:38 1995
+Path: ashpoly!cascade!mxgate!coyoacan!kiae!ehughes
+From: ehughes@kiae.su (Emi Hughes)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Apr28.151038.9468@kiae.su>
+Date: Fri, 28 Apr 1995 15:10:38 GMT
+References: <1995Apr26.160638.9558@purdue.edu>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1995Apr26.160638.9558@purdue.edu>, hlaurent@purdue.edu (Hana Laurent) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+> Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Emi Hughes <ehughes@kiae.su>
+"A soul is not exclusive to biology."
+Sun SparcStation 20 / SunOS 4.1.4
+

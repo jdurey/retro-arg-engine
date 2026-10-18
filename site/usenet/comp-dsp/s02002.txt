@@ -1,0 +1,117 @@
+From ilaurent@earthlink.net Thu Apr 11 12:20:00 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!earthlink!ilaurent
+From: ilaurent@earthlink.net (Ines Laurent)
+Newsgroups: comp.dsp
+Subject: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Apr11.122000.3614@earthlink.net>
+Date: Thu, 11 Apr 1996 12:20:00 GMT
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+MATLAB script available upon request via email.
+
+-- 
+=== Ines Laurent ===
+Dept of Electrical Engineering, EarthLink Network
+"Extraordinary claims require extraordinary spectra."
+
+From jtakahashi@purdue.edu Fri Apr 12 16:35:00 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!purdue!jtakahashi
+From: jtakahashi@purdue.edu (Ji-woo Takahashi)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Apr12.163500.4448@purdue.edu>
+Date: Fri, 12 Apr 1996 16:35:00 GMT
+References: <1996Apr11.122000.3614@earthlink.net>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Apr11.122000.3614@earthlink.net>, ilaurent@earthlink.net (Ines Laurent) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+> A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Ji-woo Takahashi
+Opinions expressed are solely my own and not those of Purdue University Engineering Computer Network.
+------------------------------------------------------------
+
+From dkang@tum.de Sat Apr 13 22:00:00 1996
+Path: ashpoly!cascade!brgate!saturno!tum!dkang
+From: dkang@tum.de (Dave Kang)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Apr13.220000.5343@tum.de>
+Date: Sat, 13 Apr 1996 22:00:00 GMT
+References: <1996Apr11.122000.3614@earthlink.net>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Apr11.122000.3614@earthlink.net>, ilaurent@earthlink.net (Ines Laurent) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Dave Kang | dkang@tum.de
+PGP Key fingerprint: E58F CD42 017E B95C
+"Keep the channels open."
+
+From jnakamura@pipeline.com Sun Apr 14 12:16:00 1996
+Path: ashpoly!cascade!bigsur!pipeline!jnakamura
+From: jnakamura@pipeline.com (Julien Nakamura)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Apr14.121600.5904@pipeline.com>
+Date: Sun, 14 Apr 1996 12:16:00 GMT
+References: <1996Apr11.122000.3614@earthlink.net>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Apr11.122000.3614@earthlink.net>, ilaurent@earthlink.net (Ines Laurent) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+> A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Julien Nakamura -- The Pipeline Internet Network
+"Hardware is temporary. The signal survives."
+
+From emartinez@inria.fr Mon Apr 15 04:57:00 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!inria!emartinez
+From: emartinez@inria.fr (Élodie Martínez)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Apr15.045700.6895@inria.fr>
+Date: Mon, 15 Apr 1996 04:57:00 GMT
+References: <1996Apr11.122000.3614@earthlink.net> <1996Apr12.163500.4448@purdue.edu>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Apr12.163500.4448@purdue.edu>, jtakahashi@purdue.edu (Ji-woo Takahashi) writes:
+> I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Élodie Martínez | emartinez@inria.fr
+PGP Key fingerprint: F0C5 C151 BB11 8428
+"Keep the channels open."
+

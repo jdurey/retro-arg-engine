@@ -1,0 +1,70 @@
+From gschneider@clari.net Tue Apr 12 15:31:37 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!clari!gschneider
+From: gschneider@clari.net (Göran Schneider)
+Newsgroups: comp.dsp
+Subject: [FLAME] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Apr12.153137.6141@clari.net>
+Date: Tue, 12 Apr 1994 15:31:37 GMT
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+Göran Schneider
+Opinions expressed are solely my own and not those of ClariNet Communications Corp.
+------------------------------------------------------------
+
+From rmuller@netcom.com Thu Apr 14 13:43:37 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!netcom!rmuller
+From: rmuller@netcom.com (Rodrigo Müller)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Apr14.134337.9138@netcom.com>
+Date: Thu, 14 Apr 1994 13:43:37 GMT
+References: <1994Apr12.153137.6141@clari.net>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Apr12.153137.6141@clari.net>, gschneider@clari.net (Göran Schneider) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+-- 
+Rodrigo Müller <rmuller@netcom.com>
+SupraFAXModem 28.8 @ 14,400 bps
+"A soul is not exclusive to biology."
+
+From hcampbell@cmu.edu Fri Apr 15 19:37:37 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!cmu!hcampbell
+From: hcampbell@cmu.edu (Hugo Campbell)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Apr15.193737.3828@cmu.edu>
+Date: Fri, 15 Apr 1994 19:37:37 GMT
+References: <1994Apr12.153137.6141@clari.net> <1994Apr14.134337.9138@netcom.com>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Apr14.134337.9138@netcom.com>, rmuller@netcom.com (Rodrigo Müller) writes:
+> Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Hugo Campbell | hcampbell@cmu.edu
+PGP Key fingerprint: F3BB 98A9 784A 3AF0
+"Keep the channels open."
+

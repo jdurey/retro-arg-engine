@@ -1,0 +1,121 @@
+From ffournier@cern.ch Sun Nov 13 21:02:48 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!cern!ffournier
+From: ffournier@cern.ch (Fiona Fournier)
+Newsgroups: comp.sys.m68k
+Subject: Discussion: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Nov13.210248.2436@cern.ch>
+Date: Sun, 13 Nov 1994 21:02:48 GMT
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+Does anyone have a 27C256 EPROM marked 'MH-U14' or 'ORION-CRYPTO'?
+
+-- 
+Fiona Fournier <ffournier@cern.ch>
+"Hardware is temporary. The signal survives."
+NeXTstation Turbo Color / NEXTSTEP 3.3
+
+From bsouza@unam.mx Tue Nov 15 06:32:48 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!unam!bsouza
+From: bsouza@unam.mx (Brian Souza)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Nov15.063248.2168@unam.mx>
+Date: Tue, 15 Nov 1994 06:32:48 GMT
+References: <1994Nov13.210248.2436@cern.ch>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1994Nov13.210248.2436@cern.ch>, ffournier@cern.ch (Fiona Fournier) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Brian Souza -- Universidad Nacional Autónoma de México (DGSCA)
+"There are 14 nodes and only 10 countries. Count again."
+
+From kpetrov@mindspring.com Wed Nov 16 13:16:48 1994
+Path: ashpoly!cascade!brgate!saturno!mindspring!kpetrov
+From: kpetrov@mindspring.com (Katrin Petrov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Nov16.131648.7569@mindspring.com>
+Date: Wed, 16 Nov 1994 13:16:48 GMT
+References: <1994Nov13.210248.2436@cern.ch>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1994Nov13.210248.2436@cern.ch>, ffournier@cern.ch (Fiona Fournier) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Katrin Petrov <kpetrov@mindspring.com>
+Hayes Optima 288 @ 28,800 bps
+"5 sigma is a discovery. 7 is a question."
+
+From ntanaka@cmu.edu Wed Nov 16 22:48:48 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!cmu!ntanaka
+From: ntanaka@cmu.edu (Natalia Tanaka)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Nov16.224848.7429@cmu.edu>
+Date: Wed, 16 Nov 1994 22:48:48 GMT
+References: <1994Nov13.210248.2436@cern.ch> <1994Nov16.131648.7569@mindspring.com>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Nov16.131648.7569@mindspring.com>, kpetrov@mindspring.com (Katrin Petrov) writes:
+> Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Natalia Tanaka <ntanaka@cmu.edu>
+"Hardware is temporary. The signal survives."
+486DX4/100 (FreeBSD 2.0.5) / System 7.5.1
+
+From mito@kth.se Sat Nov 19 02:31:48 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!kth!mito
+From: mito@kth.se (Matthias Ito)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Nov19.023148.8215@kth.se>
+Date: Sat, 19 Nov 1994 02:31:48 GMT
+References: <1994Nov13.210248.2436@cern.ch>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1994Nov13.210248.2436@cern.ch>, ffournier@cern.ch (Fiona Fournier) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Matthias Ito <mito@kth.se>
+*PLONK* filter active for trolls.
+Amiga 1200 (Blizzard 030/50) - NetBSD 1.0
+

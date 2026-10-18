@@ -1,0 +1,93 @@
+From egonzalez@pipeline.com Tue Aug 01 12:10:29 1995
+Path: ashpoly!cascade!brgate!saturno!pipeline!egonzalez
+From: egonzalez@pipeline.com (Élodie González)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Aug01.121029.6484@pipeline.com>
+Date: Tue, 01 Aug 1995 12:10:29 GMT
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Élodie González
+Opinions expressed are solely my own and not those of The Pipeline Internet Network.
+------------------------------------------------------------
+
+From snakamura@clari.net Tue Aug 01 16:24:29 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!clari!snakamura
+From: snakamura@clari.net (Sun-mi Nakamura)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Aug01.162429.1109@clari.net>
+Date: Tue, 01 Aug 1995 16:24:29 GMT
+References: <1995Aug01.121029.6484@pipeline.com>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Aug01.121029.6484@pipeline.com>, egonzalez@pipeline.com (Élodie González) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Sun-mi Nakamura -- ClariNet Communications Corp
+"Measuring a record you own is listening, not piracy."
+
+From scampbell@ox.ac.uk Thu Aug 03 02:48:29 1995
+Path: ashpoly!cascade!brgate!saturno!ox!scampbell
+From: scampbell@ox.ac.uk (Sun-mi Campbell)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Aug03.024829.4156@ox.ac.uk>
+Date: Thu, 03 Aug 1995 02:48:29 GMT
+References: <1995Aug01.121029.6484@pipeline.com> <1995Aug01.162429.1109@clari.net>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Aug01.162429.1109@clari.net>, snakamura@clari.net (Sun-mi Nakamura) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Sun-mi Campbell <scampbell@ox.ac.uk>
+"A soul is not exclusive to biology."
+Atari TT030 / SunOS 4.1.4
+
+From ksokolov@pipeline.com Fri Aug 04 09:39:29 1995
+Path: ashpoly!cascade!mxgate!coyoacan!pipeline!ksokolov
+From: ksokolov@pipeline.com (Katrin Sokolov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Aug04.093929.6566@pipeline.com>
+Date: Fri, 04 Aug 1995 09:39:29 GMT
+References: <1995Aug01.121029.6484@pipeline.com> <1995Aug01.162429.1109@clari.net> <1995Aug03.024829.4156@ox.ac.uk>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Aug03.024829.4156@ox.ac.uk>, scampbell@ox.ac.uk (Sun-mi Campbell) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Katrin Sokolov | ksokolov@pipeline.com
+PGP Key fingerprint: 0D02 3C8C 36F3 A48D
+"Keep the channels open."
+

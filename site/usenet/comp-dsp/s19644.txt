@@ -1,0 +1,95 @@
+From ismirnov@berkeley.edu Thu Feb 16 12:39:30 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!berkeley!ismirnov
+From: ismirnov@berkeley.edu (Ines Smirnov)
+Newsgroups: comp.dsp
+Subject: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Feb16.123930.7421@berkeley.edu>
+Date: Thu, 16 Feb 1995 12:39:30 GMT
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+Ines Smirnov | ismirnov@berkeley.edu
+PGP Key fingerprint: 00E7 C86A 5A10 2DF7
+"Keep the channels open."
+
+From hmartinez@netcom.com Sat Feb 18 05:48:30 1995
+Path: ashpoly!cascade!brgate!saturno!netcom!hmartinez
+From: hmartinez@netcom.com (Hana Martínez)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Feb18.054830.1692@netcom.com>
+Date: Sat, 18 Feb 1995 05:48:30 GMT
+References: <1995Feb16.123930.7421@berkeley.edu>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Feb16.123930.7421@berkeley.edu>, ismirnov@berkeley.edu (Ines Smirnov) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+> A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Hana Martínez -- NETCOM On-Line Communication Services
+"Marcus is not one man."
+
+From hpopov@cern.ch Sat Feb 18 08:30:30 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!cern!hpopov
+From: hpopov@cern.ch (Hana Popov)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Feb18.083030.2778@cern.ch>
+Date: Sat, 18 Feb 1995 08:30:30 GMT
+References: <1995Feb16.123930.7421@berkeley.edu>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 12
+
+In article <1995Feb16.123930.7421@berkeley.edu>, ismirnov@berkeley.edu (Ines Smirnov) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+> A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+Hana Popov | hpopov@cern.ch
+PGP Key fingerprint: 183A 94DE CB49 4DA1
+"Keep the channels open."
+
+From lsanchez@titech.ac.jp Sun Feb 19 12:33:30 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!titech!lsanchez
+From: lsanchez@titech.ac.jp (Lucia Sánchez)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Feb19.123330.1800@titech.ac.jp>
+Date: Sun, 19 Feb 1995 12:33:30 GMT
+References: <1995Feb16.123930.7421@berkeley.edu>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Feb16.123930.7421@berkeley.edu>, ismirnov@berkeley.edu (Ines Smirnov) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+-- 
+Lucia Sánchez -- Tokyo Institute of Technology Computer Centre
+"The hatch is open. Is anyone listening?"
+

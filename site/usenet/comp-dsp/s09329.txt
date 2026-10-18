@@ -1,0 +1,47 @@
+From drobertson@stanford.edu Wed Sep 28 23:04:35 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!stanford!drobertson
+From: drobertson@stanford.edu (Dave Robertson)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Sep28.230435.2634@stanford.edu>
+Date: Wed, 28 Sep 1994 23:04:35 GMT
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+Dave Robertson <drobertson@stanford.edu>
+Zyxel U-1496E @ 19,200 bps
+"A soul is not exclusive to biology."
+
+From snovak@utexas.edu Thu Sep 29 12:26:35 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!utexas!snovak
+From: snovak@utexas.edu (Sergei Novak)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Sep29.122635.9281@utexas.edu>
+Date: Thu, 29 Sep 1994 12:26:35 GMT
+References: <1994Sep28.230435.2634@stanford.edu>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Sep28.230435.2634@stanford.edu>, drobertson@stanford.edu (Dave Robertson) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+-- 
+Sergei Novak
+Opinions expressed are solely my own and not those of University of Texas at Austin.
+------------------------------------------------------------
+

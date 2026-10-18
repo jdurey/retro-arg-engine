@@ -1,0 +1,93 @@
+From kmoreno@uni-hamburg.de Wed Feb 15 16:42:15 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!uni-hamburg!kmoreno
+From: kmoreno@uni-hamburg.de (Kenji Moreno)
+Newsgroups: comp.sys.m68k
+Subject: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Feb15.164215.8876@uni-hamburg.de>
+Date: Wed, 15 Feb 1995 16:42:15 GMT
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+Hardware disassembly report for Motorola hardware hackers.
+
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+
+Does anyone have a 27C256 EPROM marked 'MH-U14' or 'ORION-CRYPTO'?
+
+-- 
+Kenji Moreno -- Universität Hamburg Fachbereich Informatik
+"Hold for relay."
+
+From dokonkwo@rwth-aachen.de Fri Feb 17 00:04:15 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!rwth-aachen!dokonkwo
+From: dokonkwo@rwth-aachen.de (Dmitri Okonkwo)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Feb17.000415.3597@rwth-aachen.de>
+Date: Fri, 17 Feb 1995 00:04:15 GMT
+References: <1995Feb15.164215.8876@uni-hamburg.de>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Feb15.164215.8876@uni-hamburg.de>, kmoreno@uni-hamburg.de (Kenji Moreno) writes:
+> Hardware disassembly report for Motorola hardware hackers.
+
+Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Dmitri Okonkwo <dokonkwo@rwth-aachen.de>
+*PLONK* filter active for trolls.
+Acorn RiscPC 600 - NetBSD 1.0
+
+From rpetrov@panix.com Sat Feb 18 04:25:15 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!panix!rpetrov
+From: rpetrov@panix.com (Renata Petrov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Feb18.042515.6539@panix.com>
+Date: Sat, 18 Feb 1995 04:25:15 GMT
+References: <1995Feb15.164215.8876@uni-hamburg.de>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Feb15.164215.8876@uni-hamburg.de>, kmoreno@uni-hamburg.de (Kenji Moreno) writes:
+> Hardware disassembly report for Motorola hardware hackers.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Renata Petrov
+Tape trading list upon request. SASE required for international mail.
+
+From agirard@earthlink.net Sun Feb 19 12:09:15 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!earthlink!agirard
+From: agirard@earthlink.net (Astrid Girard)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Feb19.120915.1835@earthlink.net>
+Date: Sun, 19 Feb 1995 12:09:15 GMT
+References: <1995Feb15.164215.8876@uni-hamburg.de> <1995Feb18.042515.6539@panix.com>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Feb18.042515.6539@panix.com>, rpetrov@panix.com (Renata Petrov) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+=== Astrid Girard ===
+Dept of Electrical Engineering, EarthLink Network
+"Marcus is not one man."
+

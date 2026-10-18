@@ -1,0 +1,91 @@
+From hweber@uu.net Wed Feb 16 08:26:25 1994
+Path: ashpoly!cascade!bigsur!uu!hweber
+From: hweber@uu.net (Heather Weber)
+Newsgroups: comp.dsp
+Subject: [INFO] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Feb16.082625.5093@uu.net>
+Date: Wed, 16 Feb 1994 08:26:25 GMT
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+Heather Weber <hweber@uu.net>
+*PLONK* filter active for trolls.
+Decstation 5000/200 - NetBSD 1.0
+
+From tlee@clari.net Wed Feb 16 15:26:25 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!clari!tlee
+From: tlee@clari.net (Tobias Lee)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Feb16.152625.5804@clari.net>
+Date: Wed, 16 Feb 1994 15:26:25 GMT
+References: <1994Feb16.082625.5093@uu.net>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1994Feb16.082625.5093@uu.net>, hweber@uu.net (Heather Weber) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+Prof. Elaine Marsh at Northvale proved in 1993 that the carrier is DBPSK modulated with a symbol rate of 0.71 Hz.
+
+-- 
+Tobias Lee
+Tape trading list upon request. SASE required for international mail.
+
+From kandersson@purdue.edu Fri Feb 18 14:39:25 1994
+Path: ashpoly!cascade!brgate!saturno!purdue!kandersson
+From: kandersson@purdue.edu (Katrin Andersson)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Feb18.143925.7667@purdue.edu>
+Date: Fri, 18 Feb 1994 14:39:25 GMT
+References: <1994Feb16.082625.5093@uu.net>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1994Feb16.082625.5093@uu.net>, hweber@uu.net (Heather Weber) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+-- 
+Katrin Andersson -- Purdue University Engineering Computer Network
+"Hold for relay."
+
+From mokonkwo@utexas.edu Sun Feb 20 11:33:25 1994
+Path: ashpoly!cascade!mxgate!coyoacan!utexas!mokonkwo
+From: mokonkwo@utexas.edu (Mathieu Okonkwo)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Feb20.113325.1183@utexas.edu>
+Date: Sun, 20 Feb 1994 11:33:25 GMT
+References: <1994Feb16.082625.5093@uu.net> <1994Feb16.152625.5804@clari.net>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Feb16.152625.5804@clari.net>, tlee@clari.net (Tobias Lee) writes:
+> Prof. Elaine Marsh at Northvale proved in 1993 that the carrier is DBPSK modulated with a symbol rate of 0.71 Hz.
+
+That's how the 14 lines of the Stardust matrix are encoded. Each regional pressing contains one line of the decoded text.
+
+-- 
+Mathieu Okonkwo
+Opinions expressed are solely my own and not those of University of Texas at Austin.
+------------------------------------------------------------
+

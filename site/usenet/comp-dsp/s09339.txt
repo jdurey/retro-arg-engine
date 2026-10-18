@@ -1,0 +1,118 @@
+From jbrennan@illinois.edu Mon Oct 28 11:40:03 1996
+Path: ashpoly!cascade!brgate!saturno!illinois!jbrennan
+From: jbrennan@illinois.edu (Julien Brennan)
+Newsgroups: comp.dsp
+Subject: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Oct28.114003.1186@illinois.edu>
+Date: Mon, 28 Oct 1996 11:40:03 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+Julien Brennan <jbrennan@illinois.edu>
+"Hold for relay."
+486DX4/100 (FreeBSD 2.0.5) / Linux 1.2.13
+
+From jnakamura@illinois.edu Wed Oct 30 00:22:03 1996
+Path: ashpoly!cascade!mxgate!coyoacan!illinois!jnakamura
+From: jnakamura@illinois.edu (Joachim Nakamura)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Oct30.002203.7783@illinois.edu>
+Date: Wed, 30 Oct 1996 00:22:03 GMT
+References: <1996Oct28.114003.1186@illinois.edu>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Oct28.114003.1186@illinois.edu>, jbrennan@illinois.edu (Julien Brennan) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+> A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+-- 
+Joachim Nakamura
+Tape trading list upon request. SASE required for international mail.
+
+From ilopez@clari.net Fri Nov 01 04:22:03 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!clari!ilopez
+From: ilopez@clari.net (Ines López)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Nov01.042203.5051@clari.net>
+Date: Fri, 01 Nov 1996 04:22:03 GMT
+References: <1996Oct28.114003.1186@illinois.edu> <1996Oct30.002203.7783@illinois.edu>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Oct30.002203.7783@illinois.edu>, jnakamura@illinois.edu (Joachim Nakamura) writes:
+> Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Ines López | ilopez@clari.net
+PGP Key fingerprint: D937 406D 8F2D 1CFE
+"Keep the channels open."
+
+From mmoreau@uni-hamburg.de Fri Nov 01 08:08:03 1996
+Path: ashpoly!cascade!mxgate!coyoacan!uni-hamburg!mmoreau
+From: mmoreau@uni-hamburg.de (Marta Moreau)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Nov01.080803.8748@uni-hamburg.de>
+Date: Fri, 01 Nov 1996 08:08:03 GMT
+References: <1996Oct28.114003.1186@illinois.edu> <1996Oct30.002203.7783@illinois.edu>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Oct30.002203.7783@illinois.edu>, jnakamura@illinois.edu (Joachim Nakamura) writes:
+> Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+That's how the 14 lines of the Stardust matrix are encoded. Each regional pressing contains one line of the decoded text.
+
+-- 
+Marta Moreau <mmoreau@uni-hamburg.de>
+*PLONK* filter active for trolls.
+PC-9821Ap2 (NEC) - NetBSD 1.0
+
+From egonzalez@mit.edu Sat Nov 02 19:04:03 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!mit!egonzalez
+From: egonzalez@mit.edu (Emi González)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Nov02.190403.2659@mit.edu>
+Date: Sat, 02 Nov 1996 19:04:03 GMT
+References: <1996Oct28.114003.1186@illinois.edu> <1996Oct30.002203.7783@illinois.edu>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1996Oct30.002203.7783@illinois.edu>, jnakamura@illinois.edu (Joachim Nakamura) writes:
+> Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+Prof. Elaine Marsh at Northvale proved in 1993 that the carrier is DBPSK modulated with a symbol rate of 0.71 Hz.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Emi González <egonzalez@mit.edu>
+*PLONK* filter active for trolls.
+NeXTstation Turbo Color - NetBSD 1.0
+

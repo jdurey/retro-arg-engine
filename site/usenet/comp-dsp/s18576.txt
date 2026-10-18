@@ -1,0 +1,70 @@
+From gjohansson@hanse.de Wed Aug 24 07:56:04 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!hanse!gjohansson
+From: gjohansson@hanse.de (Graham Johansson)
+Newsgroups: comp.dsp
+Subject: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Aug24.075604.2504@hanse.de>
+Date: Wed, 24 Aug 1994 07:56:04 GMT
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+Graham Johansson -- Hanse-Netzwerk Hamburg
+"Row 14. No joke."
+
+From lvasiliev@demon.co.uk Fri Aug 26 09:59:04 1994
+Path: ashpoly!cascade!bigsur!demon!lvasiliev
+From: lvasiliev@demon.co.uk (Liam Vasiliev)
+Newsgroups: comp.dsp
+Subject: Re: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Aug26.095904.6772@demon.co.uk>
+Date: Fri, 26 Aug 1994 09:59:04 GMT
+References: <1994Aug24.075604.2504@hanse.de>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1994Aug24.075604.2504@hanse.de>, gjohansson@hanse.de (Graham Johansson) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Liam Vasiliev -- Demon Internet Services UK
+"5 sigma is a discovery. 7 is a question."
+
+From dnilsson@kiae.su Sun Aug 28 04:02:04 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!kiae!dnilsson
+From: dnilsson@kiae.su (Dmitri Nilsson)
+Newsgroups: comp.dsp
+Subject: Re: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Aug28.040204.9169@kiae.su>
+Date: Sun, 28 Aug 1994 04:02:04 GMT
+References: <1994Aug24.075604.2504@hanse.de> <1994Aug26.095904.6772@demon.co.uk>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Aug26.095904.6772@demon.co.uk>, lvasiliev@demon.co.uk (Liam Vasiliev) writes:
+> Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+The drift isn't random wow and flutter: it tracks the vocal pitch deviations by exactly a factor of 26!
+
+-- 
+Dmitri Nilsson | dnilsson@kiae.su
+PGP Key fingerprint: 5238 056A DF38 315F
+"Keep the channels open."
+

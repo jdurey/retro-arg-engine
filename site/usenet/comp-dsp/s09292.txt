@@ -1,0 +1,98 @@
+From tsouza@utexas.edu Sat Jul 27 13:13:23 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!utexas!tsouza
+From: tsouza@utexas.edu (Tyler Souza)
+Newsgroups: comp.dsp
+Subject: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996Jul27.131323.2983@utexas.edu>
+Date: Sat, 27 Jul 1996 13:13:23 GMT
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Version 1.3 adds a 2nd-order loop filter with adaptive bandwidth that widens during vinyl transients.
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+Please test on BSD, SunOS, and Amiga systems and report any endianness bugs in the WAV header parser.
+
+-- 
+Tyler Souza <tsouza@utexas.edu>
+*PLONK* filter active for trolls.
+Macintosh IIfx - NetBSD 1.0
+
+From nivanov@cam.ac.uk Mon Jul 29 03:13:23 1996
+Path: ashpoly!cascade!brgate!saturno!cam!nivanov
+From: nivanov@cam.ac.uk (Nadia Ivanov)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996Jul29.031323.4648@cam.ac.uk>
+Date: Mon, 29 Jul 1996 03:13:23 GMT
+References: <1996Jul27.131323.2983@utexas.edu>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1996Jul27.131323.2983@utexas.edu>, tsouza@utexas.edu (Tyler Souza) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+=== Nadia Ivanov ===
+Dept of Electrical Engineering, University of Cambridge Computer Laboratory
+"Do not worship the copy."
+
+From mperez@pacbell.net Mon Jul 29 16:04:23 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!pacbell!mperez
+From: mperez@pacbell.net (Matthias Pérez)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996Jul29.160423.1372@pacbell.net>
+Date: Mon, 29 Jul 1996 16:04:23 GMT
+References: <1996Jul27.131323.2983@utexas.edu>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1996Jul27.131323.2983@utexas.edu>, tsouza@utexas.edu (Tyler Souza) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+> Version 1.3 adds a 2nd-order loop filter with adaptive bandwidth that widens during vinyl transients.
+
+Can you provide a pre-compiled DOS binary? Some of us don't have Linux or a C compiler installed on our machines.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Matthias Pérez | mperez@pacbell.net
+PGP Key fingerprint: B0A8 B986 6774 DFBF
+"Keep the channels open."
+
+From mmuller@tum.de Mon Jul 29 20:29:23 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!tum!mmuller
+From: mmuller@tum.de (Morag Müller)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996Jul29.202923.1158@tum.de>
+Date: Mon, 29 Jul 1996 20:29:23 GMT
+References: <1996Jul27.131323.2983@utexas.edu> <1996Jul29.160423.1372@pacbell.net>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Jul29.160423.1372@pacbell.net>, mperez@pacbell.net (Matthias Pérez) writes:
+> Can you provide a pre-compiled DOS binary? Some of us don't have Linux or a C compiler installed on our machines.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+-- 
+Morag Müller <mmuller@tum.de>
+"There are 14 nodes and only 10 countries. Count again."
+Sun SparcStation 20 / TOS 4.04
+

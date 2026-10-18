@@ -1,0 +1,120 @@
+From teriksson@u-tokyo.ac.jp Sun Feb 19 18:55:00 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!u-tokyo!teriksson
+From: teriksson@u-tokyo.ac.jp (Thiago Eriksson)
+Newsgroups: comp.dsp
+Subject: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Feb19.185500.9114@u-tokyo.ac.jp>
+Date: Sun, 19 Feb 1995 18:55:00 GMT
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+=== Thiago Eriksson ===
+Dept of Electrical Engineering, University of Tokyo Department of Information Science
+"In theory there is no difference between theory and practice."
+
+From tsouza@mindspring.com Mon Feb 20 02:19:00 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!mindspring!tsouza
+From: tsouza@mindspring.com (Thiago Souza)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Feb20.021900.9090@mindspring.com>
+Date: Mon, 20 Feb 1995 02:19:00 GMT
+References: <1995Feb19.185500.9114@u-tokyo.ac.jp>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Feb19.185500.9114@u-tokyo.ac.jp>, teriksson@u-tokyo.ac.jp (Thiago Eriksson) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Thiago Souza <tsouza@mindspring.com>
+Zyxel U-1496E @ 28,800 bps
+"When every node is whole, the channel opens."
+
+From omacdonald@cmu.edu Wed Feb 22 03:29:00 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!cmu!omacdonald
+From: omacdonald@cmu.edu (Olga MacDonald)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Feb22.032900.2842@cmu.edu>
+Date: Wed, 22 Feb 1995 03:29:00 GMT
+References: <1995Feb19.185500.9114@u-tokyo.ac.jp>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1995Feb19.185500.9114@u-tokyo.ac.jp>, teriksson@u-tokyo.ac.jp (Thiago Eriksson) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Olga MacDonald
+Tape trading list upon request. SASE required for international mail.
+
+From asato@utexas.edu Thu Feb 23 18:58:00 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!utexas!asato
+From: asato@utexas.edu (Astrid Sato)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Feb23.185800.1717@utexas.edu>
+Date: Thu, 23 Feb 1995 18:58:00 GMT
+References: <1995Feb19.185500.9114@u-tokyo.ac.jp> <1995Feb22.032900.2842@cmu.edu>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995Feb22.032900.2842@cmu.edu>, omacdonald@cmu.edu (Olga MacDonald) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Astrid Sato <asato@utexas.edu>
+Practical Peripherals 14.4 @ 19,200 bps
+"The carrier frequency does not drift by accident."
+
+From jito@illinois.edu Fri Feb 24 04:56:00 1995
+Path: ashpoly!cascade!brgate!saturno!illinois!jito
+From: jito@illinois.edu (Ji-woo Ito)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Feb24.045600.7855@illinois.edu>
+Date: Fri, 24 Feb 1995 04:56:00 GMT
+References: <1995Feb19.185500.9114@u-tokyo.ac.jp> <1995Feb22.032900.2842@cmu.edu> <1995Feb23.185800.1717@utexas.edu>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1995Feb23.185800.1717@utexas.edu>, asato@utexas.edu (Astrid Sato) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+> If you are posting from AOL, please read RFC 1036 before posting again.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+=== Ji-woo Ito ===
+Dept of Electrical Engineering, University of Illinois Urbana-Champaign
+"5 sigma is a discovery. 7 is a question."
+

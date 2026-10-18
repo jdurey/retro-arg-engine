@@ -1,0 +1,114 @@
+From gsuzuki@clari.net Fri Mar 11 00:33:52 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!clari!gsuzuki
+From: gsuzuki@clari.net (Göran Suzuki)
+Newsgroups: comp.sys.m68k
+Subject: WTB/WTT: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Mar11.003352.9445@clari.net>
+Date: Fri, 11 Mar 1994 00:33:52 GMT
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+Schematic diagram in ASCII uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/twin68_array.asc.
+
+-- 
+Göran Suzuki <gsuzuki@clari.net>
+"Measuring a record you own is listening, not piracy."
+NeXTstation Turbo Color / System 7.5.1
+
+From msilva@pipeline.com Sat Mar 12 06:19:52 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!pipeline!msilva
+From: msilva@pipeline.com (Mathieu Silva)
+Newsgroups: comp.sys.m68k
+Subject: Re: WTB/WTT: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Mar12.061952.5269@pipeline.com>
+Date: Sat, 12 Mar 1994 06:19:52 GMT
+References: <1994Mar11.003352.9445@clari.net>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1994Mar11.003352.9445@clari.net>, gsuzuki@clari.net (Göran Suzuki) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Mathieu Silva -- The Pipeline Internet Network
+"Measuring a record you own is listening, not piracy."
+
+From alindqvist@clari.net Sat Mar 12 14:45:52 1994
+Path: ashpoly!cascade!mxgate!coyoacan!clari!alindqvist
+From: alindqvist@clari.net (Amy Lindqvist)
+Newsgroups: comp.sys.m68k
+Subject: Re: WTB/WTT: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Mar12.144552.6345@clari.net>
+Date: Sat, 12 Mar 1994 14:45:52 GMT
+References: <1994Mar11.003352.9445@clari.net>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Mar11.003352.9445@clari.net>, gsuzuki@clari.net (Göran Suzuki) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+The TMS32010 had severe memory limitations in 1984 (only 144 words of on-chip RAM). Dual 68000s gave them full 16MB address space.
+
+-- 
+Amy Lindqvist <alindqvist@clari.net>
+*PLONK* filter active for trolls.
+Acorn RiscPC 600 - NetBSD 1.0
+
+From msato@demon.co.uk Mon Mar 14 15:05:52 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!demon!msato
+From: msato@demon.co.uk (Mei Sato)
+Newsgroups: comp.sys.m68k
+Subject: Re: WTB/WTT: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Mar14.150552.1360@demon.co.uk>
+Date: Mon, 14 Mar 1994 15:05:52 GMT
+References: <1994Mar11.003352.9445@clari.net> <1994Mar12.144552.6345@clari.net>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1994Mar12.144552.6345@clari.net>, alindqvist@clari.net (Amy Lindqvist) writes:
+> The TMS32010 had severe memory limitations in 1984 (only 144 words of on-chip RAM). Dual 68000s gave them full 16MB address space.
+
+Tom from Ashford Poly owns the physical board! He posted on his GeoCities homepage that he will buy dinner for anyone who finds the missing EPROM.
+
+-- 
+Mei Sato
+Tape trading list upon request. SASE required for international mail.
+
+From kvasiliev@berkeley.edu Tue Mar 15 09:07:52 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!berkeley!kvasiliev
+From: kvasiliev@berkeley.edu (Katrin Vasiliev)
+Newsgroups: comp.sys.m68k
+Subject: Re: WTB/WTT: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Mar15.090752.7834@berkeley.edu>
+Date: Tue, 15 Mar 1994 09:07:52 GMT
+References: <1994Mar11.003352.9445@clari.net> <1994Mar12.144552.6345@clari.net>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Mar12.144552.6345@clari.net>, alindqvist@clari.net (Amy Lindqvist) writes:
+> The TMS32010 had severe memory limitations in 1984 (only 144 words of on-chip RAM). Dual 68000s gave them full 16MB address space.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Katrin Vasiliev | kvasiliev@berkeley.edu
+PGP Key fingerprint: B1EE A1CC 18A1 D8EE
+"Keep the channels open."
+

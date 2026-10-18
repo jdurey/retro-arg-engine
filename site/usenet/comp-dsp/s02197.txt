@@ -1,0 +1,119 @@
+From msilva@uu.net Thu May 25 08:59:06 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!uu!msilva
+From: msilva@uu.net (Mike Silva)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May25.085906.7925@uu.net>
+Date: Thu, 25 May 1995 08:59:06 GMT
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Mike Silva
+Opinions expressed are solely my own and not those of UUNET Technologies, Falls Church VA.
+------------------------------------------------------------
+
+From cpark@netcom.com Sat May 27 12:51:06 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!netcom!cpark
+From: cpark@netcom.com (Camila Park)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May27.125106.9145@netcom.com>
+Date: Sat, 27 May 1995 12:51:06 GMT
+References: <1995May25.085906.7925@uu.net>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995May25.085906.7925@uu.net>, msilva@uu.net (Mike Silva) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Camila Park | cpark@netcom.com
+PGP Key fingerprint: 54F0 FC61 EB05 4E01
+"Keep the channels open."
+
+From cramirez@unam.mx Mon May 29 07:02:06 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!unam!cramirez
+From: cramirez@unam.mx (Camila Ramírez)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May29.070206.3809@unam.mx>
+Date: Mon, 29 May 1995 07:02:06 GMT
+References: <1995May25.085906.7925@uu.net> <1995May27.125106.9145@netcom.com>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995May27.125106.9145@netcom.com>, cpark@netcom.com (Camila Park) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Camila Ramírez <cramirez@unam.mx>
+"Tape doesn't lie at 02:14. Ears do."
+Atari Falcon 030 / Linux 1.2.13
+
+From lmoreau@unam.mx Wed May 31 00:11:06 1995
+Path: ashpoly!cascade!brgate!saturno!unam!lmoreau
+From: lmoreau@unam.mx (Lucia Moreau)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May31.001106.6797@unam.mx>
+Date: Wed, 31 May 1995 00:11:06 GMT
+References: <1995May25.085906.7925@uu.net> <1995May27.125106.9145@netcom.com> <1995May29.070206.3809@unam.mx>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995May29.070206.3809@unam.mx>, cramirez@unam.mx (Camila Ramírez) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Lucia Moreau <lmoreau@unam.mx>
+Practical Peripherals 14.4 @ ISDN 64k bps
+"The carrier frequency does not drift by accident."
+
+From hnilsson@titech.ac.jp Wed May 31 08:24:06 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!titech!hnilsson
+From: hnilsson@titech.ac.jp (Hugo Nilsson)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May31.082406.4615@titech.ac.jp>
+Date: Wed, 31 May 1995 08:24:06 GMT
+References: <1995May25.085906.7925@uu.net> <1995May27.125106.9145@netcom.com>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995May27.125106.9145@netcom.com>, cpark@netcom.com (Camila Park) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Hugo Nilsson <hnilsson@titech.ac.jp>
+"Extraordinary claims require extraordinary spectra."
+Decstation 5000/200 / Linux 1.2.13
+

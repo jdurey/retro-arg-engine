@@ -1,0 +1,94 @@
+From mmartinez@tum.de Sat Dec 09 15:13:13 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!tum!mmartinez
+From: mmartinez@tum.de (Morag Martínez)
+Newsgroups: comp.sys.m68k
+Subject: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Dec09.151313.4149@tum.de>
+Date: Sat, 09 Dec 1995 15:13:13 GMT
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+Morag Martínez <mmartinez@tum.de>
+SupraFAXModem 28.8 @ 19,200 bps
+"5 sigma is a discovery. 7 is a question."
+
+From bgarcia@pipeline.com Mon Dec 11 17:56:13 1995
+Path: ashpoly!cascade!mxgate!coyoacan!pipeline!bgarcia
+From: bgarcia@pipeline.com (Bastien García)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Dec11.175613.6882@pipeline.com>
+Date: Mon, 11 Dec 1995 17:56:13 GMT
+References: <1995Dec09.151313.4149@tum.de>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Dec09.151313.4149@tum.de>, mmartinez@tum.de (Morag Martínez) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Bastien García
+Opinions expressed are solely my own and not those of The Pipeline Internet Network.
+------------------------------------------------------------
+
+From pkowalski@unam.mx Wed Dec 13 06:59:13 1995
+Path: ashpoly!cascade!mxgate!coyoacan!unam!pkowalski
+From: pkowalski@unam.mx (Pavel Kowalski)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Dec13.065913.2528@unam.mx>
+Date: Wed, 13 Dec 1995 06:59:13 GMT
+References: <1995Dec09.151313.4149@tum.de>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Dec09.151313.4149@tum.de>, mmartinez@tum.de (Morag Martínez) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Pavel Kowalski
+Opinions expressed are solely my own and not those of Universidad Nacional Autónoma de México (DGSCA).
+------------------------------------------------------------
+
+From llopez@delphi.com Wed Dec 13 12:44:13 1995
+Path: ashpoly!cascade!mxgate!coyoacan!delphi!llopez
+From: llopez@delphi.com (Lars López)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Dec13.124413.9430@delphi.com>
+Date: Wed, 13 Dec 1995 12:44:13 GMT
+References: <1995Dec09.151313.4149@tum.de>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Dec09.151313.4149@tum.de>, mmartinez@tum.de (Morag Martínez) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+=== Lars López ===
+Dept of Electrical Engineering, Delphi Internet Services
+"Hold for relay."
+

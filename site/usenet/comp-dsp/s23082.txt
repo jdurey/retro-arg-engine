@@ -1,0 +1,91 @@
+From kramirez@ox.ac.uk Mon Oct 02 06:23:57 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!ox!kramirez
+From: kramirez@ox.ac.uk (Katrin Ramírez)
+Newsgroups: comp.dsp
+Subject: Question: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Oct02.062357.6891@ox.ac.uk>
+Date: Mon, 02 Oct 1995 06:23:57 GMT
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+Version 1.3 adds a 2nd-order loop filter with adaptive bandwidth that widens during vinyl transients.
+
+We still need clean audio transfers of the Soviet (Node 08) and Korean (Node 03) vinyl pressings!
+
+-- 
+Katrin Ramírez -- Oxford University Computing Laboratory
+"Tape doesn't lie at 02:14. Ears do."
+
+From csanchez@purdue.edu Wed Oct 04 01:57:57 1995
+Path: ashpoly!cascade!mxgate!coyoacan!purdue!csanchez
+From: csanchez@purdue.edu (Callum Sánchez)
+Newsgroups: comp.dsp
+Subject: Re: Question: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Oct04.015757.4431@purdue.edu>
+Date: Wed, 04 Oct 1995 01:57:57 GMT
+References: <1995Oct02.062357.6891@ox.ac.uk>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1995Oct02.062357.6891@ox.ac.uk>, kramirez@ox.ac.uk (Katrin Ramírez) writes:
+> Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+-- 
+Callum Sánchez -- Purdue University Engineering Computer Network
+"Do not worship the copy."
+
+From atanaka@tum.de Thu Oct 05 11:21:57 1995
+Path: ashpoly!cascade!mxgate!coyoacan!tum!atanaka
+From: atanaka@tum.de (Amy Tanaka)
+Newsgroups: comp.dsp
+Subject: Re: Question: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Oct05.112157.1072@tum.de>
+Date: Thu, 05 Oct 1995 11:21:57 GMT
+References: <1995Oct02.062357.6891@ox.ac.uk>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Oct02.062357.6891@ox.ac.uk>, kramirez@ox.ac.uk (Katrin Ramírez) writes:
+> Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+> Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Amy Tanaka
+Tape trading list upon request. SASE required for international mail.
+
+From dlarsson@clari.net Thu Oct 05 19:09:57 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!clari!dlarsson
+From: dlarsson@clari.net (Dmitri Larsson)
+Newsgroups: comp.dsp
+Subject: Re: Question: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Oct05.190957.3845@clari.net>
+Date: Thu, 05 Oct 1995 19:09:57 GMT
+References: <1995Oct02.062357.6891@ox.ac.uk> <1995Oct04.015757.4431@purdue.edu>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Oct04.015757.4431@purdue.edu>, csanchez@purdue.edu (Callum Sánchez) writes:
+> Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+-- 
+Dmitri Larsson <dlarsson@clari.net>
+Zyxel U-1496E @ 33,600 bps
+"The hatch is open. Is anyone listening?"
+

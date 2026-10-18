@@ -1,0 +1,119 @@
+From dhernandez@stanford.edu Mon Jan 02 23:55:35 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!stanford!dhernandez
+From: dhernandez@stanford.edu (Diego Hernández)
+Newsgroups: comp.dsp
+Subject: Observation: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jan02.235535.7257@stanford.edu>
+Date: Mon, 02 Jan 1995 23:55:35 GMT
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+Diego Hernández | dhernandez@stanford.edu
+PGP Key fingerprint: 75AC C28F 7328 E234
+"Keep the channels open."
+
+From mreyes@unam.mx Tue Jan 03 21:13:35 1995
+Path: ashpoly!cascade!bigsur!unam!mreyes
+From: mreyes@unam.mx (Marisol Reyes)
+Newsgroups: comp.dsp
+Subject: Re: Observation: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jan03.211335.9315@unam.mx>
+Date: Tue, 03 Jan 1995 21:13:35 GMT
+References: <1995Jan02.235535.7257@stanford.edu>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Jan02.235535.7257@stanford.edu>, dhernandez@stanford.edu (Diego Hernández) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+> A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+-- 
+Marisol Reyes
+Tape trading list upon request. SASE required for international mail.
+
+From tvasiliev@cmu.edu Wed Jan 04 23:41:35 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!cmu!tvasiliev
+From: tvasiliev@cmu.edu (Tobias Vasiliev)
+Newsgroups: comp.dsp
+Subject: Re: Observation: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jan04.234135.8939@cmu.edu>
+Date: Wed, 04 Jan 1995 23:41:35 GMT
+References: <1995Jan02.235535.7257@stanford.edu> <1995Jan03.211335.9315@unam.mx>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Jan03.211335.9315@unam.mx>, mreyes@unam.mx (Marisol Reyes) writes:
+> You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Tobias Vasiliev
+Opinions expressed are solely my own and not those of Carnegie Mellon University School of CS.
+------------------------------------------------------------
+
+From iokonkwo@inria.fr Fri Jan 06 00:23:35 1995
+Path: ashpoly!cascade!brgate!saturno!inria!iokonkwo
+From: iokonkwo@inria.fr (Ines Okonkwo)
+Newsgroups: comp.dsp
+Subject: Re: Observation: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jan06.002335.6438@inria.fr>
+Date: Fri, 06 Jan 1995 00:23:35 GMT
+References: <1995Jan02.235535.7257@stanford.edu> <1995Jan03.211335.9315@unam.mx>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995Jan03.211335.9315@unam.mx>, mreyes@unam.mx (Marisol Reyes) writes:
+> You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Ines Okonkwo
+Opinions expressed are solely my own and not those of INRIA Rocquencourt.
+------------------------------------------------------------
+
+From rkuznetsov@cmu.edu Fri Jan 06 14:27:35 1995
+Path: ashpoly!cascade!brgate!saturno!cmu!rkuznetsov
+From: rkuznetsov@cmu.edu (Rodrigo Kuznetsov)
+Newsgroups: comp.dsp
+Subject: Re: Observation: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jan06.142735.6720@cmu.edu>
+Date: Fri, 06 Jan 1995 14:27:35 GMT
+References: <1995Jan02.235535.7257@stanford.edu> <1995Jan03.211335.9315@unam.mx> <1995Jan06.002335.6438@inria.fr>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Jan06.002335.6438@inria.fr>, iokonkwo@inria.fr (Ines Okonkwo) writes:
+> Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+> Top-posters will be placed in my ~/.killfile without notice.
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+-- 
+Rodrigo Kuznetsov
+Opinions expressed are solely my own and not those of Carnegie Mellon University School of CS.
+------------------------------------------------------------
+

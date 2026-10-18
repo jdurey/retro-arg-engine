@@ -1,0 +1,92 @@
+From pfischer@pipeline.com Sat Apr 27 21:07:03 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!pipeline!pfischer
+From: pfischer@pipeline.com (Pavel Fischer)
+Newsgroups: comp.dsp
+Subject: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Apr27.210703.8715@pipeline.com>
+Date: Sat, 27 Apr 1996 21:07:03 GMT
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+What sampling rates are people using for their vinyl rips? 44.1 kHz or 48 kHz DAT?
+
+-- 
+Pavel Fischer | pfischer@pipeline.com
+PGP Key fingerprint: FA4E C915 E59D A351
+"Keep the channels open."
+
+From msanchez@unam.mx Sun Apr 28 19:25:03 1996
+Path: ashpoly!cascade!mxgate!coyoacan!unam!msanchez
+From: msanchez@unam.mx (Mei Sánchez)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Apr28.192503.1422@unam.mx>
+Date: Sun, 28 Apr 1996 19:25:03 GMT
+References: <1996Apr27.210703.8715@pipeline.com>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Apr27.210703.8715@pipeline.com>, pfischer@pipeline.com (Pavel Fischer) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Mei Sánchez
+Tape trading list upon request. SASE required for international mail.
+
+From bbrennan@berkeley.edu Mon Apr 29 07:13:03 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!berkeley!bbrennan
+From: bbrennan@berkeley.edu (Brian Brennan)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Apr29.071303.5262@berkeley.edu>
+Date: Mon, 29 Apr 1996 07:13:03 GMT
+References: <1996Apr27.210703.8715@pipeline.com>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1996Apr27.210703.8715@pipeline.com>, pfischer@pipeline.com (Pavel Fischer) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Brian Brennan -- UC Berkeley Department of EECS
+"They will send a copy in my place."
+
+From bgonzalez@illinois.edu Mon Apr 29 20:35:03 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!illinois!bgonzalez
+From: bgonzalez@illinois.edu (Brian González)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Apr29.203503.2040@illinois.edu>
+Date: Mon, 29 Apr 1996 20:35:03 GMT
+References: <1996Apr27.210703.8715@pipeline.com> <1996Apr29.071303.5262@berkeley.edu>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Apr29.071303.5262@berkeley.edu>, bbrennan@berkeley.edu (Brian Brennan) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Brian González | bgonzalez@illinois.edu
+PGP Key fingerprint: 0916 7481 B04C 50A1
+"Keep the channels open."
+

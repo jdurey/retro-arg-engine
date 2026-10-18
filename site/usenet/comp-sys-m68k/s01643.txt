@@ -1,0 +1,47 @@
+From tpetrov@cern.ch Thu Jan 18 22:15:54 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!cern!tpetrov
+From: tpetrov@cern.ch (Takeshi Petrov)
+Newsgroups: comp.sys.m68k
+Subject: WTB/WTT: Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1996Jan18.221554.7954@cern.ch>
+Date: Thu, 18 Jan 1996 22:15:54 GMT
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Amiga audio hackers: you can demodulate the 14.2 Hz carrier in real time without bogging down the OS.
+
+By setting up Paula's audio DMA to double-buffer incoming 8-bit samples, the 68020 has plenty of cycles left for the Costas loop.
+I wrote a 64-tap FIR filter in pure 68k assembly using movem.l and dbra loop unrolling to downsample to 64 Hz.
+
+Long live the Amiga. Try doing real-time subcarrier demodulation on a 386 running Windows 3.1 without dropping frames!
+
+-- 
+Takeshi Petrov
+Opinions expressed are solely my own and not those of European Laboratory for Particle Physics, Geneva.
+------------------------------------------------------------
+
+From jgonzalez@clari.net Thu Jan 18 23:09:54 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!clari!jgonzalez
+From: jgonzalez@clari.net (Ji-woo González)
+Newsgroups: comp.sys.m68k
+Subject: Re: WTB/WTT: Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1996Jan18.230954.8588@clari.net>
+Date: Thu, 18 Jan 1996 23:09:54 GMT
+References: <1996Jan18.221554.7954@cern.ch>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Jan18.221554.7954@cern.ch>, tpetrov@cern.ch (Takeshi Petrov) writes:
+> Amiga audio hackers: you can demodulate the 14.2 Hz carrier in real time without bogging down the OS.
+> By setting up Paula's audio DMA to double-buffer incoming 8-bit samples, the 68020 has plenty of cycles left for the Costas loop.
+
+Tested on my A3000 / 25 MHz. Ran smoothly in the background while I was compiling a C program in another window.
+
+-- 
+Ji-woo González -- ClariNet Communications Corp
+"We don't sign stars. We build them."
+

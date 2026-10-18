@@ -1,0 +1,46 @@
+From tschneider@pacbell.net Wed Dec 18 02:02:27 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!pacbell!tschneider
+From: tschneider@pacbell.net (Tobias Schneider)
+Newsgroups: comp.dsp
+Subject: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996Dec18.020227.4502@pacbell.net>
+Date: Wed, 18 Dec 1996 02:02:27 GMT
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+Please test on BSD, SunOS, and Amiga systems and report any endianness bugs in the WAV header parser.
+
+-- 
+Tobias Schneider
+Opinions expressed are solely my own and not those of Pacific Bell Internet Services.
+------------------------------------------------------------
+
+From rdubois@hanse.de Wed Dec 18 22:34:27 1996
+Path: ashpoly!cascade!brgate!saturno!hanse!rdubois
+From: rdubois@hanse.de (Renata Dubois)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996Dec18.223427.7938@hanse.de>
+Date: Wed, 18 Dec 1996 22:34:27 GMT
+References: <1996Dec18.020227.4502@pacbell.net>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1996Dec18.020227.4502@pacbell.net>, tschneider@pacbell.net (Tobias Schneider) writes:
+> Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Renata Dubois -- Hanse-Netzwerk Hamburg
+"In theory there is no difference between theory and practice."
+

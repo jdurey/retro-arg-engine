@@ -1,0 +1,48 @@
+From asanchez@netcom.com Tue Dec 19 06:39:07 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!netcom!asanchez
+From: asanchez@netcom.com (Anja Sánchez)
+Newsgroups: comp.sys.m68k
+Subject: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Dec19.063907.1730@netcom.com>
+Date: Tue, 19 Dec 1995 06:39:07 GMT
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Anja Sánchez <asanchez@netcom.com>
+"In theory there is no difference between theory and practice."
+NeXTstation Turbo Color / FreeBSD 2.1
+
+From jpetrov@titech.ac.jp Wed Dec 20 12:20:07 1995
+Path: ashpoly!cascade!bigsur!titech!jpetrov
+From: jpetrov@titech.ac.jp (Ji-woo Petrov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Dec20.122007.4432@titech.ac.jp>
+Date: Wed, 20 Dec 1995 12:20:07 GMT
+References: <1995Dec19.063907.1730@netcom.com>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Dec19.063907.1730@netcom.com>, asanchez@netcom.com (Anja Sánchez) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Ji-woo Petrov <jpetrov@titech.ac.jp>
+*PLONK* filter active for trolls.
+Commodore Amiga 500 (1MB OCS) - NetBSD 1.0
+

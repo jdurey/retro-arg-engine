@@ -1,0 +1,92 @@
+From knilsson@demon.co.uk Tue Jan 02 23:31:17 1996
+Path: ashpoly!cascade!brgate!saturno!demon!knilsson
+From: knilsson@demon.co.uk (Karen Nilsson)
+Newsgroups: comp.dsp
+Subject: [INFO] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Jan02.233117.8329@demon.co.uk>
+Date: Tue, 02 Jan 1996 23:31:17 GMT
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+What sampling rates are people using for their vinyl rips? 44.1 kHz or 48 kHz DAT?
+
+-- 
+=== Karen Nilsson ===
+Dept of Electrical Engineering, Demon Internet Services UK
+"Do not worship the copy."
+
+From dweber@hanse.de Wed Jan 03 05:39:17 1996
+Path: ashpoly!cascade!bigsur!hanse!dweber
+From: dweber@hanse.de (Dmitri Weber)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Jan03.053917.9238@hanse.de>
+Date: Wed, 03 Jan 1996 05:39:17 GMT
+References: <1996Jan02.233117.8329@demon.co.uk>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Jan02.233117.8329@demon.co.uk>, knilsson@demon.co.uk (Karen Nilsson) writes:
+> Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Dmitri Weber <dweber@hanse.de>
+SupraFAXModem 28.8 @ 33,600 bps
+"Marcus is not one man."
+
+From mnovak@purdue.edu Thu Jan 04 19:58:17 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!purdue!mnovak
+From: mnovak@purdue.edu (Mateo Novak)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Jan04.195817.2389@purdue.edu>
+Date: Thu, 04 Jan 1996 19:58:17 GMT
+References: <1996Jan02.233117.8329@demon.co.uk>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Jan02.233117.8329@demon.co.uk>, knilsson@demon.co.uk (Karen Nilsson) writes:
+> Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Mateo Novak <mnovak@purdue.edu>
+*PLONK* filter active for trolls.
+Macintosh IIfx - NetBSD 1.0
+
+From mnakamura@inria.fr Fri Jan 05 11:14:17 1996
+Path: ashpoly!cascade!bigsur!inria!mnakamura
+From: mnakamura@inria.fr (Matthias Nakamura)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Jan05.111417.8761@inria.fr>
+Date: Fri, 05 Jan 1996 11:14:17 GMT
+References: <1996Jan02.233117.8329@demon.co.uk> <1996Jan04.195817.2389@purdue.edu>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1996Jan04.195817.2389@purdue.edu>, mnovak@purdue.edu (Mateo Novak) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Matthias Nakamura -- INRIA Rocquencourt
+"Tape doesn't lie at 02:14. Ears do."
+

@@ -1,0 +1,71 @@
+From nmuller@cam.ac.uk Mon Jan 16 02:33:17 1995
+Path: ashpoly!cascade!mxgate!coyoacan!cam!nmuller
+From: nmuller@cam.ac.uk (Nadine Müller)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jan16.023317.9690@cam.ac.uk>
+Date: Mon, 16 Jan 1995 02:33:17 GMT
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Nadine Müller <nmuller@cam.ac.uk>
+"The hatch is open. Is anyone listening?"
+Sun SparcStation 20 / SunOS 4.1.4
+
+From tduarte@demon.co.uk Mon Jan 16 13:30:17 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!demon!tduarte
+From: tduarte@demon.co.uk (Tobias Duarte)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jan16.133017.5019@demon.co.uk>
+Date: Mon, 16 Jan 1995 13:30:17 GMT
+References: <1995Jan16.023317.9690@cam.ac.uk>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Jan16.023317.9690@cam.ac.uk>, nmuller@cam.ac.uk (Nadine Müller) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Tobias Duarte <tduarte@demon.co.uk>
+*PLONK* filter active for trolls.
+Amiga 3000T - NetBSD 1.0
+
+From tperez@cmu.edu Mon Jan 16 16:05:17 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!cmu!tperez
+From: tperez@cmu.edu (Takeshi Pérez)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jan16.160517.9131@cmu.edu>
+Date: Mon, 16 Jan 1995 16:05:17 GMT
+References: <1995Jan16.023317.9690@cam.ac.uk>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Jan16.023317.9690@cam.ac.uk>, nmuller@cam.ac.uk (Nadine Müller) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Takeshi Pérez <tperez@cmu.edu>
+*PLONK* filter active for trolls.
+Sun 3/60 (SunOS 4.1.1) - NetBSD 1.0
+

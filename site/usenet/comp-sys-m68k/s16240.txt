@@ -1,0 +1,117 @@
+From atanaka@illinois.edu Fri Nov 03 14:38:51 1995
+Path: ashpoly!cascade!bigsur!illinois!atanaka
+From: atanaka@illinois.edu (Amy Tanaka)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Nov03.143851.7237@illinois.edu>
+Date: Fri, 03 Nov 1995 14:38:51 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Amy Tanaka -- University of Illinois Urbana-Champaign
+"Marcus is not one man."
+
+From skuznetsov@demon.co.uk Fri Nov 03 18:49:51 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!demon!skuznetsov
+From: skuznetsov@demon.co.uk (Sun-mi Kuznetsov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Nov03.184951.9133@demon.co.uk>
+Date: Fri, 03 Nov 1995 18:49:51 GMT
+References: <1995Nov03.143851.7237@illinois.edu>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Nov03.143851.7237@illinois.edu>, atanaka@illinois.edu (Amy Tanaka) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Sun-mi Kuznetsov <skuznetsov@demon.co.uk>
+"Tape doesn't lie at 02:14. Ears do."
+Amiga 1200 (Blizzard 030/50) / TOS 4.04
+
+From ebrennan@mindspring.com Sat Nov 04 10:25:51 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!mindspring!ebrennan
+From: ebrennan@mindspring.com (Elaine Brennan)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Nov04.102551.5180@mindspring.com>
+Date: Sat, 04 Nov 1995 10:25:51 GMT
+References: <1995Nov03.143851.7237@illinois.edu>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Nov03.143851.7237@illinois.edu>, atanaka@illinois.edu (Amy Tanaka) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Elaine Brennan
+Opinions expressed are solely my own and not those of MindSpring Enterprises.
+------------------------------------------------------------
+
+From hgarcia@clari.net Mon Nov 06 00:25:51 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!clari!hgarcia
+From: hgarcia@clari.net (Hana García)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Nov06.002551.6948@clari.net>
+Date: Mon, 06 Nov 1995 00:25:51 GMT
+References: <1995Nov03.143851.7237@illinois.edu> <1995Nov03.184951.9133@demon.co.uk>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Nov03.184951.9133@demon.co.uk>, skuznetsov@demon.co.uk (Sun-mi Kuznetsov) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Hana García <hgarcia@clari.net>
+*PLONK* filter active for trolls.
+Sun SparcStation 20 - NetBSD 1.0
+
+From tcampbell@tum.de Tue Nov 07 19:14:51 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!tum!tcampbell
+From: tcampbell@tum.de (Tomas Campbell)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Nov07.191451.4120@tum.de>
+Date: Tue, 07 Nov 1995 19:14:51 GMT
+References: <1995Nov03.143851.7237@illinois.edu>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Nov03.143851.7237@illinois.edu>, atanaka@illinois.edu (Amy Tanaka) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Tomas Campbell <tcampbell@tum.de>
+*PLONK* filter active for trolls.
+NeXTstation Turbo Color - NetBSD 1.0
+

@@ -1,0 +1,71 @@
+From mstewart@cern.ch Fri Oct 06 08:36:57 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!cern!mstewart
+From: mstewart@cern.ch (Matthias Stewart)
+Newsgroups: comp.dsp
+Subject: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Oct06.083657.8128@cern.ch>
+Date: Fri, 06 Oct 1995 08:36:57 GMT
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Matthias Stewart
+Opinions expressed are solely my own and not those of European Laboratory for Particle Physics, Geneva.
+------------------------------------------------------------
+
+From jsato@mindspring.com Sat Oct 07 08:11:57 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!mindspring!jsato
+From: jsato@mindspring.com (Jens Sato)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Oct07.081157.7541@mindspring.com>
+Date: Sat, 07 Oct 1995 08:11:57 GMT
+References: <1995Oct06.083657.8128@cern.ch>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Oct06.083657.8128@cern.ch>, mstewart@cern.ch (Matthias Stewart) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Jens Sato
+Opinions expressed are solely my own and not those of MindSpring Enterprises.
+------------------------------------------------------------
+
+From jfournier@clari.net Sat Oct 07 11:00:57 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!clari!jfournier
+From: jfournier@clari.net (Joachim Fournier)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Oct07.110057.6138@clari.net>
+Date: Sat, 07 Oct 1995 11:00:57 GMT
+References: <1995Oct06.083657.8128@cern.ch> <1995Oct07.081157.7541@mindspring.com>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Oct07.081157.7541@mindspring.com>, jsato@mindspring.com (Jens Sato) writes:
+> I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Joachim Fournier <jfournier@clari.net>
+Practical Peripherals 14.4 @ 14,400 bps
+"5 sigma is a discovery. 7 is a question."
+

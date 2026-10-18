@@ -1,0 +1,115 @@
+From mokonkwo@uni-hamburg.de Tue Sep 26 00:43:30 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!uni-hamburg!mokonkwo
+From: mokonkwo@uni-hamburg.de (Mike Okonkwo)
+Newsgroups: comp.sys.m68k
+Subject: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Sep26.004330.5702@uni-hamburg.de>
+Date: Tue, 26 Sep 1995 00:43:30 GMT
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Mike Okonkwo <mokonkwo@uni-hamburg.de>
+Hayes Optima 288 @ 28,800 bps
+"The carrier frequency does not drift by accident."
+
+From aramirez@pacbell.net Tue Sep 26 11:09:30 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!pacbell!aramirez
+From: aramirez@pacbell.net (Astrid Ramírez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Sep26.110930.6366@pacbell.net>
+Date: Tue, 26 Sep 1995 11:09:30 GMT
+References: <1995Sep26.004330.5702@uni-hamburg.de>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Sep26.004330.5702@uni-hamburg.de>, mokonkwo@uni-hamburg.de (Mike Okonkwo) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Astrid Ramírez -- Pacific Bell Internet Services
+"There are 14 nodes and only 10 countries. Count again."
+
+From lkowalski@panix.com Wed Sep 27 13:18:30 1995
+Path: ashpoly!cascade!brgate!saturno!panix!lkowalski
+From: lkowalski@panix.com (Lucia Kowalski)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Sep27.131830.4691@panix.com>
+Date: Wed, 27 Sep 1995 13:18:30 GMT
+References: <1995Sep26.004330.5702@uni-hamburg.de> <1995Sep26.110930.6366@pacbell.net>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Sep26.110930.6366@pacbell.net>, aramirez@pacbell.net (Astrid Ramírez) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Lucia Kowalski -- Public Access Unix of New York
+"In theory there is no difference between theory and practice."
+
+From afischer@panix.com Fri Sep 29 01:14:30 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!panix!afischer
+From: afischer@panix.com (Anton Fischer)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Sep29.011430.5698@panix.com>
+Date: Fri, 29 Sep 1995 01:14:30 GMT
+References: <1995Sep26.004330.5702@uni-hamburg.de> <1995Sep26.110930.6366@pacbell.net> <1995Sep27.131830.4691@panix.com>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Sep27.131830.4691@panix.com>, lkowalski@panix.com (Lucia Kowalski) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+=== Anton Fischer ===
+Dept of Electrical Engineering, Public Access Unix of New York
+"The hatch is open. Is anyone listening?"
+
+From hfischer@uni-hamburg.de Sun Oct 01 04:02:30 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!uni-hamburg!hfischer
+From: hfischer@uni-hamburg.de (Hana Fischer)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Oct01.040230.8241@uni-hamburg.de>
+Date: Sun, 01 Oct 1995 04:02:30 GMT
+References: <1995Sep26.004330.5702@uni-hamburg.de> <1995Sep26.110930.6366@pacbell.net>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Sep26.110930.6366@pacbell.net>, aramirez@pacbell.net (Astrid Ramírez) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Hana Fischer <hfischer@uni-hamburg.de>
+SupraFAXModem 28.8 @ ISDN 64k bps
+"Do not worship the copy."
+

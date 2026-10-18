@@ -1,0 +1,47 @@
+From sdubois@kth.se Mon May 20 16:55:20 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!kth!sdubois
+From: sdubois@kth.se (Sergei Dubois)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996May20.165520.3193@kth.se>
+Date: Mon, 20 May 1996 16:55:20 GMT
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Sergei Dubois
+Opinions expressed are solely my own and not those of Royal Institute of Technology, Stockholm.
+------------------------------------------------------------
+
+From loliveira@panix.com Wed May 22 05:45:20 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!panix!loliveira
+From: loliveira@panix.com (Lucia Oliveira)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996May22.054520.4235@panix.com>
+Date: Wed, 22 May 1996 05:45:20 GMT
+References: <1996May20.165520.3193@kth.se>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996May20.165520.3193@kth.se>, sdubois@kth.se (Sergei Dubois) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Lucia Oliveira -- Public Access Unix of New York
+"Measuring a record you own is listening, not piracy."
+

@@ -1,0 +1,95 @@
+From lnakamura@illinois.edu Wed Jun 19 20:38:52 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!illinois!lnakamura
+From: lnakamura@illinois.edu (Lisa Nakamura)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Jun19.203852.2211@illinois.edu>
+Date: Wed, 19 Jun 1996 20:38:52 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Lisa Nakamura
+Tape trading list upon request. SASE required for international mail.
+
+From cschneider@clari.net Fri Jun 21 12:41:52 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!clari!cschneider
+From: cschneider@clari.net (Callum Schneider)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Jun21.124152.7208@clari.net>
+Date: Fri, 21 Jun 1996 12:41:52 GMT
+References: <1996Jun19.203852.2211@illinois.edu>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1996Jun19.203852.2211@illinois.edu>, lnakamura@illinois.edu (Lisa Nakamura) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Callum Schneider <cschneider@clari.net>
+*PLONK* filter active for trolls.
+Acorn RiscPC 600 - NetBSD 1.0
+
+From aoliveira@delphi.com Sun Jun 23 02:57:52 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!delphi!aoliveira
+From: aoliveira@delphi.com (Andrei Oliveira)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Jun23.025752.2748@delphi.com>
+Date: Sun, 23 Jun 1996 02:57:52 GMT
+References: <1996Jun19.203852.2211@illinois.edu> <1996Jun21.124152.7208@clari.net>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Jun21.124152.7208@clari.net>, cschneider@clari.net (Callum Schneider) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+> Top-posters will be placed in my ~/.killfile without notice.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Andrei Oliveira
+Tape trading list upon request. SASE required for international mail.
+
+From mwatanabe@cmu.edu Sun Jun 23 22:43:52 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!cmu!mwatanabe
+From: mwatanabe@cmu.edu (Mateo Watanabe)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Jun23.224352.7111@cmu.edu>
+Date: Sun, 23 Jun 1996 22:43:52 GMT
+References: <1996Jun19.203852.2211@illinois.edu> <1996Jun21.124152.7208@clari.net>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Jun21.124152.7208@clari.net>, cschneider@clari.net (Callum Schneider) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Mateo Watanabe <mwatanabe@cmu.edu>
+*PLONK* filter active for trolls.
+Sun 3/60 (SunOS 4.1.1) - NetBSD 1.0
+

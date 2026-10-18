@@ -1,0 +1,48 @@
+From skowalski@illinois.edu Mon May 08 21:37:58 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!illinois!skowalski
+From: skowalski@illinois.edu (Seo-yeon Kowalski)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995May08.213758.4619@illinois.edu>
+Date: Mon, 08 May 1995 21:37:58 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Seo-yeon Kowalski <skowalski@illinois.edu>
+SupraFAXModem 28.8 @ 14,400 bps
+"A soul is not exclusive to biology."
+
+From brodriguez@clari.net Wed May 10 00:35:58 1995
+Path: ashpoly!cascade!mxgate!coyoacan!clari!brodriguez
+From: brodriguez@clari.net (Bastien Rodríguez)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995May10.003558.3137@clari.net>
+Date: Wed, 10 May 1995 00:35:58 GMT
+References: <1995May08.213758.4619@illinois.edu>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995May08.213758.4619@illinois.edu>, skowalski@illinois.edu (Seo-yeon Kowalski) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Bastien Rodríguez | brodriguez@clari.net
+PGP Key fingerprint: 4020 C55C FBB0 8B86
+"Keep the channels open."
+

@@ -1,0 +1,118 @@
+From cgarcia@earthlink.net Mon Dec 11 19:25:47 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!earthlink!cgarcia
+From: cgarcia@earthlink.net (Callum García)
+Newsgroups: comp.dsp
+Subject: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Dec11.192547.9056@earthlink.net>
+Date: Mon, 11 Dec 1995 19:25:47 GMT
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+Callum García
+Opinions expressed are solely my own and not those of EarthLink Network.
+------------------------------------------------------------
+
+From gcampbell@rwth-aachen.de Wed Dec 13 01:04:47 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!rwth-aachen!gcampbell
+From: gcampbell@rwth-aachen.de (Graham Campbell)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Dec13.010447.3100@rwth-aachen.de>
+Date: Wed, 13 Dec 1995 01:04:47 GMT
+References: <1995Dec11.192547.9056@earthlink.net>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Dec11.192547.9056@earthlink.net>, cgarcia@earthlink.net (Callum García) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Graham Campbell -- RWTH Aachen Informatik
+"The hatch is open. Is anyone listening?"
+
+From gramirez@hanse.de Wed Dec 13 06:48:47 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!hanse!gramirez
+From: gramirez@hanse.de (Göran Ramírez)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Dec13.064847.4818@hanse.de>
+Date: Wed, 13 Dec 1995 06:48:47 GMT
+References: <1995Dec11.192547.9056@earthlink.net> <1995Dec13.010447.3100@rwth-aachen.de>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Dec13.010447.3100@rwth-aachen.de>, gcampbell@rwth-aachen.de (Graham Campbell) writes:
+> Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Göran Ramírez | gramirez@hanse.de
+PGP Key fingerprint: 3B1D AADC 9634 2EB7
+"Keep the channels open."
+
+From edubois@ox.ac.uk Thu Dec 14 06:18:47 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!ox!edubois
+From: edubois@ox.ac.uk (Emi Dubois)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Dec14.061847.4995@ox.ac.uk>
+Date: Thu, 14 Dec 1995 06:18:47 GMT
+References: <1995Dec11.192547.9056@earthlink.net>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1995Dec11.192547.9056@earthlink.net>, cgarcia@earthlink.net (Callum García) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+> Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Emi Dubois <edubois@ox.ac.uk>
+Hayes Optima 288 @ 19,200 bps
+"Tape doesn't lie at 02:14. Ears do."
+
+From mstewart@uni-hamburg.de Thu Dec 14 20:30:47 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!uni-hamburg!mstewart
+From: mstewart@uni-hamburg.de (Mateo Stewart)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Dec14.203047.3657@uni-hamburg.de>
+Date: Thu, 14 Dec 1995 20:30:47 GMT
+References: <1995Dec11.192547.9056@earthlink.net> <1995Dec13.010447.3100@rwth-aachen.de>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Dec13.010447.3100@rwth-aachen.de>, gcampbell@rwth-aachen.de (Graham Campbell) writes:
+> Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Mateo Stewart <mstewart@uni-hamburg.de>
+Zyxel U-1496E @ 33,600 bps
+"The hatch is open. Is anyone listening?"
+

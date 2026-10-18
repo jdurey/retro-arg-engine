@@ -1,0 +1,116 @@
+From jkarlsson@illinois.edu Mon Jul 24 01:42:52 1995
+Path: ashpoly!cascade!brgate!saturno!illinois!jkarlsson
+From: jkarlsson@illinois.edu (Joachim Karlsson)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jul24.014252.4738@illinois.edu>
+Date: Mon, 24 Jul 1995 01:42:52 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Joachim Karlsson
+Tape trading list upon request. SASE required for international mail.
+
+From glaurent@uni-hamburg.de Tue Jul 25 10:46:52 1995
+Path: ashpoly!cascade!mxgate!coyoacan!uni-hamburg!glaurent
+From: glaurent@uni-hamburg.de (Graham Laurent)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jul25.104652.6220@uni-hamburg.de>
+Date: Tue, 25 Jul 1995 10:46:52 GMT
+References: <1995Jul24.014252.4738@illinois.edu>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Jul24.014252.4738@illinois.edu>, jkarlsson@illinois.edu (Joachim Karlsson) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Graham Laurent <glaurent@uni-hamburg.de>
+*PLONK* filter active for trolls.
+Amiga 3000T - NetBSD 1.0
+
+From mpark@unam.mx Tue Jul 25 20:31:52 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!unam!mpark
+From: mpark@unam.mx (Min-jun Park)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jul25.203152.9834@unam.mx>
+Date: Tue, 25 Jul 1995 20:31:52 GMT
+References: <1995Jul24.014252.4738@illinois.edu> <1995Jul25.104652.6220@uni-hamburg.de>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Jul25.104652.6220@uni-hamburg.de>, glaurent@uni-hamburg.de (Graham Laurent) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Min-jun Park <mpark@unam.mx>
+"Tape doesn't lie at 02:14. Ears do."
+Macintosh IIfx / TOS 4.04
+
+From bgirard@rwth-aachen.de Fri Jul 28 00:31:52 1995
+Path: ashpoly!cascade!mxgate!coyoacan!rwth-aachen!bgirard
+From: bgirard@rwth-aachen.de (Brian Girard)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jul28.003152.2574@rwth-aachen.de>
+Date: Fri, 28 Jul 1995 00:31:52 GMT
+References: <1995Jul24.014252.4738@illinois.edu> <1995Jul25.104652.6220@uni-hamburg.de>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Jul25.104652.6220@uni-hamburg.de>, glaurent@uni-hamburg.de (Graham Laurent) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+=== Brian Girard ===
+Dept of Electrical Engineering, RWTH Aachen Informatik
+"Hardware is temporary. The signal survives."
+
+From tstewart@kiae.su Sat Jul 29 11:28:52 1995
+Path: ashpoly!cascade!bigsur!kiae!tstewart
+From: tstewart@kiae.su (Thiago Stewart)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jul29.112852.3387@kiae.su>
+Date: Sat, 29 Jul 1995 11:28:52 GMT
+References: <1995Jul24.014252.4738@illinois.edu> <1995Jul25.104652.6220@uni-hamburg.de>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Jul25.104652.6220@uni-hamburg.de>, glaurent@uni-hamburg.de (Graham Laurent) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Thiago Stewart <tstewart@kiae.su>
+"Extraordinary claims require extraordinary spectra."
+Amiga 3000T / Linux 1.2.13
+

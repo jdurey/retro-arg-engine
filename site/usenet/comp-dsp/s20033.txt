@@ -1,0 +1,118 @@
+From tlee@rwth-aachen.de Wed Oct 04 02:10:22 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!rwth-aachen!tlee
+From: tlee@rwth-aachen.de (Takeshi Lee)
+Newsgroups: comp.dsp
+Subject: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Oct04.021022.8539@rwth-aachen.de>
+Date: Wed, 04 Oct 1995 02:10:22 GMT
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+Takeshi Lee
+Opinions expressed are solely my own and not those of RWTH Aachen Informatik.
+------------------------------------------------------------
+
+From grobertson@inria.fr Wed Oct 04 09:03:22 1995
+Path: ashpoly!cascade!bigsur!inria!grobertson
+From: grobertson@inria.fr (Graham Robertson)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Oct04.090322.3917@inria.fr>
+Date: Wed, 04 Oct 1995 09:03:22 GMT
+References: <1995Oct04.021022.8539@rwth-aachen.de>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Oct04.021022.8539@rwth-aachen.de>, tlee@rwth-aachen.de (Takeshi Lee) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+Prof. Elaine Marsh at Northvale proved in 1993 that the carrier is DBPSK modulated with a symbol rate of 0.71 Hz.
+
+-- 
+Graham Robertson
+Opinions expressed are solely my own and not those of INRIA Rocquencourt.
+------------------------------------------------------------
+
+From dito@rwth-aachen.de Wed Oct 04 11:53:22 1995
+Path: ashpoly!cascade!mxgate!coyoacan!rwth-aachen!dito
+From: dito@rwth-aachen.de (Diego Ito)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Oct04.115322.3615@rwth-aachen.de>
+Date: Wed, 04 Oct 1995 11:53:22 GMT
+References: <1995Oct04.021022.8539@rwth-aachen.de> <1995Oct04.090322.3917@inria.fr>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Oct04.090322.3917@inria.fr>, grobertson@inria.fr (Graham Robertson) writes:
+> Prof. Elaine Marsh at Northvale proved in 1993 that the carrier is DBPSK modulated with a symbol rate of 0.71 Hz.
+
+Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+=== Diego Ito ===
+Dept of Electrical Engineering, RWTH Aachen Informatik
+"When every node is whole, the channel opens."
+
+From tnovak@stanford.edu Wed Oct 04 23:39:22 1995
+Path: ashpoly!cascade!mxgate!coyoacan!stanford!tnovak
+From: tnovak@stanford.edu (Thiago Novak)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Oct04.233922.6367@stanford.edu>
+Date: Wed, 04 Oct 1995 23:39:22 GMT
+References: <1995Oct04.021022.8539@rwth-aachen.de> <1995Oct04.090322.3917@inria.fr>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Oct04.090322.3917@inria.fr>, grobertson@inria.fr (Graham Robertson) writes:
+> Prof. Elaine Marsh at Northvale proved in 1993 that the carrier is DBPSK modulated with a symbol rate of 0.71 Hz.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Thiago Novak
+Opinions expressed are solely my own and not those of Stanford University Computer Systems Lab.
+------------------------------------------------------------
+
+From mlarsson@cmu.edu Thu Oct 05 10:41:22 1995
+Path: ashpoly!cascade!mxgate!coyoacan!cmu!mlarsson
+From: mlarsson@cmu.edu (Mateo Larsson)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Oct05.104122.4737@cmu.edu>
+Date: Thu, 05 Oct 1995 10:41:22 GMT
+References: <1995Oct04.021022.8539@rwth-aachen.de> <1995Oct04.090322.3917@inria.fr> <1995Oct04.233922.6367@stanford.edu>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Oct04.233922.6367@stanford.edu>, tnovak@stanford.edu (Thiago Novak) writes:
+> If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+-- 
+=== Mateo Larsson ===
+Dept of Electrical Engineering, Carnegie Mellon University School of CS
+"Extraordinary claims require extraordinary spectra."
+

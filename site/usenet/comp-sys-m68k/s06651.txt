@@ -1,0 +1,116 @@
+From gmuller@titech.ac.jp Thu Feb 02 19:49:57 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!titech!gmuller
+From: gmuller@titech.ac.jp (Göran Müller)
+Newsgroups: comp.sys.m68k
+Subject: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Feb02.194957.2276@titech.ac.jp>
+Date: Thu, 02 Feb 1995 19:49:57 GMT
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+Schematic diagram in ASCII uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/twin68_array.asc.
+
+-- 
+Göran Müller <gmuller@titech.ac.jp>
+Practical Peripherals 14.4 @ ISDN 64k bps
+"5 sigma is a discovery. 7 is a question."
+
+From vandersson@clari.net Sat Feb 04 15:27:57 1995
+Path: ashpoly!cascade!bigsur!clari!vandersson
+From: vandersson@clari.net (Valeria Andersson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Feb04.152757.8506@clari.net>
+Date: Sat, 04 Feb 1995 15:27:57 GMT
+References: <1995Feb02.194957.2276@titech.ac.jp>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Feb02.194957.2276@titech.ac.jp>, gmuller@titech.ac.jp (Göran Müller) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+> At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Valeria Andersson
+Tape trading list upon request. SASE required for international mail.
+
+From bchoi@uu.net Mon Feb 06 04:28:57 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!uu!bchoi
+From: bchoi@uu.net (Bill Choi)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Feb06.042857.9989@uu.net>
+Date: Mon, 06 Feb 1995 04:28:57 GMT
+References: <1995Feb02.194957.2276@titech.ac.jp> <1995Feb04.152757.8506@clari.net>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Feb04.152757.8506@clari.net>, vandersson@clari.net (Valeria Andersson) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+-- 
+Bill Choi <bchoi@uu.net>
+Hayes Optima 288 @ ISDN 64k bps
+"Row 14. No joke."
+
+From cnovak@stanford.edu Tue Feb 07 11:44:57 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!stanford!cnovak
+From: cnovak@stanford.edu (Callum Novak)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Feb07.114457.6702@stanford.edu>
+Date: Tue, 07 Feb 1995 11:44:57 GMT
+References: <1995Feb02.194957.2276@titech.ac.jp>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Feb02.194957.2276@titech.ac.jp>, gmuller@titech.ac.jp (Göran Müller) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+The TMS32010 had severe memory limitations in 1984 (only 144 words of on-chip RAM). Dual 68000s gave them full 16MB address space.
+
+-- 
+=== Callum Novak ===
+Dept of Electrical Engineering, Stanford University Computer Systems Lab
+"The hatch is open. Is anyone listening?"
+
+From dlindqvist@ox.ac.uk Wed Feb 08 18:41:57 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!ox!dlindqvist
+From: dlindqvist@ox.ac.uk (Dong-hyun Lindqvist)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Feb08.184157.6275@ox.ac.uk>
+Date: Wed, 08 Feb 1995 18:41:57 GMT
+References: <1995Feb02.194957.2276@titech.ac.jp> <1995Feb07.114457.6702@stanford.edu>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Feb07.114457.6702@stanford.edu>, cnovak@stanford.edu (Callum Novak) writes:
+> The TMS32010 had severe memory limitations in 1984 (only 144 words of on-chip RAM). Dual 68000s gave them full 16MB address space.
+
+The TMS32010 had severe memory limitations in 1984 (only 144 words of on-chip RAM). Dual 68000s gave them full 16MB address space.
+
+-- 
+Dong-hyun Lindqvist | dlindqvist@ox.ac.uk
+PGP Key fingerprint: E419 6B79 AFE1 07CA
+"Keep the channels open."
+

@@ -1,0 +1,71 @@
+From jokonkwo@cmu.edu Mon Sep 05 19:37:31 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!cmu!jokonkwo
+From: jokonkwo@cmu.edu (Joachim Okonkwo)
+Newsgroups: comp.sys.m68k
+Subject: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Sep05.193731.8490@cmu.edu>
+Date: Mon, 05 Sep 1994 19:37:31 GMT
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+Joachim Okonkwo <jokonkwo@cmu.edu>
+Zyxel U-1496E @ 33,600 bps
+"Hold for relay."
+
+From rduarte@earthlink.net Wed Sep 07 19:25:31 1994
+Path: ashpoly!cascade!brgate!saturno!earthlink!rduarte
+From: rduarte@earthlink.net (Raj Duarte)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Sep07.192531.6751@earthlink.net>
+Date: Wed, 07 Sep 1994 19:25:31 GMT
+References: <1994Sep05.193731.8490@cmu.edu>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1994Sep05.193731.8490@cmu.edu>, jokonkwo@cmu.edu (Joachim Okonkwo) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Raj Duarte <rduarte@earthlink.net>
+Practical Peripherals 14.4 @ 14,400 bps
+"They will send a copy in my place."
+
+From mfournier@berkeley.edu Thu Sep 08 10:58:31 1994
+Path: ashpoly!cascade!brgate!saturno!berkeley!mfournier
+From: mfournier@berkeley.edu (Mike Fournier)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Sep08.105831.3067@berkeley.edu>
+Date: Thu, 08 Sep 1994 10:58:31 GMT
+References: <1994Sep05.193731.8490@cmu.edu> <1994Sep07.192531.6751@earthlink.net>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Sep07.192531.6751@earthlink.net>, rduarte@earthlink.net (Raj Duarte) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Mike Fournier | mfournier@berkeley.edu
+PGP Key fingerprint: 235B 4E77 7E48 A448
+"Keep the channels open."
+

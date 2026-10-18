@@ -1,0 +1,94 @@
+From sduarte@uni-hamburg.de Mon May 16 06:06:32 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!uni-hamburg!sduarte
+From: sduarte@uni-hamburg.de (Sergei Duarte)
+Newsgroups: comp.dsp
+Subject: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994May16.060632.6893@uni-hamburg.de>
+Date: Mon, 16 May 1994 06:06:32 GMT
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Sergei Duarte <sduarte@uni-hamburg.de>
+Zyxel U-1496E @ ISDN 64k bps
+"Hardware is temporary. The signal survives."
+
+From kjohansson@delphi.com Tue May 17 10:07:32 1994
+Path: ashpoly!cascade!mxgate!coyoacan!delphi!kjohansson
+From: kjohansson@delphi.com (Katrin Johansson)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994May17.100732.2843@delphi.com>
+Date: Tue, 17 May 1994 10:07:32 GMT
+References: <1994May16.060632.6893@uni-hamburg.de>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1994May16.060632.6893@uni-hamburg.de>, sduarte@uni-hamburg.de (Sergei Duarte) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+> At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Katrin Johansson <kjohansson@delphi.com>
+"They will send a copy in my place."
+Macintosh IIfx / System 7.5.1
+
+From bvasiliev@pacbell.net Thu May 19 11:02:32 1994
+Path: ashpoly!cascade!mxgate!coyoacan!pacbell!bvasiliev
+From: bvasiliev@pacbell.net (Bill Vasiliev)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994May19.110232.8090@pacbell.net>
+Date: Thu, 19 May 1994 11:02:32 GMT
+References: <1994May16.060632.6893@uni-hamburg.de>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994May16.060632.6893@uni-hamburg.de>, sduarte@uni-hamburg.de (Sergei Duarte) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Bill Vasiliev <bvasiliev@pacbell.net>
+*PLONK* filter active for trolls.
+Commodore Amiga 500 (1MB OCS) - NetBSD 1.0
+
+From dfournier@illinois.edu Fri May 20 19:18:32 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!illinois!dfournier
+From: dfournier@illinois.edu (Dmitri Fournier)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994May20.191832.4247@illinois.edu>
+Date: Fri, 20 May 1994 19:18:32 GMT
+References: <1994May16.060632.6893@uni-hamburg.de> <1994May19.110232.8090@pacbell.net>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994May19.110232.8090@pacbell.net>, bvasiliev@pacbell.net (Bill Vasiliev) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Dmitri Fournier
+Opinions expressed are solely my own and not those of University of Illinois Urbana-Champaign.
+------------------------------------------------------------
+

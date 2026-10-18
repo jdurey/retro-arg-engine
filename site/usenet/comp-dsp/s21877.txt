@@ -1,0 +1,49 @@
+From mokonkwo@illinois.edu Wed Sep 14 15:58:17 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!illinois!mokonkwo
+From: mokonkwo@illinois.edu (Matthias Okonkwo)
+Newsgroups: comp.dsp
+Subject: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Sep14.155817.1716@illinois.edu>
+Date: Wed, 14 Sep 1994 15:58:17 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Matthias Okonkwo -- University of Illinois Urbana-Champaign
+"Hold for relay."
+
+From kandersson@berkeley.edu Thu Sep 15 07:29:17 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!berkeley!kandersson
+From: kandersson@berkeley.edu (Kirsty Andersson)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Sep15.072917.6219@berkeley.edu>
+Date: Thu, 15 Sep 1994 07:29:17 GMT
+References: <1994Sep14.155817.1716@illinois.edu>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1994Sep14.155817.1716@illinois.edu>, mokonkwo@illinois.edu (Matthias Okonkwo) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+> A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Kirsty Andersson
+Opinions expressed are solely my own and not those of UC Berkeley Department of EECS.
+------------------------------------------------------------
+

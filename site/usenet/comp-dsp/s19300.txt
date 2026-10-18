@@ -1,0 +1,113 @@
+From ksokolov@pipeline.com Sat Sep 10 02:59:13 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!pipeline!ksokolov
+From: ksokolov@pipeline.com (Kenji Sokolov)
+Newsgroups: comp.dsp
+Subject: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Sep10.025913.9255@pipeline.com>
+Date: Sat, 10 Sep 1994 02:59:13 GMT
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Kenji Sokolov -- The Pipeline Internet Network
+"Do not worship the copy."
+
+From mdubois@cam.ac.uk Mon Sep 12 00:17:13 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!cam!mdubois
+From: mdubois@cam.ac.uk (Mateo Dubois)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Sep12.001713.1543@cam.ac.uk>
+Date: Mon, 12 Sep 1994 00:17:13 GMT
+References: <1994Sep10.025913.9255@pipeline.com>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Sep10.025913.9255@pipeline.com>, ksokolov@pipeline.com (Kenji Sokolov) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Mateo Dubois -- University of Cambridge Computer Laboratory
+"In theory there is no difference between theory and practice."
+
+From mbrennan@pipeline.com Mon Sep 12 08:18:13 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!pipeline!mbrennan
+From: mbrennan@pipeline.com (Matthias Brennan)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Sep12.081813.3145@pipeline.com>
+Date: Mon, 12 Sep 1994 08:18:13 GMT
+References: <1994Sep10.025913.9255@pipeline.com>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1994Sep10.025913.9255@pipeline.com>, ksokolov@pipeline.com (Kenji Sokolov) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Matthias Brennan
+Tape trading list upon request. SASE required for international mail.
+
+From mdubois@netcom.com Mon Sep 12 21:34:13 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!netcom!mdubois
+From: mdubois@netcom.com (Mathieu Dubois)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Sep12.213413.2787@netcom.com>
+Date: Mon, 12 Sep 1994 21:34:13 GMT
+References: <1994Sep10.025913.9255@pipeline.com> <1994Sep12.081813.3145@pipeline.com>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Sep12.081813.3145@pipeline.com>, mbrennan@pipeline.com (Matthias Brennan) writes:
+> Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Mathieu Dubois
+Opinions expressed are solely my own and not those of NETCOM On-Line Communication Services.
+------------------------------------------------------------
+
+From eschneider@uni-hamburg.de Wed Sep 14 08:06:13 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!uni-hamburg!eschneider
+From: eschneider@uni-hamburg.de (Élodie Schneider)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Sep14.080613.9895@uni-hamburg.de>
+Date: Wed, 14 Sep 1994 08:06:13 GMT
+References: <1994Sep10.025913.9255@pipeline.com> <1994Sep12.081813.3145@pipeline.com> <1994Sep12.213413.2787@netcom.com>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1994Sep12.213413.2787@netcom.com>, mdubois@netcom.com (Mathieu Dubois) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Élodie Schneider -- Universität Hamburg Fachbereich Informatik
+"Do not worship the copy."
+

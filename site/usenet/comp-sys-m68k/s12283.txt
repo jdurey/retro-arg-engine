@@ -1,0 +1,48 @@
+From hsantos@mit.edu Sun Aug 06 20:23:07 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!mit!hsantos
+From: hsantos@mit.edu (Hugo Santos)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Aug06.202307.8034@mit.edu>
+Date: Sun, 06 Aug 1995 20:23:07 GMT
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Hugo Santos <hsantos@mit.edu>
+"Tape doesn't lie at 02:14. Ears do."
+Sun SparcStation 20 / SunOS 4.1.4
+
+From kkarlsson@kth.se Tue Aug 08 17:00:07 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!kth!kkarlsson
+From: kkarlsson@kth.se (Karen Karlsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Aug08.170007.9087@kth.se>
+Date: Tue, 08 Aug 1995 17:00:07 GMT
+References: <1995Aug06.202307.8034@mit.edu>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Aug06.202307.8034@mit.edu>, hsantos@mit.edu (Hugo Santos) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+=== Karen Karlsson ===
+Dept of Electrical Engineering, Royal Institute of Technology, Stockholm
+"Extraordinary claims require extraordinary spectra."
+

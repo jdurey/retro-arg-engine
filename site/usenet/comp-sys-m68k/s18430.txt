@@ -1,0 +1,122 @@
+From arobertson@pacbell.net Sat Jan 14 13:19:53 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!pacbell!arobertson
+From: arobertson@pacbell.net (Amy Robertson)
+Newsgroups: comp.sys.m68k
+Subject: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jan14.131953.1706@pacbell.net>
+Date: Sat, 14 Jan 1995 13:19:53 GMT
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+=== Amy Robertson ===
+Dept of Electrical Engineering, Pacific Bell Internet Services
+"There are 14 nodes and only 10 countries. Count again."
+
+From mmoreau@utexas.edu Mon Jan 16 08:32:53 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!utexas!mmoreau
+From: mmoreau@utexas.edu (Min-jun Moreau)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jan16.083253.2317@utexas.edu>
+Date: Mon, 16 Jan 1995 08:32:53 GMT
+References: <1995Jan14.131953.1706@pacbell.net>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1995Jan14.131953.1706@pacbell.net>, arobertson@pacbell.net (Amy Robertson) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Min-jun Moreau <mmoreau@utexas.edu>
+"Hold for relay."
+Acorn RiscPC 600 / System 7.5.1
+
+From nlopez@kiae.su Wed Jan 18 03:24:53 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!kiae!nlopez
+From: nlopez@kiae.su (Nadine López)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jan18.032453.9999@kiae.su>
+Date: Wed, 18 Jan 1995 03:24:53 GMT
+References: <1995Jan14.131953.1706@pacbell.net>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Jan14.131953.1706@pacbell.net>, arobertson@pacbell.net (Amy Robertson) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Nadine López <nlopez@kiae.su>
+*PLONK* filter active for trolls.
+Acorn RiscPC 600 - NetBSD 1.0
+
+From mchoi@delphi.com Wed Jan 18 07:31:53 1995
+Path: ashpoly!cascade!brgate!saturno!delphi!mchoi
+From: mchoi@delphi.com (Min-jun Choi)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jan18.073153.1877@delphi.com>
+Date: Wed, 18 Jan 1995 07:31:53 GMT
+References: <1995Jan14.131953.1706@pacbell.net> <1995Jan18.032453.9999@kiae.su>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Jan18.032453.9999@kiae.su>, nlopez@kiae.su (Nadine López) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Min-jun Choi | mchoi@delphi.com
+PGP Key fingerprint: 34E4 6D4B 69E4 6BBD
+"Keep the channels open."
+
+From eschneider@cmu.edu Thu Jan 19 01:18:53 1995
+Path: ashpoly!cascade!bigsur!cmu!eschneider
+From: eschneider@cmu.edu (Élodie Schneider)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jan19.011853.9661@cmu.edu>
+Date: Thu, 19 Jan 1995 01:18:53 GMT
+References: <1995Jan14.131953.1706@pacbell.net> <1995Jan18.032453.9999@kiae.su>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995Jan18.032453.9999@kiae.su>, nlopez@kiae.su (Nadine López) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Élodie Schneider | eschneider@cmu.edu
+PGP Key fingerprint: F817 11C0 222E D27B
+"Keep the channels open."
+

@@ -1,0 +1,70 @@
+From ttakahashi@cmu.edu Wed Apr 19 19:12:21 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!cmu!ttakahashi
+From: ttakahashi@cmu.edu (Thiago Takahashi)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Apr19.191221.6785@cmu.edu>
+Date: Wed, 19 Apr 1995 19:12:21 GMT
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Thiago Takahashi | ttakahashi@cmu.edu
+PGP Key fingerprint: B936 BF00 EA8A FFCB
+"Keep the channels open."
+
+From bwatanabe@tum.de Fri Apr 21 06:06:21 1995
+Path: ashpoly!cascade!brgate!saturno!tum!bwatanabe
+From: bwatanabe@tum.de (Bruno Watanabe)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Apr21.060621.9578@tum.de>
+Date: Fri, 21 Apr 1995 06:06:21 GMT
+References: <1995Apr19.191221.6785@cmu.edu>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Apr19.191221.6785@cmu.edu>, ttakahashi@cmu.edu (Thiago Takahashi) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Bruno Watanabe -- Technische Universität München
+"When every node is whole, the channel opens."
+
+From nsuzuki@hanse.de Fri Apr 21 17:14:21 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!hanse!nsuzuki
+From: nsuzuki@hanse.de (Nadia Suzuki)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Apr21.171421.3630@hanse.de>
+Date: Fri, 21 Apr 1995 17:14:21 GMT
+References: <1995Apr19.191221.6785@cmu.edu> <1995Apr21.060621.9578@tum.de>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Apr21.060621.9578@tum.de>, bwatanabe@tum.de (Bruno Watanabe) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Nadia Suzuki <nsuzuki@hanse.de>
+*PLONK* filter active for trolls.
+Mac IIci / 68882 FPU - NetBSD 1.0
+

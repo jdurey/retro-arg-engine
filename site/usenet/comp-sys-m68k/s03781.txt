@@ -1,0 +1,71 @@
+From kchoi@titech.ac.jp Sat Apr 02 19:18:17 1994
+Path: ashpoly!cascade!mxgate!coyoacan!titech!kchoi
+From: kchoi@titech.ac.jp (Kirsty Choi)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Apr02.191817.3813@titech.ac.jp>
+Date: Sat, 02 Apr 1994 19:18:17 GMT
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+Schematic diagram in ASCII uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/twin68_array.asc.
+
+-- 
+=== Kirsty Choi ===
+Dept of Electrical Engineering, Tokyo Institute of Technology Computer Centre
+"5 sigma is a discovery. 7 is a question."
+
+From aivanov@titech.ac.jp Sun Apr 03 09:17:17 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!titech!aivanov
+From: aivanov@titech.ac.jp (Amy Ivanov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Apr03.091717.6074@titech.ac.jp>
+Date: Sun, 03 Apr 1994 09:17:17 GMT
+References: <1994Apr02.191817.3813@titech.ac.jp>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Apr02.191817.3813@titech.ac.jp>, kchoi@titech.ac.jp (Kirsty Choi) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+=== Amy Ivanov ===
+Dept of Electrical Engineering, Tokyo Institute of Technology Computer Centre
+"We don't sign stars. We build them."
+
+From pito@berkeley.edu Sun Apr 03 15:55:17 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!berkeley!pito
+From: pito@berkeley.edu (Pavel Ito)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Apr03.155517.3599@berkeley.edu>
+Date: Sun, 03 Apr 1994 15:55:17 GMT
+References: <1994Apr02.191817.3813@titech.ac.jp>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1994Apr02.191817.3813@titech.ac.jp>, kchoi@titech.ac.jp (Kirsty Choi) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+> CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Pavel Ito
+Opinions expressed are solely my own and not those of UC Berkeley Department of EECS.
+------------------------------------------------------------
+

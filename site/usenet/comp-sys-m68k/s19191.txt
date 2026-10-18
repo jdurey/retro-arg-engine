@@ -1,0 +1,122 @@
+From rrobertson@u-tokyo.ac.jp Fri Jun 16 21:54:10 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!u-tokyo!rrobertson
+From: rrobertson@u-tokyo.ac.jp (Raj Robertson)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jun16.215410.7718@u-tokyo.ac.jp>
+Date: Fri, 16 Jun 1995 21:54:10 GMT
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+=== Raj Robertson ===
+Dept of Electrical Engineering, University of Tokyo Department of Information Science
+"The carrier frequency does not drift by accident."
+
+From jkowalski@clari.net Sun Jun 18 23:26:10 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!clari!jkowalski
+From: jkowalski@clari.net (Ji-woo Kowalski)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jun18.232610.5924@clari.net>
+Date: Sun, 18 Jun 1995 23:26:10 GMT
+References: <1995Jun16.215410.7718@u-tokyo.ac.jp>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Jun16.215410.7718@u-tokyo.ac.jp>, rrobertson@u-tokyo.ac.jp (Raj Robertson) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+=== Ji-woo Kowalski ===
+Dept of Electrical Engineering, ClariNet Communications Corp
+"The hatch is open. Is anyone listening?"
+
+From nokonkwo@kth.se Mon Jun 19 13:56:10 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!kth!nokonkwo
+From: nokonkwo@kth.se (Nadia Okonkwo)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jun19.135610.8662@kth.se>
+Date: Mon, 19 Jun 1995 13:56:10 GMT
+References: <1995Jun16.215410.7718@u-tokyo.ac.jp> <1995Jun18.232610.5924@clari.net>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995Jun18.232610.5924@clari.net>, jkowalski@clari.net (Ji-woo Kowalski) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+> If you are posting from AOL, please read RFC 1036 before posting again.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Nadia Okonkwo
+Tape trading list upon request. SASE required for international mail.
+
+From jschneider@cam.ac.uk Tue Jun 20 11:19:10 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!cam!jschneider
+From: jschneider@cam.ac.uk (Jen Schneider)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jun20.111910.7983@cam.ac.uk>
+Date: Tue, 20 Jun 1995 11:19:10 GMT
+References: <1995Jun16.215410.7718@u-tokyo.ac.jp>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Jun16.215410.7718@u-tokyo.ac.jp>, rrobertson@u-tokyo.ac.jp (Raj Robertson) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Jen Schneider <jschneider@cam.ac.uk>
+*PLONK* filter active for trolls.
+Sun SparcStation 20 - NetBSD 1.0
+
+From mfournier@pacbell.net Thu Jun 22 04:46:10 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!pacbell!mfournier
+From: mfournier@pacbell.net (Matthias Fournier)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jun22.044610.8411@pacbell.net>
+Date: Thu, 22 Jun 1995 04:46:10 GMT
+References: <1995Jun16.215410.7718@u-tokyo.ac.jp> <1995Jun20.111910.7983@cam.ac.uk>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995Jun20.111910.7983@cam.ac.uk>, jschneider@cam.ac.uk (Jen Schneider) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Matthias Fournier
+Opinions expressed are solely my own and not those of Pacific Bell Internet Services.
+------------------------------------------------------------
+

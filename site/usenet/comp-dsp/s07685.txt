@@ -1,0 +1,47 @@
+From poliveira@clari.net Sat Oct 07 14:37:31 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!clari!poliveira
+From: poliveira@clari.net (Pavel Oliveira)
+Newsgroups: comp.dsp
+Subject: [FLAME] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Oct07.143731.5284@clari.net>
+Date: Sat, 07 Oct 1995 14:37:31 GMT
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+Pavel Oliveira <poliveira@clari.net>
+"The carrier frequency does not drift by accident."
+PC-9821Ap2 (NEC) / AmigaOS 3.1
+
+From lschneider@cmu.edu Mon Oct 09 18:28:31 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!cmu!lschneider
+From: lschneider@cmu.edu (Liam Schneider)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Oct09.182831.2379@cmu.edu>
+Date: Mon, 09 Oct 1995 18:28:31 GMT
+References: <1995Oct07.143731.5284@clari.net>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Oct07.143731.5284@clari.net>, poliveira@clari.net (Pavel Oliveira) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Liam Schneider <lschneider@cmu.edu>
+Hayes Optima 288 @ ISDN 64k bps
+"They will send a copy in my place."
+

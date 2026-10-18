@@ -1,0 +1,73 @@
+From mduarte@stanford.edu Sat May 14 02:35:54 1994
+Path: ashpoly!cascade!mxgate!coyoacan!stanford!mduarte
+From: mduarte@stanford.edu (Mikhail Duarte)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994May14.023554.3522@stanford.edu>
+Date: Sat, 14 May 1994 02:35:54 GMT
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Mikhail Duarte <mduarte@stanford.edu>
+"The carrier frequency does not drift by accident."
+Pentium 90 (OS/2 Warp) / Linux 1.2.13
+
+From tkang@tum.de Mon May 16 01:54:54 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!tum!tkang
+From: tkang@tum.de (Tomas Kang)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994May16.015454.5820@tum.de>
+Date: Mon, 16 May 1994 01:54:54 GMT
+References: <1994May14.023554.3522@stanford.edu>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994May14.023554.3522@stanford.edu>, mduarte@stanford.edu (Mikhail Duarte) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Tomas Kang
+Tape trading list upon request. SASE required for international mail.
+
+From dgarcia@ox.ac.uk Mon May 16 19:16:54 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!ox!dgarcia
+From: dgarcia@ox.ac.uk (Dong-hyun García)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994May16.191654.2085@ox.ac.uk>
+Date: Mon, 16 May 1994 19:16:54 GMT
+References: <1994May14.023554.3522@stanford.edu>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1994May14.023554.3522@stanford.edu>, mduarte@stanford.edu (Mikhail Duarte) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Dong-hyun García
+Opinions expressed are solely my own and not those of Oxford University Computing Laboratory.
+------------------------------------------------------------
+

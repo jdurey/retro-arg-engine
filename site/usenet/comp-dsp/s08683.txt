@@ -1,0 +1,97 @@
+From psouza@netcom.com Thu Jun 16 06:16:24 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!netcom!psouza
+From: psouza@netcom.com (Pavel Souza)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Jun16.061624.8051@netcom.com>
+Date: Thu, 16 Jun 1994 06:16:24 GMT
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Pavel Souza | psouza@netcom.com
+PGP Key fingerprint: 3ABE FB25 1C32 FFC4
+"Keep the channels open."
+
+From mlopez@tum.de Thu Jun 16 19:04:24 1994
+Path: ashpoly!cascade!bigsur!tum!mlopez
+From: mlopez@tum.de (Mike López)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Jun16.190424.6752@tum.de>
+Date: Thu, 16 Jun 1994 19:04:24 GMT
+References: <1994Jun16.061624.8051@netcom.com>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1994Jun16.061624.8051@netcom.com>, psouza@netcom.com (Pavel Souza) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Mike López <mlopez@tum.de>
+Zyxel U-1496E @ 33,600 bps
+"When every node is whole, the channel opens."
+
+From bkarlsson@titech.ac.jp Fri Jun 17 18:45:24 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!titech!bkarlsson
+From: bkarlsson@titech.ac.jp (Bruno Karlsson)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Jun17.184524.1202@titech.ac.jp>
+Date: Fri, 17 Jun 1994 18:45:24 GMT
+References: <1994Jun16.061624.8051@netcom.com> <1994Jun16.190424.6752@tum.de>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1994Jun16.190424.6752@tum.de>, mlopez@tum.de (Mike López) writes:
+> Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Bruno Karlsson
+Tape trading list upon request. SASE required for international mail.
+
+From aweber@cmu.edu Sun Jun 19 16:30:24 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!cmu!aweber
+From: aweber@cmu.edu (Anja Weber)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Jun19.163024.6332@cmu.edu>
+Date: Sun, 19 Jun 1994 16:30:24 GMT
+References: <1994Jun16.061624.8051@netcom.com> <1994Jun16.190424.6752@tum.de> <1994Jun17.184524.1202@titech.ac.jp>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Jun17.184524.1202@titech.ac.jp>, bkarlsson@titech.ac.jp (Bruno Karlsson) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+> Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Anja Weber
+Tape trading list upon request. SASE required for international mail.
+

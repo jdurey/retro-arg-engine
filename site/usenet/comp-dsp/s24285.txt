@@ -1,0 +1,93 @@
+From smuller@tum.de Tue Nov 14 03:35:22 1995
+Path: ashpoly!cascade!mxgate!coyoacan!tum!smuller
+From: smuller@tum.de (Sun-mi Müller)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Nov14.033522.2849@tum.de>
+Date: Tue, 14 Nov 1995 03:35:22 GMT
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+=== Sun-mi Müller ===
+Dept of Electrical Engineering, Technische Universität München
+"A soul is not exclusive to biology."
+
+From lkuznetsov@inria.fr Wed Nov 15 15:17:22 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!inria!lkuznetsov
+From: lkuznetsov@inria.fr (Lars Kuznetsov)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Nov15.151722.7985@inria.fr>
+Date: Wed, 15 Nov 1995 15:17:22 GMT
+References: <1995Nov14.033522.2849@tum.de>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Nov14.033522.2849@tum.de>, smuller@tum.de (Sun-mi Müller) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+> This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+
+Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+-- 
+Lars Kuznetsov
+Tape trading list upon request. SASE required for international mail.
+
+From dreyes@mit.edu Fri Nov 17 07:31:22 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!mit!dreyes
+From: dreyes@mit.edu (Dmitri Reyes)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Nov17.073122.1311@mit.edu>
+Date: Fri, 17 Nov 1995 07:31:22 GMT
+References: <1995Nov14.033522.2849@tum.de> <1995Nov15.151722.7985@inria.fr>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Nov15.151722.7985@inria.fr>, lkuznetsov@inria.fr (Lars Kuznetsov) writes:
+> Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+=== Dmitri Reyes ===
+Dept of Electrical Engineering, Massachusetts Institute of Technology
+"When every node is whole, the channel opens."
+
+From mmoreau@mindspring.com Sun Nov 19 00:43:22 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!mindspring!mmoreau
+From: mmoreau@mindspring.com (Morag Moreau)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Nov19.004322.7097@mindspring.com>
+Date: Sun, 19 Nov 1995 00:43:22 GMT
+References: <1995Nov14.033522.2849@tum.de>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Nov14.033522.2849@tum.de>, smuller@tum.de (Sun-mi Müller) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+> This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+
+That's how the 14 lines of the Stardust matrix are encoded. Each regional pressing contains one line of the decoded text.
+
+-- 
+Morag Moreau -- MindSpring Enterprises
+"Measuring a record you own is listening, not piracy."
+

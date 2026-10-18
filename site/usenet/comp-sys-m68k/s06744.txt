@@ -1,0 +1,97 @@
+From hvasiliev@mit.edu Tue Oct 10 05:08:57 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!mit!hvasiliev
+From: hvasiliev@mit.edu (Heather Vasiliev)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Oct10.050857.4839@mit.edu>
+Date: Tue, 10 Oct 1995 05:08:57 GMT
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Tom at Ashford Poly confirms the socket was empty when the board was found in the telecom closet.
+
+-- 
+Heather Vasiliev
+Opinions expressed are solely my own and not those of Massachusetts Institute of Technology.
+------------------------------------------------------------
+
+From dtakahashi@titech.ac.jp Tue Oct 10 21:16:57 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!titech!dtakahashi
+From: dtakahashi@titech.ac.jp (Dmitri Takahashi)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Oct10.211657.4500@titech.ac.jp>
+Date: Tue, 10 Oct 1995 21:16:57 GMT
+References: <1995Oct10.050857.4839@mit.edu>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Oct10.050857.4839@mit.edu>, hvasiliev@mit.edu (Heather Vasiliev) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Dmitri Takahashi <dtakahashi@titech.ac.jp>
+Practical Peripherals 14.4 @ 14,400 bps
+"Hardware is temporary. The signal survives."
+
+From creyes@earthlink.net Wed Oct 11 03:43:57 1995
+Path: ashpoly!cascade!brgate!saturno!earthlink!creyes
+From: creyes@earthlink.net (Camila Reyes)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Oct11.034357.3080@earthlink.net>
+Date: Wed, 11 Oct 1995 03:43:57 GMT
+References: <1995Oct10.050857.4839@mit.edu> <1995Oct10.211657.4500@titech.ac.jp>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995Oct10.211657.4500@titech.ac.jp>, dtakahashi@titech.ac.jp (Dmitri Takahashi) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Camila Reyes <creyes@earthlink.net>
+Practical Peripherals 14.4 @ 14,400 bps
+"When every node is whole, the channel opens."
+
+From mivanov@utexas.edu Fri Oct 13 03:38:57 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!utexas!mivanov
+From: mivanov@utexas.edu (Mateo Ivanov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Oct13.033857.9382@utexas.edu>
+Date: Fri, 13 Oct 1995 03:38:57 GMT
+References: <1995Oct10.050857.4839@mit.edu>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995Oct10.050857.4839@mit.edu>, hvasiliev@mit.edu (Heather Vasiliev) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Mateo Ivanov | mivanov@utexas.edu
+PGP Key fingerprint: C43B 08A8 849E 1FE0
+"Keep the channels open."
+

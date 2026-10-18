@@ -1,0 +1,118 @@
+From divanov@cam.ac.uk Fri Oct 25 18:32:55 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!cam!divanov
+From: divanov@cam.ac.uk (Dmitri Ivanov)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Oct25.183255.7676@cam.ac.uk>
+Date: Fri, 25 Oct 1996 18:32:55 GMT
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+Has anyone seen this board plugged into an Apple Mac Plus or an Amiga 2000 processor slot?
+
+-- 
+Dmitri Ivanov
+Opinions expressed are solely my own and not those of University of Cambridge Computer Laboratory.
+------------------------------------------------------------
+
+From smacdonald@u-tokyo.ac.jp Sat Oct 26 18:19:55 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!u-tokyo!smacdonald
+From: smacdonald@u-tokyo.ac.jp (Sergei MacDonald)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Oct26.181955.1175@u-tokyo.ac.jp>
+Date: Sat, 26 Oct 1996 18:19:55 GMT
+References: <1996Oct25.183255.7676@cam.ac.uk>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Oct25.183255.7676@cam.ac.uk>, divanov@cam.ac.uk (Dmitri Ivanov) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+-- 
+Sergei MacDonald
+Opinions expressed are solely my own and not those of University of Tokyo Department of Information Science.
+------------------------------------------------------------
+
+From hlopez@inria.fr Mon Oct 28 00:31:55 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!inria!hlopez
+From: hlopez@inria.fr (Hugo López)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Oct28.003155.6263@inria.fr>
+Date: Mon, 28 Oct 1996 00:31:55 GMT
+References: <1996Oct25.183255.7676@cam.ac.uk> <1996Oct26.181955.1175@u-tokyo.ac.jp>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1996Oct26.181955.1175@u-tokyo.ac.jp>, smacdonald@u-tokyo.ac.jp (Sergei MacDonald) writes:
+> Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+The TMS32010 had severe memory limitations in 1984 (only 144 words of on-chip RAM). Dual 68000s gave them full 16MB address space.
+
+-- 
+Hugo López -- INRIA Rocquencourt
+"The hatch is open. Is anyone listening?"
+
+From mgirard@demon.co.uk Tue Oct 29 12:20:55 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!demon!mgirard
+From: mgirard@demon.co.uk (Marta Girard)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Oct29.122055.6931@demon.co.uk>
+Date: Tue, 29 Oct 1996 12:20:55 GMT
+References: <1996Oct25.183255.7676@cam.ac.uk> <1996Oct26.181955.1175@u-tokyo.ac.jp> <1996Oct28.003155.6263@inria.fr>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1996Oct28.003155.6263@inria.fr>, hlopez@inria.fr (Hugo López) writes:
+> The TMS32010 had severe memory limitations in 1984 (only 144 words of on-chip RAM). Dual 68000s gave them full 16MB address space.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+Marta Girard <mgirard@demon.co.uk>
+SupraFAXModem 28.8 @ 33,600 bps
+"5 sigma is a discovery. 7 is a question."
+
+From fsantos@kiae.su Wed Oct 30 02:38:55 1996
+Path: ashpoly!cascade!bigsur!kiae!fsantos
+From: fsantos@kiae.su (Freya Santos)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Oct30.023855.1282@kiae.su>
+Date: Wed, 30 Oct 1996 02:38:55 GMT
+References: <1996Oct25.183255.7676@cam.ac.uk> <1996Oct26.181955.1175@u-tokyo.ac.jp> <1996Oct28.003155.6263@inria.fr> <1996Oct29.122055.6931@demon.co.uk>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1996Oct29.122055.6931@demon.co.uk>, mgirard@demon.co.uk (Marta Girard) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+> Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Freya Santos <fsantos@kiae.su>
+US Robotics Courier V.34 @ 14,400 bps
+"Marcus is not one man."
+

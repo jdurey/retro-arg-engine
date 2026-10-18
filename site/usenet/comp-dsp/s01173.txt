@@ -1,0 +1,70 @@
+From tramirez@berkeley.edu Thu Jul 27 00:31:44 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!berkeley!tramirez
+From: tramirez@berkeley.edu (Tomas Ramírez)
+Newsgroups: comp.dsp
+Subject: Observation: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jul27.003144.3610@berkeley.edu>
+Date: Thu, 27 Jul 1995 00:31:44 GMT
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+Tomas Ramírez <tramirez@berkeley.edu>
+*PLONK* filter active for trolls.
+Macintosh IIfx - NetBSD 1.0
+
+From tnovak@stanford.edu Fri Jul 28 08:25:44 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!stanford!tnovak
+From: tnovak@stanford.edu (Tomas Novak)
+Newsgroups: comp.dsp
+Subject: Re: Observation: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jul28.082544.3065@stanford.edu>
+Date: Fri, 28 Jul 1995 08:25:44 GMT
+References: <1995Jul27.003144.3610@berkeley.edu>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Jul27.003144.3610@berkeley.edu>, tramirez@berkeley.edu (Tomas Ramírez) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+-- 
+Tomas Novak
+Opinions expressed are solely my own and not those of Stanford University Computer Systems Lab.
+------------------------------------------------------------
+
+From acampbell@uni-hamburg.de Fri Jul 28 21:34:44 1995
+Path: ashpoly!cascade!brgate!saturno!uni-hamburg!acampbell
+From: acampbell@uni-hamburg.de (Astrid Campbell)
+Newsgroups: comp.dsp
+Subject: Re: Observation: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jul28.213444.7071@uni-hamburg.de>
+Date: Fri, 28 Jul 1995 21:34:44 GMT
+References: <1995Jul27.003144.3610@berkeley.edu> <1995Jul28.082544.3065@stanford.edu>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Jul28.082544.3065@stanford.edu>, tnovak@stanford.edu (Tomas Novak) writes:
+> Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Astrid Campbell <acampbell@uni-hamburg.de>
+Hayes Optima 288 @ 19,200 bps
+"When every node is whole, the channel opens."
+

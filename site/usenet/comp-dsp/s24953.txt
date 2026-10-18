@@ -1,0 +1,118 @@
+From srobertson@clari.net Sun Dec 10 11:32:52 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!clari!srobertson
+From: srobertson@clari.net (Sun-mi Robertson)
+Newsgroups: comp.dsp
+Subject: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec10.113252.5248@clari.net>
+Date: Sun, 10 Dec 1995 11:32:52 GMT
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Sun-mi Robertson
+Opinions expressed are solely my own and not those of ClariNet Communications Corp.
+------------------------------------------------------------
+
+From rsato@pipeline.com Mon Dec 11 00:16:52 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!pipeline!rsato
+From: rsato@pipeline.com (Renata Sato)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec11.001652.5563@pipeline.com>
+Date: Mon, 11 Dec 1995 00:16:52 GMT
+References: <1995Dec10.113252.5248@clari.net>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995Dec10.113252.5248@clari.net>, srobertson@clari.net (Sun-mi Robertson) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Renata Sato | rsato@pipeline.com
+PGP Key fingerprint: 5A72 AE53 D884 C081
+"Keep the channels open."
+
+From msanchez@uni-hamburg.de Tue Dec 12 02:30:52 1995
+Path: ashpoly!cascade!bigsur!uni-hamburg!msanchez
+From: msanchez@uni-hamburg.de (Mei Sánchez)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec12.023052.1113@uni-hamburg.de>
+Date: Tue, 12 Dec 1995 02:30:52 GMT
+References: <1995Dec10.113252.5248@clari.net>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Dec10.113252.5248@clari.net>, srobertson@clari.net (Sun-mi Robertson) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Mei Sánchez | msanchez@uni-hamburg.de
+PGP Key fingerprint: 13F3 574A 5263 E304
+"Keep the channels open."
+
+From sweber@mindspring.com Tue Dec 12 03:55:52 1995
+Path: ashpoly!cascade!brgate!saturno!mindspring!sweber
+From: sweber@mindspring.com (Steve Weber)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec12.035552.6214@mindspring.com>
+Date: Tue, 12 Dec 1995 03:55:52 GMT
+References: <1995Dec10.113252.5248@clari.net> <1995Dec12.023052.1113@uni-hamburg.de>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Dec12.023052.1113@uni-hamburg.de>, msanchez@uni-hamburg.de (Mei Sánchez) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Steve Weber -- MindSpring Enterprises
+"In theory there is no difference between theory and practice."
+
+From mperez@mit.edu Tue Dec 12 20:52:52 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!mit!mperez
+From: mperez@mit.edu (Min-jun Pérez)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec12.205252.8060@mit.edu>
+Date: Tue, 12 Dec 1995 20:52:52 GMT
+References: <1995Dec10.113252.5248@clari.net>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Dec10.113252.5248@clari.net>, srobertson@clari.net (Sun-mi Robertson) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Min-jun Pérez
+Opinions expressed are solely my own and not those of Massachusetts Institute of Technology.
+------------------------------------------------------------
+

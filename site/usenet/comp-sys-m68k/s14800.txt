@@ -1,0 +1,117 @@
+From avasiliev@panix.com Sat Dec 02 23:07:21 1995
+Path: ashpoly!cascade!brgate!saturno!panix!avasiliev
+From: avasiliev@panix.com (Amy Vasiliev)
+Newsgroups: comp.sys.m68k
+Subject: Data: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Dec02.230721.3462@panix.com>
+Date: Sat, 02 Dec 1995 23:07:21 GMT
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+
+Does anyone have a 27C256 EPROM marked 'MH-U14' or 'ORION-CRYPTO'?
+
+-- 
+Amy Vasiliev
+Tape trading list upon request. SASE required for international mail.
+
+From ncampbell@mit.edu Mon Dec 04 15:46:21 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!mit!ncampbell
+From: ncampbell@mit.edu (Natalia Campbell)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Dec04.154621.2047@mit.edu>
+Date: Mon, 04 Dec 1995 15:46:21 GMT
+References: <1995Dec02.230721.3462@panix.com>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1995Dec02.230721.3462@panix.com>, avasiliev@panix.com (Amy Vasiliev) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+-- 
+Natalia Campbell
+Tape trading list upon request. SASE required for international mail.
+
+From brodriguez@kiae.su Tue Dec 05 01:11:21 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!kiae!brodriguez
+From: brodriguez@kiae.su (Brian Rodríguez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Dec05.011121.6433@kiae.su>
+Date: Tue, 05 Dec 1995 01:11:21 GMT
+References: <1995Dec02.230721.3462@panix.com> <1995Dec04.154621.2047@mit.edu>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995Dec04.154621.2047@mit.edu>, ncampbell@mit.edu (Natalia Campbell) writes:
+> Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Brian Rodríguez <brodriguez@kiae.su>
+"Do not worship the copy."
+Sun SparcStation 20 / SunOS 4.1.4
+
+From ahernandez@pacbell.net Wed Dec 06 20:47:21 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!pacbell!ahernandez
+From: ahernandez@pacbell.net (Aiko Hernández)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Dec06.204721.5562@pacbell.net>
+Date: Wed, 06 Dec 1995 20:47:21 GMT
+References: <1995Dec02.230721.3462@panix.com>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Dec02.230721.3462@panix.com>, avasiliev@panix.com (Amy Vasiliev) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Aiko Hernández | ahernandez@pacbell.net
+PGP Key fingerprint: F808 2002 A112 D626
+"Keep the channels open."
+
+From gmacdonald@pacbell.net Fri Dec 08 22:54:21 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!pacbell!gmacdonald
+From: gmacdonald@pacbell.net (Graham MacDonald)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Dec08.225421.8270@pacbell.net>
+Date: Fri, 08 Dec 1995 22:54:21 GMT
+References: <1995Dec02.230721.3462@panix.com> <1995Dec06.204721.5562@pacbell.net>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Dec06.204721.5562@pacbell.net>, ahernandez@pacbell.net (Aiko Hernández) writes:
+> Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Graham MacDonald <gmacdonald@pacbell.net>
+US Robotics Courier V.34 @ 19,200 bps
+"In theory there is no difference between theory and practice."
+

@@ -1,0 +1,118 @@
+From nnakamura@cmu.edu Wed Nov 22 05:36:18 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!cmu!nnakamura
+From: nnakamura@cmu.edu (Nadine Nakamura)
+Newsgroups: comp.sys.m68k
+Subject: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Nov22.053618.5849@cmu.edu>
+Date: Wed, 22 Nov 1995 05:36:18 GMT
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+Schematic diagram in ASCII uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/twin68_array.asc.
+
+-- 
+Nadine Nakamura
+Opinions expressed are solely my own and not those of Carnegie Mellon University School of CS.
+------------------------------------------------------------
+
+From mokonkwo@rwth-aachen.de Wed Nov 22 15:59:18 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!rwth-aachen!mokonkwo
+From: mokonkwo@rwth-aachen.de (Mike Okonkwo)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Nov22.155918.1686@rwth-aachen.de>
+Date: Wed, 22 Nov 1995 15:59:18 GMT
+References: <1995Nov22.053618.5849@cmu.edu>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Nov22.053618.5849@cmu.edu>, nnakamura@cmu.edu (Nadine Nakamura) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+Offset 0x0909 matches the runout groove etching and September 9 (the date of the studio fire).
+
+-- 
+Mike Okonkwo <mokonkwo@rwth-aachen.de>
+Zyxel U-1496E @ 14,400 bps
+"A soul is not exclusive to biology."
+
+From mpopov@illinois.edu Thu Nov 23 17:39:18 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!illinois!mpopov
+From: mpopov@illinois.edu (Mateo Popov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Nov23.173918.3654@illinois.edu>
+Date: Thu, 23 Nov 1995 17:39:18 GMT
+References: <1995Nov22.053618.5849@cmu.edu>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Nov22.053618.5849@cmu.edu>, nnakamura@cmu.edu (Nadine Nakamura) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+> Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Mateo Popov -- University of Illinois Urbana-Champaign
+"When every node is whole, the channel opens."
+
+From dkarlsson@uu.net Sat Nov 25 03:19:18 1995
+Path: ashpoly!cascade!bigsur!uu!dkarlsson
+From: dkarlsson@uu.net (Dmitri Karlsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Nov25.031918.6129@uu.net>
+Date: Sat, 25 Nov 1995 03:19:18 GMT
+References: <1995Nov22.053618.5849@cmu.edu> <1995Nov23.173918.3654@illinois.edu>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995Nov23.173918.3654@illinois.edu>, mpopov@illinois.edu (Mateo Popov) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Dmitri Karlsson <dkarlsson@uu.net>
+Practical Peripherals 14.4 @ ISDN 64k bps
+"5 sigma is a discovery. 7 is a question."
+
+From bsouza@cern.ch Sat Nov 25 15:47:18 1995
+Path: ashpoly!cascade!brgate!saturno!cern!bsouza
+From: bsouza@cern.ch (Bastien Souza)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Nov25.154718.8242@cern.ch>
+Date: Sat, 25 Nov 1995 15:47:18 GMT
+References: <1995Nov22.053618.5849@cmu.edu> <1995Nov22.155918.1686@rwth-aachen.de>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Nov22.155918.1686@rwth-aachen.de>, mokonkwo@rwth-aachen.de (Mike Okonkwo) writes:
+> Offset 0x0909 matches the runout groove etching and September 9 (the date of the studio fire).
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Bastien Souza | bsouza@cern.ch
+PGP Key fingerprint: BB63 5F2A 83F0 EAF2
+"Keep the channels open."
+

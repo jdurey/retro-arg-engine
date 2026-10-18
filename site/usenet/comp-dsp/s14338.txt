@@ -1,0 +1,70 @@
+From jsato@kiae.su Fri Feb 24 16:18:38 1995
+Path: ashpoly!cascade!mxgate!coyoacan!kiae!jsato
+From: jsato@kiae.su (Julien Sato)
+Newsgroups: comp.dsp
+Subject: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Feb24.161838.9200@kiae.su>
+Date: Fri, 24 Feb 1995 16:18:38 GMT
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+Julien Sato <jsato@kiae.su>
+"Tape doesn't lie at 02:14. Ears do."
+Sun SparcStation 20 / FreeBSD 2.1
+
+From crodriguez@tum.de Sat Feb 25 15:32:38 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!tum!crodriguez
+From: crodriguez@tum.de (Callum Rodríguez)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Feb25.153238.3591@tum.de>
+Date: Sat, 25 Feb 1995 15:32:38 GMT
+References: <1995Feb24.161838.9200@kiae.su>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Feb24.161838.9200@kiae.su>, jsato@kiae.su (Julien Sato) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+=== Callum Rodríguez ===
+Dept of Electrical Engineering, Technische Universität München
+"Row 14. No joke."
+
+From enovak@tum.de Mon Feb 27 12:46:38 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!tum!enovak
+From: enovak@tum.de (Elaine Novak)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Feb27.124638.9254@tum.de>
+Date: Mon, 27 Feb 1995 12:46:38 GMT
+References: <1995Feb24.161838.9200@kiae.su> <1995Feb25.153238.3591@tum.de>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Feb25.153238.3591@tum.de>, crodriguez@tum.de (Callum Rodríguez) writes:
+> If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+-- 
+Elaine Novak <enovak@tum.de>
+*PLONK* filter active for trolls.
+Macintosh IIfx - NetBSD 1.0
+

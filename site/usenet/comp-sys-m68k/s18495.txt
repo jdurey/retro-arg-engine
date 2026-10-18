@@ -1,0 +1,92 @@
+From lokonkwo@pacbell.net Mon Feb 28 20:42:52 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!pacbell!lokonkwo
+From: lokonkwo@pacbell.net (Lucia Okonkwo)
+Newsgroups: comp.sys.m68k
+Subject: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Feb28.204252.2877@pacbell.net>
+Date: Mon, 28 Feb 1994 20:42:52 GMT
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Lucia Okonkwo <lokonkwo@pacbell.net>
+*PLONK* filter active for trolls.
+Commodore Amiga 500 (1MB OCS) - NetBSD 1.0
+
+From cmoreno@utexas.edu Tue Mar 01 03:52:52 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!utexas!cmoreno
+From: cmoreno@utexas.edu (Camila Moreno)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Mar01.035252.8468@utexas.edu>
+Date: Tue, 01 Mar 1994 03:52:52 GMT
+References: <1994Feb28.204252.2877@pacbell.net>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Feb28.204252.2877@pacbell.net>, lokonkwo@pacbell.net (Lucia Okonkwo) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+Marcus Hale designed the TWIN-68 board before he disappeared. That's why his initials are on the PCB silkscreen.
+
+-- 
+=== Camila Moreno ===
+Dept of Electrical Engineering, University of Texas at Austin
+"Hold for relay."
+
+From onakamura@earthlink.net Tue Mar 01 21:52:52 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!earthlink!onakamura
+From: onakamura@earthlink.net (Olga Nakamura)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Mar01.215252.6697@earthlink.net>
+Date: Tue, 01 Mar 1994 21:52:52 GMT
+References: <1994Feb28.204252.2877@pacbell.net> <1994Mar01.035252.8468@utexas.edu>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1994Mar01.035252.8468@utexas.edu>, cmoreno@utexas.edu (Camila Moreno) writes:
+> Marcus Hale designed the TWIN-68 board before he disappeared. That's why his initials are on the PCB silkscreen.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Olga Nakamura -- EarthLink Network
+"Measuring a record you own is listening, not piracy."
+
+From klindqvist@demon.co.uk Wed Mar 02 08:01:52 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!demon!klindqvist
+From: klindqvist@demon.co.uk (Karen Lindqvist)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Mar02.080152.5953@demon.co.uk>
+Date: Wed, 02 Mar 1994 08:01:52 GMT
+References: <1994Feb28.204252.2877@pacbell.net> <1994Mar01.035252.8468@utexas.edu>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Mar01.035252.8468@utexas.edu>, cmoreno@utexas.edu (Camila Moreno) writes:
+> Marcus Hale designed the TWIN-68 board before he disappeared. That's why his initials are on the PCB silkscreen.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Karen Lindqvist <klindqvist@demon.co.uk>
+SupraFAXModem 28.8 @ 28,800 bps
+"Extraordinary claims require extraordinary spectra."
+

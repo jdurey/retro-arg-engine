@@ -1,0 +1,96 @@
+From bsuzuki@rwth-aachen.de Thu Feb 03 12:49:04 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!rwth-aachen!bsuzuki
+From: bsuzuki@rwth-aachen.de (Bruno Suzuki)
+Newsgroups: comp.dsp
+Subject: [INFO] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Feb03.124904.6943@rwth-aachen.de>
+Date: Thu, 03 Feb 1994 12:49:04 GMT
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+Bruno Suzuki | bsuzuki@rwth-aachen.de
+PGP Key fingerprint: 9B9C 9112 4E85 9C36
+"Keep the channels open."
+
+From smoreau@hanse.de Fri Feb 04 07:02:04 1994
+Path: ashpoly!cascade!mxgate!coyoacan!hanse!smoreau
+From: smoreau@hanse.de (Sergei Moreau)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Feb04.070204.7547@hanse.de>
+Date: Fri, 04 Feb 1994 07:02:04 GMT
+References: <1994Feb03.124904.6943@rwth-aachen.de>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1994Feb03.124904.6943@rwth-aachen.de>, bsuzuki@rwth-aachen.de (Bruno Suzuki) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Sergei Moreau
+Opinions expressed are solely my own and not those of Hanse-Netzwerk Hamburg.
+------------------------------------------------------------
+
+From nlindqvist@rwth-aachen.de Sun Feb 06 00:36:04 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!rwth-aachen!nlindqvist
+From: nlindqvist@rwth-aachen.de (Nadia Lindqvist)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Feb06.003604.5823@rwth-aachen.de>
+Date: Sun, 06 Feb 1994 00:36:04 GMT
+References: <1994Feb03.124904.6943@rwth-aachen.de> <1994Feb04.070204.7547@hanse.de>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Feb04.070204.7547@hanse.de>, smoreau@hanse.de (Sergei Moreau) writes:
+> If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+> PGP Public key available via finger or upon request.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Nadia Lindqvist
+Tape trading list upon request. SASE required for international mail.
+
+From ssanchez@netcom.com Mon Feb 07 03:54:04 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!netcom!ssanchez
+From: ssanchez@netcom.com (Sergei Sánchez)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Feb07.035404.9617@netcom.com>
+Date: Mon, 07 Feb 1994 03:54:04 GMT
+References: <1994Feb03.124904.6943@rwth-aachen.de> <1994Feb04.070204.7547@hanse.de> <1994Feb06.003604.5823@rwth-aachen.de>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1994Feb06.003604.5823@rwth-aachen.de>, nlindqvist@rwth-aachen.de (Nadia Lindqvist) writes:
+> Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Sergei Sánchez
+Tape trading list upon request. SASE required for international mail.
+

@@ -1,0 +1,121 @@
+From pkuznetsov@purdue.edu Sun Jan 14 02:18:16 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!purdue!pkuznetsov
+From: pkuznetsov@purdue.edu (Pavel Kuznetsov)
+Newsgroups: comp.sys.m68k
+Subject: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Jan14.021816.5482@purdue.edu>
+Date: Sun, 14 Jan 1996 02:18:16 GMT
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Pavel Kuznetsov <pkuznetsov@purdue.edu>
+*PLONK* filter active for trolls.
+PC-9821Ap2 (NEC) - NetBSD 1.0
+
+From hsokolov@rwth-aachen.de Mon Jan 15 10:37:16 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!rwth-aachen!hsokolov
+From: hsokolov@rwth-aachen.de (Hugo Sokolov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Jan15.103716.3546@rwth-aachen.de>
+Date: Mon, 15 Jan 1996 10:37:16 GMT
+References: <1996Jan14.021816.5482@purdue.edu>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1996Jan14.021816.5482@purdue.edu>, pkuznetsov@purdue.edu (Pavel Kuznetsov) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Hugo Sokolov <hsokolov@rwth-aachen.de>
+*PLONK* filter active for trolls.
+PC-9821Ap2 (NEC) - NetBSD 1.0
+
+From gperez@cam.ac.uk Tue Jan 16 23:15:16 1996
+Path: ashpoly!cascade!bigsur!cam!gperez
+From: gperez@cam.ac.uk (Göran Pérez)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Jan16.231516.8200@cam.ac.uk>
+Date: Tue, 16 Jan 1996 23:15:16 GMT
+References: <1996Jan14.021816.5482@purdue.edu> <1996Jan15.103716.3546@rwth-aachen.de>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1996Jan15.103716.3546@rwth-aachen.de>, hsokolov@rwth-aachen.de (Hugo Sokolov) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+> Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Göran Pérez <gperez@cam.ac.uk>
+Practical Peripherals 14.4 @ 9600 Telebit bps
+"We don't sign stars. We build them."
+
+From bschneider@utexas.edu Fri Jan 19 00:34:16 1996
+Path: ashpoly!cascade!mxgate!coyoacan!utexas!bschneider
+From: bschneider@utexas.edu (Bastien Schneider)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Jan19.003416.4942@utexas.edu>
+Date: Fri, 19 Jan 1996 00:34:16 GMT
+References: <1996Jan14.021816.5482@purdue.edu> <1996Jan15.103716.3546@rwth-aachen.de> <1996Jan16.231516.8200@cam.ac.uk>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Jan16.231516.8200@cam.ac.uk>, gperez@cam.ac.uk (Göran Pérez) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Bastien Schneider <bschneider@utexas.edu>
+Practical Peripherals 14.4 @ ISDN 64k bps
+"The carrier frequency does not drift by accident."
+
+From mgirard@delphi.com Fri Jan 19 18:46:16 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!delphi!mgirard
+From: mgirard@delphi.com (Morag Girard)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Jan19.184616.4555@delphi.com>
+Date: Fri, 19 Jan 1996 18:46:16 GMT
+References: <1996Jan14.021816.5482@purdue.edu> <1996Jan15.103716.3546@rwth-aachen.de> <1996Jan16.231516.8200@cam.ac.uk> <1996Jan19.003416.4942@utexas.edu>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1996Jan19.003416.4942@utexas.edu>, bschneider@utexas.edu (Bastien Schneider) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Morag Girard <mgirard@delphi.com>
+Practical Peripherals 14.4 @ 9600 Telebit bps
+"Hardware is temporary. The signal survives."
+

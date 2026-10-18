@@ -1,0 +1,115 @@
+From slopez@illinois.edu Mon Oct 07 19:31:43 1996
+Path: ashpoly!cascade!brgate!saturno!illinois!slopez
+From: slopez@illinois.edu (Sven López)
+Newsgroups: comp.sys.m68k
+Subject: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Oct07.193143.1397@illinois.edu>
+Date: Mon, 07 Oct 1996 19:31:43 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+
+Did Marcus take the decryption EPROM with him when he left the lab?
+
+-- 
+Sven López -- University of Illinois Urbana-Champaign
+"A soul is not exclusive to biology."
+
+From nsilva@pacbell.net Tue Oct 08 12:17:43 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!pacbell!nsilva
+From: nsilva@pacbell.net (Natalia Silva)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Oct08.121743.2722@pacbell.net>
+Date: Tue, 08 Oct 1996 12:17:43 GMT
+References: <1996Oct07.193143.1397@illinois.edu>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Oct07.193143.1397@illinois.edu>, slopez@illinois.edu (Sven López) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Natalia Silva <nsilva@pacbell.net>
+"There are 14 nodes and only 10 countries. Count again."
+Sun 3/60 (SunOS 4.1.1) / TOS 4.04
+
+From yrobertson@berkeley.edu Thu Oct 10 06:41:43 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!berkeley!yrobertson
+From: yrobertson@berkeley.edu (Yuki Robertson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Oct10.064143.3365@berkeley.edu>
+Date: Thu, 10 Oct 1996 06:41:43 GMT
+References: <1996Oct07.193143.1397@illinois.edu> <1996Oct08.121743.2722@pacbell.net>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Oct08.121743.2722@pacbell.net>, nsilva@pacbell.net (Natalia Silva) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+-- 
+=== Yuki Robertson ===
+Dept of Electrical Engineering, UC Berkeley Department of EECS
+"When every node is whole, the channel opens."
+
+From fmacdonald@stanford.edu Thu Oct 10 21:15:43 1996
+Path: ashpoly!cascade!mxgate!coyoacan!stanford!fmacdonald
+From: fmacdonald@stanford.edu (Fiona MacDonald)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Oct10.211543.3115@stanford.edu>
+Date: Thu, 10 Oct 1996 21:15:43 GMT
+References: <1996Oct07.193143.1397@illinois.edu> <1996Oct08.121743.2722@pacbell.net>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Oct08.121743.2722@pacbell.net>, nsilva@pacbell.net (Natalia Silva) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Fiona MacDonald <fmacdonald@stanford.edu>
+Zyxel U-1496E @ 28,800 bps
+"A soul is not exclusive to biology."
+
+From mkuznetsov@purdue.edu Sat Oct 12 15:05:43 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!purdue!mkuznetsov
+From: mkuznetsov@purdue.edu (Mei Kuznetsov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Oct12.150543.3608@purdue.edu>
+Date: Sat, 12 Oct 1996 15:05:43 GMT
+References: <1996Oct07.193143.1397@illinois.edu> <1996Oct08.121743.2722@pacbell.net> <1996Oct10.064143.3365@berkeley.edu>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Oct10.064143.3365@berkeley.edu>, yrobertson@berkeley.edu (Yuki Robertson) writes:
+> Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+-- 
+Mei Kuznetsov <mkuznetsov@purdue.edu>
+"Row 14. No joke."
+Sun SparcStation 20 / Linux 1.2.13
+

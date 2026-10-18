@@ -1,0 +1,95 @@
+From eweber@utexas.edu Thu Oct 27 18:47:28 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!utexas!eweber
+From: eweber@utexas.edu (Élodie Weber)
+Newsgroups: comp.dsp
+Subject: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Oct27.184728.6154@utexas.edu>
+Date: Thu, 27 Oct 1994 18:47:28 GMT
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+Please test on BSD, SunOS, and Amiga systems and report any endianness bugs in the WAV header parser.
+
+-- 
+Élodie Weber <eweber@utexas.edu>
+*PLONK* filter active for trolls.
+486DX4/100 (FreeBSD 2.0.5) - NetBSD 1.0
+
+From msantos@pacbell.net Fri Oct 28 18:50:28 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!pacbell!msantos
+From: msantos@pacbell.net (Morag Santos)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Oct28.185028.1686@pacbell.net>
+Date: Fri, 28 Oct 1994 18:50:28 GMT
+References: <1994Oct27.184728.6154@utexas.edu>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1994Oct27.184728.6154@utexas.edu>, eweber@utexas.edu (Élodie Weber) writes:
+> Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Morag Santos <msantos@pacbell.net>
+Hayes Optima 288 @ 14,400 bps
+"5 sigma is a discovery. 7 is a question."
+
+From npark@illinois.edu Sat Oct 29 04:07:28 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!illinois!npark
+From: npark@illinois.edu (Natalia Park)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Oct29.040728.3555@illinois.edu>
+Date: Sat, 29 Oct 1994 04:07:28 GMT
+References: <1994Oct27.184728.6154@utexas.edu> <1994Oct28.185028.1686@pacbell.net>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Oct28.185028.1686@pacbell.net>, msantos@pacbell.net (Morag Santos) writes:
+> Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+Tar.gz archive gave a CRC error with PKUNZIP. Make sure you upload in binary mode, not ASCII!
+
+-- 
+Natalia Park <npark@illinois.edu>
+"Tape doesn't lie at 02:14. Ears do."
+Sun 3/60 (SunOS 4.1.1) / Linux 1.2.13
+
+From tgonzalez@demon.co.uk Sun Oct 30 07:44:28 1994
+Path: ashpoly!cascade!mxgate!coyoacan!demon!tgonzalez
+From: tgonzalez@demon.co.uk (Tyler González)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Oct30.074428.3357@demon.co.uk>
+Date: Sun, 30 Oct 1994 07:44:28 GMT
+References: <1994Oct27.184728.6154@utexas.edu> <1994Oct28.185028.1686@pacbell.net> <1994Oct29.040728.3555@illinois.edu>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Oct29.040728.3555@illinois.edu>, npark@illinois.edu (Natalia Park) writes:
+> Tar.gz archive gave a CRC error with PKUNZIP. Make sure you upload in binary mode, not ASCII!
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+-- 
+Tyler González <tgonzalez@demon.co.uk>
+Zyxel U-1496E @ 14,400 bps
+"The carrier frequency does not drift by accident."
+

@@ -1,0 +1,49 @@
+From dmoreno@berkeley.edu Sun Feb 12 16:37:14 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!berkeley!dmoreno
+From: dmoreno@berkeley.edu (Dmitri Moreno)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Feb12.163714.5328@berkeley.edu>
+Date: Sun, 12 Feb 1995 16:37:14 GMT
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Dmitri Moreno -- UC Berkeley Department of EECS
+"There are 14 nodes and only 10 countries. Count again."
+
+From dmuller@delphi.com Mon Feb 13 10:17:14 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!delphi!dmuller
+From: dmuller@delphi.com (Diego Müller)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Feb13.101714.5833@delphi.com>
+Date: Mon, 13 Feb 1995 10:17:14 GMT
+References: <1995Feb12.163714.5328@berkeley.edu>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1995Feb12.163714.5328@berkeley.edu>, dmoreno@berkeley.edu (Dmitri Moreno) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Diego Müller <dmuller@delphi.com>
+"They will send a copy in my place."
+Decstation 5000/200 / NEXTSTEP 3.3
+

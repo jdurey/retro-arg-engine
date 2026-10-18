@@ -1,0 +1,119 @@
+From hjohansson@hanse.de Mon Jun 24 01:56:21 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!hanse!hjohansson
+From: hjohansson@hanse.de (Hana Johansson)
+Newsgroups: comp.sys.m68k
+Subject: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Jun24.015621.8033@hanse.de>
+Date: Mon, 24 Jun 1996 01:56:21 GMT
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+Schematic diagram in ASCII uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/twin68_array.asc.
+
+-- 
+Hana Johansson
+Opinions expressed are solely my own and not those of Hanse-Netzwerk Hamburg.
+------------------------------------------------------------
+
+From ggarcia@inria.fr Tue Jun 25 08:41:21 1996
+Path: ashpoly!cascade!brgate!saturno!inria!ggarcia
+From: ggarcia@inria.fr (Göran García)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Jun25.084121.2007@inria.fr>
+Date: Tue, 25 Jun 1996 08:41:21 GMT
+References: <1996Jun24.015621.8033@hanse.de>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1996Jun24.015621.8033@hanse.de>, hjohansson@hanse.de (Hana Johansson) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+-- 
+Göran García | ggarcia@inria.fr
+PGP Key fingerprint: EF0F 7D19 9888 8172
+"Keep the channels open."
+
+From bpark@pipeline.com Wed Jun 26 14:21:21 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!pipeline!bpark
+From: bpark@pipeline.com (Bill Park)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Jun26.142121.7173@pipeline.com>
+Date: Wed, 26 Jun 1996 14:21:21 GMT
+References: <1996Jun24.015621.8033@hanse.de>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1996Jun24.015621.8033@hanse.de>, hjohansson@hanse.de (Hana Johansson) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+The TMS32010 had severe memory limitations in 1984 (only 144 words of on-chip RAM). Dual 68000s gave them full 16MB address space.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Bill Park | bpark@pipeline.com
+PGP Key fingerprint: F38B A684 408F A5E5
+"Keep the channels open."
+
+From jsato@berkeley.edu Thu Jun 27 22:34:21 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!berkeley!jsato
+From: jsato@berkeley.edu (Jens Sato)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Jun27.223421.7607@berkeley.edu>
+Date: Thu, 27 Jun 1996 22:34:21 GMT
+References: <1996Jun24.015621.8033@hanse.de> <1996Jun26.142121.7173@pipeline.com>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Jun26.142121.7173@pipeline.com>, bpark@pipeline.com (Bill Park) writes:
+> The TMS32010 had severe memory limitations in 1984 (only 144 words of on-chip RAM). Dual 68000s gave them full 16MB address space.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Jens Sato <jsato@berkeley.edu>
+*PLONK* filter active for trolls.
+Atari TT030 - NetBSD 1.0
+
+From nhughes@pacbell.net Sat Jun 29 06:03:21 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!pacbell!nhughes
+From: nhughes@pacbell.net (Nadia Hughes)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Jun29.060321.9002@pacbell.net>
+Date: Sat, 29 Jun 1996 06:03:21 GMT
+References: <1996Jun24.015621.8033@hanse.de> <1996Jun25.084121.2007@inria.fr>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Jun25.084121.2007@inria.fr>, ggarcia@inria.fr (Göran García) writes:
+> Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+-- 
+Nadia Hughes <nhughes@pacbell.net>
+"We don't sign stars. We build them."
+Decstation 5000/200 / TOS 4.04
+

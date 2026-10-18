@@ -1,0 +1,94 @@
+From kmoreau@clari.net Wed Apr 27 17:09:05 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!clari!kmoreau
+From: kmoreau@clari.net (Katrin Moreau)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Apr27.170905.5174@clari.net>
+Date: Wed, 27 Apr 1994 17:09:05 GMT
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+=== Katrin Moreau ===
+Dept of Electrical Engineering, ClariNet Communications Corp
+"Hardware is temporary. The signal survives."
+
+From fmuller@delphi.com Fri Apr 29 12:21:05 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!delphi!fmuller
+From: fmuller@delphi.com (Fiona Müller)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Apr29.122105.3801@delphi.com>
+Date: Fri, 29 Apr 1994 12:21:05 GMT
+References: <1994Apr27.170905.5174@clari.net>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Apr27.170905.5174@clari.net>, kmoreau@clari.net (Katrin Moreau) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Fiona Müller <fmuller@delphi.com>
+SupraFAXModem 28.8 @ 19,200 bps
+"5 sigma is a discovery. 7 is a question."
+
+From mcampbell@pipeline.com Sat Apr 30 00:07:05 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!pipeline!mcampbell
+From: mcampbell@pipeline.com (Matthias Campbell)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Apr30.000705.7320@pipeline.com>
+Date: Sat, 30 Apr 1994 00:07:05 GMT
+References: <1994Apr27.170905.5174@clari.net>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1994Apr27.170905.5174@clari.net>, kmoreau@clari.net (Katrin Moreau) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+=== Matthias Campbell ===
+Dept of Electrical Engineering, The Pipeline Internet Network
+"We don't sign stars. We build them."
+
+From tfischer@cern.ch Sat Apr 30 05:52:05 1994
+Path: ashpoly!cascade!mxgate!coyoacan!cern!tfischer
+From: tfischer@cern.ch (Thiago Fischer)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Apr30.055205.5769@cern.ch>
+Date: Sat, 30 Apr 1994 05:52:05 GMT
+References: <1994Apr27.170905.5174@clari.net> <1994Apr30.000705.7320@pipeline.com>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Apr30.000705.7320@pipeline.com>, mcampbell@pipeline.com (Matthias Campbell) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+Thiago Fischer <tfischer@cern.ch>
+"In theory there is no difference between theory and practice."
+Atari TT030 / AmigaOS 3.1
+

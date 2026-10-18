@@ -1,0 +1,70 @@
+From deriksson@cmu.edu Tue Jan 04 16:48:13 1994
+Path: ashpoly!cascade!mxgate!coyoacan!cmu!deriksson
+From: deriksson@cmu.edu (Dmitri Eriksson)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Jan04.164813.7819@cmu.edu>
+Date: Tue, 04 Jan 1994 16:48:13 GMT
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+Dmitri Eriksson <deriksson@cmu.edu>
+Zyxel U-1496E @ 28,800 bps
+"There are 14 nodes and only 10 countries. Count again."
+
+From mmacdonald@netcom.com Thu Jan 06 01:31:13 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!netcom!mmacdonald
+From: mmacdonald@netcom.com (Mateo MacDonald)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Jan06.013113.6866@netcom.com>
+Date: Thu, 06 Jan 1994 01:31:13 GMT
+References: <1994Jan04.164813.7819@cmu.edu>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Jan04.164813.7819@cmu.edu>, deriksson@cmu.edu (Dmitri Eriksson) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Mateo MacDonald <mmacdonald@netcom.com>
+SupraFAXModem 28.8 @ ISDN 64k bps
+"When every node is whole, the channel opens."
+
+From asanchez@berkeley.edu Thu Jan 06 19:40:13 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!berkeley!asanchez
+From: asanchez@berkeley.edu (Andrei Sánchez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Jan06.194013.8710@berkeley.edu>
+Date: Thu, 06 Jan 1994 19:40:13 GMT
+References: <1994Jan04.164813.7819@cmu.edu> <1994Jan06.013113.6866@netcom.com>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Jan06.013113.6866@netcom.com>, mmacdonald@netcom.com (Mateo MacDonald) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+=== Andrei Sánchez ===
+Dept of Electrical Engineering, UC Berkeley Department of EECS
+"A soul is not exclusive to biology."
+

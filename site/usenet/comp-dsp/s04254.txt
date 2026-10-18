@@ -1,0 +1,94 @@
+From mpark@kth.se Thu Oct 26 19:02:28 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!kth!mpark
+From: mpark@kth.se (Mei Park)
+Newsgroups: comp.dsp
+Subject: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Oct26.190228.9422@kth.se>
+Date: Thu, 26 Oct 1995 19:02:28 GMT
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Mei Park <mpark@kth.se>
+US Robotics Courier V.34 @ 33,600 bps
+"5 sigma is a discovery. 7 is a question."
+
+From esantos@mindspring.com Sat Oct 28 14:55:28 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!mindspring!esantos
+From: esantos@mindspring.com (Élodie Santos)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Oct28.145528.9633@mindspring.com>
+Date: Sat, 28 Oct 1995 14:55:28 GMT
+References: <1995Oct26.190228.9422@kth.se>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Oct26.190228.9422@kth.se>, mpark@kth.se (Mei Park) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+> At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Élodie Santos <esantos@mindspring.com>
+Zyxel U-1496E @ 28,800 bps
+"A soul is not exclusive to biology."
+
+From djohansson@earthlink.net Sun Oct 29 20:45:28 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!earthlink!djohansson
+From: djohansson@earthlink.net (Dmitri Johansson)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Oct29.204528.3531@earthlink.net>
+Date: Sun, 29 Oct 1995 20:45:28 GMT
+References: <1995Oct26.190228.9422@kth.se> <1995Oct28.145528.9633@mindspring.com>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Oct28.145528.9633@mindspring.com>, esantos@mindspring.com (Élodie Santos) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Dmitri Johansson -- EarthLink Network
+"The hatch is open. Is anyone listening?"
+
+From mramirez@unam.mx Sun Oct 29 22:51:28 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!unam!mramirez
+From: mramirez@unam.mx (Min-jun Ramírez)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Oct29.225128.2335@unam.mx>
+Date: Sun, 29 Oct 1995 22:51:28 GMT
+References: <1995Oct26.190228.9422@kth.se> <1995Oct28.145528.9633@mindspring.com>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Oct28.145528.9633@mindspring.com>, esantos@mindspring.com (Élodie Santos) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Min-jun Ramírez -- Universidad Nacional Autónoma de México (DGSCA)
+"When every node is whole, the channel opens."
+

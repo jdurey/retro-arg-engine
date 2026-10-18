@@ -1,0 +1,119 @@
+From ksantos@uu.net Mon Jan 02 18:06:54 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!uu!ksantos
+From: ksantos@uu.net (Kirsty Santos)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jan02.180654.7675@uu.net>
+Date: Mon, 02 Jan 1995 18:06:54 GMT
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Kirsty Santos -- UUNET Technologies, Falls Church VA
+"The carrier frequency does not drift by accident."
+
+From yfischer@titech.ac.jp Tue Jan 03 12:51:54 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!titech!yfischer
+From: yfischer@titech.ac.jp (Yuki Fischer)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jan03.125154.8120@titech.ac.jp>
+Date: Tue, 03 Jan 1995 12:51:54 GMT
+References: <1995Jan02.180654.7675@uu.net>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995Jan02.180654.7675@uu.net>, ksantos@uu.net (Kirsty Santos) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Yuki Fischer <yfischer@titech.ac.jp>
+*PLONK* filter active for trolls.
+Sun SparcStation 20 - NetBSD 1.0
+
+From yhernandez@titech.ac.jp Tue Jan 03 20:49:54 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!titech!yhernandez
+From: yhernandez@titech.ac.jp (Yuki Hernández)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jan03.204954.4952@titech.ac.jp>
+Date: Tue, 03 Jan 1995 20:49:54 GMT
+References: <1995Jan02.180654.7675@uu.net> <1995Jan03.125154.8120@titech.ac.jp>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Jan03.125154.8120@titech.ac.jp>, yfischer@titech.ac.jp (Yuki Fischer) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Yuki Hernández <yhernandez@titech.ac.jp>
+"5 sigma is a discovery. 7 is a question."
+Atari TT030 / Linux 1.2.13
+
+From cschneider@cmu.edu Wed Jan 04 18:36:54 1995
+Path: ashpoly!cascade!bigsur!cmu!cschneider
+From: cschneider@cmu.edu (Camila Schneider)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jan04.183654.9180@cmu.edu>
+Date: Wed, 04 Jan 1995 18:36:54 GMT
+References: <1995Jan02.180654.7675@uu.net> <1995Jan03.125154.8120@titech.ac.jp>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Jan03.125154.8120@titech.ac.jp>, yfischer@titech.ac.jp (Yuki Fischer) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+> PGP Public key available via finger or upon request.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Camila Schneider | cschneider@cmu.edu
+PGP Key fingerprint: 06DE EF38 BB9E E679
+"Keep the channels open."
+
+From rnakamura@kiae.su Wed Jan 04 20:40:54 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!kiae!rnakamura
+From: rnakamura@kiae.su (Rodrigo Nakamura)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jan04.204054.1290@kiae.su>
+Date: Wed, 04 Jan 1995 20:40:54 GMT
+References: <1995Jan02.180654.7675@uu.net> <1995Jan03.125154.8120@titech.ac.jp> <1995Jan04.183654.9180@cmu.edu>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1995Jan04.183654.9180@cmu.edu>, cschneider@cmu.edu (Camila Schneider) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Rodrigo Nakamura
+Tape trading list upon request. SASE required for international mail.
+

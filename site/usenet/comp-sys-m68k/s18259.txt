@@ -1,0 +1,46 @@
+From mkowalski@hanse.de Tue Sep 26 12:07:41 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!hanse!mkowalski
+From: mkowalski@hanse.de (Mikhail Kowalski)
+Newsgroups: comp.sys.m68k
+Subject: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Sep26.120741.7798@hanse.de>
+Date: Tue, 26 Sep 1995 12:07:41 GMT
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Mikhail Kowalski -- Hanse-Netzwerk Hamburg
+"The hatch is open. Is anyone listening?"
+
+From adubois@kth.se Wed Sep 27 10:47:41 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!kth!adubois
+From: adubois@kth.se (Andrei Dubois)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Sep27.104741.9065@kth.se>
+Date: Wed, 27 Sep 1995 10:47:41 GMT
+References: <1995Sep26.120741.7798@hanse.de>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Sep26.120741.7798@hanse.de>, mkowalski@hanse.de (Mikhail Kowalski) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+=== Andrei Dubois ===
+Dept of Electrical Engineering, Royal Institute of Technology, Stockholm
+"5 sigma is a discovery. 7 is a question."
+

@@ -1,0 +1,119 @@
+From lhernandez@berkeley.edu Wed Apr 19 16:58:41 1995
+Path: ashpoly!cascade!brgate!saturno!berkeley!lhernandez
+From: lhernandez@berkeley.edu (Liam Hernández)
+Newsgroups: comp.sys.m68k
+Subject: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Apr19.165841.2664@berkeley.edu>
+Date: Wed, 19 Apr 1995 16:58:41 GMT
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+Schematic diagram in ASCII uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/twin68_array.asc.
+
+-- 
+=== Liam Hernández ===
+Dept of Electrical Engineering, UC Berkeley Department of EECS
+"In theory there is no difference between theory and practice."
+
+From jokonkwo@panix.com Fri Apr 21 15:19:41 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!panix!jokonkwo
+From: jokonkwo@panix.com (Jens Okonkwo)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Apr21.151941.9728@panix.com>
+Date: Fri, 21 Apr 1995 15:19:41 GMT
+References: <1995Apr19.165841.2664@berkeley.edu>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Apr19.165841.2664@berkeley.edu>, lhernandez@berkeley.edu (Liam Hernández) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+> CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+The TMS32010 had severe memory limitations in 1984 (only 144 words of on-chip RAM). Dual 68000s gave them full 16MB address space.
+
+-- 
+Jens Okonkwo <jokonkwo@panix.com>
+Hayes Optima 288 @ ISDN 64k bps
+"There are 14 nodes and only 10 countries. Count again."
+
+From kpetrov@inria.fr Fri Apr 21 19:25:41 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!inria!kpetrov
+From: kpetrov@inria.fr (Kirsty Petrov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Apr21.192541.6077@inria.fr>
+Date: Fri, 21 Apr 1995 19:25:41 GMT
+References: <1995Apr19.165841.2664@berkeley.edu>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Apr19.165841.2664@berkeley.edu>, lhernandez@berkeley.edu (Liam Hernández) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+> CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Kirsty Petrov <kpetrov@inria.fr>
+Practical Peripherals 14.4 @ 14,400 bps
+"The hatch is open. Is anyone listening?"
+
+From dnakamura@rwth-aachen.de Sat Apr 22 15:09:41 1995
+Path: ashpoly!cascade!mxgate!coyoacan!rwth-aachen!dnakamura
+From: dnakamura@rwth-aachen.de (Dong-hyun Nakamura)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Apr22.150941.4554@rwth-aachen.de>
+Date: Sat, 22 Apr 1995 15:09:41 GMT
+References: <1995Apr19.165841.2664@berkeley.edu> <1995Apr21.192541.6077@inria.fr>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Apr21.192541.6077@inria.fr>, kpetrov@inria.fr (Kirsty Petrov) writes:
+> The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Dong-hyun Nakamura <dnakamura@rwth-aachen.de>
+"We don't sign stars. We build them."
+Macintosh IIfx / System 7.5.1
+
+From dfournier@uu.net Sat Apr 22 19:00:41 1995
+Path: ashpoly!cascade!bigsur!uu!dfournier
+From: dfournier@uu.net (Dmitri Fournier)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Apr22.190041.1742@uu.net>
+Date: Sat, 22 Apr 1995 19:00:41 GMT
+References: <1995Apr19.165841.2664@berkeley.edu> <1995Apr21.151941.9728@panix.com>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Apr21.151941.9728@panix.com>, jokonkwo@panix.com (Jens Okonkwo) writes:
+> The TMS32010 had severe memory limitations in 1984 (only 144 words of on-chip RAM). Dual 68000s gave them full 16MB address space.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Dmitri Fournier -- UUNET Technologies, Falls Church VA
+"Hold for relay."
+

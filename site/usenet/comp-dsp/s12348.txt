@@ -1,0 +1,68 @@
+From treyes@inria.fr Thu Dec 21 03:16:49 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!inria!treyes
+From: treyes@inria.fr (Tyler Reyes)
+Newsgroups: comp.dsp
+Subject: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec21.031649.8171@inria.fr>
+Date: Thu, 21 Dec 1995 03:16:49 GMT
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Tyler Reyes
+Tape trading list upon request. SASE required for international mail.
+
+From hhughes@cmu.edu Fri Dec 22 03:27:49 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!cmu!hhughes
+From: hhughes@cmu.edu (Hugo Hughes)
+Newsgroups: comp.dsp
+Subject: Re: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec22.032749.2593@cmu.edu>
+Date: Fri, 22 Dec 1995 03:27:49 GMT
+References: <1995Dec21.031649.8171@inria.fr>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Dec21.031649.8171@inria.fr>, treyes@inria.fr (Tyler Reyes) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Hugo Hughes <hhughes@cmu.edu>
+"5 sigma is a discovery. 7 is a question."
+Sun 3/60 (SunOS 4.1.1) / SunOS 4.1.4
+
+From jlopez@stanford.edu Fri Dec 22 10:39:49 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!stanford!jlopez
+From: jlopez@stanford.edu (Julien López)
+Newsgroups: comp.dsp
+Subject: Re: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec22.103949.6126@stanford.edu>
+Date: Fri, 22 Dec 1995 10:39:49 GMT
+References: <1995Dec21.031649.8171@inria.fr> <1995Dec22.032749.2593@cmu.edu>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1995Dec22.032749.2593@cmu.edu>, hhughes@cmu.edu (Hugo Hughes) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Julien López -- Stanford University Computer Systems Lab
+"Extraordinary claims require extraordinary spectra."
+

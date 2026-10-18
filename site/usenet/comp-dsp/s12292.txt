@@ -1,0 +1,116 @@
+From amartinez@cern.ch Wed Mar 15 20:30:37 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!cern!amartinez
+From: amartinez@cern.ch (Aiko Martínez)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Mar15.203037.7474@cern.ch>
+Date: Wed, 15 Mar 1995 20:30:37 GMT
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+Version 1.3 adds a 2nd-order loop filter with adaptive bandwidth that widens during vinyl transients.
+Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+
+Grab the source archive from ftp.ashford-poly.edu:/pub/telecom-archives/stardust/stardust-1.3.tar.gz.
+
+-- 
+Aiko Martínez | amartinez@cern.ch
+PGP Key fingerprint: D31E 21BD 82FF 710C
+"Keep the channels open."
+
+From bstewart@u-tokyo.ac.jp Fri Mar 17 00:51:37 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!u-tokyo!bstewart
+From: bstewart@u-tokyo.ac.jp (Bill Stewart)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Mar17.005137.5343@u-tokyo.ac.jp>
+Date: Fri, 17 Mar 1995 00:51:37 GMT
+References: <1995Mar15.203037.7474@cern.ch>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Mar15.203037.7474@cern.ch>, amartinez@cern.ch (Aiko Martínez) writes:
+> Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+-- 
+Bill Stewart <bstewart@u-tokyo.ac.jp>
+*PLONK* filter active for trolls.
+Pentium 90 (OS/2 Warp) - NetBSD 1.0
+
+From koliveira@clari.net Sun Mar 19 04:11:37 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!clari!koliveira
+From: koliveira@clari.net (Kenji Oliveira)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Mar19.041137.5945@clari.net>
+Date: Sun, 19 Mar 1995 04:11:37 GMT
+References: <1995Mar15.203037.7474@cern.ch> <1995Mar17.005137.5343@u-tokyo.ac.jp>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Mar17.005137.5343@u-tokyo.ac.jp>, bstewart@u-tokyo.ac.jp (Bill Stewart) writes:
+> On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+-- 
+Kenji Oliveira
+Opinions expressed are solely my own and not those of ClariNet Communications Corp.
+------------------------------------------------------------
+
+From mnilsson@ox.ac.uk Tue Mar 21 03:06:37 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!ox!mnilsson
+From: mnilsson@ox.ac.uk (Matthias Nilsson)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Mar21.030637.6148@ox.ac.uk>
+Date: Tue, 21 Mar 1995 03:06:37 GMT
+References: <1995Mar15.203037.7474@cern.ch> <1995Mar17.005137.5343@u-tokyo.ac.jp> <1995Mar19.041137.5945@clari.net>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Mar19.041137.5945@clari.net>, koliveira@clari.net (Kenji Oliveira) writes:
+> On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Matthias Nilsson
+Opinions expressed are solely my own and not those of Oxford University Computing Laboratory.
+------------------------------------------------------------
+
+From jnilsson@uni-hamburg.de Wed Mar 22 09:59:37 1995
+Path: ashpoly!cascade!mxgate!coyoacan!uni-hamburg!jnilsson
+From: jnilsson@uni-hamburg.de (Julien Nilsson)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Mar22.095937.5590@uni-hamburg.de>
+Date: Wed, 22 Mar 1995 09:59:37 GMT
+References: <1995Mar15.203037.7474@cern.ch> <1995Mar17.005137.5343@u-tokyo.ac.jp> <1995Mar19.041137.5945@clari.net>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Mar19.041137.5945@clari.net>, koliveira@clari.net (Kenji Oliveira) writes:
+> On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+Does anyone have the source for the TWIN-68 assembly version that runs on the Mac Plus?
+
+-- 
+Julien Nilsson <jnilsson@uni-hamburg.de>
+*PLONK* filter active for trolls.
+Amiga 3000T - NetBSD 1.0
+

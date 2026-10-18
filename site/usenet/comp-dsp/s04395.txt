@@ -1,0 +1,93 @@
+From mkim@cern.ch Thu Apr 04 05:59:00 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!cern!mkim
+From: mkim@cern.ch (Morag Kim)
+Newsgroups: comp.dsp
+Subject: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996Apr04.055900.3342@cern.ch>
+Date: Thu, 04 Apr 1996 05:59:00 GMT
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+
+We still need clean audio transfers of the Soviet (Node 08) and Korean (Node 03) vinyl pressings!
+
+-- 
+Morag Kim
+Opinions expressed are solely my own and not those of European Laboratory for Particle Physics, Geneva.
+------------------------------------------------------------
+
+From jokonkwo@uni-hamburg.de Fri Apr 05 13:35:00 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!uni-hamburg!jokonkwo
+From: jokonkwo@uni-hamburg.de (Ji-woo Okonkwo)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996Apr05.133500.1580@uni-hamburg.de>
+Date: Fri, 05 Apr 1996 13:35:00 GMT
+References: <1996Apr04.055900.3342@cern.ch>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Apr04.055900.3342@cern.ch>, mkim@cern.ch (Morag Kim) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+-- 
+Ji-woo Okonkwo
+Opinions expressed are solely my own and not those of Universität Hamburg Fachbereich Informatik.
+------------------------------------------------------------
+
+From shernandez@kiae.su Sat Apr 06 02:03:00 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!kiae!shernandez
+From: shernandez@kiae.su (Steve Hernández)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996Apr06.020300.6239@kiae.su>
+Date: Sat, 06 Apr 1996 02:03:00 GMT
+References: <1996Apr04.055900.3342@cern.ch> <1996Apr05.133500.1580@uni-hamburg.de>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Apr05.133500.1580@uni-hamburg.de>, jokonkwo@uni-hamburg.de (Ji-woo Okonkwo) writes:
+> Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Steve Hernández <shernandez@kiae.su>
+US Robotics Courier V.34 @ ISDN 64k bps
+"Tape doesn't lie at 02:14. Ears do."
+
+From ysanchez@ox.ac.uk Sun Apr 07 07:31:00 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!ox!ysanchez
+From: ysanchez@ox.ac.uk (Yuki Sánchez)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996Apr07.073100.2809@ox.ac.uk>
+Date: Sun, 07 Apr 1996 07:31:00 GMT
+References: <1996Apr04.055900.3342@cern.ch> <1996Apr05.133500.1580@uni-hamburg.de> <1996Apr06.020300.6239@kiae.su>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Apr06.020300.6239@kiae.su>, shernandez@kiae.su (Steve Hernández) writes:
+> Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Yuki Sánchez <ysanchez@ox.ac.uk>
+Practical Peripherals 14.4 @ 9600 Telebit bps
+"Extraordinary claims require extraordinary spectra."
+

@@ -1,0 +1,98 @@
+From rvasiliev@earthlink.net Mon Nov 27 09:58:41 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!earthlink!rvasiliev
+From: rvasiliev@earthlink.net (Renata Vasiliev)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Nov27.095841.2986@earthlink.net>
+Date: Mon, 27 Nov 1995 09:58:41 GMT
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Renata Vasiliev <rvasiliev@earthlink.net>
+US Robotics Courier V.34 @ 19,200 bps
+"The carrier frequency does not drift by accident."
+
+From snakamura@mit.edu Mon Nov 27 14:30:41 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!mit!snakamura
+From: snakamura@mit.edu (Seo-yeon Nakamura)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Nov27.143041.3520@mit.edu>
+Date: Mon, 27 Nov 1995 14:30:41 GMT
+References: <1995Nov27.095841.2986@earthlink.net>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1995Nov27.095841.2986@earthlink.net>, rvasiliev@earthlink.net (Renata Vasiliev) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Seo-yeon Nakamura <snakamura@mit.edu>
+*PLONK* filter active for trolls.
+PC-9821Ap2 (NEC) - NetBSD 1.0
+
+From dkuznetsov@cmu.edu Tue Nov 28 22:32:41 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!cmu!dkuznetsov
+From: dkuznetsov@cmu.edu (Dmitri Kuznetsov)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Nov28.223241.8259@cmu.edu>
+Date: Tue, 28 Nov 1995 22:32:41 GMT
+References: <1995Nov27.095841.2986@earthlink.net> <1995Nov27.143041.3520@mit.edu>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1995Nov27.143041.3520@mit.edu>, snakamura@mit.edu (Seo-yeon Nakamura) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+> Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Dmitri Kuznetsov <dkuznetsov@cmu.edu>
+"When every node is whole, the channel opens."
+Pentium 90 (OS/2 Warp) / SunOS 4.1.4
+
+From kkim@titech.ac.jp Thu Nov 30 05:27:41 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!titech!kkim
+From: kkim@titech.ac.jp (Kenji Kim)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Nov30.052741.8382@titech.ac.jp>
+Date: Thu, 30 Nov 1995 05:27:41 GMT
+References: <1995Nov27.095841.2986@earthlink.net> <1995Nov27.143041.3520@mit.edu> <1995Nov28.223241.8259@cmu.edu>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Nov28.223241.8259@cmu.edu>, dkuznetsov@cmu.edu (Dmitri Kuznetsov) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+Kenji Kim -- Tokyo Institute of Technology Computer Centre
+"Marcus is not one man."
+

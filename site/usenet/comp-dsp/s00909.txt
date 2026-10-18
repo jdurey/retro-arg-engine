@@ -1,0 +1,91 @@
+From vchoi@utexas.edu Tue Jul 23 04:12:35 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!utexas!vchoi
+From: vchoi@utexas.edu (Valeria Choi)
+Newsgroups: comp.dsp
+Subject: WTB/WTT: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Jul23.041235.1448@utexas.edu>
+Date: Tue, 23 Jul 1996 04:12:35 GMT
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+Valeria Choi | vchoi@utexas.edu
+PGP Key fingerprint: 654A ABE6 95F7 160E
+"Keep the channels open."
+
+From smacdonald@kiae.su Tue Jul 23 23:05:35 1996
+Path: ashpoly!cascade!brgate!saturno!kiae!smacdonald
+From: smacdonald@kiae.su (Sun-mi MacDonald)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Jul23.230535.9754@kiae.su>
+Date: Tue, 23 Jul 1996 23:05:35 GMT
+References: <1996Jul23.041235.1448@utexas.edu>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Jul23.041235.1448@utexas.edu>, vchoi@utexas.edu (Valeria Choi) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Sun-mi MacDonald <smacdonald@kiae.su>
+*PLONK* filter active for trolls.
+486DX4/100 (FreeBSD 2.0.5) - NetBSD 1.0
+
+From slindqvist@ox.ac.uk Wed Jul 24 22:31:35 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!ox!slindqvist
+From: slindqvist@ox.ac.uk (Sun-mi Lindqvist)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Jul24.223135.3564@ox.ac.uk>
+Date: Wed, 24 Jul 1996 22:31:35 GMT
+References: <1996Jul23.041235.1448@utexas.edu> <1996Jul23.230535.9754@kiae.su>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1996Jul23.230535.9754@kiae.su>, smacdonald@kiae.su (Sun-mi MacDonald) writes:
+> If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+-- 
+Sun-mi Lindqvist -- Oxford University Computing Laboratory
+"The carrier frequency does not drift by accident."
+
+From lchoi@kiae.su Thu Jul 25 08:38:35 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!kiae!lchoi
+From: lchoi@kiae.su (Liam Choi)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Jul25.083835.6774@kiae.su>
+Date: Thu, 25 Jul 1996 08:38:35 GMT
+References: <1996Jul23.041235.1448@utexas.edu> <1996Jul23.230535.9754@kiae.su>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1996Jul23.230535.9754@kiae.su>, smacdonald@kiae.su (Sun-mi MacDonald) writes:
+> If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+That's how the 14 lines of the Stardust matrix are encoded. Each regional pressing contains one line of the decoded text.
+
+-- 
+Liam Choi -- Kurchatov Institute of Atomic Energy, Moscow
+"Hold for relay."
+

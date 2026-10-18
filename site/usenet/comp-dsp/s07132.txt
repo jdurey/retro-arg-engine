@@ -1,0 +1,47 @@
+From mkowalski@uni-hamburg.de Sun Aug 07 11:36:52 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!uni-hamburg!mkowalski
+From: mkowalski@uni-hamburg.de (Marta Kowalski)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Aug07.113652.9349@uni-hamburg.de>
+Date: Sun, 07 Aug 1994 11:36:52 GMT
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Marta Kowalski
+Opinions expressed are solely my own and not those of Universität Hamburg Fachbereich Informatik.
+------------------------------------------------------------
+
+From nnakamura@uu.net Sun Aug 07 17:10:52 1994
+Path: ashpoly!cascade!bigsur!uu!nnakamura
+From: nnakamura@uu.net (Nadia Nakamura)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Aug07.171052.8396@uu.net>
+Date: Sun, 07 Aug 1994 17:10:52 GMT
+References: <1994Aug07.113652.9349@uni-hamburg.de>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Aug07.113652.9349@uni-hamburg.de>, mkowalski@uni-hamburg.de (Marta Kowalski) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Nadia Nakamura <nnakamura@uu.net>
+US Robotics Courier V.34 @ 14,400 bps
+"They will send a copy in my place."
+

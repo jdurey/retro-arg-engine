@@ -1,0 +1,115 @@
+From bsantos@ox.ac.uk Thu Jul 27 08:59:50 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!ox!bsantos
+From: bsantos@ox.ac.uk (Bruno Santos)
+Newsgroups: comp.sys.m68k
+Subject: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jul27.085950.5817@ox.ac.uk>
+Date: Thu, 27 Jul 1995 08:59:50 GMT
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Bruno Santos
+Opinions expressed are solely my own and not those of Oxford University Computing Laboratory.
+------------------------------------------------------------
+
+From mrobertson@inria.fr Thu Jul 27 15:39:50 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!inria!mrobertson
+From: mrobertson@inria.fr (Marta Robertson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jul27.153950.9992@inria.fr>
+Date: Thu, 27 Jul 1995 15:39:50 GMT
+References: <1995Jul27.085950.5817@ox.ac.uk>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1995Jul27.085950.5817@ox.ac.uk>, bsantos@ox.ac.uk (Bruno Santos) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Marta Robertson
+Tape trading list upon request. SASE required for international mail.
+
+From jmuller@delphi.com Thu Jul 27 22:13:50 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!delphi!jmuller
+From: jmuller@delphi.com (Ji-woo Müller)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jul27.221350.7321@delphi.com>
+Date: Thu, 27 Jul 1995 22:13:50 GMT
+References: <1995Jul27.085950.5817@ox.ac.uk> <1995Jul27.153950.9992@inria.fr>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Jul27.153950.9992@inria.fr>, mrobertson@inria.fr (Marta Robertson) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Ji-woo Müller <jmuller@delphi.com>
+*PLONK* filter active for trolls.
+Commodore Amiga 500 (1MB OCS) - NetBSD 1.0
+
+From kkuznetsov@mindspring.com Fri Jul 28 11:04:50 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!mindspring!kkuznetsov
+From: kkuznetsov@mindspring.com (Katrin Kuznetsov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jul28.110450.9245@mindspring.com>
+Date: Fri, 28 Jul 1995 11:04:50 GMT
+References: <1995Jul27.085950.5817@ox.ac.uk>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Jul27.085950.5817@ox.ac.uk>, bsantos@ox.ac.uk (Bruno Santos) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Katrin Kuznetsov -- MindSpring Enterprises
+"Hold for relay."
+
+From gkowalski@uni-hamburg.de Sun Jul 30 08:45:50 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!uni-hamburg!gkowalski
+From: gkowalski@uni-hamburg.de (Graham Kowalski)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jul30.084550.3848@uni-hamburg.de>
+Date: Sun, 30 Jul 1995 08:45:50 GMT
+References: <1995Jul27.085950.5817@ox.ac.uk> <1995Jul27.153950.9992@inria.fr>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Jul27.153950.9992@inria.fr>, mrobertson@inria.fr (Marta Robertson) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Graham Kowalski -- Universität Hamburg Fachbereich Informatik
+"Hold for relay."
+

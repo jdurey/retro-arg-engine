@@ -1,0 +1,117 @@
+From rwatanabe@mit.edu Sat Sep 03 23:26:47 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!mit!rwatanabe
+From: rwatanabe@mit.edu (Renata Watanabe)
+Newsgroups: comp.dsp
+Subject: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Sep03.232647.7856@mit.edu>
+Date: Sat, 03 Sep 1994 23:26:47 GMT
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Renata Watanabe | rwatanabe@mit.edu
+PGP Key fingerprint: 9CE3 7DC1 5261 6F41
+"Keep the channels open."
+
+From acampbell@netcom.com Tue Sep 06 01:10:47 1994
+Path: ashpoly!cascade!brgate!saturno!netcom!acampbell
+From: acampbell@netcom.com (Anja Campbell)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Sep06.011047.1613@netcom.com>
+Date: Tue, 06 Sep 1994 01:10:47 GMT
+References: <1994Sep03.232647.7856@mit.edu>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1994Sep03.232647.7856@mit.edu>, rwatanabe@mit.edu (Renata Watanabe) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+=== Anja Campbell ===
+Dept of Electrical Engineering, NETCOM On-Line Communication Services
+"We don't sign stars. We build them."
+
+From framirez@panix.com Tue Sep 06 19:45:47 1994
+Path: ashpoly!cascade!brgate!saturno!panix!framirez
+From: framirez@panix.com (Freya Ramírez)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Sep06.194547.9250@panix.com>
+Date: Tue, 06 Sep 1994 19:45:47 GMT
+References: <1994Sep03.232647.7856@mit.edu>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1994Sep03.232647.7856@mit.edu>, rwatanabe@mit.edu (Renata Watanabe) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Freya Ramírez | framirez@panix.com
+PGP Key fingerprint: 95B6 95B4 D013 23B1
+"Keep the channels open."
+
+From rrodriguez@unam.mx Wed Sep 07 07:43:47 1994
+Path: ashpoly!cascade!bigsur!unam!rrodriguez
+From: rrodriguez@unam.mx (Renata Rodríguez)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Sep07.074347.8119@unam.mx>
+Date: Wed, 07 Sep 1994 07:43:47 GMT
+References: <1994Sep03.232647.7856@mit.edu> <1994Sep06.011047.1613@netcom.com>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1994Sep06.011047.1613@netcom.com>, acampbell@netcom.com (Anja Campbell) writes:
+> Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Renata Rodríguez -- Universidad Nacional Autónoma de México (DGSCA)
+"In theory there is no difference between theory and practice."
+
+From msouza@tum.de Thu Sep 08 08:54:47 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!tum!msouza
+From: msouza@tum.de (Mateo Souza)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Sep08.085447.3864@tum.de>
+Date: Thu, 08 Sep 1994 08:54:47 GMT
+References: <1994Sep03.232647.7856@mit.edu> <1994Sep06.011047.1613@netcom.com> <1994Sep07.074347.8119@unam.mx>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Sep07.074347.8119@unam.mx>, rrodriguez@unam.mx (Renata Rodríguez) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Mateo Souza <msouza@tum.de>
+"The carrier frequency does not drift by accident."
+Amiga 1200 (Blizzard 030/50) / FreeBSD 2.1
+

@@ -1,0 +1,118 @@
+From ksokolov@kiae.su Tue Aug 08 11:43:02 1995
+Path: ashpoly!cascade!mxgate!coyoacan!kiae!ksokolov
+From: ksokolov@kiae.su (Kirsty Sokolov)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Aug08.114302.3117@kiae.su>
+Date: Tue, 08 Aug 1995 11:43:02 GMT
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Kirsty Sokolov
+Tape trading list upon request. SASE required for international mail.
+
+From jlarsson@uni-hamburg.de Wed Aug 09 01:09:02 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!uni-hamburg!jlarsson
+From: jlarsson@uni-hamburg.de (Ji-woo Larsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Aug09.010902.1175@uni-hamburg.de>
+Date: Wed, 09 Aug 1995 01:09:02 GMT
+References: <1995Aug08.114302.3117@kiae.su>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Aug08.114302.3117@kiae.su>, ksokolov@kiae.su (Kirsty Sokolov) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+=== Ji-woo Larsson ===
+Dept of Electrical Engineering, Universität Hamburg Fachbereich Informatik
+"Measuring a record you own is listening, not piracy."
+
+From mfournier@mit.edu Thu Aug 10 02:10:02 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!mit!mfournier
+From: mfournier@mit.edu (Marisol Fournier)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Aug10.021002.7350@mit.edu>
+Date: Thu, 10 Aug 1995 02:10:02 GMT
+References: <1995Aug08.114302.3117@kiae.su> <1995Aug09.010902.1175@uni-hamburg.de>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995Aug09.010902.1175@uni-hamburg.de>, jlarsson@uni-hamburg.de (Ji-woo Larsson) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Marisol Fournier <mfournier@mit.edu>
+"Measuring a record you own is listening, not piracy."
+Acorn RiscPC 600 / Linux 1.2.13
+
+From jhernandez@netcom.com Thu Aug 10 13:10:02 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!netcom!jhernandez
+From: jhernandez@netcom.com (Ji-woo Hernández)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Aug10.131002.3736@netcom.com>
+Date: Thu, 10 Aug 1995 13:10:02 GMT
+References: <1995Aug08.114302.3117@kiae.su> <1995Aug09.010902.1175@uni-hamburg.de>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Aug09.010902.1175@uni-hamburg.de>, jlarsson@uni-hamburg.de (Ji-woo Larsson) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Ji-woo Hernández <jhernandez@netcom.com>
+"They will send a copy in my place."
+Amiga 3000T / AmigaOS 3.1
+
+From aito@u-tokyo.ac.jp Sat Aug 12 06:49:02 1995
+Path: ashpoly!cascade!bigsur!u-tokyo!aito
+From: aito@u-tokyo.ac.jp (Aiko Ito)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Aug12.064902.4688@u-tokyo.ac.jp>
+Date: Sat, 12 Aug 1995 06:49:02 GMT
+References: <1995Aug08.114302.3117@kiae.su> <1995Aug09.010902.1175@uni-hamburg.de>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Aug09.010902.1175@uni-hamburg.de>, jlarsson@uni-hamburg.de (Ji-woo Larsson) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Aiko Ito | aito@u-tokyo.ac.jp
+PGP Key fingerprint: 5A9B 1F94 20B6 CA28
+"Keep the channels open."
+

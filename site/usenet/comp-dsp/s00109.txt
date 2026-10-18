@@ -1,0 +1,118 @@
+From mbrennan@cam.ac.uk Sun May 01 01:00:34 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!cam!mbrennan
+From: mbrennan@cam.ac.uk (Matthias Brennan)
+Newsgroups: comp.dsp
+Subject: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994May01.010034.3228@cam.ac.uk>
+Date: Sun, 01 May 1994 01:00:34 GMT
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+=== Matthias Brennan ===
+Dept of Electrical Engineering, University of Cambridge Computer Laboratory
+"A soul is not exclusive to biology."
+
+From sbrennan@panix.com Sun May 01 12:01:34 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!panix!sbrennan
+From: sbrennan@panix.com (Sven Brennan)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994May01.120134.6006@panix.com>
+Date: Sun, 01 May 1994 12:01:34 GMT
+References: <1994May01.010034.3228@cam.ac.uk>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1994May01.010034.3228@cam.ac.uk>, mbrennan@cam.ac.uk (Matthias Brennan) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Sven Brennan
+Opinions expressed are solely my own and not those of Public Access Unix of New York.
+------------------------------------------------------------
+
+From erobertson@kiae.su Mon May 02 06:40:34 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!kiae!erobertson
+From: erobertson@kiae.su (Élodie Robertson)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994May02.064034.3996@kiae.su>
+Date: Mon, 02 May 1994 06:40:34 GMT
+References: <1994May01.010034.3228@cam.ac.uk>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1994May01.010034.3228@cam.ac.uk>, mbrennan@cam.ac.uk (Matthias Brennan) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Élodie Robertson <erobertson@kiae.su>
+"Row 14. No joke."
+Macintosh IIfx / SunOS 4.1.4
+
+From cmoreau@kiae.su Wed May 04 03:56:34 1994
+Path: ashpoly!cascade!bigsur!kiae!cmoreau
+From: cmoreau@kiae.su (Camila Moreau)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994May04.035634.2945@kiae.su>
+Date: Wed, 04 May 1994 03:56:34 GMT
+References: <1994May01.010034.3228@cam.ac.uk> <1994May02.064034.3996@kiae.su>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994May02.064034.3996@kiae.su>, erobertson@kiae.su (Élodie Robertson) writes:
+> Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Camila Moreau
+Opinions expressed are solely my own and not those of Kurchatov Institute of Atomic Energy, Moscow.
+------------------------------------------------------------
+
+From tgirard@berkeley.edu Thu May 05 23:42:34 1994
+Path: ashpoly!cascade!mxgate!coyoacan!berkeley!tgirard
+From: tgirard@berkeley.edu (Tomas Girard)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994May05.234234.8300@berkeley.edu>
+Date: Thu, 05 May 1994 23:42:34 GMT
+References: <1994May01.010034.3228@cam.ac.uk> <1994May02.064034.3996@kiae.su> <1994May04.035634.2945@kiae.su>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1994May04.035634.2945@kiae.su>, cmoreau@kiae.su (Camila Moreau) writes:
+> Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Tomas Girard
+Tape trading list upon request. SASE required for international mail.
+

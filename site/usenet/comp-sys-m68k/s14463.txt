@@ -1,0 +1,91 @@
+From bkang@demon.co.uk Mon Dec 02 05:18:44 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!demon!bkang
+From: bkang@demon.co.uk (Bruno Kang)
+Newsgroups: comp.sys.m68k
+Subject: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Dec02.051844.4551@demon.co.uk>
+Date: Mon, 02 Dec 1996 05:18:44 GMT
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Did Marcus take the decryption EPROM with him when he left the lab?
+
+-- 
+Bruno Kang
+Tape trading list upon request. SASE required for international mail.
+
+From mmoreau@cmu.edu Tue Dec 03 11:25:44 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!cmu!mmoreau
+From: mmoreau@cmu.edu (Mateo Moreau)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Dec03.112544.3426@cmu.edu>
+Date: Tue, 03 Dec 1996 11:25:44 GMT
+References: <1996Dec02.051844.4551@demon.co.uk>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Dec02.051844.4551@demon.co.uk>, bkang@demon.co.uk (Bruno Kang) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+-- 
+Mateo Moreau <mmoreau@cmu.edu>
+"5 sigma is a discovery. 7 is a question."
+Sun 3/60 (SunOS 4.1.1) / System 7.5.1
+
+From lchoi@unam.mx Tue Dec 03 14:08:44 1996
+Path: ashpoly!cascade!brgate!saturno!unam!lchoi
+From: lchoi@unam.mx (Lars Choi)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Dec03.140844.4312@unam.mx>
+Date: Tue, 03 Dec 1996 14:08:44 GMT
+References: <1996Dec02.051844.4551@demon.co.uk> <1996Dec03.112544.3426@cmu.edu>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Dec03.112544.3426@cmu.edu>, mmoreau@cmu.edu (Mateo Moreau) writes:
+> That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Lars Choi <lchoi@unam.mx>
+*PLONK* filter active for trolls.
+Amiga 1200 (Blizzard 030/50) - NetBSD 1.0
+
+From lsato@utexas.edu Wed Dec 04 23:00:44 1996
+Path: ashpoly!cascade!mxgate!coyoacan!utexas!lsato
+From: lsato@utexas.edu (Lars Sato)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Dec04.230044.8031@utexas.edu>
+Date: Wed, 04 Dec 1996 23:00:44 GMT
+References: <1996Dec02.051844.4551@demon.co.uk> <1996Dec03.112544.3426@cmu.edu> <1996Dec03.140844.4312@unam.mx>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1996Dec03.140844.4312@unam.mx>, lchoi@unam.mx (Lars Choi) writes:
+> Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+-- 
+Lars Sato
+Tape trading list upon request. SASE required for international mail.
+

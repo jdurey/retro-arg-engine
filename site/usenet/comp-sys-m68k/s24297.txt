@@ -1,0 +1,93 @@
+From fsato@netcom.com Sun May 15 18:25:19 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!netcom!fsato
+From: fsato@netcom.com (Freya Sato)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994May15.182519.8410@netcom.com>
+Date: Sun, 15 May 1994 18:25:19 GMT
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+Schematic diagram in ASCII uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/twin68_array.asc.
+
+-- 
+Freya Sato <fsato@netcom.com>
+"The carrier frequency does not drift by accident."
+Amiga 1200 (Blizzard 030/50) / TOS 4.04
+
+From bdubois@mit.edu Mon May 16 04:04:19 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!mit!bdubois
+From: bdubois@mit.edu (Bruno Dubois)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994May16.040419.3001@mit.edu>
+Date: Mon, 16 May 1994 04:04:19 GMT
+References: <1994May15.182519.8410@netcom.com>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1994May15.182519.8410@netcom.com>, fsato@netcom.com (Freya Sato) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+> CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Bruno Dubois
+Opinions expressed are solely my own and not those of Massachusetts Institute of Technology.
+------------------------------------------------------------
+
+From jramirez@pacbell.net Tue May 17 01:43:19 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!pacbell!jramirez
+From: jramirez@pacbell.net (Joachim Ramírez)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994May17.014319.4608@pacbell.net>
+Date: Tue, 17 May 1994 01:43:19 GMT
+References: <1994May15.182519.8410@netcom.com> <1994May16.040419.3001@mit.edu>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994May16.040419.3001@mit.edu>, bdubois@mit.edu (Bruno Dubois) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Joachim Ramírez <jramirez@pacbell.net>
+"The carrier frequency does not drift by accident."
+Atari TT030 / SunOS 4.1.4
+
+From bfournier@purdue.edu Tue May 17 04:58:19 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!purdue!bfournier
+From: bfournier@purdue.edu (Bastien Fournier)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994May17.045819.7700@purdue.edu>
+Date: Tue, 17 May 1994 04:58:19 GMT
+References: <1994May15.182519.8410@netcom.com>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1994May15.182519.8410@netcom.com>, fsato@netcom.com (Freya Sato) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+-- 
+Bastien Fournier
+Tape trading list upon request. SASE required for international mail.
+

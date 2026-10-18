@@ -1,0 +1,120 @@
+From pchoi@mit.edu Sat Mar 11 19:31:27 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!mit!pchoi
+From: pchoi@mit.edu (Pavel Choi)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Mar11.193127.3227@mit.edu>
+Date: Sat, 11 Mar 1995 19:31:27 GMT
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Pavel Choi <pchoi@mit.edu>
+*PLONK* filter active for trolls.
+486DX2/66 (Linux 1.2.13) - NetBSD 1.0
+
+From jsokolov@inria.fr Sun Mar 12 19:37:27 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!inria!jsokolov
+From: jsokolov@inria.fr (Joachim Sokolov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Mar12.193727.6499@inria.fr>
+Date: Sun, 12 Mar 1995 19:37:27 GMT
+References: <1995Mar11.193127.3227@mit.edu>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Mar11.193127.3227@mit.edu>, pchoi@mit.edu (Pavel Choi) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+=== Joachim Sokolov ===
+Dept of Electrical Engineering, INRIA Rocquencourt
+"Row 14. No joke."
+
+From ssouza@pacbell.net Mon Mar 13 03:42:27 1995
+Path: ashpoly!cascade!bigsur!pacbell!ssouza
+From: ssouza@pacbell.net (Steve Souza)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Mar13.034227.4978@pacbell.net>
+Date: Mon, 13 Mar 1995 03:42:27 GMT
+References: <1995Mar11.193127.3227@mit.edu>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Mar11.193127.3227@mit.edu>, pchoi@mit.edu (Pavel Choi) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Steve Souza
+Tape trading list upon request. SASE required for international mail.
+
+From arobertson@netcom.com Mon Mar 13 20:16:27 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!netcom!arobertson
+From: arobertson@netcom.com (Amy Robertson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Mar13.201627.2721@netcom.com>
+Date: Mon, 13 Mar 1995 20:16:27 GMT
+References: <1995Mar11.193127.3227@mit.edu> <1995Mar13.034227.4978@pacbell.net>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995Mar13.034227.4978@pacbell.net>, ssouza@pacbell.net (Steve Souza) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Amy Robertson | arobertson@netcom.com
+PGP Key fingerprint: 0AD2 57EF C0B6 DC87
+"Keep the channels open."
+
+From rgarcia@kth.se Wed Mar 15 17:50:27 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!kth!rgarcia
+From: rgarcia@kth.se (Raj García)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Mar15.175027.7474@kth.se>
+Date: Wed, 15 Mar 1995 17:50:27 GMT
+References: <1995Mar11.193127.3227@mit.edu>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Mar11.193127.3227@mit.edu>, pchoi@mit.edu (Pavel Choi) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Raj García <rgarcia@kth.se>
+*PLONK* filter active for trolls.
+Sun 3/60 (SunOS 4.1.1) - NetBSD 1.0
+

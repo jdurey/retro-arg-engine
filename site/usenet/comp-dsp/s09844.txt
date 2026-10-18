@@ -1,0 +1,123 @@
+From lsilva@delphi.com Fri Dec 23 21:45:03 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!delphi!lsilva
+From: lsilva@delphi.com (Lisa Silva)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Dec23.214503.6455@delphi.com>
+Date: Fri, 23 Dec 1994 21:45:03 GMT
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Lisa Silva
+Tape trading list upon request. SASE required for international mail.
+
+From ynilsson@utexas.edu Sun Dec 25 00:15:03 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!utexas!ynilsson
+From: ynilsson@utexas.edu (Yuki Nilsson)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Dec25.001503.4199@utexas.edu>
+Date: Sun, 25 Dec 1994 00:15:03 GMT
+References: <1994Dec23.214503.6455@delphi.com>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1994Dec23.214503.6455@delphi.com>, lsilva@delphi.com (Lisa Silva) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Yuki Nilsson | ynilsson@utexas.edu
+PGP Key fingerprint: 2A33 9B58 CCD9 A896
+"Keep the channels open."
+
+From npark@berkeley.edu Mon Dec 26 13:10:03 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!berkeley!npark
+From: npark@berkeley.edu (Natalia Park)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Dec26.131003.2153@berkeley.edu>
+Date: Mon, 26 Dec 1994 13:10:03 GMT
+References: <1994Dec23.214503.6455@delphi.com>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1994Dec23.214503.6455@delphi.com>, lsilva@delphi.com (Lisa Silva) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Natalia Park <npark@berkeley.edu>
+SupraFAXModem 28.8 @ ISDN 64k bps
+"The carrier frequency does not drift by accident."
+
+From tandersson@titech.ac.jp Mon Dec 26 19:56:03 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!titech!tandersson
+From: tandersson@titech.ac.jp (Thiago Andersson)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Dec26.195603.7203@titech.ac.jp>
+Date: Mon, 26 Dec 1994 19:56:03 GMT
+References: <1994Dec23.214503.6455@delphi.com>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1994Dec23.214503.6455@delphi.com>, lsilva@delphi.com (Lisa Silva) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Thiago Andersson | tandersson@titech.ac.jp
+PGP Key fingerprint: 3608 1A43 EC2C D29F
+"Keep the channels open."
+
+From csanchez@utexas.edu Tue Dec 27 23:49:03 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!utexas!csanchez
+From: csanchez@utexas.edu (Callum Sánchez)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Dec27.234903.4344@utexas.edu>
+Date: Tue, 27 Dec 1994 23:49:03 GMT
+References: <1994Dec23.214503.6455@delphi.com> <1994Dec25.001503.4199@utexas.edu>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1994Dec25.001503.4199@utexas.edu>, ynilsson@utexas.edu (Yuki Nilsson) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+> Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Callum Sánchez <csanchez@utexas.edu>
+*PLONK* filter active for trolls.
+Pentium 90 (OS/2 Warp) - NetBSD 1.0
+

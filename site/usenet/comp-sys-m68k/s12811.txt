@@ -1,0 +1,94 @@
+From jsato@delphi.com Tue Jan 24 08:06:48 1995
+Path: ashpoly!cascade!mxgate!coyoacan!delphi!jsato
+From: jsato@delphi.com (Jens Sato)
+Newsgroups: comp.sys.m68k
+Subject: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jan24.080648.3384@delphi.com>
+Date: Tue, 24 Jan 1995 08:06:48 GMT
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Jens Sato
+Tape trading list upon request. SASE required for international mail.
+
+From ttanaka@berkeley.edu Thu Jan 26 04:59:48 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!berkeley!ttanaka
+From: ttanaka@berkeley.edu (Thiago Tanaka)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jan26.045948.2428@berkeley.edu>
+Date: Thu, 26 Jan 1995 04:59:48 GMT
+References: <1995Jan24.080648.3384@delphi.com>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Jan24.080648.3384@delphi.com>, jsato@delphi.com (Jens Sato) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Thiago Tanaka | ttanaka@berkeley.edu
+PGP Key fingerprint: 8D33 BB79 B6E7 A4BD
+"Keep the channels open."
+
+From rsato@purdue.edu Fri Jan 27 13:55:48 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!purdue!rsato
+From: rsato@purdue.edu (Raj Sato)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jan27.135548.6633@purdue.edu>
+Date: Fri, 27 Jan 1995 13:55:48 GMT
+References: <1995Jan24.080648.3384@delphi.com> <1995Jan26.045948.2428@berkeley.edu>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995Jan26.045948.2428@berkeley.edu>, ttanaka@berkeley.edu (Thiago Tanaka) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Raj Sato <rsato@purdue.edu>
+*PLONK* filter active for trolls.
+Atari TT030 - NetBSD 1.0
+
+From emartinez@kiae.su Sat Jan 28 09:33:48 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!kiae!emartinez
+From: emartinez@kiae.su (Elaine Martínez)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jan28.093348.6482@kiae.su>
+Date: Sat, 28 Jan 1995 09:33:48 GMT
+References: <1995Jan24.080648.3384@delphi.com> <1995Jan26.045948.2428@berkeley.edu>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1995Jan26.045948.2428@berkeley.edu>, ttanaka@berkeley.edu (Thiago Tanaka) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Elaine Martínez -- Kurchatov Institute of Atomic Energy, Moscow
+"The carrier frequency does not drift by accident."
+

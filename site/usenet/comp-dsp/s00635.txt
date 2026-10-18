@@ -1,0 +1,118 @@
+From pperez@demon.co.uk Fri Mar 08 13:56:57 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!demon!pperez
+From: pperez@demon.co.uk (Pavel Pérez)
+Newsgroups: comp.dsp
+Subject: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Mar08.135657.2150@demon.co.uk>
+Date: Fri, 08 Mar 1996 13:56:57 GMT
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Pavel Pérez | pperez@demon.co.uk
+PGP Key fingerprint: 3932 440F 5281 C4B9
+"Keep the channels open."
+
+From bpark@pacbell.net Sat Mar 09 07:40:57 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!pacbell!bpark
+From: bpark@pacbell.net (Brian Park)
+Newsgroups: comp.dsp
+Subject: Re: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Mar09.074057.8215@pacbell.net>
+Date: Sat, 09 Mar 1996 07:40:57 GMT
+References: <1996Mar08.135657.2150@demon.co.uk>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996Mar08.135657.2150@demon.co.uk>, pperez@demon.co.uk (Pavel Pérez) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+> At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Brian Park
+Opinions expressed are solely my own and not those of Pacific Bell Internet Services.
+------------------------------------------------------------
+
+From jmuller@cam.ac.uk Mon Mar 11 09:06:57 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!cam!jmuller
+From: jmuller@cam.ac.uk (Jen Müller)
+Newsgroups: comp.dsp
+Subject: Re: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Mar11.090657.4136@cam.ac.uk>
+Date: Mon, 11 Mar 1996 09:06:57 GMT
+References: <1996Mar08.135657.2150@demon.co.uk> <1996Mar09.074057.8215@pacbell.net>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1996Mar09.074057.8215@pacbell.net>, bpark@pacbell.net (Brian Park) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Jen Müller -- University of Cambridge Computer Laboratory
+"Tape doesn't lie at 02:14. Ears do."
+
+From jpetrov@inria.fr Tue Mar 12 22:12:57 1996
+Path: ashpoly!cascade!brgate!saturno!inria!jpetrov
+From: jpetrov@inria.fr (Joachim Petrov)
+Newsgroups: comp.dsp
+Subject: Re: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Mar12.221257.1446@inria.fr>
+Date: Tue, 12 Mar 1996 22:12:57 GMT
+References: <1996Mar08.135657.2150@demon.co.uk>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Mar08.135657.2150@demon.co.uk>, pperez@demon.co.uk (Pavel Pérez) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+> At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Joachim Petrov -- INRIA Rocquencourt
+"Extraordinary claims require extraordinary spectra."
+
+From sgirard@pacbell.net Thu Mar 14 04:01:57 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!pacbell!sgirard
+From: sgirard@pacbell.net (Sun-mi Girard)
+Newsgroups: comp.dsp
+Subject: Re: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Mar14.040157.7715@pacbell.net>
+Date: Thu, 14 Mar 1996 04:01:57 GMT
+References: <1996Mar08.135657.2150@demon.co.uk>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1996Mar08.135657.2150@demon.co.uk>, pperez@demon.co.uk (Pavel Pérez) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Sun-mi Girard | sgirard@pacbell.net
+PGP Key fingerprint: F071 927C FA8E 34D1
+"Keep the channels open."
+

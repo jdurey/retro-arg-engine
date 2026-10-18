@@ -1,0 +1,116 @@
+From treyes@cern.ch Fri Aug 04 11:32:30 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!cern!treyes
+From: treyes@cern.ch (Tomas Reyes)
+Newsgroups: comp.sys.m68k
+Subject: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Aug04.113230.3219@cern.ch>
+Date: Fri, 04 Aug 1995 11:32:30 GMT
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+Schematic diagram in ASCII uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/twin68_array.asc.
+
+-- 
+=== Tomas Reyes ===
+Dept of Electrical Engineering, European Laboratory for Particle Physics, Geneva
+"Measuring a record you own is listening, not piracy."
+
+From eoliveira@pacbell.net Sat Aug 05 15:46:30 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!pacbell!eoliveira
+From: eoliveira@pacbell.net (Emi Oliveira)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Aug05.154630.5533@pacbell.net>
+Date: Sat, 05 Aug 1995 15:46:30 GMT
+References: <1995Aug04.113230.3219@cern.ch>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Aug04.113230.3219@cern.ch>, treyes@cern.ch (Tomas Reyes) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Emi Oliveira -- Pacific Bell Internet Services
+"When every node is whole, the channel opens."
+
+From nmuller@cern.ch Mon Aug 07 09:14:30 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!cern!nmuller
+From: nmuller@cern.ch (Nadia Müller)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Aug07.091430.5537@cern.ch>
+Date: Mon, 07 Aug 1995 09:14:30 GMT
+References: <1995Aug04.113230.3219@cern.ch>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Aug04.113230.3219@cern.ch>, treyes@cern.ch (Tomas Reyes) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+Looks like a prototype telecommunications board for military secure voice, not an audio music product.
+
+-- 
+Nadia Müller
+Tape trading list upon request. SASE required for international mail.
+
+From asouza@hanse.de Mon Aug 07 21:00:30 1995
+Path: ashpoly!cascade!brgate!saturno!hanse!asouza
+From: asouza@hanse.de (Andrei Souza)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Aug07.210030.1720@hanse.de>
+Date: Mon, 07 Aug 1995 21:00:30 GMT
+References: <1995Aug04.113230.3219@cern.ch> <1995Aug07.091430.5537@cern.ch>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1995Aug07.091430.5537@cern.ch>, nmuller@cern.ch (Nadia Müller) writes:
+> Looks like a prototype telecommunications board for military secure voice, not an audio music product.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Andrei Souza -- Hanse-Netzwerk Hamburg
+"A soul is not exclusive to biology."
+
+From smacdonald@u-tokyo.ac.jp Wed Aug 09 22:28:30 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!u-tokyo!smacdonald
+From: smacdonald@u-tokyo.ac.jp (Sven MacDonald)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Aug09.222830.2954@u-tokyo.ac.jp>
+Date: Wed, 09 Aug 1995 22:28:30 GMT
+References: <1995Aug04.113230.3219@cern.ch>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Aug04.113230.3219@cern.ch>, treyes@cern.ch (Tomas Reyes) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Sven MacDonald <smacdonald@u-tokyo.ac.jp>
+"The carrier frequency does not drift by accident."
+Sun 3/60 (SunOS 4.1.1) / Linux 1.2.13
+

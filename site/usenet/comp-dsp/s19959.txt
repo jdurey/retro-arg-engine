@@ -1,0 +1,98 @@
+From loliveira@unam.mx Tue Jan 18 21:38:18 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!unam!loliveira
+From: loliveira@unam.mx (Lisa Oliveira)
+Newsgroups: comp.dsp
+Subject: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Jan18.213818.4371@unam.mx>
+Date: Tue, 18 Jan 1994 21:38:18 GMT
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Lisa Oliveira
+Opinions expressed are solely my own and not those of Universidad Nacional Autónoma de México (DGSCA).
+------------------------------------------------------------
+
+From tpopov@cern.ch Thu Jan 20 20:22:18 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!cern!tpopov
+From: tpopov@cern.ch (Takeshi Popov)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Jan20.202218.8239@cern.ch>
+Date: Thu, 20 Jan 1994 20:22:18 GMT
+References: <1994Jan18.213818.4371@unam.mx>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1994Jan18.213818.4371@unam.mx>, loliveira@unam.mx (Lisa Oliveira) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Takeshi Popov <tpopov@cern.ch>
+*PLONK* filter active for trolls.
+Mac IIci / 68882 FPU - NetBSD 1.0
+
+From msato@netcom.com Sat Jan 22 20:16:18 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!netcom!msato
+From: msato@netcom.com (Mateo Sato)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Jan22.201618.9200@netcom.com>
+Date: Sat, 22 Jan 1994 20:16:18 GMT
+References: <1994Jan18.213818.4371@unam.mx> <1994Jan20.202218.8239@cern.ch>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Jan20.202218.8239@cern.ch>, tpopov@cern.ch (Takeshi Popov) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+> If you are posting from AOL, please read RFC 1036 before posting again.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Mateo Sato
+Tape trading list upon request. SASE required for international mail.
+
+From bito@demon.co.uk Mon Jan 24 16:44:18 1994
+Path: ashpoly!cascade!bigsur!demon!bito
+From: bito@demon.co.uk (Bill Ito)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Jan24.164418.6772@demon.co.uk>
+Date: Mon, 24 Jan 1994 16:44:18 GMT
+References: <1994Jan18.213818.4371@unam.mx> <1994Jan20.202218.8239@cern.ch>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 12
+
+In article <1994Jan20.202218.8239@cern.ch>, tpopov@cern.ch (Takeshi Popov) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+> If you are posting from AOL, please read RFC 1036 before posting again.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Bill Ito
+Opinions expressed are solely my own and not those of Demon Internet Services UK.
+------------------------------------------------------------
+

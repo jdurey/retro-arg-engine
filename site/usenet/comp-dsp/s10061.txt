@@ -1,0 +1,70 @@
+From kstewart@pipeline.com Wed Jan 18 10:47:30 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!pipeline!kstewart
+From: kstewart@pipeline.com (Katrin Stewart)
+Newsgroups: comp.dsp
+Subject: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jan18.104730.1932@pipeline.com>
+Date: Wed, 18 Jan 1995 10:47:30 GMT
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Katrin Stewart
+Opinions expressed are solely my own and not those of The Pipeline Internet Network.
+------------------------------------------------------------
+
+From mrodriguez@mindspring.com Wed Jan 18 20:55:30 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!mindspring!mrodriguez
+From: mrodriguez@mindspring.com (Mikhail Rodríguez)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jan18.205530.2209@mindspring.com>
+Date: Wed, 18 Jan 1995 20:55:30 GMT
+References: <1995Jan18.104730.1932@pipeline.com>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Jan18.104730.1932@pipeline.com>, kstewart@pipeline.com (Katrin Stewart) writes:
+> Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+=== Mikhail Rodríguez ===
+Dept of Electrical Engineering, MindSpring Enterprises
+"Measuring a record you own is listening, not piracy."
+
+From ppopov@hanse.de Thu Jan 19 01:12:30 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!hanse!ppopov
+From: ppopov@hanse.de (Pavel Popov)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jan19.011230.7644@hanse.de>
+Date: Thu, 19 Jan 1995 01:12:30 GMT
+References: <1995Jan18.104730.1932@pipeline.com>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Jan18.104730.1932@pipeline.com>, kstewart@pipeline.com (Katrin Stewart) writes:
+> Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Pavel Popov <ppopov@hanse.de>
+US Robotics Courier V.34 @ 28,800 bps
+"Hardware is temporary. The signal survives."
+

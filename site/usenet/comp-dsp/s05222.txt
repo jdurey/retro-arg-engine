@@ -1,0 +1,119 @@
+From ymacdonald@cern.ch Fri Sep 16 05:24:51 1994
+Path: ashpoly!cascade!brgate!saturno!cern!ymacdonald
+From: ymacdonald@cern.ch (Yuki MacDonald)
+Newsgroups: comp.dsp
+Subject: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Sep16.052451.7326@cern.ch>
+Date: Fri, 16 Sep 1994 05:24:51 GMT
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+Version 1.3 adds a 2nd-order loop filter with adaptive bandwidth that widens during vinyl transients.
+
+Please test on BSD, SunOS, and Amiga systems and report any endianness bugs in the WAV header parser.
+
+-- 
+Yuki MacDonald | ymacdonald@cern.ch
+PGP Key fingerprint: C937 F3BA 4504 9317
+"Keep the channels open."
+
+From hstewart@cmu.edu Sat Sep 17 02:03:51 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!cmu!hstewart
+From: hstewart@cmu.edu (Heather Stewart)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Sep17.020351.8057@cmu.edu>
+Date: Sat, 17 Sep 1994 02:03:51 GMT
+References: <1994Sep16.052451.7326@cern.ch>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Sep16.052451.7326@cern.ch>, ymacdonald@cern.ch (Yuki MacDonald) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+-- 
+Heather Stewart | hstewart@cmu.edu
+PGP Key fingerprint: F593 C275 CF9C 2558
+"Keep the channels open."
+
+From framirez@netcom.com Mon Sep 19 01:08:51 1994
+Path: ashpoly!cascade!mxgate!coyoacan!netcom!framirez
+From: framirez@netcom.com (Fiona Ramírez)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Sep19.010851.6025@netcom.com>
+Date: Mon, 19 Sep 1994 01:08:51 GMT
+References: <1994Sep16.052451.7326@cern.ch>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1994Sep16.052451.7326@cern.ch>, ymacdonald@cern.ch (Yuki MacDonald) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+> Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+-- 
+Fiona Ramírez | framirez@netcom.com
+PGP Key fingerprint: 1047 A9E9 F92E 07E8
+"Keep the channels open."
+
+From jgarcia@inria.fr Tue Sep 20 09:51:51 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!inria!jgarcia
+From: jgarcia@inria.fr (Ji-woo García)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Sep20.095151.3484@inria.fr>
+Date: Tue, 20 Sep 1994 09:51:51 GMT
+References: <1994Sep16.052451.7326@cern.ch>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1994Sep16.052451.7326@cern.ch>, ymacdonald@cern.ch (Yuki MacDonald) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Tar.gz archive gave a CRC error with PKUNZIP. Make sure you upload in binary mode, not ASCII!
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Ji-woo García
+Opinions expressed are solely my own and not those of INRIA Rocquencourt.
+------------------------------------------------------------
+
+From evasiliev@uni-hamburg.de Wed Sep 21 01:01:51 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!uni-hamburg!evasiliev
+From: evasiliev@uni-hamburg.de (Emi Vasiliev)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Sep21.010151.1902@uni-hamburg.de>
+Date: Wed, 21 Sep 1994 01:01:51 GMT
+References: <1994Sep16.052451.7326@cern.ch> <1994Sep17.020351.8057@cmu.edu>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Sep17.020351.8057@cmu.edu>, hstewart@cmu.edu (Heather Stewart) writes:
+> Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Emi Vasiliev
+Opinions expressed are solely my own and not those of Universität Hamburg Fachbereich Informatik.
+------------------------------------------------------------
+

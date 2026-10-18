@@ -1,0 +1,113 @@
+From kmuller@kth.se Sun Sep 22 23:59:19 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!kth!kmuller
+From: kmuller@kth.se (Kirsty Müller)
+Newsgroups: comp.dsp
+Subject: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Sep22.235919.9054@kth.se>
+Date: Sun, 22 Sep 1996 23:59:19 GMT
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Kirsty Müller | kmuller@kth.se
+PGP Key fingerprint: 52B9 98A7 8B44 EE15
+"Keep the channels open."
+
+From mjohansson@netcom.com Tue Sep 24 04:03:19 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!netcom!mjohansson
+From: mjohansson@netcom.com (Mateo Johansson)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Sep24.040319.2332@netcom.com>
+Date: Tue, 24 Sep 1996 04:03:19 GMT
+References: <1996Sep22.235919.9054@kth.se>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Sep22.235919.9054@kth.se>, kmuller@kth.se (Kirsty Müller) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Mateo Johansson -- NETCOM On-Line Communication Services
+"Tape doesn't lie at 02:14. Ears do."
+
+From jschneider@uni-hamburg.de Thu Sep 26 00:16:19 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!uni-hamburg!jschneider
+From: jschneider@uni-hamburg.de (Julien Schneider)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Sep26.001619.3083@uni-hamburg.de>
+Date: Thu, 26 Sep 1996 00:16:19 GMT
+References: <1996Sep22.235919.9054@kth.se>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1996Sep22.235919.9054@kth.se>, kmuller@kth.se (Kirsty Müller) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Julien Schneider -- Universität Hamburg Fachbereich Informatik
+"Extraordinary claims require extraordinary spectra."
+
+From hsmirnov@mit.edu Fri Sep 27 20:57:19 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!mit!hsmirnov
+From: hsmirnov@mit.edu (Hana Smirnov)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Sep27.205719.2644@mit.edu>
+Date: Fri, 27 Sep 1996 20:57:19 GMT
+References: <1996Sep22.235919.9054@kth.se> <1996Sep24.040319.2332@netcom.com>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1996Sep24.040319.2332@netcom.com>, mjohansson@netcom.com (Mateo Johansson) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Hana Smirnov
+Tape trading list upon request. SASE required for international mail.
+
+From bchoi@ox.ac.uk Sun Sep 29 21:26:19 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!ox!bchoi
+From: bchoi@ox.ac.uk (Bruno Choi)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Sep29.212619.2436@ox.ac.uk>
+Date: Sun, 29 Sep 1996 21:26:19 GMT
+References: <1996Sep22.235919.9054@kth.se> <1996Sep26.001619.3083@uni-hamburg.de>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1996Sep26.001619.3083@uni-hamburg.de>, jschneider@uni-hamburg.de (Julien Schneider) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Bruno Choi -- Oxford University Computing Laboratory
+"The hatch is open. Is anyone listening?"
+

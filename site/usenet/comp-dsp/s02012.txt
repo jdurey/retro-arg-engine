@@ -1,0 +1,69 @@
+From bsmirnov@pipeline.com Thu Feb 17 00:20:25 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!pipeline!bsmirnov
+From: bsmirnov@pipeline.com (Bill Smirnov)
+Newsgroups: comp.dsp
+Subject: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Feb17.002025.6260@pipeline.com>
+Date: Thu, 17 Feb 1994 00:20:25 GMT
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+MATLAB script available upon request via email.
+
+-- 
+Bill Smirnov
+Opinions expressed are solely my own and not those of The Pipeline Internet Network.
+------------------------------------------------------------
+
+From amoreno@ox.ac.uk Fri Feb 18 19:58:25 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!ox!amoreno
+From: amoreno@ox.ac.uk (Anton Moreno)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Feb18.195825.9286@ox.ac.uk>
+Date: Fri, 18 Feb 1994 19:58:25 GMT
+References: <1994Feb17.002025.6260@pipeline.com>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Feb17.002025.6260@pipeline.com>, bsmirnov@pipeline.com (Bill Smirnov) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Anton Moreno <amoreno@ox.ac.uk>
+*PLONK* filter active for trolls.
+486DX4/100 (FreeBSD 2.0.5) - NetBSD 1.0
+
+From clopez@mit.edu Sun Feb 20 20:23:25 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!mit!clopez
+From: clopez@mit.edu (Camila López)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Feb20.202325.6428@mit.edu>
+Date: Sun, 20 Feb 1994 20:23:25 GMT
+References: <1994Feb17.002025.6260@pipeline.com> <1994Feb18.195825.9286@ox.ac.uk>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1994Feb18.195825.9286@ox.ac.uk>, amoreno@ox.ac.uk (Anton Moreno) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Camila López -- Massachusetts Institute of Technology
+"In theory there is no difference between theory and practice."
+

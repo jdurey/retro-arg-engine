@@ -1,0 +1,115 @@
+From esokolov@rwth-aachen.de Fri Jan 12 15:19:14 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!rwth-aachen!esokolov
+From: esokolov@rwth-aachen.de (Élodie Sokolov)
+Newsgroups: comp.sys.m68k
+Subject: Question: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Jan12.151914.9284@rwth-aachen.de>
+Date: Fri, 12 Jan 1996 15:19:14 GMT
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+
+Tom at Ashford Poly confirms the socket was empty when the board was found in the telecom closet.
+
+-- 
+Élodie Sokolov
+Opinions expressed are solely my own and not those of RWTH Aachen Informatik.
+------------------------------------------------------------
+
+From lsouza@tum.de Sun Jan 14 14:32:14 1996
+Path: ashpoly!cascade!bigsur!tum!lsouza
+From: lsouza@tum.de (Lars Souza)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Jan14.143214.9472@tum.de>
+Date: Sun, 14 Jan 1996 14:32:14 GMT
+References: <1996Jan12.151914.9284@rwth-aachen.de>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1996Jan12.151914.9284@rwth-aachen.de>, esokolov@rwth-aachen.de (Élodie Sokolov) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Lars Souza -- Technische Universität München
+"The carrier frequency does not drift by accident."
+
+From anakamura@hanse.de Tue Jan 16 05:00:14 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!hanse!anakamura
+From: anakamura@hanse.de (Aiko Nakamura)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Jan16.050014.3044@hanse.de>
+Date: Tue, 16 Jan 1996 05:00:14 GMT
+References: <1996Jan12.151914.9284@rwth-aachen.de>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1996Jan12.151914.9284@rwth-aachen.de>, esokolov@rwth-aachen.de (Élodie Sokolov) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+> Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Aiko Nakamura <anakamura@hanse.de>
+"The carrier frequency does not drift by accident."
+Commodore Amiga 500 (1MB OCS) / SunOS 4.1.4
+
+From tlarsson@cmu.edu Wed Jan 17 19:26:14 1996
+Path: ashpoly!cascade!mxgate!coyoacan!cmu!tlarsson
+From: tlarsson@cmu.edu (Tyler Larsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Jan17.192614.1977@cmu.edu>
+Date: Wed, 17 Jan 1996 19:26:14 GMT
+References: <1996Jan12.151914.9284@rwth-aachen.de> <1996Jan16.050014.3044@hanse.de>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Jan16.050014.3044@hanse.de>, anakamura@hanse.de (Aiko Nakamura) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+=== Tyler Larsson ===
+Dept of Electrical Engineering, Carnegie Mellon University School of CS
+"When every node is whole, the channel opens."
+
+From vvasiliev@mit.edu Fri Jan 19 13:09:14 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!mit!vvasiliev
+From: vvasiliev@mit.edu (Valeria Vasiliev)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Jan19.130914.8969@mit.edu>
+Date: Fri, 19 Jan 1996 13:09:14 GMT
+References: <1996Jan12.151914.9284@rwth-aachen.de> <1996Jan16.050014.3044@hanse.de> <1996Jan17.192614.1977@cmu.edu>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1996Jan17.192614.1977@cmu.edu>, tlarsson@cmu.edu (Tyler Larsson) writes:
+> Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Valeria Vasiliev
+Tape trading list upon request. SASE required for international mail.
+

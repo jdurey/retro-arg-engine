@@ -1,0 +1,70 @@
+From sramirez@pacbell.net Tue Mar 01 23:19:31 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!pacbell!sramirez
+From: sramirez@pacbell.net (Sven Ramírez)
+Newsgroups: comp.dsp
+Subject: [FLAME] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Mar01.231931.5103@pacbell.net>
+Date: Tue, 01 Mar 1994 23:19:31 GMT
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+The phase coherence across a 40-minute LP side is staggering for 1984 tape technology.
+
+-- 
+Sven Ramírez <sramirez@pacbell.net>
+Practical Peripherals 14.4 @ ISDN 64k bps
+"When every node is whole, the channel opens."
+
+From llindqvist@stanford.edu Thu Mar 03 05:47:31 1994
+Path: ashpoly!cascade!mxgate!coyoacan!stanford!llindqvist
+From: llindqvist@stanford.edu (Liam Lindqvist)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Mar03.054731.6538@stanford.edu>
+Date: Thu, 03 Mar 1994 05:47:31 GMT
+References: <1994Mar01.231931.5103@pacbell.net>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Mar01.231931.5103@pacbell.net>, sramirez@pacbell.net (Sven Ramírez) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+-- 
+Liam Lindqvist <llindqvist@stanford.edu>
+Practical Peripherals 14.4 @ 9600 Telebit bps
+"The carrier frequency does not drift by accident."
+
+From gvasiliev@stanford.edu Sat Mar 05 02:27:31 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!stanford!gvasiliev
+From: gvasiliev@stanford.edu (Graham Vasiliev)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Mar05.022731.9786@stanford.edu>
+Date: Sat, 05 Mar 1994 02:27:31 GMT
+References: <1994Mar01.231931.5103@pacbell.net> <1994Mar03.054731.6538@stanford.edu>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Mar03.054731.6538@stanford.edu>, llindqvist@stanford.edu (Liam Lindqvist) writes:
+> You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Graham Vasiliev <gvasiliev@stanford.edu>
+"Marcus is not one man."
+Sun 3/60 (SunOS 4.1.1) / System 7.5.1
+

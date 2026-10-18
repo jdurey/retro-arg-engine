@@ -1,0 +1,72 @@
+From tmacdonald@purdue.edu Sun Nov 05 13:45:11 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!purdue!tmacdonald
+From: tmacdonald@purdue.edu (Tobias MacDonald)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Nov05.134511.2607@purdue.edu>
+Date: Sun, 05 Nov 1995 13:45:11 GMT
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Tobias MacDonald -- Purdue University Engineering Computer Network
+"When every node is whole, the channel opens."
+
+From tokonkwo@berkeley.edu Mon Nov 06 03:21:11 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!berkeley!tokonkwo
+From: tokonkwo@berkeley.edu (Tomas Okonkwo)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Nov06.032111.4404@berkeley.edu>
+Date: Mon, 06 Nov 1995 03:21:11 GMT
+References: <1995Nov05.134511.2607@purdue.edu>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1995Nov05.134511.2607@purdue.edu>, tmacdonald@purdue.edu (Tobias MacDonald) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+> Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Tomas Okonkwo <tokonkwo@berkeley.edu>
+"Marcus is not one man."
+Commodore Amiga 500 (1MB OCS) / SunOS 4.1.4
+
+From rfischer@mindspring.com Mon Nov 06 12:24:11 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!mindspring!rfischer
+From: rfischer@mindspring.com (Raj Fischer)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Nov06.122411.3706@mindspring.com>
+Date: Mon, 06 Nov 1995 12:24:11 GMT
+References: <1995Nov05.134511.2607@purdue.edu>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Nov05.134511.2607@purdue.edu>, tmacdonald@purdue.edu (Tobias MacDonald) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Raj Fischer <rfischer@mindspring.com>
+*PLONK* filter active for trolls.
+Atari Falcon 030 - NetBSD 1.0
+

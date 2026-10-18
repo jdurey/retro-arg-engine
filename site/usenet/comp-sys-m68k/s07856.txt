@@ -1,0 +1,121 @@
+From hsantos@stanford.edu Sat May 20 21:55:11 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!stanford!hsantos
+From: hsantos@stanford.edu (Hugo Santos)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995May20.215511.8948@stanford.edu>
+Date: Sat, 20 May 1995 21:55:11 GMT
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Hugo Santos
+Tape trading list upon request. SASE required for international mail.
+
+From snilsson@u-tokyo.ac.jp Sun May 21 00:16:11 1995
+Path: ashpoly!cascade!brgate!saturno!u-tokyo!snilsson
+From: snilsson@u-tokyo.ac.jp (Sun-mi Nilsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995May21.001611.2022@u-tokyo.ac.jp>
+Date: Sun, 21 May 1995 00:16:11 GMT
+References: <1995May20.215511.8948@stanford.edu>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995May20.215511.8948@stanford.edu>, hsantos@stanford.edu (Hugo Santos) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Sun-mi Nilsson <snilsson@u-tokyo.ac.jp>
+"Extraordinary claims require extraordinary spectra."
+Acorn RiscPC 600 / NEXTSTEP 3.3
+
+From llarsson@tum.de Mon May 22 01:59:11 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!tum!llarsson
+From: llarsson@tum.de (Liam Larsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995May22.015911.5518@tum.de>
+Date: Mon, 22 May 1995 01:59:11 GMT
+References: <1995May20.215511.8948@stanford.edu> <1995May21.001611.2022@u-tokyo.ac.jp>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995May21.001611.2022@u-tokyo.ac.jp>, snilsson@u-tokyo.ac.jp (Sun-mi Nilsson) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Liam Larsson | llarsson@tum.de
+PGP Key fingerprint: 1F59 B0B0 B4A8 7BC8
+"Keep the channels open."
+
+From srodriguez@delphi.com Mon May 22 13:53:11 1995
+Path: ashpoly!cascade!mxgate!coyoacan!delphi!srodriguez
+From: srodriguez@delphi.com (Seo-yeon Rodríguez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995May22.135311.2931@delphi.com>
+Date: Mon, 22 May 1995 13:53:11 GMT
+References: <1995May20.215511.8948@stanford.edu> <1995May21.001611.2022@u-tokyo.ac.jp> <1995May22.015911.5518@tum.de>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995May22.015911.5518@tum.de>, llarsson@tum.de (Liam Larsson) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Seo-yeon Rodríguez <srodriguez@delphi.com>
+"When every node is whole, the channel opens."
+Acorn RiscPC 600 / TOS 4.04
+
+From kmoreau@pacbell.net Wed May 24 17:10:11 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!pacbell!kmoreau
+From: kmoreau@pacbell.net (Kirsty Moreau)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995May24.171011.6998@pacbell.net>
+Date: Wed, 24 May 1995 17:10:11 GMT
+References: <1995May20.215511.8948@stanford.edu> <1995May21.001611.2022@u-tokyo.ac.jp> <1995May22.015911.5518@tum.de> <1995May22.135311.2931@delphi.com>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995May22.135311.2931@delphi.com>, srodriguez@delphi.com (Seo-yeon Rodríguez) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Kirsty Moreau <kmoreau@pacbell.net>
+*PLONK* filter active for trolls.
+Decstation 5000/200 - NetBSD 1.0
+

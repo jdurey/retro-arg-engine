@@ -1,0 +1,114 @@
+From cmartinez@mit.edu Mon Mar 20 08:03:11 1995
+Path: ashpoly!cascade!brgate!saturno!mit!cmartinez
+From: cmartinez@mit.edu (Camila Martínez)
+Newsgroups: comp.dsp
+Subject: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Mar20.080311.1677@mit.edu>
+Date: Mon, 20 Mar 1995 08:03:11 GMT
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Camila Martínez -- Massachusetts Institute of Technology
+"The carrier frequency does not drift by accident."
+
+From keriksson@pacbell.net Tue Mar 21 15:58:11 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!pacbell!keriksson
+From: keriksson@pacbell.net (Kirsty Eriksson)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Mar21.155811.1135@pacbell.net>
+Date: Tue, 21 Mar 1995 15:58:11 GMT
+References: <1995Mar20.080311.1677@mit.edu>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Mar20.080311.1677@mit.edu>, cmartinez@mit.edu (Camila Martínez) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Kirsty Eriksson -- Pacific Bell Internet Services
+"Marcus is not one man."
+
+From hweber@mit.edu Thu Mar 23 11:32:11 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!mit!hweber
+From: hweber@mit.edu (Heather Weber)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Mar23.113211.9991@mit.edu>
+Date: Thu, 23 Mar 1995 11:32:11 GMT
+References: <1995Mar20.080311.1677@mit.edu> <1995Mar21.155811.1135@pacbell.net>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1995Mar21.155811.1135@pacbell.net>, keriksson@pacbell.net (Kirsty Eriksson) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Heather Weber -- Massachusetts Institute of Technology
+"When every node is whole, the channel opens."
+
+From dlaurent@panix.com Fri Mar 24 04:34:11 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!panix!dlaurent
+From: dlaurent@panix.com (Dmitri Laurent)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Mar24.043411.7525@panix.com>
+Date: Fri, 24 Mar 1995 04:34:11 GMT
+References: <1995Mar20.080311.1677@mit.edu>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Mar20.080311.1677@mit.edu>, cmartinez@mit.edu (Camila Martínez) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Dmitri Laurent <dlaurent@panix.com>
+Hayes Optima 288 @ 14,400 bps
+"Hardware is temporary. The signal survives."
+
+From msuzuki@rwth-aachen.de Sat Mar 25 20:23:11 1995
+Path: ashpoly!cascade!brgate!saturno!rwth-aachen!msuzuki
+From: msuzuki@rwth-aachen.de (Mathieu Suzuki)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Mar25.202311.2680@rwth-aachen.de>
+Date: Sat, 25 Mar 1995 20:23:11 GMT
+References: <1995Mar20.080311.1677@mit.edu> <1995Mar21.155811.1135@pacbell.net> <1995Mar23.113211.9991@mit.edu>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Mar23.113211.9991@mit.edu>, hweber@mit.edu (Heather Weber) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Mathieu Suzuki | msuzuki@rwth-aachen.de
+PGP Key fingerprint: 611B 0439 0E8E 1F51
+"Keep the channels open."
+

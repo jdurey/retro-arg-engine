@@ -1,0 +1,96 @@
+From schoi@panix.com Wed Oct 18 01:45:16 1995
+Path: ashpoly!cascade!mxgate!coyoacan!panix!schoi
+From: schoi@panix.com (Seo-yeon Choi)
+Newsgroups: comp.sys.m68k
+Subject: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Oct18.014516.4184@panix.com>
+Date: Wed, 18 Oct 1995 01:45:16 GMT
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Seo-yeon Choi
+Tape trading list upon request. SASE required for international mail.
+
+From atakahashi@pipeline.com Wed Oct 18 17:55:16 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!pipeline!atakahashi
+From: atakahashi@pipeline.com (Amy Takahashi)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Oct18.175516.9965@pipeline.com>
+Date: Wed, 18 Oct 1995 17:55:16 GMT
+References: <1995Oct18.014516.4184@panix.com>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Oct18.014516.4184@panix.com>, schoi@panix.com (Seo-yeon Choi) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+> Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Amy Takahashi | atakahashi@pipeline.com
+PGP Key fingerprint: 6EE4 F30B E1A5 80CE
+"Keep the channels open."
+
+From kgonzalez@panix.com Fri Oct 20 12:17:16 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!panix!kgonzalez
+From: kgonzalez@panix.com (Kenji González)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Oct20.121716.1379@panix.com>
+Date: Fri, 20 Oct 1995 12:17:16 GMT
+References: <1995Oct18.014516.4184@panix.com> <1995Oct18.175516.9965@pipeline.com>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Oct18.175516.9965@pipeline.com>, atakahashi@pipeline.com (Amy Takahashi) writes:
+> The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+PGP Public key available via finger or upon request.
+
+-- 
+Kenji González <kgonzalez@panix.com>
+SupraFAXModem 28.8 @ ISDN 64k bps
+"They will send a copy in my place."
+
+From mlindqvist@uu.net Fri Oct 20 21:55:16 1995
+Path: ashpoly!cascade!brgate!saturno!uu!mlindqvist
+From: mlindqvist@uu.net (Mike Lindqvist)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Oct20.215516.5395@uu.net>
+Date: Fri, 20 Oct 1995 21:55:16 GMT
+References: <1995Oct18.014516.4184@panix.com>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Oct18.014516.4184@panix.com>, schoi@panix.com (Seo-yeon Choi) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+> Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Mike Lindqvist <mlindqvist@uu.net>
+"They will send a copy in my place."
+PC-9821Ap2 (NEC) / FreeBSD 2.1
+

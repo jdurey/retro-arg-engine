@@ -1,0 +1,118 @@
+From skang@panix.com Mon Jul 04 13:55:19 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!panix!skang
+From: skang@panix.com (Sven Kang)
+Newsgroups: comp.sys.m68k
+Subject: Discussion: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Jul04.135519.8002@panix.com>
+Date: Mon, 04 Jul 1994 13:55:19 GMT
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Does anyone have a 27C256 EPROM marked 'MH-U14' or 'ORION-CRYPTO'?
+
+-- 
+Sven Kang
+Tape trading list upon request. SASE required for international mail.
+
+From smacdonald@netcom.com Wed Jul 06 03:08:19 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!netcom!smacdonald
+From: smacdonald@netcom.com (Sergei MacDonald)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Jul06.030819.3443@netcom.com>
+Date: Wed, 06 Jul 1994 03:08:19 GMT
+References: <1994Jul04.135519.8002@panix.com>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1994Jul04.135519.8002@panix.com>, skang@panix.com (Sven Kang) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+Sergei MacDonald <smacdonald@netcom.com>
+SupraFAXModem 28.8 @ 14,400 bps
+"Measuring a record you own is listening, not piracy."
+
+From cokonkwo@utexas.edu Thu Jul 07 17:41:19 1994
+Path: ashpoly!cascade!mxgate!coyoacan!utexas!cokonkwo
+From: cokonkwo@utexas.edu (Camila Okonkwo)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Jul07.174119.1165@utexas.edu>
+Date: Thu, 07 Jul 1994 17:41:19 GMT
+References: <1994Jul04.135519.8002@panix.com>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Jul04.135519.8002@panix.com>, skang@panix.com (Sven Kang) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Camila Okonkwo
+Tape trading list upon request. SASE required for international mail.
+
+From hgirard@ox.ac.uk Sat Jul 09 04:40:19 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!ox!hgirard
+From: hgirard@ox.ac.uk (Hana Girard)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Jul09.044019.9849@ox.ac.uk>
+Date: Sat, 09 Jul 1994 04:40:19 GMT
+References: <1994Jul04.135519.8002@panix.com> <1994Jul06.030819.3443@netcom.com>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1994Jul06.030819.3443@netcom.com>, smacdonald@netcom.com (Sergei MacDonald) writes:
+> That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+> Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Hana Girard <hgirard@ox.ac.uk>
+Practical Peripherals 14.4 @ 14,400 bps
+"Row 14. No joke."
+
+From arobertson@demon.co.uk Mon Jul 11 06:35:19 1994
+Path: ashpoly!cascade!mxgate!coyoacan!demon!arobertson
+From: arobertson@demon.co.uk (Andrei Robertson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Jul11.063519.4336@demon.co.uk>
+Date: Mon, 11 Jul 1994 06:35:19 GMT
+References: <1994Jul04.135519.8002@panix.com> <1994Jul07.174119.1165@utexas.edu>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Jul07.174119.1165@utexas.edu>, cokonkwo@utexas.edu (Camila Okonkwo) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Andrei Robertson | arobertson@demon.co.uk
+PGP Key fingerprint: 304E C03F 5A50 D2FA
+"Keep the channels open."
+

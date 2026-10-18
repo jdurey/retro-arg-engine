@@ -1,0 +1,120 @@
+From mmuller@stanford.edu Thu May 12 06:02:55 1994
+Path: ashpoly!cascade!mxgate!coyoacan!stanford!mmuller
+From: mmuller@stanford.edu (Mathieu Müller)
+Newsgroups: comp.dsp
+Subject: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994May12.060255.3066@stanford.edu>
+Date: Thu, 12 May 1994 06:02:55 GMT
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Mathieu Müller <mmuller@stanford.edu>
+*PLONK* filter active for trolls.
+Sun 3/60 (SunOS 4.1.1) - NetBSD 1.0
+
+From gsato@utexas.edu Fri May 13 15:09:55 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!utexas!gsato
+From: gsato@utexas.edu (Göran Sato)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994May13.150955.6537@utexas.edu>
+Date: Fri, 13 May 1994 15:09:55 GMT
+References: <1994May12.060255.3066@stanford.edu>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1994May12.060255.3066@stanford.edu>, mmuller@stanford.edu (Mathieu Müller) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Göran Sato
+Opinions expressed are solely my own and not those of University of Texas at Austin.
+------------------------------------------------------------
+
+From tpark@cern.ch Sat May 14 06:52:55 1994
+Path: ashpoly!cascade!brgate!saturno!cern!tpark
+From: tpark@cern.ch (Tomas Park)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994May14.065255.9913@cern.ch>
+Date: Sat, 14 May 1994 06:52:55 GMT
+References: <1994May12.060255.3066@stanford.edu> <1994May13.150955.6537@utexas.edu>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1994May13.150955.6537@utexas.edu>, gsato@utexas.edu (Göran Sato) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Tomas Park | tpark@cern.ch
+PGP Key fingerprint: 9648 4B07 74B6 EEE1
+"Keep the channels open."
+
+From mcampbell@kiae.su Sat May 14 19:43:55 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!kiae!mcampbell
+From: mcampbell@kiae.su (Mathieu Campbell)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994May14.194355.2511@kiae.su>
+Date: Sat, 14 May 1994 19:43:55 GMT
+References: <1994May12.060255.3066@stanford.edu>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1994May12.060255.3066@stanford.edu>, mmuller@stanford.edu (Mathieu Müller) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+PGP Public key available via finger or upon request.
+
+-- 
+=== Mathieu Campbell ===
+Dept of Electrical Engineering, Kurchatov Institute of Atomic Energy, Moscow
+"The hatch is open. Is anyone listening?"
+
+From msokolov@u-tokyo.ac.jp Mon May 16 22:25:55 1994
+Path: ashpoly!cascade!brgate!saturno!u-tokyo!msokolov
+From: msokolov@u-tokyo.ac.jp (Min-jun Sokolov)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994May16.222555.7175@u-tokyo.ac.jp>
+Date: Mon, 16 May 1994 22:25:55 GMT
+References: <1994May12.060255.3066@stanford.edu> <1994May14.194355.2511@kiae.su>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1994May14.194355.2511@kiae.su>, mcampbell@kiae.su (Mathieu Campbell) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Min-jun Sokolov -- University of Tokyo Department of Information Science
+"Hold for relay."
+

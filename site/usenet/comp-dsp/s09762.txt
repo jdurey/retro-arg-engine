@@ -1,0 +1,117 @@
+From mmartinez@kiae.su Sun Sep 24 07:31:02 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!kiae!mmartinez
+From: mmartinez@kiae.su (Min-jun Martínez)
+Newsgroups: comp.dsp
+Subject: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Sep24.073102.8906@kiae.su>
+Date: Sun, 24 Sep 1995 07:31:02 GMT
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Min-jun Martínez <mmartinez@kiae.su>
+"Marcus is not one man."
+Pentium 90 (OS/2 Warp) / Linux 1.2.13
+
+From joliveira@kiae.su Sun Sep 24 10:04:02 1995
+Path: ashpoly!cascade!bigsur!kiae!joliveira
+From: joliveira@kiae.su (Julien Oliveira)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Sep24.100402.4941@kiae.su>
+Date: Sun, 24 Sep 1995 10:04:02 GMT
+References: <1995Sep24.073102.8906@kiae.su>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1995Sep24.073102.8906@kiae.su>, mmartinez@kiae.su (Min-jun Martínez) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Julien Oliveira
+Tape trading list upon request. SASE required for international mail.
+
+From asokolov@pacbell.net Mon Sep 25 02:46:02 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!pacbell!asokolov
+From: asokolov@pacbell.net (Astrid Sokolov)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Sep25.024602.8727@pacbell.net>
+Date: Mon, 25 Sep 1995 02:46:02 GMT
+References: <1995Sep24.073102.8906@kiae.su> <1995Sep24.100402.4941@kiae.su>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Sep24.100402.4941@kiae.su>, joliveira@kiae.su (Julien Oliveira) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+Astrid Sokolov -- Pacific Bell Internet Services
+"A soul is not exclusive to biology."
+
+From slee@u-tokyo.ac.jp Mon Sep 25 08:33:02 1995
+Path: ashpoly!cascade!brgate!saturno!u-tokyo!slee
+From: slee@u-tokyo.ac.jp (Sergei Lee)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Sep25.083302.1457@u-tokyo.ac.jp>
+Date: Mon, 25 Sep 1995 08:33:02 GMT
+References: <1995Sep24.073102.8906@kiae.su> <1995Sep24.100402.4941@kiae.su> <1995Sep25.024602.8727@pacbell.net>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Sep25.024602.8727@pacbell.net>, asokolov@pacbell.net (Astrid Sokolov) writes:
+> Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+=== Sergei Lee ===
+Dept of Electrical Engineering, University of Tokyo Department of Information Science
+"We don't sign stars. We build them."
+
+From gpetrov@utexas.edu Mon Sep 25 12:19:02 1995
+Path: ashpoly!cascade!bigsur!utexas!gpetrov
+From: gpetrov@utexas.edu (Graham Petrov)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Sep25.121902.3122@utexas.edu>
+Date: Mon, 25 Sep 1995 12:19:02 GMT
+References: <1995Sep24.073102.8906@kiae.su>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Sep24.073102.8906@kiae.su>, mmartinez@kiae.su (Min-jun Martínez) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+=== Graham Petrov ===
+Dept of Electrical Engineering, University of Texas at Austin
+"Extraordinary claims require extraordinary spectra."
+

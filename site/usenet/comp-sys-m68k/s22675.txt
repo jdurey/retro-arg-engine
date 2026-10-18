@@ -1,0 +1,93 @@
+From dpetrov@panix.com Mon Jun 27 05:21:17 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!panix!dpetrov
+From: dpetrov@panix.com (Dave Petrov)
+Newsgroups: comp.sys.m68k
+Subject: Discussion: Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1994Jun27.052117.4434@panix.com>
+Date: Mon, 27 Jun 1994 05:21:17 GMT
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Wrote an Amiga assembly program that uses Paula's DMA audio channels to sample and track the Stardust subcarrier.
+
+I wrote a 64-tap FIR filter in pure 68k assembly using movem.l and dbra loop unrolling to downsample to 64 Hz.
+By setting up Paula's audio DMA to double-buffer incoming 8-bit samples, the 68020 has plenty of cycles left for the Costas loop.
+
+Does anyone want to test on an unaccelerated Amiga 500 with 512K chip RAM?
+
+-- 
+Dave Petrov | dpetrov@panix.com
+PGP Key fingerprint: 8AEC 48A4 C9E7 09F8
+"Keep the channels open."
+
+From llindqvist@clari.net Tue Jun 28 13:32:17 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!clari!llindqvist
+From: llindqvist@clari.net (Lucia Lindqvist)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1994Jun28.133217.4853@clari.net>
+Date: Tue, 28 Jun 1994 13:32:17 GMT
+References: <1994Jun27.052117.4434@panix.com>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Jun27.052117.4434@panix.com>, dpetrov@panix.com (Dave Petrov) writes:
+> Wrote an Amiga assembly program that uses Paula's DMA audio channels to sample and track the Stardust subcarrier.
+> I wrote a 64-tap FIR filter in pure 68k assembly using movem.l and dbra loop unrolling to downsample to 64 Hz.
+
+Tested on my A3000 / 25 MHz. Ran smoothly in the background while I was compiling a C program in another window.
+
+-- 
+Lucia Lindqvist
+Tape trading list upon request. SASE required for international mail.
+
+From bweber@kiae.su Tue Jun 28 19:25:17 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!kiae!bweber
+From: bweber@kiae.su (Brian Weber)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1994Jun28.192517.4057@kiae.su>
+Date: Tue, 28 Jun 1994 19:25:17 GMT
+References: <1994Jun27.052117.4434@panix.com> <1994Jun28.133217.4853@clari.net>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1994Jun28.133217.4853@clari.net>, llindqvist@clari.net (Lucia Lindqvist) writes:
+> Tested on my A3000 / 25 MHz. Ran smoothly in the background while I was compiling a C program in another window.
+
+Brilliant use of Paula DMA! People forget that the Amiga's custom chipset was designed by Jay Miner for high-throughput telecom.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Brian Weber
+Tape trading list upon request. SASE required for international mail.
+
+From msmirnov@kth.se Thu Jun 30 22:34:17 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!kth!msmirnov
+From: msmirnov@kth.se (Morag Smirnov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1994Jun30.223417.4324@kth.se>
+Date: Thu, 30 Jun 1994 22:34:17 GMT
+References: <1994Jun27.052117.4434@panix.com> <1994Jun28.133217.4853@clari.net>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1994Jun28.133217.4853@clari.net>, llindqvist@clari.net (Lucia Lindqvist) writes:
+> Tested on my A3000 / 25 MHz. Ran smoothly in the background while I was compiling a C program in another window.
+
+Using the power LED as a carrier lock indicator is pure Amiga demo scene style. Kudos!
+
+-- 
+Morag Smirnov
+Tape trading list upon request. SASE required for international mail.
+

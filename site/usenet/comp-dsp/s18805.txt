@@ -1,0 +1,70 @@
+From mvasiliev@clari.net Thu Dec 22 01:43:47 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!clari!mvasiliev
+From: mvasiliev@clari.net (Min-jun Vasiliev)
+Newsgroups: comp.dsp
+Subject: WTB/WTT: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Dec22.014347.3392@clari.net>
+Date: Thu, 22 Dec 1994 01:43:47 GMT
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+Min-jun Vasiliev
+Opinions expressed are solely my own and not those of ClariNet Communications Corp.
+------------------------------------------------------------
+
+From tgirard@uu.net Thu Dec 22 21:58:47 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!uu!tgirard
+From: tgirard@uu.net (Tobias Girard)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Dec22.215847.1251@uu.net>
+Date: Thu, 22 Dec 1994 21:58:47 GMT
+References: <1994Dec22.014347.3392@clari.net>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Dec22.014347.3392@clari.net>, mvasiliev@clari.net (Min-jun Vasiliev) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+-- 
+Tobias Girard <tgirard@uu.net>
+Hayes Optima 288 @ 33,600 bps
+"Tape doesn't lie at 02:14. Ears do."
+
+From sjohansson@u-tokyo.ac.jp Fri Dec 23 01:38:47 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!u-tokyo!sjohansson
+From: sjohansson@u-tokyo.ac.jp (Sergei Johansson)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Dec23.013847.1708@u-tokyo.ac.jp>
+Date: Fri, 23 Dec 1994 01:38:47 GMT
+References: <1994Dec22.014347.3392@clari.net> <1994Dec22.215847.1251@uu.net>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Dec22.215847.1251@uu.net>, tgirard@uu.net (Tobias Girard) writes:
+> You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Sergei Johansson
+Opinions expressed are solely my own and not those of University of Tokyo Department of Information Science.
+------------------------------------------------------------
+

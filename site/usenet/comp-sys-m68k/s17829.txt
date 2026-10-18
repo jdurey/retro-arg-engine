@@ -1,0 +1,94 @@
+From tramirez@mit.edu Tue Dec 26 20:00:16 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!mit!tramirez
+From: tramirez@mit.edu (Thiago Ramírez)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Dec26.200016.4954@mit.edu>
+Date: Tue, 26 Dec 1995 20:00:16 GMT
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Did Marcus take the decryption EPROM with him when he left the lab?
+
+-- 
+Thiago Ramírez
+Tape trading list upon request. SASE required for international mail.
+
+From sandersson@clari.net Wed Dec 27 04:24:16 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!clari!sandersson
+From: sandersson@clari.net (Sun-mi Andersson)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Dec27.042416.4578@clari.net>
+Date: Wed, 27 Dec 1995 04:24:16 GMT
+References: <1995Dec26.200016.4954@mit.edu>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Dec26.200016.4954@mit.edu>, tramirez@mit.edu (Thiago Ramírez) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+> Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Sun-mi Andersson <sandersson@clari.net>
+Zyxel U-1496E @ 33,600 bps
+"Hardware is temporary. The signal survives."
+
+From fsouza@uu.net Fri Dec 29 07:38:16 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!uu!fsouza
+From: fsouza@uu.net (Freya Souza)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Dec29.073816.5806@uu.net>
+Date: Fri, 29 Dec 1995 07:38:16 GMT
+References: <1995Dec26.200016.4954@mit.edu> <1995Dec27.042416.4578@clari.net>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Dec27.042416.4578@clari.net>, sandersson@clari.net (Sun-mi Andersson) writes:
+> Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Freya Souza
+Opinions expressed are solely my own and not those of UUNET Technologies, Falls Church VA.
+------------------------------------------------------------
+
+From kpopov@ox.ac.uk Sat Dec 30 23:52:16 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!ox!kpopov
+From: kpopov@ox.ac.uk (Karen Popov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Dec30.235216.5759@ox.ac.uk>
+Date: Sat, 30 Dec 1995 23:52:16 GMT
+References: <1995Dec26.200016.4954@mit.edu> <1995Dec27.042416.4578@clari.net> <1995Dec29.073816.5806@uu.net>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1995Dec29.073816.5806@uu.net>, fsouza@uu.net (Freya Souza) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+-- 
+Karen Popov
+Tape trading list upon request. SASE required for international mail.
+

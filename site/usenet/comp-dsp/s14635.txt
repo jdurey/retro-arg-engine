@@ -1,0 +1,73 @@
+From bsouza@utexas.edu Mon Dec 12 05:58:04 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!utexas!bsouza
+From: bsouza@utexas.edu (Bastien Souza)
+Newsgroups: comp.dsp
+Subject: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Dec12.055804.4840@utexas.edu>
+Date: Mon, 12 Dec 1994 05:58:04 GMT
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+Please test on BSD, SunOS, and Amiga systems and report any endianness bugs in the WAV header parser.
+
+-- 
+Bastien Souza
+Opinions expressed are solely my own and not those of University of Texas at Austin.
+------------------------------------------------------------
+
+From ystewart@mit.edu Tue Dec 13 04:42:04 1994
+Path: ashpoly!cascade!mxgate!coyoacan!mit!ystewart
+From: ystewart@mit.edu (Yuki Stewart)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Dec13.044204.5571@mit.edu>
+Date: Tue, 13 Dec 1994 04:42:04 GMT
+References: <1994Dec12.055804.4840@utexas.edu>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1994Dec12.055804.4840@utexas.edu>, bsouza@utexas.edu (Bastien Souza) writes:
+> Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+> Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Yuki Stewart | ystewart@mit.edu
+PGP Key fingerprint: 298A 2C69 A70B ED4D
+"Keep the channels open."
+
+From skarlsson@earthlink.net Thu Dec 15 04:29:04 1994
+Path: ashpoly!cascade!brgate!saturno!earthlink!skarlsson
+From: skarlsson@earthlink.net (Steve Karlsson)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Dec15.042904.9220@earthlink.net>
+Date: Thu, 15 Dec 1994 04:29:04 GMT
+References: <1994Dec12.055804.4840@utexas.edu> <1994Dec13.044204.5571@mit.edu>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1994Dec13.044204.5571@mit.edu>, ystewart@mit.edu (Yuki Stewart) writes:
+> Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Steve Karlsson <skarlsson@earthlink.net>
+"Extraordinary claims require extraordinary spectra."
+PC-9821Ap2 (NEC) / FreeBSD 2.1
+

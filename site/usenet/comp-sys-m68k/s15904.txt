@@ -1,0 +1,96 @@
+From gsouza@illinois.edu Fri Jan 06 23:51:55 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!illinois!gsouza
+From: gsouza@illinois.edu (Göran Souza)
+Newsgroups: comp.sys.m68k
+Subject: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jan06.235155.3588@illinois.edu>
+Date: Fri, 06 Jan 1995 23:51:55 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+=== Göran Souza ===
+Dept of Electrical Engineering, University of Illinois Urbana-Champaign
+"Marcus is not one man."
+
+From rkim@uni-hamburg.de Sat Jan 07 12:11:55 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!uni-hamburg!rkim
+From: rkim@uni-hamburg.de (Raj Kim)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jan07.121155.9797@uni-hamburg.de>
+Date: Sat, 07 Jan 1995 12:11:55 GMT
+References: <1995Jan06.235155.3588@illinois.edu>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995Jan06.235155.3588@illinois.edu>, gsouza@illinois.edu (Göran Souza) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Raj Kim
+Opinions expressed are solely my own and not those of Universität Hamburg Fachbereich Informatik.
+------------------------------------------------------------
+
+From csantos@u-tokyo.ac.jp Mon Jan 09 12:33:55 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!u-tokyo!csantos
+From: csantos@u-tokyo.ac.jp (Callum Santos)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jan09.123355.1065@u-tokyo.ac.jp>
+Date: Mon, 09 Jan 1995 12:33:55 GMT
+References: <1995Jan06.235155.3588@illinois.edu> <1995Jan07.121155.9797@uni-hamburg.de>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Jan07.121155.9797@uni-hamburg.de>, rkim@uni-hamburg.de (Raj Kim) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+> Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Callum Santos <csantos@u-tokyo.ac.jp>
+*PLONK* filter active for trolls.
+Atari TT030 - NetBSD 1.0
+
+From fhughes@uni-hamburg.de Mon Jan 09 20:24:55 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!uni-hamburg!fhughes
+From: fhughes@uni-hamburg.de (Freya Hughes)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jan09.202455.3427@uni-hamburg.de>
+Date: Mon, 09 Jan 1995 20:24:55 GMT
+References: <1995Jan06.235155.3588@illinois.edu> <1995Jan07.121155.9797@uni-hamburg.de> <1995Jan09.123355.1065@u-tokyo.ac.jp>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Jan09.123355.1065@u-tokyo.ac.jp>, csantos@u-tokyo.ac.jp (Callum Santos) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Freya Hughes <fhughes@uni-hamburg.de>
+*PLONK* filter active for trolls.
+Amiga 1200 (Blizzard 030/50) - NetBSD 1.0
+

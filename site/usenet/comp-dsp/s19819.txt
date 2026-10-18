@@ -1,0 +1,116 @@
+From mhernandez@u-tokyo.ac.jp Sun Nov 20 07:42:26 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!u-tokyo!mhernandez
+From: mhernandez@u-tokyo.ac.jp (Mathieu Hernández)
+Newsgroups: comp.dsp
+Subject: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Nov20.074226.8451@u-tokyo.ac.jp>
+Date: Sun, 20 Nov 1994 07:42:26 GMT
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+Mathieu Hernández -- University of Tokyo Department of Information Science
+"Tape doesn't lie at 02:14. Ears do."
+
+From nnilsson@pipeline.com Mon Nov 21 07:18:26 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!pipeline!nnilsson
+From: nnilsson@pipeline.com (Nadine Nilsson)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Nov21.071826.4173@pipeline.com>
+Date: Mon, 21 Nov 1994 07:18:26 GMT
+References: <1994Nov20.074226.8451@u-tokyo.ac.jp>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1994Nov20.074226.8451@u-tokyo.ac.jp>, mhernandez@u-tokyo.ac.jp (Mathieu Hernández) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+> This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+
+Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+-- 
+=== Nadine Nilsson ===
+Dept of Electrical Engineering, The Pipeline Internet Network
+"They will send a copy in my place."
+
+From amuller@mit.edu Tue Nov 22 12:11:26 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!mit!amuller
+From: amuller@mit.edu (Andrei Müller)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Nov22.121126.9941@mit.edu>
+Date: Tue, 22 Nov 1994 12:11:26 GMT
+References: <1994Nov20.074226.8451@u-tokyo.ac.jp> <1994Nov21.071826.4173@pipeline.com>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Nov21.071826.4173@pipeline.com>, nnilsson@pipeline.com (Nadine Nilsson) writes:
+> Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+-- 
+=== Andrei Müller ===
+Dept of Electrical Engineering, Massachusetts Institute of Technology
+"When every node is whole, the channel opens."
+
+From hschneider@kiae.su Wed Nov 23 02:18:26 1994
+Path: ashpoly!cascade!bigsur!kiae!hschneider
+From: hschneider@kiae.su (Heather Schneider)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Nov23.021826.4679@kiae.su>
+Date: Wed, 23 Nov 1994 02:18:26 GMT
+References: <1994Nov20.074226.8451@u-tokyo.ac.jp> <1994Nov21.071826.4173@pipeline.com>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Nov21.071826.4173@pipeline.com>, nnilsson@pipeline.com (Nadine Nilsson) writes:
+> Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+-- 
+Heather Schneider <hschneider@kiae.su>
+"The hatch is open. Is anyone listening?"
+Sun SparcStation 20 / Linux 1.2.13
+
+From akang@unam.mx Thu Nov 24 06:35:26 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!unam!akang
+From: akang@unam.mx (Amy Kang)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Nov24.063526.3936@unam.mx>
+Date: Thu, 24 Nov 1994 06:35:26 GMT
+References: <1994Nov20.074226.8451@u-tokyo.ac.jp> <1994Nov21.071826.4173@pipeline.com> <1994Nov22.121126.9941@mit.edu>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Nov22.121126.9941@mit.edu>, amuller@mit.edu (Andrei Müller) writes:
+> Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+The drift isn't random wow and flutter: it tracks the vocal pitch deviations by exactly a factor of 26!
+
+-- 
+Amy Kang <akang@unam.mx>
+*PLONK* filter active for trolls.
+Amiga 3000T - NetBSD 1.0
+

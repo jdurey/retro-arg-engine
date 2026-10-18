@@ -1,0 +1,46 @@
+From csilva@utexas.edu Fri Sep 01 05:54:57 1995
+Path: ashpoly!cascade!bigsur!utexas!csilva
+From: csilva@utexas.edu (Callum Silva)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Sep01.055457.8898@utexas.edu>
+Date: Fri, 01 Sep 1995 05:54:57 GMT
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Callum Silva <csilva@utexas.edu>
+"Hold for relay."
+486DX2/66 (Linux 1.2.13) / FreeBSD 2.1
+
+From tsantos@illinois.edu Sat Sep 02 16:04:57 1995
+Path: ashpoly!cascade!bigsur!illinois!tsantos
+From: tsantos@illinois.edu (Tyler Santos)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Sep02.160457.3103@illinois.edu>
+Date: Sat, 02 Sep 1995 16:04:57 GMT
+References: <1995Sep01.055457.8898@utexas.edu>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1995Sep01.055457.8898@utexas.edu>, csilva@utexas.edu (Callum Silva) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Tyler Santos -- University of Illinois Urbana-Champaign
+"They will send a copy in my place."
+

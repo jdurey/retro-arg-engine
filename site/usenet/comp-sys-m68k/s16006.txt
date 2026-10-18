@@ -1,0 +1,116 @@
+From mivanov@cmu.edu Fri May 26 17:33:02 1995
+Path: ashpoly!cascade!bigsur!cmu!mivanov
+From: mivanov@cmu.edu (Matthias Ivanov)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995May26.173302.4040@cmu.edu>
+Date: Fri, 26 May 1995 17:33:02 GMT
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+Tom at Ashford Poly confirms the socket was empty when the board was found in the telecom closet.
+
+-- 
+Matthias Ivanov <mivanov@cmu.edu>
+SupraFAXModem 28.8 @ 33,600 bps
+"Measuring a record you own is listening, not piracy."
+
+From ekim@earthlink.net Sat May 27 08:09:02 1995
+Path: ashpoly!cascade!mxgate!coyoacan!earthlink!ekim
+From: ekim@earthlink.net (Elaine Kim)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995May27.080902.5810@earthlink.net>
+Date: Sat, 27 May 1995 08:09:02 GMT
+References: <1995May26.173302.4040@cmu.edu>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995May26.173302.4040@cmu.edu>, mivanov@cmu.edu (Matthias Ivanov) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+-- 
+Elaine Kim -- EarthLink Network
+"Row 14. No joke."
+
+From vkuznetsov@utexas.edu Sat May 27 16:46:02 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!utexas!vkuznetsov
+From: vkuznetsov@utexas.edu (Valeria Kuznetsov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995May27.164602.5793@utexas.edu>
+Date: Sat, 27 May 1995 16:46:02 GMT
+References: <1995May26.173302.4040@cmu.edu> <1995May27.080902.5810@earthlink.net>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995May27.080902.5810@earthlink.net>, ekim@earthlink.net (Elaine Kim) writes:
+> That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+-- 
+Valeria Kuznetsov <vkuznetsov@utexas.edu>
+US Robotics Courier V.34 @ 19,200 bps
+"5 sigma is a discovery. 7 is a question."
+
+From mkuznetsov@berkeley.edu Mon May 29 11:51:02 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!berkeley!mkuznetsov
+From: mkuznetsov@berkeley.edu (Mike Kuznetsov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995May29.115102.6092@berkeley.edu>
+Date: Mon, 29 May 1995 11:51:02 GMT
+References: <1995May26.173302.4040@cmu.edu> <1995May27.080902.5810@earthlink.net> <1995May27.164602.5793@utexas.edu>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995May27.164602.5793@utexas.edu>, vkuznetsov@utexas.edu (Valeria Kuznetsov) writes:
+> That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+=== Mike Kuznetsov ===
+Dept of Electrical Engineering, UC Berkeley Department of EECS
+"Do not worship the copy."
+
+From akim@ox.ac.uk Tue May 30 11:37:02 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!ox!akim
+From: akim@ox.ac.uk (Anton Kim)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995May30.113702.7488@ox.ac.uk>
+Date: Tue, 30 May 1995 11:37:02 GMT
+References: <1995May26.173302.4040@cmu.edu> <1995May27.080902.5810@earthlink.net>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995May27.080902.5810@earthlink.net>, ekim@earthlink.net (Elaine Kim) writes:
+> That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+-- 
+=== Anton Kim ===
+Dept of Electrical Engineering, Oxford University Computing Laboratory
+"Do not worship the copy."
+

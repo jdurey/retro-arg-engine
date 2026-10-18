@@ -1,0 +1,70 @@
+From ksilva@unam.mx Sat Oct 05 06:03:34 1996
+Path: ashpoly!cascade!brgate!saturno!unam!ksilva
+From: ksilva@unam.mx (Katrin Silva)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Oct05.060334.9030@unam.mx>
+Date: Sat, 05 Oct 1996 06:03:34 GMT
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+Katrin Silva <ksilva@unam.mx>
+*PLONK* filter active for trolls.
+Mac IIci / 68882 FPU - NetBSD 1.0
+
+From gpopov@berkeley.edu Sun Oct 06 11:20:34 1996
+Path: ashpoly!cascade!mxgate!coyoacan!berkeley!gpopov
+From: gpopov@berkeley.edu (Graham Popov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Oct06.112034.5870@berkeley.edu>
+Date: Sun, 06 Oct 1996 11:20:34 GMT
+References: <1996Oct05.060334.9030@unam.mx>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Oct05.060334.9030@unam.mx>, ksilva@unam.mx (Katrin Silva) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Graham Popov | gpopov@berkeley.edu
+PGP Key fingerprint: 7968 9074 5248 4358
+"Keep the channels open."
+
+From kgonzalez@stanford.edu Mon Oct 07 14:56:34 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!stanford!kgonzalez
+From: kgonzalez@stanford.edu (Kenji González)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Oct07.145634.5326@stanford.edu>
+Date: Mon, 07 Oct 1996 14:56:34 GMT
+References: <1996Oct05.060334.9030@unam.mx> <1996Oct06.112034.5870@berkeley.edu>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Oct06.112034.5870@berkeley.edu>, gpopov@berkeley.edu (Graham Popov) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Kenji González <kgonzalez@stanford.edu>
+*PLONK* filter active for trolls.
+PC-9821Ap2 (NEC) - NetBSD 1.0
+

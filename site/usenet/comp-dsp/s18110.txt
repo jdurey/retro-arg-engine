@@ -1,0 +1,92 @@
+From mgarcia@rwth-aachen.de Wed Jun 15 12:16:16 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!rwth-aachen!mgarcia
+From: mgarcia@rwth-aachen.de (Min-jun García)
+Newsgroups: comp.dsp
+Subject: Discussion: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Jun15.121616.2349@rwth-aachen.de>
+Date: Wed, 15 Jun 1994 12:16:16 GMT
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+
+Version 1.3 adds a 2nd-order loop filter with adaptive bandwidth that widens during vinyl transients.
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+
+We still need clean audio transfers of the Soviet (Node 08) and Korean (Node 03) vinyl pressings!
+
+-- 
+Min-jun García <mgarcia@rwth-aachen.de>
+*PLONK* filter active for trolls.
+486DX2/66 (Linux 1.2.13) - NetBSD 1.0
+
+From flindqvist@hanse.de Thu Jun 16 13:28:16 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!hanse!flindqvist
+From: flindqvist@hanse.de (Fiona Lindqvist)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Jun16.132816.8262@hanse.de>
+Date: Thu, 16 Jun 1994 13:28:16 GMT
+References: <1994Jun15.121616.2349@rwth-aachen.de>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Jun15.121616.2349@rwth-aachen.de>, mgarcia@rwth-aachen.de (Min-jun García) writes:
+> Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Fiona Lindqvist <flindqvist@hanse.de>
+*PLONK* filter active for trolls.
+Commodore Amiga 500 (1MB OCS) - NetBSD 1.0
+
+From kvasiliev@titech.ac.jp Fri Jun 17 01:21:16 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!titech!kvasiliev
+From: kvasiliev@titech.ac.jp (Katrin Vasiliev)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Jun17.012116.7438@titech.ac.jp>
+Date: Fri, 17 Jun 1994 01:21:16 GMT
+References: <1994Jun15.121616.2349@rwth-aachen.de> <1994Jun16.132816.8262@hanse.de>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1994Jun16.132816.8262@hanse.de>, flindqvist@hanse.de (Fiona Lindqvist) writes:
+> Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+-- 
+Katrin Vasiliev -- Tokyo Institute of Technology Computer Centre
+"5 sigma is a discovery. 7 is a question."
+
+From dweber@tum.de Fri Jun 17 10:20:16 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!tum!dweber
+From: dweber@tum.de (Dong-hyun Weber)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Jun17.102016.4675@tum.de>
+Date: Fri, 17 Jun 1994 10:20:16 GMT
+References: <1994Jun15.121616.2349@rwth-aachen.de> <1994Jun16.132816.8262@hanse.de> <1994Jun17.012116.7438@titech.ac.jp>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Jun17.012116.7438@titech.ac.jp>, kvasiliev@titech.ac.jp (Katrin Vasiliev) writes:
+> Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+-- 
+Dong-hyun Weber | dweber@tum.de
+PGP Key fingerprint: 0A6C 1E33 5207 E3A8
+"Keep the channels open."
+

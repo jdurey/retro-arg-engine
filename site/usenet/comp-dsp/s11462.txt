@@ -1,0 +1,71 @@
+From vmoreno@tum.de Fri Apr 07 02:36:32 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!tum!vmoreno
+From: vmoreno@tum.de (Valeria Moreno)
+Newsgroups: comp.dsp
+Subject: [FLAME] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Apr07.023632.1684@tum.de>
+Date: Fri, 07 Apr 1995 02:36:32 GMT
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+Version 1.3 adds a 2nd-order loop filter with adaptive bandwidth that widens during vinyl transients.
+
+Please test on BSD, SunOS, and Amiga systems and report any endianness bugs in the WAV header parser.
+
+-- 
+Valeria Moreno <vmoreno@tum.de>
+*PLONK* filter active for trolls.
+Atari Falcon 030 - NetBSD 1.0
+
+From aito@utexas.edu Sat Apr 08 10:03:32 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!utexas!aito
+From: aito@utexas.edu (Astrid Ito)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Apr08.100332.5798@utexas.edu>
+Date: Sat, 08 Apr 1995 10:03:32 GMT
+References: <1995Apr07.023632.1684@tum.de>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Apr07.023632.1684@tum.de>, vmoreno@tum.de (Valeria Moreno) writes:
+> Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+> The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+=== Astrid Ito ===
+Dept of Electrical Engineering, University of Texas at Austin
+"Marcus is not one man."
+
+From tsuzuki@cam.ac.uk Mon Apr 10 08:12:32 1995
+Path: ashpoly!cascade!bigsur!cam!tsuzuki
+From: tsuzuki@cam.ac.uk (Tobias Suzuki)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Apr10.081232.5853@cam.ac.uk>
+Date: Mon, 10 Apr 1995 08:12:32 GMT
+References: <1995Apr07.023632.1684@tum.de> <1995Apr08.100332.5798@utexas.edu>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Apr08.100332.5798@utexas.edu>, aito@utexas.edu (Astrid Ito) writes:
+> Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+-- 
+=== Tobias Suzuki ===
+Dept of Electrical Engineering, University of Cambridge Computer Laboratory
+"Hold for relay."
+

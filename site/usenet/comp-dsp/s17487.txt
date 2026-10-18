@@ -1,0 +1,119 @@
+From jeriksson@mindspring.com Wed Aug 28 22:04:48 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!mindspring!jeriksson
+From: jeriksson@mindspring.com (Jen Eriksson)
+Newsgroups: comp.dsp
+Subject: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Aug28.220448.4808@mindspring.com>
+Date: Wed, 28 Aug 1996 22:04:48 GMT
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Jen Eriksson <jeriksson@mindspring.com>
+Practical Peripherals 14.4 @ 9600 Telebit bps
+"Row 14. No joke."
+
+From blee@purdue.edu Fri Aug 30 03:44:48 1996
+Path: ashpoly!cascade!brgate!saturno!purdue!blee
+From: blee@purdue.edu (Bill Lee)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Aug30.034448.6637@purdue.edu>
+Date: Fri, 30 Aug 1996 03:44:48 GMT
+References: <1996Aug28.220448.4808@mindspring.com>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1996Aug28.220448.4808@mindspring.com>, jeriksson@mindspring.com (Jen Eriksson) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+> A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Bill Lee | blee@purdue.edu
+PGP Key fingerprint: D95A 60E7 8607 CFA7
+"Keep the channels open."
+
+From blaurent@u-tokyo.ac.jp Fri Aug 30 07:48:48 1996
+Path: ashpoly!cascade!bigsur!u-tokyo!blaurent
+From: blaurent@u-tokyo.ac.jp (Bastien Laurent)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Aug30.074848.4524@u-tokyo.ac.jp>
+Date: Fri, 30 Aug 1996 07:48:48 GMT
+References: <1996Aug28.220448.4808@mindspring.com> <1996Aug30.034448.6637@purdue.edu>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Aug30.034448.6637@purdue.edu>, blee@purdue.edu (Bill Lee) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Bastien Laurent
+Opinions expressed are solely my own and not those of University of Tokyo Department of Information Science.
+------------------------------------------------------------
+
+From egonzalez@cern.ch Fri Aug 30 09:10:48 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!cern!egonzalez
+From: egonzalez@cern.ch (Emi González)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Aug30.091048.3779@cern.ch>
+Date: Fri, 30 Aug 1996 09:10:48 GMT
+References: <1996Aug28.220448.4808@mindspring.com> <1996Aug30.034448.6637@purdue.edu>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1996Aug30.034448.6637@purdue.edu>, blee@purdue.edu (Bill Lee) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Emi González <egonzalez@cern.ch>
+Hayes Optima 288 @ 9600 Telebit bps
+"Extraordinary claims require extraordinary spectra."
+
+From jnilsson@berkeley.edu Sat Aug 31 16:48:48 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!berkeley!jnilsson
+From: jnilsson@berkeley.edu (Julien Nilsson)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Aug31.164848.3105@berkeley.edu>
+Date: Sat, 31 Aug 1996 16:48:48 GMT
+References: <1996Aug28.220448.4808@mindspring.com>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Aug28.220448.4808@mindspring.com>, jeriksson@mindspring.com (Jen Eriksson) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Julien Nilsson <jnilsson@berkeley.edu>
+*PLONK* filter active for trolls.
+PC-9821Ap2 (NEC) - NetBSD 1.0
+

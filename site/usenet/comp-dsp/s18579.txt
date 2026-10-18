@@ -1,0 +1,49 @@
+From nhernandez@tum.de Tue Apr 25 00:20:16 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!tum!nhernandez
+From: nhernandez@tum.de (Natalia Hernández)
+Newsgroups: comp.dsp
+Subject: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Apr25.002016.2327@tum.de>
+Date: Tue, 25 Apr 1995 00:20:16 GMT
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+What sampling rates are people using for their vinyl rips? 44.1 kHz or 48 kHz DAT?
+
+-- 
+Natalia Hernández <nhernandez@tum.de>
+Zyxel U-1496E @ 19,200 bps
+"In theory there is no difference between theory and practice."
+
+From msmirnov@pacbell.net Wed Apr 26 06:47:16 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!pacbell!msmirnov
+From: msmirnov@pacbell.net (Marisol Smirnov)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Apr26.064716.7106@pacbell.net>
+Date: Wed, 26 Apr 1995 06:47:16 GMT
+References: <1995Apr25.002016.2327@tum.de>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995Apr25.002016.2327@tum.de>, nhernandez@tum.de (Natalia Hernández) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Marisol Smirnov
+Opinions expressed are solely my own and not those of Pacific Bell Internet Services.
+------------------------------------------------------------
+

@@ -1,0 +1,122 @@
+From alee@hanse.de Sat Oct 22 08:05:21 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!hanse!alee
+From: alee@hanse.de (Aiko Lee)
+Newsgroups: comp.sys.m68k
+Subject: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Oct22.080521.8407@hanse.de>
+Date: Sat, 22 Oct 1994 08:05:21 GMT
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Aiko Lee <alee@hanse.de>
+*PLONK* filter active for trolls.
+Acorn RiscPC 600 - NetBSD 1.0
+
+From egonzalez@cmu.edu Mon Oct 24 01:50:21 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!cmu!egonzalez
+From: egonzalez@cmu.edu (Élodie González)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Oct24.015021.4776@cmu.edu>
+Date: Mon, 24 Oct 1994 01:50:21 GMT
+References: <1994Oct22.080521.8407@hanse.de>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1994Oct22.080521.8407@hanse.de>, alee@hanse.de (Aiko Lee) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Élodie González <egonzalez@cmu.edu>
+"The hatch is open. Is anyone listening?"
+486DX2/66 (Linux 1.2.13) / FreeBSD 2.1
+
+From jgonzalez@kiae.su Tue Oct 25 19:26:21 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!kiae!jgonzalez
+From: jgonzalez@kiae.su (Julien González)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Oct25.192621.4878@kiae.su>
+Date: Tue, 25 Oct 1994 19:26:21 GMT
+References: <1994Oct22.080521.8407@hanse.de> <1994Oct24.015021.4776@cmu.edu>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1994Oct24.015021.4776@cmu.edu>, egonzalez@cmu.edu (Élodie González) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Julien González
+Opinions expressed are solely my own and not those of Kurchatov Institute of Atomic Energy, Moscow.
+------------------------------------------------------------
+
+From vmartinez@rwth-aachen.de Thu Oct 27 22:20:21 1994
+Path: ashpoly!cascade!mxgate!coyoacan!rwth-aachen!vmartinez
+From: vmartinez@rwth-aachen.de (Valeria Martínez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Oct27.222021.5780@rwth-aachen.de>
+Date: Thu, 27 Oct 1994 22:20:21 GMT
+References: <1994Oct22.080521.8407@hanse.de>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1994Oct22.080521.8407@hanse.de>, alee@hanse.de (Aiko Lee) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+> The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+=== Valeria Martínez ===
+Dept of Electrical Engineering, RWTH Aachen Informatik
+"When every node is whole, the channel opens."
+
+From kmacdonald@stanford.edu Fri Oct 28 11:16:21 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!stanford!kmacdonald
+From: kmacdonald@stanford.edu (Kenji MacDonald)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Oct28.111621.6963@stanford.edu>
+Date: Fri, 28 Oct 1994 11:16:21 GMT
+References: <1994Oct22.080521.8407@hanse.de> <1994Oct24.015021.4776@cmu.edu>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1994Oct24.015021.4776@cmu.edu>, egonzalez@cmu.edu (Élodie González) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+> My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Kenji MacDonald | kmacdonald@stanford.edu
+PGP Key fingerprint: 9FDD 8E40 0FB0 6E4F
+"Keep the channels open."
+

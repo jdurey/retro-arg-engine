@@ -1,0 +1,93 @@
+From bhughes@mit.edu Thu Mar 09 12:15:09 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!mit!bhughes
+From: bhughes@mit.edu (Bruno Hughes)
+Newsgroups: comp.dsp
+Subject: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Mar09.121509.7577@mit.edu>
+Date: Thu, 09 Mar 1995 12:15:09 GMT
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Bruno Hughes
+Tape trading list upon request. SASE required for international mail.
+
+From tito@rwth-aachen.de Fri Mar 10 10:47:09 1995
+Path: ashpoly!cascade!brgate!saturno!rwth-aachen!tito
+From: tito@rwth-aachen.de (Thiago Ito)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Mar10.104709.2142@rwth-aachen.de>
+Date: Fri, 10 Mar 1995 10:47:09 GMT
+References: <1995Mar09.121509.7577@mit.edu>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Mar09.121509.7577@mit.edu>, bhughes@mit.edu (Bruno Hughes) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Thiago Ito
+Opinions expressed are solely my own and not those of RWTH Aachen Informatik.
+------------------------------------------------------------
+
+From nsantos@demon.co.uk Sat Mar 11 12:36:09 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!demon!nsantos
+From: nsantos@demon.co.uk (Natalia Santos)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Mar11.123609.5498@demon.co.uk>
+Date: Sat, 11 Mar 1995 12:36:09 GMT
+References: <1995Mar09.121509.7577@mit.edu>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Mar09.121509.7577@mit.edu>, bhughes@mit.edu (Bruno Hughes) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Natalia Santos
+Tape trading list upon request. SASE required for international mail.
+
+From jchoi@kiae.su Sun Mar 12 05:55:09 1995
+Path: ashpoly!cascade!brgate!saturno!kiae!jchoi
+From: jchoi@kiae.su (Joachim Choi)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Mar12.055509.6062@kiae.su>
+Date: Sun, 12 Mar 1995 05:55:09 GMT
+References: <1995Mar09.121509.7577@mit.edu> <1995Mar10.104709.2142@rwth-aachen.de>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Mar10.104709.2142@rwth-aachen.de>, tito@rwth-aachen.de (Thiago Ito) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Joachim Choi <jchoi@kiae.su>
+*PLONK* filter active for trolls.
+Sun SparcStation 20 - NetBSD 1.0
+

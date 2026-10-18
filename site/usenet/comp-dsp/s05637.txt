@@ -1,0 +1,93 @@
+From ifournier@uu.net Sun May 26 16:49:00 1996
+Path: ashpoly!cascade!brgate!saturno!uu!ifournier
+From: ifournier@uu.net (Ines Fournier)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996May26.164900.5329@uu.net>
+Date: Sun, 26 May 1996 16:49:00 GMT
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Ines Fournier <ifournier@uu.net>
+"The hatch is open. Is anyone listening?"
+Pentium 90 (OS/2 Warp) / NEXTSTEP 3.3
+
+From mmartinez@netcom.com Tue May 28 19:38:00 1996
+Path: ashpoly!cascade!brgate!saturno!netcom!mmartinez
+From: mmartinez@netcom.com (Mei Martínez)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996May28.193800.4983@netcom.com>
+Date: Tue, 28 May 1996 19:38:00 GMT
+References: <1996May26.164900.5329@uu.net>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996May26.164900.5329@uu.net>, ifournier@uu.net (Ines Fournier) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Mei Martínez
+Opinions expressed are solely my own and not those of NETCOM On-Line Communication Services.
+------------------------------------------------------------
+
+From tpopov@inria.fr Thu May 30 19:36:00 1996
+Path: ashpoly!cascade!mxgate!coyoacan!inria!tpopov
+From: tpopov@inria.fr (Tobias Popov)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996May30.193600.3709@inria.fr>
+Date: Thu, 30 May 1996 19:36:00 GMT
+References: <1996May26.164900.5329@uu.net> <1996May28.193800.4983@netcom.com>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996May28.193800.4983@netcom.com>, mmartinez@netcom.com (Mei Martínez) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Tobias Popov
+Opinions expressed are solely my own and not those of INRIA Rocquencourt.
+------------------------------------------------------------
+
+From tnakamura@cmu.edu Sat Jun 01 02:24:00 1996
+Path: ashpoly!cascade!bigsur!cmu!tnakamura
+From: tnakamura@cmu.edu (Thiago Nakamura)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jun01.022400.8317@cmu.edu>
+Date: Sat, 01 Jun 1996 02:24:00 GMT
+References: <1996May26.164900.5329@uu.net> <1996May28.193800.4983@netcom.com> <1996May30.193600.3709@inria.fr>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996May30.193600.3709@inria.fr>, tpopov@inria.fr (Tobias Popov) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+=== Thiago Nakamura ===
+Dept of Electrical Engineering, Carnegie Mellon University School of CS
+"We don't sign stars. We build them."
+

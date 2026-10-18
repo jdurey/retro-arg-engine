@@ -1,0 +1,47 @@
+From bperez@uu.net Fri Jan 19 23:55:11 1996
+Path: ashpoly!cascade!brgate!saturno!uu!bperez
+From: bperez@uu.net (Brian Pérez)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Jan19.235511.4468@uu.net>
+Date: Fri, 19 Jan 1996 23:55:11 GMT
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+Schematic diagram in ASCII uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/twin68_array.asc.
+
+-- 
+Brian Pérez <bperez@uu.net>
+"A soul is not exclusive to biology."
+486DX2/66 (Linux 1.2.13) / TOS 4.04
+
+From tkim@hanse.de Sun Jan 21 09:31:11 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!hanse!tkim
+From: tkim@hanse.de (Tyler Kim)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Jan21.093111.6383@hanse.de>
+Date: Sun, 21 Jan 1996 09:31:11 GMT
+References: <1996Jan19.235511.4468@uu.net>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Jan19.235511.4468@uu.net>, bperez@uu.net (Brian Pérez) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Tyler Kim
+Tape trading list upon request. SASE required for international mail.
+

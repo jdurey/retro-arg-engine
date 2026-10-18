@@ -1,0 +1,121 @@
+From kkim@panix.com Mon Dec 16 22:17:42 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!panix!kkim
+From: kkim@panix.com (Karen Kim)
+Newsgroups: comp.sys.m68k
+Subject: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Dec16.221742.8389@panix.com>
+Date: Mon, 16 Dec 1996 22:17:42 GMT
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Karen Kim <kkim@panix.com>
+*PLONK* filter active for trolls.
+Decstation 5000/200 - NetBSD 1.0
+
+From msuzuki@earthlink.net Tue Dec 17 03:36:42 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!earthlink!msuzuki
+From: msuzuki@earthlink.net (Morag Suzuki)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Dec17.033642.3912@earthlink.net>
+Date: Tue, 17 Dec 1996 03:36:42 GMT
+References: <1996Dec16.221742.8389@panix.com>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Dec16.221742.8389@panix.com>, kkim@panix.com (Karen Kim) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Morag Suzuki <msuzuki@earthlink.net>
+Practical Peripherals 14.4 @ 19,200 bps
+"Hold for relay."
+
+From mwatanabe@kth.se Tue Dec 17 19:20:42 1996
+Path: ashpoly!cascade!brgate!saturno!kth!mwatanabe
+From: mwatanabe@kth.se (Mei Watanabe)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Dec17.192042.4737@kth.se>
+Date: Tue, 17 Dec 1996 19:20:42 GMT
+References: <1996Dec16.221742.8389@panix.com>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Dec16.221742.8389@panix.com>, kkim@panix.com (Karen Kim) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Mei Watanabe <mwatanabe@kth.se>
+"Do not worship the copy."
+NeXTstation Turbo Color / TOS 4.04
+
+From mpetrov@unam.mx Wed Dec 18 08:56:42 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!unam!mpetrov
+From: mpetrov@unam.mx (Matthias Petrov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Dec18.085642.7025@unam.mx>
+Date: Wed, 18 Dec 1996 08:56:42 GMT
+References: <1996Dec16.221742.8389@panix.com>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1996Dec16.221742.8389@panix.com>, kkim@panix.com (Karen Kim) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Matthias Petrov | mpetrov@unam.mx
+PGP Key fingerprint: 6FF7 B3B1 0DBE 215D
+"Keep the channels open."
+
+From seriksson@pacbell.net Fri Dec 20 07:27:42 1996
+Path: ashpoly!cascade!mxgate!coyoacan!pacbell!seriksson
+From: seriksson@pacbell.net (Sven Eriksson)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Dec20.072742.1093@pacbell.net>
+Date: Fri, 20 Dec 1996 07:27:42 GMT
+References: <1996Dec16.221742.8389@panix.com> <1996Dec17.033642.3912@earthlink.net>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1996Dec17.033642.3912@earthlink.net>, msuzuki@earthlink.net (Morag Suzuki) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Sven Eriksson
+Opinions expressed are solely my own and not those of Pacific Bell Internet Services.
+------------------------------------------------------------
+

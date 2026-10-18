@@ -1,0 +1,95 @@
+From skim@unam.mx Tue Jan 16 14:39:47 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!unam!skim
+From: skim@unam.mx (Seo-yeon Kim)
+Newsgroups: comp.dsp
+Subject: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Jan16.143947.9764@unam.mx>
+Date: Tue, 16 Jan 1996 14:39:47 GMT
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+What sampling rates are people using for their vinyl rips? 44.1 kHz or 48 kHz DAT?
+
+-- 
+Seo-yeon Kim <skim@unam.mx>
+"Marcus is not one man."
+486DX4/100 (FreeBSD 2.0.5) / AmigaOS 3.1
+
+From slaurent@netcom.com Tue Jan 16 22:18:47 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!netcom!slaurent
+From: slaurent@netcom.com (Sun-mi Laurent)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Jan16.221847.8885@netcom.com>
+Date: Tue, 16 Jan 1996 22:18:47 GMT
+References: <1996Jan16.143947.9764@unam.mx>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1996Jan16.143947.9764@unam.mx>, skim@unam.mx (Seo-yeon Kim) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Sun-mi Laurent -- NETCOM On-Line Communication Services
+"Tape doesn't lie at 02:14. Ears do."
+
+From mmartinez@stanford.edu Wed Jan 17 05:07:47 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!stanford!mmartinez
+From: mmartinez@stanford.edu (Mikhail Martínez)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Jan17.050747.2378@stanford.edu>
+Date: Wed, 17 Jan 1996 05:07:47 GMT
+References: <1996Jan16.143947.9764@unam.mx>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1996Jan16.143947.9764@unam.mx>, skim@unam.mx (Seo-yeon Kim) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+> At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Mikhail Martínez
+Opinions expressed are solely my own and not those of Stanford University Computer Systems Lab.
+------------------------------------------------------------
+
+From sokonkwo@berkeley.edu Wed Jan 17 17:27:47 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!berkeley!sokonkwo
+From: sokonkwo@berkeley.edu (Seo-yeon Okonkwo)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Jan17.172747.3174@berkeley.edu>
+Date: Wed, 17 Jan 1996 17:27:47 GMT
+References: <1996Jan16.143947.9764@unam.mx>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Jan16.143947.9764@unam.mx>, skim@unam.mx (Seo-yeon Kim) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Seo-yeon Okonkwo <sokonkwo@berkeley.edu>
+*PLONK* filter active for trolls.
+Amiga 1200 (Blizzard 030/50) - NetBSD 1.0
+

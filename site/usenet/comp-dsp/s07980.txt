@@ -1,0 +1,45 @@
+From klee@utexas.edu Wed Aug 17 21:51:10 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!utexas!klee
+From: klee@utexas.edu (Katrin Lee)
+Newsgroups: comp.dsp
+Subject: Data: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Aug17.215110.5571@utexas.edu>
+Date: Wed, 17 Aug 1994 21:51:10 GMT
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+MATLAB script available upon request via email.
+
+-- 
+Katrin Lee -- University of Texas at Austin
+"They will send a copy in my place."
+
+From apark@tum.de Thu Aug 18 15:01:10 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!tum!apark
+From: apark@tum.de (Anton Park)
+Newsgroups: comp.dsp
+Subject: Re: Data: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Aug18.150110.1974@tum.de>
+Date: Thu, 18 Aug 1994 15:01:10 GMT
+References: <1994Aug17.215110.5571@utexas.edu>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1994Aug17.215110.5571@utexas.edu>, klee@utexas.edu (Katrin Lee) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Anton Park -- Technische Universität München
+"Row 14. No joke."
+

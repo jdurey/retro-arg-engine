@@ -1,0 +1,94 @@
+From mpetrov@u-tokyo.ac.jp Sun Dec 10 12:10:36 1995
+Path: ashpoly!cascade!bigsur!u-tokyo!mpetrov
+From: mpetrov@u-tokyo.ac.jp (Mateo Petrov)
+Newsgroups: comp.dsp
+Subject: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Dec10.121036.9834@u-tokyo.ac.jp>
+Date: Sun, 10 Dec 1995 12:10:36 GMT
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Mateo Petrov
+Opinions expressed are solely my own and not those of University of Tokyo Department of Information Science.
+------------------------------------------------------------
+
+From sschneider@demon.co.uk Sun Dec 10 22:32:36 1995
+Path: ashpoly!cascade!mxgate!coyoacan!demon!sschneider
+From: sschneider@demon.co.uk (Sergei Schneider)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Dec10.223236.5582@demon.co.uk>
+Date: Sun, 10 Dec 1995 22:32:36 GMT
+References: <1995Dec10.121036.9834@u-tokyo.ac.jp>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Dec10.121036.9834@u-tokyo.ac.jp>, mpetrov@u-tokyo.ac.jp (Mateo Petrov) writes:
+> Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+=== Sergei Schneider ===
+Dept of Electrical Engineering, Demon Internet Services UK
+"Do not worship the copy."
+
+From amartinez@mit.edu Mon Dec 11 09:50:36 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!mit!amartinez
+From: amartinez@mit.edu (Andrei Martínez)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Dec11.095036.3790@mit.edu>
+Date: Mon, 11 Dec 1995 09:50:36 GMT
+References: <1995Dec10.121036.9834@u-tokyo.ac.jp> <1995Dec10.223236.5582@demon.co.uk>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Dec10.223236.5582@demon.co.uk>, sschneider@demon.co.uk (Sergei Schneider) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Andrei Martínez <amartinez@mit.edu>
+"Hardware is temporary. The signal survives."
+Sun 3/60 (SunOS 4.1.1) / TOS 4.04
+
+From rmacdonald@tum.de Wed Dec 13 02:33:36 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!tum!rmacdonald
+From: rmacdonald@tum.de (Renata MacDonald)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Dec13.023336.6198@tum.de>
+Date: Wed, 13 Dec 1995 02:33:36 GMT
+References: <1995Dec10.121036.9834@u-tokyo.ac.jp>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Dec10.121036.9834@u-tokyo.ac.jp>, mpetrov@u-tokyo.ac.jp (Mateo Petrov) writes:
+> Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+> A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Renata MacDonald <rmacdonald@tum.de>
+US Robotics Courier V.34 @ 19,200 bps
+"Row 14. No joke."
+

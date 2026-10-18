@@ -1,0 +1,47 @@
+From ksanchez@uu.net Mon Nov 27 18:42:59 1995
+Path: ashpoly!cascade!mxgate!coyoacan!uu!ksanchez
+From: ksanchez@uu.net (Karen Sánchez)
+Newsgroups: comp.sys.m68k
+Subject: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Nov27.184259.7438@uu.net>
+Date: Mon, 27 Nov 1995 18:42:59 GMT
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Karen Sánchez -- UUNET Technologies, Falls Church VA
+"Hold for relay."
+
+From jreyes@unam.mx Wed Nov 29 14:10:59 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!unam!jreyes
+From: jreyes@unam.mx (Jens Reyes)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Nov29.141059.2001@unam.mx>
+Date: Wed, 29 Nov 1995 14:10:59 GMT
+References: <1995Nov27.184259.7438@uu.net>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Nov27.184259.7438@uu.net>, ksanchez@uu.net (Karen Sánchez) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Jens Reyes <jreyes@unam.mx>
+"Hardware is temporary. The signal survives."
+Acorn RiscPC 600 / NEXTSTEP 3.3
+

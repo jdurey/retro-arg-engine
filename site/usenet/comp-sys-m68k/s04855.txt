@@ -1,0 +1,117 @@
+From rgonzalez@titech.ac.jp Mon Dec 18 03:28:39 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!titech!rgonzalez
+From: rgonzalez@titech.ac.jp (Renata González)
+Newsgroups: comp.sys.m68k
+Subject: Question: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Dec18.032839.4021@titech.ac.jp>
+Date: Mon, 18 Dec 1995 03:28:39 GMT
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+
+Did Marcus take the decryption EPROM with him when he left the lab?
+
+-- 
+Renata González
+Opinions expressed are solely my own and not those of Tokyo Institute of Technology Computer Centre.
+------------------------------------------------------------
+
+From rpopov@pacbell.net Mon Dec 18 19:59:39 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!pacbell!rpopov
+From: rpopov@pacbell.net (Rodrigo Popov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Dec18.195939.5171@pacbell.net>
+Date: Mon, 18 Dec 1995 19:59:39 GMT
+References: <1995Dec18.032839.4021@titech.ac.jp>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Dec18.032839.4021@titech.ac.jp>, rgonzalez@titech.ac.jp (Renata González) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+-- 
+Rodrigo Popov <rpopov@pacbell.net>
+*PLONK* filter active for trolls.
+Sun 3/60 (SunOS 4.1.1) - NetBSD 1.0
+
+From sgarcia@mindspring.com Wed Dec 20 21:24:39 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!mindspring!sgarcia
+From: sgarcia@mindspring.com (Seo-yeon García)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Dec20.212439.6505@mindspring.com>
+Date: Wed, 20 Dec 1995 21:24:39 GMT
+References: <1995Dec18.032839.4021@titech.ac.jp> <1995Dec18.195939.5171@pacbell.net>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Dec18.195939.5171@pacbell.net>, rpopov@pacbell.net (Rodrigo Popov) writes:
+> Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Seo-yeon García <sgarcia@mindspring.com>
+*PLONK* filter active for trolls.
+Pentium 90 (OS/2 Warp) - NetBSD 1.0
+
+From mrodriguez@stanford.edu Fri Dec 22 23:04:39 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!stanford!mrodriguez
+From: mrodriguez@stanford.edu (Marisol Rodríguez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Dec22.230439.5831@stanford.edu>
+Date: Fri, 22 Dec 1995 23:04:39 GMT
+References: <1995Dec18.032839.4021@titech.ac.jp>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Dec18.032839.4021@titech.ac.jp>, rgonzalez@titech.ac.jp (Renata González) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Marisol Rodríguez
+Opinions expressed are solely my own and not those of Stanford University Computer Systems Lab.
+------------------------------------------------------------
+
+From hsanchez@mindspring.com Mon Dec 25 00:44:39 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!mindspring!hsanchez
+From: hsanchez@mindspring.com (Heather Sánchez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Dec25.004439.6669@mindspring.com>
+Date: Mon, 25 Dec 1995 00:44:39 GMT
+References: <1995Dec18.032839.4021@titech.ac.jp> <1995Dec18.195939.5171@pacbell.net>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Dec18.195939.5171@pacbell.net>, rpopov@pacbell.net (Rodrigo Popov) writes:
+> Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Heather Sánchez
+Opinions expressed are solely my own and not those of MindSpring Enterprises.
+------------------------------------------------------------
+

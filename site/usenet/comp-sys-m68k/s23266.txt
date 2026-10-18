@@ -1,0 +1,93 @@
+From mandersson@cern.ch Mon Sep 11 14:36:43 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!cern!mandersson
+From: mandersson@cern.ch (Mikhail Andersson)
+Newsgroups: comp.sys.m68k
+Subject: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep11.143643.9616@cern.ch>
+Date: Mon, 11 Sep 1995 14:36:43 GMT
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Mikhail Andersson
+Opinions expressed are solely my own and not those of European Laboratory for Particle Physics, Geneva.
+------------------------------------------------------------
+
+From esouza@kiae.su Tue Sep 12 10:21:43 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!kiae!esouza
+From: esouza@kiae.su (Emi Souza)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep12.102143.5824@kiae.su>
+Date: Tue, 12 Sep 1995 10:21:43 GMT
+References: <1995Sep11.143643.9616@cern.ch>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Sep11.143643.9616@cern.ch>, mandersson@cern.ch (Mikhail Andersson) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+> CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+Tom from Ashford Poly owns the physical board! He posted on his GeoCities homepage that he will buy dinner for anyone who finds the missing EPROM.
+
+-- 
+Emi Souza <esouza@kiae.su>
+"Measuring a record you own is listening, not piracy."
+Amiga 1200 (Blizzard 030/50) / System 7.5.1
+
+From bgirard@pipeline.com Tue Sep 12 14:02:43 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!pipeline!bgirard
+From: bgirard@pipeline.com (Bill Girard)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep12.140243.1727@pipeline.com>
+Date: Tue, 12 Sep 1995 14:02:43 GMT
+References: <1995Sep11.143643.9616@cern.ch>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Sep11.143643.9616@cern.ch>, mandersson@cern.ch (Mikhail Andersson) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Bill Girard <bgirard@pipeline.com>
+*PLONK* filter active for trolls.
+Amiga 3000T - NetBSD 1.0
+
+From preyes@delphi.com Thu Sep 14 03:30:43 1995
+Path: ashpoly!cascade!bigsur!delphi!preyes
+From: preyes@delphi.com (Pavel Reyes)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep14.033043.5442@delphi.com>
+Date: Thu, 14 Sep 1995 03:30:43 GMT
+References: <1995Sep11.143643.9616@cern.ch> <1995Sep12.140243.1727@pipeline.com>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Sep12.140243.1727@pipeline.com>, bgirard@pipeline.com (Bill Girard) writes:
+> The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+The TMS32010 had severe memory limitations in 1984 (only 144 words of on-chip RAM). Dual 68000s gave them full 16MB address space.
+
+-- 
+Pavel Reyes -- Delphi Internet Services
+"Row 14. No joke."
+

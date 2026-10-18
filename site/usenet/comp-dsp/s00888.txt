@@ -1,0 +1,95 @@
+From bpark@demon.co.uk Fri Apr 08 19:29:21 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!demon!bpark
+From: bpark@demon.co.uk (Bruno Park)
+Newsgroups: comp.dsp
+Subject: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Apr08.192921.3836@demon.co.uk>
+Date: Fri, 08 Apr 1994 19:29:21 GMT
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+=== Bruno Park ===
+Dept of Electrical Engineering, Demon Internet Services UK
+"5 sigma is a discovery. 7 is a question."
+
+From bwatanabe@rwth-aachen.de Fri Apr 08 22:11:21 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!rwth-aachen!bwatanabe
+From: bwatanabe@rwth-aachen.de (Bastien Watanabe)
+Newsgroups: comp.dsp
+Subject: Re: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Apr08.221121.1725@rwth-aachen.de>
+Date: Fri, 08 Apr 1994 22:11:21 GMT
+References: <1994Apr08.192921.3836@demon.co.uk>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Apr08.192921.3836@demon.co.uk>, bpark@demon.co.uk (Bruno Park) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+=== Bastien Watanabe ===
+Dept of Electrical Engineering, RWTH Aachen Informatik
+"There are 14 nodes and only 10 countries. Count again."
+
+From boliveira@kiae.su Mon Apr 11 01:46:21 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!kiae!boliveira
+From: boliveira@kiae.su (Bastien Oliveira)
+Newsgroups: comp.dsp
+Subject: Re: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Apr11.014621.5267@kiae.su>
+Date: Mon, 11 Apr 1994 01:46:21 GMT
+References: <1994Apr08.192921.3836@demon.co.uk> <1994Apr08.221121.1725@rwth-aachen.de>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Apr08.221121.1725@rwth-aachen.de>, bwatanabe@rwth-aachen.de (Bastien Watanabe) writes:
+> Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Bastien Oliveira <boliveira@kiae.su>
+Hayes Optima 288 @ 33,600 bps
+"Hardware is temporary. The signal survives."
+
+From tsato@titech.ac.jp Mon Apr 11 03:18:21 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!titech!tsato
+From: tsato@titech.ac.jp (Tobias Sato)
+Newsgroups: comp.dsp
+Subject: Re: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Apr11.031821.6736@titech.ac.jp>
+Date: Mon, 11 Apr 1994 03:18:21 GMT
+References: <1994Apr08.192921.3836@demon.co.uk> <1994Apr08.221121.1725@rwth-aachen.de> <1994Apr11.014621.5267@kiae.su>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1994Apr11.014621.5267@kiae.su>, boliveira@kiae.su (Bastien Oliveira) writes:
+> If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Tobias Sato
+Opinions expressed are solely my own and not those of Tokyo Institute of Technology Computer Centre.
+------------------------------------------------------------
+

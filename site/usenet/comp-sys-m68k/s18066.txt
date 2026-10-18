@@ -1,0 +1,70 @@
+From msanchez@pipeline.com Thu Mar 14 08:04:05 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!pipeline!msanchez
+From: msanchez@pipeline.com (Mateo Sánchez)
+Newsgroups: comp.sys.m68k
+Subject: WTB/WTT: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Mar14.080405.4077@pipeline.com>
+Date: Thu, 14 Mar 1996 08:04:05 GMT
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Mateo Sánchez <msanchez@pipeline.com>
+Hayes Optima 288 @ 19,200 bps
+"Tape doesn't lie at 02:14. Ears do."
+
+From msmirnov@kth.se Fri Mar 15 07:19:05 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!kth!msmirnov
+From: msmirnov@kth.se (Matthias Smirnov)
+Newsgroups: comp.sys.m68k
+Subject: Re: WTB/WTT: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Mar15.071905.5469@kth.se>
+Date: Fri, 15 Mar 1996 07:19:05 GMT
+References: <1996Mar14.080405.4077@pipeline.com>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Mar14.080405.4077@pipeline.com>, msanchez@pipeline.com (Mateo Sánchez) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+=== Matthias Smirnov ===
+Dept of Electrical Engineering, Royal Institute of Technology, Stockholm
+"We don't sign stars. We build them."
+
+From cfischer@pipeline.com Fri Mar 15 21:05:05 1996
+Path: ashpoly!cascade!brgate!saturno!pipeline!cfischer
+From: cfischer@pipeline.com (Camila Fischer)
+Newsgroups: comp.sys.m68k
+Subject: Re: WTB/WTT: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Mar15.210505.4282@pipeline.com>
+Date: Fri, 15 Mar 1996 21:05:05 GMT
+References: <1996Mar14.080405.4077@pipeline.com> <1996Mar15.071905.5469@kth.se>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Mar15.071905.5469@kth.se>, msmirnov@kth.se (Matthias Smirnov) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Camila Fischer | cfischer@pipeline.com
+PGP Key fingerprint: 3B59 854F DD5E 2E27
+"Keep the channels open."
+

@@ -1,0 +1,94 @@
+From shughes@rwth-aachen.de Thu May 18 06:45:44 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!rwth-aachen!shughes
+From: shughes@rwth-aachen.de (Steve Hughes)
+Newsgroups: comp.dsp
+Subject: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995May18.064544.8104@rwth-aachen.de>
+Date: Thu, 18 May 1995 06:45:44 GMT
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+MATLAB script available upon request via email.
+
+-- 
+Steve Hughes -- RWTH Aachen Informatik
+"Hardware is temporary. The signal survives."
+
+From ksmirnov@uu.net Thu May 18 16:12:44 1995
+Path: ashpoly!cascade!bigsur!uu!ksmirnov
+From: ksmirnov@uu.net (Katrin Smirnov)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995May18.161244.8593@uu.net>
+Date: Thu, 18 May 1995 16:12:44 GMT
+References: <1995May18.064544.8104@rwth-aachen.de>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995May18.064544.8104@rwth-aachen.de>, shughes@rwth-aachen.de (Steve Hughes) writes:
+> Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+> At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Katrin Smirnov
+Opinions expressed are solely my own and not those of UUNET Technologies, Falls Church VA.
+------------------------------------------------------------
+
+From sstewart@rwth-aachen.de Fri May 19 06:35:44 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!rwth-aachen!sstewart
+From: sstewart@rwth-aachen.de (Steve Stewart)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995May19.063544.3014@rwth-aachen.de>
+Date: Fri, 19 May 1995 06:35:44 GMT
+References: <1995May18.064544.8104@rwth-aachen.de> <1995May18.161244.8593@uu.net>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995May18.161244.8593@uu.net>, ksmirnov@uu.net (Katrin Smirnov) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+=== Steve Stewart ===
+Dept of Electrical Engineering, RWTH Aachen Informatik
+"There are 14 nodes and only 10 countries. Count again."
+
+From lmartinez@illinois.edu Fri May 19 12:29:44 1995
+Path: ashpoly!cascade!bigsur!illinois!lmartinez
+From: lmartinez@illinois.edu (Lars Martínez)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995May19.122944.1160@illinois.edu>
+Date: Fri, 19 May 1995 12:29:44 GMT
+References: <1995May18.064544.8104@rwth-aachen.de>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995May18.064544.8104@rwth-aachen.de>, shughes@rwth-aachen.de (Steve Hughes) writes:
+> Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+> At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Lars Martínez <lmartinez@illinois.edu>
+Zyxel U-1496E @ 19,200 bps
+"The carrier frequency does not drift by accident."
+

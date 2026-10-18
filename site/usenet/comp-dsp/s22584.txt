@@ -1,0 +1,118 @@
+From kjohansson@demon.co.uk Wed Dec 13 19:44:03 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!demon!kjohansson
+From: kjohansson@demon.co.uk (Katrin Johansson)
+Newsgroups: comp.dsp
+Subject: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec13.194403.8308@demon.co.uk>
+Date: Wed, 13 Dec 1995 19:44:03 GMT
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Katrin Johansson | kjohansson@demon.co.uk
+PGP Key fingerprint: 348C 90F9 8087 9E24
+"Keep the channels open."
+
+From cduarte@demon.co.uk Thu Dec 14 15:37:03 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!demon!cduarte
+From: cduarte@demon.co.uk (Camila Duarte)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec14.153703.7157@demon.co.uk>
+Date: Thu, 14 Dec 1995 15:37:03 GMT
+References: <1995Dec13.194403.8308@demon.co.uk>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Dec13.194403.8308@demon.co.uk>, kjohansson@demon.co.uk (Katrin Johansson) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+Camila Duarte -- Demon Internet Services UK
+"When every node is whole, the channel opens."
+
+From greyes@pipeline.com Sat Dec 16 14:54:03 1995
+Path: ashpoly!cascade!bigsur!pipeline!greyes
+From: greyes@pipeline.com (Göran Reyes)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec16.145403.7369@pipeline.com>
+Date: Sat, 16 Dec 1995 14:54:03 GMT
+References: <1995Dec13.194403.8308@demon.co.uk> <1995Dec14.153703.7157@demon.co.uk>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995Dec14.153703.7157@demon.co.uk>, cduarte@demon.co.uk (Camila Duarte) writes:
+> Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+> Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Göran Reyes -- The Pipeline Internet Network
+"Do not worship the copy."
+
+From moliveira@cern.ch Sun Dec 17 19:28:03 1995
+Path: ashpoly!cascade!bigsur!cern!moliveira
+From: moliveira@cern.ch (Mei Oliveira)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec17.192803.4816@cern.ch>
+Date: Sun, 17 Dec 1995 19:28:03 GMT
+References: <1995Dec13.194403.8308@demon.co.uk> <1995Dec14.153703.7157@demon.co.uk> <1995Dec16.145403.7369@pipeline.com>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1995Dec16.145403.7369@pipeline.com>, greyes@pipeline.com (Göran Reyes) writes:
+> Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Mei Oliveira
+Tape trading list upon request. SASE required for international mail.
+
+From ksuzuki@uni-hamburg.de Tue Dec 19 21:44:03 1995
+Path: ashpoly!cascade!mxgate!coyoacan!uni-hamburg!ksuzuki
+From: ksuzuki@uni-hamburg.de (Kirsty Suzuki)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec19.214403.7399@uni-hamburg.de>
+Date: Tue, 19 Dec 1995 21:44:03 GMT
+References: <1995Dec13.194403.8308@demon.co.uk> <1995Dec14.153703.7157@demon.co.uk> <1995Dec16.145403.7369@pipeline.com> <1995Dec17.192803.4816@cern.ch>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Dec17.192803.4816@cern.ch>, moliveira@cern.ch (Mei Oliveira) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Kirsty Suzuki <ksuzuki@uni-hamburg.de>
+*PLONK* filter active for trolls.
+Pentium 90 (OS/2 Warp) - NetBSD 1.0
+

@@ -1,0 +1,48 @@
+From dlopez@panix.com Sun Jul 17 05:02:35 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!panix!dlopez
+From: dlopez@panix.com (Diego López)
+Newsgroups: comp.dsp
+Subject: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Jul17.050235.6998@panix.com>
+Date: Sun, 17 Jul 1994 05:02:35 GMT
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Diego López
+Tape trading list upon request. SASE required for international mail.
+
+From ggonzalez@ox.ac.uk Tue Jul 19 01:26:35 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!ox!ggonzalez
+From: ggonzalez@ox.ac.uk (Graham González)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Jul19.012635.8822@ox.ac.uk>
+Date: Tue, 19 Jul 1994 01:26:35 GMT
+References: <1994Jul17.050235.6998@panix.com>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1994Jul17.050235.6998@panix.com>, dlopez@panix.com (Diego López) writes:
+> Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Graham González
+Opinions expressed are solely my own and not those of Oxford University Computing Laboratory.
+------------------------------------------------------------
+

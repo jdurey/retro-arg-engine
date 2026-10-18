@@ -1,0 +1,114 @@
+From tmartinez@uni-hamburg.de Thu Jul 13 17:15:26 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!uni-hamburg!tmartinez
+From: tmartinez@uni-hamburg.de (Tyler Martínez)
+Newsgroups: comp.sys.m68k
+Subject: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Jul13.171526.2000@uni-hamburg.de>
+Date: Thu, 13 Jul 1995 17:15:26 GMT
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+Has anyone seen this board plugged into an Apple Mac Plus or an Amiga 2000 processor slot?
+
+-- 
+Tyler Martínez -- Universität Hamburg Fachbereich Informatik
+"They will send a copy in my place."
+
+From lkowalski@uni-hamburg.de Sat Jul 15 07:06:26 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!uni-hamburg!lkowalski
+From: lkowalski@uni-hamburg.de (Lisa Kowalski)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Jul15.070626.4395@uni-hamburg.de>
+Date: Sat, 15 Jul 1995 07:06:26 GMT
+References: <1995Jul13.171526.2000@uni-hamburg.de>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Jul13.171526.2000@uni-hamburg.de>, tmartinez@uni-hamburg.de (Tyler Martínez) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+> At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Lisa Kowalski -- Universität Hamburg Fachbereich Informatik
+"They will send a copy in my place."
+
+From bvasiliev@ox.ac.uk Sun Jul 16 10:25:26 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!ox!bvasiliev
+From: bvasiliev@ox.ac.uk (Bastien Vasiliev)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Jul16.102526.1394@ox.ac.uk>
+Date: Sun, 16 Jul 1995 10:25:26 GMT
+References: <1995Jul13.171526.2000@uni-hamburg.de> <1995Jul15.070626.4395@uni-hamburg.de>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Jul15.070626.4395@uni-hamburg.de>, lkowalski@uni-hamburg.de (Lisa Kowalski) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Bastien Vasiliev | bvasiliev@ox.ac.uk
+PGP Key fingerprint: 02E4 CDA2 3A03 AB2F
+"Keep the channels open."
+
+From tgarcia@clari.net Sun Jul 16 18:21:26 1995
+Path: ashpoly!cascade!brgate!saturno!clari!tgarcia
+From: tgarcia@clari.net (Tobias García)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Jul16.182126.1007@clari.net>
+Date: Sun, 16 Jul 1995 18:21:26 GMT
+References: <1995Jul13.171526.2000@uni-hamburg.de>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Jul13.171526.2000@uni-hamburg.de>, tmartinez@uni-hamburg.de (Tyler Martínez) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+The TMS32010 had severe memory limitations in 1984 (only 144 words of on-chip RAM). Dual 68000s gave them full 16MB address space.
+
+-- 
+Tobias García <tgarcia@clari.net>
+*PLONK* filter active for trolls.
+NeXTstation Turbo Color - NetBSD 1.0
+
+From agonzalez@cern.ch Mon Jul 17 21:00:26 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!cern!agonzalez
+From: agonzalez@cern.ch (Aiko González)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Jul17.210026.6805@cern.ch>
+Date: Mon, 17 Jul 1995 21:00:26 GMT
+References: <1995Jul13.171526.2000@uni-hamburg.de>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1995Jul13.171526.2000@uni-hamburg.de>, tmartinez@uni-hamburg.de (Tyler Martínez) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+Tom from Ashford Poly owns the physical board! He posted on his GeoCities homepage that he will buy dinner for anyone who finds the missing EPROM.
+
+-- 
+Aiko González -- European Laboratory for Particle Physics, Geneva
+"We don't sign stars. We build them."
+

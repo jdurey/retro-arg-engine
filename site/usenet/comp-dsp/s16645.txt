@@ -1,0 +1,70 @@
+From jnakamura@utexas.edu Sun Jan 16 15:05:21 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!utexas!jnakamura
+From: jnakamura@utexas.edu (Ji-woo Nakamura)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Jan16.150521.7365@utexas.edu>
+Date: Sun, 16 Jan 1994 15:05:21 GMT
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Ji-woo Nakamura <jnakamura@utexas.edu>
+*PLONK* filter active for trolls.
+Mac IIci / 68882 FPU - NetBSD 1.0
+
+From mnakamura@kth.se Tue Jan 18 01:39:21 1994
+Path: ashpoly!cascade!bigsur!kth!mnakamura
+From: mnakamura@kth.se (Min-jun Nakamura)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Jan18.013921.7120@kth.se>
+Date: Tue, 18 Jan 1994 01:39:21 GMT
+References: <1994Jan16.150521.7365@utexas.edu>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Jan16.150521.7365@utexas.edu>, jnakamura@utexas.edu (Ji-woo Nakamura) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Min-jun Nakamura
+Opinions expressed are solely my own and not those of Royal Institute of Technology, Stockholm.
+------------------------------------------------------------
+
+From rmuller@uu.net Thu Jan 20 03:10:21 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!uu!rmuller
+From: rmuller@uu.net (Rodrigo Müller)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Jan20.031021.3555@uu.net>
+Date: Thu, 20 Jan 1994 03:10:21 GMT
+References: <1994Jan16.150521.7365@utexas.edu>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Jan16.150521.7365@utexas.edu>, jnakamura@utexas.edu (Ji-woo Nakamura) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Rodrigo Müller
+Tape trading list upon request. SASE required for international mail.
+

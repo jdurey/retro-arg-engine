@@ -1,0 +1,49 @@
+From msuzuki@kiae.su Sun Sep 22 08:42:05 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!kiae!msuzuki
+From: msuzuki@kiae.su (Matthias Suzuki)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Sep22.084205.8680@kiae.su>
+Date: Sun, 22 Sep 1996 08:42:05 GMT
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Matthias Suzuki <msuzuki@kiae.su>
+"They will send a copy in my place."
+Amiga 1200 (Blizzard 030/50) / TOS 4.04
+
+From tbrennan@earthlink.net Sun Sep 22 11:42:05 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!earthlink!tbrennan
+From: tbrennan@earthlink.net (Tobias Brennan)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Sep22.114205.3939@earthlink.net>
+Date: Sun, 22 Sep 1996 11:42:05 GMT
+References: <1996Sep22.084205.8680@kiae.su>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1996Sep22.084205.8680@kiae.su>, msuzuki@kiae.su (Matthias Suzuki) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Tobias Brennan <tbrennan@earthlink.net>
+US Robotics Courier V.34 @ 33,600 bps
+"Hold for relay."
+

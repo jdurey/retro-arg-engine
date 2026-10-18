@@ -1,0 +1,93 @@
+From mramirez@earthlink.net Mon Mar 21 12:40:51 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!earthlink!mramirez
+From: mramirez@earthlink.net (Mei Ramírez)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Mar21.124051.8294@earthlink.net>
+Date: Mon, 21 Mar 1994 12:40:51 GMT
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+=== Mei Ramírez ===
+Dept of Electrical Engineering, EarthLink Network
+"We don't sign stars. We build them."
+
+From dsilva@demon.co.uk Wed Mar 23 03:09:51 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!demon!dsilva
+From: dsilva@demon.co.uk (Dong-hyun Silva)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Mar23.030951.9462@demon.co.uk>
+Date: Wed, 23 Mar 1994 03:09:51 GMT
+References: <1994Mar21.124051.8294@earthlink.net>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1994Mar21.124051.8294@earthlink.net>, mramirez@earthlink.net (Mei Ramírez) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Dong-hyun Silva -- Demon Internet Services UK
+"Do not worship the copy."
+
+From bsilva@uu.net Thu Mar 24 23:03:51 1994
+Path: ashpoly!cascade!bigsur!uu!bsilva
+From: bsilva@uu.net (Bruno Silva)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Mar24.230351.1011@uu.net>
+Date: Thu, 24 Mar 1994 23:03:51 GMT
+References: <1994Mar21.124051.8294@earthlink.net>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Mar21.124051.8294@earthlink.net>, mramirez@earthlink.net (Mei Ramírez) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Bruno Silva <bsilva@uu.net>
+"In theory there is no difference between theory and practice."
+486DX4/100 (FreeBSD 2.0.5) / SunOS 4.1.4
+
+From ekarlsson@pacbell.net Fri Mar 25 21:45:51 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!pacbell!ekarlsson
+From: ekarlsson@pacbell.net (Élodie Karlsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Mar25.214551.5094@pacbell.net>
+Date: Fri, 25 Mar 1994 21:45:51 GMT
+References: <1994Mar21.124051.8294@earthlink.net>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1994Mar21.124051.8294@earthlink.net>, mramirez@earthlink.net (Mei Ramírez) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+> CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+Tom from Ashford Poly owns the physical board! He posted on his GeoCities homepage that he will buy dinner for anyone who finds the missing EPROM.
+
+-- 
+Élodie Karlsson <ekarlsson@pacbell.net>
+*PLONK* filter active for trolls.
+Sun 3/60 (SunOS 4.1.1) - NetBSD 1.0
+

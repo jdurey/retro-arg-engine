@@ -1,0 +1,94 @@
+From htanaka@pipeline.com Sat Jun 08 14:21:30 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!pipeline!htanaka
+From: htanaka@pipeline.com (Heather Tanaka)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Jun08.142130.2969@pipeline.com>
+Date: Sat, 08 Jun 1996 14:21:30 GMT
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+=== Heather Tanaka ===
+Dept of Electrical Engineering, The Pipeline Internet Network
+"Hardware is temporary. The signal survives."
+
+From brodriguez@clari.net Mon Jun 10 18:19:30 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!clari!brodriguez
+From: brodriguez@clari.net (Bill Rodríguez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Jun10.181930.1250@clari.net>
+Date: Mon, 10 Jun 1996 18:19:30 GMT
+References: <1996Jun08.142130.2969@pipeline.com>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1996Jun08.142130.2969@pipeline.com>, htanaka@pipeline.com (Heather Tanaka) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Bill Rodríguez | brodriguez@clari.net
+PGP Key fingerprint: ACF1 EDBE 13C8 D8EA
+"Keep the channels open."
+
+From dhernandez@mit.edu Tue Jun 11 15:43:30 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!mit!dhernandez
+From: dhernandez@mit.edu (Dmitri Hernández)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Jun11.154330.8426@mit.edu>
+Date: Tue, 11 Jun 1996 15:43:30 GMT
+References: <1996Jun08.142130.2969@pipeline.com> <1996Jun10.181930.1250@clari.net>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Jun10.181930.1250@clari.net>, brodriguez@clari.net (Bill Rodríguez) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+=== Dmitri Hernández ===
+Dept of Electrical Engineering, Massachusetts Institute of Technology
+"The carrier frequency does not drift by accident."
+
+From mjohansson@stanford.edu Thu Jun 13 00:51:30 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!stanford!mjohansson
+From: mjohansson@stanford.edu (Mei Johansson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Jun13.005130.6113@stanford.edu>
+Date: Thu, 13 Jun 1996 00:51:30 GMT
+References: <1996Jun08.142130.2969@pipeline.com>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1996Jun08.142130.2969@pipeline.com>, htanaka@pipeline.com (Heather Tanaka) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Mei Johansson
+Tape trading list upon request. SASE required for international mail.
+

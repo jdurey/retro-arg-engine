@@ -1,0 +1,96 @@
+From mokonkwo@purdue.edu Fri Jan 28 02:33:35 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!purdue!mokonkwo
+From: mokonkwo@purdue.edu (Marisol Okonkwo)
+Newsgroups: comp.sys.m68k
+Subject: Observation: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Jan28.023335.5629@purdue.edu>
+Date: Fri, 28 Jan 1994 02:33:35 GMT
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+Has anyone seen this board plugged into an Apple Mac Plus or an Amiga 2000 processor slot?
+
+-- 
+Marisol Okonkwo <mokonkwo@purdue.edu>
+"A soul is not exclusive to biology."
+Acorn RiscPC 600 / TOS 4.04
+
+From fwatanabe@rwth-aachen.de Fri Jan 28 22:38:35 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!rwth-aachen!fwatanabe
+From: fwatanabe@rwth-aachen.de (Fiona Watanabe)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Jan28.223835.6492@rwth-aachen.de>
+Date: Fri, 28 Jan 1994 22:38:35 GMT
+References: <1994Jan28.023335.5629@purdue.edu>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1994Jan28.023335.5629@purdue.edu>, mokonkwo@purdue.edu (Marisol Okonkwo) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+> CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Fiona Watanabe <fwatanabe@rwth-aachen.de>
+Practical Peripherals 14.4 @ 33,600 bps
+"Hardware is temporary. The signal survives."
+
+From plarsson@cern.ch Sun Jan 30 16:17:35 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!cern!plarsson
+From: plarsson@cern.ch (Pavel Larsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Jan30.161735.8707@cern.ch>
+Date: Sun, 30 Jan 1994 16:17:35 GMT
+References: <1994Jan28.023335.5629@purdue.edu> <1994Jan28.223835.6492@rwth-aachen.de>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Jan28.223835.6492@rwth-aachen.de>, fwatanabe@rwth-aachen.de (Fiona Watanabe) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Pavel Larsson
+Opinions expressed are solely my own and not those of European Laboratory for Particle Physics, Geneva.
+------------------------------------------------------------
+
+From llee@inria.fr Tue Feb 01 09:57:35 1994
+Path: ashpoly!cascade!bigsur!inria!llee
+From: llee@inria.fr (Liam Lee)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Feb01.095735.9381@inria.fr>
+Date: Tue, 01 Feb 1994 09:57:35 GMT
+References: <1994Jan28.023335.5629@purdue.edu>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Jan28.023335.5629@purdue.edu>, mokonkwo@purdue.edu (Marisol Okonkwo) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Liam Lee
+Opinions expressed are solely my own and not those of INRIA Rocquencourt.
+------------------------------------------------------------
+

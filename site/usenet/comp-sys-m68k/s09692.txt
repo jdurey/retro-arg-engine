@@ -1,0 +1,73 @@
+From dkowalski@inria.fr Thu May 18 07:30:14 1995
+Path: ashpoly!cascade!mxgate!coyoacan!inria!dkowalski
+From: dkowalski@inria.fr (Diego Kowalski)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995May18.073014.5846@inria.fr>
+Date: Thu, 18 May 1995 07:30:14 GMT
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+=== Diego Kowalski ===
+Dept of Electrical Engineering, INRIA Rocquencourt
+"Tape doesn't lie at 02:14. Ears do."
+
+From tfischer@rwth-aachen.de Sat May 20 07:47:14 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!rwth-aachen!tfischer
+From: tfischer@rwth-aachen.de (Thiago Fischer)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995May20.074714.7748@rwth-aachen.de>
+Date: Sat, 20 May 1995 07:47:14 GMT
+References: <1995May18.073014.5846@inria.fr>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995May18.073014.5846@inria.fr>, dkowalski@inria.fr (Diego Kowalski) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Thiago Fischer
+Tape trading list upon request. SASE required for international mail.
+
+From edubois@cmu.edu Sun May 21 14:15:14 1995
+Path: ashpoly!cascade!bigsur!cmu!edubois
+From: edubois@cmu.edu (Élodie Dubois)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995May21.141514.7098@cmu.edu>
+Date: Sun, 21 May 1995 14:15:14 GMT
+References: <1995May18.073014.5846@inria.fr>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995May18.073014.5846@inria.fr>, dkowalski@inria.fr (Diego Kowalski) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Élodie Dubois <edubois@cmu.edu>
+Hayes Optima 288 @ 28,800 bps
+"Marcus is not one man."
+

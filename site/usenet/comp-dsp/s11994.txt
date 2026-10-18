@@ -1,0 +1,117 @@
+From tperez@uu.net Wed Jul 05 11:44:45 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!uu!tperez
+From: tperez@uu.net (Tobias Pérez)
+Newsgroups: comp.dsp
+Subject: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jul05.114445.8255@uu.net>
+Date: Wed, 05 Jul 1995 11:44:45 GMT
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Tobias Pérez <tperez@uu.net>
+US Robotics Courier V.34 @ 33,600 bps
+"Do not worship the copy."
+
+From hlarsson@uni-hamburg.de Wed Jul 05 14:57:45 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!uni-hamburg!hlarsson
+From: hlarsson@uni-hamburg.de (Hana Larsson)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jul05.145745.9079@uni-hamburg.de>
+Date: Wed, 05 Jul 1995 14:57:45 GMT
+References: <1995Jul05.114445.8255@uu.net>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1995Jul05.114445.8255@uu.net>, tperez@uu.net (Tobias Pérez) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+Hana Larsson -- Universität Hamburg Fachbereich Informatik
+"Tape doesn't lie at 02:14. Ears do."
+
+From hnovak@pacbell.net Thu Jul 06 21:37:45 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!pacbell!hnovak
+From: hnovak@pacbell.net (Hana Novak)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jul06.213745.9992@pacbell.net>
+Date: Thu, 06 Jul 1995 21:37:45 GMT
+References: <1995Jul05.114445.8255@uu.net> <1995Jul05.145745.9079@uni-hamburg.de>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Jul05.145745.9079@uni-hamburg.de>, hlarsson@uni-hamburg.de (Hana Larsson) writes:
+> Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Hana Novak | hnovak@pacbell.net
+PGP Key fingerprint: 3331 2086 604B 9EC8
+"Keep the channels open."
+
+From bmacdonald@illinois.edu Sat Jul 08 17:16:45 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!illinois!bmacdonald
+From: bmacdonald@illinois.edu (Bill MacDonald)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jul08.171645.8409@illinois.edu>
+Date: Sat, 08 Jul 1995 17:16:45 GMT
+References: <1995Jul05.114445.8255@uu.net> <1995Jul05.145745.9079@uni-hamburg.de> <1995Jul06.213745.9992@pacbell.net>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Jul06.213745.9992@pacbell.net>, hnovak@pacbell.net (Hana Novak) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Bill MacDonald <bmacdonald@illinois.edu>
+*PLONK* filter active for trolls.
+Sun SparcStation 20 - NetBSD 1.0
+
+From hmartinez@kth.se Sun Jul 09 15:15:45 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!kth!hmartinez
+From: hmartinez@kth.se (Hugo Martínez)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jul09.151545.9736@kth.se>
+Date: Sun, 09 Jul 1995 15:15:45 GMT
+References: <1995Jul05.114445.8255@uu.net> <1995Jul05.145745.9079@uni-hamburg.de> <1995Jul06.213745.9992@pacbell.net> <1995Jul08.171645.8409@illinois.edu>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Jul08.171645.8409@illinois.edu>, bmacdonald@illinois.edu (Bill MacDonald) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Hugo Martínez <hmartinez@kth.se>
+*PLONK* filter active for trolls.
+Sun 3/60 (SunOS 4.1.1) - NetBSD 1.0
+

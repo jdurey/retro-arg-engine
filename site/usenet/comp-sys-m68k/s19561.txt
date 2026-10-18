@@ -1,0 +1,72 @@
+From ckarlsson@cam.ac.uk Mon Aug 07 19:59:08 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!cam!ckarlsson
+From: ckarlsson@cam.ac.uk (Callum Karlsson)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Aug07.195908.7492@cam.ac.uk>
+Date: Mon, 07 Aug 1995 19:59:08 GMT
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+=== Callum Karlsson ===
+Dept of Electrical Engineering, University of Cambridge Computer Laboratory
+"Hardware is temporary. The signal survives."
+
+From nlee@clari.net Mon Aug 07 21:20:08 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!clari!nlee
+From: nlee@clari.net (Natalia Lee)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Aug07.212008.2521@clari.net>
+Date: Mon, 07 Aug 1995 21:20:08 GMT
+References: <1995Aug07.195908.7492@cam.ac.uk>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Aug07.195908.7492@cam.ac.uk>, ckarlsson@cam.ac.uk (Callum Karlsson) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Natalia Lee <nlee@clari.net>
+*PLONK* filter active for trolls.
+Atari Falcon 030 - NetBSD 1.0
+
+From lvasiliev@delphi.com Wed Aug 09 11:35:08 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!delphi!lvasiliev
+From: lvasiliev@delphi.com (Lisa Vasiliev)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Aug09.113508.2634@delphi.com>
+Date: Wed, 09 Aug 1995 11:35:08 GMT
+References: <1995Aug07.195908.7492@cam.ac.uk> <1995Aug07.212008.2521@clari.net>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995Aug07.212008.2521@clari.net>, nlee@clari.net (Natalia Lee) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Lisa Vasiliev <lvasiliev@delphi.com>
+"The hatch is open. Is anyone listening?"
+Sun SparcStation 20 / FreeBSD 2.1
+

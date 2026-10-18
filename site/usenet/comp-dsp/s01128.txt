@@ -1,0 +1,99 @@
+From rstewart@hanse.de Tue Dec 10 07:22:25 1996
+Path: ashpoly!cascade!brgate!saturno!hanse!rstewart
+From: rstewart@hanse.de (Raj Stewart)
+Newsgroups: comp.dsp
+Subject: WTB/WTT: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Dec10.072225.8701@hanse.de>
+Date: Tue, 10 Dec 1996 07:22:25 GMT
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Raj Stewart | rstewart@hanse.de
+PGP Key fingerprint: CE57 1C08 52B1 B783
+"Keep the channels open."
+
+From iperez@stanford.edu Tue Dec 10 21:52:25 1996
+Path: ashpoly!cascade!bigsur!stanford!iperez
+From: iperez@stanford.edu (Ines Pérez)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Dec10.215225.9970@stanford.edu>
+Date: Tue, 10 Dec 1996 21:52:25 GMT
+References: <1996Dec10.072225.8701@hanse.de>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1996Dec10.072225.8701@hanse.de>, rstewart@hanse.de (Raj Stewart) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+=== Ines Pérez ===
+Dept of Electrical Engineering, Stanford University Computer Systems Lab
+"Hold for relay."
+
+From mtanaka@cmu.edu Thu Dec 12 16:38:25 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!cmu!mtanaka
+From: mtanaka@cmu.edu (Mike Tanaka)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Dec12.163825.9289@cmu.edu>
+Date: Thu, 12 Dec 1996 16:38:25 GMT
+References: <1996Dec10.072225.8701@hanse.de>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996Dec10.072225.8701@hanse.de>, rstewart@hanse.de (Raj Stewart) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Mike Tanaka <mtanaka@cmu.edu>
+"We don't sign stars. We build them."
+Pentium 90 (OS/2 Warp) / AmigaOS 3.1
+
+From klaurent@hanse.de Fri Dec 13 08:49:25 1996
+Path: ashpoly!cascade!bigsur!hanse!klaurent
+From: klaurent@hanse.de (Kenji Laurent)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Dec13.084925.2831@hanse.de>
+Date: Fri, 13 Dec 1996 08:49:25 GMT
+References: <1996Dec10.072225.8701@hanse.de>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1996Dec10.072225.8701@hanse.de>, rstewart@hanse.de (Raj Stewart) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Kenji Laurent <klaurent@hanse.de>
+Zyxel U-1496E @ ISDN 64k bps
+"We don't sign stars. We build them."
+

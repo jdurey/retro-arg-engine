@@ -1,0 +1,47 @@
+From thughes@kiae.su Sat Sep 07 18:12:22 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!kiae!thughes
+From: thughes@kiae.su (Thiago Hughes)
+Newsgroups: comp.sys.m68k
+Subject: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Sep07.181222.7069@kiae.su>
+Date: Sat, 07 Sep 1996 18:12:22 GMT
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+=== Thiago Hughes ===
+Dept of Electrical Engineering, Kurchatov Institute of Atomic Energy, Moscow
+"In theory there is no difference between theory and practice."
+
+From fperez@delphi.com Sun Sep 08 17:36:22 1996
+Path: ashpoly!cascade!bigsur!delphi!fperez
+From: fperez@delphi.com (Freya Pérez)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Sep08.173622.5828@delphi.com>
+Date: Sun, 08 Sep 1996 17:36:22 GMT
+References: <1996Sep07.181222.7069@kiae.su>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Sep07.181222.7069@kiae.su>, thughes@kiae.su (Thiago Hughes) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Freya Pérez | fperez@delphi.com
+PGP Key fingerprint: 942F D748 E40F 36E9
+"Keep the channels open."
+

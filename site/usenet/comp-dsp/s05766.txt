@@ -1,0 +1,98 @@
+From brodriguez@u-tokyo.ac.jp Sat Aug 13 21:24:40 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!u-tokyo!brodriguez
+From: brodriguez@u-tokyo.ac.jp (Bill Rodríguez)
+Newsgroups: comp.dsp
+Subject: Discussion: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Aug13.212440.1486@u-tokyo.ac.jp>
+Date: Sat, 13 Aug 1994 21:24:40 GMT
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+Bill Rodríguez <brodriguez@u-tokyo.ac.jp>
+Practical Peripherals 14.4 @ ISDN 64k bps
+"There are 14 nodes and only 10 countries. Count again."
+
+From khernandez@pipeline.com Sun Aug 14 14:42:40 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!pipeline!khernandez
+From: khernandez@pipeline.com (Katrin Hernández)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Aug14.144240.3444@pipeline.com>
+Date: Sun, 14 Aug 1994 14:42:40 GMT
+References: <1994Aug13.212440.1486@u-tokyo.ac.jp>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1994Aug13.212440.1486@u-tokyo.ac.jp>, brodriguez@u-tokyo.ac.jp (Bill Rodríguez) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Katrin Hernández | khernandez@pipeline.com
+PGP Key fingerprint: DBD4 8110 65D3 2429
+"Keep the channels open."
+
+From jsuzuki@earthlink.net Tue Aug 16 16:28:40 1994
+Path: ashpoly!cascade!bigsur!earthlink!jsuzuki
+From: jsuzuki@earthlink.net (Jen Suzuki)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Aug16.162840.4578@earthlink.net>
+Date: Tue, 16 Aug 1994 16:28:40 GMT
+References: <1994Aug13.212440.1486@u-tokyo.ac.jp>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Aug13.212440.1486@u-tokyo.ac.jp>, brodriguez@u-tokyo.ac.jp (Bill Rodríguez) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+> Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Jen Suzuki -- EarthLink Network
+"Extraordinary claims require extraordinary spectra."
+
+From ilopez@netcom.com Wed Aug 17 22:04:40 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!netcom!ilopez
+From: ilopez@netcom.com (Ines López)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Aug17.220440.3514@netcom.com>
+Date: Wed, 17 Aug 1994 22:04:40 GMT
+References: <1994Aug13.212440.1486@u-tokyo.ac.jp> <1994Aug14.144240.3444@pipeline.com>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1994Aug14.144240.3444@pipeline.com>, khernandez@pipeline.com (Katrin Hernández) writes:
+> Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+> PGP Public key available via finger or upon request.
+
+Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Ines López
+Opinions expressed are solely my own and not those of NETCOM On-Line Communication Services.
+------------------------------------------------------------
+

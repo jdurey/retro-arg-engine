@@ -1,0 +1,120 @@
+From vsuzuki@purdue.edu Fri Sep 13 00:42:16 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!purdue!vsuzuki
+From: vsuzuki@purdue.edu (Valeria Suzuki)
+Newsgroups: comp.sys.m68k
+Subject: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Sep13.004216.8994@purdue.edu>
+Date: Fri, 13 Sep 1996 00:42:16 GMT
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+
+Does anyone have a 27C256 EPROM marked 'MH-U14' or 'ORION-CRYPTO'?
+
+-- 
+=== Valeria Suzuki ===
+Dept of Electrical Engineering, Purdue University Engineering Computer Network
+"Do not worship the copy."
+
+From jlindqvist@stanford.edu Sat Sep 14 17:01:16 1996
+Path: ashpoly!cascade!brgate!saturno!stanford!jlindqvist
+From: jlindqvist@stanford.edu (Julien Lindqvist)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Sep14.170116.2878@stanford.edu>
+Date: Sat, 14 Sep 1996 17:01:16 GMT
+References: <1996Sep13.004216.8994@purdue.edu>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1996Sep13.004216.8994@purdue.edu>, vsuzuki@purdue.edu (Valeria Suzuki) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Julien Lindqvist
+Tape trading list upon request. SASE required for international mail.
+
+From mnovak@panix.com Sun Sep 15 00:47:16 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!panix!mnovak
+From: mnovak@panix.com (Min-jun Novak)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Sep15.004716.5975@panix.com>
+Date: Sun, 15 Sep 1996 00:47:16 GMT
+References: <1996Sep13.004216.8994@purdue.edu> <1996Sep14.170116.2878@stanford.edu>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1996Sep14.170116.2878@stanford.edu>, jlindqvist@stanford.edu (Julien Lindqvist) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Min-jun Novak <mnovak@panix.com>
+"The hatch is open. Is anyone listening?"
+Pentium 90 (OS/2 Warp) / TOS 4.04
+
+From jkang@rwth-aachen.de Mon Sep 16 20:23:16 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!rwth-aachen!jkang
+From: jkang@rwth-aachen.de (Jens Kang)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Sep16.202316.1843@rwth-aachen.de>
+Date: Mon, 16 Sep 1996 20:23:16 GMT
+References: <1996Sep13.004216.8994@purdue.edu> <1996Sep14.170116.2878@stanford.edu>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1996Sep14.170116.2878@stanford.edu>, jlindqvist@stanford.edu (Julien Lindqvist) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Jens Kang <jkang@rwth-aachen.de>
+"The hatch is open. Is anyone listening?"
+Amiga 3000T / AmigaOS 3.1
+
+From msmirnov@illinois.edu Wed Sep 18 06:03:16 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!illinois!msmirnov
+From: msmirnov@illinois.edu (Marta Smirnov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Sep18.060316.1770@illinois.edu>
+Date: Wed, 18 Sep 1996 06:03:16 GMT
+References: <1996Sep13.004216.8994@purdue.edu> <1996Sep14.170116.2878@stanford.edu> <1996Sep15.004716.5975@panix.com>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1996Sep15.004716.5975@panix.com>, mnovak@panix.com (Min-jun Novak) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+> Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+=== Marta Smirnov ===
+Dept of Electrical Engineering, University of Illinois Urbana-Champaign
+"We don't sign stars. We build them."
+

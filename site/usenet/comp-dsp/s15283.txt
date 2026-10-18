@@ -1,0 +1,71 @@
+From alee@cern.ch Sat Jun 24 12:27:02 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!cern!alee
+From: alee@cern.ch (Amy Lee)
+Newsgroups: comp.dsp
+Subject: Observation: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jun24.122702.7615@cern.ch>
+Date: Sat, 24 Jun 1995 12:27:02 GMT
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+
+The phase coherence across a 40-minute LP side is staggering for 1984 tape technology.
+
+-- 
+Amy Lee <alee@cern.ch>
+"5 sigma is a discovery. 7 is a question."
+Sun SparcStation 20 / TOS 4.04
+
+From tsmirnov@stanford.edu Sat Jun 24 18:45:02 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!stanford!tsmirnov
+From: tsmirnov@stanford.edu (Thiago Smirnov)
+Newsgroups: comp.dsp
+Subject: Re: Observation: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jun24.184502.7261@stanford.edu>
+Date: Sat, 24 Jun 1995 18:45:02 GMT
+References: <1995Jun24.122702.7615@cern.ch>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Jun24.122702.7615@cern.ch>, alee@cern.ch (Amy Lee) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+> With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+-- 
+Thiago Smirnov
+Opinions expressed are solely my own and not those of Stanford University Computer Systems Lab.
+------------------------------------------------------------
+
+From hlarsson@pipeline.com Sun Jun 25 08:11:02 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!pipeline!hlarsson
+From: hlarsson@pipeline.com (Heather Larsson)
+Newsgroups: comp.dsp
+Subject: Re: Observation: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jun25.081102.5135@pipeline.com>
+Date: Sun, 25 Jun 1995 08:11:02 GMT
+References: <1995Jun24.122702.7615@cern.ch> <1995Jun24.184502.7261@stanford.edu>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Jun24.184502.7261@stanford.edu>, tsmirnov@stanford.edu (Thiago Smirnov) writes:
+> You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+-- 
+Heather Larsson
+Opinions expressed are solely my own and not those of The Pipeline Internet Network.
+------------------------------------------------------------
+

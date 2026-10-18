@@ -1,0 +1,114 @@
+From ekarlsson@mit.edu Sat Jun 17 17:54:10 1995
+Path: ashpoly!cascade!mxgate!coyoacan!mit!ekarlsson
+From: ekarlsson@mit.edu (Elaine Karlsson)
+Newsgroups: comp.dsp
+Subject: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jun17.175410.7630@mit.edu>
+Date: Sat, 17 Jun 1995 17:54:10 GMT
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+=== Elaine Karlsson ===
+Dept of Electrical Engineering, Massachusetts Institute of Technology
+"There are 14 nodes and only 10 countries. Count again."
+
+From scampbell@pipeline.com Sun Jun 18 00:31:10 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!pipeline!scampbell
+From: scampbell@pipeline.com (Sven Campbell)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jun18.003110.1251@pipeline.com>
+Date: Sun, 18 Jun 1995 00:31:10 GMT
+References: <1995Jun17.175410.7630@mit.edu>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Jun17.175410.7630@mit.edu>, ekarlsson@mit.edu (Elaine Karlsson) writes:
+> Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Sven Campbell -- The Pipeline Internet Network
+"Row 14. No joke."
+
+From mnilsson@illinois.edu Sun Jun 18 13:50:10 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!illinois!mnilsson
+From: mnilsson@illinois.edu (Min-jun Nilsson)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jun18.135010.7764@illinois.edu>
+Date: Sun, 18 Jun 1995 13:50:10 GMT
+References: <1995Jun17.175410.7630@mit.edu>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1995Jun17.175410.7630@mit.edu>, ekarlsson@mit.edu (Elaine Karlsson) writes:
+> Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Min-jun Nilsson -- University of Illinois Urbana-Champaign
+"Hardware is temporary. The signal survives."
+
+From rpopov@pipeline.com Tue Jun 20 11:45:10 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!pipeline!rpopov
+From: rpopov@pipeline.com (Renata Popov)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jun20.114510.9223@pipeline.com>
+Date: Tue, 20 Jun 1995 11:45:10 GMT
+References: <1995Jun17.175410.7630@mit.edu> <1995Jun18.135010.7764@illinois.edu>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Jun18.135010.7764@illinois.edu>, mnilsson@illinois.edu (Min-jun Nilsson) writes:
+> I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Renata Popov | rpopov@pipeline.com
+PGP Key fingerprint: EF3B D2D4 41AE B3B7
+"Keep the channels open."
+
+From tsuzuki@purdue.edu Wed Jun 21 15:27:10 1995
+Path: ashpoly!cascade!mxgate!coyoacan!purdue!tsuzuki
+From: tsuzuki@purdue.edu (Thiago Suzuki)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jun21.152710.4813@purdue.edu>
+Date: Wed, 21 Jun 1995 15:27:10 GMT
+References: <1995Jun17.175410.7630@mit.edu> <1995Jun18.135010.7764@illinois.edu>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Jun18.135010.7764@illinois.edu>, mnilsson@illinois.edu (Min-jun Nilsson) writes:
+> I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Thiago Suzuki <tsuzuki@purdue.edu>
+*PLONK* filter active for trolls.
+Sun SparcStation 20 - NetBSD 1.0
+

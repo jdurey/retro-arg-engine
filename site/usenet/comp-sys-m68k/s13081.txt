@@ -1,0 +1,118 @@
+From ckang@cam.ac.uk Tue Oct 24 13:02:47 1995
+Path: ashpoly!cascade!mxgate!coyoacan!cam!ckang
+From: ckang@cam.ac.uk (Callum Kang)
+Newsgroups: comp.sys.m68k
+Subject: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Oct24.130247.2643@cam.ac.uk>
+Date: Tue, 24 Oct 1995 13:02:47 GMT
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Hardware disassembly report for Motorola hardware hackers.
+
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Did Marcus take the decryption EPROM with him when he left the lab?
+
+-- 
+Callum Kang <ckang@cam.ac.uk>
+Zyxel U-1496E @ 19,200 bps
+"Tape doesn't lie at 02:14. Ears do."
+
+From jpopov@purdue.edu Thu Oct 26 05:47:47 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!purdue!jpopov
+From: jpopov@purdue.edu (Julien Popov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Oct26.054747.8640@purdue.edu>
+Date: Thu, 26 Oct 1995 05:47:47 GMT
+References: <1995Oct24.130247.2643@cam.ac.uk>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995Oct24.130247.2643@cam.ac.uk>, ckang@cam.ac.uk (Callum Kang) writes:
+> Hardware disassembly report for Motorola hardware hackers.
+> Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Julien Popov
+Tape trading list upon request. SASE required for international mail.
+
+From jduarte@uni-hamburg.de Fri Oct 27 19:27:47 1995
+Path: ashpoly!cascade!bigsur!uni-hamburg!jduarte
+From: jduarte@uni-hamburg.de (Julien Duarte)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Oct27.192747.5958@uni-hamburg.de>
+Date: Fri, 27 Oct 1995 19:27:47 GMT
+References: <1995Oct24.130247.2643@cam.ac.uk> <1995Oct26.054747.8640@purdue.edu>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Oct26.054747.8640@purdue.edu>, jpopov@purdue.edu (Julien Popov) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+> Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+=== Julien Duarte ===
+Dept of Electrical Engineering, Universität Hamburg Fachbereich Informatik
+"When every node is whole, the channel opens."
+
+From dpark@berkeley.edu Fri Oct 27 23:46:47 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!berkeley!dpark
+From: dpark@berkeley.edu (Dmitri Park)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Oct27.234647.3423@berkeley.edu>
+Date: Fri, 27 Oct 1995 23:46:47 GMT
+References: <1995Oct24.130247.2643@cam.ac.uk> <1995Oct26.054747.8640@purdue.edu> <1995Oct27.192747.5958@uni-hamburg.de>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Oct27.192747.5958@uni-hamburg.de>, jduarte@uni-hamburg.de (Julien Duarte) writes:
+> Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Dmitri Park <dpark@berkeley.edu>
+"Measuring a record you own is listening, not piracy."
+NeXTstation Turbo Color / NEXTSTEP 3.3
+
+From areyes@netcom.com Sun Oct 29 12:31:47 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!netcom!areyes
+From: areyes@netcom.com (Anton Reyes)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Oct29.123147.8788@netcom.com>
+Date: Sun, 29 Oct 1995 12:31:47 GMT
+References: <1995Oct24.130247.2643@cam.ac.uk> <1995Oct26.054747.8640@purdue.edu> <1995Oct27.192747.5958@uni-hamburg.de> <1995Oct27.234647.3423@berkeley.edu>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1995Oct27.234647.3423@berkeley.edu>, dpark@berkeley.edu (Dmitri Park) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+-- 
+Anton Reyes -- NETCOM On-Line Communication Services
+"Do not worship the copy."
+

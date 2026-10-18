@@ -1,0 +1,70 @@
+From sgarcia@purdue.edu Wed Feb 07 00:44:47 1996
+Path: ashpoly!cascade!mxgate!coyoacan!purdue!sgarcia
+From: sgarcia@purdue.edu (Sven García)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Feb07.004447.8401@purdue.edu>
+Date: Wed, 07 Feb 1996 00:44:47 GMT
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+Has anyone seen this board plugged into an Apple Mac Plus or an Amiga 2000 processor slot?
+
+-- 
+Sven García <sgarcia@purdue.edu>
+"5 sigma is a discovery. 7 is a question."
+Amiga 3000T / NEXTSTEP 3.3
+
+From sstewart@panix.com Wed Feb 07 01:40:47 1996
+Path: ashpoly!cascade!mxgate!coyoacan!panix!sstewart
+From: sstewart@panix.com (Sun-mi Stewart)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Feb07.014047.1034@panix.com>
+Date: Wed, 07 Feb 1996 01:40:47 GMT
+References: <1996Feb07.004447.8401@purdue.edu>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Feb07.004447.8401@purdue.edu>, sgarcia@purdue.edu (Sven García) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Sun-mi Stewart
+Tape trading list upon request. SASE required for international mail.
+
+From jlindqvist@cern.ch Wed Feb 07 11:32:47 1996
+Path: ashpoly!cascade!mxgate!coyoacan!cern!jlindqvist
+From: jlindqvist@cern.ch (Ji-woo Lindqvist)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Feb07.113247.1379@cern.ch>
+Date: Wed, 07 Feb 1996 11:32:47 GMT
+References: <1996Feb07.004447.8401@purdue.edu>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Feb07.004447.8401@purdue.edu>, sgarcia@purdue.edu (Sven García) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Ji-woo Lindqvist
+Opinions expressed are solely my own and not those of European Laboratory for Particle Physics, Geneva.
+------------------------------------------------------------
+

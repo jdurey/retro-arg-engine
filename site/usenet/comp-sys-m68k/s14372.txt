@@ -1,0 +1,124 @@
+From kschneider@clari.net Sun May 21 05:28:21 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!clari!kschneider
+From: kschneider@clari.net (Kirsty Schneider)
+Newsgroups: comp.sys.m68k
+Subject: Observation: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995May21.052821.9594@clari.net>
+Date: Sun, 21 May 1995 05:28:21 GMT
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Did Marcus take the decryption EPROM with him when he left the lab?
+
+-- 
+Kirsty Schneider | kschneider@clari.net
+PGP Key fingerprint: 1ED1 98D3 3D9B 7118
+"Keep the channels open."
+
+From rchoi@u-tokyo.ac.jp Mon May 22 22:15:21 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!u-tokyo!rchoi
+From: rchoi@u-tokyo.ac.jp (Renata Choi)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995May22.221521.1819@u-tokyo.ac.jp>
+Date: Mon, 22 May 1995 22:15:21 GMT
+References: <1995May21.052821.9594@clari.net>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 12
+
+In article <1995May21.052821.9594@clari.net>, kschneider@clari.net (Kirsty Schneider) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+> Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Renata Choi | rchoi@u-tokyo.ac.jp
+PGP Key fingerprint: 6C8F 1768 E183 B619
+"Keep the channels open."
+
+From ksmirnov@illinois.edu Wed May 24 22:22:21 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!illinois!ksmirnov
+From: ksmirnov@illinois.edu (Karen Smirnov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995May24.222221.9614@illinois.edu>
+Date: Wed, 24 May 1995 22:22:21 GMT
+References: <1995May21.052821.9594@clari.net> <1995May22.221521.1819@u-tokyo.ac.jp>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995May22.221521.1819@u-tokyo.ac.jp>, rchoi@u-tokyo.ac.jp (Renata Choi) writes:
+> Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+-- 
+Karen Smirnov <ksmirnov@illinois.edu>
+"Hold for relay."
+PC-9821Ap2 (NEC) / TOS 4.04
+
+From fpark@pipeline.com Fri May 26 11:32:21 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!pipeline!fpark
+From: fpark@pipeline.com (Freya Park)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995May26.113221.1457@pipeline.com>
+Date: Fri, 26 May 1995 11:32:21 GMT
+References: <1995May21.052821.9594@clari.net>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995May21.052821.9594@clari.net>, kschneider@clari.net (Kirsty Schneider) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Freya Park | fpark@pipeline.com
+PGP Key fingerprint: 693C EC5B F524 12D7
+"Keep the channels open."
+
+From glopez@netcom.com Fri May 26 18:59:21 1995
+Path: ashpoly!cascade!brgate!saturno!netcom!glopez
+From: glopez@netcom.com (Göran López)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995May26.185921.8458@netcom.com>
+Date: Fri, 26 May 1995 18:59:21 GMT
+References: <1995May21.052821.9594@clari.net> <1995May26.113221.1457@pipeline.com>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1995May26.113221.1457@pipeline.com>, fpark@pipeline.com (Freya Park) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+> Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+=== Göran López ===
+Dept of Electrical Engineering, NETCOM On-Line Communication Services
+"They will send a copy in my place."
+

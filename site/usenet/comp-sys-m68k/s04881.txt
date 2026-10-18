@@ -1,0 +1,71 @@
+From jbrennan@titech.ac.jp Mon May 20 08:11:15 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!titech!jbrennan
+From: jbrennan@titech.ac.jp (Joachim Brennan)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996May20.081115.7717@titech.ac.jp>
+Date: Mon, 20 May 1996 08:11:15 GMT
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+Joachim Brennan <jbrennan@titech.ac.jp>
+"The carrier frequency does not drift by accident."
+Amiga 3000T / Linux 1.2.13
+
+From tstewart@utexas.edu Mon May 20 09:00:15 1996
+Path: ashpoly!cascade!brgate!saturno!utexas!tstewart
+From: tstewart@utexas.edu (Takeshi Stewart)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996May20.090015.3485@utexas.edu>
+Date: Mon, 20 May 1996 09:00:15 GMT
+References: <1996May20.081115.7717@titech.ac.jp>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1996May20.081115.7717@titech.ac.jp>, jbrennan@titech.ac.jp (Joachim Brennan) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Takeshi Stewart <tstewart@utexas.edu>
+"Hold for relay."
+Sun SparcStation 20 / NEXTSTEP 3.3
+
+From lsanchez@clari.net Mon May 20 17:54:15 1996
+Path: ashpoly!cascade!mxgate!coyoacan!clari!lsanchez
+From: lsanchez@clari.net (Lucia Sánchez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996May20.175415.3965@clari.net>
+Date: Mon, 20 May 1996 17:54:15 GMT
+References: <1996May20.081115.7717@titech.ac.jp> <1996May20.090015.3485@utexas.edu>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996May20.090015.3485@utexas.edu>, tstewart@utexas.edu (Takeshi Stewart) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Lucia Sánchez <lsanchez@clari.net>
+"5 sigma is a discovery. 7 is a question."
+Sun SparcStation 20 / Linux 1.2.13
+

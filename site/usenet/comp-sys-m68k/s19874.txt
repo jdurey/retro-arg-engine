@@ -1,0 +1,97 @@
+From estewart@pipeline.com Wed Aug 17 10:52:09 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!pipeline!estewart
+From: estewart@pipeline.com (Elaine Stewart)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Aug17.105209.5034@pipeline.com>
+Date: Wed, 17 Aug 1994 10:52:09 GMT
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Elaine Stewart <estewart@pipeline.com>
+Zyxel U-1496E @ 33,600 bps
+"A soul is not exclusive to biology."
+
+From dgirard@utexas.edu Fri Aug 19 11:38:09 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!utexas!dgirard
+From: dgirard@utexas.edu (Dave Girard)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Aug19.113809.6295@utexas.edu>
+Date: Fri, 19 Aug 1994 11:38:09 GMT
+References: <1994Aug17.105209.5034@pipeline.com>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1994Aug17.105209.5034@pipeline.com>, estewart@pipeline.com (Elaine Stewart) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+> Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Dave Girard <dgirard@utexas.edu>
+"They will send a copy in my place."
+NeXTstation Turbo Color / System 7.5.1
+
+From mtakahashi@u-tokyo.ac.jp Sun Aug 21 14:07:09 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!u-tokyo!mtakahashi
+From: mtakahashi@u-tokyo.ac.jp (Morag Takahashi)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Aug21.140709.6382@u-tokyo.ac.jp>
+Date: Sun, 21 Aug 1994 14:07:09 GMT
+References: <1994Aug17.105209.5034@pipeline.com>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1994Aug17.105209.5034@pipeline.com>, estewart@pipeline.com (Elaine Stewart) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Morag Takahashi -- University of Tokyo Department of Information Science
+"Marcus is not one man."
+
+From bramirez@mindspring.com Tue Aug 23 00:36:09 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!mindspring!bramirez
+From: bramirez@mindspring.com (Bastien Ramírez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Aug23.003609.2737@mindspring.com>
+Date: Tue, 23 Aug 1994 00:36:09 GMT
+References: <1994Aug17.105209.5034@pipeline.com> <1994Aug21.140709.6382@u-tokyo.ac.jp>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1994Aug21.140709.6382@u-tokyo.ac.jp>, mtakahashi@u-tokyo.ac.jp (Morag Takahashi) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+> Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Bastien Ramírez
+Tape trading list upon request. SASE required for international mail.
+

@@ -1,0 +1,47 @@
+From aoliveira@delphi.com Sun Mar 26 01:37:36 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!delphi!aoliveira
+From: aoliveira@delphi.com (Amy Oliveira)
+Newsgroups: comp.dsp
+Subject: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Mar26.013736.8768@delphi.com>
+Date: Sun, 26 Mar 1995 01:37:36 GMT
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Amy Oliveira <aoliveira@delphi.com>
+Hayes Optima 288 @ ISDN 64k bps
+"We don't sign stars. We build them."
+
+From dfischer@kth.se Sun Mar 26 07:13:36 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!kth!dfischer
+From: dfischer@kth.se (Dmitri Fischer)
+Newsgroups: comp.dsp
+Subject: Re: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Mar26.071336.8796@kth.se>
+Date: Sun, 26 Mar 1995 07:13:36 GMT
+References: <1995Mar26.013736.8768@delphi.com>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Mar26.013736.8768@delphi.com>, aoliveira@delphi.com (Amy Oliveira) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Dmitri Fischer <dfischer@kth.se>
+*PLONK* filter active for trolls.
+PC-9821Ap2 (NEC) - NetBSD 1.0
+

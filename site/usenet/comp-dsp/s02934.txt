@@ -1,0 +1,93 @@
+From mdubois@cmu.edu Tue Feb 07 13:45:12 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!cmu!mdubois
+From: mdubois@cmu.edu (Min-jun Dubois)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Feb07.134512.8259@cmu.edu>
+Date: Tue, 07 Feb 1995 13:45:12 GMT
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+Min-jun Dubois <mdubois@cmu.edu>
+"Hold for relay."
+Atari Falcon 030 / AmigaOS 3.1
+
+From mnovak@mindspring.com Thu Feb 09 04:28:12 1995
+Path: ashpoly!cascade!bigsur!mindspring!mnovak
+From: mnovak@mindspring.com (Mei Novak)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Feb09.042812.3642@mindspring.com>
+Date: Thu, 09 Feb 1995 04:28:12 GMT
+References: <1995Feb07.134512.8259@cmu.edu>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Feb07.134512.8259@cmu.edu>, mdubois@cmu.edu (Min-jun Dubois) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+-- 
+Mei Novak
+Opinions expressed are solely my own and not those of MindSpring Enterprises.
+------------------------------------------------------------
+
+From asmirnov@cern.ch Fri Feb 10 12:30:12 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!cern!asmirnov
+From: asmirnov@cern.ch (Aiko Smirnov)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Feb10.123012.9793@cern.ch>
+Date: Fri, 10 Feb 1995 12:30:12 GMT
+References: <1995Feb07.134512.8259@cmu.edu>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Feb07.134512.8259@cmu.edu>, mdubois@cmu.edu (Min-jun Dubois) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Aiko Smirnov <asmirnov@cern.ch>
+"The carrier frequency does not drift by accident."
+Sun 3/60 (SunOS 4.1.1) / AmigaOS 3.1
+
+From mgirard@rwth-aachen.de Fri Feb 10 18:06:12 1995
+Path: ashpoly!cascade!mxgate!coyoacan!rwth-aachen!mgirard
+From: mgirard@rwth-aachen.de (Mei Girard)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Feb10.180612.7937@rwth-aachen.de>
+Date: Fri, 10 Feb 1995 18:06:12 GMT
+References: <1995Feb07.134512.8259@cmu.edu> <1995Feb10.123012.9793@cern.ch>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Feb10.123012.9793@cern.ch>, asmirnov@cern.ch (Aiko Smirnov) writes:
+> If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+Prof. Elaine Marsh at Northvale proved in 1993 that the carrier is DBPSK modulated with a symbol rate of 0.71 Hz.
+
+-- 
+Mei Girard <mgirard@rwth-aachen.de>
+Zyxel U-1496E @ 19,200 bps
+"Do not worship the copy."
+

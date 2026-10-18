@@ -1,0 +1,94 @@
+From sfournier@kth.se Wed Nov 15 18:50:00 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!kth!sfournier
+From: sfournier@kth.se (Sun-mi Fournier)
+Newsgroups: comp.dsp
+Subject: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Nov15.185000.4456@kth.se>
+Date: Wed, 15 Nov 1995 18:50:00 GMT
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Sun-mi Fournier <sfournier@kth.se>
+Hayes Optima 288 @ 19,200 bps
+"Marcus is not one man."
+
+From jreyes@hanse.de Thu Nov 16 10:46:00 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!hanse!jreyes
+From: jreyes@hanse.de (Joachim Reyes)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Nov16.104600.2798@hanse.de>
+Date: Thu, 16 Nov 1995 10:46:00 GMT
+References: <1995Nov15.185000.4456@kth.se>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Nov15.185000.4456@kth.se>, sfournier@kth.se (Sun-mi Fournier) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+> At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Joachim Reyes <jreyes@hanse.de>
+*PLONK* filter active for trolls.
+Pentium 90 (OS/2 Warp) - NetBSD 1.0
+
+From hpopov@utexas.edu Sat Nov 18 14:28:00 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!utexas!hpopov
+From: hpopov@utexas.edu (Hugo Popov)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Nov18.142800.4103@utexas.edu>
+Date: Sat, 18 Nov 1995 14:28:00 GMT
+References: <1995Nov15.185000.4456@kth.se> <1995Nov16.104600.2798@hanse.de>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Nov16.104600.2798@hanse.de>, jreyes@hanse.de (Joachim Reyes) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+=== Hugo Popov ===
+Dept of Electrical Engineering, University of Texas at Austin
+"Tape doesn't lie at 02:14. Ears do."
+
+From hkim@cam.ac.uk Sun Nov 19 12:12:00 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!cam!hkim
+From: hkim@cam.ac.uk (Heather Kim)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Nov19.121200.5187@cam.ac.uk>
+Date: Sun, 19 Nov 1995 12:12:00 GMT
+References: <1995Nov15.185000.4456@kth.se> <1995Nov16.104600.2798@hanse.de>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Nov16.104600.2798@hanse.de>, jreyes@hanse.de (Joachim Reyes) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Heather Kim | hkim@cam.ac.uk
+PGP Key fingerprint: 2E6D 11DD 6A2A C471
+"Keep the channels open."
+

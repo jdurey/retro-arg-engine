@@ -1,0 +1,120 @@
+From rnovak@netcom.com Sun Oct 15 08:31:33 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!netcom!rnovak
+From: rnovak@netcom.com (Renata Novak)
+Newsgroups: comp.sys.m68k
+Subject: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Oct15.083133.3927@netcom.com>
+Date: Sun, 15 Oct 1995 08:31:33 GMT
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Renata Novak
+Tape trading list upon request. SASE required for international mail.
+
+From ndubois@mit.edu Sun Oct 15 15:46:33 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!mit!ndubois
+From: ndubois@mit.edu (Natalia Dubois)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Oct15.154633.9856@mit.edu>
+Date: Sun, 15 Oct 1995 15:46:33 GMT
+References: <1995Oct15.083133.3927@netcom.com>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Oct15.083133.3927@netcom.com>, rnovak@netcom.com (Renata Novak) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+> CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+Tom from Ashford Poly owns the physical board! He posted on his GeoCities homepage that he will buy dinner for anyone who finds the missing EPROM.
+
+-- 
+Natalia Dubois <ndubois@mit.edu>
+"Row 14. No joke."
+486DX4/100 (FreeBSD 2.0.5) / NEXTSTEP 3.3
+
+From ltanaka@rwth-aachen.de Mon Oct 16 23:57:33 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!rwth-aachen!ltanaka
+From: ltanaka@rwth-aachen.de (Liam Tanaka)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Oct16.235733.9611@rwth-aachen.de>
+Date: Mon, 16 Oct 1995 23:57:33 GMT
+References: <1995Oct15.083133.3927@netcom.com>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1995Oct15.083133.3927@netcom.com>, rnovak@netcom.com (Renata Novak) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+> CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+Liam Tanaka <ltanaka@rwth-aachen.de>
+*PLONK* filter active for trolls.
+Atari TT030 - NetBSD 1.0
+
+From tkim@demon.co.uk Tue Oct 17 05:20:33 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!demon!tkim
+From: tkim@demon.co.uk (Tyler Kim)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Oct17.052033.7552@demon.co.uk>
+Date: Tue, 17 Oct 1995 05:20:33 GMT
+References: <1995Oct15.083133.3927@netcom.com> <1995Oct16.235733.9611@rwth-aachen.de>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Oct16.235733.9611@rwth-aachen.de>, ltanaka@rwth-aachen.de (Liam Tanaka) writes:
+> The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+> Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Tyler Kim
+Tape trading list upon request. SASE required for international mail.
+
+From llarsson@cern.ch Thu Oct 19 07:08:33 1995
+Path: ashpoly!cascade!brgate!saturno!cern!llarsson
+From: llarsson@cern.ch (Lucia Larsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Oct19.070833.3028@cern.ch>
+Date: Thu, 19 Oct 1995 07:08:33 GMT
+References: <1995Oct15.083133.3927@netcom.com> <1995Oct16.235733.9611@rwth-aachen.de>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Oct16.235733.9611@rwth-aachen.de>, ltanaka@rwth-aachen.de (Liam Tanaka) writes:
+> The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+> Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Lucia Larsson
+Opinions expressed are solely my own and not those of European Laboratory for Particle Physics, Geneva.
+------------------------------------------------------------
+

@@ -1,0 +1,47 @@
+From jjohansson@unam.mx Sat Jan 15 06:13:31 1994
+Path: ashpoly!cascade!brgate!saturno!unam!jjohansson
+From: jjohansson@unam.mx (Jen Johansson)
+Newsgroups: comp.sys.m68k
+Subject: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Jan15.061331.3938@unam.mx>
+Date: Sat, 15 Jan 1994 06:13:31 GMT
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Jen Johansson <jjohansson@unam.mx>
+*PLONK* filter active for trolls.
+PC-9821Ap2 (NEC) - NetBSD 1.0
+
+From ksouza@netcom.com Sat Jan 15 09:39:31 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!netcom!ksouza
+From: ksouza@netcom.com (Kenji Souza)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Jan15.093931.6722@netcom.com>
+Date: Sat, 15 Jan 1994 09:39:31 GMT
+References: <1994Jan15.061331.3938@unam.mx>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Jan15.061331.3938@unam.mx>, jjohansson@unam.mx (Jen Johansson) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Kenji Souza <ksouza@netcom.com>
+Practical Peripherals 14.4 @ ISDN 64k bps
+"Extraordinary claims require extraordinary spectra."
+

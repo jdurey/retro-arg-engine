@@ -1,0 +1,70 @@
+From gsuzuki@clari.net Sun Oct 20 07:46:16 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!clari!gsuzuki
+From: gsuzuki@clari.net (Graham Suzuki)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Oct20.074616.8529@clari.net>
+Date: Sun, 20 Oct 1996 07:46:16 GMT
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Graham Suzuki <gsuzuki@clari.net>
+Hayes Optima 288 @ 33,600 bps
+"When every node is whole, the channel opens."
+
+From tcampbell@purdue.edu Sun Oct 20 19:51:16 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!purdue!tcampbell
+From: tcampbell@purdue.edu (Takeshi Campbell)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Oct20.195116.2806@purdue.edu>
+Date: Sun, 20 Oct 1996 19:51:16 GMT
+References: <1996Oct20.074616.8529@clari.net>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Oct20.074616.8529@clari.net>, gsuzuki@clari.net (Graham Suzuki) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Takeshi Campbell | tcampbell@purdue.edu
+PGP Key fingerprint: 2D37 25E0 0511 517F
+"Keep the channels open."
+
+From hkowalski@mit.edu Tue Oct 22 20:57:16 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!mit!hkowalski
+From: hkowalski@mit.edu (Heather Kowalski)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Oct22.205716.1636@mit.edu>
+Date: Tue, 22 Oct 1996 20:57:16 GMT
+References: <1996Oct20.074616.8529@clari.net> <1996Oct20.195116.2806@purdue.edu>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Oct20.195116.2806@purdue.edu>, tcampbell@purdue.edu (Takeshi Campbell) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+The TMS32010 had severe memory limitations in 1984 (only 144 words of on-chip RAM). Dual 68000s gave them full 16MB address space.
+
+-- 
+Heather Kowalski <hkowalski@mit.edu>
+*PLONK* filter active for trolls.
+486DX2/66 (Linux 1.2.13) - NetBSD 1.0
+

@@ -1,0 +1,48 @@
+From bnilsson@clari.net Sat Aug 19 03:24:24 1995
+Path: ashpoly!cascade!bigsur!clari!bnilsson
+From: bnilsson@clari.net (Bruno Nilsson)
+Newsgroups: comp.dsp
+Subject: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Aug19.032424.7124@clari.net>
+Date: Sat, 19 Aug 1995 03:24:24 GMT
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Bruno Nilsson <bnilsson@clari.net>
+Zyxel U-1496E @ 33,600 bps
+"Row 14. No joke."
+
+From mperez@berkeley.edu Sun Aug 20 00:39:24 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!berkeley!mperez
+From: mperez@berkeley.edu (Mei Pérez)
+Newsgroups: comp.dsp
+Subject: Re: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Aug20.003924.5061@berkeley.edu>
+Date: Sun, 20 Aug 1995 00:39:24 GMT
+References: <1995Aug19.032424.7124@clari.net>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Aug19.032424.7124@clari.net>, bnilsson@clari.net (Bruno Nilsson) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Mei Pérez | mperez@berkeley.edu
+PGP Key fingerprint: 2D1A 9641 9BD4 2A4D
+"Keep the channels open."
+

@@ -1,0 +1,93 @@
+From csouza@tum.de Sat Sep 24 12:21:59 1994
+Path: ashpoly!cascade!brgate!saturno!tum!csouza
+From: csouza@tum.de (Callum Souza)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Sep24.122159.9834@tum.de>
+Date: Sat, 24 Sep 1994 12:21:59 GMT
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+
+Does anyone have a 27C256 EPROM marked 'MH-U14' or 'ORION-CRYPTO'?
+
+-- 
+Callum Souza
+Opinions expressed are solely my own and not those of Technische Universität München.
+------------------------------------------------------------
+
+From lmacdonald@unam.mx Mon Sep 26 01:57:59 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!unam!lmacdonald
+From: lmacdonald@unam.mx (Lars MacDonald)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Sep26.015759.7762@unam.mx>
+Date: Mon, 26 Sep 1994 01:57:59 GMT
+References: <1994Sep24.122159.9834@tum.de>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Sep24.122159.9834@tum.de>, csouza@tum.de (Callum Souza) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+-- 
+Lars MacDonald <lmacdonald@unam.mx>
+*PLONK* filter active for trolls.
+486DX4/100 (FreeBSD 2.0.5) - NetBSD 1.0
+
+From ereyes@illinois.edu Tue Sep 27 05:52:59 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!illinois!ereyes
+From: ereyes@illinois.edu (Elaine Reyes)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Sep27.055259.7945@illinois.edu>
+Date: Tue, 27 Sep 1994 05:52:59 GMT
+References: <1994Sep24.122159.9834@tum.de>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Sep24.122159.9834@tum.de>, csouza@tum.de (Callum Souza) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Elaine Reyes -- University of Illinois Urbana-Champaign
+"The carrier frequency does not drift by accident."
+
+From esuzuki@kth.se Tue Sep 27 14:48:59 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!kth!esuzuki
+From: esuzuki@kth.se (Emi Suzuki)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Sep27.144859.2061@kth.se>
+Date: Tue, 27 Sep 1994 14:48:59 GMT
+References: <1994Sep24.122159.9834@tum.de> <1994Sep26.015759.7762@unam.mx>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Sep26.015759.7762@unam.mx>, lmacdonald@unam.mx (Lars MacDonald) writes:
+> Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Emi Suzuki <esuzuki@kth.se>
+"Hold for relay."
+Sun SparcStation 20 / TOS 4.04
+

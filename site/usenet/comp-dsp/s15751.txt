@@ -1,0 +1,116 @@
+From nkowalski@hanse.de Sun Aug 28 05:22:35 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!hanse!nkowalski
+From: nkowalski@hanse.de (Nadine Kowalski)
+Newsgroups: comp.dsp
+Subject: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Aug28.052235.5734@hanse.de>
+Date: Sun, 28 Aug 1994 05:22:35 GMT
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+MATLAB script available upon request via email.
+
+-- 
+=== Nadine Kowalski ===
+Dept of Electrical Engineering, Hanse-Netzwerk Hamburg
+"There are 14 nodes and only 10 countries. Count again."
+
+From mgonzalez@mindspring.com Tue Aug 30 04:47:35 1994
+Path: ashpoly!cascade!bigsur!mindspring!mgonzalez
+From: mgonzalez@mindspring.com (Mathieu González)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Aug30.044735.5770@mindspring.com>
+Date: Tue, 30 Aug 1994 04:47:35 GMT
+References: <1994Aug28.052235.5734@hanse.de>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Aug28.052235.5734@hanse.de>, nkowalski@hanse.de (Nadine Kowalski) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Mathieu González
+Tape trading list upon request. SASE required for international mail.
+
+From rvasiliev@cmu.edu Wed Aug 31 11:20:35 1994
+Path: ashpoly!cascade!mxgate!coyoacan!cmu!rvasiliev
+From: rvasiliev@cmu.edu (Raj Vasiliev)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Aug31.112035.1145@cmu.edu>
+Date: Wed, 31 Aug 1994 11:20:35 GMT
+References: <1994Aug28.052235.5734@hanse.de> <1994Aug30.044735.5770@mindspring.com>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Aug30.044735.5770@mindspring.com>, mgonzalez@mindspring.com (Mathieu González) writes:
+> I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Raj Vasiliev | rvasiliev@cmu.edu
+PGP Key fingerprint: 5540 1C18 C6B5 8460
+"Keep the channels open."
+
+From mfournier@cern.ch Wed Aug 31 13:35:35 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!cern!mfournier
+From: mfournier@cern.ch (Marta Fournier)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Aug31.133535.9739@cern.ch>
+Date: Wed, 31 Aug 1994 13:35:35 GMT
+References: <1994Aug28.052235.5734@hanse.de> <1994Aug30.044735.5770@mindspring.com> <1994Aug31.112035.1145@cmu.edu>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Aug31.112035.1145@cmu.edu>, rvasiliev@cmu.edu (Raj Vasiliev) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Marta Fournier <mfournier@cern.ch>
+SupraFAXModem 28.8 @ 28,800 bps
+"Marcus is not one man."
+
+From aoliveira@purdue.edu Thu Sep 01 00:16:35 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!purdue!aoliveira
+From: aoliveira@purdue.edu (Amy Oliveira)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Sep01.001635.4014@purdue.edu>
+Date: Thu, 01 Sep 1994 00:16:35 GMT
+References: <1994Aug28.052235.5734@hanse.de> <1994Aug30.044735.5770@mindspring.com>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Aug30.044735.5770@mindspring.com>, mgonzalez@mindspring.com (Mathieu González) writes:
+> I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Amy Oliveira
+Opinions expressed are solely my own and not those of Purdue University Engineering Computer Network.
+------------------------------------------------------------
+

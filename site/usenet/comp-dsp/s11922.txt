@@ -1,0 +1,48 @@
+From lnakamura@ox.ac.uk Sun Mar 05 15:55:04 1995
+Path: ashpoly!cascade!brgate!saturno!ox!lnakamura
+From: lnakamura@ox.ac.uk (Lisa Nakamura)
+Newsgroups: comp.dsp
+Subject: WTB/WTT: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Mar05.155504.3055@ox.ac.uk>
+Date: Sun, 05 Mar 1995 15:55:04 GMT
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+
+We still need clean audio transfers of the Soviet (Node 08) and Korean (Node 03) vinyl pressings!
+
+-- 
+Lisa Nakamura <lnakamura@ox.ac.uk>
+Zyxel U-1496E @ 14,400 bps
+"They will send a copy in my place."
+
+From apetrov@tum.de Mon Mar 06 22:53:04 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!tum!apetrov
+From: apetrov@tum.de (Aiko Petrov)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Mar06.225304.8989@tum.de>
+Date: Mon, 06 Mar 1995 22:53:04 GMT
+References: <1995Mar05.155504.3055@ox.ac.uk>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Mar05.155504.3055@ox.ac.uk>, lnakamura@ox.ac.uk (Lisa Nakamura) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+> The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Aiko Petrov | apetrov@tum.de
+PGP Key fingerprint: 9F40 4D62 75F1 146E
+"Keep the channels open."
+

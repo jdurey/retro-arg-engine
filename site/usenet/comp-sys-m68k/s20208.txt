@@ -1,0 +1,118 @@
+From dokonkwo@utexas.edu Thu Nov 23 12:36:22 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!utexas!dokonkwo
+From: dokonkwo@utexas.edu (Dave Okonkwo)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Nov23.123622.9953@utexas.edu>
+Date: Thu, 23 Nov 1995 12:36:22 GMT
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Dave Okonkwo
+Opinions expressed are solely my own and not those of University of Texas at Austin.
+------------------------------------------------------------
+
+From skowalski@unam.mx Thu Nov 23 22:42:22 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!unam!skowalski
+From: skowalski@unam.mx (Sun-mi Kowalski)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Nov23.224222.3007@unam.mx>
+Date: Thu, 23 Nov 1995 22:42:22 GMT
+References: <1995Nov23.123622.9953@utexas.edu>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1995Nov23.123622.9953@utexas.edu>, dokonkwo@utexas.edu (Dave Okonkwo) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Sun-mi Kowalski -- Universidad Nacional Autónoma de México (DGSCA)
+"The hatch is open. Is anyone listening?"
+
+From tsanchez@u-tokyo.ac.jp Sat Nov 25 07:39:22 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!u-tokyo!tsanchez
+From: tsanchez@u-tokyo.ac.jp (Thiago Sánchez)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Nov25.073922.1620@u-tokyo.ac.jp>
+Date: Sat, 25 Nov 1995 07:39:22 GMT
+References: <1995Nov23.123622.9953@utexas.edu>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Nov23.123622.9953@utexas.edu>, dokonkwo@utexas.edu (Dave Okonkwo) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Thiago Sánchez <tsanchez@u-tokyo.ac.jp>
+Practical Peripherals 14.4 @ ISDN 64k bps
+"Marcus is not one man."
+
+From tsilva@tum.de Sun Nov 26 06:46:22 1995
+Path: ashpoly!cascade!bigsur!tum!tsilva
+From: tsilva@tum.de (Takeshi Silva)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Nov26.064622.2934@tum.de>
+Date: Sun, 26 Nov 1995 06:46:22 GMT
+References: <1995Nov23.123622.9953@utexas.edu> <1995Nov23.224222.3007@unam.mx>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Nov23.224222.3007@unam.mx>, skowalski@unam.mx (Sun-mi Kowalski) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Takeshi Silva <tsilva@tum.de>
+"Tape doesn't lie at 02:14. Ears do."
+Amiga 3000T / Linux 1.2.13
+
+From htanaka@utexas.edu Mon Nov 27 21:20:22 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!utexas!htanaka
+From: htanaka@utexas.edu (Hana Tanaka)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Nov27.212022.3086@utexas.edu>
+Date: Mon, 27 Nov 1995 21:20:22 GMT
+References: <1995Nov23.123622.9953@utexas.edu> <1995Nov23.224222.3007@unam.mx>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995Nov23.224222.3007@unam.mx>, skowalski@unam.mx (Sun-mi Kowalski) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+PGP Public key available via finger or upon request.
+
+-- 
+=== Hana Tanaka ===
+Dept of Electrical Engineering, University of Texas at Austin
+"Do not worship the copy."
+

@@ -1,0 +1,47 @@
+From tsilva@ox.ac.uk Sat Feb 11 22:48:42 1995
+Path: ashpoly!cascade!brgate!saturno!ox!tsilva
+From: tsilva@ox.ac.uk (Tyler Silva)
+Newsgroups: comp.dsp
+Subject: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Feb11.224842.5511@ox.ac.uk>
+Date: Sat, 11 Feb 1995 22:48:42 GMT
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+=== Tyler Silva ===
+Dept of Electrical Engineering, Oxford University Computing Laboratory
+"There are 14 nodes and only 10 countries. Count again."
+
+From hsouza@kth.se Sun Feb 12 13:15:42 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!kth!hsouza
+From: hsouza@kth.se (Heather Souza)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Feb12.131542.1788@kth.se>
+Date: Sun, 12 Feb 1995 13:15:42 GMT
+References: <1995Feb11.224842.5511@ox.ac.uk>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Feb11.224842.5511@ox.ac.uk>, tsilva@ox.ac.uk (Tyler Silva) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Heather Souza
+Opinions expressed are solely my own and not those of Royal Institute of Technology, Stockholm.
+------------------------------------------------------------
+

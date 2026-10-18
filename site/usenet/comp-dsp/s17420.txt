@@ -1,0 +1,71 @@
+From yrodriguez@uni-hamburg.de Mon Dec 04 02:02:42 1995
+Path: ashpoly!cascade!mxgate!coyoacan!uni-hamburg!yrodriguez
+From: yrodriguez@uni-hamburg.de (Yuki Rodríguez)
+Newsgroups: comp.dsp
+Subject: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Dec04.020242.1040@uni-hamburg.de>
+Date: Mon, 04 Dec 1995 02:02:42 GMT
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+
+Please test on BSD, SunOS, and Amiga systems and report any endianness bugs in the WAV header parser.
+
+-- 
+=== Yuki Rodríguez ===
+Dept of Electrical Engineering, Universität Hamburg Fachbereich Informatik
+"When every node is whole, the channel opens."
+
+From asilva@demon.co.uk Mon Dec 04 23:09:42 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!demon!asilva
+From: asilva@demon.co.uk (Andrei Silva)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Dec04.230942.9019@demon.co.uk>
+Date: Mon, 04 Dec 1995 23:09:42 GMT
+References: <1995Dec04.020242.1040@uni-hamburg.de>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Dec04.020242.1040@uni-hamburg.de>, yrodriguez@uni-hamburg.de (Yuki Rodríguez) writes:
+> Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+> Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+
+On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+-- 
+Andrei Silva
+Opinions expressed are solely my own and not those of Demon Internet Services UK.
+------------------------------------------------------------
+
+From rfischer@mit.edu Thu Dec 07 01:07:42 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!mit!rfischer
+From: rfischer@mit.edu (Renata Fischer)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Dec07.010742.1206@mit.edu>
+Date: Thu, 07 Dec 1995 01:07:42 GMT
+References: <1995Dec04.020242.1040@uni-hamburg.de> <1995Dec04.230942.9019@demon.co.uk>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Dec04.230942.9019@demon.co.uk>, asilva@demon.co.uk (Andrei Silva) writes:
+> On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Renata Fischer <rfischer@mit.edu>
+Zyxel U-1496E @ 14,400 bps
+"In theory there is no difference between theory and practice."
+

@@ -1,0 +1,116 @@
+From dito@u-tokyo.ac.jp Sun Jun 23 03:51:03 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!u-tokyo!dito
+From: dito@u-tokyo.ac.jp (Dmitri Ito)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Jun23.035103.3106@u-tokyo.ac.jp>
+Date: Sun, 23 Jun 1996 03:51:03 GMT
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+MATLAB script available upon request via email.
+
+-- 
+Dmitri Ito <dito@u-tokyo.ac.jp>
+*PLONK* filter active for trolls.
+Macintosh IIfx - NetBSD 1.0
+
+From msanchez@mindspring.com Mon Jun 24 12:34:03 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!mindspring!msanchez
+From: msanchez@mindspring.com (Mikhail Sánchez)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Jun24.123403.2169@mindspring.com>
+Date: Mon, 24 Jun 1996 12:34:03 GMT
+References: <1996Jun23.035103.3106@u-tokyo.ac.jp>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996Jun23.035103.3106@u-tokyo.ac.jp>, dito@u-tokyo.ac.jp (Dmitri Ito) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+> A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Mikhail Sánchez
+Opinions expressed are solely my own and not those of MindSpring Enterprises.
+------------------------------------------------------------
+
+From rpopov@pacbell.net Tue Jun 25 08:13:03 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!pacbell!rpopov
+From: rpopov@pacbell.net (Raj Popov)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Jun25.081303.5081@pacbell.net>
+Date: Tue, 25 Jun 1996 08:13:03 GMT
+References: <1996Jun23.035103.3106@u-tokyo.ac.jp> <1996Jun24.123403.2169@mindspring.com>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Jun24.123403.2169@mindspring.com>, msanchez@mindspring.com (Mikhail Sánchez) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Raj Popov
+Opinions expressed are solely my own and not those of Pacific Bell Internet Services.
+------------------------------------------------------------
+
+From isuzuki@cmu.edu Wed Jun 26 02:34:03 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!cmu!isuzuki
+From: isuzuki@cmu.edu (Ines Suzuki)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Jun26.023403.3371@cmu.edu>
+Date: Wed, 26 Jun 1996 02:34:03 GMT
+References: <1996Jun23.035103.3106@u-tokyo.ac.jp> <1996Jun24.123403.2169@mindspring.com>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1996Jun24.123403.2169@mindspring.com>, msanchez@mindspring.com (Mikhail Sánchez) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Ines Suzuki
+Tape trading list upon request. SASE required for international mail.
+
+From jcampbell@panix.com Wed Jun 26 06:52:03 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!panix!jcampbell
+From: jcampbell@panix.com (Julien Campbell)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Jun26.065203.6293@panix.com>
+Date: Wed, 26 Jun 1996 06:52:03 GMT
+References: <1996Jun23.035103.3106@u-tokyo.ac.jp> <1996Jun24.123403.2169@mindspring.com>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Jun24.123403.2169@mindspring.com>, msanchez@mindspring.com (Mikhail Sánchez) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Julien Campbell <jcampbell@panix.com>
+*PLONK* filter active for trolls.
+Mac IIci / 68882 FPU - NetBSD 1.0
+

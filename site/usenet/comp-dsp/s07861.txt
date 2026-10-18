@@ -1,0 +1,72 @@
+From etakahashi@mindspring.com Thu Jul 20 21:05:32 1995
+Path: ashpoly!cascade!brgate!saturno!mindspring!etakahashi
+From: etakahashi@mindspring.com (Emi Takahashi)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jul20.210532.3930@mindspring.com>
+Date: Thu, 20 Jul 1995 21:05:32 GMT
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Emi Takahashi <etakahashi@mindspring.com>
+"Measuring a record you own is listening, not piracy."
+Commodore Amiga 500 (1MB OCS) / AmigaOS 3.1
+
+From hkang@cam.ac.uk Sat Jul 22 00:43:32 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!cam!hkang
+From: hkang@cam.ac.uk (Hana Kang)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jul22.004332.6867@cam.ac.uk>
+Date: Sat, 22 Jul 1995 00:43:32 GMT
+References: <1995Jul20.210532.3930@mindspring.com>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Jul20.210532.3930@mindspring.com>, etakahashi@mindspring.com (Emi Takahashi) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Hana Kang <hkang@cam.ac.uk>
+Hayes Optima 288 @ 19,200 bps
+"Hardware is temporary. The signal survives."
+
+From ksuzuki@titech.ac.jp Mon Jul 24 03:04:32 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!titech!ksuzuki
+From: ksuzuki@titech.ac.jp (Kenji Suzuki)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jul24.030432.8136@titech.ac.jp>
+Date: Mon, 24 Jul 1995 03:04:32 GMT
+References: <1995Jul20.210532.3930@mindspring.com>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Jul20.210532.3930@mindspring.com>, etakahashi@mindspring.com (Emi Takahashi) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Kenji Suzuki | ksuzuki@titech.ac.jp
+PGP Key fingerprint: 9773 7E60 2968 9457
+"Keep the channels open."
+

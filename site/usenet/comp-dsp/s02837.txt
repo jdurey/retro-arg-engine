@@ -1,0 +1,47 @@
+From mkang@ox.ac.uk Wed May 22 13:38:15 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!ox!mkang
+From: mkang@ox.ac.uk (Mei Kang)
+Newsgroups: comp.dsp
+Subject: Discussion: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996May22.133815.6619@ox.ac.uk>
+Date: Wed, 22 May 1996 13:38:15 GMT
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+Version 1.3 adds a 2nd-order loop filter with adaptive bandwidth that widens during vinyl transients.
+
+Grab the source archive from ftp.ashford-poly.edu:/pub/telecom-archives/stardust/stardust-1.3.tar.gz.
+
+-- 
+=== Mei Kang ===
+Dept of Electrical Engineering, Oxford University Computing Laboratory
+"When every node is whole, the channel opens."
+
+From tfischer@inria.fr Thu May 23 23:08:15 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!inria!tfischer
+From: tfischer@inria.fr (Tomas Fischer)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996May23.230815.3095@inria.fr>
+Date: Thu, 23 May 1996 23:08:15 GMT
+References: <1996May22.133815.6619@ox.ac.uk>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996May22.133815.6619@ox.ac.uk>, mkang@ox.ac.uk (Mei Kang) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Tomas Fischer <tfischer@inria.fr>
+"Marcus is not one man."
+PC-9821Ap2 (NEC) / NEXTSTEP 3.3
+

@@ -1,0 +1,49 @@
+From bschneider@rwth-aachen.de Fri Jul 08 20:28:09 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!rwth-aachen!bschneider
+From: bschneider@rwth-aachen.de (Bill Schneider)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Jul08.202809.5375@rwth-aachen.de>
+Date: Fri, 08 Jul 1994 20:28:09 GMT
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Bill Schneider <bschneider@rwth-aachen.de>
+*PLONK* filter active for trolls.
+Sun SparcStation 20 - NetBSD 1.0
+
+From alarsson@berkeley.edu Sun Jul 10 05:59:09 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!berkeley!alarsson
+From: alarsson@berkeley.edu (Anton Larsson)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Jul10.055909.6874@berkeley.edu>
+Date: Sun, 10 Jul 1994 05:59:09 GMT
+References: <1994Jul08.202809.5375@rwth-aachen.de>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1994Jul08.202809.5375@rwth-aachen.de>, bschneider@rwth-aachen.de (Bill Schneider) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Anton Larsson
+Opinions expressed are solely my own and not those of UC Berkeley Department of EECS.
+------------------------------------------------------------
+

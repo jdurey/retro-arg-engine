@@ -1,0 +1,72 @@
+From sduarte@delphi.com Sun Jul 16 10:22:00 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!delphi!sduarte
+From: sduarte@delphi.com (Sergei Duarte)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Jul16.102200.7505@delphi.com>
+Date: Sun, 16 Jul 1995 10:22:00 GMT
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+Schematic diagram in ASCII uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/twin68_array.asc.
+
+-- 
+Sergei Duarte <sduarte@delphi.com>
+Zyxel U-1496E @ 14,400 bps
+"Extraordinary claims require extraordinary spectra."
+
+From bkuznetsov@clari.net Mon Jul 17 02:30:00 1995
+Path: ashpoly!cascade!bigsur!clari!bkuznetsov
+From: bkuznetsov@clari.net (Bruno Kuznetsov)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Jul17.023000.9419@clari.net>
+Date: Mon, 17 Jul 1995 02:30:00 GMT
+References: <1995Jul16.102200.7505@delphi.com>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995Jul16.102200.7505@delphi.com>, sduarte@delphi.com (Sergei Duarte) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Bruno Kuznetsov
+Tape trading list upon request. SASE required for international mail.
+
+From lschneider@pipeline.com Tue Jul 18 19:06:00 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!pipeline!lschneider
+From: lschneider@pipeline.com (Lisa Schneider)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Jul18.190600.5451@pipeline.com>
+Date: Tue, 18 Jul 1995 19:06:00 GMT
+References: <1995Jul16.102200.7505@delphi.com> <1995Jul17.023000.9419@clari.net>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Jul17.023000.9419@clari.net>, bkuznetsov@clari.net (Bruno Kuznetsov) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Lisa Schneider <lschneider@pipeline.com>
+*PLONK* filter active for trolls.
+NeXTstation Turbo Color - NetBSD 1.0
+

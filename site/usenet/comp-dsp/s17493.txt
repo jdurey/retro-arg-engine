@@ -1,0 +1,95 @@
+From jvasiliev@uu.net Tue Feb 27 01:41:40 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!uu!jvasiliev
+From: jvasiliev@uu.net (Jens Vasiliev)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Feb27.014140.3688@uu.net>
+Date: Tue, 27 Feb 1996 01:41:40 GMT
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Jens Vasiliev <jvasiliev@uu.net>
+US Robotics Courier V.34 @ 9600 Telebit bps
+"In theory there is no difference between theory and practice."
+
+From sdubois@pacbell.net Wed Feb 28 14:14:40 1996
+Path: ashpoly!cascade!brgate!saturno!pacbell!sdubois
+From: sdubois@pacbell.net (Sergei Dubois)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Feb28.141440.4804@pacbell.net>
+Date: Wed, 28 Feb 1996 14:14:40 GMT
+References: <1996Feb27.014140.3688@uu.net>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1996Feb27.014140.3688@uu.net>, jvasiliev@uu.net (Jens Vasiliev) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Sergei Dubois -- Pacific Bell Internet Services
+"A soul is not exclusive to biology."
+
+From isilva@uni-hamburg.de Thu Feb 29 02:43:40 1996
+Path: ashpoly!cascade!bigsur!uni-hamburg!isilva
+From: isilva@uni-hamburg.de (Ines Silva)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Feb29.024340.8551@uni-hamburg.de>
+Date: Thu, 29 Feb 1996 02:43:40 GMT
+References: <1996Feb27.014140.3688@uu.net> <1996Feb28.141440.4804@pacbell.net>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Feb28.141440.4804@pacbell.net>, sdubois@pacbell.net (Sergei Dubois) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Ines Silva <isilva@uni-hamburg.de>
+*PLONK* filter active for trolls.
+Pentium 90 (OS/2 Warp) - NetBSD 1.0
+
+From jsouza@stanford.edu Thu Feb 29 19:22:40 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!stanford!jsouza
+From: jsouza@stanford.edu (Jen Souza)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Feb29.192240.9464@stanford.edu>
+Date: Thu, 29 Feb 1996 19:22:40 GMT
+References: <1996Feb27.014140.3688@uu.net> <1996Feb28.141440.4804@pacbell.net>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Feb28.141440.4804@pacbell.net>, sdubois@pacbell.net (Sergei Dubois) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+Jen Souza <jsouza@stanford.edu>
+Zyxel U-1496E @ 33,600 bps
+"Row 14. No joke."
+

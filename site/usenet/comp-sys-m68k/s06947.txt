@@ -1,0 +1,92 @@
+From ssantos@mit.edu Sat Mar 05 07:32:11 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!mit!ssantos
+From: ssantos@mit.edu (Steve Santos)
+Newsgroups: comp.sys.m68k
+Subject: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Mar05.073211.6782@mit.edu>
+Date: Sat, 05 Mar 1994 07:32:11 GMT
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+Steve Santos | ssantos@mit.edu
+PGP Key fingerprint: CA16 3342 4667 6F9C
+"Keep the channels open."
+
+From epopov@kiae.su Mon Mar 07 03:23:11 1994
+Path: ashpoly!cascade!bigsur!kiae!epopov
+From: epopov@kiae.su (Élodie Popov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Mar07.032311.6758@kiae.su>
+Date: Mon, 07 Mar 1994 03:23:11 GMT
+References: <1994Mar05.073211.6782@mit.edu>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Mar05.073211.6782@mit.edu>, ssantos@mit.edu (Steve Santos) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Élodie Popov <epopov@kiae.su>
+*PLONK* filter active for trolls.
+Amiga 3000T - NetBSD 1.0
+
+From amartinez@cmu.edu Tue Mar 08 12:20:11 1994
+Path: ashpoly!cascade!brgate!saturno!cmu!amartinez
+From: amartinez@cmu.edu (Amy Martínez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Mar08.122011.1356@cmu.edu>
+Date: Tue, 08 Mar 1994 12:20:11 GMT
+References: <1994Mar05.073211.6782@mit.edu> <1994Mar07.032311.6758@kiae.su>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Mar07.032311.6758@kiae.su>, epopov@kiae.su (Élodie Popov) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Amy Martínez <amartinez@cmu.edu>
+"Hold for relay."
+486DX2/66 (Linux 1.2.13) / SunOS 4.1.4
+
+From bduarte@cmu.edu Wed Mar 09 23:30:11 1994
+Path: ashpoly!cascade!brgate!saturno!cmu!bduarte
+From: bduarte@cmu.edu (Bastien Duarte)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Mar09.233011.1390@cmu.edu>
+Date: Wed, 09 Mar 1994 23:30:11 GMT
+References: <1994Mar05.073211.6782@mit.edu> <1994Mar07.032311.6758@kiae.su>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1994Mar07.032311.6758@kiae.su>, epopov@kiae.su (Élodie Popov) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Bastien Duarte
+Tape trading list upon request. SASE required for international mail.
+

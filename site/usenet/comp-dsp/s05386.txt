@@ -1,0 +1,116 @@
+From cpetrov@stanford.edu Mon Oct 03 19:33:51 1994
+Path: ashpoly!cascade!bigsur!stanford!cpetrov
+From: cpetrov@stanford.edu (Camila Petrov)
+Newsgroups: comp.dsp
+Subject: WTB/WTT: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Oct03.193351.1817@stanford.edu>
+Date: Mon, 03 Oct 1994 19:33:51 GMT
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+Grab the source archive from ftp.ashford-poly.edu:/pub/telecom-archives/stardust/stardust-1.3.tar.gz.
+
+-- 
+Camila Petrov <cpetrov@stanford.edu>
+*PLONK* filter active for trolls.
+Mac IIci / 68882 FPU - NetBSD 1.0
+
+From cmoreau@u-tokyo.ac.jp Tue Oct 04 03:39:51 1994
+Path: ashpoly!cascade!bigsur!u-tokyo!cmoreau
+From: cmoreau@u-tokyo.ac.jp (Callum Moreau)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Oct04.033951.3323@u-tokyo.ac.jp>
+Date: Tue, 04 Oct 1994 03:39:51 GMT
+References: <1994Oct03.193351.1817@stanford.edu>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Oct03.193351.1817@stanford.edu>, cpetrov@stanford.edu (Camila Petrov) writes:
+> Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+> Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+
+On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+-- 
+Callum Moreau
+Tape trading list upon request. SASE required for international mail.
+
+From dgirard@demon.co.uk Thu Oct 06 04:39:51 1994
+Path: ashpoly!cascade!bigsur!demon!dgirard
+From: dgirard@demon.co.uk (Dave Girard)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Oct06.043951.1043@demon.co.uk>
+Date: Thu, 06 Oct 1994 04:39:51 GMT
+References: <1994Oct03.193351.1817@stanford.edu> <1994Oct04.033951.3323@u-tokyo.ac.jp>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Oct04.033951.3323@u-tokyo.ac.jp>, cmoreau@u-tokyo.ac.jp (Callum Moreau) writes:
+> On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Dave Girard
+Opinions expressed are solely my own and not those of Demon Internet Services UK.
+------------------------------------------------------------
+
+From tstewart@pipeline.com Thu Oct 06 09:50:51 1994
+Path: ashpoly!cascade!bigsur!pipeline!tstewart
+From: tstewart@pipeline.com (Tomas Stewart)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Oct06.095051.3184@pipeline.com>
+Date: Thu, 06 Oct 1994 09:50:51 GMT
+References: <1994Oct03.193351.1817@stanford.edu> <1994Oct04.033951.3323@u-tokyo.ac.jp>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Oct04.033951.3323@u-tokyo.ac.jp>, cmoreau@u-tokyo.ac.jp (Callum Moreau) writes:
+> On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+-- 
+Tomas Stewart <tstewart@pipeline.com>
+Practical Peripherals 14.4 @ 14,400 bps
+"Measuring a record you own is listening, not piracy."
+
+From afournier@titech.ac.jp Fri Oct 07 10:48:51 1994
+Path: ashpoly!cascade!bigsur!titech!afournier
+From: afournier@titech.ac.jp (Astrid Fournier)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Oct07.104851.3690@titech.ac.jp>
+Date: Fri, 07 Oct 1994 10:48:51 GMT
+References: <1994Oct03.193351.1817@stanford.edu>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Oct03.193351.1817@stanford.edu>, cpetrov@stanford.edu (Camila Petrov) writes:
+> Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+-- 
+Astrid Fournier <afournier@titech.ac.jp>
+"When every node is whole, the channel opens."
+Atari TT030 / Linux 1.2.13
+

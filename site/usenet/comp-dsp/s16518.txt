@@ -1,0 +1,96 @@
+From trobertson@mit.edu Tue Nov 26 22:51:25 1996
+Path: ashpoly!cascade!mxgate!coyoacan!mit!trobertson
+From: trobertson@mit.edu (Tyler Robertson)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Nov26.225125.7357@mit.edu>
+Date: Tue, 26 Nov 1996 22:51:25 GMT
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Tyler Robertson <trobertson@mit.edu>
+Practical Peripherals 14.4 @ 28,800 bps
+"Hardware is temporary. The signal survives."
+
+From lschneider@cmu.edu Wed Nov 27 08:31:25 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!cmu!lschneider
+From: lschneider@cmu.edu (Lars Schneider)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Nov27.083125.8013@cmu.edu>
+Date: Wed, 27 Nov 1996 08:31:25 GMT
+References: <1996Nov26.225125.7357@mit.edu>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Nov26.225125.7357@mit.edu>, trobertson@mit.edu (Tyler Robertson) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Lars Schneider <lschneider@cmu.edu>
+US Robotics Courier V.34 @ 28,800 bps
+"The carrier frequency does not drift by accident."
+
+From swatanabe@u-tokyo.ac.jp Fri Nov 29 06:06:25 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!u-tokyo!swatanabe
+From: swatanabe@u-tokyo.ac.jp (Sergei Watanabe)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Nov29.060625.2532@u-tokyo.ac.jp>
+Date: Fri, 29 Nov 1996 06:06:25 GMT
+References: <1996Nov26.225125.7357@mit.edu>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996Nov26.225125.7357@mit.edu>, trobertson@mit.edu (Tyler Robertson) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Sergei Watanabe
+Tape trading list upon request. SASE required for international mail.
+
+From tkarlsson@u-tokyo.ac.jp Fri Nov 29 10:27:25 1996
+Path: ashpoly!cascade!brgate!saturno!u-tokyo!tkarlsson
+From: tkarlsson@u-tokyo.ac.jp (Tomas Karlsson)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Nov29.102725.6849@u-tokyo.ac.jp>
+Date: Fri, 29 Nov 1996 10:27:25 GMT
+References: <1996Nov26.225125.7357@mit.edu>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Nov26.225125.7357@mit.edu>, trobertson@mit.edu (Tyler Robertson) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+Tomas Karlsson <tkarlsson@u-tokyo.ac.jp>
+"Hardware is temporary. The signal survives."
+NeXTstation Turbo Color / SunOS 4.1.4
+

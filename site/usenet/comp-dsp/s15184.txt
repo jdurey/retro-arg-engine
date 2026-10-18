@@ -1,0 +1,96 @@
+From tkang@uu.net Thu Feb 08 14:11:15 1996
+Path: ashpoly!cascade!bigsur!uu!tkang
+From: tkang@uu.net (Takeshi Kang)
+Newsgroups: comp.dsp
+Subject: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Feb08.141115.1949@uu.net>
+Date: Thu, 08 Feb 1996 14:11:15 GMT
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+=== Takeshi Kang ===
+Dept of Electrical Engineering, UUNET Technologies, Falls Church VA
+"When every node is whole, the channel opens."
+
+From sduarte@uu.net Sat Feb 10 00:21:15 1996
+Path: ashpoly!cascade!mxgate!coyoacan!uu!sduarte
+From: sduarte@uu.net (Sven Duarte)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Feb10.002115.8264@uu.net>
+Date: Sat, 10 Feb 1996 00:21:15 GMT
+References: <1996Feb08.141115.1949@uu.net>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996Feb08.141115.1949@uu.net>, tkang@uu.net (Takeshi Kang) writes:
+> Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+> A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Sven Duarte | sduarte@uu.net
+PGP Key fingerprint: 5F32 9190 A09A E3FB
+"Keep the channels open."
+
+From dchoi@uni-hamburg.de Sat Feb 10 23:39:15 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!uni-hamburg!dchoi
+From: dchoi@uni-hamburg.de (Dmitri Choi)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Feb10.233915.4176@uni-hamburg.de>
+Date: Sat, 10 Feb 1996 23:39:15 GMT
+References: <1996Feb08.141115.1949@uu.net> <1996Feb10.002115.8264@uu.net>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1996Feb10.002115.8264@uu.net>, sduarte@uu.net (Sven Duarte) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Dmitri Choi <dchoi@uni-hamburg.de>
+"Extraordinary claims require extraordinary spectra."
+Atari Falcon 030 / System 7.5.1
+
+From tmoreau@panix.com Mon Feb 12 19:16:15 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!panix!tmoreau
+From: tmoreau@panix.com (Thiago Moreau)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Feb12.191615.8544@panix.com>
+Date: Mon, 12 Feb 1996 19:16:15 GMT
+References: <1996Feb08.141115.1949@uu.net>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Feb08.141115.1949@uu.net>, tkang@uu.net (Takeshi Kang) writes:
+> Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Thiago Moreau <tmoreau@panix.com>
+*PLONK* filter active for trolls.
+486DX2/66 (Linux 1.2.13) - NetBSD 1.0
+

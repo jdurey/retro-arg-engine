@@ -1,0 +1,119 @@
+From ggirard@utexas.edu Sat May 21 22:06:24 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!utexas!ggirard
+From: ggirard@utexas.edu (Göran Girard)
+Newsgroups: comp.dsp
+Subject: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994May21.220624.8392@utexas.edu>
+Date: Sat, 21 May 1994 22:06:24 GMT
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+Göran Girard <ggirard@utexas.edu>
+"The carrier frequency does not drift by accident."
+Amiga 1200 (Blizzard 030/50) / FreeBSD 2.1
+
+From ykim@uni-hamburg.de Mon May 23 17:21:24 1994
+Path: ashpoly!cascade!mxgate!coyoacan!uni-hamburg!ykim
+From: ykim@uni-hamburg.de (Yuki Kim)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994May23.172124.3233@uni-hamburg.de>
+Date: Mon, 23 May 1994 17:21:24 GMT
+References: <1994May21.220624.8392@utexas.edu>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994May21.220624.8392@utexas.edu>, ggirard@utexas.edu (Göran Girard) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+> With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+-- 
+Yuki Kim
+Tape trading list upon request. SASE required for international mail.
+
+From mandersson@delphi.com Wed May 25 05:35:24 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!delphi!mandersson
+From: mandersson@delphi.com (Min-jun Andersson)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994May25.053524.6958@delphi.com>
+Date: Wed, 25 May 1994 05:35:24 GMT
+References: <1994May21.220624.8392@utexas.edu> <1994May23.172124.3233@uni-hamburg.de>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994May23.172124.3233@uni-hamburg.de>, ykim@uni-hamburg.de (Yuki Kim) writes:
+> Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+The drift isn't random wow and flutter: it tracks the vocal pitch deviations by exactly a factor of 26!
+
+-- 
+Min-jun Andersson | mandersson@delphi.com
+PGP Key fingerprint: CB85 6505 0299 F62B
+"Keep the channels open."
+
+From sfischer@netcom.com Wed May 25 19:49:24 1994
+Path: ashpoly!cascade!bigsur!netcom!sfischer
+From: sfischer@netcom.com (Sun-mi Fischer)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994May25.194924.9555@netcom.com>
+Date: Wed, 25 May 1994 19:49:24 GMT
+References: <1994May21.220624.8392@utexas.edu> <1994May23.172124.3233@uni-hamburg.de>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1994May23.172124.3233@uni-hamburg.de>, ykim@uni-hamburg.de (Yuki Kim) writes:
+> Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Sun-mi Fischer | sfischer@netcom.com
+PGP Key fingerprint: 3EC4 3B88 5C99 92C8
+"Keep the channels open."
+
+From rmacdonald@netcom.com Fri May 27 12:37:24 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!netcom!rmacdonald
+From: rmacdonald@netcom.com (Renata MacDonald)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994May27.123724.6612@netcom.com>
+Date: Fri, 27 May 1994 12:37:24 GMT
+References: <1994May21.220624.8392@utexas.edu>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1994May21.220624.8392@utexas.edu>, ggirard@utexas.edu (Göran Girard) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+> With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+Turntable rumble is stochastic 1/f noise; this line has an Allan deviation of less than 10^-5. It was generated by a quartz crystal clock.
+
+-- 
+=== Renata MacDonald ===
+Dept of Electrical Engineering, NETCOM On-Line Communication Services
+"Row 14. No joke."
+

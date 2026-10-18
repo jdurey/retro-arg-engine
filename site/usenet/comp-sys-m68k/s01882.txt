@@ -1,0 +1,117 @@
+From dtanaka@u-tokyo.ac.jp Sun Jan 21 03:04:33 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!u-tokyo!dtanaka
+From: dtanaka@u-tokyo.ac.jp (Dong-hyun Tanaka)
+Newsgroups: comp.sys.m68k
+Subject: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Jan21.030433.1136@u-tokyo.ac.jp>
+Date: Sun, 21 Jan 1996 03:04:33 GMT
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+Does anyone have a 27C256 EPROM marked 'MH-U14' or 'ORION-CRYPTO'?
+
+-- 
+Dong-hyun Tanaka | dtanaka@u-tokyo.ac.jp
+PGP Key fingerprint: 4AFF AEEA A342 5B19
+"Keep the channels open."
+
+From mlarsson@rwth-aachen.de Mon Jan 22 19:05:33 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!rwth-aachen!mlarsson
+From: mlarsson@rwth-aachen.de (Marisol Larsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Jan22.190533.1246@rwth-aachen.de>
+Date: Mon, 22 Jan 1996 19:05:33 GMT
+References: <1996Jan21.030433.1136@u-tokyo.ac.jp>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Jan21.030433.1136@u-tokyo.ac.jp>, dtanaka@u-tokyo.ac.jp (Dong-hyun Tanaka) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Marisol Larsson | mlarsson@rwth-aachen.de
+PGP Key fingerprint: A999 500D 52DC 54ED
+"Keep the channels open."
+
+From nduarte@tum.de Tue Jan 23 05:34:33 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!tum!nduarte
+From: nduarte@tum.de (Natalia Duarte)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Jan23.053433.6324@tum.de>
+Date: Tue, 23 Jan 1996 05:34:33 GMT
+References: <1996Jan21.030433.1136@u-tokyo.ac.jp>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1996Jan21.030433.1136@u-tokyo.ac.jp>, dtanaka@u-tokyo.ac.jp (Dong-hyun Tanaka) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Natalia Duarte -- Technische Universität München
+"In theory there is no difference between theory and practice."
+
+From lokonkwo@berkeley.edu Thu Jan 25 04:58:33 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!berkeley!lokonkwo
+From: lokonkwo@berkeley.edu (Lisa Okonkwo)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Jan25.045833.5559@berkeley.edu>
+Date: Thu, 25 Jan 1996 04:58:33 GMT
+References: <1996Jan21.030433.1136@u-tokyo.ac.jp> <1996Jan23.053433.6324@tum.de>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Jan23.053433.6324@tum.de>, nduarte@tum.de (Natalia Duarte) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Lisa Okonkwo <lokonkwo@berkeley.edu>
+Hayes Optima 288 @ 19,200 bps
+"Extraordinary claims require extraordinary spectra."
+
+From kcampbell@earthlink.net Thu Jan 25 22:02:33 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!earthlink!kcampbell
+From: kcampbell@earthlink.net (Kenji Campbell)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Jan25.220233.5663@earthlink.net>
+Date: Thu, 25 Jan 1996 22:02:33 GMT
+References: <1996Jan21.030433.1136@u-tokyo.ac.jp> <1996Jan23.053433.6324@tum.de>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1996Jan23.053433.6324@tum.de>, nduarte@tum.de (Natalia Duarte) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Kenji Campbell <kcampbell@earthlink.net>
+Hayes Optima 288 @ 19,200 bps
+"The carrier frequency does not drift by accident."
+

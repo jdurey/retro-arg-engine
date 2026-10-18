@@ -1,0 +1,49 @@
+From tkim@stanford.edu Sun Nov 12 10:36:06 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!stanford!tkim
+From: tkim@stanford.edu (Thiago Kim)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Nov12.103606.4018@stanford.edu>
+Date: Sun, 12 Nov 1995 10:36:06 GMT
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Thiago Kim
+Tape trading list upon request. SASE required for international mail.
+
+From lpark@utexas.edu Mon Nov 13 00:32:06 1995
+Path: ashpoly!cascade!mxgate!coyoacan!utexas!lpark
+From: lpark@utexas.edu (Liam Park)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Nov13.003206.4033@utexas.edu>
+Date: Mon, 13 Nov 1995 00:32:06 GMT
+References: <1995Nov12.103606.4018@stanford.edu>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1995Nov12.103606.4018@stanford.edu>, tkim@stanford.edu (Thiago Kim) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Liam Park <lpark@utexas.edu>
+Practical Peripherals 14.4 @ 14,400 bps
+"They will send a copy in my place."
+

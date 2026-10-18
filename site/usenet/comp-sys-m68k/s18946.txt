@@ -1,0 +1,72 @@
+From rramirez@hanse.de Mon Jan 16 01:10:02 1995
+Path: ashpoly!cascade!bigsur!hanse!rramirez
+From: rramirez@hanse.de (Raj Ramírez)
+Newsgroups: comp.sys.m68k
+Subject: Question: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Jan16.011002.6310@hanse.de>
+Date: Mon, 16 Jan 1995 01:10:02 GMT
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Does anyone have a 27C256 EPROM marked 'MH-U14' or 'ORION-CRYPTO'?
+
+-- 
+Raj Ramírez <rramirez@hanse.de>
+*PLONK* filter active for trolls.
+Pentium 90 (OS/2 Warp) - NetBSD 1.0
+
+From tsouza@purdue.edu Tue Jan 17 19:51:02 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!purdue!tsouza
+From: tsouza@purdue.edu (Tobias Souza)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Jan17.195102.7495@purdue.edu>
+Date: Tue, 17 Jan 1995 19:51:02 GMT
+References: <1995Jan16.011002.6310@hanse.de>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Jan16.011002.6310@hanse.de>, rramirez@hanse.de (Raj Ramírez) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+> Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Tobias Souza -- Purdue University Engineering Computer Network
+"Hardware is temporary. The signal survives."
+
+From cdubois@kth.se Wed Jan 18 10:47:02 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!kth!cdubois
+From: cdubois@kth.se (Callum Dubois)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Jan18.104702.7040@kth.se>
+Date: Wed, 18 Jan 1995 10:47:02 GMT
+References: <1995Jan16.011002.6310@hanse.de> <1995Jan17.195102.7495@purdue.edu>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Jan17.195102.7495@purdue.edu>, tsouza@purdue.edu (Tobias Souza) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+> Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Callum Dubois
+Tape trading list upon request. SASE required for international mail.
+

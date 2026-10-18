@@ -1,0 +1,94 @@
+From gstewart@hanse.de Sat Dec 07 08:38:41 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!hanse!gstewart
+From: gstewart@hanse.de (Göran Stewart)
+Newsgroups: comp.sys.m68k
+Subject: Observation: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Dec07.083841.3095@hanse.de>
+Date: Sat, 07 Dec 1996 08:38:41 GMT
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+Schematic diagram in ASCII uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/twin68_array.asc.
+
+-- 
+Göran Stewart <gstewart@hanse.de>
+Practical Peripherals 14.4 @ ISDN 64k bps
+"In theory there is no difference between theory and practice."
+
+From msanchez@earthlink.net Mon Dec 09 08:31:41 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!earthlink!msanchez
+From: msanchez@earthlink.net (Morag Sánchez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Dec09.083141.2054@earthlink.net>
+Date: Mon, 09 Dec 1996 08:31:41 GMT
+References: <1996Dec07.083841.3095@hanse.de>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996Dec07.083841.3095@hanse.de>, gstewart@hanse.de (Göran Stewart) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+> CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Morag Sánchez <msanchez@earthlink.net>
+Zyxel U-1496E @ 33,600 bps
+"Tape doesn't lie at 02:14. Ears do."
+
+From jpetrov@netcom.com Tue Dec 10 10:26:41 1996
+Path: ashpoly!cascade!mxgate!coyoacan!netcom!jpetrov
+From: jpetrov@netcom.com (Julien Petrov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Dec10.102641.5700@netcom.com>
+Date: Tue, 10 Dec 1996 10:26:41 GMT
+References: <1996Dec07.083841.3095@hanse.de> <1996Dec09.083141.2054@earthlink.net>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Dec09.083141.2054@earthlink.net>, msanchez@earthlink.net (Morag Sánchez) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+-- 
+Julien Petrov <jpetrov@netcom.com>
+*PLONK* filter active for trolls.
+486DX4/100 (FreeBSD 2.0.5) - NetBSD 1.0
+
+From mtakahashi@unam.mx Tue Dec 10 23:10:41 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!unam!mtakahashi
+From: mtakahashi@unam.mx (Min-jun Takahashi)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Dec10.231041.9857@unam.mx>
+Date: Tue, 10 Dec 1996 23:10:41 GMT
+References: <1996Dec07.083841.3095@hanse.de> <1996Dec09.083141.2054@earthlink.net>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Dec09.083141.2054@earthlink.net>, msanchez@earthlink.net (Morag Sánchez) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+Looks like a prototype telecommunications board for military secure voice, not an audio music product.
+
+-- 
+=== Min-jun Takahashi ===
+Dept of Electrical Engineering, Universidad Nacional Autónoma de México (DGSCA)
+"Marcus is not one man."
+

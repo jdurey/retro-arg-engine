@@ -1,0 +1,115 @@
+From cokonkwo@cam.ac.uk Sun May 28 03:06:03 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!cam!cokonkwo
+From: cokonkwo@cam.ac.uk (Camila Okonkwo)
+Newsgroups: comp.dsp
+Subject: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995May28.030603.3799@cam.ac.uk>
+Date: Sun, 28 May 1995 03:06:03 GMT
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+Camila Okonkwo
+Tape trading list upon request. SASE required for international mail.
+
+From ksmirnov@illinois.edu Tue May 30 06:14:03 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!illinois!ksmirnov
+From: ksmirnov@illinois.edu (Kirsty Smirnov)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995May30.061403.6729@illinois.edu>
+Date: Tue, 30 May 1995 06:14:03 GMT
+References: <1995May28.030603.3799@cam.ac.uk>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995May28.030603.3799@cam.ac.uk>, cokonkwo@cam.ac.uk (Camila Okonkwo) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+> Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+-- 
+=== Kirsty Smirnov ===
+Dept of Electrical Engineering, University of Illinois Urbana-Champaign
+"Do not worship the copy."
+
+From mperez@inria.fr Tue May 30 14:08:03 1995
+Path: ashpoly!cascade!mxgate!coyoacan!inria!mperez
+From: mperez@inria.fr (Mateo Pérez)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995May30.140803.2348@inria.fr>
+Date: Tue, 30 May 1995 14:08:03 GMT
+References: <1995May28.030603.3799@cam.ac.uk>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995May28.030603.3799@cam.ac.uk>, cokonkwo@cam.ac.uk (Camila Okonkwo) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Mateo Pérez <mperez@inria.fr>
+"5 sigma is a discovery. 7 is a question."
+Sun 3/60 (SunOS 4.1.1) / AmigaOS 3.1
+
+From aoliveira@inria.fr Wed May 31 01:41:03 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!inria!aoliveira
+From: aoliveira@inria.fr (Aiko Oliveira)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995May31.014103.7702@inria.fr>
+Date: Wed, 31 May 1995 01:41:03 GMT
+References: <1995May28.030603.3799@cam.ac.uk> <1995May30.061403.6729@illinois.edu>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995May30.061403.6729@illinois.edu>, ksmirnov@illinois.edu (Kirsty Smirnov) writes:
+> Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+-- 
+Aiko Oliveira <aoliveira@inria.fr>
+*PLONK* filter active for trolls.
+Amiga 1200 (Blizzard 030/50) - NetBSD 1.0
+
+From achoi@utexas.edu Wed May 31 21:54:03 1995
+Path: ashpoly!cascade!mxgate!coyoacan!utexas!achoi
+From: achoi@utexas.edu (Anja Choi)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995May31.215403.1965@utexas.edu>
+Date: Wed, 31 May 1995 21:54:03 GMT
+References: <1995May28.030603.3799@cam.ac.uk> <1995May30.140803.2348@inria.fr>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995May30.140803.2348@inria.fr>, mperez@inria.fr (Mateo Pérez) writes:
+> If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+-- 
+Anja Choi
+Tape trading list upon request. SASE required for international mail.
+

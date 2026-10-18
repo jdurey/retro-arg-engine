@@ -1,0 +1,95 @@
+From enovak@cern.ch Sun Mar 19 21:32:00 1995
+Path: ashpoly!cascade!bigsur!cern!enovak
+From: enovak@cern.ch (Emi Novak)
+Newsgroups: comp.dsp
+Subject: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Mar19.213200.8244@cern.ch>
+Date: Sun, 19 Mar 1995 21:32:00 GMT
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+MATLAB script available upon request via email.
+
+-- 
+=== Emi Novak ===
+Dept of Electrical Engineering, European Laboratory for Particle Physics, Geneva
+"There are 14 nodes and only 10 countries. Count again."
+
+From lmoreno@pipeline.com Tue Mar 21 23:38:00 1995
+Path: ashpoly!cascade!mxgate!coyoacan!pipeline!lmoreno
+From: lmoreno@pipeline.com (Lisa Moreno)
+Newsgroups: comp.dsp
+Subject: Re: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Mar21.233800.8349@pipeline.com>
+Date: Tue, 21 Mar 1995 23:38:00 GMT
+References: <1995Mar19.213200.8244@cern.ch>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Mar19.213200.8244@cern.ch>, enovak@cern.ch (Emi Novak) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+> At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Lisa Moreno -- The Pipeline Internet Network
+"Do not worship the copy."
+
+From nschneider@illinois.edu Wed Mar 22 16:47:00 1995
+Path: ashpoly!cascade!bigsur!illinois!nschneider
+From: nschneider@illinois.edu (Nadia Schneider)
+Newsgroups: comp.dsp
+Subject: Re: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Mar22.164700.1866@illinois.edu>
+Date: Wed, 22 Mar 1995 16:47:00 GMT
+References: <1995Mar19.213200.8244@cern.ch> <1995Mar21.233800.8349@pipeline.com>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1995Mar21.233800.8349@pipeline.com>, lmoreno@pipeline.com (Lisa Moreno) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Nadia Schneider
+Tape trading list upon request. SASE required for international mail.
+
+From eweber@stanford.edu Wed Mar 22 18:44:00 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!stanford!eweber
+From: eweber@stanford.edu (Élodie Weber)
+Newsgroups: comp.dsp
+Subject: Re: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Mar22.184400.4920@stanford.edu>
+Date: Wed, 22 Mar 1995 18:44:00 GMT
+References: <1995Mar19.213200.8244@cern.ch>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 12
+
+In article <1995Mar19.213200.8244@cern.ch>, enovak@cern.ch (Emi Novak) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+> At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Élodie Weber
+Opinions expressed are solely my own and not those of Stanford University Computer Systems Lab.
+------------------------------------------------------------
+

@@ -1,0 +1,120 @@
+From mbrennan@ox.ac.uk Thu Nov 17 15:47:19 1994
+Path: ashpoly!cascade!brgate!saturno!ox!mbrennan
+From: mbrennan@ox.ac.uk (Marisol Brennan)
+Newsgroups: comp.dsp
+Subject: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Nov17.154719.5427@ox.ac.uk>
+Date: Thu, 17 Nov 1994 15:47:19 GMT
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+=== Marisol Brennan ===
+Dept of Electrical Engineering, Oxford University Computing Laboratory
+"A soul is not exclusive to biology."
+
+From tgonzalez@pipeline.com Sat Nov 19 08:15:19 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!pipeline!tgonzalez
+From: tgonzalez@pipeline.com (Tobias González)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Nov19.081519.4647@pipeline.com>
+Date: Sat, 19 Nov 1994 08:15:19 GMT
+References: <1994Nov17.154719.5427@ox.ac.uk>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 12
+
+In article <1994Nov17.154719.5427@ox.ac.uk>, mbrennan@ox.ac.uk (Marisol Brennan) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+> Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+=== Tobias González ===
+Dept of Electrical Engineering, The Pipeline Internet Network
+"There are 14 nodes and only 10 countries. Count again."
+
+From tkuznetsov@uu.net Sun Nov 20 13:47:19 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!uu!tkuznetsov
+From: tkuznetsov@uu.net (Thiago Kuznetsov)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Nov20.134719.8311@uu.net>
+Date: Sun, 20 Nov 1994 13:47:19 GMT
+References: <1994Nov17.154719.5427@ox.ac.uk>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Nov17.154719.5427@ox.ac.uk>, mbrennan@ox.ac.uk (Marisol Brennan) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+-- 
+Thiago Kuznetsov | tkuznetsov@uu.net
+PGP Key fingerprint: 4928 CBD7 BFF7 D14E
+"Keep the channels open."
+
+From jstewart@kth.se Mon Nov 21 10:30:19 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!kth!jstewart
+From: jstewart@kth.se (Julien Stewart)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Nov21.103019.7283@kth.se>
+Date: Mon, 21 Nov 1994 10:30:19 GMT
+References: <1994Nov17.154719.5427@ox.ac.uk> <1994Nov20.134719.8311@uu.net>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Nov20.134719.8311@uu.net>, tkuznetsov@uu.net (Thiago Kuznetsov) writes:
+> You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+-- 
+Julien Stewart | jstewart@kth.se
+PGP Key fingerprint: 6FC8 4E8B C1F3 391A
+"Keep the channels open."
+
+From jkarlsson@netcom.com Tue Nov 22 13:16:19 1994
+Path: ashpoly!cascade!brgate!saturno!netcom!jkarlsson
+From: jkarlsson@netcom.com (Julien Karlsson)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Nov22.131619.7283@netcom.com>
+Date: Tue, 22 Nov 1994 13:16:19 GMT
+References: <1994Nov17.154719.5427@ox.ac.uk>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1994Nov17.154719.5427@ox.ac.uk>, mbrennan@ox.ac.uk (Marisol Brennan) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+> Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+Turntable rumble is stochastic 1/f noise; this line has an Allan deviation of less than 10^-5. It was generated by a quartz crystal clock.
+
+-- 
+Julien Karlsson
+Opinions expressed are solely my own and not those of NETCOM On-Line Communication Services.
+------------------------------------------------------------
+

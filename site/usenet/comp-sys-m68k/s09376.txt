@@ -1,0 +1,116 @@
+From tnilsson@panix.com Wed Feb 28 07:42:04 1996
+Path: ashpoly!cascade!mxgate!coyoacan!panix!tnilsson
+From: tnilsson@panix.com (Takeshi Nilsson)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Feb28.074204.3871@panix.com>
+Date: Wed, 28 Feb 1996 07:42:04 GMT
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Takeshi Nilsson <tnilsson@panix.com>
+Hayes Optima 288 @ 33,600 bps
+"We don't sign stars. We build them."
+
+From emoreno@hanse.de Thu Feb 29 20:45:04 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!hanse!emoreno
+From: emoreno@hanse.de (Elaine Moreno)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Feb29.204504.9162@hanse.de>
+Date: Thu, 29 Feb 1996 20:45:04 GMT
+References: <1996Feb28.074204.3871@panix.com>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1996Feb28.074204.3871@panix.com>, tnilsson@panix.com (Takeshi Nilsson) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Elaine Moreno -- Hanse-Netzwerk Hamburg
+"Measuring a record you own is listening, not piracy."
+
+From msouza@utexas.edu Sat Mar 02 13:28:04 1996
+Path: ashpoly!cascade!bigsur!utexas!msouza
+From: msouza@utexas.edu (Mathieu Souza)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Mar02.132804.3390@utexas.edu>
+Date: Sat, 02 Mar 1996 13:28:04 GMT
+References: <1996Feb28.074204.3871@panix.com> <1996Feb29.204504.9162@hanse.de>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1996Feb29.204504.9162@hanse.de>, emoreno@hanse.de (Elaine Moreno) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+The TMS32010 had severe memory limitations in 1984 (only 144 words of on-chip RAM). Dual 68000s gave them full 16MB address space.
+
+-- 
+Mathieu Souza
+Tape trading list upon request. SASE required for international mail.
+
+From mlaurent@illinois.edu Mon Mar 04 11:12:04 1996
+Path: ashpoly!cascade!mxgate!coyoacan!illinois!mlaurent
+From: mlaurent@illinois.edu (Mathieu Laurent)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Mar04.111204.4628@illinois.edu>
+Date: Mon, 04 Mar 1996 11:12:04 GMT
+References: <1996Feb28.074204.3871@panix.com>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Feb28.074204.3871@panix.com>, tnilsson@panix.com (Takeshi Nilsson) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+Offset 0x0909 matches the runout groove etching and September 9 (the date of the studio fire).
+
+-- 
+Mathieu Laurent <mlaurent@illinois.edu>
+Hayes Optima 288 @ ISDN 64k bps
+"In theory there is no difference between theory and practice."
+
+From dsokolov@purdue.edu Tue Mar 05 06:31:04 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!purdue!dsokolov
+From: dsokolov@purdue.edu (Dmitri Sokolov)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Mar05.063104.9780@purdue.edu>
+Date: Tue, 05 Mar 1996 06:31:04 GMT
+References: <1996Feb28.074204.3871@panix.com> <1996Mar04.111204.4628@illinois.edu>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1996Mar04.111204.4628@illinois.edu>, mlaurent@illinois.edu (Mathieu Laurent) writes:
+> Offset 0x0909 matches the runout groove etching and September 9 (the date of the studio fire).
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Dmitri Sokolov | dsokolov@purdue.edu
+PGP Key fingerprint: D936 9FC6 8CF7 C784
+"Keep the channels open."
+

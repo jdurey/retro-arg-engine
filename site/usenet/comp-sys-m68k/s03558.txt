@@ -1,0 +1,113 @@
+From tkim@mindspring.com Thu Nov 07 07:17:30 1996
+Path: ashpoly!cascade!brgate!saturno!mindspring!tkim
+From: tkim@mindspring.com (Tomas Kim)
+Newsgroups: comp.sys.m68k
+Subject: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Nov07.071730.4205@mindspring.com>
+Date: Thu, 07 Nov 1996 07:17:30 GMT
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Tomas Kim <tkim@mindspring.com>
+Practical Peripherals 14.4 @ 9600 Telebit bps
+"5 sigma is a discovery. 7 is a question."
+
+From creyes@cam.ac.uk Fri Nov 08 13:42:30 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!cam!creyes
+From: creyes@cam.ac.uk (Camila Reyes)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Nov08.134230.2039@cam.ac.uk>
+Date: Fri, 08 Nov 1996 13:42:30 GMT
+References: <1996Nov07.071730.4205@mindspring.com>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Nov07.071730.4205@mindspring.com>, tkim@mindspring.com (Tomas Kim) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Camila Reyes
+Opinions expressed are solely my own and not those of University of Cambridge Computer Laboratory.
+------------------------------------------------------------
+
+From nkowalski@purdue.edu Sat Nov 09 21:07:30 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!purdue!nkowalski
+From: nkowalski@purdue.edu (Nadia Kowalski)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Nov09.210730.2127@purdue.edu>
+Date: Sat, 09 Nov 1996 21:07:30 GMT
+References: <1996Nov07.071730.4205@mindspring.com> <1996Nov08.134230.2039@cam.ac.uk>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1996Nov08.134230.2039@cam.ac.uk>, creyes@cam.ac.uk (Camila Reyes) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Nadia Kowalski
+Tape trading list upon request. SASE required for international mail.
+
+From jmuller@demon.co.uk Sun Nov 10 02:53:30 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!demon!jmuller
+From: jmuller@demon.co.uk (Jens Müller)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Nov10.025330.2738@demon.co.uk>
+Date: Sun, 10 Nov 1996 02:53:30 GMT
+References: <1996Nov07.071730.4205@mindspring.com> <1996Nov08.134230.2039@cam.ac.uk> <1996Nov09.210730.2127@purdue.edu>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1996Nov09.210730.2127@purdue.edu>, nkowalski@purdue.edu (Nadia Kowalski) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Jens Müller -- Demon Internet Services UK
+"A soul is not exclusive to biology."
+
+From ksokolov@hanse.de Tue Nov 12 04:22:30 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!hanse!ksokolov
+From: ksokolov@hanse.de (Kenji Sokolov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Nov12.042230.2948@hanse.de>
+Date: Tue, 12 Nov 1996 04:22:30 GMT
+References: <1996Nov07.071730.4205@mindspring.com> <1996Nov08.134230.2039@cam.ac.uk> <1996Nov09.210730.2127@purdue.edu>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1996Nov09.210730.2127@purdue.edu>, nkowalski@purdue.edu (Nadia Kowalski) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Kenji Sokolov
+Tape trading list upon request. SASE required for international mail.
+

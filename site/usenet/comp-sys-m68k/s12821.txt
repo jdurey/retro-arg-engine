@@ -1,0 +1,70 @@
+From snovak@rwth-aachen.de Fri Jan 27 20:41:08 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!rwth-aachen!snovak
+From: snovak@rwth-aachen.de (Seo-yeon Novak)
+Newsgroups: comp.sys.m68k
+Subject: Question: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Jan27.204108.3857@rwth-aachen.de>
+Date: Fri, 27 Jan 1995 20:41:08 GMT
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Does anyone have a 27C256 EPROM marked 'MH-U14' or 'ORION-CRYPTO'?
+
+-- 
+Seo-yeon Novak <snovak@rwth-aachen.de>
+"Hold for relay."
+Acorn RiscPC 600 / FreeBSD 2.1
+
+From svasiliev@netcom.com Sun Jan 29 11:47:08 1995
+Path: ashpoly!cascade!mxgate!coyoacan!netcom!svasiliev
+From: svasiliev@netcom.com (Seo-yeon Vasiliev)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Jan29.114708.5829@netcom.com>
+Date: Sun, 29 Jan 1995 11:47:08 GMT
+References: <1995Jan27.204108.3857@rwth-aachen.de>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Jan27.204108.3857@rwth-aachen.de>, snovak@rwth-aachen.de (Seo-yeon Novak) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+> Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Seo-yeon Vasiliev -- NETCOM On-Line Communication Services
+"Row 14. No joke."
+
+From ecampbell@rwth-aachen.de Sun Jan 29 13:39:08 1995
+Path: ashpoly!cascade!mxgate!coyoacan!rwth-aachen!ecampbell
+From: ecampbell@rwth-aachen.de (Emi Campbell)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Jan29.133908.6259@rwth-aachen.de>
+Date: Sun, 29 Jan 1995 13:39:08 GMT
+References: <1995Jan27.204108.3857@rwth-aachen.de> <1995Jan29.114708.5829@netcom.com>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Jan29.114708.5829@netcom.com>, svasiliev@netcom.com (Seo-yeon Vasiliev) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+=== Emi Campbell ===
+Dept of Electrical Engineering, RWTH Aachen Informatik
+"Do not worship the copy."
+

@@ -1,0 +1,117 @@
+From vsouza@delphi.com Thu Apr 25 06:35:57 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!delphi!vsouza
+From: vsouza@delphi.com (Valeria Souza)
+Newsgroups: comp.sys.m68k
+Subject: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Apr25.063557.7630@delphi.com>
+Date: Thu, 25 Apr 1996 06:35:57 GMT
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+Valeria Souza -- Delphi Internet Services
+"Do not worship the copy."
+
+From dlopez@inria.fr Fri Apr 26 01:53:57 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!inria!dlopez
+From: dlopez@inria.fr (Diego López)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Apr26.015357.7040@inria.fr>
+Date: Fri, 26 Apr 1996 01:53:57 GMT
+References: <1996Apr25.063557.7630@delphi.com>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Apr25.063557.7630@delphi.com>, vsouza@delphi.com (Valeria Souza) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Diego López -- INRIA Rocquencourt
+"The carrier frequency does not drift by accident."
+
+From bnovak@clari.net Fri Apr 26 23:06:57 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!clari!bnovak
+From: bnovak@clari.net (Bill Novak)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Apr26.230657.5347@clari.net>
+Date: Fri, 26 Apr 1996 23:06:57 GMT
+References: <1996Apr25.063557.7630@delphi.com> <1996Apr26.015357.7040@inria.fr>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Apr26.015357.7040@inria.fr>, dlopez@inria.fr (Diego López) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Bill Novak
+Opinions expressed are solely my own and not those of ClariNet Communications Corp.
+------------------------------------------------------------
+
+From ismirnov@netcom.com Sun Apr 28 19:17:57 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!netcom!ismirnov
+From: ismirnov@netcom.com (Ines Smirnov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Apr28.191757.6520@netcom.com>
+Date: Sun, 28 Apr 1996 19:17:57 GMT
+References: <1996Apr25.063557.7630@delphi.com>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Apr25.063557.7630@delphi.com>, vsouza@delphi.com (Valeria Souza) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Ines Smirnov <ismirnov@netcom.com>
+*PLONK* filter active for trolls.
+Sun SparcStation 20 - NetBSD 1.0
+
+From mcampbell@uni-hamburg.de Tue Apr 30 09:07:57 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!uni-hamburg!mcampbell
+From: mcampbell@uni-hamburg.de (Marta Campbell)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Apr30.090757.4651@uni-hamburg.de>
+Date: Tue, 30 Apr 1996 09:07:57 GMT
+References: <1996Apr25.063557.7630@delphi.com> <1996Apr26.015357.7040@inria.fr> <1996Apr26.230657.5347@clari.net>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1996Apr26.230657.5347@clari.net>, bnovak@clari.net (Bill Novak) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Marta Campbell
+Tape trading list upon request. SASE required for international mail.
+

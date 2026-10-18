@@ -1,0 +1,124 @@
+From bivanov@mindspring.com Sun Jun 11 07:40:09 1995
+Path: ashpoly!cascade!brgate!saturno!mindspring!bivanov
+From: bivanov@mindspring.com (Brian Ivanov)
+Newsgroups: comp.dsp
+Subject: Discussion: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Jun11.074009.8908@mindspring.com>
+Date: Sun, 11 Jun 1995 07:40:09 GMT
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+
+Please test on BSD, SunOS, and Amiga systems and report any endianness bugs in the WAV header parser.
+
+-- 
+Brian Ivanov <bivanov@mindspring.com>
+Zyxel U-1496E @ 9600 Telebit bps
+"We don't sign stars. We build them."
+
+From jwatanabe@berkeley.edu Mon Jun 12 08:50:09 1995
+Path: ashpoly!cascade!mxgate!coyoacan!berkeley!jwatanabe
+From: jwatanabe@berkeley.edu (Ji-woo Watanabe)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Jun12.085009.2951@berkeley.edu>
+Date: Mon, 12 Jun 1995 08:50:09 GMT
+References: <1995Jun11.074009.8908@mindspring.com>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1995Jun11.074009.8908@mindspring.com>, bivanov@mindspring.com (Brian Ivanov) writes:
+> Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+> The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Ji-woo Watanabe <jwatanabe@berkeley.edu>
+"In theory there is no difference between theory and practice."
+486DX4/100 (FreeBSD 2.0.5) / TOS 4.04
+
+From llopez@cern.ch Tue Jun 13 03:28:09 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!cern!llopez
+From: llopez@cern.ch (Lucia López)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Jun13.032809.9993@cern.ch>
+Date: Tue, 13 Jun 1995 03:28:09 GMT
+References: <1995Jun11.074009.8908@mindspring.com> <1995Jun12.085009.2951@berkeley.edu>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1995Jun12.085009.2951@berkeley.edu>, jwatanabe@berkeley.edu (Ji-woo Watanabe) writes:
+> Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+> Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Lucia López | llopez@cern.ch
+PGP Key fingerprint: EFB8 E69A 9DF5 8E05
+"Keep the channels open."
+
+From mnilsson@berkeley.edu Wed Jun 14 15:54:09 1995
+Path: ashpoly!cascade!mxgate!coyoacan!berkeley!mnilsson
+From: mnilsson@berkeley.edu (Min-jun Nilsson)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Jun14.155409.8664@berkeley.edu>
+Date: Wed, 14 Jun 1995 15:54:09 GMT
+References: <1995Jun11.074009.8908@mindspring.com> <1995Jun12.085009.2951@berkeley.edu> <1995Jun13.032809.9993@cern.ch>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Jun13.032809.9993@cern.ch>, llopez@cern.ch (Lucia López) writes:
+> Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Min-jun Nilsson -- UC Berkeley Department of EECS
+"Extraordinary claims require extraordinary spectra."
+
+From mmartinez@unam.mx Thu Jun 15 23:51:09 1995
+Path: ashpoly!cascade!brgate!saturno!unam!mmartinez
+From: mmartinez@unam.mx (Morag Martínez)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Jun15.235109.3211@unam.mx>
+Date: Thu, 15 Jun 1995 23:51:09 GMT
+References: <1995Jun11.074009.8908@mindspring.com> <1995Jun12.085009.2951@berkeley.edu> <1995Jun13.032809.9993@cern.ch>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Jun13.032809.9993@cern.ch>, llopez@cern.ch (Lucia López) writes:
+> Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+> Top-posters will be placed in my ~/.killfile without notice.
+
+On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+-- 
+Morag Martínez <mmartinez@unam.mx>
+*PLONK* filter active for trolls.
+PC-9821Ap2 (NEC) - NetBSD 1.0
+

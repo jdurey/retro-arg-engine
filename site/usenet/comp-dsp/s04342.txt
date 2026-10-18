@@ -1,0 +1,118 @@
+From srodriguez@delphi.com Sun May 05 09:07:59 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!delphi!srodriguez
+From: srodriguez@delphi.com (Sun-mi Rodríguez)
+Newsgroups: comp.dsp
+Subject: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996May05.090759.3448@delphi.com>
+Date: Sun, 05 May 1996 09:07:59 GMT
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+Sun-mi Rodríguez <srodriguez@delphi.com>
+"Do not worship the copy."
+Commodore Amiga 500 (1MB OCS) / Linux 1.2.13
+
+From mvasiliev@kth.se Tue May 07 00:04:59 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!kth!mvasiliev
+From: mvasiliev@kth.se (Mei Vasiliev)
+Newsgroups: comp.dsp
+Subject: Re: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996May07.000459.9235@kth.se>
+Date: Tue, 07 May 1996 00:04:59 GMT
+References: <1996May05.090759.3448@delphi.com>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996May05.090759.3448@delphi.com>, srodriguez@delphi.com (Sun-mi Rodríguez) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Mei Vasiliev <mvasiliev@kth.se>
+Hayes Optima 288 @ 28,800 bps
+"5 sigma is a discovery. 7 is a question."
+
+From blarsson@ox.ac.uk Wed May 08 12:52:59 1996
+Path: ashpoly!cascade!mxgate!coyoacan!ox!blarsson
+From: blarsson@ox.ac.uk (Brian Larsson)
+Newsgroups: comp.dsp
+Subject: Re: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996May08.125259.1332@ox.ac.uk>
+Date: Wed, 08 May 1996 12:52:59 GMT
+References: <1996May05.090759.3448@delphi.com>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996May05.090759.3448@delphi.com>, srodriguez@delphi.com (Sun-mi Rodríguez) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+> With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+-- 
+Brian Larsson
+Opinions expressed are solely my own and not those of Oxford University Computing Laboratory.
+------------------------------------------------------------
+
+From sgirard@cmu.edu Fri May 10 14:12:59 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!cmu!sgirard
+From: sgirard@cmu.edu (Seo-yeon Girard)
+Newsgroups: comp.dsp
+Subject: Re: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996May10.141259.4673@cmu.edu>
+Date: Fri, 10 May 1996 14:12:59 GMT
+References: <1996May05.090759.3448@delphi.com>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1996May05.090759.3448@delphi.com>, srodriguez@delphi.com (Sun-mi Rodríguez) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+> With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+-- 
+Seo-yeon Girard <sgirard@cmu.edu>
+US Robotics Courier V.34 @ 28,800 bps
+"Do not worship the copy."
+
+From freyes@u-tokyo.ac.jp Sun May 12 15:49:59 1996
+Path: ashpoly!cascade!bigsur!u-tokyo!freyes
+From: freyes@u-tokyo.ac.jp (Freya Reyes)
+Newsgroups: comp.dsp
+Subject: Re: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996May12.154959.9213@u-tokyo.ac.jp>
+Date: Sun, 12 May 1996 15:49:59 GMT
+References: <1996May05.090759.3448@delphi.com> <1996May08.125259.1332@ox.ac.uk>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996May08.125259.1332@ox.ac.uk>, blarsson@ox.ac.uk (Brian Larsson) writes:
+> Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+-- 
+=== Freya Reyes ===
+Dept of Electrical Engineering, University of Tokyo Department of Information Science
+"They will send a copy in my place."
+

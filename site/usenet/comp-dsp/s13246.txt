@@ -1,0 +1,75 @@
+From jschneider@kth.se Thu Nov 17 19:40:00 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!kth!jschneider
+From: jschneider@kth.se (Joachim Schneider)
+Newsgroups: comp.dsp
+Subject: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Nov17.194000.6006@kth.se>
+Date: Thu, 17 Nov 1994 19:40:00 GMT
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+MATLAB script available upon request via email.
+
+-- 
+Joachim Schneider <jschneider@kth.se>
+*PLONK* filter active for trolls.
+PC-9821Ap2 (NEC) - NetBSD 1.0
+
+From jnakamura@illinois.edu Fri Nov 18 00:54:00 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!illinois!jnakamura
+From: jnakamura@illinois.edu (Joachim Nakamura)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Nov18.005400.6472@illinois.edu>
+Date: Fri, 18 Nov 1994 00:54:00 GMT
+References: <1994Nov17.194000.6006@kth.se>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1994Nov17.194000.6006@kth.se>, jschneider@kth.se (Joachim Schneider) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Joachim Nakamura -- University of Illinois Urbana-Champaign
+"Hardware is temporary. The signal survives."
+
+From nbrennan@hanse.de Sat Nov 19 01:30:00 1994
+Path: ashpoly!cascade!brgate!saturno!hanse!nbrennan
+From: nbrennan@hanse.de (Natalia Brennan)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Nov19.013000.8085@hanse.de>
+Date: Sat, 19 Nov 1994 01:30:00 GMT
+References: <1994Nov17.194000.6006@kth.se>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1994Nov17.194000.6006@kth.se>, jschneider@kth.se (Joachim Schneider) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Natalia Brennan <nbrennan@hanse.de>
+*PLONK* filter active for trolls.
+Atari Falcon 030 - NetBSD 1.0
+

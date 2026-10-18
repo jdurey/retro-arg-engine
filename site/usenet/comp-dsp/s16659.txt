@@ -1,0 +1,73 @@
+From mrobertson@demon.co.uk Wed May 10 06:54:54 1995
+Path: ashpoly!cascade!bigsur!demon!mrobertson
+From: mrobertson@demon.co.uk (Mathieu Robertson)
+Newsgroups: comp.dsp
+Subject: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May10.065454.1631@demon.co.uk>
+Date: Wed, 10 May 1995 06:54:54 GMT
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Mathieu Robertson | mrobertson@demon.co.uk
+PGP Key fingerprint: 8908 FDBE F1A6 1C6D
+"Keep the channels open."
+
+From akuznetsov@cmu.edu Thu May 11 06:42:54 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!cmu!akuznetsov
+From: akuznetsov@cmu.edu (Anton Kuznetsov)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May11.064254.3402@cmu.edu>
+Date: Thu, 11 May 1995 06:42:54 GMT
+References: <1995May10.065454.1631@demon.co.uk>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995May10.065454.1631@demon.co.uk>, mrobertson@demon.co.uk (Mathieu Robertson) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Anton Kuznetsov | akuznetsov@cmu.edu
+PGP Key fingerprint: 275F 9CE8 6C31 8563
+"Keep the channels open."
+
+From mmoreno@pacbell.net Fri May 12 18:44:54 1995
+Path: ashpoly!cascade!bigsur!pacbell!mmoreno
+From: mmoreno@pacbell.net (Matthias Moreno)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May12.184454.3116@pacbell.net>
+Date: Fri, 12 May 1995 18:44:54 GMT
+References: <1995May10.065454.1631@demon.co.uk>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995May10.065454.1631@demon.co.uk>, mrobertson@demon.co.uk (Mathieu Robertson) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Matthias Moreno <mmoreno@pacbell.net>
+*PLONK* filter active for trolls.
+Atari TT030 - NetBSD 1.0
+

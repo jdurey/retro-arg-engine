@@ -1,0 +1,118 @@
+From rlaurent@uni-hamburg.de Sun Jul 02 01:00:13 1995
+Path: ashpoly!cascade!brgate!saturno!uni-hamburg!rlaurent
+From: rlaurent@uni-hamburg.de (Rodrigo Laurent)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Jul02.010013.4297@uni-hamburg.de>
+Date: Sun, 02 Jul 1995 01:00:13 GMT
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+
+Did Marcus take the decryption EPROM with him when he left the lab?
+
+-- 
+Rodrigo Laurent <rlaurent@uni-hamburg.de>
+*PLONK* filter active for trolls.
+Amiga 3000T - NetBSD 1.0
+
+From nhernandez@pipeline.com Mon Jul 03 09:54:13 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!pipeline!nhernandez
+From: nhernandez@pipeline.com (Natalia Hernández)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Jul03.095413.1829@pipeline.com>
+Date: Mon, 03 Jul 1995 09:54:13 GMT
+References: <1995Jul02.010013.4297@uni-hamburg.de>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Jul02.010013.4297@uni-hamburg.de>, rlaurent@uni-hamburg.de (Rodrigo Laurent) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+-- 
+Natalia Hernández <nhernandez@pipeline.com>
+"Tape doesn't lie at 02:14. Ears do."
+NeXTstation Turbo Color / SunOS 4.1.4
+
+From bgirard@utexas.edu Mon Jul 03 15:55:13 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!utexas!bgirard
+From: bgirard@utexas.edu (Brian Girard)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Jul03.155513.9724@utexas.edu>
+Date: Mon, 03 Jul 1995 15:55:13 GMT
+References: <1995Jul02.010013.4297@uni-hamburg.de> <1995Jul03.095413.1829@pipeline.com>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Jul03.095413.1829@pipeline.com>, nhernandez@pipeline.com (Natalia Hernández) writes:
+> Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Brian Girard <bgirard@utexas.edu>
+*PLONK* filter active for trolls.
+Atari TT030 - NetBSD 1.0
+
+From blarsson@inria.fr Wed Jul 05 19:47:13 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!inria!blarsson
+From: blarsson@inria.fr (Bruno Larsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Jul05.194713.2857@inria.fr>
+Date: Wed, 05 Jul 1995 19:47:13 GMT
+References: <1995Jul02.010013.4297@uni-hamburg.de> <1995Jul03.095413.1829@pipeline.com>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Jul03.095413.1829@pipeline.com>, nhernandez@pipeline.com (Natalia Hernández) writes:
+> Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Bruno Larsson -- INRIA Rocquencourt
+"Marcus is not one man."
+
+From orodriguez@kiae.su Fri Jul 07 00:36:13 1995
+Path: ashpoly!cascade!mxgate!coyoacan!kiae!orodriguez
+From: orodriguez@kiae.su (Olga Rodríguez)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Jul07.003613.1068@kiae.su>
+Date: Fri, 07 Jul 1995 00:36:13 GMT
+References: <1995Jul02.010013.4297@uni-hamburg.de> <1995Jul03.095413.1829@pipeline.com>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Jul03.095413.1829@pipeline.com>, nhernandez@pipeline.com (Natalia Hernández) writes:
+> Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Olga Rodríguez
+Opinions expressed are solely my own and not those of Kurchatov Institute of Atomic Energy, Moscow.
+------------------------------------------------------------
+

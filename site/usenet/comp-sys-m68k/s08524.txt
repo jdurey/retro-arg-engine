@@ -1,0 +1,96 @@
+From elindqvist@kth.se Sat Sep 16 21:44:16 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!kth!elindqvist
+From: elindqvist@kth.se (Elaine Lindqvist)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep16.214416.2364@kth.se>
+Date: Sat, 16 Sep 1995 21:44:16 GMT
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+Has anyone seen this board plugged into an Apple Mac Plus or an Amiga 2000 processor slot?
+
+-- 
+Elaine Lindqvist <elindqvist@kth.se>
+*PLONK* filter active for trolls.
+PC-9821Ap2 (NEC) - NetBSD 1.0
+
+From msilva@u-tokyo.ac.jp Sun Sep 17 11:05:16 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!u-tokyo!msilva
+From: msilva@u-tokyo.ac.jp (Matthias Silva)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep17.110516.6026@u-tokyo.ac.jp>
+Date: Sun, 17 Sep 1995 11:05:16 GMT
+References: <1995Sep16.214416.2364@kth.se>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Sep16.214416.2364@kth.se>, elindqvist@kth.se (Elaine Lindqvist) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+> At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Matthias Silva <msilva@u-tokyo.ac.jp>
+*PLONK* filter active for trolls.
+Sun SparcStation 20 - NetBSD 1.0
+
+From acampbell@mit.edu Sun Sep 17 22:29:16 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!mit!acampbell
+From: acampbell@mit.edu (Andrei Campbell)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep17.222916.8654@mit.edu>
+Date: Sun, 17 Sep 1995 22:29:16 GMT
+References: <1995Sep16.214416.2364@kth.se> <1995Sep17.110516.6026@u-tokyo.ac.jp>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Sep17.110516.6026@u-tokyo.ac.jp>, msilva@u-tokyo.ac.jp (Matthias Silva) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Andrei Campbell <acampbell@mit.edu>
+"We don't sign stars. We build them."
+486DX4/100 (FreeBSD 2.0.5) / SunOS 4.1.4
+
+From gsouza@pacbell.net Tue Sep 19 17:22:16 1995
+Path: ashpoly!cascade!bigsur!pacbell!gsouza
+From: gsouza@pacbell.net (Graham Souza)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep19.172216.5494@pacbell.net>
+Date: Tue, 19 Sep 1995 17:22:16 GMT
+References: <1995Sep16.214416.2364@kth.se> <1995Sep17.110516.6026@u-tokyo.ac.jp>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Sep17.110516.6026@u-tokyo.ac.jp>, msilva@u-tokyo.ac.jp (Matthias Silva) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+=== Graham Souza ===
+Dept of Electrical Engineering, Pacific Bell Internet Services
+"We don't sign stars. We build them."
+

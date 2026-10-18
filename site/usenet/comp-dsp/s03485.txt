@@ -1,0 +1,93 @@
+From klee@illinois.edu Thu Aug 10 23:39:26 1995
+Path: ashpoly!cascade!mxgate!coyoacan!illinois!klee
+From: klee@illinois.edu (Kenji Lee)
+Newsgroups: comp.dsp
+Subject: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Aug10.233926.2126@illinois.edu>
+Date: Thu, 10 Aug 1995 23:39:26 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Kenji Lee | klee@illinois.edu
+PGP Key fingerprint: DB75 EDA4 2FD9 A44B
+"Keep the channels open."
+
+From swatanabe@purdue.edu Fri Aug 11 03:16:26 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!purdue!swatanabe
+From: swatanabe@purdue.edu (Sun-mi Watanabe)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Aug11.031626.7289@purdue.edu>
+Date: Fri, 11 Aug 1995 03:16:26 GMT
+References: <1995Aug10.233926.2126@illinois.edu>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Aug10.233926.2126@illinois.edu>, klee@illinois.edu (Kenji Lee) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Sun-mi Watanabe <swatanabe@purdue.edu>
+Zyxel U-1496E @ ISDN 64k bps
+"Measuring a record you own is listening, not piracy."
+
+From msmirnov@utexas.edu Sun Aug 13 00:03:26 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!utexas!msmirnov
+From: msmirnov@utexas.edu (Marisol Smirnov)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Aug13.000326.6037@utexas.edu>
+Date: Sun, 13 Aug 1995 00:03:26 GMT
+References: <1995Aug10.233926.2126@illinois.edu> <1995Aug11.031626.7289@purdue.edu>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Aug11.031626.7289@purdue.edu>, swatanabe@purdue.edu (Sun-mi Watanabe) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+=== Marisol Smirnov ===
+Dept of Electrical Engineering, University of Texas at Austin
+"Do not worship the copy."
+
+From mrodriguez@purdue.edu Mon Aug 14 17:40:26 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!purdue!mrodriguez
+From: mrodriguez@purdue.edu (Mateo Rodríguez)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Aug14.174026.2158@purdue.edu>
+Date: Mon, 14 Aug 1995 17:40:26 GMT
+References: <1995Aug10.233926.2126@illinois.edu> <1995Aug11.031626.7289@purdue.edu>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Aug11.031626.7289@purdue.edu>, swatanabe@purdue.edu (Sun-mi Watanabe) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+=== Mateo Rodríguez ===
+Dept of Electrical Engineering, Purdue University Engineering Computer Network
+"Hold for relay."
+

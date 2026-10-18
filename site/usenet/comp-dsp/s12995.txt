@@ -1,0 +1,117 @@
+From atanaka@uni-hamburg.de Fri May 26 18:50:11 1995
+Path: ashpoly!cascade!brgate!saturno!uni-hamburg!atanaka
+From: atanaka@uni-hamburg.de (Amy Tanaka)
+Newsgroups: comp.dsp
+Subject: Question: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995May26.185011.4958@uni-hamburg.de>
+Date: Fri, 26 May 1995 18:50:11 GMT
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+
+Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+
+Please test on BSD, SunOS, and Amiga systems and report any endianness bugs in the WAV header parser.
+
+-- 
+Amy Tanaka <atanaka@uni-hamburg.de>
+Zyxel U-1496E @ 19,200 bps
+"We don't sign stars. We build them."
+
+From ypark@cern.ch Sun May 28 17:17:11 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!cern!ypark
+From: ypark@cern.ch (Yuki Park)
+Newsgroups: comp.dsp
+Subject: Re: Question: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995May28.171711.6221@cern.ch>
+Date: Sun, 28 May 1995 17:17:11 GMT
+References: <1995May26.185011.4958@uni-hamburg.de>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995May26.185011.4958@uni-hamburg.de>, atanaka@uni-hamburg.de (Amy Tanaka) writes:
+> Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Yuki Park
+Tape trading list upon request. SASE required for international mail.
+
+From bnovak@stanford.edu Mon May 29 05:50:11 1995
+Path: ashpoly!cascade!mxgate!coyoacan!stanford!bnovak
+From: bnovak@stanford.edu (Bastien Novak)
+Newsgroups: comp.dsp
+Subject: Re: Question: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995May29.055011.1010@stanford.edu>
+Date: Mon, 29 May 1995 05:50:11 GMT
+References: <1995May26.185011.4958@uni-hamburg.de>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995May26.185011.4958@uni-hamburg.de>, atanaka@uni-hamburg.de (Amy Tanaka) writes:
+> Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Bastien Novak
+Tape trading list upon request. SASE required for international mail.
+
+From hcampbell@cern.ch Tue May 30 17:40:11 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!cern!hcampbell
+From: hcampbell@cern.ch (Heather Campbell)
+Newsgroups: comp.dsp
+Subject: Re: Question: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995May30.174011.3115@cern.ch>
+Date: Tue, 30 May 1995 17:40:11 GMT
+References: <1995May26.185011.4958@uni-hamburg.de> <1995May28.171711.6221@cern.ch>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995May28.171711.6221@cern.ch>, ypark@cern.ch (Yuki Park) writes:
+> Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+> Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+Can you provide a pre-compiled DOS binary? Some of us don't have Linux or a C compiler installed on our machines.
+
+-- 
+Heather Campbell <hcampbell@cern.ch>
+"A soul is not exclusive to biology."
+Pentium 90 (OS/2 Warp) / NEXTSTEP 3.3
+
+From jcampbell@cmu.edu Wed May 31 00:39:11 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!cmu!jcampbell
+From: jcampbell@cmu.edu (Jen Campbell)
+Newsgroups: comp.dsp
+Subject: Re: Question: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995May31.003911.2516@cmu.edu>
+Date: Wed, 31 May 1995 00:39:11 GMT
+References: <1995May26.185011.4958@uni-hamburg.de> <1995May29.055011.1010@stanford.edu>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995May29.055011.1010@stanford.edu>, bnovak@stanford.edu (Bastien Novak) writes:
+> Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Jen Campbell | jcampbell@cmu.edu
+PGP Key fingerprint: 5254 9778 BAF4 3685
+"Keep the channels open."
+

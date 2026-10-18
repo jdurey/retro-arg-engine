@@ -1,0 +1,95 @@
+From hhughes@kiae.su Sun Oct 08 04:44:32 1995
+Path: ashpoly!cascade!bigsur!kiae!hhughes
+From: hhughes@kiae.su (Heather Hughes)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Oct08.044432.9119@kiae.su>
+Date: Sun, 08 Oct 1995 04:44:32 GMT
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+Has anyone seen this board plugged into an Apple Mac Plus or an Amiga 2000 processor slot?
+
+-- 
+=== Heather Hughes ===
+Dept of Electrical Engineering, Kurchatov Institute of Atomic Energy, Moscow
+"Do not worship the copy."
+
+From tlindqvist@kiae.su Mon Oct 09 03:46:32 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!kiae!tlindqvist
+From: tlindqvist@kiae.su (Takeshi Lindqvist)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Oct09.034632.3419@kiae.su>
+Date: Mon, 09 Oct 1995 03:46:32 GMT
+References: <1995Oct08.044432.9119@kiae.su>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Oct08.044432.9119@kiae.su>, hhughes@kiae.su (Heather Hughes) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Takeshi Lindqvist
+Opinions expressed are solely my own and not those of Kurchatov Institute of Atomic Energy, Moscow.
+------------------------------------------------------------
+
+From anakamura@cmu.edu Mon Oct 09 09:14:32 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!cmu!anakamura
+From: anakamura@cmu.edu (Aiko Nakamura)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Oct09.091432.8255@cmu.edu>
+Date: Mon, 09 Oct 1995 09:14:32 GMT
+References: <1995Oct08.044432.9119@kiae.su>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Oct08.044432.9119@kiae.su>, hhughes@kiae.su (Heather Hughes) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+=== Aiko Nakamura ===
+Dept of Electrical Engineering, Carnegie Mellon University School of CS
+"In theory there is no difference between theory and practice."
+
+From mkowalski@panix.com Tue Oct 10 13:14:32 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!panix!mkowalski
+From: mkowalski@panix.com (Mike Kowalski)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Oct10.131432.3443@panix.com>
+Date: Tue, 10 Oct 1995 13:14:32 GMT
+References: <1995Oct08.044432.9119@kiae.su> <1995Oct09.091432.8255@cmu.edu>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Oct09.091432.8255@cmu.edu>, anakamura@cmu.edu (Aiko Nakamura) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Mike Kowalski <mkowalski@panix.com>
+"Extraordinary claims require extraordinary spectra."
+NeXTstation Turbo Color / System 7.5.1
+

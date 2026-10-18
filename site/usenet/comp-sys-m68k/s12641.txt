@@ -1,0 +1,91 @@
+From mpark@stanford.edu Sat Sep 09 12:33:26 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!stanford!mpark
+From: mpark@stanford.edu (Min-jun Park)
+Newsgroups: comp.sys.m68k
+Subject: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep09.123326.5475@stanford.edu>
+Date: Sat, 09 Sep 1995 12:33:26 GMT
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Min-jun Park -- Stanford University Computer Systems Lab
+"Hardware is temporary. The signal survives."
+
+From kkuznetsov@hanse.de Sun Sep 10 02:48:26 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!hanse!kkuznetsov
+From: kkuznetsov@hanse.de (Kenji Kuznetsov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep10.024826.6945@hanse.de>
+Date: Sun, 10 Sep 1995 02:48:26 GMT
+References: <1995Sep09.123326.5475@stanford.edu>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1995Sep09.123326.5475@stanford.edu>, mpark@stanford.edu (Min-jun Park) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Kenji Kuznetsov
+Tape trading list upon request. SASE required for international mail.
+
+From rlindqvist@rwth-aachen.de Sun Sep 10 06:07:26 1995
+Path: ashpoly!cascade!brgate!saturno!rwth-aachen!rlindqvist
+From: rlindqvist@rwth-aachen.de (Rodrigo Lindqvist)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep10.060726.5187@rwth-aachen.de>
+Date: Sun, 10 Sep 1995 06:07:26 GMT
+References: <1995Sep09.123326.5475@stanford.edu>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Sep09.123326.5475@stanford.edu>, mpark@stanford.edu (Min-jun Park) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+> Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+-- 
+Rodrigo Lindqvist <rlindqvist@rwth-aachen.de>
+"We don't sign stars. We build them."
+Sun SparcStation 20 / TOS 4.04
+
+From srobertson@u-tokyo.ac.jp Sun Sep 10 12:06:26 1995
+Path: ashpoly!cascade!mxgate!coyoacan!u-tokyo!srobertson
+From: srobertson@u-tokyo.ac.jp (Sven Robertson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep10.120626.1425@u-tokyo.ac.jp>
+Date: Sun, 10 Sep 1995 12:06:26 GMT
+References: <1995Sep09.123326.5475@stanford.edu> <1995Sep10.024826.6945@hanse.de>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Sep10.024826.6945@hanse.de>, kkuznetsov@hanse.de (Kenji Kuznetsov) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Looks like a prototype telecommunications board for military secure voice, not an audio music product.
+
+-- 
+Sven Robertson
+Tape trading list upon request. SASE required for international mail.
+

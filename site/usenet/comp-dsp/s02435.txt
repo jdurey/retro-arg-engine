@@ -1,0 +1,73 @@
+From irodriguez@mit.edu Sat Jun 24 14:22:02 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!mit!irodriguez
+From: irodriguez@mit.edu (Ines Rodríguez)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jun24.142202.4682@mit.edu>
+Date: Sat, 24 Jun 1995 14:22:02 GMT
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+=== Ines Rodríguez ===
+Dept of Electrical Engineering, Massachusetts Institute of Technology
+"The hatch is open. Is anyone listening?"
+
+From jivanov@berkeley.edu Sat Jun 24 22:33:02 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!berkeley!jivanov
+From: jivanov@berkeley.edu (Jen Ivanov)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jun24.223302.1163@berkeley.edu>
+Date: Sat, 24 Jun 1995 22:33:02 GMT
+References: <1995Jun24.142202.4682@mit.edu>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Jun24.142202.4682@mit.edu>, irodriguez@mit.edu (Ines Rodríguez) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Jen Ivanov
+Tape trading list upon request. SASE required for international mail.
+
+From anilsson@uu.net Sun Jun 25 08:03:02 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!uu!anilsson
+From: anilsson@uu.net (Anja Nilsson)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jun25.080302.2884@uu.net>
+Date: Sun, 25 Jun 1995 08:03:02 GMT
+References: <1995Jun24.142202.4682@mit.edu>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Jun24.142202.4682@mit.edu>, irodriguez@mit.edu (Ines Rodríguez) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Anja Nilsson <anilsson@uu.net>
+"When every node is whole, the channel opens."
+Macintosh IIfx / Linux 1.2.13
+

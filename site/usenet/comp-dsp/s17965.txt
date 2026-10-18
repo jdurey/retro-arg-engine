@@ -1,0 +1,72 @@
+From nmacdonald@tum.de Mon Jan 17 08:31:55 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!tum!nmacdonald
+From: nmacdonald@tum.de (Natalia MacDonald)
+Newsgroups: comp.dsp
+Subject: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Jan17.083155.5718@tum.de>
+Date: Mon, 17 Jan 1994 08:31:55 GMT
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+Natalia MacDonald <nmacdonald@tum.de>
+SupraFAXModem 28.8 @ 9600 Telebit bps
+"Do not worship the copy."
+
+From ssanchez@rwth-aachen.de Mon Jan 17 10:42:55 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!rwth-aachen!ssanchez
+From: ssanchez@rwth-aachen.de (Seo-yeon Sánchez)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Jan17.104255.2114@rwth-aachen.de>
+Date: Mon, 17 Jan 1994 10:42:55 GMT
+References: <1994Jan17.083155.5718@tum.de>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Jan17.083155.5718@tum.de>, nmacdonald@tum.de (Natalia MacDonald) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+-- 
+Seo-yeon Sánchez
+Opinions expressed are solely my own and not those of RWTH Aachen Informatik.
+------------------------------------------------------------
+
+From jandersson@unam.mx Mon Jan 17 23:24:55 1994
+Path: ashpoly!cascade!mxgate!coyoacan!unam!jandersson
+From: jandersson@unam.mx (Julien Andersson)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Jan17.232455.1145@unam.mx>
+Date: Mon, 17 Jan 1994 23:24:55 GMT
+References: <1994Jan17.083155.5718@tum.de> <1994Jan17.104255.2114@rwth-aachen.de>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1994Jan17.104255.2114@rwth-aachen.de>, ssanchez@rwth-aachen.de (Seo-yeon Sánchez) writes:
+> Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+=== Julien Andersson ===
+Dept of Electrical Engineering, Universidad Nacional Autónoma de México (DGSCA)
+"5 sigma is a discovery. 7 is a question."
+

@@ -1,0 +1,95 @@
+From cchoi@uni-hamburg.de Thu Nov 10 10:14:08 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!uni-hamburg!cchoi
+From: cchoi@uni-hamburg.de (Camila Choi)
+Newsgroups: comp.dsp
+Subject: Data: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Nov10.101408.8784@uni-hamburg.de>
+Date: Thu, 10 Nov 1994 10:14:08 GMT
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+MATLAB script available upon request via email.
+
+-- 
+Camila Choi
+Opinions expressed are solely my own and not those of Universität Hamburg Fachbereich Informatik.
+------------------------------------------------------------
+
+From bperez@rwth-aachen.de Thu Nov 10 23:50:08 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!rwth-aachen!bperez
+From: bperez@rwth-aachen.de (Bastien Pérez)
+Newsgroups: comp.dsp
+Subject: Re: Data: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Nov10.235008.1649@rwth-aachen.de>
+Date: Thu, 10 Nov 1994 23:50:08 GMT
+References: <1994Nov10.101408.8784@uni-hamburg.de>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 12
+
+In article <1994Nov10.101408.8784@uni-hamburg.de>, cchoi@uni-hamburg.de (Camila Choi) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Bastien Pérez <bperez@rwth-aachen.de>
+US Robotics Courier V.34 @ 14,400 bps
+"Marcus is not one man."
+
+From asilva@berkeley.edu Fri Nov 11 21:39:08 1994
+Path: ashpoly!cascade!bigsur!berkeley!asilva
+From: asilva@berkeley.edu (Aiko Silva)
+Newsgroups: comp.dsp
+Subject: Re: Data: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Nov11.213908.5252@berkeley.edu>
+Date: Fri, 11 Nov 1994 21:39:08 GMT
+References: <1994Nov10.101408.8784@uni-hamburg.de> <1994Nov10.235008.1649@rwth-aachen.de>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Nov10.235008.1649@rwth-aachen.de>, bperez@rwth-aachen.de (Bastien Pérez) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+> Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Aiko Silva -- UC Berkeley Department of EECS
+"Hardware is temporary. The signal survives."
+
+From nsanchez@cam.ac.uk Sat Nov 12 18:50:08 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!cam!nsanchez
+From: nsanchez@cam.ac.uk (Nadine Sánchez)
+Newsgroups: comp.dsp
+Subject: Re: Data: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Nov12.185008.6105@cam.ac.uk>
+Date: Sat, 12 Nov 1994 18:50:08 GMT
+References: <1994Nov10.101408.8784@uni-hamburg.de> <1994Nov10.235008.1649@rwth-aachen.de> <1994Nov11.213908.5252@berkeley.edu>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1994Nov11.213908.5252@berkeley.edu>, asilva@berkeley.edu (Aiko Silva) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Nadine Sánchez -- University of Cambridge Computer Laboratory
+"Hold for relay."
+

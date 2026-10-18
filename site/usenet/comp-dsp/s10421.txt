@@ -1,0 +1,96 @@
+From dgirard@cern.ch Tue Sep 19 08:58:54 1995
+Path: ashpoly!cascade!brgate!saturno!cern!dgirard
+From: dgirard@cern.ch (Dmitri Girard)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Sep19.085854.4923@cern.ch>
+Date: Tue, 19 Sep 1995 08:58:54 GMT
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Dmitri Girard <dgirard@cern.ch>
+*PLONK* filter active for trolls.
+Pentium 90 (OS/2 Warp) - NetBSD 1.0
+
+From brobertson@pipeline.com Tue Sep 19 16:56:54 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!pipeline!brobertson
+From: brobertson@pipeline.com (Brian Robertson)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Sep19.165654.2133@pipeline.com>
+Date: Tue, 19 Sep 1995 16:56:54 GMT
+References: <1995Sep19.085854.4923@cern.ch>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995Sep19.085854.4923@cern.ch>, dgirard@cern.ch (Dmitri Girard) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Brian Robertson | brobertson@pipeline.com
+PGP Key fingerprint: D90B 0D60 503A 804A
+"Keep the channels open."
+
+From nduarte@pipeline.com Thu Sep 21 03:37:54 1995
+Path: ashpoly!cascade!mxgate!coyoacan!pipeline!nduarte
+From: nduarte@pipeline.com (Natalia Duarte)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Sep21.033754.7222@pipeline.com>
+Date: Thu, 21 Sep 1995 03:37:54 GMT
+References: <1995Sep19.085854.4923@cern.ch> <1995Sep19.165654.2133@pipeline.com>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Sep19.165654.2133@pipeline.com>, brobertson@pipeline.com (Brian Robertson) writes:
+> Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+> Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Natalia Duarte <nduarte@pipeline.com>
+"Hardware is temporary. The signal survives."
+Amiga 3000T / TOS 4.04
+
+From areyes@earthlink.net Sat Sep 23 03:15:54 1995
+Path: ashpoly!cascade!brgate!saturno!earthlink!areyes
+From: areyes@earthlink.net (Aiko Reyes)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Sep23.031554.2380@earthlink.net>
+Date: Sat, 23 Sep 1995 03:15:54 GMT
+References: <1995Sep19.085854.4923@cern.ch> <1995Sep19.165654.2133@pipeline.com>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Sep19.165654.2133@pipeline.com>, brobertson@pipeline.com (Brian Robertson) writes:
+> Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Aiko Reyes | areyes@earthlink.net
+PGP Key fingerprint: E9F8 16B4 6E31 E53A
+"Keep the channels open."
+

@@ -1,0 +1,117 @@
+From fsato@earthlink.net Sun Jan 14 04:08:37 1996
+Path: ashpoly!cascade!bigsur!earthlink!fsato
+From: fsato@earthlink.net (Fiona Sato)
+Newsgroups: comp.sys.m68k
+Subject: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Jan14.040837.5757@earthlink.net>
+Date: Sun, 14 Jan 1996 04:08:37 GMT
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+Schematic diagram in ASCII uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/twin68_array.asc.
+
+-- 
+Fiona Sato -- EarthLink Network
+"Hardware is temporary. The signal survives."
+
+From moliveira@hanse.de Tue Jan 16 05:16:37 1996
+Path: ashpoly!cascade!brgate!saturno!hanse!moliveira
+From: moliveira@hanse.de (Morag Oliveira)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Jan16.051637.7787@hanse.de>
+Date: Tue, 16 Jan 1996 05:16:37 GMT
+References: <1996Jan14.040837.5757@earthlink.net>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1996Jan14.040837.5757@earthlink.net>, fsato@earthlink.net (Fiona Sato) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+> Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Morag Oliveira <moliveira@hanse.de>
+"The carrier frequency does not drift by accident."
+486DX4/100 (FreeBSD 2.0.5) / Linux 1.2.13
+
+From hrodriguez@titech.ac.jp Wed Jan 17 23:16:37 1996
+Path: ashpoly!cascade!brgate!saturno!titech!hrodriguez
+From: hrodriguez@titech.ac.jp (Hana Rodríguez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Jan17.231637.3777@titech.ac.jp>
+Date: Wed, 17 Jan 1996 23:16:37 GMT
+References: <1996Jan14.040837.5757@earthlink.net> <1996Jan16.051637.7787@hanse.de>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Jan16.051637.7787@hanse.de>, moliveira@hanse.de (Morag Oliveira) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Hana Rodríguez
+Opinions expressed are solely my own and not those of Tokyo Institute of Technology Computer Centre.
+------------------------------------------------------------
+
+From mtanaka@pacbell.net Thu Jan 18 20:45:37 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!pacbell!mtanaka
+From: mtanaka@pacbell.net (Min-jun Tanaka)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Jan18.204537.1858@pacbell.net>
+Date: Thu, 18 Jan 1996 20:45:37 GMT
+References: <1996Jan14.040837.5757@earthlink.net> <1996Jan16.051637.7787@hanse.de> <1996Jan17.231637.3777@titech.ac.jp>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1996Jan17.231637.3777@titech.ac.jp>, hrodriguez@titech.ac.jp (Hana Rodríguez) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Min-jun Tanaka | mtanaka@pacbell.net
+PGP Key fingerprint: 65BF 996D 3AB2 2D5E
+"Keep the channels open."
+
+From bandersson@pipeline.com Fri Jan 19 10:50:37 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!pipeline!bandersson
+From: bandersson@pipeline.com (Bill Andersson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Jan19.105037.4045@pipeline.com>
+Date: Fri, 19 Jan 1996 10:50:37 GMT
+References: <1996Jan14.040837.5757@earthlink.net> <1996Jan16.051637.7787@hanse.de> <1996Jan17.231637.3777@titech.ac.jp>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1996Jan17.231637.3777@titech.ac.jp>, hrodriguez@titech.ac.jp (Hana Rodríguez) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Bill Andersson -- The Pipeline Internet Network
+"There are 14 nodes and only 10 countries. Count again."
+

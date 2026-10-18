@@ -1,0 +1,117 @@
+From msanchez@pipeline.com Wed Mar 09 11:56:24 1994
+Path: ashpoly!cascade!mxgate!coyoacan!pipeline!msanchez
+From: msanchez@pipeline.com (Min-jun Sánchez)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Mar09.115624.8449@pipeline.com>
+Date: Wed, 09 Mar 1994 11:56:24 GMT
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+Schematic diagram in ASCII uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/twin68_array.asc.
+
+-- 
+Min-jun Sánchez -- The Pipeline Internet Network
+"Hardware is temporary. The signal survives."
+
+From ssouza@stanford.edu Wed Mar 09 17:14:24 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!stanford!ssouza
+From: ssouza@stanford.edu (Sun-mi Souza)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Mar09.171424.6901@stanford.edu>
+Date: Wed, 09 Mar 1994 17:14:24 GMT
+References: <1994Mar09.115624.8449@pipeline.com>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1994Mar09.115624.8449@pipeline.com>, msanchez@pipeline.com (Min-jun Sánchez) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Sun-mi Souza
+Opinions expressed are solely my own and not those of Stanford University Computer Systems Lab.
+------------------------------------------------------------
+
+From atanaka@utexas.edu Fri Mar 11 11:15:24 1994
+Path: ashpoly!cascade!mxgate!coyoacan!utexas!atanaka
+From: atanaka@utexas.edu (Andrei Tanaka)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Mar11.111524.9434@utexas.edu>
+Date: Fri, 11 Mar 1994 11:15:24 GMT
+References: <1994Mar09.115624.8449@pipeline.com> <1994Mar09.171424.6901@stanford.edu>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Mar09.171424.6901@stanford.edu>, ssouza@stanford.edu (Sun-mi Souza) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Andrei Tanaka | atanaka@utexas.edu
+PGP Key fingerprint: 3803 12AE 4A83 601F
+"Keep the channels open."
+
+From tstewart@tum.de Sun Mar 13 04:24:24 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!tum!tstewart
+From: tstewart@tum.de (Tyler Stewart)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Mar13.042424.2825@tum.de>
+Date: Sun, 13 Mar 1994 04:24:24 GMT
+References: <1994Mar09.115624.8449@pipeline.com> <1994Mar09.171424.6901@stanford.edu> <1994Mar11.111524.9434@utexas.edu>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1994Mar11.111524.9434@utexas.edu>, atanaka@utexas.edu (Andrei Tanaka) writes:
+> The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+=== Tyler Stewart ===
+Dept of Electrical Engineering, Technische Universität München
+"Tape doesn't lie at 02:14. Ears do."
+
+From aweber@demon.co.uk Mon Mar 14 17:43:24 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!demon!aweber
+From: aweber@demon.co.uk (Astrid Weber)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Mar14.174324.4902@demon.co.uk>
+Date: Mon, 14 Mar 1994 17:43:24 GMT
+References: <1994Mar09.115624.8449@pipeline.com> <1994Mar09.171424.6901@stanford.edu> <1994Mar11.111524.9434@utexas.edu>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1994Mar11.111524.9434@utexas.edu>, atanaka@utexas.edu (Andrei Tanaka) writes:
+> The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Astrid Weber -- Demon Internet Services UK
+"We don't sign stars. We build them."
+

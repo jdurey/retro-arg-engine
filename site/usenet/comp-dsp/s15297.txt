@@ -1,0 +1,71 @@
+From spetrov@utexas.edu Thu Mar 03 16:40:11 1994
+Path: ashpoly!cascade!mxgate!coyoacan!utexas!spetrov
+From: spetrov@utexas.edu (Steve Petrov)
+Newsgroups: comp.dsp
+Subject: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Mar03.164011.4881@utexas.edu>
+Date: Thu, 03 Mar 1994 16:40:11 GMT
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Steve Petrov <spetrov@utexas.edu>
+"Hardware is temporary. The signal survives."
+Commodore Amiga 500 (1MB OCS) / AmigaOS 3.1
+
+From mgirard@purdue.edu Sat Mar 05 00:53:11 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!purdue!mgirard
+From: mgirard@purdue.edu (Marisol Girard)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Mar05.005311.8686@purdue.edu>
+Date: Sat, 05 Mar 1994 00:53:11 GMT
+References: <1994Mar03.164011.4881@utexas.edu>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Mar03.164011.4881@utexas.edu>, spetrov@utexas.edu (Steve Petrov) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Marisol Girard
+Tape trading list upon request. SASE required for international mail.
+
+From mhughes@cam.ac.uk Sun Mar 06 22:07:11 1994
+Path: ashpoly!cascade!mxgate!coyoacan!cam!mhughes
+From: mhughes@cam.ac.uk (Min-jun Hughes)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Mar06.220711.2277@cam.ac.uk>
+Date: Sun, 06 Mar 1994 22:07:11 GMT
+References: <1994Mar03.164011.4881@utexas.edu>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1994Mar03.164011.4881@utexas.edu>, spetrov@utexas.edu (Steve Petrov) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Min-jun Hughes <mhughes@cam.ac.uk>
+"Extraordinary claims require extraordinary spectra."
+Mac IIci / 68882 FPU / Linux 1.2.13
+

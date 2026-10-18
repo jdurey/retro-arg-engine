@@ -1,0 +1,72 @@
+From sschneider@demon.co.uk Thu Nov 07 17:44:14 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!demon!sschneider
+From: sschneider@demon.co.uk (Seo-yeon Schneider)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Nov07.174414.5295@demon.co.uk>
+Date: Thu, 07 Nov 1996 17:44:14 GMT
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+Seo-yeon Schneider
+Tape trading list upon request. SASE required for international mail.
+
+From nnilsson@berkeley.edu Sat Nov 09 06:42:14 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!berkeley!nnilsson
+From: nnilsson@berkeley.edu (Nadia Nilsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Nov09.064214.6253@berkeley.edu>
+Date: Sat, 09 Nov 1996 06:42:14 GMT
+References: <1996Nov07.174414.5295@demon.co.uk>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1996Nov07.174414.5295@demon.co.uk>, sschneider@demon.co.uk (Seo-yeon Schneider) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Nadia Nilsson <nnilsson@berkeley.edu>
+"5 sigma is a discovery. 7 is a question."
+Atari Falcon 030 / System 7.5.1
+
+From bivanov@kiae.su Sun Nov 10 12:12:14 1996
+Path: ashpoly!cascade!brgate!saturno!kiae!bivanov
+From: bivanov@kiae.su (Brian Ivanov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Nov10.121214.3825@kiae.su>
+Date: Sun, 10 Nov 1996 12:12:14 GMT
+References: <1996Nov07.174414.5295@demon.co.uk>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1996Nov07.174414.5295@demon.co.uk>, sschneider@demon.co.uk (Seo-yeon Schneider) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+> By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Brian Ivanov | bivanov@kiae.su
+PGP Key fingerprint: 3E30 21C1 C315 C1F6
+"Keep the channels open."
+

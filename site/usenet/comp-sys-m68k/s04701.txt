@@ -1,0 +1,95 @@
+From jtanaka@hanse.de Fri Jun 28 17:57:16 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!hanse!jtanaka
+From: jtanaka@hanse.de (Ji-woo Tanaka)
+Newsgroups: comp.sys.m68k
+Subject: Data: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Jun28.175716.4302@hanse.de>
+Date: Fri, 28 Jun 1996 17:57:16 GMT
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+
+Did Marcus take the decryption EPROM with him when he left the lab?
+
+-- 
+Ji-woo Tanaka
+Opinions expressed are solely my own and not those of Hanse-Netzwerk Hamburg.
+------------------------------------------------------------
+
+From gmoreno@mindspring.com Fri Jun 28 20:51:16 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!mindspring!gmoreno
+From: gmoreno@mindspring.com (Göran Moreno)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Jun28.205116.1327@mindspring.com>
+Date: Fri, 28 Jun 1996 20:51:16 GMT
+References: <1996Jun28.175716.4302@hanse.de>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1996Jun28.175716.4302@hanse.de>, jtanaka@hanse.de (Ji-woo Tanaka) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+> Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Göran Moreno
+Opinions expressed are solely my own and not those of MindSpring Enterprises.
+------------------------------------------------------------
+
+From jkarlsson@titech.ac.jp Sat Jun 29 00:38:16 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!titech!jkarlsson
+From: jkarlsson@titech.ac.jp (Jens Karlsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Jun29.003816.7095@titech.ac.jp>
+Date: Sat, 29 Jun 1996 00:38:16 GMT
+References: <1996Jun28.175716.4302@hanse.de>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1996Jun28.175716.4302@hanse.de>, jtanaka@hanse.de (Ji-woo Tanaka) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+> Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+=== Jens Karlsson ===
+Dept of Electrical Engineering, Tokyo Institute of Technology Computer Centre
+"The hatch is open. Is anyone listening?"
+
+From tperez@mindspring.com Sat Jun 29 05:18:16 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!mindspring!tperez
+From: tperez@mindspring.com (Takeshi Pérez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Jun29.051816.3231@mindspring.com>
+Date: Sat, 29 Jun 1996 05:18:16 GMT
+References: <1996Jun28.175716.4302@hanse.de> <1996Jun29.003816.7095@titech.ac.jp>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Jun29.003816.7095@titech.ac.jp>, jkarlsson@titech.ac.jp (Jens Karlsson) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+=== Takeshi Pérez ===
+Dept of Electrical Engineering, MindSpring Enterprises
+"In theory there is no difference between theory and practice."
+

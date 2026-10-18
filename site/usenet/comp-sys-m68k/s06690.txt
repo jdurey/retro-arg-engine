@@ -1,0 +1,115 @@
+From dschneider@uni-hamburg.de Sun Sep 01 07:24:31 1996
+Path: ashpoly!cascade!bigsur!uni-hamburg!dschneider
+From: dschneider@uni-hamburg.de (Dong-hyun Schneider)
+Newsgroups: comp.sys.m68k
+Subject: Observation: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Sep01.072431.9432@uni-hamburg.de>
+Date: Sun, 01 Sep 1996 07:24:31 GMT
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Did Marcus take the decryption EPROM with him when he left the lab?
+
+-- 
+Dong-hyun Schneider
+Opinions expressed are solely my own and not those of Universität Hamburg Fachbereich Informatik.
+------------------------------------------------------------
+
+From rstewart@hanse.de Mon Sep 02 15:54:31 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!hanse!rstewart
+From: rstewart@hanse.de (Raj Stewart)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Sep02.155431.9830@hanse.de>
+Date: Mon, 02 Sep 1996 15:54:31 GMT
+References: <1996Sep01.072431.9432@uni-hamburg.de>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Sep01.072431.9432@uni-hamburg.de>, dschneider@uni-hamburg.de (Dong-hyun Schneider) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+-- 
+Raj Stewart | rstewart@hanse.de
+PGP Key fingerprint: 0B28 6560 77D7 FF92
+"Keep the channels open."
+
+From dtakahashi@clari.net Wed Sep 04 08:21:31 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!clari!dtakahashi
+From: dtakahashi@clari.net (Dave Takahashi)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Sep04.082131.4811@clari.net>
+Date: Wed, 04 Sep 1996 08:21:31 GMT
+References: <1996Sep01.072431.9432@uni-hamburg.de> <1996Sep02.155431.9830@hanse.de>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Sep02.155431.9830@hanse.de>, rstewart@hanse.de (Raj Stewart) writes:
+> Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+-- 
+Dave Takahashi
+Opinions expressed are solely my own and not those of ClariNet Communications Corp.
+------------------------------------------------------------
+
+From dduarte@mindspring.com Thu Sep 05 16:39:31 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!mindspring!dduarte
+From: dduarte@mindspring.com (Diego Duarte)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Sep05.163931.1444@mindspring.com>
+Date: Thu, 05 Sep 1996 16:39:31 GMT
+References: <1996Sep01.072431.9432@uni-hamburg.de> <1996Sep02.155431.9830@hanse.de>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Sep02.155431.9830@hanse.de>, rstewart@hanse.de (Raj Stewart) writes:
+> Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+-- 
+Diego Duarte | dduarte@mindspring.com
+PGP Key fingerprint: 5748 D527 DFD0 61C6
+"Keep the channels open."
+
+From skarlsson@hanse.de Sat Sep 07 03:22:31 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!hanse!skarlsson
+From: skarlsson@hanse.de (Sergei Karlsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Sep07.032231.4780@hanse.de>
+Date: Sat, 07 Sep 1996 03:22:31 GMT
+References: <1996Sep01.072431.9432@uni-hamburg.de> <1996Sep02.155431.9830@hanse.de> <1996Sep05.163931.1444@mindspring.com>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1996Sep05.163931.1444@mindspring.com>, dduarte@mindspring.com (Diego Duarte) writes:
+> Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Sergei Karlsson
+Tape trading list upon request. SASE required for international mail.
+

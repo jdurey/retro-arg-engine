@@ -1,0 +1,115 @@
+From aokonkwo@mindspring.com Thu Jul 27 09:15:20 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!mindspring!aokonkwo
+From: aokonkwo@mindspring.com (Andrei Okonkwo)
+Newsgroups: comp.dsp
+Subject: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jul27.091520.5740@mindspring.com>
+Date: Thu, 27 Jul 1995 09:15:20 GMT
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Andrei Okonkwo
+Opinions expressed are solely my own and not those of MindSpring Enterprises.
+------------------------------------------------------------
+
+From tkowalski@purdue.edu Sat Jul 29 12:37:20 1995
+Path: ashpoly!cascade!mxgate!coyoacan!purdue!tkowalski
+From: tkowalski@purdue.edu (Takeshi Kowalski)
+Newsgroups: comp.dsp
+Subject: Re: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jul29.123720.7465@purdue.edu>
+Date: Sat, 29 Jul 1995 12:37:20 GMT
+References: <1995Jul27.091520.5740@mindspring.com>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Jul27.091520.5740@mindspring.com>, aokonkwo@mindspring.com (Andrei Okonkwo) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Takeshi Kowalski -- Purdue University Engineering Computer Network
+"Row 14. No joke."
+
+From jito@rwth-aachen.de Sun Jul 30 00:06:20 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!rwth-aachen!jito
+From: jito@rwth-aachen.de (Joachim Ito)
+Newsgroups: comp.dsp
+Subject: Re: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jul30.000620.3663@rwth-aachen.de>
+Date: Sun, 30 Jul 1995 00:06:20 GMT
+References: <1995Jul27.091520.5740@mindspring.com> <1995Jul29.123720.7465@purdue.edu>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Jul29.123720.7465@purdue.edu>, tkowalski@purdue.edu (Takeshi Kowalski) writes:
+> Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Joachim Ito
+Tape trading list upon request. SASE required for international mail.
+
+From mcampbell@berkeley.edu Mon Jul 31 09:29:20 1995
+Path: ashpoly!cascade!bigsur!berkeley!mcampbell
+From: mcampbell@berkeley.edu (Mateo Campbell)
+Newsgroups: comp.dsp
+Subject: Re: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jul31.092920.7042@berkeley.edu>
+Date: Mon, 31 Jul 1995 09:29:20 GMT
+References: <1995Jul27.091520.5740@mindspring.com>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Jul27.091520.5740@mindspring.com>, aokonkwo@mindspring.com (Andrei Okonkwo) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Mateo Campbell -- UC Berkeley Department of EECS
+"Marcus is not one man."
+
+From dsouza@inria.fr Tue Aug 01 09:59:20 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!inria!dsouza
+From: dsouza@inria.fr (Dong-hyun Souza)
+Newsgroups: comp.dsp
+Subject: Re: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Aug01.095920.5885@inria.fr>
+Date: Tue, 01 Aug 1995 09:59:20 GMT
+References: <1995Jul27.091520.5740@mindspring.com> <1995Jul29.123720.7465@purdue.edu>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Jul29.123720.7465@purdue.edu>, tkowalski@purdue.edu (Takeshi Kowalski) writes:
+> Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Dong-hyun Souza | dsouza@inria.fr
+PGP Key fingerprint: B807 B86E 0992 E730
+"Keep the channels open."
+

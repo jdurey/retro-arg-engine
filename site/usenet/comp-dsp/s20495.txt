@@ -1,0 +1,95 @@
+From dfournier@cam.ac.uk Thu Apr 06 07:41:34 1995
+Path: ashpoly!cascade!bigsur!cam!dfournier
+From: dfournier@cam.ac.uk (Dmitri Fournier)
+Newsgroups: comp.dsp
+Subject: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Apr06.074134.3882@cam.ac.uk>
+Date: Thu, 06 Apr 1995 07:41:34 GMT
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+Dmitri Fournier <dfournier@cam.ac.uk>
+*PLONK* filter active for trolls.
+486DX2/66 (Linux 1.2.13) - NetBSD 1.0
+
+From bfischer@ox.ac.uk Fri Apr 07 20:16:34 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!ox!bfischer
+From: bfischer@ox.ac.uk (Bruno Fischer)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Apr07.201634.1251@ox.ac.uk>
+Date: Fri, 07 Apr 1995 20:16:34 GMT
+References: <1995Apr06.074134.3882@cam.ac.uk>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Apr06.074134.3882@cam.ac.uk>, dfournier@cam.ac.uk (Dmitri Fournier) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Bruno Fischer <bfischer@ox.ac.uk>
+Hayes Optima 288 @ 14,400 bps
+"Tape doesn't lie at 02:14. Ears do."
+
+From tpopov@purdue.edu Sat Apr 08 04:33:34 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!purdue!tpopov
+From: tpopov@purdue.edu (Tobias Popov)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Apr08.043334.2436@purdue.edu>
+Date: Sat, 08 Apr 1995 04:33:34 GMT
+References: <1995Apr06.074134.3882@cam.ac.uk> <1995Apr07.201634.1251@ox.ac.uk>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Apr07.201634.1251@ox.ac.uk>, bfischer@ox.ac.uk (Bruno Fischer) writes:
+> If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Tobias Popov | tpopov@purdue.edu
+PGP Key fingerprint: D2F6 DB6B 2964 84EC
+"Keep the channels open."
+
+From nfournier@pacbell.net Sun Apr 09 00:43:34 1995
+Path: ashpoly!cascade!brgate!saturno!pacbell!nfournier
+From: nfournier@pacbell.net (Natalia Fournier)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Apr09.004334.1774@pacbell.net>
+Date: Sun, 09 Apr 1995 00:43:34 GMT
+References: <1995Apr06.074134.3882@cam.ac.uk> <1995Apr07.201634.1251@ox.ac.uk>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Apr07.201634.1251@ox.ac.uk>, bfischer@ox.ac.uk (Bruno Fischer) writes:
+> If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+Prof. Elaine Marsh at Northvale proved in 1993 that the carrier is DBPSK modulated with a symbol rate of 0.71 Hz.
+
+-- 
+=== Natalia Fournier ===
+Dept of Electrical Engineering, Pacific Bell Internet Services
+"Tape doesn't lie at 02:14. Ears do."
+

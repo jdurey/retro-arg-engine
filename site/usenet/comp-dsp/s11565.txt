@@ -1,0 +1,72 @@
+From tchoi@hanse.de Sun Aug 27 07:55:25 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!hanse!tchoi
+From: tchoi@hanse.de (Tobias Choi)
+Newsgroups: comp.dsp
+Subject: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Aug27.075525.8666@hanse.de>
+Date: Sun, 27 Aug 1995 07:55:25 GMT
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Tobias Choi | tchoi@hanse.de
+PGP Key fingerprint: C1EF 4127 DC89 887D
+"Keep the channels open."
+
+From egirard@berkeley.edu Sun Aug 27 22:21:25 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!berkeley!egirard
+From: egirard@berkeley.edu (Élodie Girard)
+Newsgroups: comp.dsp
+Subject: Re: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Aug27.222125.9812@berkeley.edu>
+Date: Sun, 27 Aug 1995 22:21:25 GMT
+References: <1995Aug27.075525.8666@hanse.de>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Aug27.075525.8666@hanse.de>, tchoi@hanse.de (Tobias Choi) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Élodie Girard | egirard@berkeley.edu
+PGP Key fingerprint: 68C0 0007 BFDB FE51
+"Keep the channels open."
+
+From msmirnov@mit.edu Mon Aug 28 14:50:25 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!mit!msmirnov
+From: msmirnov@mit.edu (Mei Smirnov)
+Newsgroups: comp.dsp
+Subject: Re: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Aug28.145025.3153@mit.edu>
+Date: Mon, 28 Aug 1995 14:50:25 GMT
+References: <1995Aug27.075525.8666@hanse.de> <1995Aug27.222125.9812@berkeley.edu>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995Aug27.222125.9812@berkeley.edu>, egirard@berkeley.edu (Élodie Girard) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Mei Smirnov | msmirnov@mit.edu
+PGP Key fingerprint: 04B6 2F44 51FE 6F7E
+"Keep the channels open."
+

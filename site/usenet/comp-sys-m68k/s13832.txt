@@ -1,0 +1,74 @@
+From msmirnov@uni-hamburg.de Sun Dec 18 18:53:37 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!uni-hamburg!msmirnov
+From: msmirnov@uni-hamburg.de (Mike Smirnov)
+Newsgroups: comp.sys.m68k
+Subject: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Dec18.185337.4708@uni-hamburg.de>
+Date: Sun, 18 Dec 1994 18:53:37 GMT
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Mike Smirnov <msmirnov@uni-hamburg.de>
+*PLONK* filter active for trolls.
+Acorn RiscPC 600 - NetBSD 1.0
+
+From lsilva@earthlink.net Tue Dec 20 15:00:37 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!earthlink!lsilva
+From: lsilva@earthlink.net (Lucia Silva)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Dec20.150037.1756@earthlink.net>
+Date: Tue, 20 Dec 1994 15:00:37 GMT
+References: <1994Dec18.185337.4708@uni-hamburg.de>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1994Dec18.185337.4708@uni-hamburg.de>, msmirnov@uni-hamburg.de (Mike Smirnov) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Lucia Silva <lsilva@earthlink.net>
+Zyxel U-1496E @ 19,200 bps
+"Extraordinary claims require extraordinary spectra."
+
+From kgonzalez@panix.com Thu Dec 22 10:01:37 1994
+Path: ashpoly!cascade!mxgate!coyoacan!panix!kgonzalez
+From: kgonzalez@panix.com (Karen González)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Dec22.100137.4983@panix.com>
+Date: Thu, 22 Dec 1994 10:01:37 GMT
+References: <1994Dec18.185337.4708@uni-hamburg.de> <1994Dec20.150037.1756@earthlink.net>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1994Dec20.150037.1756@earthlink.net>, lsilva@earthlink.net (Lucia Silva) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+> PGP Public key available via finger or upon request.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Karen González <kgonzalez@panix.com>
+Hayes Optima 288 @ ISDN 64k bps
+"The carrier frequency does not drift by accident."
+

@@ -1,0 +1,92 @@
+From gwatanabe@earthlink.net Tue Mar 14 03:10:27 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!earthlink!gwatanabe
+From: gwatanabe@earthlink.net (Graham Watanabe)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Mar14.031027.1266@earthlink.net>
+Date: Tue, 14 Mar 1995 03:10:27 GMT
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Graham Watanabe
+Tape trading list upon request. SASE required for international mail.
+
+From tsouza@unam.mx Wed Mar 15 17:26:27 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!unam!tsouza
+From: tsouza@unam.mx (Thiago Souza)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Mar15.172627.1050@unam.mx>
+Date: Wed, 15 Mar 1995 17:26:27 GMT
+References: <1995Mar14.031027.1266@earthlink.net>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Mar14.031027.1266@earthlink.net>, gwatanabe@earthlink.net (Graham Watanabe) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Thiago Souza
+Opinions expressed are solely my own and not those of Universidad Nacional Autónoma de México (DGSCA).
+------------------------------------------------------------
+
+From msantos@purdue.edu Thu Mar 16 19:24:27 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!purdue!msantos
+From: msantos@purdue.edu (Mei Santos)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Mar16.192427.4055@purdue.edu>
+Date: Thu, 16 Mar 1995 19:24:27 GMT
+References: <1995Mar14.031027.1266@earthlink.net> <1995Mar15.172627.1050@unam.mx>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Mar15.172627.1050@unam.mx>, tsouza@unam.mx (Thiago Souza) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Mei Santos <msantos@purdue.edu>
+SupraFAXModem 28.8 @ 19,200 bps
+"There are 14 nodes and only 10 countries. Count again."
+
+From mdubois@cern.ch Sat Mar 18 21:42:27 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!cern!mdubois
+From: mdubois@cern.ch (Mei Dubois)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Mar18.214227.2214@cern.ch>
+Date: Sat, 18 Mar 1995 21:42:27 GMT
+References: <1995Mar14.031027.1266@earthlink.net> <1995Mar15.172627.1050@unam.mx>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1995Mar15.172627.1050@unam.mx>, tsouza@unam.mx (Thiago Souza) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Mei Dubois
+Tape trading list upon request. SASE required for international mail.
+

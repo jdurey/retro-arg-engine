@@ -1,0 +1,69 @@
+From tlee@demon.co.uk Mon Dec 19 01:38:48 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!demon!tlee
+From: tlee@demon.co.uk (Thiago Lee)
+Newsgroups: comp.dsp
+Subject: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Dec19.013848.5267@demon.co.uk>
+Date: Mon, 19 Dec 1994 01:38:48 GMT
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+Thiago Lee
+Opinions expressed are solely my own and not those of Demon Internet Services UK.
+------------------------------------------------------------
+
+From gvasiliev@clari.net Mon Dec 19 20:05:48 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!clari!gvasiliev
+From: gvasiliev@clari.net (Göran Vasiliev)
+Newsgroups: comp.dsp
+Subject: Re: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Dec19.200548.3972@clari.net>
+Date: Mon, 19 Dec 1994 20:05:48 GMT
+References: <1994Dec19.013848.5267@demon.co.uk>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1994Dec19.013848.5267@demon.co.uk>, tlee@demon.co.uk (Thiago Lee) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+-- 
+Göran Vasiliev
+Tape trading list upon request. SASE required for international mail.
+
+From jnovak@utexas.edu Tue Dec 20 16:54:48 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!utexas!jnovak
+From: jnovak@utexas.edu (Ji-woo Novak)
+Newsgroups: comp.dsp
+Subject: Re: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Dec20.165448.3672@utexas.edu>
+Date: Tue, 20 Dec 1994 16:54:48 GMT
+References: <1994Dec19.013848.5267@demon.co.uk> <1994Dec19.200548.3972@clari.net>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Dec19.200548.3972@clari.net>, gvasiliev@clari.net (Göran Vasiliev) writes:
+> You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Ji-woo Novak
+Opinions expressed are solely my own and not those of University of Texas at Austin.
+------------------------------------------------------------
+

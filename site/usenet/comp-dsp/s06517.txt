@@ -1,0 +1,70 @@
+From akim@delphi.com Thu Oct 12 20:52:55 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!delphi!akim
+From: akim@delphi.com (Aiko Kim)
+Newsgroups: comp.dsp
+Subject: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Oct12.205255.5255@delphi.com>
+Date: Thu, 12 Oct 1995 20:52:55 GMT
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+=== Aiko Kim ===
+Dept of Electrical Engineering, Delphi Internet Services
+"The hatch is open. Is anyone listening?"
+
+From mnilsson@utexas.edu Sat Oct 14 21:16:55 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!utexas!mnilsson
+From: mnilsson@utexas.edu (Matthias Nilsson)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Oct14.211655.1942@utexas.edu>
+Date: Sat, 14 Oct 1995 21:16:55 GMT
+References: <1995Oct12.205255.5255@delphi.com>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Oct12.205255.5255@delphi.com>, akim@delphi.com (Aiko Kim) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+> A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Matthias Nilsson -- University of Texas at Austin
+"A soul is not exclusive to biology."
+
+From teriksson@uni-hamburg.de Mon Oct 16 13:52:55 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!uni-hamburg!teriksson
+From: teriksson@uni-hamburg.de (Takeshi Eriksson)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Oct16.135255.6856@uni-hamburg.de>
+Date: Mon, 16 Oct 1995 13:52:55 GMT
+References: <1995Oct12.205255.5255@delphi.com> <1995Oct14.211655.1942@utexas.edu>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Oct14.211655.1942@utexas.edu>, mnilsson@utexas.edu (Matthias Nilsson) writes:
+> Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+-- 
+Takeshi Eriksson
+Opinions expressed are solely my own and not those of Universität Hamburg Fachbereich Informatik.
+------------------------------------------------------------
+

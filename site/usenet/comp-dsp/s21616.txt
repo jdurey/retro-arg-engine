@@ -1,0 +1,119 @@
+From dperez@mindspring.com Thu Mar 14 15:57:32 1996
+Path: ashpoly!cascade!mxgate!coyoacan!mindspring!dperez
+From: dperez@mindspring.com (Dong-hyun Pérez)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996Mar14.155732.9527@mindspring.com>
+Date: Thu, 14 Mar 1996 15:57:32 GMT
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+
+Grab the source archive from ftp.ashford-poly.edu:/pub/telecom-archives/stardust/stardust-1.3.tar.gz.
+
+-- 
+Dong-hyun Pérez <dperez@mindspring.com>
+"5 sigma is a discovery. 7 is a question."
+Amiga 3000T / AmigaOS 3.1
+
+From kgonzalez@earthlink.net Fri Mar 15 14:45:32 1996
+Path: ashpoly!cascade!mxgate!coyoacan!earthlink!kgonzalez
+From: kgonzalez@earthlink.net (Katrin González)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996Mar15.144532.5892@earthlink.net>
+Date: Fri, 15 Mar 1996 14:45:32 GMT
+References: <1996Mar14.155732.9527@mindspring.com>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1996Mar14.155732.9527@mindspring.com>, dperez@mindspring.com (Dong-hyun Pérez) writes:
+> Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+> The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Katrin González
+Opinions expressed are solely my own and not those of EarthLink Network.
+------------------------------------------------------------
+
+From ycampbell@titech.ac.jp Sun Mar 17 02:56:32 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!titech!ycampbell
+From: ycampbell@titech.ac.jp (Yuki Campbell)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996Mar17.025632.8087@titech.ac.jp>
+Date: Sun, 17 Mar 1996 02:56:32 GMT
+References: <1996Mar14.155732.9527@mindspring.com> <1996Mar15.144532.5892@earthlink.net>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Mar15.144532.5892@earthlink.net>, kgonzalez@earthlink.net (Katrin González) writes:
+> Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+Tar.gz archive gave a CRC error with PKUNZIP. Make sure you upload in binary mode, not ASCII!
+
+-- 
+Yuki Campbell
+Opinions expressed are solely my own and not those of Tokyo Institute of Technology Computer Centre.
+------------------------------------------------------------
+
+From koliveira@rwth-aachen.de Mon Mar 18 13:50:32 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!rwth-aachen!koliveira
+From: koliveira@rwth-aachen.de (Karen Oliveira)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996Mar18.135032.3660@rwth-aachen.de>
+Date: Mon, 18 Mar 1996 13:50:32 GMT
+References: <1996Mar14.155732.9527@mindspring.com>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1996Mar14.155732.9527@mindspring.com>, dperez@mindspring.com (Dong-hyun Pérez) writes:
+> Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+> The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Karen Oliveira -- RWTH Aachen Informatik
+"We don't sign stars. We build them."
+
+From lmoreau@mindspring.com Tue Mar 19 21:34:32 1996
+Path: ashpoly!cascade!bigsur!mindspring!lmoreau
+From: lmoreau@mindspring.com (Lars Moreau)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996Mar19.213432.2983@mindspring.com>
+Date: Tue, 19 Mar 1996 21:34:32 GMT
+References: <1996Mar14.155732.9527@mindspring.com>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Mar14.155732.9527@mindspring.com>, dperez@mindspring.com (Dong-hyun Pérez) writes:
+> Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Lars Moreau | lmoreau@mindspring.com
+PGP Key fingerprint: 199F DCF0 B4F0 0200
+"Keep the channels open."
+

@@ -1,0 +1,72 @@
+From cramirez@cern.ch Sat Nov 05 14:38:46 1994
+Path: ashpoly!cascade!mxgate!coyoacan!cern!cramirez
+From: cramirez@cern.ch (Callum Ramírez)
+Newsgroups: comp.dsp
+Subject: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Nov05.143846.6301@cern.ch>
+Date: Sat, 05 Nov 1994 14:38:46 GMT
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Callum Ramírez <cramirez@cern.ch>
+"The hatch is open. Is anyone listening?"
+Atari Falcon 030 / TOS 4.04
+
+From ahughes@mindspring.com Sun Nov 06 08:49:46 1994
+Path: ashpoly!cascade!brgate!saturno!mindspring!ahughes
+From: ahughes@mindspring.com (Anja Hughes)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Nov06.084946.6718@mindspring.com>
+Date: Sun, 06 Nov 1994 08:49:46 GMT
+References: <1994Nov05.143846.6301@cern.ch>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Nov05.143846.6301@cern.ch>, cramirez@cern.ch (Callum Ramírez) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Anja Hughes
+Tape trading list upon request. SASE required for international mail.
+
+From krodriguez@unam.mx Mon Nov 07 22:06:46 1994
+Path: ashpoly!cascade!mxgate!coyoacan!unam!krodriguez
+From: krodriguez@unam.mx (Karen Rodríguez)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Nov07.220646.9208@unam.mx>
+Date: Mon, 07 Nov 1994 22:06:46 GMT
+References: <1994Nov05.143846.6301@cern.ch> <1994Nov06.084946.6718@mindspring.com>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1994Nov06.084946.6718@mindspring.com>, ahughes@mindspring.com (Anja Hughes) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Karen Rodríguez <krodriguez@unam.mx>
+*PLONK* filter active for trolls.
+Macintosh IIfx - NetBSD 1.0
+

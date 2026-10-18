@@ -1,0 +1,116 @@
+From tmuller@panix.com Mon Aug 07 14:19:52 1995
+Path: ashpoly!cascade!brgate!saturno!panix!tmuller
+From: tmuller@panix.com (Takeshi Müller)
+Newsgroups: comp.sys.m68k
+Subject: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Aug07.141952.9877@panix.com>
+Date: Mon, 07 Aug 1995 14:19:52 GMT
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+Takeshi Müller <tmuller@panix.com>
+SupraFAXModem 28.8 @ 14,400 bps
+"Do not worship the copy."
+
+From skarlsson@cmu.edu Tue Aug 08 18:08:52 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!cmu!skarlsson
+From: skarlsson@cmu.edu (Sergei Karlsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Aug08.180852.2061@cmu.edu>
+Date: Tue, 08 Aug 1995 18:08:52 GMT
+References: <1995Aug07.141952.9877@panix.com>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Aug07.141952.9877@panix.com>, tmuller@panix.com (Takeshi Müller) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Sergei Karlsson
+Tape trading list upon request. SASE required for international mail.
+
+From vsilva@uu.net Thu Aug 10 18:01:52 1995
+Path: ashpoly!cascade!mxgate!coyoacan!uu!vsilva
+From: vsilva@uu.net (Valeria Silva)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Aug10.180152.4325@uu.net>
+Date: Thu, 10 Aug 1995 18:01:52 GMT
+References: <1995Aug07.141952.9877@panix.com>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Aug07.141952.9877@panix.com>, tmuller@panix.com (Takeshi Müller) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Valeria Silva
+Tape trading list upon request. SASE required for international mail.
+
+From ynovak@pipeline.com Sat Aug 12 21:59:52 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!pipeline!ynovak
+From: ynovak@pipeline.com (Yuki Novak)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Aug12.215952.8237@pipeline.com>
+Date: Sat, 12 Aug 1995 21:59:52 GMT
+References: <1995Aug07.141952.9877@panix.com>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Aug07.141952.9877@panix.com>, tmuller@panix.com (Takeshi Müller) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Yuki Novak
+Tape trading list upon request. SASE required for international mail.
+
+From spetrov@titech.ac.jp Sun Aug 13 02:56:52 1995
+Path: ashpoly!cascade!mxgate!coyoacan!titech!spetrov
+From: spetrov@titech.ac.jp (Sven Petrov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Aug13.025652.4316@titech.ac.jp>
+Date: Sun, 13 Aug 1995 02:56:52 GMT
+References: <1995Aug07.141952.9877@panix.com> <1995Aug08.180852.2061@cmu.edu>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Aug08.180852.2061@cmu.edu>, skarlsson@cmu.edu (Sergei Karlsson) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Sven Petrov <spetrov@titech.ac.jp>
+*PLONK* filter active for trolls.
+Sun 3/60 (SunOS 4.1.1) - NetBSD 1.0
+

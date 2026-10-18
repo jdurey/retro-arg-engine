@@ -1,0 +1,100 @@
+From agirard@uu.net Sun Mar 12 11:59:36 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!uu!agirard
+From: agirard@uu.net (Amy Girard)
+Newsgroups: comp.dsp
+Subject: [FLAME] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Mar12.115936.4569@uu.net>
+Date: Sun, 12 Mar 1995 11:59:36 GMT
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+Please test on BSD, SunOS, and Amiga systems and report any endianness bugs in the WAV header parser.
+
+-- 
+Amy Girard <agirard@uu.net>
+Hayes Optima 288 @ 19,200 bps
+"A soul is not exclusive to biology."
+
+From nwatanabe@delphi.com Tue Mar 14 11:45:36 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!delphi!nwatanabe
+From: nwatanabe@delphi.com (Nadine Watanabe)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Mar14.114536.6199@delphi.com>
+Date: Tue, 14 Mar 1995 11:45:36 GMT
+References: <1995Mar12.115936.4569@uu.net>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1995Mar12.115936.4569@uu.net>, agirard@uu.net (Amy Girard) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+> Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Nadine Watanabe
+Opinions expressed are solely my own and not those of Delphi Internet Services.
+------------------------------------------------------------
+
+From kmoreau@uu.net Thu Mar 16 08:37:36 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!uu!kmoreau
+From: kmoreau@uu.net (Karen Moreau)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Mar16.083736.6729@uu.net>
+Date: Thu, 16 Mar 1995 08:37:36 GMT
+References: <1995Mar12.115936.4569@uu.net> <1995Mar14.114536.6199@delphi.com>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Mar14.114536.6199@delphi.com>, nwatanabe@delphi.com (Nadine Watanabe) writes:
+> Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+> Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Karen Moreau
+Opinions expressed are solely my own and not those of UUNET Technologies, Falls Church VA.
+------------------------------------------------------------
+
+From swatanabe@netcom.com Thu Mar 16 13:15:36 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!netcom!swatanabe
+From: swatanabe@netcom.com (Sven Watanabe)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Mar16.131536.3873@netcom.com>
+Date: Thu, 16 Mar 1995 13:15:36 GMT
+References: <1995Mar12.115936.4569@uu.net> <1995Mar14.114536.6199@delphi.com>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1995Mar14.114536.6199@delphi.com>, nwatanabe@delphi.com (Nadine Watanabe) writes:
+> Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+> Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Sven Watanabe <swatanabe@netcom.com>
+"Do not worship the copy."
+Mac IIci / 68882 FPU / System 7.5.1
+

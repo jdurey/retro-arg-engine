@@ -1,0 +1,117 @@
+From rpetrov@titech.ac.jp Fri Jun 14 02:31:37 1996
+Path: ashpoly!cascade!bigsur!titech!rpetrov
+From: rpetrov@titech.ac.jp (Raj Petrov)
+Newsgroups: comp.dsp
+Subject: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jun14.023137.2577@titech.ac.jp>
+Date: Fri, 14 Jun 1996 02:31:37 GMT
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Raj Petrov -- Tokyo Institute of Technology Computer Centre
+"Hold for relay."
+
+From jlee@earthlink.net Sat Jun 15 02:47:37 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!earthlink!jlee
+From: jlee@earthlink.net (Jen Lee)
+Newsgroups: comp.dsp
+Subject: Re: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jun15.024737.6825@earthlink.net>
+Date: Sat, 15 Jun 1996 02:47:37 GMT
+References: <1996Jun14.023137.2577@titech.ac.jp>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Jun14.023137.2577@titech.ac.jp>, rpetrov@titech.ac.jp (Raj Petrov) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+=== Jen Lee ===
+Dept of Electrical Engineering, EarthLink Network
+"Row 14. No joke."
+
+From mrobertson@rwth-aachen.de Sun Jun 16 14:16:37 1996
+Path: ashpoly!cascade!brgate!saturno!rwth-aachen!mrobertson
+From: mrobertson@rwth-aachen.de (Morag Robertson)
+Newsgroups: comp.dsp
+Subject: Re: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jun16.141637.7683@rwth-aachen.de>
+Date: Sun, 16 Jun 1996 14:16:37 GMT
+References: <1996Jun14.023137.2577@titech.ac.jp> <1996Jun15.024737.6825@earthlink.net>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1996Jun15.024737.6825@earthlink.net>, jlee@earthlink.net (Jen Lee) writes:
+> Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Morag Robertson | mrobertson@rwth-aachen.de
+PGP Key fingerprint: 0AE0 7A9B F0B7 C58E
+"Keep the channels open."
+
+From cdubois@cern.ch Tue Jun 18 10:39:37 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!cern!cdubois
+From: cdubois@cern.ch (Camila Dubois)
+Newsgroups: comp.dsp
+Subject: Re: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jun18.103937.5136@cern.ch>
+Date: Tue, 18 Jun 1996 10:39:37 GMT
+References: <1996Jun14.023137.2577@titech.ac.jp> <1996Jun15.024737.6825@earthlink.net>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Jun15.024737.6825@earthlink.net>, jlee@earthlink.net (Jen Lee) writes:
+> Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Camila Dubois
+Opinions expressed are solely my own and not those of European Laboratory for Particle Physics, Geneva.
+------------------------------------------------------------
+
+From shernandez@netcom.com Tue Jun 18 19:45:37 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!netcom!shernandez
+From: shernandez@netcom.com (Sun-mi Hernández)
+Newsgroups: comp.dsp
+Subject: Re: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jun18.194537.2620@netcom.com>
+Date: Tue, 18 Jun 1996 19:45:37 GMT
+References: <1996Jun14.023137.2577@titech.ac.jp> <1996Jun15.024737.6825@earthlink.net> <1996Jun18.103937.5136@cern.ch>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1996Jun18.103937.5136@cern.ch>, cdubois@cern.ch (Camila Dubois) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Sun-mi Hernández -- NETCOM On-Line Communication Services
+"Do not worship the copy."
+

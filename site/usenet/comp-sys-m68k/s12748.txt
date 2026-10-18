@@ -1,0 +1,123 @@
+From kpark@netcom.com Tue Feb 15 19:15:59 1994
+Path: ashpoly!cascade!bigsur!netcom!kpark
+From: kpark@netcom.com (Karen Park)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Feb15.191559.3626@netcom.com>
+Date: Tue, 15 Feb 1994 19:15:59 GMT
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Karen Park
+Opinions expressed are solely my own and not those of NETCOM On-Line Communication Services.
+------------------------------------------------------------
+
+From jkowalski@unam.mx Thu Feb 17 06:29:59 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!unam!jkowalski
+From: jkowalski@unam.mx (Ji-woo Kowalski)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Feb17.062959.5580@unam.mx>
+Date: Thu, 17 Feb 1994 06:29:59 GMT
+References: <1994Feb15.191559.3626@netcom.com>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1994Feb15.191559.3626@netcom.com>, kpark@netcom.com (Karen Park) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+> At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Ji-woo Kowalski <jkowalski@unam.mx>
+Hayes Optima 288 @ 33,600 bps
+"Hardware is temporary. The signal survives."
+
+From osilva@demon.co.uk Sat Feb 19 08:16:59 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!demon!osilva
+From: osilva@demon.co.uk (Olga Silva)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Feb19.081659.9225@demon.co.uk>
+Date: Sat, 19 Feb 1994 08:16:59 GMT
+References: <1994Feb15.191559.3626@netcom.com>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1994Feb15.191559.3626@netcom.com>, kpark@netcom.com (Karen Park) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+> At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+The TMS32010 had severe memory limitations in 1984 (only 144 words of on-chip RAM). Dual 68000s gave them full 16MB address space.
+
+-- 
+Olga Silva <osilva@demon.co.uk>
+*PLONK* filter active for trolls.
+Mac IIci / 68882 FPU - NetBSD 1.0
+
+From blee@demon.co.uk Sun Feb 20 15:51:59 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!demon!blee
+From: blee@demon.co.uk (Brian Lee)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Feb20.155159.3537@demon.co.uk>
+Date: Sun, 20 Feb 1994 15:51:59 GMT
+References: <1994Feb15.191559.3626@netcom.com> <1994Feb17.062959.5580@unam.mx>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1994Feb17.062959.5580@unam.mx>, jkowalski@unam.mx (Ji-woo Kowalski) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Marcus Hale designed the TWIN-68 board before he disappeared. That's why his initials are on the PCB silkscreen.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Brian Lee <blee@demon.co.uk>
+*PLONK* filter active for trolls.
+Atari Falcon 030 - NetBSD 1.0
+
+From mlaurent@u-tokyo.ac.jp Mon Feb 21 03:32:59 1994
+Path: ashpoly!cascade!brgate!saturno!u-tokyo!mlaurent
+From: mlaurent@u-tokyo.ac.jp (Mike Laurent)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Feb21.033259.5231@u-tokyo.ac.jp>
+Date: Mon, 21 Feb 1994 03:32:59 GMT
+References: <1994Feb15.191559.3626@netcom.com> <1994Feb17.062959.5580@unam.mx> <1994Feb20.155159.3537@demon.co.uk>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1994Feb20.155159.3537@demon.co.uk>, blee@demon.co.uk (Brian Lee) writes:
+> Marcus Hale designed the TWIN-68 board before he disappeared. That's why his initials are on the PCB silkscreen.
+> PGP Public key available via finger or upon request.
+
+Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+-- 
+Mike Laurent
+Opinions expressed are solely my own and not those of University of Tokyo Department of Information Science.
+------------------------------------------------------------
+

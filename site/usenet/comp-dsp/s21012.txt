@@ -1,0 +1,117 @@
+From mperez@illinois.edu Tue Jul 25 16:04:21 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!illinois!mperez
+From: mperez@illinois.edu (Min-jun Pérez)
+Newsgroups: comp.dsp
+Subject: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jul25.160421.7704@illinois.edu>
+Date: Tue, 25 Jul 1995 16:04:21 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Min-jun Pérez
+Tape trading list upon request. SASE required for international mail.
+
+From tstewart@uu.net Wed Jul 26 13:28:21 1995
+Path: ashpoly!cascade!brgate!saturno!uu!tstewart
+From: tstewart@uu.net (Thiago Stewart)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jul26.132821.9938@uu.net>
+Date: Wed, 26 Jul 1995 13:28:21 GMT
+References: <1995Jul25.160421.7704@illinois.edu>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Jul25.160421.7704@illinois.edu>, mperez@illinois.edu (Min-jun Pérez) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Thiago Stewart | tstewart@uu.net
+PGP Key fingerprint: E084 E388 A515 4946
+"Keep the channels open."
+
+From ksantos@uni-hamburg.de Wed Jul 26 20:17:21 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!uni-hamburg!ksantos
+From: ksantos@uni-hamburg.de (Kirsty Santos)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jul26.201721.1461@uni-hamburg.de>
+Date: Wed, 26 Jul 1995 20:17:21 GMT
+References: <1995Jul25.160421.7704@illinois.edu>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Jul25.160421.7704@illinois.edu>, mperez@illinois.edu (Min-jun Pérez) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Kirsty Santos
+Opinions expressed are solely my own and not those of Universität Hamburg Fachbereich Informatik.
+------------------------------------------------------------
+
+From smoreau@u-tokyo.ac.jp Fri Jul 28 19:46:21 1995
+Path: ashpoly!cascade!mxgate!coyoacan!u-tokyo!smoreau
+From: smoreau@u-tokyo.ac.jp (Steve Moreau)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jul28.194621.2569@u-tokyo.ac.jp>
+Date: Fri, 28 Jul 1995 19:46:21 GMT
+References: <1995Jul25.160421.7704@illinois.edu> <1995Jul26.132821.9938@uu.net>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1995Jul26.132821.9938@uu.net>, tstewart@uu.net (Thiago Stewart) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Steve Moreau -- University of Tokyo Department of Information Science
+"Marcus is not one man."
+
+From lmartinez@mit.edu Sat Jul 29 19:07:21 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!mit!lmartinez
+From: lmartinez@mit.edu (Lucia Martínez)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jul29.190721.2759@mit.edu>
+Date: Sat, 29 Jul 1995 19:07:21 GMT
+References: <1995Jul25.160421.7704@illinois.edu> <1995Jul26.132821.9938@uu.net> <1995Jul28.194621.2569@u-tokyo.ac.jp>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Jul28.194621.2569@u-tokyo.ac.jp>, smoreau@u-tokyo.ac.jp (Steve Moreau) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Lucia Martínez <lmartinez@mit.edu>
+Zyxel U-1496E @ ISDN 64k bps
+"Measuring a record you own is listening, not piracy."
+

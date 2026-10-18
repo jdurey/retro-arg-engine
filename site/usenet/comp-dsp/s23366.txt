@@ -1,0 +1,47 @@
+From grodriguez@ox.ac.uk Sun Feb 18 04:27:06 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!ox!grodriguez
+From: grodriguez@ox.ac.uk (Göran Rodríguez)
+Newsgroups: comp.dsp
+Subject: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Feb18.042706.9402@ox.ac.uk>
+Date: Sun, 18 Feb 1996 04:27:06 GMT
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Göran Rodríguez <grodriguez@ox.ac.uk>
+Zyxel U-1496E @ 19,200 bps
+"Tape doesn't lie at 02:14. Ears do."
+
+From cperez@uu.net Tue Feb 20 01:48:06 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!uu!cperez
+From: cperez@uu.net (Callum Pérez)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Feb20.014806.8337@uu.net>
+Date: Tue, 20 Feb 1996 01:48:06 GMT
+References: <1996Feb18.042706.9402@ox.ac.uk>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Feb18.042706.9402@ox.ac.uk>, grodriguez@ox.ac.uk (Göran Rodríguez) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Callum Pérez <cperez@uu.net>
+Zyxel U-1496E @ 9600 Telebit bps
+"5 sigma is a discovery. 7 is a question."
+

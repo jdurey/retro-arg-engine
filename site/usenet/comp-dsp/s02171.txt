@@ -1,0 +1,94 @@
+From mokonkwo@illinois.edu Mon Aug 08 10:54:39 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!illinois!mokonkwo
+From: mokonkwo@illinois.edu (Matthias Okonkwo)
+Newsgroups: comp.dsp
+Subject: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Aug08.105439.5393@illinois.edu>
+Date: Mon, 08 Aug 1994 10:54:39 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Matthias Okonkwo -- University of Illinois Urbana-Champaign
+"They will send a copy in my place."
+
+From rnakamura@pipeline.com Mon Aug 08 19:10:39 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!pipeline!rnakamura
+From: rnakamura@pipeline.com (Rodrigo Nakamura)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Aug08.191039.9145@pipeline.com>
+Date: Mon, 08 Aug 1994 19:10:39 GMT
+References: <1994Aug08.105439.5393@illinois.edu>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Aug08.105439.5393@illinois.edu>, mokonkwo@illinois.edu (Matthias Okonkwo) writes:
+> Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Rodrigo Nakamura | rnakamura@pipeline.com
+PGP Key fingerprint: 1C01 061D 46AD 2719
+"Keep the channels open."
+
+From amacdonald@purdue.edu Wed Aug 10 05:09:39 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!purdue!amacdonald
+From: amacdonald@purdue.edu (Astrid MacDonald)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Aug10.050939.8612@purdue.edu>
+Date: Wed, 10 Aug 1994 05:09:39 GMT
+References: <1994Aug08.105439.5393@illinois.edu>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Aug08.105439.5393@illinois.edu>, mokonkwo@illinois.edu (Matthias Okonkwo) writes:
+> Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Astrid MacDonald
+Opinions expressed are solely my own and not those of Purdue University Engineering Computer Network.
+------------------------------------------------------------
+
+From slindqvist@clari.net Thu Aug 11 16:55:39 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!clari!slindqvist
+From: slindqvist@clari.net (Sven Lindqvist)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Aug11.165539.3820@clari.net>
+Date: Thu, 11 Aug 1994 16:55:39 GMT
+References: <1994Aug08.105439.5393@illinois.edu> <1994Aug10.050939.8612@purdue.edu>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1994Aug10.050939.8612@purdue.edu>, amacdonald@purdue.edu (Astrid MacDonald) writes:
+> I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Sven Lindqvist
+Opinions expressed are solely my own and not those of ClariNet Communications Corp.
+------------------------------------------------------------
+

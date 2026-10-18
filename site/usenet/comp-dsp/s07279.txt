@@ -1,0 +1,118 @@
+From dgirard@tum.de Tue Nov 14 03:57:54 1995
+Path: ashpoly!cascade!mxgate!coyoacan!tum!dgirard
+From: dgirard@tum.de (Dong-hyun Girard)
+Newsgroups: comp.dsp
+Subject: Discussion: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Nov14.035754.2650@tum.de>
+Date: Tue, 14 Nov 1995 03:57:54 GMT
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+
+Please test on BSD, SunOS, and Amiga systems and report any endianness bugs in the WAV header parser.
+
+-- 
+Dong-hyun Girard | dgirard@tum.de
+PGP Key fingerprint: F0E1 7B0F 0C1F 61F9
+"Keep the channels open."
+
+From lmuller@uu.net Wed Nov 15 03:40:54 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!uu!lmuller
+From: lmuller@uu.net (Lucia Müller)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Nov15.034054.8024@uu.net>
+Date: Wed, 15 Nov 1995 03:40:54 GMT
+References: <1995Nov14.035754.2650@tum.de>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Nov14.035754.2650@tum.de>, dgirard@tum.de (Dong-hyun Girard) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+> The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+=== Lucia Müller ===
+Dept of Electrical Engineering, UUNET Technologies, Falls Church VA
+"The hatch is open. Is anyone listening?"
+
+From dtanaka@stanford.edu Thu Nov 16 23:17:54 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!stanford!dtanaka
+From: dtanaka@stanford.edu (Dong-hyun Tanaka)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Nov16.231754.9506@stanford.edu>
+Date: Thu, 16 Nov 1995 23:17:54 GMT
+References: <1995Nov14.035754.2650@tum.de> <1995Nov15.034054.8024@uu.net>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Nov15.034054.8024@uu.net>, lmuller@uu.net (Lucia Müller) writes:
+> Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+-- 
+Dong-hyun Tanaka <dtanaka@stanford.edu>
+US Robotics Courier V.34 @ 9600 Telebit bps
+"Measuring a record you own is listening, not piracy."
+
+From nivanov@delphi.com Sat Nov 18 18:06:54 1995
+Path: ashpoly!cascade!bigsur!delphi!nivanov
+From: nivanov@delphi.com (Nadia Ivanov)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Nov18.180654.7117@delphi.com>
+Date: Sat, 18 Nov 1995 18:06:54 GMT
+References: <1995Nov14.035754.2650@tum.de> <1995Nov15.034054.8024@uu.net>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Nov15.034054.8024@uu.net>, lmuller@uu.net (Lucia Müller) writes:
+> Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Nadia Ivanov
+Tape trading list upon request. SASE required for international mail.
+
+From bvasiliev@delphi.com Mon Nov 20 02:41:54 1995
+Path: ashpoly!cascade!brgate!saturno!delphi!bvasiliev
+From: bvasiliev@delphi.com (Bastien Vasiliev)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Nov20.024154.6021@delphi.com>
+Date: Mon, 20 Nov 1995 02:41:54 GMT
+References: <1995Nov14.035754.2650@tum.de> <1995Nov15.034054.8024@uu.net>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Nov15.034054.8024@uu.net>, lmuller@uu.net (Lucia Müller) writes:
+> Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+Tar.gz archive gave a CRC error with PKUNZIP. Make sure you upload in binary mode, not ASCII!
+
+-- 
+=== Bastien Vasiliev ===
+Dept of Electrical Engineering, Delphi Internet Services
+"The carrier frequency does not drift by accident."
+

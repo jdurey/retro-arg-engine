@@ -1,0 +1,118 @@
+From tramirez@kth.se Tue Oct 01 02:02:16 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!kth!tramirez
+From: tramirez@kth.se (Tomas Ramírez)
+Newsgroups: comp.sys.m68k
+Subject: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Oct01.020216.2472@kth.se>
+Date: Tue, 01 Oct 1996 02:02:16 GMT
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+Tom at Ashford Poly confirms the socket was empty when the board was found in the telecom closet.
+
+-- 
+Tomas Ramírez -- Royal Institute of Technology, Stockholm
+"5 sigma is a discovery. 7 is a question."
+
+From spopov@mit.edu Tue Oct 01 15:46:16 1996
+Path: ashpoly!cascade!bigsur!mit!spopov
+From: spopov@mit.edu (Sergei Popov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Oct01.154616.6589@mit.edu>
+Date: Tue, 01 Oct 1996 15:46:16 GMT
+References: <1996Oct01.020216.2472@kth.se>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Oct01.020216.2472@kth.se>, tramirez@kth.se (Tomas Ramírez) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Sergei Popov -- Massachusetts Institute of Technology
+"A soul is not exclusive to biology."
+
+From mkarlsson@pacbell.net Thu Oct 03 11:51:16 1996
+Path: ashpoly!cascade!bigsur!pacbell!mkarlsson
+From: mkarlsson@pacbell.net (Marisol Karlsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Oct03.115116.9099@pacbell.net>
+Date: Thu, 03 Oct 1996 11:51:16 GMT
+References: <1996Oct01.020216.2472@kth.se>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1996Oct01.020216.2472@kth.se>, tramirez@kth.se (Tomas Ramírez) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Marisol Karlsson
+Opinions expressed are solely my own and not those of Pacific Bell Internet Services.
+------------------------------------------------------------
+
+From jmuller@kth.se Sat Oct 05 07:03:16 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!kth!jmuller
+From: jmuller@kth.se (Jens Müller)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Oct05.070316.4927@kth.se>
+Date: Sat, 05 Oct 1996 07:03:16 GMT
+References: <1996Oct01.020216.2472@kth.se> <1996Oct01.154616.6589@mit.edu>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Oct01.154616.6589@mit.edu>, spopov@mit.edu (Sergei Popov) writes:
+> Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Jens Müller <jmuller@kth.se>
+"We don't sign stars. We build them."
+Sun SparcStation 20 / TOS 4.04
+
+From djohansson@mit.edu Sun Oct 06 14:21:16 1996
+Path: ashpoly!cascade!bigsur!mit!djohansson
+From: djohansson@mit.edu (Dave Johansson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Oct06.142116.9071@mit.edu>
+Date: Sun, 06 Oct 1996 14:21:16 GMT
+References: <1996Oct01.020216.2472@kth.se> <1996Oct01.154616.6589@mit.edu>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Oct01.154616.6589@mit.edu>, spopov@mit.edu (Sergei Popov) writes:
+> Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Dave Johansson
+Opinions expressed are solely my own and not those of Massachusetts Institute of Technology.
+------------------------------------------------------------
+

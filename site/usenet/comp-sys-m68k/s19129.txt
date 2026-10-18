@@ -1,0 +1,93 @@
+From bpopov@u-tokyo.ac.jp Thu Apr 28 09:55:39 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!u-tokyo!bpopov
+From: bpopov@u-tokyo.ac.jp (Brian Popov)
+Newsgroups: comp.sys.m68k
+Subject: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Apr28.095539.8709@u-tokyo.ac.jp>
+Date: Thu, 28 Apr 1994 09:55:39 GMT
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Brian Popov <bpopov@u-tokyo.ac.jp>
+Zyxel U-1496E @ 28,800 bps
+"In theory there is no difference between theory and practice."
+
+From mfischer@cmu.edu Fri Apr 29 23:44:39 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!cmu!mfischer
+From: mfischer@cmu.edu (Marta Fischer)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Apr29.234439.8417@cmu.edu>
+Date: Fri, 29 Apr 1994 23:44:39 GMT
+References: <1994Apr28.095539.8709@u-tokyo.ac.jp>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Apr28.095539.8709@u-tokyo.ac.jp>, bpopov@u-tokyo.ac.jp (Brian Popov) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Marta Fischer <mfischer@cmu.edu>
+Practical Peripherals 14.4 @ 14,400 bps
+"A soul is not exclusive to biology."
+
+From flaurent@berkeley.edu Sat Apr 30 20:40:39 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!berkeley!flaurent
+From: flaurent@berkeley.edu (Freya Laurent)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Apr30.204039.5388@berkeley.edu>
+Date: Sat, 30 Apr 1994 20:40:39 GMT
+References: <1994Apr28.095539.8709@u-tokyo.ac.jp>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Apr28.095539.8709@u-tokyo.ac.jp>, bpopov@u-tokyo.ac.jp (Brian Popov) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Freya Laurent <flaurent@berkeley.edu>
+*PLONK* filter active for trolls.
+Atari TT030 - NetBSD 1.0
+
+From fpopov@titech.ac.jp Sun May 01 11:28:39 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!titech!fpopov
+From: fpopov@titech.ac.jp (Freya Popov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994May01.112839.2237@titech.ac.jp>
+Date: Sun, 01 May 1994 11:28:39 GMT
+References: <1994Apr28.095539.8709@u-tokyo.ac.jp> <1994Apr30.204039.5388@berkeley.edu>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Apr30.204039.5388@berkeley.edu>, flaurent@berkeley.edu (Freya Laurent) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+=== Freya Popov ===
+Dept of Electrical Engineering, Tokyo Institute of Technology Computer Centre
+"Marcus is not one man."
+

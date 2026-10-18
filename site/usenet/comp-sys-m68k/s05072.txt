@@ -1,0 +1,93 @@
+From ntakahashi@uni-hamburg.de Sun Oct 08 05:26:55 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!uni-hamburg!ntakahashi
+From: ntakahashi@uni-hamburg.de (Nadine Takahashi)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Oct08.052655.6072@uni-hamburg.de>
+Date: Sun, 08 Oct 1995 05:26:55 GMT
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+Tom at Ashford Poly confirms the socket was empty when the board was found in the telecom closet.
+
+-- 
+Nadine Takahashi
+Tape trading list upon request. SASE required for international mail.
+
+From rkowalski@utexas.edu Mon Oct 09 04:06:55 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!utexas!rkowalski
+From: rkowalski@utexas.edu (Renata Kowalski)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Oct09.040655.3997@utexas.edu>
+Date: Mon, 09 Oct 1995 04:06:55 GMT
+References: <1995Oct08.052655.6072@uni-hamburg.de>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Oct08.052655.6072@uni-hamburg.de>, ntakahashi@uni-hamburg.de (Nadine Takahashi) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Renata Kowalski
+Tape trading list upon request. SASE required for international mail.
+
+From jkim@u-tokyo.ac.jp Tue Oct 10 01:52:55 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!u-tokyo!jkim
+From: jkim@u-tokyo.ac.jp (Jen Kim)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Oct10.015255.7431@u-tokyo.ac.jp>
+Date: Tue, 10 Oct 1995 01:52:55 GMT
+References: <1995Oct08.052655.6072@uni-hamburg.de>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Oct08.052655.6072@uni-hamburg.de>, ntakahashi@uni-hamburg.de (Nadine Takahashi) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Jen Kim
+Opinions expressed are solely my own and not those of University of Tokyo Department of Information Science.
+------------------------------------------------------------
+
+From mkarlsson@kth.se Wed Oct 11 05:58:55 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!kth!mkarlsson
+From: mkarlsson@kth.se (Marisol Karlsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Oct11.055855.2855@kth.se>
+Date: Wed, 11 Oct 1995 05:58:55 GMT
+References: <1995Oct08.052655.6072@uni-hamburg.de> <1995Oct09.040655.3997@utexas.edu>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Oct09.040655.3997@utexas.edu>, rkowalski@utexas.edu (Renata Kowalski) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+-- 
+Marisol Karlsson <mkarlsson@kth.se>
+SupraFAXModem 28.8 @ 19,200 bps
+"Extraordinary claims require extraordinary spectra."
+

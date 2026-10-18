@@ -1,0 +1,117 @@
+From dtanaka@mindspring.com Mon May 06 10:45:23 1996
+Path: ashpoly!cascade!mxgate!coyoacan!mindspring!dtanaka
+From: dtanaka@mindspring.com (Dave Tanaka)
+Newsgroups: comp.sys.m68k
+Subject: Data: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996May06.104523.2841@mindspring.com>
+Date: Mon, 06 May 1996 10:45:23 GMT
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+
+Did Marcus take the decryption EPROM with him when he left the lab?
+
+-- 
+Dave Tanaka <dtanaka@mindspring.com>
+US Robotics Courier V.34 @ 28,800 bps
+"Hold for relay."
+
+From kmuller@unam.mx Wed May 08 09:05:23 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!unam!kmuller
+From: kmuller@unam.mx (Kenji Müller)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996May08.090523.4257@unam.mx>
+Date: Wed, 08 May 1996 09:05:23 GMT
+References: <1996May06.104523.2841@mindspring.com>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1996May06.104523.2841@mindspring.com>, dtanaka@mindspring.com (Dave Tanaka) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Kenji Müller | kmuller@unam.mx
+PGP Key fingerprint: 08E6 8B11 DA62 D672
+"Keep the channels open."
+
+From bfischer@inria.fr Thu May 09 03:14:23 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!inria!bfischer
+From: bfischer@inria.fr (Bastien Fischer)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996May09.031423.1458@inria.fr>
+Date: Thu, 09 May 1996 03:14:23 GMT
+References: <1996May06.104523.2841@mindspring.com> <1996May08.090523.4257@unam.mx>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1996May08.090523.4257@unam.mx>, kmuller@unam.mx (Kenji Müller) writes:
+> Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Bastien Fischer -- INRIA Rocquencourt
+"Tape doesn't lie at 02:14. Ears do."
+
+From mreyes@hanse.de Thu May 09 11:13:23 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!hanse!mreyes
+From: mreyes@hanse.de (Matthias Reyes)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996May09.111323.7047@hanse.de>
+Date: Thu, 09 May 1996 11:13:23 GMT
+References: <1996May06.104523.2841@mindspring.com> <1996May08.090523.4257@unam.mx> <1996May09.031423.1458@inria.fr>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996May09.031423.1458@inria.fr>, bfischer@inria.fr (Bastien Fischer) writes:
+> Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+=== Matthias Reyes ===
+Dept of Electrical Engineering, Hanse-Netzwerk Hamburg
+"When every node is whole, the channel opens."
+
+From iduarte@clari.net Fri May 10 22:44:23 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!clari!iduarte
+From: iduarte@clari.net (Ines Duarte)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996May10.224423.8434@clari.net>
+Date: Fri, 10 May 1996 22:44:23 GMT
+References: <1996May06.104523.2841@mindspring.com> <1996May08.090523.4257@unam.mx>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996May08.090523.4257@unam.mx>, kmuller@unam.mx (Kenji Müller) writes:
+> Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Ines Duarte <iduarte@clari.net>
+*PLONK* filter active for trolls.
+486DX2/66 (Linux 1.2.13) - NetBSD 1.0
+

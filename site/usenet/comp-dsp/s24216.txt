@@ -1,0 +1,117 @@
+From mgonzalez@clari.net Sat Jun 22 06:52:08 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!clari!mgonzalez
+From: mgonzalez@clari.net (Mikhail González)
+Newsgroups: comp.dsp
+Subject: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Jun22.065208.4274@clari.net>
+Date: Sat, 22 Jun 1996 06:52:08 GMT
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+Mikhail González | mgonzalez@clari.net
+PGP Key fingerprint: A32A 2BC8 1D46 AC1F
+"Keep the channels open."
+
+From hlee@stanford.edu Sat Jun 22 14:34:08 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!stanford!hlee
+From: hlee@stanford.edu (Hugo Lee)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Jun22.143408.9552@stanford.edu>
+Date: Sat, 22 Jun 1996 14:34:08 GMT
+References: <1996Jun22.065208.4274@clari.net>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Jun22.065208.4274@clari.net>, mgonzalez@clari.net (Mikhail González) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Hugo Lee <hlee@stanford.edu>
+"Row 14. No joke."
+Sun 3/60 (SunOS 4.1.1) / System 7.5.1
+
+From msilva@panix.com Mon Jun 24 01:59:08 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!panix!msilva
+From: msilva@panix.com (Mateo Silva)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Jun24.015908.4885@panix.com>
+Date: Mon, 24 Jun 1996 01:59:08 GMT
+References: <1996Jun22.065208.4274@clari.net>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1996Jun22.065208.4274@clari.net>, mgonzalez@clari.net (Mikhail González) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Mateo Silva -- Public Access Unix of New York
+"They will send a copy in my place."
+
+From afournier@uni-hamburg.de Wed Jun 26 03:19:08 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!uni-hamburg!afournier
+From: afournier@uni-hamburg.de (Andrei Fournier)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Jun26.031908.5549@uni-hamburg.de>
+Date: Wed, 26 Jun 1996 03:19:08 GMT
+References: <1996Jun22.065208.4274@clari.net> <1996Jun22.143408.9552@stanford.edu>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1996Jun22.143408.9552@stanford.edu>, hlee@stanford.edu (Hugo Lee) writes:
+> Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+PGP Public key available via finger or upon request.
+
+-- 
+=== Andrei Fournier ===
+Dept of Electrical Engineering, Universität Hamburg Fachbereich Informatik
+"Hardware is temporary. The signal survives."
+
+From jreyes@hanse.de Wed Jun 26 15:36:08 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!hanse!jreyes
+From: jreyes@hanse.de (Joachim Reyes)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Jun26.153608.1495@hanse.de>
+Date: Wed, 26 Jun 1996 15:36:08 GMT
+References: <1996Jun22.065208.4274@clari.net> <1996Jun22.143408.9552@stanford.edu> <1996Jun26.031908.5549@uni-hamburg.de>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Jun26.031908.5549@uni-hamburg.de>, afournier@uni-hamburg.de (Andrei Fournier) writes:
+> Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Joachim Reyes | jreyes@hanse.de
+PGP Key fingerprint: 1C8D 356E 2270 AA8D
+"Keep the channels open."
+

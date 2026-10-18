@@ -1,0 +1,70 @@
+From kgarcia@uu.net Fri Jun 28 18:01:38 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!uu!kgarcia
+From: kgarcia@uu.net (Kenji García)
+Newsgroups: comp.sys.m68k
+Subject: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Jun28.180138.8370@uu.net>
+Date: Fri, 28 Jun 1996 18:01:38 GMT
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Kenji García <kgarcia@uu.net>
+"5 sigma is a discovery. 7 is a question."
+Pentium 90 (OS/2 Warp) / NEXTSTEP 3.3
+
+From vsantos@cam.ac.uk Sat Jun 29 01:41:38 1996
+Path: ashpoly!cascade!bigsur!cam!vsantos
+From: vsantos@cam.ac.uk (Valeria Santos)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Jun29.014138.5210@cam.ac.uk>
+Date: Sat, 29 Jun 1996 01:41:38 GMT
+References: <1996Jun28.180138.8370@uu.net>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Jun28.180138.8370@uu.net>, kgarcia@uu.net (Kenji García) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Valeria Santos <vsantos@cam.ac.uk>
+"The carrier frequency does not drift by accident."
+PC-9821Ap2 (NEC) / Linux 1.2.13
+
+From lchoi@berkeley.edu Sat Jun 29 23:20:38 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!berkeley!lchoi
+From: lchoi@berkeley.edu (Liam Choi)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Jun29.232038.9221@berkeley.edu>
+Date: Sat, 29 Jun 1996 23:20:38 GMT
+References: <1996Jun28.180138.8370@uu.net> <1996Jun29.014138.5210@cam.ac.uk>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Jun29.014138.5210@cam.ac.uk>, vsantos@cam.ac.uk (Valeria Santos) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Liam Choi <lchoi@berkeley.edu>
+Hayes Optima 288 @ 9600 Telebit bps
+"Do not worship the copy."
+

@@ -1,0 +1,121 @@
+From clindqvist@earthlink.net Sun Dec 18 12:32:52 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!earthlink!clindqvist
+From: clindqvist@earthlink.net (Callum Lindqvist)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Dec18.123252.4132@earthlink.net>
+Date: Sun, 18 Dec 1994 12:32:52 GMT
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Callum Lindqvist <clindqvist@earthlink.net>
+*PLONK* filter active for trolls.
+486DX2/66 (Linux 1.2.13) - NetBSD 1.0
+
+From dgarcia@u-tokyo.ac.jp Mon Dec 19 19:36:52 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!u-tokyo!dgarcia
+From: dgarcia@u-tokyo.ac.jp (Dave García)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Dec19.193652.4380@u-tokyo.ac.jp>
+Date: Mon, 19 Dec 1994 19:36:52 GMT
+References: <1994Dec18.123252.4132@earthlink.net>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Dec18.123252.4132@earthlink.net>, clindqvist@earthlink.net (Callum Lindqvist) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Dave García <dgarcia@u-tokyo.ac.jp>
+*PLONK* filter active for trolls.
+Atari Falcon 030 - NetBSD 1.0
+
+From lstewart@delphi.com Tue Dec 20 07:53:52 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!delphi!lstewart
+From: lstewart@delphi.com (Liam Stewart)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Dec20.075352.7932@delphi.com>
+Date: Tue, 20 Dec 1994 07:53:52 GMT
+References: <1994Dec18.123252.4132@earthlink.net>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Dec18.123252.4132@earthlink.net>, clindqvist@earthlink.net (Callum Lindqvist) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Liam Stewart <lstewart@delphi.com>
+*PLONK* filter active for trolls.
+PC-9821Ap2 (NEC) - NetBSD 1.0
+
+From mokonkwo@delphi.com Wed Dec 21 10:19:52 1994
+Path: ashpoly!cascade!mxgate!coyoacan!delphi!mokonkwo
+From: mokonkwo@delphi.com (Matthias Okonkwo)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Dec21.101952.9418@delphi.com>
+Date: Wed, 21 Dec 1994 10:19:52 GMT
+References: <1994Dec18.123252.4132@earthlink.net>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 12
+
+In article <1994Dec18.123252.4132@earthlink.net>, clindqvist@earthlink.net (Callum Lindqvist) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Matthias Okonkwo <mokonkwo@delphi.com>
+"Row 14. No joke."
+486DX4/100 (FreeBSD 2.0.5) / FreeBSD 2.1
+
+From spetrov@mit.edu Fri Dec 23 00:56:52 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!mit!spetrov
+From: spetrov@mit.edu (Seo-yeon Petrov)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Dec23.005652.2588@mit.edu>
+Date: Fri, 23 Dec 1994 00:56:52 GMT
+References: <1994Dec18.123252.4132@earthlink.net>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1994Dec18.123252.4132@earthlink.net>, clindqvist@earthlink.net (Callum Lindqvist) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Seo-yeon Petrov | spetrov@mit.edu
+PGP Key fingerprint: E442 FBF0 D3C6 E4C1
+"Keep the channels open."
+

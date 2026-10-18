@@ -1,0 +1,95 @@
+From freyes@unam.mx Wed Sep 14 13:50:51 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!unam!freyes
+From: freyes@unam.mx (Fiona Reyes)
+Newsgroups: comp.dsp
+Subject: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Sep14.135051.8713@unam.mx>
+Date: Wed, 14 Sep 1994 13:50:51 GMT
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+Version 1.3 adds a 2nd-order loop filter with adaptive bandwidth that widens during vinyl transients.
+
+Grab the source archive from ftp.ashford-poly.edu:/pub/telecom-archives/stardust/stardust-1.3.tar.gz.
+
+-- 
+Fiona Reyes <freyes@unam.mx>
+US Robotics Courier V.34 @ 33,600 bps
+"5 sigma is a discovery. 7 is a question."
+
+From mkim@uni-hamburg.de Thu Sep 15 02:10:51 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!uni-hamburg!mkim
+From: mkim@uni-hamburg.de (Marta Kim)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Sep15.021051.3673@uni-hamburg.de>
+Date: Thu, 15 Sep 1994 02:10:51 GMT
+References: <1994Sep14.135051.8713@unam.mx>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1994Sep14.135051.8713@unam.mx>, freyes@unam.mx (Fiona Reyes) writes:
+> Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Marta Kim -- Universität Hamburg Fachbereich Informatik
+"There are 14 nodes and only 10 countries. Count again."
+
+From asilva@cam.ac.uk Sat Sep 17 01:50:51 1994
+Path: ashpoly!cascade!brgate!saturno!cam!asilva
+From: asilva@cam.ac.uk (Anton Silva)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Sep17.015051.2809@cam.ac.uk>
+Date: Sat, 17 Sep 1994 01:50:51 GMT
+References: <1994Sep14.135051.8713@unam.mx> <1994Sep15.021051.3673@uni-hamburg.de>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1994Sep15.021051.3673@uni-hamburg.de>, mkim@uni-hamburg.de (Marta Kim) writes:
+> Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+> Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+-- 
+Anton Silva
+Opinions expressed are solely my own and not those of University of Cambridge Computer Laboratory.
+------------------------------------------------------------
+
+From mstewart@cam.ac.uk Sun Sep 18 05:56:51 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!cam!mstewart
+From: mstewart@cam.ac.uk (Mathieu Stewart)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Sep18.055651.1841@cam.ac.uk>
+Date: Sun, 18 Sep 1994 05:56:51 GMT
+References: <1994Sep14.135051.8713@unam.mx>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Sep14.135051.8713@unam.mx>, freyes@unam.mx (Fiona Reyes) writes:
+> Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Mathieu Stewart <mstewart@cam.ac.uk>
+*PLONK* filter active for trolls.
+Amiga 3000T - NetBSD 1.0
+

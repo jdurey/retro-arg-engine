@@ -1,0 +1,74 @@
+From ssmirnov@earthlink.net Sat May 14 10:07:53 1994
+Path: ashpoly!cascade!mxgate!coyoacan!earthlink!ssmirnov
+From: ssmirnov@earthlink.net (Sun-mi Smirnov)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994May14.100753.1700@earthlink.net>
+Date: Sat, 14 May 1994 10:07:53 GMT
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+Sun-mi Smirnov | ssmirnov@earthlink.net
+PGP Key fingerprint: 7BF9 D059 3DF4 A90D
+"Keep the channels open."
+
+From aeriksson@tum.de Mon May 16 13:58:53 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!tum!aeriksson
+From: aeriksson@tum.de (Anton Eriksson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994May16.135853.8433@tum.de>
+Date: Mon, 16 May 1994 13:58:53 GMT
+References: <1994May14.100753.1700@earthlink.net>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1994May14.100753.1700@earthlink.net>, ssmirnov@earthlink.net (Sun-mi Smirnov) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Anton Eriksson
+Opinions expressed are solely my own and not those of Technische Universität München.
+------------------------------------------------------------
+
+From mschneider@berkeley.edu Mon May 16 23:25:53 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!berkeley!mschneider
+From: mschneider@berkeley.edu (Matthias Schneider)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994May16.232553.9754@berkeley.edu>
+Date: Mon, 16 May 1994 23:25:53 GMT
+References: <1994May14.100753.1700@earthlink.net>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1994May14.100753.1700@earthlink.net>, ssmirnov@earthlink.net (Sun-mi Smirnov) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Matthias Schneider <mschneider@berkeley.edu>
+"Extraordinary claims require extraordinary spectra."
+Commodore Amiga 500 (1MB OCS) / System 7.5.1
+

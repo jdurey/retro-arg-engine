@@ -1,0 +1,93 @@
+From akang@inria.fr Tue May 16 03:59:00 1995
+Path: ashpoly!cascade!mxgate!coyoacan!inria!akang
+From: akang@inria.fr (Astrid Kang)
+Newsgroups: comp.dsp
+Subject: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May16.035900.3103@inria.fr>
+Date: Tue, 16 May 1995 03:59:00 GMT
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Astrid Kang
+Tape trading list upon request. SASE required for international mail.
+
+From nlaurent@tum.de Wed May 17 00:49:00 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!tum!nlaurent
+From: nlaurent@tum.de (Nadine Laurent)
+Newsgroups: comp.dsp
+Subject: Re: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May17.004900.4347@tum.de>
+Date: Wed, 17 May 1995 00:49:00 GMT
+References: <1995May16.035900.3103@inria.fr>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995May16.035900.3103@inria.fr>, akang@inria.fr (Astrid Kang) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Nadine Laurent | nlaurent@tum.de
+PGP Key fingerprint: BBA4 F313 F2D1 B95C
+"Keep the channels open."
+
+From mpark@cmu.edu Wed May 17 12:46:00 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!cmu!mpark
+From: mpark@cmu.edu (Marisol Park)
+Newsgroups: comp.dsp
+Subject: Re: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May17.124600.7731@cmu.edu>
+Date: Wed, 17 May 1995 12:46:00 GMT
+References: <1995May16.035900.3103@inria.fr> <1995May17.004900.4347@tum.de>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995May17.004900.4347@tum.de>, nlaurent@tum.de (Nadine Laurent) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Marisol Park <mpark@cmu.edu>
+Zyxel U-1496E @ 14,400 bps
+"Measuring a record you own is listening, not piracy."
+
+From treyes@mit.edu Fri May 19 08:30:00 1995
+Path: ashpoly!cascade!bigsur!mit!treyes
+From: treyes@mit.edu (Takeshi Reyes)
+Newsgroups: comp.dsp
+Subject: Re: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May19.083000.8502@mit.edu>
+Date: Fri, 19 May 1995 08:30:00 GMT
+References: <1995May16.035900.3103@inria.fr> <1995May17.004900.4347@tum.de> <1995May17.124600.7731@cmu.edu>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995May17.124600.7731@cmu.edu>, mpark@cmu.edu (Marisol Park) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Takeshi Reyes
+Opinions expressed are solely my own and not those of Massachusetts Institute of Technology.
+------------------------------------------------------------
+

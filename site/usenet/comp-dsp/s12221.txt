@@ -1,0 +1,48 @@
+From pkang@netcom.com Tue Nov 01 00:28:35 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!netcom!pkang
+From: pkang@netcom.com (Pavel Kang)
+Newsgroups: comp.dsp
+Subject: [INFO] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Nov01.002835.1831@netcom.com>
+Date: Tue, 01 Nov 1994 00:28:35 GMT
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+=== Pavel Kang ===
+Dept of Electrical Engineering, NETCOM On-Line Communication Services
+"In theory there is no difference between theory and practice."
+
+From bwatanabe@purdue.edu Thu Nov 03 00:34:35 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!purdue!bwatanabe
+From: bwatanabe@purdue.edu (Bruno Watanabe)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Nov03.003435.7176@purdue.edu>
+Date: Thu, 03 Nov 1994 00:34:35 GMT
+References: <1994Nov01.002835.1831@netcom.com>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1994Nov01.002835.1831@netcom.com>, pkang@netcom.com (Pavel Kang) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+> Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Bruno Watanabe <bwatanabe@purdue.edu>
+"When every node is whole, the channel opens."
+Pentium 90 (OS/2 Warp) / System 7.5.1
+

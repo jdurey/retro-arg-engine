@@ -1,0 +1,92 @@
+From tlee@stanford.edu Sat Dec 21 01:02:46 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!stanford!tlee
+From: tlee@stanford.edu (Takeshi Lee)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Dec21.010246.7241@stanford.edu>
+Date: Sat, 21 Dec 1996 01:02:46 GMT
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Hardware disassembly report for Motorola hardware hackers.
+
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Did Marcus take the decryption EPROM with him when he left the lab?
+
+-- 
+Takeshi Lee <tlee@stanford.edu>
+"Tape doesn't lie at 02:14. Ears do."
+Mac IIci / 68882 FPU / FreeBSD 2.1
+
+From mjohansson@demon.co.uk Sun Dec 22 19:28:46 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!demon!mjohansson
+From: mjohansson@demon.co.uk (Morag Johansson)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Dec22.192846.5817@demon.co.uk>
+Date: Sun, 22 Dec 1996 19:28:46 GMT
+References: <1996Dec21.010246.7241@stanford.edu>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996Dec21.010246.7241@stanford.edu>, tlee@stanford.edu (Takeshi Lee) writes:
+> Hardware disassembly report for Motorola hardware hackers.
+> Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+-- 
+Morag Johansson <mjohansson@demon.co.uk>
+"Measuring a record you own is listening, not piracy."
+Decstation 5000/200 / TOS 4.04
+
+From ctanaka@cern.ch Mon Dec 23 04:38:46 1996
+Path: ashpoly!cascade!bigsur!cern!ctanaka
+From: ctanaka@cern.ch (Camila Tanaka)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Dec23.043846.8967@cern.ch>
+Date: Mon, 23 Dec 1996 04:38:46 GMT
+References: <1996Dec21.010246.7241@stanford.edu> <1996Dec22.192846.5817@demon.co.uk>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1996Dec22.192846.5817@demon.co.uk>, mjohansson@demon.co.uk (Morag Johansson) writes:
+> That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Camila Tanaka -- European Laboratory for Particle Physics, Geneva
+"Do not worship the copy."
+
+From jeriksson@clari.net Tue Dec 24 04:38:46 1996
+Path: ashpoly!cascade!bigsur!clari!jeriksson
+From: jeriksson@clari.net (Jens Eriksson)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Dec24.043846.6706@clari.net>
+Date: Tue, 24 Dec 1996 04:38:46 GMT
+References: <1996Dec21.010246.7241@stanford.edu>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1996Dec21.010246.7241@stanford.edu>, tlee@stanford.edu (Takeshi Lee) writes:
+> Hardware disassembly report for Motorola hardware hackers.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Jens Eriksson -- ClariNet Communications Corp
+"Extraordinary claims require extraordinary spectra."
+

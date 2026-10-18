@@ -1,0 +1,94 @@
+From smacdonald@clari.net Sat Jul 01 15:43:12 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!clari!smacdonald
+From: smacdonald@clari.net (Sven MacDonald)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Jul01.154312.3222@clari.net>
+Date: Sat, 01 Jul 1995 15:43:12 GMT
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+Does anyone have a 27C256 EPROM marked 'MH-U14' or 'ORION-CRYPTO'?
+
+-- 
+Sven MacDonald
+Opinions expressed are solely my own and not those of ClariNet Communications Corp.
+------------------------------------------------------------
+
+From mchoi@tum.de Mon Jul 03 16:03:12 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!tum!mchoi
+From: mchoi@tum.de (Matthias Choi)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Jul03.160312.5753@tum.de>
+Date: Mon, 03 Jul 1995 16:03:12 GMT
+References: <1995Jul01.154312.3222@clari.net>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Jul01.154312.3222@clari.net>, smacdonald@clari.net (Sven MacDonald) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Matthias Choi
+Opinions expressed are solely my own and not those of Technische Universität München.
+------------------------------------------------------------
+
+From ahernandez@earthlink.net Wed Jul 05 02:26:12 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!earthlink!ahernandez
+From: ahernandez@earthlink.net (Aiko Hernández)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Jul05.022612.6559@earthlink.net>
+Date: Wed, 05 Jul 1995 02:26:12 GMT
+References: <1995Jul01.154312.3222@clari.net>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Jul01.154312.3222@clari.net>, smacdonald@clari.net (Sven MacDonald) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Aiko Hernández <ahernandez@earthlink.net>
+"They will send a copy in my place."
+Macintosh IIfx / SunOS 4.1.4
+
+From bpetrov@cern.ch Wed Jul 05 22:45:12 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!cern!bpetrov
+From: bpetrov@cern.ch (Bastien Petrov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Jul05.224512.2696@cern.ch>
+Date: Wed, 05 Jul 1995 22:45:12 GMT
+References: <1995Jul01.154312.3222@clari.net> <1995Jul05.022612.6559@earthlink.net>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Jul05.022612.6559@earthlink.net>, ahernandez@earthlink.net (Aiko Hernández) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Bastien Petrov <bpetrov@cern.ch>
+"When every node is whole, the channel opens."
+Amiga 3000T / TOS 4.04
+

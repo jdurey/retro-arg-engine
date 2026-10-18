@@ -1,0 +1,116 @@
+From alopez@kth.se Mon Sep 25 11:24:29 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!kth!alopez
+From: alopez@kth.se (Andrei López)
+Newsgroups: comp.sys.m68k
+Subject: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Sep25.112429.6716@kth.se>
+Date: Mon, 25 Sep 1995 11:24:29 GMT
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+Andrei López -- Royal Institute of Technology, Stockholm
+"We don't sign stars. We build them."
+
+From nkang@kiae.su Wed Sep 27 14:40:29 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!kiae!nkang
+From: nkang@kiae.su (Natalia Kang)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Sep27.144029.6476@kiae.su>
+Date: Wed, 27 Sep 1995 14:40:29 GMT
+References: <1995Sep25.112429.6716@kth.se>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Sep25.112429.6716@kth.se>, alopez@kth.se (Andrei López) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+=== Natalia Kang ===
+Dept of Electrical Engineering, Kurchatov Institute of Atomic Energy, Moscow
+"Marcus is not one man."
+
+From ssouza@cmu.edu Fri Sep 29 08:50:29 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!cmu!ssouza
+From: ssouza@cmu.edu (Sergei Souza)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Sep29.085029.7757@cmu.edu>
+Date: Fri, 29 Sep 1995 08:50:29 GMT
+References: <1995Sep25.112429.6716@kth.se> <1995Sep27.144029.6476@kiae.su>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Sep27.144029.6476@kiae.su>, nkang@kiae.su (Natalia Kang) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Sergei Souza <ssouza@cmu.edu>
+*PLONK* filter active for trolls.
+Sun 3/60 (SunOS 4.1.1) - NetBSD 1.0
+
+From brobertson@delphi.com Fri Sep 29 12:00:29 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!delphi!brobertson
+From: brobertson@delphi.com (Bill Robertson)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Sep29.120029.6954@delphi.com>
+Date: Fri, 29 Sep 1995 12:00:29 GMT
+References: <1995Sep25.112429.6716@kth.se> <1995Sep27.144029.6476@kiae.su> <1995Sep29.085029.7757@cmu.edu>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Sep29.085029.7757@cmu.edu>, ssouza@cmu.edu (Sergei Souza) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Bill Robertson <brobertson@delphi.com>
+*PLONK* filter active for trolls.
+Decstation 5000/200 - NetBSD 1.0
+
+From tsouza@earthlink.net Sun Oct 01 13:47:29 1995
+Path: ashpoly!cascade!brgate!saturno!earthlink!tsouza
+From: tsouza@earthlink.net (Tobias Souza)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Oct01.134729.9492@earthlink.net>
+Date: Sun, 01 Oct 1995 13:47:29 GMT
+References: <1995Sep25.112429.6716@kth.se> <1995Sep27.144029.6476@kiae.su>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Sep27.144029.6476@kiae.su>, nkang@kiae.su (Natalia Kang) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Tobias Souza <tsouza@earthlink.net>
+*PLONK* filter active for trolls.
+Atari TT030 - NetBSD 1.0
+

@@ -1,0 +1,94 @@
+From lduarte@cmu.edu Sun Sep 24 10:42:05 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!cmu!lduarte
+From: lduarte@cmu.edu (Lucia Duarte)
+Newsgroups: comp.sys.m68k
+Subject: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep24.104205.5907@cmu.edu>
+Date: Sun, 24 Sep 1995 10:42:05 GMT
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+Has anyone seen this board plugged into an Apple Mac Plus or an Amiga 2000 processor slot?
+
+-- 
+Lucia Duarte <lduarte@cmu.edu>
+Practical Peripherals 14.4 @ 14,400 bps
+"Do not worship the copy."
+
+From bkarlsson@demon.co.uk Sun Sep 24 16:26:05 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!demon!bkarlsson
+From: bkarlsson@demon.co.uk (Bill Karlsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep24.162605.8863@demon.co.uk>
+Date: Sun, 24 Sep 1995 16:26:05 GMT
+References: <1995Sep24.104205.5907@cmu.edu>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Sep24.104205.5907@cmu.edu>, lduarte@cmu.edu (Lucia Duarte) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+> CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+=== Bill Karlsson ===
+Dept of Electrical Engineering, Demon Internet Services UK
+"In theory there is no difference between theory and practice."
+
+From dmoreno@pipeline.com Mon Sep 25 21:47:05 1995
+Path: ashpoly!cascade!bigsur!pipeline!dmoreno
+From: dmoreno@pipeline.com (Diego Moreno)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep25.214705.4713@pipeline.com>
+Date: Mon, 25 Sep 1995 21:47:05 GMT
+References: <1995Sep24.104205.5907@cmu.edu> <1995Sep24.162605.8863@demon.co.uk>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Sep24.162605.8863@demon.co.uk>, bkarlsson@demon.co.uk (Bill Karlsson) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+=== Diego Moreno ===
+Dept of Electrical Engineering, The Pipeline Internet Network
+"Tape doesn't lie at 02:14. Ears do."
+
+From gcampbell@delphi.com Wed Sep 27 04:36:05 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!delphi!gcampbell
+From: gcampbell@delphi.com (Göran Campbell)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep27.043605.2752@delphi.com>
+Date: Wed, 27 Sep 1995 04:36:05 GMT
+References: <1995Sep24.104205.5907@cmu.edu> <1995Sep24.162605.8863@demon.co.uk>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Sep24.162605.8863@demon.co.uk>, bkarlsson@demon.co.uk (Bill Karlsson) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Göran Campbell <gcampbell@delphi.com>
+*PLONK* filter active for trolls.
+Commodore Amiga 500 (1MB OCS) - NetBSD 1.0
+

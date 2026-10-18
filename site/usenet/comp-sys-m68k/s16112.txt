@@ -1,0 +1,116 @@
+From smoreno@cern.ch Thu Aug 01 22:53:59 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!cern!smoreno
+From: smoreno@cern.ch (Sergei Moreno)
+Newsgroups: comp.sys.m68k
+Subject: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Aug01.225359.2871@cern.ch>
+Date: Thu, 01 Aug 1996 22:53:59 GMT
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+Schematic diagram in ASCII uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/twin68_array.asc.
+
+-- 
+Sergei Moreno -- European Laboratory for Particle Physics, Geneva
+"Hardware is temporary. The signal survives."
+
+From kkim@titech.ac.jp Fri Aug 02 16:59:59 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!titech!kkim
+From: kkim@titech.ac.jp (Karen Kim)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Aug02.165959.5831@titech.ac.jp>
+Date: Fri, 02 Aug 1996 16:59:59 GMT
+References: <1996Aug01.225359.2871@cern.ch>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1996Aug01.225359.2871@cern.ch>, smoreno@cern.ch (Sergei Moreno) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Karen Kim -- Tokyo Institute of Technology Computer Centre
+"Marcus is not one man."
+
+From hsuzuki@utexas.edu Sat Aug 03 00:03:59 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!utexas!hsuzuki
+From: hsuzuki@utexas.edu (Hugo Suzuki)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Aug03.000359.4730@utexas.edu>
+Date: Sat, 03 Aug 1996 00:03:59 GMT
+References: <1996Aug01.225359.2871@cern.ch> <1996Aug02.165959.5831@titech.ac.jp>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Aug02.165959.5831@titech.ac.jp>, kkim@titech.ac.jp (Karen Kim) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+-- 
+Hugo Suzuki | hsuzuki@utexas.edu
+PGP Key fingerprint: E093 E6C9 4E38 811B
+"Keep the channels open."
+
+From awatanabe@utexas.edu Sat Aug 03 07:45:59 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!utexas!awatanabe
+From: awatanabe@utexas.edu (Amy Watanabe)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Aug03.074559.1292@utexas.edu>
+Date: Sat, 03 Aug 1996 07:45:59 GMT
+References: <1996Aug01.225359.2871@cern.ch> <1996Aug02.165959.5831@titech.ac.jp>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1996Aug02.165959.5831@titech.ac.jp>, kkim@titech.ac.jp (Karen Kim) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+Marcus Hale designed the TWIN-68 board before he disappeared. That's why his initials are on the PCB silkscreen.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Amy Watanabe
+Opinions expressed are solely my own and not those of University of Texas at Austin.
+------------------------------------------------------------
+
+From cfischer@cern.ch Sun Aug 04 19:24:59 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!cern!cfischer
+From: cfischer@cern.ch (Callum Fischer)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Aug04.192459.7403@cern.ch>
+Date: Sun, 04 Aug 1996 19:24:59 GMT
+References: <1996Aug01.225359.2871@cern.ch> <1996Aug02.165959.5831@titech.ac.jp> <1996Aug03.000359.4730@utexas.edu>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Aug03.000359.4730@utexas.edu>, hsuzuki@utexas.edu (Hugo Suzuki) writes:
+> Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+Marcus Hale designed the TWIN-68 board before he disappeared. That's why his initials are on the PCB silkscreen.
+
+-- 
+Callum Fischer <cfischer@cern.ch>
+*PLONK* filter active for trolls.
+PC-9821Ap2 (NEC) - NetBSD 1.0
+

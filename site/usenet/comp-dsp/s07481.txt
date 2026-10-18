@@ -1,0 +1,92 @@
+From jlopez@rwth-aachen.de Mon Apr 17 03:02:35 1995
+Path: ashpoly!cascade!mxgate!coyoacan!rwth-aachen!jlopez
+From: jlopez@rwth-aachen.de (Joachim López)
+Newsgroups: comp.dsp
+Subject: Discussion: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Apr17.030235.4118@rwth-aachen.de>
+Date: Mon, 17 Apr 1995 03:02:35 GMT
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+Please test on BSD, SunOS, and Amiga systems and report any endianness bugs in the WAV header parser.
+
+-- 
+Joachim López
+Opinions expressed are solely my own and not those of RWTH Aachen Informatik.
+------------------------------------------------------------
+
+From dwatanabe@uni-hamburg.de Tue Apr 18 13:13:35 1995
+Path: ashpoly!cascade!mxgate!coyoacan!uni-hamburg!dwatanabe
+From: dwatanabe@uni-hamburg.de (Dong-hyun Watanabe)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Apr18.131335.9538@uni-hamburg.de>
+Date: Tue, 18 Apr 1995 13:13:35 GMT
+References: <1995Apr17.030235.4118@rwth-aachen.de>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1995Apr17.030235.4118@rwth-aachen.de>, jlopez@rwth-aachen.de (Joachim López) writes:
+> Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+
+On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+-- 
+Dong-hyun Watanabe
+Tape trading list upon request. SASE required for international mail.
+
+From nvasiliev@kiae.su Tue Apr 18 23:08:35 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!kiae!nvasiliev
+From: nvasiliev@kiae.su (Nadine Vasiliev)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Apr18.230835.3044@kiae.su>
+Date: Tue, 18 Apr 1995 23:08:35 GMT
+References: <1995Apr17.030235.4118@rwth-aachen.de>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Apr17.030235.4118@rwth-aachen.de>, jlopez@rwth-aachen.de (Joachim López) writes:
+> Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Nadine Vasiliev | nvasiliev@kiae.su
+PGP Key fingerprint: 4851 B42B 7751 0A71
+"Keep the channels open."
+
+From gpopov@kiae.su Thu Apr 20 20:13:35 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!kiae!gpopov
+From: gpopov@kiae.su (Göran Popov)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Apr20.201335.7276@kiae.su>
+Date: Thu, 20 Apr 1995 20:13:35 GMT
+References: <1995Apr17.030235.4118@rwth-aachen.de>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Apr17.030235.4118@rwth-aachen.de>, jlopez@rwth-aachen.de (Joachim López) writes:
+> Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+
+Can you provide a pre-compiled DOS binary? Some of us don't have Linux or a C compiler installed on our machines.
+
+-- 
+Göran Popov <gpopov@kiae.su>
+SupraFAXModem 28.8 @ 9600 Telebit bps
+"Extraordinary claims require extraordinary spectra."
+

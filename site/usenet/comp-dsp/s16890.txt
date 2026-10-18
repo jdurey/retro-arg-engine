@@ -1,0 +1,115 @@
+From rsokolov@delphi.com Sun May 14 11:32:29 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!delphi!rsokolov
+From: rsokolov@delphi.com (Renata Sokolov)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May14.113229.7103@delphi.com>
+Date: Sun, 14 May 1995 11:32:29 GMT
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Renata Sokolov <rsokolov@delphi.com>
+*PLONK* filter active for trolls.
+Sun 3/60 (SunOS 4.1.1) - NetBSD 1.0
+
+From skarlsson@utexas.edu Mon May 15 01:23:29 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!utexas!skarlsson
+From: skarlsson@utexas.edu (Sun-mi Karlsson)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May15.012329.5050@utexas.edu>
+Date: Mon, 15 May 1995 01:23:29 GMT
+References: <1995May14.113229.7103@delphi.com>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995May14.113229.7103@delphi.com>, rsokolov@delphi.com (Renata Sokolov) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Sun-mi Karlsson | skarlsson@utexas.edu
+PGP Key fingerprint: 1F2E 2E0C 1464 B5CB
+"Keep the channels open."
+
+From rlindqvist@delphi.com Mon May 15 15:33:29 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!delphi!rlindqvist
+From: rlindqvist@delphi.com (Raj Lindqvist)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May15.153329.5087@delphi.com>
+Date: Mon, 15 May 1995 15:33:29 GMT
+References: <1995May14.113229.7103@delphi.com> <1995May15.012329.5050@utexas.edu>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995May15.012329.5050@utexas.edu>, skarlsson@utexas.edu (Sun-mi Karlsson) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Raj Lindqvist
+Tape trading list upon request. SASE required for international mail.
+
+From aweber@pacbell.net Tue May 16 05:54:29 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!pacbell!aweber
+From: aweber@pacbell.net (Astrid Weber)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May16.055429.7929@pacbell.net>
+Date: Tue, 16 May 1995 05:54:29 GMT
+References: <1995May14.113229.7103@delphi.com>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995May14.113229.7103@delphi.com>, rsokolov@delphi.com (Renata Sokolov) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+Astrid Weber -- Pacific Bell Internet Services
+"Tape doesn't lie at 02:14. Ears do."
+
+From mgirard@utexas.edu Thu May 18 04:14:29 1995
+Path: ashpoly!cascade!brgate!saturno!utexas!mgirard
+From: mgirard@utexas.edu (Min-jun Girard)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May18.041429.9992@utexas.edu>
+Date: Thu, 18 May 1995 04:14:29 GMT
+References: <1995May14.113229.7103@delphi.com> <1995May15.012329.5050@utexas.edu> <1995May15.153329.5087@delphi.com>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995May15.153329.5087@delphi.com>, rlindqvist@delphi.com (Raj Lindqvist) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Min-jun Girard <mgirard@utexas.edu>
+Zyxel U-1496E @ 19,200 bps
+"The carrier frequency does not drift by accident."
+

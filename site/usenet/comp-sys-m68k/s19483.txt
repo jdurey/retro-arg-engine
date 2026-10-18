@@ -1,0 +1,93 @@
+From mandersson@rwth-aachen.de Mon Jul 04 13:48:14 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!rwth-aachen!mandersson
+From: mandersson@rwth-aachen.de (Min-jun Andersson)
+Newsgroups: comp.sys.m68k
+Subject: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Jul04.134814.4629@rwth-aachen.de>
+Date: Mon, 04 Jul 1994 13:48:14 GMT
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Min-jun Andersson | mandersson@rwth-aachen.de
+PGP Key fingerprint: 1F69 AAD9 0552 542E
+"Keep the channels open."
+
+From mnilsson@illinois.edu Tue Jul 05 12:21:14 1994
+Path: ashpoly!cascade!mxgate!coyoacan!illinois!mnilsson
+From: mnilsson@illinois.edu (Mikhail Nilsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Jul05.122114.9451@illinois.edu>
+Date: Tue, 05 Jul 1994 12:21:14 GMT
+References: <1994Jul04.134814.4629@rwth-aachen.de>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Jul04.134814.4629@rwth-aachen.de>, mandersson@rwth-aachen.de (Min-jun Andersson) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Mikhail Nilsson <mnilsson@illinois.edu>
+US Robotics Courier V.34 @ ISDN 64k bps
+"The carrier frequency does not drift by accident."
+
+From mgirard@cmu.edu Tue Jul 05 17:31:14 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!cmu!mgirard
+From: mgirard@cmu.edu (Marisol Girard)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Jul05.173114.5173@cmu.edu>
+Date: Tue, 05 Jul 1994 17:31:14 GMT
+References: <1994Jul04.134814.4629@rwth-aachen.de> <1994Jul05.122114.9451@illinois.edu>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Jul05.122114.9451@illinois.edu>, mnilsson@illinois.edu (Mikhail Nilsson) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Marisol Girard <mgirard@cmu.edu>
+*PLONK* filter active for trolls.
+Acorn RiscPC 600 - NetBSD 1.0
+
+From dmartinez@hanse.de Thu Jul 07 09:54:14 1994
+Path: ashpoly!cascade!brgate!saturno!hanse!dmartinez
+From: dmartinez@hanse.de (Dave Martínez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Jul07.095414.4653@hanse.de>
+Date: Thu, 07 Jul 1994 09:54:14 GMT
+References: <1994Jul04.134814.4629@rwth-aachen.de> <1994Jul05.122114.9451@illinois.edu>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Jul05.122114.9451@illinois.edu>, mnilsson@illinois.edu (Mikhail Nilsson) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+=== Dave Martínez ===
+Dept of Electrical Engineering, Hanse-Netzwerk Hamburg
+"5 sigma is a discovery. 7 is a question."
+

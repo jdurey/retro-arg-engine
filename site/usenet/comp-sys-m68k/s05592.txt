@@ -1,0 +1,120 @@
+From nfournier@illinois.edu Sun Oct 16 21:55:09 1994
+Path: ashpoly!cascade!brgate!saturno!illinois!nfournier
+From: nfournier@illinois.edu (Nadia Fournier)
+Newsgroups: comp.sys.m68k
+Subject: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Oct16.215509.4262@illinois.edu>
+Date: Sun, 16 Oct 1994 21:55:09 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Did Marcus take the decryption EPROM with him when he left the lab?
+
+-- 
+Nadia Fournier
+Opinions expressed are solely my own and not those of University of Illinois Urbana-Champaign.
+------------------------------------------------------------
+
+From ookonkwo@hanse.de Tue Oct 18 09:40:09 1994
+Path: ashpoly!cascade!mxgate!coyoacan!hanse!ookonkwo
+From: ookonkwo@hanse.de (Olga Okonkwo)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Oct18.094009.2888@hanse.de>
+Date: Tue, 18 Oct 1994 09:40:09 GMT
+References: <1994Oct16.215509.4262@illinois.edu>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1994Oct16.215509.4262@illinois.edu>, nfournier@illinois.edu (Nadia Fournier) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+-- 
+Olga Okonkwo
+Opinions expressed are solely my own and not those of Hanse-Netzwerk Hamburg.
+------------------------------------------------------------
+
+From rsilva@clari.net Wed Oct 19 22:19:09 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!clari!rsilva
+From: rsilva@clari.net (Renata Silva)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Oct19.221909.5799@clari.net>
+Date: Wed, 19 Oct 1994 22:19:09 GMT
+References: <1994Oct16.215509.4262@illinois.edu> <1994Oct18.094009.2888@hanse.de>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Oct18.094009.2888@hanse.de>, ookonkwo@hanse.de (Olga Okonkwo) writes:
+> That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Renata Silva <rsilva@clari.net>
+US Robotics Courier V.34 @ ISDN 64k bps
+"When every node is whole, the channel opens."
+
+From mkowalski@ox.ac.uk Fri Oct 21 02:48:09 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!ox!mkowalski
+From: mkowalski@ox.ac.uk (Mike Kowalski)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Oct21.024809.8673@ox.ac.uk>
+Date: Fri, 21 Oct 1994 02:48:09 GMT
+References: <1994Oct16.215509.4262@illinois.edu> <1994Oct18.094009.2888@hanse.de> <1994Oct19.221909.5799@clari.net>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1994Oct19.221909.5799@clari.net>, rsilva@clari.net (Renata Silva) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Mike Kowalski -- Oxford University Computing Laboratory
+"In theory there is no difference between theory and practice."
+
+From jandersson@demon.co.uk Sat Oct 22 18:51:09 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!demon!jandersson
+From: jandersson@demon.co.uk (Jens Andersson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Oct22.185109.9035@demon.co.uk>
+Date: Sat, 22 Oct 1994 18:51:09 GMT
+References: <1994Oct16.215509.4262@illinois.edu> <1994Oct18.094009.2888@hanse.de> <1994Oct19.221909.5799@clari.net> <1994Oct21.024809.8673@ox.ac.uk>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1994Oct21.024809.8673@ox.ac.uk>, mkowalski@ox.ac.uk (Mike Kowalski) writes:
+> Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+=== Jens Andersson ===
+Dept of Electrical Engineering, Demon Internet Services UK
+"5 sigma is a discovery. 7 is a question."
+

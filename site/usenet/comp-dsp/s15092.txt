@@ -1,0 +1,121 @@
+From mduarte@hanse.de Sun Jul 02 12:35:22 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!hanse!mduarte
+From: mduarte@hanse.de (Mike Duarte)
+Newsgroups: comp.dsp
+Subject: Observation: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Jul02.123522.6703@hanse.de>
+Date: Sun, 02 Jul 1995 12:35:22 GMT
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+
+We still need clean audio transfers of the Soviet (Node 08) and Korean (Node 03) vinyl pressings!
+
+-- 
+Mike Duarte <mduarte@hanse.de>
+US Robotics Courier V.34 @ 14,400 bps
+"Measuring a record you own is listening, not piracy."
+
+From jsuzuki@pipeline.com Sun Jul 02 22:16:22 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!pipeline!jsuzuki
+From: jsuzuki@pipeline.com (Ji-woo Suzuki)
+Newsgroups: comp.dsp
+Subject: Re: Observation: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Jul02.221622.5818@pipeline.com>
+Date: Sun, 02 Jul 1995 22:16:22 GMT
+References: <1995Jul02.123522.6703@hanse.de>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Jul02.123522.6703@hanse.de>, mduarte@hanse.de (Mike Duarte) writes:
+> Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Ji-woo Suzuki <jsuzuki@pipeline.com>
+*PLONK* filter active for trolls.
+Atari TT030 - NetBSD 1.0
+
+From holiveira@pipeline.com Tue Jul 04 04:15:22 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!pipeline!holiveira
+From: holiveira@pipeline.com (Hana Oliveira)
+Newsgroups: comp.dsp
+Subject: Re: Observation: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Jul04.041522.9333@pipeline.com>
+Date: Tue, 04 Jul 1995 04:15:22 GMT
+References: <1995Jul02.123522.6703@hanse.de>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Jul02.123522.6703@hanse.de>, mduarte@hanse.de (Mike Duarte) writes:
+> Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Hana Oliveira | holiveira@pipeline.com
+PGP Key fingerprint: B33F 8795 2B0E 5A7B
+"Keep the channels open."
+
+From enilsson@panix.com Wed Jul 05 13:31:22 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!panix!enilsson
+From: enilsson@panix.com (Emi Nilsson)
+Newsgroups: comp.dsp
+Subject: Re: Observation: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Jul05.133122.2719@panix.com>
+Date: Wed, 05 Jul 1995 13:31:22 GMT
+References: <1995Jul02.123522.6703@hanse.de> <1995Jul04.041522.9333@pipeline.com>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Jul04.041522.9333@pipeline.com>, holiveira@pipeline.com (Hana Oliveira) writes:
+> Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Emi Nilsson <enilsson@panix.com>
+US Robotics Courier V.34 @ ISDN 64k bps
+"Hold for relay."
+
+From joliveira@kiae.su Thu Jul 06 17:12:22 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!kiae!joliveira
+From: joliveira@kiae.su (Ji-woo Oliveira)
+Newsgroups: comp.dsp
+Subject: Re: Observation: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Jul06.171222.9478@kiae.su>
+Date: Thu, 06 Jul 1995 17:12:22 GMT
+References: <1995Jul02.123522.6703@hanse.de>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1995Jul02.123522.6703@hanse.de>, mduarte@hanse.de (Mike Duarte) writes:
+> Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+> The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Ji-woo Oliveira | joliveira@kiae.su
+PGP Key fingerprint: EDFF 2EA9 5B09 A156
+"Keep the channels open."
+

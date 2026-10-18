@@ -1,0 +1,48 @@
+From deriksson@stanford.edu Sun Jun 12 02:38:26 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!stanford!deriksson
+From: deriksson@stanford.edu (Dmitri Eriksson)
+Newsgroups: comp.dsp
+Subject: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Jun12.023826.3381@stanford.edu>
+Date: Sun, 12 Jun 1994 02:38:26 GMT
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+=== Dmitri Eriksson ===
+Dept of Electrical Engineering, Stanford University Computer Systems Lab
+"Hardware is temporary. The signal survives."
+
+From jivanov@berkeley.edu Sun Jun 12 16:13:26 1994
+Path: ashpoly!cascade!brgate!saturno!berkeley!jivanov
+From: jivanov@berkeley.edu (Joachim Ivanov)
+Newsgroups: comp.dsp
+Subject: Re: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Jun12.161326.5119@berkeley.edu>
+Date: Sun, 12 Jun 1994 16:13:26 GMT
+References: <1994Jun12.023826.3381@stanford.edu>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1994Jun12.023826.3381@stanford.edu>, deriksson@stanford.edu (Dmitri Eriksson) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Joachim Ivanov <jivanov@berkeley.edu>
+*PLONK* filter active for trolls.
+Decstation 5000/200 - NetBSD 1.0
+

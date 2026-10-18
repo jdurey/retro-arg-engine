@@ -1,0 +1,47 @@
+From atanaka@kiae.su Wed Oct 18 04:44:27 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!kiae!atanaka
+From: atanaka@kiae.su (Andrei Tanaka)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Oct18.044427.9321@kiae.su>
+Date: Wed, 18 Oct 1995 04:44:27 GMT
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Andrei Tanaka <atanaka@kiae.su>
+"When every node is whole, the channel opens."
+Sun SparcStation 20 / FreeBSD 2.1
+
+From jhughes@inria.fr Wed Oct 18 17:43:27 1995
+Path: ashpoly!cascade!bigsur!inria!jhughes
+From: jhughes@inria.fr (Julien Hughes)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Oct18.174327.3812@inria.fr>
+Date: Wed, 18 Oct 1995 17:43:27 GMT
+References: <1995Oct18.044427.9321@kiae.su>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Oct18.044427.9321@kiae.su>, atanaka@kiae.su (Andrei Tanaka) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Julien Hughes -- INRIA Rocquencourt
+"Row 14. No joke."
+

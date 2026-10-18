@@ -1,0 +1,96 @@
+From bbrennan@rwth-aachen.de Sat Oct 21 18:29:56 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!rwth-aachen!bbrennan
+From: bbrennan@rwth-aachen.de (Bruno Brennan)
+Newsgroups: comp.dsp
+Subject: Question: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Oct21.182956.5740@rwth-aachen.de>
+Date: Sat, 21 Oct 1995 18:29:56 GMT
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+Bruno Brennan <bbrennan@rwth-aachen.de>
+"Hardware is temporary. The signal survives."
+Atari Falcon 030 / SunOS 4.1.4
+
+From snilsson@utexas.edu Sat Oct 21 23:21:56 1995
+Path: ashpoly!cascade!mxgate!coyoacan!utexas!snilsson
+From: snilsson@utexas.edu (Steve Nilsson)
+Newsgroups: comp.dsp
+Subject: Re: Question: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Oct21.232156.7954@utexas.edu>
+Date: Sat, 21 Oct 1995 23:21:56 GMT
+References: <1995Oct21.182956.5740@rwth-aachen.de>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Oct21.182956.5740@rwth-aachen.de>, bbrennan@rwth-aachen.de (Bruno Brennan) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Steve Nilsson <snilsson@utexas.edu>
+Practical Peripherals 14.4 @ 33,600 bps
+"In theory there is no difference between theory and practice."
+
+From ajohansson@ox.ac.uk Mon Oct 23 21:59:56 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!ox!ajohansson
+From: ajohansson@ox.ac.uk (Astrid Johansson)
+Newsgroups: comp.dsp
+Subject: Re: Question: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Oct23.215956.5711@ox.ac.uk>
+Date: Mon, 23 Oct 1995 21:59:56 GMT
+References: <1995Oct21.182956.5740@rwth-aachen.de>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Oct21.182956.5740@rwth-aachen.de>, bbrennan@rwth-aachen.de (Bruno Brennan) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+-- 
+Astrid Johansson <ajohansson@ox.ac.uk>
+*PLONK* filter active for trolls.
+Pentium 90 (OS/2 Warp) - NetBSD 1.0
+
+From tdubois@uu.net Wed Oct 25 01:01:56 1995
+Path: ashpoly!cascade!brgate!saturno!uu!tdubois
+From: tdubois@uu.net (Thiago Dubois)
+Newsgroups: comp.dsp
+Subject: Re: Question: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Oct25.010156.7315@uu.net>
+Date: Wed, 25 Oct 1995 01:01:56 GMT
+References: <1995Oct21.182956.5740@rwth-aachen.de>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Oct21.182956.5740@rwth-aachen.de>, bbrennan@rwth-aachen.de (Bruno Brennan) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+> Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+-- 
+=== Thiago Dubois ===
+Dept of Electrical Engineering, UUNET Technologies, Falls Church VA
+"Tape doesn't lie at 02:14. Ears do."
+

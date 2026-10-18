@@ -1,0 +1,94 @@
+From nnilsson@u-tokyo.ac.jp Thu Mar 09 22:22:35 1995
+Path: ashpoly!cascade!brgate!saturno!u-tokyo!nnilsson
+From: nnilsson@u-tokyo.ac.jp (Nadine Nilsson)
+Newsgroups: comp.dsp
+Subject: Data: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Mar09.222235.7222@u-tokyo.ac.jp>
+Date: Thu, 09 Mar 1995 22:22:35 GMT
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+What sampling rates are people using for their vinyl rips? 44.1 kHz or 48 kHz DAT?
+
+-- 
+=== Nadine Nilsson ===
+Dept of Electrical Engineering, University of Tokyo Department of Information Science
+"Hardware is temporary. The signal survives."
+
+From hkowalski@uu.net Sat Mar 11 06:13:35 1995
+Path: ashpoly!cascade!brgate!saturno!uu!hkowalski
+From: hkowalski@uu.net (Hugo Kowalski)
+Newsgroups: comp.dsp
+Subject: Re: Data: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Mar11.061335.4759@uu.net>
+Date: Sat, 11 Mar 1995 06:13:35 GMT
+References: <1995Mar09.222235.7222@u-tokyo.ac.jp>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Mar09.222235.7222@u-tokyo.ac.jp>, nnilsson@u-tokyo.ac.jp (Nadine Nilsson) writes:
+> Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+> A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Hugo Kowalski -- UUNET Technologies, Falls Church VA
+"Hardware is temporary. The signal survives."
+
+From hbrennan@earthlink.net Sun Mar 12 13:12:35 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!earthlink!hbrennan
+From: hbrennan@earthlink.net (Heather Brennan)
+Newsgroups: comp.dsp
+Subject: Re: Data: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Mar12.131235.1570@earthlink.net>
+Date: Sun, 12 Mar 1995 13:12:35 GMT
+References: <1995Mar09.222235.7222@u-tokyo.ac.jp> <1995Mar11.061335.4759@uu.net>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Mar11.061335.4759@uu.net>, hkowalski@uu.net (Hugo Kowalski) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Heather Brennan -- EarthLink Network
+"Measuring a record you own is listening, not piracy."
+
+From ofischer@cmu.edu Mon Mar 13 19:39:35 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!cmu!ofischer
+From: ofischer@cmu.edu (Olga Fischer)
+Newsgroups: comp.dsp
+Subject: Re: Data: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Mar13.193935.9831@cmu.edu>
+Date: Mon, 13 Mar 1995 19:39:35 GMT
+References: <1995Mar09.222235.7222@u-tokyo.ac.jp> <1995Mar11.061335.4759@uu.net>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Mar11.061335.4759@uu.net>, hkowalski@uu.net (Hugo Kowalski) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Olga Fischer | ofischer@cmu.edu
+PGP Key fingerprint: 9379 4D26 16B4 20A2
+"Keep the channels open."
+

@@ -1,0 +1,95 @@
+From hchoi@tum.de Fri Oct 20 18:28:00 1995
+Path: ashpoly!cascade!mxgate!coyoacan!tum!hchoi
+From: hchoi@tum.de (Hana Choi)
+Newsgroups: comp.dsp
+Subject: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Oct20.182800.3497@tum.de>
+Date: Fri, 20 Oct 1995 18:28:00 GMT
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+What sampling rates are people using for their vinyl rips? 44.1 kHz or 48 kHz DAT?
+
+-- 
+Hana Choi
+Opinions expressed are solely my own and not those of Technische Universität München.
+------------------------------------------------------------
+
+From akowalski@hanse.de Sun Oct 22 03:56:00 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!hanse!akowalski
+From: akowalski@hanse.de (Anton Kowalski)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Oct22.035600.3120@hanse.de>
+Date: Sun, 22 Oct 1995 03:56:00 GMT
+References: <1995Oct20.182800.3497@tum.de>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Oct20.182800.3497@tum.de>, hchoi@tum.de (Hana Choi) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Anton Kowalski
+Opinions expressed are solely my own and not those of Hanse-Netzwerk Hamburg.
+------------------------------------------------------------
+
+From egarcia@inria.fr Sun Oct 22 17:37:00 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!inria!egarcia
+From: egarcia@inria.fr (Élodie García)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Oct22.173700.8896@inria.fr>
+Date: Sun, 22 Oct 1995 17:37:00 GMT
+References: <1995Oct20.182800.3497@tum.de> <1995Oct22.035600.3120@hanse.de>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Oct22.035600.3120@hanse.de>, akowalski@hanse.de (Anton Kowalski) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Élodie García
+Tape trading list upon request. SASE required for international mail.
+
+From rokonkwo@berkeley.edu Tue Oct 24 01:49:00 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!berkeley!rokonkwo
+From: rokonkwo@berkeley.edu (Renata Okonkwo)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Oct24.014900.4472@berkeley.edu>
+Date: Tue, 24 Oct 1995 01:49:00 GMT
+References: <1995Oct20.182800.3497@tum.de> <1995Oct22.035600.3120@hanse.de> <1995Oct22.173700.8896@inria.fr>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Oct22.173700.8896@inria.fr>, egarcia@inria.fr (Élodie García) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Renata Okonkwo <rokonkwo@berkeley.edu>
+Zyxel U-1496E @ 14,400 bps
+"Hardware is temporary. The signal survives."
+

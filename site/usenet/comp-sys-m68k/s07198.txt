@@ -1,0 +1,113 @@
+From gmoreau@panix.com Sat Oct 26 19:35:08 1996
+Path: ashpoly!cascade!bigsur!panix!gmoreau
+From: gmoreau@panix.com (Göran Moreau)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Oct26.193508.3703@panix.com>
+Date: Sat, 26 Oct 1996 19:35:08 GMT
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+Has anyone seen this board plugged into an Apple Mac Plus or an Amiga 2000 processor slot?
+
+-- 
+Göran Moreau
+Tape trading list upon request. SASE required for international mail.
+
+From kweber@kth.se Sun Oct 27 11:38:08 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!kth!kweber
+From: kweber@kth.se (Katrin Weber)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Oct27.113808.8652@kth.se>
+Date: Sun, 27 Oct 1996 11:38:08 GMT
+References: <1996Oct26.193508.3703@panix.com>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1996Oct26.193508.3703@panix.com>, gmoreau@panix.com (Göran Moreau) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Katrin Weber
+Tape trading list upon request. SASE required for international mail.
+
+From llee@u-tokyo.ac.jp Mon Oct 28 03:56:08 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!u-tokyo!llee
+From: llee@u-tokyo.ac.jp (Lars Lee)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Oct28.035608.3037@u-tokyo.ac.jp>
+Date: Mon, 28 Oct 1996 03:56:08 GMT
+References: <1996Oct26.193508.3703@panix.com> <1996Oct27.113808.8652@kth.se>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Oct27.113808.8652@kth.se>, kweber@kth.se (Katrin Weber) writes:
+> The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+=== Lars Lee ===
+Dept of Electrical Engineering, University of Tokyo Department of Information Science
+"A soul is not exclusive to biology."
+
+From mkuznetsov@clari.net Tue Oct 29 06:45:08 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!clari!mkuznetsov
+From: mkuznetsov@clari.net (Mike Kuznetsov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Oct29.064508.6343@clari.net>
+Date: Tue, 29 Oct 1996 06:45:08 GMT
+References: <1996Oct26.193508.3703@panix.com> <1996Oct27.113808.8652@kth.se>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Oct27.113808.8652@kth.se>, kweber@kth.se (Katrin Weber) writes:
+> The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+Marcus Hale designed the TWIN-68 board before he disappeared. That's why his initials are on the PCB silkscreen.
+
+-- 
+Mike Kuznetsov | mkuznetsov@clari.net
+PGP Key fingerprint: 11AD 5834 1F48 F946
+"Keep the channels open."
+
+From lsokolov@illinois.edu Wed Oct 30 15:15:08 1996
+Path: ashpoly!cascade!bigsur!illinois!lsokolov
+From: lsokolov@illinois.edu (Liam Sokolov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Oct30.151508.3455@illinois.edu>
+Date: Wed, 30 Oct 1996 15:15:08 GMT
+References: <1996Oct26.193508.3703@panix.com> <1996Oct27.113808.8652@kth.se> <1996Oct28.035608.3037@u-tokyo.ac.jp>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1996Oct28.035608.3037@u-tokyo.ac.jp>, llee@u-tokyo.ac.jp (Lars Lee) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Liam Sokolov -- University of Illinois Urbana-Champaign
+"5 sigma is a discovery. 7 is a question."
+

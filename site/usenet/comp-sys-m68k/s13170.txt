@@ -1,0 +1,91 @@
+From bcampbell@cmu.edu Sun Oct 08 17:47:54 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!cmu!bcampbell
+From: bcampbell@cmu.edu (Bruno Campbell)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Oct08.174754.6994@cmu.edu>
+Date: Sun, 08 Oct 1995 17:47:54 GMT
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+Bruno Campbell
+Tape trading list upon request. SASE required for international mail.
+
+From aduarte@uni-hamburg.de Mon Oct 09 18:00:54 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!uni-hamburg!aduarte
+From: aduarte@uni-hamburg.de (Astrid Duarte)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Oct09.180054.9516@uni-hamburg.de>
+Date: Mon, 09 Oct 1995 18:00:54 GMT
+References: <1995Oct08.174754.6994@cmu.edu>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Oct08.174754.6994@cmu.edu>, bcampbell@cmu.edu (Bruno Campbell) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Astrid Duarte -- Universität Hamburg Fachbereich Informatik
+"They will send a copy in my place."
+
+From nramirez@uni-hamburg.de Tue Oct 10 18:00:54 1995
+Path: ashpoly!cascade!mxgate!coyoacan!uni-hamburg!nramirez
+From: nramirez@uni-hamburg.de (Nadia Ramírez)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Oct10.180054.9761@uni-hamburg.de>
+Date: Tue, 10 Oct 1995 18:00:54 GMT
+References: <1995Oct08.174754.6994@cmu.edu>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Oct08.174754.6994@cmu.edu>, bcampbell@cmu.edu (Bruno Campbell) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+=== Nadia Ramírez ===
+Dept of Electrical Engineering, Universität Hamburg Fachbereich Informatik
+"There are 14 nodes and only 10 countries. Count again."
+
+From kkang@u-tokyo.ac.jp Wed Oct 11 23:26:54 1995
+Path: ashpoly!cascade!bigsur!u-tokyo!kkang
+From: kkang@u-tokyo.ac.jp (Katrin Kang)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Oct11.232654.2927@u-tokyo.ac.jp>
+Date: Wed, 11 Oct 1995 23:26:54 GMT
+References: <1995Oct08.174754.6994@cmu.edu> <1995Oct09.180054.9516@uni-hamburg.de>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1995Oct09.180054.9516@uni-hamburg.de>, aduarte@uni-hamburg.de (Astrid Duarte) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Katrin Kang
+Tape trading list upon request. SASE required for international mail.
+

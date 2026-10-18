@@ -1,0 +1,97 @@
+From blindqvist@kth.se Thu Jan 26 23:40:57 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!kth!blindqvist
+From: blindqvist@kth.se (Bruno Lindqvist)
+Newsgroups: comp.dsp
+Subject: WTB/WTT: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jan26.234057.1482@kth.se>
+Date: Thu, 26 Jan 1995 23:40:57 GMT
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Bruno Lindqvist <blindqvist@kth.se>
+"5 sigma is a discovery. 7 is a question."
+Macintosh IIfx / TOS 4.04
+
+From mandersson@demon.co.uk Fri Jan 27 10:08:57 1995
+Path: ashpoly!cascade!mxgate!coyoacan!demon!mandersson
+From: mandersson@demon.co.uk (Marisol Andersson)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jan27.100857.1538@demon.co.uk>
+Date: Fri, 27 Jan 1995 10:08:57 GMT
+References: <1995Jan26.234057.1482@kth.se>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Jan26.234057.1482@kth.se>, blindqvist@kth.se (Bruno Lindqvist) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Marisol Andersson <mandersson@demon.co.uk>
+"In theory there is no difference between theory and practice."
+PC-9821Ap2 (NEC) / FreeBSD 2.1
+
+From bsouza@unam.mx Sun Jan 29 02:45:57 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!unam!bsouza
+From: bsouza@unam.mx (Bastien Souza)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jan29.024557.7730@unam.mx>
+Date: Sun, 29 Jan 1995 02:45:57 GMT
+References: <1995Jan26.234057.1482@kth.se>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Jan26.234057.1482@kth.se>, blindqvist@kth.se (Bruno Lindqvist) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Bastien Souza | bsouza@unam.mx
+PGP Key fingerprint: 7CF8 028A 3E50 3555
+"Keep the channels open."
+
+From rmoreno@cmu.edu Mon Jan 30 22:50:57 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!cmu!rmoreno
+From: rmoreno@cmu.edu (Rodrigo Moreno)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jan30.225057.2675@cmu.edu>
+Date: Mon, 30 Jan 1995 22:50:57 GMT
+References: <1995Jan26.234057.1482@kth.se> <1995Jan27.100857.1538@demon.co.uk>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995Jan27.100857.1538@demon.co.uk>, mandersson@demon.co.uk (Marisol Andersson) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Rodrigo Moreno | rmoreno@cmu.edu
+PGP Key fingerprint: A425 044B B865 EE85
+"Keep the channels open."
+

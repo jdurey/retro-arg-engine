@@ -1,0 +1,120 @@
+From mnilsson@uu.net Sun Sep 10 13:36:21 1995
+Path: ashpoly!cascade!mxgate!coyoacan!uu!mnilsson
+From: mnilsson@uu.net (Min-jun Nilsson)
+Newsgroups: comp.sys.m68k
+Subject: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep10.133621.1566@uu.net>
+Date: Sun, 10 Sep 1995 13:36:21 GMT
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+Schematic diagram in ASCII uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/twin68_array.asc.
+
+-- 
+Min-jun Nilsson
+Tape trading list upon request. SASE required for international mail.
+
+From afischer@pacbell.net Tue Sep 12 12:49:21 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!pacbell!afischer
+From: afischer@pacbell.net (Amy Fischer)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep12.124921.7382@pacbell.net>
+Date: Tue, 12 Sep 1995 12:49:21 GMT
+References: <1995Sep10.133621.1566@uu.net>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1995Sep10.133621.1566@uu.net>, mnilsson@uu.net (Min-jun Nilsson) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+> CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+Looks like a prototype telecommunications board for military secure voice, not an audio music product.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+=== Amy Fischer ===
+Dept of Electrical Engineering, Pacific Bell Internet Services
+"Do not worship the copy."
+
+From dfournier@delphi.com Thu Sep 14 13:40:21 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!delphi!dfournier
+From: dfournier@delphi.com (Dmitri Fournier)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep14.134021.9169@delphi.com>
+Date: Thu, 14 Sep 1995 13:40:21 GMT
+References: <1995Sep10.133621.1566@uu.net> <1995Sep12.124921.7382@pacbell.net>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Sep12.124921.7382@pacbell.net>, afischer@pacbell.net (Amy Fischer) writes:
+> Looks like a prototype telecommunications board for military secure voice, not an audio music product.
+> Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Dmitri Fournier <dfournier@delphi.com>
+*PLONK* filter active for trolls.
+PC-9821Ap2 (NEC) - NetBSD 1.0
+
+From lnakamura@uu.net Fri Sep 15 06:17:21 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!uu!lnakamura
+From: lnakamura@uu.net (Lisa Nakamura)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep15.061721.1250@uu.net>
+Date: Fri, 15 Sep 1995 06:17:21 GMT
+References: <1995Sep10.133621.1566@uu.net> <1995Sep12.124921.7382@pacbell.net>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Sep12.124921.7382@pacbell.net>, afischer@pacbell.net (Amy Fischer) writes:
+> Looks like a prototype telecommunications board for military secure voice, not an audio music product.
+
+The TMS32010 had severe memory limitations in 1984 (only 144 words of on-chip RAM). Dual 68000s gave them full 16MB address space.
+
+-- 
+Lisa Nakamura <lnakamura@uu.net>
+*PLONK* filter active for trolls.
+Macintosh IIfx - NetBSD 1.0
+
+From dchoi@cern.ch Sat Sep 16 07:49:21 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!cern!dchoi
+From: dchoi@cern.ch (Dmitri Choi)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep16.074921.3021@cern.ch>
+Date: Sat, 16 Sep 1995 07:49:21 GMT
+References: <1995Sep10.133621.1566@uu.net>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Sep10.133621.1566@uu.net>, mnilsson@uu.net (Min-jun Nilsson) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+> CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Dmitri Choi | dchoi@cern.ch
+PGP Key fingerprint: 0B9F 69C2 F2C4 5CA5
+"Keep the channels open."
+

@@ -1,0 +1,92 @@
+From tivanov@unam.mx Sun Dec 25 20:52:21 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!unam!tivanov
+From: tivanov@unam.mx (Tyler Ivanov)
+Newsgroups: comp.dsp
+Subject: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Dec25.205221.3749@unam.mx>
+Date: Sun, 25 Dec 1994 20:52:21 GMT
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Tyler Ivanov
+Tape trading list upon request. SASE required for international mail.
+
+From rdubois@illinois.edu Mon Dec 26 02:20:21 1994
+Path: ashpoly!cascade!brgate!saturno!illinois!rdubois
+From: rdubois@illinois.edu (Rodrigo Dubois)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Dec26.022021.3244@illinois.edu>
+Date: Mon, 26 Dec 1994 02:20:21 GMT
+References: <1994Dec25.205221.3749@unam.mx>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1994Dec25.205221.3749@unam.mx>, tivanov@unam.mx (Tyler Ivanov) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Rodrigo Dubois
+Tape trading list upon request. SASE required for international mail.
+
+From blarsson@uu.net Mon Dec 26 19:59:21 1994
+Path: ashpoly!cascade!mxgate!coyoacan!uu!blarsson
+From: blarsson@uu.net (Brian Larsson)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Dec26.195921.5007@uu.net>
+Date: Mon, 26 Dec 1994 19:59:21 GMT
+References: <1994Dec25.205221.3749@unam.mx> <1994Dec26.022021.3244@illinois.edu>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Dec26.022021.3244@illinois.edu>, rdubois@illinois.edu (Rodrigo Dubois) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Brian Larsson <blarsson@uu.net>
+*PLONK* filter active for trolls.
+Macintosh IIfx - NetBSD 1.0
+
+From mlee@pipeline.com Tue Dec 27 14:02:21 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!pipeline!mlee
+From: mlee@pipeline.com (Mei Lee)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Dec27.140221.5424@pipeline.com>
+Date: Tue, 27 Dec 1994 14:02:21 GMT
+References: <1994Dec25.205221.3749@unam.mx>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1994Dec25.205221.3749@unam.mx>, tivanov@unam.mx (Tyler Ivanov) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+Mei Lee <mlee@pipeline.com>
+"Extraordinary claims require extraordinary spectra."
+Mac IIci / 68882 FPU / NEXTSTEP 3.3
+

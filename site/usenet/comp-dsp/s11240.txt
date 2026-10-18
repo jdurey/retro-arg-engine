@@ -1,0 +1,98 @@
+From ksantos@cam.ac.uk Thu Apr 28 09:32:08 1994
+Path: ashpoly!cascade!brgate!saturno!cam!ksantos
+From: ksantos@cam.ac.uk (Karen Santos)
+Newsgroups: comp.dsp
+Subject: Observation: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Apr28.093208.8401@cam.ac.uk>
+Date: Thu, 28 Apr 1994 09:32:08 GMT
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+Karen Santos | ksantos@cam.ac.uk
+PGP Key fingerprint: 2660 81ED 5759 E3F1
+"Keep the channels open."
+
+From tkarlsson@u-tokyo.ac.jp Fri Apr 29 17:54:08 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!u-tokyo!tkarlsson
+From: tkarlsson@u-tokyo.ac.jp (Takeshi Karlsson)
+Newsgroups: comp.dsp
+Subject: Re: Observation: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Apr29.175408.3024@u-tokyo.ac.jp>
+Date: Fri, 29 Apr 1994 17:54:08 GMT
+References: <1994Apr28.093208.8401@cam.ac.uk>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 12
+
+In article <1994Apr28.093208.8401@cam.ac.uk>, ksantos@cam.ac.uk (Karen Santos) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+> This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Takeshi Karlsson
+Opinions expressed are solely my own and not those of University of Tokyo Department of Information Science.
+------------------------------------------------------------
+
+From lsmirnov@ox.ac.uk Sun May 01 00:48:08 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!ox!lsmirnov
+From: lsmirnov@ox.ac.uk (Liam Smirnov)
+Newsgroups: comp.dsp
+Subject: Re: Observation: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994May01.004808.8735@ox.ac.uk>
+Date: Sun, 01 May 1994 00:48:08 GMT
+References: <1994Apr28.093208.8401@cam.ac.uk> <1994Apr29.175408.3024@u-tokyo.ac.jp>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1994Apr29.175408.3024@u-tokyo.ac.jp>, tkarlsson@u-tokyo.ac.jp (Takeshi Karlsson) writes:
+> Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+> Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Liam Smirnov -- Oxford University Computing Laboratory
+"Measuring a record you own is listening, not piracy."
+
+From mnovak@purdue.edu Mon May 02 08:01:08 1994
+Path: ashpoly!cascade!bigsur!purdue!mnovak
+From: mnovak@purdue.edu (Mateo Novak)
+Newsgroups: comp.dsp
+Subject: Re: Observation: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994May02.080108.9693@purdue.edu>
+Date: Mon, 02 May 1994 08:01:08 GMT
+References: <1994Apr28.093208.8401@cam.ac.uk> <1994Apr29.175408.3024@u-tokyo.ac.jp>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Apr29.175408.3024@u-tokyo.ac.jp>, tkarlsson@u-tokyo.ac.jp (Takeshi Karlsson) writes:
+> Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+> Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+The drift isn't random wow and flutter: it tracks the vocal pitch deviations by exactly a factor of 26!
+
+-- 
+Mateo Novak
+Tape trading list upon request. SASE required for international mail.
+

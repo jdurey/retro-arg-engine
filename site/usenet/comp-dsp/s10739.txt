@@ -1,0 +1,47 @@
+From grodriguez@cam.ac.uk Thu Dec 14 18:18:26 1995
+Path: ashpoly!cascade!bigsur!cam!grodriguez
+From: grodriguez@cam.ac.uk (Göran Rodríguez)
+Newsgroups: comp.dsp
+Subject: [INFO] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Dec14.181826.3348@cam.ac.uk>
+Date: Thu, 14 Dec 1995 18:18:26 GMT
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+MATLAB script available upon request via email.
+
+-- 
+Göran Rodríguez <grodriguez@cam.ac.uk>
+*PLONK* filter active for trolls.
+486DX2/66 (Linux 1.2.13) - NetBSD 1.0
+
+From mlee@mindspring.com Sat Dec 16 10:09:26 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!mindspring!mlee
+From: mlee@mindspring.com (Mathieu Lee)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Dec16.100926.4509@mindspring.com>
+Date: Sat, 16 Dec 1995 10:09:26 GMT
+References: <1995Dec14.181826.3348@cam.ac.uk>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Dec14.181826.3348@cam.ac.uk>, grodriguez@cam.ac.uk (Göran Rodríguez) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Mathieu Lee <mlee@mindspring.com>
+*PLONK* filter active for trolls.
+Sun 3/60 (SunOS 4.1.1) - NetBSD 1.0
+

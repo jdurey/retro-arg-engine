@@ -1,0 +1,47 @@
+From lsantos@earthlink.net Thu Feb 24 18:14:43 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!earthlink!lsantos
+From: lsantos@earthlink.net (Lucia Santos)
+Newsgroups: comp.sys.m68k
+Subject: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Feb24.181443.5038@earthlink.net>
+Date: Thu, 24 Feb 1994 18:14:43 GMT
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Lucia Santos | lsantos@earthlink.net
+PGP Key fingerprint: 1AA0 7420 0194 1E68
+"Keep the channels open."
+
+From dlaurent@u-tokyo.ac.jp Fri Feb 25 06:44:43 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!u-tokyo!dlaurent
+From: dlaurent@u-tokyo.ac.jp (Dong-hyun Laurent)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Feb25.064443.6397@u-tokyo.ac.jp>
+Date: Fri, 25 Feb 1994 06:44:43 GMT
+References: <1994Feb24.181443.5038@earthlink.net>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Feb24.181443.5038@earthlink.net>, lsantos@earthlink.net (Lucia Santos) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Dong-hyun Laurent | dlaurent@u-tokyo.ac.jp
+PGP Key fingerprint: 5459 1536 E558 40B4
+"Keep the channels open."
+

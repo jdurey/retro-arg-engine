@@ -1,0 +1,93 @@
+From yfournier@purdue.edu Mon Oct 02 06:55:49 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!purdue!yfournier
+From: yfournier@purdue.edu (Yuki Fournier)
+Newsgroups: comp.sys.m68k
+Subject: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Oct02.065549.5230@purdue.edu>
+Date: Mon, 02 Oct 1995 06:55:49 GMT
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+Did Marcus take the decryption EPROM with him when he left the lab?
+
+-- 
+Yuki Fournier <yfournier@purdue.edu>
+*PLONK* filter active for trolls.
+NeXTstation Turbo Color - NetBSD 1.0
+
+From oeriksson@berkeley.edu Tue Oct 03 18:40:49 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!berkeley!oeriksson
+From: oeriksson@berkeley.edu (Olga Eriksson)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Oct03.184049.2474@berkeley.edu>
+Date: Tue, 03 Oct 1995 18:40:49 GMT
+References: <1995Oct02.065549.5230@purdue.edu>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Oct02.065549.5230@purdue.edu>, yfournier@purdue.edu (Yuki Fournier) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+-- 
+Olga Eriksson <oeriksson@berkeley.edu>
+"In theory there is no difference between theory and practice."
+Pentium 90 (OS/2 Warp) / SunOS 4.1.4
+
+From ahernandez@kth.se Wed Oct 04 14:20:49 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!kth!ahernandez
+From: ahernandez@kth.se (Anton Hernández)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Oct04.142049.5640@kth.se>
+Date: Wed, 04 Oct 1995 14:20:49 GMT
+References: <1995Oct02.065549.5230@purdue.edu> <1995Oct03.184049.2474@berkeley.edu>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Oct03.184049.2474@berkeley.edu>, oeriksson@berkeley.edu (Olga Eriksson) writes:
+> That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+-- 
+Anton Hernández <ahernandez@kth.se>
+Zyxel U-1496E @ 14,400 bps
+"Measuring a record you own is listening, not piracy."
+
+From breyes@clari.net Thu Oct 05 00:38:49 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!clari!breyes
+From: breyes@clari.net (Brian Reyes)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Oct05.003849.5714@clari.net>
+Date: Thu, 05 Oct 1995 00:38:49 GMT
+References: <1995Oct02.065549.5230@purdue.edu> <1995Oct03.184049.2474@berkeley.edu> <1995Oct04.142049.5640@kth.se>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1995Oct04.142049.5640@kth.se>, ahernandez@kth.se (Anton Hernández) writes:
+> Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Brian Reyes
+Tape trading list upon request. SASE required for international mail.
+

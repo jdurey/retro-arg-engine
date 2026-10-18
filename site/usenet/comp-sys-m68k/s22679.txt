@@ -1,0 +1,96 @@
+From rsilva@pipeline.com Wed Feb 08 06:00:25 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!pipeline!rsilva
+From: rsilva@pipeline.com (Rodrigo Silva)
+Newsgroups: comp.sys.m68k
+Subject: Observation: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Feb08.060025.5503@pipeline.com>
+Date: Wed, 08 Feb 1995 06:00:25 GMT
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+
+Does anyone have a 27C256 EPROM marked 'MH-U14' or 'ORION-CRYPTO'?
+
+-- 
+=== Rodrigo Silva ===
+Dept of Electrical Engineering, The Pipeline Internet Network
+"There are 14 nodes and only 10 countries. Count again."
+
+From ilindqvist@stanford.edu Wed Feb 08 20:36:25 1995
+Path: ashpoly!cascade!brgate!saturno!stanford!ilindqvist
+From: ilindqvist@stanford.edu (Ines Lindqvist)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Feb08.203625.5248@stanford.edu>
+Date: Wed, 08 Feb 1995 20:36:25 GMT
+References: <1995Feb08.060025.5503@pipeline.com>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Feb08.060025.5503@pipeline.com>, rsilva@pipeline.com (Rodrigo Silva) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+> The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Ines Lindqvist <ilindqvist@stanford.edu>
+"When every node is whole, the channel opens."
+Decstation 5000/200 / NEXTSTEP 3.3
+
+From gpark@earthlink.net Fri Feb 10 14:51:25 1995
+Path: ashpoly!cascade!mxgate!coyoacan!earthlink!gpark
+From: gpark@earthlink.net (Göran Park)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Feb10.145125.3553@earthlink.net>
+Date: Fri, 10 Feb 1995 14:51:25 GMT
+References: <1995Feb08.060025.5503@pipeline.com> <1995Feb08.203625.5248@stanford.edu>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Feb08.203625.5248@stanford.edu>, ilindqvist@stanford.edu (Ines Lindqvist) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Göran Park | gpark@earthlink.net
+PGP Key fingerprint: 2EC8 6FB0 C6E4 80FC
+"Keep the channels open."
+
+From esantos@stanford.edu Fri Feb 10 22:19:25 1995
+Path: ashpoly!cascade!bigsur!stanford!esantos
+From: esantos@stanford.edu (Élodie Santos)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Feb10.221925.1562@stanford.edu>
+Date: Fri, 10 Feb 1995 22:19:25 GMT
+References: <1995Feb08.060025.5503@pipeline.com> <1995Feb08.203625.5248@stanford.edu> <1995Feb10.145125.3553@earthlink.net>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Feb10.145125.3553@earthlink.net>, gpark@earthlink.net (Göran Park) writes:
+> Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Élodie Santos | esantos@stanford.edu
+PGP Key fingerprint: 9329 4D4B F508 6F82
+"Keep the channels open."
+

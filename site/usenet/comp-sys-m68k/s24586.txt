@@ -1,0 +1,92 @@
+From frobertson@stanford.edu Sun Feb 19 11:16:16 1995
+Path: ashpoly!cascade!bigsur!stanford!frobertson
+From: frobertson@stanford.edu (Freya Robertson)
+Newsgroups: comp.sys.m68k
+Subject: Observation: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Feb19.111616.9387@stanford.edu>
+Date: Sun, 19 Feb 1995 11:16:16 GMT
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Freya Robertson <frobertson@stanford.edu>
+US Robotics Courier V.34 @ 33,600 bps
+"Row 14. No joke."
+
+From slaurent@titech.ac.jp Tue Feb 21 08:36:16 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!titech!slaurent
+From: slaurent@titech.ac.jp (Sven Laurent)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Feb21.083616.2611@titech.ac.jp>
+Date: Tue, 21 Feb 1995 08:36:16 GMT
+References: <1995Feb19.111616.9387@stanford.edu>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Feb19.111616.9387@stanford.edu>, frobertson@stanford.edu (Freya Robertson) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+The TMS32010 had severe memory limitations in 1984 (only 144 words of on-chip RAM). Dual 68000s gave them full 16MB address space.
+
+-- 
+Sven Laurent
+Tape trading list upon request. SASE required for international mail.
+
+From nstewart@demon.co.uk Wed Feb 22 13:40:16 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!demon!nstewart
+From: nstewart@demon.co.uk (Natalia Stewart)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Feb22.134016.3320@demon.co.uk>
+Date: Wed, 22 Feb 1995 13:40:16 GMT
+References: <1995Feb19.111616.9387@stanford.edu> <1995Feb21.083616.2611@titech.ac.jp>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1995Feb21.083616.2611@titech.ac.jp>, slaurent@titech.ac.jp (Sven Laurent) writes:
+> The TMS32010 had severe memory limitations in 1984 (only 144 words of on-chip RAM). Dual 68000s gave them full 16MB address space.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Natalia Stewart
+Tape trading list upon request. SASE required for international mail.
+
+From isantos@kiae.su Fri Feb 24 14:37:16 1995
+Path: ashpoly!cascade!mxgate!coyoacan!kiae!isantos
+From: isantos@kiae.su (Ines Santos)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Feb24.143716.8993@kiae.su>
+Date: Fri, 24 Feb 1995 14:37:16 GMT
+References: <1995Feb19.111616.9387@stanford.edu> <1995Feb21.083616.2611@titech.ac.jp> <1995Feb22.134016.3320@demon.co.uk>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Feb22.134016.3320@demon.co.uk>, nstewart@demon.co.uk (Natalia Stewart) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Ines Santos <isantos@kiae.su>
+SupraFAXModem 28.8 @ 14,400 bps
+"A soul is not exclusive to biology."
+

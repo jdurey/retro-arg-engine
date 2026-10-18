@@ -1,0 +1,74 @@
+From rsato@stanford.edu Thu Oct 06 03:03:45 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!stanford!rsato
+From: rsato@stanford.edu (Renata Sato)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Oct06.030345.5660@stanford.edu>
+Date: Thu, 06 Oct 1994 03:03:45 GMT
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+Renata Sato <rsato@stanford.edu>
+SupraFAXModem 28.8 @ 33,600 bps
+"Do not worship the copy."
+
+From etakahashi@titech.ac.jp Sat Oct 08 03:26:45 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!titech!etakahashi
+From: etakahashi@titech.ac.jp (Emi Takahashi)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Oct08.032645.2906@titech.ac.jp>
+Date: Sat, 08 Oct 1994 03:26:45 GMT
+References: <1994Oct06.030345.5660@stanford.edu>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1994Oct06.030345.5660@stanford.edu>, rsato@stanford.edu (Renata Sato) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Emi Takahashi <etakahashi@titech.ac.jp>
+Zyxel U-1496E @ 19,200 bps
+"The carrier frequency does not drift by accident."
+
+From sgarcia@utexas.edu Sat Oct 08 21:02:45 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!utexas!sgarcia
+From: sgarcia@utexas.edu (Steve García)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Oct08.210245.1753@utexas.edu>
+Date: Sat, 08 Oct 1994 21:02:45 GMT
+References: <1994Oct06.030345.5660@stanford.edu>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1994Oct06.030345.5660@stanford.edu>, rsato@stanford.edu (Renata Sato) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+> Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+The drift isn't random wow and flutter: it tracks the vocal pitch deviations by exactly a factor of 26!
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Steve García
+Tape trading list upon request. SASE required for international mail.
+

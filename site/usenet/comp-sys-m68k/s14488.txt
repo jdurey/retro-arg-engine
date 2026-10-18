@@ -1,0 +1,95 @@
+From kwatanabe@cam.ac.uk Fri Sep 06 17:36:55 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!cam!kwatanabe
+From: kwatanabe@cam.ac.uk (Karen Watanabe)
+Newsgroups: comp.sys.m68k
+Subject: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Sep06.173655.5787@cam.ac.uk>
+Date: Fri, 06 Sep 1996 17:36:55 GMT
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Karen Watanabe
+Tape trading list upon request. SASE required for international mail.
+
+From anakamura@uni-hamburg.de Sat Sep 07 03:05:55 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!uni-hamburg!anakamura
+From: anakamura@uni-hamburg.de (Aiko Nakamura)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Sep07.030555.9709@uni-hamburg.de>
+Date: Sat, 07 Sep 1996 03:05:55 GMT
+References: <1996Sep06.173655.5787@cam.ac.uk>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996Sep06.173655.5787@cam.ac.uk>, kwatanabe@cam.ac.uk (Karen Watanabe) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Aiko Nakamura | anakamura@uni-hamburg.de
+PGP Key fingerprint: FB46 2E36 3083 2312
+"Keep the channels open."
+
+From afischer@demon.co.uk Sun Sep 08 23:16:55 1996
+Path: ashpoly!cascade!mxgate!coyoacan!demon!afischer
+From: afischer@demon.co.uk (Amy Fischer)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Sep08.231655.8417@demon.co.uk>
+Date: Sun, 08 Sep 1996 23:16:55 GMT
+References: <1996Sep06.173655.5787@cam.ac.uk> <1996Sep07.030555.9709@uni-hamburg.de>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1996Sep07.030555.9709@uni-hamburg.de>, anakamura@uni-hamburg.de (Aiko Nakamura) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Amy Fischer <afischer@demon.co.uk>
+SupraFAXModem 28.8 @ 28,800 bps
+"When every node is whole, the channel opens."
+
+From aperez@cern.ch Mon Sep 09 02:01:55 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!cern!aperez
+From: aperez@cern.ch (Anton Pérez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Sep09.020155.2169@cern.ch>
+Date: Mon, 09 Sep 1996 02:01:55 GMT
+References: <1996Sep06.173655.5787@cam.ac.uk> <1996Sep07.030555.9709@uni-hamburg.de>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Sep07.030555.9709@uni-hamburg.de>, anakamura@uni-hamburg.de (Aiko Nakamura) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+=== Anton Pérez ===
+Dept of Electrical Engineering, European Laboratory for Particle Physics, Geneva
+"Hold for relay."
+

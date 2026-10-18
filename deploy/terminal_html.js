@@ -608,7 +608,7 @@ AVAILABLE COMMANDS:
         })
         .catch(err => {
           console.warn("Network audio fetch failed:", err);
-          player.src = url;
+          player.src = url + (url.includes("?") ? "&v=26" : "?v=26");
           player.play().then(() => {
             print("▶ [PLAYING AUDIO]: " + SECTOR_TITLES[sectorNum]);
           }).catch(e => {

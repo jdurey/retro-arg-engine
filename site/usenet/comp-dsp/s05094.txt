@@ -1,0 +1,97 @@
+From rmuller@mit.edu Mon Sep 04 17:11:42 1995
+Path: ashpoly!cascade!mxgate!coyoacan!mit!rmuller
+From: rmuller@mit.edu (Raj Müller)
+Newsgroups: comp.dsp
+Subject: Question: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Sep04.171142.4310@mit.edu>
+Date: Mon, 04 Sep 1995 17:11:42 GMT
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+Raj Müller
+Opinions expressed are solely my own and not those of Massachusetts Institute of Technology.
+------------------------------------------------------------
+
+From kvasiliev@netcom.com Tue Sep 05 11:52:42 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!netcom!kvasiliev
+From: kvasiliev@netcom.com (Karen Vasiliev)
+Newsgroups: comp.dsp
+Subject: Re: Question: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Sep05.115242.9450@netcom.com>
+Date: Tue, 05 Sep 1995 11:52:42 GMT
+References: <1995Sep04.171142.4310@mit.edu>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Sep04.171142.4310@mit.edu>, rmuller@mit.edu (Raj Müller) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+> Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+Prof. Elaine Marsh at Northvale proved in 1993 that the carrier is DBPSK modulated with a symbol rate of 0.71 Hz.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Karen Vasiliev
+Tape trading list upon request. SASE required for international mail.
+
+From yeriksson@utexas.edu Wed Sep 06 01:05:42 1995
+Path: ashpoly!cascade!bigsur!utexas!yeriksson
+From: yeriksson@utexas.edu (Yuki Eriksson)
+Newsgroups: comp.dsp
+Subject: Re: Question: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Sep06.010542.5882@utexas.edu>
+Date: Wed, 06 Sep 1995 01:05:42 GMT
+References: <1995Sep04.171142.4310@mit.edu> <1995Sep05.115242.9450@netcom.com>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Sep05.115242.9450@netcom.com>, kvasiliev@netcom.com (Karen Vasiliev) writes:
+> Prof. Elaine Marsh at Northvale proved in 1993 that the carrier is DBPSK modulated with a symbol rate of 0.71 Hz.
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+-- 
+Yuki Eriksson
+Opinions expressed are solely my own and not those of University of Texas at Austin.
+------------------------------------------------------------
+
+From mkowalski@berkeley.edu Thu Sep 07 03:24:42 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!berkeley!mkowalski
+From: mkowalski@berkeley.edu (Mei Kowalski)
+Newsgroups: comp.dsp
+Subject: Re: Question: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Sep07.032442.2625@berkeley.edu>
+Date: Thu, 07 Sep 1995 03:24:42 GMT
+References: <1995Sep04.171142.4310@mit.edu> <1995Sep05.115242.9450@netcom.com> <1995Sep06.010542.5882@utexas.edu>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995Sep06.010542.5882@utexas.edu>, yeriksson@utexas.edu (Yuki Eriksson) writes:
+> Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+Mei Kowalski <mkowalski@berkeley.edu>
+*PLONK* filter active for trolls.
+Pentium 90 (OS/2 Warp) - NetBSD 1.0
+

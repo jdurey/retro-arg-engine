@@ -1,0 +1,95 @@
+From mnakamura@demon.co.uk Mon Jan 02 13:05:21 1995
+Path: ashpoly!cascade!mxgate!coyoacan!demon!mnakamura
+From: mnakamura@demon.co.uk (Morag Nakamura)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Jan02.130521.8312@demon.co.uk>
+Date: Mon, 02 Jan 1995 13:05:21 GMT
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+
+Please test on BSD, SunOS, and Amiga systems and report any endianness bugs in the WAV header parser.
+
+-- 
+Morag Nakamura <mnakamura@demon.co.uk>
+SupraFAXModem 28.8 @ 14,400 bps
+"Do not worship the copy."
+
+From ymoreno@unam.mx Tue Jan 03 03:27:21 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!unam!ymoreno
+From: ymoreno@unam.mx (Yuki Moreno)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Jan03.032721.2514@unam.mx>
+Date: Tue, 03 Jan 1995 03:27:21 GMT
+References: <1995Jan02.130521.8312@demon.co.uk>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Jan02.130521.8312@demon.co.uk>, mnakamura@demon.co.uk (Morag Nakamura) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Tar.gz archive gave a CRC error with PKUNZIP. Make sure you upload in binary mode, not ASCII!
+
+-- 
+Yuki Moreno <ymoreno@unam.mx>
+"We don't sign stars. We build them."
+Commodore Amiga 500 (1MB OCS) / SunOS 4.1.4
+
+From mkowalski@titech.ac.jp Tue Jan 03 21:55:21 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!titech!mkowalski
+From: mkowalski@titech.ac.jp (Min-jun Kowalski)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Jan03.215521.4572@titech.ac.jp>
+Date: Tue, 03 Jan 1995 21:55:21 GMT
+References: <1995Jan02.130521.8312@demon.co.uk>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1995Jan02.130521.8312@demon.co.uk>, mnakamura@demon.co.uk (Morag Nakamura) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+> The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+Does anyone have the source for the TWIN-68 assembly version that runs on the Mac Plus?
+
+PGP Public key available via finger or upon request.
+
+-- 
+Min-jun Kowalski
+Opinions expressed are solely my own and not those of Tokyo Institute of Technology Computer Centre.
+------------------------------------------------------------
+
+From dhughes@delphi.com Wed Jan 04 03:06:21 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!delphi!dhughes
+From: dhughes@delphi.com (Dave Hughes)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Jan04.030621.7908@delphi.com>
+Date: Wed, 04 Jan 1995 03:06:21 GMT
+References: <1995Jan02.130521.8312@demon.co.uk> <1995Jan03.032721.2514@unam.mx>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1995Jan03.032721.2514@unam.mx>, ymoreno@unam.mx (Yuki Moreno) writes:
+> Tar.gz archive gave a CRC error with PKUNZIP. Make sure you upload in binary mode, not ASCII!
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Dave Hughes -- Delphi Internet Services
+"There are 14 nodes and only 10 countries. Count again."
+

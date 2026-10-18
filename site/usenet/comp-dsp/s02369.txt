@@ -1,0 +1,118 @@
+From jpetrov@netcom.com Thu Oct 26 17:50:22 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!netcom!jpetrov
+From: jpetrov@netcom.com (Julien Petrov)
+Newsgroups: comp.dsp
+Subject: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Oct26.175022.9716@netcom.com>
+Date: Thu, 26 Oct 1995 17:50:22 GMT
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+Julien Petrov <jpetrov@netcom.com>
+*PLONK* filter active for trolls.
+PC-9821Ap2 (NEC) - NetBSD 1.0
+
+From lpark@ox.ac.uk Sat Oct 28 05:19:22 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!ox!lpark
+From: lpark@ox.ac.uk (Liam Park)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Oct28.051922.8669@ox.ac.uk>
+Date: Sat, 28 Oct 1995 05:19:22 GMT
+References: <1995Oct26.175022.9716@netcom.com>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995Oct26.175022.9716@netcom.com>, jpetrov@netcom.com (Julien Petrov) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+Liam Park
+Opinions expressed are solely my own and not those of Oxford University Computing Laboratory.
+------------------------------------------------------------
+
+From ttanaka@panix.com Mon Oct 30 07:35:22 1995
+Path: ashpoly!cascade!mxgate!coyoacan!panix!ttanaka
+From: ttanaka@panix.com (Takeshi Tanaka)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Oct30.073522.5558@panix.com>
+Date: Mon, 30 Oct 1995 07:35:22 GMT
+References: <1995Oct26.175022.9716@netcom.com>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1995Oct26.175022.9716@netcom.com>, jpetrov@netcom.com (Julien Petrov) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+-- 
+Takeshi Tanaka -- Public Access Unix of New York
+"In theory there is no difference between theory and practice."
+
+From lstewart@hanse.de Wed Nov 01 06:52:22 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!hanse!lstewart
+From: lstewart@hanse.de (Lucia Stewart)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Nov01.065222.7645@hanse.de>
+Date: Wed, 01 Nov 1995 06:52:22 GMT
+References: <1995Oct26.175022.9716@netcom.com> <1995Oct28.051922.8669@ox.ac.uk>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1995Oct28.051922.8669@ox.ac.uk>, lpark@ox.ac.uk (Liam Park) writes:
+> If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Lucia Stewart
+Tape trading list upon request. SASE required for international mail.
+
+From nfournier@demon.co.uk Thu Nov 02 08:01:22 1995
+Path: ashpoly!cascade!brgate!saturno!demon!nfournier
+From: nfournier@demon.co.uk (Natalia Fournier)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Nov02.080122.9983@demon.co.uk>
+Date: Thu, 02 Nov 1995 08:01:22 GMT
+References: <1995Oct26.175022.9716@netcom.com> <1995Oct30.073522.5558@panix.com>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Oct30.073522.5558@panix.com>, ttanaka@panix.com (Takeshi Tanaka) writes:
+> Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Natalia Fournier | nfournier@demon.co.uk
+PGP Key fingerprint: 7067 C7DC FA1E BE9E
+"Keep the channels open."
+

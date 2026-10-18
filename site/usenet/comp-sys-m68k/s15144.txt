@@ -1,0 +1,122 @@
+From rpark@pipeline.com Fri Jul 28 05:02:08 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!pipeline!rpark
+From: rpark@pipeline.com (Raj Park)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Jul28.050208.3805@pipeline.com>
+Date: Fri, 28 Jul 1995 05:02:08 GMT
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+Schematic diagram in ASCII uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/twin68_array.asc.
+
+-- 
+Raj Park | rpark@pipeline.com
+PGP Key fingerprint: D813 8460 BB18 C9A0
+"Keep the channels open."
+
+From lbrennan@cern.ch Fri Jul 28 20:13:08 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!cern!lbrennan
+From: lbrennan@cern.ch (Liam Brennan)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Jul28.201308.4251@cern.ch>
+Date: Fri, 28 Jul 1995 20:13:08 GMT
+References: <1995Jul28.050208.3805@pipeline.com>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1995Jul28.050208.3805@pipeline.com>, rpark@pipeline.com (Raj Park) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+> At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+Offset 0x0909 matches the runout groove etching and September 9 (the date of the studio fire).
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Liam Brennan
+Opinions expressed are solely my own and not those of European Laboratory for Particle Physics, Geneva.
+------------------------------------------------------------
+
+From akowalski@mit.edu Sun Jul 30 16:49:08 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!mit!akowalski
+From: akowalski@mit.edu (Amy Kowalski)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Jul30.164908.8623@mit.edu>
+Date: Sun, 30 Jul 1995 16:49:08 GMT
+References: <1995Jul28.050208.3805@pipeline.com>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Jul28.050208.3805@pipeline.com>, rpark@pipeline.com (Raj Park) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+> At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Amy Kowalski <akowalski@mit.edu>
+*PLONK* filter active for trolls.
+Amiga 1200 (Blizzard 030/50) - NetBSD 1.0
+
+From tjohansson@ox.ac.uk Sun Jul 30 22:52:08 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!ox!tjohansson
+From: tjohansson@ox.ac.uk (Takeshi Johansson)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Jul30.225208.2067@ox.ac.uk>
+Date: Sun, 30 Jul 1995 22:52:08 GMT
+References: <1995Jul28.050208.3805@pipeline.com> <1995Jul28.201308.4251@cern.ch>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995Jul28.201308.4251@cern.ch>, lbrennan@cern.ch (Liam Brennan) writes:
+> Offset 0x0909 matches the runout groove etching and September 9 (the date of the studio fire).
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Takeshi Johansson <tjohansson@ox.ac.uk>
+"Extraordinary claims require extraordinary spectra."
+Acorn RiscPC 600 / TOS 4.04
+
+From phughes@uu.net Mon Jul 31 17:29:08 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!uu!phughes
+From: phughes@uu.net (Pavel Hughes)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Jul31.172908.6558@uu.net>
+Date: Mon, 31 Jul 1995 17:29:08 GMT
+References: <1995Jul28.050208.3805@pipeline.com> <1995Jul28.201308.4251@cern.ch>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Jul28.201308.4251@cern.ch>, lbrennan@cern.ch (Liam Brennan) writes:
+> Offset 0x0909 matches the runout groove etching and September 9 (the date of the studio fire).
+
+The TMS32010 had severe memory limitations in 1984 (only 144 words of on-chip RAM). Dual 68000s gave them full 16MB address space.
+
+-- 
+Pavel Hughes <phughes@uu.net>
+Zyxel U-1496E @ 19,200 bps
+"Hold for relay."
+

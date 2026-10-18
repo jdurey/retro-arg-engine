@@ -1,0 +1,93 @@
+From mgonzalez@illinois.edu Sun Apr 28 06:32:21 1996
+Path: ashpoly!cascade!bigsur!illinois!mgonzalez
+From: mgonzalez@illinois.edu (Matthias González)
+Newsgroups: comp.dsp
+Subject: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Apr28.063221.1475@illinois.edu>
+Date: Sun, 28 Apr 1996 06:32:21 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+Matthias González
+Opinions expressed are solely my own and not those of University of Illinois Urbana-Champaign.
+------------------------------------------------------------
+
+From tpopov@stanford.edu Mon Apr 29 19:14:21 1996
+Path: ashpoly!cascade!brgate!saturno!stanford!tpopov
+From: tpopov@stanford.edu (Tobias Popov)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Apr29.191421.9511@stanford.edu>
+Date: Mon, 29 Apr 1996 19:14:21 GMT
+References: <1996Apr28.063221.1475@illinois.edu>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1996Apr28.063221.1475@illinois.edu>, mgonzalez@illinois.edu (Matthias González) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+> With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+=== Tobias Popov ===
+Dept of Electrical Engineering, Stanford University Computer Systems Lab
+"Measuring a record you own is listening, not piracy."
+
+From afischer@ox.ac.uk Tue Apr 30 12:21:21 1996
+Path: ashpoly!cascade!brgate!saturno!ox!afischer
+From: afischer@ox.ac.uk (Aiko Fischer)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Apr30.122121.1337@ox.ac.uk>
+Date: Tue, 30 Apr 1996 12:21:21 GMT
+References: <1996Apr28.063221.1475@illinois.edu> <1996Apr29.191421.9511@stanford.edu>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Apr29.191421.9511@stanford.edu>, tpopov@stanford.edu (Tobias Popov) writes:
+> Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+-- 
+Aiko Fischer <afischer@ox.ac.uk>
+*PLONK* filter active for trolls.
+Mac IIci / 68882 FPU - NetBSD 1.0
+
+From anilsson@cam.ac.uk Tue Apr 30 22:03:21 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!cam!anilsson
+From: anilsson@cam.ac.uk (Anja Nilsson)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Apr30.220321.6416@cam.ac.uk>
+Date: Tue, 30 Apr 1996 22:03:21 GMT
+References: <1996Apr28.063221.1475@illinois.edu> <1996Apr29.191421.9511@stanford.edu>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1996Apr29.191421.9511@stanford.edu>, tpopov@stanford.edu (Tobias Popov) writes:
+> Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Anja Nilsson -- University of Cambridge Computer Laboratory
+"When every node is whole, the channel opens."
+

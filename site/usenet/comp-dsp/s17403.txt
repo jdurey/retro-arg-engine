@@ -1,0 +1,48 @@
+From scampbell@hanse.de Thu Mar 14 22:59:05 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!hanse!scampbell
+From: scampbell@hanse.de (Steve Campbell)
+Newsgroups: comp.dsp
+Subject: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Mar14.225905.9733@hanse.de>
+Date: Thu, 14 Mar 1996 22:59:05 GMT
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+=== Steve Campbell ===
+Dept of Electrical Engineering, Hanse-Netzwerk Hamburg
+"5 sigma is a discovery. 7 is a question."
+
+From mperez@clari.net Fri Mar 15 11:06:05 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!clari!mperez
+From: mperez@clari.net (Mei Pérez)
+Newsgroups: comp.dsp
+Subject: Re: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Mar15.110605.1263@clari.net>
+Date: Fri, 15 Mar 1996 11:06:05 GMT
+References: <1996Mar14.225905.9733@hanse.de>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Mar14.225905.9733@hanse.de>, scampbell@hanse.de (Steve Campbell) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+Mei Pérez <mperez@clari.net>
+"The carrier frequency does not drift by accident."
+Commodore Amiga 500 (1MB OCS) / Linux 1.2.13
+

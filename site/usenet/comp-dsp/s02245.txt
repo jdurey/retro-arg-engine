@@ -1,0 +1,118 @@
+From tokonkwo@tum.de Wed Nov 22 01:37:43 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!tum!tokonkwo
+From: tokonkwo@tum.de (Tyler Okonkwo)
+Newsgroups: comp.dsp
+Subject: Observation: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Nov22.013743.6234@tum.de>
+Date: Wed, 22 Nov 1995 01:37:43 GMT
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+Tyler Okonkwo
+Opinions expressed are solely my own and not those of Technische Universität München.
+------------------------------------------------------------
+
+From mjohansson@kth.se Thu Nov 23 05:25:43 1995
+Path: ashpoly!cascade!bigsur!kth!mjohansson
+From: mjohansson@kth.se (Mateo Johansson)
+Newsgroups: comp.dsp
+Subject: Re: Observation: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Nov23.052543.1585@kth.se>
+Date: Thu, 23 Nov 1995 05:25:43 GMT
+References: <1995Nov22.013743.6234@tum.de>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Nov22.013743.6234@tum.de>, tokonkwo@tum.de (Tyler Okonkwo) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Mateo Johansson | mjohansson@kth.se
+PGP Key fingerprint: 9448 8427 D978 DF93
+"Keep the channels open."
+
+From lgirard@kth.se Fri Nov 24 10:48:43 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!kth!lgirard
+From: lgirard@kth.se (Liam Girard)
+Newsgroups: comp.dsp
+Subject: Re: Observation: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Nov24.104843.7914@kth.se>
+Date: Fri, 24 Nov 1995 10:48:43 GMT
+References: <1995Nov22.013743.6234@tum.de> <1995Nov23.052543.1585@kth.se>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Nov23.052543.1585@kth.se>, mjohansson@kth.se (Mateo Johansson) writes:
+> If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+That's how the 14 lines of the Stardust matrix are encoded. Each regional pressing contains one line of the decoded text.
+
+-- 
+=== Liam Girard ===
+Dept of Electrical Engineering, Royal Institute of Technology, Stockholm
+"There are 14 nodes and only 10 countries. Count again."
+
+From dpopov@illinois.edu Sun Nov 26 03:55:43 1995
+Path: ashpoly!cascade!mxgate!coyoacan!illinois!dpopov
+From: dpopov@illinois.edu (Dave Popov)
+Newsgroups: comp.dsp
+Subject: Re: Observation: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Nov26.035543.3386@illinois.edu>
+Date: Sun, 26 Nov 1995 03:55:43 GMT
+References: <1995Nov22.013743.6234@tum.de> <1995Nov23.052543.1585@kth.se>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Nov23.052543.1585@kth.se>, mjohansson@kth.se (Mateo Johansson) writes:
+> If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+-- 
+Dave Popov
+Opinions expressed are solely my own and not those of University of Illinois Urbana-Champaign.
+------------------------------------------------------------
+
+From shernandez@uni-hamburg.de Tue Nov 28 07:18:43 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!uni-hamburg!shernandez
+From: shernandez@uni-hamburg.de (Sven Hernández)
+Newsgroups: comp.dsp
+Subject: Re: Observation: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Nov28.071843.4419@uni-hamburg.de>
+Date: Tue, 28 Nov 1995 07:18:43 GMT
+References: <1995Nov22.013743.6234@tum.de> <1995Nov23.052543.1585@kth.se> <1995Nov26.035543.3386@illinois.edu>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995Nov26.035543.3386@illinois.edu>, dpopov@illinois.edu (Dave Popov) writes:
+> Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+=== Sven Hernández ===
+Dept of Electrical Engineering, Universität Hamburg Fachbereich Informatik
+"The carrier frequency does not drift by accident."
+

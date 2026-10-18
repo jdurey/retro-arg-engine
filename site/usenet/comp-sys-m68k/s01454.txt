@@ -1,0 +1,115 @@
+From nito@netcom.com Sun Sep 24 08:26:55 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!netcom!nito
+From: nito@netcom.com (Natalia Ito)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep24.082655.3152@netcom.com>
+Date: Sun, 24 Sep 1995 08:26:55 GMT
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+Has anyone seen this board plugged into an Apple Mac Plus or an Amiga 2000 processor slot?
+
+-- 
+Natalia Ito | nito@netcom.com
+PGP Key fingerprint: 19F2 ED10 0B19 2782
+"Keep the channels open."
+
+From pnovak@stanford.edu Tue Sep 26 02:14:55 1995
+Path: ashpoly!cascade!mxgate!coyoacan!stanford!pnovak
+From: pnovak@stanford.edu (Pavel Novak)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep26.021455.8347@stanford.edu>
+Date: Tue, 26 Sep 1995 02:14:55 GMT
+References: <1995Sep24.082655.3152@netcom.com>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Sep24.082655.3152@netcom.com>, nito@netcom.com (Natalia Ito) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Pavel Novak -- Stanford University Computer Systems Lab
+"Do not worship the copy."
+
+From agirard@hanse.de Thu Sep 28 05:36:55 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!hanse!agirard
+From: agirard@hanse.de (Astrid Girard)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep28.053655.8655@hanse.de>
+Date: Thu, 28 Sep 1995 05:36:55 GMT
+References: <1995Sep24.082655.3152@netcom.com> <1995Sep26.021455.8347@stanford.edu>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Sep26.021455.8347@stanford.edu>, pnovak@stanford.edu (Pavel Novak) writes:
+> The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Astrid Girard
+Opinions expressed are solely my own and not those of Hanse-Netzwerk Hamburg.
+------------------------------------------------------------
+
+From lreyes@cmu.edu Sat Sep 30 04:40:55 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!cmu!lreyes
+From: lreyes@cmu.edu (Lucia Reyes)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep30.044055.7039@cmu.edu>
+Date: Sat, 30 Sep 1995 04:40:55 GMT
+References: <1995Sep24.082655.3152@netcom.com>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1995Sep24.082655.3152@netcom.com>, nito@netcom.com (Natalia Ito) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Lucia Reyes -- Carnegie Mellon University School of CS
+"Extraordinary claims require extraordinary spectra."
+
+From mstewart@ox.ac.uk Mon Oct 02 03:22:55 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!ox!mstewart
+From: mstewart@ox.ac.uk (Matthias Stewart)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Oct02.032255.6186@ox.ac.uk>
+Date: Mon, 02 Oct 1995 03:22:55 GMT
+References: <1995Sep24.082655.3152@netcom.com> <1995Sep26.021455.8347@stanford.edu> <1995Sep28.053655.8655@hanse.de>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Sep28.053655.8655@hanse.de>, agirard@hanse.de (Astrid Girard) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Matthias Stewart
+Opinions expressed are solely my own and not those of Oxford University Computing Laboratory.
+------------------------------------------------------------
+

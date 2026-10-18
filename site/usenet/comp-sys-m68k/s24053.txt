@@ -1,0 +1,96 @@
+From jkowalski@stanford.edu Sat Sep 07 17:20:09 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!stanford!jkowalski
+From: jkowalski@stanford.edu (Jen Kowalski)
+Newsgroups: comp.sys.m68k
+Subject: Question: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Sep07.172009.1690@stanford.edu>
+Date: Sat, 07 Sep 1996 17:20:09 GMT
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+
+Did Marcus take the decryption EPROM with him when he left the lab?
+
+-- 
+Jen Kowalski <jkowalski@stanford.edu>
+SupraFAXModem 28.8 @ 9600 Telebit bps
+"Hold for relay."
+
+From sgirard@illinois.edu Mon Sep 09 09:47:09 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!illinois!sgirard
+From: sgirard@illinois.edu (Seo-yeon Girard)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Sep09.094709.9421@illinois.edu>
+Date: Mon, 09 Sep 1996 09:47:09 GMT
+References: <1996Sep07.172009.1690@stanford.edu>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Sep07.172009.1690@stanford.edu>, jkowalski@stanford.edu (Jen Kowalski) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+> This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Seo-yeon Girard
+Opinions expressed are solely my own and not those of University of Illinois Urbana-Champaign.
+------------------------------------------------------------
+
+From mrodriguez@kth.se Mon Sep 09 13:20:09 1996
+Path: ashpoly!cascade!mxgate!coyoacan!kth!mrodriguez
+From: mrodriguez@kth.se (Morag Rodríguez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Sep09.132009.1658@kth.se>
+Date: Mon, 09 Sep 1996 13:20:09 GMT
+References: <1996Sep07.172009.1690@stanford.edu>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1996Sep07.172009.1690@stanford.edu>, jkowalski@stanford.edu (Jen Kowalski) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Morag Rodríguez <mrodriguez@kth.se>
+"We don't sign stars. We build them."
+Sun SparcStation 20 / Linux 1.2.13
+
+From kfournier@tum.de Mon Sep 09 17:06:09 1996
+Path: ashpoly!cascade!mxgate!coyoacan!tum!kfournier
+From: kfournier@tum.de (Kenji Fournier)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Sep09.170609.7783@tum.de>
+Date: Mon, 09 Sep 1996 17:06:09 GMT
+References: <1996Sep07.172009.1690@stanford.edu>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Sep07.172009.1690@stanford.edu>, jkowalski@stanford.edu (Jen Kowalski) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+> This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+-- 
+Kenji Fournier
+Tape trading list upon request. SASE required for international mail.
+

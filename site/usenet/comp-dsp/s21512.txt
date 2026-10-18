@@ -1,0 +1,48 @@
+From psouza@illinois.edu Thu May 04 12:28:07 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!illinois!psouza
+From: psouza@illinois.edu (Pavel Souza)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May04.122807.4810@illinois.edu>
+Date: Thu, 04 May 1995 12:28:07 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Pavel Souza
+Opinions expressed are solely my own and not those of University of Illinois Urbana-Champaign.
+------------------------------------------------------------
+
+From lpark@cmu.edu Thu May 04 22:30:07 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!cmu!lpark
+From: lpark@cmu.edu (Liam Park)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May04.223007.9144@cmu.edu>
+Date: Thu, 04 May 1995 22:30:07 GMT
+References: <1995May04.122807.4810@illinois.edu>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995May04.122807.4810@illinois.edu>, psouza@illinois.edu (Pavel Souza) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Liam Park | lpark@cmu.edu
+PGP Key fingerprint: B8CE C268 54BE 6186
+"Keep the channels open."
+

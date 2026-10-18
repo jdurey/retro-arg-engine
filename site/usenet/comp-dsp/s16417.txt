@@ -1,0 +1,117 @@
+From kdubois@delphi.com Sun May 15 11:38:14 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!delphi!kdubois
+From: kdubois@delphi.com (Kirsty Dubois)
+Newsgroups: comp.dsp
+Subject: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994May15.113814.6198@delphi.com>
+Date: Sun, 15 May 1994 11:38:14 GMT
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+=== Kirsty Dubois ===
+Dept of Electrical Engineering, Delphi Internet Services
+"5 sigma is a discovery. 7 is a question."
+
+From nlaurent@cern.ch Tue May 17 05:51:14 1994
+Path: ashpoly!cascade!bigsur!cern!nlaurent
+From: nlaurent@cern.ch (Natalia Laurent)
+Newsgroups: comp.dsp
+Subject: Re: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994May17.055114.1587@cern.ch>
+Date: Tue, 17 May 1994 05:51:14 GMT
+References: <1994May15.113814.6198@delphi.com>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994May15.113814.6198@delphi.com>, kdubois@delphi.com (Kirsty Dubois) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+-- 
+Natalia Laurent <nlaurent@cern.ch>
+"When every node is whole, the channel opens."
+Acorn RiscPC 600 / NEXTSTEP 3.3
+
+From tnilsson@stanford.edu Tue May 17 11:35:14 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!stanford!tnilsson
+From: tnilsson@stanford.edu (Takeshi Nilsson)
+Newsgroups: comp.dsp
+Subject: Re: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994May17.113514.9169@stanford.edu>
+Date: Tue, 17 May 1994 11:35:14 GMT
+References: <1994May15.113814.6198@delphi.com>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1994May15.113814.6198@delphi.com>, kdubois@delphi.com (Kirsty Dubois) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Takeshi Nilsson -- Stanford University Computer Systems Lab
+"Hardware is temporary. The signal survives."
+
+From lnilsson@hanse.de Thu May 19 03:27:14 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!hanse!lnilsson
+From: lnilsson@hanse.de (Liam Nilsson)
+Newsgroups: comp.dsp
+Subject: Re: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994May19.032714.4263@hanse.de>
+Date: Thu, 19 May 1994 03:27:14 GMT
+References: <1994May15.113814.6198@delphi.com> <1994May17.113514.9169@stanford.edu>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994May17.113514.9169@stanford.edu>, tnilsson@stanford.edu (Takeshi Nilsson) writes:
+> If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+-- 
+=== Liam Nilsson ===
+Dept of Electrical Engineering, Hanse-Netzwerk Hamburg
+"When every node is whole, the channel opens."
+
+From lpetrov@mit.edu Sat May 21 05:30:14 1994
+Path: ashpoly!cascade!mxgate!coyoacan!mit!lpetrov
+From: lpetrov@mit.edu (Lars Petrov)
+Newsgroups: comp.dsp
+Subject: Re: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994May21.053014.4109@mit.edu>
+Date: Sat, 21 May 1994 05:30:14 GMT
+References: <1994May15.113814.6198@delphi.com> <1994May17.113514.9169@stanford.edu> <1994May19.032714.4263@hanse.de>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1994May19.032714.4263@hanse.de>, lnilsson@hanse.de (Liam Nilsson) writes:
+> Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Lars Petrov
+Opinions expressed are solely my own and not those of Massachusetts Institute of Technology.
+------------------------------------------------------------
+

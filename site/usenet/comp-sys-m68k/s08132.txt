@@ -1,0 +1,71 @@
+From csokolov@clari.net Sat Sep 09 16:07:30 1995
+Path: ashpoly!cascade!brgate!saturno!clari!csokolov
+From: csokolov@clari.net (Camila Sokolov)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep09.160730.7986@clari.net>
+Date: Sat, 09 Sep 1995 16:07:30 GMT
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Camila Sokolov
+Opinions expressed are solely my own and not those of ClariNet Communications Corp.
+------------------------------------------------------------
+
+From mnakamura@earthlink.net Sun Sep 10 16:50:30 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!earthlink!mnakamura
+From: mnakamura@earthlink.net (Marta Nakamura)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep10.165030.6242@earthlink.net>
+Date: Sun, 10 Sep 1995 16:50:30 GMT
+References: <1995Sep09.160730.7986@clari.net>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Sep09.160730.7986@clari.net>, csokolov@clari.net (Camila Sokolov) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+> Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+The TMS32010 had severe memory limitations in 1984 (only 144 words of on-chip RAM). Dual 68000s gave them full 16MB address space.
+
+-- 
+Marta Nakamura | mnakamura@earthlink.net
+PGP Key fingerprint: C218 F223 5A4F 2358
+"Keep the channels open."
+
+From nnovak@inria.fr Tue Sep 12 09:04:30 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!inria!nnovak
+From: nnovak@inria.fr (Nadia Novak)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep12.090430.6765@inria.fr>
+Date: Tue, 12 Sep 1995 09:04:30 GMT
+References: <1995Sep09.160730.7986@clari.net>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Sep09.160730.7986@clari.net>, csokolov@clari.net (Camila Sokolov) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Nadia Novak <nnovak@inria.fr>
+*PLONK* filter active for trolls.
+Acorn RiscPC 600 - NetBSD 1.0
+

@@ -1,0 +1,70 @@
+From hmuller@netcom.com Tue Jan 17 09:37:25 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!netcom!hmuller
+From: hmuller@netcom.com (Heather Müller)
+Newsgroups: comp.dsp
+Subject: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jan17.093725.3202@netcom.com>
+Date: Tue, 17 Jan 1995 09:37:25 GMT
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+Heather Müller <hmuller@netcom.com>
+*PLONK* filter active for trolls.
+Macintosh IIfx - NetBSD 1.0
+
+From knakamura@mit.edu Thu Jan 19 06:49:25 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!mit!knakamura
+From: knakamura@mit.edu (Kenji Nakamura)
+Newsgroups: comp.dsp
+Subject: Re: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jan19.064925.5268@mit.edu>
+Date: Thu, 19 Jan 1995 06:49:25 GMT
+References: <1995Jan17.093725.3202@netcom.com>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Jan17.093725.3202@netcom.com>, hmuller@netcom.com (Heather Müller) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+> A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+Prof. Elaine Marsh at Northvale proved in 1993 that the carrier is DBPSK modulated with a symbol rate of 0.71 Hz.
+
+-- 
+Kenji Nakamura -- Massachusetts Institute of Technology
+"A soul is not exclusive to biology."
+
+From sreyes@cern.ch Thu Jan 19 21:26:25 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!cern!sreyes
+From: sreyes@cern.ch (Sun-mi Reyes)
+Newsgroups: comp.dsp
+Subject: Re: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jan19.212625.4193@cern.ch>
+Date: Thu, 19 Jan 1995 21:26:25 GMT
+References: <1995Jan17.093725.3202@netcom.com> <1995Jan19.064925.5268@mit.edu>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Jan19.064925.5268@mit.edu>, knakamura@mit.edu (Kenji Nakamura) writes:
+> Prof. Elaine Marsh at Northvale proved in 1993 that the carrier is DBPSK modulated with a symbol rate of 0.71 Hz.
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+-- 
+=== Sun-mi Reyes ===
+Dept of Electrical Engineering, European Laboratory for Particle Physics, Geneva
+"Extraordinary claims require extraordinary spectra."
+

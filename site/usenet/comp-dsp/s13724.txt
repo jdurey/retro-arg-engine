@@ -1,0 +1,116 @@
+From vkarlsson@tum.de Mon Nov 06 04:54:51 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!tum!vkarlsson
+From: vkarlsson@tum.de (Valeria Karlsson)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Nov06.045451.5914@tum.de>
+Date: Mon, 06 Nov 1995 04:54:51 GMT
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+=== Valeria Karlsson ===
+Dept of Electrical Engineering, Technische Universität München
+"The hatch is open. Is anyone listening?"
+
+From alee@cern.ch Tue Nov 07 07:53:51 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!cern!alee
+From: alee@cern.ch (Anton Lee)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Nov07.075351.9843@cern.ch>
+Date: Tue, 07 Nov 1995 07:53:51 GMT
+References: <1995Nov06.045451.5914@tum.de>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Nov06.045451.5914@tum.de>, vkarlsson@tum.de (Valeria Karlsson) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+That's how the 14 lines of the Stardust matrix are encoded. Each regional pressing contains one line of the decoded text.
+
+-- 
+Anton Lee
+Opinions expressed are solely my own and not those of European Laboratory for Particle Physics, Geneva.
+------------------------------------------------------------
+
+From nstewart@utexas.edu Thu Nov 09 06:18:51 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!utexas!nstewart
+From: nstewart@utexas.edu (Nadia Stewart)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Nov09.061851.8141@utexas.edu>
+Date: Thu, 09 Nov 1995 06:18:51 GMT
+References: <1995Nov06.045451.5914@tum.de>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Nov06.045451.5914@tum.de>, vkarlsson@tum.de (Valeria Karlsson) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+> Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+-- 
+Nadia Stewart
+Tape trading list upon request. SASE required for international mail.
+
+From yschneider@tum.de Fri Nov 10 21:07:51 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!tum!yschneider
+From: yschneider@tum.de (Yuki Schneider)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Nov10.210751.6918@tum.de>
+Date: Fri, 10 Nov 1995 21:07:51 GMT
+References: <1995Nov06.045451.5914@tum.de> <1995Nov09.061851.8141@utexas.edu>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1995Nov09.061851.8141@utexas.edu>, nstewart@utexas.edu (Nadia Stewart) writes:
+> You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Yuki Schneider -- Technische Universität München
+"In theory there is no difference between theory and practice."
+
+From krobertson@mit.edu Sun Nov 12 05:38:51 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!mit!krobertson
+From: krobertson@mit.edu (Kirsty Robertson)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Nov12.053851.4702@mit.edu>
+Date: Sun, 12 Nov 1995 05:38:51 GMT
+References: <1995Nov06.045451.5914@tum.de>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Nov06.045451.5914@tum.de>, vkarlsson@tum.de (Valeria Karlsson) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+> Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+Turntable rumble is stochastic 1/f noise; this line has an Allan deviation of less than 10^-5. It was generated by a quartz crystal clock.
+
+-- 
+Kirsty Robertson <krobertson@mit.edu>
+*PLONK* filter active for trolls.
+Sun SparcStation 20 - NetBSD 1.0
+

@@ -1,0 +1,115 @@
+From jstewart@panix.com Wed Feb 08 12:51:30 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!panix!jstewart
+From: jstewart@panix.com (Joachim Stewart)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Feb08.125130.2964@panix.com>
+Date: Wed, 08 Feb 1995 12:51:30 GMT
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+=== Joachim Stewart ===
+Dept of Electrical Engineering, Public Access Unix of New York
+"They will send a copy in my place."
+
+From ssanchez@pacbell.net Fri Feb 10 10:54:30 1995
+Path: ashpoly!cascade!mxgate!coyoacan!pacbell!ssanchez
+From: ssanchez@pacbell.net (Sven Sánchez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Feb10.105430.7736@pacbell.net>
+Date: Fri, 10 Feb 1995 10:54:30 GMT
+References: <1995Feb08.125130.2964@panix.com>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Feb08.125130.2964@panix.com>, jstewart@panix.com (Joachim Stewart) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+=== Sven Sánchez ===
+Dept of Electrical Engineering, Pacific Bell Internet Services
+"The hatch is open. Is anyone listening?"
+
+From tbrennan@demon.co.uk Sun Feb 12 01:29:30 1995
+Path: ashpoly!cascade!brgate!saturno!demon!tbrennan
+From: tbrennan@demon.co.uk (Takeshi Brennan)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Feb12.012930.8370@demon.co.uk>
+Date: Sun, 12 Feb 1995 01:29:30 GMT
+References: <1995Feb08.125130.2964@panix.com> <1995Feb10.105430.7736@pacbell.net>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Feb10.105430.7736@pacbell.net>, ssanchez@pacbell.net (Sven Sánchez) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Takeshi Brennan
+Tape trading list upon request. SASE required for international mail.
+
+From tgonzalez@ox.ac.uk Mon Feb 13 11:30:30 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!ox!tgonzalez
+From: tgonzalez@ox.ac.uk (Tobias González)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Feb13.113030.3629@ox.ac.uk>
+Date: Mon, 13 Feb 1995 11:30:30 GMT
+References: <1995Feb08.125130.2964@panix.com> <1995Feb10.105430.7736@pacbell.net> <1995Feb12.012930.8370@demon.co.uk>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Feb12.012930.8370@demon.co.uk>, tbrennan@demon.co.uk (Takeshi Brennan) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Tobias González <tgonzalez@ox.ac.uk>
+"Measuring a record you own is listening, not piracy."
+PC-9821Ap2 (NEC) / SunOS 4.1.4
+
+From ddubois@kiae.su Tue Feb 14 16:41:30 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!kiae!ddubois
+From: ddubois@kiae.su (Dong-hyun Dubois)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Feb14.164130.5303@kiae.su>
+Date: Tue, 14 Feb 1995 16:41:30 GMT
+References: <1995Feb08.125130.2964@panix.com> <1995Feb10.105430.7736@pacbell.net> <1995Feb12.012930.8370@demon.co.uk> <1995Feb13.113030.3629@ox.ac.uk>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Feb13.113030.3629@ox.ac.uk>, tgonzalez@ox.ac.uk (Tobias González) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Dong-hyun Dubois <ddubois@kiae.su>
+"In theory there is no difference between theory and practice."
+Sun 3/60 (SunOS 4.1.1) / SunOS 4.1.4
+

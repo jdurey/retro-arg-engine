@@ -1,0 +1,119 @@
+From mkarlsson@cern.ch Fri Dec 15 06:47:50 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!cern!mkarlsson
+From: mkarlsson@cern.ch (Marta Karlsson)
+Newsgroups: comp.sys.m68k
+Subject: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Dec15.064750.1403@cern.ch>
+Date: Fri, 15 Dec 1995 06:47:50 GMT
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Marta Karlsson <mkarlsson@cern.ch>
+*PLONK* filter active for trolls.
+Sun SparcStation 20 - NetBSD 1.0
+
+From tschneider@inria.fr Sun Dec 17 01:49:50 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!inria!tschneider
+From: tschneider@inria.fr (Tyler Schneider)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Dec17.014950.3521@inria.fr>
+Date: Sun, 17 Dec 1995 01:49:50 GMT
+References: <1995Dec15.064750.1403@cern.ch>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1995Dec15.064750.1403@cern.ch>, mkarlsson@cern.ch (Marta Karlsson) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Tyler Schneider <tschneider@inria.fr>
+US Robotics Courier V.34 @ 28,800 bps
+"When every node is whole, the channel opens."
+
+From vlopez@utexas.edu Mon Dec 18 23:55:50 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!utexas!vlopez
+From: vlopez@utexas.edu (Valeria López)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Dec18.235550.1873@utexas.edu>
+Date: Mon, 18 Dec 1995 23:55:50 GMT
+References: <1995Dec15.064750.1403@cern.ch> <1995Dec17.014950.3521@inria.fr>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Dec17.014950.3521@inria.fr>, tschneider@inria.fr (Tyler Schneider) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Valeria López
+Opinions expressed are solely my own and not those of University of Texas at Austin.
+------------------------------------------------------------
+
+From vramirez@panix.com Tue Dec 19 19:39:50 1995
+Path: ashpoly!cascade!brgate!saturno!panix!vramirez
+From: vramirez@panix.com (Valeria Ramírez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Dec19.193950.4812@panix.com>
+Date: Tue, 19 Dec 1995 19:39:50 GMT
+References: <1995Dec15.064750.1403@cern.ch> <1995Dec17.014950.3521@inria.fr> <1995Dec18.235550.1873@utexas.edu>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Dec18.235550.1873@utexas.edu>, vlopez@utexas.edu (Valeria López) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Valeria Ramírez
+Tape trading list upon request. SASE required for international mail.
+
+From fsuzuki@utexas.edu Wed Dec 20 14:58:50 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!utexas!fsuzuki
+From: fsuzuki@utexas.edu (Freya Suzuki)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Dec20.145850.4481@utexas.edu>
+Date: Wed, 20 Dec 1995 14:58:50 GMT
+References: <1995Dec15.064750.1403@cern.ch> <1995Dec17.014950.3521@inria.fr>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Dec17.014950.3521@inria.fr>, tschneider@inria.fr (Tyler Schneider) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Freya Suzuki -- University of Texas at Austin
+"Hold for relay."
+

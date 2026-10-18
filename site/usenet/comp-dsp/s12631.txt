@@ -1,0 +1,92 @@
+From apetrov@earthlink.net Sat Aug 06 17:10:21 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!earthlink!apetrov
+From: apetrov@earthlink.net (Andrei Petrov)
+Newsgroups: comp.dsp
+Subject: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Aug06.171021.7721@earthlink.net>
+Date: Sat, 06 Aug 1994 17:10:21 GMT
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Andrei Petrov
+Opinions expressed are solely my own and not those of EarthLink Network.
+------------------------------------------------------------
+
+From epetrov@pacbell.net Sun Aug 07 21:36:21 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!pacbell!epetrov
+From: epetrov@pacbell.net (Élodie Petrov)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Aug07.213621.3439@pacbell.net>
+Date: Sun, 07 Aug 1994 21:36:21 GMT
+References: <1994Aug06.171021.7721@earthlink.net>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Aug06.171021.7721@earthlink.net>, apetrov@earthlink.net (Andrei Petrov) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Élodie Petrov <epetrov@pacbell.net>
+Hayes Optima 288 @ 9600 Telebit bps
+"They will send a copy in my place."
+
+From bstewart@hanse.de Tue Aug 09 11:31:21 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!hanse!bstewart
+From: bstewart@hanse.de (Bastien Stewart)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Aug09.113121.8734@hanse.de>
+Date: Tue, 09 Aug 1994 11:31:21 GMT
+References: <1994Aug06.171021.7721@earthlink.net> <1994Aug07.213621.3439@pacbell.net>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1994Aug07.213621.3439@pacbell.net>, epetrov@pacbell.net (Élodie Petrov) writes:
+> I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Bastien Stewart -- Hanse-Netzwerk Hamburg
+"There are 14 nodes and only 10 countries. Count again."
+
+From skuznetsov@tum.de Wed Aug 10 02:58:21 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!tum!skuznetsov
+From: skuznetsov@tum.de (Sven Kuznetsov)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Aug10.025821.1661@tum.de>
+Date: Wed, 10 Aug 1994 02:58:21 GMT
+References: <1994Aug06.171021.7721@earthlink.net> <1994Aug07.213621.3439@pacbell.net> <1994Aug09.113121.8734@hanse.de>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Aug09.113121.8734@hanse.de>, bstewart@hanse.de (Bastien Stewart) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Sven Kuznetsov | skuznetsov@tum.de
+PGP Key fingerprint: 386B 84F9 8C7E 88D9
+"Keep the channels open."
+

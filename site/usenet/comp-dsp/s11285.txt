@@ -1,0 +1,116 @@
+From ejohansson@hanse.de Sat Mar 23 12:41:19 1996
+Path: ashpoly!cascade!brgate!saturno!hanse!ejohansson
+From: ejohansson@hanse.de (Emi Johansson)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Mar23.124119.8243@hanse.de>
+Date: Sat, 23 Mar 1996 12:41:19 GMT
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Emi Johansson <ejohansson@hanse.de>
+*PLONK* filter active for trolls.
+Commodore Amiga 500 (1MB OCS) - NetBSD 1.0
+
+From tweber@tum.de Sat Mar 23 15:11:19 1996
+Path: ashpoly!cascade!brgate!saturno!tum!tweber
+From: tweber@tum.de (Tyler Weber)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Mar23.151119.1710@tum.de>
+Date: Sat, 23 Mar 1996 15:11:19 GMT
+References: <1996Mar23.124119.8243@hanse.de>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Mar23.124119.8243@hanse.de>, ejohansson@hanse.de (Emi Johansson) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Tyler Weber
+Tape trading list upon request. SASE required for international mail.
+
+From tkuznetsov@kiae.su Sun Mar 24 23:14:19 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!kiae!tkuznetsov
+From: tkuznetsov@kiae.su (Takeshi Kuznetsov)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Mar24.231419.4031@kiae.su>
+Date: Sun, 24 Mar 1996 23:14:19 GMT
+References: <1996Mar23.124119.8243@hanse.de>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Mar23.124119.8243@hanse.de>, ejohansson@hanse.de (Emi Johansson) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Takeshi Kuznetsov
+Opinions expressed are solely my own and not those of Kurchatov Institute of Atomic Energy, Moscow.
+------------------------------------------------------------
+
+From msilva@kiae.su Tue Mar 26 06:54:19 1996
+Path: ashpoly!cascade!mxgate!coyoacan!kiae!msilva
+From: msilva@kiae.su (Mateo Silva)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Mar26.065419.4520@kiae.su>
+Date: Tue, 26 Mar 1996 06:54:19 GMT
+References: <1996Mar23.124119.8243@hanse.de>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1996Mar23.124119.8243@hanse.de>, ejohansson@hanse.de (Emi Johansson) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+Mateo Silva -- Kurchatov Institute of Atomic Energy, Moscow
+"5 sigma is a discovery. 7 is a question."
+
+From mrobertson@berkeley.edu Tue Mar 26 11:19:19 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!berkeley!mrobertson
+From: mrobertson@berkeley.edu (Matthias Robertson)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Mar26.111919.2318@berkeley.edu>
+Date: Tue, 26 Mar 1996 11:19:19 GMT
+References: <1996Mar23.124119.8243@hanse.de>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1996Mar23.124119.8243@hanse.de>, ejohansson@hanse.de (Emi Johansson) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Matthias Robertson
+Tape trading list upon request. SASE required for international mail.
+

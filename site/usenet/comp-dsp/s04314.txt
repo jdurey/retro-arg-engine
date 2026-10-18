@@ -1,0 +1,95 @@
+From nmartinez@panix.com Fri Jul 14 17:21:37 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!panix!nmartinez
+From: nmartinez@panix.com (Natalia Martínez)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jul14.172137.7049@panix.com>
+Date: Fri, 14 Jul 1995 17:21:37 GMT
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Natalia Martínez -- Public Access Unix of New York
+"Marcus is not one man."
+
+From mhughes@illinois.edu Sat Jul 15 18:22:37 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!illinois!mhughes
+From: mhughes@illinois.edu (Mathieu Hughes)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jul15.182237.8842@illinois.edu>
+Date: Sat, 15 Jul 1995 18:22:37 GMT
+References: <1995Jul14.172137.7049@panix.com>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Jul14.172137.7049@panix.com>, nmartinez@panix.com (Natalia Martínez) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+Mathieu Hughes <mhughes@illinois.edu>
+"Do not worship the copy."
+486DX2/66 (Linux 1.2.13) / AmigaOS 3.1
+
+From esokolov@uu.net Sun Jul 16 01:58:37 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!uu!esokolov
+From: esokolov@uu.net (Elaine Sokolov)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jul16.015837.8574@uu.net>
+Date: Sun, 16 Jul 1995 01:58:37 GMT
+References: <1995Jul14.172137.7049@panix.com>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Jul14.172137.7049@panix.com>, nmartinez@panix.com (Natalia Martínez) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+Elaine Sokolov
+Tape trading list upon request. SASE required for international mail.
+
+From ssuzuki@clari.net Mon Jul 17 11:10:37 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!clari!ssuzuki
+From: ssuzuki@clari.net (Seo-yeon Suzuki)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jul17.111037.8011@clari.net>
+Date: Mon, 17 Jul 1995 11:10:37 GMT
+References: <1995Jul14.172137.7049@panix.com> <1995Jul15.182237.8842@illinois.edu>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Jul15.182237.8842@illinois.edu>, mhughes@illinois.edu (Mathieu Hughes) writes:
+> Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Seo-yeon Suzuki <ssuzuki@clari.net>
+Practical Peripherals 14.4 @ 9600 Telebit bps
+"When every node is whole, the channel opens."
+

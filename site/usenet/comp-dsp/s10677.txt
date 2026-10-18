@@ -1,0 +1,94 @@
+From tkang@kiae.su Thu Jul 06 23:07:45 1995
+Path: ashpoly!cascade!mxgate!coyoacan!kiae!tkang
+From: tkang@kiae.su (Tyler Kang)
+Newsgroups: comp.dsp
+Subject: Observation: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Jul06.230745.8677@kiae.su>
+Date: Thu, 06 Jul 1995 23:07:45 GMT
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+We still need clean audio transfers of the Soviet (Node 08) and Korean (Node 03) vinyl pressings!
+
+-- 
+Tyler Kang
+Opinions expressed are solely my own and not those of Kurchatov Institute of Atomic Energy, Moscow.
+------------------------------------------------------------
+
+From alaurent@demon.co.uk Sat Jul 08 16:26:45 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!demon!alaurent
+From: alaurent@demon.co.uk (Anton Laurent)
+Newsgroups: comp.dsp
+Subject: Re: Observation: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Jul08.162645.6265@demon.co.uk>
+Date: Sat, 08 Jul 1995 16:26:45 GMT
+References: <1995Jul06.230745.8677@kiae.su>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Jul06.230745.8677@kiae.su>, tkang@kiae.su (Tyler Kang) writes:
+> Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+> Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+=== Anton Laurent ===
+Dept of Electrical Engineering, Demon Internet Services UK
+"Extraordinary claims require extraordinary spectra."
+
+From afournier@cam.ac.uk Sun Jul 09 20:05:45 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!cam!afournier
+From: afournier@cam.ac.uk (Amy Fournier)
+Newsgroups: comp.dsp
+Subject: Re: Observation: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Jul09.200545.3489@cam.ac.uk>
+Date: Sun, 09 Jul 1995 20:05:45 GMT
+References: <1995Jul06.230745.8677@kiae.su>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Jul06.230745.8677@kiae.su>, tkang@kiae.su (Tyler Kang) writes:
+> Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+-- 
+Amy Fournier <afournier@cam.ac.uk>
+US Robotics Courier V.34 @ 33,600 bps
+"Measuring a record you own is listening, not piracy."
+
+From jlindqvist@pipeline.com Mon Jul 10 18:01:45 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!pipeline!jlindqvist
+From: jlindqvist@pipeline.com (Jens Lindqvist)
+Newsgroups: comp.dsp
+Subject: Re: Observation: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Jul10.180145.6122@pipeline.com>
+Date: Mon, 10 Jul 1995 18:01:45 GMT
+References: <1995Jul06.230745.8677@kiae.su>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Jul06.230745.8677@kiae.su>, tkang@kiae.su (Tyler Kang) writes:
+> Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+> Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+
+On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+-- 
+Jens Lindqvist
+Tape trading list upon request. SASE required for international mail.
+

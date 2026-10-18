@@ -1,0 +1,46 @@
+From mweber@tum.de Sat May 25 08:16:41 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!tum!mweber
+From: mweber@tum.de (Mikhail Weber)
+Newsgroups: comp.dsp
+Subject: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996May25.081641.6876@tum.de>
+Date: Sat, 25 May 1996 08:16:41 GMT
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+Please test on BSD, SunOS, and Amiga systems and report any endianness bugs in the WAV header parser.
+
+-- 
+Mikhail Weber
+Tape trading list upon request. SASE required for international mail.
+
+From llopez@utexas.edu Sat May 25 13:05:41 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!utexas!llopez
+From: llopez@utexas.edu (Liam López)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996May25.130541.5446@utexas.edu>
+Date: Sat, 25 May 1996 13:05:41 GMT
+References: <1996May25.081641.6876@tum.de>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996May25.081641.6876@tum.de>, mweber@tum.de (Mikhail Weber) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Liam López
+Opinions expressed are solely my own and not those of University of Texas at Austin.
+------------------------------------------------------------
+

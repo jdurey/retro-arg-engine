@@ -1,0 +1,48 @@
+From slee@pipeline.com Tue Apr 04 01:55:34 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!pipeline!slee
+From: slee@pipeline.com (Sun-mi Lee)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Apr04.015534.2356@pipeline.com>
+Date: Tue, 04 Apr 1995 01:55:34 GMT
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Sun-mi Lee -- The Pipeline Internet Network
+"Row 14. No joke."
+
+From jokonkwo@kth.se Thu Apr 06 05:26:34 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!kth!jokonkwo
+From: jokonkwo@kth.se (Joachim Okonkwo)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Apr06.052634.7720@kth.se>
+Date: Thu, 06 Apr 1995 05:26:34 GMT
+References: <1995Apr04.015534.2356@pipeline.com>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995Apr04.015534.2356@pipeline.com>, slee@pipeline.com (Sun-mi Lee) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Joachim Okonkwo <jokonkwo@kth.se>
+"Hardware is temporary. The signal survives."
+Atari Falcon 030 / Linux 1.2.13
+

@@ -1,0 +1,95 @@
+From bfournier@purdue.edu Fri Jul 28 04:27:36 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!purdue!bfournier
+From: bfournier@purdue.edu (Bastien Fournier)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jul28.042736.3666@purdue.edu>
+Date: Fri, 28 Jul 1995 04:27:36 GMT
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Bastien Fournier <bfournier@purdue.edu>
+"Marcus is not one man."
+Macintosh IIfx / NEXTSTEP 3.3
+
+From hschneider@delphi.com Sun Jul 30 04:37:36 1995
+Path: ashpoly!cascade!mxgate!coyoacan!delphi!hschneider
+From: hschneider@delphi.com (Hugo Schneider)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jul30.043736.8515@delphi.com>
+Date: Sun, 30 Jul 1995 04:37:36 GMT
+References: <1995Jul28.042736.3666@purdue.edu>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Jul28.042736.3666@purdue.edu>, bfournier@purdue.edu (Bastien Fournier) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Hugo Schneider
+Tape trading list upon request. SASE required for international mail.
+
+From sduarte@mit.edu Mon Jul 31 00:57:36 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!mit!sduarte
+From: sduarte@mit.edu (Steve Duarte)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jul31.005736.7275@mit.edu>
+Date: Mon, 31 Jul 1995 00:57:36 GMT
+References: <1995Jul28.042736.3666@purdue.edu>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Jul28.042736.3666@purdue.edu>, bfournier@purdue.edu (Bastien Fournier) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Steve Duarte -- Massachusetts Institute of Technology
+"Measuring a record you own is listening, not piracy."
+
+From mlaurent@pacbell.net Mon Jul 31 03:06:36 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!pacbell!mlaurent
+From: mlaurent@pacbell.net (Mateo Laurent)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jul31.030636.2952@pacbell.net>
+Date: Mon, 31 Jul 1995 03:06:36 GMT
+References: <1995Jul28.042736.3666@purdue.edu> <1995Jul30.043736.8515@delphi.com>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Jul30.043736.8515@delphi.com>, hschneider@delphi.com (Hugo Schneider) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Mateo Laurent <mlaurent@pacbell.net>
+*PLONK* filter active for trolls.
+Commodore Amiga 500 (1MB OCS) - NetBSD 1.0
+

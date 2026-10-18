@@ -1,0 +1,68 @@
+From alindqvist@u-tokyo.ac.jp Fri Sep 15 08:13:59 1995
+Path: ashpoly!cascade!bigsur!u-tokyo!alindqvist
+From: alindqvist@u-tokyo.ac.jp (Anja Lindqvist)
+Newsgroups: comp.sys.m68k
+Subject: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Sep15.081359.7300@u-tokyo.ac.jp>
+Date: Fri, 15 Sep 1995 08:13:59 GMT
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+=== Anja Lindqvist ===
+Dept of Electrical Engineering, University of Tokyo Department of Information Science
+"Hold for relay."
+
+From tmoreau@u-tokyo.ac.jp Sun Sep 17 01:48:59 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!u-tokyo!tmoreau
+From: tmoreau@u-tokyo.ac.jp (Tobias Moreau)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Sep17.014859.4201@u-tokyo.ac.jp>
+Date: Sun, 17 Sep 1995 01:48:59 GMT
+References: <1995Sep15.081359.7300@u-tokyo.ac.jp>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1995Sep15.081359.7300@u-tokyo.ac.jp>, alindqvist@u-tokyo.ac.jp (Anja Lindqvist) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Tobias Moreau
+Tape trading list upon request. SASE required for international mail.
+
+From dito@mit.edu Tue Sep 19 03:28:59 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!mit!dito
+From: dito@mit.edu (Dave Ito)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Sep19.032859.7757@mit.edu>
+Date: Tue, 19 Sep 1995 03:28:59 GMT
+References: <1995Sep15.081359.7300@u-tokyo.ac.jp>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1995Sep15.081359.7300@u-tokyo.ac.jp>, alindqvist@u-tokyo.ac.jp (Anja Lindqvist) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Dave Ito
+Tape trading list upon request. SASE required for international mail.
+

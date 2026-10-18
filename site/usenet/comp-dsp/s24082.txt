@@ -1,0 +1,47 @@
+From rnovak@ox.ac.uk Sun Sep 03 16:32:31 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!ox!rnovak
+From: rnovak@ox.ac.uk (Renata Novak)
+Newsgroups: comp.dsp
+Subject: Data: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Sep03.163231.1274@ox.ac.uk>
+Date: Sun, 03 Sep 1995 16:32:31 GMT
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+MATLAB script available upon request via email.
+
+-- 
+Renata Novak <rnovak@ox.ac.uk>
+"5 sigma is a discovery. 7 is a question."
+Sun SparcStation 20 / SunOS 4.1.4
+
+From tlaurent@netcom.com Tue Sep 05 12:22:31 1995
+Path: ashpoly!cascade!mxgate!coyoacan!netcom!tlaurent
+From: tlaurent@netcom.com (Tobias Laurent)
+Newsgroups: comp.dsp
+Subject: Re: Data: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Sep05.122231.1491@netcom.com>
+Date: Tue, 05 Sep 1995 12:22:31 GMT
+References: <1995Sep03.163231.1274@ox.ac.uk>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Sep03.163231.1274@ox.ac.uk>, rnovak@ox.ac.uk (Renata Novak) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Tobias Laurent
+Tape trading list upon request. SASE required for international mail.
+

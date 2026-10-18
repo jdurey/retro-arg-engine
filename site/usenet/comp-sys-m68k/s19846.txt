@@ -1,0 +1,121 @@
+From ipopov@ox.ac.uk Tue Jul 25 18:08:11 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!ox!ipopov
+From: ipopov@ox.ac.uk (Ines Popov)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jul25.180811.5401@ox.ac.uk>
+Date: Tue, 25 Jul 1995 18:08:11 GMT
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+=== Ines Popov ===
+Dept of Electrical Engineering, Oxford University Computing Laboratory
+"Tape doesn't lie at 02:14. Ears do."
+
+From ndubois@mit.edu Wed Jul 26 21:30:11 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!mit!ndubois
+From: ndubois@mit.edu (Nadine Dubois)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jul26.213011.2472@mit.edu>
+Date: Wed, 26 Jul 1995 21:30:11 GMT
+References: <1995Jul25.180811.5401@ox.ac.uk>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995Jul25.180811.5401@ox.ac.uk>, ipopov@ox.ac.uk (Ines Popov) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Nadine Dubois <ndubois@mit.edu>
+"A soul is not exclusive to biology."
+486DX4/100 (FreeBSD 2.0.5) / FreeBSD 2.1
+
+From bmoreau@utexas.edu Fri Jul 28 19:27:11 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!utexas!bmoreau
+From: bmoreau@utexas.edu (Bastien Moreau)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jul28.192711.6755@utexas.edu>
+Date: Fri, 28 Jul 1995 19:27:11 GMT
+References: <1995Jul25.180811.5401@ox.ac.uk>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Jul25.180811.5401@ox.ac.uk>, ipopov@ox.ac.uk (Ines Popov) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Bastien Moreau <bmoreau@utexas.edu>
+*PLONK* filter active for trolls.
+486DX2/66 (Linux 1.2.13) - NetBSD 1.0
+
+From ngonzalez@hanse.de Sat Jul 29 13:22:11 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!hanse!ngonzalez
+From: ngonzalez@hanse.de (Natalia González)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jul29.132211.9916@hanse.de>
+Date: Sat, 29 Jul 1995 13:22:11 GMT
+References: <1995Jul25.180811.5401@ox.ac.uk> <1995Jul28.192711.6755@utexas.edu>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995Jul28.192711.6755@utexas.edu>, bmoreau@utexas.edu (Bastien Moreau) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Natalia González | ngonzalez@hanse.de
+PGP Key fingerprint: 3C89 00AB 1235 ED23
+"Keep the channels open."
+
+From tduarte@tum.de Sun Jul 30 12:33:11 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!tum!tduarte
+From: tduarte@tum.de (Tyler Duarte)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jul30.123311.5010@tum.de>
+Date: Sun, 30 Jul 1995 12:33:11 GMT
+References: <1995Jul25.180811.5401@ox.ac.uk> <1995Jul26.213011.2472@mit.edu>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Jul26.213011.2472@mit.edu>, ndubois@mit.edu (Nadine Dubois) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+> PGP Public key available via finger or upon request.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Tyler Duarte <tduarte@tum.de>
+*PLONK* filter active for trolls.
+Acorn RiscPC 600 - NetBSD 1.0
+

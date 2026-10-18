@@ -1,0 +1,118 @@
+From tandersson@tum.de Sat Jun 15 05:21:27 1996
+Path: ashpoly!cascade!mxgate!coyoacan!tum!tandersson
+From: tandersson@tum.de (Tomas Andersson)
+Newsgroups: comp.dsp
+Subject: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jun15.052127.3530@tum.de>
+Date: Sat, 15 Jun 1996 05:21:27 GMT
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Tomas Andersson <tandersson@tum.de>
+*PLONK* filter active for trolls.
+NeXTstation Turbo Color - NetBSD 1.0
+
+From cpopov@pacbell.net Sat Jun 15 21:15:27 1996
+Path: ashpoly!cascade!bigsur!pacbell!cpopov
+From: cpopov@pacbell.net (Camila Popov)
+Newsgroups: comp.dsp
+Subject: Re: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jun15.211527.1821@pacbell.net>
+Date: Sat, 15 Jun 1996 21:15:27 GMT
+References: <1996Jun15.052127.3530@tum.de>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1996Jun15.052127.3530@tum.de>, tandersson@tum.de (Tomas Andersson) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Camila Popov
+Opinions expressed are solely my own and not those of Pacific Bell Internet Services.
+------------------------------------------------------------
+
+From rtanaka@ox.ac.uk Tue Jun 18 00:33:27 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!ox!rtanaka
+From: rtanaka@ox.ac.uk (Rodrigo Tanaka)
+Newsgroups: comp.dsp
+Subject: Re: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jun18.003327.1138@ox.ac.uk>
+Date: Tue, 18 Jun 1996 00:33:27 GMT
+References: <1996Jun15.052127.3530@tum.de>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Jun15.052127.3530@tum.de>, tandersson@tum.de (Tomas Andersson) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Rodrigo Tanaka <rtanaka@ox.ac.uk>
+Hayes Optima 288 @ 33,600 bps
+"A soul is not exclusive to biology."
+
+From mnovak@rwth-aachen.de Tue Jun 18 07:52:27 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!rwth-aachen!mnovak
+From: mnovak@rwth-aachen.de (Marta Novak)
+Newsgroups: comp.dsp
+Subject: Re: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jun18.075227.9429@rwth-aachen.de>
+Date: Tue, 18 Jun 1996 07:52:27 GMT
+References: <1996Jun15.052127.3530@tum.de>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Jun15.052127.3530@tum.de>, tandersson@tum.de (Tomas Andersson) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Marta Novak | mnovak@rwth-aachen.de
+PGP Key fingerprint: 8CD1 32CD 8371 57FC
+"Keep the channels open."
+
+From aito@inria.fr Thu Jun 20 10:02:27 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!inria!aito
+From: aito@inria.fr (Astrid Ito)
+Newsgroups: comp.dsp
+Subject: Re: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jun20.100227.7175@inria.fr>
+Date: Thu, 20 Jun 1996 10:02:27 GMT
+References: <1996Jun15.052127.3530@tum.de> <1996Jun18.003327.1138@ox.ac.uk>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Jun18.003327.1138@ox.ac.uk>, rtanaka@ox.ac.uk (Rodrigo Tanaka) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Astrid Ito
+Tape trading list upon request. SASE required for international mail.
+

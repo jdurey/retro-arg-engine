@@ -1,0 +1,70 @@
+From glopez@titech.ac.jp Thu Nov 23 22:47:56 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!titech!glopez
+From: glopez@titech.ac.jp (Göran López)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Nov23.224756.4333@titech.ac.jp>
+Date: Thu, 23 Nov 1995 22:47:56 GMT
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Göran López <glopez@titech.ac.jp>
+*PLONK* filter active for trolls.
+Commodore Amiga 500 (1MB OCS) - NetBSD 1.0
+
+From lsanchez@pipeline.com Sat Nov 25 20:03:56 1995
+Path: ashpoly!cascade!bigsur!pipeline!lsanchez
+From: lsanchez@pipeline.com (Liam Sánchez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Nov25.200356.5255@pipeline.com>
+Date: Sat, 25 Nov 1995 20:03:56 GMT
+References: <1995Nov23.224756.4333@titech.ac.jp>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Nov23.224756.4333@titech.ac.jp>, glopez@titech.ac.jp (Göran López) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Liam Sánchez | lsanchez@pipeline.com
+PGP Key fingerprint: 80AE 4190 45FC 3A94
+"Keep the channels open."
+
+From ngarcia@rwth-aachen.de Sun Nov 26 08:10:56 1995
+Path: ashpoly!cascade!mxgate!coyoacan!rwth-aachen!ngarcia
+From: ngarcia@rwth-aachen.de (Natalia García)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Nov26.081056.5675@rwth-aachen.de>
+Date: Sun, 26 Nov 1995 08:10:56 GMT
+References: <1995Nov23.224756.4333@titech.ac.jp> <1995Nov25.200356.5255@pipeline.com>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1995Nov25.200356.5255@pipeline.com>, lsanchez@pipeline.com (Liam Sánchez) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Natalia García
+Tape trading list upon request. SASE required for international mail.
+

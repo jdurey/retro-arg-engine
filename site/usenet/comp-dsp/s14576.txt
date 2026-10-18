@@ -1,0 +1,117 @@
+From apetrov@illinois.edu Mon Oct 21 20:35:33 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!illinois!apetrov
+From: apetrov@illinois.edu (Aiko Petrov)
+Newsgroups: comp.dsp
+Subject: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Oct21.203533.9716@illinois.edu>
+Date: Mon, 21 Oct 1996 20:35:33 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Aiko Petrov | apetrov@illinois.edu
+PGP Key fingerprint: 0694 8148 14E6 C973
+"Keep the channels open."
+
+From srobertson@purdue.edu Tue Oct 22 18:27:33 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!purdue!srobertson
+From: srobertson@purdue.edu (Sergei Robertson)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Oct22.182733.1710@purdue.edu>
+Date: Tue, 22 Oct 1996 18:27:33 GMT
+References: <1996Oct21.203533.9716@illinois.edu>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Oct21.203533.9716@illinois.edu>, apetrov@illinois.edu (Aiko Petrov) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Sergei Robertson
+Tape trading list upon request. SASE required for international mail.
+
+From tmoreau@clari.net Tue Oct 22 21:24:33 1996
+Path: ashpoly!cascade!bigsur!clari!tmoreau
+From: tmoreau@clari.net (Tyler Moreau)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Oct22.212433.5409@clari.net>
+Date: Tue, 22 Oct 1996 21:24:33 GMT
+References: <1996Oct21.203533.9716@illinois.edu> <1996Oct22.182733.1710@purdue.edu>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Oct22.182733.1710@purdue.edu>, srobertson@purdue.edu (Sergei Robertson) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Tyler Moreau <tmoreau@clari.net>
+Hayes Optima 288 @ 9600 Telebit bps
+"Hardware is temporary. The signal survives."
+
+From ewatanabe@purdue.edu Thu Oct 24 10:18:33 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!purdue!ewatanabe
+From: ewatanabe@purdue.edu (Emi Watanabe)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Oct24.101833.7821@purdue.edu>
+Date: Thu, 24 Oct 1996 10:18:33 GMT
+References: <1996Oct21.203533.9716@illinois.edu> <1996Oct22.182733.1710@purdue.edu> <1996Oct22.212433.5409@clari.net>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Oct22.212433.5409@clari.net>, tmoreau@clari.net (Tyler Moreau) writes:
+> Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Emi Watanabe
+Opinions expressed are solely my own and not those of Purdue University Engineering Computer Network.
+------------------------------------------------------------
+
+From ekuznetsov@titech.ac.jp Sat Oct 26 08:25:33 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!titech!ekuznetsov
+From: ekuznetsov@titech.ac.jp (Emi Kuznetsov)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Oct26.082533.6094@titech.ac.jp>
+Date: Sat, 26 Oct 1996 08:25:33 GMT
+References: <1996Oct21.203533.9716@illinois.edu>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996Oct21.203533.9716@illinois.edu>, apetrov@illinois.edu (Aiko Petrov) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+Emi Kuznetsov | ekuznetsov@titech.ac.jp
+PGP Key fingerprint: 022E C140 63FA 7C6F
+"Keep the channels open."
+

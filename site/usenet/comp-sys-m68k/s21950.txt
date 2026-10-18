@@ -1,0 +1,120 @@
+From slopez@earthlink.net Sun Jul 16 03:21:43 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!earthlink!slopez
+From: slopez@earthlink.net (Steve López)
+Newsgroups: comp.sys.m68k
+Subject: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jul16.032143.8444@earthlink.net>
+Date: Sun, 16 Jul 1995 03:21:43 GMT
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+Steve López
+Tape trading list upon request. SASE required for international mail.
+
+From okuznetsov@cern.ch Tue Jul 18 05:08:43 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!cern!okuznetsov
+From: okuznetsov@cern.ch (Olga Kuznetsov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jul18.050843.6855@cern.ch>
+Date: Tue, 18 Jul 1995 05:08:43 GMT
+References: <1995Jul16.032143.8444@earthlink.net>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995Jul16.032143.8444@earthlink.net>, slopez@earthlink.net (Steve López) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Olga Kuznetsov <okuznetsov@cern.ch>
+"In theory there is no difference between theory and practice."
+Sun SparcStation 20 / AmigaOS 3.1
+
+From jfischer@illinois.edu Tue Jul 18 10:34:43 1995
+Path: ashpoly!cascade!brgate!saturno!illinois!jfischer
+From: jfischer@illinois.edu (Julien Fischer)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jul18.103443.9185@illinois.edu>
+Date: Tue, 18 Jul 1995 10:34:43 GMT
+References: <1995Jul16.032143.8444@earthlink.net> <1995Jul18.050843.6855@cern.ch>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1995Jul18.050843.6855@cern.ch>, okuznetsov@cern.ch (Olga Kuznetsov) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+> My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Julien Fischer <jfischer@illinois.edu>
+Practical Peripherals 14.4 @ 33,600 bps
+"We don't sign stars. We build them."
+
+From jkang@stanford.edu Wed Jul 19 07:15:43 1995
+Path: ashpoly!cascade!bigsur!stanford!jkang
+From: jkang@stanford.edu (Ji-woo Kang)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jul19.071543.4377@stanford.edu>
+Date: Wed, 19 Jul 1995 07:15:43 GMT
+References: <1995Jul16.032143.8444@earthlink.net> <1995Jul18.050843.6855@cern.ch> <1995Jul18.103443.9185@illinois.edu>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Jul18.103443.9185@illinois.edu>, jfischer@illinois.edu (Julien Fischer) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+> Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Ji-woo Kang
+Tape trading list upon request. SASE required for international mail.
+
+From jfournier@hanse.de Thu Jul 20 03:56:43 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!hanse!jfournier
+From: jfournier@hanse.de (Ji-woo Fournier)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jul20.035643.8218@hanse.de>
+Date: Thu, 20 Jul 1995 03:56:43 GMT
+References: <1995Jul16.032143.8444@earthlink.net> <1995Jul18.050843.6855@cern.ch>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Jul18.050843.6855@cern.ch>, okuznetsov@cern.ch (Olga Kuznetsov) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Ji-woo Fournier | jfournier@hanse.de
+PGP Key fingerprint: D5D9 3ACA 4CCD 8BEE
+"Keep the channels open."
+

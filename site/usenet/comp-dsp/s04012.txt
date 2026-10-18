@@ -1,0 +1,98 @@
+From hkim@purdue.edu Mon Feb 14 22:17:05 1994
+Path: ashpoly!cascade!mxgate!coyoacan!purdue!hkim
+From: hkim@purdue.edu (Heather Kim)
+Newsgroups: comp.dsp
+Subject: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Feb14.221705.4261@purdue.edu>
+Date: Mon, 14 Feb 1994 22:17:05 GMT
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Heather Kim
+Opinions expressed are solely my own and not those of Purdue University Engineering Computer Network.
+------------------------------------------------------------
+
+From elindqvist@pacbell.net Tue Feb 15 06:41:05 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!pacbell!elindqvist
+From: elindqvist@pacbell.net (Élodie Lindqvist)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Feb15.064105.9212@pacbell.net>
+Date: Tue, 15 Feb 1994 06:41:05 GMT
+References: <1994Feb14.221705.4261@purdue.edu>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Feb14.221705.4261@purdue.edu>, hkim@purdue.edu (Heather Kim) writes:
+> Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+> At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Élodie Lindqvist
+Tape trading list upon request. SASE required for international mail.
+
+From lperez@uu.net Wed Feb 16 17:20:05 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!uu!lperez
+From: lperez@uu.net (Lars Pérez)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Feb16.172005.9085@uu.net>
+Date: Wed, 16 Feb 1994 17:20:05 GMT
+References: <1994Feb14.221705.4261@purdue.edu>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1994Feb14.221705.4261@purdue.edu>, hkim@purdue.edu (Heather Kim) writes:
+> Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+> At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Lars Pérez -- UUNET Technologies, Falls Church VA
+"The carrier frequency does not drift by accident."
+
+From jmacdonald@clari.net Thu Feb 17 06:41:05 1994
+Path: ashpoly!cascade!bigsur!clari!jmacdonald
+From: jmacdonald@clari.net (Julien MacDonald)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Feb17.064105.8001@clari.net>
+Date: Thu, 17 Feb 1994 06:41:05 GMT
+References: <1994Feb14.221705.4261@purdue.edu>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1994Feb14.221705.4261@purdue.edu>, hkim@purdue.edu (Heather Kim) writes:
+> Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+> At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Julien MacDonald | jmacdonald@clari.net
+PGP Key fingerprint: 4CBA BD31 21C8 73C0
+"Keep the channels open."
+

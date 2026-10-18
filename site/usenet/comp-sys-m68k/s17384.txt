@@ -1,0 +1,116 @@
+From msantos@uu.net Wed May 11 12:29:44 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!uu!msantos
+From: msantos@uu.net (Min-jun Santos)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994May11.122944.1147@uu.net>
+Date: Wed, 11 May 1994 12:29:44 GMT
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+Min-jun Santos <msantos@uu.net>
+Hayes Optima 288 @ 28,800 bps
+"Do not worship the copy."
+
+From vreyes@utexas.edu Thu May 12 05:13:44 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!utexas!vreyes
+From: vreyes@utexas.edu (Valeria Reyes)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994May12.051344.2456@utexas.edu>
+Date: Thu, 12 May 1994 05:13:44 GMT
+References: <1994May11.122944.1147@uu.net>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994May11.122944.1147@uu.net>, msantos@uu.net (Min-jun Santos) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Valeria Reyes
+Opinions expressed are solely my own and not those of University of Texas at Austin.
+------------------------------------------------------------
+
+From kmartinez@pipeline.com Fri May 13 02:08:44 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!pipeline!kmartinez
+From: kmartinez@pipeline.com (Kenji Martínez)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994May13.020844.3180@pipeline.com>
+Date: Fri, 13 May 1994 02:08:44 GMT
+References: <1994May11.122944.1147@uu.net> <1994May12.051344.2456@utexas.edu>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994May12.051344.2456@utexas.edu>, vreyes@utexas.edu (Valeria Reyes) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Kenji Martínez <kmartinez@pipeline.com>
+*PLONK* filter active for trolls.
+Decstation 5000/200 - NetBSD 1.0
+
+From msuzuki@u-tokyo.ac.jp Sat May 14 16:21:44 1994
+Path: ashpoly!cascade!mxgate!coyoacan!u-tokyo!msuzuki
+From: msuzuki@u-tokyo.ac.jp (Matthias Suzuki)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994May14.162144.1138@u-tokyo.ac.jp>
+Date: Sat, 14 May 1994 16:21:44 GMT
+References: <1994May11.122944.1147@uu.net> <1994May12.051344.2456@utexas.edu> <1994May13.020844.3180@pipeline.com>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994May13.020844.3180@pipeline.com>, kmartinez@pipeline.com (Kenji Martínez) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Matthias Suzuki | msuzuki@u-tokyo.ac.jp
+PGP Key fingerprint: B818 076E E625 361F
+"Keep the channels open."
+
+From creyes@panix.com Sun May 15 22:34:44 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!panix!creyes
+From: creyes@panix.com (Callum Reyes)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994May15.223444.3974@panix.com>
+Date: Sun, 15 May 1994 22:34:44 GMT
+References: <1994May11.122944.1147@uu.net> <1994May12.051344.2456@utexas.edu> <1994May13.020844.3180@pipeline.com> <1994May14.162144.1138@u-tokyo.ac.jp>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994May14.162144.1138@u-tokyo.ac.jp>, msuzuki@u-tokyo.ac.jp (Matthias Suzuki) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Callum Reyes <creyes@panix.com>
+*PLONK* filter active for trolls.
+Pentium 90 (OS/2 Warp) - NetBSD 1.0
+

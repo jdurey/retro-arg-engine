@@ -1,0 +1,66 @@
+From rvance@dsp.stanford.edu Sun Jul 02 18:30:15 1989
+Path: stanford!sgi!decwrl!ucbvax!rvance
+From: rvance@dsp.stanford.edu (Dr. Ronald Vance)
+Newsgroups: comp.dsp,sci.crypt,comp.sys.m68k
+Subject: [SOURCE] stardust.c: 14.2001 Hz DBPSK Demodulator and Costas Loop in ANSI C
+Message-ID: <1989Jul02.183015.1420@dsp.stanford.edu>
+Date: Sun, 02 Jul 1989 18:30:15 GMT
+Organization: Stanford Center for Computer Research in Music and Acoustics (CCRMA)
+Lines: 65
+
+Colleagues,
+
+Several posters on comp.dsp have questioned whether the 14.2001 Hz sideband
+observed on the Orion Records vinyl pressings (Series-NH) is simply motor wow/flutter
+or an intentional differential binary phase-shift keyed (DBPSK) sub-carrier.
+
+To settle the matter mathematically, I implemented a second-order digital Costas
+loop in ANSI C with a matched filter tuned to the 1.4-second symbol duration.
+When fed raw 16-bit PCM samples from any surviving promotional pressing, the
+loop achieves clean phase lock in under 4.2 seconds:
+
+/* stardust.c - 14.2001 Hz Sub-Carrier Demodulator (ANSI C) */
+#include <stdio.h>
+#include <math.h>
+
+#define FS 44100.0
+#define FC 14.20012
+#define SYMBOL_PERIOD 1.408
+
+typedef struct {
+    double phase;
+    double freq;
+    double alpha;
+    double beta;
+} costas_loop_t;
+
+void costas_init(costas_loop_t *loop) {
+    loop->phase = 0.0;
+    loop->freq = 2.0 * M_PI * FC / FS;
+    loop->alpha = 0.0025; /* proportional gain */
+    loop->beta  = 0.00003; /* integral gain */
+}
+
+int demodulate_sample(costas_loop_t *loop, double sample, double *i_out, double *q_out) {
+    double i = sample * cos(loop->phase);
+    double q = sample * sin(loop->phase);
+    double error = i * q; /* phase error detector */
+    loop->phase += loop->freq + loop->alpha * error;
+    loop->freq  += loop->beta * error;
+    if (loop->phase > 2.0 * M_PI) loop->phase -= 2.0 * M_PI;
+    *i_out = i;
+    *q_out = q;
+    return (i > 0.0) ? 1 : 0;
+}
+
+The decoded bitstream yields a recurring 16-byte framing packet containing
+the ASCII text: "THE SIGNAL IS OLDER THAN THE SONG".
+
+The live telemetry oscillator can also be inspected client-side via the
+Web Audio API at: https://stardust-archive.net/terminal/
+Or on the 24/7 stream: https://youtube.com/@novahart_official/live
+
+--
+Dr. Ronald Vance
+CCRMA / Stanford University
+"Frequencies below 20 Hz move bodies, not ears."

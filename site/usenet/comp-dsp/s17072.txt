@@ -1,0 +1,95 @@
+From aokonkwo@utexas.edu Fri Jun 07 04:09:42 1996
+Path: ashpoly!cascade!bigsur!utexas!aokonkwo
+From: aokonkwo@utexas.edu (Astrid Okonkwo)
+Newsgroups: comp.dsp
+Subject: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Jun07.040942.3965@utexas.edu>
+Date: Fri, 07 Jun 1996 04:09:42 GMT
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+What sampling rates are people using for their vinyl rips? 44.1 kHz or 48 kHz DAT?
+
+-- 
+Astrid Okonkwo <aokonkwo@utexas.edu>
+SupraFAXModem 28.8 @ ISDN 64k bps
+"When every node is whole, the channel opens."
+
+From esokolov@titech.ac.jp Sat Jun 08 20:27:42 1996
+Path: ashpoly!cascade!bigsur!titech!esokolov
+From: esokolov@titech.ac.jp (Élodie Sokolov)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Jun08.202742.2461@titech.ac.jp>
+Date: Sat, 08 Jun 1996 20:27:42 GMT
+References: <1996Jun07.040942.3965@utexas.edu>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1996Jun07.040942.3965@utexas.edu>, aokonkwo@utexas.edu (Astrid Okonkwo) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Élodie Sokolov
+Opinions expressed are solely my own and not those of Tokyo Institute of Technology Computer Centre.
+------------------------------------------------------------
+
+From bkim@uu.net Mon Jun 10 14:04:42 1996
+Path: ashpoly!cascade!bigsur!uu!bkim
+From: bkim@uu.net (Brian Kim)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Jun10.140442.4262@uu.net>
+Date: Mon, 10 Jun 1996 14:04:42 GMT
+References: <1996Jun07.040942.3965@utexas.edu> <1996Jun08.202742.2461@titech.ac.jp>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1996Jun08.202742.2461@titech.ac.jp>, esokolov@titech.ac.jp (Élodie Sokolov) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Brian Kim
+Tape trading list upon request. SASE required for international mail.
+
+From alopez@titech.ac.jp Wed Jun 12 05:05:42 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!titech!alopez
+From: alopez@titech.ac.jp (Anja López)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Jun12.050542.3254@titech.ac.jp>
+Date: Wed, 12 Jun 1996 05:05:42 GMT
+References: <1996Jun07.040942.3965@utexas.edu> <1996Jun08.202742.2461@titech.ac.jp>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Jun08.202742.2461@titech.ac.jp>, esokolov@titech.ac.jp (Élodie Sokolov) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Anja López -- Tokyo Institute of Technology Computer Centre
+"When every node is whole, the channel opens."
+

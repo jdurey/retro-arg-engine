@@ -1,0 +1,91 @@
+From emuller@cmu.edu Wed Jul 12 02:51:47 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!cmu!emuller
+From: emuller@cmu.edu (Emi Müller)
+Newsgroups: comp.dsp
+Subject: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jul12.025147.2054@cmu.edu>
+Date: Wed, 12 Jul 1995 02:51:47 GMT
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+What sampling rates are people using for their vinyl rips? 44.1 kHz or 48 kHz DAT?
+
+-- 
+Emi Müller -- Carnegie Mellon University School of CS
+"Tape doesn't lie at 02:14. Ears do."
+
+From bstewart@purdue.edu Thu Jul 13 03:00:47 1995
+Path: ashpoly!cascade!bigsur!purdue!bstewart
+From: bstewart@purdue.edu (Bastien Stewart)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jul13.030047.1357@purdue.edu>
+Date: Thu, 13 Jul 1995 03:00:47 GMT
+References: <1995Jul12.025147.2054@cmu.edu>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1995Jul12.025147.2054@cmu.edu>, emuller@cmu.edu (Emi Müller) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Bastien Stewart -- Purdue University Engineering Computer Network
+"Hardware is temporary. The signal survives."
+
+From khernandez@demon.co.uk Thu Jul 13 05:46:47 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!demon!khernandez
+From: khernandez@demon.co.uk (Kenji Hernández)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jul13.054647.1465@demon.co.uk>
+Date: Thu, 13 Jul 1995 05:46:47 GMT
+References: <1995Jul12.025147.2054@cmu.edu> <1995Jul13.030047.1357@purdue.edu>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Jul13.030047.1357@purdue.edu>, bstewart@purdue.edu (Bastien Stewart) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Kenji Hernández
+Opinions expressed are solely my own and not those of Demon Internet Services UK.
+------------------------------------------------------------
+
+From aoliveira@uu.net Sat Jul 15 04:52:47 1995
+Path: ashpoly!cascade!brgate!saturno!uu!aoliveira
+From: aoliveira@uu.net (Aiko Oliveira)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jul15.045247.8988@uu.net>
+Date: Sat, 15 Jul 1995 04:52:47 GMT
+References: <1995Jul12.025147.2054@cmu.edu> <1995Jul13.030047.1357@purdue.edu> <1995Jul13.054647.1465@demon.co.uk>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Jul13.054647.1465@demon.co.uk>, khernandez@demon.co.uk (Kenji Hernández) writes:
+> I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Aiko Oliveira
+Opinions expressed are solely my own and not those of UUNET Technologies, Falls Church VA.
+------------------------------------------------------------
+

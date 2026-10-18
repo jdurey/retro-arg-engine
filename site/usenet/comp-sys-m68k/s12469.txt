@@ -1,0 +1,70 @@
+From eweber@kiae.su Sat Nov 16 15:27:00 1996
+Path: ashpoly!cascade!brgate!saturno!kiae!eweber
+From: eweber@kiae.su (Emi Weber)
+Newsgroups: comp.sys.m68k
+Subject: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Nov16.152700.4773@kiae.su>
+Date: Sat, 16 Nov 1996 15:27:00 GMT
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+Emi Weber
+Opinions expressed are solely my own and not those of Kurchatov Institute of Atomic Energy, Moscow.
+------------------------------------------------------------
+
+From arodriguez@berkeley.edu Sat Nov 16 23:33:00 1996
+Path: ashpoly!cascade!mxgate!coyoacan!berkeley!arodriguez
+From: arodriguez@berkeley.edu (Amy Rodríguez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Nov16.233300.1222@berkeley.edu>
+Date: Sat, 16 Nov 1996 23:33:00 GMT
+References: <1996Nov16.152700.4773@kiae.su>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Nov16.152700.4773@kiae.su>, eweber@kiae.su (Emi Weber) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+=== Amy Rodríguez ===
+Dept of Electrical Engineering, UC Berkeley Department of EECS
+"5 sigma is a discovery. 7 is a question."
+
+From jcampbell@kiae.su Mon Nov 18 13:20:00 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!kiae!jcampbell
+From: jcampbell@kiae.su (Jen Campbell)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Nov18.132000.4908@kiae.su>
+Date: Mon, 18 Nov 1996 13:20:00 GMT
+References: <1996Nov16.152700.4773@kiae.su>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Nov16.152700.4773@kiae.su>, eweber@kiae.su (Emi Weber) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Jen Campbell
+Opinions expressed are solely my own and not those of Kurchatov Institute of Atomic Energy, Moscow.
+------------------------------------------------------------
+

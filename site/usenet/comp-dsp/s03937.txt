@@ -1,0 +1,97 @@
+From amoreau@panix.com Sun Feb 12 09:41:55 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!panix!amoreau
+From: amoreau@panix.com (Andrei Moreau)
+Newsgroups: comp.dsp
+Subject: [INFO] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Feb12.094155.8504@panix.com>
+Date: Sun, 12 Feb 1995 09:41:55 GMT
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+MATLAB script available upon request via email.
+
+-- 
+Andrei Moreau | amoreau@panix.com
+PGP Key fingerprint: 6E6F F4CA 640B 6194
+"Keep the channels open."
+
+From grodriguez@pacbell.net Tue Feb 14 02:09:55 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!pacbell!grodriguez
+From: grodriguez@pacbell.net (Graham Rodríguez)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Feb14.020955.9668@pacbell.net>
+Date: Tue, 14 Feb 1995 02:09:55 GMT
+References: <1995Feb12.094155.8504@panix.com>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1995Feb12.094155.8504@panix.com>, amoreau@panix.com (Andrei Moreau) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Graham Rodríguez | grodriguez@pacbell.net
+PGP Key fingerprint: 2C78 4E8A 5464 E535
+"Keep the channels open."
+
+From bsmirnov@titech.ac.jp Wed Feb 15 13:12:55 1995
+Path: ashpoly!cascade!brgate!saturno!titech!bsmirnov
+From: bsmirnov@titech.ac.jp (Bruno Smirnov)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Feb15.131255.1507@titech.ac.jp>
+Date: Wed, 15 Feb 1995 13:12:55 GMT
+References: <1995Feb12.094155.8504@panix.com>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Feb12.094155.8504@panix.com>, amoreau@panix.com (Andrei Moreau) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Bruno Smirnov
+Opinions expressed are solely my own and not those of Tokyo Institute of Technology Computer Centre.
+------------------------------------------------------------
+
+From mkang@mit.edu Fri Feb 17 14:39:55 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!mit!mkang
+From: mkang@mit.edu (Mateo Kang)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Feb17.143955.7132@mit.edu>
+Date: Fri, 17 Feb 1995 14:39:55 GMT
+References: <1995Feb12.094155.8504@panix.com>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Feb12.094155.8504@panix.com>, amoreau@panix.com (Andrei Moreau) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Mateo Kang
+Opinions expressed are solely my own and not those of Massachusetts Institute of Technology.
+------------------------------------------------------------
+

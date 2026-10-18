@@ -1,0 +1,93 @@
+From sstewart@cam.ac.uk Wed Aug 16 01:44:29 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!cam!sstewart
+From: sstewart@cam.ac.uk (Seo-yeon Stewart)
+Newsgroups: comp.dsp
+Subject: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Aug16.014429.5363@cam.ac.uk>
+Date: Wed, 16 Aug 1995 01:44:29 GMT
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Seo-yeon Stewart <sstewart@cam.ac.uk>
+*PLONK* filter active for trolls.
+NeXTstation Turbo Color - NetBSD 1.0
+
+From kjohansson@uu.net Wed Aug 16 17:54:29 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!uu!kjohansson
+From: kjohansson@uu.net (Karen Johansson)
+Newsgroups: comp.dsp
+Subject: Re: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Aug16.175429.9147@uu.net>
+Date: Wed, 16 Aug 1995 17:54:29 GMT
+References: <1995Aug16.014429.5363@cam.ac.uk>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Aug16.014429.5363@cam.ac.uk>, sstewart@cam.ac.uk (Seo-yeon Stewart) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Karen Johansson <kjohansson@uu.net>
+"Hold for relay."
+486DX4/100 (FreeBSD 2.0.5) / TOS 4.04
+
+From asilva@pacbell.net Thu Aug 17 05:21:29 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!pacbell!asilva
+From: asilva@pacbell.net (Anja Silva)
+Newsgroups: comp.dsp
+Subject: Re: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Aug17.052129.3763@pacbell.net>
+Date: Thu, 17 Aug 1995 05:21:29 GMT
+References: <1995Aug16.014429.5363@cam.ac.uk>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Aug16.014429.5363@cam.ac.uk>, sstewart@cam.ac.uk (Seo-yeon Stewart) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Anja Silva
+Tape trading list upon request. SASE required for international mail.
+
+From bsokolov@illinois.edu Thu Aug 17 14:07:29 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!illinois!bsokolov
+From: bsokolov@illinois.edu (Bastien Sokolov)
+Newsgroups: comp.dsp
+Subject: Re: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Aug17.140729.8885@illinois.edu>
+Date: Thu, 17 Aug 1995 14:07:29 GMT
+References: <1995Aug16.014429.5363@cam.ac.uk> <1995Aug16.175429.9147@uu.net>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Aug16.175429.9147@uu.net>, kjohansson@uu.net (Karen Johansson) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Bastien Sokolov
+Opinions expressed are solely my own and not those of University of Illinois Urbana-Champaign.
+------------------------------------------------------------
+

@@ -1,0 +1,119 @@
+From jjohansson@ox.ac.uk Sun May 07 14:56:01 1995
+Path: ashpoly!cascade!bigsur!ox!jjohansson
+From: jjohansson@ox.ac.uk (Ji-woo Johansson)
+Newsgroups: comp.dsp
+Subject: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May07.145601.7024@ox.ac.uk>
+Date: Sun, 07 May 1995 14:56:01 GMT
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Ji-woo Johansson
+Tape trading list upon request. SASE required for international mail.
+
+From pgarcia@unam.mx Tue May 09 13:38:01 1995
+Path: ashpoly!cascade!bigsur!unam!pgarcia
+From: pgarcia@unam.mx (Pavel García)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May09.133801.9315@unam.mx>
+Date: Tue, 09 May 1995 13:38:01 GMT
+References: <1995May07.145601.7024@ox.ac.uk>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1995May07.145601.7024@ox.ac.uk>, jjohansson@ox.ac.uk (Ji-woo Johansson) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Pavel García
+Tape trading list upon request. SASE required for international mail.
+
+From agarcia@unam.mx Wed May 10 18:16:01 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!unam!agarcia
+From: agarcia@unam.mx (Andrei García)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May10.181601.8078@unam.mx>
+Date: Wed, 10 May 1995 18:16:01 GMT
+References: <1995May07.145601.7024@ox.ac.uk> <1995May09.133801.9315@unam.mx>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995May09.133801.9315@unam.mx>, pgarcia@unam.mx (Pavel García) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Andrei García
+Opinions expressed are solely my own and not those of Universidad Nacional Autónoma de México (DGSCA).
+------------------------------------------------------------
+
+From efischer@purdue.edu Fri May 12 18:57:01 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!purdue!efischer
+From: efischer@purdue.edu (Élodie Fischer)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May12.185701.2252@purdue.edu>
+Date: Fri, 12 May 1995 18:57:01 GMT
+References: <1995May07.145601.7024@ox.ac.uk> <1995May09.133801.9315@unam.mx>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995May09.133801.9315@unam.mx>, pgarcia@unam.mx (Pavel García) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Élodie Fischer <efischer@purdue.edu>
+"There are 14 nodes and only 10 countries. Count again."
+Atari TT030 / TOS 4.04
+
+From ssato@pipeline.com Sun May 14 22:12:01 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!pipeline!ssato
+From: ssato@pipeline.com (Seo-yeon Sato)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May14.221201.8540@pipeline.com>
+Date: Sun, 14 May 1995 22:12:01 GMT
+References: <1995May07.145601.7024@ox.ac.uk>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1995May07.145601.7024@ox.ac.uk>, jjohansson@ox.ac.uk (Ji-woo Johansson) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+PGP Public key available via finger or upon request.
+
+-- 
+Seo-yeon Sato <ssato@pipeline.com>
+"Hardware is temporary. The signal survives."
+Amiga 3000T / AmigaOS 3.1
+

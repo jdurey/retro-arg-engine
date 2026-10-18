@@ -1,0 +1,118 @@
+From dpetrov@unam.mx Thu Aug 24 16:30:48 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!unam!dpetrov
+From: dpetrov@unam.mx (Dong-hyun Petrov)
+Newsgroups: comp.dsp
+Subject: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Aug24.163048.5297@unam.mx>
+Date: Thu, 24 Aug 1995 16:30:48 GMT
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+Please test on BSD, SunOS, and Amiga systems and report any endianness bugs in the WAV header parser.
+
+-- 
+Dong-hyun Petrov <dpetrov@unam.mx>
+*PLONK* filter active for trolls.
+486DX4/100 (FreeBSD 2.0.5) - NetBSD 1.0
+
+From nbrennan@mit.edu Sat Aug 26 08:30:48 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!mit!nbrennan
+From: nbrennan@mit.edu (Nadine Brennan)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Aug26.083048.9865@mit.edu>
+Date: Sat, 26 Aug 1995 08:30:48 GMT
+References: <1995Aug24.163048.5297@unam.mx>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Aug24.163048.5297@unam.mx>, dpetrov@unam.mx (Dong-hyun Petrov) writes:
+> Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+-- 
+Nadine Brennan <nbrennan@mit.edu>
+Hayes Optima 288 @ 9600 Telebit bps
+"Tape doesn't lie at 02:14. Ears do."
+
+From hsato@titech.ac.jp Mon Aug 28 09:53:48 1995
+Path: ashpoly!cascade!brgate!saturno!titech!hsato
+From: hsato@titech.ac.jp (Hana Sato)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Aug28.095348.3334@titech.ac.jp>
+Date: Mon, 28 Aug 1995 09:53:48 GMT
+References: <1995Aug24.163048.5297@unam.mx> <1995Aug26.083048.9865@mit.edu>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Aug26.083048.9865@mit.edu>, nbrennan@mit.edu (Nadine Brennan) writes:
+> On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Hana Sato <hsato@titech.ac.jp>
+Zyxel U-1496E @ ISDN 64k bps
+"Marcus is not one man."
+
+From lkim@illinois.edu Mon Aug 28 11:16:48 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!illinois!lkim
+From: lkim@illinois.edu (Lucia Kim)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Aug28.111648.3393@illinois.edu>
+Date: Mon, 28 Aug 1995 11:16:48 GMT
+References: <1995Aug24.163048.5297@unam.mx> <1995Aug26.083048.9865@mit.edu> <1995Aug28.095348.3334@titech.ac.jp>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Aug28.095348.3334@titech.ac.jp>, hsato@titech.ac.jp (Hana Sato) writes:
+> Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+-- 
+Lucia Kim <lkim@illinois.edu>
+Practical Peripherals 14.4 @ 28,800 bps
+"5 sigma is a discovery. 7 is a question."
+
+From jcampbell@mindspring.com Wed Aug 30 03:18:48 1995
+Path: ashpoly!cascade!brgate!saturno!mindspring!jcampbell
+From: jcampbell@mindspring.com (Jens Campbell)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Aug30.031848.2307@mindspring.com>
+Date: Wed, 30 Aug 1995 03:18:48 GMT
+References: <1995Aug24.163048.5297@unam.mx> <1995Aug26.083048.9865@mit.edu> <1995Aug28.095348.3334@titech.ac.jp>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995Aug28.095348.3334@titech.ac.jp>, hsato@titech.ac.jp (Hana Sato) writes:
+> Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Jens Campbell <jcampbell@mindspring.com>
+Practical Peripherals 14.4 @ 14,400 bps
+"The carrier frequency does not drift by accident."
+

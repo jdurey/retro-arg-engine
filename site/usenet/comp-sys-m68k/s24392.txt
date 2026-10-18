@@ -1,0 +1,70 @@
+From ssilva@purdue.edu Fri Dec 16 07:04:16 1994
+Path: ashpoly!cascade!mxgate!coyoacan!purdue!ssilva
+From: ssilva@purdue.edu (Sergei Silva)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Dec16.070416.1357@purdue.edu>
+Date: Fri, 16 Dec 1994 07:04:16 GMT
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+Schematic diagram in ASCII uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/twin68_array.asc.
+
+-- 
+Sergei Silva
+Opinions expressed are solely my own and not those of Purdue University Engineering Computer Network.
+------------------------------------------------------------
+
+From dperez@utexas.edu Sun Dec 18 04:43:16 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!utexas!dperez
+From: dperez@utexas.edu (Dong-hyun Pérez)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Dec18.044316.9645@utexas.edu>
+Date: Sun, 18 Dec 1994 04:43:16 GMT
+References: <1994Dec16.070416.1357@purdue.edu>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Dec16.070416.1357@purdue.edu>, ssilva@purdue.edu (Sergei Silva) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Dong-hyun Pérez | dperez@utexas.edu
+PGP Key fingerprint: 8BB2 5B77 77CE DB56
+"Keep the channels open."
+
+From mtanaka@kth.se Mon Dec 19 02:47:16 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!kth!mtanaka
+From: mtanaka@kth.se (Marisol Tanaka)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Dec19.024716.2418@kth.se>
+Date: Mon, 19 Dec 1994 02:47:16 GMT
+References: <1994Dec16.070416.1357@purdue.edu> <1994Dec18.044316.9645@utexas.edu>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Dec18.044316.9645@utexas.edu>, dperez@utexas.edu (Dong-hyun Pérez) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Marisol Tanaka <mtanaka@kth.se>
+Hayes Optima 288 @ 14,400 bps
+"Extraordinary claims require extraordinary spectra."
+

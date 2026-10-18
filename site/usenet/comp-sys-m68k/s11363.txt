@@ -1,0 +1,71 @@
+From jramirez@u-tokyo.ac.jp Wed Oct 11 00:15:58 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!u-tokyo!jramirez
+From: jramirez@u-tokyo.ac.jp (Jens Ramírez)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Oct11.001558.6190@u-tokyo.ac.jp>
+Date: Wed, 11 Oct 1995 00:15:58 GMT
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+=== Jens Ramírez ===
+Dept of Electrical Engineering, University of Tokyo Department of Information Science
+"Hardware is temporary. The signal survives."
+
+From jvasiliev@titech.ac.jp Thu Oct 12 07:52:58 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!titech!jvasiliev
+From: jvasiliev@titech.ac.jp (Jens Vasiliev)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Oct12.075258.8843@titech.ac.jp>
+Date: Thu, 12 Oct 1995 07:52:58 GMT
+References: <1995Oct11.001558.6190@u-tokyo.ac.jp>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Oct11.001558.6190@u-tokyo.ac.jp>, jramirez@u-tokyo.ac.jp (Jens Ramírez) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Jens Vasiliev
+Opinions expressed are solely my own and not those of Tokyo Institute of Technology Computer Centre.
+------------------------------------------------------------
+
+From gsmirnov@pipeline.com Fri Oct 13 18:21:58 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!pipeline!gsmirnov
+From: gsmirnov@pipeline.com (Graham Smirnov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Oct13.182158.2703@pipeline.com>
+Date: Fri, 13 Oct 1995 18:21:58 GMT
+References: <1995Oct11.001558.6190@u-tokyo.ac.jp>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Oct11.001558.6190@u-tokyo.ac.jp>, jramirez@u-tokyo.ac.jp (Jens Ramírez) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+=== Graham Smirnov ===
+Dept of Electrical Engineering, The Pipeline Internet Network
+"Hold for relay."
+

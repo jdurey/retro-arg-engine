@@ -1,0 +1,97 @@
+From mduarte@cam.ac.uk Tue Feb 28 18:50:49 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!cam!mduarte
+From: mduarte@cam.ac.uk (Mathieu Duarte)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Feb28.185049.6594@cam.ac.uk>
+Date: Tue, 28 Feb 1995 18:50:49 GMT
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+Mathieu Duarte <mduarte@cam.ac.uk>
+Hayes Optima 288 @ 14,400 bps
+"5 sigma is a discovery. 7 is a question."
+
+From yivanov@stanford.edu Thu Mar 02 10:34:49 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!stanford!yivanov
+From: yivanov@stanford.edu (Yuki Ivanov)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Mar02.103449.5661@stanford.edu>
+Date: Thu, 02 Mar 1995 10:34:49 GMT
+References: <1995Feb28.185049.6594@cam.ac.uk>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995Feb28.185049.6594@cam.ac.uk>, mduarte@cam.ac.uk (Mathieu Duarte) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Yuki Ivanov <yivanov@stanford.edu>
+"Measuring a record you own is listening, not piracy."
+486DX4/100 (FreeBSD 2.0.5) / System 7.5.1
+
+From divanov@pipeline.com Fri Mar 03 13:04:49 1995
+Path: ashpoly!cascade!bigsur!pipeline!divanov
+From: divanov@pipeline.com (Diego Ivanov)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Mar03.130449.8584@pipeline.com>
+Date: Fri, 03 Mar 1995 13:04:49 GMT
+References: <1995Feb28.185049.6594@cam.ac.uk> <1995Mar02.103449.5661@stanford.edu>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Mar02.103449.5661@stanford.edu>, yivanov@stanford.edu (Yuki Ivanov) writes:
+> If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+> My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+-- 
+Diego Ivanov <divanov@pipeline.com>
+US Robotics Courier V.34 @ 19,200 bps
+"Extraordinary claims require extraordinary spectra."
+
+From lkim@titech.ac.jp Sat Mar 04 03:08:49 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!titech!lkim
+From: lkim@titech.ac.jp (Lars Kim)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Mar04.030849.5332@titech.ac.jp>
+Date: Sat, 04 Mar 1995 03:08:49 GMT
+References: <1995Feb28.185049.6594@cam.ac.uk>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Feb28.185049.6594@cam.ac.uk>, mduarte@cam.ac.uk (Mathieu Duarte) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+> This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+-- 
+=== Lars Kim ===
+Dept of Electrical Engineering, Tokyo Institute of Technology Computer Centre
+"Marcus is not one man."
+

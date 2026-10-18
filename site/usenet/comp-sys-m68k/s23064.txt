@@ -1,0 +1,125 @@
+From kgarcia@panix.com Sun Dec 25 19:02:41 1994
+Path: ashpoly!cascade!bigsur!panix!kgarcia
+From: kgarcia@panix.com (Karen García)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Dec25.190241.1257@panix.com>
+Date: Sun, 25 Dec 1994 19:02:41 GMT
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Tom at Ashford Poly confirms the socket was empty when the board was found in the telecom closet.
+
+-- 
+Karen García <kgarcia@panix.com>
+"Tape doesn't lie at 02:14. Ears do."
+Sun 3/60 (SunOS 4.1.1) / System 7.5.1
+
+From mnakamura@rwth-aachen.de Mon Dec 26 21:05:41 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!rwth-aachen!mnakamura
+From: mnakamura@rwth-aachen.de (Mikhail Nakamura)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Dec26.210541.8999@rwth-aachen.de>
+Date: Mon, 26 Dec 1994 21:05:41 GMT
+References: <1994Dec25.190241.1257@panix.com>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1994Dec25.190241.1257@panix.com>, kgarcia@panix.com (Karen García) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+> Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+=== Mikhail Nakamura ===
+Dept of Electrical Engineering, RWTH Aachen Informatik
+"When every node is whole, the channel opens."
+
+From alee@kth.se Wed Dec 28 17:28:41 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!kth!alee
+From: alee@kth.se (Amy Lee)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Dec28.172841.5558@kth.se>
+Date: Wed, 28 Dec 1994 17:28:41 GMT
+References: <1994Dec25.190241.1257@panix.com>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1994Dec25.190241.1257@panix.com>, kgarcia@panix.com (Karen García) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Amy Lee <alee@kth.se>
+*PLONK* filter active for trolls.
+Mac IIci / 68882 FPU - NetBSD 1.0
+
+From jwatanabe@hanse.de Fri Dec 30 00:11:41 1994
+Path: ashpoly!cascade!brgate!saturno!hanse!jwatanabe
+From: jwatanabe@hanse.de (Joachim Watanabe)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Dec30.001141.9675@hanse.de>
+Date: Fri, 30 Dec 1994 00:11:41 GMT
+References: <1994Dec25.190241.1257@panix.com> <1994Dec28.172841.5558@kth.se>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1994Dec28.172841.5558@kth.se>, alee@kth.se (Amy Lee) writes:
+> Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+> PGP Public key available via finger or upon request.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Joachim Watanabe
+Opinions expressed are solely my own and not those of Hanse-Netzwerk Hamburg.
+------------------------------------------------------------
+
+From jmoreau@demon.co.uk Fri Dec 30 22:46:41 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!demon!jmoreau
+From: jmoreau@demon.co.uk (Ji-woo Moreau)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Dec30.224641.7683@demon.co.uk>
+Date: Fri, 30 Dec 1994 22:46:41 GMT
+References: <1994Dec25.190241.1257@panix.com>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1994Dec25.190241.1257@panix.com>, kgarcia@panix.com (Karen García) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+> Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+
+Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Ji-woo Moreau
+Opinions expressed are solely my own and not those of Demon Internet Services UK.
+------------------------------------------------------------
+

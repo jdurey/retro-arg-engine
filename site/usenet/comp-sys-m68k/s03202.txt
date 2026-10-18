@@ -1,0 +1,71 @@
+From jgarcia@panix.com Wed Jul 12 00:31:08 1995
+Path: ashpoly!cascade!brgate!saturno!panix!jgarcia
+From: jgarcia@panix.com (Jens García)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jul12.003108.6123@panix.com>
+Date: Wed, 12 Jul 1995 00:31:08 GMT
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Jens García <jgarcia@panix.com>
+Practical Peripherals 14.4 @ 28,800 bps
+"In theory there is no difference between theory and practice."
+
+From nandersson@uni-hamburg.de Thu Jul 13 15:06:08 1995
+Path: ashpoly!cascade!mxgate!coyoacan!uni-hamburg!nandersson
+From: nandersson@uni-hamburg.de (Nadine Andersson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jul13.150608.6195@uni-hamburg.de>
+Date: Thu, 13 Jul 1995 15:06:08 GMT
+References: <1995Jul12.003108.6123@panix.com>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Jul12.003108.6123@panix.com>, jgarcia@panix.com (Jens García) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Nadine Andersson <nandersson@uni-hamburg.de>
+"Tape doesn't lie at 02:14. Ears do."
+Acorn RiscPC 600 / NEXTSTEP 3.3
+
+From htakahashi@rwth-aachen.de Fri Jul 14 23:57:08 1995
+Path: ashpoly!cascade!mxgate!coyoacan!rwth-aachen!htakahashi
+From: htakahashi@rwth-aachen.de (Hana Takahashi)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jul14.235708.4867@rwth-aachen.de>
+Date: Fri, 14 Jul 1995 23:57:08 GMT
+References: <1995Jul12.003108.6123@panix.com> <1995Jul13.150608.6195@uni-hamburg.de>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Jul13.150608.6195@uni-hamburg.de>, nandersson@uni-hamburg.de (Nadine Andersson) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Hana Takahashi <htakahashi@rwth-aachen.de>
+"In theory there is no difference between theory and practice."
+Sun 3/60 (SunOS 4.1.1) / Linux 1.2.13
+

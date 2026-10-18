@@ -1,0 +1,92 @@
+From bgirard@earthlink.net Tue Mar 28 02:53:57 1995
+Path: ashpoly!cascade!brgate!saturno!earthlink!bgirard
+From: bgirard@earthlink.net (Bill Girard)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Mar28.025357.1805@earthlink.net>
+Date: Tue, 28 Mar 1995 02:53:57 GMT
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Bill Girard <bgirard@earthlink.net>
+"Do not worship the copy."
+486DX4/100 (FreeBSD 2.0.5) / NEXTSTEP 3.3
+
+From elopez@hanse.de Wed Mar 29 02:16:57 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!hanse!elopez
+From: elopez@hanse.de (Emi López)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Mar29.021657.8290@hanse.de>
+Date: Wed, 29 Mar 1995 02:16:57 GMT
+References: <1995Mar28.025357.1805@earthlink.net>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Mar28.025357.1805@earthlink.net>, bgirard@earthlink.net (Bill Girard) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+> At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Emi López -- Hanse-Netzwerk Hamburg
+"Extraordinary claims require extraordinary spectra."
+
+From rramirez@cmu.edu Wed Mar 29 10:41:57 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!cmu!rramirez
+From: rramirez@cmu.edu (Renata Ramírez)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Mar29.104157.5699@cmu.edu>
+Date: Wed, 29 Mar 1995 10:41:57 GMT
+References: <1995Mar28.025357.1805@earthlink.net>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Mar28.025357.1805@earthlink.net>, bgirard@earthlink.net (Bill Girard) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+> At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Renata Ramírez -- Carnegie Mellon University School of CS
+"They will send a copy in my place."
+
+From bkim@uni-hamburg.de Thu Mar 30 00:16:57 1995
+Path: ashpoly!cascade!mxgate!coyoacan!uni-hamburg!bkim
+From: bkim@uni-hamburg.de (Bill Kim)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Mar30.001657.9735@uni-hamburg.de>
+Date: Thu, 30 Mar 1995 00:16:57 GMT
+References: <1995Mar28.025357.1805@earthlink.net> <1995Mar29.104157.5699@cmu.edu>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Mar29.104157.5699@cmu.edu>, rramirez@cmu.edu (Renata Ramírez) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Bill Kim
+Tape trading list upon request. SASE required for international mail.
+

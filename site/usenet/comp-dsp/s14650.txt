@@ -1,0 +1,97 @@
+From gfischer@mit.edu Thu Mar 17 22:03:01 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!mit!gfischer
+From: gfischer@mit.edu (Graham Fischer)
+Newsgroups: comp.dsp
+Subject: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Mar17.220301.9580@mit.edu>
+Date: Thu, 17 Mar 1994 22:03:01 GMT
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Graham Fischer
+Tape trading list upon request. SASE required for international mail.
+
+From hmartinez@purdue.edu Fri Mar 18 15:10:01 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!purdue!hmartinez
+From: hmartinez@purdue.edu (Heather Martínez)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Mar18.151001.2174@purdue.edu>
+Date: Fri, 18 Mar 1994 15:10:01 GMT
+References: <1994Mar17.220301.9580@mit.edu>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1994Mar17.220301.9580@mit.edu>, gfischer@mit.edu (Graham Fischer) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+=== Heather Martínez ===
+Dept of Electrical Engineering, Purdue University Engineering Computer Network
+"The hatch is open. Is anyone listening?"
+
+From ctanaka@mit.edu Sun Mar 20 02:07:01 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!mit!ctanaka
+From: ctanaka@mit.edu (Camila Tanaka)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Mar20.020701.3311@mit.edu>
+Date: Sun, 20 Mar 1994 02:07:01 GMT
+References: <1994Mar17.220301.9580@mit.edu> <1994Mar18.151001.2174@purdue.edu>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1994Mar18.151001.2174@purdue.edu>, hmartinez@purdue.edu (Heather Martínez) writes:
+> Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+> Top-posters will be placed in my ~/.killfile without notice.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Camila Tanaka | ctanaka@mit.edu
+PGP Key fingerprint: 3F96 CEA6 8646 D413
+"Keep the channels open."
+
+From gmoreno@earthlink.net Tue Mar 22 00:15:01 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!earthlink!gmoreno
+From: gmoreno@earthlink.net (Graham Moreno)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Mar22.001501.5969@earthlink.net>
+Date: Tue, 22 Mar 1994 00:15:01 GMT
+References: <1994Mar17.220301.9580@mit.edu> <1994Mar18.151001.2174@purdue.edu>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1994Mar18.151001.2174@purdue.edu>, hmartinez@purdue.edu (Heather Martínez) writes:
+> Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+> Top-posters will be placed in my ~/.killfile without notice.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Graham Moreno <gmoreno@earthlink.net>
+SupraFAXModem 28.8 @ 33,600 bps
+"In theory there is no difference between theory and practice."
+

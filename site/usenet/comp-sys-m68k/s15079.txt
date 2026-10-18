@@ -1,0 +1,119 @@
+From hdubois@mit.edu Sat Jul 13 13:14:25 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!mit!hdubois
+From: hdubois@mit.edu (Hugo Dubois)
+Newsgroups: comp.sys.m68k
+Subject: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Jul13.131425.1105@mit.edu>
+Date: Sat, 13 Jul 1996 13:14:25 GMT
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+Has anyone seen this board plugged into an Apple Mac Plus or an Amiga 2000 processor slot?
+
+-- 
+Hugo Dubois <hdubois@mit.edu>
+*PLONK* filter active for trolls.
+Mac IIci / 68882 FPU - NetBSD 1.0
+
+From vfournier@kth.se Sun Jul 14 04:46:25 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!kth!vfournier
+From: vfournier@kth.se (Valeria Fournier)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Jul14.044625.3778@kth.se>
+Date: Sun, 14 Jul 1996 04:46:25 GMT
+References: <1996Jul13.131425.1105@mit.edu>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1996Jul13.131425.1105@mit.edu>, hdubois@mit.edu (Hugo Dubois) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+Looks like a prototype telecommunications board for military secure voice, not an audio music product.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Valeria Fournier <vfournier@kth.se>
+"When every node is whole, the channel opens."
+Acorn RiscPC 600 / System 7.5.1
+
+From slaurent@unam.mx Tue Jul 16 00:12:25 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!unam!slaurent
+From: slaurent@unam.mx (Sun-mi Laurent)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Jul16.001225.2122@unam.mx>
+Date: Tue, 16 Jul 1996 00:12:25 GMT
+References: <1996Jul13.131425.1105@mit.edu>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Jul13.131425.1105@mit.edu>, hdubois@mit.edu (Hugo Dubois) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Sun-mi Laurent | slaurent@unam.mx
+PGP Key fingerprint: 1322 8167 962E C99E
+"Keep the channels open."
+
+From kschneider@berkeley.edu Tue Jul 16 07:55:25 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!berkeley!kschneider
+From: kschneider@berkeley.edu (Kenji Schneider)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Jul16.075525.8365@berkeley.edu>
+Date: Tue, 16 Jul 1996 07:55:25 GMT
+References: <1996Jul13.131425.1105@mit.edu> <1996Jul14.044625.3778@kth.se>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1996Jul14.044625.3778@kth.se>, vfournier@kth.se (Valeria Fournier) writes:
+> Looks like a prototype telecommunications board for military secure voice, not an audio music product.
+> Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Kenji Schneider <kschneider@berkeley.edu>
+"They will send a copy in my place."
+Pentium 90 (OS/2 Warp) / AmigaOS 3.1
+
+From mwatanabe@pipeline.com Wed Jul 17 19:21:25 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!pipeline!mwatanabe
+From: mwatanabe@pipeline.com (Mei Watanabe)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Jul17.192125.5330@pipeline.com>
+Date: Wed, 17 Jul 1996 19:21:25 GMT
+References: <1996Jul13.131425.1105@mit.edu> <1996Jul16.001225.2122@unam.mx>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Jul16.001225.2122@unam.mx>, slaurent@unam.mx (Sun-mi Laurent) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Mei Watanabe <mwatanabe@pipeline.com>
+"When every node is whole, the channel opens."
+Atari TT030 / NEXTSTEP 3.3
+

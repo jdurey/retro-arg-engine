@@ -1,0 +1,96 @@
+From clindqvist@delphi.com Thu Jul 07 23:15:31 1994
+Path: ashpoly!cascade!brgate!saturno!delphi!clindqvist
+From: clindqvist@delphi.com (Callum Lindqvist)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Jul07.231531.9585@delphi.com>
+Date: Thu, 07 Jul 1994 23:15:31 GMT
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Does anyone have a 27C256 EPROM marked 'MH-U14' or 'ORION-CRYPTO'?
+
+-- 
+Callum Lindqvist <clindqvist@delphi.com>
+"When every node is whole, the channel opens."
+486DX4/100 (FreeBSD 2.0.5) / SunOS 4.1.4
+
+From hkuznetsov@panix.com Fri Jul 08 16:02:31 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!panix!hkuznetsov
+From: hkuznetsov@panix.com (Hugo Kuznetsov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Jul08.160231.2806@panix.com>
+Date: Fri, 08 Jul 1994 16:02:31 GMT
+References: <1994Jul07.231531.9585@delphi.com>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Jul07.231531.9585@delphi.com>, clindqvist@delphi.com (Callum Lindqvist) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Hugo Kuznetsov
+Tape trading list upon request. SASE required for international mail.
+
+From sstewart@purdue.edu Fri Jul 08 17:22:31 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!purdue!sstewart
+From: sstewart@purdue.edu (Sven Stewart)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Jul08.172231.5496@purdue.edu>
+Date: Fri, 08 Jul 1994 17:22:31 GMT
+References: <1994Jul07.231531.9585@delphi.com> <1994Jul08.160231.2806@panix.com>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1994Jul08.160231.2806@panix.com>, hkuznetsov@panix.com (Hugo Kuznetsov) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Sven Stewart
+Tape trading list upon request. SASE required for international mail.
+
+From mnovak@demon.co.uk Sun Jul 10 11:30:31 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!demon!mnovak
+From: mnovak@demon.co.uk (Marta Novak)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Jul10.113031.2582@demon.co.uk>
+Date: Sun, 10 Jul 1994 11:30:31 GMT
+References: <1994Jul07.231531.9585@delphi.com> <1994Jul08.160231.2806@panix.com>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1994Jul08.160231.2806@panix.com>, hkuznetsov@panix.com (Hugo Kuznetsov) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Marta Novak <mnovak@demon.co.uk>
+*PLONK* filter active for trolls.
+Amiga 3000T - NetBSD 1.0
+

@@ -1,0 +1,122 @@
+From teriksson@kiae.su Sat Apr 16 15:50:37 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!kiae!teriksson
+From: teriksson@kiae.su (Tyler Eriksson)
+Newsgroups: comp.dsp
+Subject: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Apr16.155037.8906@kiae.su>
+Date: Sat, 16 Apr 1994 15:50:37 GMT
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+What sampling rates are people using for their vinyl rips? 44.1 kHz or 48 kHz DAT?
+
+-- 
+Tyler Eriksson -- Kurchatov Institute of Atomic Energy, Moscow
+"When every node is whole, the channel opens."
+
+From tbrennan@pacbell.net Mon Apr 18 06:52:37 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!pacbell!tbrennan
+From: tbrennan@pacbell.net (Takeshi Brennan)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Apr18.065237.7990@pacbell.net>
+Date: Mon, 18 Apr 1994 06:52:37 GMT
+References: <1994Apr16.155037.8906@kiae.su>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1994Apr16.155037.8906@kiae.su>, teriksson@kiae.su (Tyler Eriksson) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Takeshi Brennan <tbrennan@pacbell.net>
+"When every node is whole, the channel opens."
+Pentium 90 (OS/2 Warp) / SunOS 4.1.4
+
+From tandersson@netcom.com Mon Apr 18 09:16:37 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!netcom!tandersson
+From: tandersson@netcom.com (Tomas Andersson)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Apr18.091637.5261@netcom.com>
+Date: Mon, 18 Apr 1994 09:16:37 GMT
+References: <1994Apr16.155037.8906@kiae.su> <1994Apr18.065237.7990@pacbell.net>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1994Apr18.065237.7990@pacbell.net>, tbrennan@pacbell.net (Takeshi Brennan) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+> PGP Public key available via finger or upon request.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+=== Tomas Andersson ===
+Dept of Electrical Engineering, NETCOM On-Line Communication Services
+"Extraordinary claims require extraordinary spectra."
+
+From tmoreno@mindspring.com Mon Apr 18 15:55:37 1994
+Path: ashpoly!cascade!bigsur!mindspring!tmoreno
+From: tmoreno@mindspring.com (Tyler Moreno)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Apr18.155537.3538@mindspring.com>
+Date: Mon, 18 Apr 1994 15:55:37 GMT
+References: <1994Apr16.155037.8906@kiae.su> <1994Apr18.065237.7990@pacbell.net>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 12
+
+In article <1994Apr18.065237.7990@pacbell.net>, tbrennan@pacbell.net (Takeshi Brennan) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+> PGP Public key available via finger or upon request.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+=== Tyler Moreno ===
+Dept of Electrical Engineering, MindSpring Enterprises
+"Hardware is temporary. The signal survives."
+
+From blindqvist@rwth-aachen.de Tue Apr 19 00:44:37 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!rwth-aachen!blindqvist
+From: blindqvist@rwth-aachen.de (Brian Lindqvist)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Apr19.004437.5753@rwth-aachen.de>
+Date: Tue, 19 Apr 1994 00:44:37 GMT
+References: <1994Apr16.155037.8906@kiae.su> <1994Apr18.065237.7990@pacbell.net>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1994Apr18.065237.7990@pacbell.net>, tbrennan@pacbell.net (Takeshi Brennan) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+> PGP Public key available via finger or upon request.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+=== Brian Lindqvist ===
+Dept of Electrical Engineering, RWTH Aachen Informatik
+"5 sigma is a discovery. 7 is a question."
+

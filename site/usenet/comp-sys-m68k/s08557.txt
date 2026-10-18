@@ -1,0 +1,93 @@
+From lcampbell@earthlink.net Tue Sep 26 22:36:43 1995
+Path: ashpoly!cascade!bigsur!earthlink!lcampbell
+From: lcampbell@earthlink.net (Lucia Campbell)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Sep26.223643.7686@earthlink.net>
+Date: Tue, 26 Sep 1995 22:36:43 GMT
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Lucia Campbell
+Opinions expressed are solely my own and not those of EarthLink Network.
+------------------------------------------------------------
+
+From seriksson@inria.fr Thu Sep 28 06:32:43 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!inria!seriksson
+From: seriksson@inria.fr (Steve Eriksson)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Sep28.063243.3761@inria.fr>
+Date: Thu, 28 Sep 1995 06:32:43 GMT
+References: <1995Sep26.223643.7686@earthlink.net>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Sep26.223643.7686@earthlink.net>, lcampbell@earthlink.net (Lucia Campbell) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Steve Eriksson <seriksson@inria.fr>
+"Marcus is not one man."
+Mac IIci / 68882 FPU / SunOS 4.1.4
+
+From vkowalski@netcom.com Sat Sep 30 01:26:43 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!netcom!vkowalski
+From: vkowalski@netcom.com (Valeria Kowalski)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Sep30.012643.4314@netcom.com>
+Date: Sat, 30 Sep 1995 01:26:43 GMT
+References: <1995Sep26.223643.7686@earthlink.net> <1995Sep28.063243.3761@inria.fr>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Sep28.063243.3761@inria.fr>, seriksson@inria.fr (Steve Eriksson) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+=== Valeria Kowalski ===
+Dept of Electrical Engineering, NETCOM On-Line Communication Services
+"They will send a copy in my place."
+
+From sreyes@rwth-aachen.de Sat Sep 30 09:53:43 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!rwth-aachen!sreyes
+From: sreyes@rwth-aachen.de (Sun-mi Reyes)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Sep30.095343.5514@rwth-aachen.de>
+Date: Sat, 30 Sep 1995 09:53:43 GMT
+References: <1995Sep26.223643.7686@earthlink.net> <1995Sep28.063243.3761@inria.fr> <1995Sep30.012643.4314@netcom.com>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Sep30.012643.4314@netcom.com>, vkowalski@netcom.com (Valeria Kowalski) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+=== Sun-mi Reyes ===
+Dept of Electrical Engineering, RWTH Aachen Informatik
+"Hardware is temporary. The signal survives."
+

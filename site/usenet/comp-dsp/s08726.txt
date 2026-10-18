@@ -1,0 +1,69 @@
+From cnakamura@cmu.edu Tue Jun 07 13:58:20 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!cmu!cnakamura
+From: cnakamura@cmu.edu (Callum Nakamura)
+Newsgroups: comp.dsp
+Subject: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Jun07.135820.2629@cmu.edu>
+Date: Tue, 07 Jun 1994 13:58:20 GMT
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Callum Nakamura | cnakamura@cmu.edu
+PGP Key fingerprint: 5C50 0143 CD70 0019
+"Keep the channels open."
+
+From hlopez@mit.edu Wed Jun 08 13:04:20 1994
+Path: ashpoly!cascade!mxgate!coyoacan!mit!hlopez
+From: hlopez@mit.edu (Heather López)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Jun08.130420.1636@mit.edu>
+Date: Wed, 08 Jun 1994 13:04:20 GMT
+References: <1994Jun07.135820.2629@cmu.edu>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Jun07.135820.2629@cmu.edu>, cnakamura@cmu.edu (Callum Nakamura) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Heather López -- Massachusetts Institute of Technology
+"There are 14 nodes and only 10 countries. Count again."
+
+From ihughes@clari.net Fri Jun 10 02:15:20 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!clari!ihughes
+From: ihughes@clari.net (Ines Hughes)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Jun10.021520.9037@clari.net>
+Date: Fri, 10 Jun 1994 02:15:20 GMT
+References: <1994Jun07.135820.2629@cmu.edu> <1994Jun08.130420.1636@mit.edu>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1994Jun08.130420.1636@mit.edu>, hlopez@mit.edu (Heather López) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Ines Hughes
+Tape trading list upon request. SASE required for international mail.
+

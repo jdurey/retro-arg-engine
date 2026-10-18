@@ -1,0 +1,70 @@
+From omartinez@titech.ac.jp Sat Oct 26 19:05:18 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!titech!omartinez
+From: omartinez@titech.ac.jp (Olga Martínez)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Oct26.190518.2836@titech.ac.jp>
+Date: Sat, 26 Oct 1996 19:05:18 GMT
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+Schematic diagram in ASCII uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/twin68_array.asc.
+
+-- 
+Olga Martínez <omartinez@titech.ac.jp>
+US Robotics Courier V.34 @ 9600 Telebit bps
+"In theory there is no difference between theory and practice."
+
+From bjohansson@clari.net Sat Oct 26 20:32:18 1996
+Path: ashpoly!cascade!bigsur!clari!bjohansson
+From: bjohansson@clari.net (Bruno Johansson)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Oct26.203218.3688@clari.net>
+Date: Sat, 26 Oct 1996 20:32:18 GMT
+References: <1996Oct26.190518.2836@titech.ac.jp>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Oct26.190518.2836@titech.ac.jp>, omartinez@titech.ac.jp (Olga Martínez) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+> Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Bruno Johansson
+Tape trading list upon request. SASE required for international mail.
+
+From ksmirnov@demon.co.uk Mon Oct 28 08:57:18 1996
+Path: ashpoly!cascade!bigsur!demon!ksmirnov
+From: ksmirnov@demon.co.uk (Karen Smirnov)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Oct28.085718.1136@demon.co.uk>
+Date: Mon, 28 Oct 1996 08:57:18 GMT
+References: <1996Oct26.190518.2836@titech.ac.jp> <1996Oct26.203218.3688@clari.net>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Oct26.203218.3688@clari.net>, bjohansson@clari.net (Bruno Johansson) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Karen Smirnov <ksmirnov@demon.co.uk>
+*PLONK* filter active for trolls.
+Sun SparcStation 20 - NetBSD 1.0
+

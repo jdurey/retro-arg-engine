@@ -1,0 +1,93 @@
+From ekuznetsov@unam.mx Sun May 22 11:02:49 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!unam!ekuznetsov
+From: ekuznetsov@unam.mx (Emi Kuznetsov)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994May22.110249.5047@unam.mx>
+Date: Sun, 22 May 1994 11:02:49 GMT
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Emi Kuznetsov
+Opinions expressed are solely my own and not those of Universidad Nacional Autónoma de México (DGSCA).
+------------------------------------------------------------
+
+From sweber@mit.edu Sun May 22 19:03:49 1994
+Path: ashpoly!cascade!brgate!saturno!mit!sweber
+From: sweber@mit.edu (Sun-mi Weber)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994May22.190349.9645@mit.edu>
+Date: Sun, 22 May 1994 19:03:49 GMT
+References: <1994May22.110249.5047@unam.mx>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994May22.110249.5047@unam.mx>, ekuznetsov@unam.mx (Emi Kuznetsov) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Sun-mi Weber
+Tape trading list upon request. SASE required for international mail.
+
+From randersson@kiae.su Mon May 23 15:24:49 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!kiae!randersson
+From: randersson@kiae.su (Renata Andersson)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994May23.152449.6842@kiae.su>
+Date: Mon, 23 May 1994 15:24:49 GMT
+References: <1994May22.110249.5047@unam.mx> <1994May22.190349.9645@mit.edu>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994May22.190349.9645@mit.edu>, sweber@mit.edu (Sun-mi Weber) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Renata Andersson <randersson@kiae.su>
+"Hold for relay."
+Pentium 90 (OS/2 Warp) / NEXTSTEP 3.3
+
+From mkarlsson@demon.co.uk Wed May 25 02:24:49 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!demon!mkarlsson
+From: mkarlsson@demon.co.uk (Marisol Karlsson)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994May25.022449.6573@demon.co.uk>
+Date: Wed, 25 May 1994 02:24:49 GMT
+References: <1994May22.110249.5047@unam.mx> <1994May22.190349.9645@mit.edu> <1994May23.152449.6842@kiae.su>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994May23.152449.6842@kiae.su>, randersson@kiae.su (Renata Andersson) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Marisol Karlsson <mkarlsson@demon.co.uk>
+"Row 14. No joke."
+Sun 3/60 (SunOS 4.1.1) / AmigaOS 3.1
+

@@ -1,0 +1,117 @@
+From rfournier@hanse.de Wed May 25 10:46:02 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!hanse!rfournier
+From: rfournier@hanse.de (Raj Fournier)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994May25.104602.7740@hanse.de>
+Date: Wed, 25 May 1994 10:46:02 GMT
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Raj Fournier
+Opinions expressed are solely my own and not those of Hanse-Netzwerk Hamburg.
+------------------------------------------------------------
+
+From mlee@u-tokyo.ac.jp Fri May 27 10:13:02 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!u-tokyo!mlee
+From: mlee@u-tokyo.ac.jp (Morag Lee)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994May27.101302.8611@u-tokyo.ac.jp>
+Date: Fri, 27 May 1994 10:13:02 GMT
+References: <1994May25.104602.7740@hanse.de>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1994May25.104602.7740@hanse.de>, rfournier@hanse.de (Raj Fournier) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Morag Lee <mlee@u-tokyo.ac.jp>
+"We don't sign stars. We build them."
+Macintosh IIfx / TOS 4.04
+
+From adubois@purdue.edu Sat May 28 18:06:02 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!purdue!adubois
+From: adubois@purdue.edu (Amy Dubois)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994May28.180602.2753@purdue.edu>
+Date: Sat, 28 May 1994 18:06:02 GMT
+References: <1994May25.104602.7740@hanse.de> <1994May27.101302.8611@u-tokyo.ac.jp>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994May27.101302.8611@u-tokyo.ac.jp>, mlee@u-tokyo.ac.jp (Morag Lee) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Amy Dubois
+Opinions expressed are solely my own and not those of Purdue University Engineering Computer Network.
+------------------------------------------------------------
+
+From enilsson@panix.com Mon May 30 00:30:02 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!panix!enilsson
+From: enilsson@panix.com (Elaine Nilsson)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994May30.003002.5100@panix.com>
+Date: Mon, 30 May 1994 00:30:02 GMT
+References: <1994May25.104602.7740@hanse.de> <1994May27.101302.8611@u-tokyo.ac.jp> <1994May28.180602.2753@purdue.edu>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994May28.180602.2753@purdue.edu>, adubois@purdue.edu (Amy Dubois) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Elaine Nilsson | enilsson@panix.com
+PGP Key fingerprint: D827 D1B0 43D4 EB30
+"Keep the channels open."
+
+From aivanov@u-tokyo.ac.jp Mon May 30 13:13:02 1994
+Path: ashpoly!cascade!brgate!saturno!u-tokyo!aivanov
+From: aivanov@u-tokyo.ac.jp (Anton Ivanov)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994May30.131302.2915@u-tokyo.ac.jp>
+Date: Mon, 30 May 1994 13:13:02 GMT
+References: <1994May25.104602.7740@hanse.de> <1994May27.101302.8611@u-tokyo.ac.jp> <1994May28.180602.2753@purdue.edu> <1994May30.003002.5100@panix.com>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994May30.003002.5100@panix.com>, enilsson@panix.com (Elaine Nilsson) writes:
+> Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Anton Ivanov
+Opinions expressed are solely my own and not those of University of Tokyo Department of Information Science.
+------------------------------------------------------------
+

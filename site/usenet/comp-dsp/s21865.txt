@@ -1,0 +1,46 @@
+From snilsson@kiae.su Fri Jul 07 13:21:55 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!kiae!snilsson
+From: snilsson@kiae.su (Seo-yeon Nilsson)
+Newsgroups: comp.dsp
+Subject: WTB/WTT: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Jul07.132155.8304@kiae.su>
+Date: Fri, 07 Jul 1995 13:21:55 GMT
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+Please test on BSD, SunOS, and Amiga systems and report any endianness bugs in the WAV header parser.
+
+-- 
+Seo-yeon Nilsson <snilsson@kiae.su>
+"Extraordinary claims require extraordinary spectra."
+Atari TT030 / NEXTSTEP 3.3
+
+From lsato@unam.mx Fri Jul 07 20:36:55 1995
+Path: ashpoly!cascade!brgate!saturno!unam!lsato
+From: lsato@unam.mx (Liam Sato)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Jul07.203655.2954@unam.mx>
+Date: Fri, 07 Jul 1995 20:36:55 GMT
+References: <1995Jul07.132155.8304@kiae.su>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Jul07.132155.8304@kiae.su>, snilsson@kiae.su (Seo-yeon Nilsson) writes:
+> Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Liam Sato -- Universidad Nacional Autónoma de México (DGSCA)
+"Measuring a record you own is listening, not piracy."
+

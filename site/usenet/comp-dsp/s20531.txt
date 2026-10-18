@@ -1,0 +1,119 @@
+From slindqvist@uu.net Wed Mar 27 02:37:30 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!uu!slindqvist
+From: slindqvist@uu.net (Seo-yeon Lindqvist)
+Newsgroups: comp.dsp
+Subject: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Mar27.023730.7875@uu.net>
+Date: Wed, 27 Mar 1996 02:37:30 GMT
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Seo-yeon Lindqvist
+Opinions expressed are solely my own and not those of UUNET Technologies, Falls Church VA.
+------------------------------------------------------------
+
+From tvasiliev@titech.ac.jp Thu Mar 28 15:26:30 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!titech!tvasiliev
+From: tvasiliev@titech.ac.jp (Tyler Vasiliev)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Mar28.152630.9622@titech.ac.jp>
+Date: Thu, 28 Mar 1996 15:26:30 GMT
+References: <1996Mar27.023730.7875@uu.net>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1996Mar27.023730.7875@uu.net>, slindqvist@uu.net (Seo-yeon Lindqvist) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Tyler Vasiliev | tvasiliev@titech.ac.jp
+PGP Key fingerprint: 1486 E324 BA7E A01F
+"Keep the channels open."
+
+From ifischer@rwth-aachen.de Sat Mar 30 17:00:30 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!rwth-aachen!ifischer
+From: ifischer@rwth-aachen.de (Ines Fischer)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Mar30.170030.6904@rwth-aachen.de>
+Date: Sat, 30 Mar 1996 17:00:30 GMT
+References: <1996Mar27.023730.7875@uu.net> <1996Mar28.152630.9622@titech.ac.jp>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Mar28.152630.9622@titech.ac.jp>, tvasiliev@titech.ac.jp (Tyler Vasiliev) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Ines Fischer -- RWTH Aachen Informatik
+"Extraordinary claims require extraordinary spectra."
+
+From jweber@purdue.edu Sat Mar 30 18:44:30 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!purdue!jweber
+From: jweber@purdue.edu (Jens Weber)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Mar30.184430.9754@purdue.edu>
+Date: Sat, 30 Mar 1996 18:44:30 GMT
+References: <1996Mar27.023730.7875@uu.net> <1996Mar28.152630.9622@titech.ac.jp> <1996Mar30.170030.6904@rwth-aachen.de>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996Mar30.170030.6904@rwth-aachen.de>, ifischer@rwth-aachen.de (Ines Fischer) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+> My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Jens Weber <jweber@purdue.edu>
+*PLONK* filter active for trolls.
+Pentium 90 (OS/2 Warp) - NetBSD 1.0
+
+From bschneider@unam.mx Mon Apr 01 22:36:30 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!unam!bschneider
+From: bschneider@unam.mx (Brian Schneider)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Apr01.223630.6958@unam.mx>
+Date: Mon, 01 Apr 1996 22:36:30 GMT
+References: <1996Mar27.023730.7875@uu.net> <1996Mar28.152630.9622@titech.ac.jp>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Mar28.152630.9622@titech.ac.jp>, tvasiliev@titech.ac.jp (Tyler Vasiliev) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Brian Schneider | bschneider@unam.mx
+PGP Key fingerprint: 0B79 B1D8 93AE E5CD
+"Keep the channels open."
+

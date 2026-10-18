@@ -1,0 +1,48 @@
+From vlopez@cern.ch Fri Jan 19 18:32:59 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!cern!vlopez
+From: vlopez@cern.ch (Valeria López)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Jan19.183259.8157@cern.ch>
+Date: Fri, 19 Jan 1996 18:32:59 GMT
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Valeria López <vlopez@cern.ch>
+US Robotics Courier V.34 @ ISDN 64k bps
+"Measuring a record you own is listening, not piracy."
+
+From rsouza@cam.ac.uk Sun Jan 21 16:18:59 1996
+Path: ashpoly!cascade!mxgate!coyoacan!cam!rsouza
+From: rsouza@cam.ac.uk (Renata Souza)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Jan21.161859.6263@cam.ac.uk>
+Date: Sun, 21 Jan 1996 16:18:59 GMT
+References: <1996Jan19.183259.8157@cern.ch>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Jan19.183259.8157@cern.ch>, vlopez@cern.ch (Valeria López) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Renata Souza <rsouza@cam.ac.uk>
+"There are 14 nodes and only 10 countries. Count again."
+Atari Falcon 030 / FreeBSD 2.1
+

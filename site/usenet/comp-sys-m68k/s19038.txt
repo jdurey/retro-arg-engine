@@ -1,0 +1,68 @@
+From ypark@cam.ac.uk Tue Mar 14 02:49:27 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!cam!ypark
+From: ypark@cam.ac.uk (Yuki Park)
+Newsgroups: comp.sys.m68k
+Subject: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Mar14.024927.8450@cam.ac.uk>
+Date: Tue, 14 Mar 1995 02:49:27 GMT
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Yuki Park
+Opinions expressed are solely my own and not those of University of Cambridge Computer Laboratory.
+------------------------------------------------------------
+
+From mfischer@inria.fr Tue Mar 14 21:33:27 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!inria!mfischer
+From: mfischer@inria.fr (Marta Fischer)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Mar14.213327.5579@inria.fr>
+Date: Tue, 14 Mar 1995 21:33:27 GMT
+References: <1995Mar14.024927.8450@cam.ac.uk>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1995Mar14.024927.8450@cam.ac.uk>, ypark@cam.ac.uk (Yuki Park) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+Looks like a prototype telecommunications board for military secure voice, not an audio music product.
+
+-- 
+Marta Fischer -- INRIA Rocquencourt
+"There are 14 nodes and only 10 countries. Count again."
+
+From tmartinez@uni-hamburg.de Wed Mar 15 16:52:27 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!uni-hamburg!tmartinez
+From: tmartinez@uni-hamburg.de (Tomas Martínez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Mar15.165227.8188@uni-hamburg.de>
+Date: Wed, 15 Mar 1995 16:52:27 GMT
+References: <1995Mar14.024927.8450@cam.ac.uk> <1995Mar14.213327.5579@inria.fr>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1995Mar14.213327.5579@inria.fr>, mfischer@inria.fr (Marta Fischer) writes:
+> Looks like a prototype telecommunications board for military secure voice, not an audio music product.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Tomas Martínez -- Universität Hamburg Fachbereich Informatik
+"Hold for relay."
+

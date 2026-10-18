@@ -1,0 +1,93 @@
+From bstewart@unam.mx Fri Mar 15 02:49:15 1996
+Path: ashpoly!cascade!bigsur!unam!bstewart
+From: bstewart@unam.mx (Bill Stewart)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Mar15.024915.2137@unam.mx>
+Date: Fri, 15 Mar 1996 02:49:15 GMT
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Bill Stewart <bstewart@unam.mx>
+"Marcus is not one man."
+486DX4/100 (FreeBSD 2.0.5) / Linux 1.2.13
+
+From jkang@unam.mx Sun Mar 17 05:21:15 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!unam!jkang
+From: jkang@unam.mx (Jens Kang)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Mar17.052115.9089@unam.mx>
+Date: Sun, 17 Mar 1996 05:21:15 GMT
+References: <1996Mar15.024915.2137@unam.mx>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Mar15.024915.2137@unam.mx>, bstewart@unam.mx (Bill Stewart) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+Jens Kang
+Opinions expressed are solely my own and not those of Universidad Nacional Autónoma de México (DGSCA).
+------------------------------------------------------------
+
+From rsanchez@purdue.edu Mon Mar 18 15:04:15 1996
+Path: ashpoly!cascade!mxgate!coyoacan!purdue!rsanchez
+From: rsanchez@purdue.edu (Renata Sánchez)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Mar18.150415.2054@purdue.edu>
+Date: Mon, 18 Mar 1996 15:04:15 GMT
+References: <1996Mar15.024915.2137@unam.mx> <1996Mar17.052115.9089@unam.mx>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Mar17.052115.9089@unam.mx>, jkang@unam.mx (Jens Kang) writes:
+> Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Renata Sánchez <rsanchez@purdue.edu>
+"Do not worship the copy."
+Mac IIci / 68882 FPU / NEXTSTEP 3.3
+
+From tivanov@cam.ac.uk Wed Mar 20 03:55:15 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!cam!tivanov
+From: tivanov@cam.ac.uk (Tyler Ivanov)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Mar20.035515.6730@cam.ac.uk>
+Date: Wed, 20 Mar 1996 03:55:15 GMT
+References: <1996Mar15.024915.2137@unam.mx> <1996Mar17.052115.9089@unam.mx> <1996Mar18.150415.2054@purdue.edu>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Mar18.150415.2054@purdue.edu>, rsanchez@purdue.edu (Renata Sánchez) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Tyler Ivanov <tivanov@cam.ac.uk>
+"There are 14 nodes and only 10 countries. Count again."
+Amiga 1200 (Blizzard 030/50) / System 7.5.1
+

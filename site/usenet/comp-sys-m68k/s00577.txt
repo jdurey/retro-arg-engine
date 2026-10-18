@@ -1,0 +1,71 @@
+From smacdonald@berkeley.edu Tue Nov 07 04:42:33 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!berkeley!smacdonald
+From: smacdonald@berkeley.edu (Seo-yeon MacDonald)
+Newsgroups: comp.sys.m68k
+Subject: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Nov07.044233.3796@berkeley.edu>
+Date: Tue, 07 Nov 1995 04:42:33 GMT
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Seo-yeon MacDonald <smacdonald@berkeley.edu>
+"There are 14 nodes and only 10 countries. Count again."
+Macintosh IIfx / Linux 1.2.13
+
+From klee@purdue.edu Wed Nov 08 16:40:33 1995
+Path: ashpoly!cascade!mxgate!coyoacan!purdue!klee
+From: klee@purdue.edu (Katrin Lee)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Nov08.164033.1989@purdue.edu>
+Date: Wed, 08 Nov 1995 16:40:33 GMT
+References: <1995Nov07.044233.3796@berkeley.edu>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Nov07.044233.3796@berkeley.edu>, smacdonald@berkeley.edu (Seo-yeon MacDonald) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+> Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Katrin Lee
+Opinions expressed are solely my own and not those of Purdue University Engineering Computer Network.
+------------------------------------------------------------
+
+From mlopez@utexas.edu Thu Nov 09 20:28:33 1995
+Path: ashpoly!cascade!brgate!saturno!utexas!mlopez
+From: mlopez@utexas.edu (Mikhail López)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Nov09.202833.9590@utexas.edu>
+Date: Thu, 09 Nov 1995 20:28:33 GMT
+References: <1995Nov07.044233.3796@berkeley.edu> <1995Nov08.164033.1989@purdue.edu>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Nov08.164033.1989@purdue.edu>, klee@purdue.edu (Katrin Lee) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Mikhail López <mlopez@utexas.edu>
+Practical Peripherals 14.4 @ 28,800 bps
+"Row 14. No joke."
+

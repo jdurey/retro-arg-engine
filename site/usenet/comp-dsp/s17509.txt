@@ -1,0 +1,121 @@
+From asuzuki@tum.de Thu Sep 28 09:23:46 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!tum!asuzuki
+From: asuzuki@tum.de (Amy Suzuki)
+Newsgroups: comp.dsp
+Subject: Data: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Sep28.092346.9861@tum.de>
+Date: Thu, 28 Sep 1995 09:23:46 GMT
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Amy Suzuki | asuzuki@tum.de
+PGP Key fingerprint: 051F 8C51 4559 45EA
+"Keep the channels open."
+
+From npark@rwth-aachen.de Thu Sep 28 22:47:46 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!rwth-aachen!npark
+From: npark@rwth-aachen.de (Natalia Park)
+Newsgroups: comp.dsp
+Subject: Re: Data: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Sep28.224746.1291@rwth-aachen.de>
+Date: Thu, 28 Sep 1995 22:47:46 GMT
+References: <1995Sep28.092346.9861@tum.de>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1995Sep28.092346.9861@tum.de>, asuzuki@tum.de (Amy Suzuki) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+=== Natalia Park ===
+Dept of Electrical Engineering, RWTH Aachen Informatik
+"When every node is whole, the channel opens."
+
+From akang@hanse.de Sat Sep 30 06:01:46 1995
+Path: ashpoly!cascade!brgate!saturno!hanse!akang
+From: akang@hanse.de (Amy Kang)
+Newsgroups: comp.dsp
+Subject: Re: Data: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Sep30.060146.2030@hanse.de>
+Date: Sat, 30 Sep 1995 06:01:46 GMT
+References: <1995Sep28.092346.9861@tum.de>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Sep28.092346.9861@tum.de>, asuzuki@tum.de (Amy Suzuki) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Amy Kang <akang@hanse.de>
+Hayes Optima 288 @ ISDN 64k bps
+"Tape doesn't lie at 02:14. Ears do."
+
+From eoliveira@pacbell.net Sun Oct 01 03:13:46 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!pacbell!eoliveira
+From: eoliveira@pacbell.net (Elaine Oliveira)
+Newsgroups: comp.dsp
+Subject: Re: Data: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Oct01.031346.3773@pacbell.net>
+Date: Sun, 01 Oct 1995 03:13:46 GMT
+References: <1995Sep28.092346.9861@tum.de> <1995Sep30.060146.2030@hanse.de>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Sep30.060146.2030@hanse.de>, akang@hanse.de (Amy Kang) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Elaine Oliveira -- Pacific Bell Internet Services
+"When every node is whole, the channel opens."
+
+From crodriguez@earthlink.net Mon Oct 02 06:15:46 1995
+Path: ashpoly!cascade!brgate!saturno!earthlink!crodriguez
+From: crodriguez@earthlink.net (Callum Rodríguez)
+Newsgroups: comp.dsp
+Subject: Re: Data: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Oct02.061546.4690@earthlink.net>
+Date: Mon, 02 Oct 1995 06:15:46 GMT
+References: <1995Sep28.092346.9861@tum.de> <1995Sep30.060146.2030@hanse.de>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Sep30.060146.2030@hanse.de>, akang@hanse.de (Amy Kang) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Callum Rodríguez <crodriguez@earthlink.net>
+"5 sigma is a discovery. 7 is a question."
+Sun SparcStation 20 / Linux 1.2.13
+

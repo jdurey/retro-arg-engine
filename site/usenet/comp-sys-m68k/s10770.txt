@@ -1,0 +1,92 @@
+From lvasiliev@purdue.edu Sat Mar 04 16:51:38 1995
+Path: ashpoly!cascade!brgate!saturno!purdue!lvasiliev
+From: lvasiliev@purdue.edu (Lisa Vasiliev)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Mar04.165138.4973@purdue.edu>
+Date: Sat, 04 Mar 1995 16:51:38 GMT
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+
+Did Marcus take the decryption EPROM with him when he left the lab?
+
+-- 
+Lisa Vasiliev <lvasiliev@purdue.edu>
+SupraFAXModem 28.8 @ 28,800 bps
+"Marcus is not one man."
+
+From skang@berkeley.edu Mon Mar 06 02:19:38 1995
+Path: ashpoly!cascade!brgate!saturno!berkeley!skang
+From: skang@berkeley.edu (Sun-mi Kang)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Mar06.021938.6001@berkeley.edu>
+Date: Mon, 06 Mar 1995 02:19:38 GMT
+References: <1995Mar04.165138.4973@purdue.edu>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Mar04.165138.4973@purdue.edu>, lvasiliev@purdue.edu (Lisa Vasiliev) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+-- 
+=== Sun-mi Kang ===
+Dept of Electrical Engineering, UC Berkeley Department of EECS
+"Hardware is temporary. The signal survives."
+
+From itanaka@pacbell.net Tue Mar 07 22:21:38 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!pacbell!itanaka
+From: itanaka@pacbell.net (Ines Tanaka)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Mar07.222138.8244@pacbell.net>
+Date: Tue, 07 Mar 1995 22:21:38 GMT
+References: <1995Mar04.165138.4973@purdue.edu>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1995Mar04.165138.4973@purdue.edu>, lvasiliev@purdue.edu (Lisa Vasiliev) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+-- 
+Ines Tanaka
+Tape trading list upon request. SASE required for international mail.
+
+From dbrennan@cam.ac.uk Thu Mar 09 02:58:38 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!cam!dbrennan
+From: dbrennan@cam.ac.uk (Diego Brennan)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Mar09.025838.4305@cam.ac.uk>
+Date: Thu, 09 Mar 1995 02:58:38 GMT
+References: <1995Mar04.165138.4973@purdue.edu> <1995Mar07.222138.8244@pacbell.net>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1995Mar07.222138.8244@pacbell.net>, itanaka@pacbell.net (Ines Tanaka) writes:
+> That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Diego Brennan
+Tape trading list upon request. SASE required for international mail.
+

@@ -1,0 +1,47 @@
+From mfischer@panix.com Thu May 11 13:01:21 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!panix!mfischer
+From: mfischer@panix.com (Mateo Fischer)
+Newsgroups: comp.sys.m68k
+Subject: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995May11.130121.3829@panix.com>
+Date: Thu, 11 May 1995 13:01:21 GMT
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Mateo Fischer -- Public Access Unix of New York
+"The hatch is open. Is anyone listening?"
+
+From jhughes@tum.de Sat May 13 01:02:21 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!tum!jhughes
+From: jhughes@tum.de (Joachim Hughes)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995May13.010221.6814@tum.de>
+Date: Sat, 13 May 1995 01:02:21 GMT
+References: <1995May11.130121.3829@panix.com>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995May11.130121.3829@panix.com>, mfischer@panix.com (Mateo Fischer) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+=== Joachim Hughes ===
+Dept of Electrical Engineering, Technische Universität München
+"Measuring a record you own is listening, not piracy."
+

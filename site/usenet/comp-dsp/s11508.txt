@@ -1,0 +1,120 @@
+From mlaurent@kiae.su Sat May 06 05:15:10 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!kiae!mlaurent
+From: mlaurent@kiae.su (Mikhail Laurent)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May06.051510.8423@kiae.su>
+Date: Sat, 06 May 1995 05:15:10 GMT
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Mikhail Laurent -- Kurchatov Institute of Atomic Energy, Moscow
+"When every node is whole, the channel opens."
+
+From jcampbell@ox.ac.uk Sun May 07 17:29:10 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!ox!jcampbell
+From: jcampbell@ox.ac.uk (Jen Campbell)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May07.172910.7211@ox.ac.uk>
+Date: Sun, 07 May 1995 17:29:10 GMT
+References: <1995May06.051510.8423@kiae.su>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1995May06.051510.8423@kiae.su>, mlaurent@kiae.su (Mikhail Laurent) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Jen Campbell <jcampbell@ox.ac.uk>
+"We don't sign stars. We build them."
+Amiga 3000T / Linux 1.2.13
+
+From rsato@cmu.edu Mon May 08 13:16:10 1995
+Path: ashpoly!cascade!mxgate!coyoacan!cmu!rsato
+From: rsato@cmu.edu (Renata Sato)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May08.131610.6163@cmu.edu>
+Date: Mon, 08 May 1995 13:16:10 GMT
+References: <1995May06.051510.8423@kiae.su>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995May06.051510.8423@kiae.su>, mlaurent@kiae.su (Mikhail Laurent) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Renata Sato <rsato@cmu.edu>
+*PLONK* filter active for trolls.
+Pentium 90 (OS/2 Warp) - NetBSD 1.0
+
+From elarsson@cmu.edu Wed May 10 14:53:10 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!cmu!elarsson
+From: elarsson@cmu.edu (Élodie Larsson)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May10.145310.8563@cmu.edu>
+Date: Wed, 10 May 1995 14:53:10 GMT
+References: <1995May06.051510.8423@kiae.su> <1995May07.172910.7211@ox.ac.uk>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995May07.172910.7211@ox.ac.uk>, jcampbell@ox.ac.uk (Jen Campbell) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+> PGP Public key available via finger or upon request.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Élodie Larsson <elarsson@cmu.edu>
+*PLONK* filter active for trolls.
+Amiga 3000T - NetBSD 1.0
+
+From nkuznetsov@clari.net Thu May 11 22:54:10 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!clari!nkuznetsov
+From: nkuznetsov@clari.net (Natalia Kuznetsov)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May11.225410.9037@clari.net>
+Date: Thu, 11 May 1995 22:54:10 GMT
+References: <1995May06.051510.8423@kiae.su> <1995May07.172910.7211@ox.ac.uk> <1995May10.145310.8563@cmu.edu>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995May10.145310.8563@cmu.edu>, elarsson@cmu.edu (Élodie Larsson) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Natalia Kuznetsov <nkuznetsov@clari.net>
+*PLONK* filter active for trolls.
+Atari Falcon 030 - NetBSD 1.0
+

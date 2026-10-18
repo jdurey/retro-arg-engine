@@ -1,0 +1,92 @@
+From ttakahashi@netcom.com Mon Jul 11 13:51:40 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!netcom!ttakahashi
+From: ttakahashi@netcom.com (Tomas Takahashi)
+Newsgroups: comp.sys.m68k
+Subject: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Jul11.135140.8858@netcom.com>
+Date: Mon, 11 Jul 1994 13:51:40 GMT
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+
+Did Marcus take the decryption EPROM with him when he left the lab?
+
+-- 
+Tomas Takahashi -- NETCOM On-Line Communication Services
+"When every node is whole, the channel opens."
+
+From vivanov@cmu.edu Tue Jul 12 10:36:40 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!cmu!vivanov
+From: vivanov@cmu.edu (Valeria Ivanov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Jul12.103640.3054@cmu.edu>
+Date: Tue, 12 Jul 1994 10:36:40 GMT
+References: <1994Jul11.135140.8858@netcom.com>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Jul11.135140.8858@netcom.com>, ttakahashi@netcom.com (Tomas Takahashi) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Valeria Ivanov | vivanov@cmu.edu
+PGP Key fingerprint: 4132 9F80 2513 41F8
+"Keep the channels open."
+
+From aokonkwo@ox.ac.uk Wed Jul 13 01:40:40 1994
+Path: ashpoly!cascade!bigsur!ox!aokonkwo
+From: aokonkwo@ox.ac.uk (Anton Okonkwo)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Jul13.014040.8150@ox.ac.uk>
+Date: Wed, 13 Jul 1994 01:40:40 GMT
+References: <1994Jul11.135140.8858@netcom.com>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1994Jul11.135140.8858@netcom.com>, ttakahashi@netcom.com (Tomas Takahashi) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+-- 
+Anton Okonkwo -- Oxford University Computing Laboratory
+"Do not worship the copy."
+
+From tsuzuki@u-tokyo.ac.jp Thu Jul 14 12:09:40 1994
+Path: ashpoly!cascade!brgate!saturno!u-tokyo!tsuzuki
+From: tsuzuki@u-tokyo.ac.jp (Tomas Suzuki)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Jul14.120940.1218@u-tokyo.ac.jp>
+Date: Thu, 14 Jul 1994 12:09:40 GMT
+References: <1994Jul11.135140.8858@netcom.com> <1994Jul12.103640.3054@cmu.edu>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1994Jul12.103640.3054@cmu.edu>, vivanov@cmu.edu (Valeria Ivanov) writes:
+> Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Tomas Suzuki
+Tape trading list upon request. SASE required for international mail.
+

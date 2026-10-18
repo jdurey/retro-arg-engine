@@ -1,0 +1,116 @@
+From ykarlsson@cern.ch Thu Jul 06 17:25:24 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!cern!ykarlsson
+From: ykarlsson@cern.ch (Yuki Karlsson)
+Newsgroups: comp.dsp
+Subject: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jul06.172524.5234@cern.ch>
+Date: Thu, 06 Jul 1995 17:25:24 GMT
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Yuki Karlsson <ykarlsson@cern.ch>
+*PLONK* filter active for trolls.
+Mac IIci / 68882 FPU - NetBSD 1.0
+
+From tkarlsson@cam.ac.uk Fri Jul 07 22:21:24 1995
+Path: ashpoly!cascade!brgate!saturno!cam!tkarlsson
+From: tkarlsson@cam.ac.uk (Takeshi Karlsson)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jul07.222124.9355@cam.ac.uk>
+Date: Fri, 07 Jul 1995 22:21:24 GMT
+References: <1995Jul06.172524.5234@cern.ch>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Jul06.172524.5234@cern.ch>, ykarlsson@cern.ch (Yuki Karlsson) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+=== Takeshi Karlsson ===
+Dept of Electrical Engineering, University of Cambridge Computer Laboratory
+"The carrier frequency does not drift by accident."
+
+From mgarcia@u-tokyo.ac.jp Sun Jul 09 00:23:24 1995
+Path: ashpoly!cascade!mxgate!coyoacan!u-tokyo!mgarcia
+From: mgarcia@u-tokyo.ac.jp (Marisol García)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jul09.002324.3418@u-tokyo.ac.jp>
+Date: Sun, 09 Jul 1995 00:23:24 GMT
+References: <1995Jul06.172524.5234@cern.ch> <1995Jul07.222124.9355@cam.ac.uk>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Jul07.222124.9355@cam.ac.uk>, tkarlsson@cam.ac.uk (Takeshi Karlsson) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Marisol García <mgarcia@u-tokyo.ac.jp>
+Practical Peripherals 14.4 @ 28,800 bps
+"The hatch is open. Is anyone listening?"
+
+From kpetrov@mit.edu Sun Jul 09 01:51:24 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!mit!kpetrov
+From: kpetrov@mit.edu (Katrin Petrov)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jul09.015124.2744@mit.edu>
+Date: Sun, 09 Jul 1995 01:51:24 GMT
+References: <1995Jul06.172524.5234@cern.ch>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Jul06.172524.5234@cern.ch>, ykarlsson@cern.ch (Yuki Karlsson) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+=== Katrin Petrov ===
+Dept of Electrical Engineering, Massachusetts Institute of Technology
+"In theory there is no difference between theory and practice."
+
+From etanaka@pipeline.com Mon Jul 10 22:14:24 1995
+Path: ashpoly!cascade!brgate!saturno!pipeline!etanaka
+From: etanaka@pipeline.com (Emi Tanaka)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jul10.221424.1893@pipeline.com>
+Date: Mon, 10 Jul 1995 22:14:24 GMT
+References: <1995Jul06.172524.5234@cern.ch> <1995Jul09.015124.2744@mit.edu>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1995Jul09.015124.2744@mit.edu>, kpetrov@mit.edu (Katrin Petrov) writes:
+> Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Emi Tanaka -- The Pipeline Internet Network
+"When every node is whole, the channel opens."
+

@@ -1,0 +1,70 @@
+From mtanaka@berkeley.edu Sat Sep 28 04:54:15 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!berkeley!mtanaka
+From: mtanaka@berkeley.edu (Marisol Tanaka)
+Newsgroups: comp.sys.m68k
+Subject: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Sep28.045415.2195@berkeley.edu>
+Date: Sat, 28 Sep 1996 04:54:15 GMT
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Marisol Tanaka <mtanaka@berkeley.edu>
+Zyxel U-1496E @ 28,800 bps
+"When every node is whole, the channel opens."
+
+From dokonkwo@netcom.com Mon Sep 30 04:14:15 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!netcom!dokonkwo
+From: dokonkwo@netcom.com (Dong-hyun Okonkwo)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Sep30.041415.3453@netcom.com>
+Date: Mon, 30 Sep 1996 04:14:15 GMT
+References: <1996Sep28.045415.2195@berkeley.edu>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Sep28.045415.2195@berkeley.edu>, mtanaka@berkeley.edu (Marisol Tanaka) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Dong-hyun Okonkwo
+Tape trading list upon request. SASE required for international mail.
+
+From emoreno@uu.net Tue Oct 01 02:39:15 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!uu!emoreno
+From: emoreno@uu.net (Emi Moreno)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Oct01.023915.3185@uu.net>
+Date: Tue, 01 Oct 1996 02:39:15 GMT
+References: <1996Sep28.045415.2195@berkeley.edu> <1996Sep30.041415.3453@netcom.com>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Sep30.041415.3453@netcom.com>, dokonkwo@netcom.com (Dong-hyun Okonkwo) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Emi Moreno <emoreno@uu.net>
+"Hardware is temporary. The signal survives."
+Sun SparcStation 20 / FreeBSD 2.1
+

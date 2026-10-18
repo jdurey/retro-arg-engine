@@ -1,0 +1,117 @@
+From mtakahashi@panix.com Fri Jan 21 19:59:54 1994
+Path: ashpoly!cascade!brgate!saturno!panix!mtakahashi
+From: mtakahashi@panix.com (Mike Takahashi)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Jan21.195954.2108@panix.com>
+Date: Fri, 21 Jan 1994 19:59:54 GMT
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+Version 1.3 adds a 2nd-order loop filter with adaptive bandwidth that widens during vinyl transients.
+Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+
+Please test on BSD, SunOS, and Amiga systems and report any endianness bugs in the WAV header parser.
+
+-- 
+Mike Takahashi -- Public Access Unix of New York
+"They will send a copy in my place."
+
+From enilsson@kth.se Sat Jan 22 04:34:54 1994
+Path: ashpoly!cascade!bigsur!kth!enilsson
+From: enilsson@kth.se (Elaine Nilsson)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Jan22.043454.6992@kth.se>
+Date: Sat, 22 Jan 1994 04:34:54 GMT
+References: <1994Jan21.195954.2108@panix.com>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Jan21.195954.2108@panix.com>, mtakahashi@panix.com (Mike Takahashi) writes:
+> Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Elaine Nilsson
+Opinions expressed are solely my own and not those of Royal Institute of Technology, Stockholm.
+------------------------------------------------------------
+
+From hsantos@uni-hamburg.de Mon Jan 24 05:14:54 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!uni-hamburg!hsantos
+From: hsantos@uni-hamburg.de (Hana Santos)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Jan24.051454.2114@uni-hamburg.de>
+Date: Mon, 24 Jan 1994 05:14:54 GMT
+References: <1994Jan21.195954.2108@panix.com> <1994Jan22.043454.6992@kth.se>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1994Jan22.043454.6992@kth.se>, enilsson@kth.se (Elaine Nilsson) writes:
+> Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+Tar.gz archive gave a CRC error with PKUNZIP. Make sure you upload in binary mode, not ASCII!
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Hana Santos -- Universität Hamburg Fachbereich Informatik
+"When every node is whole, the channel opens."
+
+From mmuller@pacbell.net Tue Jan 25 11:52:54 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!pacbell!mmuller
+From: mmuller@pacbell.net (Morag Müller)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Jan25.115254.4779@pacbell.net>
+Date: Tue, 25 Jan 1994 11:52:54 GMT
+References: <1994Jan21.195954.2108@panix.com> <1994Jan22.043454.6992@kth.se> <1994Jan24.051454.2114@uni-hamburg.de>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1994Jan24.051454.2114@uni-hamburg.de>, hsantos@uni-hamburg.de (Hana Santos) writes:
+> Tar.gz archive gave a CRC error with PKUNZIP. Make sure you upload in binary mode, not ASCII!
+
+On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+=== Morag Müller ===
+Dept of Electrical Engineering, Pacific Bell Internet Services
+"They will send a copy in my place."
+
+From mgonzalez@unam.mx Tue Jan 25 13:33:54 1994
+Path: ashpoly!cascade!brgate!saturno!unam!mgonzalez
+From: mgonzalez@unam.mx (Marta González)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Jan25.133354.2903@unam.mx>
+Date: Tue, 25 Jan 1994 13:33:54 GMT
+References: <1994Jan21.195954.2108@panix.com>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1994Jan21.195954.2108@panix.com>, mtakahashi@panix.com (Mike Takahashi) writes:
+> Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Marta González -- Universidad Nacional Autónoma de México (DGSCA)
+"The carrier frequency does not drift by accident."
+

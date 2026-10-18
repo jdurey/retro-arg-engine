@@ -1,0 +1,116 @@
+From jandersson@utexas.edu Wed Mar 22 01:21:43 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!utexas!jandersson
+From: jandersson@utexas.edu (Jen Andersson)
+Newsgroups: comp.dsp
+Subject: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Mar22.012143.4480@utexas.edu>
+Date: Wed, 22 Mar 1995 01:21:43 GMT
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Jen Andersson <jandersson@utexas.edu>
+*PLONK* filter active for trolls.
+Commodore Amiga 500 (1MB OCS) - NetBSD 1.0
+
+From mpark@cern.ch Wed Mar 22 23:39:43 1995
+Path: ashpoly!cascade!bigsur!cern!mpark
+From: mpark@cern.ch (Matthias Park)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Mar22.233943.7355@cern.ch>
+Date: Wed, 22 Mar 1995 23:39:43 GMT
+References: <1995Mar22.012143.4480@utexas.edu>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Mar22.012143.4480@utexas.edu>, jandersson@utexas.edu (Jen Andersson) writes:
+> Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+=== Matthias Park ===
+Dept of Electrical Engineering, European Laboratory for Particle Physics, Geneva
+"The carrier frequency does not drift by accident."
+
+From lsilva@stanford.edu Thu Mar 23 19:54:43 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!stanford!lsilva
+From: lsilva@stanford.edu (Lucia Silva)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Mar23.195443.5880@stanford.edu>
+Date: Thu, 23 Mar 1995 19:54:43 GMT
+References: <1995Mar22.012143.4480@utexas.edu> <1995Mar22.233943.7355@cern.ch>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Mar22.233943.7355@cern.ch>, mpark@cern.ch (Matthias Park) writes:
+> I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+=== Lucia Silva ===
+Dept of Electrical Engineering, Stanford University Computer Systems Lab
+"Hold for relay."
+
+From itanaka@pipeline.com Sat Mar 25 14:46:43 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!pipeline!itanaka
+From: itanaka@pipeline.com (Ines Tanaka)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Mar25.144643.9920@pipeline.com>
+Date: Sat, 25 Mar 1995 14:46:43 GMT
+References: <1995Mar22.012143.4480@utexas.edu> <1995Mar22.233943.7355@cern.ch> <1995Mar23.195443.5880@stanford.edu>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Mar23.195443.5880@stanford.edu>, lsilva@stanford.edu (Lucia Silva) writes:
+> I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+=== Ines Tanaka ===
+Dept of Electrical Engineering, The Pipeline Internet Network
+"Hardware is temporary. The signal survives."
+
+From mmartinez@earthlink.net Sun Mar 26 06:22:43 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!earthlink!mmartinez
+From: mmartinez@earthlink.net (Mathieu Martínez)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Mar26.062243.7810@earthlink.net>
+Date: Sun, 26 Mar 1995 06:22:43 GMT
+References: <1995Mar22.012143.4480@utexas.edu> <1995Mar22.233943.7355@cern.ch> <1995Mar23.195443.5880@stanford.edu> <1995Mar25.144643.9920@pipeline.com>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Mar25.144643.9920@pipeline.com>, itanaka@pipeline.com (Ines Tanaka) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Mathieu Martínez <mmartinez@earthlink.net>
+Hayes Optima 288 @ 19,200 bps
+"Do not worship the copy."
+

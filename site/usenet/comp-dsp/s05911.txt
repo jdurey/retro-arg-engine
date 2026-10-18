@@ -1,0 +1,96 @@
+From sstewart@cam.ac.uk Wed Jan 04 07:59:03 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!cam!sstewart
+From: sstewart@cam.ac.uk (Sergei Stewart)
+Newsgroups: comp.dsp
+Subject: WTB/WTT: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jan04.075903.7207@cam.ac.uk>
+Date: Wed, 04 Jan 1995 07:59:03 GMT
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+MATLAB script available upon request via email.
+
+-- 
+Sergei Stewart
+Tape trading list upon request. SASE required for international mail.
+
+From tchoi@cmu.edu Thu Jan 05 08:22:03 1995
+Path: ashpoly!cascade!mxgate!coyoacan!cmu!tchoi
+From: tchoi@cmu.edu (Tyler Choi)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jan05.082203.8460@cmu.edu>
+Date: Thu, 05 Jan 1995 08:22:03 GMT
+References: <1995Jan04.075903.7207@cam.ac.uk>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Jan04.075903.7207@cam.ac.uk>, sstewart@cam.ac.uk (Sergei Stewart) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+=== Tyler Choi ===
+Dept of Electrical Engineering, Carnegie Mellon University School of CS
+"Extraordinary claims require extraordinary spectra."
+
+From bkarlsson@cern.ch Fri Jan 06 05:54:03 1995
+Path: ashpoly!cascade!mxgate!coyoacan!cern!bkarlsson
+From: bkarlsson@cern.ch (Brian Karlsson)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jan06.055403.4932@cern.ch>
+Date: Fri, 06 Jan 1995 05:54:03 GMT
+References: <1995Jan04.075903.7207@cam.ac.uk>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995Jan04.075903.7207@cam.ac.uk>, sstewart@cam.ac.uk (Sergei Stewart) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Brian Karlsson
+Tape trading list upon request. SASE required for international mail.
+
+From alindqvist@titech.ac.jp Sat Jan 07 15:28:03 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!titech!alindqvist
+From: alindqvist@titech.ac.jp (Astrid Lindqvist)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jan07.152803.6929@titech.ac.jp>
+Date: Sat, 07 Jan 1995 15:28:03 GMT
+References: <1995Jan04.075903.7207@cam.ac.uk>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Jan04.075903.7207@cam.ac.uk>, sstewart@cam.ac.uk (Sergei Stewart) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Astrid Lindqvist <alindqvist@titech.ac.jp>
+*PLONK* filter active for trolls.
+Atari Falcon 030 - NetBSD 1.0
+

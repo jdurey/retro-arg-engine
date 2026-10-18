@@ -1,0 +1,94 @@
+From msato@cern.ch Wed Jul 24 06:30:54 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!cern!msato
+From: msato@cern.ch (Mikhail Sato)
+Newsgroups: comp.sys.m68k
+Subject: WTB/WTT: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Jul24.063054.3346@cern.ch>
+Date: Wed, 24 Jul 1996 06:30:54 GMT
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+
+Does anyone have a 27C256 EPROM marked 'MH-U14' or 'ORION-CRYPTO'?
+
+-- 
+Mikhail Sato <msato@cern.ch>
+"5 sigma is a discovery. 7 is a question."
+Commodore Amiga 500 (1MB OCS) / Linux 1.2.13
+
+From lchoi@kth.se Wed Jul 24 13:15:54 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!kth!lchoi
+From: lchoi@kth.se (Lucia Choi)
+Newsgroups: comp.sys.m68k
+Subject: Re: WTB/WTT: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Jul24.131554.6907@kth.se>
+Date: Wed, 24 Jul 1996 13:15:54 GMT
+References: <1996Jul24.063054.3346@cern.ch>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Jul24.063054.3346@cern.ch>, msato@cern.ch (Mikhail Sato) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Lucia Choi <lchoi@kth.se>
+"A soul is not exclusive to biology."
+Macintosh IIfx / Linux 1.2.13
+
+From tsmirnov@netcom.com Fri Jul 26 05:16:54 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!netcom!tsmirnov
+From: tsmirnov@netcom.com (Takeshi Smirnov)
+Newsgroups: comp.sys.m68k
+Subject: Re: WTB/WTT: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Jul26.051654.7834@netcom.com>
+Date: Fri, 26 Jul 1996 05:16:54 GMT
+References: <1996Jul24.063054.3346@cern.ch> <1996Jul24.131554.6907@kth.se>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1996Jul24.131554.6907@kth.se>, lchoi@kth.se (Lucia Choi) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+PGP Public key available via finger or upon request.
+
+-- 
+=== Takeshi Smirnov ===
+Dept of Electrical Engineering, NETCOM On-Line Communication Services
+"5 sigma is a discovery. 7 is a question."
+
+From nkarlsson@panix.com Sat Jul 27 05:21:54 1996
+Path: ashpoly!cascade!brgate!saturno!panix!nkarlsson
+From: nkarlsson@panix.com (Natalia Karlsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: WTB/WTT: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Jul27.052154.2299@panix.com>
+Date: Sat, 27 Jul 1996 05:21:54 GMT
+References: <1996Jul24.063054.3346@cern.ch> <1996Jul24.131554.6907@kth.se>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1996Jul24.131554.6907@kth.se>, lchoi@kth.se (Lucia Choi) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Natalia Karlsson -- Public Access Unix of New York
+"In theory there is no difference between theory and practice."
+

@@ -1,0 +1,98 @@
+From lkuznetsov@stanford.edu Tue Nov 21 09:11:16 1995
+Path: ashpoly!cascade!brgate!saturno!stanford!lkuznetsov
+From: lkuznetsov@stanford.edu (Lars Kuznetsov)
+Newsgroups: comp.dsp
+Subject: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Nov21.091116.1470@stanford.edu>
+Date: Tue, 21 Nov 1995 09:11:16 GMT
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+=== Lars Kuznetsov ===
+Dept of Electrical Engineering, Stanford University Computer Systems Lab
+"The hatch is open. Is anyone listening?"
+
+From bperez@u-tokyo.ac.jp Tue Nov 21 09:59:16 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!u-tokyo!bperez
+From: bperez@u-tokyo.ac.jp (Bruno Pérez)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Nov21.095916.8014@u-tokyo.ac.jp>
+Date: Tue, 21 Nov 1995 09:59:16 GMT
+References: <1995Nov21.091116.1470@stanford.edu>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Nov21.091116.1470@stanford.edu>, lkuznetsov@stanford.edu (Lars Kuznetsov) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Bruno Pérez
+Opinions expressed are solely my own and not those of University of Tokyo Department of Information Science.
+------------------------------------------------------------
+
+From mnilsson@inria.fr Thu Nov 23 05:27:16 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!inria!mnilsson
+From: mnilsson@inria.fr (Min-jun Nilsson)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Nov23.052716.7013@inria.fr>
+Date: Thu, 23 Nov 1995 05:27:16 GMT
+References: <1995Nov21.091116.1470@stanford.edu> <1995Nov21.095916.8014@u-tokyo.ac.jp>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995Nov21.095916.8014@u-tokyo.ac.jp>, bperez@u-tokyo.ac.jp (Bruno Pérez) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Min-jun Nilsson <mnilsson@inria.fr>
+"The hatch is open. Is anyone listening?"
+Mac IIci / 68882 FPU / Linux 1.2.13
+
+From npopov@cam.ac.uk Thu Nov 23 06:18:16 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!cam!npopov
+From: npopov@cam.ac.uk (Nadine Popov)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Nov23.061816.7490@cam.ac.uk>
+Date: Thu, 23 Nov 1995 06:18:16 GMT
+References: <1995Nov21.091116.1470@stanford.edu>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1995Nov21.091116.1470@stanford.edu>, lkuznetsov@stanford.edu (Lars Kuznetsov) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+Nadine Popov | npopov@cam.ac.uk
+PGP Key fingerprint: 9DA2 2948 6E3A 5B22
+"Keep the channels open."
+

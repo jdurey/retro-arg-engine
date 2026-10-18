@@ -1,0 +1,48 @@
+From mmoreno@delphi.com Fri Nov 03 06:26:07 1995
+Path: ashpoly!cascade!bigsur!delphi!mmoreno
+From: mmoreno@delphi.com (Min-jun Moreno)
+Newsgroups: comp.dsp
+Subject: [INFO] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Nov03.062607.7076@delphi.com>
+Date: Fri, 03 Nov 1995 06:26:07 GMT
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+MATLAB script available upon request via email.
+
+-- 
+Min-jun Moreno <mmoreno@delphi.com>
+Hayes Optima 288 @ ISDN 64k bps
+"There are 14 nodes and only 10 countries. Count again."
+
+From mgirard@mit.edu Sat Nov 04 20:14:07 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!mit!mgirard
+From: mgirard@mit.edu (Mateo Girard)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Nov04.201407.9586@mit.edu>
+Date: Sat, 04 Nov 1995 20:14:07 GMT
+References: <1995Nov03.062607.7076@delphi.com>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Nov03.062607.7076@delphi.com>, mmoreno@delphi.com (Min-jun Moreno) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Mateo Girard | mgirard@mit.edu
+PGP Key fingerprint: 4357 8791 ED31 53CA
+"Keep the channels open."
+

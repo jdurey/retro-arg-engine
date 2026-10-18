@@ -1,0 +1,70 @@
+From jlarsson@rwth-aachen.de Tue Dec 17 10:16:32 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!rwth-aachen!jlarsson
+From: jlarsson@rwth-aachen.de (Jens Larsson)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Dec17.101632.1838@rwth-aachen.de>
+Date: Tue, 17 Dec 1996 10:16:32 GMT
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+Did Marcus take the decryption EPROM with him when he left the lab?
+
+-- 
+Jens Larsson -- RWTH Aachen Informatik
+"5 sigma is a discovery. 7 is a question."
+
+From jsouza@u-tokyo.ac.jp Tue Dec 17 12:34:32 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!u-tokyo!jsouza
+From: jsouza@u-tokyo.ac.jp (Jen Souza)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Dec17.123432.2093@u-tokyo.ac.jp>
+Date: Tue, 17 Dec 1996 12:34:32 GMT
+References: <1996Dec17.101632.1838@rwth-aachen.de>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1996Dec17.101632.1838@rwth-aachen.de>, jlarsson@rwth-aachen.de (Jens Larsson) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Jen Souza <jsouza@u-tokyo.ac.jp>
+*PLONK* filter active for trolls.
+Macintosh IIfx - NetBSD 1.0
+
+From amuller@stanford.edu Thu Dec 19 00:34:32 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!stanford!amuller
+From: amuller@stanford.edu (Astrid Müller)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Dec19.003432.2374@stanford.edu>
+Date: Thu, 19 Dec 1996 00:34:32 GMT
+References: <1996Dec17.101632.1838@rwth-aachen.de> <1996Dec17.123432.2093@u-tokyo.ac.jp>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Dec17.123432.2093@u-tokyo.ac.jp>, jsouza@u-tokyo.ac.jp (Jen Souza) writes:
+> Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Astrid Müller <amuller@stanford.edu>
+"Tape doesn't lie at 02:14. Ears do."
+Pentium 90 (OS/2 Warp) / SunOS 4.1.4
+

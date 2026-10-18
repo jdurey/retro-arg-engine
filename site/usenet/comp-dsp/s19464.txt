@@ -1,0 +1,93 @@
+From oivanov@stanford.edu Tue Apr 26 22:27:39 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!stanford!oivanov
+From: oivanov@stanford.edu (Olga Ivanov)
+Newsgroups: comp.dsp
+Subject: WTB/WTT: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Apr26.222739.4654@stanford.edu>
+Date: Tue, 26 Apr 1994 22:27:39 GMT
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Olga Ivanov | oivanov@stanford.edu
+PGP Key fingerprint: 406A 0ED5 C822 A94D
+"Keep the channels open."
+
+From aschneider@kth.se Thu Apr 28 23:01:39 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!kth!aschneider
+From: aschneider@kth.se (Andrei Schneider)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Apr28.230139.9416@kth.se>
+Date: Thu, 28 Apr 1994 23:01:39 GMT
+References: <1994Apr26.222739.4654@stanford.edu>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1994Apr26.222739.4654@stanford.edu>, oivanov@stanford.edu (Olga Ivanov) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+Andrei Schneider
+Tape trading list upon request. SASE required for international mail.
+
+From tmuller@uni-hamburg.de Sat Apr 30 22:14:39 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!uni-hamburg!tmuller
+From: tmuller@uni-hamburg.de (Tobias Müller)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Apr30.221439.7308@uni-hamburg.de>
+Date: Sat, 30 Apr 1994 22:14:39 GMT
+References: <1994Apr26.222739.4654@stanford.edu>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Apr26.222739.4654@stanford.edu>, oivanov@stanford.edu (Olga Ivanov) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Tobias Müller <tmuller@uni-hamburg.de>
+"Hardware is temporary. The signal survives."
+Macintosh IIfx / NEXTSTEP 3.3
+
+From vreyes@stanford.edu Sun May 01 10:31:39 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!stanford!vreyes
+From: vreyes@stanford.edu (Valeria Reyes)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994May01.103139.8369@stanford.edu>
+Date: Sun, 01 May 1994 10:31:39 GMT
+References: <1994Apr26.222739.4654@stanford.edu> <1994Apr28.230139.9416@kth.se>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1994Apr28.230139.9416@kth.se>, aschneider@kth.se (Andrei Schneider) writes:
+> Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Valeria Reyes
+Tape trading list upon request. SASE required for international mail.
+

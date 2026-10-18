@@ -1,0 +1,93 @@
+From mtakahashi@berkeley.edu Fri Aug 18 19:58:48 1995
+Path: ashpoly!cascade!brgate!saturno!berkeley!mtakahashi
+From: mtakahashi@berkeley.edu (Min-jun Takahashi)
+Newsgroups: comp.dsp
+Subject: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Aug18.195848.4846@berkeley.edu>
+Date: Fri, 18 Aug 1995 19:58:48 GMT
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Min-jun Takahashi
+Tape trading list upon request. SASE required for international mail.
+
+From fmacdonald@clari.net Sun Aug 20 06:15:48 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!clari!fmacdonald
+From: fmacdonald@clari.net (Fiona MacDonald)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Aug20.061548.8545@clari.net>
+Date: Sun, 20 Aug 1995 06:15:48 GMT
+References: <1995Aug18.195848.4846@berkeley.edu>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Aug18.195848.4846@berkeley.edu>, mtakahashi@berkeley.edu (Min-jun Takahashi) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Fiona MacDonald
+Opinions expressed are solely my own and not those of ClariNet Communications Corp.
+------------------------------------------------------------
+
+From akowalski@berkeley.edu Sun Aug 20 23:58:48 1995
+Path: ashpoly!cascade!bigsur!berkeley!akowalski
+From: akowalski@berkeley.edu (Amy Kowalski)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Aug20.235848.6376@berkeley.edu>
+Date: Sun, 20 Aug 1995 23:58:48 GMT
+References: <1995Aug18.195848.4846@berkeley.edu> <1995Aug20.061548.8545@clari.net>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Aug20.061548.8545@clari.net>, fmacdonald@clari.net (Fiona MacDonald) writes:
+> Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Amy Kowalski <akowalski@berkeley.edu>
+Practical Peripherals 14.4 @ 33,600 bps
+"The hatch is open. Is anyone listening?"
+
+From nhughes@clari.net Mon Aug 21 16:23:48 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!clari!nhughes
+From: nhughes@clari.net (Nadine Hughes)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Aug21.162348.6302@clari.net>
+Date: Mon, 21 Aug 1995 16:23:48 GMT
+References: <1995Aug18.195848.4846@berkeley.edu> <1995Aug20.061548.8545@clari.net> <1995Aug20.235848.6376@berkeley.edu>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Aug20.235848.6376@berkeley.edu>, akowalski@berkeley.edu (Amy Kowalski) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+Nadine Hughes -- ClariNet Communications Corp
+"Row 14. No joke."
+

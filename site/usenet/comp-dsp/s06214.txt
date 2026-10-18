@@ -1,0 +1,93 @@
+From dnovak@demon.co.uk Thu Nov 28 06:53:46 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!demon!dnovak
+From: dnovak@demon.co.uk (Diego Novak)
+Newsgroups: comp.dsp
+Subject: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Nov28.065346.8328@demon.co.uk>
+Date: Thu, 28 Nov 1996 06:53:46 GMT
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Diego Novak <dnovak@demon.co.uk>
+*PLONK* filter active for trolls.
+Pentium 90 (OS/2 Warp) - NetBSD 1.0
+
+From nsouza@kiae.su Fri Nov 29 17:08:46 1996
+Path: ashpoly!cascade!brgate!saturno!kiae!nsouza
+From: nsouza@kiae.su (Nadine Souza)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Nov29.170846.9890@kiae.su>
+Date: Fri, 29 Nov 1996 17:08:46 GMT
+References: <1996Nov28.065346.8328@demon.co.uk>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Nov28.065346.8328@demon.co.uk>, dnovak@demon.co.uk (Diego Novak) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Nadine Souza
+Opinions expressed are solely my own and not those of Kurchatov Institute of Atomic Energy, Moscow.
+------------------------------------------------------------
+
+From ilindqvist@u-tokyo.ac.jp Sun Dec 01 19:12:46 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!u-tokyo!ilindqvist
+From: ilindqvist@u-tokyo.ac.jp (Ines Lindqvist)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Dec01.191246.3590@u-tokyo.ac.jp>
+Date: Sun, 01 Dec 1996 19:12:46 GMT
+References: <1996Nov28.065346.8328@demon.co.uk> <1996Nov29.170846.9890@kiae.su>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Nov29.170846.9890@kiae.su>, nsouza@kiae.su (Nadine Souza) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Ines Lindqvist <ilindqvist@u-tokyo.ac.jp>
+Hayes Optima 288 @ 9600 Telebit bps
+"Hardware is temporary. The signal survives."
+
+From jlee@cmu.edu Mon Dec 02 06:49:46 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!cmu!jlee
+From: jlee@cmu.edu (Jens Lee)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Dec02.064946.1580@cmu.edu>
+Date: Mon, 02 Dec 1996 06:49:46 GMT
+References: <1996Nov28.065346.8328@demon.co.uk> <1996Nov29.170846.9890@kiae.su>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Nov29.170846.9890@kiae.su>, nsouza@kiae.su (Nadine Souza) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Jens Lee
+Opinions expressed are solely my own and not those of Carnegie Mellon University School of CS.
+------------------------------------------------------------
+

@@ -1,0 +1,95 @@
+From afischer@cmu.edu Sat Dec 23 10:11:18 1995
+Path: ashpoly!cascade!mxgate!coyoacan!cmu!afischer
+From: afischer@cmu.edu (Aiko Fischer)
+Newsgroups: comp.dsp
+Subject: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec23.101118.2073@cmu.edu>
+Date: Sat, 23 Dec 1995 10:11:18 GMT
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Aiko Fischer | afischer@cmu.edu
+PGP Key fingerprint: 5911 1618 EE16 0C02
+"Keep the channels open."
+
+From llopez@utexas.edu Sun Dec 24 04:50:18 1995
+Path: ashpoly!cascade!bigsur!utexas!llopez
+From: llopez@utexas.edu (Liam López)
+Newsgroups: comp.dsp
+Subject: Re: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec24.045018.1114@utexas.edu>
+Date: Sun, 24 Dec 1995 04:50:18 GMT
+References: <1995Dec23.101118.2073@cmu.edu>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995Dec23.101118.2073@cmu.edu>, afischer@cmu.edu (Aiko Fischer) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Liam López <llopez@utexas.edu>
+*PLONK* filter active for trolls.
+Amiga 1200 (Blizzard 030/50) - NetBSD 1.0
+
+From shughes@cern.ch Mon Dec 25 06:57:18 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!cern!shughes
+From: shughes@cern.ch (Sergei Hughes)
+Newsgroups: comp.dsp
+Subject: Re: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec25.065718.6303@cern.ch>
+Date: Mon, 25 Dec 1995 06:57:18 GMT
+References: <1995Dec23.101118.2073@cmu.edu> <1995Dec24.045018.1114@utexas.edu>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Dec24.045018.1114@utexas.edu>, llopez@utexas.edu (Liam López) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+Sergei Hughes
+Tape trading list upon request. SASE required for international mail.
+
+From ssilva@pacbell.net Tue Dec 26 09:12:18 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!pacbell!ssilva
+From: ssilva@pacbell.net (Sergei Silva)
+Newsgroups: comp.dsp
+Subject: Re: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec26.091218.3803@pacbell.net>
+Date: Tue, 26 Dec 1995 09:12:18 GMT
+References: <1995Dec23.101118.2073@cmu.edu> <1995Dec24.045018.1114@utexas.edu>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Dec24.045018.1114@utexas.edu>, llopez@utexas.edu (Liam López) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+> Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Sergei Silva | ssilva@pacbell.net
+PGP Key fingerprint: 8C61 D16E 780B C2EA
+"Keep the channels open."
+

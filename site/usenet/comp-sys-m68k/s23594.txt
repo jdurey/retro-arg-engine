@@ -1,0 +1,117 @@
+From rnilsson@earthlink.net Mon Dec 25 11:21:44 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!earthlink!rnilsson
+From: rnilsson@earthlink.net (Rodrigo Nilsson)
+Newsgroups: comp.sys.m68k
+Subject: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Dec25.112144.1727@earthlink.net>
+Date: Mon, 25 Dec 1995 11:21:44 GMT
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Did Marcus take the decryption EPROM with him when he left the lab?
+
+-- 
+Rodrigo Nilsson <rnilsson@earthlink.net>
+*PLONK* filter active for trolls.
+486DX2/66 (Linux 1.2.13) - NetBSD 1.0
+
+From jsmirnov@titech.ac.jp Tue Dec 26 17:21:44 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!titech!jsmirnov
+From: jsmirnov@titech.ac.jp (Jens Smirnov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Dec26.172144.9967@titech.ac.jp>
+Date: Tue, 26 Dec 1995 17:21:44 GMT
+References: <1995Dec25.112144.1727@earthlink.net>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1995Dec25.112144.1727@earthlink.net>, rnilsson@earthlink.net (Rodrigo Nilsson) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Jens Smirnov -- Tokyo Institute of Technology Computer Centre
+"The hatch is open. Is anyone listening?"
+
+From nweber@rwth-aachen.de Wed Dec 27 14:15:44 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!rwth-aachen!nweber
+From: nweber@rwth-aachen.de (Nadia Weber)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Dec27.141544.6959@rwth-aachen.de>
+Date: Wed, 27 Dec 1995 14:15:44 GMT
+References: <1995Dec25.112144.1727@earthlink.net> <1995Dec26.172144.9967@titech.ac.jp>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995Dec26.172144.9967@titech.ac.jp>, jsmirnov@titech.ac.jp (Jens Smirnov) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+Nadia Weber <nweber@rwth-aachen.de>
+"Hardware is temporary. The signal survives."
+Acorn RiscPC 600 / Linux 1.2.13
+
+From mreyes@kth.se Wed Dec 27 23:01:44 1995
+Path: ashpoly!cascade!bigsur!kth!mreyes
+From: mreyes@kth.se (Morag Reyes)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Dec27.230144.7928@kth.se>
+Date: Wed, 27 Dec 1995 23:01:44 GMT
+References: <1995Dec25.112144.1727@earthlink.net> <1995Dec26.172144.9967@titech.ac.jp>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Dec26.172144.9967@titech.ac.jp>, jsmirnov@titech.ac.jp (Jens Smirnov) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+-- 
+Morag Reyes | mreyes@kth.se
+PGP Key fingerprint: EECC 7043 3BEC 594D
+"Keep the channels open."
+
+From smacdonald@hanse.de Fri Dec 29 01:17:44 1995
+Path: ashpoly!cascade!brgate!saturno!hanse!smacdonald
+From: smacdonald@hanse.de (Steve MacDonald)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Dec29.011744.1933@hanse.de>
+Date: Fri, 29 Dec 1995 01:17:44 GMT
+References: <1995Dec25.112144.1727@earthlink.net>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Dec25.112144.1727@earthlink.net>, rnilsson@earthlink.net (Rodrigo Nilsson) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Steve MacDonald | smacdonald@hanse.de
+PGP Key fingerprint: 14AC BEF4 B6A7 A677
+"Keep the channels open."
+

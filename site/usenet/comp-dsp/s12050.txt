@@ -1,0 +1,96 @@
+From vchoi@kiae.su Wed Dec 06 12:01:44 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!kiae!vchoi
+From: vchoi@kiae.su (Valeria Choi)
+Newsgroups: comp.dsp
+Subject: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Dec06.120144.2825@kiae.su>
+Date: Wed, 06 Dec 1995 12:01:44 GMT
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+MATLAB script available upon request via email.
+
+-- 
+Valeria Choi | vchoi@kiae.su
+PGP Key fingerprint: C816 7A98 613A 419F
+"Keep the channels open."
+
+From msuzuki@tum.de Fri Dec 08 07:52:44 1995
+Path: ashpoly!cascade!bigsur!tum!msuzuki
+From: msuzuki@tum.de (Mike Suzuki)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Dec08.075244.8693@tum.de>
+Date: Fri, 08 Dec 1995 07:52:44 GMT
+References: <1995Dec06.120144.2825@kiae.su>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Dec06.120144.2825@kiae.su>, vchoi@kiae.su (Valeria Choi) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Mike Suzuki | msuzuki@tum.de
+PGP Key fingerprint: B84B 76C9 32A3 9943
+"Keep the channels open."
+
+From aeriksson@utexas.edu Sat Dec 09 03:55:44 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!utexas!aeriksson
+From: aeriksson@utexas.edu (Astrid Eriksson)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Dec09.035544.9885@utexas.edu>
+Date: Sat, 09 Dec 1995 03:55:44 GMT
+References: <1995Dec06.120144.2825@kiae.su>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1995Dec06.120144.2825@kiae.su>, vchoi@kiae.su (Valeria Choi) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+> A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+PGP Public key available via finger or upon request.
+
+-- 
+=== Astrid Eriksson ===
+Dept of Electrical Engineering, University of Texas at Austin
+"A soul is not exclusive to biology."
+
+From lsokolov@inria.fr Mon Dec 11 05:23:44 1995
+Path: ashpoly!cascade!bigsur!inria!lsokolov
+From: lsokolov@inria.fr (Lisa Sokolov)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Dec11.052344.3574@inria.fr>
+Date: Mon, 11 Dec 1995 05:23:44 GMT
+References: <1995Dec06.120144.2825@kiae.su> <1995Dec08.075244.8693@tum.de>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Dec08.075244.8693@tum.de>, msuzuki@tum.de (Mike Suzuki) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Lisa Sokolov | lsokolov@inria.fr
+PGP Key fingerprint: 6848 CA01 DB7F 2228
+"Keep the channels open."
+

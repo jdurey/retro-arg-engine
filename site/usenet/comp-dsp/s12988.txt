@@ -1,0 +1,47 @@
+From vkowalski@tum.de Tue Dec 03 20:44:38 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!tum!vkowalski
+From: vkowalski@tum.de (Valeria Kowalski)
+Newsgroups: comp.dsp
+Subject: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Dec03.204438.2809@tum.de>
+Date: Tue, 03 Dec 1996 20:44:38 GMT
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+MATLAB script available upon request via email.
+
+-- 
+Valeria Kowalski
+Opinions expressed are solely my own and not those of Technische Universität München.
+------------------------------------------------------------
+
+From gmuller@kiae.su Wed Dec 04 13:30:38 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!kiae!gmuller
+From: gmuller@kiae.su (Graham Müller)
+Newsgroups: comp.dsp
+Subject: Re: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Dec04.133038.7929@kiae.su>
+Date: Wed, 04 Dec 1996 13:30:38 GMT
+References: <1996Dec03.204438.2809@tum.de>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Dec03.204438.2809@tum.de>, vkowalski@tum.de (Valeria Kowalski) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Graham Müller -- Kurchatov Institute of Atomic Energy, Moscow
+"They will send a copy in my place."
+

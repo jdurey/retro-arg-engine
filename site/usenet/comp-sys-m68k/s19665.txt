@@ -1,0 +1,116 @@
+From gpopov@unam.mx Sat Oct 26 10:26:39 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!unam!gpopov
+From: gpopov@unam.mx (Göran Popov)
+Newsgroups: comp.sys.m68k
+Subject: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Oct26.102639.6944@unam.mx>
+Date: Sat, 26 Oct 1996 10:26:39 GMT
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+Schematic diagram in ASCII uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/twin68_array.asc.
+
+-- 
+Göran Popov <gpopov@unam.mx>
+Hayes Optima 288 @ 28,800 bps
+"Hold for relay."
+
+From kmoreau@berkeley.edu Sat Oct 26 12:00:39 1996
+Path: ashpoly!cascade!mxgate!coyoacan!berkeley!kmoreau
+From: kmoreau@berkeley.edu (Kirsty Moreau)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Oct26.120039.2845@berkeley.edu>
+Date: Sat, 26 Oct 1996 12:00:39 GMT
+References: <1996Oct26.102639.6944@unam.mx>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1996Oct26.102639.6944@unam.mx>, gpopov@unam.mx (Göran Popov) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Kirsty Moreau -- UC Berkeley Department of EECS
+"Extraordinary claims require extraordinary spectra."
+
+From eperez@kiae.su Sun Oct 27 12:49:39 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!kiae!eperez
+From: eperez@kiae.su (Élodie Pérez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Oct27.124939.1997@kiae.su>
+Date: Sun, 27 Oct 1996 12:49:39 GMT
+References: <1996Oct26.102639.6944@unam.mx>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Oct26.102639.6944@unam.mx>, gpopov@unam.mx (Göran Popov) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+> Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Élodie Pérez | eperez@kiae.su
+PGP Key fingerprint: 9F8A 4938 A850 37FB
+"Keep the channels open."
+
+From nnovak@uni-hamburg.de Mon Oct 28 20:21:39 1996
+Path: ashpoly!cascade!mxgate!coyoacan!uni-hamburg!nnovak
+From: nnovak@uni-hamburg.de (Natalia Novak)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Oct28.202139.1297@uni-hamburg.de>
+Date: Mon, 28 Oct 1996 20:21:39 GMT
+References: <1996Oct26.102639.6944@unam.mx> <1996Oct26.120039.2845@berkeley.edu>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Oct26.120039.2845@berkeley.edu>, kmoreau@berkeley.edu (Kirsty Moreau) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+Tom from Ashford Poly owns the physical board! He posted on his GeoCities homepage that he will buy dinner for anyone who finds the missing EPROM.
+
+-- 
+Natalia Novak
+Opinions expressed are solely my own and not those of Universität Hamburg Fachbereich Informatik.
+------------------------------------------------------------
+
+From rweber@mit.edu Wed Oct 30 21:07:39 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!mit!rweber
+From: rweber@mit.edu (Rodrigo Weber)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Oct30.210739.3839@mit.edu>
+Date: Wed, 30 Oct 1996 21:07:39 GMT
+References: <1996Oct26.102639.6944@unam.mx> <1996Oct26.120039.2845@berkeley.edu> <1996Oct28.202139.1297@uni-hamburg.de>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Oct28.202139.1297@uni-hamburg.de>, nnovak@uni-hamburg.de (Natalia Novak) writes:
+> Tom from Ashford Poly owns the physical board! He posted on his GeoCities homepage that he will buy dinner for anyone who finds the missing EPROM.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Rodrigo Weber
+Opinions expressed are solely my own and not those of Massachusetts Institute of Technology.
+------------------------------------------------------------
+

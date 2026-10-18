@@ -1,0 +1,115 @@
+From jlee@illinois.edu Tue Jun 18 23:59:20 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!illinois!jlee
+From: jlee@illinois.edu (Julien Lee)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Jun18.235920.4862@illinois.edu>
+Date: Tue, 18 Jun 1996 23:59:20 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+=== Julien Lee ===
+Dept of Electrical Engineering, University of Illinois Urbana-Champaign
+"In theory there is no difference between theory and practice."
+
+From oreyes@clari.net Wed Jun 19 05:14:20 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!clari!oreyes
+From: oreyes@clari.net (Olga Reyes)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Jun19.051420.1968@clari.net>
+Date: Wed, 19 Jun 1996 05:14:20 GMT
+References: <1996Jun18.235920.4862@illinois.edu>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Jun18.235920.4862@illinois.edu>, jlee@illinois.edu (Julien Lee) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Olga Reyes
+Tape trading list upon request. SASE required for international mail.
+
+From rpopov@tum.de Fri Jun 21 05:52:20 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!tum!rpopov
+From: rpopov@tum.de (Renata Popov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Jun21.055220.3131@tum.de>
+Date: Fri, 21 Jun 1996 05:52:20 GMT
+References: <1996Jun18.235920.4862@illinois.edu>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1996Jun18.235920.4862@illinois.edu>, jlee@illinois.edu (Julien Lee) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Renata Popov
+Tape trading list upon request. SASE required for international mail.
+
+From rfournier@rwth-aachen.de Sun Jun 23 09:24:20 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!rwth-aachen!rfournier
+From: rfournier@rwth-aachen.de (Rodrigo Fournier)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Jun23.092420.5763@rwth-aachen.de>
+Date: Sun, 23 Jun 1996 09:24:20 GMT
+References: <1996Jun18.235920.4862@illinois.edu> <1996Jun21.055220.3131@tum.de>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Jun21.055220.3131@tum.de>, rpopov@tum.de (Renata Popov) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Rodrigo Fournier <rfournier@rwth-aachen.de>
+*PLONK* filter active for trolls.
+PC-9821Ap2 (NEC) - NetBSD 1.0
+
+From bmuller@panix.com Sun Jun 23 16:26:20 1996
+Path: ashpoly!cascade!brgate!saturno!panix!bmuller
+From: bmuller@panix.com (Bill Müller)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Jun23.162620.9383@panix.com>
+Date: Sun, 23 Jun 1996 16:26:20 GMT
+References: <1996Jun18.235920.4862@illinois.edu> <1996Jun21.055220.3131@tum.de>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Jun21.055220.3131@tum.de>, rpopov@tum.de (Renata Popov) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Bill Müller | bmuller@panix.com
+PGP Key fingerprint: 0E52 F0F1 8D8D 746D
+"Keep the channels open."
+

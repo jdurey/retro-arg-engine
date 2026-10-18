@@ -1,0 +1,117 @@
+From aokonkwo@uu.net Fri Dec 13 09:57:12 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!uu!aokonkwo
+From: aokonkwo@uu.net (Andrei Okonkwo)
+Newsgroups: comp.sys.m68k
+Subject: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Dec13.095712.6097@uu.net>
+Date: Fri, 13 Dec 1996 09:57:12 GMT
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+=== Andrei Okonkwo ===
+Dept of Electrical Engineering, UUNET Technologies, Falls Church VA
+"In theory there is no difference between theory and practice."
+
+From dweber@clari.net Sat Dec 14 22:10:12 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!clari!dweber
+From: dweber@clari.net (Dave Weber)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Dec14.221012.6577@clari.net>
+Date: Sat, 14 Dec 1996 22:10:12 GMT
+References: <1996Dec13.095712.6097@uu.net>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996Dec13.095712.6097@uu.net>, aokonkwo@uu.net (Andrei Okonkwo) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Dave Weber <dweber@clari.net>
+"The hatch is open. Is anyone listening?"
+Amiga 1200 (Blizzard 030/50) / FreeBSD 2.1
+
+From pokonkwo@unam.mx Mon Dec 16 03:55:12 1996
+Path: ashpoly!cascade!mxgate!coyoacan!unam!pokonkwo
+From: pokonkwo@unam.mx (Pavel Okonkwo)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Dec16.035512.3511@unam.mx>
+Date: Mon, 16 Dec 1996 03:55:12 GMT
+References: <1996Dec13.095712.6097@uu.net> <1996Dec14.221012.6577@clari.net>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Dec14.221012.6577@clari.net>, dweber@clari.net (Dave Weber) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Pavel Okonkwo | pokonkwo@unam.mx
+PGP Key fingerprint: 9E07 7850 433A C313
+"Keep the channels open."
+
+From mgarcia@inria.fr Tue Dec 17 04:59:12 1996
+Path: ashpoly!cascade!bigsur!inria!mgarcia
+From: mgarcia@inria.fr (Mathieu García)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Dec17.045912.5032@inria.fr>
+Date: Tue, 17 Dec 1996 04:59:12 GMT
+References: <1996Dec13.095712.6097@uu.net> <1996Dec14.221012.6577@clari.net>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Dec14.221012.6577@clari.net>, dweber@clari.net (Dave Weber) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Mathieu García <mgarcia@inria.fr>
+*PLONK* filter active for trolls.
+Atari TT030 - NetBSD 1.0
+
+From nlopez@earthlink.net Wed Dec 18 00:59:12 1996
+Path: ashpoly!cascade!mxgate!coyoacan!earthlink!nlopez
+From: nlopez@earthlink.net (Natalia López)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Dec18.005912.9767@earthlink.net>
+Date: Wed, 18 Dec 1996 00:59:12 GMT
+References: <1996Dec13.095712.6097@uu.net> <1996Dec14.221012.6577@clari.net>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Dec14.221012.6577@clari.net>, dweber@clari.net (Dave Weber) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Natalia López <nlopez@earthlink.net>
+"Tape doesn't lie at 02:14. Ears do."
+Mac IIci / 68882 FPU / TOS 4.04
+

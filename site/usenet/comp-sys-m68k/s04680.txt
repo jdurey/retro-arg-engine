@@ -1,0 +1,97 @@
+From mramirez@berkeley.edu Thu Jun 16 16:50:56 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!berkeley!mramirez
+From: mramirez@berkeley.edu (Mikhail Ramírez)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Jun16.165056.8962@berkeley.edu>
+Date: Thu, 16 Jun 1994 16:50:56 GMT
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Mikhail Ramírez <mramirez@berkeley.edu>
+"Tape doesn't lie at 02:14. Ears do."
+486DX4/100 (FreeBSD 2.0.5) / Linux 1.2.13
+
+From mnilsson@titech.ac.jp Sat Jun 18 08:33:56 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!titech!mnilsson
+From: mnilsson@titech.ac.jp (Mathieu Nilsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Jun18.083356.1254@titech.ac.jp>
+Date: Sat, 18 Jun 1994 08:33:56 GMT
+References: <1994Jun16.165056.8962@berkeley.edu>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1994Jun16.165056.8962@berkeley.edu>, mramirez@berkeley.edu (Mikhail Ramírez) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Mathieu Nilsson <mnilsson@titech.ac.jp>
+"Measuring a record you own is listening, not piracy."
+PC-9821Ap2 (NEC) / Linux 1.2.13
+
+From ngirard@purdue.edu Sun Jun 19 18:43:56 1994
+Path: ashpoly!cascade!brgate!saturno!purdue!ngirard
+From: ngirard@purdue.edu (Nadine Girard)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Jun19.184356.1899@purdue.edu>
+Date: Sun, 19 Jun 1994 18:43:56 GMT
+References: <1994Jun16.165056.8962@berkeley.edu>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1994Jun16.165056.8962@berkeley.edu>, mramirez@berkeley.edu (Mikhail Ramírez) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+> Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Nadine Girard
+Tape trading list upon request. SASE required for international mail.
+
+From bhernandez@illinois.edu Tue Jun 21 20:32:56 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!illinois!bhernandez
+From: bhernandez@illinois.edu (Bruno Hernández)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Jun21.203256.1964@illinois.edu>
+Date: Tue, 21 Jun 1994 20:32:56 GMT
+References: <1994Jun16.165056.8962@berkeley.edu> <1994Jun19.184356.1899@purdue.edu>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Jun19.184356.1899@purdue.edu>, ngirard@purdue.edu (Nadine Girard) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Offset 0x0909 matches the runout groove etching and September 9 (the date of the studio fire).
+
+-- 
+Bruno Hernández <bhernandez@illinois.edu>
+Practical Peripherals 14.4 @ 14,400 bps
+"Tape doesn't lie at 02:14. Ears do."
+

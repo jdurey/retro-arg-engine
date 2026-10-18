@@ -1,0 +1,69 @@
+From ischneider@unam.mx Mon Dec 25 07:50:34 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!unam!ischneider
+From: ischneider@unam.mx (Ines Schneider)
+Newsgroups: comp.sys.m68k
+Subject: Observation: Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1995Dec25.075034.9249@unam.mx>
+Date: Mon, 25 Dec 1995 07:50:34 GMT
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Amiga audio hackers: you can demodulate the 14.2 Hz carrier in real time without bogging down the OS.
+
+I wrote a 64-tap FIR filter in pure 68k assembly using movem.l and dbra loop unrolling to downsample to 64 Hz.
+By setting up Paula's audio DMA to double-buffer incoming 8-bit samples, the 68020 has plenty of cycles left for the Costas loop.
+
+Long live the Amiga. Try doing real-time subcarrier demodulation on a 386 running Windows 3.1 without dropping frames!
+
+-- 
+Ines Schneider | ischneider@unam.mx
+PGP Key fingerprint: 6787 7250 ED4B 0CAF
+"Keep the channels open."
+
+From epopov@cern.ch Wed Dec 27 06:12:34 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!cern!epopov
+From: epopov@cern.ch (Emi Popov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1995Dec27.061234.5266@cern.ch>
+Date: Wed, 27 Dec 1995 06:12:34 GMT
+References: <1995Dec25.075034.9249@unam.mx>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Dec25.075034.9249@unam.mx>, ischneider@unam.mx (Ines Schneider) writes:
+> Amiga audio hackers: you can demodulate the 14.2 Hz carrier in real time without bogging down the OS.
+
+Tested on my A3000 / 25 MHz. Ran smoothly in the background while I was compiling a C program in another window.
+
+-- 
+Emi Popov | epopov@cern.ch
+PGP Key fingerprint: 2447 56C9 98EA 9471
+"Keep the channels open."
+
+From bsanchez@cern.ch Wed Dec 27 11:39:34 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!cern!bsanchez
+From: bsanchez@cern.ch (Bastien Sánchez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1995Dec27.113934.6552@cern.ch>
+Date: Wed, 27 Dec 1995 11:39:34 GMT
+References: <1995Dec25.075034.9249@unam.mx> <1995Dec27.061234.5266@cern.ch>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1995Dec27.061234.5266@cern.ch>, epopov@cern.ch (Emi Popov) writes:
+> Tested on my A3000 / 25 MHz. Ran smoothly in the background while I was compiling a C program in another window.
+
+Brilliant use of Paula DMA! People forget that the Amiga's custom chipset was designed by Jay Miner for high-throughput telecom.
+
+-- 
+Bastien Sánchez
+Tape trading list upon request. SASE required for international mail.
+

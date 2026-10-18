@@ -1,0 +1,91 @@
+From mnovak@cmu.edu Sun Mar 13 18:05:34 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!cmu!mnovak
+From: mnovak@cmu.edu (Mateo Novak)
+Newsgroups: comp.dsp
+Subject: Data: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Mar13.180534.3476@cmu.edu>
+Date: Sun, 13 Mar 1994 18:05:34 GMT
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+
+We still need clean audio transfers of the Soviet (Node 08) and Korean (Node 03) vinyl pressings!
+
+-- 
+Mateo Novak
+Tape trading list upon request. SASE required for international mail.
+
+From ksmirnov@pacbell.net Tue Mar 15 04:51:34 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!pacbell!ksmirnov
+From: ksmirnov@pacbell.net (Karen Smirnov)
+Newsgroups: comp.dsp
+Subject: Re: Data: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Mar15.045134.1004@pacbell.net>
+Date: Tue, 15 Mar 1994 04:51:34 GMT
+References: <1994Mar13.180534.3476@cmu.edu>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Mar13.180534.3476@cmu.edu>, mnovak@cmu.edu (Mateo Novak) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Tar.gz archive gave a CRC error with PKUNZIP. Make sure you upload in binary mode, not ASCII!
+
+-- 
+Karen Smirnov <ksmirnov@pacbell.net>
+"Extraordinary claims require extraordinary spectra."
+Amiga 3000T / AmigaOS 3.1
+
+From mduarte@uu.net Tue Mar 15 06:53:34 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!uu!mduarte
+From: mduarte@uu.net (Morag Duarte)
+Newsgroups: comp.dsp
+Subject: Re: Data: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Mar15.065334.3923@uu.net>
+Date: Tue, 15 Mar 1994 06:53:34 GMT
+References: <1994Mar13.180534.3476@cmu.edu> <1994Mar15.045134.1004@pacbell.net>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1994Mar15.045134.1004@pacbell.net>, ksmirnov@pacbell.net (Karen Smirnov) writes:
+> Tar.gz archive gave a CRC error with PKUNZIP. Make sure you upload in binary mode, not ASCII!
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Morag Duarte
+Tape trading list upon request. SASE required for international mail.
+
+From ntanaka@titech.ac.jp Wed Mar 16 11:52:34 1994
+Path: ashpoly!cascade!mxgate!coyoacan!titech!ntanaka
+From: ntanaka@titech.ac.jp (Natalia Tanaka)
+Newsgroups: comp.dsp
+Subject: Re: Data: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Mar16.115234.4725@titech.ac.jp>
+Date: Wed, 16 Mar 1994 11:52:34 GMT
+References: <1994Mar13.180534.3476@cmu.edu> <1994Mar15.045134.1004@pacbell.net>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Mar15.045134.1004@pacbell.net>, ksmirnov@pacbell.net (Karen Smirnov) writes:
+> Tar.gz archive gave a CRC error with PKUNZIP. Make sure you upload in binary mode, not ASCII!
+
+Tar.gz archive gave a CRC error with PKUNZIP. Make sure you upload in binary mode, not ASCII!
+
+-- 
+Natalia Tanaka <ntanaka@titech.ac.jp>
+*PLONK* filter active for trolls.
+Acorn RiscPC 600 - NetBSD 1.0
+

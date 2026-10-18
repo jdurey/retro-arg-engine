@@ -1,0 +1,121 @@
+From asuzuki@delphi.com Wed May 03 22:47:40 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!delphi!asuzuki
+From: asuzuki@delphi.com (Amy Suzuki)
+Newsgroups: comp.dsp
+Subject: Data: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995May03.224740.2638@delphi.com>
+Date: Wed, 03 May 1995 22:47:40 GMT
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+
+Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+Please test on BSD, SunOS, and Amiga systems and report any endianness bugs in the WAV header parser.
+
+-- 
+Amy Suzuki | asuzuki@delphi.com
+PGP Key fingerprint: FCE0 3823 0543 3866
+"Keep the channels open."
+
+From itakahashi@uni-hamburg.de Fri May 05 18:14:40 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!uni-hamburg!itakahashi
+From: itakahashi@uni-hamburg.de (Ines Takahashi)
+Newsgroups: comp.dsp
+Subject: Re: Data: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995May05.181440.4591@uni-hamburg.de>
+Date: Fri, 05 May 1995 18:14:40 GMT
+References: <1995May03.224740.2638@delphi.com>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995May03.224740.2638@delphi.com>, asuzuki@delphi.com (Amy Suzuki) writes:
+> Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+> Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+
+On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+-- 
+Ines Takahashi
+Opinions expressed are solely my own and not those of Universität Hamburg Fachbereich Informatik.
+------------------------------------------------------------
+
+From jkarlsson@hanse.de Sun May 07 21:45:40 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!hanse!jkarlsson
+From: jkarlsson@hanse.de (Joachim Karlsson)
+Newsgroups: comp.dsp
+Subject: Re: Data: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995May07.214540.7444@hanse.de>
+Date: Sun, 07 May 1995 21:45:40 GMT
+References: <1995May03.224740.2638@delphi.com>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 12
+
+In article <1995May03.224740.2638@delphi.com>, asuzuki@delphi.com (Amy Suzuki) writes:
+> Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+> Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+
+Can you provide a pre-compiled DOS binary? Some of us don't have Linux or a C compiler installed on our machines.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Joachim Karlsson <jkarlsson@hanse.de>
+*PLONK* filter active for trolls.
+486DX2/66 (Linux 1.2.13) - NetBSD 1.0
+
+From anakamura@delphi.com Mon May 08 04:22:40 1995
+Path: ashpoly!cascade!bigsur!delphi!anakamura
+From: anakamura@delphi.com (Aiko Nakamura)
+Newsgroups: comp.dsp
+Subject: Re: Data: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995May08.042240.3756@delphi.com>
+Date: Mon, 08 May 1995 04:22:40 GMT
+References: <1995May03.224740.2638@delphi.com>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995May03.224740.2638@delphi.com>, asuzuki@delphi.com (Amy Suzuki) writes:
+> Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+> Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+-- 
+=== Aiko Nakamura ===
+Dept of Electrical Engineering, Delphi Internet Services
+"There are 14 nodes and only 10 countries. Count again."
+
+From tlarsson@kiae.su Mon May 08 11:58:40 1995
+Path: ashpoly!cascade!brgate!saturno!kiae!tlarsson
+From: tlarsson@kiae.su (Thiago Larsson)
+Newsgroups: comp.dsp
+Subject: Re: Data: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995May08.115840.7554@kiae.su>
+Date: Mon, 08 May 1995 11:58:40 GMT
+References: <1995May03.224740.2638@delphi.com> <1995May08.042240.3756@delphi.com>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995May08.042240.3756@delphi.com>, anakamura@delphi.com (Aiko Nakamura) writes:
+> Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+Can you provide a pre-compiled DOS binary? Some of us don't have Linux or a C compiler installed on our machines.
+
+-- 
+Thiago Larsson
+Opinions expressed are solely my own and not those of Kurchatov Institute of Atomic Energy, Moscow.
+------------------------------------------------------------
+

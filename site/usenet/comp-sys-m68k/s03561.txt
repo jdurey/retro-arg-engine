@@ -1,0 +1,96 @@
+From mkarlsson@panix.com Mon Nov 06 11:43:11 1995
+Path: ashpoly!cascade!brgate!saturno!panix!mkarlsson
+From: mkarlsson@panix.com (Morag Karlsson)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Nov06.114311.2035@panix.com>
+Date: Mon, 06 Nov 1995 11:43:11 GMT
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+Morag Karlsson | mkarlsson@panix.com
+PGP Key fingerprint: 97B5 7ED6 1C18 41D6
+"Keep the channels open."
+
+From hfournier@kth.se Wed Nov 08 08:33:11 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!kth!hfournier
+From: hfournier@kth.se (Hana Fournier)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Nov08.083311.3486@kth.se>
+Date: Wed, 08 Nov 1995 08:33:11 GMT
+References: <1995Nov06.114311.2035@panix.com>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1995Nov06.114311.2035@panix.com>, mkarlsson@panix.com (Morag Karlsson) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Hana Fournier <hfournier@kth.se>
+*PLONK* filter active for trolls.
+Atari Falcon 030 - NetBSD 1.0
+
+From agarcia@illinois.edu Wed Nov 08 10:36:11 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!illinois!agarcia
+From: agarcia@illinois.edu (Andrei García)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Nov08.103611.7295@illinois.edu>
+Date: Wed, 08 Nov 1995 10:36:11 GMT
+References: <1995Nov06.114311.2035@panix.com>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Nov06.114311.2035@panix.com>, mkarlsson@panix.com (Morag Karlsson) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Andrei García <agarcia@illinois.edu>
+Zyxel U-1496E @ 19,200 bps
+"There are 14 nodes and only 10 countries. Count again."
+
+From fnovak@cam.ac.uk Wed Nov 08 20:15:11 1995
+Path: ashpoly!cascade!mxgate!coyoacan!cam!fnovak
+From: fnovak@cam.ac.uk (Fiona Novak)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Nov08.201511.4387@cam.ac.uk>
+Date: Wed, 08 Nov 1995 20:15:11 GMT
+References: <1995Nov06.114311.2035@panix.com> <1995Nov08.083311.3486@kth.se>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Nov08.083311.3486@kth.se>, hfournier@kth.se (Hana Fournier) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+=== Fiona Novak ===
+Dept of Electrical Engineering, University of Cambridge Computer Laboratory
+"A soul is not exclusive to biology."
+

@@ -1,0 +1,71 @@
+From hpopov@illinois.edu Sun Aug 06 07:42:13 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!illinois!hpopov
+From: hpopov@illinois.edu (Hugo Popov)
+Newsgroups: comp.dsp
+Subject: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Aug06.074213.2497@illinois.edu>
+Date: Sun, 06 Aug 1995 07:42:13 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Hugo Popov | hpopov@illinois.edu
+PGP Key fingerprint: BEFF 4B67 1008 F3EE
+"Keep the channels open."
+
+From mlindqvist@ox.ac.uk Sun Aug 06 17:43:13 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!ox!mlindqvist
+From: mlindqvist@ox.ac.uk (Matthias Lindqvist)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Aug06.174313.3141@ox.ac.uk>
+Date: Sun, 06 Aug 1995 17:43:13 GMT
+References: <1995Aug06.074213.2497@illinois.edu>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Aug06.074213.2497@illinois.edu>, hpopov@illinois.edu (Hugo Popov) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+=== Matthias Lindqvist ===
+Dept of Electrical Engineering, Oxford University Computing Laboratory
+"They will send a copy in my place."
+
+From gdubois@kiae.su Tue Aug 08 03:11:13 1995
+Path: ashpoly!cascade!brgate!saturno!kiae!gdubois
+From: gdubois@kiae.su (Graham Dubois)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Aug08.031113.2655@kiae.su>
+Date: Tue, 08 Aug 1995 03:11:13 GMT
+References: <1995Aug06.074213.2497@illinois.edu> <1995Aug06.174313.3141@ox.ac.uk>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Aug06.174313.3141@ox.ac.uk>, mlindqvist@ox.ac.uk (Matthias Lindqvist) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Graham Dubois
+Opinions expressed are solely my own and not those of Kurchatov Institute of Atomic Energy, Moscow.
+------------------------------------------------------------
+

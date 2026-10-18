@@ -1,0 +1,92 @@
+From ylopez@earthlink.net Mon May 01 02:27:11 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!earthlink!ylopez
+From: ylopez@earthlink.net (Yuki López)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May01.022711.4972@earthlink.net>
+Date: Mon, 01 May 1995 02:27:11 GMT
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Yuki López
+Tape trading list upon request. SASE required for international mail.
+
+From ghernandez@mit.edu Mon May 01 20:59:11 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!mit!ghernandez
+From: ghernandez@mit.edu (Göran Hernández)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May01.205911.8348@mit.edu>
+Date: Mon, 01 May 1995 20:59:11 GMT
+References: <1995May01.022711.4972@earthlink.net>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995May01.022711.4972@earthlink.net>, ylopez@earthlink.net (Yuki López) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Göran Hernández <ghernandez@mit.edu>
+*PLONK* filter active for trolls.
+Commodore Amiga 500 (1MB OCS) - NetBSD 1.0
+
+From jokonkwo@kth.se Tue May 02 04:33:11 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!kth!jokonkwo
+From: jokonkwo@kth.se (Jen Okonkwo)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May02.043311.8363@kth.se>
+Date: Tue, 02 May 1995 04:33:11 GMT
+References: <1995May01.022711.4972@earthlink.net> <1995May01.205911.8348@mit.edu>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1995May01.205911.8348@mit.edu>, ghernandez@mit.edu (Göran Hernández) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+Jen Okonkwo -- Royal Institute of Technology, Stockholm
+"Row 14. No joke."
+
+From ekarlsson@panix.com Thu May 04 05:40:11 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!panix!ekarlsson
+From: ekarlsson@panix.com (Emi Karlsson)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May04.054011.9541@panix.com>
+Date: Thu, 04 May 1995 05:40:11 GMT
+References: <1995May01.022711.4972@earthlink.net>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995May01.022711.4972@earthlink.net>, ylopez@earthlink.net (Yuki López) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+=== Emi Karlsson ===
+Dept of Electrical Engineering, Public Access Unix of New York
+"A soul is not exclusive to biology."
+

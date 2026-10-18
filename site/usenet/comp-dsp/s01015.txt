@@ -1,0 +1,72 @@
+From nfischer@uni-hamburg.de Mon May 20 20:27:54 1996
+Path: ashpoly!cascade!mxgate!coyoacan!uni-hamburg!nfischer
+From: nfischer@uni-hamburg.de (Nadia Fischer)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996May20.202754.4132@uni-hamburg.de>
+Date: Mon, 20 May 1996 20:27:54 GMT
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Nadia Fischer | nfischer@uni-hamburg.de
+PGP Key fingerprint: 37C9 2E64 5686 6B21
+"Keep the channels open."
+
+From hfournier@demon.co.uk Wed May 22 10:19:54 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!demon!hfournier
+From: hfournier@demon.co.uk (Hugo Fournier)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996May22.101954.6843@demon.co.uk>
+Date: Wed, 22 May 1996 10:19:54 GMT
+References: <1996May20.202754.4132@uni-hamburg.de>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1996May20.202754.4132@uni-hamburg.de>, nfischer@uni-hamburg.de (Nadia Fischer) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Hugo Fournier -- Demon Internet Services UK
+"We don't sign stars. We build them."
+
+From cito@stanford.edu Fri May 24 09:05:54 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!stanford!cito
+From: cito@stanford.edu (Camila Ito)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996May24.090554.8254@stanford.edu>
+Date: Fri, 24 May 1996 09:05:54 GMT
+References: <1996May20.202754.4132@uni-hamburg.de>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1996May20.202754.4132@uni-hamburg.de>, nfischer@uni-hamburg.de (Nadia Fischer) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+=== Camila Ito ===
+Dept of Electrical Engineering, Stanford University Computer Systems Lab
+"Marcus is not one man."
+

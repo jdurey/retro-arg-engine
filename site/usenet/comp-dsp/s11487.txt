@@ -1,0 +1,93 @@
+From rdubois@cmu.edu Fri Feb 25 19:55:51 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!cmu!rdubois
+From: rdubois@cmu.edu (Rodrigo Dubois)
+Newsgroups: comp.dsp
+Subject: Question: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Feb25.195551.6269@cmu.edu>
+Date: Fri, 25 Feb 1994 19:55:51 GMT
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+
+Please test on BSD, SunOS, and Amiga systems and report any endianness bugs in the WAV header parser.
+
+-- 
+=== Rodrigo Dubois ===
+Dept of Electrical Engineering, Carnegie Mellon University School of CS
+"A soul is not exclusive to biology."
+
+From ekim@clari.net Sat Feb 26 21:33:51 1994
+Path: ashpoly!cascade!bigsur!clari!ekim
+From: ekim@clari.net (Elaine Kim)
+Newsgroups: comp.dsp
+Subject: Re: Question: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Feb26.213351.4387@clari.net>
+Date: Sat, 26 Feb 1994 21:33:51 GMT
+References: <1994Feb25.195551.6269@cmu.edu>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1994Feb25.195551.6269@cmu.edu>, rdubois@cmu.edu (Rodrigo Dubois) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+> Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+
+Tar.gz archive gave a CRC error with PKUNZIP. Make sure you upload in binary mode, not ASCII!
+
+-- 
+Elaine Kim <ekim@clari.net>
+Hayes Optima 288 @ ISDN 64k bps
+"Tape doesn't lie at 02:14. Ears do."
+
+From gjohansson@titech.ac.jp Mon Feb 28 11:47:51 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!titech!gjohansson
+From: gjohansson@titech.ac.jp (Graham Johansson)
+Newsgroups: comp.dsp
+Subject: Re: Question: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Feb28.114751.4277@titech.ac.jp>
+Date: Mon, 28 Feb 1994 11:47:51 GMT
+References: <1994Feb25.195551.6269@cmu.edu>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Feb25.195551.6269@cmu.edu>, rdubois@cmu.edu (Rodrigo Dubois) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+-- 
+Graham Johansson
+Opinions expressed are solely my own and not those of Tokyo Institute of Technology Computer Centre.
+------------------------------------------------------------
+
+From mreyes@mindspring.com Mon Feb 28 21:32:51 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!mindspring!mreyes
+From: mreyes@mindspring.com (Marisol Reyes)
+Newsgroups: comp.dsp
+Subject: Re: Question: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Feb28.213251.9421@mindspring.com>
+Date: Mon, 28 Feb 1994 21:32:51 GMT
+References: <1994Feb25.195551.6269@cmu.edu> <1994Feb26.213351.4387@clari.net>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1994Feb26.213351.4387@clari.net>, ekim@clari.net (Elaine Kim) writes:
+> Tar.gz archive gave a CRC error with PKUNZIP. Make sure you upload in binary mode, not ASCII!
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Marisol Reyes
+Tape trading list upon request. SASE required for international mail.
+

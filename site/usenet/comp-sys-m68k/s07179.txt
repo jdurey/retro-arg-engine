@@ -1,0 +1,95 @@
+From livanov@hanse.de Sun Oct 06 01:47:03 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!hanse!livanov
+From: livanov@hanse.de (Lars Ivanov)
+Newsgroups: comp.sys.m68k
+Subject: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Oct06.014703.6756@hanse.de>
+Date: Sun, 06 Oct 1996 01:47:03 GMT
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Lars Ivanov <livanov@hanse.de>
+*PLONK* filter active for trolls.
+PC-9821Ap2 (NEC) - NetBSD 1.0
+
+From tsouza@u-tokyo.ac.jp Sun Oct 06 10:58:03 1996
+Path: ashpoly!cascade!mxgate!coyoacan!u-tokyo!tsouza
+From: tsouza@u-tokyo.ac.jp (Takeshi Souza)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Oct06.105803.6719@u-tokyo.ac.jp>
+Date: Sun, 06 Oct 1996 10:58:03 GMT
+References: <1996Oct06.014703.6756@hanse.de>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1996Oct06.014703.6756@hanse.de>, livanov@hanse.de (Lars Ivanov) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Takeshi Souza | tsouza@u-tokyo.ac.jp
+PGP Key fingerprint: 6671 F495 DDDC 84A6
+"Keep the channels open."
+
+From gnakamura@inria.fr Mon Oct 07 10:28:03 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!inria!gnakamura
+From: gnakamura@inria.fr (Graham Nakamura)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Oct07.102803.5124@inria.fr>
+Date: Mon, 07 Oct 1996 10:28:03 GMT
+References: <1996Oct06.014703.6756@hanse.de> <1996Oct06.105803.6719@u-tokyo.ac.jp>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Oct06.105803.6719@u-tokyo.ac.jp>, tsouza@u-tokyo.ac.jp (Takeshi Souza) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+> If you are posting from AOL, please read RFC 1036 before posting again.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Graham Nakamura
+Tape trading list upon request. SASE required for international mail.
+
+From jsouza@mindspring.com Wed Oct 09 08:51:03 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!mindspring!jsouza
+From: jsouza@mindspring.com (Jen Souza)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Oct09.085103.7770@mindspring.com>
+Date: Wed, 09 Oct 1996 08:51:03 GMT
+References: <1996Oct06.014703.6756@hanse.de> <1996Oct06.105803.6719@u-tokyo.ac.jp> <1996Oct07.102803.5124@inria.fr>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Oct07.102803.5124@inria.fr>, gnakamura@inria.fr (Graham Nakamura) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Jen Souza <jsouza@mindspring.com>
+*PLONK* filter active for trolls.
+Macintosh IIfx - NetBSD 1.0
+

@@ -1,0 +1,47 @@
+From nsanchez@pipeline.com Wed Mar 06 11:08:32 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!pipeline!nsanchez
+From: nsanchez@pipeline.com (Natalia Sánchez)
+Newsgroups: comp.dsp
+Subject: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Mar06.110832.1959@pipeline.com>
+Date: Wed, 06 Mar 1996 11:08:32 GMT
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+=== Natalia Sánchez ===
+Dept of Electrical Engineering, The Pipeline Internet Network
+"In theory there is no difference between theory and practice."
+
+From cnilsson@mit.edu Wed Mar 06 13:56:32 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!mit!cnilsson
+From: cnilsson@mit.edu (Camila Nilsson)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Mar06.135632.2931@mit.edu>
+Date: Wed, 06 Mar 1996 13:56:32 GMT
+References: <1996Mar06.110832.1959@pipeline.com>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Mar06.110832.1959@pipeline.com>, nsanchez@pipeline.com (Natalia Sánchez) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Camila Nilsson <cnilsson@mit.edu>
+"There are 14 nodes and only 10 countries. Count again."
+Atari TT030 / NEXTSTEP 3.3
+

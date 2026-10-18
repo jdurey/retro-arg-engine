@@ -1,0 +1,48 @@
+From echoi@purdue.edu Sat Aug 10 06:03:28 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!purdue!echoi
+From: echoi@purdue.edu (Elaine Choi)
+Newsgroups: comp.dsp
+Subject: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Aug10.060328.4258@purdue.edu>
+Date: Sat, 10 Aug 1996 06:03:28 GMT
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Elaine Choi <echoi@purdue.edu>
+"Measuring a record you own is listening, not piracy."
+Amiga 1200 (Blizzard 030/50) / Linux 1.2.13
+
+From jmoreno@uni-hamburg.de Sun Aug 11 11:09:28 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!uni-hamburg!jmoreno
+From: jmoreno@uni-hamburg.de (Joachim Moreno)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Aug11.110928.8138@uni-hamburg.de>
+Date: Sun, 11 Aug 1996 11:09:28 GMT
+References: <1996Aug10.060328.4258@purdue.edu>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Aug10.060328.4258@purdue.edu>, echoi@purdue.edu (Elaine Choi) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Joachim Moreno <jmoreno@uni-hamburg.de>
+"The carrier frequency does not drift by accident."
+Atari Falcon 030 / FreeBSD 2.1
+

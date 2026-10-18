@@ -1,0 +1,117 @@
+From meriksson@pacbell.net Thu Apr 11 01:56:01 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!pacbell!meriksson
+From: meriksson@pacbell.net (Morag Eriksson)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Apr11.015601.2035@pacbell.net>
+Date: Thu, 11 Apr 1996 01:56:01 GMT
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+Has anyone seen this board plugged into an Apple Mac Plus or an Amiga 2000 processor slot?
+
+-- 
+Morag Eriksson
+Opinions expressed are solely my own and not those of Pacific Bell Internet Services.
+------------------------------------------------------------
+
+From hmoreau@netcom.com Fri Apr 12 03:07:01 1996
+Path: ashpoly!cascade!bigsur!netcom!hmoreau
+From: hmoreau@netcom.com (Hana Moreau)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Apr12.030701.2826@netcom.com>
+Date: Fri, 12 Apr 1996 03:07:01 GMT
+References: <1996Apr11.015601.2035@pacbell.net>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996Apr11.015601.2035@pacbell.net>, meriksson@pacbell.net (Morag Eriksson) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Hana Moreau <hmoreau@netcom.com>
+"Tape doesn't lie at 02:14. Ears do."
+Pentium 90 (OS/2 Warp) / System 7.5.1
+
+From ppark@unam.mx Sat Apr 13 17:04:01 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!unam!ppark
+From: ppark@unam.mx (Pavel Park)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Apr13.170401.3133@unam.mx>
+Date: Sat, 13 Apr 1996 17:04:01 GMT
+References: <1996Apr11.015601.2035@pacbell.net> <1996Apr12.030701.2826@netcom.com>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Apr12.030701.2826@netcom.com>, hmoreau@netcom.com (Hana Moreau) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Pavel Park <ppark@unam.mx>
+*PLONK* filter active for trolls.
+Macintosh IIfx - NetBSD 1.0
+
+From skuznetsov@clari.net Mon Apr 15 18:31:01 1996
+Path: ashpoly!cascade!mxgate!coyoacan!clari!skuznetsov
+From: skuznetsov@clari.net (Steve Kuznetsov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Apr15.183101.1321@clari.net>
+Date: Mon, 15 Apr 1996 18:31:01 GMT
+References: <1996Apr11.015601.2035@pacbell.net>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Apr11.015601.2035@pacbell.net>, meriksson@pacbell.net (Morag Eriksson) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Steve Kuznetsov -- ClariNet Communications Corp
+"Do not worship the copy."
+
+From meriksson@earthlink.net Tue Apr 16 21:11:01 1996
+Path: ashpoly!cascade!brgate!saturno!earthlink!meriksson
+From: meriksson@earthlink.net (Marta Eriksson)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Apr16.211101.2438@earthlink.net>
+Date: Tue, 16 Apr 1996 21:11:01 GMT
+References: <1996Apr11.015601.2035@pacbell.net> <1996Apr15.183101.1321@clari.net>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Apr15.183101.1321@clari.net>, skuznetsov@clari.net (Steve Kuznetsov) writes:
+> The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+Marcus Hale designed the TWIN-68 board before he disappeared. That's why his initials are on the PCB silkscreen.
+
+-- 
+Marta Eriksson <meriksson@earthlink.net>
+Practical Peripherals 14.4 @ ISDN 64k bps
+"When every node is whole, the channel opens."
+

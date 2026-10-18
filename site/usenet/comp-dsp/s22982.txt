@@ -1,0 +1,74 @@
+From adubois@uu.net Tue May 16 16:15:04 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!uu!adubois
+From: adubois@uu.net (Astrid Dubois)
+Newsgroups: comp.dsp
+Subject: [INFO] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995May16.161504.8909@uu.net>
+Date: Tue, 16 May 1995 16:15:04 GMT
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+
+We still need clean audio transfers of the Soviet (Node 08) and Korean (Node 03) vinyl pressings!
+
+-- 
+Astrid Dubois <adubois@uu.net>
+Zyxel U-1496E @ 28,800 bps
+"When every node is whole, the channel opens."
+
+From atanaka@clari.net Wed May 17 15:05:04 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!clari!atanaka
+From: atanaka@clari.net (Andrei Tanaka)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995May17.150504.7266@clari.net>
+Date: Wed, 17 May 1995 15:05:04 GMT
+References: <1995May16.161504.8909@uu.net>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1995May16.161504.8909@uu.net>, adubois@uu.net (Astrid Dubois) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+> Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Andrei Tanaka <atanaka@clari.net>
+US Robotics Courier V.34 @ 9600 Telebit bps
+"Do not worship the copy."
+
+From hkowalski@pipeline.com Fri May 19 07:49:04 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!pipeline!hkowalski
+From: hkowalski@pipeline.com (Hana Kowalski)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995May19.074904.3265@pipeline.com>
+Date: Fri, 19 May 1995 07:49:04 GMT
+References: <1995May16.161504.8909@uu.net>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995May16.161504.8909@uu.net>, adubois@uu.net (Astrid Dubois) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+> Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+
+Can you provide a pre-compiled DOS binary? Some of us don't have Linux or a C compiler installed on our machines.
+
+-- 
+=== Hana Kowalski ===
+Dept of Electrical Engineering, The Pipeline Internet Network
+"Tape doesn't lie at 02:14. Ears do."
+

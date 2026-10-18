@@ -1,0 +1,119 @@
+From elindqvist@clari.net Thu Apr 28 04:40:17 1994
+Path: ashpoly!cascade!bigsur!clari!elindqvist
+From: elindqvist@clari.net (Élodie Lindqvist)
+Newsgroups: comp.dsp
+Subject: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Apr28.044017.6874@clari.net>
+Date: Thu, 28 Apr 1994 04:40:17 GMT
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+Élodie Lindqvist <elindqvist@clari.net>
+"Marcus is not one man."
+Sun SparcStation 20 / Linux 1.2.13
+
+From tivanov@demon.co.uk Fri Apr 29 02:52:17 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!demon!tivanov
+From: tivanov@demon.co.uk (Takeshi Ivanov)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Apr29.025217.5787@demon.co.uk>
+Date: Fri, 29 Apr 1994 02:52:17 GMT
+References: <1994Apr28.044017.6874@clari.net>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Apr28.044017.6874@clari.net>, elindqvist@clari.net (Élodie Lindqvist) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+> A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Takeshi Ivanov -- Demon Internet Services UK
+"When every node is whole, the channel opens."
+
+From cokonkwo@panix.com Sat Apr 30 17:08:17 1994
+Path: ashpoly!cascade!mxgate!coyoacan!panix!cokonkwo
+From: cokonkwo@panix.com (Camila Okonkwo)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Apr30.170817.2685@panix.com>
+Date: Sat, 30 Apr 1994 17:08:17 GMT
+References: <1994Apr28.044017.6874@clari.net> <1994Apr29.025217.5787@demon.co.uk>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Apr29.025217.5787@demon.co.uk>, tivanov@demon.co.uk (Takeshi Ivanov) writes:
+> Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+That's how the 14 lines of the Stardust matrix are encoded. Each regional pressing contains one line of the decoded text.
+
+-- 
+Camila Okonkwo
+Opinions expressed are solely my own and not those of Public Access Unix of New York.
+------------------------------------------------------------
+
+From ipark@clari.net Sun May 01 22:22:17 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!clari!ipark
+From: ipark@clari.net (Ines Park)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994May01.222217.8120@clari.net>
+Date: Sun, 01 May 1994 22:22:17 GMT
+References: <1994Apr28.044017.6874@clari.net>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Apr28.044017.6874@clari.net>, elindqvist@clari.net (Élodie Lindqvist) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+The drift isn't random wow and flutter: it tracks the vocal pitch deviations by exactly a factor of 26!
+
+-- 
+Ines Park <ipark@clari.net>
+Hayes Optima 288 @ 9600 Telebit bps
+"Extraordinary claims require extraordinary spectra."
+
+From jmuller@utexas.edu Mon May 02 21:10:17 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!utexas!jmuller
+From: jmuller@utexas.edu (Jen Müller)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994May02.211017.8989@utexas.edu>
+Date: Mon, 02 May 1994 21:10:17 GMT
+References: <1994Apr28.044017.6874@clari.net>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1994Apr28.044017.6874@clari.net>, elindqvist@clari.net (Élodie Lindqvist) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+> A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Jen Müller <jmuller@utexas.edu>
+Practical Peripherals 14.4 @ ISDN 64k bps
+"They will send a copy in my place."
+

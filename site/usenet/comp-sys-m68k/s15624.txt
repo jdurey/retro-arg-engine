@@ -1,0 +1,118 @@
+From sjohansson@pacbell.net Thu Mar 16 05:42:54 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!pacbell!sjohansson
+From: sjohansson@pacbell.net (Sergei Johansson)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Mar16.054254.2732@pacbell.net>
+Date: Thu, 16 Mar 1995 05:42:54 GMT
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+
+Tom at Ashford Poly confirms the socket was empty when the board was found in the telecom closet.
+
+-- 
+Sergei Johansson
+Opinions expressed are solely my own and not those of Pacific Bell Internet Services.
+------------------------------------------------------------
+
+From nmoreno@demon.co.uk Fri Mar 17 20:38:54 1995
+Path: ashpoly!cascade!mxgate!coyoacan!demon!nmoreno
+From: nmoreno@demon.co.uk (Natalia Moreno)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Mar17.203854.5445@demon.co.uk>
+Date: Fri, 17 Mar 1995 20:38:54 GMT
+References: <1995Mar16.054254.2732@pacbell.net>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Mar16.054254.2732@pacbell.net>, sjohansson@pacbell.net (Sergei Johansson) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Natalia Moreno
+Tape trading list upon request. SASE required for international mail.
+
+From ksokolov@ox.ac.uk Sun Mar 19 08:52:54 1995
+Path: ashpoly!cascade!bigsur!ox!ksokolov
+From: ksokolov@ox.ac.uk (Kenji Sokolov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Mar19.085254.6884@ox.ac.uk>
+Date: Sun, 19 Mar 1995 08:52:54 GMT
+References: <1995Mar16.054254.2732@pacbell.net> <1995Mar17.203854.5445@demon.co.uk>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Mar17.203854.5445@demon.co.uk>, nmoreno@demon.co.uk (Natalia Moreno) writes:
+> Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+> Top-posters will be placed in my ~/.killfile without notice.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Kenji Sokolov
+Tape trading list upon request. SASE required for international mail.
+
+From jsato@stanford.edu Mon Mar 20 23:35:54 1995
+Path: ashpoly!cascade!brgate!saturno!stanford!jsato
+From: jsato@stanford.edu (Jens Sato)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Mar20.233554.4154@stanford.edu>
+Date: Mon, 20 Mar 1995 23:35:54 GMT
+References: <1995Mar16.054254.2732@pacbell.net> <1995Mar17.203854.5445@demon.co.uk> <1995Mar19.085254.6884@ox.ac.uk>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Mar19.085254.6884@ox.ac.uk>, ksokolov@ox.ac.uk (Kenji Sokolov) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+-- 
+Jens Sato <jsato@stanford.edu>
+Hayes Optima 288 @ 14,400 bps
+"Marcus is not one man."
+
+From mkang@kiae.su Wed Mar 22 21:16:54 1995
+Path: ashpoly!cascade!bigsur!kiae!mkang
+From: mkang@kiae.su (Mateo Kang)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Mar22.211654.4102@kiae.su>
+Date: Wed, 22 Mar 1995 21:16:54 GMT
+References: <1995Mar16.054254.2732@pacbell.net> <1995Mar17.203854.5445@demon.co.uk> <1995Mar19.085254.6884@ox.ac.uk>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Mar19.085254.6884@ox.ac.uk>, ksokolov@ox.ac.uk (Kenji Sokolov) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Mateo Kang <mkang@kiae.su>
+Zyxel U-1496E @ 28,800 bps
+"Row 14. No joke."
+

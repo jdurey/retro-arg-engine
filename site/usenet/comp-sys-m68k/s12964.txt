@@ -1,0 +1,71 @@
+From hkuznetsov@stanford.edu Mon Mar 18 22:14:41 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!stanford!hkuznetsov
+From: hkuznetsov@stanford.edu (Heather Kuznetsov)
+Newsgroups: comp.sys.m68k
+Subject: Observation: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Mar18.221441.9318@stanford.edu>
+Date: Mon, 18 Mar 1996 22:14:41 GMT
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Heather Kuznetsov <hkuznetsov@stanford.edu>
+Hayes Optima 288 @ ISDN 64k bps
+"They will send a copy in my place."
+
+From slaurent@cmu.edu Tue Mar 19 21:05:41 1996
+Path: ashpoly!cascade!mxgate!coyoacan!cmu!slaurent
+From: slaurent@cmu.edu (Seo-yeon Laurent)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Mar19.210541.7822@cmu.edu>
+Date: Tue, 19 Mar 1996 21:05:41 GMT
+References: <1996Mar18.221441.9318@stanford.edu>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996Mar18.221441.9318@stanford.edu>, hkuznetsov@stanford.edu (Heather Kuznetsov) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+> Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+=== Seo-yeon Laurent ===
+Dept of Electrical Engineering, Carnegie Mellon University School of CS
+"A soul is not exclusive to biology."
+
+From smoreau@illinois.edu Wed Mar 20 18:07:41 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!illinois!smoreau
+From: smoreau@illinois.edu (Sven Moreau)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Mar20.180741.1740@illinois.edu>
+Date: Wed, 20 Mar 1996 18:07:41 GMT
+References: <1996Mar18.221441.9318@stanford.edu> <1996Mar19.210541.7822@cmu.edu>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Mar19.210541.7822@cmu.edu>, slaurent@cmu.edu (Seo-yeon Laurent) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+-- 
+Sven Moreau | smoreau@illinois.edu
+PGP Key fingerprint: 731C 50B2 1B14 336A
+"Keep the channels open."
+

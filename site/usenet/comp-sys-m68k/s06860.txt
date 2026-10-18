@@ -1,0 +1,97 @@
+From imoreno@u-tokyo.ac.jp Thu May 12 13:06:57 1994
+Path: ashpoly!cascade!brgate!saturno!u-tokyo!imoreno
+From: imoreno@u-tokyo.ac.jp (Ines Moreno)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994May12.130657.6505@u-tokyo.ac.jp>
+Date: Thu, 12 May 1994 13:06:57 GMT
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+=== Ines Moreno ===
+Dept of Electrical Engineering, University of Tokyo Department of Information Science
+"Hardware is temporary. The signal survives."
+
+From dsouza@unam.mx Fri May 13 10:31:57 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!unam!dsouza
+From: dsouza@unam.mx (Dmitri Souza)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994May13.103157.8262@unam.mx>
+Date: Fri, 13 May 1994 10:31:57 GMT
+References: <1994May12.130657.6505@u-tokyo.ac.jp>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1994May12.130657.6505@u-tokyo.ac.jp>, imoreno@u-tokyo.ac.jp (Ines Moreno) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+=== Dmitri Souza ===
+Dept of Electrical Engineering, Universidad Nacional Autónoma de México (DGSCA)
+"Hardware is temporary. The signal survives."
+
+From snovak@unam.mx Fri May 13 14:37:57 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!unam!snovak
+From: snovak@unam.mx (Sven Novak)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994May13.143757.6712@unam.mx>
+Date: Fri, 13 May 1994 14:37:57 GMT
+References: <1994May12.130657.6505@u-tokyo.ac.jp>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994May12.130657.6505@u-tokyo.ac.jp>, imoreno@u-tokyo.ac.jp (Ines Moreno) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Sven Novak
+Opinions expressed are solely my own and not those of Universidad Nacional Autónoma de México (DGSCA).
+------------------------------------------------------------
+
+From tkuznetsov@ox.ac.uk Sun May 15 10:26:57 1994
+Path: ashpoly!cascade!mxgate!coyoacan!ox!tkuznetsov
+From: tkuznetsov@ox.ac.uk (Tomas Kuznetsov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994May15.102657.7974@ox.ac.uk>
+Date: Sun, 15 May 1994 10:26:57 GMT
+References: <1994May12.130657.6505@u-tokyo.ac.jp>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1994May12.130657.6505@u-tokyo.ac.jp>, imoreno@u-tokyo.ac.jp (Ines Moreno) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Tomas Kuznetsov | tkuznetsov@ox.ac.uk
+PGP Key fingerprint: E81B C3B5 6F65 9854
+"Keep the channels open."
+

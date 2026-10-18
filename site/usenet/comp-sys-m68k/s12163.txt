@@ -1,0 +1,116 @@
+From gperez@illinois.edu Mon Nov 20 07:23:45 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!illinois!gperez
+From: gperez@illinois.edu (Graham Pérez)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Nov20.072345.7681@illinois.edu>
+Date: Mon, 20 Nov 1995 07:23:45 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Graham Pérez
+Opinions expressed are solely my own and not those of University of Illinois Urbana-Champaign.
+------------------------------------------------------------
+
+From stanaka@stanford.edu Mon Nov 20 15:18:45 1995
+Path: ashpoly!cascade!bigsur!stanford!stanaka
+From: stanaka@stanford.edu (Sergei Tanaka)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Nov20.151845.3771@stanford.edu>
+Date: Mon, 20 Nov 1995 15:18:45 GMT
+References: <1995Nov20.072345.7681@illinois.edu>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Nov20.072345.7681@illinois.edu>, gperez@illinois.edu (Graham Pérez) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Sergei Tanaka <stanaka@stanford.edu>
+Zyxel U-1496E @ 9600 Telebit bps
+"The hatch is open. Is anyone listening?"
+
+From enakamura@titech.ac.jp Wed Nov 22 09:15:45 1995
+Path: ashpoly!cascade!mxgate!coyoacan!titech!enakamura
+From: enakamura@titech.ac.jp (Élodie Nakamura)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Nov22.091545.6580@titech.ac.jp>
+Date: Wed, 22 Nov 1995 09:15:45 GMT
+References: <1995Nov20.072345.7681@illinois.edu> <1995Nov20.151845.3771@stanford.edu>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Nov20.151845.3771@stanford.edu>, stanaka@stanford.edu (Sergei Tanaka) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Élodie Nakamura <enakamura@titech.ac.jp>
+US Robotics Courier V.34 @ 33,600 bps
+"Extraordinary claims require extraordinary spectra."
+
+From bfischer@cern.ch Fri Nov 24 03:32:45 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!cern!bfischer
+From: bfischer@cern.ch (Bruno Fischer)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Nov24.033245.4843@cern.ch>
+Date: Fri, 24 Nov 1995 03:32:45 GMT
+References: <1995Nov20.072345.7681@illinois.edu>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Nov20.072345.7681@illinois.edu>, gperez@illinois.edu (Graham Pérez) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Bruno Fischer <bfischer@cern.ch>
+US Robotics Courier V.34 @ 19,200 bps
+"The carrier frequency does not drift by accident."
+
+From dkowalski@mindspring.com Fri Nov 24 07:02:45 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!mindspring!dkowalski
+From: dkowalski@mindspring.com (Dave Kowalski)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Nov24.070245.4583@mindspring.com>
+Date: Fri, 24 Nov 1995 07:02:45 GMT
+References: <1995Nov20.072345.7681@illinois.edu> <1995Nov24.033245.4843@cern.ch>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Nov24.033245.4843@cern.ch>, bfischer@cern.ch (Bruno Fischer) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+=== Dave Kowalski ===
+Dept of Electrical Engineering, MindSpring Enterprises
+"Marcus is not one man."
+

@@ -1,0 +1,70 @@
+From mwatanabe@u-tokyo.ac.jp Sun Aug 21 15:26:03 1994
+Path: ashpoly!cascade!mxgate!coyoacan!u-tokyo!mwatanabe
+From: mwatanabe@u-tokyo.ac.jp (Mike Watanabe)
+Newsgroups: comp.dsp
+Subject: [INFO] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Aug21.152603.6587@u-tokyo.ac.jp>
+Date: Sun, 21 Aug 1994 15:26:03 GMT
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+Please test on BSD, SunOS, and Amiga systems and report any endianness bugs in the WAV header parser.
+
+-- 
+Mike Watanabe
+Opinions expressed are solely my own and not those of University of Tokyo Department of Information Science.
+------------------------------------------------------------
+
+From mmoreau@ox.ac.uk Mon Aug 22 22:50:03 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!ox!mmoreau
+From: mmoreau@ox.ac.uk (Min-jun Moreau)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Aug22.225003.6578@ox.ac.uk>
+Date: Mon, 22 Aug 1994 22:50:03 GMT
+References: <1994Aug21.152603.6587@u-tokyo.ac.jp>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Aug21.152603.6587@u-tokyo.ac.jp>, mwatanabe@u-tokyo.ac.jp (Mike Watanabe) writes:
+> Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+-- 
+Min-jun Moreau <mmoreau@ox.ac.uk>
+Practical Peripherals 14.4 @ 28,800 bps
+"We don't sign stars. We build them."
+
+From bmuller@hanse.de Tue Aug 23 20:26:03 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!hanse!bmuller
+From: bmuller@hanse.de (Bruno Müller)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Aug23.202603.1569@hanse.de>
+Date: Tue, 23 Aug 1994 20:26:03 GMT
+References: <1994Aug21.152603.6587@u-tokyo.ac.jp>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Aug21.152603.6587@u-tokyo.ac.jp>, mwatanabe@u-tokyo.ac.jp (Mike Watanabe) writes:
+> Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+=== Bruno Müller ===
+Dept of Electrical Engineering, Hanse-Netzwerk Hamburg
+"The hatch is open. Is anyone listening?"
+

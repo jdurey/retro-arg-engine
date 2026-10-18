@@ -1,0 +1,95 @@
+From aoliveira@kiae.su Fri May 19 01:55:12 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!kiae!aoliveira
+From: aoliveira@kiae.su (Andrei Oliveira)
+Newsgroups: comp.sys.m68k
+Subject: Observation: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995May19.015512.5649@kiae.su>
+Date: Fri, 19 May 1995 01:55:12 GMT
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+=== Andrei Oliveira ===
+Dept of Electrical Engineering, Kurchatov Institute of Atomic Energy, Moscow
+"Measuring a record you own is listening, not piracy."
+
+From lnovak@u-tokyo.ac.jp Sat May 20 16:34:12 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!u-tokyo!lnovak
+From: lnovak@u-tokyo.ac.jp (Lars Novak)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995May20.163412.6439@u-tokyo.ac.jp>
+Date: Sat, 20 May 1995 16:34:12 GMT
+References: <1995May19.015512.5649@kiae.su>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995May19.015512.5649@kiae.su>, aoliveira@kiae.su (Andrei Oliveira) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+> Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Lars Novak
+Tape trading list upon request. SASE required for international mail.
+
+From sstewart@pacbell.net Mon May 22 12:54:12 1995
+Path: ashpoly!cascade!brgate!saturno!pacbell!sstewart
+From: sstewart@pacbell.net (Seo-yeon Stewart)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995May22.125412.3817@pacbell.net>
+Date: Mon, 22 May 1995 12:54:12 GMT
+References: <1995May19.015512.5649@kiae.su> <1995May20.163412.6439@u-tokyo.ac.jp>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995May20.163412.6439@u-tokyo.ac.jp>, lnovak@u-tokyo.ac.jp (Lars Novak) writes:
+> Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+> Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Seo-yeon Stewart -- Pacific Bell Internet Services
+"Extraordinary claims require extraordinary spectra."
+
+From rlindqvist@kiae.su Tue May 23 09:32:12 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!kiae!rlindqvist
+From: rlindqvist@kiae.su (Rodrigo Lindqvist)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995May23.093212.2320@kiae.su>
+Date: Tue, 23 May 1995 09:32:12 GMT
+References: <1995May19.015512.5649@kiae.su> <1995May20.163412.6439@u-tokyo.ac.jp> <1995May22.125412.3817@pacbell.net>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995May22.125412.3817@pacbell.net>, sstewart@pacbell.net (Seo-yeon Stewart) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Rodrigo Lindqvist
+Opinions expressed are solely my own and not those of Kurchatov Institute of Atomic Energy, Moscow.
+------------------------------------------------------------
+

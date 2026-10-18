@@ -1,0 +1,93 @@
+From jjohansson@unam.mx Mon Jul 17 14:20:00 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!unam!jjohansson
+From: jjohansson@unam.mx (Jen Johansson)
+Newsgroups: comp.dsp
+Subject: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jul17.142000.2717@unam.mx>
+Date: Mon, 17 Jul 1995 14:20:00 GMT
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+Jen Johansson
+Opinions expressed are solely my own and not those of Universidad Nacional Autónoma de México (DGSCA).
+------------------------------------------------------------
+
+From dnilsson@earthlink.net Tue Jul 18 00:58:00 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!earthlink!dnilsson
+From: dnilsson@earthlink.net (Diego Nilsson)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jul18.005800.2910@earthlink.net>
+Date: Tue, 18 Jul 1995 00:58:00 GMT
+References: <1995Jul17.142000.2717@unam.mx>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Jul17.142000.2717@unam.mx>, jjohansson@unam.mx (Jen Johansson) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+-- 
+Diego Nilsson | dnilsson@earthlink.net
+PGP Key fingerprint: 0A92 481B 3008 AB5B
+"Keep the channels open."
+
+From asouza@utexas.edu Tue Jul 18 05:12:00 1995
+Path: ashpoly!cascade!bigsur!utexas!asouza
+From: asouza@utexas.edu (Andrei Souza)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jul18.051200.4766@utexas.edu>
+Date: Tue, 18 Jul 1995 05:12:00 GMT
+References: <1995Jul17.142000.2717@unam.mx> <1995Jul18.005800.2910@earthlink.net>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Jul18.005800.2910@earthlink.net>, dnilsson@earthlink.net (Diego Nilsson) writes:
+> You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+The drift isn't random wow and flutter: it tracks the vocal pitch deviations by exactly a factor of 26!
+
+-- 
+Andrei Souza <asouza@utexas.edu>
+Hayes Optima 288 @ 33,600 bps
+"We don't sign stars. We build them."
+
+From arodriguez@ox.ac.uk Wed Jul 19 01:15:00 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!ox!arodriguez
+From: arodriguez@ox.ac.uk (Astrid Rodríguez)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jul19.011500.2631@ox.ac.uk>
+Date: Wed, 19 Jul 1995 01:15:00 GMT
+References: <1995Jul17.142000.2717@unam.mx> <1995Jul18.005800.2910@earthlink.net>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Jul18.005800.2910@earthlink.net>, dnilsson@earthlink.net (Diego Nilsson) writes:
+> You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Astrid Rodríguez | arodriguez@ox.ac.uk
+PGP Key fingerprint: 42F9 7C87 0149 95D1
+"Keep the channels open."
+

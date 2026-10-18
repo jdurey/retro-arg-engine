@@ -1,0 +1,112 @@
+From dweber@hanse.de Tue Dec 24 18:57:41 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!hanse!dweber
+From: dweber@hanse.de (Dmitri Weber)
+Newsgroups: comp.sys.m68k
+Subject: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Dec24.185741.5785@hanse.de>
+Date: Tue, 24 Dec 1996 18:57:41 GMT
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+
+Does anyone have a 27C256 EPROM marked 'MH-U14' or 'ORION-CRYPTO'?
+
+-- 
+Dmitri Weber -- Hanse-Netzwerk Hamburg
+"Do not worship the copy."
+
+From jdubois@panix.com Wed Dec 25 20:07:41 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!panix!jdubois
+From: jdubois@panix.com (Joachim Dubois)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Dec25.200741.1196@panix.com>
+Date: Wed, 25 Dec 1996 20:07:41 GMT
+References: <1996Dec24.185741.5785@hanse.de>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1996Dec24.185741.5785@hanse.de>, dweber@hanse.de (Dmitri Weber) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Joachim Dubois
+Tape trading list upon request. SASE required for international mail.
+
+From ybrennan@hanse.de Thu Dec 26 10:46:41 1996
+Path: ashpoly!cascade!brgate!saturno!hanse!ybrennan
+From: ybrennan@hanse.de (Yuki Brennan)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Dec26.104641.4510@hanse.de>
+Date: Thu, 26 Dec 1996 10:46:41 GMT
+References: <1996Dec24.185741.5785@hanse.de> <1996Dec25.200741.1196@panix.com>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1996Dec25.200741.1196@panix.com>, jdubois@panix.com (Joachim Dubois) writes:
+> Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+-- 
+Yuki Brennan -- Hanse-Netzwerk Hamburg
+"The carrier frequency does not drift by accident."
+
+From rmuller@cern.ch Fri Dec 27 00:24:41 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!cern!rmuller
+From: rmuller@cern.ch (Raj Müller)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Dec27.002441.8022@cern.ch>
+Date: Fri, 27 Dec 1996 00:24:41 GMT
+References: <1996Dec24.185741.5785@hanse.de> <1996Dec25.200741.1196@panix.com>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Dec25.200741.1196@panix.com>, jdubois@panix.com (Joachim Dubois) writes:
+> Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+-- 
+Raj Müller | rmuller@cern.ch
+PGP Key fingerprint: 369E 6E92 2E52 8867
+"Keep the channels open."
+
+From nwatanabe@mit.edu Sun Dec 29 00:47:41 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!mit!nwatanabe
+From: nwatanabe@mit.edu (Natalia Watanabe)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Dec29.004741.5415@mit.edu>
+Date: Sun, 29 Dec 1996 00:47:41 GMT
+References: <1996Dec24.185741.5785@hanse.de> <1996Dec25.200741.1196@panix.com> <1996Dec27.002441.8022@cern.ch>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1996Dec27.002441.8022@cern.ch>, rmuller@cern.ch (Raj Müller) writes:
+> Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Natalia Watanabe -- Massachusetts Institute of Technology
+"A soul is not exclusive to biology."
+

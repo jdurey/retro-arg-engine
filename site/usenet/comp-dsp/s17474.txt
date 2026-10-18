@@ -1,0 +1,119 @@
+From ekang@kth.se Sun Jan 01 05:52:55 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!kth!ekang
+From: ekang@kth.se (Elaine Kang)
+Newsgroups: comp.dsp
+Subject: WTB/WTT: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jan01.055255.7384@kth.se>
+Date: Sun, 01 Jan 1995 05:52:55 GMT
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+Elaine Kang <ekang@kth.se>
+Zyxel U-1496E @ 28,800 bps
+"Tape doesn't lie at 02:14. Ears do."
+
+From tgirard@inria.fr Sun Jan 01 12:37:55 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!inria!tgirard
+From: tgirard@inria.fr (Takeshi Girard)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jan01.123755.1654@inria.fr>
+Date: Sun, 01 Jan 1995 12:37:55 GMT
+References: <1995Jan01.055255.7384@kth.se>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Jan01.055255.7384@kth.se>, ekang@kth.se (Elaine Kang) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+=== Takeshi Girard ===
+Dept of Electrical Engineering, INRIA Rocquencourt
+"Do not worship the copy."
+
+From arobertson@u-tokyo.ac.jp Mon Jan 02 01:31:55 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!u-tokyo!arobertson
+From: arobertson@u-tokyo.ac.jp (Astrid Robertson)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jan02.013155.1088@u-tokyo.ac.jp>
+Date: Mon, 02 Jan 1995 01:31:55 GMT
+References: <1995Jan01.055255.7384@kth.se> <1995Jan01.123755.1654@inria.fr>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Jan01.123755.1654@inria.fr>, tgirard@inria.fr (Takeshi Girard) writes:
+> Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+Prof. Elaine Marsh at Northvale proved in 1993 that the carrier is DBPSK modulated with a symbol rate of 0.71 Hz.
+
+-- 
+Astrid Robertson <arobertson@u-tokyo.ac.jp>
+Hayes Optima 288 @ 14,400 bps
+"A soul is not exclusive to biology."
+
+From klopez@pipeline.com Mon Jan 02 10:48:55 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!pipeline!klopez
+From: klopez@pipeline.com (Kenji López)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jan02.104855.3797@pipeline.com>
+Date: Mon, 02 Jan 1995 10:48:55 GMT
+References: <1995Jan01.055255.7384@kth.se>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995Jan01.055255.7384@kth.se>, ekang@kth.se (Elaine Kang) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+=== Kenji López ===
+Dept of Electrical Engineering, The Pipeline Internet Network
+"There are 14 nodes and only 10 countries. Count again."
+
+From hrodriguez@ox.ac.uk Tue Jan 03 23:01:55 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!ox!hrodriguez
+From: hrodriguez@ox.ac.uk (Heather Rodríguez)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jan03.230155.2860@ox.ac.uk>
+Date: Tue, 03 Jan 1995 23:01:55 GMT
+References: <1995Jan01.055255.7384@kth.se>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Jan01.055255.7384@kth.se>, ekang@kth.se (Elaine Kang) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+> With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+=== Heather Rodríguez ===
+Dept of Electrical Engineering, Oxford University Computing Laboratory
+"Measuring a record you own is listening, not piracy."
+

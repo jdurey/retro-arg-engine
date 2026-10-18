@@ -1,0 +1,95 @@
+From bnovak@utexas.edu Tue Apr 02 22:27:15 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!utexas!bnovak
+From: bnovak@utexas.edu (Bill Novak)
+Newsgroups: comp.dsp
+Subject: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Apr02.222715.8680@utexas.edu>
+Date: Tue, 02 Apr 1996 22:27:15 GMT
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Bill Novak <bnovak@utexas.edu>
+"Do not worship the copy."
+Macintosh IIfx / AmigaOS 3.1
+
+From alee@ox.ac.uk Thu Apr 04 18:09:15 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!ox!alee
+From: alee@ox.ac.uk (Anton Lee)
+Newsgroups: comp.dsp
+Subject: Re: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Apr04.180915.2110@ox.ac.uk>
+Date: Thu, 04 Apr 1996 18:09:15 GMT
+References: <1996Apr02.222715.8680@utexas.edu>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1996Apr02.222715.8680@utexas.edu>, bnovak@utexas.edu (Bill Novak) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Anton Lee
+Tape trading list upon request. SASE required for international mail.
+
+From abrennan@pacbell.net Fri Apr 05 03:28:15 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!pacbell!abrennan
+From: abrennan@pacbell.net (Astrid Brennan)
+Newsgroups: comp.dsp
+Subject: Re: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Apr05.032815.2214@pacbell.net>
+Date: Fri, 05 Apr 1996 03:28:15 GMT
+References: <1996Apr02.222715.8680@utexas.edu> <1996Apr04.180915.2110@ox.ac.uk>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Apr04.180915.2110@ox.ac.uk>, alee@ox.ac.uk (Anton Lee) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Astrid Brennan | abrennan@pacbell.net
+PGP Key fingerprint: 0A90 732A 2A45 6494
+"Keep the channels open."
+
+From ctanaka@berkeley.edu Sat Apr 06 05:01:15 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!berkeley!ctanaka
+From: ctanaka@berkeley.edu (Camila Tanaka)
+Newsgroups: comp.dsp
+Subject: Re: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Apr06.050115.1170@berkeley.edu>
+Date: Sat, 06 Apr 1996 05:01:15 GMT
+References: <1996Apr02.222715.8680@utexas.edu> <1996Apr04.180915.2110@ox.ac.uk> <1996Apr05.032815.2214@pacbell.net>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Apr05.032815.2214@pacbell.net>, abrennan@pacbell.net (Astrid Brennan) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Camila Tanaka <ctanaka@berkeley.edu>
+Practical Peripherals 14.4 @ 9600 Telebit bps
+"Measuring a record you own is listening, not piracy."
+

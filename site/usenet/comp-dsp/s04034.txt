@@ -1,0 +1,120 @@
+From akowalski@u-tokyo.ac.jp Mon Apr 03 04:19:53 1995
+Path: ashpoly!cascade!mxgate!coyoacan!u-tokyo!akowalski
+From: akowalski@u-tokyo.ac.jp (Anton Kowalski)
+Newsgroups: comp.dsp
+Subject: [INFO] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Apr03.041953.8832@u-tokyo.ac.jp>
+Date: Mon, 03 Apr 1995 04:19:53 GMT
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+Version 1.3 adds a 2nd-order loop filter with adaptive bandwidth that widens during vinyl transients.
+
+Grab the source archive from ftp.ashford-poly.edu:/pub/telecom-archives/stardust/stardust-1.3.tar.gz.
+
+-- 
+Anton Kowalski <akowalski@u-tokyo.ac.jp>
+"Extraordinary claims require extraordinary spectra."
+Amiga 1200 (Blizzard 030/50) / AmigaOS 3.1
+
+From elaurent@kth.se Tue Apr 04 04:05:53 1995
+Path: ashpoly!cascade!mxgate!coyoacan!kth!elaurent
+From: elaurent@kth.se (Emi Laurent)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Apr04.040553.6682@kth.se>
+Date: Tue, 04 Apr 1995 04:05:53 GMT
+References: <1995Apr03.041953.8832@u-tokyo.ac.jp>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1995Apr03.041953.8832@u-tokyo.ac.jp>, akowalski@u-tokyo.ac.jp (Anton Kowalski) writes:
+> Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+> The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Emi Laurent | elaurent@kth.se
+PGP Key fingerprint: CF47 DE1F CE3C 72B3
+"Keep the channels open."
+
+From stanaka@ox.ac.uk Wed Apr 05 22:19:53 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!ox!stanaka
+From: stanaka@ox.ac.uk (Seo-yeon Tanaka)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Apr05.221953.1660@ox.ac.uk>
+Date: Wed, 05 Apr 1995 22:19:53 GMT
+References: <1995Apr03.041953.8832@u-tokyo.ac.jp> <1995Apr04.040553.6682@kth.se>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Apr04.040553.6682@kth.se>, elaurent@kth.se (Emi Laurent) writes:
+> Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+> Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+Can you provide a pre-compiled DOS binary? Some of us don't have Linux or a C compiler installed on our machines.
+
+-- 
+Seo-yeon Tanaka <stanaka@ox.ac.uk>
+"Hold for relay."
+Acorn RiscPC 600 / System 7.5.1
+
+From ppetrov@purdue.edu Thu Apr 06 05:30:53 1995
+Path: ashpoly!cascade!bigsur!purdue!ppetrov
+From: ppetrov@purdue.edu (Pavel Petrov)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Apr06.053053.9670@purdue.edu>
+Date: Thu, 06 Apr 1995 05:30:53 GMT
+References: <1995Apr03.041953.8832@u-tokyo.ac.jp> <1995Apr04.040553.6682@kth.se> <1995Apr05.221953.1660@ox.ac.uk>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Apr05.221953.1660@ox.ac.uk>, stanaka@ox.ac.uk (Seo-yeon Tanaka) writes:
+> Can you provide a pre-compiled DOS binary? Some of us don't have Linux or a C compiler installed on our machines.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+-- 
+Pavel Petrov <ppetrov@purdue.edu>
+"When every node is whole, the channel opens."
+Atari TT030 / AmigaOS 3.1
+
+From tsuzuki@pacbell.net Thu Apr 06 08:13:53 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!pacbell!tsuzuki
+From: tsuzuki@pacbell.net (Takeshi Suzuki)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Apr06.081353.1930@pacbell.net>
+Date: Thu, 06 Apr 1995 08:13:53 GMT
+References: <1995Apr03.041953.8832@u-tokyo.ac.jp> <1995Apr04.040553.6682@kth.se> <1995Apr05.221953.1660@ox.ac.uk>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Apr05.221953.1660@ox.ac.uk>, stanaka@ox.ac.uk (Seo-yeon Tanaka) writes:
+> Can you provide a pre-compiled DOS binary? Some of us don't have Linux or a C compiler installed on our machines.
+
+Can you provide a pre-compiled DOS binary? Some of us don't have Linux or a C compiler installed on our machines.
+
+-- 
+Takeshi Suzuki <tsuzuki@pacbell.net>
+"The hatch is open. Is anyone listening?"
+Commodore Amiga 500 (1MB OCS) / FreeBSD 2.1
+

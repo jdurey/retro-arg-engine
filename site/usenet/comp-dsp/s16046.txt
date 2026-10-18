@@ -1,0 +1,96 @@
+From acampbell@hanse.de Sat Sep 10 08:10:48 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!hanse!acampbell
+From: acampbell@hanse.de (Astrid Campbell)
+Newsgroups: comp.dsp
+Subject: [INFO] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Sep10.081048.5066@hanse.de>
+Date: Sat, 10 Sep 1994 08:10:48 GMT
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+Astrid Campbell
+Tape trading list upon request. SASE required for international mail.
+
+From bmuller@clari.net Sun Sep 11 17:11:48 1994
+Path: ashpoly!cascade!bigsur!clari!bmuller
+From: bmuller@clari.net (Bastien Müller)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Sep11.171148.8387@clari.net>
+Date: Sun, 11 Sep 1994 17:11:48 GMT
+References: <1994Sep10.081048.5066@hanse.de>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1994Sep10.081048.5066@hanse.de>, acampbell@hanse.de (Astrid Campbell) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Bastien Müller -- ClariNet Communications Corp
+"A soul is not exclusive to biology."
+
+From spopov@pipeline.com Mon Sep 12 13:07:48 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!pipeline!spopov
+From: spopov@pipeline.com (Sun-mi Popov)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Sep12.130748.5787@pipeline.com>
+Date: Mon, 12 Sep 1994 13:07:48 GMT
+References: <1994Sep10.081048.5066@hanse.de>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1994Sep10.081048.5066@hanse.de>, acampbell@hanse.de (Astrid Campbell) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+> Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Sun-mi Popov <spopov@pipeline.com>
+"The carrier frequency does not drift by accident."
+Amiga 1200 (Blizzard 030/50) / System 7.5.1
+
+From avasiliev@purdue.edu Tue Sep 13 14:40:48 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!purdue!avasiliev
+From: avasiliev@purdue.edu (Anton Vasiliev)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Sep13.144048.6464@purdue.edu>
+Date: Tue, 13 Sep 1994 14:40:48 GMT
+References: <1994Sep10.081048.5066@hanse.de> <1994Sep12.130748.5787@pipeline.com>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Sep12.130748.5787@pipeline.com>, spopov@pipeline.com (Sun-mi Popov) writes:
+> Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+-- 
+Anton Vasiliev <avasiliev@purdue.edu>
+Practical Peripherals 14.4 @ 14,400 bps
+"They will send a copy in my place."
+

@@ -1,0 +1,120 @@
+From fperez@clari.net Mon Aug 05 05:21:58 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!clari!fperez
+From: fperez@clari.net (Freya Pérez)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Aug05.052158.8390@clari.net>
+Date: Mon, 05 Aug 1996 05:21:58 GMT
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+Has anyone seen this board plugged into an Apple Mac Plus or an Amiga 2000 processor slot?
+
+-- 
+Freya Pérez
+Tape trading list upon request. SASE required for international mail.
+
+From asmirnov@inria.fr Mon Aug 05 11:19:58 1996
+Path: ashpoly!cascade!mxgate!coyoacan!inria!asmirnov
+From: asmirnov@inria.fr (Andrei Smirnov)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Aug05.111958.1332@inria.fr>
+Date: Mon, 05 Aug 1996 11:19:58 GMT
+References: <1996Aug05.052158.8390@clari.net>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Aug05.052158.8390@clari.net>, fperez@clari.net (Freya Pérez) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Andrei Smirnov | asmirnov@inria.fr
+PGP Key fingerprint: B9D5 6F32 6537 5A53
+"Keep the channels open."
+
+From skuznetsov@inria.fr Tue Aug 06 10:33:58 1996
+Path: ashpoly!cascade!mxgate!coyoacan!inria!skuznetsov
+From: skuznetsov@inria.fr (Sergei Kuznetsov)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Aug06.103358.5356@inria.fr>
+Date: Tue, 06 Aug 1996 10:33:58 GMT
+References: <1996Aug05.052158.8390@clari.net> <1996Aug05.111958.1332@inria.fr>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1996Aug05.111958.1332@inria.fr>, asmirnov@inria.fr (Andrei Smirnov) writes:
+> The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+=== Sergei Kuznetsov ===
+Dept of Electrical Engineering, INRIA Rocquencourt
+"When every node is whole, the channel opens."
+
+From hsantos@uu.net Thu Aug 08 09:03:58 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!uu!hsantos
+From: hsantos@uu.net (Hugo Santos)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Aug08.090358.4486@uu.net>
+Date: Thu, 08 Aug 1996 09:03:58 GMT
+References: <1996Aug05.052158.8390@clari.net> <1996Aug05.111958.1332@inria.fr> <1996Aug06.103358.5356@inria.fr>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1996Aug06.103358.5356@inria.fr>, skuznetsov@inria.fr (Sergei Kuznetsov) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+> Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Hugo Santos
+Opinions expressed are solely my own and not those of UUNET Technologies, Falls Church VA.
+------------------------------------------------------------
+
+From arobertson@illinois.edu Thu Aug 08 18:42:58 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!illinois!arobertson
+From: arobertson@illinois.edu (Amy Robertson)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Aug08.184258.4431@illinois.edu>
+Date: Thu, 08 Aug 1996 18:42:58 GMT
+References: <1996Aug05.052158.8390@clari.net> <1996Aug05.111958.1332@inria.fr> <1996Aug06.103358.5356@inria.fr> <1996Aug08.090358.4486@uu.net>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Aug08.090358.4486@uu.net>, hsantos@uu.net (Hugo Santos) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+Looks like a prototype telecommunications board for military secure voice, not an audio music product.
+
+-- 
+Amy Robertson <arobertson@illinois.edu>
+"Hardware is temporary. The signal survives."
+PC-9821Ap2 (NEC) / AmigaOS 3.1
+

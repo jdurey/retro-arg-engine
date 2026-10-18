@@ -1,0 +1,70 @@
+From gkuznetsov@cmu.edu Sat Jul 27 22:25:37 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!cmu!gkuznetsov
+From: gkuznetsov@cmu.edu (Göran Kuznetsov)
+Newsgroups: comp.dsp
+Subject: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Jul27.222537.6548@cmu.edu>
+Date: Sat, 27 Jul 1996 22:25:37 GMT
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+MATLAB script available upon request via email.
+
+-- 
+Göran Kuznetsov <gkuznetsov@cmu.edu>
+"The hatch is open. Is anyone listening?"
+Mac IIci / 68882 FPU / FreeBSD 2.1
+
+From lperez@pipeline.com Sun Jul 28 18:59:37 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!pipeline!lperez
+From: lperez@pipeline.com (Lars Pérez)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Jul28.185937.6782@pipeline.com>
+Date: Sun, 28 Jul 1996 18:59:37 GMT
+References: <1996Jul27.222537.6548@cmu.edu>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996Jul27.222537.6548@cmu.edu>, gkuznetsov@cmu.edu (Göran Kuznetsov) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+> At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Lars Pérez | lperez@pipeline.com
+PGP Key fingerprint: 2210 84B8 1A40 D5FC
+"Keep the channels open."
+
+From cmacdonald@illinois.edu Mon Jul 29 15:08:37 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!illinois!cmacdonald
+From: cmacdonald@illinois.edu (Camila MacDonald)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Jul29.150837.8158@illinois.edu>
+Date: Mon, 29 Jul 1996 15:08:37 GMT
+References: <1996Jul27.222537.6548@cmu.edu>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1996Jul27.222537.6548@cmu.edu>, gkuznetsov@cmu.edu (Göran Kuznetsov) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Camila MacDonald
+Tape trading list upon request. SASE required for international mail.
+

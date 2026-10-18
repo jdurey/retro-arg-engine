@@ -1,0 +1,94 @@
+From tsanchez@uni-hamburg.de Wed Jun 01 06:48:58 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!uni-hamburg!tsanchez
+From: tsanchez@uni-hamburg.de (Thiago Sánchez)
+Newsgroups: comp.sys.m68k
+Subject: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Jun01.064858.7178@uni-hamburg.de>
+Date: Wed, 01 Jun 1994 06:48:58 GMT
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+Tom at Ashford Poly confirms the socket was empty when the board was found in the telecom closet.
+
+-- 
+Thiago Sánchez <tsanchez@uni-hamburg.de>
+Hayes Optima 288 @ 33,600 bps
+"Hold for relay."
+
+From hrobertson@panix.com Wed Jun 01 13:33:58 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!panix!hrobertson
+From: hrobertson@panix.com (Hana Robertson)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Jun01.133358.9090@panix.com>
+Date: Wed, 01 Jun 1994 13:33:58 GMT
+References: <1994Jun01.064858.7178@uni-hamburg.de>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1994Jun01.064858.7178@uni-hamburg.de>, tsanchez@uni-hamburg.de (Thiago Sánchez) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Hana Robertson <hrobertson@panix.com>
+Practical Peripherals 14.4 @ ISDN 64k bps
+"The carrier frequency does not drift by accident."
+
+From lbrennan@uni-hamburg.de Thu Jun 02 16:24:58 1994
+Path: ashpoly!cascade!bigsur!uni-hamburg!lbrennan
+From: lbrennan@uni-hamburg.de (Lars Brennan)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Jun02.162458.6696@uni-hamburg.de>
+Date: Thu, 02 Jun 1994 16:24:58 GMT
+References: <1994Jun01.064858.7178@uni-hamburg.de> <1994Jun01.133358.9090@panix.com>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1994Jun01.133358.9090@panix.com>, hrobertson@panix.com (Hana Robertson) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Lars Brennan -- Universität Hamburg Fachbereich Informatik
+"5 sigma is a discovery. 7 is a question."
+
+From tnilsson@stanford.edu Sat Jun 04 04:58:58 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!stanford!tnilsson
+From: tnilsson@stanford.edu (Tyler Nilsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Jun04.045858.7905@stanford.edu>
+Date: Sat, 04 Jun 1994 04:58:58 GMT
+References: <1994Jun01.064858.7178@uni-hamburg.de>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1994Jun01.064858.7178@uni-hamburg.de>, tsanchez@uni-hamburg.de (Thiago Sánchez) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+-- 
+Tyler Nilsson <tnilsson@stanford.edu>
+Hayes Optima 288 @ 19,200 bps
+"Extraordinary claims require extraordinary spectra."
+

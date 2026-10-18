@@ -1,0 +1,120 @@
+From amoreau@pipeline.com Sun Jan 16 15:19:24 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!pipeline!amoreau
+From: amoreau@pipeline.com (Anja Moreau)
+Newsgroups: comp.dsp
+Subject: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Jan16.151924.4024@pipeline.com>
+Date: Sun, 16 Jan 1994 15:19:24 GMT
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+Grab the source archive from ftp.ashford-poly.edu:/pub/telecom-archives/stardust/stardust-1.3.tar.gz.
+
+-- 
+Anja Moreau <amoreau@pipeline.com>
+*PLONK* filter active for trolls.
+Mac IIci / 68882 FPU - NetBSD 1.0
+
+From lchoi@uu.net Mon Jan 17 06:53:24 1994
+Path: ashpoly!cascade!mxgate!coyoacan!uu!lchoi
+From: lchoi@uu.net (Liam Choi)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Jan17.065324.7570@uu.net>
+Date: Mon, 17 Jan 1994 06:53:24 GMT
+References: <1994Jan16.151924.4024@pipeline.com>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Jan16.151924.4024@pipeline.com>, amoreau@pipeline.com (Anja Moreau) writes:
+> Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+-- 
+Liam Choi <lchoi@uu.net>
+Practical Peripherals 14.4 @ 9600 Telebit bps
+"Tape doesn't lie at 02:14. Ears do."
+
+From lmartinez@pipeline.com Wed Jan 19 01:01:24 1994
+Path: ashpoly!cascade!bigsur!pipeline!lmartinez
+From: lmartinez@pipeline.com (Lisa Martínez)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Jan19.010124.2020@pipeline.com>
+Date: Wed, 19 Jan 1994 01:01:24 GMT
+References: <1994Jan16.151924.4024@pipeline.com>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1994Jan16.151924.4024@pipeline.com>, amoreau@pipeline.com (Anja Moreau) writes:
+> Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+> Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Lisa Martínez | lmartinez@pipeline.com
+PGP Key fingerprint: 4F5A 2DA5 42C7 218B
+"Keep the channels open."
+
+From apopov@cam.ac.uk Wed Jan 19 11:24:24 1994
+Path: ashpoly!cascade!bigsur!cam!apopov
+From: apopov@cam.ac.uk (Astrid Popov)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Jan19.112424.2286@cam.ac.uk>
+Date: Wed, 19 Jan 1994 11:24:24 GMT
+References: <1994Jan16.151924.4024@pipeline.com> <1994Jan17.065324.7570@uu.net>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1994Jan17.065324.7570@uu.net>, lchoi@uu.net (Liam Choi) writes:
+> Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Astrid Popov -- University of Cambridge Computer Laboratory
+"The hatch is open. Is anyone listening?"
+
+From jschneider@netcom.com Thu Jan 20 23:16:24 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!netcom!jschneider
+From: jschneider@netcom.com (Jens Schneider)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Jan20.231624.6100@netcom.com>
+Date: Thu, 20 Jan 1994 23:16:24 GMT
+References: <1994Jan16.151924.4024@pipeline.com> <1994Jan19.010124.2020@pipeline.com>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1994Jan19.010124.2020@pipeline.com>, lmartinez@pipeline.com (Lisa Martínez) writes:
+> Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+Tar.gz archive gave a CRC error with PKUNZIP. Make sure you upload in binary mode, not ASCII!
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+=== Jens Schneider ===
+Dept of Electrical Engineering, NETCOM On-Line Communication Services
+"The hatch is open. Is anyone listening?"
+

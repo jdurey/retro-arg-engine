@@ -1,0 +1,92 @@
+From alaurent@ox.ac.uk Thu May 04 04:44:37 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!ox!alaurent
+From: alaurent@ox.ac.uk (Andrei Laurent)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995May04.044437.2803@ox.ac.uk>
+Date: Thu, 04 May 1995 04:44:37 GMT
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Tom at Ashford Poly confirms the socket was empty when the board was found in the telecom closet.
+
+-- 
+Andrei Laurent <alaurent@ox.ac.uk>
+US Robotics Courier V.34 @ 28,800 bps
+"5 sigma is a discovery. 7 is a question."
+
+From bsmirnov@hanse.de Sat May 06 05:31:37 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!hanse!bsmirnov
+From: bsmirnov@hanse.de (Bruno Smirnov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995May06.053137.9249@hanse.de>
+Date: Sat, 06 May 1995 05:31:37 GMT
+References: <1995May04.044437.2803@ox.ac.uk>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995May04.044437.2803@ox.ac.uk>, alaurent@ox.ac.uk (Andrei Laurent) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+=== Bruno Smirnov ===
+Dept of Electrical Engineering, Hanse-Netzwerk Hamburg
+"The hatch is open. Is anyone listening?"
+
+From mchoi@inria.fr Sun May 07 01:43:37 1995
+Path: ashpoly!cascade!bigsur!inria!mchoi
+From: mchoi@inria.fr (Mathieu Choi)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995May07.014337.8405@inria.fr>
+Date: Sun, 07 May 1995 01:43:37 GMT
+References: <1995May04.044437.2803@ox.ac.uk> <1995May06.053137.9249@hanse.de>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995May06.053137.9249@hanse.de>, bsmirnov@hanse.de (Bruno Smirnov) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+-- 
+=== Mathieu Choi ===
+Dept of Electrical Engineering, INRIA Rocquencourt
+"The carrier frequency does not drift by accident."
+
+From ypark@purdue.edu Mon May 08 05:46:37 1995
+Path: ashpoly!cascade!mxgate!coyoacan!purdue!ypark
+From: ypark@purdue.edu (Yuki Park)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995May08.054637.9137@purdue.edu>
+Date: Mon, 08 May 1995 05:46:37 GMT
+References: <1995May04.044437.2803@ox.ac.uk> <1995May06.053137.9249@hanse.de> <1995May07.014337.8405@inria.fr>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1995May07.014337.8405@inria.fr>, mchoi@inria.fr (Mathieu Choi) writes:
+> Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Yuki Park -- Purdue University Engineering Computer Network
+"In theory there is no difference between theory and practice."
+

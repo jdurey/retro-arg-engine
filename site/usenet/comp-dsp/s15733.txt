@@ -1,0 +1,71 @@
+From nmoreau@illinois.edu Wed Aug 16 00:16:50 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!illinois!nmoreau
+From: nmoreau@illinois.edu (Natalia Moreau)
+Newsgroups: comp.dsp
+Subject: Observation: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Aug16.001650.4446@illinois.edu>
+Date: Wed, 16 Aug 1995 00:16:50 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+
+Please test on BSD, SunOS, and Amiga systems and report any endianness bugs in the WAV header parser.
+
+-- 
+Natalia Moreau
+Opinions expressed are solely my own and not those of University of Illinois Urbana-Champaign.
+------------------------------------------------------------
+
+From kivanov@earthlink.net Wed Aug 16 05:10:50 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!earthlink!kivanov
+From: kivanov@earthlink.net (Karen Ivanov)
+Newsgroups: comp.dsp
+Subject: Re: Observation: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Aug16.051050.6828@earthlink.net>
+Date: Wed, 16 Aug 1995 05:10:50 GMT
+References: <1995Aug16.001650.4446@illinois.edu>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995Aug16.001650.4446@illinois.edu>, nmoreau@illinois.edu (Natalia Moreau) writes:
+> Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Karen Ivanov <kivanov@earthlink.net>
+*PLONK* filter active for trolls.
+Decstation 5000/200 - NetBSD 1.0
+
+From adubois@netcom.com Wed Aug 16 12:13:50 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!netcom!adubois
+From: adubois@netcom.com (Astrid Dubois)
+Newsgroups: comp.dsp
+Subject: Re: Observation: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Aug16.121350.8743@netcom.com>
+Date: Wed, 16 Aug 1995 12:13:50 GMT
+References: <1995Aug16.001650.4446@illinois.edu> <1995Aug16.051050.6828@earthlink.net>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1995Aug16.051050.6828@earthlink.net>, kivanov@earthlink.net (Karen Ivanov) writes:
+> Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Astrid Dubois -- NETCOM On-Line Communication Services
+"Row 14. No joke."
+

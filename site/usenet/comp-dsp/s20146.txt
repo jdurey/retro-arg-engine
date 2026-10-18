@@ -1,0 +1,117 @@
+From cmoreno@mit.edu Thu Feb 02 12:29:23 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!mit!cmoreno
+From: cmoreno@mit.edu (Callum Moreno)
+Newsgroups: comp.dsp
+Subject: [FLAME] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Feb02.122923.6831@mit.edu>
+Date: Thu, 02 Feb 1995 12:29:23 GMT
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+
+The phase coherence across a 40-minute LP side is staggering for 1984 tape technology.
+
+-- 
+=== Callum Moreno ===
+Dept of Electrical Engineering, Massachusetts Institute of Technology
+"When every node is whole, the channel opens."
+
+From htakahashi@cern.ch Fri Feb 03 20:46:23 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!cern!htakahashi
+From: htakahashi@cern.ch (Hana Takahashi)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Feb03.204623.1232@cern.ch>
+Date: Fri, 03 Feb 1995 20:46:23 GMT
+References: <1995Feb02.122923.6831@mit.edu>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995Feb02.122923.6831@mit.edu>, cmoreno@mit.edu (Callum Moreno) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+> Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Hana Takahashi -- European Laboratory for Particle Physics, Geneva
+"There are 14 nodes and only 10 countries. Count again."
+
+From mdubois@pacbell.net Sun Feb 05 12:42:23 1995
+Path: ashpoly!cascade!brgate!saturno!pacbell!mdubois
+From: mdubois@pacbell.net (Marisol Dubois)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Feb05.124223.7260@pacbell.net>
+Date: Sun, 05 Feb 1995 12:42:23 GMT
+References: <1995Feb02.122923.6831@mit.edu>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Feb02.122923.6831@mit.edu>, cmoreno@mit.edu (Callum Moreno) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+> Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Marisol Dubois -- Pacific Bell Internet Services
+"Row 14. No joke."
+
+From jsato@titech.ac.jp Tue Feb 07 00:03:23 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!titech!jsato
+From: jsato@titech.ac.jp (Julien Sato)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Feb07.000323.6350@titech.ac.jp>
+Date: Tue, 07 Feb 1995 00:03:23 GMT
+References: <1995Feb02.122923.6831@mit.edu> <1995Feb03.204623.1232@cern.ch>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Feb03.204623.1232@cern.ch>, htakahashi@cern.ch (Hana Takahashi) writes:
+> Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+> My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Julien Sato
+Tape trading list upon request. SASE required for international mail.
+
+From thernandez@clari.net Wed Feb 08 12:01:23 1995
+Path: ashpoly!cascade!mxgate!coyoacan!clari!thernandez
+From: thernandez@clari.net (Tyler Hernández)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Feb08.120123.5309@clari.net>
+Date: Wed, 08 Feb 1995 12:01:23 GMT
+References: <1995Feb02.122923.6831@mit.edu> <1995Feb03.204623.1232@cern.ch> <1995Feb07.000323.6350@titech.ac.jp>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Feb07.000323.6350@titech.ac.jp>, jsato@titech.ac.jp (Julien Sato) writes:
+> If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+-- 
+Tyler Hernández
+Tape trading list upon request. SASE required for international mail.
+

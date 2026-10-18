@@ -1,0 +1,92 @@
+From nfischer@utexas.edu Mon Sep 25 05:11:51 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!utexas!nfischer
+From: nfischer@utexas.edu (Nadia Fischer)
+Newsgroups: comp.dsp
+Subject: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Sep25.051151.8455@utexas.edu>
+Date: Mon, 25 Sep 1995 05:11:51 GMT
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Nadia Fischer
+Tape trading list upon request. SASE required for international mail.
+
+From tpark@kth.se Mon Sep 25 17:49:51 1995
+Path: ashpoly!cascade!mxgate!coyoacan!kth!tpark
+From: tpark@kth.se (Tobias Park)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Sep25.174951.3646@kth.se>
+Date: Mon, 25 Sep 1995 17:49:51 GMT
+References: <1995Sep25.051151.8455@utexas.edu>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Sep25.051151.8455@utexas.edu>, nfischer@utexas.edu (Nadia Fischer) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Tobias Park <tpark@kth.se>
+SupraFAXModem 28.8 @ 9600 Telebit bps
+"Do not worship the copy."
+
+From cmoreau@pipeline.com Tue Sep 26 06:32:51 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!pipeline!cmoreau
+From: cmoreau@pipeline.com (Callum Moreau)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Sep26.063251.3903@pipeline.com>
+Date: Tue, 26 Sep 1995 06:32:51 GMT
+References: <1995Sep25.051151.8455@utexas.edu> <1995Sep25.174951.3646@kth.se>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Sep25.174951.3646@kth.se>, tpark@kth.se (Tobias Park) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Callum Moreau | cmoreau@pipeline.com
+PGP Key fingerprint: 5695 5411 BA47 EBC3
+"Keep the channels open."
+
+From lbrennan@inria.fr Tue Sep 26 17:05:51 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!inria!lbrennan
+From: lbrennan@inria.fr (Lisa Brennan)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Sep26.170551.7728@inria.fr>
+Date: Tue, 26 Sep 1995 17:05:51 GMT
+References: <1995Sep25.051151.8455@utexas.edu> <1995Sep25.174951.3646@kth.se>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Sep25.174951.3646@kth.se>, tpark@kth.se (Tobias Park) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Lisa Brennan <lbrennan@inria.fr>
+Zyxel U-1496E @ 28,800 bps
+"When every node is whole, the channel opens."
+

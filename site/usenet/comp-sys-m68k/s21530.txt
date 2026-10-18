@@ -1,0 +1,93 @@
+From tkim@hanse.de Fri Oct 21 18:52:40 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!hanse!tkim
+From: tkim@hanse.de (Tyler Kim)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Oct21.185240.5658@hanse.de>
+Date: Fri, 21 Oct 1994 18:52:40 GMT
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Tyler Kim <tkim@hanse.de>
+"Row 14. No joke."
+486DX4/100 (FreeBSD 2.0.5) / NEXTSTEP 3.3
+
+From lnilsson@tum.de Sat Oct 22 12:01:40 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!tum!lnilsson
+From: lnilsson@tum.de (Lisa Nilsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Oct22.120140.5985@tum.de>
+Date: Sat, 22 Oct 1994 12:01:40 GMT
+References: <1994Oct21.185240.5658@hanse.de>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1994Oct21.185240.5658@hanse.de>, tkim@hanse.de (Tyler Kim) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+=== Lisa Nilsson ===
+Dept of Electrical Engineering, Technische Universität München
+"Extraordinary claims require extraordinary spectra."
+
+From njohansson@rwth-aachen.de Sun Oct 23 10:24:40 1994
+Path: ashpoly!cascade!bigsur!rwth-aachen!njohansson
+From: njohansson@rwth-aachen.de (Nadine Johansson)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Oct23.102440.3892@rwth-aachen.de>
+Date: Sun, 23 Oct 1994 10:24:40 GMT
+References: <1994Oct21.185240.5658@hanse.de> <1994Oct22.120140.5985@tum.de>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Oct22.120140.5985@tum.de>, lnilsson@tum.de (Lisa Nilsson) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Nadine Johansson <njohansson@rwth-aachen.de>
+"There are 14 nodes and only 10 countries. Count again."
+PC-9821Ap2 (NEC) / SunOS 4.1.4
+
+From fgarcia@cern.ch Mon Oct 24 11:59:40 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!cern!fgarcia
+From: fgarcia@cern.ch (Fiona García)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Oct24.115940.4751@cern.ch>
+Date: Mon, 24 Oct 1994 11:59:40 GMT
+References: <1994Oct21.185240.5658@hanse.de> <1994Oct22.120140.5985@tum.de> <1994Oct23.102440.3892@rwth-aachen.de>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1994Oct23.102440.3892@rwth-aachen.de>, njohansson@rwth-aachen.de (Nadine Johansson) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Fiona García -- European Laboratory for Particle Physics, Geneva
+"We don't sign stars. We build them."
+

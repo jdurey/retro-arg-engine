@@ -1,0 +1,93 @@
+From tperez@rwth-aachen.de Sun Jan 01 10:39:17 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!rwth-aachen!tperez
+From: tperez@rwth-aachen.de (Thiago Pérez)
+Newsgroups: comp.sys.m68k
+Subject: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jan01.103917.8249@rwth-aachen.de>
+Date: Sun, 01 Jan 1995 10:39:17 GMT
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Thiago Pérez
+Opinions expressed are solely my own and not those of RWTH Aachen Informatik.
+------------------------------------------------------------
+
+From mlarsson@clari.net Sun Jan 01 14:10:17 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!clari!mlarsson
+From: mlarsson@clari.net (Min-jun Larsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jan01.141017.3703@clari.net>
+Date: Sun, 01 Jan 1995 14:10:17 GMT
+References: <1995Jan01.103917.8249@rwth-aachen.de>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Jan01.103917.8249@rwth-aachen.de>, tperez@rwth-aachen.de (Thiago Pérez) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Min-jun Larsson -- ClariNet Communications Corp
+"Do not worship the copy."
+
+From ceriksson@unam.mx Mon Jan 02 23:32:17 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!unam!ceriksson
+From: ceriksson@unam.mx (Camila Eriksson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jan02.233217.2229@unam.mx>
+Date: Mon, 02 Jan 1995 23:32:17 GMT
+References: <1995Jan01.103917.8249@rwth-aachen.de> <1995Jan01.141017.3703@clari.net>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Jan01.141017.3703@clari.net>, mlarsson@clari.net (Min-jun Larsson) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Camila Eriksson <ceriksson@unam.mx>
+*PLONK* filter active for trolls.
+Amiga 3000T - NetBSD 1.0
+
+From yduarte@rwth-aachen.de Tue Jan 03 11:54:17 1995
+Path: ashpoly!cascade!bigsur!rwth-aachen!yduarte
+From: yduarte@rwth-aachen.de (Yuki Duarte)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jan03.115417.7443@rwth-aachen.de>
+Date: Tue, 03 Jan 1995 11:54:17 GMT
+References: <1995Jan01.103917.8249@rwth-aachen.de> <1995Jan01.141017.3703@clari.net>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Jan01.141017.3703@clari.net>, mlarsson@clari.net (Min-jun Larsson) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Yuki Duarte <yduarte@rwth-aachen.de>
+US Robotics Courier V.34 @ 9600 Telebit bps
+"A soul is not exclusive to biology."
+

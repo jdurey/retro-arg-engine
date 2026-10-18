@@ -1,0 +1,73 @@
+From tnovak@mit.edu Sat Sep 17 07:55:40 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!mit!tnovak
+From: tnovak@mit.edu (Tomas Novak)
+Newsgroups: comp.dsp
+Subject: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Sep17.075540.8111@mit.edu>
+Date: Sat, 17 Sep 1994 07:55:40 GMT
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+What sampling rates are people using for their vinyl rips? 44.1 kHz or 48 kHz DAT?
+
+-- 
+Tomas Novak <tnovak@mit.edu>
+"There are 14 nodes and only 10 countries. Count again."
+Mac IIci / 68882 FPU / NEXTSTEP 3.3
+
+From gkuznetsov@kth.se Sat Sep 17 09:36:40 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!kth!gkuznetsov
+From: gkuznetsov@kth.se (Göran Kuznetsov)
+Newsgroups: comp.dsp
+Subject: Re: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Sep17.093640.8921@kth.se>
+Date: Sat, 17 Sep 1994 09:36:40 GMT
+References: <1994Sep17.075540.8111@mit.edu>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 12
+
+In article <1994Sep17.075540.8111@mit.edu>, tnovak@mit.edu (Tomas Novak) writes:
+> Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+> A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Göran Kuznetsov
+Opinions expressed are solely my own and not those of Royal Institute of Technology, Stockholm.
+------------------------------------------------------------
+
+From mnakamura@mit.edu Sat Sep 17 14:44:40 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!mit!mnakamura
+From: mnakamura@mit.edu (Marisol Nakamura)
+Newsgroups: comp.dsp
+Subject: Re: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Sep17.144440.3343@mit.edu>
+Date: Sat, 17 Sep 1994 14:44:40 GMT
+References: <1994Sep17.075540.8111@mit.edu> <1994Sep17.093640.8921@kth.se>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Sep17.093640.8921@kth.se>, gkuznetsov@kth.se (Göran Kuznetsov) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Marisol Nakamura <mnakamura@mit.edu>
+"Hardware is temporary. The signal survives."
+Sun SparcStation 20 / SunOS 4.1.4
+

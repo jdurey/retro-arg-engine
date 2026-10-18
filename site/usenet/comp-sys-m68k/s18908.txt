@@ -1,0 +1,118 @@
+From mvasiliev@u-tokyo.ac.jp Wed Aug 23 01:25:19 1995
+Path: ashpoly!cascade!bigsur!u-tokyo!mvasiliev
+From: mvasiliev@u-tokyo.ac.jp (Marisol Vasiliev)
+Newsgroups: comp.sys.m68k
+Subject: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Aug23.012519.7972@u-tokyo.ac.jp>
+Date: Wed, 23 Aug 1995 01:25:19 GMT
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Hardware disassembly report for Motorola hardware hackers.
+
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+Did Marcus take the decryption EPROM with him when he left the lab?
+
+-- 
+Marisol Vasiliev | mvasiliev@u-tokyo.ac.jp
+PGP Key fingerprint: FFF0 DAA1 9A0B B283
+"Keep the channels open."
+
+From sreyes@demon.co.uk Fri Aug 25 02:30:19 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!demon!sreyes
+From: sreyes@demon.co.uk (Steve Reyes)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Aug25.023019.6859@demon.co.uk>
+Date: Fri, 25 Aug 1995 02:30:19 GMT
+References: <1995Aug23.012519.7972@u-tokyo.ac.jp>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Aug23.012519.7972@u-tokyo.ac.jp>, mvasiliev@u-tokyo.ac.jp (Marisol Vasiliev) writes:
+> Hardware disassembly report for Motorola hardware hackers.
+> Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Steve Reyes <sreyes@demon.co.uk>
+Practical Peripherals 14.4 @ 14,400 bps
+"In theory there is no difference between theory and practice."
+
+From jkuznetsov@cam.ac.uk Fri Aug 25 07:54:19 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!cam!jkuznetsov
+From: jkuznetsov@cam.ac.uk (Jen Kuznetsov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Aug25.075419.2654@cam.ac.uk>
+Date: Fri, 25 Aug 1995 07:54:19 GMT
+References: <1995Aug23.012519.7972@u-tokyo.ac.jp>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Aug23.012519.7972@u-tokyo.ac.jp>, mvasiliev@u-tokyo.ac.jp (Marisol Vasiliev) writes:
+> Hardware disassembly report for Motorola hardware hackers.
+> Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Jen Kuznetsov <jkuznetsov@cam.ac.uk>
+"There are 14 nodes and only 10 countries. Count again."
+Macintosh IIfx / SunOS 4.1.4
+
+From tpark@utexas.edu Sat Aug 26 23:56:19 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!utexas!tpark
+From: tpark@utexas.edu (Tomas Park)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Aug26.235619.6896@utexas.edu>
+Date: Sat, 26 Aug 1995 23:56:19 GMT
+References: <1995Aug23.012519.7972@u-tokyo.ac.jp> <1995Aug25.023019.6859@demon.co.uk>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Aug25.023019.6859@demon.co.uk>, sreyes@demon.co.uk (Steve Reyes) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Tomas Park <tpark@utexas.edu>
+*PLONK* filter active for trolls.
+Sun 3/60 (SunOS 4.1.1) - NetBSD 1.0
+
+From amoreau@pacbell.net Mon Aug 28 06:21:19 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!pacbell!amoreau
+From: amoreau@pacbell.net (Anton Moreau)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Aug28.062119.7847@pacbell.net>
+Date: Mon, 28 Aug 1995 06:21:19 GMT
+References: <1995Aug23.012519.7972@u-tokyo.ac.jp> <1995Aug25.023019.6859@demon.co.uk> <1995Aug26.235619.6896@utexas.edu>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Aug26.235619.6896@utexas.edu>, tpark@utexas.edu (Tomas Park) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Anton Moreau <amoreau@pacbell.net>
+US Robotics Courier V.34 @ ISDN 64k bps
+"Hardware is temporary. The signal survives."
+

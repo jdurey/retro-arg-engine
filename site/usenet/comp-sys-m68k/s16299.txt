@@ -1,0 +1,74 @@
+From khughes@mit.edu Sun Sep 22 19:24:56 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!mit!khughes
+From: khughes@mit.edu (Kirsty Hughes)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Sep22.192456.1824@mit.edu>
+Date: Sun, 22 Sep 1996 19:24:56 GMT
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Kirsty Hughes <khughes@mit.edu>
+"Marcus is not one man."
+Amiga 3000T / FreeBSD 2.1
+
+From mjohansson@cam.ac.uk Tue Sep 24 01:50:56 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!cam!mjohansson
+From: mjohansson@cam.ac.uk (Mei Johansson)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Sep24.015056.8925@cam.ac.uk>
+Date: Tue, 24 Sep 1996 01:50:56 GMT
+References: <1996Sep22.192456.1824@mit.edu>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1996Sep22.192456.1824@mit.edu>, khughes@mit.edu (Kirsty Hughes) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Mei Johansson <mjohansson@cam.ac.uk>
+"Marcus is not one man."
+PC-9821Ap2 (NEC) / FreeBSD 2.1
+
+From nokonkwo@cern.ch Tue Sep 24 08:57:56 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!cern!nokonkwo
+From: nokonkwo@cern.ch (Nadia Okonkwo)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Sep24.085756.9871@cern.ch>
+Date: Tue, 24 Sep 1996 08:57:56 GMT
+References: <1996Sep22.192456.1824@mit.edu> <1996Sep24.015056.8925@cam.ac.uk>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1996Sep24.015056.8925@cam.ac.uk>, mjohansson@cam.ac.uk (Mei Johansson) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Nadia Okonkwo <nokonkwo@cern.ch>
+*PLONK* filter active for trolls.
+Amiga 1200 (Blizzard 030/50) - NetBSD 1.0
+

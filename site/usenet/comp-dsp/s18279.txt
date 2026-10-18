@@ -1,0 +1,116 @@
+From mmoreau@berkeley.edu Tue May 23 10:37:18 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!berkeley!mmoreau
+From: mmoreau@berkeley.edu (Min-jun Moreau)
+Newsgroups: comp.dsp
+Subject: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995May23.103718.6517@berkeley.edu>
+Date: Tue, 23 May 1995 10:37:18 GMT
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+
+Grab the source archive from ftp.ashford-poly.edu:/pub/telecom-archives/stardust/stardust-1.3.tar.gz.
+
+-- 
+=== Min-jun Moreau ===
+Dept of Electrical Engineering, UC Berkeley Department of EECS
+"Hardware is temporary. The signal survives."
+
+From schoi@delphi.com Wed May 24 14:22:18 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!delphi!schoi
+From: schoi@delphi.com (Sun-mi Choi)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995May24.142218.4582@delphi.com>
+Date: Wed, 24 May 1995 14:22:18 GMT
+References: <1995May23.103718.6517@berkeley.edu>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995May23.103718.6517@berkeley.edu>, mmoreau@berkeley.edu (Min-jun Moreau) writes:
+> Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+> Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+
+Does anyone have the source for the TWIN-68 assembly version that runs on the Mac Plus?
+
+-- 
+=== Sun-mi Choi ===
+Dept of Electrical Engineering, Delphi Internet Services
+"The hatch is open. Is anyone listening?"
+
+From esato@demon.co.uk Fri May 26 07:16:18 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!demon!esato
+From: esato@demon.co.uk (Élodie Sato)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995May26.071618.3988@demon.co.uk>
+Date: Fri, 26 May 1995 07:16:18 GMT
+References: <1995May23.103718.6517@berkeley.edu>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1995May23.103718.6517@berkeley.edu>, mmoreau@berkeley.edu (Min-jun Moreau) writes:
+> Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+-- 
+Élodie Sato -- Demon Internet Services UK
+"5 sigma is a discovery. 7 is a question."
+
+From sandersson@kiae.su Sat May 27 05:23:18 1995
+Path: ashpoly!cascade!brgate!saturno!kiae!sandersson
+From: sandersson@kiae.su (Sergei Andersson)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995May27.052318.5021@kiae.su>
+Date: Sat, 27 May 1995 05:23:18 GMT
+References: <1995May23.103718.6517@berkeley.edu> <1995May24.142218.4582@delphi.com>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995May24.142218.4582@delphi.com>, schoi@delphi.com (Sun-mi Choi) writes:
+> Does anyone have the source for the TWIN-68 assembly version that runs on the Mac Plus?
+
+Tar.gz archive gave a CRC error with PKUNZIP. Make sure you upload in binary mode, not ASCII!
+
+-- 
+Sergei Andersson | sandersson@kiae.su
+PGP Key fingerprint: 8E79 F4B8 E47C 35BE
+"Keep the channels open."
+
+From thughes@u-tokyo.ac.jp Sun May 28 11:58:18 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!u-tokyo!thughes
+From: thughes@u-tokyo.ac.jp (Tomas Hughes)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995May28.115818.4094@u-tokyo.ac.jp>
+Date: Sun, 28 May 1995 11:58:18 GMT
+References: <1995May23.103718.6517@berkeley.edu> <1995May24.142218.4582@delphi.com> <1995May27.052318.5021@kiae.su>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995May27.052318.5021@kiae.su>, sandersson@kiae.su (Sergei Andersson) writes:
+> Tar.gz archive gave a CRC error with PKUNZIP. Make sure you upload in binary mode, not ASCII!
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Tomas Hughes <thughes@u-tokyo.ac.jp>
+Practical Peripherals 14.4 @ 33,600 bps
+"Measuring a record you own is listening, not piracy."
+

@@ -1,0 +1,70 @@
+From boliveira@cern.ch Sun May 14 05:58:37 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!cern!boliveira
+From: boliveira@cern.ch (Bruno Oliveira)
+Newsgroups: comp.dsp
+Subject: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May14.055837.5266@cern.ch>
+Date: Sun, 14 May 1995 05:58:37 GMT
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Bruno Oliveira <boliveira@cern.ch>
+*PLONK* filter active for trolls.
+PC-9821Ap2 (NEC) - NetBSD 1.0
+
+From asato@unam.mx Sun May 14 21:26:37 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!unam!asato
+From: asato@unam.mx (Aiko Sato)
+Newsgroups: comp.dsp
+Subject: Re: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May14.212637.4338@unam.mx>
+Date: Sun, 14 May 1995 21:26:37 GMT
+References: <1995May14.055837.5266@cern.ch>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995May14.055837.5266@cern.ch>, boliveira@cern.ch (Bruno Oliveira) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Aiko Sato <asato@unam.mx>
+"In theory there is no difference between theory and practice."
+Acorn RiscPC 600 / FreeBSD 2.1
+
+From cmuller@rwth-aachen.de Tue May 16 09:35:37 1995
+Path: ashpoly!cascade!brgate!saturno!rwth-aachen!cmuller
+From: cmuller@rwth-aachen.de (Callum Müller)
+Newsgroups: comp.dsp
+Subject: Re: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May16.093537.6916@rwth-aachen.de>
+Date: Tue, 16 May 1995 09:35:37 GMT
+References: <1995May14.055837.5266@cern.ch>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995May14.055837.5266@cern.ch>, boliveira@cern.ch (Bruno Oliveira) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+Callum Müller <cmuller@rwth-aachen.de>
+"Tape doesn't lie at 02:14. Ears do."
+NeXTstation Turbo Color / TOS 4.04
+

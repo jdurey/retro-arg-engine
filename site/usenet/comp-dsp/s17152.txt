@@ -1,0 +1,115 @@
+From lito@titech.ac.jp Thu Oct 12 16:47:26 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!titech!lito
+From: lito@titech.ac.jp (Lisa Ito)
+Newsgroups: comp.dsp
+Subject: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Oct12.164726.8409@titech.ac.jp>
+Date: Thu, 12 Oct 1995 16:47:26 GMT
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Lisa Ito <lito@titech.ac.jp>
+*PLONK* filter active for trolls.
+Commodore Amiga 500 (1MB OCS) - NetBSD 1.0
+
+From lvasiliev@panix.com Thu Oct 12 21:25:26 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!panix!lvasiliev
+From: lvasiliev@panix.com (Liam Vasiliev)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Oct12.212526.1632@panix.com>
+Date: Thu, 12 Oct 1995 21:25:26 GMT
+References: <1995Oct12.164726.8409@titech.ac.jp>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Oct12.164726.8409@titech.ac.jp>, lito@titech.ac.jp (Lisa Ito) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+=== Liam Vasiliev ===
+Dept of Electrical Engineering, Public Access Unix of New York
+"Row 14. No joke."
+
+From jito@cmu.edu Fri Oct 13 04:03:26 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!cmu!jito
+From: jito@cmu.edu (Ji-woo Ito)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Oct13.040326.7371@cmu.edu>
+Date: Fri, 13 Oct 1995 04:03:26 GMT
+References: <1995Oct12.164726.8409@titech.ac.jp> <1995Oct12.212526.1632@panix.com>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Oct12.212526.1632@panix.com>, lvasiliev@panix.com (Liam Vasiliev) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Ji-woo Ito | jito@cmu.edu
+PGP Key fingerprint: ACA9 F72A 3222 2058
+"Keep the channels open."
+
+From sperez@purdue.edu Sat Oct 14 04:02:26 1995
+Path: ashpoly!cascade!brgate!saturno!purdue!sperez
+From: sperez@purdue.edu (Seo-yeon Pérez)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Oct14.040226.4143@purdue.edu>
+Date: Sat, 14 Oct 1995 04:02:26 GMT
+References: <1995Oct12.164726.8409@titech.ac.jp>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Oct12.164726.8409@titech.ac.jp>, lito@titech.ac.jp (Lisa Ito) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Seo-yeon Pérez -- Purdue University Engineering Computer Network
+"We don't sign stars. We build them."
+
+From mbrennan@purdue.edu Mon Oct 16 03:12:26 1995
+Path: ashpoly!cascade!brgate!saturno!purdue!mbrennan
+From: mbrennan@purdue.edu (Morag Brennan)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Oct16.031226.6778@purdue.edu>
+Date: Mon, 16 Oct 1995 03:12:26 GMT
+References: <1995Oct12.164726.8409@titech.ac.jp> <1995Oct14.040226.4143@purdue.edu>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1995Oct14.040226.4143@purdue.edu>, sperez@purdue.edu (Seo-yeon Pérez) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Morag Brennan -- Purdue University Engineering Computer Network
+"Do not worship the copy."
+

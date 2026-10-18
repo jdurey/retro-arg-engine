@@ -1,0 +1,71 @@
+From nrobertson@illinois.edu Sun Mar 19 16:00:08 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!illinois!nrobertson
+From: nrobertson@illinois.edu (Nadia Robertson)
+Newsgroups: comp.dsp
+Subject: WTB/WTT: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Mar19.160008.1686@illinois.edu>
+Date: Sun, 19 Mar 1995 16:00:08 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+
+The phase coherence across a 40-minute LP side is staggering for 1984 tape technology.
+
+-- 
+Nadia Robertson <nrobertson@illinois.edu>
+*PLONK* filter active for trolls.
+Mac IIci / 68882 FPU - NetBSD 1.0
+
+From apark@unam.mx Sun Mar 19 23:19:08 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!unam!apark
+From: apark@unam.mx (Anton Park)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Mar19.231908.6907@unam.mx>
+Date: Sun, 19 Mar 1995 23:19:08 GMT
+References: <1995Mar19.160008.1686@illinois.edu>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Mar19.160008.1686@illinois.edu>, nrobertson@illinois.edu (Nadia Robertson) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+> Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Anton Park | apark@unam.mx
+PGP Key fingerprint: FEE7 4153 80F4 1D71
+"Keep the channels open."
+
+From pjohansson@kth.se Tue Mar 21 12:35:08 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!kth!pjohansson
+From: pjohansson@kth.se (Pavel Johansson)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Mar21.123508.3854@kth.se>
+Date: Tue, 21 Mar 1995 12:35:08 GMT
+References: <1995Mar19.160008.1686@illinois.edu> <1995Mar19.231908.6907@unam.mx>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Mar19.231908.6907@unam.mx>, apark@unam.mx (Anton Park) writes:
+> Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Pavel Johansson <pjohansson@kth.se>
+*PLONK* filter active for trolls.
+Acorn RiscPC 600 - NetBSD 1.0
+

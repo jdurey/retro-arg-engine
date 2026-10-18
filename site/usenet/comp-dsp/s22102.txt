@@ -1,0 +1,94 @@
+From ssantos@berkeley.edu Sat Apr 01 16:21:02 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!berkeley!ssantos
+From: ssantos@berkeley.edu (Sun-mi Santos)
+Newsgroups: comp.dsp
+Subject: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Apr01.162102.7322@berkeley.edu>
+Date: Sat, 01 Apr 1995 16:21:02 GMT
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+MATLAB script available upon request via email.
+
+-- 
+Sun-mi Santos
+Opinions expressed are solely my own and not those of UC Berkeley Department of EECS.
+------------------------------------------------------------
+
+From hkarlsson@mit.edu Sun Apr 02 13:17:02 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!mit!hkarlsson
+From: hkarlsson@mit.edu (Hana Karlsson)
+Newsgroups: comp.dsp
+Subject: Re: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Apr02.131702.6761@mit.edu>
+Date: Sun, 02 Apr 1995 13:17:02 GMT
+References: <1995Apr01.162102.7322@berkeley.edu>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Apr01.162102.7322@berkeley.edu>, ssantos@berkeley.edu (Sun-mi Santos) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Hana Karlsson
+Opinions expressed are solely my own and not those of Massachusetts Institute of Technology.
+------------------------------------------------------------
+
+From gduarte@kiae.su Mon Apr 03 08:10:02 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!kiae!gduarte
+From: gduarte@kiae.su (Göran Duarte)
+Newsgroups: comp.dsp
+Subject: Re: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Apr03.081002.5218@kiae.su>
+Date: Mon, 03 Apr 1995 08:10:02 GMT
+References: <1995Apr01.162102.7322@berkeley.edu>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Apr01.162102.7322@berkeley.edu>, ssantos@berkeley.edu (Sun-mi Santos) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+=== Göran Duarte ===
+Dept of Electrical Engineering, Kurchatov Institute of Atomic Energy, Moscow
+"Hardware is temporary. The signal survives."
+
+From jchoi@mindspring.com Tue Apr 04 04:50:02 1995
+Path: ashpoly!cascade!bigsur!mindspring!jchoi
+From: jchoi@mindspring.com (Joachim Choi)
+Newsgroups: comp.dsp
+Subject: Re: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Apr04.045002.1326@mindspring.com>
+Date: Tue, 04 Apr 1995 04:50:02 GMT
+References: <1995Apr01.162102.7322@berkeley.edu> <1995Apr02.131702.6761@mit.edu>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1995Apr02.131702.6761@mit.edu>, hkarlsson@mit.edu (Hana Karlsson) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Joachim Choi -- MindSpring Enterprises
+"The carrier frequency does not drift by accident."
+

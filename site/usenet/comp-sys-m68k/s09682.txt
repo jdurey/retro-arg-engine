@@ -1,0 +1,92 @@
+From vschneider@uu.net Sun Dec 10 16:31:29 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!uu!vschneider
+From: vschneider@uu.net (Valeria Schneider)
+Newsgroups: comp.sys.m68k
+Subject: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Dec10.163129.6270@uu.net>
+Date: Sun, 10 Dec 1995 16:31:29 GMT
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Valeria Schneider -- UUNET Technologies, Falls Church VA
+"Row 14. No joke."
+
+From asanchez@utexas.edu Sun Dec 10 21:15:29 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!utexas!asanchez
+From: asanchez@utexas.edu (Aiko Sánchez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Dec10.211529.7462@utexas.edu>
+Date: Sun, 10 Dec 1995 21:15:29 GMT
+References: <1995Dec10.163129.6270@uu.net>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Dec10.163129.6270@uu.net>, vschneider@uu.net (Valeria Schneider) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+=== Aiko Sánchez ===
+Dept of Electrical Engineering, University of Texas at Austin
+"Row 14. No joke."
+
+From tschneider@rwth-aachen.de Tue Dec 12 18:30:29 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!rwth-aachen!tschneider
+From: tschneider@rwth-aachen.de (Thiago Schneider)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Dec12.183029.8105@rwth-aachen.de>
+Date: Tue, 12 Dec 1995 18:30:29 GMT
+References: <1995Dec10.163129.6270@uu.net>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Dec10.163129.6270@uu.net>, vschneider@uu.net (Valeria Schneider) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+=== Thiago Schneider ===
+Dept of Electrical Engineering, RWTH Aachen Informatik
+"When every node is whole, the channel opens."
+
+From ssato@ox.ac.uk Thu Dec 14 14:59:29 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!ox!ssato
+From: ssato@ox.ac.uk (Sergei Sato)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Dec14.145929.6322@ox.ac.uk>
+Date: Thu, 14 Dec 1995 14:59:29 GMT
+References: <1995Dec10.163129.6270@uu.net> <1995Dec10.211529.7462@utexas.edu>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Dec10.211529.7462@utexas.edu>, asanchez@utexas.edu (Aiko Sánchez) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Sergei Sato | ssato@ox.ac.uk
+PGP Key fingerprint: 97A5 108A 5FA0 36C1
+"Keep the channels open."
+

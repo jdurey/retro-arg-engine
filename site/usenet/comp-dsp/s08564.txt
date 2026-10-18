@@ -1,0 +1,118 @@
+From hvasiliev@purdue.edu Tue May 03 14:11:16 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!purdue!hvasiliev
+From: hvasiliev@purdue.edu (Hugo Vasiliev)
+Newsgroups: comp.dsp
+Subject: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994May03.141116.9089@purdue.edu>
+Date: Tue, 03 May 1994 14:11:16 GMT
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Hugo Vasiliev -- Purdue University Engineering Computer Network
+"We don't sign stars. We build them."
+
+From msuzuki@cmu.edu Thu May 05 04:13:16 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!cmu!msuzuki
+From: msuzuki@cmu.edu (Mateo Suzuki)
+Newsgroups: comp.dsp
+Subject: Re: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994May05.041316.4630@cmu.edu>
+Date: Thu, 05 May 1994 04:13:16 GMT
+References: <1994May03.141116.9089@purdue.edu>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1994May03.141116.9089@purdue.edu>, hvasiliev@purdue.edu (Hugo Vasiliev) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Mateo Suzuki
+Opinions expressed are solely my own and not those of Carnegie Mellon University School of CS.
+------------------------------------------------------------
+
+From dsmirnov@pipeline.com Thu May 05 07:08:16 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!pipeline!dsmirnov
+From: dsmirnov@pipeline.com (Dave Smirnov)
+Newsgroups: comp.dsp
+Subject: Re: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994May05.070816.2110@pipeline.com>
+Date: Thu, 05 May 1994 07:08:16 GMT
+References: <1994May03.141116.9089@purdue.edu>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994May03.141116.9089@purdue.edu>, hvasiliev@purdue.edu (Hugo Vasiliev) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Dave Smirnov <dsmirnov@pipeline.com>
+"Extraordinary claims require extraordinary spectra."
+Pentium 90 (OS/2 Warp) / TOS 4.04
+
+From moliveira@mindspring.com Fri May 06 20:37:16 1994
+Path: ashpoly!cascade!mxgate!coyoacan!mindspring!moliveira
+From: moliveira@mindspring.com (Morag Oliveira)
+Newsgroups: comp.dsp
+Subject: Re: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994May06.203716.4066@mindspring.com>
+Date: Fri, 06 May 1994 20:37:16 GMT
+References: <1994May03.141116.9089@purdue.edu> <1994May05.070816.2110@pipeline.com>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994May05.070816.2110@pipeline.com>, dsmirnov@pipeline.com (Dave Smirnov) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Morag Oliveira <moliveira@mindspring.com>
+*PLONK* filter active for trolls.
+Sun 3/60 (SunOS 4.1.1) - NetBSD 1.0
+
+From scampbell@berkeley.edu Sun May 08 14:53:16 1994
+Path: ashpoly!cascade!mxgate!coyoacan!berkeley!scampbell
+From: scampbell@berkeley.edu (Sun-mi Campbell)
+Newsgroups: comp.dsp
+Subject: Re: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994May08.145316.5593@berkeley.edu>
+Date: Sun, 08 May 1994 14:53:16 GMT
+References: <1994May03.141116.9089@purdue.edu> <1994May05.070816.2110@pipeline.com>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1994May05.070816.2110@pipeline.com>, dsmirnov@pipeline.com (Dave Smirnov) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Sun-mi Campbell | scampbell@berkeley.edu
+PGP Key fingerprint: AC24 FA74 C90C 8456
+"Keep the channels open."
+

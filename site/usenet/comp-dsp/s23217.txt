@@ -1,0 +1,47 @@
+From asantos@pacbell.net Wed Aug 14 13:53:14 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!pacbell!asantos
+From: asantos@pacbell.net (Astrid Santos)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Aug14.135314.9789@pacbell.net>
+Date: Wed, 14 Aug 1996 13:53:14 GMT
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+=== Astrid Santos ===
+Dept of Electrical Engineering, Pacific Bell Internet Services
+"Measuring a record you own is listening, not piracy."
+
+From vsanchez@mindspring.com Thu Aug 15 13:54:14 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!mindspring!vsanchez
+From: vsanchez@mindspring.com (Valeria Sánchez)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Aug15.135414.1091@mindspring.com>
+Date: Thu, 15 Aug 1996 13:54:14 GMT
+References: <1996Aug14.135314.9789@pacbell.net>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Aug14.135314.9789@pacbell.net>, asantos@pacbell.net (Astrid Santos) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Valeria Sánchez <vsanchez@mindspring.com>
+Practical Peripherals 14.4 @ 28,800 bps
+"Measuring a record you own is listening, not piracy."
+

@@ -1,0 +1,124 @@
+From jreyes@earthlink.net Thu Nov 17 22:08:37 1994
+Path: ashpoly!cascade!brgate!saturno!earthlink!jreyes
+From: jreyes@earthlink.net (Jen Reyes)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1994Nov17.220837.9630@earthlink.net>
+Date: Thu, 17 Nov 1994 22:08:37 GMT
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Amiga audio hackers: you can demodulate the 14.2 Hz carrier in real time without bogging down the OS.
+
+By setting up Paula's audio DMA to double-buffer incoming 8-bit samples, the 68020 has plenty of cycles left for the Costas loop.
+I wrote a 64-tap FIR filter in pure 68k assembly using movem.l and dbra loop unrolling to downsample to 64 Hz.
+
+Long live the Amiga. Try doing real-time subcarrier demodulation on a 386 running Windows 3.1 without dropping frames!
+
+-- 
+Jen Reyes <jreyes@earthlink.net>
+"They will send a copy in my place."
+Atari Falcon 030 / AmigaOS 3.1
+
+From msanchez@netcom.com Sat Nov 19 23:57:37 1994
+Path: ashpoly!cascade!brgate!saturno!netcom!msanchez
+From: msanchez@netcom.com (Mathieu Sánchez)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1994Nov19.235737.7688@netcom.com>
+Date: Sat, 19 Nov 1994 23:57:37 GMT
+References: <1994Nov17.220837.9630@earthlink.net>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1994Nov17.220837.9630@earthlink.net>, jreyes@earthlink.net (Jen Reyes) writes:
+> Amiga audio hackers: you can demodulate the 14.2 Hz carrier in real time without bogging down the OS.
+> By setting up Paula's audio DMA to double-buffer incoming 8-bit samples, the 68020 has plenty of cycles left for the Costas loop.
+
+Tested on my A3000 / 25 MHz. Ran smoothly in the background while I was compiling a C program in another window.
+
+PGP Public key available via finger or upon request.
+
+-- 
+=== Mathieu Sánchez ===
+Dept of Electrical Engineering, NETCOM On-Line Communication Services
+"The hatch is open. Is anyone listening?"
+
+From jeriksson@kth.se Sun Nov 20 20:53:37 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!kth!jeriksson
+From: jeriksson@kth.se (Joachim Eriksson)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1994Nov20.205337.7113@kth.se>
+Date: Sun, 20 Nov 1994 20:53:37 GMT
+References: <1994Nov17.220837.9630@earthlink.net>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1994Nov17.220837.9630@earthlink.net>, jreyes@earthlink.net (Jen Reyes) writes:
+> Amiga audio hackers: you can demodulate the 14.2 Hz carrier in real time without bogging down the OS.
+> By setting up Paula's audio DMA to double-buffer incoming 8-bit samples, the 68020 has plenty of cycles left for the Costas loop.
+
+Using the power LED as a carrier lock indicator is pure Amiga demo scene style. Kudos!
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Joachim Eriksson | jeriksson@kth.se
+PGP Key fingerprint: 4A96 8148 70FD 2CA3
+"Keep the channels open."
+
+From itanaka@titech.ac.jp Tue Nov 22 16:17:37 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!titech!itanaka
+From: itanaka@titech.ac.jp (Ines Tanaka)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1994Nov22.161737.7919@titech.ac.jp>
+Date: Tue, 22 Nov 1994 16:17:37 GMT
+References: <1994Nov17.220837.9630@earthlink.net> <1994Nov20.205337.7113@kth.se>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1994Nov20.205337.7113@kth.se>, jeriksson@kth.se (Joachim Eriksson) writes:
+> Using the power LED as a carrier lock indicator is pure Amiga demo scene style. Kudos!
+> If you are posting from AOL, please read RFC 1036 before posting again.
+
+Download failed on Aminet mirror. Can someone mail me an ADF floppy disk image?
+
+-- 
+Ines Tanaka <itanaka@titech.ac.jp>
+"In theory there is no difference between theory and practice."
+Macintosh IIfx / Linux 1.2.13
+
+From jandersson@uni-hamburg.de Tue Nov 22 23:45:37 1994
+Path: ashpoly!cascade!brgate!saturno!uni-hamburg!jandersson
+From: jandersson@uni-hamburg.de (Joachim Andersson)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1994Nov22.234537.6199@uni-hamburg.de>
+Date: Tue, 22 Nov 1994 23:45:37 GMT
+References: <1994Nov17.220837.9630@earthlink.net> <1994Nov19.235737.7688@netcom.com>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1994Nov19.235737.7688@netcom.com>, msanchez@netcom.com (Mathieu Sánchez) writes:
+> Tested on my A3000 / 25 MHz. Ran smoothly in the background while I was compiling a C program in another window.
+> PGP Public key available via finger or upon request.
+
+Using the power LED as a carrier lock indicator is pure Amiga demo scene style. Kudos!
+
+-- 
+Joachim Andersson
+Opinions expressed are solely my own and not those of Universität Hamburg Fachbereich Informatik.
+------------------------------------------------------------
+

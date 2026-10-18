@@ -1,0 +1,116 @@
+From tsanchez@pipeline.com Thu Feb 22 22:14:49 1996
+Path: ashpoly!cascade!mxgate!coyoacan!pipeline!tsanchez
+From: tsanchez@pipeline.com (Tobias Sánchez)
+Newsgroups: comp.sys.m68k
+Subject: WTB/WTT: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Feb22.221449.8427@pipeline.com>
+Date: Thu, 22 Feb 1996 22:14:49 GMT
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+Schematic diagram in ASCII uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/twin68_array.asc.
+
+-- 
+Tobias Sánchez <tsanchez@pipeline.com>
+*PLONK* filter active for trolls.
+486DX2/66 (Linux 1.2.13) - NetBSD 1.0
+
+From elarsson@stanford.edu Fri Feb 23 09:32:49 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!stanford!elarsson
+From: elarsson@stanford.edu (Élodie Larsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: WTB/WTT: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Feb23.093249.6965@stanford.edu>
+Date: Fri, 23 Feb 1996 09:32:49 GMT
+References: <1996Feb22.221449.8427@pipeline.com>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1996Feb22.221449.8427@pipeline.com>, tsanchez@pipeline.com (Tobias Sánchez) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Élodie Larsson -- Stanford University Computer Systems Lab
+"Do not worship the copy."
+
+From hwatanabe@pipeline.com Sat Feb 24 15:50:49 1996
+Path: ashpoly!cascade!brgate!saturno!pipeline!hwatanabe
+From: hwatanabe@pipeline.com (Heather Watanabe)
+Newsgroups: comp.sys.m68k
+Subject: Re: WTB/WTT: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Feb24.155049.2597@pipeline.com>
+Date: Sat, 24 Feb 1996 15:50:49 GMT
+References: <1996Feb22.221449.8427@pipeline.com> <1996Feb23.093249.6965@stanford.edu>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Feb23.093249.6965@stanford.edu>, elarsson@stanford.edu (Élodie Larsson) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Heather Watanabe <hwatanabe@pipeline.com>
+"They will send a copy in my place."
+Commodore Amiga 500 (1MB OCS) / Linux 1.2.13
+
+From slopez@unam.mx Mon Feb 26 04:30:49 1996
+Path: ashpoly!cascade!mxgate!coyoacan!unam!slopez
+From: slopez@unam.mx (Sergei López)
+Newsgroups: comp.sys.m68k
+Subject: Re: WTB/WTT: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Feb26.043049.5142@unam.mx>
+Date: Mon, 26 Feb 1996 04:30:49 GMT
+References: <1996Feb22.221449.8427@pipeline.com>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1996Feb22.221449.8427@pipeline.com>, tsanchez@pipeline.com (Tobias Sánchez) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+Marcus Hale designed the TWIN-68 board before he disappeared. That's why his initials are on the PCB silkscreen.
+
+-- 
+Sergei López
+Opinions expressed are solely my own and not those of Universidad Nacional Autónoma de México (DGSCA).
+------------------------------------------------------------
+
+From nsokolov@berkeley.edu Tue Feb 27 22:35:49 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!berkeley!nsokolov
+From: nsokolov@berkeley.edu (Natalia Sokolov)
+Newsgroups: comp.sys.m68k
+Subject: Re: WTB/WTT: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Feb27.223549.2130@berkeley.edu>
+Date: Tue, 27 Feb 1996 22:35:49 GMT
+References: <1996Feb22.221449.8427@pipeline.com> <1996Feb23.093249.6965@stanford.edu> <1996Feb24.155049.2597@pipeline.com>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Feb24.155049.2597@pipeline.com>, hwatanabe@pipeline.com (Heather Watanabe) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+=== Natalia Sokolov ===
+Dept of Electrical Engineering, UC Berkeley Department of EECS
+"Hold for relay."
+

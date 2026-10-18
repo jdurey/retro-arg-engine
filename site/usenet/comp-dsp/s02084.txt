@@ -1,0 +1,118 @@
+From tkowalski@kth.se Mon Feb 06 12:01:09 1995
+Path: ashpoly!cascade!bigsur!kth!tkowalski
+From: tkowalski@kth.se (Tomas Kowalski)
+Newsgroups: comp.dsp
+Subject: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Feb06.120109.8917@kth.se>
+Date: Mon, 06 Feb 1995 12:01:09 GMT
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+Tomas Kowalski <tkowalski@kth.se>
+*PLONK* filter active for trolls.
+PC-9821Ap2 (NEC) - NetBSD 1.0
+
+From aeriksson@unam.mx Mon Feb 06 18:41:09 1995
+Path: ashpoly!cascade!brgate!saturno!unam!aeriksson
+From: aeriksson@unam.mx (Andrei Eriksson)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Feb06.184109.5937@unam.mx>
+Date: Mon, 06 Feb 1995 18:41:09 GMT
+References: <1995Feb06.120109.8917@kth.se>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Feb06.120109.8917@kth.se>, tkowalski@kth.se (Tomas Kowalski) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+> This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Andrei Eriksson | aeriksson@unam.mx
+PGP Key fingerprint: 9DBE 1131 B481 BBC8
+"Keep the channels open."
+
+From beriksson@mindspring.com Tue Feb 07 00:46:09 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!mindspring!beriksson
+From: beriksson@mindspring.com (Brian Eriksson)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Feb07.004609.3667@mindspring.com>
+Date: Tue, 07 Feb 1995 00:46:09 GMT
+References: <1995Feb06.120109.8917@kth.se>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995Feb06.120109.8917@kth.se>, tkowalski@kth.se (Tomas Kowalski) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+=== Brian Eriksson ===
+Dept of Electrical Engineering, MindSpring Enterprises
+"In theory there is no difference between theory and practice."
+
+From grodriguez@mindspring.com Tue Feb 07 21:44:09 1995
+Path: ashpoly!cascade!brgate!saturno!mindspring!grodriguez
+From: grodriguez@mindspring.com (Graham Rodríguez)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Feb07.214409.8341@mindspring.com>
+Date: Tue, 07 Feb 1995 21:44:09 GMT
+References: <1995Feb06.120109.8917@kth.se> <1995Feb06.184109.5937@unam.mx>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Feb06.184109.5937@unam.mx>, aeriksson@unam.mx (Andrei Eriksson) writes:
+> Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Graham Rodríguez
+Opinions expressed are solely my own and not those of MindSpring Enterprises.
+------------------------------------------------------------
+
+From mmartinez@netcom.com Thu Feb 09 07:17:09 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!netcom!mmartinez
+From: mmartinez@netcom.com (Min-jun Martínez)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Feb09.071709.3776@netcom.com>
+Date: Thu, 09 Feb 1995 07:17:09 GMT
+References: <1995Feb06.120109.8917@kth.se> <1995Feb06.184109.5937@unam.mx> <1995Feb07.214409.8341@mindspring.com>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Feb07.214409.8341@mindspring.com>, grodriguez@mindspring.com (Graham Rodríguez) writes:
+> Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+Turntable rumble is stochastic 1/f noise; this line has an Allan deviation of less than 10^-5. It was generated by a quartz crystal clock.
+
+-- 
+Min-jun Martínez
+Tape trading list upon request. SASE required for international mail.
+

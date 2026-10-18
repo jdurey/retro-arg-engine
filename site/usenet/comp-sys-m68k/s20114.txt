@@ -1,0 +1,93 @@
+From arobertson@cern.ch Wed Apr 19 20:12:23 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!cern!arobertson
+From: arobertson@cern.ch (Anja Robertson)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Apr19.201223.9545@cern.ch>
+Date: Wed, 19 Apr 1995 20:12:23 GMT
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+Schematic diagram in ASCII uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/twin68_array.asc.
+
+-- 
+=== Anja Robertson ===
+Dept of Electrical Engineering, European Laboratory for Particle Physics, Geneva
+"Measuring a record you own is listening, not piracy."
+
+From tkang@berkeley.edu Fri Apr 21 06:06:23 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!berkeley!tkang
+From: tkang@berkeley.edu (Tobias Kang)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Apr21.060623.4135@berkeley.edu>
+Date: Fri, 21 Apr 1995 06:06:23 GMT
+References: <1995Apr19.201223.9545@cern.ch>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Apr19.201223.9545@cern.ch>, arobertson@cern.ch (Anja Robertson) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Tobias Kang <tkang@berkeley.edu>
+Zyxel U-1496E @ 19,200 bps
+"Row 14. No joke."
+
+From sreyes@demon.co.uk Sun Apr 23 02:46:23 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!demon!sreyes
+From: sreyes@demon.co.uk (Sun-mi Reyes)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Apr23.024623.8054@demon.co.uk>
+Date: Sun, 23 Apr 1995 02:46:23 GMT
+References: <1995Apr19.201223.9545@cern.ch> <1995Apr21.060623.4135@berkeley.edu>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Apr21.060623.4135@berkeley.edu>, tkang@berkeley.edu (Tobias Kang) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+=== Sun-mi Reyes ===
+Dept of Electrical Engineering, Demon Internet Services UK
+"5 sigma is a discovery. 7 is a question."
+
+From ljohansson@berkeley.edu Sun Apr 23 18:25:23 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!berkeley!ljohansson
+From: ljohansson@berkeley.edu (Lisa Johansson)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Apr23.182523.7659@berkeley.edu>
+Date: Sun, 23 Apr 1995 18:25:23 GMT
+References: <1995Apr19.201223.9545@cern.ch>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Apr19.201223.9545@cern.ch>, arobertson@cern.ch (Anja Robertson) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Lisa Johansson
+Opinions expressed are solely my own and not those of UC Berkeley Department of EECS.
+------------------------------------------------------------
+

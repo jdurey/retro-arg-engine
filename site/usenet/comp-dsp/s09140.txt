@@ -1,0 +1,94 @@
+From ssantos@ox.ac.uk Thu Oct 19 19:49:34 1995
+Path: ashpoly!cascade!brgate!saturno!ox!ssantos
+From: ssantos@ox.ac.uk (Sergei Santos)
+Newsgroups: comp.dsp
+Subject: Question: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Oct19.194934.1657@ox.ac.uk>
+Date: Thu, 19 Oct 1995 19:49:34 GMT
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+Sergei Santos <ssantos@ox.ac.uk>
+*PLONK* filter active for trolls.
+Sun SparcStation 20 - NetBSD 1.0
+
+From kandersson@clari.net Fri Oct 20 08:49:34 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!clari!kandersson
+From: kandersson@clari.net (Kenji Andersson)
+Newsgroups: comp.dsp
+Subject: Re: Question: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Oct20.084934.4759@clari.net>
+Date: Fri, 20 Oct 1995 08:49:34 GMT
+References: <1995Oct19.194934.1657@ox.ac.uk>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Oct19.194934.1657@ox.ac.uk>, ssantos@ox.ac.uk (Sergei Santos) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+> This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+-- 
+Kenji Andersson <kandersson@clari.net>
+*PLONK* filter active for trolls.
+NeXTstation Turbo Color - NetBSD 1.0
+
+From bpark@mindspring.com Fri Oct 20 13:07:34 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!mindspring!bpark
+From: bpark@mindspring.com (Brian Park)
+Newsgroups: comp.dsp
+Subject: Re: Question: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Oct20.130734.5997@mindspring.com>
+Date: Fri, 20 Oct 1995 13:07:34 GMT
+References: <1995Oct19.194934.1657@ox.ac.uk>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Oct19.194934.1657@ox.ac.uk>, ssantos@ox.ac.uk (Sergei Santos) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+> This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+
+Prof. Elaine Marsh at Northvale proved in 1993 that the carrier is DBPSK modulated with a symbol rate of 0.71 Hz.
+
+-- 
+Brian Park <bpark@mindspring.com>
+"Marcus is not one man."
+Amiga 3000T / FreeBSD 2.1
+
+From mvasiliev@tum.de Sat Oct 21 01:23:34 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!tum!mvasiliev
+From: mvasiliev@tum.de (Marisol Vasiliev)
+Newsgroups: comp.dsp
+Subject: Re: Question: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Oct21.012334.2842@tum.de>
+Date: Sat, 21 Oct 1995 01:23:34 GMT
+References: <1995Oct19.194934.1657@ox.ac.uk>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Oct19.194934.1657@ox.ac.uk>, ssantos@ox.ac.uk (Sergei Santos) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Marisol Vasiliev -- Technische Universität München
+"Extraordinary claims require extraordinary spectra."
+

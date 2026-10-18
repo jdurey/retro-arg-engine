@@ -1,0 +1,118 @@
+From hokonkwo@uu.net Thu Jun 20 19:27:53 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!uu!hokonkwo
+From: hokonkwo@uu.net (Hugo Okonkwo)
+Newsgroups: comp.dsp
+Subject: WTB/WTT: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Jun20.192753.9656@uu.net>
+Date: Thu, 20 Jun 1996 19:27:53 GMT
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+=== Hugo Okonkwo ===
+Dept of Electrical Engineering, UUNET Technologies, Falls Church VA
+"When every node is whole, the channel opens."
+
+From egonzalez@cmu.edu Fri Jun 21 14:52:53 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!cmu!egonzalez
+From: egonzalez@cmu.edu (Élodie González)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Jun21.145253.2767@cmu.edu>
+Date: Fri, 21 Jun 1996 14:52:53 GMT
+References: <1996Jun20.192753.9656@uu.net>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Jun20.192753.9656@uu.net>, hokonkwo@uu.net (Hugo Okonkwo) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+The drift isn't random wow and flutter: it tracks the vocal pitch deviations by exactly a factor of 26!
+
+-- 
+Élodie González <egonzalez@cmu.edu>
+Zyxel U-1496E @ 14,400 bps
+"They will send a copy in my place."
+
+From bvasiliev@earthlink.net Sat Jun 22 19:44:53 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!earthlink!bvasiliev
+From: bvasiliev@earthlink.net (Bruno Vasiliev)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Jun22.194453.9884@earthlink.net>
+Date: Sat, 22 Jun 1996 19:44:53 GMT
+References: <1996Jun20.192753.9656@uu.net>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Jun20.192753.9656@uu.net>, hokonkwo@uu.net (Hugo Okonkwo) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+> Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Bruno Vasiliev
+Tape trading list upon request. SASE required for international mail.
+
+From apopov@cern.ch Sat Jun 22 20:35:53 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!cern!apopov
+From: apopov@cern.ch (Astrid Popov)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Jun22.203553.1907@cern.ch>
+Date: Sat, 22 Jun 1996 20:35:53 GMT
+References: <1996Jun20.192753.9656@uu.net> <1996Jun22.194453.9884@earthlink.net>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1996Jun22.194453.9884@earthlink.net>, bvasiliev@earthlink.net (Bruno Vasiliev) writes:
+> Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Astrid Popov
+Opinions expressed are solely my own and not those of European Laboratory for Particle Physics, Geneva.
+------------------------------------------------------------
+
+From mwatanabe@purdue.edu Mon Jun 24 00:42:53 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!purdue!mwatanabe
+From: mwatanabe@purdue.edu (Min-jun Watanabe)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Jun24.004253.8637@purdue.edu>
+Date: Mon, 24 Jun 1996 00:42:53 GMT
+References: <1996Jun20.192753.9656@uu.net> <1996Jun21.145253.2767@cmu.edu>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Jun21.145253.2767@cmu.edu>, egonzalez@cmu.edu (Élodie González) writes:
+> The drift isn't random wow and flutter: it tracks the vocal pitch deviations by exactly a factor of 26!
+
+That's how the 14 lines of the Stardust matrix are encoded. Each regional pressing contains one line of the decoded text.
+
+-- 
+Min-jun Watanabe <mwatanabe@purdue.edu>
+Hayes Optima 288 @ 19,200 bps
+"Hold for relay."
+

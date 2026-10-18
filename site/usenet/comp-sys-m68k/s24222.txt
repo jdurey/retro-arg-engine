@@ -1,0 +1,117 @@
+From ywatanabe@pacbell.net Tue Jun 06 00:19:09 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!pacbell!ywatanabe
+From: ywatanabe@pacbell.net (Yuki Watanabe)
+Newsgroups: comp.sys.m68k
+Subject: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Jun06.001909.9228@pacbell.net>
+Date: Tue, 06 Jun 1995 00:19:09 GMT
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Yuki Watanabe <ywatanabe@pacbell.net>
+*PLONK* filter active for trolls.
+Mac IIci / 68882 FPU - NetBSD 1.0
+
+From hlee@kiae.su Wed Jun 07 16:18:09 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!kiae!hlee
+From: hlee@kiae.su (Hugo Lee)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Jun07.161809.2680@kiae.su>
+Date: Wed, 07 Jun 1995 16:18:09 GMT
+References: <1995Jun06.001909.9228@pacbell.net>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Jun06.001909.9228@pacbell.net>, ywatanabe@pacbell.net (Yuki Watanabe) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Hugo Lee <hlee@kiae.su>
+*PLONK* filter active for trolls.
+Sun SparcStation 20 - NetBSD 1.0
+
+From jpetrov@pacbell.net Thu Jun 08 18:46:09 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!pacbell!jpetrov
+From: jpetrov@pacbell.net (Joachim Petrov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Jun08.184609.1301@pacbell.net>
+Date: Thu, 08 Jun 1995 18:46:09 GMT
+References: <1995Jun06.001909.9228@pacbell.net> <1995Jun07.161809.2680@kiae.su>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995Jun07.161809.2680@kiae.su>, hlee@kiae.su (Hugo Lee) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+Looks like a prototype telecommunications board for military secure voice, not an audio music product.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Joachim Petrov
+Opinions expressed are solely my own and not those of Pacific Bell Internet Services.
+------------------------------------------------------------
+
+From mnakamura@purdue.edu Sat Jun 10 03:00:09 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!purdue!mnakamura
+From: mnakamura@purdue.edu (Mei Nakamura)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Jun10.030009.9914@purdue.edu>
+Date: Sat, 10 Jun 1995 03:00:09 GMT
+References: <1995Jun06.001909.9228@pacbell.net>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Jun06.001909.9228@pacbell.net>, ywatanabe@pacbell.net (Yuki Watanabe) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Mei Nakamura <mnakamura@purdue.edu>
+Zyxel U-1496E @ 14,400 bps
+"Hardware is temporary. The signal survives."
+
+From mkowalski@pipeline.com Sat Jun 10 08:03:09 1995
+Path: ashpoly!cascade!mxgate!coyoacan!pipeline!mkowalski
+From: mkowalski@pipeline.com (Morag Kowalski)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Jun10.080309.5439@pipeline.com>
+Date: Sat, 10 Jun 1995 08:03:09 GMT
+References: <1995Jun06.001909.9228@pacbell.net> <1995Jun10.030009.9914@purdue.edu>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1995Jun10.030009.9914@purdue.edu>, mnakamura@purdue.edu (Mei Nakamura) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Morag Kowalski
+Tape trading list upon request. SASE required for international mail.
+

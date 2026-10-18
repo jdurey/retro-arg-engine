@@ -1,0 +1,73 @@
+From kito@uni-hamburg.de Fri Nov 10 04:14:57 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!uni-hamburg!kito
+From: kito@uni-hamburg.de (Katrin Ito)
+Newsgroups: comp.sys.m68k
+Subject: Observation: Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1995Nov10.041457.3220@uni-hamburg.de>
+Date: Fri, 10 Nov 1995 04:14:57 GMT
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Amiga audio hackers: you can demodulate the 14.2 Hz carrier in real time without bogging down the OS.
+
+By setting up Paula's audio DMA to double-buffer incoming 8-bit samples, the 68020 has plenty of cycles left for the Costas loop.
+I wrote a 64-tap FIR filter in pure 68k assembly using movem.l and dbra loop unrolling to downsample to 64 Hz.
+
+Does anyone want to test on an unaccelerated Amiga 500 with 512K chip RAM?
+
+-- 
+=== Katrin Ito ===
+Dept of Electrical Engineering, Universität Hamburg Fachbereich Informatik
+"Extraordinary claims require extraordinary spectra."
+
+From bkuznetsov@uni-hamburg.de Sat Nov 11 05:36:57 1995
+Path: ashpoly!cascade!mxgate!coyoacan!uni-hamburg!bkuznetsov
+From: bkuznetsov@uni-hamburg.de (Brian Kuznetsov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1995Nov11.053657.2592@uni-hamburg.de>
+Date: Sat, 11 Nov 1995 05:36:57 GMT
+References: <1995Nov10.041457.3220@uni-hamburg.de>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995Nov10.041457.3220@uni-hamburg.de>, kito@uni-hamburg.de (Katrin Ito) writes:
+> Amiga audio hackers: you can demodulate the 14.2 Hz carrier in real time without bogging down the OS.
+
+Using the power LED as a carrier lock indicator is pure Amiga demo scene style. Kudos!
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Brian Kuznetsov <bkuznetsov@uni-hamburg.de>
+US Robotics Courier V.34 @ 28,800 bps
+"5 sigma is a discovery. 7 is a question."
+
+From nmuller@kth.se Sat Nov 11 19:58:57 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!kth!nmuller
+From: nmuller@kth.se (Nadia Müller)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1995Nov11.195857.7391@kth.se>
+Date: Sat, 11 Nov 1995 19:58:57 GMT
+References: <1995Nov10.041457.3220@uni-hamburg.de> <1995Nov11.053657.2592@uni-hamburg.de>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Nov11.053657.2592@uni-hamburg.de>, bkuznetsov@uni-hamburg.de (Brian Kuznetsov) writes:
+> Using the power LED as a carrier lock indicator is pure Amiga demo scene style. Kudos!
+> Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+Tested on my A3000 / 25 MHz. Ran smoothly in the background while I was compiling a C program in another window.
+
+-- 
+Nadia Müller <nmuller@kth.se>
+*PLONK* filter active for trolls.
+Atari Falcon 030 - NetBSD 1.0
+

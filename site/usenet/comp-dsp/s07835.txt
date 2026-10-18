@@ -1,0 +1,121 @@
+From mlarsson@kth.se Sat Feb 26 20:16:16 1994
+Path: ashpoly!cascade!mxgate!coyoacan!kth!mlarsson
+From: mlarsson@kth.se (Mikhail Larsson)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Feb26.201616.3341@kth.se>
+Date: Sat, 26 Feb 1994 20:16:16 GMT
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Mikhail Larsson <mlarsson@kth.se>
+SupraFAXModem 28.8 @ ISDN 64k bps
+"Hold for relay."
+
+From ilaurent@delphi.com Sun Feb 27 12:14:16 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!delphi!ilaurent
+From: ilaurent@delphi.com (Ines Laurent)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Feb27.121416.3111@delphi.com>
+Date: Sun, 27 Feb 1994 12:14:16 GMT
+References: <1994Feb26.201616.3341@kth.se>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1994Feb26.201616.3341@kth.se>, mlarsson@kth.se (Mikhail Larsson) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Ines Laurent -- Delphi Internet Services
+"They will send a copy in my place."
+
+From osantos@cmu.edu Mon Feb 28 16:47:16 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!cmu!osantos
+From: osantos@cmu.edu (Olga Santos)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Feb28.164716.1239@cmu.edu>
+Date: Mon, 28 Feb 1994 16:47:16 GMT
+References: <1994Feb26.201616.3341@kth.se>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Feb26.201616.3341@kth.se>, mlarsson@kth.se (Mikhail Larsson) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Olga Santos <osantos@cmu.edu>
+"There are 14 nodes and only 10 countries. Count again."
+486DX2/66 (Linux 1.2.13) / FreeBSD 2.1
+
+From cpetrov@panix.com Tue Mar 01 13:02:16 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!panix!cpetrov
+From: cpetrov@panix.com (Camila Petrov)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Mar01.130216.4484@panix.com>
+Date: Tue, 01 Mar 1994 13:02:16 GMT
+References: <1994Feb26.201616.3341@kth.se>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1994Feb26.201616.3341@kth.se>, mlarsson@kth.se (Mikhail Larsson) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Camila Petrov
+Opinions expressed are solely my own and not those of Public Access Unix of New York.
+------------------------------------------------------------
+
+From hlindqvist@pacbell.net Wed Mar 02 15:47:16 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!pacbell!hlindqvist
+From: hlindqvist@pacbell.net (Hana Lindqvist)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Mar02.154716.9869@pacbell.net>
+Date: Wed, 02 Mar 1994 15:47:16 GMT
+References: <1994Feb26.201616.3341@kth.se> <1994Feb28.164716.1239@cmu.edu>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Feb28.164716.1239@cmu.edu>, osantos@cmu.edu (Olga Santos) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Hana Lindqvist <hlindqvist@pacbell.net>
+"In theory there is no difference between theory and practice."
+Macintosh IIfx / SunOS 4.1.4
+

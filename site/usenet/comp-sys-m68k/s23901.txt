@@ -1,0 +1,115 @@
+From rkuznetsov@panix.com Fri Apr 28 03:39:20 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!panix!rkuznetsov
+From: rkuznetsov@panix.com (Renata Kuznetsov)
+Newsgroups: comp.sys.m68k
+Subject: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Apr28.033920.1846@panix.com>
+Date: Fri, 28 Apr 1995 03:39:20 GMT
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+=== Renata Kuznetsov ===
+Dept of Electrical Engineering, Public Access Unix of New York
+"Do not worship the copy."
+
+From elee@utexas.edu Fri Apr 28 06:00:20 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!utexas!elee
+From: elee@utexas.edu (Élodie Lee)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Apr28.060020.3442@utexas.edu>
+Date: Fri, 28 Apr 1995 06:00:20 GMT
+References: <1995Apr28.033920.1846@panix.com>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Apr28.033920.1846@panix.com>, rkuznetsov@panix.com (Renata Kuznetsov) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Élodie Lee | elee@utexas.edu
+PGP Key fingerprint: 7860 60E2 C6E7 CF72
+"Keep the channels open."
+
+From ddubois@kiae.su Fri Apr 28 14:03:20 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!kiae!ddubois
+From: ddubois@kiae.su (Diego Dubois)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Apr28.140320.8250@kiae.su>
+Date: Fri, 28 Apr 1995 14:03:20 GMT
+References: <1995Apr28.033920.1846@panix.com>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Apr28.033920.1846@panix.com>, rkuznetsov@panix.com (Renata Kuznetsov) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Diego Dubois | ddubois@kiae.su
+PGP Key fingerprint: 7005 496E 1883 E813
+"Keep the channels open."
+
+From fmoreau@mindspring.com Fri Apr 28 18:10:20 1995
+Path: ashpoly!cascade!mxgate!coyoacan!mindspring!fmoreau
+From: fmoreau@mindspring.com (Fiona Moreau)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Apr28.181020.3635@mindspring.com>
+Date: Fri, 28 Apr 1995 18:10:20 GMT
+References: <1995Apr28.033920.1846@panix.com> <1995Apr28.060020.3442@utexas.edu>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Apr28.060020.3442@utexas.edu>, elee@utexas.edu (Élodie Lee) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Fiona Moreau
+Tape trading list upon request. SASE required for international mail.
+
+From dschneider@demon.co.uk Sat Apr 29 04:52:20 1995
+Path: ashpoly!cascade!mxgate!coyoacan!demon!dschneider
+From: dschneider@demon.co.uk (Dong-hyun Schneider)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Apr29.045220.9234@demon.co.uk>
+Date: Sat, 29 Apr 1995 04:52:20 GMT
+References: <1995Apr28.033920.1846@panix.com> <1995Apr28.060020.3442@utexas.edu> <1995Apr28.181020.3635@mindspring.com>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Apr28.181020.3635@mindspring.com>, fmoreau@mindspring.com (Fiona Moreau) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Dong-hyun Schneider <dschneider@demon.co.uk>
+Zyxel U-1496E @ 33,600 bps
+"We don't sign stars. We build them."
+

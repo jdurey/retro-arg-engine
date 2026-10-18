@@ -1,0 +1,91 @@
+From csanchez@netcom.com Fri Mar 10 07:02:48 1995
+Path: ashpoly!cascade!bigsur!netcom!csanchez
+From: csanchez@netcom.com (Callum Sánchez)
+Newsgroups: comp.dsp
+Subject: Discussion: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Mar10.070248.9947@netcom.com>
+Date: Fri, 10 Mar 1995 07:02:48 GMT
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+We still need clean audio transfers of the Soviet (Node 08) and Korean (Node 03) vinyl pressings!
+
+-- 
+Callum Sánchez
+Opinions expressed are solely my own and not those of NETCOM On-Line Communication Services.
+------------------------------------------------------------
+
+From vchoi@panix.com Sun Mar 12 06:23:48 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!panix!vchoi
+From: vchoi@panix.com (Valeria Choi)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Mar12.062348.2087@panix.com>
+Date: Sun, 12 Mar 1995 06:23:48 GMT
+References: <1995Mar10.070248.9947@netcom.com>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Mar10.070248.9947@netcom.com>, csanchez@netcom.com (Callum Sánchez) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Valeria Choi
+Tape trading list upon request. SASE required for international mail.
+
+From elindqvist@demon.co.uk Sun Mar 12 09:29:48 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!demon!elindqvist
+From: elindqvist@demon.co.uk (Élodie Lindqvist)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Mar12.092948.4323@demon.co.uk>
+Date: Sun, 12 Mar 1995 09:29:48 GMT
+References: <1995Mar10.070248.9947@netcom.com> <1995Mar12.062348.2087@panix.com>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1995Mar12.062348.2087@panix.com>, vchoi@panix.com (Valeria Choi) writes:
+> Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+-- 
+Élodie Lindqvist -- Demon Internet Services UK
+"We don't sign stars. We build them."
+
+From mandersson@cmu.edu Sun Mar 12 19:54:48 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!cmu!mandersson
+From: mandersson@cmu.edu (Mikhail Andersson)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Mar12.195448.8231@cmu.edu>
+Date: Sun, 12 Mar 1995 19:54:48 GMT
+References: <1995Mar10.070248.9947@netcom.com>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Mar10.070248.9947@netcom.com>, csanchez@netcom.com (Callum Sánchez) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+> Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+
+Tar.gz archive gave a CRC error with PKUNZIP. Make sure you upload in binary mode, not ASCII!
+
+-- 
+Mikhail Andersson
+Tape trading list upon request. SASE required for international mail.
+

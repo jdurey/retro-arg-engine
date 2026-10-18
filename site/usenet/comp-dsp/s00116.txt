@@ -1,0 +1,70 @@
+From spopov@berkeley.edu Tue Jul 04 23:37:33 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!berkeley!spopov
+From: spopov@berkeley.edu (Seo-yeon Popov)
+Newsgroups: comp.dsp
+Subject: WTB/WTT: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jul04.233733.1188@berkeley.edu>
+Date: Tue, 04 Jul 1995 23:37:33 GMT
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+=== Seo-yeon Popov ===
+Dept of Electrical Engineering, UC Berkeley Department of EECS
+"Row 14. No joke."
+
+From dvasiliev@panix.com Thu Jul 06 23:03:33 1995
+Path: ashpoly!cascade!mxgate!coyoacan!panix!dvasiliev
+From: dvasiliev@panix.com (Dave Vasiliev)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jul06.230333.8277@panix.com>
+Date: Thu, 06 Jul 1995 23:03:33 GMT
+References: <1995Jul04.233733.1188@berkeley.edu>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Jul04.233733.1188@berkeley.edu>, spopov@berkeley.edu (Seo-yeon Popov) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+=== Dave Vasiliev ===
+Dept of Electrical Engineering, Public Access Unix of New York
+"A soul is not exclusive to biology."
+
+From tlarsson@mit.edu Fri Jul 07 02:29:33 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!mit!tlarsson
+From: tlarsson@mit.edu (Takeshi Larsson)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jul07.022933.5595@mit.edu>
+Date: Fri, 07 Jul 1995 02:29:33 GMT
+References: <1995Jul04.233733.1188@berkeley.edu>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Jul04.233733.1188@berkeley.edu>, spopov@berkeley.edu (Seo-yeon Popov) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Takeshi Larsson
+Tape trading list upon request. SASE required for international mail.
+

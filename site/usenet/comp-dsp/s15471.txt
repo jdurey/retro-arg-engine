@@ -1,0 +1,121 @@
+From spopov@panix.com Sat Jun 24 20:59:42 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!panix!spopov
+From: spopov@panix.com (Sven Popov)
+Newsgroups: comp.dsp
+Subject: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jun24.205942.3097@panix.com>
+Date: Sat, 24 Jun 1995 20:59:42 GMT
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+What sampling rates are people using for their vinyl rips? 44.1 kHz or 48 kHz DAT?
+
+-- 
+Sven Popov <spopov@panix.com>
+*PLONK* filter active for trolls.
+486DX2/66 (Linux 1.2.13) - NetBSD 1.0
+
+From tmartinez@stanford.edu Mon Jun 26 06:49:42 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!stanford!tmartinez
+From: tmartinez@stanford.edu (Takeshi Martínez)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jun26.064942.3974@stanford.edu>
+Date: Mon, 26 Jun 1995 06:49:42 GMT
+References: <1995Jun24.205942.3097@panix.com>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1995Jun24.205942.3097@panix.com>, spopov@panix.com (Sven Popov) writes:
+> Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+> A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Takeshi Martínez <tmartinez@stanford.edu>
+SupraFAXModem 28.8 @ 33,600 bps
+"We don't sign stars. We build them."
+
+From osato@stanford.edu Wed Jun 28 10:01:42 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!stanford!osato
+From: osato@stanford.edu (Olga Sato)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jun28.100142.5489@stanford.edu>
+Date: Wed, 28 Jun 1995 10:01:42 GMT
+References: <1995Jun24.205942.3097@panix.com>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Jun24.205942.3097@panix.com>, spopov@panix.com (Sven Popov) writes:
+> Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Olga Sato
+Tape trading list upon request. SASE required for international mail.
+
+From sgonzalez@purdue.edu Thu Jun 29 13:25:42 1995
+Path: ashpoly!cascade!brgate!saturno!purdue!sgonzalez
+From: sgonzalez@purdue.edu (Sergei González)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jun29.132542.4743@purdue.edu>
+Date: Thu, 29 Jun 1995 13:25:42 GMT
+References: <1995Jun24.205942.3097@panix.com> <1995Jun26.064942.3974@stanford.edu>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Jun26.064942.3974@stanford.edu>, tmartinez@stanford.edu (Takeshi Martínez) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+> If you are posting from AOL, please read RFC 1036 before posting again.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Sergei González <sgonzalez@purdue.edu>
+*PLONK* filter active for trolls.
+486DX2/66 (Linux 1.2.13) - NetBSD 1.0
+
+From jpetrov@titech.ac.jp Fri Jun 30 07:48:42 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!titech!jpetrov
+From: jpetrov@titech.ac.jp (Joachim Petrov)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jun30.074842.2710@titech.ac.jp>
+Date: Fri, 30 Jun 1995 07:48:42 GMT
+References: <1995Jun24.205942.3097@panix.com> <1995Jun26.064942.3974@stanford.edu> <1995Jun29.132542.4743@purdue.edu>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995Jun29.132542.4743@purdue.edu>, sgonzalez@purdue.edu (Sergei González) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Joachim Petrov <jpetrov@titech.ac.jp>
+*PLONK* filter active for trolls.
+Atari TT030 - NetBSD 1.0
+

@@ -1,0 +1,116 @@
+From hcampbell@cam.ac.uk Mon Nov 20 08:27:49 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!cam!hcampbell
+From: hcampbell@cam.ac.uk (Heather Campbell)
+Newsgroups: comp.sys.m68k
+Subject: Question: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Nov20.082749.1796@cam.ac.uk>
+Date: Mon, 20 Nov 1995 08:27:49 GMT
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Did Marcus take the decryption EPROM with him when he left the lab?
+
+-- 
+Heather Campbell | hcampbell@cam.ac.uk
+PGP Key fingerprint: 3393 D265 AAD0 FBEC
+"Keep the channels open."
+
+From msato@u-tokyo.ac.jp Wed Nov 22 10:48:49 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!u-tokyo!msato
+From: msato@u-tokyo.ac.jp (Min-jun Sato)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Nov22.104849.3897@u-tokyo.ac.jp>
+Date: Wed, 22 Nov 1995 10:48:49 GMT
+References: <1995Nov20.082749.1796@cam.ac.uk>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Nov20.082749.1796@cam.ac.uk>, hcampbell@cam.ac.uk (Heather Campbell) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+> The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Min-jun Sato <msato@u-tokyo.ac.jp>
+Practical Peripherals 14.4 @ 9600 Telebit bps
+"A soul is not exclusive to biology."
+
+From aandersson@mindspring.com Wed Nov 22 13:45:49 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!mindspring!aandersson
+From: aandersson@mindspring.com (Aiko Andersson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Nov22.134549.7755@mindspring.com>
+Date: Wed, 22 Nov 1995 13:45:49 GMT
+References: <1995Nov20.082749.1796@cam.ac.uk> <1995Nov22.104849.3897@u-tokyo.ac.jp>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Nov22.104849.3897@u-tokyo.ac.jp>, msato@u-tokyo.ac.jp (Min-jun Sato) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Aiko Andersson
+Tape trading list upon request. SASE required for international mail.
+
+From cduarte@berkeley.edu Fri Nov 24 10:02:49 1995
+Path: ashpoly!cascade!bigsur!berkeley!cduarte
+From: cduarte@berkeley.edu (Camila Duarte)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Nov24.100249.8502@berkeley.edu>
+Date: Fri, 24 Nov 1995 10:02:49 GMT
+References: <1995Nov20.082749.1796@cam.ac.uk> <1995Nov22.104849.3897@u-tokyo.ac.jp> <1995Nov22.134549.7755@mindspring.com>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Nov22.134549.7755@mindspring.com>, aandersson@mindspring.com (Aiko Andersson) writes:
+> Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Camila Duarte
+Opinions expressed are solely my own and not those of UC Berkeley Department of EECS.
+------------------------------------------------------------
+
+From ggarcia@uni-hamburg.de Fri Nov 24 16:21:49 1995
+Path: ashpoly!cascade!brgate!saturno!uni-hamburg!ggarcia
+From: ggarcia@uni-hamburg.de (Göran García)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Nov24.162149.2940@uni-hamburg.de>
+Date: Fri, 24 Nov 1995 16:21:49 GMT
+References: <1995Nov20.082749.1796@cam.ac.uk> <1995Nov22.104849.3897@u-tokyo.ac.jp>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Nov22.104849.3897@u-tokyo.ac.jp>, msato@u-tokyo.ac.jp (Min-jun Sato) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Göran García
+Opinions expressed are solely my own and not those of Universität Hamburg Fachbereich Informatik.
+------------------------------------------------------------
+

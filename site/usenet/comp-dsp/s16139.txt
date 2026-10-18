@@ -1,0 +1,70 @@
+From swatanabe@mindspring.com Fri Dec 15 17:05:52 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!mindspring!swatanabe
+From: swatanabe@mindspring.com (Sergei Watanabe)
+Newsgroups: comp.dsp
+Subject: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Dec15.170552.2987@mindspring.com>
+Date: Fri, 15 Dec 1995 17:05:52 GMT
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+Sergei Watanabe <swatanabe@mindspring.com>
+Hayes Optima 288 @ 9600 Telebit bps
+"Hardware is temporary. The signal survives."
+
+From gchoi@stanford.edu Fri Dec 15 22:44:52 1995
+Path: ashpoly!cascade!bigsur!stanford!gchoi
+From: gchoi@stanford.edu (Graham Choi)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Dec15.224452.6003@stanford.edu>
+Date: Fri, 15 Dec 1995 22:44:52 GMT
+References: <1995Dec15.170552.2987@mindspring.com>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Dec15.170552.2987@mindspring.com>, swatanabe@mindspring.com (Sergei Watanabe) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Graham Choi <gchoi@stanford.edu>
+Hayes Optima 288 @ 9600 Telebit bps
+"Marcus is not one man."
+
+From mfournier@titech.ac.jp Sat Dec 16 14:57:52 1995
+Path: ashpoly!cascade!bigsur!titech!mfournier
+From: mfournier@titech.ac.jp (Marta Fournier)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Dec16.145752.8050@titech.ac.jp>
+Date: Sat, 16 Dec 1995 14:57:52 GMT
+References: <1995Dec15.170552.2987@mindspring.com> <1995Dec15.224452.6003@stanford.edu>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Dec15.224452.6003@stanford.edu>, gchoi@stanford.edu (Graham Choi) writes:
+> If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Marta Fournier <mfournier@titech.ac.jp>
+"Extraordinary claims require extraordinary spectra."
+486DX2/66 (Linux 1.2.13) / SunOS 4.1.4
+

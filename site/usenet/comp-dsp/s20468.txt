@@ -1,0 +1,72 @@
+From tperez@mindspring.com Fri Feb 16 09:18:01 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!mindspring!tperez
+From: tperez@mindspring.com (Tobias Pérez)
+Newsgroups: comp.dsp
+Subject: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Feb16.091801.1576@mindspring.com>
+Date: Fri, 16 Feb 1996 09:18:01 GMT
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Tobias Pérez <tperez@mindspring.com>
+Hayes Optima 288 @ 14,400 bps
+"Marcus is not one man."
+
+From mperez@inria.fr Sat Feb 17 04:20:01 1996
+Path: ashpoly!cascade!brgate!saturno!inria!mperez
+From: mperez@inria.fr (Mikhail Pérez)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Feb17.042001.6176@inria.fr>
+Date: Sat, 17 Feb 1996 04:20:01 GMT
+References: <1996Feb16.091801.1576@mindspring.com>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Feb16.091801.1576@mindspring.com>, tperez@mindspring.com (Tobias Pérez) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+=== Mikhail Pérez ===
+Dept of Electrical Engineering, INRIA Rocquencourt
+"Measuring a record you own is listening, not piracy."
+
+From nsato@purdue.edu Sat Feb 17 19:57:01 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!purdue!nsato
+From: nsato@purdue.edu (Natalia Sato)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Feb17.195701.6123@purdue.edu>
+Date: Sat, 17 Feb 1996 19:57:01 GMT
+References: <1996Feb16.091801.1576@mindspring.com>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1996Feb16.091801.1576@mindspring.com>, tperez@mindspring.com (Tobias Pérez) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Natalia Sato <nsato@purdue.edu>
+Hayes Optima 288 @ 28,800 bps
+"Extraordinary claims require extraordinary spectra."
+

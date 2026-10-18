@@ -1,0 +1,75 @@
+From jnovak@cmu.edu Sun Nov 19 00:01:28 1995
+Path: ashpoly!cascade!brgate!saturno!cmu!jnovak
+From: jnovak@cmu.edu (Jens Novak)
+Newsgroups: comp.dsp
+Subject: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Nov19.000128.5380@cmu.edu>
+Date: Sun, 19 Nov 1995 00:01:28 GMT
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Jens Novak <jnovak@cmu.edu>
+*PLONK* filter active for trolls.
+Atari Falcon 030 - NetBSD 1.0
+
+From gkang@clari.net Mon Nov 20 22:40:28 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!clari!gkang
+From: gkang@clari.net (Göran Kang)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Nov20.224028.7523@clari.net>
+Date: Mon, 20 Nov 1995 22:40:28 GMT
+References: <1995Nov19.000128.5380@cmu.edu>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1995Nov19.000128.5380@cmu.edu>, jnovak@cmu.edu (Jens Novak) writes:
+> Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+> At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+=== Göran Kang ===
+Dept of Electrical Engineering, ClariNet Communications Corp
+"A soul is not exclusive to biology."
+
+From mjohansson@stanford.edu Tue Nov 21 01:16:28 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!stanford!mjohansson
+From: mjohansson@stanford.edu (Mei Johansson)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Nov21.011628.2236@stanford.edu>
+Date: Tue, 21 Nov 1995 01:16:28 GMT
+References: <1995Nov19.000128.5380@cmu.edu> <1995Nov20.224028.7523@clari.net>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995Nov20.224028.7523@clari.net>, gkang@clari.net (Göran Kang) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+> Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Mei Johansson
+Tape trading list upon request. SASE required for international mail.
+

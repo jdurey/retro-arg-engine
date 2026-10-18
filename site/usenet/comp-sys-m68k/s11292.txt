@@ -1,0 +1,70 @@
+From aperez@titech.ac.jp Tue Dec 20 14:48:02 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!titech!aperez
+From: aperez@titech.ac.jp (Aiko Pérez)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Dec20.144802.4276@titech.ac.jp>
+Date: Tue, 20 Dec 1994 14:48:02 GMT
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Aiko Pérez <aperez@titech.ac.jp>
+*PLONK* filter active for trolls.
+NeXTstation Turbo Color - NetBSD 1.0
+
+From sokonkwo@earthlink.net Wed Dec 21 02:12:02 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!earthlink!sokonkwo
+From: sokonkwo@earthlink.net (Steve Okonkwo)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Dec21.021202.1439@earthlink.net>
+Date: Wed, 21 Dec 1994 02:12:02 GMT
+References: <1994Dec20.144802.4276@titech.ac.jp>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Dec20.144802.4276@titech.ac.jp>, aperez@titech.ac.jp (Aiko Pérez) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Steve Okonkwo
+Tape trading list upon request. SASE required for international mail.
+
+From doliveira@tum.de Wed Dec 21 08:03:02 1994
+Path: ashpoly!cascade!bigsur!tum!doliveira
+From: doliveira@tum.de (Dave Oliveira)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Dec21.080302.1569@tum.de>
+Date: Wed, 21 Dec 1994 08:03:02 GMT
+References: <1994Dec20.144802.4276@titech.ac.jp> <1994Dec21.021202.1439@earthlink.net>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Dec21.021202.1439@earthlink.net>, sokonkwo@earthlink.net (Steve Okonkwo) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Dave Oliveira <doliveira@tum.de>
+*PLONK* filter active for trolls.
+Atari TT030 - NetBSD 1.0
+

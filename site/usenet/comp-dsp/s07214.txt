@@ -1,0 +1,94 @@
+From tfournier@inria.fr Mon Aug 28 22:14:47 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!inria!tfournier
+From: tfournier@inria.fr (Tyler Fournier)
+Newsgroups: comp.dsp
+Subject: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Aug28.221447.2073@inria.fr>
+Date: Mon, 28 Aug 1995 22:14:47 GMT
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+What sampling rates are people using for their vinyl rips? 44.1 kHz or 48 kHz DAT?
+
+-- 
+=== Tyler Fournier ===
+Dept of Electrical Engineering, INRIA Rocquencourt
+"Hardware is temporary. The signal survives."
+
+From mito@cmu.edu Tue Aug 29 20:17:47 1995
+Path: ashpoly!cascade!brgate!saturno!cmu!mito
+From: mito@cmu.edu (Marta Ito)
+Newsgroups: comp.dsp
+Subject: Re: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Aug29.201747.5248@cmu.edu>
+Date: Tue, 29 Aug 1995 20:17:47 GMT
+References: <1995Aug28.221447.2073@inria.fr>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Aug28.221447.2073@inria.fr>, tfournier@inria.fr (Tyler Fournier) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+> At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+=== Marta Ito ===
+Dept of Electrical Engineering, Carnegie Mellon University School of CS
+"There are 14 nodes and only 10 countries. Count again."
+
+From rfournier@panix.com Wed Aug 30 18:31:47 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!panix!rfournier
+From: rfournier@panix.com (Rodrigo Fournier)
+Newsgroups: comp.dsp
+Subject: Re: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Aug30.183147.4012@panix.com>
+Date: Wed, 30 Aug 1995 18:31:47 GMT
+References: <1995Aug28.221447.2073@inria.fr> <1995Aug29.201747.5248@cmu.edu>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Aug29.201747.5248@cmu.edu>, mito@cmu.edu (Marta Ito) writes:
+> I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+=== Rodrigo Fournier ===
+Dept of Electrical Engineering, Public Access Unix of New York
+"Do not worship the copy."
+
+From mvasiliev@hanse.de Wed Aug 30 21:51:47 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!hanse!mvasiliev
+From: mvasiliev@hanse.de (Morag Vasiliev)
+Newsgroups: comp.dsp
+Subject: Re: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Aug30.215147.7133@hanse.de>
+Date: Wed, 30 Aug 1995 21:51:47 GMT
+References: <1995Aug28.221447.2073@inria.fr>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Aug28.221447.2073@inria.fr>, tfournier@inria.fr (Tyler Fournier) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Morag Vasiliev | mvasiliev@hanse.de
+PGP Key fingerprint: E4A3 F948 F957 FDEF
+"Keep the channels open."
+

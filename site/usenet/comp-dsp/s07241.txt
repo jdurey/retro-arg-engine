@@ -1,0 +1,114 @@
+From onilsson@unam.mx Mon Oct 23 23:42:32 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!unam!onilsson
+From: onilsson@unam.mx (Olga Nilsson)
+Newsgroups: comp.dsp
+Subject: Data: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Oct23.234232.9311@unam.mx>
+Date: Mon, 23 Oct 1995 23:42:32 GMT
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+
+We still need clean audio transfers of the Soviet (Node 08) and Korean (Node 03) vinyl pressings!
+
+-- 
+Olga Nilsson | onilsson@unam.mx
+PGP Key fingerprint: 8293 FEC4 50A8 01DD
+"Keep the channels open."
+
+From astewart@inria.fr Tue Oct 24 21:40:32 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!inria!astewart
+From: astewart@inria.fr (Anton Stewart)
+Newsgroups: comp.dsp
+Subject: Re: Data: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Oct24.214032.8536@inria.fr>
+Date: Tue, 24 Oct 1995 21:40:32 GMT
+References: <1995Oct23.234232.9311@unam.mx>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Oct23.234232.9311@unam.mx>, onilsson@unam.mx (Olga Nilsson) writes:
+> Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+-- 
+Anton Stewart
+Opinions expressed are solely my own and not those of INRIA Rocquencourt.
+------------------------------------------------------------
+
+From lsilva@delphi.com Thu Oct 26 04:17:32 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!delphi!lsilva
+From: lsilva@delphi.com (Lars Silva)
+Newsgroups: comp.dsp
+Subject: Re: Data: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Oct26.041732.8793@delphi.com>
+Date: Thu, 26 Oct 1995 04:17:32 GMT
+References: <1995Oct23.234232.9311@unam.mx>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Oct23.234232.9311@unam.mx>, onilsson@unam.mx (Olga Nilsson) writes:
+> Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Lars Silva -- Delphi Internet Services
+"There are 14 nodes and only 10 countries. Count again."
+
+From rmoreno@hanse.de Fri Oct 27 21:38:32 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!hanse!rmoreno
+From: rmoreno@hanse.de (Raj Moreno)
+Newsgroups: comp.dsp
+Subject: Re: Data: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Oct27.213832.8144@hanse.de>
+Date: Fri, 27 Oct 1995 21:38:32 GMT
+References: <1995Oct23.234232.9311@unam.mx> <1995Oct24.214032.8536@inria.fr>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1995Oct24.214032.8536@inria.fr>, astewart@inria.fr (Anton Stewart) writes:
+> On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+-- 
+Raj Moreno
+Tape trading list upon request. SASE required for international mail.
+
+From mvasiliev@pacbell.net Sun Oct 29 16:39:32 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!pacbell!mvasiliev
+From: mvasiliev@pacbell.net (Mathieu Vasiliev)
+Newsgroups: comp.dsp
+Subject: Re: Data: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Oct29.163932.9965@pacbell.net>
+Date: Sun, 29 Oct 1995 16:39:32 GMT
+References: <1995Oct23.234232.9311@unam.mx> <1995Oct24.214032.8536@inria.fr> <1995Oct27.213832.8144@hanse.de>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Oct27.213832.8144@hanse.de>, rmoreno@hanse.de (Raj Moreno) writes:
+> On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+-- 
+Mathieu Vasiliev <mvasiliev@pacbell.net>
+*PLONK* filter active for trolls.
+Macintosh IIfx - NetBSD 1.0
+

@@ -1,0 +1,93 @@
+From mweber@pacbell.net Mon Jan 09 15:59:43 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!pacbell!mweber
+From: mweber@pacbell.net (Min-jun Weber)
+Newsgroups: comp.dsp
+Subject: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jan09.155943.9101@pacbell.net>
+Date: Mon, 09 Jan 1995 15:59:43 GMT
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+Min-jun Weber <mweber@pacbell.net>
+"We don't sign stars. We build them."
+Amiga 1200 (Blizzard 030/50) / Linux 1.2.13
+
+From jsilva@stanford.edu Tue Jan 10 07:10:43 1995
+Path: ashpoly!cascade!brgate!saturno!stanford!jsilva
+From: jsilva@stanford.edu (Julien Silva)
+Newsgroups: comp.dsp
+Subject: Re: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jan10.071043.1052@stanford.edu>
+Date: Tue, 10 Jan 1995 07:10:43 GMT
+References: <1995Jan09.155943.9101@pacbell.net>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Jan09.155943.9101@pacbell.net>, mweber@pacbell.net (Min-jun Weber) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+-- 
+Julien Silva | jsilva@stanford.edu
+PGP Key fingerprint: 118E 0442 2DEA 35E1
+"Keep the channels open."
+
+From mmoreno@kiae.su Wed Jan 11 03:20:43 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!kiae!mmoreno
+From: mmoreno@kiae.su (Mateo Moreno)
+Newsgroups: comp.dsp
+Subject: Re: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jan11.032043.3043@kiae.su>
+Date: Wed, 11 Jan 1995 03:20:43 GMT
+References: <1995Jan09.155943.9101@pacbell.net> <1995Jan10.071043.1052@stanford.edu>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Jan10.071043.1052@stanford.edu>, jsilva@stanford.edu (Julien Silva) writes:
+> Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Mateo Moreno <mmoreno@kiae.su>
+Hayes Optima 288 @ 9600 Telebit bps
+"When every node is whole, the channel opens."
+
+From kmoreau@pipeline.com Wed Jan 11 18:32:43 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!pipeline!kmoreau
+From: kmoreau@pipeline.com (Katrin Moreau)
+Newsgroups: comp.dsp
+Subject: Re: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jan11.183243.4467@pipeline.com>
+Date: Wed, 11 Jan 1995 18:32:43 GMT
+References: <1995Jan09.155943.9101@pacbell.net> <1995Jan10.071043.1052@stanford.edu>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Jan10.071043.1052@stanford.edu>, jsilva@stanford.edu (Julien Silva) writes:
+> Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+Prof. Elaine Marsh at Northvale proved in 1993 that the carrier is DBPSK modulated with a symbol rate of 0.71 Hz.
+
+-- 
+Katrin Moreau <kmoreau@pipeline.com>
+"Row 14. No joke."
+PC-9821Ap2 (NEC) / System 7.5.1
+

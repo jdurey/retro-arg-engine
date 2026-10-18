@@ -1,0 +1,93 @@
+From csmirnov@utexas.edu Thu May 18 16:42:58 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!utexas!csmirnov
+From: csmirnov@utexas.edu (Callum Smirnov)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May18.164258.4572@utexas.edu>
+Date: Thu, 18 May 1995 16:42:58 GMT
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Callum Smirnov <csmirnov@utexas.edu>
+"5 sigma is a discovery. 7 is a question."
+486DX4/100 (FreeBSD 2.0.5) / SunOS 4.1.4
+
+From ngarcia@stanford.edu Thu May 18 19:00:58 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!stanford!ngarcia
+From: ngarcia@stanford.edu (Nadine García)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May18.190058.6020@stanford.edu>
+Date: Thu, 18 May 1995 19:00:58 GMT
+References: <1995May18.164258.4572@utexas.edu>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995May18.164258.4572@utexas.edu>, csmirnov@utexas.edu (Callum Smirnov) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Nadine García <ngarcia@stanford.edu>
+US Robotics Courier V.34 @ 28,800 bps
+"Tape doesn't lie at 02:14. Ears do."
+
+From msanchez@stanford.edu Fri May 19 14:05:58 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!stanford!msanchez
+From: msanchez@stanford.edu (Mikhail Sánchez)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May19.140558.2652@stanford.edu>
+Date: Fri, 19 May 1995 14:05:58 GMT
+References: <1995May18.164258.4572@utexas.edu>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995May18.164258.4572@utexas.edu>, csmirnov@utexas.edu (Callum Smirnov) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Mikhail Sánchez
+Opinions expressed are solely my own and not those of Stanford University Computer Systems Lab.
+------------------------------------------------------------
+
+From apetrov@illinois.edu Sun May 21 01:11:58 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!illinois!apetrov
+From: apetrov@illinois.edu (Aiko Petrov)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May21.011158.2181@illinois.edu>
+Date: Sun, 21 May 1995 01:11:58 GMT
+References: <1995May18.164258.4572@utexas.edu> <1995May18.190058.6020@stanford.edu>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995May18.190058.6020@stanford.edu>, ngarcia@stanford.edu (Nadine García) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+Aiko Petrov <apetrov@illinois.edu>
+"Tape doesn't lie at 02:14. Ears do."
+Atari TT030 / NEXTSTEP 3.3
+

@@ -1,0 +1,118 @@
+From smuller@earthlink.net Sat Feb 18 17:10:33 1995
+Path: ashpoly!cascade!brgate!saturno!earthlink!smuller
+From: smuller@earthlink.net (Sven Müller)
+Newsgroups: comp.dsp
+Subject: WTB/WTT: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Feb18.171033.7954@earthlink.net>
+Date: Sat, 18 Feb 1995 17:10:33 GMT
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Sven Müller
+Opinions expressed are solely my own and not those of EarthLink Network.
+------------------------------------------------------------
+
+From cvasiliev@utexas.edu Sun Feb 19 20:22:33 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!utexas!cvasiliev
+From: cvasiliev@utexas.edu (Camila Vasiliev)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Feb19.202233.8686@utexas.edu>
+Date: Sun, 19 Feb 1995 20:22:33 GMT
+References: <1995Feb18.171033.7954@earthlink.net>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Feb18.171033.7954@earthlink.net>, smuller@earthlink.net (Sven Müller) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Camila Vasiliev | cvasiliev@utexas.edu
+PGP Key fingerprint: AE41 5E6F D34A E66B
+"Keep the channels open."
+
+From tlee@clari.net Tue Feb 21 22:10:33 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!clari!tlee
+From: tlee@clari.net (Tomas Lee)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Feb21.221033.1178@clari.net>
+Date: Tue, 21 Feb 1995 22:10:33 GMT
+References: <1995Feb18.171033.7954@earthlink.net> <1995Feb19.202233.8686@utexas.edu>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Feb19.202233.8686@utexas.edu>, cvasiliev@utexas.edu (Camila Vasiliev) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Tomas Lee | tlee@clari.net
+PGP Key fingerprint: 501F 1138 7228 0EF4
+"Keep the channels open."
+
+From asantos@earthlink.net Wed Feb 22 02:11:33 1995
+Path: ashpoly!cascade!mxgate!coyoacan!earthlink!asantos
+From: asantos@earthlink.net (Anja Santos)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Feb22.021133.3350@earthlink.net>
+Date: Wed, 22 Feb 1995 02:11:33 GMT
+References: <1995Feb18.171033.7954@earthlink.net>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Feb18.171033.7954@earthlink.net>, smuller@earthlink.net (Sven Müller) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Anja Santos <asantos@earthlink.net>
+"A soul is not exclusive to biology."
+Macintosh IIfx / FreeBSD 2.1
+
+From kvasiliev@stanford.edu Thu Feb 23 04:37:33 1995
+Path: ashpoly!cascade!bigsur!stanford!kvasiliev
+From: kvasiliev@stanford.edu (Karen Vasiliev)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Feb23.043733.6564@stanford.edu>
+Date: Thu, 23 Feb 1995 04:37:33 GMT
+References: <1995Feb18.171033.7954@earthlink.net> <1995Feb19.202233.8686@utexas.edu>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Feb19.202233.8686@utexas.edu>, cvasiliev@utexas.edu (Camila Vasiliev) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Karen Vasiliev
+Opinions expressed are solely my own and not those of Stanford University Computer Systems Lab.
+------------------------------------------------------------
+

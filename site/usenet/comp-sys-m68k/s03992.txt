@@ -1,0 +1,70 @@
+From vramirez@cam.ac.uk Sun Nov 20 07:27:13 1994
+Path: ashpoly!cascade!mxgate!coyoacan!cam!vramirez
+From: vramirez@cam.ac.uk (Valeria Ramírez)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Nov20.072713.2594@cam.ac.uk>
+Date: Sun, 20 Nov 1994 07:27:13 GMT
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Valeria Ramírez -- University of Cambridge Computer Laboratory
+"Marcus is not one man."
+
+From vcampbell@unam.mx Sun Nov 20 11:58:13 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!unam!vcampbell
+From: vcampbell@unam.mx (Valeria Campbell)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Nov20.115813.5035@unam.mx>
+Date: Sun, 20 Nov 1994 11:58:13 GMT
+References: <1994Nov20.072713.2594@cam.ac.uk>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1994Nov20.072713.2594@cam.ac.uk>, vramirez@cam.ac.uk (Valeria Ramírez) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+> CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Valeria Campbell
+Opinions expressed are solely my own and not those of Universidad Nacional Autónoma de México (DGSCA).
+------------------------------------------------------------
+
+From astewart@purdue.edu Tue Nov 22 12:03:13 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!purdue!astewart
+From: astewart@purdue.edu (Andrei Stewart)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Nov22.120313.8326@purdue.edu>
+Date: Tue, 22 Nov 1994 12:03:13 GMT
+References: <1994Nov20.072713.2594@cam.ac.uk>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Nov20.072713.2594@cam.ac.uk>, vramirez@cam.ac.uk (Valeria Ramírez) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+> CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Andrei Stewart -- Purdue University Engineering Computer Network
+"Measuring a record you own is listening, not piracy."
+

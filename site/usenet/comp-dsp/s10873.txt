@@ -1,0 +1,73 @@
+From asouza@uu.net Sat Feb 12 13:32:23 1994
+Path: ashpoly!cascade!bigsur!uu!asouza
+From: asouza@uu.net (Anton Souza)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Feb12.133223.2840@uu.net>
+Date: Sat, 12 Feb 1994 13:32:23 GMT
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+=== Anton Souza ===
+Dept of Electrical Engineering, UUNET Technologies, Falls Church VA
+"In theory there is no difference between theory and practice."
+
+From vkarlsson@panix.com Sun Feb 13 10:10:23 1994
+Path: ashpoly!cascade!brgate!saturno!panix!vkarlsson
+From: vkarlsson@panix.com (Valeria Karlsson)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Feb13.101023.3043@panix.com>
+Date: Sun, 13 Feb 1994 10:10:23 GMT
+References: <1994Feb12.133223.2840@uu.net>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1994Feb12.133223.2840@uu.net>, asouza@uu.net (Anton Souza) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Valeria Karlsson <vkarlsson@panix.com>
+*PLONK* filter active for trolls.
+486DX2/66 (Linux 1.2.13) - NetBSD 1.0
+
+From tperez@u-tokyo.ac.jp Mon Feb 14 17:21:23 1994
+Path: ashpoly!cascade!bigsur!u-tokyo!tperez
+From: tperez@u-tokyo.ac.jp (Thiago Pérez)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Feb14.172123.4025@u-tokyo.ac.jp>
+Date: Mon, 14 Feb 1994 17:21:23 GMT
+References: <1994Feb12.133223.2840@uu.net>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1994Feb12.133223.2840@uu.net>, asouza@uu.net (Anton Souza) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+Thiago Pérez -- University of Tokyo Department of Information Science
+"The hatch is open. Is anyone listening?"
+

@@ -1,0 +1,92 @@
+From bkuznetsov@hanse.de Wed Oct 18 09:07:23 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!hanse!bkuznetsov
+From: bkuznetsov@hanse.de (Brian Kuznetsov)
+Newsgroups: comp.sys.m68k
+Subject: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Oct18.090723.5086@hanse.de>
+Date: Wed, 18 Oct 1995 09:07:23 GMT
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Brian Kuznetsov <bkuznetsov@hanse.de>
+SupraFAXModem 28.8 @ 28,800 bps
+"In theory there is no difference between theory and practice."
+
+From thernandez@unam.mx Thu Oct 19 19:25:23 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!unam!thernandez
+From: thernandez@unam.mx (Tobias Hernández)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Oct19.192523.8358@unam.mx>
+Date: Thu, 19 Oct 1995 19:25:23 GMT
+References: <1995Oct18.090723.5086@hanse.de>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Oct18.090723.5086@hanse.de>, bkuznetsov@hanse.de (Brian Kuznetsov) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Tobias Hernández
+Tape trading list upon request. SASE required for international mail.
+
+From kkuznetsov@cern.ch Sat Oct 21 23:22:23 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!cern!kkuznetsov
+From: kkuznetsov@cern.ch (Katrin Kuznetsov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Oct21.232223.5109@cern.ch>
+Date: Sat, 21 Oct 1995 23:22:23 GMT
+References: <1995Oct18.090723.5086@hanse.de> <1995Oct19.192523.8358@unam.mx>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1995Oct19.192523.8358@unam.mx>, thernandez@unam.mx (Tobias Hernández) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Katrin Kuznetsov
+Tape trading list upon request. SASE required for international mail.
+
+From sreyes@clari.net Tue Oct 24 02:26:23 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!clari!sreyes
+From: sreyes@clari.net (Sven Reyes)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Oct24.022623.6279@clari.net>
+Date: Tue, 24 Oct 1995 02:26:23 GMT
+References: <1995Oct18.090723.5086@hanse.de> <1995Oct19.192523.8358@unam.mx> <1995Oct21.232223.5109@cern.ch>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Oct21.232223.5109@cern.ch>, kkuznetsov@cern.ch (Katrin Kuznetsov) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Sven Reyes
+Opinions expressed are solely my own and not those of ClariNet Communications Corp.
+------------------------------------------------------------
+

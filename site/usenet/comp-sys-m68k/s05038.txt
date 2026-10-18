@@ -1,0 +1,119 @@
+From ssokolov@uu.net Wed Aug 09 06:32:05 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!uu!ssokolov
+From: ssokolov@uu.net (Sergei Sokolov)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Aug09.063205.8433@uu.net>
+Date: Wed, 09 Aug 1995 06:32:05 GMT
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Sergei Sokolov
+Opinions expressed are solely my own and not those of UUNET Technologies, Falls Church VA.
+------------------------------------------------------------
+
+From dtanaka@kiae.su Fri Aug 11 02:30:05 1995
+Path: ashpoly!cascade!mxgate!coyoacan!kiae!dtanaka
+From: dtanaka@kiae.su (Diego Tanaka)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Aug11.023005.1287@kiae.su>
+Date: Fri, 11 Aug 1995 02:30:05 GMT
+References: <1995Aug09.063205.8433@uu.net>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 12
+
+In article <1995Aug09.063205.8433@uu.net>, ssokolov@uu.net (Sergei Sokolov) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+Diego Tanaka <dtanaka@kiae.su>
+*PLONK* filter active for trolls.
+PC-9821Ap2 (NEC) - NetBSD 1.0
+
+From mandersson@mit.edu Fri Aug 11 04:18:05 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!mit!mandersson
+From: mandersson@mit.edu (Matthias Andersson)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Aug11.041805.6387@mit.edu>
+Date: Fri, 11 Aug 1995 04:18:05 GMT
+References: <1995Aug09.063205.8433@uu.net> <1995Aug11.023005.1287@kiae.su>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Aug11.023005.1287@kiae.su>, dtanaka@kiae.su (Diego Tanaka) writes:
+> The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+> Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Matthias Andersson | mandersson@mit.edu
+PGP Key fingerprint: C54F 1D98 6305 5858
+"Keep the channels open."
+
+From lmoreau@inria.fr Fri Aug 11 23:05:05 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!inria!lmoreau
+From: lmoreau@inria.fr (Liam Moreau)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Aug11.230505.6826@inria.fr>
+Date: Fri, 11 Aug 1995 23:05:05 GMT
+References: <1995Aug09.063205.8433@uu.net>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1995Aug09.063205.8433@uu.net>, ssokolov@uu.net (Sergei Sokolov) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Liam Moreau -- INRIA Rocquencourt
+"They will send a copy in my place."
+
+From bpark@titech.ac.jp Sat Aug 12 01:00:05 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!titech!bpark
+From: bpark@titech.ac.jp (Brian Park)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Aug12.010005.5831@titech.ac.jp>
+Date: Sat, 12 Aug 1995 01:00:05 GMT
+References: <1995Aug09.063205.8433@uu.net>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Aug09.063205.8433@uu.net>, ssokolov@uu.net (Sergei Sokolov) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Brian Park <bpark@titech.ac.jp>
+"Do not worship the copy."
+Sun 3/60 (SunOS 4.1.1) / System 7.5.1
+

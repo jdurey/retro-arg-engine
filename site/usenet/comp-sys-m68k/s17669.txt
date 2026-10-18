@@ -1,0 +1,122 @@
+From jtanaka@clari.net Wed Jul 05 20:57:43 1995
+Path: ashpoly!cascade!mxgate!coyoacan!clari!jtanaka
+From: jtanaka@clari.net (Julien Tanaka)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jul05.205743.1861@clari.net>
+Date: Wed, 05 Jul 1995 20:57:43 GMT
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Julien Tanaka <jtanaka@clari.net>
+Zyxel U-1496E @ 14,400 bps
+"Extraordinary claims require extraordinary spectra."
+
+From gduarte@panix.com Thu Jul 06 21:55:43 1995
+Path: ashpoly!cascade!bigsur!panix!gduarte
+From: gduarte@panix.com (Göran Duarte)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jul06.215543.6375@panix.com>
+Date: Thu, 06 Jul 1995 21:55:43 GMT
+References: <1995Jul05.205743.1861@clari.net>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Jul05.205743.1861@clari.net>, jtanaka@clari.net (Julien Tanaka) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Göran Duarte <gduarte@panix.com>
+"They will send a copy in my place."
+Mac IIci / 68882 FPU / FreeBSD 2.1
+
+From dokonkwo@uu.net Fri Jul 07 19:14:43 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!uu!dokonkwo
+From: dokonkwo@uu.net (Dmitri Okonkwo)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jul07.191443.6363@uu.net>
+Date: Fri, 07 Jul 1995 19:14:43 GMT
+References: <1995Jul05.205743.1861@clari.net>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Jul05.205743.1861@clari.net>, jtanaka@clari.net (Julien Tanaka) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Dmitri Okonkwo
+Tape trading list upon request. SASE required for international mail.
+
+From fmartinez@utexas.edu Sat Jul 08 11:13:43 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!utexas!fmartinez
+From: fmartinez@utexas.edu (Fiona Martínez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jul08.111343.3499@utexas.edu>
+Date: Sat, 08 Jul 1995 11:13:43 GMT
+References: <1995Jul05.205743.1861@clari.net>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995Jul05.205743.1861@clari.net>, jtanaka@clari.net (Julien Tanaka) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Fiona Martínez <fmartinez@utexas.edu>
+*PLONK* filter active for trolls.
+NeXTstation Turbo Color - NetBSD 1.0
+
+From glopez@clari.net Sat Jul 08 20:17:43 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!clari!glopez
+From: glopez@clari.net (Göran López)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jul08.201743.8048@clari.net>
+Date: Sat, 08 Jul 1995 20:17:43 GMT
+References: <1995Jul05.205743.1861@clari.net> <1995Jul07.191443.6363@uu.net>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Jul07.191443.6363@uu.net>, dokonkwo@uu.net (Dmitri Okonkwo) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+> My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Göran López | glopez@clari.net
+PGP Key fingerprint: A616 E965 25A8 14A9
+"Keep the channels open."
+

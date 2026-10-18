@@ -1,0 +1,98 @@
+From jchoi@purdue.edu Tue Sep 10 19:23:00 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!purdue!jchoi
+From: jchoi@purdue.edu (Joachim Choi)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Sep10.192300.5266@purdue.edu>
+Date: Tue, 10 Sep 1996 19:23:00 GMT
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+Joachim Choi <jchoi@purdue.edu>
+US Robotics Courier V.34 @ 9600 Telebit bps
+"Tape doesn't lie at 02:14. Ears do."
+
+From srobertson@berkeley.edu Thu Sep 12 01:16:00 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!berkeley!srobertson
+From: srobertson@berkeley.edu (Sun-mi Robertson)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Sep12.011600.6822@berkeley.edu>
+Date: Thu, 12 Sep 1996 01:16:00 GMT
+References: <1996Sep10.192300.5266@purdue.edu>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1996Sep10.192300.5266@purdue.edu>, jchoi@purdue.edu (Joachim Choi) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+> Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Sun-mi Robertson <srobertson@berkeley.edu>
+*PLONK* filter active for trolls.
+NeXTstation Turbo Color - NetBSD 1.0
+
+From msmirnov@pacbell.net Sat Sep 14 00:58:00 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!pacbell!msmirnov
+From: msmirnov@pacbell.net (Marisol Smirnov)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Sep14.005800.4766@pacbell.net>
+Date: Sat, 14 Sep 1996 00:58:00 GMT
+References: <1996Sep10.192300.5266@purdue.edu>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996Sep10.192300.5266@purdue.edu>, jchoi@purdue.edu (Joachim Choi) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+> Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Marisol Smirnov <msmirnov@pacbell.net>
+"In theory there is no difference between theory and practice."
+PC-9821Ap2 (NEC) / System 7.5.1
+
+From lkowalski@cern.ch Sun Sep 15 12:59:00 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!cern!lkowalski
+From: lkowalski@cern.ch (Liam Kowalski)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Sep15.125900.8340@cern.ch>
+Date: Sun, 15 Sep 1996 12:59:00 GMT
+References: <1996Sep10.192300.5266@purdue.edu> <1996Sep12.011600.6822@berkeley.edu>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996Sep12.011600.6822@berkeley.edu>, srobertson@berkeley.edu (Sun-mi Robertson) writes:
+> Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+> If you are posting from AOL, please read RFC 1036 before posting again.
+
+Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+-- 
+Liam Kowalski
+Opinions expressed are solely my own and not those of European Laboratory for Particle Physics, Geneva.
+------------------------------------------------------------
+

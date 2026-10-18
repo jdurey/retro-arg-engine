@@ -1,0 +1,70 @@
+From alopez@berkeley.edu Wed Oct 11 15:59:11 1995
+Path: ashpoly!cascade!mxgate!coyoacan!berkeley!alopez
+From: alopez@berkeley.edu (Anja López)
+Newsgroups: comp.dsp
+Subject: WTB/WTT: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Oct11.155911.7117@berkeley.edu>
+Date: Wed, 11 Oct 1995 15:59:11 GMT
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+Anja López <alopez@berkeley.edu>
+Hayes Optima 288 @ 9600 Telebit bps
+"Do not worship the copy."
+
+From nperez@uu.net Fri Oct 13 06:21:11 1995
+Path: ashpoly!cascade!bigsur!uu!nperez
+From: nperez@uu.net (Nadine Pérez)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Oct13.062111.7341@uu.net>
+Date: Fri, 13 Oct 1995 06:21:11 GMT
+References: <1995Oct11.155911.7117@berkeley.edu>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Oct11.155911.7117@berkeley.edu>, alopez@berkeley.edu (Anja López) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+-- 
+=== Nadine Pérez ===
+Dept of Electrical Engineering, UUNET Technologies, Falls Church VA
+"Measuring a record you own is listening, not piracy."
+
+From cstewart@pipeline.com Sat Oct 14 20:48:11 1995
+Path: ashpoly!cascade!mxgate!coyoacan!pipeline!cstewart
+From: cstewart@pipeline.com (Callum Stewart)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Oct14.204811.8572@pipeline.com>
+Date: Sat, 14 Oct 1995 20:48:11 GMT
+References: <1995Oct11.155911.7117@berkeley.edu> <1995Oct13.062111.7341@uu.net>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Oct13.062111.7341@uu.net>, nperez@uu.net (Nadine Pérez) writes:
+> Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Callum Stewart <cstewart@pipeline.com>
+*PLONK* filter active for trolls.
+Decstation 5000/200 - NetBSD 1.0
+

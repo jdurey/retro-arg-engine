@@ -1,0 +1,47 @@
+From erodriguez@titech.ac.jp Wed Oct 19 13:08:22 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!titech!erodriguez
+From: erodriguez@titech.ac.jp (Elaine Rodríguez)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Oct19.130822.7567@titech.ac.jp>
+Date: Wed, 19 Oct 1994 13:08:22 GMT
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Elaine Rodríguez
+Tape trading list upon request. SASE required for international mail.
+
+From gkarlsson@kth.se Thu Oct 20 11:27:22 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!kth!gkarlsson
+From: gkarlsson@kth.se (Graham Karlsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Oct20.112722.5905@kth.se>
+Date: Thu, 20 Oct 1994 11:27:22 GMT
+References: <1994Oct19.130822.7567@titech.ac.jp>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1994Oct19.130822.7567@titech.ac.jp>, erodriguez@titech.ac.jp (Elaine Rodríguez) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+> CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Graham Karlsson <gkarlsson@kth.se>
+*PLONK* filter active for trolls.
+486DX2/66 (Linux 1.2.13) - NetBSD 1.0
+

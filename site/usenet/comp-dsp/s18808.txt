@@ -1,0 +1,92 @@
+From bchoi@earthlink.net Wed Jun 15 12:19:10 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!earthlink!bchoi
+From: bchoi@earthlink.net (Bruno Choi)
+Newsgroups: comp.dsp
+Subject: WTB/WTT: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Jun15.121910.1466@earthlink.net>
+Date: Wed, 15 Jun 1994 12:19:10 GMT
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Bruno Choi
+Tape trading list upon request. SASE required for international mail.
+
+From tsanchez@cmu.edu Wed Jun 15 19:40:10 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!cmu!tsanchez
+From: tsanchez@cmu.edu (Thiago Sánchez)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Jun15.194010.5949@cmu.edu>
+Date: Wed, 15 Jun 1994 19:40:10 GMT
+References: <1994Jun15.121910.1466@earthlink.net>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Jun15.121910.1466@earthlink.net>, bchoi@earthlink.net (Bruno Choi) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Thiago Sánchez <tsanchez@cmu.edu>
+"There are 14 nodes and only 10 countries. Count again."
+NeXTstation Turbo Color / FreeBSD 2.1
+
+From lduarte@kth.se Thu Jun 16 02:03:10 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!kth!lduarte
+From: lduarte@kth.se (Liam Duarte)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Jun16.020310.1356@kth.se>
+Date: Thu, 16 Jun 1994 02:03:10 GMT
+References: <1994Jun15.121910.1466@earthlink.net> <1994Jun15.194010.5949@cmu.edu>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1994Jun15.194010.5949@cmu.edu>, tsanchez@cmu.edu (Thiago Sánchez) writes:
+> I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Liam Duarte -- Royal Institute of Technology, Stockholm
+"There are 14 nodes and only 10 countries. Count again."
+
+From mbrennan@kth.se Sat Jun 18 02:35:10 1994
+Path: ashpoly!cascade!bigsur!kth!mbrennan
+From: mbrennan@kth.se (Matthias Brennan)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Jun18.023510.2708@kth.se>
+Date: Sat, 18 Jun 1994 02:35:10 GMT
+References: <1994Jun15.121910.1466@earthlink.net>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1994Jun15.121910.1466@earthlink.net>, bchoi@earthlink.net (Bruno Choi) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+> A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Matthias Brennan <mbrennan@kth.se>
+"Marcus is not one man."
+Mac IIci / 68882 FPU / SunOS 4.1.4
+

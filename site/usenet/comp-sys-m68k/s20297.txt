@@ -1,0 +1,93 @@
+From jivanov@cmu.edu Thu Jul 07 01:30:33 1994
+Path: ashpoly!cascade!bigsur!cmu!jivanov
+From: jivanov@cmu.edu (Jen Ivanov)
+Newsgroups: comp.sys.m68k
+Subject: Data: Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1994Jul07.013033.1744@cmu.edu>
+Date: Thu, 07 Jul 1994 01:30:33 GMT
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Amiga audio hackers: you can demodulate the 14.2 Hz carrier in real time without bogging down the OS.
+
+By setting up Paula's audio DMA to double-buffer incoming 8-bit samples, the 68020 has plenty of cycles left for the Costas loop.
+I wrote a 64-tap FIR filter in pure 68k assembly using movem.l and dbra loop unrolling to downsample to 64 Hz.
+
+Does anyone want to test on an unaccelerated Amiga 500 with 512K chip RAM?
+
+-- 
+Jen Ivanov
+Tape trading list upon request. SASE required for international mail.
+
+From mchoi@ox.ac.uk Sat Jul 09 03:38:33 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!ox!mchoi
+From: mchoi@ox.ac.uk (Mikhail Choi)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1994Jul09.033833.8512@ox.ac.uk>
+Date: Sat, 09 Jul 1994 03:38:33 GMT
+References: <1994Jul07.013033.1744@cmu.edu>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Jul07.013033.1744@cmu.edu>, jivanov@cmu.edu (Jen Ivanov) writes:
+> Amiga audio hackers: you can demodulate the 14.2 Hz carrier in real time without bogging down the OS.
+
+Tested on my A3000 / 25 MHz. Ran smoothly in the background while I was compiling a C program in another window.
+
+-- 
+Mikhail Choi <mchoi@ox.ac.uk>
+Hayes Optima 288 @ 9600 Telebit bps
+"The hatch is open. Is anyone listening?"
+
+From smartinez@rwth-aachen.de Mon Jul 11 06:56:33 1994
+Path: ashpoly!cascade!brgate!saturno!rwth-aachen!smartinez
+From: smartinez@rwth-aachen.de (Steve Martínez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1994Jul11.065633.4056@rwth-aachen.de>
+Date: Mon, 11 Jul 1994 06:56:33 GMT
+References: <1994Jul07.013033.1744@cmu.edu>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Jul07.013033.1744@cmu.edu>, jivanov@cmu.edu (Jen Ivanov) writes:
+> Amiga audio hackers: you can demodulate the 14.2 Hz carrier in real time without bogging down the OS.
+
+Brilliant use of Paula DMA! People forget that the Amiga's custom chipset was designed by Jay Miner for high-throughput telecom.
+
+-- 
+Steve Martínez <smartinez@rwth-aachen.de>
+"Measuring a record you own is listening, not piracy."
+Pentium 90 (OS/2 Warp) / System 7.5.1
+
+From jreyes@demon.co.uk Mon Jul 11 12:08:33 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!demon!jreyes
+From: jreyes@demon.co.uk (Ji-woo Reyes)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1994Jul11.120833.8707@demon.co.uk>
+Date: Mon, 11 Jul 1994 12:08:33 GMT
+References: <1994Jul07.013033.1744@cmu.edu>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1994Jul07.013033.1744@cmu.edu>, jivanov@cmu.edu (Jen Ivanov) writes:
+> Amiga audio hackers: you can demodulate the 14.2 Hz carrier in real time without bogging down the OS.
+> By setting up Paula's audio DMA to double-buffer incoming 8-bit samples, the 68020 has plenty of cycles left for the Costas loop.
+
+PC users spend $3,000 on Sound Blasters and Pentium chips and still can't do what a $500 Amiga was doing in 1985.
+
+-- 
+Ji-woo Reyes <jreyes@demon.co.uk>
+*PLONK* filter active for trolls.
+Decstation 5000/200 - NetBSD 1.0
+

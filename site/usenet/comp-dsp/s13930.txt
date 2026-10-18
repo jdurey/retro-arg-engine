@@ -1,0 +1,98 @@
+From cpopov@tum.de Fri Nov 11 13:03:56 1994
+Path: ashpoly!cascade!bigsur!tum!cpopov
+From: cpopov@tum.de (Camila Popov)
+Newsgroups: comp.dsp
+Subject: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Nov11.130356.3815@tum.de>
+Date: Fri, 11 Nov 1994 13:03:56 GMT
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+=== Camila Popov ===
+Dept of Electrical Engineering, Technische Universität München
+"Extraordinary claims require extraordinary spectra."
+
+From aduarte@berkeley.edu Sun Nov 13 14:09:56 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!berkeley!aduarte
+From: aduarte@berkeley.edu (Aiko Duarte)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Nov13.140956.7906@berkeley.edu>
+Date: Sun, 13 Nov 1994 14:09:56 GMT
+References: <1994Nov11.130356.3815@tum.de>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1994Nov11.130356.3815@tum.de>, cpopov@tum.de (Camila Popov) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Aiko Duarte
+Opinions expressed are solely my own and not those of UC Berkeley Department of EECS.
+------------------------------------------------------------
+
+From llaurent@uni-hamburg.de Tue Nov 15 05:44:56 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!uni-hamburg!llaurent
+From: llaurent@uni-hamburg.de (Lisa Laurent)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Nov15.054456.7781@uni-hamburg.de>
+Date: Tue, 15 Nov 1994 05:44:56 GMT
+References: <1994Nov11.130356.3815@tum.de> <1994Nov13.140956.7906@berkeley.edu>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1994Nov13.140956.7906@berkeley.edu>, aduarte@berkeley.edu (Aiko Duarte) writes:
+> Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Lisa Laurent | llaurent@uni-hamburg.de
+PGP Key fingerprint: 87B8 6AF8 5F84 02A6
+"Keep the channels open."
+
+From apetrov@netcom.com Tue Nov 15 08:19:56 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!netcom!apetrov
+From: apetrov@netcom.com (Anton Petrov)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Nov15.081956.9072@netcom.com>
+Date: Tue, 15 Nov 1994 08:19:56 GMT
+References: <1994Nov11.130356.3815@tum.de> <1994Nov13.140956.7906@berkeley.edu> <1994Nov15.054456.7781@uni-hamburg.de>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1994Nov15.054456.7781@uni-hamburg.de>, llaurent@uni-hamburg.de (Lisa Laurent) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+> PGP Public key available via finger or upon request.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Anton Petrov <apetrov@netcom.com>
+US Robotics Courier V.34 @ ISDN 64k bps
+"They will send a copy in my place."
+

@@ -1,0 +1,71 @@
+From isokolov@kth.se Mon Jan 17 16:39:52 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!kth!isokolov
+From: isokolov@kth.se (Ines Sokolov)
+Newsgroups: comp.dsp
+Subject: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Jan17.163952.3720@kth.se>
+Date: Mon, 17 Jan 1994 16:39:52 GMT
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+
+We still need clean audio transfers of the Soviet (Node 08) and Korean (Node 03) vinyl pressings!
+
+-- 
+Ines Sokolov <isokolov@kth.se>
+Zyxel U-1496E @ 14,400 bps
+"There are 14 nodes and only 10 countries. Count again."
+
+From rbrennan@illinois.edu Wed Jan 19 01:54:52 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!illinois!rbrennan
+From: rbrennan@illinois.edu (Rodrigo Brennan)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Jan19.015452.1490@illinois.edu>
+Date: Wed, 19 Jan 1994 01:54:52 GMT
+References: <1994Jan17.163952.3720@kth.se>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1994Jan17.163952.3720@kth.se>, isokolov@kth.se (Ines Sokolov) writes:
+> Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+> The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+-- 
+Rodrigo Brennan <rbrennan@illinois.edu>
+"When every node is whole, the channel opens."
+Commodore Amiga 500 (1MB OCS) / AmigaOS 3.1
+
+From jfournier@mindspring.com Wed Jan 19 02:44:52 1994
+Path: ashpoly!cascade!mxgate!coyoacan!mindspring!jfournier
+From: jfournier@mindspring.com (Julien Fournier)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Jan19.024452.8596@mindspring.com>
+Date: Wed, 19 Jan 1994 02:44:52 GMT
+References: <1994Jan17.163952.3720@kth.se>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Jan17.163952.3720@kth.se>, isokolov@kth.se (Ines Sokolov) writes:
+> Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Julien Fournier | jfournier@mindspring.com
+PGP Key fingerprint: 6696 7A90 4716 58AB
+"Keep the channels open."
+

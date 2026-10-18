@@ -1,0 +1,95 @@
+From bgonzalez@ox.ac.uk Mon May 23 00:38:20 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!ox!bgonzalez
+From: bgonzalez@ox.ac.uk (Bill González)
+Newsgroups: comp.dsp
+Subject: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994May23.003820.3718@ox.ac.uk>
+Date: Mon, 23 May 1994 00:38:20 GMT
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+=== Bill González ===
+Dept of Electrical Engineering, Oxford University Computing Laboratory
+"We don't sign stars. We build them."
+
+From afournier@pipeline.com Mon May 23 09:56:20 1994
+Path: ashpoly!cascade!brgate!saturno!pipeline!afournier
+From: afournier@pipeline.com (Amy Fournier)
+Newsgroups: comp.dsp
+Subject: Re: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994May23.095620.8104@pipeline.com>
+Date: Mon, 23 May 1994 09:56:20 GMT
+References: <1994May23.003820.3718@ox.ac.uk>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1994May23.003820.3718@ox.ac.uk>, bgonzalez@ox.ac.uk (Bill González) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+Amy Fournier | afournier@pipeline.com
+PGP Key fingerprint: ADAD F39D D103 A665
+"Keep the channels open."
+
+From jdubois@uu.net Mon May 23 19:27:20 1994
+Path: ashpoly!cascade!brgate!saturno!uu!jdubois
+From: jdubois@uu.net (Joachim Dubois)
+Newsgroups: comp.dsp
+Subject: Re: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994May23.192720.9975@uu.net>
+Date: Mon, 23 May 1994 19:27:20 GMT
+References: <1994May23.003820.3718@ox.ac.uk>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1994May23.003820.3718@ox.ac.uk>, bgonzalez@ox.ac.uk (Bill González) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Joachim Dubois <jdubois@uu.net>
+"Hardware is temporary. The signal survives."
+Sun SparcStation 20 / FreeBSD 2.1
+
+From lgirard@purdue.edu Wed May 25 11:47:20 1994
+Path: ashpoly!cascade!mxgate!coyoacan!purdue!lgirard
+From: lgirard@purdue.edu (Lars Girard)
+Newsgroups: comp.dsp
+Subject: Re: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994May25.114720.5058@purdue.edu>
+Date: Wed, 25 May 1994 11:47:20 GMT
+References: <1994May23.003820.3718@ox.ac.uk> <1994May23.192720.9975@uu.net>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994May23.192720.9975@uu.net>, jdubois@uu.net (Joachim Dubois) writes:
+> Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Lars Girard <lgirard@purdue.edu>
+"A soul is not exclusive to biology."
+Amiga 3000T / TOS 4.04
+

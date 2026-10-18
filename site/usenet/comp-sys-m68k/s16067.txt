@@ -1,0 +1,48 @@
+From jpark@pacbell.net Sat Oct 12 08:27:23 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!pacbell!jpark
+From: jpark@pacbell.net (Ji-woo Park)
+Newsgroups: comp.sys.m68k
+Subject: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Oct12.082723.1885@pacbell.net>
+Date: Sat, 12 Oct 1996 08:27:23 GMT
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Ji-woo Park -- Pacific Bell Internet Services
+"A soul is not exclusive to biology."
+
+From rcampbell@u-tokyo.ac.jp Sun Oct 13 09:43:23 1996
+Path: ashpoly!cascade!brgate!saturno!u-tokyo!rcampbell
+From: rcampbell@u-tokyo.ac.jp (Raj Campbell)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Oct13.094323.5607@u-tokyo.ac.jp>
+Date: Sun, 13 Oct 1996 09:43:23 GMT
+References: <1996Oct12.082723.1885@pacbell.net>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1996Oct12.082723.1885@pacbell.net>, jpark@pacbell.net (Ji-woo Park) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+=== Raj Campbell ===
+Dept of Electrical Engineering, University of Tokyo Department of Information Science
+"Do not worship the copy."
+

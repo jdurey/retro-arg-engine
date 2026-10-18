@@ -1,0 +1,118 @@
+From mtanaka@illinois.edu Sat Feb 10 09:26:54 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!illinois!mtanaka
+From: mtanaka@illinois.edu (Mathieu Tanaka)
+Newsgroups: comp.sys.m68k
+Subject: WTB/WTT: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Feb10.092654.2104@illinois.edu>
+Date: Sat, 10 Feb 1996 09:26:54 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+
+Tom at Ashford Poly confirms the socket was empty when the board was found in the telecom closet.
+
+-- 
+Mathieu Tanaka <mtanaka@illinois.edu>
+"Hold for relay."
+PC-9821Ap2 (NEC) / System 7.5.1
+
+From jlee@uni-hamburg.de Mon Feb 12 08:28:54 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!uni-hamburg!jlee
+From: jlee@uni-hamburg.de (Jen Lee)
+Newsgroups: comp.sys.m68k
+Subject: Re: WTB/WTT: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Feb12.082854.9991@uni-hamburg.de>
+Date: Mon, 12 Feb 1996 08:28:54 GMT
+References: <1996Feb10.092654.2104@illinois.edu>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996Feb10.092654.2104@illinois.edu>, mtanaka@illinois.edu (Mathieu Tanaka) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+-- 
+Jen Lee
+Opinions expressed are solely my own and not those of Universität Hamburg Fachbereich Informatik.
+------------------------------------------------------------
+
+From smoreau@illinois.edu Tue Feb 13 16:34:54 1996
+Path: ashpoly!cascade!brgate!saturno!illinois!smoreau
+From: smoreau@illinois.edu (Steve Moreau)
+Newsgroups: comp.sys.m68k
+Subject: Re: WTB/WTT: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Feb13.163454.3532@illinois.edu>
+Date: Tue, 13 Feb 1996 16:34:54 GMT
+References: <1996Feb10.092654.2104@illinois.edu> <1996Feb12.082854.9991@uni-hamburg.de>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1996Feb12.082854.9991@uni-hamburg.de>, jlee@uni-hamburg.de (Jen Lee) writes:
+> That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Steve Moreau <smoreau@illinois.edu>
+"The hatch is open. Is anyone listening?"
+Amiga 1200 (Blizzard 030/50) / Linux 1.2.13
+
+From snakamura@u-tokyo.ac.jp Wed Feb 14 20:20:54 1996
+Path: ashpoly!cascade!brgate!saturno!u-tokyo!snakamura
+From: snakamura@u-tokyo.ac.jp (Steve Nakamura)
+Newsgroups: comp.sys.m68k
+Subject: Re: WTB/WTT: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Feb14.202054.2986@u-tokyo.ac.jp>
+Date: Wed, 14 Feb 1996 20:20:54 GMT
+References: <1996Feb10.092654.2104@illinois.edu> <1996Feb12.082854.9991@uni-hamburg.de>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1996Feb12.082854.9991@uni-hamburg.de>, jlee@uni-hamburg.de (Jen Lee) writes:
+> That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+-- 
+Steve Nakamura
+Tape trading list upon request. SASE required for international mail.
+
+From mtanaka@clari.net Thu Feb 15 14:44:54 1996
+Path: ashpoly!cascade!bigsur!clari!mtanaka
+From: mtanaka@clari.net (Matthias Tanaka)
+Newsgroups: comp.sys.m68k
+Subject: Re: WTB/WTT: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Feb15.144454.2317@clari.net>
+Date: Thu, 15 Feb 1996 14:44:54 GMT
+References: <1996Feb10.092654.2104@illinois.edu> <1996Feb12.082854.9991@uni-hamburg.de> <1996Feb14.202054.2986@u-tokyo.ac.jp>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Feb14.202054.2986@u-tokyo.ac.jp>, snakamura@u-tokyo.ac.jp (Steve Nakamura) writes:
+> That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Matthias Tanaka <mtanaka@clari.net>
+"We don't sign stars. We build them."
+Mac IIci / 68882 FPU / NEXTSTEP 3.3
+

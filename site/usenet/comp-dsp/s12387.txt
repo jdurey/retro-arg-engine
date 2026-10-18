@@ -1,0 +1,47 @@
+From alaurent@unam.mx Sat Jan 06 15:01:18 1996
+Path: ashpoly!cascade!mxgate!coyoacan!unam!alaurent
+From: alaurent@unam.mx (Anton Laurent)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jan06.150118.8727@unam.mx>
+Date: Sat, 06 Jan 1996 15:01:18 GMT
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Anton Laurent <alaurent@unam.mx>
+Practical Peripherals 14.4 @ 14,400 bps
+"The hatch is open. Is anyone listening?"
+
+From ggarcia@titech.ac.jp Sun Jan 07 18:31:18 1996
+Path: ashpoly!cascade!bigsur!titech!ggarcia
+From: ggarcia@titech.ac.jp (Göran García)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jan07.183118.1948@titech.ac.jp>
+Date: Sun, 07 Jan 1996 18:31:18 GMT
+References: <1996Jan06.150118.8727@unam.mx>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Jan06.150118.8727@unam.mx>, alaurent@unam.mx (Anton Laurent) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Göran García
+Tape trading list upon request. SASE required for international mail.
+

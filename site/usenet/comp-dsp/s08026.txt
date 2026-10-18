@@ -1,0 +1,118 @@
+From leriksson@berkeley.edu Sun Feb 12 09:17:22 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!berkeley!leriksson
+From: leriksson@berkeley.edu (Lisa Eriksson)
+Newsgroups: comp.dsp
+Subject: Observation: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Feb12.091722.2642@berkeley.edu>
+Date: Sun, 12 Feb 1995 09:17:22 GMT
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+Lisa Eriksson <leriksson@berkeley.edu>
+"A soul is not exclusive to biology."
+Pentium 90 (OS/2 Warp) / AmigaOS 3.1
+
+From mpetrov@clari.net Tue Feb 14 04:21:22 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!clari!mpetrov
+From: mpetrov@clari.net (Marisol Petrov)
+Newsgroups: comp.dsp
+Subject: Re: Observation: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Feb14.042122.9609@clari.net>
+Date: Tue, 14 Feb 1995 04:21:22 GMT
+References: <1995Feb12.091722.2642@berkeley.edu>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Feb12.091722.2642@berkeley.edu>, leriksson@berkeley.edu (Lisa Eriksson) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+> With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Marisol Petrov
+Opinions expressed are solely my own and not those of ClariNet Communications Corp.
+------------------------------------------------------------
+
+From ischneider@cern.ch Tue Feb 14 17:12:22 1995
+Path: ashpoly!cascade!brgate!saturno!cern!ischneider
+From: ischneider@cern.ch (Ines Schneider)
+Newsgroups: comp.dsp
+Subject: Re: Observation: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Feb14.171222.8372@cern.ch>
+Date: Tue, 14 Feb 1995 17:12:22 GMT
+References: <1995Feb12.091722.2642@berkeley.edu>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Feb12.091722.2642@berkeley.edu>, leriksson@berkeley.edu (Lisa Eriksson) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+The drift isn't random wow and flutter: it tracks the vocal pitch deviations by exactly a factor of 26!
+
+-- 
+Ines Schneider <ischneider@cern.ch>
+"Hardware is temporary. The signal survives."
+Sun 3/60 (SunOS 4.1.1) / FreeBSD 2.1
+
+From hpetrov@pacbell.net Thu Feb 16 01:45:22 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!pacbell!hpetrov
+From: hpetrov@pacbell.net (Heather Petrov)
+Newsgroups: comp.dsp
+Subject: Re: Observation: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Feb16.014522.4419@pacbell.net>
+Date: Thu, 16 Feb 1995 01:45:22 GMT
+References: <1995Feb12.091722.2642@berkeley.edu> <1995Feb14.171222.8372@cern.ch>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995Feb14.171222.8372@cern.ch>, ischneider@cern.ch (Ines Schneider) writes:
+> The drift isn't random wow and flutter: it tracks the vocal pitch deviations by exactly a factor of 26!
+
+Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Heather Petrov
+Opinions expressed are solely my own and not those of Pacific Bell Internet Services.
+------------------------------------------------------------
+
+From nmartinez@stanford.edu Fri Feb 17 12:31:22 1995
+Path: ashpoly!cascade!bigsur!stanford!nmartinez
+From: nmartinez@stanford.edu (Nadine Martínez)
+Newsgroups: comp.dsp
+Subject: Re: Observation: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Feb17.123122.3033@stanford.edu>
+Date: Fri, 17 Feb 1995 12:31:22 GMT
+References: <1995Feb12.091722.2642@berkeley.edu> <1995Feb14.042122.9609@clari.net>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1995Feb14.042122.9609@clari.net>, mpetrov@clari.net (Marisol Petrov) writes:
+> If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+-- 
+Nadine Martínez -- Stanford University Computer Systems Lab
+"5 sigma is a discovery. 7 is a question."
+

@@ -1,0 +1,72 @@
+From blopez@demon.co.uk Wed Apr 13 18:37:18 1994
+Path: ashpoly!cascade!brgate!saturno!demon!blopez
+From: blopez@demon.co.uk (Bruno López)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Apr13.183718.3226@demon.co.uk>
+Date: Wed, 13 Apr 1994 18:37:18 GMT
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Bruno López <blopez@demon.co.uk>
+*PLONK* filter active for trolls.
+486DX4/100 (FreeBSD 2.0.5) - NetBSD 1.0
+
+From gcampbell@demon.co.uk Fri Apr 15 04:10:18 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!demon!gcampbell
+From: gcampbell@demon.co.uk (Göran Campbell)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Apr15.041018.1993@demon.co.uk>
+Date: Fri, 15 Apr 1994 04:10:18 GMT
+References: <1994Apr13.183718.3226@demon.co.uk>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1994Apr13.183718.3226@demon.co.uk>, blopez@demon.co.uk (Bruno López) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Göran Campbell
+Tape trading list upon request. SASE required for international mail.
+
+From sramirez@inria.fr Fri Apr 15 15:41:18 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!inria!sramirez
+From: sramirez@inria.fr (Steve Ramírez)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Apr15.154118.7263@inria.fr>
+Date: Fri, 15 Apr 1994 15:41:18 GMT
+References: <1994Apr13.183718.3226@demon.co.uk> <1994Apr15.041018.1993@demon.co.uk>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Apr15.041018.1993@demon.co.uk>, gcampbell@demon.co.uk (Göran Campbell) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+> PGP Public key available via finger or upon request.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Steve Ramírez
+Tape trading list upon request. SASE required for international mail.
+

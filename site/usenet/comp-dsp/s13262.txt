@@ -1,0 +1,93 @@
+From bschneider@purdue.edu Thu Dec 28 20:10:04 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!purdue!bschneider
+From: bschneider@purdue.edu (Bruno Schneider)
+Newsgroups: comp.dsp
+Subject: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Dec28.201004.7750@purdue.edu>
+Date: Thu, 28 Dec 1995 20:10:04 GMT
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+What sampling rates are people using for their vinyl rips? 44.1 kHz or 48 kHz DAT?
+
+-- 
+Bruno Schneider <bschneider@purdue.edu>
+"In theory there is no difference between theory and practice."
+PC-9821Ap2 (NEC) / NEXTSTEP 3.3
+
+From eoliveira@uu.net Sat Dec 30 19:36:04 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!uu!eoliveira
+From: eoliveira@uu.net (Emi Oliveira)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Dec30.193604.3502@uu.net>
+Date: Sat, 30 Dec 1995 19:36:04 GMT
+References: <1995Dec28.201004.7750@purdue.edu>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Dec28.201004.7750@purdue.edu>, bschneider@purdue.edu (Bruno Schneider) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+=== Emi Oliveira ===
+Dept of Electrical Engineering, UUNET Technologies, Falls Church VA
+"The hatch is open. Is anyone listening?"
+
+From hnakamura@ox.ac.uk Mon Jan 01 11:38:04 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!ox!hnakamura
+From: hnakamura@ox.ac.uk (Heather Nakamura)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Jan01.113804.1990@ox.ac.uk>
+Date: Mon, 01 Jan 1996 11:38:04 GMT
+References: <1995Dec28.201004.7750@purdue.edu> <1995Dec30.193604.3502@uu.net>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Dec30.193604.3502@uu.net>, eoliveira@uu.net (Emi Oliveira) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Heather Nakamura <hnakamura@ox.ac.uk>
+"Tape doesn't lie at 02:14. Ears do."
+Pentium 90 (OS/2 Warp) / Linux 1.2.13
+
+From srobertson@hanse.de Mon Jan 01 20:14:04 1996
+Path: ashpoly!cascade!brgate!saturno!hanse!srobertson
+From: srobertson@hanse.de (Sergei Robertson)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Jan01.201404.9055@hanse.de>
+Date: Mon, 01 Jan 1996 20:14:04 GMT
+References: <1995Dec28.201004.7750@purdue.edu> <1995Dec30.193604.3502@uu.net> <1996Jan01.113804.1990@ox.ac.uk>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1996Jan01.113804.1990@ox.ac.uk>, hnakamura@ox.ac.uk (Heather Nakamura) writes:
+> I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Sergei Robertson -- Hanse-Netzwerk Hamburg
+"We don't sign stars. We build them."
+

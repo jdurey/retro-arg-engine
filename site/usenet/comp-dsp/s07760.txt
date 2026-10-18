@@ -1,0 +1,112 @@
+From cpark@pacbell.net Mon Apr 03 17:30:49 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!pacbell!cpark
+From: cpark@pacbell.net (Camila Park)
+Newsgroups: comp.dsp
+Subject: WTB/WTT: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Apr03.173049.3900@pacbell.net>
+Date: Mon, 03 Apr 1995 17:30:49 GMT
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+Version 1.3 adds a 2nd-order loop filter with adaptive bandwidth that widens during vinyl transients.
+
+Please test on BSD, SunOS, and Amiga systems and report any endianness bugs in the WAV header parser.
+
+-- 
+=== Camila Park ===
+Dept of Electrical Engineering, Pacific Bell Internet Services
+"Hold for relay."
+
+From dfournier@tum.de Tue Apr 04 15:28:49 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!tum!dfournier
+From: dfournier@tum.de (Diego Fournier)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Apr04.152849.4272@tum.de>
+Date: Tue, 04 Apr 1995 15:28:49 GMT
+References: <1995Apr03.173049.3900@pacbell.net>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1995Apr03.173049.3900@pacbell.net>, cpark@pacbell.net (Camila Park) writes:
+> Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+-- 
+Diego Fournier -- Technische Universität München
+"Hold for relay."
+
+From glaurent@panix.com Thu Apr 06 10:58:49 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!panix!glaurent
+From: glaurent@panix.com (Graham Laurent)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Apr06.105849.6986@panix.com>
+Date: Thu, 06 Apr 1995 10:58:49 GMT
+References: <1995Apr03.173049.3900@pacbell.net> <1995Apr04.152849.4272@tum.de>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1995Apr04.152849.4272@tum.de>, dfournier@tum.de (Diego Fournier) writes:
+> Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+-- 
+Graham Laurent
+Tape trading list upon request. SASE required for international mail.
+
+From clopez@earthlink.net Sat Apr 08 07:19:49 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!earthlink!clopez
+From: clopez@earthlink.net (Camila López)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Apr08.071949.4584@earthlink.net>
+Date: Sat, 08 Apr 1995 07:19:49 GMT
+References: <1995Apr03.173049.3900@pacbell.net> <1995Apr04.152849.4272@tum.de> <1995Apr06.105849.6986@panix.com>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1995Apr06.105849.6986@panix.com>, glaurent@panix.com (Graham Laurent) writes:
+> On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+-- 
+Camila López -- EarthLink Network
+"Marcus is not one man."
+
+From drobertson@rwth-aachen.de Sun Apr 09 14:36:49 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!rwth-aachen!drobertson
+From: drobertson@rwth-aachen.de (Dong-hyun Robertson)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Apr09.143649.1760@rwth-aachen.de>
+Date: Sun, 09 Apr 1995 14:36:49 GMT
+References: <1995Apr03.173049.3900@pacbell.net> <1995Apr04.152849.4272@tum.de>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1995Apr04.152849.4272@tum.de>, dfournier@tum.de (Diego Fournier) writes:
+> Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Dong-hyun Robertson
+Tape trading list upon request. SASE required for international mail.
+

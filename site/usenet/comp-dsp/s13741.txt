@@ -1,0 +1,47 @@
+From lfournier@delphi.com Thu Jan 05 12:52:17 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!delphi!lfournier
+From: lfournier@delphi.com (Liam Fournier)
+Newsgroups: comp.dsp
+Subject: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jan05.125217.6687@delphi.com>
+Date: Thu, 05 Jan 1995 12:52:17 GMT
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+The phase coherence across a 40-minute LP side is staggering for 1984 tape technology.
+
+-- 
+Liam Fournier
+Opinions expressed are solely my own and not those of Delphi Internet Services.
+------------------------------------------------------------
+
+From lsmirnov@clari.net Sat Jan 07 00:35:17 1995
+Path: ashpoly!cascade!mxgate!coyoacan!clari!lsmirnov
+From: lsmirnov@clari.net (Liam Smirnov)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jan07.003517.4646@clari.net>
+Date: Sat, 07 Jan 1995 00:35:17 GMT
+References: <1995Jan05.125217.6687@delphi.com>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Jan05.125217.6687@delphi.com>, lfournier@delphi.com (Liam Fournier) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+> With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Liam Smirnov -- ClariNet Communications Corp
+"The carrier frequency does not drift by accident."
+

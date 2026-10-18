@@ -1,0 +1,94 @@
+From csilva@mit.edu Fri Jul 12 06:23:08 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!mit!csilva
+From: csilva@mit.edu (Camila Silva)
+Newsgroups: comp.dsp
+Subject: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jul12.062308.1437@mit.edu>
+Date: Fri, 12 Jul 1996 06:23:08 GMT
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+=== Camila Silva ===
+Dept of Electrical Engineering, Massachusetts Institute of Technology
+"The hatch is open. Is anyone listening?"
+
+From dmoreau@clari.net Sat Jul 13 02:10:08 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!clari!dmoreau
+From: dmoreau@clari.net (Dong-hyun Moreau)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jul13.021008.2932@clari.net>
+Date: Sat, 13 Jul 1996 02:10:08 GMT
+References: <1996Jul12.062308.1437@mit.edu>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Jul12.062308.1437@mit.edu>, csilva@mit.edu (Camila Silva) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+Dong-hyun Moreau | dmoreau@clari.net
+PGP Key fingerprint: 9284 109B 40E8 2FB1
+"Keep the channels open."
+
+From tsouza@unam.mx Sat Jul 13 18:51:08 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!unam!tsouza
+From: tsouza@unam.mx (Tyler Souza)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jul13.185108.4398@unam.mx>
+Date: Sat, 13 Jul 1996 18:51:08 GMT
+References: <1996Jul12.062308.1437@mit.edu>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1996Jul12.062308.1437@mit.edu>, csilva@mit.edu (Camila Silva) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Tyler Souza
+Tape trading list upon request. SASE required for international mail.
+
+From kfournier@titech.ac.jp Mon Jul 15 22:15:08 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!titech!kfournier
+From: kfournier@titech.ac.jp (Katrin Fournier)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jul15.221508.3704@titech.ac.jp>
+Date: Mon, 15 Jul 1996 22:15:08 GMT
+References: <1996Jul12.062308.1437@mit.edu>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1996Jul12.062308.1437@mit.edu>, csilva@mit.edu (Camila Silva) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Katrin Fournier <kfournier@titech.ac.jp>
+*PLONK* filter active for trolls.
+Sun 3/60 (SunOS 4.1.1) - NetBSD 1.0
+

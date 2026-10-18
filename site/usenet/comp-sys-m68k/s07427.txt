@@ -1,0 +1,92 @@
+From hlaurent@tum.de Sun Sep 24 05:33:51 1995
+Path: ashpoly!cascade!mxgate!coyoacan!tum!hlaurent
+From: hlaurent@tum.de (Heather Laurent)
+Newsgroups: comp.sys.m68k
+Subject: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Sep24.053351.3964@tum.de>
+Date: Sun, 24 Sep 1995 05:33:51 GMT
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+
+Did Marcus take the decryption EPROM with him when he left the lab?
+
+-- 
+Heather Laurent
+Tape trading list upon request. SASE required for international mail.
+
+From ltakahashi@illinois.edu Mon Sep 25 05:39:51 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!illinois!ltakahashi
+From: ltakahashi@illinois.edu (Lisa Takahashi)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Sep25.053951.7904@illinois.edu>
+Date: Mon, 25 Sep 1995 05:39:51 GMT
+References: <1995Sep24.053351.3964@tum.de>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Sep24.053351.3964@tum.de>, hlaurent@tum.de (Heather Laurent) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Lisa Takahashi -- University of Illinois Urbana-Champaign
+"Measuring a record you own is listening, not piracy."
+
+From yrodriguez@cam.ac.uk Wed Sep 27 03:31:51 1995
+Path: ashpoly!cascade!mxgate!coyoacan!cam!yrodriguez
+From: yrodriguez@cam.ac.uk (Yuki Rodríguez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Sep27.033151.3739@cam.ac.uk>
+Date: Wed, 27 Sep 1995 03:31:51 GMT
+References: <1995Sep24.053351.3964@tum.de>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Sep24.053351.3964@tum.de>, hlaurent@tum.de (Heather Laurent) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Yuki Rodríguez <yrodriguez@cam.ac.uk>
+Zyxel U-1496E @ 19,200 bps
+"Row 14. No joke."
+
+From jfournier@kth.se Wed Sep 27 06:42:51 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!kth!jfournier
+From: jfournier@kth.se (Joachim Fournier)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Sep27.064251.8854@kth.se>
+Date: Wed, 27 Sep 1995 06:42:51 GMT
+References: <1995Sep24.053351.3964@tum.de>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Sep24.053351.3964@tum.de>, hlaurent@tum.de (Heather Laurent) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Joachim Fournier | jfournier@kth.se
+PGP Key fingerprint: 753E E83E 90BF 2CA0
+"Keep the channels open."
+

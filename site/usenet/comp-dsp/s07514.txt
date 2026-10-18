@@ -1,0 +1,73 @@
+From bmoreau@inria.fr Mon Dec 16 17:02:47 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!inria!bmoreau
+From: bmoreau@inria.fr (Brian Moreau)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Dec16.170247.8610@inria.fr>
+Date: Mon, 16 Dec 1996 17:02:47 GMT
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Brian Moreau <bmoreau@inria.fr>
+*PLONK* filter active for trolls.
+Atari TT030 - NetBSD 1.0
+
+From bcampbell@cern.ch Mon Dec 16 23:25:47 1996
+Path: ashpoly!cascade!bigsur!cern!bcampbell
+From: bcampbell@cern.ch (Bastien Campbell)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Dec16.232547.5906@cern.ch>
+Date: Mon, 16 Dec 1996 23:25:47 GMT
+References: <1996Dec16.170247.8610@inria.fr>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1996Dec16.170247.8610@inria.fr>, bmoreau@inria.fr (Brian Moreau) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Bastien Campbell
+Opinions expressed are solely my own and not those of European Laboratory for Particle Physics, Geneva.
+------------------------------------------------------------
+
+From neriksson@pipeline.com Tue Dec 17 15:28:47 1996
+Path: ashpoly!cascade!bigsur!pipeline!neriksson
+From: neriksson@pipeline.com (Nadine Eriksson)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Dec17.152847.6695@pipeline.com>
+Date: Tue, 17 Dec 1996 15:28:47 GMT
+References: <1996Dec16.170247.8610@inria.fr> <1996Dec16.232547.5906@cern.ch>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Dec16.232547.5906@cern.ch>, bcampbell@cern.ch (Bastien Campbell) writes:
+> Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Nadine Eriksson <neriksson@pipeline.com>
+"Do not worship the copy."
+NeXTstation Turbo Color / AmigaOS 3.1
+

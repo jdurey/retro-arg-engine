@@ -1,0 +1,114 @@
+From hkang@hanse.de Sun Feb 12 18:55:40 1995
+Path: ashpoly!cascade!brgate!saturno!hanse!hkang
+From: hkang@hanse.de (Hana Kang)
+Newsgroups: comp.sys.m68k
+Subject: Observation: Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1995Feb12.185540.9574@hanse.de>
+Date: Sun, 12 Feb 1995 18:55:40 GMT
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Testing custom audio input routines on an Amiga 1200 with a standard parallel-port sampler.
+
+By setting up Paula's audio DMA to double-buffer incoming 8-bit samples, the 68020 has plenty of cycles left for the Costas loop.
+I wrote a 64-tap FIR filter in pure 68k assembly using movem.l and dbra loop unrolling to downsample to 64 Hz.
+
+Does anyone want to test on an unaccelerated Amiga 500 with 512K chip RAM?
+
+-- 
+Hana Kang -- Hanse-Netzwerk Hamburg
+"Extraordinary claims require extraordinary spectra."
+
+From dmoreno@u-tokyo.ac.jp Mon Feb 13 11:42:40 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!u-tokyo!dmoreno
+From: dmoreno@u-tokyo.ac.jp (Dave Moreno)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1995Feb13.114240.8684@u-tokyo.ac.jp>
+Date: Mon, 13 Feb 1995 11:42:40 GMT
+References: <1995Feb12.185540.9574@hanse.de>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Feb12.185540.9574@hanse.de>, hkang@hanse.de (Hana Kang) writes:
+> Testing custom audio input routines on an Amiga 1200 with a standard parallel-port sampler.
+
+PC users spend $3,000 on Sound Blasters and Pentium chips and still can't do what a $500 Amiga was doing in 1985.
+
+-- 
+Dave Moreno -- University of Tokyo Department of Information Science
+"Row 14. No joke."
+
+From jjohansson@cern.ch Wed Feb 15 12:02:40 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!cern!jjohansson
+From: jjohansson@cern.ch (Joachim Johansson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1995Feb15.120240.7724@cern.ch>
+Date: Wed, 15 Feb 1995 12:02:40 GMT
+References: <1995Feb12.185540.9574@hanse.de> <1995Feb13.114240.8684@u-tokyo.ac.jp>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Feb13.114240.8684@u-tokyo.ac.jp>, dmoreno@u-tokyo.ac.jp (Dave Moreno) writes:
+> PC users spend $3,000 on Sound Blasters and Pentium chips and still can't do what a $500 Amiga was doing in 1985.
+
+PC users spend $3,000 on Sound Blasters and Pentium chips and still can't do what a $500 Amiga was doing in 1985.
+
+-- 
+=== Joachim Johansson ===
+Dept of Electrical Engineering, European Laboratory for Particle Physics, Geneva
+"The hatch is open. Is anyone listening?"
+
+From slee@hanse.de Thu Feb 16 23:50:40 1995
+Path: ashpoly!cascade!bigsur!hanse!slee
+From: slee@hanse.de (Sven Lee)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1995Feb16.235040.3832@hanse.de>
+Date: Thu, 16 Feb 1995 23:50:40 GMT
+References: <1995Feb12.185540.9574@hanse.de> <1995Feb13.114240.8684@u-tokyo.ac.jp> <1995Feb15.120240.7724@cern.ch>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Feb15.120240.7724@cern.ch>, jjohansson@cern.ch (Joachim Johansson) writes:
+> PC users spend $3,000 on Sound Blasters and Pentium chips and still can't do what a $500 Amiga was doing in 1985.
+
+Tested on my A3000 / 25 MHz. Ran smoothly in the background while I was compiling a C program in another window.
+
+-- 
+Sven Lee | slee@hanse.de
+PGP Key fingerprint: AEE7 782B C786 99A9
+"Keep the channels open."
+
+From mhernandez@netcom.com Sat Feb 18 00:02:40 1995
+Path: ashpoly!cascade!brgate!saturno!netcom!mhernandez
+From: mhernandez@netcom.com (Mikhail Hernández)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1995Feb18.000240.3558@netcom.com>
+Date: Sat, 18 Feb 1995 00:02:40 GMT
+References: <1995Feb12.185540.9574@hanse.de> <1995Feb13.114240.8684@u-tokyo.ac.jp> <1995Feb15.120240.7724@cern.ch> <1995Feb16.235040.3832@hanse.de>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Feb16.235040.3832@hanse.de>, slee@hanse.de (Sven Lee) writes:
+> Tested on my A3000 / 25 MHz. Ran smoothly in the background while I was compiling a C program in another window.
+
+Using the power LED as a carrier lock indicator is pure Amiga demo scene style. Kudos!
+
+-- 
+Mikhail Hernández <mhernandez@netcom.com>
+Practical Peripherals 14.4 @ 14,400 bps
+"Hold for relay."
+

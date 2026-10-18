@@ -1,0 +1,93 @@
+From ckim@unam.mx Fri Feb 04 09:58:18 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!unam!ckim
+From: ckim@unam.mx (Camila Kim)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Feb04.095818.6010@unam.mx>
+Date: Fri, 04 Feb 1994 09:58:18 GMT
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Camila Kim <ckim@unam.mx>
+*PLONK* filter active for trolls.
+486DX2/66 (Linux 1.2.13) - NetBSD 1.0
+
+From skarlsson@pipeline.com Sun Feb 06 13:58:18 1994
+Path: ashpoly!cascade!bigsur!pipeline!skarlsson
+From: skarlsson@pipeline.com (Sergei Karlsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Feb06.135818.2125@pipeline.com>
+Date: Sun, 06 Feb 1994 13:58:18 GMT
+References: <1994Feb04.095818.6010@unam.mx>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Feb04.095818.6010@unam.mx>, ckim@unam.mx (Camila Kim) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Sergei Karlsson | skarlsson@pipeline.com
+PGP Key fingerprint: F38F 01E1 D5B2 7A0E
+"Keep the channels open."
+
+From tsato@uu.net Mon Feb 07 09:15:18 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!uu!tsato
+From: tsato@uu.net (Tomas Sato)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Feb07.091518.7330@uu.net>
+Date: Mon, 07 Feb 1994 09:15:18 GMT
+References: <1994Feb04.095818.6010@unam.mx> <1994Feb06.135818.2125@pipeline.com>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Feb06.135818.2125@pipeline.com>, skarlsson@pipeline.com (Sergei Karlsson) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+=== Tomas Sato ===
+Dept of Electrical Engineering, UUNET Technologies, Falls Church VA
+"Measuring a record you own is listening, not piracy."
+
+From fkowalski@panix.com Tue Feb 08 20:49:18 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!panix!fkowalski
+From: fkowalski@panix.com (Fiona Kowalski)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Feb08.204918.7985@panix.com>
+Date: Tue, 08 Feb 1994 20:49:18 GMT
+References: <1994Feb04.095818.6010@unam.mx>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Feb04.095818.6010@unam.mx>, ckim@unam.mx (Camila Kim) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Fiona Kowalski <fkowalski@panix.com>
+*PLONK* filter active for trolls.
+Commodore Amiga 500 (1MB OCS) - NetBSD 1.0
+

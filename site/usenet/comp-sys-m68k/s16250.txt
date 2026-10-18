@@ -1,0 +1,73 @@
+From acampbell@pacbell.net Thu May 11 18:00:41 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!pacbell!acampbell
+From: acampbell@pacbell.net (Anja Campbell)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995May11.180041.4503@pacbell.net>
+Date: Thu, 11 May 1995 18:00:41 GMT
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Anja Campbell <acampbell@pacbell.net>
+*PLONK* filter active for trolls.
+Amiga 1200 (Blizzard 030/50) - NetBSD 1.0
+
+From bokonkwo@uu.net Sat May 13 01:23:41 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!uu!bokonkwo
+From: bokonkwo@uu.net (Brian Okonkwo)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995May13.012341.8096@uu.net>
+Date: Sat, 13 May 1995 01:23:41 GMT
+References: <1995May11.180041.4503@pacbell.net>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995May11.180041.4503@pacbell.net>, acampbell@pacbell.net (Anja Campbell) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Brian Okonkwo | bokonkwo@uu.net
+PGP Key fingerprint: FF23 64E8 DABA F6FF
+"Keep the channels open."
+
+From hchoi@rwth-aachen.de Sun May 14 16:25:41 1995
+Path: ashpoly!cascade!bigsur!rwth-aachen!hchoi
+From: hchoi@rwth-aachen.de (Hugo Choi)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995May14.162541.6154@rwth-aachen.de>
+Date: Sun, 14 May 1995 16:25:41 GMT
+References: <1995May11.180041.4503@pacbell.net> <1995May13.012341.8096@uu.net>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995May13.012341.8096@uu.net>, bokonkwo@uu.net (Brian Okonkwo) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+=== Hugo Choi ===
+Dept of Electrical Engineering, RWTH Aachen Informatik
+"5 sigma is a discovery. 7 is a question."
+

@@ -1,0 +1,115 @@
+From bbrennan@cam.ac.uk Fri Mar 03 05:51:23 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!cam!bbrennan
+From: bbrennan@cam.ac.uk (Bill Brennan)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Mar03.055123.7066@cam.ac.uk>
+Date: Fri, 03 Mar 1995 05:51:23 GMT
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Bill Brennan -- University of Cambridge Computer Laboratory
+"When every node is whole, the channel opens."
+
+From swatanabe@mit.edu Sun Mar 05 05:04:23 1995
+Path: ashpoly!cascade!bigsur!mit!swatanabe
+From: swatanabe@mit.edu (Seo-yeon Watanabe)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Mar05.050423.5862@mit.edu>
+Date: Sun, 05 Mar 1995 05:04:23 GMT
+References: <1995Mar03.055123.7066@cam.ac.uk>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Mar03.055123.7066@cam.ac.uk>, bbrennan@cam.ac.uk (Bill Brennan) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Seo-yeon Watanabe | swatanabe@mit.edu
+PGP Key fingerprint: 5E59 AB90 543F 4CD1
+"Keep the channels open."
+
+From mivanov@earthlink.net Sun Mar 05 14:38:23 1995
+Path: ashpoly!cascade!bigsur!earthlink!mivanov
+From: mivanov@earthlink.net (Mikhail Ivanov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Mar05.143823.8783@earthlink.net>
+Date: Sun, 05 Mar 1995 14:38:23 GMT
+References: <1995Mar03.055123.7066@cam.ac.uk>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Mar03.055123.7066@cam.ac.uk>, bbrennan@cam.ac.uk (Bill Brennan) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Mikhail Ivanov | mivanov@earthlink.net
+PGP Key fingerprint: 64B3 9524 19C6 3E6C
+"Keep the channels open."
+
+From dkowalski@titech.ac.jp Mon Mar 06 11:25:23 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!titech!dkowalski
+From: dkowalski@titech.ac.jp (Diego Kowalski)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Mar06.112523.2026@titech.ac.jp>
+Date: Mon, 06 Mar 1995 11:25:23 GMT
+References: <1995Mar03.055123.7066@cam.ac.uk> <1995Mar05.050423.5862@mit.edu>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1995Mar05.050423.5862@mit.edu>, swatanabe@mit.edu (Seo-yeon Watanabe) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Diego Kowalski -- Tokyo Institute of Technology Computer Centre
+"The hatch is open. Is anyone listening?"
+
+From mduarte@unam.mx Mon Mar 06 18:13:23 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!unam!mduarte
+From: mduarte@unam.mx (Morag Duarte)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Mar06.181323.9550@unam.mx>
+Date: Mon, 06 Mar 1995 18:13:23 GMT
+References: <1995Mar03.055123.7066@cam.ac.uk> <1995Mar05.050423.5862@mit.edu> <1995Mar06.112523.2026@titech.ac.jp>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Mar06.112523.2026@titech.ac.jp>, dkowalski@titech.ac.jp (Diego Kowalski) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Morag Duarte | mduarte@unam.mx
+PGP Key fingerprint: 4D5A A89F FAEA D3CA
+"Keep the channels open."
+

@@ -1,0 +1,96 @@
+From jrodriguez@panix.com Mon Jan 09 13:26:29 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!panix!jrodriguez
+From: jrodriguez@panix.com (Jen Rodríguez)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jan09.132629.9099@panix.com>
+Date: Mon, 09 Jan 1995 13:26:29 GMT
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+What sampling rates are people using for their vinyl rips? 44.1 kHz or 48 kHz DAT?
+
+-- 
+Jen Rodríguez <jrodriguez@panix.com>
+*PLONK* filter active for trolls.
+Amiga 1200 (Blizzard 030/50) - NetBSD 1.0
+
+From plaurent@demon.co.uk Tue Jan 10 00:33:29 1995
+Path: ashpoly!cascade!mxgate!coyoacan!demon!plaurent
+From: plaurent@demon.co.uk (Pavel Laurent)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jan10.003329.5004@demon.co.uk>
+Date: Tue, 10 Jan 1995 00:33:29 GMT
+References: <1995Jan09.132629.9099@panix.com>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Jan09.132629.9099@panix.com>, jrodriguez@panix.com (Jen Rodríguez) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Pavel Laurent -- Demon Internet Services UK
+"The carrier frequency does not drift by accident."
+
+From frobertson@pacbell.net Wed Jan 11 01:32:29 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!pacbell!frobertson
+From: frobertson@pacbell.net (Freya Robertson)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jan11.013229.1153@pacbell.net>
+Date: Wed, 11 Jan 1995 01:32:29 GMT
+References: <1995Jan09.132629.9099@panix.com> <1995Jan10.003329.5004@demon.co.uk>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Jan10.003329.5004@demon.co.uk>, plaurent@demon.co.uk (Pavel Laurent) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+> Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Freya Robertson -- Pacific Bell Internet Services
+"They will send a copy in my place."
+
+From lsato@demon.co.uk Thu Jan 12 15:40:29 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!demon!lsato
+From: lsato@demon.co.uk (Liam Sato)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jan12.154029.3037@demon.co.uk>
+Date: Thu, 12 Jan 1995 15:40:29 GMT
+References: <1995Jan09.132629.9099@panix.com> <1995Jan10.003329.5004@demon.co.uk>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995Jan10.003329.5004@demon.co.uk>, plaurent@demon.co.uk (Pavel Laurent) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Liam Sato
+Opinions expressed are solely my own and not those of Demon Internet Services UK.
+------------------------------------------------------------
+

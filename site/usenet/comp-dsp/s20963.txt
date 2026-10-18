@@ -1,0 +1,98 @@
+From mito@tum.de Tue Apr 04 16:06:40 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!tum!mito
+From: mito@tum.de (Marta Ito)
+Newsgroups: comp.dsp
+Subject: [INFO] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Apr04.160640.4184@tum.de>
+Date: Tue, 04 Apr 1995 16:06:40 GMT
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+Version 1.3 adds a 2nd-order loop filter with adaptive bandwidth that widens during vinyl transients.
+
+Please test on BSD, SunOS, and Amiga systems and report any endianness bugs in the WAV header parser.
+
+-- 
+Marta Ito
+Opinions expressed are solely my own and not those of Technische Universität München.
+------------------------------------------------------------
+
+From ncampbell@pacbell.net Thu Apr 06 20:01:40 1995
+Path: ashpoly!cascade!mxgate!coyoacan!pacbell!ncampbell
+From: ncampbell@pacbell.net (Nadine Campbell)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Apr06.200140.7147@pacbell.net>
+Date: Thu, 06 Apr 1995 20:01:40 GMT
+References: <1995Apr04.160640.4184@tum.de>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Apr04.160640.4184@tum.de>, mito@tum.de (Marta Ito) writes:
+> Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+> The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+Tar.gz archive gave a CRC error with PKUNZIP. Make sure you upload in binary mode, not ASCII!
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Nadine Campbell -- Pacific Bell Internet Services
+"There are 14 nodes and only 10 countries. Count again."
+
+From hlindqvist@kiae.su Sat Apr 08 11:14:40 1995
+Path: ashpoly!cascade!mxgate!coyoacan!kiae!hlindqvist
+From: hlindqvist@kiae.su (Hana Lindqvist)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Apr08.111440.5255@kiae.su>
+Date: Sat, 08 Apr 1995 11:14:40 GMT
+References: <1995Apr04.160640.4184@tum.de> <1995Apr06.200140.7147@pacbell.net>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Apr06.200140.7147@pacbell.net>, ncampbell@pacbell.net (Nadine Campbell) writes:
+> Tar.gz archive gave a CRC error with PKUNZIP. Make sure you upload in binary mode, not ASCII!
+> Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Hana Lindqvist <hlindqvist@kiae.su>
+*PLONK* filter active for trolls.
+Pentium 90 (OS/2 Warp) - NetBSD 1.0
+
+From jschneider@ox.ac.uk Mon Apr 10 07:00:40 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!ox!jschneider
+From: jschneider@ox.ac.uk (Jens Schneider)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Apr10.070040.2222@ox.ac.uk>
+Date: Mon, 10 Apr 1995 07:00:40 GMT
+References: <1995Apr04.160640.4184@tum.de> <1995Apr06.200140.7147@pacbell.net>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995Apr06.200140.7147@pacbell.net>, ncampbell@pacbell.net (Nadine Campbell) writes:
+> Tar.gz archive gave a CRC error with PKUNZIP. Make sure you upload in binary mode, not ASCII!
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+=== Jens Schneider ===
+Dept of Electrical Engineering, Oxford University Computing Laboratory
+"Hardware is temporary. The signal survives."
+

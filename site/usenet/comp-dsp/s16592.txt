@@ -1,0 +1,48 @@
+From givanov@stanford.edu Thu Aug 11 14:02:25 1994
+Path: ashpoly!cascade!bigsur!stanford!givanov
+From: givanov@stanford.edu (Göran Ivanov)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Aug11.140225.2558@stanford.edu>
+Date: Thu, 11 Aug 1994 14:02:25 GMT
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+Göran Ivanov | givanov@stanford.edu
+PGP Key fingerprint: 2918 FAC3 5B9E 1B60
+"Keep the channels open."
+
+From ksantos@hanse.de Thu Aug 11 17:33:25 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!hanse!ksantos
+From: ksantos@hanse.de (Kenji Santos)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Aug11.173325.9197@hanse.de>
+Date: Thu, 11 Aug 1994 17:33:25 GMT
+References: <1994Aug11.140225.2558@stanford.edu>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1994Aug11.140225.2558@stanford.edu>, givanov@stanford.edu (Göran Ivanov) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+> With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Kenji Santos | ksantos@hanse.de
+PGP Key fingerprint: 0931 4B0A 6345 479E
+"Keep the channels open."
+

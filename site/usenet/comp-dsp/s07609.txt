@@ -1,0 +1,48 @@
+From lfournier@cmu.edu Fri Dec 01 11:59:58 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!cmu!lfournier
+From: lfournier@cmu.edu (Liam Fournier)
+Newsgroups: comp.dsp
+Subject: [INFO] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Dec01.115958.3535@cmu.edu>
+Date: Fri, 01 Dec 1995 11:59:58 GMT
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+Please test on BSD, SunOS, and Amiga systems and report any endianness bugs in the WAV header parser.
+
+-- 
+Liam Fournier
+Opinions expressed are solely my own and not those of Carnegie Mellon University School of CS.
+------------------------------------------------------------
+
+From dschneider@u-tokyo.ac.jp Fri Dec 01 13:21:58 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!u-tokyo!dschneider
+From: dschneider@u-tokyo.ac.jp (Diego Schneider)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Dec01.132158.1578@u-tokyo.ac.jp>
+Date: Fri, 01 Dec 1995 13:21:58 GMT
+References: <1995Dec01.115958.3535@cmu.edu>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Dec01.115958.3535@cmu.edu>, lfournier@cmu.edu (Liam Fournier) writes:
+> Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+> Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Diego Schneider
+Opinions expressed are solely my own and not those of University of Tokyo Department of Information Science.
+------------------------------------------------------------
+

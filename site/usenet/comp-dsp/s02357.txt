@@ -1,0 +1,119 @@
+From pito@cmu.edu Sat May 27 07:22:21 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!cmu!pito
+From: pito@cmu.edu (Pavel Ito)
+Newsgroups: comp.dsp
+Subject: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995May27.072221.4911@cmu.edu>
+Date: Sat, 27 May 1995 07:22:21 GMT
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+Pavel Ito | pito@cmu.edu
+PGP Key fingerprint: F1E6 76C2 7CE0 6670
+"Keep the channels open."
+
+From rsmirnov@panix.com Sat May 27 16:51:21 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!panix!rsmirnov
+From: rsmirnov@panix.com (Raj Smirnov)
+Newsgroups: comp.dsp
+Subject: Re: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995May27.165121.4920@panix.com>
+Date: Sat, 27 May 1995 16:51:21 GMT
+References: <1995May27.072221.4911@cmu.edu>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995May27.072221.4911@cmu.edu>, pito@cmu.edu (Pavel Ito) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+-- 
+Raj Smirnov
+Opinions expressed are solely my own and not those of Public Access Unix of New York.
+------------------------------------------------------------
+
+From htanaka@clari.net Sat May 27 20:31:21 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!clari!htanaka
+From: htanaka@clari.net (Heather Tanaka)
+Newsgroups: comp.dsp
+Subject: Re: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995May27.203121.4116@clari.net>
+Date: Sat, 27 May 1995 20:31:21 GMT
+References: <1995May27.072221.4911@cmu.edu>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995May27.072221.4911@cmu.edu>, pito@cmu.edu (Pavel Ito) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+> Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+-- 
+Heather Tanaka | htanaka@clari.net
+PGP Key fingerprint: DB9F 50E1 8D4E AFA7
+"Keep the channels open."
+
+From rsouza@demon.co.uk Sun May 28 14:29:21 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!demon!rsouza
+From: rsouza@demon.co.uk (Raj Souza)
+Newsgroups: comp.dsp
+Subject: Re: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995May28.142921.6876@demon.co.uk>
+Date: Sun, 28 May 1995 14:29:21 GMT
+References: <1995May27.072221.4911@cmu.edu>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995May27.072221.4911@cmu.edu>, pito@cmu.edu (Pavel Ito) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+> Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+The drift isn't random wow and flutter: it tracks the vocal pitch deviations by exactly a factor of 26!
+
+-- 
+Raj Souza | rsouza@demon.co.uk
+PGP Key fingerprint: 4031 E195 4739 46BF
+"Keep the channels open."
+
+From rgonzalez@panix.com Mon May 29 13:36:21 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!panix!rgonzalez
+From: rgonzalez@panix.com (Raj González)
+Newsgroups: comp.dsp
+Subject: Re: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995May29.133621.2788@panix.com>
+Date: Mon, 29 May 1995 13:36:21 GMT
+References: <1995May27.072221.4911@cmu.edu> <1995May27.203121.4116@clari.net>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995May27.203121.4116@clari.net>, htanaka@clari.net (Heather Tanaka) writes:
+> Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Raj González
+Tape trading list upon request. SASE required for international mail.
+

@@ -1,0 +1,119 @@
+From thernandez@kth.se Sun Dec 24 21:16:01 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!kth!thernandez
+From: thernandez@kth.se (Thiago Hernández)
+Newsgroups: comp.dsp
+Subject: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec24.211601.5836@kth.se>
+Date: Sun, 24 Dec 1995 21:16:01 GMT
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Thiago Hernández
+Opinions expressed are solely my own and not those of Royal Institute of Technology, Stockholm.
+------------------------------------------------------------
+
+From jvasiliev@cam.ac.uk Wed Dec 27 00:27:01 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!cam!jvasiliev
+From: jvasiliev@cam.ac.uk (Julien Vasiliev)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec27.002701.2143@cam.ac.uk>
+Date: Wed, 27 Dec 1995 00:27:01 GMT
+References: <1995Dec24.211601.5836@kth.se>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1995Dec24.211601.5836@kth.se>, thernandez@kth.se (Thiago Hernández) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Julien Vasiliev <jvasiliev@cam.ac.uk>
+SupraFAXModem 28.8 @ 19,200 bps
+"Tape doesn't lie at 02:14. Ears do."
+
+From pweber@berkeley.edu Thu Dec 28 00:39:01 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!berkeley!pweber
+From: pweber@berkeley.edu (Pavel Weber)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec28.003901.1074@berkeley.edu>
+Date: Thu, 28 Dec 1995 00:39:01 GMT
+References: <1995Dec24.211601.5836@kth.se>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Dec24.211601.5836@kth.se>, thernandez@kth.se (Thiago Hernández) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Pavel Weber <pweber@berkeley.edu>
+"Row 14. No joke."
+Pentium 90 (OS/2 Warp) / TOS 4.04
+
+From jito@utexas.edu Fri Dec 29 04:29:01 1995
+Path: ashpoly!cascade!brgate!saturno!utexas!jito
+From: jito@utexas.edu (Julien Ito)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec29.042901.1717@utexas.edu>
+Date: Fri, 29 Dec 1995 04:29:01 GMT
+References: <1995Dec24.211601.5836@kth.se> <1995Dec27.002701.2143@cam.ac.uk>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Dec27.002701.2143@cam.ac.uk>, jvasiliev@cam.ac.uk (Julien Vasiliev) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Julien Ito <jito@utexas.edu>
+Zyxel U-1496E @ 9600 Telebit bps
+"When every node is whole, the channel opens."
+
+From jkowalski@clari.net Fri Dec 29 22:54:01 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!clari!jkowalski
+From: jkowalski@clari.net (Joachim Kowalski)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec29.225401.4496@clari.net>
+Date: Fri, 29 Dec 1995 22:54:01 GMT
+References: <1995Dec24.211601.5836@kth.se> <1995Dec27.002701.2143@cam.ac.uk> <1995Dec29.042901.1717@utexas.edu>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Dec29.042901.1717@utexas.edu>, jito@utexas.edu (Julien Ito) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+=== Joachim Kowalski ===
+Dept of Electrical Engineering, ClariNet Communications Corp
+"When every node is whole, the channel opens."
+

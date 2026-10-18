@@ -1,0 +1,93 @@
+From dpark@earthlink.net Fri Mar 25 21:37:55 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!earthlink!dpark
+From: dpark@earthlink.net (Dmitri Park)
+Newsgroups: comp.dsp
+Subject: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Mar25.213755.4622@earthlink.net>
+Date: Fri, 25 Mar 1994 21:37:55 GMT
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Dmitri Park -- EarthLink Network
+"We don't sign stars. We build them."
+
+From mkim@illinois.edu Sat Mar 26 04:48:55 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!illinois!mkim
+From: mkim@illinois.edu (Marisol Kim)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Mar26.044855.5396@illinois.edu>
+Date: Sat, 26 Mar 1994 04:48:55 GMT
+References: <1994Mar25.213755.4622@earthlink.net>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1994Mar25.213755.4622@earthlink.net>, dpark@earthlink.net (Dmitri Park) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+Marisol Kim | mkim@illinois.edu
+PGP Key fingerprint: 96E7 37BB 597A A1EB
+"Keep the channels open."
+
+From jkowalski@cmu.edu Sat Mar 26 22:07:55 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!cmu!jkowalski
+From: jkowalski@cmu.edu (Ji-woo Kowalski)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Mar26.220755.6364@cmu.edu>
+Date: Sat, 26 Mar 1994 22:07:55 GMT
+References: <1994Mar25.213755.4622@earthlink.net> <1994Mar26.044855.5396@illinois.edu>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Mar26.044855.5396@illinois.edu>, mkim@illinois.edu (Marisol Kim) writes:
+> Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Ji-woo Kowalski <jkowalski@cmu.edu>
+US Robotics Courier V.34 @ 33,600 bps
+"Hold for relay."
+
+From ssokolov@kth.se Sun Mar 27 20:00:55 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!kth!ssokolov
+From: ssokolov@kth.se (Seo-yeon Sokolov)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Mar27.200055.7395@kth.se>
+Date: Sun, 27 Mar 1994 20:00:55 GMT
+References: <1994Mar25.213755.4622@earthlink.net> <1994Mar26.044855.5396@illinois.edu>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Mar26.044855.5396@illinois.edu>, mkim@illinois.edu (Marisol Kim) writes:
+> Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Seo-yeon Sokolov <ssokolov@kth.se>
+SupraFAXModem 28.8 @ 19,200 bps
+"Marcus is not one man."
+

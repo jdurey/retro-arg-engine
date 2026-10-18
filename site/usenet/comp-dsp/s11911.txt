@@ -1,0 +1,94 @@
+From dmoreau@mindspring.com Sun Sep 10 16:50:01 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!mindspring!dmoreau
+From: dmoreau@mindspring.com (Dave Moreau)
+Newsgroups: comp.dsp
+Subject: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Sep10.165001.9858@mindspring.com>
+Date: Sun, 10 Sep 1995 16:50:01 GMT
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+=== Dave Moreau ===
+Dept of Electrical Engineering, MindSpring Enterprises
+"In theory there is no difference between theory and practice."
+
+From mchoi@cern.ch Mon Sep 11 08:39:01 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!cern!mchoi
+From: mchoi@cern.ch (Morag Choi)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Sep11.083901.7536@cern.ch>
+Date: Mon, 11 Sep 1995 08:39:01 GMT
+References: <1995Sep10.165001.9858@mindspring.com>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Sep10.165001.9858@mindspring.com>, dmoreau@mindspring.com (Dave Moreau) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Morag Choi
+Tape trading list upon request. SASE required for international mail.
+
+From nkarlsson@u-tokyo.ac.jp Tue Sep 12 11:05:01 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!u-tokyo!nkarlsson
+From: nkarlsson@u-tokyo.ac.jp (Natalia Karlsson)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Sep12.110501.2933@u-tokyo.ac.jp>
+Date: Tue, 12 Sep 1995 11:05:01 GMT
+References: <1995Sep10.165001.9858@mindspring.com>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Sep10.165001.9858@mindspring.com>, dmoreau@mindspring.com (Dave Moreau) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Natalia Karlsson
+Opinions expressed are solely my own and not those of University of Tokyo Department of Information Science.
+------------------------------------------------------------
+
+From nokonkwo@delphi.com Wed Sep 13 18:03:01 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!delphi!nokonkwo
+From: nokonkwo@delphi.com (Nadine Okonkwo)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Sep13.180301.5773@delphi.com>
+Date: Wed, 13 Sep 1995 18:03:01 GMT
+References: <1995Sep10.165001.9858@mindspring.com>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Sep10.165001.9858@mindspring.com>, dmoreau@mindspring.com (Dave Moreau) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Nadine Okonkwo -- Delphi Internet Services
+"Hold for relay."
+

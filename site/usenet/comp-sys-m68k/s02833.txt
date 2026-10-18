@@ -1,0 +1,94 @@
+From mkowalski@kiae.su Fri Nov 17 21:35:37 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!kiae!mkowalski
+From: mkowalski@kiae.su (Mikhail Kowalski)
+Newsgroups: comp.sys.m68k
+Subject: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Nov17.213537.1731@kiae.su>
+Date: Fri, 17 Nov 1995 21:35:37 GMT
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Mikhail Kowalski -- Kurchatov Institute of Atomic Energy, Moscow
+"The hatch is open. Is anyone listening?"
+
+From amoreau@cmu.edu Sat Nov 18 21:02:37 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!cmu!amoreau
+From: amoreau@cmu.edu (Andrei Moreau)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Nov18.210237.8462@cmu.edu>
+Date: Sat, 18 Nov 1995 21:02:37 GMT
+References: <1995Nov17.213537.1731@kiae.su>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Nov17.213537.1731@kiae.su>, mkowalski@kiae.su (Mikhail Kowalski) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Andrei Moreau -- Carnegie Mellon University School of CS
+"Extraordinary claims require extraordinary spectra."
+
+From mokonkwo@panix.com Sun Nov 19 23:20:37 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!panix!mokonkwo
+From: mokonkwo@panix.com (Mike Okonkwo)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Nov19.232037.7248@panix.com>
+Date: Sun, 19 Nov 1995 23:20:37 GMT
+References: <1995Nov17.213537.1731@kiae.su>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1995Nov17.213537.1731@kiae.su>, mkowalski@kiae.su (Mikhail Kowalski) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+Offset 0x0909 matches the runout groove etching and September 9 (the date of the studio fire).
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Mike Okonkwo | mokonkwo@panix.com
+PGP Key fingerprint: D786 CCC1 55AD 1663
+"Keep the channels open."
+
+From rvasiliev@demon.co.uk Tue Nov 21 06:44:37 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!demon!rvasiliev
+From: rvasiliev@demon.co.uk (Renata Vasiliev)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Nov21.064437.1787@demon.co.uk>
+Date: Tue, 21 Nov 1995 06:44:37 GMT
+References: <1995Nov17.213537.1731@kiae.su> <1995Nov19.232037.7248@panix.com>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Nov19.232037.7248@panix.com>, mokonkwo@panix.com (Mike Okonkwo) writes:
+> Offset 0x0909 matches the runout groove etching and September 9 (the date of the studio fire).
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Renata Vasiliev <rvasiliev@demon.co.uk>
+*PLONK* filter active for trolls.
+Acorn RiscPC 600 - NetBSD 1.0
+

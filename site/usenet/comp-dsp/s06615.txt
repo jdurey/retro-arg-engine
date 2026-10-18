@@ -1,0 +1,94 @@
+From rkarlsson@utexas.edu Sat Mar 11 11:51:59 1995
+Path: ashpoly!cascade!bigsur!utexas!rkarlsson
+From: rkarlsson@utexas.edu (Raj Karlsson)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Mar11.115159.8532@utexas.edu>
+Date: Sat, 11 Mar 1995 11:51:59 GMT
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+=== Raj Karlsson ===
+Dept of Electrical Engineering, University of Texas at Austin
+"Do not worship the copy."
+
+From skuznetsov@titech.ac.jp Sun Mar 12 10:12:59 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!titech!skuznetsov
+From: skuznetsov@titech.ac.jp (Steve Kuznetsov)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Mar12.101259.7139@titech.ac.jp>
+Date: Sun, 12 Mar 1995 10:12:59 GMT
+References: <1995Mar11.115159.8532@utexas.edu>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Mar11.115159.8532@utexas.edu>, rkarlsson@utexas.edu (Raj Karlsson) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Steve Kuznetsov <skuznetsov@titech.ac.jp>
+Zyxel U-1496E @ 33,600 bps
+"Tape doesn't lie at 02:14. Ears do."
+
+From mpark@berkeley.edu Sun Mar 12 21:20:59 1995
+Path: ashpoly!cascade!bigsur!berkeley!mpark
+From: mpark@berkeley.edu (Mei Park)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Mar12.212059.4861@berkeley.edu>
+Date: Sun, 12 Mar 1995 21:20:59 GMT
+References: <1995Mar11.115159.8532@utexas.edu> <1995Mar12.101259.7139@titech.ac.jp>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Mar12.101259.7139@titech.ac.jp>, skuznetsov@titech.ac.jp (Steve Kuznetsov) writes:
+> Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Mei Park <mpark@berkeley.edu>
+"We don't sign stars. We build them."
+Mac IIci / 68882 FPU / System 7.5.1
+
+From spopov@berkeley.edu Tue Mar 14 20:44:59 1995
+Path: ashpoly!cascade!mxgate!coyoacan!berkeley!spopov
+From: spopov@berkeley.edu (Sergei Popov)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Mar14.204459.6273@berkeley.edu>
+Date: Tue, 14 Mar 1995 20:44:59 GMT
+References: <1995Mar11.115159.8532@utexas.edu> <1995Mar12.101259.7139@titech.ac.jp> <1995Mar12.212059.4861@berkeley.edu>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Mar12.212059.4861@berkeley.edu>, mpark@berkeley.edu (Mei Park) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Sergei Popov
+Opinions expressed are solely my own and not those of UC Berkeley Department of EECS.
+------------------------------------------------------------
+

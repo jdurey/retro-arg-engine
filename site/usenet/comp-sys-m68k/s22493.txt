@@ -1,0 +1,120 @@
+From ykuznetsov@kiae.su Tue May 09 15:40:36 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!kiae!ykuznetsov
+From: ykuznetsov@kiae.su (Yuki Kuznetsov)
+Newsgroups: comp.sys.m68k
+Subject: Discussion: Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1995May09.154036.5121@kiae.su>
+Date: Tue, 09 May 1995 15:40:36 GMT
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Testing custom audio input routines on an Amiga 1200 with a standard parallel-port sampler.
+
+By setting up Paula's audio DMA to double-buffer incoming 8-bit samples, the 68020 has plenty of cycles left for the Costas loop.
+I wrote a 64-tap FIR filter in pure 68k assembly using movem.l and dbra loop unrolling to downsample to 64 Hz.
+
+Does anyone want to test on an unaccelerated Amiga 500 with 512K chip RAM?
+
+-- 
+Yuki Kuznetsov
+Opinions expressed are solely my own and not those of Kurchatov Institute of Atomic Energy, Moscow.
+------------------------------------------------------------
+
+From tnilsson@illinois.edu Wed May 10 22:32:36 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!illinois!tnilsson
+From: tnilsson@illinois.edu (Takeshi Nilsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1995May10.223236.3664@illinois.edu>
+Date: Wed, 10 May 1995 22:32:36 GMT
+References: <1995May09.154036.5121@kiae.su>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995May09.154036.5121@kiae.su>, ykuznetsov@kiae.su (Yuki Kuznetsov) writes:
+> Testing custom audio input routines on an Amiga 1200 with a standard parallel-port sampler.
+> By setting up Paula's audio DMA to double-buffer incoming 8-bit samples, the 68020 has plenty of cycles left for the Costas loop.
+
+Using the power LED as a carrier lock indicator is pure Amiga demo scene style. Kudos!
+
+-- 
+Takeshi Nilsson <tnilsson@illinois.edu>
+Hayes Optima 288 @ 19,200 bps
+"A soul is not exclusive to biology."
+
+From jpark@ox.ac.uk Thu May 11 06:33:36 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!ox!jpark
+From: jpark@ox.ac.uk (Jen Park)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1995May11.063336.7821@ox.ac.uk>
+Date: Thu, 11 May 1995 06:33:36 GMT
+References: <1995May09.154036.5121@kiae.su> <1995May10.223236.3664@illinois.edu>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995May10.223236.3664@illinois.edu>, tnilsson@illinois.edu (Takeshi Nilsson) writes:
+> Using the power LED as a carrier lock indicator is pure Amiga demo scene style. Kudos!
+
+Please make sure it's compatible with Kickstart 1.3 for those of us who haven't upgraded our A500s to 3.1 yet.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Jen Park
+Opinions expressed are solely my own and not those of Oxford University Computing Laboratory.
+------------------------------------------------------------
+
+From jramirez@cam.ac.uk Fri May 12 23:23:36 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!cam!jramirez
+From: jramirez@cam.ac.uk (Jens Ramírez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1995May12.232336.7310@cam.ac.uk>
+Date: Fri, 12 May 1995 23:23:36 GMT
+References: <1995May09.154036.5121@kiae.su>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995May09.154036.5121@kiae.su>, ykuznetsov@kiae.su (Yuki Kuznetsov) writes:
+> Testing custom audio input routines on an Amiga 1200 with a standard parallel-port sampler.
+> By setting up Paula's audio DMA to double-buffer incoming 8-bit samples, the 68020 has plenty of cycles left for the Costas loop.
+
+Brilliant use of Paula DMA! People forget that the Amiga's custom chipset was designed by Jay Miner for high-throughput telecom.
+
+-- 
+Jens Ramírez
+Tape trading list upon request. SASE required for international mail.
+
+From mbrennan@rwth-aachen.de Sat May 13 13:27:36 1995
+Path: ashpoly!cascade!brgate!saturno!rwth-aachen!mbrennan
+From: mbrennan@rwth-aachen.de (Mei Brennan)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1995May13.132736.4792@rwth-aachen.de>
+Date: Sat, 13 May 1995 13:27:36 GMT
+References: <1995May09.154036.5121@kiae.su> <1995May10.223236.3664@illinois.edu> <1995May11.063336.7821@ox.ac.uk>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995May11.063336.7821@ox.ac.uk>, jpark@ox.ac.uk (Jen Park) writes:
+> Please make sure it's compatible with Kickstart 1.3 for those of us who haven't upgraded our A500s to 3.1 yet.
+> If you are posting from AOL, please read RFC 1036 before posting again.
+
+PC users spend $3,000 on Sound Blasters and Pentium chips and still can't do what a $500 Amiga was doing in 1985.
+
+-- 
+Mei Brennan
+Opinions expressed are solely my own and not those of RWTH Aachen Informatik.
+------------------------------------------------------------
+

@@ -1,0 +1,94 @@
+From mhernandez@rwth-aachen.de Sat Jun 10 03:32:52 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!rwth-aachen!mhernandez
+From: mhernandez@rwth-aachen.de (Min-jun Hernández)
+Newsgroups: comp.dsp
+Subject: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jun10.033252.7957@rwth-aachen.de>
+Date: Sat, 10 Jun 1995 03:32:52 GMT
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+MATLAB script available upon request via email.
+
+-- 
+Min-jun Hernández <mhernandez@rwth-aachen.de>
+*PLONK* filter active for trolls.
+Sun SparcStation 20 - NetBSD 1.0
+
+From mkowalski@unam.mx Sat Jun 10 06:22:52 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!unam!mkowalski
+From: mkowalski@unam.mx (Mei Kowalski)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jun10.062252.6839@unam.mx>
+Date: Sat, 10 Jun 1995 06:22:52 GMT
+References: <1995Jun10.033252.7957@rwth-aachen.de>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Jun10.033252.7957@rwth-aachen.de>, mhernandez@rwth-aachen.de (Min-jun Hernández) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Mei Kowalski <mkowalski@unam.mx>
+*PLONK* filter active for trolls.
+Commodore Amiga 500 (1MB OCS) - NetBSD 1.0
+
+From greyes@pacbell.net Sun Jun 11 16:03:52 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!pacbell!greyes
+From: greyes@pacbell.net (Göran Reyes)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jun11.160352.4903@pacbell.net>
+Date: Sun, 11 Jun 1995 16:03:52 GMT
+References: <1995Jun10.033252.7957@rwth-aachen.de>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Jun10.033252.7957@rwth-aachen.de>, mhernandez@rwth-aachen.de (Min-jun Hernández) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+=== Göran Reyes ===
+Dept of Electrical Engineering, Pacific Bell Internet Services
+"Hardware is temporary. The signal survives."
+
+From knovak@purdue.edu Mon Jun 12 12:58:52 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!purdue!knovak
+From: knovak@purdue.edu (Karen Novak)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jun12.125852.9252@purdue.edu>
+Date: Mon, 12 Jun 1995 12:58:52 GMT
+References: <1995Jun10.033252.7957@rwth-aachen.de> <1995Jun11.160352.4903@pacbell.net>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Jun11.160352.4903@pacbell.net>, greyes@pacbell.net (Göran Reyes) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Karen Novak | knovak@purdue.edu
+PGP Key fingerprint: 4AC3 BC5F 847B DFA6
+"Keep the channels open."
+

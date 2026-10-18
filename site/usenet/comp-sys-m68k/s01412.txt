@@ -1,0 +1,71 @@
+From dlaurent@tum.de Thu Dec 21 01:44:42 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!tum!dlaurent
+From: dlaurent@tum.de (Dmitri Laurent)
+Newsgroups: comp.sys.m68k
+Subject: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Dec21.014442.9990@tum.de>
+Date: Thu, 21 Dec 1995 01:44:42 GMT
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Dmitri Laurent
+Opinions expressed are solely my own and not those of Technische Universität München.
+------------------------------------------------------------
+
+From gsilva@earthlink.net Thu Dec 21 23:25:42 1995
+Path: ashpoly!cascade!bigsur!earthlink!gsilva
+From: gsilva@earthlink.net (Göran Silva)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Dec21.232542.9491@earthlink.net>
+Date: Thu, 21 Dec 1995 23:25:42 GMT
+References: <1995Dec21.014442.9990@tum.de>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995Dec21.014442.9990@tum.de>, dlaurent@tum.de (Dmitri Laurent) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Göran Silva
+Opinions expressed are solely my own and not those of EarthLink Network.
+------------------------------------------------------------
+
+From goliveira@unam.mx Fri Dec 22 16:57:42 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!unam!goliveira
+From: goliveira@unam.mx (Graham Oliveira)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Dec22.165742.1936@unam.mx>
+Date: Fri, 22 Dec 1995 16:57:42 GMT
+References: <1995Dec21.014442.9990@tum.de> <1995Dec21.232542.9491@earthlink.net>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Dec21.232542.9491@earthlink.net>, gsilva@earthlink.net (Göran Silva) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Graham Oliveira -- Universidad Nacional Autónoma de México (DGSCA)
+"Extraordinary claims require extraordinary spectra."
+

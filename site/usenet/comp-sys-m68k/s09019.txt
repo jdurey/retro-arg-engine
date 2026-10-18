@@ -1,0 +1,113 @@
+From mkuznetsov@cmu.edu Mon Jan 16 21:18:23 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!cmu!mkuznetsov
+From: mkuznetsov@cmu.edu (Matthias Kuznetsov)
+Newsgroups: comp.sys.m68k
+Subject: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Jan16.211823.2351@cmu.edu>
+Date: Mon, 16 Jan 1995 21:18:23 GMT
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+Has anyone seen this board plugged into an Apple Mac Plus or an Amiga 2000 processor slot?
+
+-- 
+Matthias Kuznetsov
+Tape trading list upon request. SASE required for international mail.
+
+From mkim@inria.fr Tue Jan 17 22:19:23 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!inria!mkim
+From: mkim@inria.fr (Min-jun Kim)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Jan17.221923.2344@inria.fr>
+Date: Tue, 17 Jan 1995 22:19:23 GMT
+References: <1995Jan16.211823.2351@cmu.edu>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Jan16.211823.2351@cmu.edu>, mkuznetsov@cmu.edu (Matthias Kuznetsov) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+> At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Min-jun Kim
+Tape trading list upon request. SASE required for international mail.
+
+From avasiliev@pacbell.net Wed Jan 18 22:23:23 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!pacbell!avasiliev
+From: avasiliev@pacbell.net (Anja Vasiliev)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Jan18.222323.7602@pacbell.net>
+Date: Wed, 18 Jan 1995 22:23:23 GMT
+References: <1995Jan16.211823.2351@cmu.edu> <1995Jan17.221923.2344@inria.fr>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1995Jan17.221923.2344@inria.fr>, mkim@inria.fr (Min-jun Kim) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+Looks like a prototype telecommunications board for military secure voice, not an audio music product.
+
+-- 
+Anja Vasiliev -- Pacific Bell Internet Services
+"In theory there is no difference between theory and practice."
+
+From bsouza@cern.ch Fri Jan 20 17:22:23 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!cern!bsouza
+From: bsouza@cern.ch (Bruno Souza)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Jan20.172223.1240@cern.ch>
+Date: Fri, 20 Jan 1995 17:22:23 GMT
+References: <1995Jan16.211823.2351@cmu.edu>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Jan16.211823.2351@cmu.edu>, mkuznetsov@cmu.edu (Matthias Kuznetsov) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Bruno Souza <bsouza@cern.ch>
+"5 sigma is a discovery. 7 is a question."
+Pentium 90 (OS/2 Warp) / TOS 4.04
+
+From asato@cern.ch Sat Jan 21 21:40:23 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!cern!asato
+From: asato@cern.ch (Anton Sato)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Jan21.214023.1309@cern.ch>
+Date: Sat, 21 Jan 1995 21:40:23 GMT
+References: <1995Jan16.211823.2351@cmu.edu> <1995Jan20.172223.1240@cern.ch>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1995Jan20.172223.1240@cern.ch>, bsouza@cern.ch (Bruno Souza) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Anton Sato
+Tape trading list upon request. SASE required for international mail.
+

@@ -1,0 +1,93 @@
+From cpopov@clari.net Thu Sep 21 18:06:31 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!clari!cpopov
+From: cpopov@clari.net (Camila Popov)
+Newsgroups: comp.dsp
+Subject: WTB/WTT: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Sep21.180631.4460@clari.net>
+Date: Thu, 21 Sep 1995 18:06:31 GMT
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+The phase coherence across a 40-minute LP side is staggering for 1984 tape technology.
+
+-- 
+Camila Popov <cpopov@clari.net>
+"There are 14 nodes and only 10 countries. Count again."
+Atari TT030 / System 7.5.1
+
+From mkang@berkeley.edu Sat Sep 23 18:43:31 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!berkeley!mkang
+From: mkang@berkeley.edu (Mathieu Kang)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Sep23.184331.8496@berkeley.edu>
+Date: Sat, 23 Sep 1995 18:43:31 GMT
+References: <1995Sep21.180631.4460@clari.net>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Sep21.180631.4460@clari.net>, cpopov@clari.net (Camila Popov) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+> Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+-- 
+Mathieu Kang -- UC Berkeley Department of EECS
+"Extraordinary claims require extraordinary spectra."
+
+From ykarlsson@clari.net Mon Sep 25 07:11:31 1995
+Path: ashpoly!cascade!brgate!saturno!clari!ykarlsson
+From: ykarlsson@clari.net (Yuki Karlsson)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Sep25.071131.5697@clari.net>
+Date: Mon, 25 Sep 1995 07:11:31 GMT
+References: <1995Sep21.180631.4460@clari.net> <1995Sep23.184331.8496@berkeley.edu>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Sep23.184331.8496@berkeley.edu>, mkang@berkeley.edu (Mathieu Kang) writes:
+> Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Yuki Karlsson <ykarlsson@clari.net>
+"Do not worship the copy."
+Sun 3/60 (SunOS 4.1.1) / TOS 4.04
+
+From trobertson@demon.co.uk Tue Sep 26 16:50:31 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!demon!trobertson
+From: trobertson@demon.co.uk (Thiago Robertson)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Sep26.165031.1274@demon.co.uk>
+Date: Tue, 26 Sep 1995 16:50:31 GMT
+References: <1995Sep21.180631.4460@clari.net>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Sep21.180631.4460@clari.net>, cpopov@clari.net (Camila Popov) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Thiago Robertson | trobertson@demon.co.uk
+PGP Key fingerprint: 575C CEF6 F218 965F
+"Keep the channels open."
+

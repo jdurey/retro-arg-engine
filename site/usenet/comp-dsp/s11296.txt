@@ -1,0 +1,98 @@
+From egarcia@tum.de Fri Oct 25 03:52:29 1996
+Path: ashpoly!cascade!bigsur!tum!egarcia
+From: egarcia@tum.de (Élodie García)
+Newsgroups: comp.dsp
+Subject: [FLAME] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996Oct25.035229.2939@tum.de>
+Date: Fri, 25 Oct 1996 03:52:29 GMT
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+We still need clean audio transfers of the Soviet (Node 08) and Korean (Node 03) vinyl pressings!
+
+-- 
+Élodie García
+Opinions expressed are solely my own and not those of Technische Universität München.
+------------------------------------------------------------
+
+From hvasiliev@uu.net Sat Oct 26 11:19:29 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!uu!hvasiliev
+From: hvasiliev@uu.net (Heather Vasiliev)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996Oct26.111929.5858@uu.net>
+Date: Sat, 26 Oct 1996 11:19:29 GMT
+References: <1996Oct25.035229.2939@tum.de>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996Oct25.035229.2939@tum.de>, egarcia@tum.de (Élodie García) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Heather Vasiliev
+Tape trading list upon request. SASE required for international mail.
+
+From tsouza@inria.fr Sun Oct 27 21:31:29 1996
+Path: ashpoly!cascade!mxgate!coyoacan!inria!tsouza
+From: tsouza@inria.fr (Thiago Souza)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996Oct27.213129.8957@inria.fr>
+Date: Sun, 27 Oct 1996 21:31:29 GMT
+References: <1996Oct25.035229.2939@tum.de>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1996Oct25.035229.2939@tum.de>, egarcia@tum.de (Élodie García) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+> Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Thiago Souza <tsouza@inria.fr>
+Practical Peripherals 14.4 @ ISDN 64k bps
+"Tape doesn't lie at 02:14. Ears do."
+
+From mpetrov@tum.de Mon Oct 28 00:34:29 1996
+Path: ashpoly!cascade!brgate!saturno!tum!mpetrov
+From: mpetrov@tum.de (Mathieu Petrov)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996Oct28.003429.4573@tum.de>
+Date: Mon, 28 Oct 1996 00:34:29 GMT
+References: <1996Oct25.035229.2939@tum.de> <1996Oct26.111929.5858@uu.net>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Oct26.111929.5858@uu.net>, hvasiliev@uu.net (Heather Vasiliev) writes:
+> Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+> Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+-- 
+=== Mathieu Petrov ===
+Dept of Electrical Engineering, Technische Universität München
+"A soul is not exclusive to biology."
+

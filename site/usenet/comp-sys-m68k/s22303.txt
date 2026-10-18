@@ -1,0 +1,93 @@
+From jramirez@kth.se Tue Dec 26 10:26:41 1995
+Path: ashpoly!cascade!brgate!saturno!kth!jramirez
+From: jramirez@kth.se (Julien Ramírez)
+Newsgroups: comp.sys.m68k
+Subject: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Dec26.102641.8324@kth.se>
+Date: Tue, 26 Dec 1995 10:26:41 GMT
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Julien Ramírez <jramirez@kth.se>
+Zyxel U-1496E @ 33,600 bps
+"When every node is whole, the channel opens."
+
+From sfournier@panix.com Tue Dec 26 16:59:41 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!panix!sfournier
+From: sfournier@panix.com (Sergei Fournier)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Dec26.165941.5382@panix.com>
+Date: Tue, 26 Dec 1995 16:59:41 GMT
+References: <1995Dec26.102641.8324@kth.se>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Dec26.102641.8324@kth.se>, jramirez@kth.se (Julien Ramírez) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+=== Sergei Fournier ===
+Dept of Electrical Engineering, Public Access Unix of New York
+"Hardware is temporary. The signal survives."
+
+From kgonzalez@kth.se Thu Dec 28 07:35:41 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!kth!kgonzalez
+From: kgonzalez@kth.se (Katrin González)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Dec28.073541.6364@kth.se>
+Date: Thu, 28 Dec 1995 07:35:41 GMT
+References: <1995Dec26.102641.8324@kth.se>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Dec26.102641.8324@kth.se>, jramirez@kth.se (Julien Ramírez) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+> By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Katrin González <kgonzalez@kth.se>
+"When every node is whole, the channel opens."
+Sun 3/60 (SunOS 4.1.1) / FreeBSD 2.1
+
+From sdubois@u-tokyo.ac.jp Thu Dec 28 11:24:41 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!u-tokyo!sdubois
+From: sdubois@u-tokyo.ac.jp (Sergei Dubois)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Dec28.112441.2372@u-tokyo.ac.jp>
+Date: Thu, 28 Dec 1995 11:24:41 GMT
+References: <1995Dec26.102641.8324@kth.se> <1995Dec26.165941.5382@panix.com>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1995Dec26.165941.5382@panix.com>, sfournier@panix.com (Sergei Fournier) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Sergei Dubois
+Tape trading list upon request. SASE required for international mail.
+

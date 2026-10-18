@@ -1,0 +1,116 @@
+From smoreno@rwth-aachen.de Mon Jul 17 07:24:20 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!rwth-aachen!smoreno
+From: smoreno@rwth-aachen.de (Sven Moreno)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Jul17.072420.3809@rwth-aachen.de>
+Date: Mon, 17 Jul 1995 07:24:20 GMT
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+Schematic diagram in ASCII uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/twin68_array.asc.
+
+-- 
+Sven Moreno | smoreno@rwth-aachen.de
+PGP Key fingerprint: 58B1 7F40 157E 2879
+"Keep the channels open."
+
+From dpopov@stanford.edu Tue Jul 18 13:03:20 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!stanford!dpopov
+From: dpopov@stanford.edu (Dmitri Popov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Jul18.130320.9597@stanford.edu>
+Date: Tue, 18 Jul 1995 13:03:20 GMT
+References: <1995Jul17.072420.3809@rwth-aachen.de>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Jul17.072420.3809@rwth-aachen.de>, smoreno@rwth-aachen.de (Sven Moreno) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+> The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+=== Dmitri Popov ===
+Dept of Electrical Engineering, Stanford University Computer Systems Lab
+"When every node is whole, the channel opens."
+
+From ltanaka@stanford.edu Wed Jul 19 14:00:20 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!stanford!ltanaka
+From: ltanaka@stanford.edu (Liam Tanaka)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Jul19.140020.5629@stanford.edu>
+Date: Wed, 19 Jul 1995 14:00:20 GMT
+References: <1995Jul17.072420.3809@rwth-aachen.de> <1995Jul18.130320.9597@stanford.edu>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Jul18.130320.9597@stanford.edu>, dpopov@stanford.edu (Dmitri Popov) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Liam Tanaka <ltanaka@stanford.edu>
+*PLONK* filter active for trolls.
+Atari Falcon 030 - NetBSD 1.0
+
+From tmartinez@illinois.edu Fri Jul 21 15:15:20 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!illinois!tmartinez
+From: tmartinez@illinois.edu (Tobias Martínez)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Jul21.151520.9671@illinois.edu>
+Date: Fri, 21 Jul 1995 15:15:20 GMT
+References: <1995Jul17.072420.3809@rwth-aachen.de> <1995Jul18.130320.9597@stanford.edu>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Jul18.130320.9597@stanford.edu>, dpopov@stanford.edu (Dmitri Popov) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+Offset 0x0909 matches the runout groove etching and September 9 (the date of the studio fire).
+
+-- 
+Tobias Martínez
+Tape trading list upon request. SASE required for international mail.
+
+From cnovak@kiae.su Sun Jul 23 06:21:20 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!kiae!cnovak
+From: cnovak@kiae.su (Camila Novak)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Jul23.062120.4981@kiae.su>
+Date: Sun, 23 Jul 1995 06:21:20 GMT
+References: <1995Jul17.072420.3809@rwth-aachen.de> <1995Jul18.130320.9597@stanford.edu> <1995Jul21.151520.9671@illinois.edu>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Jul21.151520.9671@illinois.edu>, tmartinez@illinois.edu (Tobias Martínez) writes:
+> Offset 0x0909 matches the runout groove etching and September 9 (the date of the studio fire).
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+=== Camila Novak ===
+Dept of Electrical Engineering, Kurchatov Institute of Atomic Energy, Moscow
+"A soul is not exclusive to biology."
+

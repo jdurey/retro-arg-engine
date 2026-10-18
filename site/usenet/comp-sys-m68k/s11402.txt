@@ -1,0 +1,117 @@
+From jsmirnov@earthlink.net Wed Oct 04 11:03:17 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!earthlink!jsmirnov
+From: jsmirnov@earthlink.net (Ji-woo Smirnov)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Oct04.110317.6765@earthlink.net>
+Date: Wed, 04 Oct 1995 11:03:17 GMT
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Ji-woo Smirnov <jsmirnov@earthlink.net>
+*PLONK* filter active for trolls.
+Commodore Amiga 500 (1MB OCS) - NetBSD 1.0
+
+From mfournier@mit.edu Fri Oct 06 12:07:17 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!mit!mfournier
+From: mfournier@mit.edu (Mei Fournier)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Oct06.120717.2354@mit.edu>
+Date: Fri, 06 Oct 1995 12:07:17 GMT
+References: <1995Oct04.110317.6765@earthlink.net>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Oct04.110317.6765@earthlink.net>, jsmirnov@earthlink.net (Ji-woo Smirnov) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Mei Fournier <mfournier@mit.edu>
+*PLONK* filter active for trolls.
+Atari Falcon 030 - NetBSD 1.0
+
+From osanchez@stanford.edu Sat Oct 07 01:00:17 1995
+Path: ashpoly!cascade!mxgate!coyoacan!stanford!osanchez
+From: osanchez@stanford.edu (Olga Sánchez)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Oct07.010017.4584@stanford.edu>
+Date: Sat, 07 Oct 1995 01:00:17 GMT
+References: <1995Oct04.110317.6765@earthlink.net> <1995Oct06.120717.2354@mit.edu>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Oct06.120717.2354@mit.edu>, mfournier@mit.edu (Mei Fournier) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Olga Sánchez -- Stanford University Computer Systems Lab
+"Extraordinary claims require extraordinary spectra."
+
+From elaurent@kiae.su Sat Oct 07 08:52:17 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!kiae!elaurent
+From: elaurent@kiae.su (Emi Laurent)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Oct07.085217.4526@kiae.su>
+Date: Sat, 07 Oct 1995 08:52:17 GMT
+References: <1995Oct04.110317.6765@earthlink.net> <1995Oct06.120717.2354@mit.edu>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Oct06.120717.2354@mit.edu>, mfournier@mit.edu (Mei Fournier) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+=== Emi Laurent ===
+Dept of Electrical Engineering, Kurchatov Institute of Atomic Energy, Moscow
+"Extraordinary claims require extraordinary spectra."
+
+From mkuznetsov@mindspring.com Mon Oct 09 02:12:17 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!mindspring!mkuznetsov
+From: mkuznetsov@mindspring.com (Min-jun Kuznetsov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Oct09.021217.9620@mindspring.com>
+Date: Mon, 09 Oct 1995 02:12:17 GMT
+References: <1995Oct04.110317.6765@earthlink.net> <1995Oct06.120717.2354@mit.edu> <1995Oct07.085217.4526@kiae.su>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Oct07.085217.4526@kiae.su>, elaurent@kiae.su (Emi Laurent) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Min-jun Kuznetsov <mkuznetsov@mindspring.com>
+*PLONK* filter active for trolls.
+Mac IIci / 68882 FPU - NetBSD 1.0
+

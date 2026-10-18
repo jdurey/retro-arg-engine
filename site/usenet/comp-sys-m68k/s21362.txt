@@ -1,0 +1,92 @@
+From mtanaka@delphi.com Sat Apr 23 02:19:23 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!delphi!mtanaka
+From: mtanaka@delphi.com (Mateo Tanaka)
+Newsgroups: comp.sys.m68k
+Subject: WTB/WTT: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Apr23.021923.5372@delphi.com>
+Date: Sat, 23 Apr 1994 02:19:23 GMT
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Did Marcus take the decryption EPROM with him when he left the lab?
+
+-- 
+Mateo Tanaka <mtanaka@delphi.com>
+"Hardware is temporary. The signal survives."
+Amiga 1200 (Blizzard 030/50) / System 7.5.1
+
+From rpopov@clari.net Sun Apr 24 22:49:23 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!clari!rpopov
+From: rpopov@clari.net (Raj Popov)
+Newsgroups: comp.sys.m68k
+Subject: Re: WTB/WTT: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Apr24.224923.2069@clari.net>
+Date: Sun, 24 Apr 1994 22:49:23 GMT
+References: <1994Apr23.021923.5372@delphi.com>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Apr23.021923.5372@delphi.com>, mtanaka@delphi.com (Mateo Tanaka) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+-- 
+Raj Popov <rpopov@clari.net>
+"We don't sign stars. We build them."
+Acorn RiscPC 600 / Linux 1.2.13
+
+From lfournier@uu.net Wed Apr 27 01:04:23 1994
+Path: ashpoly!cascade!brgate!saturno!uu!lfournier
+From: lfournier@uu.net (Lars Fournier)
+Newsgroups: comp.sys.m68k
+Subject: Re: WTB/WTT: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Apr27.010423.8784@uu.net>
+Date: Wed, 27 Apr 1994 01:04:23 GMT
+References: <1994Apr23.021923.5372@delphi.com> <1994Apr24.224923.2069@clari.net>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Apr24.224923.2069@clari.net>, rpopov@clari.net (Raj Popov) writes:
+> Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Lars Fournier <lfournier@uu.net>
+Practical Peripherals 14.4 @ 33,600 bps
+"Row 14. No joke."
+
+From kpopov@mit.edu Wed Apr 27 10:59:23 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!mit!kpopov
+From: kpopov@mit.edu (Kirsty Popov)
+Newsgroups: comp.sys.m68k
+Subject: Re: WTB/WTT: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Apr27.105923.7822@mit.edu>
+Date: Wed, 27 Apr 1994 10:59:23 GMT
+References: <1994Apr23.021923.5372@delphi.com> <1994Apr24.224923.2069@clari.net>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1994Apr24.224923.2069@clari.net>, rpopov@clari.net (Raj Popov) writes:
+> Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Kirsty Popov
+Tape trading list upon request. SASE required for international mail.
+

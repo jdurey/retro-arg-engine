@@ -1,0 +1,93 @@
+From ttanaka@illinois.edu Sat Dec 02 10:54:58 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!illinois!ttanaka
+From: ttanaka@illinois.edu (Takeshi Tanaka)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Dec02.105458.1989@illinois.edu>
+Date: Sat, 02 Dec 1995 10:54:58 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Takeshi Tanaka -- University of Illinois Urbana-Champaign
+"Measuring a record you own is listening, not piracy."
+
+From bpopov@cam.ac.uk Sun Dec 03 09:14:58 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!cam!bpopov
+From: bpopov@cam.ac.uk (Bruno Popov)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Dec03.091458.5403@cam.ac.uk>
+Date: Sun, 03 Dec 1995 09:14:58 GMT
+References: <1995Dec02.105458.1989@illinois.edu>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Dec02.105458.1989@illinois.edu>, ttanaka@illinois.edu (Takeshi Tanaka) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Bruno Popov <bpopov@cam.ac.uk>
+US Robotics Courier V.34 @ 9600 Telebit bps
+"Hardware is temporary. The signal survives."
+
+From akuznetsov@u-tokyo.ac.jp Tue Dec 05 09:43:58 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!u-tokyo!akuznetsov
+From: akuznetsov@u-tokyo.ac.jp (Anja Kuznetsov)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Dec05.094358.2319@u-tokyo.ac.jp>
+Date: Tue, 05 Dec 1995 09:43:58 GMT
+References: <1995Dec02.105458.1989@illinois.edu> <1995Dec03.091458.5403@cam.ac.uk>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1995Dec03.091458.5403@cam.ac.uk>, bpopov@cam.ac.uk (Bruno Popov) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Anja Kuznetsov
+Tape trading list upon request. SASE required for international mail.
+
+From bgonzalez@pipeline.com Wed Dec 06 04:04:58 1995
+Path: ashpoly!cascade!brgate!saturno!pipeline!bgonzalez
+From: bgonzalez@pipeline.com (Bill González)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Dec06.040458.6496@pipeline.com>
+Date: Wed, 06 Dec 1995 04:04:58 GMT
+References: <1995Dec02.105458.1989@illinois.edu> <1995Dec03.091458.5403@cam.ac.uk>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995Dec03.091458.5403@cam.ac.uk>, bpopov@cam.ac.uk (Bruno Popov) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+Bill González | bgonzalez@pipeline.com
+PGP Key fingerprint: A93A 70C3 3868 D87D
+"Keep the channels open."
+

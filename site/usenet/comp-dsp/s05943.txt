@@ -1,0 +1,118 @@
+From anakamura@utexas.edu Sat Aug 27 19:57:16 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!utexas!anakamura
+From: anakamura@utexas.edu (Amy Nakamura)
+Newsgroups: comp.dsp
+Subject: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Aug27.195716.4277@utexas.edu>
+Date: Sat, 27 Aug 1994 19:57:16 GMT
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+MATLAB script available upon request via email.
+
+-- 
+=== Amy Nakamura ===
+Dept of Electrical Engineering, University of Texas at Austin
+"5 sigma is a discovery. 7 is a question."
+
+From gdubois@uu.net Mon Aug 29 17:54:16 1994
+Path: ashpoly!cascade!bigsur!uu!gdubois
+From: gdubois@uu.net (Graham Dubois)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Aug29.175416.3073@uu.net>
+Date: Mon, 29 Aug 1994 17:54:16 GMT
+References: <1994Aug27.195716.4277@utexas.edu>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1994Aug27.195716.4277@utexas.edu>, anakamura@utexas.edu (Amy Nakamura) writes:
+> Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+> A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Graham Dubois | gdubois@uu.net
+PGP Key fingerprint: 1860 1E84 AD9B 0ED1
+"Keep the channels open."
+
+From mstewart@ox.ac.uk Tue Aug 30 14:32:16 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!ox!mstewart
+From: mstewart@ox.ac.uk (Mateo Stewart)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Aug30.143216.1802@ox.ac.uk>
+Date: Tue, 30 Aug 1994 14:32:16 GMT
+References: <1994Aug27.195716.4277@utexas.edu> <1994Aug29.175416.3073@uu.net>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1994Aug29.175416.3073@uu.net>, gdubois@uu.net (Graham Dubois) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Mateo Stewart
+Tape trading list upon request. SASE required for international mail.
+
+From jrodriguez@inria.fr Wed Aug 31 12:49:16 1994
+Path: ashpoly!cascade!mxgate!coyoacan!inria!jrodriguez
+From: jrodriguez@inria.fr (Julien Rodríguez)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Aug31.124916.1897@inria.fr>
+Date: Wed, 31 Aug 1994 12:49:16 GMT
+References: <1994Aug27.195716.4277@utexas.edu>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Aug27.195716.4277@utexas.edu>, anakamura@utexas.edu (Amy Nakamura) writes:
+> Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+=== Julien Rodríguez ===
+Dept of Electrical Engineering, INRIA Rocquencourt
+"Tape doesn't lie at 02:14. Ears do."
+
+From nreyes@cern.ch Wed Aug 31 23:49:16 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!cern!nreyes
+From: nreyes@cern.ch (Natalia Reyes)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Aug31.234916.8954@cern.ch>
+Date: Wed, 31 Aug 1994 23:49:16 GMT
+References: <1994Aug27.195716.4277@utexas.edu> <1994Aug29.175416.3073@uu.net> <1994Aug30.143216.1802@ox.ac.uk>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1994Aug30.143216.1802@ox.ac.uk>, mstewart@ox.ac.uk (Mateo Stewart) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Natalia Reyes | nreyes@cern.ch
+PGP Key fingerprint: 772D 4E7D 2CC9 A959
+"Keep the channels open."
+

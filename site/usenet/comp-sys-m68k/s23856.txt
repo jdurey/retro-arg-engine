@@ -1,0 +1,48 @@
+From ecampbell@panix.com Sat Feb 03 01:19:05 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!panix!ecampbell
+From: ecampbell@panix.com (Élodie Campbell)
+Newsgroups: comp.sys.m68k
+Subject: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Feb03.011905.6386@panix.com>
+Date: Sat, 03 Feb 1996 01:19:05 GMT
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+Élodie Campbell
+Opinions expressed are solely my own and not those of Public Access Unix of New York.
+------------------------------------------------------------
+
+From nkarlsson@cam.ac.uk Sun Feb 04 02:23:05 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!cam!nkarlsson
+From: nkarlsson@cam.ac.uk (Nadine Karlsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Feb04.022305.4958@cam.ac.uk>
+Date: Sun, 04 Feb 1996 02:23:05 GMT
+References: <1996Feb03.011905.6386@panix.com>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996Feb03.011905.6386@panix.com>, ecampbell@panix.com (Élodie Campbell) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+> By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Nadine Karlsson <nkarlsson@cam.ac.uk>
+"Tape doesn't lie at 02:14. Ears do."
+Amiga 1200 (Blizzard 030/50) / Linux 1.2.13
+

@@ -1,0 +1,93 @@
+From dchoi@illinois.edu Mon Jun 03 14:25:50 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!illinois!dchoi
+From: dchoi@illinois.edu (Dave Choi)
+Newsgroups: comp.dsp
+Subject: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jun03.142550.3002@illinois.edu>
+Date: Mon, 03 Jun 1996 14:25:50 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Dave Choi
+Tape trading list upon request. SASE required for international mail.
+
+From jfournier@stanford.edu Wed Jun 05 04:04:50 1996
+Path: ashpoly!cascade!brgate!saturno!stanford!jfournier
+From: jfournier@stanford.edu (Julien Fournier)
+Newsgroups: comp.dsp
+Subject: Re: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jun05.040450.9268@stanford.edu>
+Date: Wed, 05 Jun 1996 04:04:50 GMT
+References: <1996Jun03.142550.3002@illinois.edu>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Jun03.142550.3002@illinois.edu>, dchoi@illinois.edu (Dave Choi) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+Julien Fournier <jfournier@stanford.edu>
+US Robotics Courier V.34 @ ISDN 64k bps
+"The carrier frequency does not drift by accident."
+
+From pfournier@delphi.com Thu Jun 06 05:17:50 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!delphi!pfournier
+From: pfournier@delphi.com (Pavel Fournier)
+Newsgroups: comp.dsp
+Subject: Re: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jun06.051750.2309@delphi.com>
+Date: Thu, 06 Jun 1996 05:17:50 GMT
+References: <1996Jun03.142550.3002@illinois.edu>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1996Jun03.142550.3002@illinois.edu>, dchoi@illinois.edu (Dave Choi) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Pavel Fournier <pfournier@delphi.com>
+"The hatch is open. Is anyone listening?"
+Amiga 3000T / Linux 1.2.13
+
+From divanov@uni-hamburg.de Thu Jun 06 13:10:50 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!uni-hamburg!divanov
+From: divanov@uni-hamburg.de (Dave Ivanov)
+Newsgroups: comp.dsp
+Subject: Re: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jun06.131050.2211@uni-hamburg.de>
+Date: Thu, 06 Jun 1996 13:10:50 GMT
+References: <1996Jun03.142550.3002@illinois.edu> <1996Jun05.040450.9268@stanford.edu>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1996Jun05.040450.9268@stanford.edu>, jfournier@stanford.edu (Julien Fournier) writes:
+> Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Dave Ivanov
+Tape trading list upon request. SASE required for international mail.
+

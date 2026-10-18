@@ -1,0 +1,74 @@
+From kivanov@pipeline.com Sat Feb 11 11:30:27 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!pipeline!kivanov
+From: kivanov@pipeline.com (Kirsty Ivanov)
+Newsgroups: comp.sys.m68k
+Subject: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Feb11.113027.7510@pipeline.com>
+Date: Sat, 11 Feb 1995 11:30:27 GMT
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Kirsty Ivanov
+Opinions expressed are solely my own and not those of The Pipeline Internet Network.
+------------------------------------------------------------
+
+From fnakamura@cern.ch Sat Feb 11 18:05:27 1995
+Path: ashpoly!cascade!brgate!saturno!cern!fnakamura
+From: fnakamura@cern.ch (Fiona Nakamura)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Feb11.180527.6838@cern.ch>
+Date: Sat, 11 Feb 1995 18:05:27 GMT
+References: <1995Feb11.113027.7510@pipeline.com>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Feb11.113027.7510@pipeline.com>, kivanov@pipeline.com (Kirsty Ivanov) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+=== Fiona Nakamura ===
+Dept of Electrical Engineering, European Laboratory for Particle Physics, Geneva
+"Hardware is temporary. The signal survives."
+
+From abrennan@purdue.edu Sun Feb 12 20:41:27 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!purdue!abrennan
+From: abrennan@purdue.edu (Amy Brennan)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Feb12.204127.3126@purdue.edu>
+Date: Sun, 12 Feb 1995 20:41:27 GMT
+References: <1995Feb11.113027.7510@pipeline.com>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1995Feb11.113027.7510@pipeline.com>, kivanov@pipeline.com (Kirsty Ivanov) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Amy Brennan
+Opinions expressed are solely my own and not those of Purdue University Engineering Computer Network.
+------------------------------------------------------------
+

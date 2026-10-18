@@ -1,0 +1,121 @@
+From cduarte@inria.fr Sun Dec 22 15:00:41 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!inria!cduarte
+From: cduarte@inria.fr (Camila Duarte)
+Newsgroups: comp.sys.m68k
+Subject: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Dec22.150041.9335@inria.fr>
+Date: Sun, 22 Dec 1996 15:00:41 GMT
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Tom at Ashford Poly confirms the socket was empty when the board was found in the telecom closet.
+
+-- 
+Camila Duarte
+Opinions expressed are solely my own and not those of INRIA Rocquencourt.
+------------------------------------------------------------
+
+From sweber@uni-hamburg.de Mon Dec 23 01:01:41 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!uni-hamburg!sweber
+From: sweber@uni-hamburg.de (Steve Weber)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Dec23.010141.5674@uni-hamburg.de>
+Date: Mon, 23 Dec 1996 01:01:41 GMT
+References: <1996Dec22.150041.9335@inria.fr>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Dec22.150041.9335@inria.fr>, cduarte@inria.fr (Camila Duarte) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Steve Weber | sweber@uni-hamburg.de
+PGP Key fingerprint: 0D4C E026 FC56 C7F3
+"Keep the channels open."
+
+From aivanov@unam.mx Mon Dec 23 02:52:41 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!unam!aivanov
+From: aivanov@unam.mx (Anja Ivanov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Dec23.025241.4110@unam.mx>
+Date: Mon, 23 Dec 1996 02:52:41 GMT
+References: <1996Dec22.150041.9335@inria.fr>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1996Dec22.150041.9335@inria.fr>, cduarte@inria.fr (Camila Duarte) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+> The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Anja Ivanov | aivanov@unam.mx
+PGP Key fingerprint: 5BD9 C0D1 6A81 81F7
+"Keep the channels open."
+
+From knovak@cam.ac.uk Tue Dec 24 05:19:41 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!cam!knovak
+From: knovak@cam.ac.uk (Katrin Novak)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Dec24.051941.5360@cam.ac.uk>
+Date: Tue, 24 Dec 1996 05:19:41 GMT
+References: <1996Dec22.150041.9335@inria.fr> <1996Dec23.010141.5674@uni-hamburg.de>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Dec23.010141.5674@uni-hamburg.de>, sweber@uni-hamburg.de (Steve Weber) writes:
+> Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Katrin Novak <knovak@cam.ac.uk>
+"Hardware is temporary. The signal survives."
+Atari Falcon 030 / TOS 4.04
+
+From slee@inria.fr Wed Dec 25 17:54:41 1996
+Path: ashpoly!cascade!bigsur!inria!slee
+From: slee@inria.fr (Seo-yeon Lee)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Dec25.175441.7726@inria.fr>
+Date: Wed, 25 Dec 1996 17:54:41 GMT
+References: <1996Dec22.150041.9335@inria.fr> <1996Dec23.010141.5674@uni-hamburg.de>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1996Dec23.010141.5674@uni-hamburg.de>, sweber@uni-hamburg.de (Steve Weber) writes:
+> Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Seo-yeon Lee | slee@inria.fr
+PGP Key fingerprint: 5FAD FA66 5F53 7429
+"Keep the channels open."
+

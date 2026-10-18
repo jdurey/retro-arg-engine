@@ -1,0 +1,117 @@
+From bkuznetsov@demon.co.uk Fri Nov 03 16:26:52 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!demon!bkuznetsov
+From: bkuznetsov@demon.co.uk (Bill Kuznetsov)
+Newsgroups: comp.sys.m68k
+Subject: WTB/WTT: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Nov03.162652.3581@demon.co.uk>
+Date: Fri, 03 Nov 1995 16:26:52 GMT
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Hardware disassembly report for Motorola hardware hackers.
+
+Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Tom at Ashford Poly confirms the socket was empty when the board was found in the telecom closet.
+
+-- 
+Bill Kuznetsov | bkuznetsov@demon.co.uk
+PGP Key fingerprint: 7F32 9081 7F06 6126
+"Keep the channels open."
+
+From msokolov@purdue.edu Sat Nov 04 14:18:52 1995
+Path: ashpoly!cascade!brgate!saturno!purdue!msokolov
+From: msokolov@purdue.edu (Mathieu Sokolov)
+Newsgroups: comp.sys.m68k
+Subject: Re: WTB/WTT: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Nov04.141852.1709@purdue.edu>
+Date: Sat, 04 Nov 1995 14:18:52 GMT
+References: <1995Nov03.162652.3581@demon.co.uk>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Nov03.162652.3581@demon.co.uk>, bkuznetsov@demon.co.uk (Bill Kuznetsov) writes:
+> Hardware disassembly report for Motorola hardware hackers.
+> Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Mathieu Sokolov | msokolov@purdue.edu
+PGP Key fingerprint: 2A48 81EE ABD7 7A95
+"Keep the channels open."
+
+From jlopez@cam.ac.uk Sun Nov 05 04:55:52 1995
+Path: ashpoly!cascade!brgate!saturno!cam!jlopez
+From: jlopez@cam.ac.uk (Jen López)
+Newsgroups: comp.sys.m68k
+Subject: Re: WTB/WTT: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Nov05.045552.9122@cam.ac.uk>
+Date: Sun, 05 Nov 1995 04:55:52 GMT
+References: <1995Nov03.162652.3581@demon.co.uk> <1995Nov04.141852.1709@purdue.edu>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1995Nov04.141852.1709@purdue.edu>, msokolov@purdue.edu (Mathieu Sokolov) writes:
+> Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Jen López -- University of Cambridge Computer Laboratory
+"Row 14. No joke."
+
+From njohansson@panix.com Tue Nov 07 03:17:52 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!panix!njohansson
+From: njohansson@panix.com (Nadia Johansson)
+Newsgroups: comp.sys.m68k
+Subject: Re: WTB/WTT: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Nov07.031752.5904@panix.com>
+Date: Tue, 07 Nov 1995 03:17:52 GMT
+References: <1995Nov03.162652.3581@demon.co.uk> <1995Nov04.141852.1709@purdue.edu> <1995Nov05.045552.9122@cam.ac.uk>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1995Nov05.045552.9122@cam.ac.uk>, jlopez@cam.ac.uk (Jen López) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Nadia Johansson
+Tape trading list upon request. SASE required for international mail.
+
+From kgonzalez@cern.ch Wed Nov 08 16:13:52 1995
+Path: ashpoly!cascade!bigsur!cern!kgonzalez
+From: kgonzalez@cern.ch (Katrin González)
+Newsgroups: comp.sys.m68k
+Subject: Re: WTB/WTT: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Nov08.161352.5832@cern.ch>
+Date: Wed, 08 Nov 1995 16:13:52 GMT
+References: <1995Nov03.162652.3581@demon.co.uk> <1995Nov04.141852.1709@purdue.edu> <1995Nov05.045552.9122@cam.ac.uk> <1995Nov07.031752.5904@panix.com>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Nov07.031752.5904@panix.com>, njohansson@panix.com (Nadia Johansson) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Katrin González <kgonzalez@cern.ch>
+*PLONK* filter active for trolls.
+Amiga 1200 (Blizzard 030/50) - NetBSD 1.0
+

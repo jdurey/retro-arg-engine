@@ -1,0 +1,70 @@
+From jpark@ox.ac.uk Mon Aug 15 02:24:02 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!ox!jpark
+From: jpark@ox.ac.uk (Joachim Park)
+Newsgroups: comp.dsp
+Subject: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Aug15.022402.2608@ox.ac.uk>
+Date: Mon, 15 Aug 1994 02:24:02 GMT
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Joachim Park | jpark@ox.ac.uk
+PGP Key fingerprint: F662 18BA 57FF 9B1F
+"Keep the channels open."
+
+From jnakamura@purdue.edu Wed Aug 17 03:28:02 1994
+Path: ashpoly!cascade!brgate!saturno!purdue!jnakamura
+From: jnakamura@purdue.edu (Julien Nakamura)
+Newsgroups: comp.dsp
+Subject: Re: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Aug17.032802.9557@purdue.edu>
+Date: Wed, 17 Aug 1994 03:28:02 GMT
+References: <1994Aug15.022402.2608@ox.ac.uk>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Aug15.022402.2608@ox.ac.uk>, jpark@ox.ac.uk (Joachim Park) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+=== Julien Nakamura ===
+Dept of Electrical Engineering, Purdue University Engineering Computer Network
+"We don't sign stars. We build them."
+
+From btakahashi@hanse.de Wed Aug 17 20:36:02 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!hanse!btakahashi
+From: btakahashi@hanse.de (Bruno Takahashi)
+Newsgroups: comp.dsp
+Subject: Re: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Aug17.203602.1717@hanse.de>
+Date: Wed, 17 Aug 1994 20:36:02 GMT
+References: <1994Aug15.022402.2608@ox.ac.uk>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Aug15.022402.2608@ox.ac.uk>, jpark@ox.ac.uk (Joachim Park) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Bruno Takahashi <btakahashi@hanse.de>
+*PLONK* filter active for trolls.
+Amiga 3000T - NetBSD 1.0
+

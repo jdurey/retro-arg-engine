@@ -1,0 +1,96 @@
+From lsuzuki@purdue.edu Thu Jan 26 11:53:51 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!purdue!lsuzuki
+From: lsuzuki@purdue.edu (Lisa Suzuki)
+Newsgroups: comp.sys.m68k
+Subject: Data: Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1995Jan26.115351.6478@purdue.edu>
+Date: Thu, 26 Jan 1995 11:53:51 GMT
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+Amiga audio hackers: you can demodulate the 14.2 Hz carrier in real time without bogging down the OS.
+
+I wrote a 64-tap FIR filter in pure 68k assembly using movem.l and dbra loop unrolling to downsample to 64 Hz.
+By setting up Paula's audio DMA to double-buffer incoming 8-bit samples, the 68020 has plenty of cycles left for the Costas loop.
+
+Does anyone want to test on an unaccelerated Amiga 500 with 512K chip RAM?
+
+-- 
+Lisa Suzuki -- Purdue University Engineering Computer Network
+"5 sigma is a discovery. 7 is a question."
+
+From tsanchez@cmu.edu Sat Jan 28 12:41:51 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!cmu!tsanchez
+From: tsanchez@cmu.edu (Tyler Sánchez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1995Jan28.124151.5148@cmu.edu>
+Date: Sat, 28 Jan 1995 12:41:51 GMT
+References: <1995Jan26.115351.6478@purdue.edu>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995Jan26.115351.6478@purdue.edu>, lsuzuki@purdue.edu (Lisa Suzuki) writes:
+> Amiga audio hackers: you can demodulate the 14.2 Hz carrier in real time without bogging down the OS.
+
+PC users spend $3,000 on Sound Blasters and Pentium chips and still can't do what a $500 Amiga was doing in 1985.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Tyler Sánchez <tsanchez@cmu.edu>
+Zyxel U-1496E @ 9600 Telebit bps
+"A soul is not exclusive to biology."
+
+From snakamura@tum.de Mon Jan 30 01:27:51 1995
+Path: ashpoly!cascade!brgate!saturno!tum!snakamura
+From: snakamura@tum.de (Steve Nakamura)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1995Jan30.012751.6706@tum.de>
+Date: Mon, 30 Jan 1995 01:27:51 GMT
+References: <1995Jan26.115351.6478@purdue.edu>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Jan26.115351.6478@purdue.edu>, lsuzuki@purdue.edu (Lisa Suzuki) writes:
+> Amiga audio hackers: you can demodulate the 14.2 Hz carrier in real time without bogging down the OS.
+
+Tested on my A3000 / 25 MHz. Ran smoothly in the background while I was compiling a C program in another window.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Steve Nakamura
+Tape trading list upon request. SASE required for international mail.
+
+From ksokolov@utexas.edu Mon Jan 30 21:31:51 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!utexas!ksokolov
+From: ksokolov@utexas.edu (Karen Sokolov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1995Jan30.213151.6342@utexas.edu>
+Date: Mon, 30 Jan 1995 21:31:51 GMT
+References: <1995Jan26.115351.6478@purdue.edu> <1995Jan28.124151.5148@cmu.edu>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Jan28.124151.5148@cmu.edu>, tsanchez@cmu.edu (Tyler Sánchez) writes:
+> PC users spend $3,000 on Sound Blasters and Pentium chips and still can't do what a $500 Amiga was doing in 1985.
+> Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+Tested on my A3000 / 25 MHz. Ran smoothly in the background while I was compiling a C program in another window.
+
+-- 
+Karen Sokolov <ksokolov@utexas.edu>
+SupraFAXModem 28.8 @ ISDN 64k bps
+"We don't sign stars. We build them."
+

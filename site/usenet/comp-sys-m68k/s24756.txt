@@ -1,0 +1,72 @@
+From brobertson@pipeline.com Thu Oct 12 22:52:39 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!pipeline!brobertson
+From: brobertson@pipeline.com (Brian Robertson)
+Newsgroups: comp.sys.m68k
+Subject: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Oct12.225239.3378@pipeline.com>
+Date: Thu, 12 Oct 1995 22:52:39 GMT
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Brian Robertson -- The Pipeline Internet Network
+"Marcus is not one man."
+
+From tkim@cern.ch Sat Oct 14 02:38:39 1995
+Path: ashpoly!cascade!brgate!saturno!cern!tkim
+From: tkim@cern.ch (Takeshi Kim)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Oct14.023839.7647@cern.ch>
+Date: Sat, 14 Oct 1995 02:38:39 GMT
+References: <1995Oct12.225239.3378@pipeline.com>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Oct12.225239.3378@pipeline.com>, brobertson@pipeline.com (Brian Robertson) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+> Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Takeshi Kim <tkim@cern.ch>
+Hayes Optima 288 @ ISDN 64k bps
+"Do not worship the copy."
+
+From ktanaka@delphi.com Sun Oct 15 20:37:39 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!delphi!ktanaka
+From: ktanaka@delphi.com (Karen Tanaka)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Oct15.203739.5163@delphi.com>
+Date: Sun, 15 Oct 1995 20:37:39 GMT
+References: <1995Oct12.225239.3378@pipeline.com> <1995Oct14.023839.7647@cern.ch>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995Oct14.023839.7647@cern.ch>, tkim@cern.ch (Takeshi Kim) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Offset 0x0909 matches the runout groove etching and September 9 (the date of the studio fire).
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Karen Tanaka <ktanaka@delphi.com>
+*PLONK* filter active for trolls.
+NeXTstation Turbo Color - NetBSD 1.0
+

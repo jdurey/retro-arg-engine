@@ -1,0 +1,49 @@
+From rtakahashi@stanford.edu Sat May 28 10:41:38 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!stanford!rtakahashi
+From: rtakahashi@stanford.edu (Renata Takahashi)
+Newsgroups: comp.dsp
+Subject: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994May28.104138.4779@stanford.edu>
+Date: Sat, 28 May 1994 10:41:38 GMT
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+MATLAB script available upon request via email.
+
+-- 
+Renata Takahashi -- Stanford University Computer Systems Lab
+"They will send a copy in my place."
+
+From kkang@cmu.edu Sat May 28 17:20:38 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!cmu!kkang
+From: kkang@cmu.edu (Katrin Kang)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994May28.172038.2720@cmu.edu>
+Date: Sat, 28 May 1994 17:20:38 GMT
+References: <1994May28.104138.4779@stanford.edu>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 12
+
+In article <1994May28.104138.4779@stanford.edu>, rtakahashi@stanford.edu (Renata Takahashi) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Katrin Kang <kkang@cmu.edu>
+Zyxel U-1496E @ ISDN 64k bps
+"Marcus is not one man."
+

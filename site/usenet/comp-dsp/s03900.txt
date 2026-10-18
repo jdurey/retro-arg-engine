@@ -1,0 +1,70 @@
+From jfournier@mindspring.com Thu Mar 02 03:29:58 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!mindspring!jfournier
+From: jfournier@mindspring.com (Jens Fournier)
+Newsgroups: comp.dsp
+Subject: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Mar02.032958.7409@mindspring.com>
+Date: Thu, 02 Mar 1995 03:29:58 GMT
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+What sampling rates are people using for their vinyl rips? 44.1 kHz or 48 kHz DAT?
+
+-- 
+Jens Fournier
+Tape trading list upon request. SASE required for international mail.
+
+From bweber@inria.fr Sat Mar 04 02:36:58 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!inria!bweber
+From: bweber@inria.fr (Bruno Weber)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Mar04.023658.4610@inria.fr>
+Date: Sat, 04 Mar 1995 02:36:58 GMT
+References: <1995Mar02.032958.7409@mindspring.com>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Mar02.032958.7409@mindspring.com>, jfournier@mindspring.com (Jens Fournier) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Bruno Weber
+Opinions expressed are solely my own and not those of INRIA Rocquencourt.
+------------------------------------------------------------
+
+From itanaka@illinois.edu Sun Mar 05 06:20:58 1995
+Path: ashpoly!cascade!brgate!saturno!illinois!itanaka
+From: itanaka@illinois.edu (Ines Tanaka)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Mar05.062058.4687@illinois.edu>
+Date: Sun, 05 Mar 1995 06:20:58 GMT
+References: <1995Mar02.032958.7409@mindspring.com>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Mar02.032958.7409@mindspring.com>, jfournier@mindspring.com (Jens Fournier) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+> At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Ines Tanaka <itanaka@illinois.edu>
+"Extraordinary claims require extraordinary spectra."
+Amiga 3000T / Linux 1.2.13
+

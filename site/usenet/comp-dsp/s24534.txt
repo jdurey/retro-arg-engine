@@ -1,0 +1,118 @@
+From shernandez@u-tokyo.ac.jp Thu Jan 06 09:31:47 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!u-tokyo!shernandez
+From: shernandez@u-tokyo.ac.jp (Sun-mi Hernández)
+Newsgroups: comp.dsp
+Subject: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Jan06.093147.7543@u-tokyo.ac.jp>
+Date: Thu, 06 Jan 1994 09:31:47 GMT
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+=== Sun-mi Hernández ===
+Dept of Electrical Engineering, University of Tokyo Department of Information Science
+"They will send a copy in my place."
+
+From jmoreno@stanford.edu Thu Jan 06 18:41:47 1994
+Path: ashpoly!cascade!bigsur!stanford!jmoreno
+From: jmoreno@stanford.edu (Ji-woo Moreno)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Jan06.184147.6985@stanford.edu>
+Date: Thu, 06 Jan 1994 18:41:47 GMT
+References: <1994Jan06.093147.7543@u-tokyo.ac.jp>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Jan06.093147.7543@u-tokyo.ac.jp>, shernandez@u-tokyo.ac.jp (Sun-mi Hernández) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+=== Ji-woo Moreno ===
+Dept of Electrical Engineering, Stanford University Computer Systems Lab
+"Hardware is temporary. The signal survives."
+
+From jivanov@unam.mx Sat Jan 08 06:31:47 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!unam!jivanov
+From: jivanov@unam.mx (Jens Ivanov)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Jan08.063147.3252@unam.mx>
+Date: Sat, 08 Jan 1994 06:31:47 GMT
+References: <1994Jan06.093147.7543@u-tokyo.ac.jp> <1994Jan06.184147.6985@stanford.edu>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Jan06.184147.6985@stanford.edu>, jmoreno@stanford.edu (Ji-woo Moreno) writes:
+> Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Jens Ivanov | jivanov@unam.mx
+PGP Key fingerprint: 26DE 7D17 5D2F 1B6C
+"Keep the channels open."
+
+From ktakahashi@mit.edu Sat Jan 08 14:19:47 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!mit!ktakahashi
+From: ktakahashi@mit.edu (Kenji Takahashi)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Jan08.141947.8179@mit.edu>
+Date: Sat, 08 Jan 1994 14:19:47 GMT
+References: <1994Jan06.093147.7543@u-tokyo.ac.jp>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Jan06.093147.7543@u-tokyo.ac.jp>, shernandez@u-tokyo.ac.jp (Sun-mi Hernández) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Kenji Takahashi -- Massachusetts Institute of Technology
+"The carrier frequency does not drift by accident."
+
+From bchoi@mit.edu Sun Jan 09 15:34:47 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!mit!bchoi
+From: bchoi@mit.edu (Bastien Choi)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Jan09.153447.2369@mit.edu>
+Date: Sun, 09 Jan 1994 15:34:47 GMT
+References: <1994Jan06.093147.7543@u-tokyo.ac.jp> <1994Jan06.184147.6985@stanford.edu> <1994Jan08.063147.3252@unam.mx>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1994Jan08.063147.3252@unam.mx>, jivanov@unam.mx (Jens Ivanov) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+Bastien Choi | bchoi@mit.edu
+PGP Key fingerprint: D3A6 4D2C C335 83D1
+"Keep the channels open."
+

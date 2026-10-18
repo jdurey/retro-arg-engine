@@ -1,0 +1,95 @@
+From odubois@netcom.com Sat Oct 14 05:33:37 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!netcom!odubois
+From: odubois@netcom.com (Olga Dubois)
+Newsgroups: comp.dsp
+Subject: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Oct14.053337.2334@netcom.com>
+Date: Sat, 14 Oct 1995 05:33:37 GMT
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+MATLAB script available upon request via email.
+
+-- 
+Olga Dubois -- NETCOM On-Line Communication Services
+"5 sigma is a discovery. 7 is a question."
+
+From agonzalez@tum.de Mon Oct 16 06:14:37 1995
+Path: ashpoly!cascade!brgate!saturno!tum!agonzalez
+From: agonzalez@tum.de (Anton González)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Oct16.061437.2417@tum.de>
+Date: Mon, 16 Oct 1995 06:14:37 GMT
+References: <1995Oct14.053337.2334@netcom.com>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1995Oct14.053337.2334@netcom.com>, odubois@netcom.com (Olga Dubois) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Anton González <agonzalez@tum.de>
+"When every node is whole, the channel opens."
+NeXTstation Turbo Color / SunOS 4.1.4
+
+From fivanov@earthlink.net Wed Oct 18 01:40:37 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!earthlink!fivanov
+From: fivanov@earthlink.net (Freya Ivanov)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Oct18.014037.3042@earthlink.net>
+Date: Wed, 18 Oct 1995 01:40:37 GMT
+References: <1995Oct14.053337.2334@netcom.com> <1995Oct16.061437.2417@tum.de>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Oct16.061437.2417@tum.de>, agonzalez@tum.de (Anton González) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Freya Ivanov | fivanov@earthlink.net
+PGP Key fingerprint: BA0A 728A EC09 1867
+"Keep the channels open."
+
+From landersson@clari.net Fri Oct 20 01:24:37 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!clari!landersson
+From: landersson@clari.net (Lisa Andersson)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Oct20.012437.8242@clari.net>
+Date: Fri, 20 Oct 1995 01:24:37 GMT
+References: <1995Oct14.053337.2334@netcom.com> <1995Oct16.061437.2417@tum.de>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Oct16.061437.2417@tum.de>, agonzalez@tum.de (Anton González) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Lisa Andersson <landersson@clari.net>
+SupraFAXModem 28.8 @ ISDN 64k bps
+"Do not worship the copy."
+

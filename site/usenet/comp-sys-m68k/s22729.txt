@@ -1,0 +1,116 @@
+From cgarcia@stanford.edu Sat Sep 03 09:29:04 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!stanford!cgarcia
+From: cgarcia@stanford.edu (Camila García)
+Newsgroups: comp.sys.m68k
+Subject: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Sep03.092904.9418@stanford.edu>
+Date: Sat, 03 Sep 1994 09:29:04 GMT
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Camila García | cgarcia@stanford.edu
+PGP Key fingerprint: CFE3 9F6D 2645 8E70
+"Keep the channels open."
+
+From bivanov@mit.edu Sun Sep 04 18:40:04 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!mit!bivanov
+From: bivanov@mit.edu (Bastien Ivanov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Sep04.184004.2283@mit.edu>
+Date: Sun, 04 Sep 1994 18:40:04 GMT
+References: <1994Sep03.092904.9418@stanford.edu>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1994Sep03.092904.9418@stanford.edu>, cgarcia@stanford.edu (Camila García) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Bastien Ivanov
+Opinions expressed are solely my own and not those of Massachusetts Institute of Technology.
+------------------------------------------------------------
+
+From hnakamura@unam.mx Mon Sep 05 08:00:04 1994
+Path: ashpoly!cascade!mxgate!coyoacan!unam!hnakamura
+From: hnakamura@unam.mx (Hugo Nakamura)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Sep05.080004.1799@unam.mx>
+Date: Mon, 05 Sep 1994 08:00:04 GMT
+References: <1994Sep03.092904.9418@stanford.edu> <1994Sep04.184004.2283@mit.edu>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Sep04.184004.2283@mit.edu>, bivanov@mit.edu (Bastien Ivanov) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Hugo Nakamura <hnakamura@unam.mx>
+*PLONK* filter active for trolls.
+Atari Falcon 030 - NetBSD 1.0
+
+From ctakahashi@kiae.su Mon Sep 05 19:18:04 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!kiae!ctakahashi
+From: ctakahashi@kiae.su (Callum Takahashi)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Sep05.191804.7725@kiae.su>
+Date: Mon, 05 Sep 1994 19:18:04 GMT
+References: <1994Sep03.092904.9418@stanford.edu> <1994Sep04.184004.2283@mit.edu>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Sep04.184004.2283@mit.edu>, bivanov@mit.edu (Bastien Ivanov) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Callum Takahashi <ctakahashi@kiae.su>
+"The hatch is open. Is anyone listening?"
+Atari TT030 / Linux 1.2.13
+
+From akang@cern.ch Wed Sep 07 12:15:04 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!cern!akang
+From: akang@cern.ch (Anja Kang)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Sep07.121504.9799@cern.ch>
+Date: Wed, 07 Sep 1994 12:15:04 GMT
+References: <1994Sep03.092904.9418@stanford.edu> <1994Sep04.184004.2283@mit.edu> <1994Sep05.191804.7725@kiae.su>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1994Sep05.191804.7725@kiae.su>, ctakahashi@kiae.su (Callum Takahashi) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Anja Kang -- European Laboratory for Particle Physics, Geneva
+"Measuring a record you own is listening, not piracy."
+

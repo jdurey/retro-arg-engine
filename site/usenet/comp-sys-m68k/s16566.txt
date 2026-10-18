@@ -1,0 +1,117 @@
+From ksilva@stanford.edu Tue Sep 26 20:37:18 1995
+Path: ashpoly!cascade!brgate!saturno!stanford!ksilva
+From: ksilva@stanford.edu (Karen Silva)
+Newsgroups: comp.sys.m68k
+Subject: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Sep26.203718.9591@stanford.edu>
+Date: Tue, 26 Sep 1995 20:37:18 GMT
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Karen Silva | ksilva@stanford.edu
+PGP Key fingerprint: 6A1C 30AD 5DDA 11F3
+"Keep the channels open."
+
+From fsmirnov@purdue.edu Thu Sep 28 01:35:18 1995
+Path: ashpoly!cascade!bigsur!purdue!fsmirnov
+From: fsmirnov@purdue.edu (Fiona Smirnov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Sep28.013518.1327@purdue.edu>
+Date: Thu, 28 Sep 1995 01:35:18 GMT
+References: <1995Sep26.203718.9591@stanford.edu>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Sep26.203718.9591@stanford.edu>, ksilva@stanford.edu (Karen Silva) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Fiona Smirnov | fsmirnov@purdue.edu
+PGP Key fingerprint: 862D 7D04 B8A1 1E03
+"Keep the channels open."
+
+From jito@cam.ac.uk Sat Sep 30 00:50:18 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!cam!jito
+From: jito@cam.ac.uk (Jen Ito)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Sep30.005018.5542@cam.ac.uk>
+Date: Sat, 30 Sep 1995 00:50:18 GMT
+References: <1995Sep26.203718.9591@stanford.edu>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Sep26.203718.9591@stanford.edu>, ksilva@stanford.edu (Karen Silva) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+> Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Jen Ito -- University of Cambridge Computer Laboratory
+"The carrier frequency does not drift by accident."
+
+From ggarcia@tum.de Sat Sep 30 02:49:18 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!tum!ggarcia
+From: ggarcia@tum.de (Graham García)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Sep30.024918.7000@tum.de>
+Date: Sat, 30 Sep 1995 02:49:18 GMT
+References: <1995Sep26.203718.9591@stanford.edu> <1995Sep30.005018.5542@cam.ac.uk>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Sep30.005018.5542@cam.ac.uk>, jito@cam.ac.uk (Jen Ito) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Graham García <ggarcia@tum.de>
+Zyxel U-1496E @ 33,600 bps
+"The carrier frequency does not drift by accident."
+
+From tgonzalez@stanford.edu Sat Sep 30 18:54:18 1995
+Path: ashpoly!cascade!brgate!saturno!stanford!tgonzalez
+From: tgonzalez@stanford.edu (Tomas González)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Sep30.185418.3921@stanford.edu>
+Date: Sat, 30 Sep 1995 18:54:18 GMT
+References: <1995Sep26.203718.9591@stanford.edu> <1995Sep30.005018.5542@cam.ac.uk>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1995Sep30.005018.5542@cam.ac.uk>, jito@cam.ac.uk (Jen Ito) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Tomas González -- Stanford University Computer Systems Lab
+"In theory there is no difference between theory and practice."
+

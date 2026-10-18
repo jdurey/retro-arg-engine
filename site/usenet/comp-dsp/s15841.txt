@@ -1,0 +1,116 @@
+From mmoreau@cam.ac.uk Sat Jan 06 20:39:09 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!cam!mmoreau
+From: mmoreau@cam.ac.uk (Mei Moreau)
+Newsgroups: comp.dsp
+Subject: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Jan06.203909.4455@cam.ac.uk>
+Date: Sat, 06 Jan 1996 20:39:09 GMT
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+Mei Moreau
+Opinions expressed are solely my own and not those of University of Cambridge Computer Laboratory.
+------------------------------------------------------------
+
+From stakahashi@cam.ac.uk Mon Jan 08 21:40:09 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!cam!stakahashi
+From: stakahashi@cam.ac.uk (Sun-mi Takahashi)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Jan08.214009.6855@cam.ac.uk>
+Date: Mon, 08 Jan 1996 21:40:09 GMT
+References: <1996Jan06.203909.4455@cam.ac.uk>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1996Jan06.203909.4455@cam.ac.uk>, mmoreau@cam.ac.uk (Mei Moreau) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+> A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Sun-mi Takahashi <stakahashi@cam.ac.uk>
+Zyxel U-1496E @ 9600 Telebit bps
+"Hold for relay."
+
+From landersson@mindspring.com Tue Jan 09 20:04:09 1996
+Path: ashpoly!cascade!mxgate!coyoacan!mindspring!landersson
+From: landersson@mindspring.com (Lars Andersson)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Jan09.200409.5089@mindspring.com>
+Date: Tue, 09 Jan 1996 20:04:09 GMT
+References: <1996Jan06.203909.4455@cam.ac.uk> <1996Jan08.214009.6855@cam.ac.uk>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Jan08.214009.6855@cam.ac.uk>, stakahashi@cam.ac.uk (Sun-mi Takahashi) writes:
+> If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+That's how the 14 lines of the Stardust matrix are encoded. Each regional pressing contains one line of the decoded text.
+
+-- 
+=== Lars Andersson ===
+Dept of Electrical Engineering, MindSpring Enterprises
+"When every node is whole, the channel opens."
+
+From blarsson@mindspring.com Thu Jan 11 19:06:09 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!mindspring!blarsson
+From: blarsson@mindspring.com (Bastien Larsson)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Jan11.190609.2505@mindspring.com>
+Date: Thu, 11 Jan 1996 19:06:09 GMT
+References: <1996Jan06.203909.4455@cam.ac.uk> <1996Jan08.214009.6855@cam.ac.uk> <1996Jan09.200409.5089@mindspring.com>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Jan09.200409.5089@mindspring.com>, landersson@mindspring.com (Lars Andersson) writes:
+> That's how the 14 lines of the Stardust matrix are encoded. Each regional pressing contains one line of the decoded text.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Bastien Larsson | blarsson@mindspring.com
+PGP Key fingerprint: 5CB4 54B5 EF3F D9CF
+"Keep the channels open."
+
+From oduarte@illinois.edu Sat Jan 13 16:47:09 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!illinois!oduarte
+From: oduarte@illinois.edu (Olga Duarte)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Jan13.164709.6451@illinois.edu>
+Date: Sat, 13 Jan 1996 16:47:09 GMT
+References: <1996Jan06.203909.4455@cam.ac.uk> <1996Jan08.214009.6855@cam.ac.uk> <1996Jan09.200409.5089@mindspring.com>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1996Jan09.200409.5089@mindspring.com>, landersson@mindspring.com (Lars Andersson) writes:
+> That's how the 14 lines of the Stardust matrix are encoded. Each regional pressing contains one line of the decoded text.
+
+Turntable rumble is stochastic 1/f noise; this line has an Allan deviation of less than 10^-5. It was generated by a quartz crystal clock.
+
+-- 
+Olga Duarte -- University of Illinois Urbana-Champaign
+"We don't sign stars. We build them."
+

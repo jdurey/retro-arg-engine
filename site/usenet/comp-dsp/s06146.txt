@@ -1,0 +1,49 @@
+From tvasiliev@cern.ch Sat Oct 12 09:22:53 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!cern!tvasiliev
+From: tvasiliev@cern.ch (Thiago Vasiliev)
+Newsgroups: comp.dsp
+Subject: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Oct12.092253.5478@cern.ch>
+Date: Sat, 12 Oct 1996 09:22:53 GMT
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+What sampling rates are people using for their vinyl rips? 44.1 kHz or 48 kHz DAT?
+
+-- 
+Thiago Vasiliev <tvasiliev@cern.ch>
+*PLONK* filter active for trolls.
+Macintosh IIfx - NetBSD 1.0
+
+From sweber@berkeley.edu Sun Oct 13 00:27:53 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!berkeley!sweber
+From: sweber@berkeley.edu (Sven Weber)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Oct13.002753.2463@berkeley.edu>
+Date: Sun, 13 Oct 1996 00:27:53 GMT
+References: <1996Oct12.092253.5478@cern.ch>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1996Oct12.092253.5478@cern.ch>, tvasiliev@cern.ch (Thiago Vasiliev) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Sven Weber
+Tape trading list upon request. SASE required for international mail.
+

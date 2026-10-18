@@ -1,0 +1,69 @@
+From freyes@rwth-aachen.de Sat Mar 23 19:21:14 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!rwth-aachen!freyes
+From: freyes@rwth-aachen.de (Fiona Reyes)
+Newsgroups: comp.sys.m68k
+Subject: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Mar23.192114.8229@rwth-aachen.de>
+Date: Sat, 23 Mar 1996 19:21:14 GMT
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+Does anyone have a 27C256 EPROM marked 'MH-U14' or 'ORION-CRYPTO'?
+
+-- 
+Fiona Reyes -- RWTH Aachen Informatik
+"Measuring a record you own is listening, not piracy."
+
+From dsuzuki@hanse.de Sun Mar 24 09:42:14 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!hanse!dsuzuki
+From: dsuzuki@hanse.de (Dmitri Suzuki)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Mar24.094214.7683@hanse.de>
+Date: Sun, 24 Mar 1996 09:42:14 GMT
+References: <1996Mar23.192114.8229@rwth-aachen.de>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996Mar23.192114.8229@rwth-aachen.de>, freyes@rwth-aachen.de (Fiona Reyes) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+=== Dmitri Suzuki ===
+Dept of Electrical Engineering, Hanse-Netzwerk Hamburg
+"Hold for relay."
+
+From msato@delphi.com Sun Mar 24 15:50:14 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!delphi!msato
+From: msato@delphi.com (Mei Sato)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Mar24.155014.8184@delphi.com>
+Date: Sun, 24 Mar 1996 15:50:14 GMT
+References: <1996Mar23.192114.8229@rwth-aachen.de>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1996Mar23.192114.8229@rwth-aachen.de>, freyes@rwth-aachen.de (Fiona Reyes) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Mei Sato -- Delphi Internet Services
+"When every node is whole, the channel opens."
+

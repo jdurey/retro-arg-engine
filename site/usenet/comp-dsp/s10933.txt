@@ -1,0 +1,70 @@
+From jhughes@purdue.edu Tue Mar 21 06:14:33 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!purdue!jhughes
+From: jhughes@purdue.edu (Joachim Hughes)
+Newsgroups: comp.dsp
+Subject: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Mar21.061433.2965@purdue.edu>
+Date: Tue, 21 Mar 1995 06:14:33 GMT
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Joachim Hughes <jhughes@purdue.edu>
+"We don't sign stars. We build them."
+PC-9821Ap2 (NEC) / TOS 4.04
+
+From rschneider@purdue.edu Wed Mar 22 09:07:33 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!purdue!rschneider
+From: rschneider@purdue.edu (Raj Schneider)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Mar22.090733.5770@purdue.edu>
+Date: Wed, 22 Mar 1995 09:07:33 GMT
+References: <1995Mar21.061433.2965@purdue.edu>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Mar21.061433.2965@purdue.edu>, jhughes@purdue.edu (Joachim Hughes) writes:
+> Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+> A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Raj Schneider | rschneider@purdue.edu
+PGP Key fingerprint: 560E 8EBD 1838 D410
+"Keep the channels open."
+
+From tgonzalez@uu.net Wed Mar 22 09:57:33 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!uu!tgonzalez
+From: tgonzalez@uu.net (Thiago González)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Mar22.095733.3256@uu.net>
+Date: Wed, 22 Mar 1995 09:57:33 GMT
+References: <1995Mar21.061433.2965@purdue.edu>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Mar21.061433.2965@purdue.edu>, jhughes@purdue.edu (Joachim Hughes) writes:
+> Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Thiago González
+Tape trading list upon request. SASE required for international mail.
+

@@ -1,0 +1,116 @@
+From pkarlsson@delphi.com Sat Sep 02 05:50:19 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!delphi!pkarlsson
+From: pkarlsson@delphi.com (Pavel Karlsson)
+Newsgroups: comp.dsp
+Subject: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Sep02.055019.2776@delphi.com>
+Date: Sat, 02 Sep 1995 05:50:19 GMT
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+Version 1.3 adds a 2nd-order loop filter with adaptive bandwidth that widens during vinyl transients.
+
+Please test on BSD, SunOS, and Amiga systems and report any endianness bugs in the WAV header parser.
+
+-- 
+Pavel Karlsson <pkarlsson@delphi.com>
+"The carrier frequency does not drift by accident."
+Amiga 3000T / Linux 1.2.13
+
+From gandersson@cern.ch Sat Sep 02 21:19:19 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!cern!gandersson
+From: gandersson@cern.ch (Göran Andersson)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Sep02.211919.3478@cern.ch>
+Date: Sat, 02 Sep 1995 21:19:19 GMT
+References: <1995Sep02.055019.2776@delphi.com>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Sep02.055019.2776@delphi.com>, pkarlsson@delphi.com (Pavel Karlsson) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+> The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+Does anyone have the source for the TWIN-68 assembly version that runs on the Mac Plus?
+
+-- 
+Göran Andersson
+Tape trading list upon request. SASE required for international mail.
+
+From tbrennan@earthlink.net Mon Sep 04 17:04:19 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!earthlink!tbrennan
+From: tbrennan@earthlink.net (Tobias Brennan)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Sep04.170419.4401@earthlink.net>
+Date: Mon, 04 Sep 1995 17:04:19 GMT
+References: <1995Sep02.055019.2776@delphi.com>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Sep02.055019.2776@delphi.com>, pkarlsson@delphi.com (Pavel Karlsson) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+-- 
+Tobias Brennan <tbrennan@earthlink.net>
+*PLONK* filter active for trolls.
+PC-9821Ap2 (NEC) - NetBSD 1.0
+
+From agirard@ox.ac.uk Wed Sep 06 07:00:19 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!ox!agirard
+From: agirard@ox.ac.uk (Amy Girard)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Sep06.070019.1350@ox.ac.uk>
+Date: Wed, 06 Sep 1995 07:00:19 GMT
+References: <1995Sep02.055019.2776@delphi.com>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Sep02.055019.2776@delphi.com>, pkarlsson@delphi.com (Pavel Karlsson) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+-- 
+Amy Girard <agirard@ox.ac.uk>
+*PLONK* filter active for trolls.
+NeXTstation Turbo Color - NetBSD 1.0
+
+From mgarcia@cern.ch Fri Sep 08 04:32:19 1995
+Path: ashpoly!cascade!brgate!saturno!cern!mgarcia
+From: mgarcia@cern.ch (Matthias García)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Sep08.043219.3784@cern.ch>
+Date: Fri, 08 Sep 1995 04:32:19 GMT
+References: <1995Sep02.055019.2776@delphi.com> <1995Sep02.211919.3478@cern.ch>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Sep02.211919.3478@cern.ch>, gandersson@cern.ch (Göran Andersson) writes:
+> Does anyone have the source for the TWIN-68 assembly version that runs on the Mac Plus?
+
+Tar.gz archive gave a CRC error with PKUNZIP. Make sure you upload in binary mode, not ASCII!
+
+-- 
+Matthias García <mgarcia@cern.ch>
+"The hatch is open. Is anyone listening?"
+Pentium 90 (OS/2 Warp) / FreeBSD 2.1
+

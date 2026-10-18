@@ -1,0 +1,120 @@
+From bnilsson@kth.se Wed Apr 26 14:14:29 1995
+Path: ashpoly!cascade!bigsur!kth!bnilsson
+From: bnilsson@kth.se (Bastien Nilsson)
+Newsgroups: comp.dsp
+Subject: [INFO] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Apr26.141429.5693@kth.se>
+Date: Wed, 26 Apr 1995 14:14:29 GMT
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+Bastien Nilsson <bnilsson@kth.se>
+*PLONK* filter active for trolls.
+Sun 3/60 (SunOS 4.1.1) - NetBSD 1.0
+
+From dlopez@kiae.su Fri Apr 28 12:00:29 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!kiae!dlopez
+From: dlopez@kiae.su (Dong-hyun López)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Apr28.120029.1386@kiae.su>
+Date: Fri, 28 Apr 1995 12:00:29 GMT
+References: <1995Apr26.141429.5693@kth.se>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995Apr26.141429.5693@kth.se>, bnilsson@kth.se (Bastien Nilsson) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+> A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Dong-hyun López -- Kurchatov Institute of Atomic Energy, Moscow
+"Measuring a record you own is listening, not piracy."
+
+From hperez@uu.net Sun Apr 30 05:03:29 1995
+Path: ashpoly!cascade!bigsur!uu!hperez
+From: hperez@uu.net (Heather Pérez)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Apr30.050329.2895@uu.net>
+Date: Sun, 30 Apr 1995 05:03:29 GMT
+References: <1995Apr26.141429.5693@kth.se> <1995Apr28.120029.1386@kiae.su>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Apr28.120029.1386@kiae.su>, dlopez@kiae.su (Dong-hyun López) writes:
+> You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+> Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+-- 
+Heather Pérez <hperez@uu.net>
+"Tape doesn't lie at 02:14. Ears do."
+NeXTstation Turbo Color / SunOS 4.1.4
+
+From ckuznetsov@mindspring.com Mon May 01 13:30:29 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!mindspring!ckuznetsov
+From: ckuznetsov@mindspring.com (Callum Kuznetsov)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995May01.133029.2963@mindspring.com>
+Date: Mon, 01 May 1995 13:30:29 GMT
+References: <1995Apr26.141429.5693@kth.se> <1995Apr28.120029.1386@kiae.su>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Apr28.120029.1386@kiae.su>, dlopez@kiae.su (Dong-hyun López) writes:
+> You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+> Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Callum Kuznetsov <ckuznetsov@mindspring.com>
+*PLONK* filter active for trolls.
+Amiga 3000T - NetBSD 1.0
+
+From klee@delphi.com Tue May 02 11:27:29 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!delphi!klee
+From: klee@delphi.com (Kirsty Lee)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995May02.112729.9753@delphi.com>
+Date: Tue, 02 May 1995 11:27:29 GMT
+References: <1995Apr26.141429.5693@kth.se> <1995Apr28.120029.1386@kiae.su> <1995May01.133029.2963@mindspring.com>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995May01.133029.2963@mindspring.com>, ckuznetsov@mindspring.com (Callum Kuznetsov) writes:
+> Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+-- 
+Kirsty Lee <klee@delphi.com>
+"When every node is whole, the channel opens."
+Commodore Amiga 500 (1MB OCS) / System 7.5.1
+

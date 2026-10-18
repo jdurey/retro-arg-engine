@@ -1,0 +1,93 @@
+From yschneider@pipeline.com Fri Nov 10 19:00:19 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!pipeline!yschneider
+From: yschneider@pipeline.com (Yuki Schneider)
+Newsgroups: comp.dsp
+Subject: Discussion: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Nov10.190019.4279@pipeline.com>
+Date: Fri, 10 Nov 1995 19:00:19 GMT
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+Yuki Schneider <yschneider@pipeline.com>
+"5 sigma is a discovery. 7 is a question."
+Decstation 5000/200 / TOS 4.04
+
+From kpark@delphi.com Sun Nov 12 22:54:19 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!delphi!kpark
+From: kpark@delphi.com (Karen Park)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Nov12.225419.4630@delphi.com>
+Date: Sun, 12 Nov 1995 22:54:19 GMT
+References: <1995Nov10.190019.4279@pipeline.com>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Nov10.190019.4279@pipeline.com>, yschneider@pipeline.com (Yuki Schneider) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+-- 
+Karen Park
+Opinions expressed are solely my own and not those of Delphi Internet Services.
+------------------------------------------------------------
+
+From mperez@purdue.edu Tue Nov 14 10:35:19 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!purdue!mperez
+From: mperez@purdue.edu (Mei Pérez)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Nov14.103519.8819@purdue.edu>
+Date: Tue, 14 Nov 1995 10:35:19 GMT
+References: <1995Nov10.190019.4279@pipeline.com>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Nov10.190019.4279@pipeline.com>, yschneider@pipeline.com (Yuki Schneider) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Mei Pérez <mperez@purdue.edu>
+*PLONK* filter active for trolls.
+Sun 3/60 (SunOS 4.1.1) - NetBSD 1.0
+
+From ssato@rwth-aachen.de Wed Nov 15 20:26:19 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!rwth-aachen!ssato
+From: ssato@rwth-aachen.de (Steve Sato)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Nov15.202619.6762@rwth-aachen.de>
+Date: Wed, 15 Nov 1995 20:26:19 GMT
+References: <1995Nov10.190019.4279@pipeline.com>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Nov10.190019.4279@pipeline.com>, yschneider@pipeline.com (Yuki Schneider) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+-- 
+Steve Sato <ssato@rwth-aachen.de>
+*PLONK* filter active for trolls.
+Decstation 5000/200 - NetBSD 1.0
+

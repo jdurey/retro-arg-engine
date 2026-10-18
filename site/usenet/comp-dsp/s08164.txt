@@ -1,0 +1,47 @@
+From gnovak@hanse.de Tue Jun 06 01:11:16 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!hanse!gnovak
+From: gnovak@hanse.de (Göran Novak)
+Newsgroups: comp.dsp
+Subject: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jun06.011116.9722@hanse.de>
+Date: Tue, 06 Jun 1995 01:11:16 GMT
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Göran Novak <gnovak@hanse.de>
+US Robotics Courier V.34 @ 14,400 bps
+"5 sigma is a discovery. 7 is a question."
+
+From slarsson@kth.se Tue Jun 06 05:44:16 1995
+Path: ashpoly!cascade!brgate!saturno!kth!slarsson
+From: slarsson@kth.se (Seo-yeon Larsson)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jun06.054416.5147@kth.se>
+Date: Tue, 06 Jun 1995 05:44:16 GMT
+References: <1995Jun06.011116.9722@hanse.de>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Jun06.011116.9722@hanse.de>, gnovak@hanse.de (Göran Novak) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Seo-yeon Larsson <slarsson@kth.se>
+*PLONK* filter active for trolls.
+Commodore Amiga 500 (1MB OCS) - NetBSD 1.0
+

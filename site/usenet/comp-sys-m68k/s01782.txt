@@ -1,0 +1,119 @@
+From tbrennan@pacbell.net Tue Apr 25 00:39:19 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!pacbell!tbrennan
+From: tbrennan@pacbell.net (Tyler Brennan)
+Newsgroups: comp.sys.m68k
+Subject: Data: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Apr25.003919.1947@pacbell.net>
+Date: Tue, 25 Apr 1995 00:39:19 GMT
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+
+Did Marcus take the decryption EPROM with him when he left the lab?
+
+-- 
+=== Tyler Brennan ===
+Dept of Electrical Engineering, Pacific Bell Internet Services
+"Hardware is temporary. The signal survives."
+
+From msilva@mit.edu Tue Apr 25 20:20:19 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!mit!msilva
+From: msilva@mit.edu (Morag Silva)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Apr25.202019.1833@mit.edu>
+Date: Tue, 25 Apr 1995 20:20:19 GMT
+References: <1995Apr25.003919.1947@pacbell.net>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Apr25.003919.1947@pacbell.net>, tbrennan@pacbell.net (Tyler Brennan) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+-- 
+Morag Silva -- Massachusetts Institute of Technology
+"Extraordinary claims require extraordinary spectra."
+
+From asato@panix.com Thu Apr 27 04:44:19 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!panix!asato
+From: asato@panix.com (Anton Sato)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Apr27.044419.1093@panix.com>
+Date: Thu, 27 Apr 1995 04:44:19 GMT
+References: <1995Apr25.003919.1947@pacbell.net>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 12
+
+In article <1995Apr25.003919.1947@pacbell.net>, tbrennan@pacbell.net (Tyler Brennan) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Anton Sato <asato@panix.com>
+*PLONK* filter active for trolls.
+Mac IIci / 68882 FPU - NetBSD 1.0
+
+From apetrov@tum.de Fri Apr 28 10:06:19 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!tum!apetrov
+From: apetrov@tum.de (Astrid Petrov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Apr28.100619.2327@tum.de>
+Date: Fri, 28 Apr 1995 10:06:19 GMT
+References: <1995Apr25.003919.1947@pacbell.net> <1995Apr27.044419.1093@panix.com>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Apr27.044419.1093@panix.com>, asato@panix.com (Anton Sato) writes:
+> Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+> My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Astrid Petrov -- Technische Universität München
+"A soul is not exclusive to biology."
+
+From apetrov@inria.fr Sat Apr 29 17:48:19 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!inria!apetrov
+From: apetrov@inria.fr (Anton Petrov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Apr29.174819.2698@inria.fr>
+Date: Sat, 29 Apr 1995 17:48:19 GMT
+References: <1995Apr25.003919.1947@pacbell.net>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Apr25.003919.1947@pacbell.net>, tbrennan@pacbell.net (Tyler Brennan) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Anton Petrov
+Tape trading list upon request. SASE required for international mail.
+

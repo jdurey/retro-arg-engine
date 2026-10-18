@@ -1,0 +1,118 @@
+From hkuznetsov@inria.fr Fri Oct 07 09:02:42 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!inria!hkuznetsov
+From: hkuznetsov@inria.fr (Heather Kuznetsov)
+Newsgroups: comp.dsp
+Subject: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Oct07.090242.8800@inria.fr>
+Date: Fri, 07 Oct 1994 09:02:42 GMT
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+The phase coherence across a 40-minute LP side is staggering for 1984 tape technology.
+
+-- 
+Heather Kuznetsov -- INRIA Rocquencourt
+"A soul is not exclusive to biology."
+
+From hcampbell@mit.edu Fri Oct 07 21:10:42 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!mit!hcampbell
+From: hcampbell@mit.edu (Heather Campbell)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Oct07.211042.2539@mit.edu>
+Date: Fri, 07 Oct 1994 21:10:42 GMT
+References: <1994Oct07.090242.8800@inria.fr>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Oct07.090242.8800@inria.fr>, hkuznetsov@inria.fr (Heather Kuznetsov) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+-- 
+=== Heather Campbell ===
+Dept of Electrical Engineering, Massachusetts Institute of Technology
+"Do not worship the copy."
+
+From klaurent@kiae.su Sat Oct 08 11:21:42 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!kiae!klaurent
+From: klaurent@kiae.su (Kenji Laurent)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Oct08.112142.1605@kiae.su>
+Date: Sat, 08 Oct 1994 11:21:42 GMT
+References: <1994Oct07.090242.8800@inria.fr> <1994Oct07.211042.2539@mit.edu>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1994Oct07.211042.2539@mit.edu>, hcampbell@mit.edu (Heather Campbell) writes:
+> Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Kenji Laurent
+Tape trading list upon request. SASE required for international mail.
+
+From ylarsson@uni-hamburg.de Mon Oct 10 09:34:42 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!uni-hamburg!ylarsson
+From: ylarsson@uni-hamburg.de (Yuki Larsson)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Oct10.093442.7289@uni-hamburg.de>
+Date: Mon, 10 Oct 1994 09:34:42 GMT
+References: <1994Oct07.090242.8800@inria.fr> <1994Oct07.211042.2539@mit.edu> <1994Oct08.112142.1605@kiae.su>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1994Oct08.112142.1605@kiae.su>, klaurent@kiae.su (Kenji Laurent) writes:
+> If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+=== Yuki Larsson ===
+Dept of Electrical Engineering, Universität Hamburg Fachbereich Informatik
+"Hold for relay."
+
+From vkarlsson@hanse.de Wed Oct 12 03:35:42 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!hanse!vkarlsson
+From: vkarlsson@hanse.de (Valeria Karlsson)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Oct12.033542.7620@hanse.de>
+Date: Wed, 12 Oct 1994 03:35:42 GMT
+References: <1994Oct07.090242.8800@inria.fr>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1994Oct07.090242.8800@inria.fr>, hkuznetsov@inria.fr (Heather Kuznetsov) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+> With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Valeria Karlsson
+Tape trading list upon request. SASE required for international mail.
+

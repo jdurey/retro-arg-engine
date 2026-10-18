@@ -1,0 +1,71 @@
+From jfournier@clari.net Mon Jun 27 07:53:29 1994
+Path: ashpoly!cascade!bigsur!clari!jfournier
+From: jfournier@clari.net (Joachim Fournier)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Jun27.075329.7330@clari.net>
+Date: Mon, 27 Jun 1994 07:53:29 GMT
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+=== Joachim Fournier ===
+Dept of Electrical Engineering, ClariNet Communications Corp
+"Hardware is temporary. The signal survives."
+
+From tpark@uu.net Wed Jun 29 01:48:29 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!uu!tpark
+From: tpark@uu.net (Takeshi Park)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Jun29.014829.9715@uu.net>
+Date: Wed, 29 Jun 1994 01:48:29 GMT
+References: <1994Jun27.075329.7330@clari.net>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Jun27.075329.7330@clari.net>, jfournier@clari.net (Joachim Fournier) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Takeshi Park <tpark@uu.net>
+"Extraordinary claims require extraordinary spectra."
+486DX4/100 (FreeBSD 2.0.5) / System 7.5.1
+
+From hwatanabe@berkeley.edu Thu Jun 30 08:35:29 1994
+Path: ashpoly!cascade!brgate!saturno!berkeley!hwatanabe
+From: hwatanabe@berkeley.edu (Hugo Watanabe)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Jun30.083529.8695@berkeley.edu>
+Date: Thu, 30 Jun 1994 08:35:29 GMT
+References: <1994Jun27.075329.7330@clari.net>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1994Jun27.075329.7330@clari.net>, jfournier@clari.net (Joachim Fournier) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Hugo Watanabe | hwatanabe@berkeley.edu
+PGP Key fingerprint: 73D4 C727 85E2 E756
+"Keep the channels open."
+

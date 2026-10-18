@@ -1,0 +1,72 @@
+From arobertson@illinois.edu Fri Mar 10 17:11:00 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!illinois!arobertson
+From: arobertson@illinois.edu (Anja Robertson)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Mar10.171100.5041@illinois.edu>
+Date: Fri, 10 Mar 1995 17:11:00 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Anja Robertson <arobertson@illinois.edu>
+"When every node is whole, the channel opens."
+Mac IIci / 68882 FPU / System 7.5.1
+
+From gsmirnov@inria.fr Sun Mar 12 16:47:00 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!inria!gsmirnov
+From: gsmirnov@inria.fr (Graham Smirnov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Mar12.164700.2028@inria.fr>
+Date: Sun, 12 Mar 1995 16:47:00 GMT
+References: <1995Mar10.171100.5041@illinois.edu>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995Mar10.171100.5041@illinois.edu>, arobertson@illinois.edu (Anja Robertson) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Graham Smirnov | gsmirnov@inria.fr
+PGP Key fingerprint: E948 619B 9D61 9CC2
+"Keep the channels open."
+
+From fschneider@kiae.su Tue Mar 14 15:39:00 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!kiae!fschneider
+From: fschneider@kiae.su (Fiona Schneider)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Mar14.153900.8239@kiae.su>
+Date: Tue, 14 Mar 1995 15:39:00 GMT
+References: <1995Mar10.171100.5041@illinois.edu> <1995Mar12.164700.2028@inria.fr>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Mar12.164700.2028@inria.fr>, gsmirnov@inria.fr (Graham Smirnov) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Fiona Schneider <fschneider@kiae.su>
+*PLONK* filter active for trolls.
+Commodore Amiga 500 (1MB OCS) - NetBSD 1.0
+

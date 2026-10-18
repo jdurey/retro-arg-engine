@@ -1,0 +1,96 @@
+From fsuzuki@kth.se Sat Apr 23 10:26:59 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!kth!fsuzuki
+From: fsuzuki@kth.se (Fiona Suzuki)
+Newsgroups: comp.dsp
+Subject: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Apr23.102659.5516@kth.se>
+Date: Sat, 23 Apr 1994 10:26:59 GMT
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+Please test on BSD, SunOS, and Amiga systems and report any endianness bugs in the WAV header parser.
+
+-- 
+Fiona Suzuki | fsuzuki@kth.se
+PGP Key fingerprint: 6F11 3A10 6665 05F4
+"Keep the channels open."
+
+From fpopov@netcom.com Sat Apr 23 16:40:59 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!netcom!fpopov
+From: fpopov@netcom.com (Freya Popov)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Apr23.164059.6158@netcom.com>
+Date: Sat, 23 Apr 1994 16:40:59 GMT
+References: <1994Apr23.102659.5516@kth.se>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1994Apr23.102659.5516@kth.se>, fsuzuki@kth.se (Fiona Suzuki) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Freya Popov | fpopov@netcom.com
+PGP Key fingerprint: 7DBF DD27 EC21 9DF3
+"Keep the channels open."
+
+From opark@panix.com Sun Apr 24 05:56:59 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!panix!opark
+From: opark@panix.com (Olga Park)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Apr24.055659.4338@panix.com>
+Date: Sun, 24 Apr 1994 05:56:59 GMT
+References: <1994Apr23.102659.5516@kth.se> <1994Apr23.164059.6158@netcom.com>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Apr23.164059.6158@netcom.com>, fpopov@netcom.com (Freya Popov) writes:
+> On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Olga Park
+Opinions expressed are solely my own and not those of Public Access Unix of New York.
+------------------------------------------------------------
+
+From rsmirnov@uu.net Sun Apr 24 23:05:59 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!uu!rsmirnov
+From: rsmirnov@uu.net (Raj Smirnov)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Apr24.230559.3097@uu.net>
+Date: Sun, 24 Apr 1994 23:05:59 GMT
+References: <1994Apr23.102659.5516@kth.se> <1994Apr23.164059.6158@netcom.com>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1994Apr23.164059.6158@netcom.com>, fpopov@netcom.com (Freya Popov) writes:
+> On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+> Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+-- 
+Raj Smirnov <rsmirnov@uu.net>
+*PLONK* filter active for trolls.
+Amiga 3000T - NetBSD 1.0
+

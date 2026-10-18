@@ -1,0 +1,96 @@
+From mweber@uni-hamburg.de Sat Jun 25 10:41:25 1994
+Path: ashpoly!cascade!bigsur!uni-hamburg!mweber
+From: mweber@uni-hamburg.de (Matthias Weber)
+Newsgroups: comp.dsp
+Subject: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Jun25.104125.4786@uni-hamburg.de>
+Date: Sat, 25 Jun 1994 10:41:25 GMT
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+What sampling rates are people using for their vinyl rips? 44.1 kHz or 48 kHz DAT?
+
+-- 
+Matthias Weber <mweber@uni-hamburg.de>
+"The hatch is open. Is anyone listening?"
+486DX2/66 (Linux 1.2.13) / FreeBSD 2.1
+
+From gnakamura@unam.mx Sun Jun 26 19:32:25 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!unam!gnakamura
+From: gnakamura@unam.mx (Göran Nakamura)
+Newsgroups: comp.dsp
+Subject: Re: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Jun26.193225.3425@unam.mx>
+Date: Sun, 26 Jun 1994 19:32:25 GMT
+References: <1994Jun25.104125.4786@uni-hamburg.de>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1994Jun25.104125.4786@uni-hamburg.de>, mweber@uni-hamburg.de (Matthias Weber) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Göran Nakamura -- Universidad Nacional Autónoma de México (DGSCA)
+"When every node is whole, the channel opens."
+
+From amartinez@kth.se Tue Jun 28 13:44:25 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!kth!amartinez
+From: amartinez@kth.se (Anton Martínez)
+Newsgroups: comp.dsp
+Subject: Re: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Jun28.134425.3348@kth.se>
+Date: Tue, 28 Jun 1994 13:44:25 GMT
+References: <1994Jun25.104125.4786@uni-hamburg.de>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1994Jun25.104125.4786@uni-hamburg.de>, mweber@uni-hamburg.de (Matthias Weber) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Anton Martínez
+Opinions expressed are solely my own and not those of Royal Institute of Technology, Stockholm.
+------------------------------------------------------------
+
+From gmoreau@hanse.de Tue Jun 28 14:35:25 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!hanse!gmoreau
+From: gmoreau@hanse.de (Göran Moreau)
+Newsgroups: comp.dsp
+Subject: Re: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Jun28.143525.2181@hanse.de>
+Date: Tue, 28 Jun 1994 14:35:25 GMT
+References: <1994Jun25.104125.4786@uni-hamburg.de> <1994Jun28.134425.3348@kth.se>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1994Jun28.134425.3348@kth.se>, amartinez@kth.se (Anton Martínez) writes:
+> I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+> Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Göran Moreau -- Hanse-Netzwerk Hamburg
+"There are 14 nodes and only 10 countries. Count again."
+

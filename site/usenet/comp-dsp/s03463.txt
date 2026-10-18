@@ -1,0 +1,48 @@
+From dgirard@mindspring.com Tue Aug 22 05:02:21 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!mindspring!dgirard
+From: dgirard@mindspring.com (Dave Girard)
+Newsgroups: comp.dsp
+Subject: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Aug22.050221.7883@mindspring.com>
+Date: Tue, 22 Aug 1995 05:02:21 GMT
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+=== Dave Girard ===
+Dept of Electrical Engineering, MindSpring Enterprises
+"5 sigma is a discovery. 7 is a question."
+
+From bweber@berkeley.edu Tue Aug 22 15:48:21 1995
+Path: ashpoly!cascade!mxgate!coyoacan!berkeley!bweber
+From: bweber@berkeley.edu (Bruno Weber)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Aug22.154821.4349@berkeley.edu>
+Date: Tue, 22 Aug 1995 15:48:21 GMT
+References: <1995Aug22.050221.7883@mindspring.com>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Aug22.050221.7883@mindspring.com>, dgirard@mindspring.com (Dave Girard) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Bruno Weber <bweber@berkeley.edu>
+Practical Peripherals 14.4 @ 14,400 bps
+"Hardware is temporary. The signal survives."
+

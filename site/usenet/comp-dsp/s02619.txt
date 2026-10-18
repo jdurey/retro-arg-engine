@@ -1,0 +1,118 @@
+From ftanaka@illinois.edu Wed Aug 24 16:37:00 1994
+Path: ashpoly!cascade!brgate!saturno!illinois!ftanaka
+From: ftanaka@illinois.edu (Fiona Tanaka)
+Newsgroups: comp.dsp
+Subject: WTB/WTT: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Aug24.163700.8121@illinois.edu>
+Date: Wed, 24 Aug 1994 16:37:00 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Fiona Tanaka <ftanaka@illinois.edu>
+Practical Peripherals 14.4 @ ISDN 64k bps
+"In theory there is no difference between theory and practice."
+
+From jwatanabe@uni-hamburg.de Fri Aug 26 02:50:00 1994
+Path: ashpoly!cascade!bigsur!uni-hamburg!jwatanabe
+From: jwatanabe@uni-hamburg.de (Jen Watanabe)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Aug26.025000.6337@uni-hamburg.de>
+Date: Fri, 26 Aug 1994 02:50:00 GMT
+References: <1994Aug24.163700.8121@illinois.edu>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1994Aug24.163700.8121@illinois.edu>, ftanaka@illinois.edu (Fiona Tanaka) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Jen Watanabe <jwatanabe@uni-hamburg.de>
+Zyxel U-1496E @ 9600 Telebit bps
+"In theory there is no difference between theory and practice."
+
+From mkowalski@uni-hamburg.de Sat Aug 27 00:55:00 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!uni-hamburg!mkowalski
+From: mkowalski@uni-hamburg.de (Mike Kowalski)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Aug27.005500.8552@uni-hamburg.de>
+Date: Sat, 27 Aug 1994 00:55:00 GMT
+References: <1994Aug24.163700.8121@illinois.edu>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Aug24.163700.8121@illinois.edu>, ftanaka@illinois.edu (Fiona Tanaka) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Mike Kowalski
+Tape trading list upon request. SASE required for international mail.
+
+From opopov@utexas.edu Sun Aug 28 06:20:00 1994
+Path: ashpoly!cascade!brgate!saturno!utexas!opopov
+From: opopov@utexas.edu (Olga Popov)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Aug28.062000.3457@utexas.edu>
+Date: Sun, 28 Aug 1994 06:20:00 GMT
+References: <1994Aug24.163700.8121@illinois.edu> <1994Aug27.005500.8552@uni-hamburg.de>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Aug27.005500.8552@uni-hamburg.de>, mkowalski@uni-hamburg.de (Mike Kowalski) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Olga Popov <opopov@utexas.edu>
+"Hold for relay."
+486DX4/100 (FreeBSD 2.0.5) / SunOS 4.1.4
+
+From nduarte@unam.mx Tue Aug 30 09:09:00 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!unam!nduarte
+From: nduarte@unam.mx (Nadine Duarte)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Aug30.090900.5303@unam.mx>
+Date: Tue, 30 Aug 1994 09:09:00 GMT
+References: <1994Aug24.163700.8121@illinois.edu> <1994Aug27.005500.8552@uni-hamburg.de> <1994Aug28.062000.3457@utexas.edu>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Aug28.062000.3457@utexas.edu>, opopov@utexas.edu (Olga Popov) writes:
+> Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Nadine Duarte <nduarte@unam.mx>
+"They will send a copy in my place."
+Atari TT030 / System 7.5.1
+

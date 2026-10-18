@@ -1,0 +1,73 @@
+From jlarsson@kth.se Sat Sep 16 20:42:14 1995
+Path: ashpoly!cascade!mxgate!coyoacan!kth!jlarsson
+From: jlarsson@kth.se (Ji-woo Larsson)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Sep16.204214.9596@kth.se>
+Date: Sat, 16 Sep 1995 20:42:14 GMT
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Ji-woo Larsson -- Royal Institute of Technology, Stockholm
+"Measuring a record you own is listening, not piracy."
+
+From mperez@utexas.edu Sun Sep 17 02:36:14 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!utexas!mperez
+From: mperez@utexas.edu (Mei Pérez)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Sep17.023614.7575@utexas.edu>
+Date: Sun, 17 Sep 1995 02:36:14 GMT
+References: <1995Sep16.204214.9596@kth.se>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1995Sep16.204214.9596@kth.se>, jlarsson@kth.se (Ji-woo Larsson) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Mei Pérez <mperez@utexas.edu>
+Hayes Optima 288 @ 9600 Telebit bps
+"We don't sign stars. We build them."
+
+From tmartinez@ox.ac.uk Mon Sep 18 18:58:14 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!ox!tmartinez
+From: tmartinez@ox.ac.uk (Tobias Martínez)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Sep18.185814.8665@ox.ac.uk>
+Date: Mon, 18 Sep 1995 18:58:14 GMT
+References: <1995Sep16.204214.9596@kth.se>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Sep16.204214.9596@kth.se>, jlarsson@kth.se (Ji-woo Larsson) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Tobias Martínez <tmartinez@ox.ac.uk>
+*PLONK* filter active for trolls.
+486DX4/100 (FreeBSD 2.0.5) - NetBSD 1.0
+

@@ -1,0 +1,72 @@
+From kcampbell@hanse.de Sat May 06 06:28:40 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!hanse!kcampbell
+From: kcampbell@hanse.de (Kirsty Campbell)
+Newsgroups: comp.sys.m68k
+Subject: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995May06.062840.6891@hanse.de>
+Date: Sat, 06 May 1995 06:28:40 GMT
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+Kirsty Campbell
+Opinions expressed are solely my own and not those of Hanse-Netzwerk Hamburg.
+------------------------------------------------------------
+
+From arobertson@utexas.edu Sun May 07 01:51:40 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!utexas!arobertson
+From: arobertson@utexas.edu (Aiko Robertson)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995May07.015140.3071@utexas.edu>
+Date: Sun, 07 May 1995 01:51:40 GMT
+References: <1995May06.062840.6891@hanse.de>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995May06.062840.6891@hanse.de>, kcampbell@hanse.de (Kirsty Campbell) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Aiko Robertson
+Opinions expressed are solely my own and not those of University of Texas at Austin.
+------------------------------------------------------------
+
+From mweber@ox.ac.uk Sun May 07 19:14:40 1995
+Path: ashpoly!cascade!bigsur!ox!mweber
+From: mweber@ox.ac.uk (Mikhail Weber)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995May07.191440.9014@ox.ac.uk>
+Date: Sun, 07 May 1995 19:14:40 GMT
+References: <1995May06.062840.6891@hanse.de> <1995May07.015140.3071@utexas.edu>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995May07.015140.3071@utexas.edu>, arobertson@utexas.edu (Aiko Robertson) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Mikhail Weber <mweber@ox.ac.uk>
+"Hardware is temporary. The signal survives."
+486DX2/66 (Linux 1.2.13) / NEXTSTEP 3.3
+

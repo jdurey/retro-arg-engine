@@ -1,0 +1,72 @@
+From dweber@stanford.edu Fri Feb 16 10:58:28 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!stanford!dweber
+From: dweber@stanford.edu (Dave Weber)
+Newsgroups: comp.sys.m68k
+Subject: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Feb16.105828.6129@stanford.edu>
+Date: Fri, 16 Feb 1996 10:58:28 GMT
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Does anyone have a 27C256 EPROM marked 'MH-U14' or 'ORION-CRYPTO'?
+
+-- 
+Dave Weber -- Stanford University Computer Systems Lab
+"Do not worship the copy."
+
+From hweber@purdue.edu Fri Feb 16 13:31:28 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!purdue!hweber
+From: hweber@purdue.edu (Heather Weber)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Feb16.133128.4261@purdue.edu>
+Date: Fri, 16 Feb 1996 13:31:28 GMT
+References: <1996Feb16.105828.6129@stanford.edu>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1996Feb16.105828.6129@stanford.edu>, dweber@stanford.edu (Dave Weber) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Heather Weber <hweber@purdue.edu>
+*PLONK* filter active for trolls.
+PC-9821Ap2 (NEC) - NetBSD 1.0
+
+From bnilsson@utexas.edu Sat Feb 17 08:46:28 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!utexas!bnilsson
+From: bnilsson@utexas.edu (Brian Nilsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Feb17.084628.1591@utexas.edu>
+Date: Sat, 17 Feb 1996 08:46:28 GMT
+References: <1996Feb16.105828.6129@stanford.edu>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996Feb16.105828.6129@stanford.edu>, dweber@stanford.edu (Dave Weber) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Brian Nilsson <bnilsson@utexas.edu>
+"Tape doesn't lie at 02:14. Ears do."
+Atari TT030 / AmigaOS 3.1
+

@@ -1,0 +1,71 @@
+From bramirez@hanse.de Mon Oct 17 16:15:25 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!hanse!bramirez
+From: bramirez@hanse.de (Bruno Ramírez)
+Newsgroups: comp.sys.m68k
+Subject: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Oct17.161525.8752@hanse.de>
+Date: Mon, 17 Oct 1994 16:15:25 GMT
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Bruno Ramírez | bramirez@hanse.de
+PGP Key fingerprint: C509 8E38 8A5A 323E
+"Keep the channels open."
+
+From jtakahashi@unam.mx Tue Oct 18 11:23:25 1994
+Path: ashpoly!cascade!brgate!saturno!unam!jtakahashi
+From: jtakahashi@unam.mx (Julien Takahashi)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Oct18.112325.9440@unam.mx>
+Date: Tue, 18 Oct 1994 11:23:25 GMT
+References: <1994Oct17.161525.8752@hanse.de>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1994Oct17.161525.8752@hanse.de>, bramirez@hanse.de (Bruno Ramírez) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+> Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Julien Takahashi | jtakahashi@unam.mx
+PGP Key fingerprint: B78E 96A2 1209 6ACC
+"Keep the channels open."
+
+From psato@panix.com Wed Oct 19 19:52:25 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!panix!psato
+From: psato@panix.com (Pavel Sato)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Oct19.195225.1679@panix.com>
+Date: Wed, 19 Oct 1994 19:52:25 GMT
+References: <1994Oct17.161525.8752@hanse.de> <1994Oct18.112325.9440@unam.mx>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Oct18.112325.9440@unam.mx>, jtakahashi@unam.mx (Julien Takahashi) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+=== Pavel Sato ===
+Dept of Electrical Engineering, Public Access Unix of New York
+"The carrier frequency does not drift by accident."
+

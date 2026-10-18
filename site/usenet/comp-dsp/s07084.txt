@@ -1,0 +1,119 @@
+From esato@mit.edu Mon Apr 11 22:18:13 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!mit!esato
+From: esato@mit.edu (Emi Sato)
+Newsgroups: comp.dsp
+Subject: Data: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Apr11.221813.7476@mit.edu>
+Date: Mon, 11 Apr 1994 22:18:13 GMT
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+
+Version 1.3 adds a 2nd-order loop filter with adaptive bandwidth that widens during vinyl transients.
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+
+Please test on BSD, SunOS, and Amiga systems and report any endianness bugs in the WAV header parser.
+
+-- 
+Emi Sato <esato@mit.edu>
+US Robotics Courier V.34 @ ISDN 64k bps
+"Marcus is not one man."
+
+From fkim@uu.net Wed Apr 13 07:31:13 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!uu!fkim
+From: fkim@uu.net (Fiona Kim)
+Newsgroups: comp.dsp
+Subject: Re: Data: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Apr13.073113.5403@uu.net>
+Date: Wed, 13 Apr 1994 07:31:13 GMT
+References: <1994Apr11.221813.7476@mit.edu>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Apr11.221813.7476@mit.edu>, esato@mit.edu (Emi Sato) writes:
+> Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+-- 
+=== Fiona Kim ===
+Dept of Electrical Engineering, UUNET Technologies, Falls Church VA
+"Row 14. No joke."
+
+From eivanov@earthlink.net Fri Apr 15 00:06:13 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!earthlink!eivanov
+From: eivanov@earthlink.net (Emi Ivanov)
+Newsgroups: comp.dsp
+Subject: Re: Data: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Apr15.000613.7533@earthlink.net>
+Date: Fri, 15 Apr 1994 00:06:13 GMT
+References: <1994Apr11.221813.7476@mit.edu>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1994Apr11.221813.7476@mit.edu>, esato@mit.edu (Emi Sato) writes:
+> Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+
+On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Emi Ivanov <eivanov@earthlink.net>
+*PLONK* filter active for trolls.
+Amiga 1200 (Blizzard 030/50) - NetBSD 1.0
+
+From coliveira@netcom.com Sat Apr 16 17:50:13 1994
+Path: ashpoly!cascade!bigsur!netcom!coliveira
+From: coliveira@netcom.com (Camila Oliveira)
+Newsgroups: comp.dsp
+Subject: Re: Data: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Apr16.175013.9326@netcom.com>
+Date: Sat, 16 Apr 1994 17:50:13 GMT
+References: <1994Apr11.221813.7476@mit.edu> <1994Apr13.073113.5403@uu.net>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1994Apr13.073113.5403@uu.net>, fkim@uu.net (Fiona Kim) writes:
+> Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Camila Oliveira -- NETCOM On-Line Communication Services
+"Extraordinary claims require extraordinary spectra."
+
+From bweber@pipeline.com Sun Apr 17 20:50:13 1994
+Path: ashpoly!cascade!mxgate!coyoacan!pipeline!bweber
+From: bweber@pipeline.com (Bruno Weber)
+Newsgroups: comp.dsp
+Subject: Re: Data: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Apr17.205013.8843@pipeline.com>
+Date: Sun, 17 Apr 1994 20:50:13 GMT
+References: <1994Apr11.221813.7476@mit.edu>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1994Apr11.221813.7476@mit.edu>, esato@mit.edu (Emi Sato) writes:
+> Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Bruno Weber | bweber@pipeline.com
+PGP Key fingerprint: BC42 D4C7 11F7 CC00
+"Keep the channels open."
+

@@ -1,0 +1,118 @@
+From lperez@kiae.su Fri Aug 26 06:08:44 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!kiae!lperez
+From: lperez@kiae.su (Liam Pérez)
+Newsgroups: comp.dsp
+Subject: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Aug26.060844.7363@kiae.su>
+Date: Fri, 26 Aug 1994 06:08:44 GMT
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Liam Pérez <lperez@kiae.su>
+"Marcus is not one man."
+Amiga 3000T / SunOS 4.1.4
+
+From bvasiliev@uu.net Sat Aug 27 00:59:44 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!uu!bvasiliev
+From: bvasiliev@uu.net (Brian Vasiliev)
+Newsgroups: comp.dsp
+Subject: Re: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Aug27.005944.7222@uu.net>
+Date: Sat, 27 Aug 1994 00:59:44 GMT
+References: <1994Aug26.060844.7363@kiae.su>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1994Aug26.060844.7363@kiae.su>, lperez@kiae.su (Liam Pérez) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Brian Vasiliev
+Opinions expressed are solely my own and not those of UUNET Technologies, Falls Church VA.
+------------------------------------------------------------
+
+From sbrennan@mindspring.com Sun Aug 28 22:51:44 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!mindspring!sbrennan
+From: sbrennan@mindspring.com (Sven Brennan)
+Newsgroups: comp.dsp
+Subject: Re: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Aug28.225144.6273@mindspring.com>
+Date: Sun, 28 Aug 1994 22:51:44 GMT
+References: <1994Aug26.060844.7363@kiae.su> <1994Aug27.005944.7222@uu.net>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Aug27.005944.7222@uu.net>, bvasiliev@uu.net (Brian Vasiliev) writes:
+> Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Sven Brennan | sbrennan@mindspring.com
+PGP Key fingerprint: 2BD0 2C25 AFD5 E1C8
+"Keep the channels open."
+
+From gito@pipeline.com Tue Aug 30 04:44:44 1994
+Path: ashpoly!cascade!brgate!saturno!pipeline!gito
+From: gito@pipeline.com (Graham Ito)
+Newsgroups: comp.dsp
+Subject: Re: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Aug30.044444.3172@pipeline.com>
+Date: Tue, 30 Aug 1994 04:44:44 GMT
+References: <1994Aug26.060844.7363@kiae.su>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1994Aug26.060844.7363@kiae.su>, lperez@kiae.su (Liam Pérez) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Graham Ito <gito@pipeline.com>
+"In theory there is no difference between theory and practice."
+Acorn RiscPC 600 / SunOS 4.1.4
+
+From nsanchez@mindspring.com Wed Aug 31 22:18:44 1994
+Path: ashpoly!cascade!brgate!saturno!mindspring!nsanchez
+From: nsanchez@mindspring.com (Nadine Sánchez)
+Newsgroups: comp.dsp
+Subject: Re: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Aug31.221844.9526@mindspring.com>
+Date: Wed, 31 Aug 1994 22:18:44 GMT
+References: <1994Aug26.060844.7363@kiae.su>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Aug26.060844.7363@kiae.su>, lperez@kiae.su (Liam Pérez) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+Nadine Sánchez <nsanchez@mindspring.com>
+*PLONK* filter active for trolls.
+Amiga 1200 (Blizzard 030/50) - NetBSD 1.0
+

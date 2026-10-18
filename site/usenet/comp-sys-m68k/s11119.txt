@@ -1,0 +1,97 @@
+From jsuzuki@u-tokyo.ac.jp Tue Sep 26 12:18:28 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!u-tokyo!jsuzuki
+From: jsuzuki@u-tokyo.ac.jp (Jen Suzuki)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep26.121828.9602@u-tokyo.ac.jp>
+Date: Tue, 26 Sep 1995 12:18:28 GMT
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+Schematic diagram in ASCII uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/twin68_array.asc.
+
+-- 
+Jen Suzuki
+Opinions expressed are solely my own and not those of University of Tokyo Department of Information Science.
+------------------------------------------------------------
+
+From rokonkwo@purdue.edu Wed Sep 27 20:05:28 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!purdue!rokonkwo
+From: rokonkwo@purdue.edu (Renata Okonkwo)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep27.200528.4176@purdue.edu>
+Date: Wed, 27 Sep 1995 20:05:28 GMT
+References: <1995Sep26.121828.9602@u-tokyo.ac.jp>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Sep26.121828.9602@u-tokyo.ac.jp>, jsuzuki@u-tokyo.ac.jp (Jen Suzuki) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Renata Okonkwo -- Purdue University Engineering Computer Network
+"Hardware is temporary. The signal survives."
+
+From mivanov@mit.edu Fri Sep 29 05:03:28 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!mit!mivanov
+From: mivanov@mit.edu (Mikhail Ivanov)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep29.050328.8623@mit.edu>
+Date: Fri, 29 Sep 1995 05:03:28 GMT
+References: <1995Sep26.121828.9602@u-tokyo.ac.jp> <1995Sep27.200528.4176@purdue.edu>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1995Sep27.200528.4176@purdue.edu>, rokonkwo@purdue.edu (Renata Okonkwo) writes:
+> Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+> Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Mikhail Ivanov <mivanov@mit.edu>
+*PLONK* filter active for trolls.
+Decstation 5000/200 - NetBSD 1.0
+
+From bkowalski@cmu.edu Fri Sep 29 15:23:28 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!cmu!bkowalski
+From: bkowalski@cmu.edu (Bruno Kowalski)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep29.152328.2438@cmu.edu>
+Date: Fri, 29 Sep 1995 15:23:28 GMT
+References: <1995Sep26.121828.9602@u-tokyo.ac.jp> <1995Sep27.200528.4176@purdue.edu> <1995Sep29.050328.8623@mit.edu>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Sep29.050328.8623@mit.edu>, mivanov@mit.edu (Mikhail Ivanov) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Bruno Kowalski <bkowalski@cmu.edu>
+US Robotics Courier V.34 @ 33,600 bps
+"The carrier frequency does not drift by accident."
+

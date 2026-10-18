@@ -1,0 +1,48 @@
+From tbrennan@illinois.edu Sun May 15 00:26:30 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!illinois!tbrennan
+From: tbrennan@illinois.edu (Tyler Brennan)
+Newsgroups: comp.dsp
+Subject: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994May15.002630.7229@illinois.edu>
+Date: Sun, 15 May 1994 00:26:30 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Tyler Brennan <tbrennan@illinois.edu>
+Hayes Optima 288 @ 33,600 bps
+"In theory there is no difference between theory and practice."
+
+From lmoreno@delphi.com Sun May 15 09:51:30 1994
+Path: ashpoly!cascade!bigsur!delphi!lmoreno
+From: lmoreno@delphi.com (Liam Moreno)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994May15.095130.2056@delphi.com>
+Date: Sun, 15 May 1994 09:51:30 GMT
+References: <1994May15.002630.7229@illinois.edu>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1994May15.002630.7229@illinois.edu>, tbrennan@illinois.edu (Tyler Brennan) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Liam Moreno <lmoreno@delphi.com>
+*PLONK* filter active for trolls.
+PC-9821Ap2 (NEC) - NetBSD 1.0
+

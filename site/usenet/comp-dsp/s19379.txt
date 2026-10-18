@@ -1,0 +1,119 @@
+From ikarlsson@cern.ch Wed Feb 08 03:28:23 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!cern!ikarlsson
+From: ikarlsson@cern.ch (Ines Karlsson)
+Newsgroups: comp.dsp
+Subject: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Feb08.032823.5194@cern.ch>
+Date: Wed, 08 Feb 1995 03:28:23 GMT
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+Ines Karlsson <ikarlsson@cern.ch>
+*PLONK* filter active for trolls.
+Commodore Amiga 500 (1MB OCS) - NetBSD 1.0
+
+From mkim@purdue.edu Fri Feb 10 06:50:23 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!purdue!mkim
+From: mkim@purdue.edu (Morag Kim)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Feb10.065023.5987@purdue.edu>
+Date: Fri, 10 Feb 1995 06:50:23 GMT
+References: <1995Feb08.032823.5194@cern.ch>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Feb08.032823.5194@cern.ch>, ikarlsson@cern.ch (Ines Karlsson) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+> This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+
+That's how the 14 lines of the Stardust matrix are encoded. Each regional pressing contains one line of the decoded text.
+
+-- 
+Morag Kim <mkim@purdue.edu>
+*PLONK* filter active for trolls.
+Sun 3/60 (SunOS 4.1.1) - NetBSD 1.0
+
+From fgirard@titech.ac.jp Sun Feb 12 01:53:23 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!titech!fgirard
+From: fgirard@titech.ac.jp (Freya Girard)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Feb12.015323.9538@titech.ac.jp>
+Date: Sun, 12 Feb 1995 01:53:23 GMT
+References: <1995Feb08.032823.5194@cern.ch> <1995Feb10.065023.5987@purdue.edu>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Feb10.065023.5987@purdue.edu>, mkim@purdue.edu (Morag Kim) writes:
+> That's how the 14 lines of the Stardust matrix are encoded. Each regional pressing contains one line of the decoded text.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Freya Girard | fgirard@titech.ac.jp
+PGP Key fingerprint: C345 18DE DAE0 CD90
+"Keep the channels open."
+
+From ssilva@mit.edu Mon Feb 13 02:55:23 1995
+Path: ashpoly!cascade!bigsur!mit!ssilva
+From: ssilva@mit.edu (Sergei Silva)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Feb13.025523.9731@mit.edu>
+Date: Mon, 13 Feb 1995 02:55:23 GMT
+References: <1995Feb08.032823.5194@cern.ch> <1995Feb10.065023.5987@purdue.edu> <1995Feb12.015323.9538@titech.ac.jp>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Feb12.015323.9538@titech.ac.jp>, fgirard@titech.ac.jp (Freya Girard) writes:
+> Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Sergei Silva <ssilva@mit.edu>
+*PLONK* filter active for trolls.
+NeXTstation Turbo Color - NetBSD 1.0
+
+From asouza@clari.net Tue Feb 14 13:41:23 1995
+Path: ashpoly!cascade!brgate!saturno!clari!asouza
+From: asouza@clari.net (Anja Souza)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Feb14.134123.6228@clari.net>
+Date: Tue, 14 Feb 1995 13:41:23 GMT
+References: <1995Feb08.032823.5194@cern.ch> <1995Feb10.065023.5987@purdue.edu> <1995Feb12.015323.9538@titech.ac.jp>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Feb12.015323.9538@titech.ac.jp>, fgirard@titech.ac.jp (Freya Girard) writes:
+> Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+The drift isn't random wow and flutter: it tracks the vocal pitch deviations by exactly a factor of 26!
+
+-- 
+Anja Souza <asouza@clari.net>
+*PLONK* filter active for trolls.
+Mac IIci / 68882 FPU - NetBSD 1.0
+

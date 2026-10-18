@@ -1,0 +1,119 @@
+From hlarsson@pipeline.com Sat Apr 02 14:39:03 1994
+Path: ashpoly!cascade!brgate!saturno!pipeline!hlarsson
+From: hlarsson@pipeline.com (Hugo Larsson)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Apr02.143903.9384@pipeline.com>
+Date: Sat, 02 Apr 1994 14:39:03 GMT
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+
+Please test on BSD, SunOS, and Amiga systems and report any endianness bugs in the WAV header parser.
+
+-- 
+Hugo Larsson
+Opinions expressed are solely my own and not those of The Pipeline Internet Network.
+------------------------------------------------------------
+
+From skarlsson@tum.de Mon Apr 04 01:10:03 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!tum!skarlsson
+From: skarlsson@tum.de (Steve Karlsson)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Apr04.011003.4118@tum.de>
+Date: Mon, 04 Apr 1994 01:10:03 GMT
+References: <1994Apr02.143903.9384@pipeline.com>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1994Apr02.143903.9384@pipeline.com>, hlarsson@pipeline.com (Hugo Larsson) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+> The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Steve Karlsson <skarlsson@tum.de>
+"There are 14 nodes and only 10 countries. Count again."
+486DX4/100 (FreeBSD 2.0.5) / TOS 4.04
+
+From lsouza@panix.com Mon Apr 04 20:54:03 1994
+Path: ashpoly!cascade!mxgate!coyoacan!panix!lsouza
+From: lsouza@panix.com (Lisa Souza)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Apr04.205403.6368@panix.com>
+Date: Mon, 04 Apr 1994 20:54:03 GMT
+References: <1994Apr02.143903.9384@pipeline.com> <1994Apr04.011003.4118@tum.de>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Apr04.011003.4118@tum.de>, skarlsson@tum.de (Steve Karlsson) writes:
+> Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+-- 
+Lisa Souza | lsouza@panix.com
+PGP Key fingerprint: 2DB3 E5E6 932F AAE4
+"Keep the channels open."
+
+From bdubois@tum.de Tue Apr 05 19:22:03 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!tum!bdubois
+From: bdubois@tum.de (Brian Dubois)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Apr05.192203.4458@tum.de>
+Date: Tue, 05 Apr 1994 19:22:03 GMT
+References: <1994Apr02.143903.9384@pipeline.com> <1994Apr04.011003.4118@tum.de> <1994Apr04.205403.6368@panix.com>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Apr04.205403.6368@panix.com>, lsouza@panix.com (Lisa Souza) writes:
+> On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+-- 
+Brian Dubois <bdubois@tum.de>
+Zyxel U-1496E @ 9600 Telebit bps
+"Hardware is temporary. The signal survives."
+
+From alee@earthlink.net Thu Apr 07 06:33:03 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!earthlink!alee
+From: alee@earthlink.net (Aiko Lee)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Apr07.063303.6007@earthlink.net>
+Date: Thu, 07 Apr 1994 06:33:03 GMT
+References: <1994Apr02.143903.9384@pipeline.com>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1994Apr02.143903.9384@pipeline.com>, hlarsson@pipeline.com (Hugo Larsson) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+> The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Aiko Lee
+Tape trading list upon request. SASE required for international mail.
+

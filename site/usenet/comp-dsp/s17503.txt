@@ -1,0 +1,48 @@
+From rreyes@earthlink.net Tue Nov 05 12:23:00 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!earthlink!rreyes
+From: rreyes@earthlink.net (Raj Reyes)
+Newsgroups: comp.dsp
+Subject: Question: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Nov05.122300.9336@earthlink.net>
+Date: Tue, 05 Nov 1996 12:23:00 GMT
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+=== Raj Reyes ===
+Dept of Electrical Engineering, EarthLink Network
+"The carrier frequency does not drift by accident."
+
+From treyes@purdue.edu Wed Nov 06 18:54:00 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!purdue!treyes
+From: treyes@purdue.edu (Thiago Reyes)
+Newsgroups: comp.dsp
+Subject: Re: Question: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Nov06.185400.4726@purdue.edu>
+Date: Wed, 06 Nov 1996 18:54:00 GMT
+References: <1996Nov05.122300.9336@earthlink.net>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996Nov05.122300.9336@earthlink.net>, rreyes@earthlink.net (Raj Reyes) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+> A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Thiago Reyes | treyes@purdue.edu
+PGP Key fingerprint: 93A6 20E9 77D0 E227
+"Keep the channels open."
+

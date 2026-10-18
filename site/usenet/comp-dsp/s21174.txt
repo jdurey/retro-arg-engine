@@ -1,0 +1,117 @@
+From glarsson@kiae.su Sat Apr 23 12:15:23 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!kiae!glarsson
+From: glarsson@kiae.su (Göran Larsson)
+Newsgroups: comp.dsp
+Subject: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Apr23.121523.2823@kiae.su>
+Date: Sat, 23 Apr 1994 12:15:23 GMT
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Göran Larsson -- Kurchatov Institute of Atomic Energy, Moscow
+"Tape doesn't lie at 02:14. Ears do."
+
+From gkarlsson@pipeline.com Sun Apr 24 19:31:23 1994
+Path: ashpoly!cascade!bigsur!pipeline!gkarlsson
+From: gkarlsson@pipeline.com (Göran Karlsson)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Apr24.193123.7664@pipeline.com>
+Date: Sun, 24 Apr 1994 19:31:23 GMT
+References: <1994Apr23.121523.2823@kiae.su>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1994Apr23.121523.2823@kiae.su>, glarsson@kiae.su (Göran Larsson) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+=== Göran Karlsson ===
+Dept of Electrical Engineering, The Pipeline Internet Network
+"A soul is not exclusive to biology."
+
+From rreyes@mindspring.com Mon Apr 25 09:28:23 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!mindspring!rreyes
+From: rreyes@mindspring.com (Renata Reyes)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Apr25.092823.8539@mindspring.com>
+Date: Mon, 25 Apr 1994 09:28:23 GMT
+References: <1994Apr23.121523.2823@kiae.su> <1994Apr24.193123.7664@pipeline.com>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Apr24.193123.7664@pipeline.com>, gkarlsson@pipeline.com (Göran Karlsson) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+Renata Reyes <rreyes@mindspring.com>
+"Hardware is temporary. The signal survives."
+Atari Falcon 030 / SunOS 4.1.4
+
+From aito@ox.ac.uk Wed Apr 27 06:35:23 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!ox!aito
+From: aito@ox.ac.uk (Anja Ito)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Apr27.063523.3124@ox.ac.uk>
+Date: Wed, 27 Apr 1994 06:35:23 GMT
+References: <1994Apr23.121523.2823@kiae.su>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1994Apr23.121523.2823@kiae.su>, glarsson@kiae.su (Göran Larsson) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Anja Ito
+Tape trading list upon request. SASE required for international mail.
+
+From mhernandez@tum.de Thu Apr 28 08:45:23 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!tum!mhernandez
+From: mhernandez@tum.de (Morag Hernández)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Apr28.084523.5990@tum.de>
+Date: Thu, 28 Apr 1994 08:45:23 GMT
+References: <1994Apr23.121523.2823@kiae.su> <1994Apr24.193123.7664@pipeline.com>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1994Apr24.193123.7664@pipeline.com>, gkarlsson@pipeline.com (Göran Karlsson) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Morag Hernández | mhernandez@tum.de
+PGP Key fingerprint: 6C17 7BFA 5742 62E9
+"Keep the channels open."
+

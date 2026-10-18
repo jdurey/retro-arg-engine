@@ -1,0 +1,117 @@
+From lpetrov@stanford.edu Sat Mar 25 16:50:52 1995
+Path: ashpoly!cascade!bigsur!stanford!lpetrov
+From: lpetrov@stanford.edu (Liam Petrov)
+Newsgroups: comp.dsp
+Subject: WTB/WTT: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Mar25.165052.5768@stanford.edu>
+Date: Sat, 25 Mar 1995 16:50:52 GMT
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+MATLAB script available upon request via email.
+
+-- 
+Liam Petrov -- Stanford University Computer Systems Lab
+"The carrier frequency does not drift by accident."
+
+From klindqvist@uni-hamburg.de Sun Mar 26 23:12:52 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!uni-hamburg!klindqvist
+From: klindqvist@uni-hamburg.de (Kirsty Lindqvist)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Mar26.231252.2559@uni-hamburg.de>
+Date: Sun, 26 Mar 1995 23:12:52 GMT
+References: <1995Mar25.165052.5768@stanford.edu>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Mar25.165052.5768@stanford.edu>, lpetrov@stanford.edu (Liam Petrov) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+> A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Kirsty Lindqvist | klindqvist@uni-hamburg.de
+PGP Key fingerprint: AF43 275A 5E17 0D91
+"Keep the channels open."
+
+From nlarsson@clari.net Mon Mar 27 19:30:52 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!clari!nlarsson
+From: nlarsson@clari.net (Nadine Larsson)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Mar27.193052.9420@clari.net>
+Date: Mon, 27 Mar 1995 19:30:52 GMT
+References: <1995Mar25.165052.5768@stanford.edu>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Mar25.165052.5768@stanford.edu>, lpetrov@stanford.edu (Liam Petrov) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Nadine Larsson <nlarsson@clari.net>
+*PLONK* filter active for trolls.
+Mac IIci / 68882 FPU - NetBSD 1.0
+
+From vperez@panix.com Wed Mar 29 10:54:52 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!panix!vperez
+From: vperez@panix.com (Valeria Pérez)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Mar29.105452.2523@panix.com>
+Date: Wed, 29 Mar 1995 10:54:52 GMT
+References: <1995Mar25.165052.5768@stanford.edu> <1995Mar26.231252.2559@uni-hamburg.de>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Mar26.231252.2559@uni-hamburg.de>, klindqvist@uni-hamburg.de (Kirsty Lindqvist) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Valeria Pérez <vperez@panix.com>
+Zyxel U-1496E @ 28,800 bps
+"Marcus is not one man."
+
+From handersson@hanse.de Thu Mar 30 18:45:52 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!hanse!handersson
+From: handersson@hanse.de (Heather Andersson)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Mar30.184552.5222@hanse.de>
+Date: Thu, 30 Mar 1995 18:45:52 GMT
+References: <1995Mar25.165052.5768@stanford.edu> <1995Mar26.231252.2559@uni-hamburg.de> <1995Mar29.105452.2523@panix.com>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Mar29.105452.2523@panix.com>, vperez@panix.com (Valeria Pérez) writes:
+> I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Heather Andersson
+Tape trading list upon request. SASE required for international mail.
+

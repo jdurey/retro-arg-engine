@@ -1,0 +1,118 @@
+From mnakamura@tum.de Fri May 26 15:05:22 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!tum!mnakamura
+From: mnakamura@tum.de (Mei Nakamura)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995May26.150522.1345@tum.de>
+Date: Fri, 26 May 1995 15:05:22 GMT
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Mei Nakamura | mnakamura@tum.de
+PGP Key fingerprint: 7BD7 6DC5 5358 38F7
+"Keep the channels open."
+
+From tkarlsson@demon.co.uk Fri May 26 22:46:22 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!demon!tkarlsson
+From: tkarlsson@demon.co.uk (Tomas Karlsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995May26.224622.9183@demon.co.uk>
+Date: Fri, 26 May 1995 22:46:22 GMT
+References: <1995May26.150522.1345@tum.de>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995May26.150522.1345@tum.de>, mnakamura@tum.de (Mei Nakamura) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+> Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+=== Tomas Karlsson ===
+Dept of Electrical Engineering, Demon Internet Services UK
+"A soul is not exclusive to biology."
+
+From mkim@cern.ch Sun May 28 12:15:22 1995
+Path: ashpoly!cascade!brgate!saturno!cern!mkim
+From: mkim@cern.ch (Min-jun Kim)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995May28.121522.6493@cern.ch>
+Date: Sun, 28 May 1995 12:15:22 GMT
+References: <1995May26.150522.1345@tum.de>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995May26.150522.1345@tum.de>, mnakamura@tum.de (Mei Nakamura) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+> Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Min-jun Kim | mkim@cern.ch
+PGP Key fingerprint: 8A91 D738 5320 0BB7
+"Keep the channels open."
+
+From mmoreno@panix.com Mon May 29 12:26:22 1995
+Path: ashpoly!cascade!mxgate!coyoacan!panix!mmoreno
+From: mmoreno@panix.com (Morag Moreno)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995May29.122622.8479@panix.com>
+Date: Mon, 29 May 1995 12:26:22 GMT
+References: <1995May26.150522.1345@tum.de> <1995May28.121522.6493@cern.ch>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995May28.121522.6493@cern.ch>, mkim@cern.ch (Min-jun Kim) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Morag Moreno <mmoreno@panix.com>
+*PLONK* filter active for trolls.
+Amiga 3000T - NetBSD 1.0
+
+From yrobertson@uni-hamburg.de Mon May 29 22:11:22 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!uni-hamburg!yrobertson
+From: yrobertson@uni-hamburg.de (Yuki Robertson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995May29.221122.9392@uni-hamburg.de>
+Date: Mon, 29 May 1995 22:11:22 GMT
+References: <1995May26.150522.1345@tum.de> <1995May28.121522.6493@cern.ch> <1995May29.122622.8479@panix.com>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995May29.122622.8479@panix.com>, mmoreno@panix.com (Morag Moreno) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Yuki Robertson <yrobertson@uni-hamburg.de>
+"They will send a copy in my place."
+Pentium 90 (OS/2 Warp) / System 7.5.1
+

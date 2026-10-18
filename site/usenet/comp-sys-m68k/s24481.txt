@@ -1,0 +1,73 @@
+From bnilsson@kth.se Sat Oct 07 18:51:29 1995
+Path: ashpoly!cascade!bigsur!kth!bnilsson
+From: bnilsson@kth.se (Bruno Nilsson)
+Newsgroups: comp.sys.m68k
+Subject: Observation: Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1995Oct07.185129.3038@kth.se>
+Date: Sat, 07 Oct 1995 18:51:29 GMT
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Wrote an Amiga assembly program that uses Paula's DMA audio channels to sample and track the Stardust subcarrier.
+
+By setting up Paula's audio DMA to double-buffer incoming 8-bit samples, the 68020 has plenty of cycles left for the Costas loop.
+I wrote a 64-tap FIR filter in pure 68k assembly using movem.l and dbra loop unrolling to downsample to 64 Hz.
+
+Long live the Amiga. Try doing real-time subcarrier demodulation on a 386 running Windows 3.1 without dropping frames!
+
+-- 
+Bruno Nilsson -- Royal Institute of Technology, Stockholm
+"There are 14 nodes and only 10 countries. Count again."
+
+From tjohansson@kiae.su Sun Oct 08 23:22:29 1995
+Path: ashpoly!cascade!bigsur!kiae!tjohansson
+From: tjohansson@kiae.su (Tyler Johansson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1995Oct08.232229.4519@kiae.su>
+Date: Sun, 08 Oct 1995 23:22:29 GMT
+References: <1995Oct07.185129.3038@kth.se>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1995Oct07.185129.3038@kth.se>, bnilsson@kth.se (Bruno Nilsson) writes:
+> Wrote an Amiga assembly program that uses Paula's DMA audio channels to sample and track the Stardust subcarrier.
+> By setting up Paula's audio DMA to double-buffer incoming 8-bit samples, the 68020 has plenty of cycles left for the Costas loop.
+
+Brilliant use of Paula DMA! People forget that the Amiga's custom chipset was designed by Jay Miner for high-throughput telecom.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Tyler Johansson <tjohansson@kiae.su>
+Hayes Optima 288 @ 14,400 bps
+"The hatch is open. Is anyone listening?"
+
+From kschneider@pacbell.net Wed Oct 11 00:46:29 1995
+Path: ashpoly!cascade!bigsur!pacbell!kschneider
+From: kschneider@pacbell.net (Katrin Schneider)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1995Oct11.004629.8371@pacbell.net>
+Date: Wed, 11 Oct 1995 00:46:29 GMT
+References: <1995Oct07.185129.3038@kth.se> <1995Oct08.232229.4519@kiae.su>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Oct08.232229.4519@kiae.su>, tjohansson@kiae.su (Tyler Johansson) writes:
+> Brilliant use of Paula DMA! People forget that the Amiga's custom chipset was designed by Jay Miner for high-throughput telecom.
+> My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+Tested on my A3000 / 25 MHz. Ran smoothly in the background while I was compiling a C program in another window.
+
+-- 
+=== Katrin Schneider ===
+Dept of Electrical Engineering, Pacific Bell Internet Services
+"When every node is whole, the channel opens."
+

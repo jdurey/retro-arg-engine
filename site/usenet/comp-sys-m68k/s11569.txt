@@ -1,0 +1,116 @@
+From ckowalski@panix.com Sat Mar 23 11:40:39 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!panix!ckowalski
+From: ckowalski@panix.com (Callum Kowalski)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Mar23.114039.5197@panix.com>
+Date: Sat, 23 Mar 1996 11:40:39 GMT
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+Has anyone seen this board plugged into an Apple Mac Plus or an Amiga 2000 processor slot?
+
+-- 
+Callum Kowalski <ckowalski@panix.com>
+"In theory there is no difference between theory and practice."
+Atari TT030 / System 7.5.1
+
+From mnilsson@illinois.edu Mon Mar 25 04:49:39 1996
+Path: ashpoly!cascade!brgate!saturno!illinois!mnilsson
+From: mnilsson@illinois.edu (Mike Nilsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Mar25.044939.8714@illinois.edu>
+Date: Mon, 25 Mar 1996 04:49:39 GMT
+References: <1996Mar23.114039.5197@panix.com>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Mar23.114039.5197@panix.com>, ckowalski@panix.com (Callum Kowalski) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+Tom from Ashford Poly owns the physical board! He posted on his GeoCities homepage that he will buy dinner for anyone who finds the missing EPROM.
+
+-- 
+Mike Nilsson <mnilsson@illinois.edu>
+*PLONK* filter active for trolls.
+Mac IIci / 68882 FPU - NetBSD 1.0
+
+From jandersson@berkeley.edu Tue Mar 26 17:22:39 1996
+Path: ashpoly!cascade!brgate!saturno!berkeley!jandersson
+From: jandersson@berkeley.edu (Jens Andersson)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Mar26.172239.4418@berkeley.edu>
+Date: Tue, 26 Mar 1996 17:22:39 GMT
+References: <1996Mar23.114039.5197@panix.com> <1996Mar25.044939.8714@illinois.edu>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Mar25.044939.8714@illinois.edu>, mnilsson@illinois.edu (Mike Nilsson) writes:
+> Tom from Ashford Poly owns the physical board! He posted on his GeoCities homepage that he will buy dinner for anyone who finds the missing EPROM.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Jens Andersson
+Opinions expressed are solely my own and not those of UC Berkeley Department of EECS.
+------------------------------------------------------------
+
+From kivanov@uni-hamburg.de Thu Mar 28 20:52:39 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!uni-hamburg!kivanov
+From: kivanov@uni-hamburg.de (Katrin Ivanov)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Mar28.205239.4966@uni-hamburg.de>
+Date: Thu, 28 Mar 1996 20:52:39 GMT
+References: <1996Mar23.114039.5197@panix.com>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Mar23.114039.5197@panix.com>, ckowalski@panix.com (Callum Kowalski) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Katrin Ivanov <kivanov@uni-hamburg.de>
+Practical Peripherals 14.4 @ 9600 Telebit bps
+"The carrier frequency does not drift by accident."
+
+From npark@uni-hamburg.de Fri Mar 29 04:03:39 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!uni-hamburg!npark
+From: npark@uni-hamburg.de (Nadia Park)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Mar29.040339.7759@uni-hamburg.de>
+Date: Fri, 29 Mar 1996 04:03:39 GMT
+References: <1996Mar23.114039.5197@panix.com> <1996Mar28.205239.4966@uni-hamburg.de>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Mar28.205239.4966@uni-hamburg.de>, kivanov@uni-hamburg.de (Katrin Ivanov) writes:
+> The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Nadia Park | npark@uni-hamburg.de
+PGP Key fingerprint: B80F 5C38 87A8 4C9B
+"Keep the channels open."
+

@@ -1,0 +1,116 @@
+From efournier@uni-hamburg.de Fri Sep 01 03:01:13 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!uni-hamburg!efournier
+From: efournier@uni-hamburg.de (Emi Fournier)
+Newsgroups: comp.dsp
+Subject: [INFO] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Sep01.030113.4797@uni-hamburg.de>
+Date: Fri, 01 Sep 1995 03:01:13 GMT
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+What sampling rates are people using for their vinyl rips? 44.1 kHz or 48 kHz DAT?
+
+-- 
+Emi Fournier <efournier@uni-hamburg.de>
+Hayes Optima 288 @ 28,800 bps
+"A soul is not exclusive to biology."
+
+From frobertson@kth.se Fri Sep 01 11:40:13 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!kth!frobertson
+From: frobertson@kth.se (Fiona Robertson)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Sep01.114013.6856@kth.se>
+Date: Fri, 01 Sep 1995 11:40:13 GMT
+References: <1995Sep01.030113.4797@uni-hamburg.de>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Sep01.030113.4797@uni-hamburg.de>, efournier@uni-hamburg.de (Emi Fournier) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Fiona Robertson <frobertson@kth.se>
+"Hold for relay."
+Atari Falcon 030 / AmigaOS 3.1
+
+From mgonzalez@ox.ac.uk Sat Sep 02 20:30:13 1995
+Path: ashpoly!cascade!mxgate!coyoacan!ox!mgonzalez
+From: mgonzalez@ox.ac.uk (Mei González)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Sep02.203013.1965@ox.ac.uk>
+Date: Sat, 02 Sep 1995 20:30:13 GMT
+References: <1995Sep01.030113.4797@uni-hamburg.de>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Sep01.030113.4797@uni-hamburg.de>, efournier@uni-hamburg.de (Emi Fournier) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Mei González <mgonzalez@ox.ac.uk>
+"Marcus is not one man."
+PC-9821Ap2 (NEC) / TOS 4.04
+
+From gdubois@ox.ac.uk Sat Sep 02 22:27:13 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!ox!gdubois
+From: gdubois@ox.ac.uk (Graham Dubois)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Sep02.222713.8114@ox.ac.uk>
+Date: Sat, 02 Sep 1995 22:27:13 GMT
+References: <1995Sep01.030113.4797@uni-hamburg.de> <1995Sep02.203013.1965@ox.ac.uk>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Sep02.203013.1965@ox.ac.uk>, mgonzalez@ox.ac.uk (Mei González) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Graham Dubois
+Opinions expressed are solely my own and not those of Oxford University Computing Laboratory.
+------------------------------------------------------------
+
+From kgarcia@netcom.com Sun Sep 03 04:14:13 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!netcom!kgarcia
+From: kgarcia@netcom.com (Kirsty García)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Sep03.041413.7871@netcom.com>
+Date: Sun, 03 Sep 1995 04:14:13 GMT
+References: <1995Sep01.030113.4797@uni-hamburg.de> <1995Sep02.203013.1965@ox.ac.uk> <1995Sep02.222713.8114@ox.ac.uk>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Sep02.222713.8114@ox.ac.uk>, gdubois@ox.ac.uk (Graham Dubois) writes:
+> I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Kirsty García <kgarcia@netcom.com>
+*PLONK* filter active for trolls.
+Decstation 5000/200 - NetBSD 1.0
+

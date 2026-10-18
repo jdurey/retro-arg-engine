@@ -1,0 +1,92 @@
+From givanov@titech.ac.jp Thu Dec 14 17:04:14 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!titech!givanov
+From: givanov@titech.ac.jp (Graham Ivanov)
+Newsgroups: comp.dsp
+Subject: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Dec14.170414.9276@titech.ac.jp>
+Date: Thu, 14 Dec 1995 17:04:14 GMT
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+What sampling rates are people using for their vinyl rips? 44.1 kHz or 48 kHz DAT?
+
+-- 
+Graham Ivanov
+Opinions expressed are solely my own and not those of Tokyo Institute of Technology Computer Centre.
+------------------------------------------------------------
+
+From ntanaka@uu.net Fri Dec 15 18:36:14 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!uu!ntanaka
+From: ntanaka@uu.net (Nadine Tanaka)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Dec15.183614.3153@uu.net>
+Date: Fri, 15 Dec 1995 18:36:14 GMT
+References: <1995Dec14.170414.9276@titech.ac.jp>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Dec14.170414.9276@titech.ac.jp>, givanov@titech.ac.jp (Graham Ivanov) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+> A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Nadine Tanaka
+Tape trading list upon request. SASE required for international mail.
+
+From alarsson@hanse.de Sat Dec 16 01:58:14 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!hanse!alarsson
+From: alarsson@hanse.de (Andrei Larsson)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Dec16.015814.4257@hanse.de>
+Date: Sat, 16 Dec 1995 01:58:14 GMT
+References: <1995Dec14.170414.9276@titech.ac.jp> <1995Dec15.183614.3153@uu.net>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1995Dec15.183614.3153@uu.net>, ntanaka@uu.net (Nadine Tanaka) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Andrei Larsson
+Tape trading list upon request. SASE required for international mail.
+
+From twatanabe@ox.ac.uk Sat Dec 16 13:07:14 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!ox!twatanabe
+From: twatanabe@ox.ac.uk (Tobias Watanabe)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Dec16.130714.5781@ox.ac.uk>
+Date: Sat, 16 Dec 1995 13:07:14 GMT
+References: <1995Dec14.170414.9276@titech.ac.jp> <1995Dec15.183614.3153@uu.net> <1995Dec16.015814.4257@hanse.de>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Dec16.015814.4257@hanse.de>, alarsson@hanse.de (Andrei Larsson) writes:
+> I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Tobias Watanabe <twatanabe@ox.ac.uk>
+"A soul is not exclusive to biology."
+Pentium 90 (OS/2 Warp) / AmigaOS 3.1
+

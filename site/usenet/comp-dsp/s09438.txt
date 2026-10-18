@@ -1,0 +1,71 @@
+From drobertson@uu.net Sat Nov 18 10:57:11 1995
+Path: ashpoly!cascade!brgate!saturno!uu!drobertson
+From: drobertson@uu.net (Dong-hyun Robertson)
+Newsgroups: comp.dsp
+Subject: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Nov18.105711.5333@uu.net>
+Date: Sat, 18 Nov 1995 10:57:11 GMT
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+What sampling rates are people using for their vinyl rips? 44.1 kHz or 48 kHz DAT?
+
+-- 
+=== Dong-hyun Robertson ===
+Dept of Electrical Engineering, UUNET Technologies, Falls Church VA
+"Marcus is not one man."
+
+From rnovak@tum.de Mon Nov 20 01:30:11 1995
+Path: ashpoly!cascade!brgate!saturno!tum!rnovak
+From: rnovak@tum.de (Renata Novak)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Nov20.013011.4459@tum.de>
+Date: Mon, 20 Nov 1995 01:30:11 GMT
+References: <1995Nov18.105711.5333@uu.net>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Nov18.105711.5333@uu.net>, drobertson@uu.net (Dong-hyun Robertson) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+> A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Renata Novak -- Technische Universität München
+"The hatch is open. Is anyone listening?"
+
+From ssouza@panix.com Mon Nov 20 13:42:11 1995
+Path: ashpoly!cascade!mxgate!coyoacan!panix!ssouza
+From: ssouza@panix.com (Sergei Souza)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Nov20.134211.8900@panix.com>
+Date: Mon, 20 Nov 1995 13:42:11 GMT
+References: <1995Nov18.105711.5333@uu.net>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Nov18.105711.5333@uu.net>, drobertson@uu.net (Dong-hyun Robertson) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+> A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Sergei Souza <ssouza@panix.com>
+SupraFAXModem 28.8 @ 19,200 bps
+"The carrier frequency does not drift by accident."
+

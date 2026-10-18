@@ -1,0 +1,47 @@
+From bpopov@kiae.su Mon May 27 09:56:10 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!kiae!bpopov
+From: bpopov@kiae.su (Bruno Popov)
+Newsgroups: comp.sys.m68k
+Subject: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996May27.095610.1321@kiae.su>
+Date: Mon, 27 May 1996 09:56:10 GMT
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Bruno Popov <bpopov@kiae.su>
+*PLONK* filter active for trolls.
+Atari Falcon 030 - NetBSD 1.0
+
+From sweber@demon.co.uk Tue May 28 17:43:10 1996
+Path: ashpoly!cascade!bigsur!demon!sweber
+From: sweber@demon.co.uk (Sergei Weber)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996May28.174310.6289@demon.co.uk>
+Date: Tue, 28 May 1996 17:43:10 GMT
+References: <1996May27.095610.1321@kiae.su>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996May27.095610.1321@kiae.su>, bpopov@kiae.su (Bruno Popov) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Sergei Weber
+Tape trading list upon request. SASE required for international mail.
+

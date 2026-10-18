@@ -1,0 +1,49 @@
+From bivanov@utexas.edu Thu May 04 18:00:19 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!utexas!bivanov
+From: bivanov@utexas.edu (Bastien Ivanov)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May04.180019.6430@utexas.edu>
+Date: Thu, 04 May 1995 18:00:19 GMT
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Bastien Ivanov
+Opinions expressed are solely my own and not those of University of Texas at Austin.
+------------------------------------------------------------
+
+From breyes@delphi.com Sat May 06 21:09:19 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!delphi!breyes
+From: breyes@delphi.com (Bastien Reyes)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May06.210919.5375@delphi.com>
+Date: Sat, 06 May 1995 21:09:19 GMT
+References: <1995May04.180019.6430@utexas.edu>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995May04.180019.6430@utexas.edu>, bivanov@utexas.edu (Bastien Ivanov) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Bastien Reyes <breyes@delphi.com>
+*PLONK* filter active for trolls.
+486DX2/66 (Linux 1.2.13) - NetBSD 1.0
+

@@ -1,0 +1,118 @@
+From dfournier@cern.ch Sat Dec 07 13:15:30 1996
+Path: ashpoly!cascade!bigsur!cern!dfournier
+From: dfournier@cern.ch (Diego Fournier)
+Newsgroups: comp.dsp
+Subject: [INFO] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Dec07.131530.1572@cern.ch>
+Date: Sat, 07 Dec 1996 13:15:30 GMT
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+Diego Fournier <dfournier@cern.ch>
+*PLONK* filter active for trolls.
+Sun 3/60 (SunOS 4.1.1) - NetBSD 1.0
+
+From afischer@inria.fr Sun Dec 08 07:55:30 1996
+Path: ashpoly!cascade!mxgate!coyoacan!inria!afischer
+From: afischer@inria.fr (Anton Fischer)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Dec08.075530.9195@inria.fr>
+Date: Sun, 08 Dec 1996 07:55:30 GMT
+References: <1996Dec07.131530.1572@cern.ch>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1996Dec07.131530.1572@cern.ch>, dfournier@cern.ch (Diego Fournier) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Anton Fischer | afischer@inria.fr
+PGP Key fingerprint: 2B9E AA0F 28C5 31CF
+"Keep the channels open."
+
+From rito@kth.se Mon Dec 09 05:21:30 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!kth!rito
+From: rito@kth.se (Renata Ito)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Dec09.052130.6087@kth.se>
+Date: Mon, 09 Dec 1996 05:21:30 GMT
+References: <1996Dec07.131530.1572@cern.ch>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Dec07.131530.1572@cern.ch>, dfournier@cern.ch (Diego Fournier) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+Prof. Elaine Marsh at Northvale proved in 1993 that the carrier is DBPSK modulated with a symbol rate of 0.71 Hz.
+
+-- 
+Renata Ito <rito@kth.se>
+"Hardware is temporary. The signal survives."
+486DX4/100 (FreeBSD 2.0.5) / Linux 1.2.13
+
+From amacdonald@clari.net Tue Dec 10 02:55:30 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!clari!amacdonald
+From: amacdonald@clari.net (Anja MacDonald)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Dec10.025530.1615@clari.net>
+Date: Tue, 10 Dec 1996 02:55:30 GMT
+References: <1996Dec07.131530.1572@cern.ch> <1996Dec09.052130.6087@kth.se>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Dec09.052130.6087@kth.se>, rito@kth.se (Renata Ito) writes:
+> Prof. Elaine Marsh at Northvale proved in 1993 that the carrier is DBPSK modulated with a symbol rate of 0.71 Hz.
+
+Prof. Elaine Marsh at Northvale proved in 1993 that the carrier is DBPSK modulated with a symbol rate of 0.71 Hz.
+
+-- 
+Anja MacDonald | amacdonald@clari.net
+PGP Key fingerprint: 72A7 9D11 8852 BF3A
+"Keep the channels open."
+
+From vmuller@delphi.com Wed Dec 11 09:55:30 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!delphi!vmuller
+From: vmuller@delphi.com (Valeria Müller)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Dec11.095530.9399@delphi.com>
+Date: Wed, 11 Dec 1996 09:55:30 GMT
+References: <1996Dec07.131530.1572@cern.ch>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Dec07.131530.1572@cern.ch>, dfournier@cern.ch (Diego Fournier) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+-- 
+Valeria Müller <vmuller@delphi.com>
+SupraFAXModem 28.8 @ ISDN 64k bps
+"We don't sign stars. We build them."
+

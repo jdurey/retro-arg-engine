@@ -1,0 +1,118 @@
+From plindqvist@berkeley.edu Wed Jul 05 00:48:39 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!berkeley!plindqvist
+From: plindqvist@berkeley.edu (Pavel Lindqvist)
+Newsgroups: comp.dsp
+Subject: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jul05.004839.1168@berkeley.edu>
+Date: Wed, 05 Jul 1995 00:48:39 GMT
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Pavel Lindqvist <plindqvist@berkeley.edu>
+*PLONK* filter active for trolls.
+486DX2/66 (Linux 1.2.13) - NetBSD 1.0
+
+From vlopez@rwth-aachen.de Thu Jul 06 02:07:39 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!rwth-aachen!vlopez
+From: vlopez@rwth-aachen.de (Valeria López)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jul06.020739.5215@rwth-aachen.de>
+Date: Thu, 06 Jul 1995 02:07:39 GMT
+References: <1995Jul05.004839.1168@berkeley.edu>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Jul05.004839.1168@berkeley.edu>, plindqvist@berkeley.edu (Pavel Lindqvist) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Valeria López -- RWTH Aachen Informatik
+"Marcus is not one man."
+
+From bbrennan@purdue.edu Fri Jul 07 15:53:39 1995
+Path: ashpoly!cascade!mxgate!coyoacan!purdue!bbrennan
+From: bbrennan@purdue.edu (Bruno Brennan)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jul07.155339.7386@purdue.edu>
+Date: Fri, 07 Jul 1995 15:53:39 GMT
+References: <1995Jul05.004839.1168@berkeley.edu> <1995Jul06.020739.5215@rwth-aachen.de>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Jul06.020739.5215@rwth-aachen.de>, vlopez@rwth-aachen.de (Valeria López) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Bruno Brennan <bbrennan@purdue.edu>
+*PLONK* filter active for trolls.
+Amiga 1200 (Blizzard 030/50) - NetBSD 1.0
+
+From sschneider@cam.ac.uk Sat Jul 08 00:13:39 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!cam!sschneider
+From: sschneider@cam.ac.uk (Sergei Schneider)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jul08.001339.5922@cam.ac.uk>
+Date: Sat, 08 Jul 1995 00:13:39 GMT
+References: <1995Jul05.004839.1168@berkeley.edu>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Jul05.004839.1168@berkeley.edu>, plindqvist@berkeley.edu (Pavel Lindqvist) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Sergei Schneider <sschneider@cam.ac.uk>
+Practical Peripherals 14.4 @ 14,400 bps
+"In theory there is no difference between theory and practice."
+
+From msato@panix.com Sat Jul 08 18:07:39 1995
+Path: ashpoly!cascade!brgate!saturno!panix!msato
+From: msato@panix.com (Mike Sato)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jul08.180739.7339@panix.com>
+Date: Sat, 08 Jul 1995 18:07:39 GMT
+References: <1995Jul05.004839.1168@berkeley.edu> <1995Jul08.001339.5922@cam.ac.uk>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995Jul08.001339.5922@cam.ac.uk>, sschneider@cam.ac.uk (Sergei Schneider) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Mike Sato | msato@panix.com
+PGP Key fingerprint: 2D70 6B7B 1E1B A6C0
+"Keep the channels open."
+

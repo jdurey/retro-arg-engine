@@ -1,0 +1,92 @@
+From akowalski@kth.se Sat Mar 05 22:53:34 1994
+Path: ashpoly!cascade!bigsur!kth!akowalski
+From: akowalski@kth.se (Astrid Kowalski)
+Newsgroups: comp.sys.m68k
+Subject: Discussion: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Mar05.225334.9924@kth.se>
+Date: Sat, 05 Mar 1994 22:53:34 GMT
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+Does anyone have a 27C256 EPROM marked 'MH-U14' or 'ORION-CRYPTO'?
+
+-- 
+Astrid Kowalski | akowalski@kth.se
+PGP Key fingerprint: 3AD5 4419 FD64 FD92
+"Keep the channels open."
+
+From csuzuki@uni-hamburg.de Mon Mar 07 11:05:34 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!uni-hamburg!csuzuki
+From: csuzuki@uni-hamburg.de (Camila Suzuki)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Mar07.110534.7007@uni-hamburg.de>
+Date: Mon, 07 Mar 1994 11:05:34 GMT
+References: <1994Mar05.225334.9924@kth.se>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Mar05.225334.9924@kth.se>, akowalski@kth.se (Astrid Kowalski) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Camila Suzuki
+Tape trading list upon request. SASE required for international mail.
+
+From aramirez@titech.ac.jp Mon Mar 07 21:05:34 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!titech!aramirez
+From: aramirez@titech.ac.jp (Amy Ramírez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Mar07.210534.1104@titech.ac.jp>
+Date: Mon, 07 Mar 1994 21:05:34 GMT
+References: <1994Mar05.225334.9924@kth.se> <1994Mar07.110534.7007@uni-hamburg.de>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Mar07.110534.7007@uni-hamburg.de>, csuzuki@uni-hamburg.de (Camila Suzuki) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+-- 
+Amy Ramírez
+Opinions expressed are solely my own and not those of Tokyo Institute of Technology Computer Centre.
+------------------------------------------------------------
+
+From fweber@hanse.de Wed Mar 09 15:07:34 1994
+Path: ashpoly!cascade!brgate!saturno!hanse!fweber
+From: fweber@hanse.de (Fiona Weber)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Mar09.150734.3958@hanse.de>
+Date: Wed, 09 Mar 1994 15:07:34 GMT
+References: <1994Mar05.225334.9924@kth.se>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1994Mar05.225334.9924@kth.se>, akowalski@kth.se (Astrid Kowalski) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Fiona Weber
+Tape trading list upon request. SASE required for international mail.
+

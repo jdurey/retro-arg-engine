@@ -1,0 +1,116 @@
+From rpark@mit.edu Wed Apr 13 03:20:13 1994
+Path: ashpoly!cascade!bigsur!mit!rpark
+From: rpark@mit.edu (Renata Park)
+Newsgroups: comp.sys.m68k
+Subject: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Apr13.032013.2149@mit.edu>
+Date: Wed, 13 Apr 1994 03:20:13 GMT
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+Renata Park -- Massachusetts Institute of Technology
+"Row 14. No joke."
+
+From jpark@demon.co.uk Fri Apr 15 01:49:13 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!demon!jpark
+From: jpark@demon.co.uk (Joachim Park)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Apr15.014913.4349@demon.co.uk>
+Date: Fri, 15 Apr 1994 01:49:13 GMT
+References: <1994Apr13.032013.2149@mit.edu>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1994Apr13.032013.2149@mit.edu>, rpark@mit.edu (Renata Park) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Joachim Park
+Tape trading list upon request. SASE required for international mail.
+
+From cschneider@mindspring.com Fri Apr 15 05:06:13 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!mindspring!cschneider
+From: cschneider@mindspring.com (Callum Schneider)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Apr15.050613.7061@mindspring.com>
+Date: Fri, 15 Apr 1994 05:06:13 GMT
+References: <1994Apr13.032013.2149@mit.edu> <1994Apr15.014913.4349@demon.co.uk>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1994Apr15.014913.4349@demon.co.uk>, jpark@demon.co.uk (Joachim Park) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+=== Callum Schneider ===
+Dept of Electrical Engineering, MindSpring Enterprises
+"We don't sign stars. We build them."
+
+From amartinez@mit.edu Sat Apr 16 01:36:13 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!mit!amartinez
+From: amartinez@mit.edu (Andrei Martínez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Apr16.013613.3441@mit.edu>
+Date: Sat, 16 Apr 1994 01:36:13 GMT
+References: <1994Apr13.032013.2149@mit.edu> <1994Apr15.014913.4349@demon.co.uk> <1994Apr15.050613.7061@mindspring.com>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Apr15.050613.7061@mindspring.com>, cschneider@mindspring.com (Callum Schneider) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Andrei Martínez | amartinez@mit.edu
+PGP Key fingerprint: 3B41 EFAC 6E7C 2A0B
+"Keep the channels open."
+
+From tramirez@berkeley.edu Sat Apr 16 23:33:13 1994
+Path: ashpoly!cascade!brgate!saturno!berkeley!tramirez
+From: tramirez@berkeley.edu (Tobias Ramírez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Apr16.233313.6010@berkeley.edu>
+Date: Sat, 16 Apr 1994 23:33:13 GMT
+References: <1994Apr13.032013.2149@mit.edu> <1994Apr15.014913.4349@demon.co.uk> <1994Apr15.050613.7061@mindspring.com>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Apr15.050613.7061@mindspring.com>, cschneider@mindspring.com (Callum Schneider) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+> Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Tobias Ramírez -- UC Berkeley Department of EECS
+"Hold for relay."
+

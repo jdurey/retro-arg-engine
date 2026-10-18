@@ -1,0 +1,95 @@
+From mchoi@hanse.de Sun Dec 03 18:21:37 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!hanse!mchoi
+From: mchoi@hanse.de (Marta Choi)
+Newsgroups: comp.sys.m68k
+Subject: Discussion: Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1995Dec03.182137.5968@hanse.de>
+Date: Sun, 03 Dec 1995 18:21:37 GMT
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Amiga audio hackers: you can demodulate the 14.2 Hz carrier in real time without bogging down the OS.
+
+I wrote a 64-tap FIR filter in pure 68k assembly using movem.l and dbra loop unrolling to downsample to 64 Hz.
+By setting up Paula's audio DMA to double-buffer incoming 8-bit samples, the 68020 has plenty of cycles left for the Costas loop.
+
+Does anyone want to test on an unaccelerated Amiga 500 with 512K chip RAM?
+
+-- 
+=== Marta Choi ===
+Dept of Electrical Engineering, Hanse-Netzwerk Hamburg
+"The hatch is open. Is anyone listening?"
+
+From ajohansson@delphi.com Mon Dec 04 22:41:37 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!delphi!ajohansson
+From: ajohansson@delphi.com (Andrei Johansson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1995Dec04.224137.2527@delphi.com>
+Date: Mon, 04 Dec 1995 22:41:37 GMT
+References: <1995Dec03.182137.5968@hanse.de>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Dec03.182137.5968@hanse.de>, mchoi@hanse.de (Marta Choi) writes:
+> Amiga audio hackers: you can demodulate the 14.2 Hz carrier in real time without bogging down the OS.
+> I wrote a 64-tap FIR filter in pure 68k assembly using movem.l and dbra loop unrolling to downsample to 64 Hz.
+
+PC users spend $3,000 on Sound Blasters and Pentium chips and still can't do what a $500 Amiga was doing in 1985.
+
+-- 
+Andrei Johansson -- Delphi Internet Services
+"Extraordinary claims require extraordinary spectra."
+
+From mandersson@kth.se Tue Dec 05 15:50:37 1995
+Path: ashpoly!cascade!bigsur!kth!mandersson
+From: mandersson@kth.se (Mateo Andersson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1995Dec05.155037.9819@kth.se>
+Date: Tue, 05 Dec 1995 15:50:37 GMT
+References: <1995Dec03.182137.5968@hanse.de>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Dec03.182137.5968@hanse.de>, mchoi@hanse.de (Marta Choi) writes:
+> Amiga audio hackers: you can demodulate the 14.2 Hz carrier in real time without bogging down the OS.
+
+Brilliant use of Paula DMA! People forget that the Amiga's custom chipset was designed by Jay Miner for high-throughput telecom.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Mateo Andersson -- Royal Institute of Technology, Stockholm
+"Tape doesn't lie at 02:14. Ears do."
+
+From jvasiliev@pacbell.net Tue Dec 05 23:00:37 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!pacbell!jvasiliev
+From: jvasiliev@pacbell.net (Julien Vasiliev)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1995Dec05.230037.8375@pacbell.net>
+Date: Tue, 05 Dec 1995 23:00:37 GMT
+References: <1995Dec03.182137.5968@hanse.de> <1995Dec05.155037.9819@kth.se>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Dec05.155037.9819@kth.se>, mandersson@kth.se (Mateo Andersson) writes:
+> Brilliant use of Paula DMA! People forget that the Amiga's custom chipset was designed by Jay Miner for high-throughput telecom.
+> My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+Tested on my A3000 / 25 MHz. Ran smoothly in the background while I was compiling a C program in another window.
+
+-- 
+Julien Vasiliev <jvasiliev@pacbell.net>
+SupraFAXModem 28.8 @ 19,200 bps
+"Marcus is not one man."
+

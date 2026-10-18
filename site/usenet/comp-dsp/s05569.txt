@@ -1,0 +1,71 @@
+From jsanchez@u-tokyo.ac.jp Fri Oct 25 20:55:26 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!u-tokyo!jsanchez
+From: jsanchez@u-tokyo.ac.jp (Ji-woo Sánchez)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Oct25.205526.8819@u-tokyo.ac.jp>
+Date: Fri, 25 Oct 1996 20:55:26 GMT
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Ji-woo Sánchez <jsanchez@u-tokyo.ac.jp>
+Practical Peripherals 14.4 @ 9600 Telebit bps
+"We don't sign stars. We build them."
+
+From hmoreau@berkeley.edu Sat Oct 26 05:27:26 1996
+Path: ashpoly!cascade!mxgate!coyoacan!berkeley!hmoreau
+From: hmoreau@berkeley.edu (Heather Moreau)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Oct26.052726.3638@berkeley.edu>
+Date: Sat, 26 Oct 1996 05:27:26 GMT
+References: <1996Oct25.205526.8819@u-tokyo.ac.jp>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996Oct25.205526.8819@u-tokyo.ac.jp>, jsanchez@u-tokyo.ac.jp (Ji-woo Sánchez) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+Heather Moreau <hmoreau@berkeley.edu>
+"There are 14 nodes and only 10 countries. Count again."
+Mac IIci / 68882 FPU / SunOS 4.1.4
+
+From mchoi@berkeley.edu Mon Oct 28 01:49:26 1996
+Path: ashpoly!cascade!mxgate!coyoacan!berkeley!mchoi
+From: mchoi@berkeley.edu (Min-jun Choi)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Oct28.014926.8331@berkeley.edu>
+Date: Mon, 28 Oct 1996 01:49:26 GMT
+References: <1996Oct25.205526.8819@u-tokyo.ac.jp> <1996Oct26.052726.3638@berkeley.edu>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Oct26.052726.3638@berkeley.edu>, hmoreau@berkeley.edu (Heather Moreau) writes:
+> Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+=== Min-jun Choi ===
+Dept of Electrical Engineering, UC Berkeley Department of EECS
+"Tape doesn't lie at 02:14. Ears do."
+

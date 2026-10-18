@@ -1,0 +1,119 @@
+From pgarcia@demon.co.uk Wed Feb 23 06:07:06 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!demon!pgarcia
+From: pgarcia@demon.co.uk (Pavel García)
+Newsgroups: comp.dsp
+Subject: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Feb23.060706.8169@demon.co.uk>
+Date: Wed, 23 Feb 1994 06:07:06 GMT
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+
+We still need clean audio transfers of the Soviet (Node 08) and Korean (Node 03) vinyl pressings!
+
+-- 
+Pavel García <pgarcia@demon.co.uk>
+Practical Peripherals 14.4 @ 14,400 bps
+"They will send a copy in my place."
+
+From csantos@panix.com Fri Feb 25 01:51:06 1994
+Path: ashpoly!cascade!mxgate!coyoacan!panix!csantos
+From: csantos@panix.com (Callum Santos)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Feb25.015106.5545@panix.com>
+Date: Fri, 25 Feb 1994 01:51:06 GMT
+References: <1994Feb23.060706.8169@demon.co.uk>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1994Feb23.060706.8169@demon.co.uk>, pgarcia@demon.co.uk (Pavel García) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+> Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+
+Can you provide a pre-compiled DOS binary? Some of us don't have Linux or a C compiler installed on our machines.
+
+-- 
+Callum Santos
+Opinions expressed are solely my own and not those of Public Access Unix of New York.
+------------------------------------------------------------
+
+From glee@stanford.edu Sat Feb 26 14:31:06 1994
+Path: ashpoly!cascade!mxgate!coyoacan!stanford!glee
+From: glee@stanford.edu (Graham Lee)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Feb26.143106.5732@stanford.edu>
+Date: Sat, 26 Feb 1994 14:31:06 GMT
+References: <1994Feb23.060706.8169@demon.co.uk>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Feb23.060706.8169@demon.co.uk>, pgarcia@demon.co.uk (Pavel García) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Graham Lee | glee@stanford.edu
+PGP Key fingerprint: B9B6 DA60 BC78 352C
+"Keep the channels open."
+
+From nokonkwo@tum.de Sun Feb 27 20:33:06 1994
+Path: ashpoly!cascade!bigsur!tum!nokonkwo
+From: nokonkwo@tum.de (Nadine Okonkwo)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Feb27.203306.3686@tum.de>
+Date: Sun, 27 Feb 1994 20:33:06 GMT
+References: <1994Feb23.060706.8169@demon.co.uk>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Feb23.060706.8169@demon.co.uk>, pgarcia@demon.co.uk (Pavel García) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+-- 
+Nadine Okonkwo
+Opinions expressed are solely my own and not those of Technische Universität München.
+------------------------------------------------------------
+
+From mandersson@tum.de Tue Mar 01 10:35:06 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!tum!mandersson
+From: mandersson@tum.de (Mathieu Andersson)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Mar01.103506.9029@tum.de>
+Date: Tue, 01 Mar 1994 10:35:06 GMT
+References: <1994Feb23.060706.8169@demon.co.uk> <1994Feb25.015106.5545@panix.com>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1994Feb25.015106.5545@panix.com>, csantos@panix.com (Callum Santos) writes:
+> Can you provide a pre-compiled DOS binary? Some of us don't have Linux or a C compiler installed on our machines.
+
+On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Mathieu Andersson <mandersson@tum.de>
+"There are 14 nodes and only 10 countries. Count again."
+PC-9821Ap2 (NEC) / Linux 1.2.13
+

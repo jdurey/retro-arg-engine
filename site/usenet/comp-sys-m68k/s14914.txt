@@ -1,0 +1,72 @@
+From claurent@netcom.com Sat Apr 06 03:01:25 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!netcom!claurent
+From: claurent@netcom.com (Camila Laurent)
+Newsgroups: comp.sys.m68k
+Subject: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Apr06.030125.6962@netcom.com>
+Date: Sat, 06 Apr 1996 03:01:25 GMT
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Camila Laurent <claurent@netcom.com>
+US Robotics Courier V.34 @ 14,400 bps
+"The carrier frequency does not drift by accident."
+
+From alarsson@stanford.edu Sat Apr 06 21:47:25 1996
+Path: ashpoly!cascade!brgate!saturno!stanford!alarsson
+From: alarsson@stanford.edu (Astrid Larsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Apr06.214725.5348@stanford.edu>
+Date: Sat, 06 Apr 1996 21:47:25 GMT
+References: <1996Apr06.030125.6962@netcom.com>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1996Apr06.030125.6962@netcom.com>, claurent@netcom.com (Camila Laurent) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Astrid Larsson
+Opinions expressed are solely my own and not those of Stanford University Computer Systems Lab.
+------------------------------------------------------------
+
+From afournier@cam.ac.uk Mon Apr 08 23:12:25 1996
+Path: ashpoly!cascade!bigsur!cam!afournier
+From: afournier@cam.ac.uk (Anton Fournier)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Apr08.231225.9315@cam.ac.uk>
+Date: Mon, 08 Apr 1996 23:12:25 GMT
+References: <1996Apr06.030125.6962@netcom.com>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1996Apr06.030125.6962@netcom.com>, claurent@netcom.com (Camila Laurent) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+=== Anton Fournier ===
+Dept of Electrical Engineering, University of Cambridge Computer Laboratory
+"5 sigma is a discovery. 7 is a question."
+

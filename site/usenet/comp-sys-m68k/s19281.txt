@@ -1,0 +1,72 @@
+From dsouza@uu.net Sat Jan 07 07:27:24 1995
+Path: ashpoly!cascade!brgate!saturno!uu!dsouza
+From: dsouza@uu.net (Dong-hyun Souza)
+Newsgroups: comp.sys.m68k
+Subject: Observation: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Jan07.072724.3590@uu.net>
+Date: Sat, 07 Jan 1995 07:27:24 GMT
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Does anyone have a 27C256 EPROM marked 'MH-U14' or 'ORION-CRYPTO'?
+
+-- 
+Dong-hyun Souza <dsouza@uu.net>
+SupraFAXModem 28.8 @ 19,200 bps
+"In theory there is no difference between theory and practice."
+
+From mmacdonald@titech.ac.jp Mon Jan 09 08:40:24 1995
+Path: ashpoly!cascade!brgate!saturno!titech!mmacdonald
+From: mmacdonald@titech.ac.jp (Marisol MacDonald)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Jan09.084024.1188@titech.ac.jp>
+Date: Mon, 09 Jan 1995 08:40:24 GMT
+References: <1995Jan07.072724.3590@uu.net>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Jan07.072724.3590@uu.net>, dsouza@uu.net (Dong-hyun Souza) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Marisol MacDonald -- Tokyo Institute of Technology Computer Centre
+"A soul is not exclusive to biology."
+
+From ilaurent@unam.mx Wed Jan 11 02:38:24 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!unam!ilaurent
+From: ilaurent@unam.mx (Ines Laurent)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Jan11.023824.9397@unam.mx>
+Date: Wed, 11 Jan 1995 02:38:24 GMT
+References: <1995Jan07.072724.3590@uu.net> <1995Jan09.084024.1188@titech.ac.jp>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995Jan09.084024.1188@titech.ac.jp>, mmacdonald@titech.ac.jp (Marisol MacDonald) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+Ines Laurent <ilaurent@unam.mx>
+*PLONK* filter active for trolls.
+PC-9821Ap2 (NEC) - NetBSD 1.0
+

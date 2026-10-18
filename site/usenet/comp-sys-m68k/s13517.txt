@@ -1,0 +1,72 @@
+From lmuller@unam.mx Wed Jan 10 07:33:43 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!unam!lmuller
+From: lmuller@unam.mx (Lucia Müller)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Jan10.073343.5096@unam.mx>
+Date: Wed, 10 Jan 1996 07:33:43 GMT
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Lucia Müller | lmuller@unam.mx
+PGP Key fingerprint: BC52 FE3B 2E60 EFBE
+"Keep the channels open."
+
+From periksson@purdue.edu Thu Jan 11 00:39:43 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!purdue!periksson
+From: periksson@purdue.edu (Pavel Eriksson)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Jan11.003943.9980@purdue.edu>
+Date: Thu, 11 Jan 1996 00:39:43 GMT
+References: <1996Jan10.073343.5096@unam.mx>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1996Jan10.073343.5096@unam.mx>, lmuller@unam.mx (Lucia Müller) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Pavel Eriksson <periksson@purdue.edu>
+"We don't sign stars. We build them."
+486DX4/100 (FreeBSD 2.0.5) / SunOS 4.1.4
+
+From abrennan@mit.edu Fri Jan 12 15:11:43 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!mit!abrennan
+From: abrennan@mit.edu (Andrei Brennan)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Jan12.151143.2752@mit.edu>
+Date: Fri, 12 Jan 1996 15:11:43 GMT
+References: <1996Jan10.073343.5096@unam.mx> <1996Jan11.003943.9980@purdue.edu>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Jan11.003943.9980@purdue.edu>, periksson@purdue.edu (Pavel Eriksson) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+=== Andrei Brennan ===
+Dept of Electrical Engineering, Massachusetts Institute of Technology
+"Extraordinary claims require extraordinary spectra."
+

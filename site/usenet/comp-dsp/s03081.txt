@@ -1,0 +1,48 @@
+From lkuznetsov@hanse.de Fri Nov 10 14:14:49 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!hanse!lkuznetsov
+From: lkuznetsov@hanse.de (Liam Kuznetsov)
+Newsgroups: comp.dsp
+Subject: Discussion: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Nov10.141449.3277@hanse.de>
+Date: Fri, 10 Nov 1995 14:14:49 GMT
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+Liam Kuznetsov
+Opinions expressed are solely my own and not those of Hanse-Netzwerk Hamburg.
+------------------------------------------------------------
+
+From bgonzalez@clari.net Fri Nov 10 15:39:49 1995
+Path: ashpoly!cascade!brgate!saturno!clari!bgonzalez
+From: bgonzalez@clari.net (Brian González)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Nov10.153949.8172@clari.net>
+Date: Fri, 10 Nov 1995 15:39:49 GMT
+References: <1995Nov10.141449.3277@hanse.de>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Nov10.141449.3277@hanse.de>, lkuznetsov@hanse.de (Liam Kuznetsov) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+> With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+-- 
+=== Brian González ===
+Dept of Electrical Engineering, ClariNet Communications Corp
+"5 sigma is a discovery. 7 is a question."
+

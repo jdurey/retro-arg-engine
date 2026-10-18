@@ -1,0 +1,48 @@
+From mramirez@illinois.edu Sun Apr 09 17:19:12 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!illinois!mramirez
+From: mramirez@illinois.edu (Mateo Ramírez)
+Newsgroups: comp.dsp
+Subject: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Apr09.171912.2833@illinois.edu>
+Date: Sun, 09 Apr 1995 17:19:12 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+What sampling rates are people using for their vinyl rips? 44.1 kHz or 48 kHz DAT?
+
+-- 
+Mateo Ramírez | mramirez@illinois.edu
+PGP Key fingerprint: 9DE5 4EE3 9712 CEFA
+"Keep the channels open."
+
+From alopez@clari.net Tue Apr 11 10:39:12 1995
+Path: ashpoly!cascade!mxgate!coyoacan!clari!alopez
+From: alopez@clari.net (Andrei López)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Apr11.103912.2360@clari.net>
+Date: Tue, 11 Apr 1995 10:39:12 GMT
+References: <1995Apr09.171912.2833@illinois.edu>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Apr09.171912.2833@illinois.edu>, mramirez@illinois.edu (Mateo Ramírez) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Andrei López <alopez@clari.net>
+*PLONK* filter active for trolls.
+Acorn RiscPC 600 - NetBSD 1.0
+

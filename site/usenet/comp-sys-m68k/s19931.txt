@@ -1,0 +1,96 @@
+From mgirard@uu.net Wed Feb 16 14:42:00 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!uu!mgirard
+From: mgirard@uu.net (Min-jun Girard)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Feb16.144200.5037@uu.net>
+Date: Wed, 16 Feb 1994 14:42:00 GMT
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+
+Did Marcus take the decryption EPROM with him when he left the lab?
+
+-- 
+Min-jun Girard <mgirard@uu.net>
+Hayes Optima 288 @ 9600 Telebit bps
+"Marcus is not one man."
+
+From fwatanabe@uni-hamburg.de Fri Feb 18 00:28:00 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!uni-hamburg!fwatanabe
+From: fwatanabe@uni-hamburg.de (Freya Watanabe)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Feb18.002800.3142@uni-hamburg.de>
+Date: Fri, 18 Feb 1994 00:28:00 GMT
+References: <1994Feb16.144200.5037@uu.net>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1994Feb16.144200.5037@uu.net>, mgirard@uu.net (Min-jun Girard) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+> This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Freya Watanabe <fwatanabe@uni-hamburg.de>
+SupraFAXModem 28.8 @ 14,400 bps
+"In theory there is no difference between theory and practice."
+
+From hhernandez@earthlink.net Fri Feb 18 05:22:00 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!earthlink!hhernandez
+From: hhernandez@earthlink.net (Heather Hernández)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Feb18.052200.3369@earthlink.net>
+Date: Fri, 18 Feb 1994 05:22:00 GMT
+References: <1994Feb16.144200.5037@uu.net> <1994Feb18.002800.3142@uni-hamburg.de>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1994Feb18.002800.3142@uni-hamburg.de>, fwatanabe@uni-hamburg.de (Freya Watanabe) writes:
+> Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+> If you are posting from AOL, please read RFC 1036 before posting again.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Heather Hernández <hhernandez@earthlink.net>
+*PLONK* filter active for trolls.
+Decstation 5000/200 - NetBSD 1.0
+
+From sreyes@rwth-aachen.de Sat Feb 19 02:10:00 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!rwth-aachen!sreyes
+From: sreyes@rwth-aachen.de (Steve Reyes)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Feb19.021000.5414@rwth-aachen.de>
+Date: Sat, 19 Feb 1994 02:10:00 GMT
+References: <1994Feb16.144200.5037@uu.net> <1994Feb18.002800.3142@uni-hamburg.de> <1994Feb18.052200.3369@earthlink.net>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1994Feb18.052200.3369@earthlink.net>, hhernandez@earthlink.net (Heather Hernández) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+-- 
+Steve Reyes -- RWTH Aachen Informatik
+"Measuring a record you own is listening, not piracy."
+

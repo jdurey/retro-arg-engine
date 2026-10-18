@@ -1,0 +1,69 @@
+From lpetrov@berkeley.edu Thu Aug 04 23:15:16 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!berkeley!lpetrov
+From: lpetrov@berkeley.edu (Lars Petrov)
+Newsgroups: comp.dsp
+Subject: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Aug04.231516.6935@berkeley.edu>
+Date: Thu, 04 Aug 1994 23:15:16 GMT
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Lars Petrov <lpetrov@berkeley.edu>
+*PLONK* filter active for trolls.
+Macintosh IIfx - NetBSD 1.0
+
+From bkowalski@unam.mx Sat Aug 06 09:04:16 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!unam!bkowalski
+From: bkowalski@unam.mx (Brian Kowalski)
+Newsgroups: comp.dsp
+Subject: Re: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Aug06.090416.8545@unam.mx>
+Date: Sat, 06 Aug 1994 09:04:16 GMT
+References: <1994Aug04.231516.6935@berkeley.edu>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1994Aug04.231516.6935@berkeley.edu>, lpetrov@berkeley.edu (Lars Petrov) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Brian Kowalski
+Tape trading list upon request. SASE required for international mail.
+
+From hlindqvist@hanse.de Sun Aug 07 18:38:16 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!hanse!hlindqvist
+From: hlindqvist@hanse.de (Hugo Lindqvist)
+Newsgroups: comp.dsp
+Subject: Re: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Aug07.183816.2517@hanse.de>
+Date: Sun, 07 Aug 1994 18:38:16 GMT
+References: <1994Aug04.231516.6935@berkeley.edu>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Aug04.231516.6935@berkeley.edu>, lpetrov@berkeley.edu (Lars Petrov) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+=== Hugo Lindqvist ===
+Dept of Electrical Engineering, Hanse-Netzwerk Hamburg
+"5 sigma is a discovery. 7 is a question."
+

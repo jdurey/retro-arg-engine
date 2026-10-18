@@ -1,0 +1,91 @@
+From hkang@demon.co.uk Mon Jan 24 10:51:44 1994
+Path: ashpoly!cascade!mxgate!coyoacan!demon!hkang
+From: hkang@demon.co.uk (Hana Kang)
+Newsgroups: comp.dsp
+Subject: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Jan24.105144.6971@demon.co.uk>
+Date: Mon, 24 Jan 1994 10:51:44 GMT
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Hana Kang
+Tape trading list upon request. SASE required for international mail.
+
+From njohansson@mit.edu Wed Jan 26 08:20:44 1994
+Path: ashpoly!cascade!mxgate!coyoacan!mit!njohansson
+From: njohansson@mit.edu (Nadine Johansson)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Jan26.082044.1033@mit.edu>
+Date: Wed, 26 Jan 1994 08:20:44 GMT
+References: <1994Jan24.105144.6971@demon.co.uk>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Jan24.105144.6971@demon.co.uk>, hkang@demon.co.uk (Hana Kang) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Nadine Johansson
+Opinions expressed are solely my own and not those of Massachusetts Institute of Technology.
+------------------------------------------------------------
+
+From tlee@demon.co.uk Wed Jan 26 21:12:44 1994
+Path: ashpoly!cascade!brgate!saturno!demon!tlee
+From: tlee@demon.co.uk (Takeshi Lee)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Jan26.211244.1102@demon.co.uk>
+Date: Wed, 26 Jan 1994 21:12:44 GMT
+References: <1994Jan24.105144.6971@demon.co.uk> <1994Jan26.082044.1033@mit.edu>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Jan26.082044.1033@mit.edu>, njohansson@mit.edu (Nadine Johansson) writes:
+> I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+=== Takeshi Lee ===
+Dept of Electrical Engineering, Demon Internet Services UK
+"Measuring a record you own is listening, not piracy."
+
+From kschneider@delphi.com Thu Jan 27 20:02:44 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!delphi!kschneider
+From: kschneider@delphi.com (Kirsty Schneider)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Jan27.200244.4176@delphi.com>
+Date: Thu, 27 Jan 1994 20:02:44 GMT
+References: <1994Jan24.105144.6971@demon.co.uk> <1994Jan26.082044.1033@mit.edu> <1994Jan26.211244.1102@demon.co.uk>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1994Jan26.211244.1102@demon.co.uk>, tlee@demon.co.uk (Takeshi Lee) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Kirsty Schneider -- Delphi Internet Services
+"Hold for relay."
+

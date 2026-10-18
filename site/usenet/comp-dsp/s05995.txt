@@ -1,0 +1,122 @@
+From mfischer@unam.mx Tue Sep 06 12:24:44 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!unam!mfischer
+From: mfischer@unam.mx (Marisol Fischer)
+Newsgroups: comp.dsp
+Subject: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Sep06.122444.7218@unam.mx>
+Date: Tue, 06 Sep 1994 12:24:44 GMT
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+Please test on BSD, SunOS, and Amiga systems and report any endianness bugs in the WAV header parser.
+
+-- 
+Marisol Fischer
+Tape trading list upon request. SASE required for international mail.
+
+From mdubois@netcom.com Tue Sep 06 22:31:44 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!netcom!mdubois
+From: mdubois@netcom.com (Marisol Dubois)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Sep06.223144.7694@netcom.com>
+Date: Tue, 06 Sep 1994 22:31:44 GMT
+References: <1994Sep06.122444.7218@unam.mx>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1994Sep06.122444.7218@unam.mx>, mfischer@unam.mx (Marisol Fischer) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Marisol Dubois -- NETCOM On-Line Communication Services
+"In theory there is no difference between theory and practice."
+
+From tlopez@pacbell.net Wed Sep 07 09:04:44 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!pacbell!tlopez
+From: tlopez@pacbell.net (Takeshi López)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Sep07.090444.6951@pacbell.net>
+Date: Wed, 07 Sep 1994 09:04:44 GMT
+References: <1994Sep06.122444.7218@unam.mx> <1994Sep06.223144.7694@netcom.com>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 12
+
+In article <1994Sep06.223144.7694@netcom.com>, mdubois@netcom.com (Marisol Dubois) writes:
+> Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+> My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+Takeshi López <tlopez@pacbell.net>
+"Extraordinary claims require extraordinary spectra."
+Acorn RiscPC 600 / Linux 1.2.13
+
+From mlopez@ox.ac.uk Thu Sep 08 03:50:44 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!ox!mlopez
+From: mlopez@ox.ac.uk (Marisol López)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Sep08.035044.1022@ox.ac.uk>
+Date: Thu, 08 Sep 1994 03:50:44 GMT
+References: <1994Sep06.122444.7218@unam.mx>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1994Sep06.122444.7218@unam.mx>, mfischer@unam.mx (Marisol Fischer) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+> Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+=== Marisol López ===
+Dept of Electrical Engineering, Oxford University Computing Laboratory
+"Measuring a record you own is listening, not piracy."
+
+From hsokolov@tum.de Thu Sep 08 22:54:44 1994
+Path: ashpoly!cascade!brgate!saturno!tum!hsokolov
+From: hsokolov@tum.de (Heather Sokolov)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Sep08.225444.4385@tum.de>
+Date: Thu, 08 Sep 1994 22:54:44 GMT
+References: <1994Sep06.122444.7218@unam.mx> <1994Sep08.035044.1022@ox.ac.uk>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1994Sep08.035044.1022@ox.ac.uk>, mlopez@ox.ac.uk (Marisol López) writes:
+> Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Heather Sokolov | hsokolov@tum.de
+PGP Key fingerprint: FED5 2B98 5144 672A
+"Keep the channels open."
+

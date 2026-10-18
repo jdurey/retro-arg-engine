@@ -1,0 +1,47 @@
+From mreyes@hanse.de Thu Oct 19 18:24:24 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!hanse!mreyes
+From: mreyes@hanse.de (Mikhail Reyes)
+Newsgroups: comp.sys.m68k
+Subject: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Oct19.182424.5608@hanse.de>
+Date: Thu, 19 Oct 1995 18:24:24 GMT
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Mikhail Reyes
+Tape trading list upon request. SASE required for international mail.
+
+From rschneider@demon.co.uk Fri Oct 20 02:23:24 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!demon!rschneider
+From: rschneider@demon.co.uk (Rodrigo Schneider)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Oct20.022324.3389@demon.co.uk>
+Date: Fri, 20 Oct 1995 02:23:24 GMT
+References: <1995Oct19.182424.5608@hanse.de>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Oct19.182424.5608@hanse.de>, mreyes@hanse.de (Mikhail Reyes) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+=== Rodrigo Schneider ===
+Dept of Electrical Engineering, Demon Internet Services UK
+"The hatch is open. Is anyone listening?"
+

@@ -1,0 +1,96 @@
+From svasiliev@mindspring.com Sun Jan 02 22:52:11 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!mindspring!svasiliev
+From: svasiliev@mindspring.com (Sven Vasiliev)
+Newsgroups: comp.dsp
+Subject: WTB/WTT: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Jan02.225211.3845@mindspring.com>
+Date: Sun, 02 Jan 1994 22:52:11 GMT
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+Version 1.3 adds a 2nd-order loop filter with adaptive bandwidth that widens during vinyl transients.
+
+Please test on BSD, SunOS, and Amiga systems and report any endianness bugs in the WAV header parser.
+
+-- 
+Sven Vasiliev | svasiliev@mindspring.com
+PGP Key fingerprint: A9AB 89A8 FECC 3512
+"Keep the channels open."
+
+From egirard@earthlink.net Tue Jan 04 20:18:11 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!earthlink!egirard
+From: egirard@earthlink.net (Élodie Girard)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Jan04.201811.4709@earthlink.net>
+Date: Tue, 04 Jan 1994 20:18:11 GMT
+References: <1994Jan02.225211.3845@mindspring.com>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1994Jan02.225211.3845@mindspring.com>, svasiliev@mindspring.com (Sven Vasiliev) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+> Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+-- 
+Élodie Girard <egirard@earthlink.net>
+*PLONK* filter active for trolls.
+Atari Falcon 030 - NetBSD 1.0
+
+From jlindqvist@kth.se Thu Jan 06 06:22:11 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!kth!jlindqvist
+From: jlindqvist@kth.se (Julien Lindqvist)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Jan06.062211.1920@kth.se>
+Date: Thu, 06 Jan 1994 06:22:11 GMT
+References: <1994Jan02.225211.3845@mindspring.com> <1994Jan04.201811.4709@earthlink.net>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Jan04.201811.4709@earthlink.net>, egirard@earthlink.net (Élodie Girard) writes:
+> Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+-- 
+Julien Lindqvist | jlindqvist@kth.se
+PGP Key fingerprint: A7CF 1171 E3CA AE72
+"Keep the channels open."
+
+From sivanov@earthlink.net Fri Jan 07 09:49:11 1994
+Path: ashpoly!cascade!mxgate!coyoacan!earthlink!sivanov
+From: sivanov@earthlink.net (Seo-yeon Ivanov)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Jan07.094911.6483@earthlink.net>
+Date: Fri, 07 Jan 1994 09:49:11 GMT
+References: <1994Jan02.225211.3845@mindspring.com> <1994Jan04.201811.4709@earthlink.net> <1994Jan06.062211.1920@kth.se>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1994Jan06.062211.1920@kth.se>, jlindqvist@kth.se (Julien Lindqvist) writes:
+> Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+=== Seo-yeon Ivanov ===
+Dept of Electrical Engineering, EarthLink Network
+"A soul is not exclusive to biology."
+

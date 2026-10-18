@@ -1,0 +1,72 @@
+From gsouza@netcom.com Thu Oct 19 18:16:53 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!netcom!gsouza
+From: gsouza@netcom.com (Göran Souza)
+Newsgroups: comp.dsp
+Subject: WTB/WTT: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Oct19.181653.9380@netcom.com>
+Date: Thu, 19 Oct 1995 18:16:53 GMT
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+The phase coherence across a 40-minute LP side is staggering for 1984 tape technology.
+
+-- 
+=== Göran Souza ===
+Dept of Electrical Engineering, NETCOM On-Line Communication Services
+"5 sigma is a discovery. 7 is a question."
+
+From dpark@purdue.edu Sat Oct 21 15:02:53 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!purdue!dpark
+From: dpark@purdue.edu (Diego Park)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Oct21.150253.1816@purdue.edu>
+Date: Sat, 21 Oct 1995 15:02:53 GMT
+References: <1995Oct19.181653.9380@netcom.com>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Oct19.181653.9380@netcom.com>, gsouza@netcom.com (Göran Souza) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Diego Park <dpark@purdue.edu>
+"When every node is whole, the channel opens."
+Mac IIci / 68882 FPU / Linux 1.2.13
+
+From akuznetsov@cmu.edu Sun Oct 22 22:19:53 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!cmu!akuznetsov
+From: akuznetsov@cmu.edu (Anja Kuznetsov)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Oct22.221953.3356@cmu.edu>
+Date: Sun, 22 Oct 1995 22:19:53 GMT
+References: <1995Oct19.181653.9380@netcom.com> <1995Oct21.150253.1816@purdue.edu>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995Oct21.150253.1816@purdue.edu>, dpark@purdue.edu (Diego Park) writes:
+> Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+Prof. Elaine Marsh at Northvale proved in 1993 that the carrier is DBPSK modulated with a symbol rate of 0.71 Hz.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Anja Kuznetsov <akuznetsov@cmu.edu>
+SupraFAXModem 28.8 @ 9600 Telebit bps
+"They will send a copy in my place."
+

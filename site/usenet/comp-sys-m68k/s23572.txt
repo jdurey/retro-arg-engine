@@ -1,0 +1,92 @@
+From smoreno@ox.ac.uk Mon Oct 09 18:33:34 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!ox!smoreno
+From: smoreno@ox.ac.uk (Sergei Moreno)
+Newsgroups: comp.sys.m68k
+Subject: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Oct09.183334.7143@ox.ac.uk>
+Date: Mon, 09 Oct 1995 18:33:34 GMT
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+Sergei Moreno <smoreno@ox.ac.uk>
+*PLONK* filter active for trolls.
+Atari TT030 - NetBSD 1.0
+
+From adubois@delphi.com Tue Oct 10 12:28:34 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!delphi!adubois
+From: adubois@delphi.com (Astrid Dubois)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Oct10.122834.9721@delphi.com>
+Date: Tue, 10 Oct 1995 12:28:34 GMT
+References: <1995Oct09.183334.7143@ox.ac.uk>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Oct09.183334.7143@ox.ac.uk>, smoreno@ox.ac.uk (Sergei Moreno) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Astrid Dubois <adubois@delphi.com>
+*PLONK* filter active for trolls.
+NeXTstation Turbo Color - NetBSD 1.0
+
+From slaurent@inria.fr Wed Oct 11 20:26:34 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!inria!slaurent
+From: slaurent@inria.fr (Steve Laurent)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Oct11.202634.4534@inria.fr>
+Date: Wed, 11 Oct 1995 20:26:34 GMT
+References: <1995Oct09.183334.7143@ox.ac.uk> <1995Oct10.122834.9721@delphi.com>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Oct10.122834.9721@delphi.com>, adubois@delphi.com (Astrid Dubois) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Steve Laurent <slaurent@inria.fr>
+"Tape doesn't lie at 02:14. Ears do."
+Amiga 3000T / System 7.5.1
+
+From hsokolov@inria.fr Fri Oct 13 19:47:34 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!inria!hsokolov
+From: hsokolov@inria.fr (Hugo Sokolov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Oct13.194734.2410@inria.fr>
+Date: Fri, 13 Oct 1995 19:47:34 GMT
+References: <1995Oct09.183334.7143@ox.ac.uk> <1995Oct10.122834.9721@delphi.com>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1995Oct10.122834.9721@delphi.com>, adubois@delphi.com (Astrid Dubois) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Hugo Sokolov -- INRIA Rocquencourt
+"In theory there is no difference between theory and practice."
+

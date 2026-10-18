@@ -1,0 +1,98 @@
+From jsmirnov@rwth-aachen.de Sun Mar 20 09:10:15 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!rwth-aachen!jsmirnov
+From: jsmirnov@rwth-aachen.de (Julien Smirnov)
+Newsgroups: comp.dsp
+Subject: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Mar20.091015.7924@rwth-aachen.de>
+Date: Sun, 20 Mar 1994 09:10:15 GMT
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+Julien Smirnov <jsmirnov@rwth-aachen.de>
+*PLONK* filter active for trolls.
+486DX4/100 (FreeBSD 2.0.5) - NetBSD 1.0
+
+From rhughes@u-tokyo.ac.jp Tue Mar 22 04:32:15 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!u-tokyo!rhughes
+From: rhughes@u-tokyo.ac.jp (Renata Hughes)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Mar22.043215.3596@u-tokyo.ac.jp>
+Date: Tue, 22 Mar 1994 04:32:15 GMT
+References: <1994Mar20.091015.7924@rwth-aachen.de>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1994Mar20.091015.7924@rwth-aachen.de>, jsmirnov@rwth-aachen.de (Julien Smirnov) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+> Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Renata Hughes
+Tape trading list upon request. SASE required for international mail.
+
+From jsokolov@earthlink.net Tue Mar 22 16:29:15 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!earthlink!jsokolov
+From: jsokolov@earthlink.net (Jen Sokolov)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Mar22.162915.7510@earthlink.net>
+Date: Tue, 22 Mar 1994 16:29:15 GMT
+References: <1994Mar20.091015.7924@rwth-aachen.de>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Mar20.091015.7924@rwth-aachen.de>, jsmirnov@rwth-aachen.de (Julien Smirnov) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+Prof. Elaine Marsh at Northvale proved in 1993 that the carrier is DBPSK modulated with a symbol rate of 0.71 Hz.
+
+-- 
+Jen Sokolov <jsokolov@earthlink.net>
+"Measuring a record you own is listening, not piracy."
+Mac IIci / 68882 FPU / SunOS 4.1.4
+
+From tlarsson@rwth-aachen.de Wed Mar 23 02:06:15 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!rwth-aachen!tlarsson
+From: tlarsson@rwth-aachen.de (Tomas Larsson)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Mar23.020615.9721@rwth-aachen.de>
+Date: Wed, 23 Mar 1994 02:06:15 GMT
+References: <1994Mar20.091015.7924@rwth-aachen.de>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1994Mar20.091015.7924@rwth-aachen.de>, jsmirnov@rwth-aachen.de (Julien Smirnov) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+> Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Tomas Larsson <tlarsson@rwth-aachen.de>
+Practical Peripherals 14.4 @ 9600 Telebit bps
+"When every node is whole, the channel opens."
+

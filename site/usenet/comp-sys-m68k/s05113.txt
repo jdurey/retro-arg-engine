@@ -1,0 +1,117 @@
+From mlopez@berkeley.edu Sun May 26 16:59:58 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!berkeley!mlopez
+From: mlopez@berkeley.edu (Mikhail López)
+Newsgroups: comp.sys.m68k
+Subject: Observation: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996May26.165958.1129@berkeley.edu>
+Date: Sun, 26 May 1996 16:59:58 GMT
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+Schematic diagram in ASCII uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/twin68_array.asc.
+
+-- 
+Mikhail López | mlopez@berkeley.edu
+PGP Key fingerprint: 35DD D9A6 72A6 03C5
+"Keep the channels open."
+
+From anakamura@cern.ch Mon May 27 07:23:58 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!cern!anakamura
+From: anakamura@cern.ch (Andrei Nakamura)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996May27.072358.5153@cern.ch>
+Date: Mon, 27 May 1996 07:23:58 GMT
+References: <1996May26.165958.1129@berkeley.edu>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1996May26.165958.1129@berkeley.edu>, mlopez@berkeley.edu (Mikhail López) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Andrei Nakamura -- European Laboratory for Particle Physics, Geneva
+"Hold for relay."
+
+From yreyes@utexas.edu Tue May 28 13:11:58 1996
+Path: ashpoly!cascade!bigsur!utexas!yreyes
+From: yreyes@utexas.edu (Yuki Reyes)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996May28.131158.7940@utexas.edu>
+Date: Tue, 28 May 1996 13:11:58 GMT
+References: <1996May26.165958.1129@berkeley.edu>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996May26.165958.1129@berkeley.edu>, mlopez@berkeley.edu (Mikhail López) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Yuki Reyes <yreyes@utexas.edu>
+"Measuring a record you own is listening, not piracy."
+Sun SparcStation 20 / SunOS 4.1.4
+
+From asmirnov@pipeline.com Tue May 28 22:20:58 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!pipeline!asmirnov
+From: asmirnov@pipeline.com (Andrei Smirnov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996May28.222058.1359@pipeline.com>
+Date: Tue, 28 May 1996 22:20:58 GMT
+References: <1996May26.165958.1129@berkeley.edu> <1996May28.131158.7940@utexas.edu>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1996May28.131158.7940@utexas.edu>, yreyes@utexas.edu (Yuki Reyes) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+=== Andrei Smirnov ===
+Dept of Electrical Engineering, The Pipeline Internet Network
+"They will send a copy in my place."
+
+From lsanchez@illinois.edu Wed May 29 15:08:58 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!illinois!lsanchez
+From: lsanchez@illinois.edu (Lucia Sánchez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996May29.150858.3588@illinois.edu>
+Date: Wed, 29 May 1996 15:08:58 GMT
+References: <1996May26.165958.1129@berkeley.edu> <1996May28.131158.7940@utexas.edu> <1996May28.222058.1359@pipeline.com>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996May28.222058.1359@pipeline.com>, asmirnov@pipeline.com (Andrei Smirnov) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+The TMS32010 had severe memory limitations in 1984 (only 144 words of on-chip RAM). Dual 68000s gave them full 16MB address space.
+
+-- 
+=== Lucia Sánchez ===
+Dept of Electrical Engineering, University of Illinois Urbana-Champaign
+"Marcus is not one man."
+

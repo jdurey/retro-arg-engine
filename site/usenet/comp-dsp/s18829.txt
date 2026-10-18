@@ -1,0 +1,97 @@
+From ffischer@uu.net Mon Feb 21 13:23:46 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!uu!ffischer
+From: ffischer@uu.net (Freya Fischer)
+Newsgroups: comp.dsp
+Subject: WTB/WTT: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Feb21.132346.1267@uu.net>
+Date: Mon, 21 Feb 1994 13:23:46 GMT
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Freya Fischer -- UUNET Technologies, Falls Church VA
+"Measuring a record you own is listening, not piracy."
+
+From msouza@cam.ac.uk Wed Feb 23 14:24:46 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!cam!msouza
+From: msouza@cam.ac.uk (Marisol Souza)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Feb23.142446.3211@cam.ac.uk>
+Date: Wed, 23 Feb 1994 14:24:46 GMT
+References: <1994Feb21.132346.1267@uu.net>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1994Feb21.132346.1267@uu.net>, ffischer@uu.net (Freya Fischer) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+Marisol Souza <msouza@cam.ac.uk>
+"5 sigma is a discovery. 7 is a question."
+Pentium 90 (OS/2 Warp) / FreeBSD 2.1
+
+From mlee@tum.de Fri Feb 25 16:56:46 1994
+Path: ashpoly!cascade!brgate!saturno!tum!mlee
+From: mlee@tum.de (Mike Lee)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Feb25.165646.8644@tum.de>
+Date: Fri, 25 Feb 1994 16:56:46 GMT
+References: <1994Feb21.132346.1267@uu.net> <1994Feb23.142446.3211@cam.ac.uk>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1994Feb23.142446.3211@cam.ac.uk>, msouza@cam.ac.uk (Marisol Souza) writes:
+> Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+> Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Mike Lee
+Opinions expressed are solely my own and not those of Technische Universität München.
+------------------------------------------------------------
+
+From vstewart@inria.fr Sat Feb 26 22:44:46 1994
+Path: ashpoly!cascade!brgate!saturno!inria!vstewart
+From: vstewart@inria.fr (Valeria Stewart)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Feb26.224446.7689@inria.fr>
+Date: Sat, 26 Feb 1994 22:44:46 GMT
+References: <1994Feb21.132346.1267@uu.net> <1994Feb23.142446.3211@cam.ac.uk>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1994Feb23.142446.3211@cam.ac.uk>, msouza@cam.ac.uk (Marisol Souza) writes:
+> Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+> Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+=== Valeria Stewart ===
+Dept of Electrical Engineering, INRIA Rocquencourt
+"There are 14 nodes and only 10 countries. Count again."
+

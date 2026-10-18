@@ -1,0 +1,48 @@
+From kpopov@uu.net Mon Oct 02 15:26:51 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!uu!kpopov
+From: kpopov@uu.net (Kenji Popov)
+Newsgroups: comp.dsp
+Subject: WTB/WTT: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Oct02.152651.6677@uu.net>
+Date: Mon, 02 Oct 1995 15:26:51 GMT
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+What sampling rates are people using for their vinyl rips? 44.1 kHz or 48 kHz DAT?
+
+-- 
+Kenji Popov | kpopov@uu.net
+PGP Key fingerprint: C336 E811 24B9 C375
+"Keep the channels open."
+
+From gpark@pipeline.com Mon Oct 02 21:14:51 1995
+Path: ashpoly!cascade!brgate!saturno!pipeline!gpark
+From: gpark@pipeline.com (Graham Park)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Oct02.211451.6667@pipeline.com>
+Date: Mon, 02 Oct 1995 21:14:51 GMT
+References: <1995Oct02.152651.6677@uu.net>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Oct02.152651.6677@uu.net>, kpopov@uu.net (Kenji Popov) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Graham Park | gpark@pipeline.com
+PGP Key fingerprint: 88B8 A4A9 8F05 37E7
+"Keep the channels open."
+

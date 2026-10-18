@@ -1,0 +1,48 @@
+From clarsson@uni-hamburg.de Fri Oct 18 11:29:19 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!uni-hamburg!clarsson
+From: clarsson@uni-hamburg.de (Camila Larsson)
+Newsgroups: comp.dsp
+Subject: Observation: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996Oct18.112919.3061@uni-hamburg.de>
+Date: Fri, 18 Oct 1996 11:29:19 GMT
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+Version 1.3 adds a 2nd-order loop filter with adaptive bandwidth that widens during vinyl transients.
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+
+Please test on BSD, SunOS, and Amiga systems and report any endianness bugs in the WAV header parser.
+
+-- 
+Camila Larsson | clarsson@uni-hamburg.de
+PGP Key fingerprint: FC95 4996 9B1D 8FF5
+"Keep the channels open."
+
+From jtakahashi@pipeline.com Sat Oct 19 17:38:19 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!pipeline!jtakahashi
+From: jtakahashi@pipeline.com (Ji-woo Takahashi)
+Newsgroups: comp.dsp
+Subject: Re: Observation: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996Oct19.173819.5935@pipeline.com>
+Date: Sat, 19 Oct 1996 17:38:19 GMT
+References: <1996Oct18.112919.3061@uni-hamburg.de>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1996Oct18.112919.3061@uni-hamburg.de>, clarsson@uni-hamburg.de (Camila Larsson) writes:
+> Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+> Version 1.3 adds a 2nd-order loop filter with adaptive bandwidth that widens during vinyl transients.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+=== Ji-woo Takahashi ===
+Dept of Electrical Engineering, The Pipeline Internet Network
+"Extraordinary claims require extraordinary spectra."
+

@@ -1,0 +1,47 @@
+From olindqvist@pacbell.net Fri Jan 12 21:05:05 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!pacbell!olindqvist
+From: olindqvist@pacbell.net (Olga Lindqvist)
+Newsgroups: comp.dsp
+Subject: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jan12.210505.6928@pacbell.net>
+Date: Fri, 12 Jan 1996 21:05:05 GMT
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Olga Lindqvist
+Opinions expressed are solely my own and not those of Pacific Bell Internet Services.
+------------------------------------------------------------
+
+From mpetrov@cmu.edu Sat Jan 13 11:36:05 1996
+Path: ashpoly!cascade!mxgate!coyoacan!cmu!mpetrov
+From: mpetrov@cmu.edu (Min-jun Petrov)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jan13.113605.6405@cmu.edu>
+Date: Sat, 13 Jan 1996 11:36:05 GMT
+References: <1996Jan12.210505.6928@pacbell.net>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Jan12.210505.6928@pacbell.net>, olindqvist@pacbell.net (Olga Lindqvist) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Min-jun Petrov
+Opinions expressed are solely my own and not those of Carnegie Mellon University School of CS.
+------------------------------------------------------------
+

@@ -1,0 +1,47 @@
+From dlee@tum.de Thu Aug 18 04:22:01 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!tum!dlee
+From: dlee@tum.de (Diego Lee)
+Newsgroups: comp.dsp
+Subject: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Aug18.042201.1408@tum.de>
+Date: Thu, 18 Aug 1994 04:22:01 GMT
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Diego Lee
+Opinions expressed are solely my own and not those of Technische Universität München.
+------------------------------------------------------------
+
+From ssmirnov@uni-hamburg.de Thu Aug 18 08:55:01 1994
+Path: ashpoly!cascade!bigsur!uni-hamburg!ssmirnov
+From: ssmirnov@uni-hamburg.de (Sun-mi Smirnov)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Aug18.085501.5387@uni-hamburg.de>
+Date: Thu, 18 Aug 1994 08:55:01 GMT
+References: <1994Aug18.042201.1408@tum.de>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Aug18.042201.1408@tum.de>, dlee@tum.de (Diego Lee) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Sun-mi Smirnov | ssmirnov@uni-hamburg.de
+PGP Key fingerprint: 375C 80EC E127 E192
+"Keep the channels open."
+

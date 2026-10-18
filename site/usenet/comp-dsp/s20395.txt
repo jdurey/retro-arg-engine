@@ -1,0 +1,116 @@
+From ncampbell@hanse.de Sun Oct 22 06:21:12 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!hanse!ncampbell
+From: ncampbell@hanse.de (Nadine Campbell)
+Newsgroups: comp.dsp
+Subject: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Oct22.062112.8199@hanse.de>
+Date: Sun, 22 Oct 1995 06:21:12 GMT
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+Nadine Campbell <ncampbell@hanse.de>
+SupraFAXModem 28.8 @ 19,200 bps
+"They will send a copy in my place."
+
+From jgarcia@inria.fr Sun Oct 22 10:11:12 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!inria!jgarcia
+From: jgarcia@inria.fr (Julien García)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Oct22.101112.4243@inria.fr>
+Date: Sun, 22 Oct 1995 10:11:12 GMT
+References: <1995Oct22.062112.8199@hanse.de>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Oct22.062112.8199@hanse.de>, ncampbell@hanse.de (Nadine Campbell) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+> Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+-- 
+Julien García
+Opinions expressed are solely my own and not those of INRIA Rocquencourt.
+------------------------------------------------------------
+
+From swatanabe@cam.ac.uk Mon Oct 23 12:16:12 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!cam!swatanabe
+From: swatanabe@cam.ac.uk (Sergei Watanabe)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Oct23.121612.7350@cam.ac.uk>
+Date: Mon, 23 Oct 1995 12:16:12 GMT
+References: <1995Oct22.062112.8199@hanse.de>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Oct22.062112.8199@hanse.de>, ncampbell@hanse.de (Nadine Campbell) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Sergei Watanabe <swatanabe@cam.ac.uk>
+"Do not worship the copy."
+Pentium 90 (OS/2 Warp) / System 7.5.1
+
+From boliveira@demon.co.uk Wed Oct 25 10:14:12 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!demon!boliveira
+From: boliveira@demon.co.uk (Bastien Oliveira)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Oct25.101412.8473@demon.co.uk>
+Date: Wed, 25 Oct 1995 10:14:12 GMT
+References: <1995Oct22.062112.8199@hanse.de> <1995Oct23.121612.7350@cam.ac.uk>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Oct23.121612.7350@cam.ac.uk>, swatanabe@cam.ac.uk (Sergei Watanabe) writes:
+> Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Bastien Oliveira
+Opinions expressed are solely my own and not those of Demon Internet Services UK.
+------------------------------------------------------------
+
+From tgarcia@stanford.edu Wed Oct 25 22:30:12 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!stanford!tgarcia
+From: tgarcia@stanford.edu (Tyler García)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Oct25.223012.3984@stanford.edu>
+Date: Wed, 25 Oct 1995 22:30:12 GMT
+References: <1995Oct22.062112.8199@hanse.de> <1995Oct23.121612.7350@cam.ac.uk> <1995Oct25.101412.8473@demon.co.uk>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1995Oct25.101412.8473@demon.co.uk>, boliveira@demon.co.uk (Bastien Oliveira) writes:
+> If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+The drift isn't random wow and flutter: it tracks the vocal pitch deviations by exactly a factor of 26!
+
+-- 
+Tyler García
+Tape trading list upon request. SASE required for international mail.
+

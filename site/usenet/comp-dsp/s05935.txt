@@ -1,0 +1,70 @@
+From klarsson@cam.ac.uk Sat Dec 02 10:50:51 1995
+Path: ashpoly!cascade!bigsur!cam!klarsson
+From: klarsson@cam.ac.uk (Kirsty Larsson)
+Newsgroups: comp.dsp
+Subject: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec02.105051.1426@cam.ac.uk>
+Date: Sat, 02 Dec 1995 10:50:51 GMT
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Kirsty Larsson
+Opinions expressed are solely my own and not those of University of Cambridge Computer Laboratory.
+------------------------------------------------------------
+
+From brodriguez@illinois.edu Sun Dec 03 00:25:51 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!illinois!brodriguez
+From: brodriguez@illinois.edu (Brian Rodríguez)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec03.002551.2105@illinois.edu>
+Date: Sun, 03 Dec 1995 00:25:51 GMT
+References: <1995Dec02.105051.1426@cam.ac.uk>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Dec02.105051.1426@cam.ac.uk>, klarsson@cam.ac.uk (Kirsty Larsson) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Brian Rodríguez | brodriguez@illinois.edu
+PGP Key fingerprint: 68BF 10B8 231D 8484
+"Keep the channels open."
+
+From lkang@u-tokyo.ac.jp Sun Dec 03 18:22:51 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!u-tokyo!lkang
+From: lkang@u-tokyo.ac.jp (Lisa Kang)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec03.182251.7466@u-tokyo.ac.jp>
+Date: Sun, 03 Dec 1995 18:22:51 GMT
+References: <1995Dec02.105051.1426@cam.ac.uk> <1995Dec03.002551.2105@illinois.edu>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Dec03.002551.2105@illinois.edu>, brodriguez@illinois.edu (Brian Rodríguez) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Lisa Kang <lkang@u-tokyo.ac.jp>
+"Hardware is temporary. The signal survives."
+Amiga 3000T / NEXTSTEP 3.3
+

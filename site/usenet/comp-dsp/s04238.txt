@@ -1,0 +1,94 @@
+From bpetrov@kiae.su Wed May 10 03:24:55 1995
+Path: ashpoly!cascade!mxgate!coyoacan!kiae!bpetrov
+From: bpetrov@kiae.su (Bruno Petrov)
+Newsgroups: comp.dsp
+Subject: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995May10.032455.9902@kiae.su>
+Date: Wed, 10 May 1995 03:24:55 GMT
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+What sampling rates are people using for their vinyl rips? 44.1 kHz or 48 kHz DAT?
+
+-- 
+Bruno Petrov <bpetrov@kiae.su>
+*PLONK* filter active for trolls.
+Decstation 5000/200 - NetBSD 1.0
+
+From ehernandez@kiae.su Wed May 10 09:23:55 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!kiae!ehernandez
+From: ehernandez@kiae.su (Emi Hernández)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995May10.092355.4983@kiae.su>
+Date: Wed, 10 May 1995 09:23:55 GMT
+References: <1995May10.032455.9902@kiae.su>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995May10.032455.9902@kiae.su>, bpetrov@kiae.su (Bruno Petrov) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+> A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Emi Hernández <ehernandez@kiae.su>
+Practical Peripherals 14.4 @ 28,800 bps
+"Tape doesn't lie at 02:14. Ears do."
+
+From dgonzalez@demon.co.uk Fri May 12 12:29:55 1995
+Path: ashpoly!cascade!bigsur!demon!dgonzalez
+From: dgonzalez@demon.co.uk (Diego González)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995May12.122955.6228@demon.co.uk>
+Date: Fri, 12 May 1995 12:29:55 GMT
+References: <1995May10.032455.9902@kiae.su>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995May10.032455.9902@kiae.su>, bpetrov@kiae.su (Bruno Petrov) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Diego González <dgonzalez@demon.co.uk>
+"They will send a copy in my place."
+Atari TT030 / System 7.5.1
+
+From ksuzuki@mindspring.com Sun May 14 09:42:55 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!mindspring!ksuzuki
+From: ksuzuki@mindspring.com (Katrin Suzuki)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995May14.094255.4456@mindspring.com>
+Date: Sun, 14 May 1995 09:42:55 GMT
+References: <1995May10.032455.9902@kiae.su> <1995May10.092355.4983@kiae.su>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995May10.092355.4983@kiae.su>, ehernandez@kiae.su (Emi Hernández) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Katrin Suzuki <ksuzuki@mindspring.com>
+*PLONK* filter active for trolls.
+486DX4/100 (FreeBSD 2.0.5) - NetBSD 1.0
+

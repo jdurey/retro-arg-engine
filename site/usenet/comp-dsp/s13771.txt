@@ -1,0 +1,47 @@
+From ykim@purdue.edu Sat Apr 23 06:23:10 1994
+Path: ashpoly!cascade!bigsur!purdue!ykim
+From: ykim@purdue.edu (Yuki Kim)
+Newsgroups: comp.dsp
+Subject: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Apr23.062310.3322@purdue.edu>
+Date: Sat, 23 Apr 1994 06:23:10 GMT
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+=== Yuki Kim ===
+Dept of Electrical Engineering, Purdue University Engineering Computer Network
+"Hold for relay."
+
+From ssato@utexas.edu Sun Apr 24 04:40:10 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!utexas!ssato
+From: ssato@utexas.edu (Sergei Sato)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Apr24.044010.7844@utexas.edu>
+Date: Sun, 24 Apr 1994 04:40:10 GMT
+References: <1994Apr23.062310.3322@purdue.edu>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Apr23.062310.3322@purdue.edu>, ykim@purdue.edu (Yuki Kim) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Sergei Sato
+Tape trading list upon request. SASE required for international mail.
+

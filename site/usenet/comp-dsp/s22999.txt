@@ -1,0 +1,116 @@
+From mhughes@u-tokyo.ac.jp Thu Aug 15 20:38:28 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!u-tokyo!mhughes
+From: mhughes@u-tokyo.ac.jp (Mathieu Hughes)
+Newsgroups: comp.dsp
+Subject: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Aug15.203828.5389@u-tokyo.ac.jp>
+Date: Thu, 15 Aug 1996 20:38:28 GMT
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Mathieu Hughes | mhughes@u-tokyo.ac.jp
+PGP Key fingerprint: 3696 2D6B 3AAA 6EA6
+"Keep the channels open."
+
+From csanchez@cam.ac.uk Fri Aug 16 22:33:28 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!cam!csanchez
+From: csanchez@cam.ac.uk (Callum Sánchez)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Aug16.223328.7085@cam.ac.uk>
+Date: Fri, 16 Aug 1996 22:33:28 GMT
+References: <1996Aug15.203828.5389@u-tokyo.ac.jp>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Aug15.203828.5389@u-tokyo.ac.jp>, mhughes@u-tokyo.ac.jp (Mathieu Hughes) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+=== Callum Sánchez ===
+Dept of Electrical Engineering, University of Cambridge Computer Laboratory
+"Measuring a record you own is listening, not piracy."
+
+From rmartinez@rwth-aachen.de Mon Aug 19 01:08:28 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!rwth-aachen!rmartinez
+From: rmartinez@rwth-aachen.de (Rodrigo Martínez)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Aug19.010828.6595@rwth-aachen.de>
+Date: Mon, 19 Aug 1996 01:08:28 GMT
+References: <1996Aug15.203828.5389@u-tokyo.ac.jp> <1996Aug16.223328.7085@cam.ac.uk>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1996Aug16.223328.7085@cam.ac.uk>, csanchez@cam.ac.uk (Callum Sánchez) writes:
+> Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Rodrigo Martínez
+Tape trading list upon request. SASE required for international mail.
+
+From bjohansson@illinois.edu Tue Aug 20 05:18:28 1996
+Path: ashpoly!cascade!mxgate!coyoacan!illinois!bjohansson
+From: bjohansson@illinois.edu (Bill Johansson)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Aug20.051828.2381@illinois.edu>
+Date: Tue, 20 Aug 1996 05:18:28 GMT
+References: <1996Aug15.203828.5389@u-tokyo.ac.jp> <1996Aug16.223328.7085@cam.ac.uk> <1996Aug19.010828.6595@rwth-aachen.de>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Aug19.010828.6595@rwth-aachen.de>, rmartinez@rwth-aachen.de (Rodrigo Martínez) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+=== Bill Johansson ===
+Dept of Electrical Engineering, University of Illinois Urbana-Champaign
+"When every node is whole, the channel opens."
+
+From esantos@mit.edu Wed Aug 21 17:11:28 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!mit!esantos
+From: esantos@mit.edu (Elaine Santos)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Aug21.171128.9270@mit.edu>
+Date: Wed, 21 Aug 1996 17:11:28 GMT
+References: <1996Aug15.203828.5389@u-tokyo.ac.jp> <1996Aug16.223328.7085@cam.ac.uk> <1996Aug19.010828.6595@rwth-aachen.de>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Aug19.010828.6595@rwth-aachen.de>, rmartinez@rwth-aachen.de (Rodrigo Martínez) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Elaine Santos <esantos@mit.edu>
+*PLONK* filter active for trolls.
+Pentium 90 (OS/2 Warp) - NetBSD 1.0
+

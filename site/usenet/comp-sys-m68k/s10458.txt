@@ -1,0 +1,115 @@
+From tcampbell@berkeley.edu Thu Sep 12 21:06:56 1996
+Path: ashpoly!cascade!mxgate!coyoacan!berkeley!tcampbell
+From: tcampbell@berkeley.edu (Thiago Campbell)
+Newsgroups: comp.sys.m68k
+Subject: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Sep12.210656.3270@berkeley.edu>
+Date: Thu, 12 Sep 1996 21:06:56 GMT
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Thiago Campbell <tcampbell@berkeley.edu>
+Zyxel U-1496E @ ISDN 64k bps
+"Tape doesn't lie at 02:14. Ears do."
+
+From knovak@cam.ac.uk Fri Sep 13 18:35:56 1996
+Path: ashpoly!cascade!bigsur!cam!knovak
+From: knovak@cam.ac.uk (Kirsty Novak)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Sep13.183556.1109@cam.ac.uk>
+Date: Fri, 13 Sep 1996 18:35:56 GMT
+References: <1996Sep12.210656.3270@berkeley.edu>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Sep12.210656.3270@berkeley.edu>, tcampbell@berkeley.edu (Thiago Campbell) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Kirsty Novak | knovak@cam.ac.uk
+PGP Key fingerprint: AB14 C5B0 47D0 EDF6
+"Keep the channels open."
+
+From dlaurent@cern.ch Sat Sep 14 17:08:56 1996
+Path: ashpoly!cascade!brgate!saturno!cern!dlaurent
+From: dlaurent@cern.ch (Dmitri Laurent)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Sep14.170856.5102@cern.ch>
+Date: Sat, 14 Sep 1996 17:08:56 GMT
+References: <1996Sep12.210656.3270@berkeley.edu>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Sep12.210656.3270@berkeley.edu>, tcampbell@berkeley.edu (Thiago Campbell) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Dmitri Laurent <dlaurent@cern.ch>
+*PLONK* filter active for trolls.
+Atari TT030 - NetBSD 1.0
+
+From smacdonald@rwth-aachen.de Mon Sep 16 20:02:56 1996
+Path: ashpoly!cascade!bigsur!rwth-aachen!smacdonald
+From: smacdonald@rwth-aachen.de (Sven MacDonald)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Sep16.200256.3853@rwth-aachen.de>
+Date: Mon, 16 Sep 1996 20:02:56 GMT
+References: <1996Sep12.210656.3270@berkeley.edu> <1996Sep13.183556.1109@cam.ac.uk>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Sep13.183556.1109@cam.ac.uk>, knovak@cam.ac.uk (Kirsty Novak) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Sven MacDonald <smacdonald@rwth-aachen.de>
+Practical Peripherals 14.4 @ 14,400 bps
+"Hardware is temporary. The signal survives."
+
+From dpopov@pipeline.com Tue Sep 17 19:19:56 1996
+Path: ashpoly!cascade!mxgate!coyoacan!pipeline!dpopov
+From: dpopov@pipeline.com (Diego Popov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Sep17.191956.9286@pipeline.com>
+Date: Tue, 17 Sep 1996 19:19:56 GMT
+References: <1996Sep12.210656.3270@berkeley.edu> <1996Sep14.170856.5102@cern.ch>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1996Sep14.170856.5102@cern.ch>, dlaurent@cern.ch (Dmitri Laurent) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Diego Popov -- The Pipeline Internet Network
+"Marcus is not one man."
+

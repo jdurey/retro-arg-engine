@@ -1,0 +1,117 @@
+From dsanchez@tum.de Fri Feb 25 05:17:12 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!tum!dsanchez
+From: dsanchez@tum.de (Diego Sánchez)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1994Feb25.051712.6336@tum.de>
+Date: Fri, 25 Feb 1994 05:17:12 GMT
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Amiga audio hackers: you can demodulate the 14.2 Hz carrier in real time without bogging down the OS.
+
+By setting up Paula's audio DMA to double-buffer incoming 8-bit samples, the 68020 has plenty of cycles left for the Costas loop.
+I wrote a 64-tap FIR filter in pure 68k assembly using movem.l and dbra loop unrolling to downsample to 64 Hz.
+
+Long live the Amiga. Try doing real-time subcarrier demodulation on a 386 running Windows 3.1 without dropping frames!
+
+-- 
+Diego Sánchez <dsanchez@tum.de>
+*PLONK* filter active for trolls.
+486DX4/100 (FreeBSD 2.0.5) - NetBSD 1.0
+
+From agirard@hanse.de Fri Feb 25 15:30:12 1994
+Path: ashpoly!cascade!mxgate!coyoacan!hanse!agirard
+From: agirard@hanse.de (Amy Girard)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1994Feb25.153012.5820@hanse.de>
+Date: Fri, 25 Feb 1994 15:30:12 GMT
+References: <1994Feb25.051712.6336@tum.de>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Feb25.051712.6336@tum.de>, dsanchez@tum.de (Diego Sánchez) writes:
+> Amiga audio hackers: you can demodulate the 14.2 Hz carrier in real time without bogging down the OS.
+
+Download failed on Aminet mirror. Can someone mail me an ADF floppy disk image?
+
+-- 
+Amy Girard <agirard@hanse.de>
+Hayes Optima 288 @ 14,400 bps
+"In theory there is no difference between theory and practice."
+
+From ecampbell@mit.edu Fri Feb 25 21:19:12 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!mit!ecampbell
+From: ecampbell@mit.edu (Elaine Campbell)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1994Feb25.211912.9962@mit.edu>
+Date: Fri, 25 Feb 1994 21:19:12 GMT
+References: <1994Feb25.051712.6336@tum.de>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1994Feb25.051712.6336@tum.de>, dsanchez@tum.de (Diego Sánchez) writes:
+> Amiga audio hackers: you can demodulate the 14.2 Hz carrier in real time without bogging down the OS.
+
+Please make sure it's compatible with Kickstart 1.3 for those of us who haven't upgraded our A500s to 3.1 yet.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Elaine Campbell
+Tape trading list upon request. SASE required for international mail.
+
+From asouza@stanford.edu Sat Feb 26 19:10:12 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!stanford!asouza
+From: asouza@stanford.edu (Amy Souza)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1994Feb26.191012.7850@stanford.edu>
+Date: Sat, 26 Feb 1994 19:10:12 GMT
+References: <1994Feb25.051712.6336@tum.de>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1994Feb25.051712.6336@tum.de>, dsanchez@tum.de (Diego Sánchez) writes:
+> Amiga audio hackers: you can demodulate the 14.2 Hz carrier in real time without bogging down the OS.
+> By setting up Paula's audio DMA to double-buffer incoming 8-bit samples, the 68020 has plenty of cycles left for the Costas loop.
+
+Tested on my A3000 / 25 MHz. Ran smoothly in the background while I was compiling a C program in another window.
+
+-- 
+Amy Souza <asouza@stanford.edu>
+*PLONK* filter active for trolls.
+Mac IIci / 68882 FPU - NetBSD 1.0
+
+From mdubois@u-tokyo.ac.jp Mon Feb 28 09:59:12 1994
+Path: ashpoly!cascade!brgate!saturno!u-tokyo!mdubois
+From: mdubois@u-tokyo.ac.jp (Mateo Dubois)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1994Feb28.095912.5870@u-tokyo.ac.jp>
+Date: Mon, 28 Feb 1994 09:59:12 GMT
+References: <1994Feb25.051712.6336@tum.de> <1994Feb25.153012.5820@hanse.de>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1994Feb25.153012.5820@hanse.de>, agirard@hanse.de (Amy Girard) writes:
+> Download failed on Aminet mirror. Can someone mail me an ADF floppy disk image?
+
+Please make sure it's compatible with Kickstart 1.3 for those of us who haven't upgraded our A500s to 3.1 yet.
+
+-- 
+Mateo Dubois -- University of Tokyo Department of Information Science
+"We don't sign stars. We build them."
+

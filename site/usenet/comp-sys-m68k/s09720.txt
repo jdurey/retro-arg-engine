@@ -1,0 +1,116 @@
+From tsokolov@unam.mx Thu Jul 25 16:28:41 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!unam!tsokolov
+From: tsokolov@unam.mx (Thiago Sokolov)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Jul25.162841.7485@unam.mx>
+Date: Thu, 25 Jul 1996 16:28:41 GMT
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+Thiago Sokolov <tsokolov@unam.mx>
+"We don't sign stars. We build them."
+Atari TT030 / SunOS 4.1.4
+
+From jokonkwo@inria.fr Fri Jul 26 05:23:41 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!inria!jokonkwo
+From: jokonkwo@inria.fr (Jen Okonkwo)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Jul26.052341.2576@inria.fr>
+Date: Fri, 26 Jul 1996 05:23:41 GMT
+References: <1996Jul25.162841.7485@unam.mx>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Jul25.162841.7485@unam.mx>, tsokolov@unam.mx (Thiago Sokolov) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+=== Jen Okonkwo ===
+Dept of Electrical Engineering, INRIA Rocquencourt
+"We don't sign stars. We build them."
+
+From cpetrov@illinois.edu Fri Jul 26 06:53:41 1996
+Path: ashpoly!cascade!brgate!saturno!illinois!cpetrov
+From: cpetrov@illinois.edu (Callum Petrov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Jul26.065341.6363@illinois.edu>
+Date: Fri, 26 Jul 1996 06:53:41 GMT
+References: <1996Jul25.162841.7485@unam.mx>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Jul25.162841.7485@unam.mx>, tsokolov@unam.mx (Thiago Sokolov) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+=== Callum Petrov ===
+Dept of Electrical Engineering, University of Illinois Urbana-Champaign
+"A soul is not exclusive to biology."
+
+From bmoreno@tum.de Fri Jul 26 22:43:41 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!tum!bmoreno
+From: bmoreno@tum.de (Brian Moreno)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Jul26.224341.5360@tum.de>
+Date: Fri, 26 Jul 1996 22:43:41 GMT
+References: <1996Jul25.162841.7485@unam.mx> <1996Jul26.052341.2576@inria.fr>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Jul26.052341.2576@inria.fr>, jokonkwo@inria.fr (Jen Okonkwo) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Brian Moreno | bmoreno@tum.de
+PGP Key fingerprint: 6154 821D DAF2 CE95
+"Keep the channels open."
+
+From isilva@inria.fr Sun Jul 28 07:29:41 1996
+Path: ashpoly!cascade!mxgate!coyoacan!inria!isilva
+From: isilva@inria.fr (Ines Silva)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Jul28.072941.7424@inria.fr>
+Date: Sun, 28 Jul 1996 07:29:41 GMT
+References: <1996Jul25.162841.7485@unam.mx> <1996Jul26.052341.2576@inria.fr> <1996Jul26.224341.5360@tum.de>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1996Jul26.224341.5360@tum.de>, bmoreno@tum.de (Brian Moreno) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Ines Silva -- INRIA Rocquencourt
+"Row 14. No joke."
+

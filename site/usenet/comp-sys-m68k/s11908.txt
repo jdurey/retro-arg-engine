@@ -1,0 +1,115 @@
+From asokolov@unam.mx Wed Feb 07 16:39:14 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!unam!asokolov
+From: asokolov@unam.mx (Andrei Sokolov)
+Newsgroups: comp.sys.m68k
+Subject: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Feb07.163914.6462@unam.mx>
+Date: Wed, 07 Feb 1996 16:39:14 GMT
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+
+Did Marcus take the decryption EPROM with him when he left the lab?
+
+-- 
+Andrei Sokolov -- Universidad Nacional Autónoma de México (DGSCA)
+"In theory there is no difference between theory and practice."
+
+From lperez@stanford.edu Thu Feb 08 08:12:14 1996
+Path: ashpoly!cascade!bigsur!stanford!lperez
+From: lperez@stanford.edu (Lucia Pérez)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Feb08.081214.9323@stanford.edu>
+Date: Thu, 08 Feb 1996 08:12:14 GMT
+References: <1996Feb07.163914.6462@unam.mx>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1996Feb07.163914.6462@unam.mx>, asokolov@unam.mx (Andrei Sokolov) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+> This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+-- 
+Lucia Pérez <lperez@stanford.edu>
+"5 sigma is a discovery. 7 is a question."
+Acorn RiscPC 600 / Linux 1.2.13
+
+From ltanaka@pipeline.com Fri Feb 09 04:36:14 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!pipeline!ltanaka
+From: ltanaka@pipeline.com (Lars Tanaka)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Feb09.043614.8724@pipeline.com>
+Date: Fri, 09 Feb 1996 04:36:14 GMT
+References: <1996Feb07.163914.6462@unam.mx> <1996Feb08.081214.9323@stanford.edu>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1996Feb08.081214.9323@stanford.edu>, lperez@stanford.edu (Lucia Pérez) writes:
+> That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Lars Tanaka
+Tape trading list upon request. SASE required for international mail.
+
+From jpetrov@u-tokyo.ac.jp Fri Feb 09 17:53:14 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!u-tokyo!jpetrov
+From: jpetrov@u-tokyo.ac.jp (Joachim Petrov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Feb09.175314.3026@u-tokyo.ac.jp>
+Date: Fri, 09 Feb 1996 17:53:14 GMT
+References: <1996Feb07.163914.6462@unam.mx> <1996Feb08.081214.9323@stanford.edu> <1996Feb09.043614.8724@pipeline.com>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Feb09.043614.8724@pipeline.com>, ltanaka@pipeline.com (Lars Tanaka) writes:
+> Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+-- 
+Joachim Petrov
+Opinions expressed are solely my own and not those of University of Tokyo Department of Information Science.
+------------------------------------------------------------
+
+From rduarte@delphi.com Sun Feb 11 10:12:14 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!delphi!rduarte
+From: rduarte@delphi.com (Raj Duarte)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Feb11.101214.8673@delphi.com>
+Date: Sun, 11 Feb 1996 10:12:14 GMT
+References: <1996Feb07.163914.6462@unam.mx> <1996Feb08.081214.9323@stanford.edu>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Feb08.081214.9323@stanford.edu>, lperez@stanford.edu (Lucia Pérez) writes:
+> That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Raj Duarte <rduarte@delphi.com>
+Zyxel U-1496E @ ISDN 64k bps
+"A soul is not exclusive to biology."
+

@@ -1,0 +1,48 @@
+From tbrennan@berkeley.edu Fri Oct 06 10:25:45 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!berkeley!tbrennan
+From: tbrennan@berkeley.edu (Takeshi Brennan)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Oct06.102545.4519@berkeley.edu>
+Date: Fri, 06 Oct 1995 10:25:45 GMT
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Takeshi Brennan
+Tape trading list upon request. SASE required for international mail.
+
+From rschneider@mit.edu Sat Oct 07 04:15:45 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!mit!rschneider
+From: rschneider@mit.edu (Rodrigo Schneider)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Oct07.041545.9636@mit.edu>
+Date: Sat, 07 Oct 1995 04:15:45 GMT
+References: <1995Oct06.102545.4519@berkeley.edu>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995Oct06.102545.4519@berkeley.edu>, tbrennan@berkeley.edu (Takeshi Brennan) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Rodrigo Schneider <rschneider@mit.edu>
+"5 sigma is a discovery. 7 is a question."
+Amiga 1200 (Blizzard 030/50) / NEXTSTEP 3.3
+

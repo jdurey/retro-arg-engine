@@ -1,0 +1,71 @@
+From mjohansson@illinois.edu Thu Apr 25 08:13:48 1996
+Path: ashpoly!cascade!brgate!saturno!illinois!mjohansson
+From: mjohansson@illinois.edu (Mathieu Johansson)
+Newsgroups: comp.sys.m68k
+Subject: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Apr25.081348.9697@illinois.edu>
+Date: Thu, 25 Apr 1996 08:13:48 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Mathieu Johansson
+Opinions expressed are solely my own and not those of University of Illinois Urbana-Champaign.
+------------------------------------------------------------
+
+From jkarlsson@kth.se Sat Apr 27 06:17:48 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!kth!jkarlsson
+From: jkarlsson@kth.se (Ji-woo Karlsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Apr27.061748.5122@kth.se>
+Date: Sat, 27 Apr 1996 06:17:48 GMT
+References: <1996Apr25.081348.9697@illinois.edu>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1996Apr25.081348.9697@illinois.edu>, mjohansson@illinois.edu (Mathieu Johansson) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Ji-woo Karlsson <jkarlsson@kth.se>
+"When every node is whole, the channel opens."
+486DX4/100 (FreeBSD 2.0.5) / AmigaOS 3.1
+
+From mrobertson@kiae.su Sun Apr 28 22:33:48 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!kiae!mrobertson
+From: mrobertson@kiae.su (Mathieu Robertson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Apr28.223348.3159@kiae.su>
+Date: Sun, 28 Apr 1996 22:33:48 GMT
+References: <1996Apr25.081348.9697@illinois.edu>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Apr25.081348.9697@illinois.edu>, mjohansson@illinois.edu (Mathieu Johansson) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Mathieu Robertson <mrobertson@kiae.su>
+*PLONK* filter active for trolls.
+Macintosh IIfx - NetBSD 1.0
+

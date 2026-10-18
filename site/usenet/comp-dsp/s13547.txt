@@ -1,0 +1,93 @@
+From breyes@titech.ac.jp Tue Dec 12 08:20:47 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!titech!breyes
+From: breyes@titech.ac.jp (Bastien Reyes)
+Newsgroups: comp.dsp
+Subject: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec12.082047.8682@titech.ac.jp>
+Date: Tue, 12 Dec 1995 08:20:47 GMT
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+=== Bastien Reyes ===
+Dept of Electrical Engineering, Tokyo Institute of Technology Computer Centre
+"Tape doesn't lie at 02:14. Ears do."
+
+From tkuznetsov@hanse.de Tue Dec 12 09:52:47 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!hanse!tkuznetsov
+From: tkuznetsov@hanse.de (Takeshi Kuznetsov)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec12.095247.5304@hanse.de>
+Date: Tue, 12 Dec 1995 09:52:47 GMT
+References: <1995Dec12.082047.8682@titech.ac.jp>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Dec12.082047.8682@titech.ac.jp>, breyes@titech.ac.jp (Bastien Reyes) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+Takeshi Kuznetsov -- Hanse-Netzwerk Hamburg
+"When every node is whole, the channel opens."
+
+From ssantos@netcom.com Tue Dec 12 12:09:47 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!netcom!ssantos
+From: ssantos@netcom.com (Sun-mi Santos)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec12.120947.2446@netcom.com>
+Date: Tue, 12 Dec 1995 12:09:47 GMT
+References: <1995Dec12.082047.8682@titech.ac.jp>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1995Dec12.082047.8682@titech.ac.jp>, breyes@titech.ac.jp (Bastien Reyes) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Sun-mi Santos -- NETCOM On-Line Communication Services
+"Row 14. No joke."
+
+From alee@cmu.edu Wed Dec 13 09:35:47 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!cmu!alee
+From: alee@cmu.edu (Anja Lee)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec13.093547.3764@cmu.edu>
+Date: Wed, 13 Dec 1995 09:35:47 GMT
+References: <1995Dec12.082047.8682@titech.ac.jp> <1995Dec12.095247.5304@hanse.de>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Dec12.095247.5304@hanse.de>, tkuznetsov@hanse.de (Takeshi Kuznetsov) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+Anja Lee | alee@cmu.edu
+PGP Key fingerprint: 1C15 76C2 EB0D 78E6
+"Keep the channels open."
+

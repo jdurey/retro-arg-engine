@@ -1,0 +1,119 @@
+From fchoi@tum.de Thu Jul 04 21:10:48 1996
+Path: ashpoly!cascade!brgate!saturno!tum!fchoi
+From: fchoi@tum.de (Fiona Choi)
+Newsgroups: comp.sys.m68k
+Subject: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Jul04.211048.7481@tum.de>
+Date: Thu, 04 Jul 1996 21:10:48 GMT
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Does anyone have a 27C256 EPROM marked 'MH-U14' or 'ORION-CRYPTO'?
+
+-- 
+Fiona Choi <fchoi@tum.de>
+*PLONK* filter active for trolls.
+Acorn RiscPC 600 - NetBSD 1.0
+
+From nmacdonald@mindspring.com Fri Jul 05 06:54:48 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!mindspring!nmacdonald
+From: nmacdonald@mindspring.com (Nadia MacDonald)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Jul05.065448.5183@mindspring.com>
+Date: Fri, 05 Jul 1996 06:54:48 GMT
+References: <1996Jul04.211048.7481@tum.de>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Jul04.211048.7481@tum.de>, fchoi@tum.de (Fiona Choi) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+-- 
+Nadia MacDonald <nmacdonald@mindspring.com>
+"Tape doesn't lie at 02:14. Ears do."
+486DX4/100 (FreeBSD 2.0.5) / System 7.5.1
+
+From jlindqvist@pacbell.net Fri Jul 05 13:32:48 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!pacbell!jlindqvist
+From: jlindqvist@pacbell.net (Jens Lindqvist)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Jul05.133248.7413@pacbell.net>
+Date: Fri, 05 Jul 1996 13:32:48 GMT
+References: <1996Jul04.211048.7481@tum.de> <1996Jul05.065448.5183@mindspring.com>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1996Jul05.065448.5183@mindspring.com>, nmacdonald@mindspring.com (Nadia MacDonald) writes:
+> That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Jens Lindqvist <jlindqvist@pacbell.net>
+*PLONK* filter active for trolls.
+486DX4/100 (FreeBSD 2.0.5) - NetBSD 1.0
+
+From gsanchez@cern.ch Sun Jul 07 13:35:48 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!cern!gsanchez
+From: gsanchez@cern.ch (Göran Sánchez)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Jul07.133548.6876@cern.ch>
+Date: Sun, 07 Jul 1996 13:35:48 GMT
+References: <1996Jul04.211048.7481@tum.de> <1996Jul05.065448.5183@mindspring.com> <1996Jul05.133248.7413@pacbell.net>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Jul05.133248.7413@pacbell.net>, jlindqvist@pacbell.net (Jens Lindqvist) writes:
+> That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+> Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Göran Sánchez -- European Laboratory for Particle Physics, Geneva
+"Hold for relay."
+
+From bbrennan@uni-hamburg.de Tue Jul 09 03:14:48 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!uni-hamburg!bbrennan
+From: bbrennan@uni-hamburg.de (Bastien Brennan)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Jul09.031448.9330@uni-hamburg.de>
+Date: Tue, 09 Jul 1996 03:14:48 GMT
+References: <1996Jul04.211048.7481@tum.de> <1996Jul05.065448.5183@mindspring.com> <1996Jul05.133248.7413@pacbell.net>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1996Jul05.133248.7413@pacbell.net>, jlindqvist@pacbell.net (Jens Lindqvist) writes:
+> That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+> Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+-- 
+Bastien Brennan | bbrennan@uni-hamburg.de
+PGP Key fingerprint: 5314 C521 C282 20FD
+"Keep the channels open."
+

@@ -1,0 +1,120 @@
+From sgirard@delphi.com Sat Mar 16 11:01:10 1996
+Path: ashpoly!cascade!brgate!saturno!delphi!sgirard
+From: sgirard@delphi.com (Steve Girard)
+Newsgroups: comp.sys.m68k
+Subject: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Mar16.110110.4754@delphi.com>
+Date: Sat, 16 Mar 1996 11:01:10 GMT
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+
+Did Marcus take the decryption EPROM with him when he left the lab?
+
+-- 
+Steve Girard <sgirard@delphi.com>
+"In theory there is no difference between theory and practice."
+Atari Falcon 030 / AmigaOS 3.1
+
+From oreyes@kth.se Mon Mar 18 02:37:10 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!kth!oreyes
+From: oreyes@kth.se (Olga Reyes)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Mar18.023710.3158@kth.se>
+Date: Mon, 18 Mar 1996 02:37:10 GMT
+References: <1996Mar16.110110.4754@delphi.com>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Mar16.110110.4754@delphi.com>, sgirard@delphi.com (Steve Girard) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Olga Reyes
+Opinions expressed are solely my own and not those of Royal Institute of Technology, Stockholm.
+------------------------------------------------------------
+
+From hkarlsson@unam.mx Mon Mar 18 11:48:10 1996
+Path: ashpoly!cascade!mxgate!coyoacan!unam!hkarlsson
+From: hkarlsson@unam.mx (Hana Karlsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Mar18.114810.2753@unam.mx>
+Date: Mon, 18 Mar 1996 11:48:10 GMT
+References: <1996Mar16.110110.4754@delphi.com> <1996Mar18.023710.3158@kth.se>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Mar18.023710.3158@kth.se>, oreyes@kth.se (Olga Reyes) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Hana Karlsson <hkarlsson@unam.mx>
+*PLONK* filter active for trolls.
+PC-9821Ap2 (NEC) - NetBSD 1.0
+
+From snakamura@cern.ch Mon Mar 18 14:53:10 1996
+Path: ashpoly!cascade!brgate!saturno!cern!snakamura
+From: snakamura@cern.ch (Sun-mi Nakamura)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Mar18.145310.3101@cern.ch>
+Date: Mon, 18 Mar 1996 14:53:10 GMT
+References: <1996Mar16.110110.4754@delphi.com>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1996Mar16.110110.4754@delphi.com>, sgirard@delphi.com (Steve Girard) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+> Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Sun-mi Nakamura -- European Laboratory for Particle Physics, Geneva
+"5 sigma is a discovery. 7 is a question."
+
+From gramirez@kth.se Wed Mar 20 10:07:10 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!kth!gramirez
+From: gramirez@kth.se (Göran Ramírez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Mar20.100710.9299@kth.se>
+Date: Wed, 20 Mar 1996 10:07:10 GMT
+References: <1996Mar16.110110.4754@delphi.com> <1996Mar18.023710.3158@kth.se> <1996Mar18.114810.2753@unam.mx>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1996Mar18.114810.2753@unam.mx>, hkarlsson@unam.mx (Hana Karlsson) writes:
+> Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Göran Ramírez <gramirez@kth.se>
+*PLONK* filter active for trolls.
+486DX2/66 (Linux 1.2.13) - NetBSD 1.0
+

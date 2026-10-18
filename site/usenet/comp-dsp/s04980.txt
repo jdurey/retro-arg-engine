@@ -1,0 +1,119 @@
+From hkang@illinois.edu Thu Dec 28 14:17:34 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!illinois!hkang
+From: hkang@illinois.edu (Hana Kang)
+Newsgroups: comp.dsp
+Subject: Observation: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Dec28.141734.5542@illinois.edu>
+Date: Thu, 28 Dec 1995 14:17:34 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+
+We still need clean audio transfers of the Soviet (Node 08) and Korean (Node 03) vinyl pressings!
+
+-- 
+Hana Kang <hkang@illinois.edu>
+*PLONK* filter active for trolls.
+Pentium 90 (OS/2 Warp) - NetBSD 1.0
+
+From sito@berkeley.edu Sat Dec 30 09:35:34 1995
+Path: ashpoly!cascade!bigsur!berkeley!sito
+From: sito@berkeley.edu (Sven Ito)
+Newsgroups: comp.dsp
+Subject: Re: Observation: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Dec30.093534.6418@berkeley.edu>
+Date: Sat, 30 Dec 1995 09:35:34 GMT
+References: <1995Dec28.141734.5542@illinois.edu>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Dec28.141734.5542@illinois.edu>, hkang@illinois.edu (Hana Kang) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Sven Ito
+Opinions expressed are solely my own and not those of UC Berkeley Department of EECS.
+------------------------------------------------------------
+
+From rvasiliev@delphi.com Sat Dec 30 13:45:34 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!delphi!rvasiliev
+From: rvasiliev@delphi.com (Raj Vasiliev)
+Newsgroups: comp.dsp
+Subject: Re: Observation: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Dec30.134534.5217@delphi.com>
+Date: Sat, 30 Dec 1995 13:45:34 GMT
+References: <1995Dec28.141734.5542@illinois.edu> <1995Dec30.093534.6418@berkeley.edu>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Dec30.093534.6418@berkeley.edu>, sito@berkeley.edu (Sven Ito) writes:
+> Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Raj Vasiliev <rvasiliev@delphi.com>
+*PLONK* filter active for trolls.
+Atari TT030 - NetBSD 1.0
+
+From tsokolov@stanford.edu Mon Jan 01 17:31:34 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!stanford!tsokolov
+From: tsokolov@stanford.edu (Tyler Sokolov)
+Newsgroups: comp.dsp
+Subject: Re: Observation: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996Jan01.173134.8619@stanford.edu>
+Date: Mon, 01 Jan 1996 17:31:34 GMT
+References: <1995Dec28.141734.5542@illinois.edu> <1995Dec30.093534.6418@berkeley.edu>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Dec30.093534.6418@berkeley.edu>, sito@berkeley.edu (Sven Ito) writes:
+> Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Tyler Sokolov <tsokolov@stanford.edu>
+Hayes Optima 288 @ 28,800 bps
+"There are 14 nodes and only 10 countries. Count again."
+
+From kkuznetsov@ox.ac.uk Tue Jan 02 09:16:34 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!ox!kkuznetsov
+From: kkuznetsov@ox.ac.uk (Kirsty Kuznetsov)
+Newsgroups: comp.dsp
+Subject: Re: Observation: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996Jan02.091634.3195@ox.ac.uk>
+Date: Tue, 02 Jan 1996 09:16:34 GMT
+References: <1995Dec28.141734.5542@illinois.edu> <1995Dec30.093534.6418@berkeley.edu> <1995Dec30.134534.5217@delphi.com>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Dec30.134534.5217@delphi.com>, rvasiliev@delphi.com (Raj Vasiliev) writes:
+> Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+> PGP Public key available via finger or upon request.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+-- 
+=== Kirsty Kuznetsov ===
+Dept of Electrical Engineering, Oxford University Computing Laboratory
+"Row 14. No joke."
+

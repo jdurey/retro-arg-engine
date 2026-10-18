@@ -1,0 +1,121 @@
+From cchoi@mindspring.com Sat Apr 22 23:54:32 1995
+Path: ashpoly!cascade!brgate!saturno!mindspring!cchoi
+From: cchoi@mindspring.com (Callum Choi)
+Newsgroups: comp.dsp
+Subject: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Apr22.235432.2456@mindspring.com>
+Date: Sat, 22 Apr 1995 23:54:32 GMT
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Callum Choi
+Opinions expressed are solely my own and not those of MindSpring Enterprises.
+------------------------------------------------------------
+
+From ereyes@unam.mx Sun Apr 23 11:24:32 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!unam!ereyes
+From: ereyes@unam.mx (Emi Reyes)
+Newsgroups: comp.dsp
+Subject: Re: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Apr23.112432.2863@unam.mx>
+Date: Sun, 23 Apr 1995 11:24:32 GMT
+References: <1995Apr22.235432.2456@mindspring.com>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Apr22.235432.2456@mindspring.com>, cchoi@mindspring.com (Callum Choi) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+=== Emi Reyes ===
+Dept of Electrical Engineering, Universidad Nacional Autónoma de México (DGSCA)
+"5 sigma is a discovery. 7 is a question."
+
+From lrobertson@uni-hamburg.de Sun Apr 23 12:31:32 1995
+Path: ashpoly!cascade!mxgate!coyoacan!uni-hamburg!lrobertson
+From: lrobertson@uni-hamburg.de (Lisa Robertson)
+Newsgroups: comp.dsp
+Subject: Re: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Apr23.123132.5295@uni-hamburg.de>
+Date: Sun, 23 Apr 1995 12:31:32 GMT
+References: <1995Apr22.235432.2456@mindspring.com>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1995Apr22.235432.2456@mindspring.com>, cchoi@mindspring.com (Callum Choi) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Lisa Robertson <lrobertson@uni-hamburg.de>
+"We don't sign stars. We build them."
+486DX2/66 (Linux 1.2.13) / FreeBSD 2.1
+
+From bweber@panix.com Tue Apr 25 03:02:32 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!panix!bweber
+From: bweber@panix.com (Bastien Weber)
+Newsgroups: comp.dsp
+Subject: Re: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Apr25.030232.7880@panix.com>
+Date: Tue, 25 Apr 1995 03:02:32 GMT
+References: <1995Apr22.235432.2456@mindspring.com>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Apr22.235432.2456@mindspring.com>, cchoi@mindspring.com (Callum Choi) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+Bastien Weber | bweber@panix.com
+PGP Key fingerprint: A36F 74F3 0CB1 05BB
+"Keep the channels open."
+
+From egarcia@netcom.com Wed Apr 26 22:49:32 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!netcom!egarcia
+From: egarcia@netcom.com (Élodie García)
+Newsgroups: comp.dsp
+Subject: Re: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Apr26.224932.7974@netcom.com>
+Date: Wed, 26 Apr 1995 22:49:32 GMT
+References: <1995Apr22.235432.2456@mindspring.com> <1995Apr23.123132.5295@uni-hamburg.de>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Apr23.123132.5295@uni-hamburg.de>, lrobertson@uni-hamburg.de (Lisa Robertson) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Élodie García <egarcia@netcom.com>
+Hayes Optima 288 @ 9600 Telebit bps
+"5 sigma is a discovery. 7 is a question."
+

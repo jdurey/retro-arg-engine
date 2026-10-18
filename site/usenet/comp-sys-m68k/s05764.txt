@@ -1,0 +1,70 @@
+From sandersson@clari.net Mon May 23 00:43:30 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!clari!sandersson
+From: sandersson@clari.net (Sun-mi Andersson)
+Newsgroups: comp.sys.m68k
+Subject: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994May23.004330.1654@clari.net>
+Date: Mon, 23 May 1994 00:43:30 GMT
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Sun-mi Andersson
+Tape trading list upon request. SASE required for international mail.
+
+From kweber@cern.ch Mon May 23 15:32:30 1994
+Path: ashpoly!cascade!bigsur!cern!kweber
+From: kweber@cern.ch (Katrin Weber)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994May23.153230.1646@cern.ch>
+Date: Mon, 23 May 1994 15:32:30 GMT
+References: <1994May23.004330.1654@clari.net>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994May23.004330.1654@clari.net>, sandersson@clari.net (Sun-mi Andersson) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Katrin Weber <kweber@cern.ch>
+"Extraordinary claims require extraordinary spectra."
+PC-9821Ap2 (NEC) / AmigaOS 3.1
+
+From tcampbell@inria.fr Tue May 24 19:40:30 1994
+Path: ashpoly!cascade!brgate!saturno!inria!tcampbell
+From: tcampbell@inria.fr (Tyler Campbell)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994May24.194030.8785@inria.fr>
+Date: Tue, 24 May 1994 19:40:30 GMT
+References: <1994May23.004330.1654@clari.net>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1994May23.004330.1654@clari.net>, sandersson@clari.net (Sun-mi Andersson) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+> Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+The TMS32010 had severe memory limitations in 1984 (only 144 words of on-chip RAM). Dual 68000s gave them full 16MB address space.
+
+-- 
+Tyler Campbell | tcampbell@inria.fr
+PGP Key fingerprint: 8085 B5BD 146C 544D
+"Keep the channels open."
+

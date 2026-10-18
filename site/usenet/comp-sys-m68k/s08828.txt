@@ -1,0 +1,115 @@
+From msmirnov@tum.de Sun Aug 04 22:41:06 1996
+Path: ashpoly!cascade!mxgate!coyoacan!tum!msmirnov
+From: msmirnov@tum.de (Marisol Smirnov)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Aug04.224106.2944@tum.de>
+Date: Sun, 04 Aug 1996 22:41:06 GMT
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Marisol Smirnov -- Technische Universität München
+"The carrier frequency does not drift by accident."
+
+From mmoreau@tum.de Mon Aug 05 10:41:06 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!tum!mmoreau
+From: mmoreau@tum.de (Matthias Moreau)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Aug05.104106.1539@tum.de>
+Date: Mon, 05 Aug 1996 10:41:06 GMT
+References: <1996Aug04.224106.2944@tum.de>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Aug04.224106.2944@tum.de>, msmirnov@tum.de (Marisol Smirnov) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+> Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Matthias Moreau -- Technische Universität München
+"Marcus is not one man."
+
+From lpopov@berkeley.edu Tue Aug 06 09:06:06 1996
+Path: ashpoly!cascade!mxgate!coyoacan!berkeley!lpopov
+From: lpopov@berkeley.edu (Lisa Popov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Aug06.090606.1948@berkeley.edu>
+Date: Tue, 06 Aug 1996 09:06:06 GMT
+References: <1996Aug04.224106.2944@tum.de> <1996Aug05.104106.1539@tum.de>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Aug05.104106.1539@tum.de>, mmoreau@tum.de (Matthias Moreau) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Lisa Popov
+Opinions expressed are solely my own and not those of UC Berkeley Department of EECS.
+------------------------------------------------------------
+
+From amoreau@tum.de Thu Aug 08 01:45:06 1996
+Path: ashpoly!cascade!brgate!saturno!tum!amoreau
+From: amoreau@tum.de (Aiko Moreau)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Aug08.014506.9710@tum.de>
+Date: Thu, 08 Aug 1996 01:45:06 GMT
+References: <1996Aug04.224106.2944@tum.de>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Aug04.224106.2944@tum.de>, msmirnov@tum.de (Marisol Smirnov) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+> Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Aiko Moreau
+Opinions expressed are solely my own and not those of Technische Universität München.
+------------------------------------------------------------
+
+From kito@cam.ac.uk Thu Aug 08 10:27:06 1996
+Path: ashpoly!cascade!brgate!saturno!cam!kito
+From: kito@cam.ac.uk (Katrin Ito)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Aug08.102706.4577@cam.ac.uk>
+Date: Thu, 08 Aug 1996 10:27:06 GMT
+References: <1996Aug04.224106.2944@tum.de> <1996Aug05.104106.1539@tum.de> <1996Aug06.090606.1948@berkeley.edu>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1996Aug06.090606.1948@berkeley.edu>, lpopov@berkeley.edu (Lisa Popov) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Katrin Ito -- University of Cambridge Computer Laboratory
+"There are 14 nodes and only 10 countries. Count again."
+

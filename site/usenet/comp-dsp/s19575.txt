@@ -1,0 +1,117 @@
+From sweber@earthlink.net Tue Jan 18 08:29:48 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!earthlink!sweber
+From: sweber@earthlink.net (Steve Weber)
+Newsgroups: comp.dsp
+Subject: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Jan18.082948.1314@earthlink.net>
+Date: Tue, 18 Jan 1994 08:29:48 GMT
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+Steve Weber <sweber@earthlink.net>
+Practical Peripherals 14.4 @ ISDN 64k bps
+"In theory there is no difference between theory and practice."
+
+From fnakamura@mindspring.com Wed Jan 19 02:36:48 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!mindspring!fnakamura
+From: fnakamura@mindspring.com (Freya Nakamura)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Jan19.023648.2074@mindspring.com>
+Date: Wed, 19 Jan 1994 02:36:48 GMT
+References: <1994Jan18.082948.1314@earthlink.net>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1994Jan18.082948.1314@earthlink.net>, sweber@earthlink.net (Steve Weber) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+> Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Freya Nakamura <fnakamura@mindspring.com>
+"There are 14 nodes and only 10 countries. Count again."
+Mac IIci / 68882 FPU / TOS 4.04
+
+From htanaka@purdue.edu Wed Jan 19 11:07:48 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!purdue!htanaka
+From: htanaka@purdue.edu (Heather Tanaka)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Jan19.110748.8110@purdue.edu>
+Date: Wed, 19 Jan 1994 11:07:48 GMT
+References: <1994Jan18.082948.1314@earthlink.net> <1994Jan19.023648.2074@mindspring.com>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1994Jan19.023648.2074@mindspring.com>, fnakamura@mindspring.com (Freya Nakamura) writes:
+> Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Heather Tanaka -- Purdue University Engineering Computer Network
+"We don't sign stars. We build them."
+
+From jeriksson@u-tokyo.ac.jp Thu Jan 20 02:45:48 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!u-tokyo!jeriksson
+From: jeriksson@u-tokyo.ac.jp (Julien Eriksson)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Jan20.024548.1492@u-tokyo.ac.jp>
+Date: Thu, 20 Jan 1994 02:45:48 GMT
+References: <1994Jan18.082948.1314@earthlink.net>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1994Jan18.082948.1314@earthlink.net>, sweber@earthlink.net (Steve Weber) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+> Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Julien Eriksson | jeriksson@u-tokyo.ac.jp
+PGP Key fingerprint: 64DE B9BE 538A BB0C
+"Keep the channels open."
+
+From lkim@berkeley.edu Thu Jan 20 11:40:48 1994
+Path: ashpoly!cascade!mxgate!coyoacan!berkeley!lkim
+From: lkim@berkeley.edu (Liam Kim)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Jan20.114048.5423@berkeley.edu>
+Date: Thu, 20 Jan 1994 11:40:48 GMT
+References: <1994Jan18.082948.1314@earthlink.net> <1994Jan20.024548.1492@u-tokyo.ac.jp>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Jan20.024548.1492@u-tokyo.ac.jp>, jeriksson@u-tokyo.ac.jp (Julien Eriksson) writes:
+> If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+Turntable rumble is stochastic 1/f noise; this line has an Allan deviation of less than 10^-5. It was generated by a quartz crystal clock.
+
+-- 
+Liam Kim <lkim@berkeley.edu>
+"In theory there is no difference between theory and practice."
+Macintosh IIfx / Linux 1.2.13
+

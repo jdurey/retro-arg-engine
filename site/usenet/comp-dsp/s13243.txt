@@ -1,0 +1,118 @@
+From divanov@cmu.edu Sat Aug 13 19:57:35 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!cmu!divanov
+From: divanov@cmu.edu (Diego Ivanov)
+Newsgroups: comp.dsp
+Subject: WTB/WTT: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Aug13.195735.6647@cmu.edu>
+Date: Sat, 13 Aug 1994 19:57:35 GMT
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Diego Ivanov | divanov@cmu.edu
+PGP Key fingerprint: 7D59 372A 1410 85F0
+"Keep the channels open."
+
+From stanaka@kiae.su Sat Aug 13 20:48:35 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!kiae!stanaka
+From: stanaka@kiae.su (Sergei Tanaka)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Aug13.204835.2864@kiae.su>
+Date: Sat, 13 Aug 1994 20:48:35 GMT
+References: <1994Aug13.195735.6647@cmu.edu>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1994Aug13.195735.6647@cmu.edu>, divanov@cmu.edu (Diego Ivanov) writes:
+> Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+> At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Sergei Tanaka
+Opinions expressed are solely my own and not those of Kurchatov Institute of Atomic Energy, Moscow.
+------------------------------------------------------------
+
+From mtakahashi@cern.ch Sun Aug 14 10:42:35 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!cern!mtakahashi
+From: mtakahashi@cern.ch (Mike Takahashi)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Aug14.104235.2637@cern.ch>
+Date: Sun, 14 Aug 1994 10:42:35 GMT
+References: <1994Aug13.195735.6647@cmu.edu>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Aug13.195735.6647@cmu.edu>, divanov@cmu.edu (Diego Ivanov) writes:
+> Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Mike Takahashi <mtakahashi@cern.ch>
+Hayes Optima 288 @ 14,400 bps
+"We don't sign stars. We build them."
+
+From drodriguez@ox.ac.uk Sun Aug 14 12:59:35 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!ox!drodriguez
+From: drodriguez@ox.ac.uk (Dong-hyun Rodríguez)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Aug14.125935.1997@ox.ac.uk>
+Date: Sun, 14 Aug 1994 12:59:35 GMT
+References: <1994Aug13.195735.6647@cmu.edu> <1994Aug14.104235.2637@cern.ch>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1994Aug14.104235.2637@cern.ch>, mtakahashi@cern.ch (Mike Takahashi) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Dong-hyun Rodríguez <drodriguez@ox.ac.uk>
+*PLONK* filter active for trolls.
+Commodore Amiga 500 (1MB OCS) - NetBSD 1.0
+
+From rsilva@ox.ac.uk Sun Aug 14 20:22:35 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!ox!rsilva
+From: rsilva@ox.ac.uk (Renata Silva)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Aug14.202235.7599@ox.ac.uk>
+Date: Sun, 14 Aug 1994 20:22:35 GMT
+References: <1994Aug13.195735.6647@cmu.edu> <1994Aug14.104235.2637@cern.ch>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1994Aug14.104235.2637@cern.ch>, mtakahashi@cern.ch (Mike Takahashi) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Renata Silva
+Tape trading list upon request. SASE required for international mail.
+

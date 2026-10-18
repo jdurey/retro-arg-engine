@@ -1,0 +1,50 @@
+From ssuzuki@cam.ac.uk Mon Sep 02 05:04:12 1996
+Path: ashpoly!cascade!brgate!saturno!cam!ssuzuki
+From: ssuzuki@cam.ac.uk (Seo-yeon Suzuki)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Sep02.050412.5680@cam.ac.uk>
+Date: Mon, 02 Sep 1996 05:04:12 GMT
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+=== Seo-yeon Suzuki ===
+Dept of Electrical Engineering, University of Cambridge Computer Laboratory
+"Extraordinary claims require extraordinary spectra."
+
+From aschneider@earthlink.net Tue Sep 03 03:29:12 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!earthlink!aschneider
+From: aschneider@earthlink.net (Astrid Schneider)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Sep03.032912.9927@earthlink.net>
+Date: Tue, 03 Sep 1996 03:29:12 GMT
+References: <1996Sep02.050412.5680@cam.ac.uk>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 12
+
+In article <1996Sep02.050412.5680@cam.ac.uk>, ssuzuki@cam.ac.uk (Seo-yeon Suzuki) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+Astrid Schneider <aschneider@earthlink.net>
+"They will send a copy in my place."
+Mac IIci / 68882 FPU / TOS 4.04
+

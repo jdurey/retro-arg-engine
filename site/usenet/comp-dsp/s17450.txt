@@ -1,0 +1,49 @@
+From mnilsson@berkeley.edu Tue Sep 13 22:20:51 1994
+Path: ashpoly!cascade!mxgate!coyoacan!berkeley!mnilsson
+From: mnilsson@berkeley.edu (Marisol Nilsson)
+Newsgroups: comp.dsp
+Subject: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Sep13.222051.3990@berkeley.edu>
+Date: Tue, 13 Sep 1994 22:20:51 GMT
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Marisol Nilsson | mnilsson@berkeley.edu
+PGP Key fingerprint: A77B 7DD2 81C6 5C45
+"Keep the channels open."
+
+From ereyes@kth.se Wed Sep 14 10:30:51 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!kth!ereyes
+From: ereyes@kth.se (Elaine Reyes)
+Newsgroups: comp.dsp
+Subject: Re: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Sep14.103051.8076@kth.se>
+Date: Wed, 14 Sep 1994 10:30:51 GMT
+References: <1994Sep13.222051.3990@berkeley.edu>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1994Sep13.222051.3990@berkeley.edu>, mnilsson@berkeley.edu (Marisol Nilsson) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Elaine Reyes | ereyes@kth.se
+PGP Key fingerprint: FAD5 2A5A F1FA B230
+"Keep the channels open."
+

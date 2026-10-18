@@ -1,0 +1,96 @@
+From sandersson@utexas.edu Thu Feb 23 13:26:20 1995
+Path: ashpoly!cascade!mxgate!coyoacan!utexas!sandersson
+From: sandersson@utexas.edu (Steve Andersson)
+Newsgroups: comp.dsp
+Subject: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Feb23.132620.5948@utexas.edu>
+Date: Thu, 23 Feb 1995 13:26:20 GMT
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Steve Andersson | sandersson@utexas.edu
+PGP Key fingerprint: 1985 DD4B 5092 8726
+"Keep the channels open."
+
+From mokonkwo@ox.ac.uk Fri Feb 24 07:06:20 1995
+Path: ashpoly!cascade!mxgate!coyoacan!ox!mokonkwo
+From: mokonkwo@ox.ac.uk (Mei Okonkwo)
+Newsgroups: comp.dsp
+Subject: Re: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Feb24.070620.2845@ox.ac.uk>
+Date: Fri, 24 Feb 1995 07:06:20 GMT
+References: <1995Feb23.132620.5948@utexas.edu>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Feb23.132620.5948@utexas.edu>, sandersson@utexas.edu (Steve Andersson) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Mei Okonkwo | mokonkwo@ox.ac.uk
+PGP Key fingerprint: B992 CDEE 6126 FCA6
+"Keep the channels open."
+
+From klarsson@illinois.edu Fri Feb 24 13:53:20 1995
+Path: ashpoly!cascade!bigsur!illinois!klarsson
+From: klarsson@illinois.edu (Katrin Larsson)
+Newsgroups: comp.dsp
+Subject: Re: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Feb24.135320.9975@illinois.edu>
+Date: Fri, 24 Feb 1995 13:53:20 GMT
+References: <1995Feb23.132620.5948@utexas.edu>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995Feb23.132620.5948@utexas.edu>, sandersson@utexas.edu (Steve Andersson) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Katrin Larsson <klarsson@illinois.edu>
+*PLONK* filter active for trolls.
+Acorn RiscPC 600 - NetBSD 1.0
+
+From epark@cmu.edu Sat Feb 25 12:05:20 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!cmu!epark
+From: epark@cmu.edu (Emi Park)
+Newsgroups: comp.dsp
+Subject: Re: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Feb25.120520.3375@cmu.edu>
+Date: Sat, 25 Feb 1995 12:05:20 GMT
+References: <1995Feb23.132620.5948@utexas.edu> <1995Feb24.135320.9975@illinois.edu>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Feb24.135320.9975@illinois.edu>, klarsson@illinois.edu (Katrin Larsson) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+> PGP Public key available via finger or upon request.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Emi Park <epark@cmu.edu>
+*PLONK* filter active for trolls.
+NeXTstation Turbo Color - NetBSD 1.0
+

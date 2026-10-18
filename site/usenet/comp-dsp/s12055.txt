@@ -1,0 +1,50 @@
+From bkang@stanford.edu Tue Mar 08 01:01:40 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!stanford!bkang
+From: bkang@stanford.edu (Brian Kang)
+Newsgroups: comp.dsp
+Subject: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Mar08.010140.8998@stanford.edu>
+Date: Tue, 08 Mar 1994 01:01:40 GMT
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+What sampling rates are people using for their vinyl rips? 44.1 kHz or 48 kHz DAT?
+
+-- 
+Brian Kang <bkang@stanford.edu>
+Hayes Optima 288 @ ISDN 64k bps
+"In theory there is no difference between theory and practice."
+
+From rkarlsson@illinois.edu Tue Mar 08 07:00:40 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!illinois!rkarlsson
+From: rkarlsson@illinois.edu (Raj Karlsson)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Mar08.070040.3635@illinois.edu>
+Date: Tue, 08 Mar 1994 07:00:40 GMT
+References: <1994Mar08.010140.8998@stanford.edu>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1994Mar08.010140.8998@stanford.edu>, bkang@stanford.edu (Brian Kang) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Raj Karlsson <rkarlsson@illinois.edu>
+Practical Peripherals 14.4 @ 19,200 bps
+"Tape doesn't lie at 02:14. Ears do."
+

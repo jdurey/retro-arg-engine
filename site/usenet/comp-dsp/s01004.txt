@@ -1,0 +1,46 @@
+From sramirez@tum.de Mon Apr 25 23:03:03 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!tum!sramirez
+From: sramirez@tum.de (Seo-yeon Ramírez)
+Newsgroups: comp.dsp
+Subject: WTB/WTT: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Apr25.230303.9638@tum.de>
+Date: Mon, 25 Apr 1994 23:03:03 GMT
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+What sampling rates are people using for their vinyl rips? 44.1 kHz or 48 kHz DAT?
+
+-- 
+Seo-yeon Ramírez
+Tape trading list upon request. SASE required for international mail.
+
+From lkuznetsov@illinois.edu Tue Apr 26 15:15:03 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!illinois!lkuznetsov
+From: lkuznetsov@illinois.edu (Lars Kuznetsov)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Apr26.151503.6224@illinois.edu>
+Date: Tue, 26 Apr 1994 15:15:03 GMT
+References: <1994Apr25.230303.9638@tum.de>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Apr25.230303.9638@tum.de>, sramirez@tum.de (Seo-yeon Ramírez) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Lars Kuznetsov
+Opinions expressed are solely my own and not those of University of Illinois Urbana-Champaign.
+------------------------------------------------------------
+

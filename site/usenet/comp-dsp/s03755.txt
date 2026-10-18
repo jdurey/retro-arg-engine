@@ -1,0 +1,69 @@
+From msuzuki@ox.ac.uk Tue Dec 13 04:28:46 1994
+Path: ashpoly!cascade!brgate!saturno!ox!msuzuki
+From: msuzuki@ox.ac.uk (Mei Suzuki)
+Newsgroups: comp.dsp
+Subject: [FLAME] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Dec13.042846.8551@ox.ac.uk>
+Date: Tue, 13 Dec 1994 04:28:46 GMT
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+Mei Suzuki -- Oxford University Computing Laboratory
+"Row 14. No joke."
+
+From krodriguez@hanse.de Tue Dec 13 17:46:46 1994
+Path: ashpoly!cascade!brgate!saturno!hanse!krodriguez
+From: krodriguez@hanse.de (Katrin Rodríguez)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Dec13.174646.5859@hanse.de>
+Date: Tue, 13 Dec 1994 17:46:46 GMT
+References: <1994Dec13.042846.8551@ox.ac.uk>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Dec13.042846.8551@ox.ac.uk>, msuzuki@ox.ac.uk (Mei Suzuki) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+-- 
+Katrin Rodríguez <krodriguez@hanse.de>
+*PLONK* filter active for trolls.
+Pentium 90 (OS/2 Warp) - NetBSD 1.0
+
+From tsanchez@u-tokyo.ac.jp Thu Dec 15 03:55:46 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!u-tokyo!tsanchez
+From: tsanchez@u-tokyo.ac.jp (Tomas Sánchez)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Dec15.035546.5678@u-tokyo.ac.jp>
+Date: Thu, 15 Dec 1994 03:55:46 GMT
+References: <1994Dec13.042846.8551@ox.ac.uk> <1994Dec13.174646.5859@hanse.de>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Dec13.174646.5859@hanse.de>, krodriguez@hanse.de (Katrin Rodríguez) writes:
+> You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Tomas Sánchez
+Opinions expressed are solely my own and not those of University of Tokyo Department of Information Science.
+------------------------------------------------------------
+

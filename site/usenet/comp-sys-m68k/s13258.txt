@@ -1,0 +1,116 @@
+From jkarlsson@cern.ch Fri Nov 01 21:07:36 1996
+Path: ashpoly!cascade!mxgate!coyoacan!cern!jkarlsson
+From: jkarlsson@cern.ch (Julien Karlsson)
+Newsgroups: comp.sys.m68k
+Subject: Data: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Nov01.210736.8602@cern.ch>
+Date: Fri, 01 Nov 1996 21:07:36 GMT
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Hardware disassembly report for Motorola hardware hackers.
+
+The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Does anyone have a 27C256 EPROM marked 'MH-U14' or 'ORION-CRYPTO'?
+
+-- 
+Julien Karlsson <jkarlsson@cern.ch>
+Practical Peripherals 14.4 @ 28,800 bps
+"5 sigma is a discovery. 7 is a question."
+
+From teriksson@delphi.com Sat Nov 02 21:37:36 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!delphi!teriksson
+From: teriksson@delphi.com (Tyler Eriksson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Nov02.213736.7819@delphi.com>
+Date: Sat, 02 Nov 1996 21:37:36 GMT
+References: <1996Nov01.210736.8602@cern.ch>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996Nov01.210736.8602@cern.ch>, jkarlsson@cern.ch (Julien Karlsson) writes:
+> Hardware disassembly report for Motorola hardware hackers.
+> The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Tyler Eriksson <teriksson@delphi.com>
+*PLONK* filter active for trolls.
+Amiga 1200 (Blizzard 030/50) - NetBSD 1.0
+
+From bhughes@stanford.edu Mon Nov 04 14:12:36 1996
+Path: ashpoly!cascade!bigsur!stanford!bhughes
+From: bhughes@stanford.edu (Bastien Hughes)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Nov04.141236.2470@stanford.edu>
+Date: Mon, 04 Nov 1996 14:12:36 GMT
+References: <1996Nov01.210736.8602@cern.ch> <1996Nov02.213736.7819@delphi.com>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1996Nov02.213736.7819@delphi.com>, teriksson@delphi.com (Tyler Eriksson) writes:
+> Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+-- 
+Bastien Hughes -- Stanford University Computer Systems Lab
+"Marcus is not one man."
+
+From bsanchez@uu.net Tue Nov 05 20:36:36 1996
+Path: ashpoly!cascade!mxgate!coyoacan!uu!bsanchez
+From: bsanchez@uu.net (Bruno Sánchez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Nov05.203636.8174@uu.net>
+Date: Tue, 05 Nov 1996 20:36:36 GMT
+References: <1996Nov01.210736.8602@cern.ch> <1996Nov02.213736.7819@delphi.com>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Nov02.213736.7819@delphi.com>, teriksson@delphi.com (Tyler Eriksson) writes:
+> Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Bruno Sánchez <bsanchez@uu.net>
+Practical Peripherals 14.4 @ ISDN 64k bps
+"Do not worship the copy."
+
+From elindqvist@u-tokyo.ac.jp Fri Nov 08 00:01:36 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!u-tokyo!elindqvist
+From: elindqvist@u-tokyo.ac.jp (Élodie Lindqvist)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Nov08.000136.6068@u-tokyo.ac.jp>
+Date: Fri, 08 Nov 1996 00:01:36 GMT
+References: <1996Nov01.210736.8602@cern.ch> <1996Nov02.213736.7819@delphi.com> <1996Nov05.203636.8174@uu.net>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Nov05.203636.8174@uu.net>, bsanchez@uu.net (Bruno Sánchez) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+-- 
+Élodie Lindqvist | elindqvist@u-tokyo.ac.jp
+PGP Key fingerprint: AC33 17F6 071C 1BF1
+"Keep the channels open."
+

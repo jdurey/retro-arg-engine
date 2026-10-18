@@ -1,0 +1,94 @@
+From ahughes@ox.ac.uk Wed Nov 22 08:03:51 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!ox!ahughes
+From: ahughes@ox.ac.uk (Anja Hughes)
+Newsgroups: comp.dsp
+Subject: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Nov22.080351.3206@ox.ac.uk>
+Date: Wed, 22 Nov 1995 08:03:51 GMT
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+MATLAB script available upon request via email.
+
+-- 
+=== Anja Hughes ===
+Dept of Electrical Engineering, Oxford University Computing Laboratory
+"Hold for relay."
+
+From ypark@clari.net Fri Nov 24 04:55:51 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!clari!ypark
+From: ypark@clari.net (Yuki Park)
+Newsgroups: comp.dsp
+Subject: Re: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Nov24.045551.6854@clari.net>
+Date: Fri, 24 Nov 1995 04:55:51 GMT
+References: <1995Nov22.080351.3206@ox.ac.uk>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Nov22.080351.3206@ox.ac.uk>, ahughes@ox.ac.uk (Anja Hughes) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Yuki Park <ypark@clari.net>
+*PLONK* filter active for trolls.
+Acorn RiscPC 600 - NetBSD 1.0
+
+From bfournier@cam.ac.uk Sat Nov 25 05:04:51 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!cam!bfournier
+From: bfournier@cam.ac.uk (Bastien Fournier)
+Newsgroups: comp.dsp
+Subject: Re: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Nov25.050451.2511@cam.ac.uk>
+Date: Sat, 25 Nov 1995 05:04:51 GMT
+References: <1995Nov22.080351.3206@ox.ac.uk> <1995Nov24.045551.6854@clari.net>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Nov24.045551.6854@clari.net>, ypark@clari.net (Yuki Park) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Bastien Fournier
+Opinions expressed are solely my own and not those of University of Cambridge Computer Laboratory.
+------------------------------------------------------------
+
+From orobertson@utexas.edu Sat Nov 25 13:49:51 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!utexas!orobertson
+From: orobertson@utexas.edu (Olga Robertson)
+Newsgroups: comp.dsp
+Subject: Re: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Nov25.134951.9033@utexas.edu>
+Date: Sat, 25 Nov 1995 13:49:51 GMT
+References: <1995Nov22.080351.3206@ox.ac.uk>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Nov22.080351.3206@ox.ac.uk>, ahughes@ox.ac.uk (Anja Hughes) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Olga Robertson | orobertson@utexas.edu
+PGP Key fingerprint: DA0A C3B0 C803 2FCE
+"Keep the channels open."
+

@@ -1,0 +1,119 @@
+From jmoreno@kth.se Tue Dec 12 14:20:08 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!kth!jmoreno
+From: jmoreno@kth.se (Jen Moreno)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Dec12.142008.2056@kth.se>
+Date: Tue, 12 Dec 1995 14:20:08 GMT
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+
+Did Marcus take the decryption EPROM with him when he left the lab?
+
+-- 
+Jen Moreno <jmoreno@kth.se>
+*PLONK* filter active for trolls.
+Macintosh IIfx - NetBSD 1.0
+
+From lsokolov@cern.ch Thu Dec 14 15:49:08 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!cern!lsokolov
+From: lsokolov@cern.ch (Lars Sokolov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Dec14.154908.6952@cern.ch>
+Date: Thu, 14 Dec 1995 15:49:08 GMT
+References: <1995Dec12.142008.2056@kth.se>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Dec12.142008.2056@kth.se>, jmoreno@kth.se (Jen Moreno) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+> This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Lars Sokolov <lsokolov@cern.ch>
+SupraFAXModem 28.8 @ 33,600 bps
+"Tape doesn't lie at 02:14. Ears do."
+
+From bgonzalez@utexas.edu Sat Dec 16 16:31:08 1995
+Path: ashpoly!cascade!bigsur!utexas!bgonzalez
+From: bgonzalez@utexas.edu (Bruno González)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Dec16.163108.7704@utexas.edu>
+Date: Sat, 16 Dec 1995 16:31:08 GMT
+References: <1995Dec12.142008.2056@kth.se> <1995Dec14.154908.6952@cern.ch>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Dec14.154908.6952@cern.ch>, lsokolov@cern.ch (Lars Sokolov) writes:
+> Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+-- 
+Bruno González
+Opinions expressed are solely my own and not those of University of Texas at Austin.
+------------------------------------------------------------
+
+From ktakahashi@illinois.edu Sun Dec 17 18:20:08 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!illinois!ktakahashi
+From: ktakahashi@illinois.edu (Kirsty Takahashi)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Dec17.182008.4539@illinois.edu>
+Date: Sun, 17 Dec 1995 18:20:08 GMT
+References: <1995Dec12.142008.2056@kth.se> <1995Dec14.154908.6952@cern.ch>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Dec14.154908.6952@cern.ch>, lsokolov@cern.ch (Lars Sokolov) writes:
+> Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Kirsty Takahashi <ktakahashi@illinois.edu>
+Practical Peripherals 14.4 @ 19,200 bps
+"They will send a copy in my place."
+
+From kdubois@kiae.su Mon Dec 18 01:33:08 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!kiae!kdubois
+From: kdubois@kiae.su (Kirsty Dubois)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Dec18.013308.9547@kiae.su>
+Date: Mon, 18 Dec 1995 01:33:08 GMT
+References: <1995Dec12.142008.2056@kth.se>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Dec12.142008.2056@kth.se>, jmoreno@kth.se (Jen Moreno) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Kirsty Dubois
+Opinions expressed are solely my own and not those of Kurchatov Institute of Atomic Energy, Moscow.
+------------------------------------------------------------
+

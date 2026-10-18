@@ -1,0 +1,70 @@
+From hvasiliev@pipeline.com Mon Feb 27 06:32:54 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!pipeline!hvasiliev
+From: hvasiliev@pipeline.com (Heather Vasiliev)
+Newsgroups: comp.sys.m68k
+Subject: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Feb27.063254.5192@pipeline.com>
+Date: Mon, 27 Feb 1995 06:32:54 GMT
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+Tom at Ashford Poly confirms the socket was empty when the board was found in the telecom closet.
+
+-- 
+=== Heather Vasiliev ===
+Dept of Electrical Engineering, The Pipeline Internet Network
+"In theory there is no difference between theory and practice."
+
+From slaurent@unam.mx Wed Mar 01 08:28:54 1995
+Path: ashpoly!cascade!brgate!saturno!unam!slaurent
+From: slaurent@unam.mx (Sun-mi Laurent)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Mar01.082854.4194@unam.mx>
+Date: Wed, 01 Mar 1995 08:28:54 GMT
+References: <1995Feb27.063254.5192@pipeline.com>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Feb27.063254.5192@pipeline.com>, hvasiliev@pipeline.com (Heather Vasiliev) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Sun-mi Laurent <slaurent@unam.mx>
+*PLONK* filter active for trolls.
+Sun SparcStation 20 - NetBSD 1.0
+
+From mpopov@illinois.edu Thu Mar 02 14:37:54 1995
+Path: ashpoly!cascade!brgate!saturno!illinois!mpopov
+From: mpopov@illinois.edu (Marisol Popov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Mar02.143754.6209@illinois.edu>
+Date: Thu, 02 Mar 1995 14:37:54 GMT
+References: <1995Feb27.063254.5192@pipeline.com> <1995Mar01.082854.4194@unam.mx>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Mar01.082854.4194@unam.mx>, slaurent@unam.mx (Sun-mi Laurent) writes:
+> Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Marisol Popov
+Opinions expressed are solely my own and not those of University of Illinois Urbana-Champaign.
+------------------------------------------------------------
+

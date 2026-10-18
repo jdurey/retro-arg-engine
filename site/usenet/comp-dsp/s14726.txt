@@ -1,0 +1,118 @@
+From jcampbell@purdue.edu Sun Mar 19 04:03:41 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!purdue!jcampbell
+From: jcampbell@purdue.edu (Julien Campbell)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Mar19.040341.6702@purdue.edu>
+Date: Sun, 19 Mar 1995 04:03:41 GMT
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+Grab the source archive from ftp.ashford-poly.edu:/pub/telecom-archives/stardust/stardust-1.3.tar.gz.
+
+-- 
+Julien Campbell <jcampbell@purdue.edu>
+*PLONK* filter active for trolls.
+486DX4/100 (FreeBSD 2.0.5) - NetBSD 1.0
+
+From blarsson@titech.ac.jp Mon Mar 20 16:10:41 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!titech!blarsson
+From: blarsson@titech.ac.jp (Bastien Larsson)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Mar20.161041.7448@titech.ac.jp>
+Date: Mon, 20 Mar 1995 16:10:41 GMT
+References: <1995Mar19.040341.6702@purdue.edu>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Mar19.040341.6702@purdue.edu>, jcampbell@purdue.edu (Julien Campbell) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+-- 
+Bastien Larsson <blarsson@titech.ac.jp>
+SupraFAXModem 28.8 @ 33,600 bps
+"When every node is whole, the channel opens."
+
+From bschneider@pacbell.net Tue Mar 21 02:56:41 1995
+Path: ashpoly!cascade!bigsur!pacbell!bschneider
+From: bschneider@pacbell.net (Brian Schneider)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Mar21.025641.5370@pacbell.net>
+Date: Tue, 21 Mar 1995 02:56:41 GMT
+References: <1995Mar19.040341.6702@purdue.edu>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Mar19.040341.6702@purdue.edu>, jcampbell@purdue.edu (Julien Campbell) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+-- 
+Brian Schneider <bschneider@pacbell.net>
+"Hardware is temporary. The signal survives."
+Decstation 5000/200 / FreeBSD 2.1
+
+From jschneider@berkeley.edu Tue Mar 21 06:38:41 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!berkeley!jschneider
+From: jschneider@berkeley.edu (Joachim Schneider)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Mar21.063841.5390@berkeley.edu>
+Date: Tue, 21 Mar 1995 06:38:41 GMT
+References: <1995Mar19.040341.6702@purdue.edu>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Mar19.040341.6702@purdue.edu>, jcampbell@purdue.edu (Julien Campbell) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+> Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+-- 
+Joachim Schneider <jschneider@berkeley.edu>
+*PLONK* filter active for trolls.
+486DX4/100 (FreeBSD 2.0.5) - NetBSD 1.0
+
+From mito@utexas.edu Tue Mar 21 21:47:41 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!utexas!mito
+From: mito@utexas.edu (Marisol Ito)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Mar21.214741.9210@utexas.edu>
+Date: Tue, 21 Mar 1995 21:47:41 GMT
+References: <1995Mar19.040341.6702@purdue.edu> <1995Mar21.063841.5390@berkeley.edu>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Mar21.063841.5390@berkeley.edu>, jschneider@berkeley.edu (Joachim Schneider) writes:
+> Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Marisol Ito -- University of Texas at Austin
+"They will send a copy in my place."
+

@@ -1,0 +1,70 @@
+From gsanchez@utexas.edu Sun Apr 09 04:35:22 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!utexas!gsanchez
+From: gsanchez@utexas.edu (Göran Sánchez)
+Newsgroups: comp.sys.m68k
+Subject: Observation: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Apr09.043522.6719@utexas.edu>
+Date: Sun, 09 Apr 1995 04:35:22 GMT
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+Schematic diagram in ASCII uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/twin68_array.asc.
+
+-- 
+Göran Sánchez
+Tape trading list upon request. SASE required for international mail.
+
+From lcampbell@panix.com Sun Apr 09 15:10:22 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!panix!lcampbell
+From: lcampbell@panix.com (Lisa Campbell)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Apr09.151022.9121@panix.com>
+Date: Sun, 09 Apr 1995 15:10:22 GMT
+References: <1995Apr09.043522.6719@utexas.edu>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Apr09.043522.6719@utexas.edu>, gsanchez@utexas.edu (Göran Sánchez) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Lisa Campbell <lcampbell@panix.com>
+*PLONK* filter active for trolls.
+Pentium 90 (OS/2 Warp) - NetBSD 1.0
+
+From amoreau@tum.de Tue Apr 11 13:00:22 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!tum!amoreau
+From: amoreau@tum.de (Astrid Moreau)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Apr11.130022.7686@tum.de>
+Date: Tue, 11 Apr 1995 13:00:22 GMT
+References: <1995Apr09.043522.6719@utexas.edu>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Apr09.043522.6719@utexas.edu>, gsanchez@utexas.edu (Göran Sánchez) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Astrid Moreau <amoreau@tum.de>
+Hayes Optima 288 @ 9600 Telebit bps
+"Row 14. No joke."
+

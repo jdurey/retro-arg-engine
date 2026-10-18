@@ -1,0 +1,113 @@
+From mstewart@cam.ac.uk Thu Dec 22 03:47:24 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!cam!mstewart
+From: mstewart@cam.ac.uk (Mikhail Stewart)
+Newsgroups: comp.dsp
+Subject: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Dec22.034724.4457@cam.ac.uk>
+Date: Thu, 22 Dec 1994 03:47:24 GMT
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+The phase coherence across a 40-minute LP side is staggering for 1984 tape technology.
+
+-- 
+Mikhail Stewart -- University of Cambridge Computer Laboratory
+"The hatch is open. Is anyone listening?"
+
+From jgirard@uni-hamburg.de Thu Dec 22 19:24:24 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!uni-hamburg!jgirard
+From: jgirard@uni-hamburg.de (Jen Girard)
+Newsgroups: comp.dsp
+Subject: Re: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Dec22.192424.4927@uni-hamburg.de>
+Date: Thu, 22 Dec 1994 19:24:24 GMT
+References: <1994Dec22.034724.4457@cam.ac.uk>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1994Dec22.034724.4457@cam.ac.uk>, mstewart@cam.ac.uk (Mikhail Stewart) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Jen Girard -- Universität Hamburg Fachbereich Informatik
+"When every node is whole, the channel opens."
+
+From aweber@kiae.su Sat Dec 24 01:23:24 1994
+Path: ashpoly!cascade!brgate!saturno!kiae!aweber
+From: aweber@kiae.su (Andrei Weber)
+Newsgroups: comp.dsp
+Subject: Re: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Dec24.012324.5216@kiae.su>
+Date: Sat, 24 Dec 1994 01:23:24 GMT
+References: <1994Dec22.034724.4457@cam.ac.uk>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Dec22.034724.4457@cam.ac.uk>, mstewart@cam.ac.uk (Mikhail Stewart) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+=== Andrei Weber ===
+Dept of Electrical Engineering, Kurchatov Institute of Atomic Energy, Moscow
+"Do not worship the copy."
+
+From nkuznetsov@cmu.edu Sun Dec 25 07:28:24 1994
+Path: ashpoly!cascade!bigsur!cmu!nkuznetsov
+From: nkuznetsov@cmu.edu (Natalia Kuznetsov)
+Newsgroups: comp.dsp
+Subject: Re: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Dec25.072824.5171@cmu.edu>
+Date: Sun, 25 Dec 1994 07:28:24 GMT
+References: <1994Dec22.034724.4457@cam.ac.uk> <1994Dec22.192424.4927@uni-hamburg.de>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Dec22.192424.4927@uni-hamburg.de>, jgirard@uni-hamburg.de (Jen Girard) writes:
+> Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Natalia Kuznetsov <nkuznetsov@cmu.edu>
+"We don't sign stars. We build them."
+Pentium 90 (OS/2 Warp) / System 7.5.1
+
+From jduarte@u-tokyo.ac.jp Tue Dec 27 07:13:24 1994
+Path: ashpoly!cascade!mxgate!coyoacan!u-tokyo!jduarte
+From: jduarte@u-tokyo.ac.jp (Jens Duarte)
+Newsgroups: comp.dsp
+Subject: Re: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Dec27.071324.9493@u-tokyo.ac.jp>
+Date: Tue, 27 Dec 1994 07:13:24 GMT
+References: <1994Dec22.034724.4457@cam.ac.uk> <1994Dec22.192424.4927@uni-hamburg.de>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1994Dec22.192424.4927@uni-hamburg.de>, jgirard@uni-hamburg.de (Jen Girard) writes:
+> Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+-- 
+Jens Duarte -- University of Tokyo Department of Information Science
+"There are 14 nodes and only 10 countries. Count again."
+

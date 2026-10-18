@@ -1,0 +1,48 @@
+From rrodriguez@tum.de Sun Jan 22 14:15:34 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!tum!rrodriguez
+From: rrodriguez@tum.de (Renata Rodríguez)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jan22.141534.4391@tum.de>
+Date: Sun, 22 Jan 1995 14:15:34 GMT
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Renata Rodríguez <rrodriguez@tum.de>
+"Extraordinary claims require extraordinary spectra."
+486DX2/66 (Linux 1.2.13) / System 7.5.1
+
+From mvasiliev@earthlink.net Mon Jan 23 11:11:34 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!earthlink!mvasiliev
+From: mvasiliev@earthlink.net (Matthias Vasiliev)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jan23.111134.1073@earthlink.net>
+Date: Mon, 23 Jan 1995 11:11:34 GMT
+References: <1995Jan22.141534.4391@tum.de>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Jan22.141534.4391@tum.de>, rrodriguez@tum.de (Renata Rodríguez) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Matthias Vasiliev <mvasiliev@earthlink.net>
+US Robotics Courier V.34 @ 28,800 bps
+"Marcus is not one man."
+

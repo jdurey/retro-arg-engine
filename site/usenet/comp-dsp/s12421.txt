@@ -1,0 +1,117 @@
+From btanaka@ox.ac.uk Mon May 16 09:17:59 1994
+Path: ashpoly!cascade!mxgate!coyoacan!ox!btanaka
+From: btanaka@ox.ac.uk (Bruno Tanaka)
+Newsgroups: comp.dsp
+Subject: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994May16.091759.7661@ox.ac.uk>
+Date: Mon, 16 May 1994 09:17:59 GMT
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Bruno Tanaka <btanaka@ox.ac.uk>
+*PLONK* filter active for trolls.
+Mac IIci / 68882 FPU - NetBSD 1.0
+
+From hkarlsson@cmu.edu Tue May 17 18:24:59 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!cmu!hkarlsson
+From: hkarlsson@cmu.edu (Hana Karlsson)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994May17.182459.1382@cmu.edu>
+Date: Tue, 17 May 1994 18:24:59 GMT
+References: <1994May16.091759.7661@ox.ac.uk>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994May16.091759.7661@ox.ac.uk>, btanaka@ox.ac.uk (Bruno Tanaka) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Hana Karlsson -- Carnegie Mellon University School of CS
+"Extraordinary claims require extraordinary spectra."
+
+From kchoi@uu.net Wed May 18 23:26:59 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!uu!kchoi
+From: kchoi@uu.net (Katrin Choi)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994May18.232659.6171@uu.net>
+Date: Wed, 18 May 1994 23:26:59 GMT
+References: <1994May16.091759.7661@ox.ac.uk>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1994May16.091759.7661@ox.ac.uk>, btanaka@ox.ac.uk (Bruno Tanaka) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Katrin Choi -- UUNET Technologies, Falls Church VA
+"There are 14 nodes and only 10 countries. Count again."
+
+From mkuznetsov@uni-hamburg.de Thu May 19 09:19:59 1994
+Path: ashpoly!cascade!brgate!saturno!uni-hamburg!mkuznetsov
+From: mkuznetsov@uni-hamburg.de (Min-jun Kuznetsov)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994May19.091959.8018@uni-hamburg.de>
+Date: Thu, 19 May 1994 09:19:59 GMT
+References: <1994May16.091759.7661@ox.ac.uk>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994May16.091759.7661@ox.ac.uk>, btanaka@ox.ac.uk (Bruno Tanaka) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Min-jun Kuznetsov -- Universität Hamburg Fachbereich Informatik
+"In theory there is no difference between theory and practice."
+
+From jrobertson@u-tokyo.ac.jp Thu May 19 14:34:59 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!u-tokyo!jrobertson
+From: jrobertson@u-tokyo.ac.jp (Jen Robertson)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994May19.143459.1124@u-tokyo.ac.jp>
+Date: Thu, 19 May 1994 14:34:59 GMT
+References: <1994May16.091759.7661@ox.ac.uk> <1994May19.091959.8018@uni-hamburg.de>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994May19.091959.8018@uni-hamburg.de>, mkuznetsov@uni-hamburg.de (Min-jun Kuznetsov) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Jen Robertson | jrobertson@u-tokyo.ac.jp
+PGP Key fingerprint: DDE0 D1B3 ABBC FA50
+"Keep the channels open."
+

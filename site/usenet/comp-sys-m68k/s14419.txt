@@ -1,0 +1,118 @@
+From yrodriguez@kth.se Fri Apr 07 11:48:40 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!kth!yrodriguez
+From: yrodriguez@kth.se (Yuki Rodríguez)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Apr07.114840.8387@kth.se>
+Date: Fri, 07 Apr 1995 11:48:40 GMT
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Yuki Rodríguez
+Opinions expressed are solely my own and not those of Royal Institute of Technology, Stockholm.
+------------------------------------------------------------
+
+From mfischer@mit.edu Sat Apr 08 18:18:40 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!mit!mfischer
+From: mfischer@mit.edu (Mei Fischer)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Apr08.181840.1972@mit.edu>
+Date: Sat, 08 Apr 1995 18:18:40 GMT
+References: <1995Apr07.114840.8387@kth.se>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Apr07.114840.8387@kth.se>, yrodriguez@kth.se (Yuki Rodríguez) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Mei Fischer <mfischer@mit.edu>
+"The hatch is open. Is anyone listening?"
+486DX2/66 (Linux 1.2.13) / System 7.5.1
+
+From gschneider@netcom.com Mon Apr 10 00:05:40 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!netcom!gschneider
+From: gschneider@netcom.com (Göran Schneider)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Apr10.000540.7486@netcom.com>
+Date: Mon, 10 Apr 1995 00:05:40 GMT
+References: <1995Apr07.114840.8387@kth.se> <1995Apr08.181840.1972@mit.edu>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1995Apr08.181840.1972@mit.edu>, mfischer@mit.edu (Mei Fischer) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Göran Schneider
+Tape trading list upon request. SASE required for international mail.
+
+From mnakamura@demon.co.uk Tue Apr 11 14:19:40 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!demon!mnakamura
+From: mnakamura@demon.co.uk (Marta Nakamura)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Apr11.141940.5788@demon.co.uk>
+Date: Tue, 11 Apr 1995 14:19:40 GMT
+References: <1995Apr07.114840.8387@kth.se> <1995Apr08.181840.1972@mit.edu>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995Apr08.181840.1972@mit.edu>, mfischer@mit.edu (Mei Fischer) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Marta Nakamura
+Opinions expressed are solely my own and not those of Demon Internet Services UK.
+------------------------------------------------------------
+
+From eschneider@tum.de Wed Apr 12 03:22:40 1995
+Path: ashpoly!cascade!mxgate!coyoacan!tum!eschneider
+From: eschneider@tum.de (Élodie Schneider)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Apr12.032240.1058@tum.de>
+Date: Wed, 12 Apr 1995 03:22:40 GMT
+References: <1995Apr07.114840.8387@kth.se> <1995Apr08.181840.1972@mit.edu> <1995Apr11.141940.5788@demon.co.uk>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Apr11.141940.5788@demon.co.uk>, mnakamura@demon.co.uk (Marta Nakamura) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Élodie Schneider <eschneider@tum.de>
+"There are 14 nodes and only 10 countries. Count again."
+Decstation 5000/200 / System 7.5.1
+

@@ -1,0 +1,74 @@
+From epark@berkeley.edu Wed Dec 21 20:36:43 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!berkeley!epark
+From: epark@berkeley.edu (Élodie Park)
+Newsgroups: comp.dsp
+Subject: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Dec21.203643.3794@berkeley.edu>
+Date: Wed, 21 Dec 1994 20:36:43 GMT
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+=== Élodie Park ===
+Dept of Electrical Engineering, UC Berkeley Department of EECS
+"Hardware is temporary. The signal survives."
+
+From tjohansson@ox.ac.uk Fri Dec 23 16:38:43 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!ox!tjohansson
+From: tjohansson@ox.ac.uk (Thiago Johansson)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Dec23.163843.5989@ox.ac.uk>
+Date: Fri, 23 Dec 1994 16:38:43 GMT
+References: <1994Dec21.203643.3794@berkeley.edu>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1994Dec21.203643.3794@berkeley.edu>, epark@berkeley.edu (Élodie Park) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+PGP Public key available via finger or upon request.
+
+-- 
+=== Thiago Johansson ===
+Dept of Electrical Engineering, Oxford University Computing Laboratory
+"A soul is not exclusive to biology."
+
+From bnovak@uni-hamburg.de Sat Dec 24 11:33:43 1994
+Path: ashpoly!cascade!bigsur!uni-hamburg!bnovak
+From: bnovak@uni-hamburg.de (Bruno Novak)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Dec24.113343.1877@uni-hamburg.de>
+Date: Sat, 24 Dec 1994 11:33:43 GMT
+References: <1994Dec21.203643.3794@berkeley.edu> <1994Dec23.163843.5989@ox.ac.uk>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1994Dec23.163843.5989@ox.ac.uk>, tjohansson@ox.ac.uk (Thiago Johansson) writes:
+> Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Bruno Novak | bnovak@uni-hamburg.de
+PGP Key fingerprint: DE75 9BCF 78CE F2A0
+"Keep the channels open."
+

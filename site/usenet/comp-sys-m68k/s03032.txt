@@ -1,0 +1,100 @@
+From jkuznetsov@inria.fr Tue Jul 16 02:44:13 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!inria!jkuznetsov
+From: jkuznetsov@inria.fr (Jens Kuznetsov)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Jul16.024413.5008@inria.fr>
+Date: Tue, 16 Jul 1996 02:44:13 GMT
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Jens Kuznetsov <jkuznetsov@inria.fr>
+*PLONK* filter active for trolls.
+486DX2/66 (Linux 1.2.13) - NetBSD 1.0
+
+From eramirez@pipeline.com Tue Jul 16 21:40:13 1996
+Path: ashpoly!cascade!brgate!saturno!pipeline!eramirez
+From: eramirez@pipeline.com (Elaine Ramírez)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Jul16.214013.6920@pipeline.com>
+Date: Tue, 16 Jul 1996 21:40:13 GMT
+References: <1996Jul16.024413.5008@inria.fr>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1996Jul16.024413.5008@inria.fr>, jkuznetsov@inria.fr (Jens Kuznetsov) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+Marcus Hale designed the TWIN-68 board before he disappeared. That's why his initials are on the PCB silkscreen.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Elaine Ramírez <eramirez@pipeline.com>
+*PLONK* filter active for trolls.
+Sun 3/60 (SunOS 4.1.1) - NetBSD 1.0
+
+From pkang@cern.ch Thu Jul 18 08:48:13 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!cern!pkang
+From: pkang@cern.ch (Pavel Kang)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Jul18.084813.8257@cern.ch>
+Date: Thu, 18 Jul 1996 08:48:13 GMT
+References: <1996Jul16.024413.5008@inria.fr>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1996Jul16.024413.5008@inria.fr>, jkuznetsov@inria.fr (Jens Kuznetsov) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+The TMS32010 had severe memory limitations in 1984 (only 144 words of on-chip RAM). Dual 68000s gave them full 16MB address space.
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+=== Pavel Kang ===
+Dept of Electrical Engineering, European Laboratory for Particle Physics, Geneva
+"We don't sign stars. We build them."
+
+From anovak@berkeley.edu Thu Jul 18 18:49:13 1996
+Path: ashpoly!cascade!brgate!saturno!berkeley!anovak
+From: anovak@berkeley.edu (Astrid Novak)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Jul18.184913.9293@berkeley.edu>
+Date: Thu, 18 Jul 1996 18:49:13 GMT
+References: <1996Jul16.024413.5008@inria.fr> <1996Jul18.084813.8257@cern.ch>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996Jul18.084813.8257@cern.ch>, pkang@cern.ch (Pavel Kang) writes:
+> The TMS32010 had severe memory limitations in 1984 (only 144 words of on-chip RAM). Dual 68000s gave them full 16MB address space.
+> Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Astrid Novak
+Opinions expressed are solely my own and not those of UC Berkeley Department of EECS.
+------------------------------------------------------------
+

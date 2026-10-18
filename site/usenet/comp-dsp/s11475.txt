@@ -1,0 +1,93 @@
+From tkarlsson@u-tokyo.ac.jp Thu May 25 15:48:29 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!u-tokyo!tkarlsson
+From: tkarlsson@u-tokyo.ac.jp (Tyler Karlsson)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May25.154829.6786@u-tokyo.ac.jp>
+Date: Thu, 25 May 1995 15:48:29 GMT
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Tyler Karlsson
+Opinions expressed are solely my own and not those of University of Tokyo Department of Information Science.
+------------------------------------------------------------
+
+From ltakahashi@cern.ch Sat May 27 08:16:29 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!cern!ltakahashi
+From: ltakahashi@cern.ch (Liam Takahashi)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May27.081629.6657@cern.ch>
+Date: Sat, 27 May 1995 08:16:29 GMT
+References: <1995May25.154829.6786@u-tokyo.ac.jp>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995May25.154829.6786@u-tokyo.ac.jp>, tkarlsson@u-tokyo.ac.jp (Tyler Karlsson) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Liam Takahashi <ltakahashi@cern.ch>
+Practical Peripherals 14.4 @ 19,200 bps
+"Tape doesn't lie at 02:14. Ears do."
+
+From bschneider@purdue.edu Sun May 28 20:10:29 1995
+Path: ashpoly!cascade!brgate!saturno!purdue!bschneider
+From: bschneider@purdue.edu (Bastien Schneider)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May28.201029.5959@purdue.edu>
+Date: Sun, 28 May 1995 20:10:29 GMT
+References: <1995May25.154829.6786@u-tokyo.ac.jp>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1995May25.154829.6786@u-tokyo.ac.jp>, tkarlsson@u-tokyo.ac.jp (Tyler Karlsson) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Bastien Schneider -- Purdue University Engineering Computer Network
+"There are 14 nodes and only 10 countries. Count again."
+
+From ereyes@earthlink.net Mon May 29 20:03:29 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!earthlink!ereyes
+From: ereyes@earthlink.net (Elaine Reyes)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May29.200329.3692@earthlink.net>
+Date: Mon, 29 May 1995 20:03:29 GMT
+References: <1995May25.154829.6786@u-tokyo.ac.jp> <1995May27.081629.6657@cern.ch>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995May27.081629.6657@cern.ch>, ltakahashi@cern.ch (Liam Takahashi) writes:
+> Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Elaine Reyes | ereyes@earthlink.net
+PGP Key fingerprint: BEFD CBBC 1AB3 FAAF
+"Keep the channels open."
+

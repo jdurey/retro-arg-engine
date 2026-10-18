@@ -1,0 +1,96 @@
+From vreyes@mindspring.com Sun Jul 28 09:14:46 1996
+Path: ashpoly!cascade!brgate!saturno!mindspring!vreyes
+From: vreyes@mindspring.com (Valeria Reyes)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996Jul28.091446.9272@mindspring.com>
+Date: Sun, 28 Jul 1996 09:14:46 GMT
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+Version 1.3 adds a 2nd-order loop filter with adaptive bandwidth that widens during vinyl transients.
+Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+
+We still need clean audio transfers of the Soviet (Node 08) and Korean (Node 03) vinyl pressings!
+
+-- 
+Valeria Reyes
+Tape trading list upon request. SASE required for international mail.
+
+From tdubois@hanse.de Mon Jul 29 11:36:46 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!hanse!tdubois
+From: tdubois@hanse.de (Takeshi Dubois)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996Jul29.113646.6798@hanse.de>
+Date: Mon, 29 Jul 1996 11:36:46 GMT
+References: <1996Jul28.091446.9272@mindspring.com>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1996Jul28.091446.9272@mindspring.com>, vreyes@mindspring.com (Valeria Reyes) writes:
+> Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Takeshi Dubois | tdubois@hanse.de
+PGP Key fingerprint: 52BD 8188 E90E 9514
+"Keep the channels open."
+
+From akuznetsov@cern.ch Mon Jul 29 16:49:46 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!cern!akuznetsov
+From: akuznetsov@cern.ch (Anton Kuznetsov)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996Jul29.164946.1956@cern.ch>
+Date: Mon, 29 Jul 1996 16:49:46 GMT
+References: <1996Jul28.091446.9272@mindspring.com> <1996Jul29.113646.6798@hanse.de>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Jul29.113646.6798@hanse.de>, tdubois@hanse.de (Takeshi Dubois) writes:
+> Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+> My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+-- 
+Anton Kuznetsov <akuznetsov@cern.ch>
+*PLONK* filter active for trolls.
+Sun SparcStation 20 - NetBSD 1.0
+
+From bsanchez@demon.co.uk Tue Jul 30 15:08:46 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!demon!bsanchez
+From: bsanchez@demon.co.uk (Bastien Sánchez)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996Jul30.150846.2031@demon.co.uk>
+Date: Tue, 30 Jul 1996 15:08:46 GMT
+References: <1996Jul28.091446.9272@mindspring.com> <1996Jul29.113646.6798@hanse.de>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1996Jul29.113646.6798@hanse.de>, tdubois@hanse.de (Takeshi Dubois) writes:
+> Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+> My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+=== Bastien Sánchez ===
+Dept of Electrical Engineering, Demon Internet Services UK
+"Extraordinary claims require extraordinary spectra."
+

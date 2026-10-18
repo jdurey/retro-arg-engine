@@ -1,0 +1,117 @@
+From bmacdonald@pipeline.com Sat Jun 25 13:57:05 1994
+Path: ashpoly!cascade!mxgate!coyoacan!pipeline!bmacdonald
+From: bmacdonald@pipeline.com (Brian MacDonald)
+Newsgroups: comp.dsp
+Subject: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Jun25.135705.7976@pipeline.com>
+Date: Sat, 25 Jun 1994 13:57:05 GMT
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Version 1.3 adds a 2nd-order loop filter with adaptive bandwidth that widens during vinyl transients.
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+Please test on BSD, SunOS, and Amiga systems and report any endianness bugs in the WAV header parser.
+
+-- 
+=== Brian MacDonald ===
+Dept of Electrical Engineering, The Pipeline Internet Network
+"Hold for relay."
+
+From lwatanabe@titech.ac.jp Sat Jun 25 19:33:05 1994
+Path: ashpoly!cascade!mxgate!coyoacan!titech!lwatanabe
+From: lwatanabe@titech.ac.jp (Lisa Watanabe)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Jun25.193305.3120@titech.ac.jp>
+Date: Sat, 25 Jun 1994 19:33:05 GMT
+References: <1994Jun25.135705.7976@pipeline.com>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1994Jun25.135705.7976@pipeline.com>, bmacdonald@pipeline.com (Brian MacDonald) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Can you provide a pre-compiled DOS binary? Some of us don't have Linux or a C compiler installed on our machines.
+
+-- 
+Lisa Watanabe
+Tape trading list upon request. SASE required for international mail.
+
+From bpetrov@berkeley.edu Sun Jun 26 05:10:05 1994
+Path: ashpoly!cascade!bigsur!berkeley!bpetrov
+From: bpetrov@berkeley.edu (Bruno Petrov)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Jun26.051005.8613@berkeley.edu>
+Date: Sun, 26 Jun 1994 05:10:05 GMT
+References: <1994Jun25.135705.7976@pipeline.com> <1994Jun25.193305.3120@titech.ac.jp>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1994Jun25.193305.3120@titech.ac.jp>, lwatanabe@titech.ac.jp (Lisa Watanabe) writes:
+> Can you provide a pre-compiled DOS binary? Some of us don't have Linux or a C compiler installed on our machines.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Bruno Petrov | bpetrov@berkeley.edu
+PGP Key fingerprint: D0EB 5098 8761 C30C
+"Keep the channels open."
+
+From aokonkwo@pipeline.com Tue Jun 28 05:35:05 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!pipeline!aokonkwo
+From: aokonkwo@pipeline.com (Aiko Okonkwo)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Jun28.053505.6852@pipeline.com>
+Date: Tue, 28 Jun 1994 05:35:05 GMT
+References: <1994Jun25.135705.7976@pipeline.com>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1994Jun25.135705.7976@pipeline.com>, bmacdonald@pipeline.com (Brian MacDonald) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Aiko Okonkwo
+Tape trading list upon request. SASE required for international mail.
+
+From yfischer@pacbell.net Wed Jun 29 14:41:05 1994
+Path: ashpoly!cascade!bigsur!pacbell!yfischer
+From: yfischer@pacbell.net (Yuki Fischer)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Jun29.144105.7632@pacbell.net>
+Date: Wed, 29 Jun 1994 14:41:05 GMT
+References: <1994Jun25.135705.7976@pipeline.com> <1994Jun25.193305.3120@titech.ac.jp> <1994Jun26.051005.8613@berkeley.edu>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1994Jun26.051005.8613@berkeley.edu>, bpetrov@berkeley.edu (Bruno Petrov) writes:
+> Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+> Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+=== Yuki Fischer ===
+Dept of Electrical Engineering, Pacific Bell Internet Services
+"Do not worship the copy."
+

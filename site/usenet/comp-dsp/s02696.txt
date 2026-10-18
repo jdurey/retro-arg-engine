@@ -1,0 +1,69 @@
+From atanaka@mit.edu Fri Oct 07 04:58:21 1994
+Path: ashpoly!cascade!brgate!saturno!mit!atanaka
+From: atanaka@mit.edu (Astrid Tanaka)
+Newsgroups: comp.dsp
+Subject: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Oct07.045821.1489@mit.edu>
+Date: Fri, 07 Oct 1994 04:58:21 GMT
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Astrid Tanaka
+Tape trading list upon request. SASE required for international mail.
+
+From fito@unam.mx Sun Oct 09 04:28:21 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!unam!fito
+From: fito@unam.mx (Fiona Ito)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Oct09.042821.8577@unam.mx>
+Date: Sun, 09 Oct 1994 04:28:21 GMT
+References: <1994Oct07.045821.1489@mit.edu>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Oct07.045821.1489@mit.edu>, atanaka@mit.edu (Astrid Tanaka) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Fiona Ito <fito@unam.mx>
+"The carrier frequency does not drift by accident."
+Acorn RiscPC 600 / NEXTSTEP 3.3
+
+From aduarte@clari.net Sun Oct 09 11:44:21 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!clari!aduarte
+From: aduarte@clari.net (Andrei Duarte)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Oct09.114421.7204@clari.net>
+Date: Sun, 09 Oct 1994 11:44:21 GMT
+References: <1994Oct07.045821.1489@mit.edu> <1994Oct09.042821.8577@unam.mx>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Oct09.042821.8577@unam.mx>, fito@unam.mx (Fiona Ito) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Andrei Duarte <aduarte@clari.net>
+"They will send a copy in my place."
+Sun 3/60 (SunOS 4.1.1) / AmigaOS 3.1
+

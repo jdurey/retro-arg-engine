@@ -1,0 +1,118 @@
+From kschneider@hanse.de Thu Jul 25 00:50:50 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!hanse!kschneider
+From: kschneider@hanse.de (Karen Schneider)
+Newsgroups: comp.sys.m68k
+Subject: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Jul25.005050.9687@hanse.de>
+Date: Thu, 25 Jul 1996 00:50:50 GMT
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Karen Schneider | kschneider@hanse.de
+PGP Key fingerprint: 219E 6A4F 3D42 F465
+"Keep the channels open."
+
+From glopez@cmu.edu Fri Jul 26 17:11:50 1996
+Path: ashpoly!cascade!bigsur!cmu!glopez
+From: glopez@cmu.edu (Graham López)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Jul26.171150.7612@cmu.edu>
+Date: Fri, 26 Jul 1996 17:11:50 GMT
+References: <1996Jul25.005050.9687@hanse.de>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1996Jul25.005050.9687@hanse.de>, kschneider@hanse.de (Karen Schneider) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Graham López -- Carnegie Mellon University School of CS
+"When every node is whole, the channel opens."
+
+From jmoreau@kth.se Sun Jul 28 05:21:50 1996
+Path: ashpoly!cascade!brgate!saturno!kth!jmoreau
+From: jmoreau@kth.se (Joachim Moreau)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Jul28.052150.6668@kth.se>
+Date: Sun, 28 Jul 1996 05:21:50 GMT
+References: <1996Jul25.005050.9687@hanse.de>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1996Jul25.005050.9687@hanse.de>, kschneider@hanse.de (Karen Schneider) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+> Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+PGP Public key available via finger or upon request.
+
+-- 
+=== Joachim Moreau ===
+Dept of Electrical Engineering, Royal Institute of Technology, Stockholm
+"Measuring a record you own is listening, not piracy."
+
+From mlindqvist@cam.ac.uk Tue Jul 30 05:27:50 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!cam!mlindqvist
+From: mlindqvist@cam.ac.uk (Mathieu Lindqvist)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Jul30.052750.1131@cam.ac.uk>
+Date: Tue, 30 Jul 1996 05:27:50 GMT
+References: <1996Jul25.005050.9687@hanse.de>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Jul25.005050.9687@hanse.de>, kschneider@hanse.de (Karen Schneider) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+> Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Mathieu Lindqvist
+Tape trading list upon request. SASE required for international mail.
+
+From mkuznetsov@demon.co.uk Tue Jul 30 19:45:50 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!demon!mkuznetsov
+From: mkuznetsov@demon.co.uk (Mateo Kuznetsov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Jul30.194550.7316@demon.co.uk>
+Date: Tue, 30 Jul 1996 19:45:50 GMT
+References: <1996Jul25.005050.9687@hanse.de> <1996Jul30.052750.1131@cam.ac.uk>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Jul30.052750.1131@cam.ac.uk>, mlindqvist@cam.ac.uk (Mathieu Lindqvist) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+=== Mateo Kuznetsov ===
+Dept of Electrical Engineering, Demon Internet Services UK
+"The carrier frequency does not drift by accident."
+

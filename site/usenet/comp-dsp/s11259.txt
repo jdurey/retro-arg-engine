@@ -1,0 +1,48 @@
+From tkim@kiae.su Thu Aug 10 16:25:01 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!kiae!tkim
+From: tkim@kiae.su (Tomas Kim)
+Newsgroups: comp.dsp
+Subject: Observation: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Aug10.162501.3407@kiae.su>
+Date: Thu, 10 Aug 1995 16:25:01 GMT
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+=== Tomas Kim ===
+Dept of Electrical Engineering, Kurchatov Institute of Atomic Energy, Moscow
+"Measuring a record you own is listening, not piracy."
+
+From fsato@tum.de Fri Aug 11 11:36:01 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!tum!fsato
+From: fsato@tum.de (Fiona Sato)
+Newsgroups: comp.dsp
+Subject: Re: Observation: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Aug11.113601.8373@tum.de>
+Date: Fri, 11 Aug 1995 11:36:01 GMT
+References: <1995Aug10.162501.3407@kiae.su>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Aug10.162501.3407@kiae.su>, tkim@kiae.su (Tomas Kim) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+> With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Fiona Sato | fsato@tum.de
+PGP Key fingerprint: 7A86 ED67 454E 40C6
+"Keep the channels open."
+

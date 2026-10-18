@@ -1,0 +1,95 @@
+From bpetrov@delphi.com Sun Feb 05 17:43:53 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!delphi!bpetrov
+From: bpetrov@delphi.com (Bill Petrov)
+Newsgroups: comp.dsp
+Subject: [INFO] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Feb05.174353.9229@delphi.com>
+Date: Sun, 05 Feb 1995 17:43:53 GMT
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+What sampling rates are people using for their vinyl rips? 44.1 kHz or 48 kHz DAT?
+
+-- 
+Bill Petrov <bpetrov@delphi.com>
+*PLONK* filter active for trolls.
+Sun 3/60 (SunOS 4.1.1) - NetBSD 1.0
+
+From asilva@berkeley.edu Tue Feb 07 07:00:53 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!berkeley!asilva
+From: asilva@berkeley.edu (Andrei Silva)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Feb07.070053.9974@berkeley.edu>
+Date: Tue, 07 Feb 1995 07:00:53 GMT
+References: <1995Feb05.174353.9229@delphi.com>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Feb05.174353.9229@delphi.com>, bpetrov@delphi.com (Bill Petrov) writes:
+> Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Andrei Silva <asilva@berkeley.edu>
+Hayes Optima 288 @ 14,400 bps
+"Hold for relay."
+
+From kchoi@mindspring.com Tue Feb 07 15:05:53 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!mindspring!kchoi
+From: kchoi@mindspring.com (Kirsty Choi)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Feb07.150553.8071@mindspring.com>
+Date: Tue, 07 Feb 1995 15:05:53 GMT
+References: <1995Feb05.174353.9229@delphi.com> <1995Feb07.070053.9974@berkeley.edu>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Feb07.070053.9974@berkeley.edu>, asilva@berkeley.edu (Andrei Silva) writes:
+> I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Kirsty Choi | kchoi@mindspring.com
+PGP Key fingerprint: 1835 4DA6 45E1 DF2F
+"Keep the channels open."
+
+From jlindqvist@pacbell.net Wed Feb 08 03:35:53 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!pacbell!jlindqvist
+From: jlindqvist@pacbell.net (Jens Lindqvist)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Feb08.033553.6169@pacbell.net>
+Date: Wed, 08 Feb 1995 03:35:53 GMT
+References: <1995Feb05.174353.9229@delphi.com> <1995Feb07.070053.9974@berkeley.edu>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995Feb07.070053.9974@berkeley.edu>, asilva@berkeley.edu (Andrei Silva) writes:
+> I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+PGP Public key available via finger or upon request.
+
+-- 
+=== Jens Lindqvist ===
+Dept of Electrical Engineering, Pacific Bell Internet Services
+"The hatch is open. Is anyone listening?"
+

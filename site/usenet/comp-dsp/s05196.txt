@@ -1,0 +1,117 @@
+From dsokolov@netcom.com Tue May 07 10:01:20 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!netcom!dsokolov
+From: dsokolov@netcom.com (Dong-hyun Sokolov)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996May07.100120.6179@netcom.com>
+Date: Tue, 07 May 1996 10:01:20 GMT
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Dong-hyun Sokolov <dsokolov@netcom.com>
+*PLONK* filter active for trolls.
+Pentium 90 (OS/2 Warp) - NetBSD 1.0
+
+From pfournier@netcom.com Wed May 08 03:16:20 1996
+Path: ashpoly!cascade!brgate!saturno!netcom!pfournier
+From: pfournier@netcom.com (Pavel Fournier)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996May08.031620.2141@netcom.com>
+Date: Wed, 08 May 1996 03:16:20 GMT
+References: <1996May07.100120.6179@netcom.com>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996May07.100120.6179@netcom.com>, dsokolov@netcom.com (Dong-hyun Sokolov) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Pavel Fournier
+Tape trading list upon request. SASE required for international mail.
+
+From nkuznetsov@purdue.edu Thu May 09 09:35:20 1996
+Path: ashpoly!cascade!mxgate!coyoacan!purdue!nkuznetsov
+From: nkuznetsov@purdue.edu (Natalia Kuznetsov)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996May09.093520.6457@purdue.edu>
+Date: Thu, 09 May 1996 09:35:20 GMT
+References: <1996May07.100120.6179@netcom.com> <1996May08.031620.2141@netcom.com>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996May08.031620.2141@netcom.com>, pfournier@netcom.com (Pavel Fournier) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+=== Natalia Kuznetsov ===
+Dept of Electrical Engineering, Purdue University Engineering Computer Network
+"Marcus is not one man."
+
+From lperez@panix.com Fri May 10 13:07:20 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!panix!lperez
+From: lperez@panix.com (Lars Pérez)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996May10.130720.6985@panix.com>
+Date: Fri, 10 May 1996 13:07:20 GMT
+References: <1996May07.100120.6179@netcom.com>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996May07.100120.6179@netcom.com>, dsokolov@netcom.com (Dong-hyun Sokolov) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Lars Pérez | lperez@panix.com
+PGP Key fingerprint: 7DD7 BE43 CADA 3161
+"Keep the channels open."
+
+From igirard@cam.ac.uk Sat May 11 01:25:20 1996
+Path: ashpoly!cascade!brgate!saturno!cam!igirard
+From: igirard@cam.ac.uk (Ines Girard)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996May11.012520.7183@cam.ac.uk>
+Date: Sat, 11 May 1996 01:25:20 GMT
+References: <1996May07.100120.6179@netcom.com> <1996May08.031620.2141@netcom.com> <1996May09.093520.6457@purdue.edu>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996May09.093520.6457@purdue.edu>, nkuznetsov@purdue.edu (Natalia Kuznetsov) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Ines Girard | igirard@cam.ac.uk
+PGP Key fingerprint: 6AB1 1347 6847 984D
+"Keep the channels open."
+

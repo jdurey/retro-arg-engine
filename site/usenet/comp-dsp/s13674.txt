@@ -1,0 +1,68 @@
+From tmuller@cmu.edu Thu Jan 18 20:37:50 1996
+Path: ashpoly!cascade!mxgate!coyoacan!cmu!tmuller
+From: tmuller@cmu.edu (Tyler Müller)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jan18.203750.8733@cmu.edu>
+Date: Thu, 18 Jan 1996 20:37:50 GMT
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Tyler Müller
+Tape trading list upon request. SASE required for international mail.
+
+From evasiliev@kth.se Sat Jan 20 17:32:50 1996
+Path: ashpoly!cascade!brgate!saturno!kth!evasiliev
+From: evasiliev@kth.se (Elaine Vasiliev)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jan20.173250.4849@kth.se>
+Date: Sat, 20 Jan 1996 17:32:50 GMT
+References: <1996Jan18.203750.8733@cmu.edu>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1996Jan18.203750.8733@cmu.edu>, tmuller@cmu.edu (Tyler Müller) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Elaine Vasiliev
+Tape trading list upon request. SASE required for international mail.
+
+From elarsson@clari.net Sun Jan 21 04:21:50 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!clari!elarsson
+From: elarsson@clari.net (Élodie Larsson)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jan21.042150.4425@clari.net>
+Date: Sun, 21 Jan 1996 04:21:50 GMT
+References: <1996Jan18.203750.8733@cmu.edu> <1996Jan20.173250.4849@kth.se>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Jan20.173250.4849@kth.se>, evasiliev@kth.se (Elaine Vasiliev) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Élodie Larsson <elarsson@clari.net>
+"Hold for relay."
+486DX4/100 (FreeBSD 2.0.5) / AmigaOS 3.1
+

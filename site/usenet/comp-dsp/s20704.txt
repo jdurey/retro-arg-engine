@@ -1,0 +1,117 @@
+From jdubois@pacbell.net Thu May 18 19:47:44 1995
+Path: ashpoly!cascade!mxgate!coyoacan!pacbell!jdubois
+From: jdubois@pacbell.net (Julien Dubois)
+Newsgroups: comp.dsp
+Subject: Discussion: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995May18.194744.5936@pacbell.net>
+Date: Thu, 18 May 1995 19:47:44 GMT
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+Julien Dubois | jdubois@pacbell.net
+PGP Key fingerprint: 8823 3932 5848 C150
+"Keep the channels open."
+
+From kivanov@pipeline.com Fri May 19 19:02:44 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!pipeline!kivanov
+From: kivanov@pipeline.com (Karen Ivanov)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995May19.190244.7292@pipeline.com>
+Date: Fri, 19 May 1995 19:02:44 GMT
+References: <1995May18.194744.5936@pacbell.net>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995May18.194744.5936@pacbell.net>, jdubois@pacbell.net (Julien Dubois) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Karen Ivanov
+Opinions expressed are solely my own and not those of The Pipeline Internet Network.
+------------------------------------------------------------
+
+From msuzuki@illinois.edu Sun May 21 01:01:44 1995
+Path: ashpoly!cascade!brgate!saturno!illinois!msuzuki
+From: msuzuki@illinois.edu (Marisol Suzuki)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995May21.010144.4930@illinois.edu>
+Date: Sun, 21 May 1995 01:01:44 GMT
+References: <1995May18.194744.5936@pacbell.net> <1995May19.190244.7292@pipeline.com>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1995May19.190244.7292@pipeline.com>, kivanov@pipeline.com (Karen Ivanov) writes:
+> Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Marisol Suzuki
+Tape trading list upon request. SASE required for international mail.
+
+From lschneider@purdue.edu Mon May 22 19:05:44 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!purdue!lschneider
+From: lschneider@purdue.edu (Liam Schneider)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995May22.190544.5468@purdue.edu>
+Date: Mon, 22 May 1995 19:05:44 GMT
+References: <1995May18.194744.5936@pacbell.net>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995May18.194744.5936@pacbell.net>, jdubois@pacbell.net (Julien Dubois) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+> With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Liam Schneider <lschneider@purdue.edu>
+Hayes Optima 288 @ 19,200 bps
+"A soul is not exclusive to biology."
+
+From dschneider@utexas.edu Mon May 22 21:55:44 1995
+Path: ashpoly!cascade!brgate!saturno!utexas!dschneider
+From: dschneider@utexas.edu (Dong-hyun Schneider)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995May22.215544.2787@utexas.edu>
+Date: Mon, 22 May 1995 21:55:44 GMT
+References: <1995May18.194744.5936@pacbell.net> <1995May19.190244.7292@pipeline.com> <1995May21.010144.4930@illinois.edu>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995May21.010144.4930@illinois.edu>, msuzuki@illinois.edu (Marisol Suzuki) writes:
+> Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+-- 
+Dong-hyun Schneider
+Tape trading list upon request. SASE required for international mail.
+

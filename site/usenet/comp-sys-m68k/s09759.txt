@@ -1,0 +1,68 @@
+From bperez@clari.net Tue Sep 24 08:26:06 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!clari!bperez
+From: bperez@clari.net (Bruno Pérez)
+Newsgroups: comp.sys.m68k
+Subject: Observation: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Sep24.082606.3508@clari.net>
+Date: Tue, 24 Sep 1996 08:26:06 GMT
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Bruno Pérez
+Tape trading list upon request. SASE required for international mail.
+
+From bkowalski@netcom.com Tue Sep 24 18:13:06 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!netcom!bkowalski
+From: bkowalski@netcom.com (Bastien Kowalski)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Sep24.181306.2599@netcom.com>
+Date: Tue, 24 Sep 1996 18:13:06 GMT
+References: <1996Sep24.082606.3508@clari.net>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Sep24.082606.3508@clari.net>, bperez@clari.net (Bruno Pérez) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Bastien Kowalski -- NETCOM On-Line Communication Services
+"We don't sign stars. We build them."
+
+From fschneider@mit.edu Thu Sep 26 17:55:06 1996
+Path: ashpoly!cascade!brgate!saturno!mit!fschneider
+From: fschneider@mit.edu (Fiona Schneider)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Sep26.175506.3813@mit.edu>
+Date: Thu, 26 Sep 1996 17:55:06 GMT
+References: <1996Sep24.082606.3508@clari.net> <1996Sep24.181306.2599@netcom.com>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1996Sep24.181306.2599@netcom.com>, bkowalski@netcom.com (Bastien Kowalski) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Fiona Schneider -- Massachusetts Institute of Technology
+"We don't sign stars. We build them."
+

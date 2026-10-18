@@ -1,0 +1,116 @@
+From sgirard@purdue.edu Mon May 27 13:30:29 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!purdue!sgirard
+From: sgirard@purdue.edu (Sun-mi Girard)
+Newsgroups: comp.dsp
+Subject: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996May27.133029.8454@purdue.edu>
+Date: Mon, 27 May 1996 13:30:29 GMT
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+What sampling rates are people using for their vinyl rips? 44.1 kHz or 48 kHz DAT?
+
+-- 
+Sun-mi Girard -- Purdue University Engineering Computer Network
+"When every node is whole, the channel opens."
+
+From sreyes@uni-hamburg.de Wed May 29 10:22:29 1996
+Path: ashpoly!cascade!bigsur!uni-hamburg!sreyes
+From: sreyes@uni-hamburg.de (Sergei Reyes)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996May29.102229.9309@uni-hamburg.de>
+Date: Wed, 29 May 1996 10:22:29 GMT
+References: <1996May27.133029.8454@purdue.edu>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996May27.133029.8454@purdue.edu>, sgirard@purdue.edu (Sun-mi Girard) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Sergei Reyes
+Opinions expressed are solely my own and not those of Universität Hamburg Fachbereich Informatik.
+------------------------------------------------------------
+
+From bmoreno@inria.fr Wed May 29 12:34:29 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!inria!bmoreno
+From: bmoreno@inria.fr (Bruno Moreno)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996May29.123429.8386@inria.fr>
+Date: Wed, 29 May 1996 12:34:29 GMT
+References: <1996May27.133029.8454@purdue.edu>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996May27.133029.8454@purdue.edu>, sgirard@purdue.edu (Sun-mi Girard) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Bruno Moreno <bmoreno@inria.fr>
+*PLONK* filter active for trolls.
+Decstation 5000/200 - NetBSD 1.0
+
+From nkuznetsov@u-tokyo.ac.jp Thu May 30 23:40:29 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!u-tokyo!nkuznetsov
+From: nkuznetsov@u-tokyo.ac.jp (Natalia Kuznetsov)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996May30.234029.7544@u-tokyo.ac.jp>
+Date: Thu, 30 May 1996 23:40:29 GMT
+References: <1996May27.133029.8454@purdue.edu> <1996May29.102229.9309@uni-hamburg.de>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996May29.102229.9309@uni-hamburg.de>, sreyes@uni-hamburg.de (Sergei Reyes) writes:
+> I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Natalia Kuznetsov <nkuznetsov@u-tokyo.ac.jp>
+SupraFAXModem 28.8 @ 19,200 bps
+"There are 14 nodes and only 10 countries. Count again."
+
+From lstewart@purdue.edu Sat Jun 01 06:57:29 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!purdue!lstewart
+From: lstewart@purdue.edu (Liam Stewart)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Jun01.065729.7825@purdue.edu>
+Date: Sat, 01 Jun 1996 06:57:29 GMT
+References: <1996May27.133029.8454@purdue.edu> <1996May29.123429.8386@inria.fr>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996May29.123429.8386@inria.fr>, bmoreno@inria.fr (Bruno Moreno) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Liam Stewart <lstewart@purdue.edu>
+Hayes Optima 288 @ 9600 Telebit bps
+"A soul is not exclusive to biology."
+

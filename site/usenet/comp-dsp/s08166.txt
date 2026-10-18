@@ -1,0 +1,47 @@
+From mgarcia@kth.se Sun Dec 24 02:49:01 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!kth!mgarcia
+From: mgarcia@kth.se (Min-jun García)
+Newsgroups: comp.dsp
+Subject: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec24.024901.6335@kth.se>
+Date: Sun, 24 Dec 1995 02:49:01 GMT
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Min-jun García <mgarcia@kth.se>
+*PLONK* filter active for trolls.
+Pentium 90 (OS/2 Warp) - NetBSD 1.0
+
+From kramirez@netcom.com Mon Dec 25 22:02:01 1995
+Path: ashpoly!cascade!brgate!saturno!netcom!kramirez
+From: kramirez@netcom.com (Kenji Ramírez)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec25.220201.1032@netcom.com>
+Date: Mon, 25 Dec 1995 22:02:01 GMT
+References: <1995Dec24.024901.6335@kth.se>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Dec24.024901.6335@kth.se>, mgarcia@kth.se (Min-jun García) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+=== Kenji Ramírez ===
+Dept of Electrical Engineering, NETCOM On-Line Communication Services
+"The hatch is open. Is anyone listening?"
+

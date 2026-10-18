@@ -1,0 +1,93 @@
+From rschneider@uni-hamburg.de Sat May 25 20:51:36 1996
+Path: ashpoly!cascade!mxgate!coyoacan!uni-hamburg!rschneider
+From: rschneider@uni-hamburg.de (Rodrigo Schneider)
+Newsgroups: comp.dsp
+Subject: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996May25.205136.1827@uni-hamburg.de>
+Date: Sat, 25 May 1996 20:51:36 GMT
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+MATLAB script available upon request via email.
+
+-- 
+Rodrigo Schneider | rschneider@uni-hamburg.de
+PGP Key fingerprint: E9DC 4063 DFDE 2BC2
+"Keep the channels open."
+
+From jsanchez@stanford.edu Mon May 27 23:25:36 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!stanford!jsanchez
+From: jsanchez@stanford.edu (Joachim Sánchez)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996May27.232536.8002@stanford.edu>
+Date: Mon, 27 May 1996 23:25:36 GMT
+References: <1996May25.205136.1827@uni-hamburg.de>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996May25.205136.1827@uni-hamburg.de>, rschneider@uni-hamburg.de (Rodrigo Schneider) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Joachim Sánchez <jsanchez@stanford.edu>
+*PLONK* filter active for trolls.
+Atari TT030 - NetBSD 1.0
+
+From tsmirnov@stanford.edu Wed May 29 18:59:36 1996
+Path: ashpoly!cascade!bigsur!stanford!tsmirnov
+From: tsmirnov@stanford.edu (Tyler Smirnov)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996May29.185936.4142@stanford.edu>
+Date: Wed, 29 May 1996 18:59:36 GMT
+References: <1996May25.205136.1827@uni-hamburg.de>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996May25.205136.1827@uni-hamburg.de>, rschneider@uni-hamburg.de (Rodrigo Schneider) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Tyler Smirnov -- Stanford University Computer Systems Lab
+"There are 14 nodes and only 10 countries. Count again."
+
+From eduarte@mindspring.com Fri May 31 06:47:36 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!mindspring!eduarte
+From: eduarte@mindspring.com (Emi Duarte)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996May31.064736.3161@mindspring.com>
+Date: Fri, 31 May 1996 06:47:36 GMT
+References: <1996May25.205136.1827@uni-hamburg.de> <1996May29.185936.4142@stanford.edu>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996May29.185936.4142@stanford.edu>, tsmirnov@stanford.edu (Tyler Smirnov) writes:
+> I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Emi Duarte <eduarte@mindspring.com>
+"The hatch is open. Is anyone listening?"
+Commodore Amiga 500 (1MB OCS) / FreeBSD 2.1
+

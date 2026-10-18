@@ -1,0 +1,92 @@
+From alaurent@delphi.com Wed Mar 16 11:13:36 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!delphi!alaurent
+From: alaurent@delphi.com (Amy Laurent)
+Newsgroups: comp.dsp
+Subject: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Mar16.111336.9568@delphi.com>
+Date: Wed, 16 Mar 1994 11:13:36 GMT
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Amy Laurent | alaurent@delphi.com
+PGP Key fingerprint: FB57 318E C5FC 0983
+"Keep the channels open."
+
+From mlarsson@utexas.edu Thu Mar 17 07:37:36 1994
+Path: ashpoly!cascade!bigsur!utexas!mlarsson
+From: mlarsson@utexas.edu (Mateo Larsson)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Mar17.073736.6462@utexas.edu>
+Date: Thu, 17 Mar 1994 07:37:36 GMT
+References: <1994Mar16.111336.9568@delphi.com>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Mar16.111336.9568@delphi.com>, alaurent@delphi.com (Amy Laurent) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Mateo Larsson <mlarsson@utexas.edu>
+*PLONK* filter active for trolls.
+Macintosh IIfx - NetBSD 1.0
+
+From mfischer@mindspring.com Fri Mar 18 19:13:36 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!mindspring!mfischer
+From: mfischer@mindspring.com (Mei Fischer)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Mar18.191336.5504@mindspring.com>
+Date: Fri, 18 Mar 1994 19:13:36 GMT
+References: <1994Mar16.111336.9568@delphi.com> <1994Mar17.073736.6462@utexas.edu>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1994Mar17.073736.6462@utexas.edu>, mlarsson@utexas.edu (Mateo Larsson) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Mei Fischer
+Tape trading list upon request. SASE required for international mail.
+
+From jlopez@earthlink.net Sun Mar 20 05:59:36 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!earthlink!jlopez
+From: jlopez@earthlink.net (Ji-woo López)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Mar20.055936.3971@earthlink.net>
+Date: Sun, 20 Mar 1994 05:59:36 GMT
+References: <1994Mar16.111336.9568@delphi.com> <1994Mar17.073736.6462@utexas.edu>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Mar17.073736.6462@utexas.edu>, mlarsson@utexas.edu (Mateo Larsson) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+=== Ji-woo López ===
+Dept of Electrical Engineering, EarthLink Network
+"When every node is whole, the channel opens."
+

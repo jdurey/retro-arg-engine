@@ -1,0 +1,118 @@
+From aduarte@cmu.edu Sun Feb 05 23:32:23 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!cmu!aduarte
+From: aduarte@cmu.edu (Amy Duarte)
+Newsgroups: comp.sys.m68k
+Subject: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Feb05.233223.8940@cmu.edu>
+Date: Sun, 05 Feb 1995 23:32:23 GMT
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Amy Duarte | aduarte@cmu.edu
+PGP Key fingerprint: DFB4 96E7 3F3B 1C93
+"Keep the channels open."
+
+From jramirez@utexas.edu Mon Feb 06 03:27:23 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!utexas!jramirez
+From: jramirez@utexas.edu (Julien Ramírez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Feb06.032723.3722@utexas.edu>
+Date: Mon, 06 Feb 1995 03:27:23 GMT
+References: <1995Feb05.233223.8940@cmu.edu>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995Feb05.233223.8940@cmu.edu>, aduarte@cmu.edu (Amy Duarte) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+> Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+Looks like a prototype telecommunications board for military secure voice, not an audio music product.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Julien Ramírez -- University of Texas at Austin
+"They will send a copy in my place."
+
+From sstewart@cmu.edu Tue Feb 07 15:44:23 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!cmu!sstewart
+From: sstewart@cmu.edu (Sergei Stewart)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Feb07.154423.8305@cmu.edu>
+Date: Tue, 07 Feb 1995 15:44:23 GMT
+References: <1995Feb05.233223.8940@cmu.edu>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Feb05.233223.8940@cmu.edu>, aduarte@cmu.edu (Amy Duarte) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Sergei Stewart <sstewart@cmu.edu>
+SupraFAXModem 28.8 @ 33,600 bps
+"Tape doesn't lie at 02:14. Ears do."
+
+From meriksson@pacbell.net Tue Feb 07 19:37:23 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!pacbell!meriksson
+From: meriksson@pacbell.net (Min-jun Eriksson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Feb07.193723.9428@pacbell.net>
+Date: Tue, 07 Feb 1995 19:37:23 GMT
+References: <1995Feb05.233223.8940@cmu.edu> <1995Feb07.154423.8305@cmu.edu>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1995Feb07.154423.8305@cmu.edu>, sstewart@cmu.edu (Sergei Stewart) writes:
+> The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Min-jun Eriksson -- Pacific Bell Internet Services
+"Tape doesn't lie at 02:14. Ears do."
+
+From hmoreno@tum.de Thu Feb 09 06:29:23 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!tum!hmoreno
+From: hmoreno@tum.de (Hugo Moreno)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Feb09.062923.2039@tum.de>
+Date: Thu, 09 Feb 1995 06:29:23 GMT
+References: <1995Feb05.233223.8940@cmu.edu> <1995Feb06.032723.3722@utexas.edu>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Feb06.032723.3722@utexas.edu>, jramirez@utexas.edu (Julien Ramírez) writes:
+> Looks like a prototype telecommunications board for military secure voice, not an audio music product.
+> PGP Public key available via finger or upon request.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Hugo Moreno <hmoreno@tum.de>
+Hayes Optima 288 @ 33,600 bps
+"We don't sign stars. We build them."
+

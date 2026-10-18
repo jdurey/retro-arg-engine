@@ -1,0 +1,93 @@
+From mlaurent@stanford.edu Sat Feb 05 01:02:14 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!stanford!mlaurent
+From: mlaurent@stanford.edu (Mei Laurent)
+Newsgroups: comp.dsp
+Subject: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Feb05.010214.1011@stanford.edu>
+Date: Sat, 05 Feb 1994 01:02:14 GMT
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+MATLAB script available upon request via email.
+
+-- 
+Mei Laurent
+Opinions expressed are solely my own and not those of Stanford University Computer Systems Lab.
+------------------------------------------------------------
+
+From rdubois@cern.ch Sun Feb 06 15:48:14 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!cern!rdubois
+From: rdubois@cern.ch (Rodrigo Dubois)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Feb06.154814.6121@cern.ch>
+Date: Sun, 06 Feb 1994 15:48:14 GMT
+References: <1994Feb05.010214.1011@stanford.edu>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1994Feb05.010214.1011@stanford.edu>, mlaurent@stanford.edu (Mei Laurent) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+> A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Rodrigo Dubois <rdubois@cern.ch>
+"When every node is whole, the channel opens."
+Macintosh IIfx / TOS 4.04
+
+From dpetrov@panix.com Mon Feb 07 15:41:14 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!panix!dpetrov
+From: dpetrov@panix.com (Dmitri Petrov)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Feb07.154114.4982@panix.com>
+Date: Mon, 07 Feb 1994 15:41:14 GMT
+References: <1994Feb05.010214.1011@stanford.edu>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Feb05.010214.1011@stanford.edu>, mlaurent@stanford.edu (Mei Laurent) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+> A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Dmitri Petrov -- Public Access Unix of New York
+"The carrier frequency does not drift by accident."
+
+From ymacdonald@tum.de Wed Feb 09 16:58:14 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!tum!ymacdonald
+From: ymacdonald@tum.de (Yuki MacDonald)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Feb09.165814.9692@tum.de>
+Date: Wed, 09 Feb 1994 16:58:14 GMT
+References: <1994Feb05.010214.1011@stanford.edu> <1994Feb06.154814.6121@cern.ch>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1994Feb06.154814.6121@cern.ch>, rdubois@cern.ch (Rodrigo Dubois) writes:
+> I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Yuki MacDonald
+Tape trading list upon request. SASE required for international mail.
+

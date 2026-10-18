@@ -1,0 +1,48 @@
+From glarsson@cam.ac.uk Sat Dec 16 23:06:56 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!cam!glarsson
+From: glarsson@cam.ac.uk (Graham Larsson)
+Newsgroups: comp.dsp
+Subject: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Dec16.230656.3052@cam.ac.uk>
+Date: Sat, 16 Dec 1995 23:06:56 GMT
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+What sampling rates are people using for their vinyl rips? 44.1 kHz or 48 kHz DAT?
+
+-- 
+=== Graham Larsson ===
+Dept of Electrical Engineering, University of Cambridge Computer Laboratory
+"Extraordinary claims require extraordinary spectra."
+
+From bperez@pacbell.net Sun Dec 17 06:23:56 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!pacbell!bperez
+From: bperez@pacbell.net (Bill Pérez)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Dec17.062356.9229@pacbell.net>
+Date: Sun, 17 Dec 1995 06:23:56 GMT
+References: <1995Dec16.230656.3052@cam.ac.uk>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Dec16.230656.3052@cam.ac.uk>, glarsson@cam.ac.uk (Graham Larsson) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+=== Bill Pérez ===
+Dept of Electrical Engineering, Pacific Bell Internet Services
+"The hatch is open. Is anyone listening?"
+

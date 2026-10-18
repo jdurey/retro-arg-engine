@@ -1,0 +1,94 @@
+From ppark@berkeley.edu Mon Jul 01 02:35:09 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!berkeley!ppark
+From: ppark@berkeley.edu (Pavel Park)
+Newsgroups: comp.dsp
+Subject: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jul01.023509.3496@berkeley.edu>
+Date: Mon, 01 Jul 1996 02:35:09 GMT
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Pavel Park -- UC Berkeley Department of EECS
+"Hardware is temporary. The signal survives."
+
+From asuzuki@clari.net Tue Jul 02 06:29:09 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!clari!asuzuki
+From: asuzuki@clari.net (Aiko Suzuki)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jul02.062909.2323@clari.net>
+Date: Tue, 02 Jul 1996 06:29:09 GMT
+References: <1996Jul01.023509.3496@berkeley.edu>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Jul01.023509.3496@berkeley.edu>, ppark@berkeley.edu (Pavel Park) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Aiko Suzuki -- ClariNet Communications Corp
+"Marcus is not one man."
+
+From estewart@kiae.su Tue Jul 02 20:32:09 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!kiae!estewart
+From: estewart@kiae.su (Élodie Stewart)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jul02.203209.3058@kiae.su>
+Date: Tue, 02 Jul 1996 20:32:09 GMT
+References: <1996Jul01.023509.3496@berkeley.edu>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Jul01.023509.3496@berkeley.edu>, ppark@berkeley.edu (Pavel Park) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+=== Élodie Stewart ===
+Dept of Electrical Engineering, Kurchatov Institute of Atomic Energy, Moscow
+"The carrier frequency does not drift by accident."
+
+From mmoreau@ox.ac.uk Wed Jul 03 18:34:09 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!ox!mmoreau
+From: mmoreau@ox.ac.uk (Min-jun Moreau)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jul03.183409.6239@ox.ac.uk>
+Date: Wed, 03 Jul 1996 18:34:09 GMT
+References: <1996Jul01.023509.3496@berkeley.edu> <1996Jul02.062909.2323@clari.net>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1996Jul02.062909.2323@clari.net>, asuzuki@clari.net (Aiko Suzuki) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+Min-jun Moreau <mmoreau@ox.ac.uk>
+Zyxel U-1496E @ ISDN 64k bps
+"In theory there is no difference between theory and practice."
+

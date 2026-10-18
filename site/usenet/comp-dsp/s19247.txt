@@ -1,0 +1,118 @@
+From ysanchez@illinois.edu Thu Jul 20 21:46:06 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!illinois!ysanchez
+From: ysanchez@illinois.edu (Yuki Sánchez)
+Newsgroups: comp.dsp
+Subject: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jul20.214606.2095@illinois.edu>
+Date: Thu, 20 Jul 1995 21:46:06 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Yuki Sánchez
+Tape trading list upon request. SASE required for international mail.
+
+From soliveira@stanford.edu Sat Jul 22 01:48:06 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!stanford!soliveira
+From: soliveira@stanford.edu (Sun-mi Oliveira)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jul22.014806.5436@stanford.edu>
+Date: Sat, 22 Jul 1995 01:48:06 GMT
+References: <1995Jul20.214606.2095@illinois.edu>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Jul20.214606.2095@illinois.edu>, ysanchez@illinois.edu (Yuki Sánchez) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Sun-mi Oliveira
+Opinions expressed are solely my own and not those of Stanford University Computer Systems Lab.
+------------------------------------------------------------
+
+From ysouza@rwth-aachen.de Sun Jul 23 14:08:06 1995
+Path: ashpoly!cascade!bigsur!rwth-aachen!ysouza
+From: ysouza@rwth-aachen.de (Yuki Souza)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jul23.140806.2753@rwth-aachen.de>
+Date: Sun, 23 Jul 1995 14:08:06 GMT
+References: <1995Jul20.214606.2095@illinois.edu>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Jul20.214606.2095@illinois.edu>, ysanchez@illinois.edu (Yuki Sánchez) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Yuki Souza <ysouza@rwth-aachen.de>
+SupraFAXModem 28.8 @ ISDN 64k bps
+"There are 14 nodes and only 10 countries. Count again."
+
+From kperez@cern.ch Mon Jul 24 06:38:06 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!cern!kperez
+From: kperez@cern.ch (Kenji Pérez)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jul24.063806.9432@cern.ch>
+Date: Mon, 24 Jul 1995 06:38:06 GMT
+References: <1995Jul20.214606.2095@illinois.edu>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Jul20.214606.2095@illinois.edu>, ysanchez@illinois.edu (Yuki Sánchez) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Kenji Pérez | kperez@cern.ch
+PGP Key fingerprint: 5766 8A01 B420 1F31
+"Keep the channels open."
+
+From mchoi@panix.com Wed Jul 26 08:41:06 1995
+Path: ashpoly!cascade!bigsur!panix!mchoi
+From: mchoi@panix.com (Mike Choi)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jul26.084106.1739@panix.com>
+Date: Wed, 26 Jul 1995 08:41:06 GMT
+References: <1995Jul20.214606.2095@illinois.edu>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Jul20.214606.2095@illinois.edu>, ysanchez@illinois.edu (Yuki Sánchez) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Mike Choi
+Opinions expressed are solely my own and not those of Public Access Unix of New York.
+------------------------------------------------------------
+

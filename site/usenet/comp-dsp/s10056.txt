@@ -1,0 +1,92 @@
+From bnakamura@clari.net Fri Jan 26 12:20:24 1996
+Path: ashpoly!cascade!brgate!saturno!clari!bnakamura
+From: bnakamura@clari.net (Brian Nakamura)
+Newsgroups: comp.dsp
+Subject: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jan26.122024.1645@clari.net>
+Date: Fri, 26 Jan 1996 12:20:24 GMT
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Brian Nakamura <bnakamura@clari.net>
+Practical Peripherals 14.4 @ 9600 Telebit bps
+"When every node is whole, the channel opens."
+
+From adubois@ox.ac.uk Sat Jan 27 21:02:24 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!ox!adubois
+From: adubois@ox.ac.uk (Andrei Dubois)
+Newsgroups: comp.dsp
+Subject: Re: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jan27.210224.7672@ox.ac.uk>
+Date: Sat, 27 Jan 1996 21:02:24 GMT
+References: <1996Jan26.122024.1645@clari.net>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Jan26.122024.1645@clari.net>, bnakamura@clari.net (Brian Nakamura) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+=== Andrei Dubois ===
+Dept of Electrical Engineering, Oxford University Computing Laboratory
+"Measuring a record you own is listening, not piracy."
+
+From mito@kiae.su Sun Jan 28 22:43:24 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!kiae!mito
+From: mito@kiae.su (Mateo Ito)
+Newsgroups: comp.dsp
+Subject: Re: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jan28.224324.2525@kiae.su>
+Date: Sun, 28 Jan 1996 22:43:24 GMT
+References: <1996Jan26.122024.1645@clari.net>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1996Jan26.122024.1645@clari.net>, bnakamura@clari.net (Brian Nakamura) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Mateo Ito -- Kurchatov Institute of Atomic Energy, Moscow
+"Row 14. No joke."
+
+From lgarcia@illinois.edu Tue Jan 30 09:08:24 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!illinois!lgarcia
+From: lgarcia@illinois.edu (Lucia García)
+Newsgroups: comp.dsp
+Subject: Re: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jan30.090824.4028@illinois.edu>
+Date: Tue, 30 Jan 1996 09:08:24 GMT
+References: <1996Jan26.122024.1645@clari.net> <1996Jan28.224324.2525@kiae.su>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Jan28.224324.2525@kiae.su>, mito@kiae.su (Mateo Ito) writes:
+> Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Lucia García
+Opinions expressed are solely my own and not those of University of Illinois Urbana-Champaign.
+------------------------------------------------------------
+

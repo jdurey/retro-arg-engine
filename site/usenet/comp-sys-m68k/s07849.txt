@@ -1,0 +1,122 @@
+From orobertson@kiae.su Tue Oct 08 16:19:15 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!kiae!orobertson
+From: orobertson@kiae.su (Olga Robertson)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Oct08.161915.4729@kiae.su>
+Date: Tue, 08 Oct 1996 16:19:15 GMT
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Olga Robertson <orobertson@kiae.su>
+"Hold for relay."
+Atari Falcon 030 / AmigaOS 3.1
+
+From aeriksson@u-tokyo.ac.jp Thu Oct 10 04:11:15 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!u-tokyo!aeriksson
+From: aeriksson@u-tokyo.ac.jp (Astrid Eriksson)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Oct10.041115.1347@u-tokyo.ac.jp>
+Date: Thu, 10 Oct 1996 04:11:15 GMT
+References: <1996Oct08.161915.4729@kiae.su>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1996Oct08.161915.4729@kiae.su>, orobertson@kiae.su (Olga Robertson) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+> At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Astrid Eriksson | aeriksson@u-tokyo.ac.jp
+PGP Key fingerprint: 2D55 77E4 5540 FE3D
+"Keep the channels open."
+
+From mgirard@earthlink.net Thu Oct 10 17:52:15 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!earthlink!mgirard
+From: mgirard@earthlink.net (Mike Girard)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Oct10.175215.9142@earthlink.net>
+Date: Thu, 10 Oct 1996 17:52:15 GMT
+References: <1996Oct08.161915.4729@kiae.su>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Oct08.161915.4729@kiae.su>, orobertson@kiae.su (Olga Robertson) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Mike Girard <mgirard@earthlink.net>
+"In theory there is no difference between theory and practice."
+486DX2/66 (Linux 1.2.13) / NEXTSTEP 3.3
+
+From mkuznetsov@illinois.edu Sat Oct 12 17:03:15 1996
+Path: ashpoly!cascade!mxgate!coyoacan!illinois!mkuznetsov
+From: mkuznetsov@illinois.edu (Marisol Kuznetsov)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Oct12.170315.5675@illinois.edu>
+Date: Sat, 12 Oct 1996 17:03:15 GMT
+References: <1996Oct08.161915.4729@kiae.su> <1996Oct10.041115.1347@u-tokyo.ac.jp>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1996Oct10.041115.1347@u-tokyo.ac.jp>, aeriksson@u-tokyo.ac.jp (Astrid Eriksson) writes:
+> The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+> My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Marisol Kuznetsov <mkuznetsov@illinois.edu>
+"There are 14 nodes and only 10 countries. Count again."
+Pentium 90 (OS/2 Warp) / System 7.5.1
+
+From gweber@tum.de Sat Oct 12 21:45:15 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!tum!gweber
+From: gweber@tum.de (Graham Weber)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Oct12.214515.2274@tum.de>
+Date: Sat, 12 Oct 1996 21:45:15 GMT
+References: <1996Oct08.161915.4729@kiae.su> <1996Oct10.041115.1347@u-tokyo.ac.jp> <1996Oct12.170315.5675@illinois.edu>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Oct12.170315.5675@illinois.edu>, mkuznetsov@illinois.edu (Marisol Kuznetsov) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Graham Weber | gweber@tum.de
+PGP Key fingerprint: E8D1 EC4F 41D8 4AC1
+"Keep the channels open."
+

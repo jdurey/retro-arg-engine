@@ -1,0 +1,95 @@
+From tsanchez@u-tokyo.ac.jp Wed Sep 04 13:36:27 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!u-tokyo!tsanchez
+From: tsanchez@u-tokyo.ac.jp (Tobias Sánchez)
+Newsgroups: comp.dsp
+Subject: Data: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Sep04.133627.2478@u-tokyo.ac.jp>
+Date: Wed, 04 Sep 1996 13:36:27 GMT
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Tobias Sánchez <tsanchez@u-tokyo.ac.jp>
+*PLONK* filter active for trolls.
+NeXTstation Turbo Color - NetBSD 1.0
+
+From aduarte@panix.com Fri Sep 06 03:56:27 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!panix!aduarte
+From: aduarte@panix.com (Aiko Duarte)
+Newsgroups: comp.dsp
+Subject: Re: Data: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Sep06.035627.9014@panix.com>
+Date: Fri, 06 Sep 1996 03:56:27 GMT
+References: <1996Sep04.133627.2478@u-tokyo.ac.jp>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1996Sep04.133627.2478@u-tokyo.ac.jp>, tsanchez@u-tokyo.ac.jp (Tobias Sánchez) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Aiko Duarte | aduarte@panix.com
+PGP Key fingerprint: A60A C064 83FA 2498
+"Keep the channels open."
+
+From tbrennan@demon.co.uk Sat Sep 07 15:31:27 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!demon!tbrennan
+From: tbrennan@demon.co.uk (Thiago Brennan)
+Newsgroups: comp.dsp
+Subject: Re: Data: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Sep07.153127.6044@demon.co.uk>
+Date: Sat, 07 Sep 1996 15:31:27 GMT
+References: <1996Sep04.133627.2478@u-tokyo.ac.jp> <1996Sep06.035627.9014@panix.com>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Sep06.035627.9014@panix.com>, aduarte@panix.com (Aiko Duarte) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Thiago Brennan <tbrennan@demon.co.uk>
+"The carrier frequency does not drift by accident."
+NeXTstation Turbo Color / SunOS 4.1.4
+
+From bkowalski@uni-hamburg.de Mon Sep 09 14:16:27 1996
+Path: ashpoly!cascade!mxgate!coyoacan!uni-hamburg!bkowalski
+From: bkowalski@uni-hamburg.de (Bill Kowalski)
+Newsgroups: comp.dsp
+Subject: Re: Data: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Sep09.141627.5780@uni-hamburg.de>
+Date: Mon, 09 Sep 1996 14:16:27 GMT
+References: <1996Sep04.133627.2478@u-tokyo.ac.jp>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Sep04.133627.2478@u-tokyo.ac.jp>, tsanchez@u-tokyo.ac.jp (Tobias Sánchez) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Bill Kowalski <bkowalski@uni-hamburg.de>
+*PLONK* filter active for trolls.
+Decstation 5000/200 - NetBSD 1.0
+

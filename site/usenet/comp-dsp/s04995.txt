@@ -1,0 +1,118 @@
+From msouza@ox.ac.uk Thu Jul 27 09:29:16 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!ox!msouza
+From: msouza@ox.ac.uk (Mikhail Souza)
+Newsgroups: comp.dsp
+Subject: [FLAME] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jul27.092916.2731@ox.ac.uk>
+Date: Thu, 27 Jul 1995 09:29:16 GMT
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+Mikhail Souza <msouza@ox.ac.uk>
+Zyxel U-1496E @ 14,400 bps
+"In theory there is no difference between theory and practice."
+
+From olopez@tum.de Thu Jul 27 14:04:16 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!tum!olopez
+From: olopez@tum.de (Olga López)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jul27.140416.9057@tum.de>
+Date: Thu, 27 Jul 1995 14:04:16 GMT
+References: <1995Jul27.092916.2731@ox.ac.uk>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Jul27.092916.2731@ox.ac.uk>, msouza@ox.ac.uk (Mikhail Souza) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+> Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+-- 
+Olga López
+Opinions expressed are solely my own and not those of Technische Universität München.
+------------------------------------------------------------
+
+From dmuller@uu.net Sat Jul 29 12:21:16 1995
+Path: ashpoly!cascade!mxgate!coyoacan!uu!dmuller
+From: dmuller@uu.net (Dong-hyun Müller)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jul29.122116.3963@uu.net>
+Date: Sat, 29 Jul 1995 12:21:16 GMT
+References: <1995Jul27.092916.2731@ox.ac.uk> <1995Jul27.140416.9057@tum.de>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Jul27.140416.9057@tum.de>, olopez@tum.de (Olga López) writes:
+> Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+-- 
+Dong-hyun Müller | dmuller@uu.net
+PGP Key fingerprint: 284E 9047 7540 3620
+"Keep the channels open."
+
+From tsato@mit.edu Mon Jul 31 04:03:16 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!mit!tsato
+From: tsato@mit.edu (Tobias Sato)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jul31.040316.4445@mit.edu>
+Date: Mon, 31 Jul 1995 04:03:16 GMT
+References: <1995Jul27.092916.2731@ox.ac.uk>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Jul27.092916.2731@ox.ac.uk>, msouza@ox.ac.uk (Mikhail Souza) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+> Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Tobias Sato
+Opinions expressed are solely my own and not those of Massachusetts Institute of Technology.
+------------------------------------------------------------
+
+From sfischer@delphi.com Mon Jul 31 05:14:16 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!delphi!sfischer
+From: sfischer@delphi.com (Sven Fischer)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jul31.051416.7300@delphi.com>
+Date: Mon, 31 Jul 1995 05:14:16 GMT
+References: <1995Jul27.092916.2731@ox.ac.uk>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Jul27.092916.2731@ox.ac.uk>, msouza@ox.ac.uk (Mikhail Souza) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Sven Fischer <sfischer@delphi.com>
+*PLONK* filter active for trolls.
+Amiga 1200 (Blizzard 030/50) - NetBSD 1.0
+

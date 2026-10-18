@@ -1,0 +1,95 @@
+From bpark@earthlink.net Mon May 27 12:00:34 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!earthlink!bpark
+From: bpark@earthlink.net (Bastien Park)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996May27.120034.7093@earthlink.net>
+Date: Mon, 27 May 1996 12:00:34 GMT
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+Schematic diagram in ASCII uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/twin68_array.asc.
+
+-- 
+Bastien Park
+Opinions expressed are solely my own and not those of EarthLink Network.
+------------------------------------------------------------
+
+From kfischer@purdue.edu Tue May 28 20:23:34 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!purdue!kfischer
+From: kfischer@purdue.edu (Karen Fischer)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996May28.202334.4628@purdue.edu>
+Date: Tue, 28 May 1996 20:23:34 GMT
+References: <1996May27.120034.7093@earthlink.net>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1996May27.120034.7093@earthlink.net>, bpark@earthlink.net (Bastien Park) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Karen Fischer <kfischer@purdue.edu>
+*PLONK* filter active for trolls.
+PC-9821Ap2 (NEC) - NetBSD 1.0
+
+From jmartinez@inria.fr Thu May 30 13:17:34 1996
+Path: ashpoly!cascade!brgate!saturno!inria!jmartinez
+From: jmartinez@inria.fr (Julien Martínez)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996May30.131734.7586@inria.fr>
+Date: Thu, 30 May 1996 13:17:34 GMT
+References: <1996May27.120034.7093@earthlink.net> <1996May28.202334.4628@purdue.edu>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996May28.202334.4628@purdue.edu>, kfischer@purdue.edu (Karen Fischer) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+=== Julien Martínez ===
+Dept of Electrical Engineering, INRIA Rocquencourt
+"Row 14. No joke."
+
+From bokonkwo@pipeline.com Fri May 31 11:42:34 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!pipeline!bokonkwo
+From: bokonkwo@pipeline.com (Bill Okonkwo)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996May31.114234.1632@pipeline.com>
+Date: Fri, 31 May 1996 11:42:34 GMT
+References: <1996May27.120034.7093@earthlink.net> <1996May28.202334.4628@purdue.edu> <1996May30.131734.7586@inria.fr>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996May30.131734.7586@inria.fr>, jmartinez@inria.fr (Julien Martínez) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+=== Bill Okonkwo ===
+Dept of Electrical Engineering, The Pipeline Internet Network
+"The hatch is open. Is anyone listening?"
+

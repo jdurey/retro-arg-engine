@@ -1,0 +1,117 @@
+From bschneider@netcom.com Mon Nov 28 16:23:01 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!netcom!bschneider
+From: bschneider@netcom.com (Bastien Schneider)
+Newsgroups: comp.dsp
+Subject: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Nov28.162301.9729@netcom.com>
+Date: Mon, 28 Nov 1994 16:23:01 GMT
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+
+Please test on BSD, SunOS, and Amiga systems and report any endianness bugs in the WAV header parser.
+
+-- 
+Bastien Schneider
+Opinions expressed are solely my own and not those of NETCOM On-Line Communication Services.
+------------------------------------------------------------
+
+From ivasiliev@earthlink.net Wed Nov 30 17:27:01 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!earthlink!ivasiliev
+From: ivasiliev@earthlink.net (Ines Vasiliev)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Nov30.172701.6094@earthlink.net>
+Date: Wed, 30 Nov 1994 17:27:01 GMT
+References: <1994Nov28.162301.9729@netcom.com>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1994Nov28.162301.9729@netcom.com>, bschneider@netcom.com (Bastien Schneider) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+-- 
+Ines Vasiliev
+Tape trading list upon request. SASE required for international mail.
+
+From cperez@unam.mx Thu Dec 01 06:07:01 1994
+Path: ashpoly!cascade!bigsur!unam!cperez
+From: cperez@unam.mx (Camila Pérez)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Dec01.060701.5180@unam.mx>
+Date: Thu, 01 Dec 1994 06:07:01 GMT
+References: <1994Nov28.162301.9729@netcom.com>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Nov28.162301.9729@netcom.com>, bschneider@netcom.com (Bastien Schneider) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+-- 
+=== Camila Pérez ===
+Dept of Electrical Engineering, Universidad Nacional Autónoma de México (DGSCA)
+"When every node is whole, the channel opens."
+
+From pkuznetsov@cmu.edu Thu Dec 01 07:55:01 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!cmu!pkuznetsov
+From: pkuznetsov@cmu.edu (Pavel Kuznetsov)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Dec01.075501.7284@cmu.edu>
+Date: Thu, 01 Dec 1994 07:55:01 GMT
+References: <1994Nov28.162301.9729@netcom.com>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Nov28.162301.9729@netcom.com>, bschneider@netcom.com (Bastien Schneider) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+-- 
+=== Pavel Kuznetsov ===
+Dept of Electrical Engineering, Carnegie Mellon University School of CS
+"When every node is whole, the channel opens."
+
+From jlee@mindspring.com Sat Dec 03 02:21:01 1994
+Path: ashpoly!cascade!brgate!saturno!mindspring!jlee
+From: jlee@mindspring.com (Julien Lee)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Dec03.022101.2801@mindspring.com>
+Date: Sat, 03 Dec 1994 02:21:01 GMT
+References: <1994Nov28.162301.9729@netcom.com> <1994Dec01.075501.7284@cmu.edu>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1994Dec01.075501.7284@cmu.edu>, pkuznetsov@cmu.edu (Pavel Kuznetsov) writes:
+> Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Julien Lee
+Opinions expressed are solely my own and not those of MindSpring Enterprises.
+------------------------------------------------------------
+

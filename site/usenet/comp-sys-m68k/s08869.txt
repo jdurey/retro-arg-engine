@@ -1,0 +1,99 @@
+From gkang@kiae.su Sat Jun 01 11:22:01 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!kiae!gkang
+From: gkang@kiae.su (Göran Kang)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Jun01.112201.8945@kiae.su>
+Date: Sat, 01 Jun 1996 11:22:01 GMT
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Göran Kang <gkang@kiae.su>
+"There are 14 nodes and only 10 countries. Count again."
+Amiga 1200 (Blizzard 030/50) / NEXTSTEP 3.3
+
+From glindqvist@illinois.edu Mon Jun 03 02:20:01 1996
+Path: ashpoly!cascade!mxgate!coyoacan!illinois!glindqvist
+From: glindqvist@illinois.edu (Graham Lindqvist)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Jun03.022001.6215@illinois.edu>
+Date: Mon, 03 Jun 1996 02:20:01 GMT
+References: <1996Jun01.112201.8945@kiae.su>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1996Jun01.112201.8945@kiae.su>, gkang@kiae.su (Göran Kang) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Graham Lindqvist
+Opinions expressed are solely my own and not those of University of Illinois Urbana-Champaign.
+------------------------------------------------------------
+
+From moliveira@delphi.com Tue Jun 04 19:03:01 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!delphi!moliveira
+From: moliveira@delphi.com (Morag Oliveira)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Jun04.190301.7011@delphi.com>
+Date: Tue, 04 Jun 1996 19:03:01 GMT
+References: <1996Jun01.112201.8945@kiae.su> <1996Jun03.022001.6215@illinois.edu>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1996Jun03.022001.6215@illinois.edu>, glindqvist@illinois.edu (Graham Lindqvist) writes:
+> The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Morag Oliveira <moliveira@delphi.com>
+*PLONK* filter active for trolls.
+Amiga 1200 (Blizzard 030/50) - NetBSD 1.0
+
+From ssmirnov@mindspring.com Wed Jun 05 11:06:01 1996
+Path: ashpoly!cascade!bigsur!mindspring!ssmirnov
+From: ssmirnov@mindspring.com (Sun-mi Smirnov)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Jun05.110601.8892@mindspring.com>
+Date: Wed, 05 Jun 1996 11:06:01 GMT
+References: <1996Jun01.112201.8945@kiae.su> <1996Jun03.022001.6215@illinois.edu> <1996Jun04.190301.7011@delphi.com>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Jun04.190301.7011@delphi.com>, moliveira@delphi.com (Morag Oliveira) writes:
+> Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+> Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Sun-mi Smirnov
+Opinions expressed are solely my own and not those of MindSpring Enterprises.
+------------------------------------------------------------
+

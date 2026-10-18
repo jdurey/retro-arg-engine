@@ -1,0 +1,147 @@
+From tokafor@ee.ashford-poly.edu Sun Jul 02 19:44:08 1989
+Path: ashpoly!cascade!bigsur!ee!tokafor
+From: tokafor@ee.ashford-poly.edu (Tom Okafor)
+Newsgroups: comp.dsp
+Subject: 14.2 Hz DBPSK demod - C source (was: 14.2 Hz peak on a 1985 synth-rock LP)
+Message-ID: <1989Jul02.194408.9019@ee.ashford-poly.edu>
+Date: 2 Jul 89 19:44:08 GMT
+Organization: Ashford Polytechnic Institute, Dept. of Electrical Engineering
+X-Newsreader: rn 4.3 patchlevel 1
+Lines: 29
+
+OK, it IS BPSK. Symbol period 0.5634 s (1.775 baud), differential, and
+the bitstream frames cleanly into 8-N-1 ASCII. Side A gives 284 bytes.
+Core loop below. Runs on a stock Mac Plus at about 4x real time.
+
+/* stardust.c -- coherent 14.2 Hz DBPSK demod. Public domain. */
+#define FC   14.2
+#define FS   64.0
+#define SPS  36          /* samples per symbol (64 * 0.5634) */
+
+    for (n = 0; n < len; n++) {
+        i_acc += x[n] * cos(2*PI*FC*n/FS);
+        q_acc += x[n] * sin(2*PI*FC*n/FS);
+        if (++k == SPS) {
+            ph  = atan2(q_acc, i_acc);
+            bit = fabs(ph - last_ph) > PI/2;
+            emit(bit); last_ph = ph; i_acc = q_acc = 0; k = 0;
+        }
+    }
+
+First decoded lines of side A, US pressing:
+
+    STARDUST/1 KESTREL NODE 01 OF 14 -- HOLD FOR RELAY
+    NOVA HART TO ALL STATIONS
+
+I have no idea what that means. Anyone?
+
+-- 
+Tom Okafor  | tokafor@ee.ashford-poly.edu | "The FFT never lies.
+Ashford EE   | Room 3-114, ext 4471          |  Interpreters do."
+
+From ytanabe@yokohama-pc.or.jp Tue Jul 04 14:59:08 1989
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!yokohama-pc!ytanabe
+From: ytanabe@yokohama-pc.or.jp (Yuki Tanabe)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz DBPSK demod - C source (was: 14.2 Hz peak on a 1985 synth-rock LP)
+Message-ID: <1989Jul04.145908.9492@yokohama-pc.or.jp>
+Date: 4 Jul 89 14:59:08 GMT
+References: <1989Jul02.194408.9019@ee.ashford-poly.edu>
+Organization: Yokohama PC-98 Users Circle
+X-Newsreader: rn 4.3
+Lines: 17
+
+In article <1989Jul02.194408.9019@ee.ashford-poly.edu>, tokafor@ee.ashford-poly.edu (Tom Okafor) writes:
+> OK, it IS BPSK. Symbol period 0.5634 s (1.775 baud), differential, and
+> the bitstream frames cleanly into 8-N-1 ASCII. Side A gives 284 bytes.
+> Core loop below. Runs on a stock Mac Plus at about 4x real time.
+
+I have ported to PC-9801 with Turbo C 2.0. My Japanese pressing
+(catalogue OJ-28011) gives a different result from yours:
+
+    STARDUST/1 KESTREL NODE 02 OF 14 -- HOLD FOR RELAY
+    THE SIGNAL IS OLDER THAN THE SONG
+
+Also the runout groove of my copy has 64 bytes that are not music.
+I will post hex dump soon. Please check other pressings.
+
+-- 
+Yuki Tanabe / Yokohama, Japan / PC-9801RA21
+KAMOME-NET ID: QZK04117
+
+From tokafor@ee.ashford-poly.edu Thu Jul 06 09:50:08 1989
+Path: ashpoly!cascade!bigsur!ee!tokafor
+From: tokafor@ee.ashford-poly.edu (Tom Okafor)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz DBPSK demod - C source (was: 14.2 Hz peak on a 1985 synth-rock LP)
+Message-ID: <1989Jul06.095008.4496@ee.ashford-poly.edu>
+Date: 6 Jul 89 09:50:08 GMT
+References: <1989Jul02.194408.9019@ee.ashford-poly.edu> <1989Jul04.145908.9492@yokohama-pc.or.jp>
+Organization: Ashford Polytechnic Institute, Dept. of Electrical Engineering
+X-Newsreader: vnews 2.11
+Lines: 12
+
+In article <1989Jul04.145908.9492@yokohama-pc.or.jp>, ytanabe@yokohama-pc.or.jp (Yuki Tanabe) writes:
+> I have ported to PC-9801 with Turbo C 2.0. My Japanese pressing
+> (catalogue OJ-28011) gives a different result from yours:
+
+Yuki -- confirmed with a second JP copy from a used shop in SF.
+Different pressings, different nodes, different lines.
+
+Somebody please tell me there's a German and a Korean pressing.
+
+-- 
+Tom Okafor  | tokafor@ee.ashford-poly.edu | "The FFT never lies.
+Ashford EE   | Room 3-114, ext 4471          |  Interpreters do."
+
+From jkaltenbach@p3.f114.n240.z2.fidonet.org Thu Jul 06 16:31:08 1989
+Path: ashpoly!cascade!transat!eunet-de!hansebox!p3!jkaltenbach
+From: jkaltenbach@p3.f114.n240.z2.fidonet.org (Juergen Kaltenbach)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz DBPSK demod - C source (was: 14.2 Hz peak on a 1985 synth-rock LP)
+Message-ID: <1989Jul06.163108.8429@p3.f114.n240.z2.fidonet.org>
+Date: 6 Jul 89 16:31:08 GMT
+References: <1989Jul02.194408.9019@ee.ashford-poly.edu> <1989Jul04.145908.9492@yokohama-pc.or.jp> <1989Jul06.095008.4496@ee.ashford-poly.edu>
+Organization: Hanse-Box Hamburg (FidoNet 2:240/114)
+X-Newsreader: rn 4.3 patchlevel 1
+Lines: 12
+
+In article <1989Jul06.095008.4496@ee.ashford-poly.edu>, tokafor@ee.ashford-poly.edu (Tom Okafor) writes:
+> Yuki -- confirmed with a second JP copy from a used shop in SF.
+
+There is a West German pressing (Orion Hamburg, 1985). I am sysop of a
+FidoNet node in Hamburg; we discuss this in the SYNTH.GER echo. Nobody
+has a clean copy yet -- I will post the moment we decode it.
+
+Also: I watched the Hamburg Live-Fidelity Broadcast in 1985. Ask me
+about it some time.
+
+-- 
+Juergen Kaltenbach * Hanse-Box Hamburg * 2:240/114 * +49-40-555-0114
+
+From jhpark@eunha-net.co.kr Sat Jul 08 10:03:08 1989
+Path: ashpoly!bigsur!pacrim!krgate!eunha!eunha-net!jhpark
+From: jhpark@eunha-net.co.kr (Park Ji-hoon)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz DBPSK demod - C source (was: 14.2 Hz peak on a 1985 synth-rock LP)
+Message-ID: <1989Jul08.100308.1717@eunha-net.co.kr>
+Date: 8 Jul 89 10:03:08 GMT
+References: <1989Jul02.194408.9019@ee.ashford-poly.edu> <1989Jul04.145908.9492@yokohama-pc.or.jp> <1989Jul06.095008.4496@ee.ashford-poly.edu>
+Organization: Eunha-Net PC-tongsin, Seoul
+X-Newsreader: rn 4.3
+Lines: 13
+
+In article <1989Jul06.095008.4496@ee.ashford-poly.edu>, tokafor@ee.ashford-poly.edu (Tom Okafor) writes:
+> Yuki -- confirmed with a second JP copy from a used shop in SF.
+
+Korean licensed pressing (1985) exists, very few copies. Decoded on
+a Samsung SPC-1000 with help from friends on our PC-tongsin board:
+
+    STARDUST/1 KESTREL NODE 03 OF 14 -- HOLD FOR RELAY
+    THE CRACK RUNS UNDER THE BORDER
+
+In Korea this line makes people nervous. Please understand.
+
+-- 
+Park Ji-hoon / Seoul / Eunha-Net GO NOVA
+

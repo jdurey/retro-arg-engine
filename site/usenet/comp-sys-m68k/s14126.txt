@@ -1,0 +1,92 @@
+From kkim@cam.ac.uk Fri Mar 10 00:30:49 1995
+Path: ashpoly!cascade!mxgate!coyoacan!cam!kkim
+From: kkim@cam.ac.uk (Katrin Kim)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Mar10.003049.8103@cam.ac.uk>
+Date: Fri, 10 Mar 1995 00:30:49 GMT
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Katrin Kim
+Opinions expressed are solely my own and not those of University of Cambridge Computer Laboratory.
+------------------------------------------------------------
+
+From gkowalski@demon.co.uk Fri Mar 10 07:44:49 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!demon!gkowalski
+From: gkowalski@demon.co.uk (Göran Kowalski)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Mar10.074449.2284@demon.co.uk>
+Date: Fri, 10 Mar 1995 07:44:49 GMT
+References: <1995Mar10.003049.8103@cam.ac.uk>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1995Mar10.003049.8103@cam.ac.uk>, kkim@cam.ac.uk (Katrin Kim) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Göran Kowalski
+Tape trading list upon request. SASE required for international mail.
+
+From mlarsson@u-tokyo.ac.jp Sat Mar 11 22:14:49 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!u-tokyo!mlarsson
+From: mlarsson@u-tokyo.ac.jp (Mike Larsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Mar11.221449.8933@u-tokyo.ac.jp>
+Date: Sat, 11 Mar 1995 22:14:49 GMT
+References: <1995Mar10.003049.8103@cam.ac.uk>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Mar10.003049.8103@cam.ac.uk>, kkim@cam.ac.uk (Katrin Kim) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+Looks like a prototype telecommunications board for military secure voice, not an audio music product.
+
+-- 
+Mike Larsson
+Tape trading list upon request. SASE required for international mail.
+
+From toliveira@unam.mx Sun Mar 12 02:53:49 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!unam!toliveira
+From: toliveira@unam.mx (Tyler Oliveira)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Mar12.025349.9681@unam.mx>
+Date: Sun, 12 Mar 1995 02:53:49 GMT
+References: <1995Mar10.003049.8103@cam.ac.uk> <1995Mar10.074449.2284@demon.co.uk>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Mar10.074449.2284@demon.co.uk>, gkowalski@demon.co.uk (Göran Kowalski) writes:
+> The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+=== Tyler Oliveira ===
+Dept of Electrical Engineering, Universidad Nacional Autónoma de México (DGSCA)
+"They will send a copy in my place."
+

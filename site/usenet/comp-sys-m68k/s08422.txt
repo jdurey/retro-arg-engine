@@ -1,0 +1,116 @@
+From klindqvist@mit.edu Wed Aug 24 07:41:30 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!mit!klindqvist
+From: klindqvist@mit.edu (Katrin Lindqvist)
+Newsgroups: comp.sys.m68k
+Subject: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Aug24.074130.3265@mit.edu>
+Date: Wed, 24 Aug 1994 07:41:30 GMT
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+=== Katrin Lindqvist ===
+Dept of Electrical Engineering, Massachusetts Institute of Technology
+"There are 14 nodes and only 10 countries. Count again."
+
+From msmirnov@ox.ac.uk Thu Aug 25 04:44:30 1994
+Path: ashpoly!cascade!brgate!saturno!ox!msmirnov
+From: msmirnov@ox.ac.uk (Mike Smirnov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Aug25.044430.7350@ox.ac.uk>
+Date: Thu, 25 Aug 1994 04:44:30 GMT
+References: <1994Aug24.074130.3265@mit.edu>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Aug24.074130.3265@mit.edu>, klindqvist@mit.edu (Katrin Lindqvist) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+=== Mike Smirnov ===
+Dept of Electrical Engineering, Oxford University Computing Laboratory
+"When every node is whole, the channel opens."
+
+From mivanov@cam.ac.uk Sat Aug 27 02:09:30 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!cam!mivanov
+From: mivanov@cam.ac.uk (Mike Ivanov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Aug27.020930.1054@cam.ac.uk>
+Date: Sat, 27 Aug 1994 02:09:30 GMT
+References: <1994Aug24.074130.3265@mit.edu>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1994Aug24.074130.3265@mit.edu>, klindqvist@mit.edu (Katrin Lindqvist) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Mike Ivanov <mivanov@cam.ac.uk>
+*PLONK* filter active for trolls.
+PC-9821Ap2 (NEC) - NetBSD 1.0
+
+From mwatanabe@demon.co.uk Sat Aug 27 13:04:30 1994
+Path: ashpoly!cascade!brgate!saturno!demon!mwatanabe
+From: mwatanabe@demon.co.uk (Mikhail Watanabe)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Aug27.130430.6821@demon.co.uk>
+Date: Sat, 27 Aug 1994 13:04:30 GMT
+References: <1994Aug24.074130.3265@mit.edu> <1994Aug27.020930.1054@cam.ac.uk>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1994Aug27.020930.1054@cam.ac.uk>, mivanov@cam.ac.uk (Mike Ivanov) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+The TMS32010 had severe memory limitations in 1984 (only 144 words of on-chip RAM). Dual 68000s gave them full 16MB address space.
+
+-- 
+Mikhail Watanabe -- Demon Internet Services UK
+"When every node is whole, the channel opens."
+
+From feriksson@uu.net Mon Aug 29 16:29:30 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!uu!feriksson
+From: feriksson@uu.net (Fiona Eriksson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Aug29.162930.6668@uu.net>
+Date: Mon, 29 Aug 1994 16:29:30 GMT
+References: <1994Aug24.074130.3265@mit.edu> <1994Aug27.020930.1054@cam.ac.uk>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Aug27.020930.1054@cam.ac.uk>, mivanov@cam.ac.uk (Mike Ivanov) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Fiona Eriksson <feriksson@uu.net>
+*PLONK* filter active for trolls.
+Sun SparcStation 20 - NetBSD 1.0
+

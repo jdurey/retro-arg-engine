@@ -1,0 +1,71 @@
+From pjohansson@berkeley.edu Sun Nov 13 23:58:34 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!berkeley!pjohansson
+From: pjohansson@berkeley.edu (Pavel Johansson)
+Newsgroups: comp.dsp
+Subject: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Nov13.235834.9003@berkeley.edu>
+Date: Sun, 13 Nov 1994 23:58:34 GMT
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+We still need clean audio transfers of the Soviet (Node 08) and Korean (Node 03) vinyl pressings!
+
+-- 
+Pavel Johansson -- UC Berkeley Department of EECS
+"Do not worship the copy."
+
+From tpark@uu.net Wed Nov 16 03:08:34 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!uu!tpark
+From: tpark@uu.net (Tomas Park)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Nov16.030834.3932@uu.net>
+Date: Wed, 16 Nov 1994 03:08:34 GMT
+References: <1994Nov13.235834.9003@berkeley.edu>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1994Nov13.235834.9003@berkeley.edu>, pjohansson@berkeley.edu (Pavel Johansson) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+> Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+
+On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+-- 
+=== Tomas Park ===
+Dept of Electrical Engineering, UUNET Technologies, Falls Church VA
+"The hatch is open. Is anyone listening?"
+
+From sdubois@ox.ac.uk Wed Nov 16 20:47:34 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!ox!sdubois
+From: sdubois@ox.ac.uk (Sergei Dubois)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Nov16.204734.4578@ox.ac.uk>
+Date: Wed, 16 Nov 1994 20:47:34 GMT
+References: <1994Nov13.235834.9003@berkeley.edu>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1994Nov13.235834.9003@berkeley.edu>, pjohansson@berkeley.edu (Pavel Johansson) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+> Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+-- 
+Sergei Dubois <sdubois@ox.ac.uk>
+*PLONK* filter active for trolls.
+486DX4/100 (FreeBSD 2.0.5) - NetBSD 1.0
+

@@ -1,0 +1,121 @@
+From ksmirnov@unam.mx Fri Feb 17 12:03:22 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!unam!ksmirnov
+From: ksmirnov@unam.mx (Kenji Smirnov)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Feb17.120322.6634@unam.mx>
+Date: Fri, 17 Feb 1995 12:03:22 GMT
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+Schematic diagram in ASCII uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/twin68_array.asc.
+
+-- 
+Kenji Smirnov
+Tape trading list upon request. SASE required for international mail.
+
+From dsokolov@uni-hamburg.de Fri Feb 17 15:09:22 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!uni-hamburg!dsokolov
+From: dsokolov@uni-hamburg.de (Dong-hyun Sokolov)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Feb17.150922.8850@uni-hamburg.de>
+Date: Fri, 17 Feb 1995 15:09:22 GMT
+References: <1995Feb17.120322.6634@unam.mx>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1995Feb17.120322.6634@unam.mx>, ksmirnov@unam.mx (Kenji Smirnov) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+> Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+Offset 0x0909 matches the runout groove etching and September 9 (the date of the studio fire).
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Dong-hyun Sokolov <dsokolov@uni-hamburg.de>
+Practical Peripherals 14.4 @ 28,800 bps
+"Hardware is temporary. The signal survives."
+
+From joliveira@earthlink.net Sat Feb 18 18:56:22 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!earthlink!joliveira
+From: joliveira@earthlink.net (Jen Oliveira)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Feb18.185622.2064@earthlink.net>
+Date: Sat, 18 Feb 1995 18:56:22 GMT
+References: <1995Feb17.120322.6634@unam.mx> <1995Feb17.150922.8850@uni-hamburg.de>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Feb17.150922.8850@uni-hamburg.de>, dsokolov@uni-hamburg.de (Dong-hyun Sokolov) writes:
+> Offset 0x0909 matches the runout groove etching and September 9 (the date of the studio fire).
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Jen Oliveira
+Opinions expressed are solely my own and not those of EarthLink Network.
+------------------------------------------------------------
+
+From hmacdonald@unam.mx Sun Feb 19 07:07:22 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!unam!hmacdonald
+From: hmacdonald@unam.mx (Hana MacDonald)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Feb19.070722.9409@unam.mx>
+Date: Sun, 19 Feb 1995 07:07:22 GMT
+References: <1995Feb17.120322.6634@unam.mx>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Feb17.120322.6634@unam.mx>, ksmirnov@unam.mx (Kenji Smirnov) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Hana MacDonald <hmacdonald@unam.mx>
+"When every node is whole, the channel opens."
+Amiga 1200 (Blizzard 030/50) / NEXTSTEP 3.3
+
+From glopez@kth.se Tue Feb 21 09:15:22 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!kth!glopez
+From: glopez@kth.se (Graham López)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Feb21.091522.1740@kth.se>
+Date: Tue, 21 Feb 1995 09:15:22 GMT
+References: <1995Feb17.120322.6634@unam.mx>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1995Feb17.120322.6634@unam.mx>, ksmirnov@unam.mx (Kenji Smirnov) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+> Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Graham López
+Opinions expressed are solely my own and not those of Royal Institute of Technology, Stockholm.
+------------------------------------------------------------
+

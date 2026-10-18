@@ -1,0 +1,94 @@
+From tlaurent@pacbell.net Wed Feb 21 22:30:24 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!pacbell!tlaurent
+From: tlaurent@pacbell.net (Takeshi Laurent)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Feb21.223024.1981@pacbell.net>
+Date: Wed, 21 Feb 1996 22:30:24 GMT
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Takeshi Laurent
+Opinions expressed are solely my own and not those of Pacific Bell Internet Services.
+------------------------------------------------------------
+
+From nduarte@ox.ac.uk Thu Feb 22 19:27:24 1996
+Path: ashpoly!cascade!bigsur!ox!nduarte
+From: nduarte@ox.ac.uk (Natalia Duarte)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Feb22.192724.2993@ox.ac.uk>
+Date: Thu, 22 Feb 1996 19:27:24 GMT
+References: <1996Feb21.223024.1981@pacbell.net>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Feb21.223024.1981@pacbell.net>, tlaurent@pacbell.net (Takeshi Laurent) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Natalia Duarte <nduarte@ox.ac.uk>
+"Row 14. No joke."
+Atari Falcon 030 / NEXTSTEP 3.3
+
+From mlopez@mindspring.com Fri Feb 23 21:55:24 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!mindspring!mlopez
+From: mlopez@mindspring.com (Mike López)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Feb23.215524.9608@mindspring.com>
+Date: Fri, 23 Feb 1996 21:55:24 GMT
+References: <1996Feb21.223024.1981@pacbell.net> <1996Feb22.192724.2993@ox.ac.uk>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Feb22.192724.2993@ox.ac.uk>, nduarte@ox.ac.uk (Natalia Duarte) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Mike López <mlopez@mindspring.com>
+*PLONK* filter active for trolls.
+Pentium 90 (OS/2 Warp) - NetBSD 1.0
+
+From ksuzuki@uu.net Sat Feb 24 09:14:24 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!uu!ksuzuki
+From: ksuzuki@uu.net (Karen Suzuki)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Feb24.091424.3225@uu.net>
+Date: Sat, 24 Feb 1996 09:14:24 GMT
+References: <1996Feb21.223024.1981@pacbell.net> <1996Feb22.192724.2993@ox.ac.uk>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Feb22.192724.2993@ox.ac.uk>, nduarte@ox.ac.uk (Natalia Duarte) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Karen Suzuki
+Tape trading list upon request. SASE required for international mail.
+

@@ -1,0 +1,47 @@
+From mnakamura@u-tokyo.ac.jp Tue Sep 05 05:51:30 1995
+Path: ashpoly!cascade!brgate!saturno!u-tokyo!mnakamura
+From: mnakamura@u-tokyo.ac.jp (Matthias Nakamura)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1995Sep05.055130.2305@u-tokyo.ac.jp>
+Date: Tue, 05 Sep 1995 05:51:30 GMT
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Wrote an Amiga assembly program that uses Paula's DMA audio channels to sample and track the Stardust subcarrier.
+
+By setting up Paula's audio DMA to double-buffer incoming 8-bit samples, the 68020 has plenty of cycles left for the Costas loop.
+I wrote a 64-tap FIR filter in pure 68k assembly using movem.l and dbra loop unrolling to downsample to 64 Hz.
+
+Long live the Amiga. Try doing real-time subcarrier demodulation on a 386 running Windows 3.1 without dropping frames!
+
+-- 
+=== Matthias Nakamura ===
+Dept of Electrical Engineering, University of Tokyo Department of Information Science
+"The carrier frequency does not drift by accident."
+
+From sgarcia@clari.net Tue Sep 05 13:48:30 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!clari!sgarcia
+From: sgarcia@clari.net (Steve García)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1995Sep05.134830.8490@clari.net>
+Date: Tue, 05 Sep 1995 13:48:30 GMT
+References: <1995Sep05.055130.2305@u-tokyo.ac.jp>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Sep05.055130.2305@u-tokyo.ac.jp>, mnakamura@u-tokyo.ac.jp (Matthias Nakamura) writes:
+> Wrote an Amiga assembly program that uses Paula's DMA audio channels to sample and track the Stardust subcarrier.
+
+Tested on my A3000 / 25 MHz. Ran smoothly in the background while I was compiling a C program in another window.
+
+-- 
+Steve García <sgarcia@clari.net>
+*PLONK* filter active for trolls.
+PC-9821Ap2 (NEC) - NetBSD 1.0
+

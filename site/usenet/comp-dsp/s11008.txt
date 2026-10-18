@@ -1,0 +1,48 @@
+From lnakamura@pipeline.com Tue Mar 01 12:46:46 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!pipeline!lnakamura
+From: lnakamura@pipeline.com (Liam Nakamura)
+Newsgroups: comp.dsp
+Subject: Question: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Mar01.124646.9144@pipeline.com>
+Date: Tue, 01 Mar 1994 12:46:46 GMT
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+Liam Nakamura
+Tape trading list upon request. SASE required for international mail.
+
+From blarsson@tum.de Wed Mar 02 09:51:46 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!tum!blarsson
+From: blarsson@tum.de (Bastien Larsson)
+Newsgroups: comp.dsp
+Subject: Re: Question: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Mar02.095146.3152@tum.de>
+Date: Wed, 02 Mar 1994 09:51:46 GMT
+References: <1994Mar01.124646.9144@pipeline.com>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1994Mar01.124646.9144@pipeline.com>, lnakamura@pipeline.com (Liam Nakamura) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+> A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Bastien Larsson
+Tape trading list upon request. SASE required for international mail.
+

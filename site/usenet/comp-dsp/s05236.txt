@@ -1,0 +1,121 @@
+From jokonkwo@mit.edu Sun Nov 24 18:11:27 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!mit!jokonkwo
+From: jokonkwo@mit.edu (Julien Okonkwo)
+Newsgroups: comp.dsp
+Subject: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Nov24.181127.9951@mit.edu>
+Date: Sun, 24 Nov 1996 18:11:27 GMT
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+=== Julien Okonkwo ===
+Dept of Electrical Engineering, Massachusetts Institute of Technology
+"5 sigma is a discovery. 7 is a question."
+
+From nweber@stanford.edu Tue Nov 26 04:14:27 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!stanford!nweber
+From: nweber@stanford.edu (Nadine Weber)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Nov26.041427.8346@stanford.edu>
+Date: Tue, 26 Nov 1996 04:14:27 GMT
+References: <1996Nov24.181127.9951@mit.edu>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Nov24.181127.9951@mit.edu>, jokonkwo@mit.edu (Julien Okonkwo) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Nadine Weber
+Tape trading list upon request. SASE required for international mail.
+
+From epetrov@ox.ac.uk Tue Nov 26 07:12:27 1996
+Path: ashpoly!cascade!brgate!saturno!ox!epetrov
+From: epetrov@ox.ac.uk (Elaine Petrov)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Nov26.071227.5763@ox.ac.uk>
+Date: Tue, 26 Nov 1996 07:12:27 GMT
+References: <1996Nov24.181127.9951@mit.edu>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 12
+
+In article <1996Nov24.181127.9951@mit.edu>, jokonkwo@mit.edu (Julien Okonkwo) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+=== Elaine Petrov ===
+Dept of Electrical Engineering, Oxford University Computing Laboratory
+"When every node is whole, the channel opens."
+
+From ktakahashi@stanford.edu Wed Nov 27 03:07:27 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!stanford!ktakahashi
+From: ktakahashi@stanford.edu (Karen Takahashi)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Nov27.030727.3802@stanford.edu>
+Date: Wed, 27 Nov 1996 03:07:27 GMT
+References: <1996Nov24.181127.9951@mit.edu> <1996Nov26.041427.8346@stanford.edu>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Nov26.041427.8346@stanford.edu>, nweber@stanford.edu (Nadine Weber) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Karen Takahashi
+Tape trading list upon request. SASE required for international mail.
+
+From sgirard@kiae.su Wed Nov 27 12:53:27 1996
+Path: ashpoly!cascade!brgate!saturno!kiae!sgirard
+From: sgirard@kiae.su (Seo-yeon Girard)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Nov27.125327.8285@kiae.su>
+Date: Wed, 27 Nov 1996 12:53:27 GMT
+References: <1996Nov24.181127.9951@mit.edu> <1996Nov26.041427.8346@stanford.edu> <1996Nov27.030727.3802@stanford.edu>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1996Nov27.030727.3802@stanford.edu>, ktakahashi@stanford.edu (Karen Takahashi) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+> If you are posting from AOL, please read RFC 1036 before posting again.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Seo-yeon Girard <sgirard@kiae.su>
+Practical Peripherals 14.4 @ 28,800 bps
+"Hold for relay."
+

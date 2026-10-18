@@ -1,0 +1,92 @@
+From dito@titech.ac.jp Fri Dec 15 15:21:36 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!titech!dito
+From: dito@titech.ac.jp (Dong-hyun Ito)
+Newsgroups: comp.dsp
+Subject: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Dec15.152136.7786@titech.ac.jp>
+Date: Fri, 15 Dec 1995 15:21:36 GMT
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+Grab the source archive from ftp.ashford-poly.edu:/pub/telecom-archives/stardust/stardust-1.3.tar.gz.
+
+-- 
+Dong-hyun Ito -- Tokyo Institute of Technology Computer Centre
+"The hatch is open. Is anyone listening?"
+
+From swatanabe@inria.fr Sun Dec 17 17:33:36 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!inria!swatanabe
+From: swatanabe@inria.fr (Steve Watanabe)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Dec17.173336.1156@inria.fr>
+Date: Sun, 17 Dec 1995 17:33:36 GMT
+References: <1995Dec15.152136.7786@titech.ac.jp>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Dec15.152136.7786@titech.ac.jp>, dito@titech.ac.jp (Dong-hyun Ito) writes:
+> Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+=== Steve Watanabe ===
+Dept of Electrical Engineering, INRIA Rocquencourt
+"Do not worship the copy."
+
+From tbrennan@inria.fr Tue Dec 19 18:15:36 1995
+Path: ashpoly!cascade!brgate!saturno!inria!tbrennan
+From: tbrennan@inria.fr (Tobias Brennan)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Dec19.181536.6964@inria.fr>
+Date: Tue, 19 Dec 1995 18:15:36 GMT
+References: <1995Dec15.152136.7786@titech.ac.jp>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Dec15.152136.7786@titech.ac.jp>, dito@titech.ac.jp (Dong-hyun Ito) writes:
+> Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+> Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+
+On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+-- 
+=== Tobias Brennan ===
+Dept of Electrical Engineering, INRIA Rocquencourt
+"Do not worship the copy."
+
+From jmartinez@kiae.su Wed Dec 20 04:31:36 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!kiae!jmartinez
+From: jmartinez@kiae.su (Julien Martínez)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Dec20.043136.1666@kiae.su>
+Date: Wed, 20 Dec 1995 04:31:36 GMT
+References: <1995Dec15.152136.7786@titech.ac.jp> <1995Dec17.173336.1156@inria.fr>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Dec17.173336.1156@inria.fr>, swatanabe@inria.fr (Steve Watanabe) writes:
+> Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+-- 
+Julien Martínez
+Tape trading list upon request. SASE required for international mail.
+

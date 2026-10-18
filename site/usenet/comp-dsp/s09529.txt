@@ -1,0 +1,119 @@
+From mfischer@rwth-aachen.de Sat Jun 18 15:11:44 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!rwth-aachen!mfischer
+From: mfischer@rwth-aachen.de (Mikhail Fischer)
+Newsgroups: comp.dsp
+Subject: Replicating Anton Reiss's 7.1-sigma pitch variance analysis
+Message-ID: <1994Jun18.151144.1550@rwth-aachen.de>
+Date: Sat, 18 Jun 1994 15:11:44 GMT
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Attempted to replicate Dr. Anton Reiss's 1989 paper on Nova Hart's vocal pitch distribution.
+
+Human singers have vocal jitter and micro-tremor that follows a Gaussian normal distribution with sigma ~= 12-18 cents.
+In statistical terms, her pitch deviation sits 7.1 sigma outside the normal human vocal distribution.
+
+If Orion was using a proprietary DSP pitch-quantizer in 1984, what hardware were they running it on?
+
+-- 
+Mikhail Fischer <mfischer@rwth-aachen.de>
+"Marcus is not one man."
+Atari TT030 / AmigaOS 3.1
+
+From divanov@rwth-aachen.de Sun Jun 19 17:32:44 1994
+Path: ashpoly!cascade!brgate!saturno!rwth-aachen!divanov
+From: divanov@rwth-aachen.de (Dmitri Ivanov)
+Newsgroups: comp.dsp
+Subject: Re: Replicating Anton Reiss's 7.1-sigma pitch variance analysis
+Message-ID: <1994Jun19.173244.1071@rwth-aachen.de>
+Date: Sun, 19 Jun 1994 17:32:44 GMT
+References: <1994Jun18.151144.1550@rwth-aachen.de>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Jun18.151144.1550@rwth-aachen.de>, mfischer@rwth-aachen.de (Mikhail Fischer) writes:
+> Attempted to replicate Dr. Anton Reiss's 1989 paper on Nova Hart's vocal pitch distribution.
+
+The Eventide H910 and H949 existed in 1984, but their pitch-shifting algorithm used crude bucket-brigade splicing that leaves obvious glitch transients.
+
+-- 
+Dmitri Ivanov | divanov@rwth-aachen.de
+PGP Key fingerprint: 301B 5E00 CCF2 1921
+"Keep the channels open."
+
+From cmacdonald@kiae.su Tue Jun 21 16:05:44 1994
+Path: ashpoly!cascade!mxgate!coyoacan!kiae!cmacdonald
+From: cmacdonald@kiae.su (Camila MacDonald)
+Newsgroups: comp.dsp
+Subject: Re: Replicating Anton Reiss's 7.1-sigma pitch variance analysis
+Message-ID: <1994Jun21.160544.8625@kiae.su>
+Date: Tue, 21 Jun 1994 16:05:44 GMT
+References: <1994Jun18.151144.1550@rwth-aachen.de> <1994Jun19.173244.1071@rwth-aachen.de>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1994Jun19.173244.1071@rwth-aachen.de>, divanov@rwth-aachen.de (Dmitri Ivanov) writes:
+> The Eventide H910 and H949 existed in 1984, but their pitch-shifting algorithm used crude bucket-brigade splicing that leaves obvious glitch transients.
+
+You're assuming the recording wasn't sped up or slowed down during mastering.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Camila MacDonald
+Tape trading list upon request. SASE required for international mail.
+
+From ovasiliev@pipeline.com Wed Jun 22 18:51:44 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!pipeline!ovasiliev
+From: ovasiliev@pipeline.com (Olga Vasiliev)
+Newsgroups: comp.dsp
+Subject: Re: Replicating Anton Reiss's 7.1-sigma pitch variance analysis
+Message-ID: <1994Jun22.185144.9234@pipeline.com>
+Date: Wed, 22 Jun 1994 18:51:44 GMT
+References: <1994Jun18.151144.1550@rwth-aachen.de> <1994Jun19.173244.1071@rwth-aachen.de>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1994Jun19.173244.1071@rwth-aachen.de>, divanov@rwth-aachen.de (Dmitri Ivanov) writes:
+> The Eventide H910 and H949 existed in 1984, but their pitch-shifting algorithm used crude bucket-brigade splicing that leaves obvious glitch transients.
+
+Her voice wasn't corrected after the fact. Her vocal cords were simulated by an acoustic physical model.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+=== Olga Vasiliev ===
+Dept of Electrical Engineering, The Pipeline Internet Network
+"A soul is not exclusive to biology."
+
+From skarlsson@u-tokyo.ac.jp Thu Jun 23 20:43:44 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!u-tokyo!skarlsson
+From: skarlsson@u-tokyo.ac.jp (Steve Karlsson)
+Newsgroups: comp.dsp
+Subject: Re: Replicating Anton Reiss's 7.1-sigma pitch variance analysis
+Message-ID: <1994Jun23.204344.9887@u-tokyo.ac.jp>
+Date: Thu, 23 Jun 1994 20:43:44 GMT
+References: <1994Jun18.151144.1550@rwth-aachen.de> <1994Jun19.173244.1071@rwth-aachen.de> <1994Jun22.185144.9234@pipeline.com>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Jun22.185144.9234@pipeline.com>, ovasiliev@pipeline.com (Olga Vasiliev) writes:
+> Her voice wasn't corrected after the fact. Her vocal cords were simulated by an acoustic physical model.
+> Top-posters will be placed in my ~/.killfile without notice.
+
+Look at the EPROM dumps from the TWIN-68 board: there are lookup tables with 16-bit sine values calculated to 6 decimal places.
+
+-- 
+Steve Karlsson -- University of Tokyo Department of Information Science
+"Marcus is not one man."
+

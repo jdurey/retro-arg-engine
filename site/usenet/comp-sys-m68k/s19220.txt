@@ -1,0 +1,112 @@
+From mlaurent@utexas.edu Sun Apr 24 19:22:21 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!utexas!mlaurent
+From: mlaurent@utexas.edu (Mei Laurent)
+Newsgroups: comp.sys.m68k
+Subject: Observation: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Apr24.192221.4460@utexas.edu>
+Date: Sun, 24 Apr 1994 19:22:21 GMT
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Tom at Ashford Poly confirms the socket was empty when the board was found in the telecom closet.
+
+-- 
+Mei Laurent -- University of Texas at Austin
+"Do not worship the copy."
+
+From anilsson@utexas.edu Mon Apr 25 09:28:21 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!utexas!anilsson
+From: anilsson@utexas.edu (Andrei Nilsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Apr25.092821.3177@utexas.edu>
+Date: Mon, 25 Apr 1994 09:28:21 GMT
+References: <1994Apr24.192221.4460@utexas.edu>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Apr24.192221.4460@utexas.edu>, mlaurent@utexas.edu (Mei Laurent) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Andrei Nilsson <anilsson@utexas.edu>
+"There are 14 nodes and only 10 countries. Count again."
+Decstation 5000/200 / System 7.5.1
+
+From aeriksson@uni-hamburg.de Mon Apr 25 16:40:21 1994
+Path: ashpoly!cascade!mxgate!coyoacan!uni-hamburg!aeriksson
+From: aeriksson@uni-hamburg.de (Andrei Eriksson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Apr25.164021.4408@uni-hamburg.de>
+Date: Mon, 25 Apr 1994 16:40:21 GMT
+References: <1994Apr24.192221.4460@utexas.edu> <1994Apr25.092821.3177@utexas.edu>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1994Apr25.092821.3177@utexas.edu>, anilsson@utexas.edu (Andrei Nilsson) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Andrei Eriksson
+Tape trading list upon request. SASE required for international mail.
+
+From srodriguez@rwth-aachen.de Mon Apr 25 22:51:21 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!rwth-aachen!srodriguez
+From: srodriguez@rwth-aachen.de (Sergei Rodríguez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Apr25.225121.3214@rwth-aachen.de>
+Date: Mon, 25 Apr 1994 22:51:21 GMT
+References: <1994Apr24.192221.4460@utexas.edu> <1994Apr25.092821.3177@utexas.edu> <1994Apr25.164021.4408@uni-hamburg.de>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1994Apr25.164021.4408@uni-hamburg.de>, aeriksson@uni-hamburg.de (Andrei Eriksson) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Sergei Rodríguez -- RWTH Aachen Informatik
+"The hatch is open. Is anyone listening?"
+
+From scampbell@u-tokyo.ac.jp Wed Apr 27 01:43:21 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!u-tokyo!scampbell
+From: scampbell@u-tokyo.ac.jp (Sun-mi Campbell)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Apr27.014321.6626@u-tokyo.ac.jp>
+Date: Wed, 27 Apr 1994 01:43:21 GMT
+References: <1994Apr24.192221.4460@utexas.edu>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1994Apr24.192221.4460@utexas.edu>, mlaurent@utexas.edu (Mei Laurent) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Sun-mi Campbell -- University of Tokyo Department of Information Science
+"A soul is not exclusive to biology."
+

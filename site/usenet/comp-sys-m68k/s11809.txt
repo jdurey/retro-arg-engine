@@ -1,0 +1,120 @@
+From dlindqvist@purdue.edu Sat Oct 14 06:35:20 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!purdue!dlindqvist
+From: dlindqvist@purdue.edu (Dave Lindqvist)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Oct14.063520.7664@purdue.edu>
+Date: Sat, 14 Oct 1995 06:35:20 GMT
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+Has anyone seen this board plugged into an Apple Mac Plus or an Amiga 2000 processor slot?
+
+-- 
+Dave Lindqvist | dlindqvist@purdue.edu
+PGP Key fingerprint: ED83 0293 27E6 1290
+"Keep the channels open."
+
+From hduarte@cam.ac.uk Sat Oct 14 09:59:20 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!cam!hduarte
+From: hduarte@cam.ac.uk (Hana Duarte)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Oct14.095920.6961@cam.ac.uk>
+Date: Sat, 14 Oct 1995 09:59:20 GMT
+References: <1995Oct14.063520.7664@purdue.edu>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1995Oct14.063520.7664@purdue.edu>, dlindqvist@purdue.edu (Dave Lindqvist) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+> At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+PGP Public key available via finger or upon request.
+
+-- 
+=== Hana Duarte ===
+Dept of Electrical Engineering, University of Cambridge Computer Laboratory
+"They will send a copy in my place."
+
+From jnakamura@uni-hamburg.de Sun Oct 15 13:18:20 1995
+Path: ashpoly!cascade!brgate!saturno!uni-hamburg!jnakamura
+From: jnakamura@uni-hamburg.de (Jen Nakamura)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Oct15.131820.9971@uni-hamburg.de>
+Date: Sun, 15 Oct 1995 13:18:20 GMT
+References: <1995Oct14.063520.7664@purdue.edu>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Oct14.063520.7664@purdue.edu>, dlindqvist@purdue.edu (Dave Lindqvist) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+> At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Jen Nakamura
+Tape trading list upon request. SASE required for international mail.
+
+From jlopez@uni-hamburg.de Tue Oct 17 15:40:20 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!uni-hamburg!jlopez
+From: jlopez@uni-hamburg.de (Joachim López)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Oct17.154020.2467@uni-hamburg.de>
+Date: Tue, 17 Oct 1995 15:40:20 GMT
+References: <1995Oct14.063520.7664@purdue.edu>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Oct14.063520.7664@purdue.edu>, dlindqvist@purdue.edu (Dave Lindqvist) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Joachim López | jlopez@uni-hamburg.de
+PGP Key fingerprint: C64D C43A 605E 6665
+"Keep the channels open."
+
+From bgonzalez@illinois.edu Wed Oct 18 10:22:20 1995
+Path: ashpoly!cascade!bigsur!illinois!bgonzalez
+From: bgonzalez@illinois.edu (Brian González)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Oct18.102220.1699@illinois.edu>
+Date: Wed, 18 Oct 1995 10:22:20 GMT
+References: <1995Oct14.063520.7664@purdue.edu>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Oct14.063520.7664@purdue.edu>, dlindqvist@purdue.edu (Dave Lindqvist) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+> At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+-- 
+Brian González | bgonzalez@illinois.edu
+PGP Key fingerprint: 19C0 8506 B374 7472
+"Keep the channels open."
+

@@ -1,0 +1,121 @@
+From givanov@uu.net Sat Jan 28 04:35:21 1995
+Path: ashpoly!cascade!bigsur!uu!givanov
+From: givanov@uu.net (Göran Ivanov)
+Newsgroups: comp.dsp
+Subject: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jan28.043521.9497@uu.net>
+Date: Sat, 28 Jan 1995 04:35:21 GMT
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Göran Ivanov <givanov@uu.net>
+"In theory there is no difference between theory and practice."
+486DX4/100 (FreeBSD 2.0.5) / Linux 1.2.13
+
+From aoliveira@clari.net Sun Jan 29 21:30:21 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!clari!aoliveira
+From: aoliveira@clari.net (Aiko Oliveira)
+Newsgroups: comp.dsp
+Subject: Re: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jan29.213021.3347@clari.net>
+Date: Sun, 29 Jan 1995 21:30:21 GMT
+References: <1995Jan28.043521.9497@uu.net>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Jan28.043521.9497@uu.net>, givanov@uu.net (Göran Ivanov) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Aiko Oliveira | aoliveira@clari.net
+PGP Key fingerprint: 21C9 0586 EC3E A690
+"Keep the channels open."
+
+From akang@stanford.edu Tue Jan 31 00:58:21 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!stanford!akang
+From: akang@stanford.edu (Astrid Kang)
+Newsgroups: comp.dsp
+Subject: Re: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jan31.005821.1227@stanford.edu>
+Date: Tue, 31 Jan 1995 00:58:21 GMT
+References: <1995Jan28.043521.9497@uu.net>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Jan28.043521.9497@uu.net>, givanov@uu.net (Göran Ivanov) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Astrid Kang
+Opinions expressed are solely my own and not those of Stanford University Computer Systems Lab.
+------------------------------------------------------------
+
+From mlee@u-tokyo.ac.jp Wed Feb 01 12:37:21 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!u-tokyo!mlee
+From: mlee@u-tokyo.ac.jp (Matthias Lee)
+Newsgroups: comp.dsp
+Subject: Re: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Feb01.123721.8780@u-tokyo.ac.jp>
+Date: Wed, 01 Feb 1995 12:37:21 GMT
+References: <1995Jan28.043521.9497@uu.net> <1995Jan31.005821.1227@stanford.edu>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Jan31.005821.1227@stanford.edu>, akang@stanford.edu (Astrid Kang) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Matthias Lee | mlee@u-tokyo.ac.jp
+PGP Key fingerprint: F90B 3599 8F65 F4C4
+"Keep the channels open."
+
+From acampbell@cmu.edu Fri Feb 03 03:49:21 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!cmu!acampbell
+From: acampbell@cmu.edu (Andrei Campbell)
+Newsgroups: comp.dsp
+Subject: Re: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Feb03.034921.7931@cmu.edu>
+Date: Fri, 03 Feb 1995 03:49:21 GMT
+References: <1995Jan28.043521.9497@uu.net>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1995Jan28.043521.9497@uu.net>, givanov@uu.net (Göran Ivanov) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Andrei Campbell <acampbell@cmu.edu>
+US Robotics Courier V.34 @ ISDN 64k bps
+"Measuring a record you own is listening, not piracy."
+

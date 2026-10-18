@@ -1,0 +1,70 @@
+From lkowalski@ox.ac.uk Mon Nov 27 09:34:28 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!ox!lkowalski
+From: lkowalski@ox.ac.uk (Lars Kowalski)
+Newsgroups: comp.sys.m68k
+Subject: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Nov27.093428.9292@ox.ac.uk>
+Date: Mon, 27 Nov 1995 09:34:28 GMT
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+Lars Kowalski | lkowalski@ox.ac.uk
+PGP Key fingerprint: 6D1B 757A 66E4 1EBD
+"Keep the channels open."
+
+From kandersson@uni-hamburg.de Wed Nov 29 04:46:28 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!uni-hamburg!kandersson
+From: kandersson@uni-hamburg.de (Kirsty Andersson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Nov29.044628.2224@uni-hamburg.de>
+Date: Wed, 29 Nov 1995 04:46:28 GMT
+References: <1995Nov27.093428.9292@ox.ac.uk>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Nov27.093428.9292@ox.ac.uk>, lkowalski@ox.ac.uk (Lars Kowalski) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+> By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Kirsty Andersson
+Tape trading list upon request. SASE required for international mail.
+
+From emuller@mit.edu Thu Nov 30 21:46:28 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!mit!emuller
+From: emuller@mit.edu (Elaine Müller)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Nov30.214628.8819@mit.edu>
+Date: Thu, 30 Nov 1995 21:46:28 GMT
+References: <1995Nov27.093428.9292@ox.ac.uk> <1995Nov29.044628.2224@uni-hamburg.de>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Nov29.044628.2224@uni-hamburg.de>, kandersson@uni-hamburg.de (Kirsty Andersson) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Elaine Müller <emuller@mit.edu>
+"Marcus is not one man."
+Macintosh IIfx / Linux 1.2.13
+

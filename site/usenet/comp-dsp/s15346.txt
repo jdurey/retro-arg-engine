@@ -1,0 +1,116 @@
+From bkowalski@kiae.su Tue May 02 11:55:17 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!kiae!bkowalski
+From: bkowalski@kiae.su (Brian Kowalski)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May02.115517.6523@kiae.su>
+Date: Tue, 02 May 1995 11:55:17 GMT
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Brian Kowalski | bkowalski@kiae.su
+PGP Key fingerprint: 2E2A 1A00 0504 17BD
+"Keep the channels open."
+
+From alaurent@netcom.com Thu May 04 10:05:17 1995
+Path: ashpoly!cascade!mxgate!coyoacan!netcom!alaurent
+From: alaurent@netcom.com (Aiko Laurent)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May04.100517.1636@netcom.com>
+Date: Thu, 04 May 1995 10:05:17 GMT
+References: <1995May02.115517.6523@kiae.su>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995May02.115517.6523@kiae.su>, bkowalski@kiae.su (Brian Kowalski) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Aiko Laurent <alaurent@netcom.com>
+*PLONK* filter active for trolls.
+486DX2/66 (Linux 1.2.13) - NetBSD 1.0
+
+From dsanchez@stanford.edu Sat May 06 01:52:17 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!stanford!dsanchez
+From: dsanchez@stanford.edu (Dmitri Sánchez)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May06.015217.9120@stanford.edu>
+Date: Sat, 06 May 1995 01:52:17 GMT
+References: <1995May02.115517.6523@kiae.su>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995May02.115517.6523@kiae.su>, bkowalski@kiae.su (Brian Kowalski) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Dmitri Sánchez
+Tape trading list upon request. SASE required for international mail.
+
+From vrodriguez@illinois.edu Mon May 08 03:48:17 1995
+Path: ashpoly!cascade!brgate!saturno!illinois!vrodriguez
+From: vrodriguez@illinois.edu (Valeria Rodríguez)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May08.034817.8946@illinois.edu>
+Date: Mon, 08 May 1995 03:48:17 GMT
+References: <1995May02.115517.6523@kiae.su>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995May02.115517.6523@kiae.su>, bkowalski@kiae.su (Brian Kowalski) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Valeria Rodríguez <vrodriguez@illinois.edu>
+Zyxel U-1496E @ 9600 Telebit bps
+"Tape doesn't lie at 02:14. Ears do."
+
+From kbrennan@cam.ac.uk Tue May 09 02:32:17 1995
+Path: ashpoly!cascade!brgate!saturno!cam!kbrennan
+From: kbrennan@cam.ac.uk (Katrin Brennan)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May09.023217.2883@cam.ac.uk>
+Date: Tue, 09 May 1995 02:32:17 GMT
+References: <1995May02.115517.6523@kiae.su> <1995May08.034817.8946@illinois.edu>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995May08.034817.8946@illinois.edu>, vrodriguez@illinois.edu (Valeria Rodríguez) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Katrin Brennan | kbrennan@cam.ac.uk
+PGP Key fingerprint: 98DD 46D3 F44B DDD8
+"Keep the channels open."
+

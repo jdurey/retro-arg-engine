@@ -1,0 +1,93 @@
+From mkarlsson@netcom.com Tue Mar 26 03:35:42 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!netcom!mkarlsson
+From: mkarlsson@netcom.com (Mateo Karlsson)
+Newsgroups: comp.dsp
+Subject: Discussion: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996Mar26.033542.8818@netcom.com>
+Date: Tue, 26 Mar 1996 03:35:42 GMT
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+
+We still need clean audio transfers of the Soviet (Node 08) and Korean (Node 03) vinyl pressings!
+
+-- 
+Mateo Karlsson -- NETCOM On-Line Communication Services
+"Marcus is not one man."
+
+From dito@earthlink.net Tue Mar 26 06:05:42 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!earthlink!dito
+From: dito@earthlink.net (Dave Ito)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996Mar26.060542.1503@earthlink.net>
+Date: Tue, 26 Mar 1996 06:05:42 GMT
+References: <1996Mar26.033542.8818@netcom.com>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1996Mar26.033542.8818@netcom.com>, mkarlsson@netcom.com (Mateo Karlsson) writes:
+> Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+> The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Dave Ito <dito@earthlink.net>
+"Extraordinary claims require extraordinary spectra."
+Amiga 3000T / AmigaOS 3.1
+
+From apark@earthlink.net Tue Mar 26 11:09:42 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!earthlink!apark
+From: apark@earthlink.net (Anja Park)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996Mar26.110942.1396@earthlink.net>
+Date: Tue, 26 Mar 1996 11:09:42 GMT
+References: <1996Mar26.033542.8818@netcom.com> <1996Mar26.060542.1503@earthlink.net>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Mar26.060542.1503@earthlink.net>, dito@earthlink.net (Dave Ito) writes:
+> Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+-- 
+Anja Park <apark@earthlink.net>
+"Do not worship the copy."
+Acorn RiscPC 600 / NEXTSTEP 3.3
+
+From ostewart@utexas.edu Tue Mar 26 16:57:42 1996
+Path: ashpoly!cascade!brgate!saturno!utexas!ostewart
+From: ostewart@utexas.edu (Olga Stewart)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996Mar26.165742.9515@utexas.edu>
+Date: Tue, 26 Mar 1996 16:57:42 GMT
+References: <1996Mar26.033542.8818@netcom.com> <1996Mar26.060542.1503@earthlink.net> <1996Mar26.110942.1396@earthlink.net>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Mar26.110942.1396@earthlink.net>, apark@earthlink.net (Anja Park) writes:
+> Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+=== Olga Stewart ===
+Dept of Electrical Engineering, University of Texas at Austin
+"They will send a copy in my place."
+

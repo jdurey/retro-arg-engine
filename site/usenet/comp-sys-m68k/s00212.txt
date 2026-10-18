@@ -1,0 +1,115 @@
+From aandersson@delphi.com Tue Jul 05 09:00:01 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!delphi!aandersson
+From: aandersson@delphi.com (Astrid Andersson)
+Newsgroups: comp.sys.m68k
+Subject: Observation: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Jul05.090001.6546@delphi.com>
+Date: Tue, 05 Jul 1994 09:00:01 GMT
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Hardware disassembly report for Motorola hardware hackers.
+
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+
+Does anyone have a 27C256 EPROM marked 'MH-U14' or 'ORION-CRYPTO'?
+
+-- 
+Astrid Andersson -- Delphi Internet Services
+"Tape doesn't lie at 02:14. Ears do."
+
+From kstewart@mit.edu Tue Jul 05 14:04:01 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!mit!kstewart
+From: kstewart@mit.edu (Katrin Stewart)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Jul05.140401.9579@mit.edu>
+Date: Tue, 05 Jul 1994 14:04:01 GMT
+References: <1994Jul05.090001.6546@delphi.com>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1994Jul05.090001.6546@delphi.com>, aandersson@delphi.com (Astrid Andersson) writes:
+> Hardware disassembly report for Motorola hardware hackers.
+> Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Katrin Stewart <kstewart@mit.edu>
+*PLONK* filter active for trolls.
+NeXTstation Turbo Color - NetBSD 1.0
+
+From jandersson@cmu.edu Wed Jul 06 07:26:01 1994
+Path: ashpoly!cascade!brgate!saturno!cmu!jandersson
+From: jandersson@cmu.edu (Ji-woo Andersson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Jul06.072601.2045@cmu.edu>
+Date: Wed, 06 Jul 1994 07:26:01 GMT
+References: <1994Jul05.090001.6546@delphi.com> <1994Jul05.140401.9579@mit.edu>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1994Jul05.140401.9579@mit.edu>, kstewart@mit.edu (Katrin Stewart) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+-- 
+Ji-woo Andersson -- Carnegie Mellon University School of CS
+"5 sigma is a discovery. 7 is a question."
+
+From esuzuki@cam.ac.uk Wed Jul 06 10:15:01 1994
+Path: ashpoly!cascade!mxgate!coyoacan!cam!esuzuki
+From: esuzuki@cam.ac.uk (Emi Suzuki)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Jul06.101501.1260@cam.ac.uk>
+Date: Wed, 06 Jul 1994 10:15:01 GMT
+References: <1994Jul05.090001.6546@delphi.com> <1994Jul05.140401.9579@mit.edu>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1994Jul05.140401.9579@mit.edu>, kstewart@mit.edu (Katrin Stewart) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+-- 
+Emi Suzuki
+Tape trading list upon request. SASE required for international mail.
+
+From bhughes@rwth-aachen.de Wed Jul 06 19:11:01 1994
+Path: ashpoly!cascade!mxgate!coyoacan!rwth-aachen!bhughes
+From: bhughes@rwth-aachen.de (Bill Hughes)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Jul06.191101.5140@rwth-aachen.de>
+Date: Wed, 06 Jul 1994 19:11:01 GMT
+References: <1994Jul05.090001.6546@delphi.com> <1994Jul05.140401.9579@mit.edu> <1994Jul06.101501.1260@cam.ac.uk>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1994Jul06.101501.1260@cam.ac.uk>, esuzuki@cam.ac.uk (Emi Suzuki) writes:
+> That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+Bill Hughes -- RWTH Aachen Informatik
+"A soul is not exclusive to biology."
+

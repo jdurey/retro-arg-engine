@@ -1,0 +1,121 @@
+From tfischer@rwth-aachen.de Wed Dec 06 17:22:01 1995
+Path: ashpoly!cascade!bigsur!rwth-aachen!tfischer
+From: tfischer@rwth-aachen.de (Thiago Fischer)
+Newsgroups: comp.dsp
+Subject: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Dec06.172201.8079@rwth-aachen.de>
+Date: Wed, 06 Dec 1995 17:22:01 GMT
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+Thiago Fischer <tfischer@rwth-aachen.de>
+"Tape doesn't lie at 02:14. Ears do."
+Amiga 3000T / Linux 1.2.13
+
+From jivanov@kth.se Thu Dec 07 15:39:01 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!kth!jivanov
+From: jivanov@kth.se (Julien Ivanov)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Dec07.153901.5090@kth.se>
+Date: Thu, 07 Dec 1995 15:39:01 GMT
+References: <1995Dec06.172201.8079@rwth-aachen.de>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Dec06.172201.8079@rwth-aachen.de>, tfischer@rwth-aachen.de (Thiago Fischer) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+That's how the 14 lines of the Stardust matrix are encoded. Each regional pressing contains one line of the decoded text.
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+Julien Ivanov -- Royal Institute of Technology, Stockholm
+"Row 14. No joke."
+
+From avasiliev@clari.net Fri Dec 08 16:07:01 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!clari!avasiliev
+From: avasiliev@clari.net (Anja Vasiliev)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Dec08.160701.5136@clari.net>
+Date: Fri, 08 Dec 1995 16:07:01 GMT
+References: <1995Dec06.172201.8079@rwth-aachen.de> <1995Dec07.153901.5090@kth.se>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Dec07.153901.5090@kth.se>, jivanov@kth.se (Julien Ivanov) writes:
+> That's how the 14 lines of the Stardust matrix are encoded. Each regional pressing contains one line of the decoded text.
+
+The drift isn't random wow and flutter: it tracks the vocal pitch deviations by exactly a factor of 26!
+
+PGP Public key available via finger or upon request.
+
+-- 
+Anja Vasiliev -- ClariNet Communications Corp
+"Hardware is temporary. The signal survives."
+
+From tsmirnov@titech.ac.jp Sun Dec 10 11:37:01 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!titech!tsmirnov
+From: tsmirnov@titech.ac.jp (Tyler Smirnov)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Dec10.113701.8686@titech.ac.jp>
+Date: Sun, 10 Dec 1995 11:37:01 GMT
+References: <1995Dec06.172201.8079@rwth-aachen.de> <1995Dec07.153901.5090@kth.se> <1995Dec08.160701.5136@clari.net>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995Dec08.160701.5136@clari.net>, avasiliev@clari.net (Anja Vasiliev) writes:
+> The drift isn't random wow and flutter: it tracks the vocal pitch deviations by exactly a factor of 26!
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+=== Tyler Smirnov ===
+Dept of Electrical Engineering, Tokyo Institute of Technology Computer Centre
+"A soul is not exclusive to biology."
+
+From fsilva@cmu.edu Mon Dec 11 12:52:01 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!cmu!fsilva
+From: fsilva@cmu.edu (Fiona Silva)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Dec11.125201.3837@cmu.edu>
+Date: Mon, 11 Dec 1995 12:52:01 GMT
+References: <1995Dec06.172201.8079@rwth-aachen.de> <1995Dec07.153901.5090@kth.se> <1995Dec08.160701.5136@clari.net> <1995Dec10.113701.8686@titech.ac.jp>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Dec10.113701.8686@titech.ac.jp>, tsmirnov@titech.ac.jp (Tyler Smirnov) writes:
+> If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+> My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Fiona Silva <fsilva@cmu.edu>
+"In theory there is no difference between theory and practice."
+Amiga 3000T / System 7.5.1
+

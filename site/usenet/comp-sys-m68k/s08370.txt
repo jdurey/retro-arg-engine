@@ -1,0 +1,120 @@
+From rwatanabe@u-tokyo.ac.jp Tue Dec 05 15:19:09 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!u-tokyo!rwatanabe
+From: rwatanabe@u-tokyo.ac.jp (Renata Watanabe)
+Newsgroups: comp.sys.m68k
+Subject: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Dec05.151909.3885@u-tokyo.ac.jp>
+Date: Tue, 05 Dec 1995 15:19:09 GMT
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+Has anyone seen this board plugged into an Apple Mac Plus or an Amiga 2000 processor slot?
+
+-- 
+Renata Watanabe
+Opinions expressed are solely my own and not those of University of Tokyo Department of Information Science.
+------------------------------------------------------------
+
+From mweber@cmu.edu Thu Dec 07 19:19:09 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!cmu!mweber
+From: mweber@cmu.edu (Mathieu Weber)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Dec07.191909.2680@cmu.edu>
+Date: Thu, 07 Dec 1995 19:19:09 GMT
+References: <1995Dec05.151909.3885@u-tokyo.ac.jp>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995Dec05.151909.3885@u-tokyo.ac.jp>, rwatanabe@u-tokyo.ac.jp (Renata Watanabe) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+=== Mathieu Weber ===
+Dept of Electrical Engineering, Carnegie Mellon University School of CS
+"Row 14. No joke."
+
+From csuzuki@u-tokyo.ac.jp Sat Dec 09 00:54:09 1995
+Path: ashpoly!cascade!mxgate!coyoacan!u-tokyo!csuzuki
+From: csuzuki@u-tokyo.ac.jp (Callum Suzuki)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Dec09.005409.3163@u-tokyo.ac.jp>
+Date: Sat, 09 Dec 1995 00:54:09 GMT
+References: <1995Dec05.151909.3885@u-tokyo.ac.jp>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995Dec05.151909.3885@u-tokyo.ac.jp>, rwatanabe@u-tokyo.ac.jp (Renata Watanabe) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Callum Suzuki
+Opinions expressed are solely my own and not those of University of Tokyo Department of Information Science.
+------------------------------------------------------------
+
+From kpark@rwth-aachen.de Sat Dec 09 16:23:09 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!rwth-aachen!kpark
+From: kpark@rwth-aachen.de (Kenji Park)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Dec09.162309.8663@rwth-aachen.de>
+Date: Sat, 09 Dec 1995 16:23:09 GMT
+References: <1995Dec05.151909.3885@u-tokyo.ac.jp> <1995Dec07.191909.2680@cmu.edu>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1995Dec07.191909.2680@cmu.edu>, mweber@cmu.edu (Mathieu Weber) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+-- 
+Kenji Park
+Tape trading list upon request. SASE required for international mail.
+
+From jchoi@panix.com Mon Dec 11 00:49:09 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!panix!jchoi
+From: jchoi@panix.com (Ji-woo Choi)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Dec11.004909.1539@panix.com>
+Date: Mon, 11 Dec 1995 00:49:09 GMT
+References: <1995Dec05.151909.3885@u-tokyo.ac.jp> <1995Dec07.191909.2680@cmu.edu>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Dec07.191909.2680@cmu.edu>, mweber@cmu.edu (Mathieu Weber) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+> Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Ji-woo Choi
+Opinions expressed are solely my own and not those of Public Access Unix of New York.
+------------------------------------------------------------
+

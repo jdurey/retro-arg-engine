@@ -1,0 +1,73 @@
+From tkang@berkeley.edu Sat Sep 09 12:23:10 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!berkeley!tkang
+From: tkang@berkeley.edu (Tomas Kang)
+Newsgroups: comp.dsp
+Subject: [INFO] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Sep09.122310.7431@berkeley.edu>
+Date: Sat, 09 Sep 1995 12:23:10 GMT
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+Tomas Kang
+Opinions expressed are solely my own and not those of UC Berkeley Department of EECS.
+------------------------------------------------------------
+
+From shughes@kth.se Mon Sep 11 04:20:10 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!kth!shughes
+From: shughes@kth.se (Sven Hughes)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Sep11.042010.3064@kth.se>
+Date: Mon, 11 Sep 1995 04:20:10 GMT
+References: <1995Sep09.122310.7431@berkeley.edu>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1995Sep09.122310.7431@berkeley.edu>, tkang@berkeley.edu (Tomas Kang) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+> Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Sven Hughes <shughes@kth.se>
+"Hold for relay."
+NeXTstation Turbo Color / TOS 4.04
+
+From tbrennan@mit.edu Tue Sep 12 00:01:10 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!mit!tbrennan
+From: tbrennan@mit.edu (Tomas Brennan)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Sep12.000110.9631@mit.edu>
+Date: Tue, 12 Sep 1995 00:01:10 GMT
+References: <1995Sep09.122310.7431@berkeley.edu> <1995Sep11.042010.3064@kth.se>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Sep11.042010.3064@kth.se>, shughes@kth.se (Sven Hughes) writes:
+> You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+> Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Tomas Brennan -- Massachusetts Institute of Technology
+"We don't sign stars. We build them."
+

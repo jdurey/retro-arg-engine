@@ -1,0 +1,93 @@
+From ltanaka@kth.se Fri Mar 17 04:03:42 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!kth!ltanaka
+From: ltanaka@kth.se (Lars Tanaka)
+Newsgroups: comp.dsp
+Subject: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Mar17.040342.3720@kth.se>
+Date: Fri, 17 Mar 1995 04:03:42 GMT
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Lars Tanaka <ltanaka@kth.se>
+"There are 14 nodes and only 10 countries. Count again."
+Commodore Amiga 500 (1MB OCS) / System 7.5.1
+
+From fhernandez@earthlink.net Sat Mar 18 21:07:42 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!earthlink!fhernandez
+From: fhernandez@earthlink.net (Fiona Hernández)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Mar18.210742.1965@earthlink.net>
+Date: Sat, 18 Mar 1995 21:07:42 GMT
+References: <1995Mar17.040342.3720@kth.se>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Mar17.040342.3720@kth.se>, ltanaka@kth.se (Lars Tanaka) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+> A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Fiona Hernández -- EarthLink Network
+"A soul is not exclusive to biology."
+
+From tsokolov@mit.edu Sun Mar 19 14:37:42 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!mit!tsokolov
+From: tsokolov@mit.edu (Takeshi Sokolov)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Mar19.143742.8138@mit.edu>
+Date: Sun, 19 Mar 1995 14:37:42 GMT
+References: <1995Mar17.040342.3720@kth.se> <1995Mar18.210742.1965@earthlink.net>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Mar18.210742.1965@earthlink.net>, fhernandez@earthlink.net (Fiona Hernández) writes:
+> I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+=== Takeshi Sokolov ===
+Dept of Electrical Engineering, Massachusetts Institute of Technology
+"They will send a copy in my place."
+
+From akuznetsov@rwth-aachen.de Mon Mar 20 13:07:42 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!rwth-aachen!akuznetsov
+From: akuznetsov@rwth-aachen.de (Anton Kuznetsov)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Mar20.130742.3903@rwth-aachen.de>
+Date: Mon, 20 Mar 1995 13:07:42 GMT
+References: <1995Mar17.040342.3720@kth.se>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Mar17.040342.3720@kth.se>, ltanaka@kth.se (Lars Tanaka) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Anton Kuznetsov | akuznetsov@rwth-aachen.de
+PGP Key fingerprint: 9311 59C6 0B0B BBC3
+"Keep the channels open."
+

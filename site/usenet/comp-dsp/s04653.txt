@@ -1,0 +1,71 @@
+From mrodriguez@titech.ac.jp Mon Jun 19 03:50:22 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!titech!mrodriguez
+From: mrodriguez@titech.ac.jp (Marta Rodríguez)
+Newsgroups: comp.dsp
+Subject: WTB/WTT: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jun19.035022.1123@titech.ac.jp>
+Date: Mon, 19 Jun 1995 03:50:22 GMT
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+What sampling rates are people using for their vinyl rips? 44.1 kHz or 48 kHz DAT?
+
+-- 
+Marta Rodríguez | mrodriguez@titech.ac.jp
+PGP Key fingerprint: A9B0 BCBE 447D 9535
+"Keep the channels open."
+
+From vsouza@cam.ac.uk Tue Jun 20 02:55:22 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!cam!vsouza
+From: vsouza@cam.ac.uk (Valeria Souza)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jun20.025522.5202@cam.ac.uk>
+Date: Tue, 20 Jun 1995 02:55:22 GMT
+References: <1995Jun19.035022.1123@titech.ac.jp>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Jun19.035022.1123@titech.ac.jp>, mrodriguez@titech.ac.jp (Marta Rodríguez) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+=== Valeria Souza ===
+Dept of Electrical Engineering, University of Cambridge Computer Laboratory
+"5 sigma is a discovery. 7 is a question."
+
+From ymuller@stanford.edu Tue Jun 20 23:13:22 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!stanford!ymuller
+From: ymuller@stanford.edu (Yuki Müller)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jun20.231322.7983@stanford.edu>
+Date: Tue, 20 Jun 1995 23:13:22 GMT
+References: <1995Jun19.035022.1123@titech.ac.jp> <1995Jun20.025522.5202@cam.ac.uk>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Jun20.025522.5202@cam.ac.uk>, vsouza@cam.ac.uk (Valeria Souza) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Yuki Müller <ymuller@stanford.edu>
+*PLONK* filter active for trolls.
+Pentium 90 (OS/2 Warp) - NetBSD 1.0
+

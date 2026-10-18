@@ -1,0 +1,95 @@
+From cmartinez@netcom.com Sat Feb 11 00:49:59 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!netcom!cmartinez
+From: cmartinez@netcom.com (Callum Martínez)
+Newsgroups: comp.sys.m68k
+Subject: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Feb11.004959.4493@netcom.com>
+Date: Sat, 11 Feb 1995 00:49:59 GMT
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Callum Martínez -- NETCOM On-Line Communication Services
+"Marcus is not one man."
+
+From asato@u-tokyo.ac.jp Sat Feb 11 04:48:59 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!u-tokyo!asato
+From: asato@u-tokyo.ac.jp (Aiko Sato)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Feb11.044859.3924@u-tokyo.ac.jp>
+Date: Sat, 11 Feb 1995 04:48:59 GMT
+References: <1995Feb11.004959.4493@netcom.com>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 12
+
+In article <1995Feb11.004959.4493@netcom.com>, cmartinez@netcom.com (Callum Martínez) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+> Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Aiko Sato | asato@u-tokyo.ac.jp
+PGP Key fingerprint: AA5F DC48 0298 AD07
+"Keep the channels open."
+
+From meriksson@uni-hamburg.de Sun Feb 12 09:15:59 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!uni-hamburg!meriksson
+From: meriksson@uni-hamburg.de (Marisol Eriksson)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Feb12.091559.1680@uni-hamburg.de>
+Date: Sun, 12 Feb 1995 09:15:59 GMT
+References: <1995Feb11.004959.4493@netcom.com> <1995Feb11.044859.3924@u-tokyo.ac.jp>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Feb11.044859.3924@u-tokyo.ac.jp>, asato@u-tokyo.ac.jp (Aiko Sato) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Marisol Eriksson
+Opinions expressed are solely my own and not those of Universität Hamburg Fachbereich Informatik.
+------------------------------------------------------------
+
+From efournier@ox.ac.uk Sun Feb 12 16:52:59 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!ox!efournier
+From: efournier@ox.ac.uk (Elaine Fournier)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Feb12.165259.8675@ox.ac.uk>
+Date: Sun, 12 Feb 1995 16:52:59 GMT
+References: <1995Feb11.004959.4493@netcom.com>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Feb11.004959.4493@netcom.com>, cmartinez@netcom.com (Callum Martínez) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+> Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Elaine Fournier
+Tape trading list upon request. SASE required for international mail.
+

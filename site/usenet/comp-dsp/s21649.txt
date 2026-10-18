@@ -1,0 +1,95 @@
+From jkuznetsov@mit.edu Fri Apr 08 13:16:10 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!mit!jkuznetsov
+From: jkuznetsov@mit.edu (Jen Kuznetsov)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Apr08.131610.9300@mit.edu>
+Date: Fri, 08 Apr 1994 13:16:10 GMT
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+=== Jen Kuznetsov ===
+Dept of Electrical Engineering, Massachusetts Institute of Technology
+"Tape doesn't lie at 02:14. Ears do."
+
+From tgirard@mindspring.com Fri Apr 08 16:38:10 1994
+Path: ashpoly!cascade!mxgate!coyoacan!mindspring!tgirard
+From: tgirard@mindspring.com (Takeshi Girard)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Apr08.163810.7038@mindspring.com>
+Date: Fri, 08 Apr 1994 16:38:10 GMT
+References: <1994Apr08.131610.9300@mit.edu>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1994Apr08.131610.9300@mit.edu>, jkuznetsov@mit.edu (Jen Kuznetsov) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+=== Takeshi Girard ===
+Dept of Electrical Engineering, MindSpring Enterprises
+"Marcus is not one man."
+
+From mmacdonald@purdue.edu Sat Apr 09 08:24:10 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!purdue!mmacdonald
+From: mmacdonald@purdue.edu (Marisol MacDonald)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Apr09.082410.7753@purdue.edu>
+Date: Sat, 09 Apr 1994 08:24:10 GMT
+References: <1994Apr08.131610.9300@mit.edu>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1994Apr08.131610.9300@mit.edu>, jkuznetsov@mit.edu (Jen Kuznetsov) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Marisol MacDonald
+Tape trading list upon request. SASE required for international mail.
+
+From mreyes@rwth-aachen.de Sat Apr 09 09:46:10 1994
+Path: ashpoly!cascade!bigsur!rwth-aachen!mreyes
+From: mreyes@rwth-aachen.de (Min-jun Reyes)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Apr09.094610.9002@rwth-aachen.de>
+Date: Sat, 09 Apr 1994 09:46:10 GMT
+References: <1994Apr08.131610.9300@mit.edu>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1994Apr08.131610.9300@mit.edu>, jkuznetsov@mit.edu (Jen Kuznetsov) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+Min-jun Reyes <mreyes@rwth-aachen.de>
+*PLONK* filter active for trolls.
+Amiga 3000T - NetBSD 1.0
+

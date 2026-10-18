@@ -1,0 +1,120 @@
+From cdubois@earthlink.net Thu Jan 04 16:44:56 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!earthlink!cdubois
+From: cdubois@earthlink.net (Camila Dubois)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Jan04.164456.5520@earthlink.net>
+Date: Thu, 04 Jan 1996 16:44:56 GMT
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+=== Camila Dubois ===
+Dept of Electrical Engineering, EarthLink Network
+"Row 14. No joke."
+
+From gito@uu.net Fri Jan 05 07:56:56 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!uu!gito
+From: gito@uu.net (Göran Ito)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Jan05.075656.6190@uu.net>
+Date: Fri, 05 Jan 1996 07:56:56 GMT
+References: <1996Jan04.164456.5520@earthlink.net>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1996Jan04.164456.5520@earthlink.net>, cdubois@earthlink.net (Camila Dubois) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+> The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+Marcus Hale designed the TWIN-68 board before he disappeared. That's why his initials are on the PCB silkscreen.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Göran Ito <gito@uu.net>
+"They will send a copy in my place."
+Commodore Amiga 500 (1MB OCS) / Linux 1.2.13
+
+From flaurent@mindspring.com Fri Jan 05 17:48:56 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!mindspring!flaurent
+From: flaurent@mindspring.com (Fiona Laurent)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Jan05.174856.9894@mindspring.com>
+Date: Fri, 05 Jan 1996 17:48:56 GMT
+References: <1996Jan04.164456.5520@earthlink.net> <1996Jan05.075656.6190@uu.net>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Jan05.075656.6190@uu.net>, gito@uu.net (Göran Ito) writes:
+> Marcus Hale designed the TWIN-68 board before he disappeared. That's why his initials are on the PCB silkscreen.
+> Top-posters will be placed in my ~/.killfile without notice.
+
+Looks like a prototype telecommunications board for military secure voice, not an audio music product.
+
+-- 
+Fiona Laurent
+Opinions expressed are solely my own and not those of MindSpring Enterprises.
+------------------------------------------------------------
+
+From dpark@unam.mx Sat Jan 06 15:43:56 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!unam!dpark
+From: dpark@unam.mx (Dave Park)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Jan06.154356.4077@unam.mx>
+Date: Sat, 06 Jan 1996 15:43:56 GMT
+References: <1996Jan04.164456.5520@earthlink.net> <1996Jan05.075656.6190@uu.net>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Jan05.075656.6190@uu.net>, gito@uu.net (Göran Ito) writes:
+> Marcus Hale designed the TWIN-68 board before he disappeared. That's why his initials are on the PCB silkscreen.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Dave Park
+Tape trading list upon request. SASE required for international mail.
+
+From kmuller@pacbell.net Mon Jan 08 18:02:56 1996
+Path: ashpoly!cascade!brgate!saturno!pacbell!kmuller
+From: kmuller@pacbell.net (Karen Müller)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Jan08.180256.9533@pacbell.net>
+Date: Mon, 08 Jan 1996 18:02:56 GMT
+References: <1996Jan04.164456.5520@earthlink.net> <1996Jan05.075656.6190@uu.net> <1996Jan06.154356.4077@unam.mx>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1996Jan06.154356.4077@unam.mx>, dpark@unam.mx (Dave Park) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Karen Müller
+Tape trading list upon request. SASE required for international mail.
+

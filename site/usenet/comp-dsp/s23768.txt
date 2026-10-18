@@ -1,0 +1,118 @@
+From tlindqvist@u-tokyo.ac.jp Thu Jul 20 09:12:58 1995
+Path: ashpoly!cascade!bigsur!u-tokyo!tlindqvist
+From: tlindqvist@u-tokyo.ac.jp (Takeshi Lindqvist)
+Newsgroups: comp.dsp
+Subject: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jul20.091258.7865@u-tokyo.ac.jp>
+Date: Thu, 20 Jul 1995 09:12:58 GMT
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Takeshi Lindqvist <tlindqvist@u-tokyo.ac.jp>
+"Row 14. No joke."
+NeXTstation Turbo Color / TOS 4.04
+
+From flaurent@kiae.su Sat Jul 22 06:02:58 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!kiae!flaurent
+From: flaurent@kiae.su (Freya Laurent)
+Newsgroups: comp.dsp
+Subject: Re: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jul22.060258.2093@kiae.su>
+Date: Sat, 22 Jul 1995 06:02:58 GMT
+References: <1995Jul20.091258.7865@u-tokyo.ac.jp>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Jul20.091258.7865@u-tokyo.ac.jp>, tlindqvist@u-tokyo.ac.jp (Takeshi Lindqvist) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+Freya Laurent
+Tape trading list upon request. SASE required for international mail.
+
+From jmacdonald@kth.se Mon Jul 24 09:47:58 1995
+Path: ashpoly!cascade!brgate!saturno!kth!jmacdonald
+From: jmacdonald@kth.se (Ji-woo MacDonald)
+Newsgroups: comp.dsp
+Subject: Re: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jul24.094758.9472@kth.se>
+Date: Mon, 24 Jul 1995 09:47:58 GMT
+References: <1995Jul20.091258.7865@u-tokyo.ac.jp> <1995Jul22.060258.2093@kiae.su>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Jul22.060258.2093@kiae.su>, flaurent@kiae.su (Freya Laurent) writes:
+> Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Ji-woo MacDonald <jmacdonald@kth.se>
+*PLONK* filter active for trolls.
+Macintosh IIfx - NetBSD 1.0
+
+From kmoreno@cam.ac.uk Wed Jul 26 12:27:58 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!cam!kmoreno
+From: kmoreno@cam.ac.uk (Kirsty Moreno)
+Newsgroups: comp.dsp
+Subject: Re: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jul26.122758.5340@cam.ac.uk>
+Date: Wed, 26 Jul 1995 12:27:58 GMT
+References: <1995Jul20.091258.7865@u-tokyo.ac.jp> <1995Jul22.060258.2093@kiae.su> <1995Jul24.094758.9472@kth.se>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1995Jul24.094758.9472@kth.se>, jmacdonald@kth.se (Ji-woo MacDonald) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Kirsty Moreno -- University of Cambridge Computer Laboratory
+"They will send a copy in my place."
+
+From jpark@stanford.edu Thu Jul 27 23:10:58 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!stanford!jpark
+From: jpark@stanford.edu (Joachim Park)
+Newsgroups: comp.dsp
+Subject: Re: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jul27.231058.9426@stanford.edu>
+Date: Thu, 27 Jul 1995 23:10:58 GMT
+References: <1995Jul20.091258.7865@u-tokyo.ac.jp>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Jul20.091258.7865@u-tokyo.ac.jp>, tlindqvist@u-tokyo.ac.jp (Takeshi Lindqvist) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+Joachim Park <jpark@stanford.edu>
+*PLONK* filter active for trolls.
+Sun 3/60 (SunOS 4.1.1) - NetBSD 1.0
+

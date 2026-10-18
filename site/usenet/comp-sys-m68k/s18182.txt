@@ -1,0 +1,94 @@
+From fperez@panix.com Fri Oct 28 11:45:53 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!panix!fperez
+From: fperez@panix.com (Freya Pérez)
+Newsgroups: comp.sys.m68k
+Subject: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Oct28.114553.4040@panix.com>
+Date: Fri, 28 Oct 1994 11:45:53 GMT
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+Did Marcus take the decryption EPROM with him when he left the lab?
+
+-- 
+Freya Pérez | fperez@panix.com
+PGP Key fingerprint: 43E4 A81E C1A6 F74E
+"Keep the channels open."
+
+From dkim@mit.edu Sat Oct 29 20:31:53 1994
+Path: ashpoly!cascade!mxgate!coyoacan!mit!dkim
+From: dkim@mit.edu (Dong-hyun Kim)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Oct29.203153.9314@mit.edu>
+Date: Sat, 29 Oct 1994 20:31:53 GMT
+References: <1994Oct28.114553.4040@panix.com>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1994Oct28.114553.4040@panix.com>, fperez@panix.com (Freya Pérez) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Dong-hyun Kim | dkim@mit.edu
+PGP Key fingerprint: BA22 91A4 D9ED 0137
+"Keep the channels open."
+
+From jito@mindspring.com Mon Oct 31 01:59:53 1994
+Path: ashpoly!cascade!mxgate!coyoacan!mindspring!jito
+From: jito@mindspring.com (Jens Ito)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Oct31.015953.1431@mindspring.com>
+Date: Mon, 31 Oct 1994 01:59:53 GMT
+References: <1994Oct28.114553.4040@panix.com>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Oct28.114553.4040@panix.com>, fperez@panix.com (Freya Pérez) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Jens Ito <jito@mindspring.com>
+"The carrier frequency does not drift by accident."
+Macintosh IIfx / AmigaOS 3.1
+
+From edubois@kiae.su Mon Oct 31 06:36:53 1994
+Path: ashpoly!cascade!bigsur!kiae!edubois
+From: edubois@kiae.su (Elaine Dubois)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Oct31.063653.7942@kiae.su>
+Date: Mon, 31 Oct 1994 06:36:53 GMT
+References: <1994Oct28.114553.4040@panix.com> <1994Oct31.015953.1431@mindspring.com>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Oct31.015953.1431@mindspring.com>, jito@mindspring.com (Jens Ito) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Elaine Dubois <edubois@kiae.su>
+"We don't sign stars. We build them."
+Sun 3/60 (SunOS 4.1.1) / FreeBSD 2.1
+

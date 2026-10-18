@@ -1,0 +1,94 @@
+From ssuzuki@rwth-aachen.de Tue Dec 12 12:26:05 1995
+Path: ashpoly!cascade!mxgate!coyoacan!rwth-aachen!ssuzuki
+From: ssuzuki@rwth-aachen.de (Sergei Suzuki)
+Newsgroups: comp.sys.m68k
+Subject: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Dec12.122605.2443@rwth-aachen.de>
+Date: Tue, 12 Dec 1995 12:26:05 GMT
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+Schematic diagram in ASCII uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/twin68_array.asc.
+
+-- 
+=== Sergei Suzuki ===
+Dept of Electrical Engineering, RWTH Aachen Informatik
+"In theory there is no difference between theory and practice."
+
+From jsanchez@pipeline.com Wed Dec 13 07:34:05 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!pipeline!jsanchez
+From: jsanchez@pipeline.com (Julien Sánchez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Dec13.073405.5887@pipeline.com>
+Date: Wed, 13 Dec 1995 07:34:05 GMT
+References: <1995Dec12.122605.2443@rwth-aachen.de>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Dec12.122605.2443@rwth-aachen.de>, ssuzuki@rwth-aachen.de (Sergei Suzuki) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+> Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Julien Sánchez -- The Pipeline Internet Network
+"A soul is not exclusive to biology."
+
+From tvasiliev@kth.se Fri Dec 15 09:06:05 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!kth!tvasiliev
+From: tvasiliev@kth.se (Takeshi Vasiliev)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Dec15.090605.4265@kth.se>
+Date: Fri, 15 Dec 1995 09:06:05 GMT
+References: <1995Dec12.122605.2443@rwth-aachen.de> <1995Dec13.073405.5887@pipeline.com>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Dec13.073405.5887@pipeline.com>, jsanchez@pipeline.com (Julien Sánchez) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+Looks like a prototype telecommunications board for military secure voice, not an audio music product.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Takeshi Vasiliev
+Tape trading list upon request. SASE required for international mail.
+
+From tschneider@inria.fr Sun Dec 17 03:40:05 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!inria!tschneider
+From: tschneider@inria.fr (Tomas Schneider)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Dec17.034005.5908@inria.fr>
+Date: Sun, 17 Dec 1995 03:40:05 GMT
+References: <1995Dec12.122605.2443@rwth-aachen.de> <1995Dec13.073405.5887@pipeline.com> <1995Dec15.090605.4265@kth.se>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Dec15.090605.4265@kth.se>, tvasiliev@kth.se (Takeshi Vasiliev) writes:
+> Looks like a prototype telecommunications board for military secure voice, not an audio music product.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Tomas Schneider <tschneider@inria.fr>
+Practical Peripherals 14.4 @ 33,600 bps
+"Measuring a record you own is listening, not piracy."
+

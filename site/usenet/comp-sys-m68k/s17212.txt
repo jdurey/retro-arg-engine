@@ -1,0 +1,118 @@
+From bkowalski@uu.net Mon Apr 01 04:25:37 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!uu!bkowalski
+From: bkowalski@uu.net (Bastien Kowalski)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Apr01.042537.6662@uu.net>
+Date: Mon, 01 Apr 1996 04:25:37 GMT
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Bastien Kowalski <bkowalski@uu.net>
+"5 sigma is a discovery. 7 is a question."
+Sun 3/60 (SunOS 4.1.1) / FreeBSD 2.1
+
+From hgarcia@utexas.edu Mon Apr 01 07:27:37 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!utexas!hgarcia
+From: hgarcia@utexas.edu (Hugo García)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Apr01.072737.3850@utexas.edu>
+Date: Mon, 01 Apr 1996 07:27:37 GMT
+References: <1996Apr01.042537.6662@uu.net>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Apr01.042537.6662@uu.net>, bkowalski@uu.net (Bastien Kowalski) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Hugo García <hgarcia@utexas.edu>
+*PLONK* filter active for trolls.
+PC-9821Ap2 (NEC) - NetBSD 1.0
+
+From asato@pipeline.com Mon Apr 01 20:37:37 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!pipeline!asato
+From: asato@pipeline.com (Andrei Sato)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Apr01.203737.6403@pipeline.com>
+Date: Mon, 01 Apr 1996 20:37:37 GMT
+References: <1996Apr01.042537.6662@uu.net> <1996Apr01.072737.3850@utexas.edu>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Apr01.072737.3850@utexas.edu>, hgarcia@utexas.edu (Hugo García) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Andrei Sato <asato@pipeline.com>
+"When every node is whole, the channel opens."
+Decstation 5000/200 / SunOS 4.1.4
+
+From mweber@stanford.edu Mon Apr 01 23:53:37 1996
+Path: ashpoly!cascade!brgate!saturno!stanford!mweber
+From: mweber@stanford.edu (Mei Weber)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Apr01.235337.7409@stanford.edu>
+Date: Mon, 01 Apr 1996 23:53:37 GMT
+References: <1996Apr01.042537.6662@uu.net> <1996Apr01.072737.3850@utexas.edu>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Apr01.072737.3850@utexas.edu>, hgarcia@utexas.edu (Hugo García) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+=== Mei Weber ===
+Dept of Electrical Engineering, Stanford University Computer Systems Lab
+"A soul is not exclusive to biology."
+
+From ttakahashi@clari.net Tue Apr 02 10:27:37 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!clari!ttakahashi
+From: ttakahashi@clari.net (Takeshi Takahashi)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Apr02.102737.8814@clari.net>
+Date: Tue, 02 Apr 1996 10:27:37 GMT
+References: <1996Apr01.042537.6662@uu.net>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1996Apr01.042537.6662@uu.net>, bkowalski@uu.net (Bastien Kowalski) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Takeshi Takahashi <ttakahashi@clari.net>
+Practical Peripherals 14.4 @ 28,800 bps
+"5 sigma is a discovery. 7 is a question."
+

@@ -1,0 +1,93 @@
+From seriksson@kiae.su Sat Nov 12 17:55:43 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!kiae!seriksson
+From: seriksson@kiae.su (Sergei Eriksson)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Nov12.175543.4501@kiae.su>
+Date: Sat, 12 Nov 1994 17:55:43 GMT
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Sergei Eriksson
+Tape trading list upon request. SASE required for international mail.
+
+From mrobertson@netcom.com Mon Nov 14 01:32:43 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!netcom!mrobertson
+From: mrobertson@netcom.com (Mei Robertson)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Nov14.013243.7715@netcom.com>
+Date: Mon, 14 Nov 1994 01:32:43 GMT
+References: <1994Nov12.175543.4501@kiae.su>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1994Nov12.175543.4501@kiae.su>, seriksson@kiae.su (Sergei Eriksson) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+-- 
+Mei Robertson
+Opinions expressed are solely my own and not those of NETCOM On-Line Communication Services.
+------------------------------------------------------------
+
+From lhughes@mindspring.com Mon Nov 14 06:00:43 1994
+Path: ashpoly!cascade!brgate!saturno!mindspring!lhughes
+From: lhughes@mindspring.com (Lars Hughes)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Nov14.060043.8946@mindspring.com>
+Date: Mon, 14 Nov 1994 06:00:43 GMT
+References: <1994Nov12.175543.4501@kiae.su> <1994Nov14.013243.7715@netcom.com>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Nov14.013243.7715@netcom.com>, mrobertson@netcom.com (Mei Robertson) writes:
+> Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+=== Lars Hughes ===
+Dept of Electrical Engineering, MindSpring Enterprises
+"When every node is whole, the channel opens."
+
+From djohansson@ox.ac.uk Wed Nov 16 03:51:43 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!ox!djohansson
+From: djohansson@ox.ac.uk (Diego Johansson)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Nov16.035143.9505@ox.ac.uk>
+Date: Wed, 16 Nov 1994 03:51:43 GMT
+References: <1994Nov12.175543.4501@kiae.su>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Nov12.175543.4501@kiae.su>, seriksson@kiae.su (Sergei Eriksson) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Diego Johansson <djohansson@ox.ac.uk>
+"5 sigma is a discovery. 7 is a question."
+Amiga 1200 (Blizzard 030/50) / NEXTSTEP 3.3
+

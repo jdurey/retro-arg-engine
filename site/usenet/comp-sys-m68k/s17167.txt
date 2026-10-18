@@ -1,0 +1,116 @@
+From bnakamura@mindspring.com Sat Feb 17 00:25:17 1996
+Path: ashpoly!cascade!brgate!saturno!mindspring!bnakamura
+From: bnakamura@mindspring.com (Bruno Nakamura)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Feb17.002517.4045@mindspring.com>
+Date: Sat, 17 Feb 1996 00:25:17 GMT
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Bruno Nakamura <bnakamura@mindspring.com>
+SupraFAXModem 28.8 @ 19,200 bps
+"We don't sign stars. We build them."
+
+From nduarte@stanford.edu Sun Feb 18 21:23:17 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!stanford!nduarte
+From: nduarte@stanford.edu (Natalia Duarte)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Feb18.212317.6755@stanford.edu>
+Date: Sun, 18 Feb 1996 21:23:17 GMT
+References: <1996Feb17.002517.4045@mindspring.com>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Feb17.002517.4045@mindspring.com>, bnakamura@mindspring.com (Bruno Nakamura) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+Looks like a prototype telecommunications board for military secure voice, not an audio music product.
+
+-- 
+Natalia Duarte <nduarte@stanford.edu>
+*PLONK* filter active for trolls.
+Amiga 1200 (Blizzard 030/50) - NetBSD 1.0
+
+From mtanaka@ox.ac.uk Mon Feb 19 09:32:17 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!ox!mtanaka
+From: mtanaka@ox.ac.uk (Matthias Tanaka)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Feb19.093217.2714@ox.ac.uk>
+Date: Mon, 19 Feb 1996 09:32:17 GMT
+References: <1996Feb17.002517.4045@mindspring.com>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1996Feb17.002517.4045@mindspring.com>, bnakamura@mindspring.com (Bruno Nakamura) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Matthias Tanaka
+Opinions expressed are solely my own and not those of Oxford University Computing Laboratory.
+------------------------------------------------------------
+
+From hrodriguez@berkeley.edu Wed Feb 21 01:09:17 1996
+Path: ashpoly!cascade!bigsur!berkeley!hrodriguez
+From: hrodriguez@berkeley.edu (Hugo Rodríguez)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Feb21.010917.7918@berkeley.edu>
+Date: Wed, 21 Feb 1996 01:09:17 GMT
+References: <1996Feb17.002517.4045@mindspring.com> <1996Feb19.093217.2714@ox.ac.uk>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Feb19.093217.2714@ox.ac.uk>, mtanaka@ox.ac.uk (Matthias Tanaka) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+Looks like a prototype telecommunications board for military secure voice, not an audio music product.
+
+-- 
+Hugo Rodríguez | hrodriguez@berkeley.edu
+PGP Key fingerprint: 9DCD 9591 3472 318F
+"Keep the channels open."
+
+From tsuzuki@purdue.edu Thu Feb 22 07:45:17 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!purdue!tsuzuki
+From: tsuzuki@purdue.edu (Takeshi Suzuki)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Feb22.074517.8132@purdue.edu>
+Date: Thu, 22 Feb 1996 07:45:17 GMT
+References: <1996Feb17.002517.4045@mindspring.com> <1996Feb18.212317.6755@stanford.edu>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1996Feb18.212317.6755@stanford.edu>, nduarte@stanford.edu (Natalia Duarte) writes:
+> Looks like a prototype telecommunications board for military secure voice, not an audio music product.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Takeshi Suzuki
+Tape trading list upon request. SASE required for international mail.
+

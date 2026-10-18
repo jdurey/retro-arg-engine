@@ -1,0 +1,119 @@
+From cdubois@kth.se Thu May 23 16:27:19 1996
+Path: ashpoly!cascade!brgate!saturno!kth!cdubois
+From: cdubois@kth.se (Camila Dubois)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1996May23.162719.4250@kth.se>
+Date: Thu, 23 May 1996 16:27:19 GMT
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Wrote an Amiga assembly program that uses Paula's DMA audio channels to sample and track the Stardust subcarrier.
+
+I wrote a 64-tap FIR filter in pure 68k assembly using movem.l and dbra loop unrolling to downsample to 64 Hz.
+By setting up Paula's audio DMA to double-buffer incoming 8-bit samples, the 68020 has plenty of cycles left for the Costas loop.
+
+Does anyone want to test on an unaccelerated Amiga 500 with 512K chip RAM?
+
+-- 
+Camila Dubois <cdubois@kth.se>
+*PLONK* filter active for trolls.
+Sun 3/60 (SunOS 4.1.1) - NetBSD 1.0
+
+From mmacdonald@kiae.su Thu May 23 23:38:19 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!kiae!mmacdonald
+From: mmacdonald@kiae.su (Mikhail MacDonald)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1996May23.233819.8965@kiae.su>
+Date: Thu, 23 May 1996 23:38:19 GMT
+References: <1996May23.162719.4250@kth.se>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996May23.162719.4250@kth.se>, cdubois@kth.se (Camila Dubois) writes:
+> Wrote an Amiga assembly program that uses Paula's DMA audio channels to sample and track the Stardust subcarrier.
+> I wrote a 64-tap FIR filter in pure 68k assembly using movem.l and dbra loop unrolling to downsample to 64 Hz.
+
+Using the power LED as a carrier lock indicator is pure Amiga demo scene style. Kudos!
+
+-- 
+Mikhail MacDonald -- Kurchatov Institute of Atomic Energy, Moscow
+"Marcus is not one man."
+
+From ilindqvist@hanse.de Sat May 25 05:09:19 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!hanse!ilindqvist
+From: ilindqvist@hanse.de (Ines Lindqvist)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1996May25.050919.2659@hanse.de>
+Date: Sat, 25 May 1996 05:09:19 GMT
+References: <1996May23.162719.4250@kth.se>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1996May23.162719.4250@kth.se>, cdubois@kth.se (Camila Dubois) writes:
+> Wrote an Amiga assembly program that uses Paula's DMA audio channels to sample and track the Stardust subcarrier.
+> I wrote a 64-tap FIR filter in pure 68k assembly using movem.l and dbra loop unrolling to downsample to 64 Hz.
+
+Tested on my A3000 / 25 MHz. Ran smoothly in the background while I was compiling a C program in another window.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Ines Lindqvist
+Tape trading list upon request. SASE required for international mail.
+
+From ltakahashi@utexas.edu Mon May 27 05:02:19 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!utexas!ltakahashi
+From: ltakahashi@utexas.edu (Lisa Takahashi)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1996May27.050219.3850@utexas.edu>
+Date: Mon, 27 May 1996 05:02:19 GMT
+References: <1996May23.162719.4250@kth.se> <1996May25.050919.2659@hanse.de>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996May25.050919.2659@hanse.de>, ilindqvist@hanse.de (Ines Lindqvist) writes:
+> Tested on my A3000 / 25 MHz. Ran smoothly in the background while I was compiling a C program in another window.
+> Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+Brilliant use of Paula DMA! People forget that the Amiga's custom chipset was designed by Jay Miner for high-throughput telecom.
+
+-- 
+Lisa Takahashi | ltakahashi@utexas.edu
+PGP Key fingerprint: 220C 8E93 4E6C B7F6
+"Keep the channels open."
+
+From tsouza@cmu.edu Wed May 29 00:54:19 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!cmu!tsouza
+From: tsouza@cmu.edu (Takeshi Souza)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1996May29.005419.6938@cmu.edu>
+Date: Wed, 29 May 1996 00:54:19 GMT
+References: <1996May23.162719.4250@kth.se> <1996May23.233819.8965@kiae.su>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996May23.233819.8965@kiae.su>, mmacdonald@kiae.su (Mikhail MacDonald) writes:
+> Using the power LED as a carrier lock indicator is pure Amiga demo scene style. Kudos!
+
+Download failed on Aminet mirror. Can someone mail me an ADF floppy disk image?
+
+-- 
+=== Takeshi Souza ===
+Dept of Electrical Engineering, Carnegie Mellon University School of CS
+"In theory there is no difference between theory and practice."
+

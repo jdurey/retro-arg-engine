@@ -1,0 +1,70 @@
+From rlarsson@delphi.com Fri Aug 18 10:35:33 1995
+Path: ashpoly!cascade!bigsur!delphi!rlarsson
+From: rlarsson@delphi.com (Rodrigo Larsson)
+Newsgroups: comp.dsp
+Subject: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Aug18.103533.7325@delphi.com>
+Date: Fri, 18 Aug 1995 10:35:33 GMT
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+
+Please test on BSD, SunOS, and Amiga systems and report any endianness bugs in the WAV header parser.
+
+-- 
+Rodrigo Larsson <rlarsson@delphi.com>
+*PLONK* filter active for trolls.
+Amiga 1200 (Blizzard 030/50) - NetBSD 1.0
+
+From msokolov@clari.net Sat Aug 19 16:30:33 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!clari!msokolov
+From: msokolov@clari.net (Mikhail Sokolov)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Aug19.163033.7548@clari.net>
+Date: Sat, 19 Aug 1995 16:30:33 GMT
+References: <1995Aug18.103533.7325@delphi.com>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Aug18.103533.7325@delphi.com>, rlarsson@delphi.com (Rodrigo Larsson) writes:
+> Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+-- 
+Mikhail Sokolov
+Opinions expressed are solely my own and not those of ClariNet Communications Corp.
+------------------------------------------------------------
+
+From elee@uni-hamburg.de Mon Aug 21 13:51:33 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!uni-hamburg!elee
+From: elee@uni-hamburg.de (Elaine Lee)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Aug21.135133.3872@uni-hamburg.de>
+Date: Mon, 21 Aug 1995 13:51:33 GMT
+References: <1995Aug18.103533.7325@delphi.com> <1995Aug19.163033.7548@clari.net>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Aug19.163033.7548@clari.net>, msokolov@clari.net (Mikhail Sokolov) writes:
+> Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Elaine Lee <elee@uni-hamburg.de>
+Hayes Optima 288 @ 33,600 bps
+"A soul is not exclusive to biology."
+

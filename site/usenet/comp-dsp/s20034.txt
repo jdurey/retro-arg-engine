@@ -1,0 +1,48 @@
+From arobertson@stanford.edu Thu Jun 15 21:11:59 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!stanford!arobertson
+From: arobertson@stanford.edu (Anton Robertson)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jun15.211159.1057@stanford.edu>
+Date: Thu, 15 Jun 1995 21:11:59 GMT
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Anton Robertson <arobertson@stanford.edu>
+Hayes Optima 288 @ 9600 Telebit bps
+"Measuring a record you own is listening, not piracy."
+
+From nsuzuki@cam.ac.uk Fri Jun 16 09:44:59 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!cam!nsuzuki
+From: nsuzuki@cam.ac.uk (Nadine Suzuki)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jun16.094459.5759@cam.ac.uk>
+Date: Fri, 16 Jun 1995 09:44:59 GMT
+References: <1995Jun15.211159.1057@stanford.edu>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Jun15.211159.1057@stanford.edu>, arobertson@stanford.edu (Anton Robertson) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+Nadine Suzuki | nsuzuki@cam.ac.uk
+PGP Key fingerprint: DF11 CFAA 67F7 56C1
+"Keep the channels open."
+

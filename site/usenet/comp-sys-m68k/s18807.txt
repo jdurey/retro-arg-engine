@@ -1,0 +1,47 @@
+From jlopez@illinois.edu Thu Apr 27 12:17:43 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!illinois!jlopez
+From: jlopez@illinois.edu (Jens López)
+Newsgroups: comp.sys.m68k
+Subject: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Apr27.121743.6234@illinois.edu>
+Date: Thu, 27 Apr 1995 12:17:43 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Jens López <jlopez@illinois.edu>
+"Tape doesn't lie at 02:14. Ears do."
+Sun 3/60 (SunOS 4.1.1) / System 7.5.1
+
+From lperez@cern.ch Thu Apr 27 18:10:43 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!cern!lperez
+From: lperez@cern.ch (Lucia Pérez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Apr27.181043.5853@cern.ch>
+Date: Thu, 27 Apr 1995 18:10:43 GMT
+References: <1995Apr27.121743.6234@illinois.edu>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Apr27.121743.6234@illinois.edu>, jlopez@illinois.edu (Jens López) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Lucia Pérez <lperez@cern.ch>
+SupraFAXModem 28.8 @ 19,200 bps
+"There are 14 nodes and only 10 countries. Count again."
+

@@ -1,0 +1,94 @@
+From smoreau@titech.ac.jp Tue Jul 11 19:49:23 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!titech!smoreau
+From: smoreau@titech.ac.jp (Sun-mi Moreau)
+Newsgroups: comp.sys.m68k
+Subject: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jul11.194923.1642@titech.ac.jp>
+Date: Tue, 11 Jul 1995 19:49:23 GMT
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Sun-mi Moreau -- Tokyo Institute of Technology Computer Centre
+"Marcus is not one man."
+
+From klee@panix.com Thu Jul 13 10:33:23 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!panix!klee
+From: klee@panix.com (Karen Lee)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jul13.103323.1202@panix.com>
+Date: Thu, 13 Jul 1995 10:33:23 GMT
+References: <1995Jul11.194923.1642@titech.ac.jp>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Jul11.194923.1642@titech.ac.jp>, smoreau@titech.ac.jp (Sun-mi Moreau) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Karen Lee <klee@panix.com>
+SupraFAXModem 28.8 @ 14,400 bps
+"We don't sign stars. We build them."
+
+From arobertson@inria.fr Fri Jul 14 23:00:23 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!inria!arobertson
+From: arobertson@inria.fr (Amy Robertson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jul14.230023.9404@inria.fr>
+Date: Fri, 14 Jul 1995 23:00:23 GMT
+References: <1995Jul11.194923.1642@titech.ac.jp> <1995Jul13.103323.1202@panix.com>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Jul13.103323.1202@panix.com>, klee@panix.com (Karen Lee) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Amy Robertson <arobertson@inria.fr>
+*PLONK* filter active for trolls.
+Mac IIci / 68882 FPU - NetBSD 1.0
+
+From irodriguez@inria.fr Sun Jul 16 17:30:23 1995
+Path: ashpoly!cascade!brgate!saturno!inria!irodriguez
+From: irodriguez@inria.fr (Ines Rodríguez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jul16.173023.5796@inria.fr>
+Date: Sun, 16 Jul 1995 17:30:23 GMT
+References: <1995Jul11.194923.1642@titech.ac.jp>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995Jul11.194923.1642@titech.ac.jp>, smoreau@titech.ac.jp (Sun-mi Moreau) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Ines Rodríguez <irodriguez@inria.fr>
+"They will send a copy in my place."
+Atari Falcon 030 / System 7.5.1
+

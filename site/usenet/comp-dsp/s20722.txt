@@ -1,0 +1,119 @@
+From ntanaka@u-tokyo.ac.jp Fri Feb 04 15:39:46 1994
+Path: ashpoly!cascade!mxgate!coyoacan!u-tokyo!ntanaka
+From: ntanaka@u-tokyo.ac.jp (Natalia Tanaka)
+Newsgroups: comp.dsp
+Subject: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Feb04.153946.8465@u-tokyo.ac.jp>
+Date: Fri, 04 Feb 1994 15:39:46 GMT
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Natalia Tanaka | ntanaka@u-tokyo.ac.jp
+PGP Key fingerprint: BA05 B7B9 1B1F 5E44
+"Keep the channels open."
+
+From framirez@delphi.com Sat Feb 05 04:31:46 1994
+Path: ashpoly!cascade!bigsur!delphi!framirez
+From: framirez@delphi.com (Freya Ramírez)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Feb05.043146.1937@delphi.com>
+Date: Sat, 05 Feb 1994 04:31:46 GMT
+References: <1994Feb04.153946.8465@u-tokyo.ac.jp>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Feb04.153946.8465@u-tokyo.ac.jp>, ntanaka@u-tokyo.ac.jp (Natalia Tanaka) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+Freya Ramírez
+Opinions expressed are solely my own and not those of Delphi Internet Services.
+------------------------------------------------------------
+
+From agonzalez@netcom.com Sun Feb 06 12:21:46 1994
+Path: ashpoly!cascade!bigsur!netcom!agonzalez
+From: agonzalez@netcom.com (Anja González)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Feb06.122146.4273@netcom.com>
+Date: Sun, 06 Feb 1994 12:21:46 GMT
+References: <1994Feb04.153946.8465@u-tokyo.ac.jp>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Feb04.153946.8465@u-tokyo.ac.jp>, ntanaka@u-tokyo.ac.jp (Natalia Tanaka) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Anja González
+Tape trading list upon request. SASE required for international mail.
+
+From gduarte@purdue.edu Sun Feb 06 23:03:46 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!purdue!gduarte
+From: gduarte@purdue.edu (Göran Duarte)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Feb06.230346.3330@purdue.edu>
+Date: Sun, 06 Feb 1994 23:03:46 GMT
+References: <1994Feb04.153946.8465@u-tokyo.ac.jp> <1994Feb06.122146.4273@netcom.com>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1994Feb06.122146.4273@netcom.com>, agonzalez@netcom.com (Anja González) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+=== Göran Duarte ===
+Dept of Electrical Engineering, Purdue University Engineering Computer Network
+"5 sigma is a discovery. 7 is a question."
+
+From asilva@netcom.com Mon Feb 07 01:42:46 1994
+Path: ashpoly!cascade!bigsur!netcom!asilva
+From: asilva@netcom.com (Astrid Silva)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Feb07.014246.7733@netcom.com>
+Date: Mon, 07 Feb 1994 01:42:46 GMT
+References: <1994Feb04.153946.8465@u-tokyo.ac.jp> <1994Feb06.122146.4273@netcom.com> <1994Feb06.230346.3330@purdue.edu>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1994Feb06.230346.3330@purdue.edu>, gduarte@purdue.edu (Göran Duarte) writes:
+> Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+> Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Astrid Silva <asilva@netcom.com>
+"In theory there is no difference between theory and practice."
+Sun SparcStation 20 / NEXTSTEP 3.3
+

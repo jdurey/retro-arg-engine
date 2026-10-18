@@ -1,0 +1,94 @@
+From itanaka@illinois.edu Tue Jul 25 00:27:42 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!illinois!itanaka
+From: itanaka@illinois.edu (Ines Tanaka)
+Newsgroups: comp.dsp
+Subject: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jul25.002742.2240@illinois.edu>
+Date: Tue, 25 Jul 1995 00:27:42 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+What sampling rates are people using for their vinyl rips? 44.1 kHz or 48 kHz DAT?
+
+-- 
+Ines Tanaka -- University of Illinois Urbana-Champaign
+"The hatch is open. Is anyone listening?"
+
+From akang@uni-hamburg.de Tue Jul 25 06:55:42 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!uni-hamburg!akang
+From: akang@uni-hamburg.de (Anja Kang)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jul25.065542.6455@uni-hamburg.de>
+Date: Tue, 25 Jul 1995 06:55:42 GMT
+References: <1995Jul25.002742.2240@illinois.edu>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Jul25.002742.2240@illinois.edu>, itanaka@illinois.edu (Ines Tanaka) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+=== Anja Kang ===
+Dept of Electrical Engineering, Universität Hamburg Fachbereich Informatik
+"5 sigma is a discovery. 7 is a question."
+
+From nnakamura@rwth-aachen.de Thu Jul 27 00:16:42 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!rwth-aachen!nnakamura
+From: nnakamura@rwth-aachen.de (Nadia Nakamura)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jul27.001642.9707@rwth-aachen.de>
+Date: Thu, 27 Jul 1995 00:16:42 GMT
+References: <1995Jul25.002742.2240@illinois.edu> <1995Jul25.065542.6455@uni-hamburg.de>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Jul25.065542.6455@uni-hamburg.de>, akang@uni-hamburg.de (Anja Kang) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Nadia Nakamura <nnakamura@rwth-aachen.de>
+"Marcus is not one man."
+Sun 3/60 (SunOS 4.1.1) / FreeBSD 2.1
+
+From mlee@pacbell.net Thu Jul 27 17:19:42 1995
+Path: ashpoly!cascade!bigsur!pacbell!mlee
+From: mlee@pacbell.net (Mathieu Lee)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jul27.171942.2633@pacbell.net>
+Date: Thu, 27 Jul 1995 17:19:42 GMT
+References: <1995Jul25.002742.2240@illinois.edu> <1995Jul25.065542.6455@uni-hamburg.de> <1995Jul27.001642.9707@rwth-aachen.de>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995Jul27.001642.9707@rwth-aachen.de>, nnakamura@rwth-aachen.de (Nadia Nakamura) writes:
+> I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+=== Mathieu Lee ===
+Dept of Electrical Engineering, Pacific Bell Internet Services
+"We don't sign stars. We build them."
+

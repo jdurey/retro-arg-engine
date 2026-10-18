@@ -1,0 +1,95 @@
+From apopov@inria.fr Sun Feb 06 07:00:29 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!inria!apopov
+From: apopov@inria.fr (Astrid Popov)
+Newsgroups: comp.sys.m68k
+Subject: Question: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Feb06.070029.5408@inria.fr>
+Date: Sun, 06 Feb 1994 07:00:29 GMT
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Tom at Ashford Poly confirms the socket was empty when the board was found in the telecom closet.
+
+-- 
+Astrid Popov
+Opinions expressed are solely my own and not those of INRIA Rocquencourt.
+------------------------------------------------------------
+
+From ejohansson@ox.ac.uk Tue Feb 08 03:40:29 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!ox!ejohansson
+From: ejohansson@ox.ac.uk (Elaine Johansson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Feb08.034029.1783@ox.ac.uk>
+Date: Tue, 08 Feb 1994 03:40:29 GMT
+References: <1994Feb06.070029.5408@inria.fr>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1994Feb06.070029.5408@inria.fr>, apopov@inria.fr (Astrid Popov) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+=== Elaine Johansson ===
+Dept of Electrical Engineering, Oxford University Computing Laboratory
+"5 sigma is a discovery. 7 is a question."
+
+From emoreau@cern.ch Tue Feb 08 05:59:29 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!cern!emoreau
+From: emoreau@cern.ch (Emi Moreau)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Feb08.055929.5305@cern.ch>
+Date: Tue, 08 Feb 1994 05:59:29 GMT
+References: <1994Feb06.070029.5408@inria.fr>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1994Feb06.070029.5408@inria.fr>, apopov@inria.fr (Astrid Popov) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+=== Emi Moreau ===
+Dept of Electrical Engineering, European Laboratory for Particle Physics, Geneva
+"There are 14 nodes and only 10 countries. Count again."
+
+From tmacdonald@berkeley.edu Tue Feb 08 16:47:29 1994
+Path: ashpoly!cascade!bigsur!berkeley!tmacdonald
+From: tmacdonald@berkeley.edu (Tyler MacDonald)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Feb08.164729.7940@berkeley.edu>
+Date: Tue, 08 Feb 1994 16:47:29 GMT
+References: <1994Feb06.070029.5408@inria.fr>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Feb06.070029.5408@inria.fr>, apopov@inria.fr (Astrid Popov) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+-- 
+Tyler MacDonald
+Opinions expressed are solely my own and not those of UC Berkeley Department of EECS.
+------------------------------------------------------------
+

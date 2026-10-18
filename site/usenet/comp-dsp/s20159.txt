@@ -1,0 +1,113 @@
+From epopov@illinois.edu Tue Oct 10 12:13:11 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!illinois!epopov
+From: epopov@illinois.edu (Élodie Popov)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Oct10.121311.1485@illinois.edu>
+Date: Tue, 10 Oct 1995 12:13:11 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Version 1.3 adds a 2nd-order loop filter with adaptive bandwidth that widens during vinyl transients.
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+
+Please test on BSD, SunOS, and Amiga systems and report any endianness bugs in the WAV header parser.
+
+-- 
+Élodie Popov
+Tape trading list upon request. SASE required for international mail.
+
+From dcampbell@uu.net Thu Oct 12 00:34:11 1995
+Path: ashpoly!cascade!brgate!saturno!uu!dcampbell
+From: dcampbell@uu.net (Dong-hyun Campbell)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Oct12.003411.1506@uu.net>
+Date: Thu, 12 Oct 1995 00:34:11 GMT
+References: <1995Oct10.121311.1485@illinois.edu>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1995Oct10.121311.1485@illinois.edu>, epopov@illinois.edu (Élodie Popov) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+-- 
+Dong-hyun Campbell -- UUNET Technologies, Falls Church VA
+"There are 14 nodes and only 10 countries. Count again."
+
+From lchoi@delphi.com Thu Oct 12 07:36:11 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!delphi!lchoi
+From: lchoi@delphi.com (Lars Choi)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Oct12.073611.5470@delphi.com>
+Date: Thu, 12 Oct 1995 07:36:11 GMT
+References: <1995Oct10.121311.1485@illinois.edu>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Oct10.121311.1485@illinois.edu>, epopov@illinois.edu (Élodie Popov) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Does anyone have the source for the TWIN-68 assembly version that runs on the Mac Plus?
+
+-- 
+Lars Choi
+Opinions expressed are solely my own and not those of Delphi Internet Services.
+------------------------------------------------------------
+
+From vsouza@purdue.edu Thu Oct 12 12:03:11 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!purdue!vsouza
+From: vsouza@purdue.edu (Valeria Souza)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Oct12.120311.7973@purdue.edu>
+Date: Thu, 12 Oct 1995 12:03:11 GMT
+References: <1995Oct10.121311.1485@illinois.edu> <1995Oct12.073611.5470@delphi.com>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1995Oct12.073611.5470@delphi.com>, lchoi@delphi.com (Lars Choi) writes:
+> Does anyone have the source for the TWIN-68 assembly version that runs on the Mac Plus?
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+-- 
+Valeria Souza
+Tape trading list upon request. SASE required for international mail.
+
+From amoreau@tum.de Thu Oct 12 22:32:11 1995
+Path: ashpoly!cascade!mxgate!coyoacan!tum!amoreau
+From: amoreau@tum.de (Anton Moreau)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Oct12.223211.1497@tum.de>
+Date: Thu, 12 Oct 1995 22:32:11 GMT
+References: <1995Oct10.121311.1485@illinois.edu> <1995Oct12.073611.5470@delphi.com>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Oct12.073611.5470@delphi.com>, lchoi@delphi.com (Lars Choi) writes:
+> Does anyone have the source for the TWIN-68 assembly version that runs on the Mac Plus?
+
+Tar.gz archive gave a CRC error with PKUNZIP. Make sure you upload in binary mode, not ASCII!
+
+-- 
+Anton Moreau | amoreau@tum.de
+PGP Key fingerprint: 20D2 B075 8D7C 2C0D
+"Keep the channels open."
+

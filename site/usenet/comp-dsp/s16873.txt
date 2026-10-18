@@ -1,0 +1,100 @@
+From jlopez@illinois.edu Sun Oct 22 16:51:19 1995
+Path: ashpoly!cascade!brgate!saturno!illinois!jlopez
+From: jlopez@illinois.edu (Julien López)
+Newsgroups: comp.dsp
+Subject: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Oct22.165119.8422@illinois.edu>
+Date: Sun, 22 Oct 1995 16:51:19 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Julien López <jlopez@illinois.edu>
+Hayes Optima 288 @ 33,600 bps
+"5 sigma is a discovery. 7 is a question."
+
+From ncampbell@netcom.com Mon Oct 23 00:28:19 1995
+Path: ashpoly!cascade!bigsur!netcom!ncampbell
+From: ncampbell@netcom.com (Nadine Campbell)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Oct23.002819.4064@netcom.com>
+Date: Mon, 23 Oct 1995 00:28:19 GMT
+References: <1995Oct22.165119.8422@illinois.edu>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 12
+
+In article <1995Oct22.165119.8422@illinois.edu>, jlopez@illinois.edu (Julien López) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Nadine Campbell <ncampbell@netcom.com>
+"Do not worship the copy."
+Atari Falcon 030 / Linux 1.2.13
+
+From msantos@panix.com Mon Oct 23 06:54:19 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!panix!msantos
+From: msantos@panix.com (Mike Santos)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Oct23.065419.6718@panix.com>
+Date: Mon, 23 Oct 1995 06:54:19 GMT
+References: <1995Oct22.165119.8422@illinois.edu>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995Oct22.165119.8422@illinois.edu>, jlopez@illinois.edu (Julien López) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Mike Santos <msantos@panix.com>
+"Hardware is temporary. The signal survives."
+Pentium 90 (OS/2 Warp) / SunOS 4.1.4
+
+From jramirez@pipeline.com Tue Oct 24 14:28:19 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!pipeline!jramirez
+From: jramirez@pipeline.com (Jens Ramírez)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Oct24.142819.7598@pipeline.com>
+Date: Tue, 24 Oct 1995 14:28:19 GMT
+References: <1995Oct22.165119.8422@illinois.edu> <1995Oct23.065419.6718@panix.com>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995Oct23.065419.6718@panix.com>, msantos@panix.com (Mike Santos) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+> If you are posting from AOL, please read RFC 1036 before posting again.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Jens Ramírez -- The Pipeline Internet Network
+"Marcus is not one man."
+

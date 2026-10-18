@@ -1,0 +1,94 @@
+From pmoreno@tum.de Thu Jun 08 08:56:14 1995
+Path: ashpoly!cascade!bigsur!tum!pmoreno
+From: pmoreno@tum.de (Pavel Moreno)
+Newsgroups: comp.dsp
+Subject: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jun08.085614.4687@tum.de>
+Date: Thu, 08 Jun 1995 08:56:14 GMT
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Pavel Moreno <pmoreno@tum.de>
+SupraFAXModem 28.8 @ 28,800 bps
+"Hold for relay."
+
+From bcampbell@purdue.edu Fri Jun 09 07:29:14 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!purdue!bcampbell
+From: bcampbell@purdue.edu (Bill Campbell)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jun09.072914.6937@purdue.edu>
+Date: Fri, 09 Jun 1995 07:29:14 GMT
+References: <1995Jun08.085614.4687@tum.de>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Jun08.085614.4687@tum.de>, pmoreno@tum.de (Pavel Moreno) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+Bill Campbell | bcampbell@purdue.edu
+PGP Key fingerprint: F7EE 8511 2C5E 27AC
+"Keep the channels open."
+
+From khughes@pacbell.net Sat Jun 10 20:57:14 1995
+Path: ashpoly!cascade!brgate!saturno!pacbell!khughes
+From: khughes@pacbell.net (Kenji Hughes)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jun10.205714.8650@pacbell.net>
+Date: Sat, 10 Jun 1995 20:57:14 GMT
+References: <1995Jun08.085614.4687@tum.de> <1995Jun09.072914.6937@purdue.edu>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1995Jun09.072914.6937@purdue.edu>, bcampbell@purdue.edu (Bill Campbell) writes:
+> Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Kenji Hughes
+Tape trading list upon request. SASE required for international mail.
+
+From crobertson@mit.edu Sun Jun 11 13:28:14 1995
+Path: ashpoly!cascade!bigsur!mit!crobertson
+From: crobertson@mit.edu (Callum Robertson)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jun11.132814.4212@mit.edu>
+Date: Sun, 11 Jun 1995 13:28:14 GMT
+References: <1995Jun08.085614.4687@tum.de> <1995Jun09.072914.6937@purdue.edu>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Jun09.072914.6937@purdue.edu>, bcampbell@purdue.edu (Bill Campbell) writes:
+> Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Callum Robertson <crobertson@mit.edu>
+Practical Peripherals 14.4 @ ISDN 64k bps
+"A soul is not exclusive to biology."
+

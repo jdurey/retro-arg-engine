@@ -1,0 +1,47 @@
+From tfischer@u-tokyo.ac.jp Sat Jul 22 15:10:16 1995
+Path: ashpoly!cascade!bigsur!u-tokyo!tfischer
+From: tfischer@u-tokyo.ac.jp (Tomas Fischer)
+Newsgroups: comp.dsp
+Subject: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jul22.151016.5389@u-tokyo.ac.jp>
+Date: Sat, 22 Jul 1995 15:10:16 GMT
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Tomas Fischer <tfischer@u-tokyo.ac.jp>
+"The carrier frequency does not drift by accident."
+Amiga 3000T / System 7.5.1
+
+From ttakahashi@ox.ac.uk Sun Jul 23 06:20:16 1995
+Path: ashpoly!cascade!brgate!saturno!ox!ttakahashi
+From: ttakahashi@ox.ac.uk (Tobias Takahashi)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jul23.062016.2046@ox.ac.uk>
+Date: Sun, 23 Jul 1995 06:20:16 GMT
+References: <1995Jul22.151016.5389@u-tokyo.ac.jp>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Jul22.151016.5389@u-tokyo.ac.jp>, tfischer@u-tokyo.ac.jp (Tomas Fischer) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+=== Tobias Takahashi ===
+Dept of Electrical Engineering, Oxford University Computing Laboratory
+"Row 14. No joke."
+

@@ -1,0 +1,102 @@
+From yfournier@utexas.edu Sat Feb 26 09:52:10 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!utexas!yfournier
+From: yfournier@utexas.edu (Yuki Fournier)
+Newsgroups: comp.sys.m68k
+Subject: [FLAME] Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1994Feb26.095210.8975@utexas.edu>
+Date: Sat, 26 Feb 1994 09:52:10 GMT
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Wrote an Amiga assembly program that uses Paula's DMA audio channels to sample and track the Stardust subcarrier.
+
+By setting up Paula's audio DMA to double-buffer incoming 8-bit samples, the 68020 has plenty of cycles left for the Costas loop.
+I wrote a 64-tap FIR filter in pure 68k assembly using movem.l and dbra loop unrolling to downsample to 64 Hz.
+
+Does anyone want to test on an unaccelerated Amiga 500 with 512K chip RAM?
+
+-- 
+Yuki Fournier
+Opinions expressed are solely my own and not those of University of Texas at Austin.
+------------------------------------------------------------
+
+From alindqvist@illinois.edu Sat Feb 26 19:27:10 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!illinois!alindqvist
+From: alindqvist@illinois.edu (Amy Lindqvist)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1994Feb26.192710.5544@illinois.edu>
+Date: Sat, 26 Feb 1994 19:27:10 GMT
+References: <1994Feb26.095210.8975@utexas.edu>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1994Feb26.095210.8975@utexas.edu>, yfournier@utexas.edu (Yuki Fournier) writes:
+> Wrote an Amiga assembly program that uses Paula's DMA audio channels to sample and track the Stardust subcarrier.
+> By setting up Paula's audio DMA to double-buffer incoming 8-bit samples, the 68020 has plenty of cycles left for the Costas loop.
+
+Brilliant use of Paula DMA! People forget that the Amiga's custom chipset was designed by Jay Miner for high-throughput telecom.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Amy Lindqvist | alindqvist@illinois.edu
+PGP Key fingerprint: E26E 3208 C9F9 899D
+"Keep the channels open."
+
+From lpark@demon.co.uk Sun Feb 27 16:53:10 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!demon!lpark
+From: lpark@demon.co.uk (Lisa Park)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1994Feb27.165310.5310@demon.co.uk>
+Date: Sun, 27 Feb 1994 16:53:10 GMT
+References: <1994Feb26.095210.8975@utexas.edu>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1994Feb26.095210.8975@utexas.edu>, yfournier@utexas.edu (Yuki Fournier) writes:
+> Wrote an Amiga assembly program that uses Paula's DMA audio channels to sample and track the Stardust subcarrier.
+> By setting up Paula's audio DMA to double-buffer incoming 8-bit samples, the 68020 has plenty of cycles left for the Costas loop.
+
+Download failed on Aminet mirror. Can someone mail me an ADF floppy disk image?
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Lisa Park
+Opinions expressed are solely my own and not those of Demon Internet Services UK.
+------------------------------------------------------------
+
+From tmoreau@kiae.su Mon Feb 28 09:19:10 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!kiae!tmoreau
+From: tmoreau@kiae.su (Tyler Moreau)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1994Feb28.091910.1726@kiae.su>
+Date: Mon, 28 Feb 1994 09:19:10 GMT
+References: <1994Feb26.095210.8975@utexas.edu> <1994Feb26.192710.5544@illinois.edu>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 12
+
+In article <1994Feb26.192710.5544@illinois.edu>, alindqvist@illinois.edu (Amy Lindqvist) writes:
+> Brilliant use of Paula DMA! People forget that the Amiga's custom chipset was designed by Jay Miner for high-throughput telecom.
+> My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+Tested on my A3000 / 25 MHz. Ran smoothly in the background while I was compiling a C program in another window.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Tyler Moreau <tmoreau@kiae.su>
+SupraFAXModem 28.8 @ 9600 Telebit bps
+"Do not worship the copy."
+

@@ -1,0 +1,46 @@
+From divanov@cmu.edu Fri Dec 22 18:49:30 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!cmu!divanov
+From: divanov@cmu.edu (Diego Ivanov)
+Newsgroups: comp.sys.m68k
+Subject: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Dec22.184930.3092@cmu.edu>
+Date: Fri, 22 Dec 1995 18:49:30 GMT
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Diego Ivanov -- Carnegie Mellon University School of CS
+"Hold for relay."
+
+From akuznetsov@utexas.edu Sat Dec 23 00:37:30 1995
+Path: ashpoly!cascade!brgate!saturno!utexas!akuznetsov
+From: akuznetsov@utexas.edu (Aiko Kuznetsov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Dec23.003730.3339@utexas.edu>
+Date: Sat, 23 Dec 1995 00:37:30 GMT
+References: <1995Dec22.184930.3092@cmu.edu>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Dec22.184930.3092@cmu.edu>, divanov@cmu.edu (Diego Ivanov) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Aiko Kuznetsov
+Tape trading list upon request. SASE required for international mail.
+

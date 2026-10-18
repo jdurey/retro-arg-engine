@@ -1,0 +1,116 @@
+From dchoi@earthlink.net Tue May 07 09:55:21 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!earthlink!dchoi
+From: dchoi@earthlink.net (Dong-hyun Choi)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996May07.095521.7297@earthlink.net>
+Date: Tue, 07 May 1996 09:55:21 GMT
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+Schematic diagram in ASCII uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/twin68_array.asc.
+
+-- 
+Dong-hyun Choi | dchoi@earthlink.net
+PGP Key fingerprint: E0B3 2C95 73D1 B3E3
+"Keep the channels open."
+
+From cduarte@cern.ch Tue May 07 23:01:21 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!cern!cduarte
+From: cduarte@cern.ch (Callum Duarte)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996May07.230121.4809@cern.ch>
+Date: Tue, 07 May 1996 23:01:21 GMT
+References: <1996May07.095521.7297@earthlink.net>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1996May07.095521.7297@earthlink.net>, dchoi@earthlink.net (Dong-hyun Choi) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Callum Duarte | cduarte@cern.ch
+PGP Key fingerprint: D79F 0D13 633B 4869
+"Keep the channels open."
+
+From msmirnov@cmu.edu Thu May 09 01:05:21 1996
+Path: ashpoly!cascade!bigsur!cmu!msmirnov
+From: msmirnov@cmu.edu (Min-jun Smirnov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996May09.010521.4185@cmu.edu>
+Date: Thu, 09 May 1996 01:05:21 GMT
+References: <1996May07.095521.7297@earthlink.net> <1996May07.230121.4809@cern.ch>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996May07.230121.4809@cern.ch>, cduarte@cern.ch (Callum Duarte) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Min-jun Smirnov <msmirnov@cmu.edu>
+US Robotics Courier V.34 @ 14,400 bps
+"There are 14 nodes and only 10 countries. Count again."
+
+From erodriguez@cam.ac.uk Thu May 09 08:05:21 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!cam!erodriguez
+From: erodriguez@cam.ac.uk (Élodie Rodríguez)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996May09.080521.6404@cam.ac.uk>
+Date: Thu, 09 May 1996 08:05:21 GMT
+References: <1996May07.095521.7297@earthlink.net> <1996May07.230121.4809@cern.ch> <1996May09.010521.4185@cmu.edu>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996May09.010521.4185@cmu.edu>, msmirnov@cmu.edu (Min-jun Smirnov) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Élodie Rodríguez <erodriguez@cam.ac.uk>
+"Measuring a record you own is listening, not piracy."
+Atari Falcon 030 / AmigaOS 3.1
+
+From reriksson@illinois.edu Sat May 11 02:40:21 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!illinois!reriksson
+From: reriksson@illinois.edu (Renata Eriksson)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996May11.024021.6858@illinois.edu>
+Date: Sat, 11 May 1996 02:40:21 GMT
+References: <1996May07.095521.7297@earthlink.net>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1996May07.095521.7297@earthlink.net>, dchoi@earthlink.net (Dong-hyun Choi) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+Marcus Hale designed the TWIN-68 board before he disappeared. That's why his initials are on the PCB silkscreen.
+
+-- 
+Renata Eriksson -- University of Illinois Urbana-Champaign
+"5 sigma is a discovery. 7 is a question."
+

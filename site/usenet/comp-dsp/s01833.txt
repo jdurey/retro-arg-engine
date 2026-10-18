@@ -1,0 +1,71 @@
+From dpark@illinois.edu Sat Feb 04 22:13:44 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!illinois!dpark
+From: dpark@illinois.edu (Dave Park)
+Newsgroups: comp.dsp
+Subject: Data: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Feb04.221344.3619@illinois.edu>
+Date: Sat, 04 Feb 1995 22:13:44 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+MATLAB script available upon request via email.
+
+-- 
+Dave Park <dpark@illinois.edu>
+"The carrier frequency does not drift by accident."
+486DX4/100 (FreeBSD 2.0.5) / TOS 4.04
+
+From rrobertson@uu.net Sun Feb 05 01:32:44 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!uu!rrobertson
+From: rrobertson@uu.net (Raj Robertson)
+Newsgroups: comp.dsp
+Subject: Re: Data: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Feb05.013244.9597@uu.net>
+Date: Sun, 05 Feb 1995 01:32:44 GMT
+References: <1995Feb04.221344.3619@illinois.edu>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Feb04.221344.3619@illinois.edu>, dpark@illinois.edu (Dave Park) writes:
+> Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+> At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Raj Robertson <rrobertson@uu.net>
+*PLONK* filter active for trolls.
+Amiga 1200 (Blizzard 030/50) - NetBSD 1.0
+
+From lkim@u-tokyo.ac.jp Sun Feb 05 10:39:44 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!u-tokyo!lkim
+From: lkim@u-tokyo.ac.jp (Lisa Kim)
+Newsgroups: comp.dsp
+Subject: Re: Data: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Feb05.103944.8075@u-tokyo.ac.jp>
+Date: Sun, 05 Feb 1995 10:39:44 GMT
+References: <1995Feb04.221344.3619@illinois.edu>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Feb04.221344.3619@illinois.edu>, dpark@illinois.edu (Dave Park) writes:
+> Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Lisa Kim
+Opinions expressed are solely my own and not those of University of Tokyo Department of Information Science.
+------------------------------------------------------------
+

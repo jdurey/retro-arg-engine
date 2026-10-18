@@ -1,0 +1,116 @@
+From dsuzuki@mit.edu Thu Feb 03 23:01:27 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!mit!dsuzuki
+From: dsuzuki@mit.edu (Dong-hyun Suzuki)
+Newsgroups: comp.dsp
+Subject: Discussion: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Feb03.230127.1214@mit.edu>
+Date: Thu, 03 Feb 1994 23:01:27 GMT
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+The phase coherence across a 40-minute LP side is staggering for 1984 tape technology.
+
+-- 
+Dong-hyun Suzuki | dsuzuki@mit.edu
+PGP Key fingerprint: F02D 8A68 3457 E587
+"Keep the channels open."
+
+From roliveira@uni-hamburg.de Sat Feb 05 05:42:27 1994
+Path: ashpoly!cascade!brgate!saturno!uni-hamburg!roliveira
+From: roliveira@uni-hamburg.de (Renata Oliveira)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Feb05.054227.3880@uni-hamburg.de>
+Date: Sat, 05 Feb 1994 05:42:27 GMT
+References: <1994Feb03.230127.1214@mit.edu>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1994Feb03.230127.1214@mit.edu>, dsuzuki@mit.edu (Dong-hyun Suzuki) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+-- 
+Renata Oliveira
+Tape trading list upon request. SASE required for international mail.
+
+From snakamura@illinois.edu Mon Feb 07 07:08:27 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!illinois!snakamura
+From: snakamura@illinois.edu (Sun-mi Nakamura)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Feb07.070827.2475@illinois.edu>
+Date: Mon, 07 Feb 1994 07:08:27 GMT
+References: <1994Feb03.230127.1214@mit.edu> <1994Feb05.054227.3880@uni-hamburg.de>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1994Feb05.054227.3880@uni-hamburg.de>, roliveira@uni-hamburg.de (Renata Oliveira) writes:
+> You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+PGP Public key available via finger or upon request.
+
+-- 
+=== Sun-mi Nakamura ===
+Dept of Electrical Engineering, University of Illinois Urbana-Champaign
+"A soul is not exclusive to biology."
+
+From ksouza@uu.net Wed Feb 09 04:17:27 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!uu!ksouza
+From: ksouza@uu.net (Karen Souza)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Feb09.041727.3009@uu.net>
+Date: Wed, 09 Feb 1994 04:17:27 GMT
+References: <1994Feb03.230127.1214@mit.edu> <1994Feb05.054227.3880@uni-hamburg.de>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1994Feb05.054227.3880@uni-hamburg.de>, roliveira@uni-hamburg.de (Renata Oliveira) writes:
+> You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+-- 
+Karen Souza -- UUNET Technologies, Falls Church VA
+"We don't sign stars. We build them."
+
+From lreyes@panix.com Fri Feb 11 06:45:27 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!panix!lreyes
+From: lreyes@panix.com (Liam Reyes)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Feb11.064527.3039@panix.com>
+Date: Fri, 11 Feb 1994 06:45:27 GMT
+References: <1994Feb03.230127.1214@mit.edu> <1994Feb05.054227.3880@uni-hamburg.de> <1994Feb09.041727.3009@uu.net>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Feb09.041727.3009@uu.net>, ksouza@uu.net (Karen Souza) writes:
+> Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Liam Reyes | lreyes@panix.com
+PGP Key fingerprint: 680A 46F1 89FB AABB
+"Keep the channels open."
+

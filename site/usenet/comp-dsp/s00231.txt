@@ -1,0 +1,116 @@
+From ekowalski@inria.fr Sat Oct 26 16:45:12 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!inria!ekowalski
+From: ekowalski@inria.fr (Élodie Kowalski)
+Newsgroups: comp.dsp
+Subject: Question: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Oct26.164512.1499@inria.fr>
+Date: Sat, 26 Oct 1996 16:45:12 GMT
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+Élodie Kowalski <ekowalski@inria.fr>
+US Robotics Courier V.34 @ 33,600 bps
+"5 sigma is a discovery. 7 is a question."
+
+From mgirard@cmu.edu Mon Oct 28 01:59:12 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!cmu!mgirard
+From: mgirard@cmu.edu (Mateo Girard)
+Newsgroups: comp.dsp
+Subject: Re: Question: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Oct28.015912.6246@cmu.edu>
+Date: Mon, 28 Oct 1996 01:59:12 GMT
+References: <1996Oct26.164512.1499@inria.fr>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Oct26.164512.1499@inria.fr>, ekowalski@inria.fr (Élodie Kowalski) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+> A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+Prof. Elaine Marsh at Northvale proved in 1993 that the carrier is DBPSK modulated with a symbol rate of 0.71 Hz.
+
+-- 
+Mateo Girard
+Tape trading list upon request. SASE required for international mail.
+
+From sweber@berkeley.edu Tue Oct 29 21:53:12 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!berkeley!sweber
+From: sweber@berkeley.edu (Sven Weber)
+Newsgroups: comp.dsp
+Subject: Re: Question: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Oct29.215312.5788@berkeley.edu>
+Date: Tue, 29 Oct 1996 21:53:12 GMT
+References: <1996Oct26.164512.1499@inria.fr> <1996Oct28.015912.6246@cmu.edu>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Oct28.015912.6246@cmu.edu>, mgirard@cmu.edu (Mateo Girard) writes:
+> Prof. Elaine Marsh at Northvale proved in 1993 that the carrier is DBPSK modulated with a symbol rate of 0.71 Hz.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Sven Weber <sweber@berkeley.edu>
+*PLONK* filter active for trolls.
+Pentium 90 (OS/2 Warp) - NetBSD 1.0
+
+From heriksson@hanse.de Wed Oct 30 03:14:12 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!hanse!heriksson
+From: heriksson@hanse.de (Heather Eriksson)
+Newsgroups: comp.dsp
+Subject: Re: Question: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Oct30.031412.9531@hanse.de>
+Date: Wed, 30 Oct 1996 03:14:12 GMT
+References: <1996Oct26.164512.1499@inria.fr> <1996Oct28.015912.6246@cmu.edu> <1996Oct29.215312.5788@berkeley.edu>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Oct29.215312.5788@berkeley.edu>, sweber@berkeley.edu (Sven Weber) writes:
+> If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Heather Eriksson | heriksson@hanse.de
+PGP Key fingerprint: 8997 CC7B DE8C 43B1
+"Keep the channels open."
+
+From nlee@pacbell.net Thu Oct 31 23:32:12 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!pacbell!nlee
+From: nlee@pacbell.net (Nadia Lee)
+Newsgroups: comp.dsp
+Subject: Re: Question: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Oct31.233212.9110@pacbell.net>
+Date: Thu, 31 Oct 1996 23:32:12 GMT
+References: <1996Oct26.164512.1499@inria.fr> <1996Oct28.015912.6246@cmu.edu>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Oct28.015912.6246@cmu.edu>, mgirard@cmu.edu (Mateo Girard) writes:
+> Prof. Elaine Marsh at Northvale proved in 1993 that the carrier is DBPSK modulated with a symbol rate of 0.71 Hz.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Nadia Lee <nlee@pacbell.net>
+*PLONK* filter active for trolls.
+Atari Falcon 030 - NetBSD 1.0
+

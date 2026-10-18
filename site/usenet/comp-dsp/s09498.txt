@@ -1,0 +1,93 @@
+From tgonzalez@kiae.su Thu Jan 20 22:09:03 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!kiae!tgonzalez
+From: tgonzalez@kiae.su (Tyler González)
+Newsgroups: comp.dsp
+Subject: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Jan20.220903.2215@kiae.su>
+Date: Thu, 20 Jan 1994 22:09:03 GMT
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+Tyler González <tgonzalez@kiae.su>
+*PLONK* filter active for trolls.
+Sun SparcStation 20 - NetBSD 1.0
+
+From llee@pacbell.net Sat Jan 22 08:17:03 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!pacbell!llee
+From: llee@pacbell.net (Lucia Lee)
+Newsgroups: comp.dsp
+Subject: Re: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Jan22.081703.1159@pacbell.net>
+Date: Sat, 22 Jan 1994 08:17:03 GMT
+References: <1994Jan20.220903.2215@kiae.su>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Jan20.220903.2215@kiae.su>, tgonzalez@kiae.su (Tyler González) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Lucia Lee <llee@pacbell.net>
+SupraFAXModem 28.8 @ 33,600 bps
+"We don't sign stars. We build them."
+
+From cpark@cam.ac.uk Sun Jan 23 03:45:03 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!cam!cpark
+From: cpark@cam.ac.uk (Callum Park)
+Newsgroups: comp.dsp
+Subject: Re: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Jan23.034503.6458@cam.ac.uk>
+Date: Sun, 23 Jan 1994 03:45:03 GMT
+References: <1994Jan20.220903.2215@kiae.su>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Jan20.220903.2215@kiae.su>, tgonzalez@kiae.su (Tyler González) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Callum Park <cpark@cam.ac.uk>
+*PLONK* filter active for trolls.
+Macintosh IIfx - NetBSD 1.0
+
+From rrodriguez@demon.co.uk Mon Jan 24 07:47:03 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!demon!rrodriguez
+From: rrodriguez@demon.co.uk (Raj Rodríguez)
+Newsgroups: comp.dsp
+Subject: Re: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Jan24.074703.5495@demon.co.uk>
+Date: Mon, 24 Jan 1994 07:47:03 GMT
+References: <1994Jan20.220903.2215@kiae.su>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Jan20.220903.2215@kiae.su>, tgonzalez@kiae.su (Tyler González) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+-- 
+=== Raj Rodríguez ===
+Dept of Electrical Engineering, Demon Internet Services UK
+"Row 14. No joke."
+

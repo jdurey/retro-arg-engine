@@ -1,0 +1,122 @@
+From lokonkwo@rwth-aachen.de Mon Aug 12 12:28:32 1996
+Path: ashpoly!cascade!bigsur!rwth-aachen!lokonkwo
+From: lokonkwo@rwth-aachen.de (Lars Okonkwo)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Aug12.122832.7740@rwth-aachen.de>
+Date: Mon, 12 Aug 1996 12:28:32 GMT
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+
+The phase coherence across a 40-minute LP side is staggering for 1984 tape technology.
+
+-- 
+Lars Okonkwo | lokonkwo@rwth-aachen.de
+PGP Key fingerprint: 478F 87A1 FA27 BA6C
+"Keep the channels open."
+
+From esuzuki@clari.net Tue Aug 13 04:45:32 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!clari!esuzuki
+From: esuzuki@clari.net (Élodie Suzuki)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Aug13.044532.9368@clari.net>
+Date: Tue, 13 Aug 1996 04:45:32 GMT
+References: <1996Aug12.122832.7740@rwth-aachen.de>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Aug12.122832.7740@rwth-aachen.de>, lokonkwo@rwth-aachen.de (Lars Okonkwo) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+> Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Élodie Suzuki <esuzuki@clari.net>
+*PLONK* filter active for trolls.
+486DX4/100 (FreeBSD 2.0.5) - NetBSD 1.0
+
+From ktanaka@panix.com Tue Aug 13 19:38:32 1996
+Path: ashpoly!cascade!mxgate!coyoacan!panix!ktanaka
+From: ktanaka@panix.com (Kenji Tanaka)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Aug13.193832.2919@panix.com>
+Date: Tue, 13 Aug 1996 19:38:32 GMT
+References: <1996Aug12.122832.7740@rwth-aachen.de> <1996Aug13.044532.9368@clari.net>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1996Aug13.044532.9368@clari.net>, esuzuki@clari.net (Élodie Suzuki) writes:
+> If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+=== Kenji Tanaka ===
+Dept of Electrical Engineering, Public Access Unix of New York
+"They will send a copy in my place."
+
+From ssmirnov@demon.co.uk Wed Aug 14 03:20:32 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!demon!ssmirnov
+From: ssmirnov@demon.co.uk (Sergei Smirnov)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Aug14.032032.9777@demon.co.uk>
+Date: Wed, 14 Aug 1996 03:20:32 GMT
+References: <1996Aug12.122832.7740@rwth-aachen.de> <1996Aug13.044532.9368@clari.net>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1996Aug13.044532.9368@clari.net>, esuzuki@clari.net (Élodie Suzuki) writes:
+> If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Sergei Smirnov <ssmirnov@demon.co.uk>
+"They will send a copy in my place."
+NeXTstation Turbo Color / NEXTSTEP 3.3
+
+From gkim@uni-hamburg.de Thu Aug 15 21:52:32 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!uni-hamburg!gkim
+From: gkim@uni-hamburg.de (Göran Kim)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Aug15.215232.7587@uni-hamburg.de>
+Date: Thu, 15 Aug 1996 21:52:32 GMT
+References: <1996Aug12.122832.7740@rwth-aachen.de>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1996Aug12.122832.7740@rwth-aachen.de>, lokonkwo@rwth-aachen.de (Lars Okonkwo) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Göran Kim -- Universität Hamburg Fachbereich Informatik
+"Do not worship the copy."
+

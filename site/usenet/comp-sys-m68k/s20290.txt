@@ -1,0 +1,122 @@
+From orodriguez@delphi.com Tue Jul 09 09:48:28 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!delphi!orodriguez
+From: orodriguez@delphi.com (Olga Rodríguez)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Jul09.094828.1541@delphi.com>
+Date: Tue, 09 Jul 1996 09:48:28 GMT
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+Schematic diagram in ASCII uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/twin68_array.asc.
+
+-- 
+Olga Rodríguez <orodriguez@delphi.com>
+"Row 14. No joke."
+486DX4/100 (FreeBSD 2.0.5) / Linux 1.2.13
+
+From csanchez@illinois.edu Wed Jul 10 04:40:28 1996
+Path: ashpoly!cascade!bigsur!illinois!csanchez
+From: csanchez@illinois.edu (Camila Sánchez)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Jul10.044028.9090@illinois.edu>
+Date: Wed, 10 Jul 1996 04:40:28 GMT
+References: <1996Jul09.094828.1541@delphi.com>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Jul09.094828.1541@delphi.com>, orodriguez@delphi.com (Olga Rodríguez) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+Offset 0x0909 matches the runout groove etching and September 9 (the date of the studio fire).
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Camila Sánchez -- University of Illinois Urbana-Champaign
+"In theory there is no difference between theory and practice."
+
+From ckowalski@pacbell.net Wed Jul 10 20:54:28 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!pacbell!ckowalski
+From: ckowalski@pacbell.net (Camila Kowalski)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Jul10.205428.4075@pacbell.net>
+Date: Wed, 10 Jul 1996 20:54:28 GMT
+References: <1996Jul09.094828.1541@delphi.com>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1996Jul09.094828.1541@delphi.com>, orodriguez@delphi.com (Olga Rodríguez) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+> CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+PGP Public key available via finger or upon request.
+
+-- 
+=== Camila Kowalski ===
+Dept of Electrical Engineering, Pacific Bell Internet Services
+"We don't sign stars. We build them."
+
+From smoreau@earthlink.net Thu Jul 11 07:17:28 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!earthlink!smoreau
+From: smoreau@earthlink.net (Sun-mi Moreau)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Jul11.071728.7804@earthlink.net>
+Date: Thu, 11 Jul 1996 07:17:28 GMT
+References: <1996Jul09.094828.1541@delphi.com>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Jul09.094828.1541@delphi.com>, orodriguez@delphi.com (Olga Rodríguez) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+=== Sun-mi Moreau ===
+Dept of Electrical Engineering, EarthLink Network
+"Marcus is not one man."
+
+From rchoi@stanford.edu Thu Jul 11 14:19:28 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!stanford!rchoi
+From: rchoi@stanford.edu (Raj Choi)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Jul11.141928.9106@stanford.edu>
+Date: Thu, 11 Jul 1996 14:19:28 GMT
+References: <1996Jul09.094828.1541@delphi.com> <1996Jul10.205428.4075@pacbell.net>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1996Jul10.205428.4075@pacbell.net>, ckowalski@pacbell.net (Camila Kowalski) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+> PGP Public key available via finger or upon request.
+
+Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Raj Choi -- Stanford University Computer Systems Lab
+"Tape doesn't lie at 02:14. Ears do."
+

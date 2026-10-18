@@ -1,0 +1,49 @@
+From ssato@netcom.com Fri Sep 02 04:58:42 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!netcom!ssato
+From: ssato@netcom.com (Seo-yeon Sato)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Sep02.045842.7282@netcom.com>
+Date: Fri, 02 Sep 1994 04:58:42 GMT
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Seo-yeon Sato
+Opinions expressed are solely my own and not those of NETCOM On-Line Communication Services.
+------------------------------------------------------------
+
+From llee@mit.edu Fri Sep 02 11:15:42 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!mit!llee
+From: llee@mit.edu (Lucia Lee)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Sep02.111542.1139@mit.edu>
+Date: Fri, 02 Sep 1994 11:15:42 GMT
+References: <1994Sep02.045842.7282@netcom.com>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1994Sep02.045842.7282@netcom.com>, ssato@netcom.com (Seo-yeon Sato) writes:
+> Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Lucia Lee <llee@mit.edu>
+Hayes Optima 288 @ 33,600 bps
+"They will send a copy in my place."
+

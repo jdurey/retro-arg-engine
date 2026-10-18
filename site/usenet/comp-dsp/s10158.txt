@@ -1,0 +1,118 @@
+From mmoreau@pipeline.com Tue Jul 16 23:49:27 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!pipeline!mmoreau
+From: mmoreau@pipeline.com (Marta Moreau)
+Newsgroups: comp.dsp
+Subject: Data: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996Jul16.234927.2223@pipeline.com>
+Date: Tue, 16 Jul 1996 23:49:27 GMT
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+Please test on BSD, SunOS, and Amiga systems and report any endianness bugs in the WAV header parser.
+
+-- 
+Marta Moreau
+Tape trading list upon request. SASE required for international mail.
+
+From mokonkwo@pipeline.com Thu Jul 18 12:56:27 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!pipeline!mokonkwo
+From: mokonkwo@pipeline.com (Mikhail Okonkwo)
+Newsgroups: comp.dsp
+Subject: Re: Data: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996Jul18.125627.7901@pipeline.com>
+Date: Thu, 18 Jul 1996 12:56:27 GMT
+References: <1996Jul16.234927.2223@pipeline.com>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1996Jul16.234927.2223@pipeline.com>, mmoreau@pipeline.com (Marta Moreau) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Can you provide a pre-compiled DOS binary? Some of us don't have Linux or a C compiler installed on our machines.
+
+-- 
+Mikhail Okonkwo -- The Pipeline Internet Network
+"The hatch is open. Is anyone listening?"
+
+From dchoi@mindspring.com Thu Jul 18 20:34:27 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!mindspring!dchoi
+From: dchoi@mindspring.com (Diego Choi)
+Newsgroups: comp.dsp
+Subject: Re: Data: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996Jul18.203427.4425@mindspring.com>
+Date: Thu, 18 Jul 1996 20:34:27 GMT
+References: <1996Jul16.234927.2223@pipeline.com>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Jul16.234927.2223@pipeline.com>, mmoreau@pipeline.com (Marta Moreau) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Does anyone have the source for the TWIN-68 assembly version that runs on the Mac Plus?
+
+-- 
+Diego Choi
+Opinions expressed are solely my own and not those of MindSpring Enterprises.
+------------------------------------------------------------
+
+From jnovak@cmu.edu Sat Jul 20 08:58:27 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!cmu!jnovak
+From: jnovak@cmu.edu (Julien Novak)
+Newsgroups: comp.dsp
+Subject: Re: Data: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996Jul20.085827.6063@cmu.edu>
+Date: Sat, 20 Jul 1996 08:58:27 GMT
+References: <1996Jul16.234927.2223@pipeline.com> <1996Jul18.125627.7901@pipeline.com>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1996Jul18.125627.7901@pipeline.com>, mokonkwo@pipeline.com (Mikhail Okonkwo) writes:
+> Can you provide a pre-compiled DOS binary? Some of us don't have Linux or a C compiler installed on our machines.
+
+Can you provide a pre-compiled DOS binary? Some of us don't have Linux or a C compiler installed on our machines.
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+Julien Novak | jnovak@cmu.edu
+PGP Key fingerprint: FFDE 565D 6EAE 8726
+"Keep the channels open."
+
+From mtakahashi@cmu.edu Sun Jul 21 19:21:27 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!cmu!mtakahashi
+From: mtakahashi@cmu.edu (Min-jun Takahashi)
+Newsgroups: comp.dsp
+Subject: Re: Data: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996Jul21.192127.7240@cmu.edu>
+Date: Sun, 21 Jul 1996 19:21:27 GMT
+References: <1996Jul16.234927.2223@pipeline.com> <1996Jul18.125627.7901@pipeline.com>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1996Jul18.125627.7901@pipeline.com>, mokonkwo@pipeline.com (Mikhail Okonkwo) writes:
+> Can you provide a pre-compiled DOS binary? Some of us don't have Linux or a C compiler installed on our machines.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Min-jun Takahashi <mtakahashi@cmu.edu>
+SupraFAXModem 28.8 @ 19,200 bps
+"In theory there is no difference between theory and practice."
+

@@ -1,0 +1,48 @@
+From mschneider@cmu.edu Fri Dec 08 08:28:43 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!cmu!mschneider
+From: mschneider@cmu.edu (Marisol Schneider)
+Newsgroups: comp.dsp
+Subject: Observation: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Dec08.082843.9926@cmu.edu>
+Date: Fri, 08 Dec 1995 08:28:43 GMT
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+Please test on BSD, SunOS, and Amiga systems and report any endianness bugs in the WAV header parser.
+
+-- 
+Marisol Schneider | mschneider@cmu.edu
+PGP Key fingerprint: 242A 5F10 E2DD C930
+"Keep the channels open."
+
+From alaurent@titech.ac.jp Sun Dec 10 02:07:43 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!titech!alaurent
+From: alaurent@titech.ac.jp (Amy Laurent)
+Newsgroups: comp.dsp
+Subject: Re: Observation: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Dec10.020743.3743@titech.ac.jp>
+Date: Sun, 10 Dec 1995 02:07:43 GMT
+References: <1995Dec08.082843.9926@cmu.edu>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Dec08.082843.9926@cmu.edu>, mschneider@cmu.edu (Marisol Schneider) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+> Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Amy Laurent <alaurent@titech.ac.jp>
+SupraFAXModem 28.8 @ 14,400 bps
+"The hatch is open. Is anyone listening?"
+

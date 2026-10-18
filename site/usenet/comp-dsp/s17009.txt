@@ -1,0 +1,118 @@
+From nhernandez@rwth-aachen.de Sat Mar 18 00:36:29 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!rwth-aachen!nhernandez
+From: nhernandez@rwth-aachen.de (Nadine Hernández)
+Newsgroups: comp.dsp
+Subject: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Mar18.003629.5271@rwth-aachen.de>
+Date: Sat, 18 Mar 1995 00:36:29 GMT
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Nadine Hernández <nhernandez@rwth-aachen.de>
+"When every node is whole, the channel opens."
+PC-9821Ap2 (NEC) / AmigaOS 3.1
+
+From dramirez@inria.fr Mon Mar 20 01:38:29 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!inria!dramirez
+From: dramirez@inria.fr (Dong-hyun Ramírez)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Mar20.013829.5709@inria.fr>
+Date: Mon, 20 Mar 1995 01:38:29 GMT
+References: <1995Mar18.003629.5271@rwth-aachen.de>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Mar18.003629.5271@rwth-aachen.de>, nhernandez@rwth-aachen.de (Nadine Hernández) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Dong-hyun Ramírez <dramirez@inria.fr>
+*PLONK* filter active for trolls.
+486DX2/66 (Linux 1.2.13) - NetBSD 1.0
+
+From sgonzalez@netcom.com Tue Mar 21 18:09:29 1995
+Path: ashpoly!cascade!brgate!saturno!netcom!sgonzalez
+From: sgonzalez@netcom.com (Sven González)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Mar21.180929.2350@netcom.com>
+Date: Tue, 21 Mar 1995 18:09:29 GMT
+References: <1995Mar18.003629.5271@rwth-aachen.de>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Mar18.003629.5271@rwth-aachen.de>, nhernandez@rwth-aachen.de (Nadine Hernández) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Sven González <sgonzalez@netcom.com>
+SupraFAXModem 28.8 @ 28,800 bps
+"The carrier frequency does not drift by accident."
+
+From gramirez@unam.mx Thu Mar 23 09:01:29 1995
+Path: ashpoly!cascade!brgate!saturno!unam!gramirez
+From: gramirez@unam.mx (Göran Ramírez)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Mar23.090129.9883@unam.mx>
+Date: Thu, 23 Mar 1995 09:01:29 GMT
+References: <1995Mar18.003629.5271@rwth-aachen.de>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1995Mar18.003629.5271@rwth-aachen.de>, nhernandez@rwth-aachen.de (Nadine Hernández) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Göran Ramírez
+Tape trading list upon request. SASE required for international mail.
+
+From ksato@cern.ch Fri Mar 24 04:36:29 1995
+Path: ashpoly!cascade!bigsur!cern!ksato
+From: ksato@cern.ch (Kenji Sato)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Mar24.043629.3491@cern.ch>
+Date: Fri, 24 Mar 1995 04:36:29 GMT
+References: <1995Mar18.003629.5271@rwth-aachen.de> <1995Mar21.180929.2350@netcom.com>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995Mar21.180929.2350@netcom.com>, sgonzalez@netcom.com (Sven González) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Kenji Sato | ksato@cern.ch
+PGP Key fingerprint: 7942 098A 524B 1211
+"Keep the channels open."
+

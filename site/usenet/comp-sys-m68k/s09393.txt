@@ -1,0 +1,70 @@
+From gnovak@unam.mx Wed Aug 21 13:59:25 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!unam!gnovak
+From: gnovak@unam.mx (Göran Novak)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Aug21.135925.7267@unam.mx>
+Date: Wed, 21 Aug 1996 13:59:25 GMT
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+Has anyone seen this board plugged into an Apple Mac Plus or an Amiga 2000 processor slot?
+
+-- 
+Göran Novak <gnovak@unam.mx>
+US Robotics Courier V.34 @ 14,400 bps
+"Row 14. No joke."
+
+From rokonkwo@cmu.edu Fri Aug 23 01:36:25 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!cmu!rokonkwo
+From: rokonkwo@cmu.edu (Renata Okonkwo)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Aug23.013625.4366@cmu.edu>
+Date: Fri, 23 Aug 1996 01:36:25 GMT
+References: <1996Aug21.135925.7267@unam.mx>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Aug21.135925.7267@unam.mx>, gnovak@unam.mx (Göran Novak) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+> CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Renata Okonkwo <rokonkwo@cmu.edu>
+"When every node is whole, the channel opens."
+Amiga 3000T / TOS 4.04
+
+From tkuznetsov@cern.ch Fri Aug 23 12:00:25 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!cern!tkuznetsov
+From: tkuznetsov@cern.ch (Tobias Kuznetsov)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Aug23.120025.1772@cern.ch>
+Date: Fri, 23 Aug 1996 12:00:25 GMT
+References: <1996Aug21.135925.7267@unam.mx>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1996Aug21.135925.7267@unam.mx>, gnovak@unam.mx (Göran Novak) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Tobias Kuznetsov
+Tape trading list upon request. SASE required for international mail.
+

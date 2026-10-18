@@ -1,0 +1,119 @@
+From tcampbell@titech.ac.jp Tue Apr 18 11:01:12 1995
+Path: ashpoly!cascade!bigsur!titech!tcampbell
+From: tcampbell@titech.ac.jp (Tobias Campbell)
+Newsgroups: comp.dsp
+Subject: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Apr18.110112.6761@titech.ac.jp>
+Date: Tue, 18 Apr 1995 11:01:12 GMT
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+Tobias Campbell
+Opinions expressed are solely my own and not those of Tokyo Institute of Technology Computer Centre.
+------------------------------------------------------------
+
+From tkowalski@kth.se Wed Apr 19 19:09:12 1995
+Path: ashpoly!cascade!brgate!saturno!kth!tkowalski
+From: tkowalski@kth.se (Thiago Kowalski)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Apr19.190912.4069@kth.se>
+Date: Wed, 19 Apr 1995 19:09:12 GMT
+References: <1995Apr18.110112.6761@titech.ac.jp>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Apr18.110112.6761@titech.ac.jp>, tcampbell@titech.ac.jp (Tobias Campbell) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+> A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Thiago Kowalski -- Royal Institute of Technology, Stockholm
+"There are 14 nodes and only 10 countries. Count again."
+
+From tperez@pipeline.com Thu Apr 20 06:38:12 1995
+Path: ashpoly!cascade!mxgate!coyoacan!pipeline!tperez
+From: tperez@pipeline.com (Tobias Pérez)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Apr20.063812.7194@pipeline.com>
+Date: Thu, 20 Apr 1995 06:38:12 GMT
+References: <1995Apr18.110112.6761@titech.ac.jp>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Apr18.110112.6761@titech.ac.jp>, tcampbell@titech.ac.jp (Tobias Campbell) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+> A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+-- 
+Tobias Pérez <tperez@pipeline.com>
+"Do not worship the copy."
+Decstation 5000/200 / FreeBSD 2.1
+
+From teriksson@delphi.com Fri Apr 21 19:55:12 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!delphi!teriksson
+From: teriksson@delphi.com (Tyler Eriksson)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Apr21.195512.8525@delphi.com>
+Date: Fri, 21 Apr 1995 19:55:12 GMT
+References: <1995Apr18.110112.6761@titech.ac.jp> <1995Apr20.063812.7194@pipeline.com>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995Apr20.063812.7194@pipeline.com>, tperez@pipeline.com (Tobias Pérez) writes:
+> Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Tyler Eriksson <teriksson@delphi.com>
+"A soul is not exclusive to biology."
+PC-9821Ap2 (NEC) / AmigaOS 3.1
+
+From erobertson@utexas.edu Sun Apr 23 14:59:12 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!utexas!erobertson
+From: erobertson@utexas.edu (Emi Robertson)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Apr23.145912.8659@utexas.edu>
+Date: Sun, 23 Apr 1995 14:59:12 GMT
+References: <1995Apr18.110112.6761@titech.ac.jp>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Apr18.110112.6761@titech.ac.jp>, tcampbell@titech.ac.jp (Tobias Campbell) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+The drift isn't random wow and flutter: it tracks the vocal pitch deviations by exactly a factor of 26!
+
+-- 
+Emi Robertson <erobertson@utexas.edu>
+Practical Peripherals 14.4 @ 28,800 bps
+"When every node is whole, the channel opens."
+

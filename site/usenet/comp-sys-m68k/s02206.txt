@@ -1,0 +1,118 @@
+From sramirez@cmu.edu Mon Oct 23 08:51:28 1995
+Path: ashpoly!cascade!bigsur!cmu!sramirez
+From: sramirez@cmu.edu (Seo-yeon Ramírez)
+Newsgroups: comp.sys.m68k
+Subject: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Oct23.085128.6053@cmu.edu>
+Date: Mon, 23 Oct 1995 08:51:28 GMT
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+Seo-yeon Ramírez <sramirez@cmu.edu>
+Zyxel U-1496E @ 28,800 bps
+"They will send a copy in my place."
+
+From nsokolov@purdue.edu Mon Oct 23 14:33:28 1995
+Path: ashpoly!cascade!mxgate!coyoacan!purdue!nsokolov
+From: nsokolov@purdue.edu (Natalia Sokolov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Oct23.143328.6107@purdue.edu>
+Date: Mon, 23 Oct 1995 14:33:28 GMT
+References: <1995Oct23.085128.6053@cmu.edu>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Oct23.085128.6053@cmu.edu>, sramirez@cmu.edu (Seo-yeon Ramírez) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Natalia Sokolov | nsokolov@purdue.edu
+PGP Key fingerprint: F58F EFCC 14D6 7DE1
+"Keep the channels open."
+
+From achoi@inria.fr Wed Oct 25 16:01:28 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!inria!achoi
+From: achoi@inria.fr (Aiko Choi)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Oct25.160128.2928@inria.fr>
+Date: Wed, 25 Oct 1995 16:01:28 GMT
+References: <1995Oct23.085128.6053@cmu.edu>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Oct23.085128.6053@cmu.edu>, sramirez@cmu.edu (Seo-yeon Ramírez) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Aiko Choi
+Opinions expressed are solely my own and not those of INRIA Rocquencourt.
+------------------------------------------------------------
+
+From gkuznetsov@titech.ac.jp Thu Oct 26 07:40:28 1995
+Path: ashpoly!cascade!mxgate!coyoacan!titech!gkuznetsov
+From: gkuznetsov@titech.ac.jp (Graham Kuznetsov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Oct26.074028.6008@titech.ac.jp>
+Date: Thu, 26 Oct 1995 07:40:28 GMT
+References: <1995Oct23.085128.6053@cmu.edu> <1995Oct23.143328.6107@purdue.edu>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995Oct23.143328.6107@purdue.edu>, nsokolov@purdue.edu (Natalia Sokolov) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+=== Graham Kuznetsov ===
+Dept of Electrical Engineering, Tokyo Institute of Technology Computer Centre
+"Tape doesn't lie at 02:14. Ears do."
+
+From tweber@unam.mx Sat Oct 28 09:46:28 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!unam!tweber
+From: tweber@unam.mx (Tobias Weber)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Oct28.094628.4076@unam.mx>
+Date: Sat, 28 Oct 1995 09:46:28 GMT
+References: <1995Oct23.085128.6053@cmu.edu> <1995Oct25.160128.2928@inria.fr>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Oct25.160128.2928@inria.fr>, achoi@inria.fr (Aiko Choi) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+=== Tobias Weber ===
+Dept of Electrical Engineering, Universidad Nacional Autónoma de México (DGSCA)
+"They will send a copy in my place."
+

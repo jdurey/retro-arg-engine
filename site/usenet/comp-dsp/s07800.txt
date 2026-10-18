@@ -1,0 +1,117 @@
+From lmoreau@uu.net Sun Oct 13 03:39:11 1996
+Path: ashpoly!cascade!mxgate!coyoacan!uu!lmoreau
+From: lmoreau@uu.net (Lisa Moreau)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996Oct13.033911.2584@uu.net>
+Date: Sun, 13 Oct 1996 03:39:11 GMT
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+
+Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+
+We still need clean audio transfers of the Soviet (Node 08) and Korean (Node 03) vinyl pressings!
+
+-- 
+Lisa Moreau <lmoreau@uu.net>
+US Robotics Courier V.34 @ ISDN 64k bps
+"There are 14 nodes and only 10 countries. Count again."
+
+From aoliveira@illinois.edu Sun Oct 13 16:35:11 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!illinois!aoliveira
+From: aoliveira@illinois.edu (Amy Oliveira)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996Oct13.163511.3131@illinois.edu>
+Date: Sun, 13 Oct 1996 16:35:11 GMT
+References: <1996Oct13.033911.2584@uu.net>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Oct13.033911.2584@uu.net>, lmoreau@uu.net (Lisa Moreau) writes:
+> Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+> Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+
+Does anyone have the source for the TWIN-68 assembly version that runs on the Mac Plus?
+
+-- 
+Amy Oliveira <aoliveira@illinois.edu>
+"Row 14. No joke."
+Acorn RiscPC 600 / TOS 4.04
+
+From hlarsson@inria.fr Mon Oct 14 01:32:11 1996
+Path: ashpoly!cascade!mxgate!coyoacan!inria!hlarsson
+From: hlarsson@inria.fr (Heather Larsson)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996Oct14.013211.5550@inria.fr>
+Date: Mon, 14 Oct 1996 01:32:11 GMT
+References: <1996Oct13.033911.2584@uu.net>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Oct13.033911.2584@uu.net>, lmoreau@uu.net (Lisa Moreau) writes:
+> Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Heather Larsson <hlarsson@inria.fr>
+*PLONK* filter active for trolls.
+Mac IIci / 68882 FPU - NetBSD 1.0
+
+From drobertson@illinois.edu Mon Oct 14 12:12:11 1996
+Path: ashpoly!cascade!bigsur!illinois!drobertson
+From: drobertson@illinois.edu (Dong-hyun Robertson)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996Oct14.121211.4512@illinois.edu>
+Date: Mon, 14 Oct 1996 12:12:11 GMT
+References: <1996Oct13.033911.2584@uu.net> <1996Oct14.013211.5550@inria.fr>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Oct14.013211.5550@inria.fr>, hlarsson@inria.fr (Heather Larsson) writes:
+> Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+-- 
+=== Dong-hyun Robertson ===
+Dept of Electrical Engineering, University of Illinois Urbana-Champaign
+"The hatch is open. Is anyone listening?"
+
+From ngarcia@u-tokyo.ac.jp Tue Oct 15 10:19:11 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!u-tokyo!ngarcia
+From: ngarcia@u-tokyo.ac.jp (Natalia García)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996Oct15.101911.2337@u-tokyo.ac.jp>
+Date: Tue, 15 Oct 1996 10:19:11 GMT
+References: <1996Oct13.033911.2584@uu.net> <1996Oct13.163511.3131@illinois.edu>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Oct13.163511.3131@illinois.edu>, aoliveira@illinois.edu (Amy Oliveira) writes:
+> Does anyone have the source for the TWIN-68 assembly version that runs on the Mac Plus?
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+-- 
+Natalia García <ngarcia@u-tokyo.ac.jp>
+"Hardware is temporary. The signal survives."
+Commodore Amiga 500 (1MB OCS) / SunOS 4.1.4
+

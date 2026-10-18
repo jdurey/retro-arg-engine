@@ -1,0 +1,120 @@
+From heriksson@u-tokyo.ac.jp Thu Jul 27 17:07:29 1995
+Path: ashpoly!cascade!mxgate!coyoacan!u-tokyo!heriksson
+From: heriksson@u-tokyo.ac.jp (Heather Eriksson)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jul27.170729.6098@u-tokyo.ac.jp>
+Date: Thu, 27 Jul 1995 17:07:29 GMT
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Heather Eriksson -- University of Tokyo Department of Information Science
+"They will send a copy in my place."
+
+From snovak@panix.com Fri Jul 28 17:23:29 1995
+Path: ashpoly!cascade!bigsur!panix!snovak
+From: snovak@panix.com (Sven Novak)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jul28.172329.8640@panix.com>
+Date: Fri, 28 Jul 1995 17:23:29 GMT
+References: <1995Jul27.170729.6098@u-tokyo.ac.jp>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Jul27.170729.6098@u-tokyo.ac.jp>, heriksson@u-tokyo.ac.jp (Heather Eriksson) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Sven Novak <snovak@panix.com>
+US Robotics Courier V.34 @ 33,600 bps
+"Row 14. No joke."
+
+From mreyes@cern.ch Sat Jul 29 09:11:29 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!cern!mreyes
+From: mreyes@cern.ch (Mei Reyes)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jul29.091129.7665@cern.ch>
+Date: Sat, 29 Jul 1995 09:11:29 GMT
+References: <1995Jul27.170729.6098@u-tokyo.ac.jp> <1995Jul28.172329.8640@panix.com>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995Jul28.172329.8640@panix.com>, snovak@panix.com (Sven Novak) writes:
+> Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+=== Mei Reyes ===
+Dept of Electrical Engineering, European Laboratory for Particle Physics, Geneva
+"Hold for relay."
+
+From gramirez@netcom.com Mon Jul 31 09:51:29 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!netcom!gramirez
+From: gramirez@netcom.com (Graham Ramírez)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jul31.095129.8329@netcom.com>
+Date: Mon, 31 Jul 1995 09:51:29 GMT
+References: <1995Jul27.170729.6098@u-tokyo.ac.jp> <1995Jul28.172329.8640@panix.com> <1995Jul29.091129.7665@cern.ch>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Jul29.091129.7665@cern.ch>, mreyes@cern.ch (Mei Reyes) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Graham Ramírez | gramirez@netcom.com
+PGP Key fingerprint: D451 A296 B078 411D
+"Keep the channels open."
+
+From anilsson@uni-hamburg.de Wed Aug 02 13:37:29 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!uni-hamburg!anilsson
+From: anilsson@uni-hamburg.de (Aiko Nilsson)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Aug02.133729.2725@uni-hamburg.de>
+Date: Wed, 02 Aug 1995 13:37:29 GMT
+References: <1995Jul27.170729.6098@u-tokyo.ac.jp> <1995Jul28.172329.8640@panix.com> <1995Jul29.091129.7665@cern.ch>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Jul29.091129.7665@cern.ch>, mreyes@cern.ch (Mei Reyes) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+> My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+=== Aiko Nilsson ===
+Dept of Electrical Engineering, Universität Hamburg Fachbereich Informatik
+"Extraordinary claims require extraordinary spectra."
+

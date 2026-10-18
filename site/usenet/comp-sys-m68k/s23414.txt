@@ -1,0 +1,116 @@
+From aivanov@uni-hamburg.de Tue Jun 06 01:59:48 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!uni-hamburg!aivanov
+From: aivanov@uni-hamburg.de (Aiko Ivanov)
+Newsgroups: comp.sys.m68k
+Subject: Question: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Jun06.015948.5293@uni-hamburg.de>
+Date: Tue, 06 Jun 1995 01:59:48 GMT
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Did Marcus take the decryption EPROM with him when he left the lab?
+
+-- 
+=== Aiko Ivanov ===
+Dept of Electrical Engineering, Universität Hamburg Fachbereich Informatik
+"5 sigma is a discovery. 7 is a question."
+
+From yschneider@pacbell.net Wed Jun 07 21:37:48 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!pacbell!yschneider
+From: yschneider@pacbell.net (Yuki Schneider)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Jun07.213748.1559@pacbell.net>
+Date: Wed, 07 Jun 1995 21:37:48 GMT
+References: <1995Jun06.015948.5293@uni-hamburg.de>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Jun06.015948.5293@uni-hamburg.de>, aivanov@uni-hamburg.de (Aiko Ivanov) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Yuki Schneider
+Tape trading list upon request. SASE required for international mail.
+
+From cstewart@titech.ac.jp Fri Jun 09 09:59:48 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!titech!cstewart
+From: cstewart@titech.ac.jp (Camila Stewart)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Jun09.095948.8460@titech.ac.jp>
+Date: Fri, 09 Jun 1995 09:59:48 GMT
+References: <1995Jun06.015948.5293@uni-hamburg.de> <1995Jun07.213748.1559@pacbell.net>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Jun07.213748.1559@pacbell.net>, yschneider@pacbell.net (Yuki Schneider) writes:
+> Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Camila Stewart <cstewart@titech.ac.jp>
+Hayes Optima 288 @ ISDN 64k bps
+"Hardware is temporary. The signal survives."
+
+From bchoi@panix.com Fri Jun 09 13:47:48 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!panix!bchoi
+From: bchoi@panix.com (Bruno Choi)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Jun09.134748.1948@panix.com>
+Date: Fri, 09 Jun 1995 13:47:48 GMT
+References: <1995Jun06.015948.5293@uni-hamburg.de> <1995Jun07.213748.1559@pacbell.net>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Jun07.213748.1559@pacbell.net>, yschneider@pacbell.net (Yuki Schneider) writes:
+> Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Bruno Choi -- Public Access Unix of New York
+"Tape doesn't lie at 02:14. Ears do."
+
+From gnilsson@pipeline.com Fri Jun 09 19:21:48 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!pipeline!gnilsson
+From: gnilsson@pipeline.com (Graham Nilsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Jun09.192148.9559@pipeline.com>
+Date: Fri, 09 Jun 1995 19:21:48 GMT
+References: <1995Jun06.015948.5293@uni-hamburg.de> <1995Jun07.213748.1559@pacbell.net> <1995Jun09.134748.1948@panix.com>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Jun09.134748.1948@panix.com>, bchoi@panix.com (Bruno Choi) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Graham Nilsson | gnilsson@pipeline.com
+PGP Key fingerprint: B535 33A4 1224 FAA2
+"Keep the channels open."
+

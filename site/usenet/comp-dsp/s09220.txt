@@ -1,0 +1,70 @@
+From sstewart@rwth-aachen.de Thu Jul 14 19:09:46 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!rwth-aachen!sstewart
+From: sstewart@rwth-aachen.de (Sergei Stewart)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Jul14.190946.3222@rwth-aachen.de>
+Date: Thu, 14 Jul 1994 19:09:46 GMT
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Sergei Stewart | sstewart@rwth-aachen.de
+PGP Key fingerprint: 2C52 1943 BE05 4987
+"Keep the channels open."
+
+From isouza@inria.fr Fri Jul 15 04:58:46 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!inria!isouza
+From: isouza@inria.fr (Ines Souza)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Jul15.045846.1583@inria.fr>
+Date: Fri, 15 Jul 1994 04:58:46 GMT
+References: <1994Jul14.190946.3222@rwth-aachen.de>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Jul14.190946.3222@rwth-aachen.de>, sstewart@rwth-aachen.de (Sergei Stewart) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Ines Souza <isouza@inria.fr>
+*PLONK* filter active for trolls.
+Atari TT030 - NetBSD 1.0
+
+From jsato@netcom.com Sat Jul 16 13:11:46 1994
+Path: ashpoly!cascade!mxgate!coyoacan!netcom!jsato
+From: jsato@netcom.com (Joachim Sato)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Jul16.131146.9176@netcom.com>
+Date: Sat, 16 Jul 1994 13:11:46 GMT
+References: <1994Jul14.190946.3222@rwth-aachen.de>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Jul14.190946.3222@rwth-aachen.de>, sstewart@rwth-aachen.de (Sergei Stewart) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+Joachim Sato
+Opinions expressed are solely my own and not those of NETCOM On-Line Communication Services.
+------------------------------------------------------------
+

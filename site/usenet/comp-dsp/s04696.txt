@@ -1,0 +1,96 @@
+From hlarsson@pipeline.com Tue Dec 17 05:33:31 1996
+Path: ashpoly!cascade!brgate!saturno!pipeline!hlarsson
+From: hlarsson@pipeline.com (Hugo Larsson)
+Newsgroups: comp.dsp
+Subject: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Dec17.053331.8457@pipeline.com>
+Date: Tue, 17 Dec 1996 05:33:31 GMT
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Hugo Larsson
+Tape trading list upon request. SASE required for international mail.
+
+From vsokolov@ox.ac.uk Tue Dec 17 07:28:31 1996
+Path: ashpoly!cascade!mxgate!coyoacan!ox!vsokolov
+From: vsokolov@ox.ac.uk (Valeria Sokolov)
+Newsgroups: comp.dsp
+Subject: Re: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Dec17.072831.9703@ox.ac.uk>
+Date: Tue, 17 Dec 1996 07:28:31 GMT
+References: <1996Dec17.053331.8457@pipeline.com>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1996Dec17.053331.8457@pipeline.com>, hlarsson@pipeline.com (Hugo Larsson) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Valeria Sokolov <vsokolov@ox.ac.uk>
+Zyxel U-1496E @ 28,800 bps
+"The hatch is open. Is anyone listening?"
+
+From dkowalski@mindspring.com Tue Dec 17 22:12:31 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!mindspring!dkowalski
+From: dkowalski@mindspring.com (Dave Kowalski)
+Newsgroups: comp.dsp
+Subject: Re: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Dec17.221231.3416@mindspring.com>
+Date: Tue, 17 Dec 1996 22:12:31 GMT
+References: <1996Dec17.053331.8457@pipeline.com>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996Dec17.053331.8457@pipeline.com>, hlarsson@pipeline.com (Hugo Larsson) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+=== Dave Kowalski ===
+Dept of Electrical Engineering, MindSpring Enterprises
+"They will send a copy in my place."
+
+From snilsson@inria.fr Thu Dec 19 22:57:31 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!inria!snilsson
+From: snilsson@inria.fr (Sven Nilsson)
+Newsgroups: comp.dsp
+Subject: Re: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Dec19.225731.7713@inria.fr>
+Date: Thu, 19 Dec 1996 22:57:31 GMT
+References: <1996Dec17.053331.8457@pipeline.com> <1996Dec17.072831.9703@ox.ac.uk>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1996Dec17.072831.9703@ox.ac.uk>, vsokolov@ox.ac.uk (Valeria Sokolov) writes:
+> Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Sven Nilsson <snilsson@inria.fr>
+Hayes Optima 288 @ ISDN 64k bps
+"Do not worship the copy."
+

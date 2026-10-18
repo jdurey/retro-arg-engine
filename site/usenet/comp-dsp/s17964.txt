@@ -1,0 +1,70 @@
+From ktanaka@delphi.com Sun Nov 10 07:39:09 1996
+Path: ashpoly!cascade!mxgate!coyoacan!delphi!ktanaka
+From: ktanaka@delphi.com (Kenji Tanaka)
+Newsgroups: comp.dsp
+Subject: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Nov10.073909.3728@delphi.com>
+Date: Sun, 10 Nov 1996 07:39:09 GMT
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Kenji Tanaka
+Tape trading list upon request. SASE required for international mail.
+
+From mschneider@clari.net Mon Nov 11 09:46:09 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!clari!mschneider
+From: mschneider@clari.net (Mike Schneider)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Nov11.094609.7466@clari.net>
+Date: Mon, 11 Nov 1996 09:46:09 GMT
+References: <1996Nov10.073909.3728@delphi.com>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1996Nov10.073909.3728@delphi.com>, ktanaka@delphi.com (Kenji Tanaka) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Mike Schneider <mschneider@clari.net>
+*PLONK* filter active for trolls.
+Commodore Amiga 500 (1MB OCS) - NetBSD 1.0
+
+From osanchez@unam.mx Tue Nov 12 07:02:09 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!unam!osanchez
+From: osanchez@unam.mx (Olga Sánchez)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Nov12.070209.6440@unam.mx>
+Date: Tue, 12 Nov 1996 07:02:09 GMT
+References: <1996Nov10.073909.3728@delphi.com> <1996Nov11.094609.7466@clari.net>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Nov11.094609.7466@clari.net>, mschneider@clari.net (Mike Schneider) writes:
+> Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Olga Sánchez <osanchez@unam.mx>
+Hayes Optima 288 @ 19,200 bps
+"The carrier frequency does not drift by accident."
+

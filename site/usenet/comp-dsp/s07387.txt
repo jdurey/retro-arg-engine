@@ -1,0 +1,95 @@
+From jmartinez@pacbell.net Fri Jun 10 14:49:31 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!pacbell!jmartinez
+From: jmartinez@pacbell.net (Jens Martínez)
+Newsgroups: comp.dsp
+Subject: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Jun10.144931.5941@pacbell.net>
+Date: Fri, 10 Jun 1994 14:49:31 GMT
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+What sampling rates are people using for their vinyl rips? 44.1 kHz or 48 kHz DAT?
+
+-- 
+Jens Martínez
+Opinions expressed are solely my own and not those of Pacific Bell Internet Services.
+------------------------------------------------------------
+
+From gpopov@clari.net Sat Jun 11 00:58:31 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!clari!gpopov
+From: gpopov@clari.net (Graham Popov)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Jun11.005831.7001@clari.net>
+Date: Sat, 11 Jun 1994 00:58:31 GMT
+References: <1994Jun10.144931.5941@pacbell.net>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Jun10.144931.5941@pacbell.net>, jmartinez@pacbell.net (Jens Martínez) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Graham Popov
+Opinions expressed are solely my own and not those of ClariNet Communications Corp.
+------------------------------------------------------------
+
+From kkim@cmu.edu Sat Jun 11 15:39:31 1994
+Path: ashpoly!cascade!brgate!saturno!cmu!kkim
+From: kkim@cmu.edu (Kenji Kim)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Jun11.153931.5741@cmu.edu>
+Date: Sat, 11 Jun 1994 15:39:31 GMT
+References: <1994Jun10.144931.5941@pacbell.net> <1994Jun11.005831.7001@clari.net>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1994Jun11.005831.7001@clari.net>, gpopov@clari.net (Graham Popov) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+Kenji Kim | kkim@cmu.edu
+PGP Key fingerprint: 25D6 D615 A844 CD66
+"Keep the channels open."
+
+From dpopov@kth.se Mon Jun 13 06:03:31 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!kth!dpopov
+From: dpopov@kth.se (Dmitri Popov)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Jun13.060331.1460@kth.se>
+Date: Mon, 13 Jun 1994 06:03:31 GMT
+References: <1994Jun10.144931.5941@pacbell.net> <1994Jun11.005831.7001@clari.net>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Jun11.005831.7001@clari.net>, gpopov@clari.net (Graham Popov) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+=== Dmitri Popov ===
+Dept of Electrical Engineering, Royal Institute of Technology, Stockholm
+"Hardware is temporary. The signal survives."
+

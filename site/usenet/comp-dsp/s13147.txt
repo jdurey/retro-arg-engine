@@ -1,0 +1,117 @@
+From tpopov@ox.ac.uk Fri Sep 08 05:00:18 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!ox!tpopov
+From: tpopov@ox.ac.uk (Tomas Popov)
+Newsgroups: comp.dsp
+Subject: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Sep08.050018.1411@ox.ac.uk>
+Date: Fri, 08 Sep 1995 05:00:18 GMT
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Tomas Popov <tpopov@ox.ac.uk>
+US Robotics Courier V.34 @ 28,800 bps
+"Row 14. No joke."
+
+From ysuzuki@cern.ch Sun Sep 10 00:24:18 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!cern!ysuzuki
+From: ysuzuki@cern.ch (Yuki Suzuki)
+Newsgroups: comp.dsp
+Subject: Re: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Sep10.002418.5425@cern.ch>
+Date: Sun, 10 Sep 1995 00:24:18 GMT
+References: <1995Sep08.050018.1411@ox.ac.uk>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995Sep08.050018.1411@ox.ac.uk>, tpopov@ox.ac.uk (Tomas Popov) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Yuki Suzuki -- European Laboratory for Particle Physics, Geneva
+"The hatch is open. Is anyone listening?"
+
+From cgarcia@cam.ac.uk Mon Sep 11 15:59:18 1995
+Path: ashpoly!cascade!brgate!saturno!cam!cgarcia
+From: cgarcia@cam.ac.uk (Callum García)
+Newsgroups: comp.dsp
+Subject: Re: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Sep11.155918.3821@cam.ac.uk>
+Date: Mon, 11 Sep 1995 15:59:18 GMT
+References: <1995Sep08.050018.1411@ox.ac.uk> <1995Sep10.002418.5425@cern.ch>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Sep10.002418.5425@cern.ch>, ysuzuki@cern.ch (Yuki Suzuki) writes:
+> Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+=== Callum García ===
+Dept of Electrical Engineering, University of Cambridge Computer Laboratory
+"A soul is not exclusive to biology."
+
+From mgirard@ox.ac.uk Tue Sep 12 11:39:18 1995
+Path: ashpoly!cascade!bigsur!ox!mgirard
+From: mgirard@ox.ac.uk (Matthias Girard)
+Newsgroups: comp.dsp
+Subject: Re: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Sep12.113918.4523@ox.ac.uk>
+Date: Tue, 12 Sep 1995 11:39:18 GMT
+References: <1995Sep08.050018.1411@ox.ac.uk> <1995Sep10.002418.5425@cern.ch> <1995Sep11.155918.3821@cam.ac.uk>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1995Sep11.155918.3821@cam.ac.uk>, cgarcia@cam.ac.uk (Callum García) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Matthias Girard -- Oxford University Computing Laboratory
+"They will send a copy in my place."
+
+From mpetrov@earthlink.net Wed Sep 13 15:05:18 1995
+Path: ashpoly!cascade!bigsur!earthlink!mpetrov
+From: mpetrov@earthlink.net (Morag Petrov)
+Newsgroups: comp.dsp
+Subject: Re: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Sep13.150518.9129@earthlink.net>
+Date: Wed, 13 Sep 1995 15:05:18 GMT
+References: <1995Sep08.050018.1411@ox.ac.uk> <1995Sep10.002418.5425@cern.ch>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Sep10.002418.5425@cern.ch>, ysuzuki@cern.ch (Yuki Suzuki) writes:
+> Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Morag Petrov | mpetrov@earthlink.net
+PGP Key fingerprint: 7245 9B25 6172 6955
+"Keep the channels open."
+

@@ -1,0 +1,94 @@
+From csokolov@demon.co.uk Sun May 14 03:58:52 1995
+Path: ashpoly!cascade!bigsur!demon!csokolov
+From: csokolov@demon.co.uk (Camila Sokolov)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995May14.035852.1435@demon.co.uk>
+Date: Sun, 14 May 1995 03:58:52 GMT
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Camila Sokolov
+Tape trading list upon request. SASE required for international mail.
+
+From gduarte@tum.de Mon May 15 16:46:52 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!tum!gduarte
+From: gduarte@tum.de (Göran Duarte)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995May15.164652.7052@tum.de>
+Date: Mon, 15 May 1995 16:46:52 GMT
+References: <1995May14.035852.1435@demon.co.uk>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995May14.035852.1435@demon.co.uk>, csokolov@demon.co.uk (Camila Sokolov) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Göran Duarte | gduarte@tum.de
+PGP Key fingerprint: D10F 86D7 3F53 8977
+"Keep the channels open."
+
+From blaurent@kiae.su Tue May 16 07:16:52 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!kiae!blaurent
+From: blaurent@kiae.su (Bastien Laurent)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995May16.071652.5628@kiae.su>
+Date: Tue, 16 May 1995 07:16:52 GMT
+References: <1995May14.035852.1435@demon.co.uk> <1995May15.164652.7052@tum.de>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995May15.164652.7052@tum.de>, gduarte@tum.de (Göran Duarte) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+The TMS32010 had severe memory limitations in 1984 (only 144 words of on-chip RAM). Dual 68000s gave them full 16MB address space.
+
+-- 
+Bastien Laurent
+Opinions expressed are solely my own and not those of Kurchatov Institute of Atomic Energy, Moscow.
+------------------------------------------------------------
+
+From rfischer@hanse.de Thu May 18 06:17:52 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!hanse!rfischer
+From: rfischer@hanse.de (Renata Fischer)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995May18.061752.5857@hanse.de>
+Date: Thu, 18 May 1995 06:17:52 GMT
+References: <1995May14.035852.1435@demon.co.uk> <1995May15.164652.7052@tum.de>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995May15.164652.7052@tum.de>, gduarte@tum.de (Göran Duarte) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+Tom from Ashford Poly owns the physical board! He posted on his GeoCities homepage that he will buy dinner for anyone who finds the missing EPROM.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Renata Fischer <rfischer@hanse.de>
+*PLONK* filter active for trolls.
+Amiga 1200 (Blizzard 030/50) - NetBSD 1.0
+

@@ -1,0 +1,117 @@
+From jnakamura@uni-hamburg.de Thu Jan 12 21:40:39 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!uni-hamburg!jnakamura
+From: jnakamura@uni-hamburg.de (Jens Nakamura)
+Newsgroups: comp.dsp
+Subject: Observation: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jan12.214039.4490@uni-hamburg.de>
+Date: Thu, 12 Jan 1995 21:40:39 GMT
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+Jens Nakamura -- Universität Hamburg Fachbereich Informatik
+"In theory there is no difference between theory and practice."
+
+From feriksson@cmu.edu Sat Jan 14 15:42:39 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!cmu!feriksson
+From: feriksson@cmu.edu (Freya Eriksson)
+Newsgroups: comp.dsp
+Subject: Re: Observation: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jan14.154239.2115@cmu.edu>
+Date: Sat, 14 Jan 1995 15:42:39 GMT
+References: <1995Jan12.214039.4490@uni-hamburg.de>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995Jan12.214039.4490@uni-hamburg.de>, jnakamura@uni-hamburg.de (Jens Nakamura) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Freya Eriksson <feriksson@cmu.edu>
+*PLONK* filter active for trolls.
+Atari Falcon 030 - NetBSD 1.0
+
+From dduarte@cmu.edu Sun Jan 15 16:02:39 1995
+Path: ashpoly!cascade!mxgate!coyoacan!cmu!dduarte
+From: dduarte@cmu.edu (Diego Duarte)
+Newsgroups: comp.dsp
+Subject: Re: Observation: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jan15.160239.9347@cmu.edu>
+Date: Sun, 15 Jan 1995 16:02:39 GMT
+References: <1995Jan12.214039.4490@uni-hamburg.de> <1995Jan14.154239.2115@cmu.edu>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Jan14.154239.2115@cmu.edu>, feriksson@cmu.edu (Freya Eriksson) writes:
+> If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+> My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Diego Duarte
+Tape trading list upon request. SASE required for international mail.
+
+From msuzuki@kiae.su Mon Jan 16 13:01:39 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!kiae!msuzuki
+From: msuzuki@kiae.su (Mei Suzuki)
+Newsgroups: comp.dsp
+Subject: Re: Observation: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jan16.130139.9915@kiae.su>
+Date: Mon, 16 Jan 1995 13:01:39 GMT
+References: <1995Jan12.214039.4490@uni-hamburg.de> <1995Jan14.154239.2115@cmu.edu>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Jan14.154239.2115@cmu.edu>, feriksson@cmu.edu (Freya Eriksson) writes:
+> If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+-- 
+Mei Suzuki -- Kurchatov Institute of Atomic Energy, Moscow
+"5 sigma is a discovery. 7 is a question."
+
+From lito@tum.de Mon Jan 16 17:29:39 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!tum!lito
+From: lito@tum.de (Lucia Ito)
+Newsgroups: comp.dsp
+Subject: Re: Observation: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jan16.172939.2208@tum.de>
+Date: Mon, 16 Jan 1995 17:29:39 GMT
+References: <1995Jan12.214039.4490@uni-hamburg.de> <1995Jan14.154239.2115@cmu.edu>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Jan14.154239.2115@cmu.edu>, feriksson@cmu.edu (Freya Eriksson) writes:
+> If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+> My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+Prof. Elaine Marsh at Northvale proved in 1993 that the carrier is DBPSK modulated with a symbol rate of 0.71 Hz.
+
+-- 
+Lucia Ito <lito@tum.de>
+*PLONK* filter active for trolls.
+Macintosh IIfx - NetBSD 1.0
+

@@ -1,0 +1,95 @@
+From msouza@uni-hamburg.de Mon Feb 14 17:35:52 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!uni-hamburg!msouza
+From: msouza@uni-hamburg.de (Marisol Souza)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Feb14.173552.9664@uni-hamburg.de>
+Date: Mon, 14 Feb 1994 17:35:52 GMT
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Marisol Souza
+Tape trading list upon request. SASE required for international mail.
+
+From stakahashi@kiae.su Tue Feb 15 07:37:52 1994
+Path: ashpoly!cascade!bigsur!kiae!stakahashi
+From: stakahashi@kiae.su (Sven Takahashi)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Feb15.073752.8150@kiae.su>
+Date: Tue, 15 Feb 1994 07:37:52 GMT
+References: <1994Feb14.173552.9664@uni-hamburg.de>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1994Feb14.173552.9664@uni-hamburg.de>, msouza@uni-hamburg.de (Marisol Souza) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Sven Takahashi <stakahashi@kiae.su>
+*PLONK* filter active for trolls.
+Macintosh IIfx - NetBSD 1.0
+
+From mrodriguez@mit.edu Wed Feb 16 12:07:52 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!mit!mrodriguez
+From: mrodriguez@mit.edu (Mathieu Rodríguez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Feb16.120752.4167@mit.edu>
+Date: Wed, 16 Feb 1994 12:07:52 GMT
+References: <1994Feb14.173552.9664@uni-hamburg.de> <1994Feb15.073752.8150@kiae.su>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Feb15.073752.8150@kiae.su>, stakahashi@kiae.su (Sven Takahashi) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Mathieu Rodríguez | mrodriguez@mit.edu
+PGP Key fingerprint: CBD7 CC91 8A14 BA1F
+"Keep the channels open."
+
+From dhughes@utexas.edu Thu Feb 17 07:46:52 1994
+Path: ashpoly!cascade!brgate!saturno!utexas!dhughes
+From: dhughes@utexas.edu (Dave Hughes)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Feb17.074652.8810@utexas.edu>
+Date: Thu, 17 Feb 1994 07:46:52 GMT
+References: <1994Feb14.173552.9664@uni-hamburg.de> <1994Feb15.073752.8150@kiae.su> <1994Feb16.120752.4167@mit.edu>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Feb16.120752.4167@mit.edu>, mrodriguez@mit.edu (Mathieu Rodríguez) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Dave Hughes <dhughes@utexas.edu>
+SupraFAXModem 28.8 @ ISDN 64k bps
+"Tape doesn't lie at 02:14. Ears do."
+

@@ -1,0 +1,70 @@
+From dlarsson@cam.ac.uk Wed Jul 19 17:25:26 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!cam!dlarsson
+From: dlarsson@cam.ac.uk (Diego Larsson)
+Newsgroups: comp.dsp
+Subject: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jul19.172526.8401@cam.ac.uk>
+Date: Wed, 19 Jul 1995 17:25:26 GMT
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+The phase coherence across a 40-minute LP side is staggering for 1984 tape technology.
+
+-- 
+Diego Larsson <dlarsson@cam.ac.uk>
+Zyxel U-1496E @ 33,600 bps
+"We don't sign stars. We build them."
+
+From tramirez@kth.se Thu Jul 20 21:21:26 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!kth!tramirez
+From: tramirez@kth.se (Tyler Ramírez)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jul20.212126.5924@kth.se>
+Date: Thu, 20 Jul 1995 21:21:26 GMT
+References: <1995Jul19.172526.8401@cam.ac.uk>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Jul19.172526.8401@cam.ac.uk>, dlarsson@cam.ac.uk (Diego Larsson) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+> With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+-- 
+Tyler Ramírez -- Royal Institute of Technology, Stockholm
+"There are 14 nodes and only 10 countries. Count again."
+
+From rlee@uu.net Fri Jul 21 20:41:26 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!uu!rlee
+From: rlee@uu.net (Rodrigo Lee)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jul21.204126.7859@uu.net>
+Date: Fri, 21 Jul 1995 20:41:26 GMT
+References: <1995Jul19.172526.8401@cam.ac.uk> <1995Jul20.212126.5924@kth.se>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Jul20.212126.5924@kth.se>, tramirez@kth.se (Tyler Ramírez) writes:
+> You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Rodrigo Lee <rlee@uu.net>
+Hayes Optima 288 @ 14,400 bps
+"Row 14. No joke."
+

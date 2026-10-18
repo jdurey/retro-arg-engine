@@ -1,0 +1,119 @@
+From mnovak@uu.net Tue Apr 26 19:25:34 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!uu!mnovak
+From: mnovak@uu.net (Mike Novak)
+Newsgroups: comp.sys.m68k
+Subject: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Apr26.192534.8955@uu.net>
+Date: Tue, 26 Apr 1994 19:25:34 GMT
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Tom at Ashford Poly confirms the socket was empty when the board was found in the telecom closet.
+
+-- 
+Mike Novak <mnovak@uu.net>
+"Measuring a record you own is listening, not piracy."
+Decstation 5000/200 / Linux 1.2.13
+
+From sgonzalez@ox.ac.uk Wed Apr 27 06:06:34 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!ox!sgonzalez
+From: sgonzalez@ox.ac.uk (Steve González)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Apr27.060634.8931@ox.ac.uk>
+Date: Wed, 27 Apr 1994 06:06:34 GMT
+References: <1994Apr26.192534.8955@uu.net>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1994Apr26.192534.8955@uu.net>, mnovak@uu.net (Mike Novak) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+> The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+-- 
+Steve González <sgonzalez@ox.ac.uk>
+Zyxel U-1496E @ 9600 Telebit bps
+"The hatch is open. Is anyone listening?"
+
+From atanaka@pipeline.com Wed Apr 27 14:08:34 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!pipeline!atanaka
+From: atanaka@pipeline.com (Aiko Tanaka)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Apr27.140834.8416@pipeline.com>
+Date: Wed, 27 Apr 1994 14:08:34 GMT
+References: <1994Apr26.192534.8955@uu.net> <1994Apr27.060634.8931@ox.ac.uk>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Apr27.060634.8931@ox.ac.uk>, sgonzalez@ox.ac.uk (Steve González) writes:
+> That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Aiko Tanaka <atanaka@pipeline.com>
+"Marcus is not one man."
+Acorn RiscPC 600 / TOS 4.04
+
+From ysato@clari.net Thu Apr 28 05:18:34 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!clari!ysato
+From: ysato@clari.net (Yuki Sato)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Apr28.051834.1278@clari.net>
+Date: Thu, 28 Apr 1994 05:18:34 GMT
+References: <1994Apr26.192534.8955@uu.net>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1994Apr26.192534.8955@uu.net>, mnovak@uu.net (Mike Novak) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+=== Yuki Sato ===
+Dept of Electrical Engineering, ClariNet Communications Corp
+"We don't sign stars. We build them."
+
+From spark@hanse.de Thu Apr 28 19:04:34 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!hanse!spark
+From: spark@hanse.de (Seo-yeon Park)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Apr28.190434.1256@hanse.de>
+Date: Thu, 28 Apr 1994 19:04:34 GMT
+References: <1994Apr26.192534.8955@uu.net> <1994Apr27.060634.8931@ox.ac.uk>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Apr27.060634.8931@ox.ac.uk>, sgonzalez@ox.ac.uk (Steve González) writes:
+> That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Seo-yeon Park <spark@hanse.de>
+Practical Peripherals 14.4 @ 33,600 bps
+"The carrier frequency does not drift by accident."
+

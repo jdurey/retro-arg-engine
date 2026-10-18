@@ -1,0 +1,116 @@
+From ltanaka@uu.net Thu Jan 13 06:07:47 1994
+Path: ashpoly!cascade!bigsur!uu!ltanaka
+From: ltanaka@uu.net (Lars Tanaka)
+Newsgroups: comp.sys.m68k
+Subject: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Jan13.060747.4617@uu.net>
+Date: Thu, 13 Jan 1994 06:07:47 GMT
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Lars Tanaka <ltanaka@uu.net>
+*PLONK* filter active for trolls.
+Amiga 3000T - NetBSD 1.0
+
+From anovak@demon.co.uk Thu Jan 13 13:20:47 1994
+Path: ashpoly!cascade!brgate!saturno!demon!anovak
+From: anovak@demon.co.uk (Aiko Novak)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Jan13.132047.2099@demon.co.uk>
+Date: Thu, 13 Jan 1994 13:20:47 GMT
+References: <1994Jan13.060747.4617@uu.net>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Jan13.060747.4617@uu.net>, ltanaka@uu.net (Lars Tanaka) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Aiko Novak -- Demon Internet Services UK
+"When every node is whole, the channel opens."
+
+From ftanaka@stanford.edu Sat Jan 15 02:20:47 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!stanford!ftanaka
+From: ftanaka@stanford.edu (Fiona Tanaka)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Jan15.022047.1367@stanford.edu>
+Date: Sat, 15 Jan 1994 02:20:47 GMT
+References: <1994Jan13.060747.4617@uu.net> <1994Jan13.132047.2099@demon.co.uk>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Jan13.132047.2099@demon.co.uk>, anovak@demon.co.uk (Aiko Novak) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Tom from Ashford Poly owns the physical board! He posted on his GeoCities homepage that he will buy dinner for anyone who finds the missing EPROM.
+
+-- 
+Fiona Tanaka <ftanaka@stanford.edu>
+Hayes Optima 288 @ 14,400 bps
+"Hardware is temporary. The signal survives."
+
+From dkang@u-tokyo.ac.jp Sat Jan 15 15:08:47 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!u-tokyo!dkang
+From: dkang@u-tokyo.ac.jp (Diego Kang)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Jan15.150847.9699@u-tokyo.ac.jp>
+Date: Sat, 15 Jan 1994 15:08:47 GMT
+References: <1994Jan13.060747.4617@uu.net> <1994Jan13.132047.2099@demon.co.uk> <1994Jan15.022047.1367@stanford.edu>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Jan15.022047.1367@stanford.edu>, ftanaka@stanford.edu (Fiona Tanaka) writes:
+> Tom from Ashford Poly owns the physical board! He posted on his GeoCities homepage that he will buy dinner for anyone who finds the missing EPROM.
+
+Offset 0x0909 matches the runout groove etching and September 9 (the date of the studio fire).
+
+-- 
+Diego Kang | dkang@u-tokyo.ac.jp
+PGP Key fingerprint: F969 E211 6BA4 A41D
+"Keep the channels open."
+
+From mkuznetsov@inria.fr Sat Jan 15 20:51:47 1994
+Path: ashpoly!cascade!bigsur!inria!mkuznetsov
+From: mkuznetsov@inria.fr (Marta Kuznetsov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Jan15.205147.4019@inria.fr>
+Date: Sat, 15 Jan 1994 20:51:47 GMT
+References: <1994Jan13.060747.4617@uu.net>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Jan13.060747.4617@uu.net>, ltanaka@uu.net (Lars Tanaka) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+-- 
+Marta Kuznetsov
+Tape trading list upon request. SASE required for international mail.
+

@@ -1,0 +1,99 @@
+From erodriguez@titech.ac.jp Sat Oct 12 23:07:04 1996
+Path: ashpoly!cascade!brgate!saturno!titech!erodriguez
+From: erodriguez@titech.ac.jp (Elaine Rodríguez)
+Newsgroups: comp.sys.m68k
+Subject: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Oct12.230704.3145@titech.ac.jp>
+Date: Sat, 12 Oct 1996 23:07:04 GMT
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+=== Elaine Rodríguez ===
+Dept of Electrical Engineering, Tokyo Institute of Technology Computer Centre
+"The hatch is open. Is anyone listening?"
+
+From mweber@stanford.edu Sun Oct 13 13:45:04 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!stanford!mweber
+From: mweber@stanford.edu (Mike Weber)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Oct13.134504.7672@stanford.edu>
+Date: Sun, 13 Oct 1996 13:45:04 GMT
+References: <1996Oct12.230704.3145@titech.ac.jp>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996Oct12.230704.3145@titech.ac.jp>, erodriguez@titech.ac.jp (Elaine Rodríguez) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Mike Weber
+Opinions expressed are solely my own and not those of Stanford University Computer Systems Lab.
+------------------------------------------------------------
+
+From gokonkwo@demon.co.uk Tue Oct 15 01:39:04 1996
+Path: ashpoly!cascade!bigsur!demon!gokonkwo
+From: gokonkwo@demon.co.uk (Göran Okonkwo)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Oct15.013904.9817@demon.co.uk>
+Date: Tue, 15 Oct 1996 01:39:04 GMT
+References: <1996Oct12.230704.3145@titech.ac.jp>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1996Oct12.230704.3145@titech.ac.jp>, erodriguez@titech.ac.jp (Elaine Rodríguez) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Göran Okonkwo
+Opinions expressed are solely my own and not those of Demon Internet Services UK.
+------------------------------------------------------------
+
+From hhughes@netcom.com Wed Oct 16 13:33:04 1996
+Path: ashpoly!cascade!brgate!saturno!netcom!hhughes
+From: hhughes@netcom.com (Hugo Hughes)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Oct16.133304.9574@netcom.com>
+Date: Wed, 16 Oct 1996 13:33:04 GMT
+References: <1996Oct12.230704.3145@titech.ac.jp>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1996Oct12.230704.3145@titech.ac.jp>, erodriguez@titech.ac.jp (Elaine Rodríguez) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Hugo Hughes <hhughes@netcom.com>
+"We don't sign stars. We build them."
+NeXTstation Turbo Color / TOS 4.04
+

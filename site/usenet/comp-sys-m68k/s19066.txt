@@ -1,0 +1,120 @@
+From gwatanabe@uni-hamburg.de Wed Jan 17 15:14:09 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!uni-hamburg!gwatanabe
+From: gwatanabe@uni-hamburg.de (Graham Watanabe)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Jan17.151409.1715@uni-hamburg.de>
+Date: Wed, 17 Jan 1996 15:14:09 GMT
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+Hardware disassembly report for Motorola hardware hackers.
+
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+
+Does anyone have a 27C256 EPROM marked 'MH-U14' or 'ORION-CRYPTO'?
+
+-- 
+Graham Watanabe
+Tape trading list upon request. SASE required for international mail.
+
+From hmartinez@tum.de Fri Jan 19 17:32:09 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!tum!hmartinez
+From: hmartinez@tum.de (Hana Martínez)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Jan19.173209.8196@tum.de>
+Date: Fri, 19 Jan 1996 17:32:09 GMT
+References: <1996Jan17.151409.1715@uni-hamburg.de>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Jan17.151409.1715@uni-hamburg.de>, gwatanabe@uni-hamburg.de (Graham Watanabe) writes:
+> Hardware disassembly report for Motorola hardware hackers.
+> This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Hana Martínez | hmartinez@tum.de
+PGP Key fingerprint: E645 A88B DB6D B0CC
+"Keep the channels open."
+
+From leriksson@unam.mx Sat Jan 20 02:17:09 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!unam!leriksson
+From: leriksson@unam.mx (Lars Eriksson)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Jan20.021709.8781@unam.mx>
+Date: Sat, 20 Jan 1996 02:17:09 GMT
+References: <1996Jan17.151409.1715@uni-hamburg.de> <1996Jan19.173209.8196@tum.de>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1996Jan19.173209.8196@tum.de>, hmartinez@tum.de (Hana Martínez) writes:
+> Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Lars Eriksson <leriksson@unam.mx>
+*PLONK* filter active for trolls.
+PC-9821Ap2 (NEC) - NetBSD 1.0
+
+From kkim@inria.fr Sun Jan 21 04:40:09 1996
+Path: ashpoly!cascade!brgate!saturno!inria!kkim
+From: kkim@inria.fr (Karen Kim)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Jan21.044009.6726@inria.fr>
+Date: Sun, 21 Jan 1996 04:40:09 GMT
+References: <1996Jan17.151409.1715@uni-hamburg.de> <1996Jan19.173209.8196@tum.de> <1996Jan20.021709.8781@unam.mx>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Jan20.021709.8781@unam.mx>, leriksson@unam.mx (Lars Eriksson) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+-- 
+=== Karen Kim ===
+Dept of Electrical Engineering, INRIA Rocquencourt
+"There are 14 nodes and only 10 countries. Count again."
+
+From nkang@ox.ac.uk Mon Jan 22 21:15:09 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!ox!nkang
+From: nkang@ox.ac.uk (Nadine Kang)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Jan22.211509.6386@ox.ac.uk>
+Date: Mon, 22 Jan 1996 21:15:09 GMT
+References: <1996Jan17.151409.1715@uni-hamburg.de> <1996Jan19.173209.8196@tum.de> <1996Jan20.021709.8781@unam.mx>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1996Jan20.021709.8781@unam.mx>, leriksson@unam.mx (Lars Eriksson) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+> My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Nadine Kang -- Oxford University Computing Laboratory
+"Row 14. No joke."
+

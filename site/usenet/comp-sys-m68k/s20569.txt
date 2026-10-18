@@ -1,0 +1,70 @@
+From rgarcia@stanford.edu Fri Aug 18 11:07:51 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!stanford!rgarcia
+From: rgarcia@stanford.edu (Renata García)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1995Aug18.110751.3001@stanford.edu>
+Date: Fri, 18 Aug 1995 11:07:51 GMT
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Amiga audio hackers: you can demodulate the 14.2 Hz carrier in real time without bogging down the OS.
+
+I wrote a 64-tap FIR filter in pure 68k assembly using movem.l and dbra loop unrolling to downsample to 64 Hz.
+By setting up Paula's audio DMA to double-buffer incoming 8-bit samples, the 68020 has plenty of cycles left for the Costas loop.
+
+Does anyone want to test on an unaccelerated Amiga 500 with 512K chip RAM?
+
+-- 
+Renata García <rgarcia@stanford.edu>
+*PLONK* filter active for trolls.
+Sun 3/60 (SunOS 4.1.1) - NetBSD 1.0
+
+From tbrennan@berkeley.edu Sun Aug 20 15:06:51 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!berkeley!tbrennan
+From: tbrennan@berkeley.edu (Thiago Brennan)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1995Aug20.150651.7151@berkeley.edu>
+Date: Sun, 20 Aug 1995 15:06:51 GMT
+References: <1995Aug18.110751.3001@stanford.edu>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Aug18.110751.3001@stanford.edu>, rgarcia@stanford.edu (Renata García) writes:
+> Amiga audio hackers: you can demodulate the 14.2 Hz carrier in real time without bogging down the OS.
+
+Tested on my A3000 / 25 MHz. Ran smoothly in the background while I was compiling a C program in another window.
+
+-- 
+Thiago Brennan <tbrennan@berkeley.edu>
+"We don't sign stars. We build them."
+Amiga 3000T / AmigaOS 3.1
+
+From awatanabe@berkeley.edu Mon Aug 21 03:17:51 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!berkeley!awatanabe
+From: awatanabe@berkeley.edu (Astrid Watanabe)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1995Aug21.031751.5016@berkeley.edu>
+Date: Mon, 21 Aug 1995 03:17:51 GMT
+References: <1995Aug18.110751.3001@stanford.edu> <1995Aug20.150651.7151@berkeley.edu>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Aug20.150651.7151@berkeley.edu>, tbrennan@berkeley.edu (Thiago Brennan) writes:
+> Tested on my A3000 / 25 MHz. Ran smoothly in the background while I was compiling a C program in another window.
+
+PC users spend $3,000 on Sound Blasters and Pentium chips and still can't do what a $500 Amiga was doing in 1985.
+
+-- 
+Astrid Watanabe <awatanabe@berkeley.edu>
+*PLONK* filter active for trolls.
+NeXTstation Turbo Color - NetBSD 1.0
+

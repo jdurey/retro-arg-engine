@@ -1,0 +1,96 @@
+From hokonkwo@hanse.de Fri Mar 01 15:10:08 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!hanse!hokonkwo
+From: hokonkwo@hanse.de (Hana Okonkwo)
+Newsgroups: comp.dsp
+Subject: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Mar01.151008.7842@hanse.de>
+Date: Fri, 01 Mar 1996 15:10:08 GMT
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+Hana Okonkwo | hokonkwo@hanse.de
+PGP Key fingerprint: 4405 0FA4 8AAC BFA8
+"Keep the channels open."
+
+From drodriguez@kth.se Sun Mar 03 05:45:08 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!kth!drodriguez
+From: drodriguez@kth.se (Dong-hyun Rodríguez)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Mar03.054508.1259@kth.se>
+Date: Sun, 03 Mar 1996 05:45:08 GMT
+References: <1996Mar01.151008.7842@hanse.de>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1996Mar01.151008.7842@hanse.de>, hokonkwo@hanse.de (Hana Okonkwo) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+> Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Dong-hyun Rodríguez <drodriguez@kth.se>
+*PLONK* filter active for trolls.
+Decstation 5000/200 - NetBSD 1.0
+
+From blee@clari.net Sun Mar 03 19:52:08 1996
+Path: ashpoly!cascade!brgate!saturno!clari!blee
+From: blee@clari.net (Bastien Lee)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Mar03.195208.1616@clari.net>
+Date: Sun, 03 Mar 1996 19:52:08 GMT
+References: <1996Mar01.151008.7842@hanse.de> <1996Mar03.054508.1259@kth.se>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1996Mar03.054508.1259@kth.se>, drodriguez@kth.se (Dong-hyun Rodríguez) writes:
+> If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+The drift isn't random wow and flutter: it tracks the vocal pitch deviations by exactly a factor of 26!
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Bastien Lee <blee@clari.net>
+SupraFAXModem 28.8 @ 9600 Telebit bps
+"Tape doesn't lie at 02:14. Ears do."
+
+From lkuznetsov@kiae.su Mon Mar 04 19:03:08 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!kiae!lkuznetsov
+From: lkuznetsov@kiae.su (Lars Kuznetsov)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Mar04.190308.8156@kiae.su>
+Date: Mon, 04 Mar 1996 19:03:08 GMT
+References: <1996Mar01.151008.7842@hanse.de>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Mar01.151008.7842@hanse.de>, hokonkwo@hanse.de (Hana Okonkwo) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+> Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+Prof. Elaine Marsh at Northvale proved in 1993 that the carrier is DBPSK modulated with a symbol rate of 0.71 Hz.
+
+-- 
+Lars Kuznetsov -- Kurchatov Institute of Atomic Energy, Moscow
+"Extraordinary claims require extraordinary spectra."
+

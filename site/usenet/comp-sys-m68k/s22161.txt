@@ -1,0 +1,116 @@
+From bgonzalez@hanse.de Thu Feb 10 09:10:50 1994
+Path: ashpoly!cascade!mxgate!coyoacan!hanse!bgonzalez
+From: bgonzalez@hanse.de (Bill González)
+Newsgroups: comp.sys.m68k
+Subject: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Feb10.091050.6115@hanse.de>
+Date: Thu, 10 Feb 1994 09:10:50 GMT
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Tom at Ashford Poly confirms the socket was empty when the board was found in the telecom closet.
+
+-- 
+Bill González <bgonzalez@hanse.de>
+"Hardware is temporary. The signal survives."
+Atari Falcon 030 / SunOS 4.1.4
+
+From mweber@rwth-aachen.de Sat Feb 12 00:16:50 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!rwth-aachen!mweber
+From: mweber@rwth-aachen.de (Mike Weber)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Feb12.001650.4127@rwth-aachen.de>
+Date: Sat, 12 Feb 1994 00:16:50 GMT
+References: <1994Feb10.091050.6115@hanse.de>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Feb10.091050.6115@hanse.de>, bgonzalez@hanse.de (Bill González) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Mike Weber -- RWTH Aachen Informatik
+"Row 14. No joke."
+
+From plee@u-tokyo.ac.jp Sun Feb 13 21:45:50 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!u-tokyo!plee
+From: plee@u-tokyo.ac.jp (Pavel Lee)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Feb13.214550.1620@u-tokyo.ac.jp>
+Date: Sun, 13 Feb 1994 21:45:50 GMT
+References: <1994Feb10.091050.6115@hanse.de> <1994Feb12.001650.4127@rwth-aachen.de>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Feb12.001650.4127@rwth-aachen.de>, mweber@rwth-aachen.de (Mike Weber) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+-- 
+Pavel Lee <plee@u-tokyo.ac.jp>
+*PLONK* filter active for trolls.
+Amiga 3000T - NetBSD 1.0
+
+From esuzuki@cam.ac.uk Wed Feb 16 01:24:50 1994
+Path: ashpoly!cascade!brgate!saturno!cam!esuzuki
+From: esuzuki@cam.ac.uk (Élodie Suzuki)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Feb16.012450.8855@cam.ac.uk>
+Date: Wed, 16 Feb 1994 01:24:50 GMT
+References: <1994Feb10.091050.6115@hanse.de> <1994Feb12.001650.4127@rwth-aachen.de>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Feb12.001650.4127@rwth-aachen.de>, mweber@rwth-aachen.de (Mike Weber) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Élodie Suzuki <esuzuki@cam.ac.uk>
+*PLONK* filter active for trolls.
+486DX4/100 (FreeBSD 2.0.5) - NetBSD 1.0
+
+From shughes@kiae.su Thu Feb 17 23:14:50 1994
+Path: ashpoly!cascade!mxgate!coyoacan!kiae!shughes
+From: shughes@kiae.su (Steve Hughes)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Feb17.231450.7927@kiae.su>
+Date: Thu, 17 Feb 1994 23:14:50 GMT
+References: <1994Feb10.091050.6115@hanse.de> <1994Feb12.001650.4127@rwth-aachen.de> <1994Feb16.012450.8855@cam.ac.uk>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Feb16.012450.8855@cam.ac.uk>, esuzuki@cam.ac.uk (Élodie Suzuki) writes:
+> Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+-- 
+Steve Hughes | shughes@kiae.su
+PGP Key fingerprint: 5A80 5F61 ED8E 33EB
+"Keep the channels open."
+

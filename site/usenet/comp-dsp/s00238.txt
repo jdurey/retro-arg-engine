@@ -1,0 +1,97 @@
+From sito@rwth-aachen.de Sat Apr 27 03:07:34 1996
+Path: ashpoly!cascade!brgate!saturno!rwth-aachen!sito
+From: sito@rwth-aachen.de (Sven Ito)
+Newsgroups: comp.dsp
+Subject: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Apr27.030734.7387@rwth-aachen.de>
+Date: Sat, 27 Apr 1996 03:07:34 GMT
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Sven Ito <sito@rwth-aachen.de>
+*PLONK* filter active for trolls.
+Sun 3/60 (SunOS 4.1.1) - NetBSD 1.0
+
+From nduarte@inria.fr Mon Apr 29 01:15:34 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!inria!nduarte
+From: nduarte@inria.fr (Nadine Duarte)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Apr29.011534.4061@inria.fr>
+Date: Mon, 29 Apr 1996 01:15:34 GMT
+References: <1996Apr27.030734.7387@rwth-aachen.de>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Apr27.030734.7387@rwth-aachen.de>, sito@rwth-aachen.de (Sven Ito) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+=== Nadine Duarte ===
+Dept of Electrical Engineering, INRIA Rocquencourt
+"Extraordinary claims require extraordinary spectra."
+
+From rmoreno@delphi.com Mon Apr 29 14:57:34 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!delphi!rmoreno
+From: rmoreno@delphi.com (Rodrigo Moreno)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Apr29.145734.1029@delphi.com>
+Date: Mon, 29 Apr 1996 14:57:34 GMT
+References: <1996Apr27.030734.7387@rwth-aachen.de>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1996Apr27.030734.7387@rwth-aachen.de>, sito@rwth-aachen.de (Sven Ito) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Rodrigo Moreno | rmoreno@delphi.com
+PGP Key fingerprint: C12E C8F5 94C2 0AF8
+"Keep the channels open."
+
+From srobertson@delphi.com Wed May 01 04:06:34 1996
+Path: ashpoly!cascade!mxgate!coyoacan!delphi!srobertson
+From: srobertson@delphi.com (Sergei Robertson)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996May01.040634.4464@delphi.com>
+Date: Wed, 01 May 1996 04:06:34 GMT
+References: <1996Apr27.030734.7387@rwth-aachen.de>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1996Apr27.030734.7387@rwth-aachen.de>, sito@rwth-aachen.de (Sven Ito) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+=== Sergei Robertson ===
+Dept of Electrical Engineering, Delphi Internet Services
+"Marcus is not one man."
+

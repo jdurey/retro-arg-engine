@@ -1,0 +1,71 @@
+From nfischer@panix.com Tue Mar 21 07:42:12 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!panix!nfischer
+From: nfischer@panix.com (Nadia Fischer)
+Newsgroups: comp.dsp
+Subject: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Mar21.074212.3926@panix.com>
+Date: Tue, 21 Mar 1995 07:42:12 GMT
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+
+Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+Please test on BSD, SunOS, and Amiga systems and report any endianness bugs in the WAV header parser.
+
+-- 
+Nadia Fischer <nfischer@panix.com>
+*PLONK* filter active for trolls.
+486DX2/66 (Linux 1.2.13) - NetBSD 1.0
+
+From skowalski@berkeley.edu Tue Mar 21 21:47:12 1995
+Path: ashpoly!cascade!brgate!saturno!berkeley!skowalski
+From: skowalski@berkeley.edu (Sergei Kowalski)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Mar21.214712.7682@berkeley.edu>
+Date: Tue, 21 Mar 1995 21:47:12 GMT
+References: <1995Mar21.074212.3926@panix.com>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Mar21.074212.3926@panix.com>, nfischer@panix.com (Nadia Fischer) writes:
+> Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+> Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Sergei Kowalski | skowalski@berkeley.edu
+PGP Key fingerprint: 4BED 3E40 303C 447C
+"Keep the channels open."
+
+From alee@cam.ac.uk Tue Mar 21 23:02:12 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!cam!alee
+From: alee@cam.ac.uk (Astrid Lee)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Mar21.230212.3325@cam.ac.uk>
+Date: Tue, 21 Mar 1995 23:02:12 GMT
+References: <1995Mar21.074212.3926@panix.com> <1995Mar21.214712.7682@berkeley.edu>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Mar21.214712.7682@berkeley.edu>, skowalski@berkeley.edu (Sergei Kowalski) writes:
+> Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+-- 
+Astrid Lee
+Opinions expressed are solely my own and not those of University of Cambridge Computer Laboratory.
+------------------------------------------------------------
+

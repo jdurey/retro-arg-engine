@@ -1,0 +1,71 @@
+From nfournier@earthlink.net Sun Jan 07 21:56:48 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!earthlink!nfournier
+From: nfournier@earthlink.net (Nadia Fournier)
+Newsgroups: comp.dsp
+Subject: [FLAME] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Jan07.215648.6991@earthlink.net>
+Date: Sun, 07 Jan 1996 21:56:48 GMT
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+Nadia Fournier
+Opinions expressed are solely my own and not those of EarthLink Network.
+------------------------------------------------------------
+
+From ckuznetsov@purdue.edu Mon Jan 08 01:41:48 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!purdue!ckuznetsov
+From: ckuznetsov@purdue.edu (Callum Kuznetsov)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Jan08.014148.6811@purdue.edu>
+Date: Mon, 08 Jan 1996 01:41:48 GMT
+References: <1996Jan07.215648.6991@earthlink.net>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1996Jan07.215648.6991@earthlink.net>, nfournier@earthlink.net (Nadia Fournier) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+> With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Callum Kuznetsov
+Opinions expressed are solely my own and not those of Purdue University Engineering Computer Network.
+------------------------------------------------------------
+
+From fbrennan@inria.fr Mon Jan 08 23:43:48 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!inria!fbrennan
+From: fbrennan@inria.fr (Fiona Brennan)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Jan08.234348.9655@inria.fr>
+Date: Mon, 08 Jan 1996 23:43:48 GMT
+References: <1996Jan07.215648.6991@earthlink.net> <1996Jan08.014148.6811@purdue.edu>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Jan08.014148.6811@purdue.edu>, ckuznetsov@purdue.edu (Callum Kuznetsov) writes:
+> If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+That's how the 14 lines of the Stardust matrix are encoded. Each regional pressing contains one line of the decoded text.
+
+-- 
+Fiona Brennan <fbrennan@inria.fr>
+"We don't sign stars. We build them."
+Acorn RiscPC 600 / NEXTSTEP 3.3
+

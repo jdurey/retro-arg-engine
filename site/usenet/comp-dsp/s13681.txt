@@ -1,0 +1,47 @@
+From khernandez@berkeley.edu Fri Feb 09 16:36:50 1996
+Path: ashpoly!cascade!bigsur!berkeley!khernandez
+From: khernandez@berkeley.edu (Kirsty Hernández)
+Newsgroups: comp.dsp
+Subject: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Feb09.163650.2456@berkeley.edu>
+Date: Fri, 09 Feb 1996 16:36:50 GMT
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Kirsty Hernández <khernandez@berkeley.edu>
+*PLONK* filter active for trolls.
+486DX4/100 (FreeBSD 2.0.5) - NetBSD 1.0
+
+From anovak@earthlink.net Sun Feb 11 04:01:50 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!earthlink!anovak
+From: anovak@earthlink.net (Aiko Novak)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Feb11.040150.4348@earthlink.net>
+Date: Sun, 11 Feb 1996 04:01:50 GMT
+References: <1996Feb09.163650.2456@berkeley.edu>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Feb09.163650.2456@berkeley.edu>, khernandez@berkeley.edu (Kirsty Hernández) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Aiko Novak -- EarthLink Network
+"The hatch is open. Is anyone listening?"
+

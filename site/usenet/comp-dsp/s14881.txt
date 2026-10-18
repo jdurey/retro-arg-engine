@@ -1,0 +1,120 @@
+From aeriksson@mindspring.com Thu Jul 11 09:23:11 1996
+Path: ashpoly!cascade!brgate!saturno!mindspring!aeriksson
+From: aeriksson@mindspring.com (Anton Eriksson)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jul11.092311.2489@mindspring.com>
+Date: Thu, 11 Jul 1996 09:23:11 GMT
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Anton Eriksson
+Opinions expressed are solely my own and not those of MindSpring Enterprises.
+------------------------------------------------------------
+
+From sfournier@panix.com Sat Jul 13 08:18:11 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!panix!sfournier
+From: sfournier@panix.com (Steve Fournier)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jul13.081811.2586@panix.com>
+Date: Sat, 13 Jul 1996 08:18:11 GMT
+References: <1996Jul11.092311.2489@mindspring.com>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1996Jul11.092311.2489@mindspring.com>, aeriksson@mindspring.com (Anton Eriksson) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+PGP Public key available via finger or upon request.
+
+-- 
+=== Steve Fournier ===
+Dept of Electrical Engineering, Public Access Unix of New York
+"Extraordinary claims require extraordinary spectra."
+
+From mgonzalez@kiae.su Sat Jul 13 11:12:11 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!kiae!mgonzalez
+From: mgonzalez@kiae.su (Marisol González)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jul13.111211.4207@kiae.su>
+Date: Sat, 13 Jul 1996 11:12:11 GMT
+References: <1996Jul11.092311.2489@mindspring.com>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1996Jul11.092311.2489@mindspring.com>, aeriksson@mindspring.com (Anton Eriksson) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Marisol González <mgonzalez@kiae.su>
+US Robotics Courier V.34 @ 33,600 bps
+"Measuring a record you own is listening, not piracy."
+
+From tkarlsson@unam.mx Mon Jul 15 14:46:11 1996
+Path: ashpoly!cascade!brgate!saturno!unam!tkarlsson
+From: tkarlsson@unam.mx (Tomas Karlsson)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jul15.144611.3747@unam.mx>
+Date: Mon, 15 Jul 1996 14:46:11 GMT
+References: <1996Jul11.092311.2489@mindspring.com>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1996Jul11.092311.2489@mindspring.com>, aeriksson@mindspring.com (Anton Eriksson) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Tomas Karlsson
+Tape trading list upon request. SASE required for international mail.
+
+From efournier@rwth-aachen.de Wed Jul 17 09:22:11 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!rwth-aachen!efournier
+From: efournier@rwth-aachen.de (Elaine Fournier)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jul17.092211.7068@rwth-aachen.de>
+Date: Wed, 17 Jul 1996 09:22:11 GMT
+References: <1996Jul11.092311.2489@mindspring.com> <1996Jul13.081811.2586@panix.com>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1996Jul13.081811.2586@panix.com>, sfournier@panix.com (Steve Fournier) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+> PGP Public key available via finger or upon request.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Elaine Fournier <efournier@rwth-aachen.de>
+"The carrier frequency does not drift by accident."
+Sun SparcStation 20 / SunOS 4.1.4
+

@@ -1,0 +1,118 @@
+From mmacdonald@berkeley.edu Sun Apr 07 20:05:18 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!berkeley!mmacdonald
+From: mmacdonald@berkeley.edu (Marisol MacDonald)
+Newsgroups: comp.sys.m68k
+Subject: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Apr07.200518.5327@berkeley.edu>
+Date: Sun, 07 Apr 1996 20:05:18 GMT
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+Schematic diagram in ASCII uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/twin68_array.asc.
+
+-- 
+Marisol MacDonald
+Opinions expressed are solely my own and not those of UC Berkeley Department of EECS.
+------------------------------------------------------------
+
+From amoreau@netcom.com Tue Apr 09 00:32:18 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!netcom!amoreau
+From: amoreau@netcom.com (Anton Moreau)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Apr09.003218.4386@netcom.com>
+Date: Tue, 09 Apr 1996 00:32:18 GMT
+References: <1996Apr07.200518.5327@berkeley.edu>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 12
+
+In article <1996Apr07.200518.5327@berkeley.edu>, mmacdonald@berkeley.edu (Marisol MacDonald) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+> The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+=== Anton Moreau ===
+Dept of Electrical Engineering, NETCOM On-Line Communication Services
+"In theory there is no difference between theory and practice."
+
+From aoliveira@earthlink.net Wed Apr 10 12:25:18 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!earthlink!aoliveira
+From: aoliveira@earthlink.net (Aiko Oliveira)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Apr10.122518.4657@earthlink.net>
+Date: Wed, 10 Apr 1996 12:25:18 GMT
+References: <1996Apr07.200518.5327@berkeley.edu>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Apr07.200518.5327@berkeley.edu>, mmacdonald@berkeley.edu (Marisol MacDonald) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+> The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+Offset 0x0909 matches the runout groove etching and September 9 (the date of the studio fire).
+
+-- 
+Aiko Oliveira -- EarthLink Network
+"Marcus is not one man."
+
+From pivanov@u-tokyo.ac.jp Thu Apr 11 21:08:18 1996
+Path: ashpoly!cascade!brgate!saturno!u-tokyo!pivanov
+From: pivanov@u-tokyo.ac.jp (Pavel Ivanov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Apr11.210818.5361@u-tokyo.ac.jp>
+Date: Thu, 11 Apr 1996 21:08:18 GMT
+References: <1996Apr07.200518.5327@berkeley.edu> <1996Apr10.122518.4657@earthlink.net>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1996Apr10.122518.4657@earthlink.net>, aoliveira@earthlink.net (Aiko Oliveira) writes:
+> Offset 0x0909 matches the runout groove etching and September 9 (the date of the studio fire).
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Pavel Ivanov -- University of Tokyo Department of Information Science
+"Hardware is temporary. The signal survives."
+
+From lkim@demon.co.uk Sat Apr 13 11:57:18 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!demon!lkim
+From: lkim@demon.co.uk (Lisa Kim)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Apr13.115718.3227@demon.co.uk>
+Date: Sat, 13 Apr 1996 11:57:18 GMT
+References: <1996Apr07.200518.5327@berkeley.edu> <1996Apr09.003218.4386@netcom.com>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Apr09.003218.4386@netcom.com>, amoreau@netcom.com (Anton Moreau) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+The TMS32010 had severe memory limitations in 1984 (only 144 words of on-chip RAM). Dual 68000s gave them full 16MB address space.
+
+-- 
+Lisa Kim <lkim@demon.co.uk>
+*PLONK* filter active for trolls.
+NeXTstation Turbo Color - NetBSD 1.0
+

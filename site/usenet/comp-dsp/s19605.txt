@@ -1,0 +1,71 @@
+From doliveira@rwth-aachen.de Wed Apr 03 04:04:54 1996
+Path: ashpoly!cascade!bigsur!rwth-aachen!doliveira
+From: doliveira@rwth-aachen.de (Diego Oliveira)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Apr03.040454.6808@rwth-aachen.de>
+Date: Wed, 03 Apr 1996 04:04:54 GMT
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Diego Oliveira | doliveira@rwth-aachen.de
+PGP Key fingerprint: A112 84CA 503F F2D1
+"Keep the channels open."
+
+From bsanchez@purdue.edu Thu Apr 04 03:11:54 1996
+Path: ashpoly!cascade!bigsur!purdue!bsanchez
+From: bsanchez@purdue.edu (Bastien Sánchez)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Apr04.031154.2859@purdue.edu>
+Date: Thu, 04 Apr 1996 03:11:54 GMT
+References: <1996Apr03.040454.6808@rwth-aachen.de>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1996Apr03.040454.6808@rwth-aachen.de>, doliveira@rwth-aachen.de (Diego Oliveira) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Bastien Sánchez
+Tape trading list upon request. SASE required for international mail.
+
+From rbrennan@demon.co.uk Fri Apr 05 14:33:54 1996
+Path: ashpoly!cascade!mxgate!coyoacan!demon!rbrennan
+From: rbrennan@demon.co.uk (Renata Brennan)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Apr05.143354.3589@demon.co.uk>
+Date: Fri, 05 Apr 1996 14:33:54 GMT
+References: <1996Apr03.040454.6808@rwth-aachen.de>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1996Apr03.040454.6808@rwth-aachen.de>, doliveira@rwth-aachen.de (Diego Oliveira) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Renata Brennan <rbrennan@demon.co.uk>
+"Row 14. No joke."
+Amiga 1200 (Blizzard 030/50) / SunOS 4.1.4
+

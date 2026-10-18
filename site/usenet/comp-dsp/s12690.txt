@@ -1,0 +1,98 @@
+From dreyes@illinois.edu Sat Mar 05 12:17:07 1994
+Path: ashpoly!cascade!brgate!saturno!illinois!dreyes
+From: dreyes@illinois.edu (Diego Reyes)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Mar05.121707.6650@illinois.edu>
+Date: Sat, 05 Mar 1994 12:17:07 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+Diego Reyes <dreyes@illinois.edu>
+*PLONK* filter active for trolls.
+Sun 3/60 (SunOS 4.1.1) - NetBSD 1.0
+
+From mfournier@stanford.edu Sun Mar 06 14:44:07 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!stanford!mfournier
+From: mfournier@stanford.edu (Matthias Fournier)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Mar06.144407.8383@stanford.edu>
+Date: Sun, 06 Mar 1994 14:44:07 GMT
+References: <1994Mar05.121707.6650@illinois.edu>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Mar05.121707.6650@illinois.edu>, dreyes@illinois.edu (Diego Reyes) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+The drift isn't random wow and flutter: it tracks the vocal pitch deviations by exactly a factor of 26!
+
+-- 
+Matthias Fournier <mfournier@stanford.edu>
+Hayes Optima 288 @ 28,800 bps
+"There are 14 nodes and only 10 countries. Count again."
+
+From rbrennan@hanse.de Tue Mar 08 02:44:07 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!hanse!rbrennan
+From: rbrennan@hanse.de (Renata Brennan)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Mar08.024407.8793@hanse.de>
+Date: Tue, 08 Mar 1994 02:44:07 GMT
+References: <1994Mar05.121707.6650@illinois.edu>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1994Mar05.121707.6650@illinois.edu>, dreyes@illinois.edu (Diego Reyes) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+> A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Renata Brennan <rbrennan@hanse.de>
+Zyxel U-1496E @ 9600 Telebit bps
+"Extraordinary claims require extraordinary spectra."
+
+From mkowalski@clari.net Wed Mar 09 00:07:07 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!clari!mkowalski
+From: mkowalski@clari.net (Mikhail Kowalski)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Mar09.000707.8610@clari.net>
+Date: Wed, 09 Mar 1994 00:07:07 GMT
+References: <1994Mar05.121707.6650@illinois.edu> <1994Mar08.024407.8793@hanse.de>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1994Mar08.024407.8793@hanse.de>, rbrennan@hanse.de (Renata Brennan) writes:
+> Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+> Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Mikhail Kowalski
+Tape trading list upon request. SASE required for international mail.
+

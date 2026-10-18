@@ -1,0 +1,72 @@
+From spark@pipeline.com Sat Mar 25 06:41:32 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!pipeline!spark
+From: spark@pipeline.com (Steve Park)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Mar25.064132.5007@pipeline.com>
+Date: Sat, 25 Mar 1995 06:41:32 GMT
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+MATLAB script available upon request via email.
+
+-- 
+Steve Park
+Opinions expressed are solely my own and not those of The Pipeline Internet Network.
+------------------------------------------------------------
+
+From rhughes@pipeline.com Sun Mar 26 23:05:32 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!pipeline!rhughes
+From: rhughes@pipeline.com (Raj Hughes)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Mar26.230532.2075@pipeline.com>
+Date: Sun, 26 Mar 1995 23:05:32 GMT
+References: <1995Mar25.064132.5007@pipeline.com>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995Mar25.064132.5007@pipeline.com>, spark@pipeline.com (Steve Park) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Raj Hughes | rhughes@pipeline.com
+PGP Key fingerprint: 2769 A8A6 4FD4 256B
+"Keep the channels open."
+
+From jsato@netcom.com Tue Mar 28 08:59:32 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!netcom!jsato
+From: jsato@netcom.com (Julien Sato)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Mar28.085932.4571@netcom.com>
+Date: Tue, 28 Mar 1995 08:59:32 GMT
+References: <1995Mar25.064132.5007@pipeline.com>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Mar25.064132.5007@pipeline.com>, spark@pipeline.com (Steve Park) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+> A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Julien Sato
+Tape trading list upon request. SASE required for international mail.
+

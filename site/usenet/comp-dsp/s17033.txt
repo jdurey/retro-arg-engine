@@ -1,0 +1,117 @@
+From tschneider@titech.ac.jp Thu Jan 04 22:30:39 1996
+Path: ashpoly!cascade!bigsur!titech!tschneider
+From: tschneider@titech.ac.jp (Thiago Schneider)
+Newsgroups: comp.dsp
+Subject: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Jan04.223039.9771@titech.ac.jp>
+Date: Thu, 04 Jan 1996 22:30:39 GMT
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+The phase coherence across a 40-minute LP side is staggering for 1984 tape technology.
+
+-- 
+=== Thiago Schneider ===
+Dept of Electrical Engineering, Tokyo Institute of Technology Computer Centre
+"They will send a copy in my place."
+
+From ctanaka@cmu.edu Sat Jan 06 23:07:39 1996
+Path: ashpoly!cascade!bigsur!cmu!ctanaka
+From: ctanaka@cmu.edu (Camila Tanaka)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Jan06.230739.5168@cmu.edu>
+Date: Sat, 06 Jan 1996 23:07:39 GMT
+References: <1996Jan04.223039.9771@titech.ac.jp>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Jan04.223039.9771@titech.ac.jp>, tschneider@titech.ac.jp (Thiago Schneider) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+-- 
+Camila Tanaka <ctanaka@cmu.edu>
+SupraFAXModem 28.8 @ 14,400 bps
+"Hold for relay."
+
+From aokonkwo@kiae.su Sun Jan 07 07:37:39 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!kiae!aokonkwo
+From: aokonkwo@kiae.su (Aiko Okonkwo)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Jan07.073739.4872@kiae.su>
+Date: Sun, 07 Jan 1996 07:37:39 GMT
+References: <1996Jan04.223039.9771@titech.ac.jp> <1996Jan06.230739.5168@cmu.edu>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Jan06.230739.5168@cmu.edu>, ctanaka@cmu.edu (Camila Tanaka) writes:
+> Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+=== Aiko Okonkwo ===
+Dept of Electrical Engineering, Kurchatov Institute of Atomic Energy, Moscow
+"They will send a copy in my place."
+
+From jito@stanford.edu Sun Jan 07 22:43:39 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!stanford!jito
+From: jito@stanford.edu (Ji-woo Ito)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Jan07.224339.8277@stanford.edu>
+Date: Sun, 07 Jan 1996 22:43:39 GMT
+References: <1996Jan04.223039.9771@titech.ac.jp>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Jan04.223039.9771@titech.ac.jp>, tschneider@titech.ac.jp (Thiago Schneider) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+> This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Ji-woo Ito <jito@stanford.edu>
+"5 sigma is a discovery. 7 is a question."
+Macintosh IIfx / AmigaOS 3.1
+
+From nmuller@u-tokyo.ac.jp Tue Jan 09 20:58:39 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!u-tokyo!nmuller
+From: nmuller@u-tokyo.ac.jp (Natalia Müller)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Jan09.205839.3005@u-tokyo.ac.jp>
+Date: Tue, 09 Jan 1996 20:58:39 GMT
+References: <1996Jan04.223039.9771@titech.ac.jp> <1996Jan06.230739.5168@cmu.edu>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Jan06.230739.5168@cmu.edu>, ctanaka@cmu.edu (Camila Tanaka) writes:
+> Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+-- 
+Natalia Müller <nmuller@u-tokyo.ac.jp>
+Hayes Optima 288 @ 33,600 bps
+"They will send a copy in my place."
+

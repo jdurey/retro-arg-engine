@@ -1,0 +1,121 @@
+From ymuller@tum.de Mon Jan 24 14:52:54 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!tum!ymuller
+From: ymuller@tum.de (Yuki Müller)
+Newsgroups: comp.sys.m68k
+Subject: Data: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Jan24.145254.2542@tum.de>
+Date: Mon, 24 Jan 1994 14:52:54 GMT
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Hardware disassembly report for Motorola hardware hackers.
+
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+Does anyone have a 27C256 EPROM marked 'MH-U14' or 'ORION-CRYPTO'?
+
+-- 
+Yuki Müller
+Opinions expressed are solely my own and not those of Technische Universität München.
+------------------------------------------------------------
+
+From jlarsson@berkeley.edu Tue Jan 25 12:23:54 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!berkeley!jlarsson
+From: jlarsson@berkeley.edu (Jen Larsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Jan25.122354.7147@berkeley.edu>
+Date: Tue, 25 Jan 1994 12:23:54 GMT
+References: <1994Jan24.145254.2542@tum.de>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Jan24.145254.2542@tum.de>, ymuller@tum.de (Yuki Müller) writes:
+> Hardware disassembly report for Motorola hardware hackers.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Jen Larsson <jlarsson@berkeley.edu>
+Practical Peripherals 14.4 @ 33,600 bps
+"There are 14 nodes and only 10 countries. Count again."
+
+From ksilva@mindspring.com Wed Jan 26 03:39:54 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!mindspring!ksilva
+From: ksilva@mindspring.com (Kirsty Silva)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Jan26.033954.3828@mindspring.com>
+Date: Wed, 26 Jan 1994 03:39:54 GMT
+References: <1994Jan24.145254.2542@tum.de> <1994Jan25.122354.7147@berkeley.edu>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1994Jan25.122354.7147@berkeley.edu>, jlarsson@berkeley.edu (Jen Larsson) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Kirsty Silva -- MindSpring Enterprises
+"Row 14. No joke."
+
+From ttanaka@demon.co.uk Thu Jan 27 06:30:54 1994
+Path: ashpoly!cascade!mxgate!coyoacan!demon!ttanaka
+From: ttanaka@demon.co.uk (Tobias Tanaka)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Jan27.063054.2587@demon.co.uk>
+Date: Thu, 27 Jan 1994 06:30:54 GMT
+References: <1994Jan24.145254.2542@tum.de>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1994Jan24.145254.2542@tum.de>, ymuller@tum.de (Yuki Müller) writes:
+> Hardware disassembly report for Motorola hardware hackers.
+> This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Tobias Tanaka <ttanaka@demon.co.uk>
+"Marcus is not one man."
+Mac IIci / 68882 FPU / SunOS 4.1.4
+
+From jgonzalez@stanford.edu Fri Jan 28 08:12:54 1994
+Path: ashpoly!cascade!bigsur!stanford!jgonzalez
+From: jgonzalez@stanford.edu (Julien González)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Jan28.081254.3873@stanford.edu>
+Date: Fri, 28 Jan 1994 08:12:54 GMT
+References: <1994Jan24.145254.2542@tum.de> <1994Jan25.122354.7147@berkeley.edu> <1994Jan26.033954.3828@mindspring.com>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1994Jan26.033954.3828@mindspring.com>, ksilva@mindspring.com (Kirsty Silva) writes:
+> Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+> Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Julien González | jgonzalez@stanford.edu
+PGP Key fingerprint: 7D9D FE4F 1607 1890
+"Keep the channels open."
+

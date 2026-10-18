@@ -1,0 +1,47 @@
+From jfournier@panix.com Sun Dec 15 01:33:11 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!panix!jfournier
+From: jfournier@panix.com (Julien Fournier)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Dec15.013311.5429@panix.com>
+Date: Sun, 15 Dec 1996 01:33:11 GMT
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Julien Fournier
+Opinions expressed are solely my own and not those of Public Access Unix of New York.
+------------------------------------------------------------
+
+From rschneider@stanford.edu Mon Dec 16 15:52:11 1996
+Path: ashpoly!cascade!mxgate!coyoacan!stanford!rschneider
+From: rschneider@stanford.edu (Raj Schneider)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Dec16.155211.1611@stanford.edu>
+Date: Mon, 16 Dec 1996 15:52:11 GMT
+References: <1996Dec15.013311.5429@panix.com>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Dec15.013311.5429@panix.com>, jfournier@panix.com (Julien Fournier) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+Raj Schneider <rschneider@stanford.edu>
+"5 sigma is a discovery. 7 is a question."
+Pentium 90 (OS/2 Warp) / Linux 1.2.13
+

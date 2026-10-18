@@ -1,0 +1,95 @@
+From mtakahashi@cmu.edu Sat Apr 13 13:13:50 1996
+Path: ashpoly!cascade!brgate!saturno!cmu!mtakahashi
+From: mtakahashi@cmu.edu (Morag Takahashi)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Apr13.131350.2727@cmu.edu>
+Date: Sat, 13 Apr 1996 13:13:50 GMT
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Morag Takahashi -- Carnegie Mellon University School of CS
+"Row 14. No joke."
+
+From koliveira@cmu.edu Sat Apr 13 18:21:50 1996
+Path: ashpoly!cascade!mxgate!coyoacan!cmu!koliveira
+From: koliveira@cmu.edu (Karen Oliveira)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Apr13.182150.9414@cmu.edu>
+Date: Sat, 13 Apr 1996 18:21:50 GMT
+References: <1996Apr13.131350.2727@cmu.edu>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1996Apr13.131350.2727@cmu.edu>, mtakahashi@cmu.edu (Morag Takahashi) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Karen Oliveira <koliveira@cmu.edu>
+Hayes Optima 288 @ 19,200 bps
+"Marcus is not one man."
+
+From kdubois@pipeline.com Sun Apr 14 20:00:50 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!pipeline!kdubois
+From: kdubois@pipeline.com (Karen Dubois)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Apr14.200050.9144@pipeline.com>
+Date: Sun, 14 Apr 1996 20:00:50 GMT
+References: <1996Apr13.131350.2727@cmu.edu> <1996Apr13.182150.9414@cmu.edu>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Apr13.182150.9414@cmu.edu>, koliveira@cmu.edu (Karen Oliveira) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+> Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Karen Dubois | kdubois@pipeline.com
+PGP Key fingerprint: 1712 A152 E1D1 31FE
+"Keep the channels open."
+
+From ftanaka@pacbell.net Tue Apr 16 08:11:50 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!pacbell!ftanaka
+From: ftanaka@pacbell.net (Freya Tanaka)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Apr16.081150.4611@pacbell.net>
+Date: Tue, 16 Apr 1996 08:11:50 GMT
+References: <1996Apr13.131350.2727@cmu.edu>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Apr13.131350.2727@cmu.edu>, mtakahashi@cmu.edu (Morag Takahashi) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Freya Tanaka <ftanaka@pacbell.net>
+"Row 14. No joke."
+486DX2/66 (Linux 1.2.13) / System 7.5.1
+

@@ -1,0 +1,72 @@
+From akarlsson@cmu.edu Wed Dec 27 03:41:56 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!cmu!akarlsson
+From: akarlsson@cmu.edu (Amy Karlsson)
+Newsgroups: comp.dsp
+Subject: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Dec27.034156.7588@cmu.edu>
+Date: Wed, 27 Dec 1995 03:41:56 GMT
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+
+Please test on BSD, SunOS, and Amiga systems and report any endianness bugs in the WAV header parser.
+
+-- 
+Amy Karlsson <akarlsson@cmu.edu>
+"There are 14 nodes and only 10 countries. Count again."
+NeXTstation Turbo Color / NEXTSTEP 3.3
+
+From kjohansson@uu.net Thu Dec 28 02:08:56 1995
+Path: ashpoly!cascade!bigsur!uu!kjohansson
+From: kjohansson@uu.net (Kirsty Johansson)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Dec28.020856.4278@uu.net>
+Date: Thu, 28 Dec 1995 02:08:56 GMT
+References: <1995Dec27.034156.7588@cmu.edu>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Dec27.034156.7588@cmu.edu>, akarlsson@cmu.edu (Amy Karlsson) writes:
+> Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Kirsty Johansson
+Tape trading list upon request. SASE required for international mail.
+
+From thughes@berkeley.edu Sat Dec 30 01:50:56 1995
+Path: ashpoly!cascade!brgate!saturno!berkeley!thughes
+From: thughes@berkeley.edu (Tomas Hughes)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Dec30.015056.9359@berkeley.edu>
+Date: Sat, 30 Dec 1995 01:50:56 GMT
+References: <1995Dec27.034156.7588@cmu.edu>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Dec27.034156.7588@cmu.edu>, akarlsson@cmu.edu (Amy Karlsson) writes:
+> Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+> The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+-- 
+Tomas Hughes
+Opinions expressed are solely my own and not those of UC Berkeley Department of EECS.
+------------------------------------------------------------
+

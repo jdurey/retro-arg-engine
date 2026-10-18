@@ -1,0 +1,115 @@
+From rperez@uni-hamburg.de Thu Jan 19 13:59:07 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!uni-hamburg!rperez
+From: rperez@uni-hamburg.de (Rodrigo Pérez)
+Newsgroups: comp.sys.m68k
+Subject: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jan19.135907.5856@uni-hamburg.de>
+Date: Thu, 19 Jan 1995 13:59:07 GMT
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+Rodrigo Pérez -- Universität Hamburg Fachbereich Informatik
+"Measuring a record you own is listening, not piracy."
+
+From gnilsson@earthlink.net Sat Jan 21 04:35:07 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!earthlink!gnilsson
+From: gnilsson@earthlink.net (Graham Nilsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jan21.043507.7996@earthlink.net>
+Date: Sat, 21 Jan 1995 04:35:07 GMT
+References: <1995Jan19.135907.5856@uni-hamburg.de>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Jan19.135907.5856@uni-hamburg.de>, rperez@uni-hamburg.de (Rodrigo Pérez) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Graham Nilsson
+Opinions expressed are solely my own and not those of EarthLink Network.
+------------------------------------------------------------
+
+From jlindqvist@earthlink.net Sun Jan 22 21:01:07 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!earthlink!jlindqvist
+From: jlindqvist@earthlink.net (Jen Lindqvist)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jan22.210107.8923@earthlink.net>
+Date: Sun, 22 Jan 1995 21:01:07 GMT
+References: <1995Jan19.135907.5856@uni-hamburg.de> <1995Jan21.043507.7996@earthlink.net>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Jan21.043507.7996@earthlink.net>, gnilsson@earthlink.net (Graham Nilsson) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Jen Lindqvist | jlindqvist@earthlink.net
+PGP Key fingerprint: F811 49D0 9716 6CDA
+"Keep the channels open."
+
+From tsanchez@ox.ac.uk Tue Jan 24 10:16:07 1995
+Path: ashpoly!cascade!bigsur!ox!tsanchez
+From: tsanchez@ox.ac.uk (Tyler Sánchez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jan24.101607.8073@ox.ac.uk>
+Date: Tue, 24 Jan 1995 10:16:07 GMT
+References: <1995Jan19.135907.5856@uni-hamburg.de>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Jan19.135907.5856@uni-hamburg.de>, rperez@uni-hamburg.de (Rodrigo Pérez) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+=== Tyler Sánchez ===
+Dept of Electrical Engineering, Oxford University Computing Laboratory
+"Hold for relay."
+
+From oito@uu.net Thu Jan 26 00:57:07 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!uu!oito
+From: oito@uu.net (Olga Ito)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jan26.005707.5294@uu.net>
+Date: Thu, 26 Jan 1995 00:57:07 GMT
+References: <1995Jan19.135907.5856@uni-hamburg.de> <1995Jan21.043507.7996@earthlink.net>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Jan21.043507.7996@earthlink.net>, gnilsson@earthlink.net (Graham Nilsson) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Olga Ito <oito@uu.net>
+"When every node is whole, the channel opens."
+Commodore Amiga 500 (1MB OCS) / System 7.5.1
+

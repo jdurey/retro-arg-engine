@@ -1,0 +1,119 @@
+From tkuznetsov@inria.fr Sat Aug 27 04:14:10 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!inria!tkuznetsov
+From: tkuznetsov@inria.fr (Tyler Kuznetsov)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Aug27.041410.1269@inria.fr>
+Date: Sat, 27 Aug 1994 04:14:10 GMT
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Tyler Kuznetsov <tkuznetsov@inria.fr>
+*PLONK* filter active for trolls.
+Amiga 3000T - NetBSD 1.0
+
+From akarlsson@pacbell.net Sat Aug 27 11:04:10 1994
+Path: ashpoly!cascade!bigsur!pacbell!akarlsson
+From: akarlsson@pacbell.net (Anton Karlsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Aug27.110410.2058@pacbell.net>
+Date: Sat, 27 Aug 1994 11:04:10 GMT
+References: <1994Aug27.041410.1269@inria.fr>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Aug27.041410.1269@inria.fr>, tkuznetsov@inria.fr (Tyler Kuznetsov) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Anton Karlsson <akarlsson@pacbell.net>
+"Hold for relay."
+Amiga 3000T / AmigaOS 3.1
+
+From jhernandez@pipeline.com Sun Aug 28 13:02:10 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!pipeline!jhernandez
+From: jhernandez@pipeline.com (Julien Hernández)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Aug28.130210.2634@pipeline.com>
+Date: Sun, 28 Aug 1994 13:02:10 GMT
+References: <1994Aug27.041410.1269@inria.fr> <1994Aug27.110410.2058@pacbell.net>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1994Aug27.110410.2058@pacbell.net>, akarlsson@pacbell.net (Anton Karlsson) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Julien Hernández | jhernandez@pipeline.com
+PGP Key fingerprint: 0A9E 9EA2 E291 056B
+"Keep the channels open."
+
+From landersson@unam.mx Sun Aug 28 19:42:10 1994
+Path: ashpoly!cascade!brgate!saturno!unam!landersson
+From: landersson@unam.mx (Lars Andersson)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Aug28.194210.1665@unam.mx>
+Date: Sun, 28 Aug 1994 19:42:10 GMT
+References: <1994Aug27.041410.1269@inria.fr> <1994Aug27.110410.2058@pacbell.net> <1994Aug28.130210.2634@pipeline.com>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1994Aug28.130210.2634@pipeline.com>, jhernandez@pipeline.com (Julien Hernández) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+> Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Lars Andersson | landersson@unam.mx
+PGP Key fingerprint: 58B7 C553 B525 F390
+"Keep the channels open."
+
+From bschneider@clari.net Mon Aug 29 03:38:10 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!clari!bschneider
+From: bschneider@clari.net (Bruno Schneider)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Aug29.033810.6383@clari.net>
+Date: Mon, 29 Aug 1994 03:38:10 GMT
+References: <1994Aug27.041410.1269@inria.fr> <1994Aug27.110410.2058@pacbell.net> <1994Aug28.130210.2634@pipeline.com>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Aug28.130210.2634@pipeline.com>, jhernandez@pipeline.com (Julien Hernández) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+> Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+Marcus Hale designed the TWIN-68 board before he disappeared. That's why his initials are on the PCB silkscreen.
+
+-- 
+Bruno Schneider -- ClariNet Communications Corp
+"Row 14. No joke."
+

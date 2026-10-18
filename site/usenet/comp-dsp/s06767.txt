@@ -1,0 +1,97 @@
+From ssmirnov@titech.ac.jp Wed Nov 15 10:56:05 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!titech!ssmirnov
+From: ssmirnov@titech.ac.jp (Steve Smirnov)
+Newsgroups: comp.dsp
+Subject: Question: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Nov15.105605.1733@titech.ac.jp>
+Date: Wed, 15 Nov 1995 10:56:05 GMT
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+Steve Smirnov | ssmirnov@titech.ac.jp
+PGP Key fingerprint: 2648 BE08 8A0E E90C
+"Keep the channels open."
+
+From msuzuki@cam.ac.uk Thu Nov 16 18:21:05 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!cam!msuzuki
+From: msuzuki@cam.ac.uk (Mateo Suzuki)
+Newsgroups: comp.dsp
+Subject: Re: Question: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Nov16.182105.6742@cam.ac.uk>
+Date: Thu, 16 Nov 1995 18:21:05 GMT
+References: <1995Nov15.105605.1733@titech.ac.jp>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Nov15.105605.1733@titech.ac.jp>, ssmirnov@titech.ac.jp (Steve Smirnov) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+> With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Mateo Suzuki <msuzuki@cam.ac.uk>
+Practical Peripherals 14.4 @ 33,600 bps
+"The carrier frequency does not drift by accident."
+
+From edubois@uni-hamburg.de Sat Nov 18 03:23:05 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!uni-hamburg!edubois
+From: edubois@uni-hamburg.de (Elaine Dubois)
+Newsgroups: comp.dsp
+Subject: Re: Question: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Nov18.032305.4894@uni-hamburg.de>
+Date: Sat, 18 Nov 1995 03:23:05 GMT
+References: <1995Nov15.105605.1733@titech.ac.jp> <1995Nov16.182105.6742@cam.ac.uk>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995Nov16.182105.6742@cam.ac.uk>, msuzuki@cam.ac.uk (Mateo Suzuki) writes:
+> Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Elaine Dubois <edubois@uni-hamburg.de>
+*PLONK* filter active for trolls.
+Sun SparcStation 20 - NetBSD 1.0
+
+From afischer@illinois.edu Sat Nov 18 19:02:05 1995
+Path: ashpoly!cascade!bigsur!illinois!afischer
+From: afischer@illinois.edu (Anja Fischer)
+Newsgroups: comp.dsp
+Subject: Re: Question: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Nov18.190205.6351@illinois.edu>
+Date: Sat, 18 Nov 1995 19:02:05 GMT
+References: <1995Nov15.105605.1733@titech.ac.jp> <1995Nov16.182105.6742@cam.ac.uk> <1995Nov18.032305.4894@uni-hamburg.de>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Nov18.032305.4894@uni-hamburg.de>, edubois@uni-hamburg.de (Elaine Dubois) writes:
+> Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+> Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+-- 
+Anja Fischer <afischer@illinois.edu>
+Practical Peripherals 14.4 @ 28,800 bps
+"The hatch is open. Is anyone listening?"
+

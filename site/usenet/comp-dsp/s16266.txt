@@ -1,0 +1,120 @@
+From fhughes@delphi.com Sun Sep 25 01:45:00 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!delphi!fhughes
+From: fhughes@delphi.com (Freya Hughes)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Sep25.014500.3451@delphi.com>
+Date: Sun, 25 Sep 1994 01:45:00 GMT
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+Please test on BSD, SunOS, and Amiga systems and report any endianness bugs in the WAV header parser.
+
+-- 
+Freya Hughes
+Opinions expressed are solely my own and not those of Delphi Internet Services.
+------------------------------------------------------------
+
+From emacdonald@kiae.su Sun Sep 25 20:19:00 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!kiae!emacdonald
+From: emacdonald@kiae.su (Emi MacDonald)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Sep25.201900.1470@kiae.su>
+Date: Sun, 25 Sep 1994 20:19:00 GMT
+References: <1994Sep25.014500.3451@delphi.com>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1994Sep25.014500.3451@delphi.com>, fhughes@delphi.com (Freya Hughes) writes:
+> Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+> Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Emi MacDonald <emacdonald@kiae.su>
+*PLONK* filter active for trolls.
+Sun 3/60 (SunOS 4.1.1) - NetBSD 1.0
+
+From mweber@earthlink.net Mon Sep 26 06:55:00 1994
+Path: ashpoly!cascade!brgate!saturno!earthlink!mweber
+From: mweber@earthlink.net (Min-jun Weber)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Sep26.065500.9630@earthlink.net>
+Date: Mon, 26 Sep 1994 06:55:00 GMT
+References: <1994Sep25.014500.3451@delphi.com>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Sep25.014500.3451@delphi.com>, fhughes@delphi.com (Freya Hughes) writes:
+> Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+-- 
+Min-jun Weber
+Opinions expressed are solely my own and not those of EarthLink Network.
+------------------------------------------------------------
+
+From mwatanabe@u-tokyo.ac.jp Mon Sep 26 17:29:00 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!u-tokyo!mwatanabe
+From: mwatanabe@u-tokyo.ac.jp (Mikhail Watanabe)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Sep26.172900.2669@u-tokyo.ac.jp>
+Date: Mon, 26 Sep 1994 17:29:00 GMT
+References: <1994Sep25.014500.3451@delphi.com> <1994Sep25.201900.1470@kiae.su>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1994Sep25.201900.1470@kiae.su>, emacdonald@kiae.su (Emi MacDonald) writes:
+> Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+> If you are posting from AOL, please read RFC 1036 before posting again.
+
+Can you provide a pre-compiled DOS binary? Some of us don't have Linux or a C compiler installed on our machines.
+
+-- 
+Mikhail Watanabe | mwatanabe@u-tokyo.ac.jp
+PGP Key fingerprint: C9A6 27EC BE17 BA6F
+"Keep the channels open."
+
+From swatanabe@uni-hamburg.de Wed Sep 28 01:00:00 1994
+Path: ashpoly!cascade!brgate!saturno!uni-hamburg!swatanabe
+From: swatanabe@uni-hamburg.de (Seo-yeon Watanabe)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Sep28.010000.8322@uni-hamburg.de>
+Date: Wed, 28 Sep 1994 01:00:00 GMT
+References: <1994Sep25.014500.3451@delphi.com> <1994Sep25.201900.1470@kiae.su> <1994Sep26.172900.2669@u-tokyo.ac.jp>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Sep26.172900.2669@u-tokyo.ac.jp>, mwatanabe@u-tokyo.ac.jp (Mikhail Watanabe) writes:
+> Can you provide a pre-compiled DOS binary? Some of us don't have Linux or a C compiler installed on our machines.
+
+Tar.gz archive gave a CRC error with PKUNZIP. Make sure you upload in binary mode, not ASCII!
+
+-- 
+Seo-yeon Watanabe | swatanabe@uni-hamburg.de
+PGP Key fingerprint: 0BE1 3B32 7438 930A
+"Keep the channels open."
+

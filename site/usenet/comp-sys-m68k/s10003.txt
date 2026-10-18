@@ -1,0 +1,119 @@
+From cbrennan@cam.ac.uk Sun Jan 01 04:23:39 1995
+Path: ashpoly!cascade!bigsur!cam!cbrennan
+From: cbrennan@cam.ac.uk (Callum Brennan)
+Newsgroups: comp.sys.m68k
+Subject: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Jan01.042339.1093@cam.ac.uk>
+Date: Sun, 01 Jan 1995 04:23:39 GMT
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+Schematic diagram in ASCII uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/twin68_array.asc.
+
+-- 
+Callum Brennan
+Tape trading list upon request. SASE required for international mail.
+
+From spopov@demon.co.uk Tue Jan 03 05:39:39 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!demon!spopov
+From: spopov@demon.co.uk (Seo-yeon Popov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Jan03.053939.6219@demon.co.uk>
+Date: Tue, 03 Jan 1995 05:39:39 GMT
+References: <1995Jan01.042339.1093@cam.ac.uk>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1995Jan01.042339.1093@cam.ac.uk>, cbrennan@cam.ac.uk (Callum Brennan) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+> Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+=== Seo-yeon Popov ===
+Dept of Electrical Engineering, Demon Internet Services UK
+"When every node is whole, the channel opens."
+
+From mandersson@uu.net Tue Jan 03 08:08:39 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!uu!mandersson
+From: mandersson@uu.net (Mike Andersson)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Jan03.080839.3102@uu.net>
+Date: Tue, 03 Jan 1995 08:08:39 GMT
+References: <1995Jan01.042339.1093@cam.ac.uk>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Jan01.042339.1093@cam.ac.uk>, cbrennan@cam.ac.uk (Callum Brennan) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Mike Andersson | mandersson@uu.net
+PGP Key fingerprint: AA65 8028 9181 B3DA
+"Keep the channels open."
+
+From afournier@utexas.edu Wed Jan 04 12:23:39 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!utexas!afournier
+From: afournier@utexas.edu (Anja Fournier)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Jan04.122339.7041@utexas.edu>
+Date: Wed, 04 Jan 1995 12:23:39 GMT
+References: <1995Jan01.042339.1093@cam.ac.uk> <1995Jan03.053939.6219@demon.co.uk>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Jan03.053939.6219@demon.co.uk>, spopov@demon.co.uk (Seo-yeon Popov) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+> If you are posting from AOL, please read RFC 1036 before posting again.
+
+Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+-- 
+Anja Fournier <afournier@utexas.edu>
+*PLONK* filter active for trolls.
+NeXTstation Turbo Color - NetBSD 1.0
+
+From nlarsson@earthlink.net Thu Jan 05 18:33:39 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!earthlink!nlarsson
+From: nlarsson@earthlink.net (Natalia Larsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Jan05.183339.4621@earthlink.net>
+Date: Thu, 05 Jan 1995 18:33:39 GMT
+References: <1995Jan01.042339.1093@cam.ac.uk> <1995Jan03.080839.3102@uu.net>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Jan03.080839.3102@uu.net>, mandersson@uu.net (Mike Andersson) writes:
+> The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+Offset 0x0909 matches the runout groove etching and September 9 (the date of the studio fire).
+
+-- 
+Natalia Larsson <nlarsson@earthlink.net>
+"They will send a copy in my place."
+Sun SparcStation 20 / AmigaOS 3.1
+

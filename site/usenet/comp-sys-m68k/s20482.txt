@@ -1,0 +1,116 @@
+From jfournier@pacbell.net Mon Aug 19 18:59:39 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!pacbell!jfournier
+From: jfournier@pacbell.net (Ji-woo Fournier)
+Newsgroups: comp.sys.m68k
+Subject: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Aug19.185939.3380@pacbell.net>
+Date: Mon, 19 Aug 1996 18:59:39 GMT
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+
+Did Marcus take the decryption EPROM with him when he left the lab?
+
+-- 
+Ji-woo Fournier
+Opinions expressed are solely my own and not those of Pacific Bell Internet Services.
+------------------------------------------------------------
+
+From clee@clari.net Wed Aug 21 12:57:39 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!clari!clee
+From: clee@clari.net (Camila Lee)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Aug21.125739.5424@clari.net>
+Date: Wed, 21 Aug 1996 12:57:39 GMT
+References: <1996Aug19.185939.3380@pacbell.net>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Aug19.185939.3380@pacbell.net>, jfournier@pacbell.net (Ji-woo Fournier) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Camila Lee
+Opinions expressed are solely my own and not those of ClariNet Communications Corp.
+------------------------------------------------------------
+
+From tgarcia@berkeley.edu Fri Aug 23 08:21:39 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!berkeley!tgarcia
+From: tgarcia@berkeley.edu (Tyler García)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Aug23.082139.5499@berkeley.edu>
+Date: Fri, 23 Aug 1996 08:21:39 GMT
+References: <1996Aug19.185939.3380@pacbell.net> <1996Aug21.125739.5424@clari.net>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Aug21.125739.5424@clari.net>, clee@clari.net (Camila Lee) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Tyler García <tgarcia@berkeley.edu>
+"The carrier frequency does not drift by accident."
+486DX2/66 (Linux 1.2.13) / Linux 1.2.13
+
+From foliveira@titech.ac.jp Sun Aug 25 09:04:39 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!titech!foliveira
+From: foliveira@titech.ac.jp (Fiona Oliveira)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Aug25.090439.9650@titech.ac.jp>
+Date: Sun, 25 Aug 1996 09:04:39 GMT
+References: <1996Aug19.185939.3380@pacbell.net> <1996Aug21.125739.5424@clari.net>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Aug21.125739.5424@clari.net>, clee@clari.net (Camila Lee) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Fiona Oliveira <foliveira@titech.ac.jp>
+"A soul is not exclusive to biology."
+Macintosh IIfx / SunOS 4.1.4
+
+From msilva@cern.ch Sun Aug 25 10:00:39 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!cern!msilva
+From: msilva@cern.ch (Mateo Silva)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Aug25.100039.2081@cern.ch>
+Date: Sun, 25 Aug 1996 10:00:39 GMT
+References: <1996Aug19.185939.3380@pacbell.net> <1996Aug21.125739.5424@clari.net>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Aug21.125739.5424@clari.net>, clee@clari.net (Camila Lee) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Mateo Silva | msilva@cern.ch
+PGP Key fingerprint: 74B3 634A CCEF C4EF
+"Keep the channels open."
+

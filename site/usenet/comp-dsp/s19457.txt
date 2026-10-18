@@ -1,0 +1,47 @@
+From tlopez@rwth-aachen.de Sun Jun 04 10:49:09 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!rwth-aachen!tlopez
+From: tlopez@rwth-aachen.de (Takeshi López)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jun04.104909.8894@rwth-aachen.de>
+Date: Sun, 04 Jun 1995 10:49:09 GMT
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Takeshi López
+Opinions expressed are solely my own and not those of RWTH Aachen Informatik.
+------------------------------------------------------------
+
+From bstewart@pipeline.com Tue Jun 06 03:07:09 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!pipeline!bstewart
+From: bstewart@pipeline.com (Bastien Stewart)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jun06.030709.6301@pipeline.com>
+Date: Tue, 06 Jun 1995 03:07:09 GMT
+References: <1995Jun04.104909.8894@rwth-aachen.de>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Jun04.104909.8894@rwth-aachen.de>, tlopez@rwth-aachen.de (Takeshi López) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Bastien Stewart -- The Pipeline Internet Network
+"The carrier frequency does not drift by accident."
+

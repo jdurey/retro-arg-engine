@@ -1,0 +1,98 @@
+From dsokolov@unam.mx Thu Feb 09 01:44:45 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!unam!dsokolov
+From: dsokolov@unam.mx (Dmitri Sokolov)
+Newsgroups: comp.dsp
+Subject: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Feb09.014445.7613@unam.mx>
+Date: Thu, 09 Feb 1995 01:44:45 GMT
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+MATLAB script available upon request via email.
+
+-- 
+Dmitri Sokolov | dsokolov@unam.mx
+PGP Key fingerprint: 8117 71CF EC93 35AC
+"Keep the channels open."
+
+From landersson@ox.ac.uk Fri Feb 10 17:00:45 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!ox!landersson
+From: landersson@ox.ac.uk (Lisa Andersson)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Feb10.170045.2232@ox.ac.uk>
+Date: Fri, 10 Feb 1995 17:00:45 GMT
+References: <1995Feb09.014445.7613@unam.mx>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995Feb09.014445.7613@unam.mx>, dsokolov@unam.mx (Dmitri Sokolov) writes:
+> Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+> A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Lisa Andersson -- Oxford University Computing Laboratory
+"5 sigma is a discovery. 7 is a question."
+
+From sjohansson@illinois.edu Sun Feb 12 03:42:45 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!illinois!sjohansson
+From: sjohansson@illinois.edu (Seo-yeon Johansson)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Feb12.034245.2981@illinois.edu>
+Date: Sun, 12 Feb 1995 03:42:45 GMT
+References: <1995Feb09.014445.7613@unam.mx> <1995Feb10.170045.2232@ox.ac.uk>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Feb10.170045.2232@ox.ac.uk>, landersson@ox.ac.uk (Lisa Andersson) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+> Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Seo-yeon Johansson -- University of Illinois Urbana-Champaign
+"Do not worship the copy."
+
+From grodriguez@mindspring.com Sun Feb 12 08:24:45 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!mindspring!grodriguez
+From: grodriguez@mindspring.com (Graham Rodríguez)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Feb12.082445.9664@mindspring.com>
+Date: Sun, 12 Feb 1995 08:24:45 GMT
+References: <1995Feb09.014445.7613@unam.mx> <1995Feb10.170045.2232@ox.ac.uk>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 12
+
+In article <1995Feb10.170045.2232@ox.ac.uk>, landersson@ox.ac.uk (Lisa Andersson) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+> Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Graham Rodríguez
+Opinions expressed are solely my own and not those of MindSpring Enterprises.
+------------------------------------------------------------
+

@@ -1,0 +1,100 @@
+From mreyes@ox.ac.uk Tue Jun 11 07:26:20 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!ox!mreyes
+From: mreyes@ox.ac.uk (Min-jun Reyes)
+Newsgroups: comp.dsp
+Subject: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Jun11.072620.8137@ox.ac.uk>
+Date: Tue, 11 Jun 1996 07:26:20 GMT
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+What sampling rates are people using for their vinyl rips? 44.1 kHz or 48 kHz DAT?
+
+-- 
+Min-jun Reyes <mreyes@ox.ac.uk>
+*PLONK* filter active for trolls.
+Acorn RiscPC 600 - NetBSD 1.0
+
+From ewatanabe@pipeline.com Wed Jun 12 13:09:20 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!pipeline!ewatanabe
+From: ewatanabe@pipeline.com (Elaine Watanabe)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Jun12.130920.5999@pipeline.com>
+Date: Wed, 12 Jun 1996 13:09:20 GMT
+References: <1996Jun11.072620.8137@ox.ac.uk>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1996Jun11.072620.8137@ox.ac.uk>, mreyes@ox.ac.uk (Min-jun Reyes) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+> At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Elaine Watanabe <ewatanabe@pipeline.com>
+"Row 14. No joke."
+486DX2/66 (Linux 1.2.13) / FreeBSD 2.1
+
+From tmoreno@titech.ac.jp Fri Jun 14 04:52:20 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!titech!tmoreno
+From: tmoreno@titech.ac.jp (Thiago Moreno)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Jun14.045220.5926@titech.ac.jp>
+Date: Fri, 14 Jun 1996 04:52:20 GMT
+References: <1996Jun11.072620.8137@ox.ac.uk>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1996Jun11.072620.8137@ox.ac.uk>, mreyes@ox.ac.uk (Min-jun Reyes) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+> At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Thiago Moreno <tmoreno@titech.ac.jp>
+Hayes Optima 288 @ 19,200 bps
+"Hold for relay."
+
+From scampbell@utexas.edu Fri Jun 14 14:52:20 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!utexas!scampbell
+From: scampbell@utexas.edu (Sun-mi Campbell)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Jun14.145220.2803@utexas.edu>
+Date: Fri, 14 Jun 1996 14:52:20 GMT
+References: <1996Jun11.072620.8137@ox.ac.uk> <1996Jun12.130920.5999@pipeline.com>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996Jun12.130920.5999@pipeline.com>, ewatanabe@pipeline.com (Elaine Watanabe) writes:
+> I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+> Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Sun-mi Campbell <scampbell@utexas.edu>
+Hayes Optima 288 @ 19,200 bps
+"In theory there is no difference between theory and practice."
+

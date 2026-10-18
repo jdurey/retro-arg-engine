@@ -1,0 +1,116 @@
+From mlopez@hanse.de Sat Apr 27 01:47:09 1996
+Path: ashpoly!cascade!bigsur!hanse!mlopez
+From: mlopez@hanse.de (Mike López)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Apr27.014709.5846@hanse.de>
+Date: Sat, 27 Apr 1996 01:47:09 GMT
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+=== Mike López ===
+Dept of Electrical Engineering, Hanse-Netzwerk Hamburg
+"Hold for relay."
+
+From mgonzalez@clari.net Sun Apr 28 14:16:09 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!clari!mgonzalez
+From: mgonzalez@clari.net (Mike González)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Apr28.141609.7174@clari.net>
+Date: Sun, 28 Apr 1996 14:16:09 GMT
+References: <1996Apr27.014709.5846@hanse.de>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Apr27.014709.5846@hanse.de>, mlopez@hanse.de (Mike López) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Mike González <mgonzalez@clari.net>
+"Hold for relay."
+PC-9821Ap2 (NEC) / NEXTSTEP 3.3
+
+From bsilva@berkeley.edu Mon Apr 29 08:40:09 1996
+Path: ashpoly!cascade!bigsur!berkeley!bsilva
+From: bsilva@berkeley.edu (Bill Silva)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Apr29.084009.7439@berkeley.edu>
+Date: Mon, 29 Apr 1996 08:40:09 GMT
+References: <1996Apr27.014709.5846@hanse.de>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Apr27.014709.5846@hanse.de>, mlopez@hanse.de (Mike López) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+=== Bill Silva ===
+Dept of Electrical Engineering, UC Berkeley Department of EECS
+"Hold for relay."
+
+From csantos@mindspring.com Tue Apr 30 04:29:09 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!mindspring!csantos
+From: csantos@mindspring.com (Callum Santos)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Apr30.042909.2226@mindspring.com>
+Date: Tue, 30 Apr 1996 04:29:09 GMT
+References: <1996Apr27.014709.5846@hanse.de> <1996Apr28.141609.7174@clari.net>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Apr28.141609.7174@clari.net>, mgonzalez@clari.net (Mike González) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Callum Santos <csantos@mindspring.com>
+US Robotics Courier V.34 @ 33,600 bps
+"Hold for relay."
+
+From aschneider@netcom.com Tue Apr 30 09:57:09 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!netcom!aschneider
+From: aschneider@netcom.com (Anton Schneider)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Apr30.095709.3388@netcom.com>
+Date: Tue, 30 Apr 1996 09:57:09 GMT
+References: <1996Apr27.014709.5846@hanse.de> <1996Apr29.084009.7439@berkeley.edu>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1996Apr29.084009.7439@berkeley.edu>, bsilva@berkeley.edu (Bill Silva) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Anton Schneider -- NETCOM On-Line Communication Services
+"There are 14 nodes and only 10 countries. Count again."
+

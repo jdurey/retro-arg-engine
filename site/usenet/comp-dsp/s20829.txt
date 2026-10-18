@@ -1,0 +1,116 @@
+From odubois@clari.net Sun Dec 10 06:34:01 1995
+Path: ashpoly!cascade!mxgate!coyoacan!clari!odubois
+From: odubois@clari.net (Olga Dubois)
+Newsgroups: comp.dsp
+Subject: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec10.063401.6813@clari.net>
+Date: Sun, 10 Dec 1995 06:34:01 GMT
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+=== Olga Dubois ===
+Dept of Electrical Engineering, ClariNet Communications Corp
+"Measuring a record you own is listening, not piracy."
+
+From lsantos@kiae.su Sun Dec 10 07:36:01 1995
+Path: ashpoly!cascade!bigsur!kiae!lsantos
+From: lsantos@kiae.su (Lars Santos)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec10.073601.4896@kiae.su>
+Date: Sun, 10 Dec 1995 07:36:01 GMT
+References: <1995Dec10.063401.6813@clari.net>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Dec10.063401.6813@clari.net>, odubois@clari.net (Olga Dubois) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Lars Santos
+Tape trading list upon request. SASE required for international mail.
+
+From awatanabe@stanford.edu Mon Dec 11 18:20:01 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!stanford!awatanabe
+From: awatanabe@stanford.edu (Amy Watanabe)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec11.182001.3786@stanford.edu>
+Date: Mon, 11 Dec 1995 18:20:01 GMT
+References: <1995Dec10.063401.6813@clari.net>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Dec10.063401.6813@clari.net>, odubois@clari.net (Olga Dubois) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+=== Amy Watanabe ===
+Dept of Electrical Engineering, Stanford University Computer Systems Lab
+"Hold for relay."
+
+From soliveira@cam.ac.uk Wed Dec 13 19:57:01 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!cam!soliveira
+From: soliveira@cam.ac.uk (Sun-mi Oliveira)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec13.195701.3685@cam.ac.uk>
+Date: Wed, 13 Dec 1995 19:57:01 GMT
+References: <1995Dec10.063401.6813@clari.net>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1995Dec10.063401.6813@clari.net>, odubois@clari.net (Olga Dubois) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Sun-mi Oliveira
+Tape trading list upon request. SASE required for international mail.
+
+From mlopez@uni-hamburg.de Fri Dec 15 18:05:01 1995
+Path: ashpoly!cascade!bigsur!uni-hamburg!mlopez
+From: mlopez@uni-hamburg.de (Min-jun López)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec15.180501.5896@uni-hamburg.de>
+Date: Fri, 15 Dec 1995 18:05:01 GMT
+References: <1995Dec10.063401.6813@clari.net> <1995Dec11.182001.3786@stanford.edu>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Dec11.182001.3786@stanford.edu>, awatanabe@stanford.edu (Amy Watanabe) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Min-jun López | mlopez@uni-hamburg.de
+PGP Key fingerprint: 191A 21F3 E525 31BE
+"Keep the channels open."
+

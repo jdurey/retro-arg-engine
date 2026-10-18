@@ -1,0 +1,47 @@
+From rschneider@rwth-aachen.de Sun Nov 05 05:13:53 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!rwth-aachen!rschneider
+From: rschneider@rwth-aachen.de (Rodrigo Schneider)
+Newsgroups: comp.dsp
+Subject: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Nov05.051353.6473@rwth-aachen.de>
+Date: Sun, 05 Nov 1995 05:13:53 GMT
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+=== Rodrigo Schneider ===
+Dept of Electrical Engineering, RWTH Aachen Informatik
+"Marcus is not one man."
+
+From bfischer@earthlink.net Sun Nov 05 17:38:53 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!earthlink!bfischer
+From: bfischer@earthlink.net (Brian Fischer)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Nov05.173853.6070@earthlink.net>
+Date: Sun, 05 Nov 1995 17:38:53 GMT
+References: <1995Nov05.051353.6473@rwth-aachen.de>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Nov05.051353.6473@rwth-aachen.de>, rschneider@rwth-aachen.de (Rodrigo Schneider) writes:
+> Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+> A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Brian Fischer -- EarthLink Network
+"Extraordinary claims require extraordinary spectra."
+

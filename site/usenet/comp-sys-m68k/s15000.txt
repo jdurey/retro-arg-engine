@@ -1,0 +1,120 @@
+From keriksson@berkeley.edu Sat May 27 13:02:09 1995
+Path: ashpoly!cascade!bigsur!berkeley!keriksson
+From: keriksson@berkeley.edu (Kenji Eriksson)
+Newsgroups: comp.sys.m68k
+Subject: Discussion: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995May27.130209.9074@berkeley.edu>
+Date: Sat, 27 May 1995 13:02:09 GMT
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Does anyone have a 27C256 EPROM marked 'MH-U14' or 'ORION-CRYPTO'?
+
+-- 
+Kenji Eriksson
+Tape trading list upon request. SASE required for international mail.
+
+From ilopez@cam.ac.uk Sun May 28 10:46:09 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!cam!ilopez
+From: ilopez@cam.ac.uk (Ines López)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995May28.104609.9771@cam.ac.uk>
+Date: Sun, 28 May 1995 10:46:09 GMT
+References: <1995May27.130209.9074@berkeley.edu>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1995May27.130209.9074@berkeley.edu>, keriksson@berkeley.edu (Kenji Eriksson) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Ines López <ilopez@cam.ac.uk>
+SupraFAXModem 28.8 @ ISDN 64k bps
+"Hold for relay."
+
+From etanaka@uni-hamburg.de Sun May 28 15:44:09 1995
+Path: ashpoly!cascade!bigsur!uni-hamburg!etanaka
+From: etanaka@uni-hamburg.de (Emi Tanaka)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995May28.154409.6653@uni-hamburg.de>
+Date: Sun, 28 May 1995 15:44:09 GMT
+References: <1995May27.130209.9074@berkeley.edu> <1995May28.104609.9771@cam.ac.uk>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995May28.104609.9771@cam.ac.uk>, ilopez@cam.ac.uk (Ines López) writes:
+> That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+> My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Emi Tanaka | etanaka@uni-hamburg.de
+PGP Key fingerprint: 290C C050 E347 EDFB
+"Keep the channels open."
+
+From njohansson@cern.ch Tue May 30 19:26:09 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!cern!njohansson
+From: njohansson@cern.ch (Natalia Johansson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995May30.192609.7304@cern.ch>
+Date: Tue, 30 May 1995 19:26:09 GMT
+References: <1995May27.130209.9074@berkeley.edu> <1995May28.104609.9771@cam.ac.uk> <1995May28.154409.6653@uni-hamburg.de>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995May28.154409.6653@uni-hamburg.de>, etanaka@uni-hamburg.de (Emi Tanaka) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Natalia Johansson <njohansson@cern.ch>
+"When every node is whole, the channel opens."
+486DX4/100 (FreeBSD 2.0.5) / System 7.5.1
+
+From blarsson@uu.net Wed May 31 05:54:09 1995
+Path: ashpoly!cascade!mxgate!coyoacan!uu!blarsson
+From: blarsson@uu.net (Brian Larsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995May31.055409.2874@uu.net>
+Date: Wed, 31 May 1995 05:54:09 GMT
+References: <1995May27.130209.9074@berkeley.edu> <1995May28.104609.9771@cam.ac.uk>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995May28.104609.9771@cam.ac.uk>, ilopez@cam.ac.uk (Ines López) writes:
+> That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+Brian Larsson
+Tape trading list upon request. SASE required for international mail.
+

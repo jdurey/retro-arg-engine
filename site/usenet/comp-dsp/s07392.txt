@@ -1,0 +1,72 @@
+From bgonzalez@u-tokyo.ac.jp Sun Jun 11 06:54:35 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!u-tokyo!bgonzalez
+From: bgonzalez@u-tokyo.ac.jp (Brian González)
+Newsgroups: comp.dsp
+Subject: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jun11.065435.9567@u-tokyo.ac.jp>
+Date: Sun, 11 Jun 1995 06:54:35 GMT
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Brian González | bgonzalez@u-tokyo.ac.jp
+PGP Key fingerprint: 7832 735E BA43 6073
+"Keep the channels open."
+
+From trobertson@clari.net Mon Jun 12 10:51:35 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!clari!trobertson
+From: trobertson@clari.net (Takeshi Robertson)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jun12.105135.1295@clari.net>
+Date: Mon, 12 Jun 1995 10:51:35 GMT
+References: <1995Jun11.065435.9567@u-tokyo.ac.jp>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995Jun11.065435.9567@u-tokyo.ac.jp>, bgonzalez@u-tokyo.ac.jp (Brian González) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Takeshi Robertson <trobertson@clari.net>
+*PLONK* filter active for trolls.
+Pentium 90 (OS/2 Warp) - NetBSD 1.0
+
+From mtanaka@pacbell.net Tue Jun 13 08:18:35 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!pacbell!mtanaka
+From: mtanaka@pacbell.net (Marisol Tanaka)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jun13.081835.7422@pacbell.net>
+Date: Tue, 13 Jun 1995 08:18:35 GMT
+References: <1995Jun11.065435.9567@u-tokyo.ac.jp> <1995Jun12.105135.1295@clari.net>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Jun12.105135.1295@clari.net>, trobertson@clari.net (Takeshi Robertson) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Marisol Tanaka <mtanaka@pacbell.net>
+Practical Peripherals 14.4 @ 33,600 bps
+"There are 14 nodes and only 10 countries. Count again."
+

@@ -1,0 +1,114 @@
+From ckarlsson@uu.net Sat Aug 26 11:06:57 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!uu!ckarlsson
+From: ckarlsson@uu.net (Callum Karlsson)
+Newsgroups: comp.dsp
+Subject: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Aug26.110657.3549@uu.net>
+Date: Sat, 26 Aug 1995 11:06:57 GMT
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+What sampling rates are people using for their vinyl rips? 44.1 kHz or 48 kHz DAT?
+
+-- 
+Callum Karlsson -- UUNET Technologies, Falls Church VA
+"There are 14 nodes and only 10 countries. Count again."
+
+From msanchez@purdue.edu Mon Aug 28 05:57:57 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!purdue!msanchez
+From: msanchez@purdue.edu (Mikhail Sánchez)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Aug28.055757.7145@purdue.edu>
+Date: Mon, 28 Aug 1995 05:57:57 GMT
+References: <1995Aug26.110657.3549@uu.net>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Aug26.110657.3549@uu.net>, ckarlsson@uu.net (Callum Karlsson) writes:
+> Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+> At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Mikhail Sánchez
+Tape trading list upon request. SASE required for international mail.
+
+From dkowalski@uni-hamburg.de Tue Aug 29 18:40:57 1995
+Path: ashpoly!cascade!brgate!saturno!uni-hamburg!dkowalski
+From: dkowalski@uni-hamburg.de (Diego Kowalski)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Aug29.184057.7132@uni-hamburg.de>
+Date: Tue, 29 Aug 1995 18:40:57 GMT
+References: <1995Aug26.110657.3549@uu.net> <1995Aug28.055757.7145@purdue.edu>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Aug28.055757.7145@purdue.edu>, msanchez@purdue.edu (Mikhail Sánchez) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Diego Kowalski | dkowalski@uni-hamburg.de
+PGP Key fingerprint: 25FC ADCE EE3D C58C
+"Keep the channels open."
+
+From ksanchez@kiae.su Thu Aug 31 21:26:57 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!kiae!ksanchez
+From: ksanchez@kiae.su (Kenji Sánchez)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Aug31.212657.2542@kiae.su>
+Date: Thu, 31 Aug 1995 21:26:57 GMT
+References: <1995Aug26.110657.3549@uu.net> <1995Aug28.055757.7145@purdue.edu> <1995Aug29.184057.7132@uni-hamburg.de>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1995Aug29.184057.7132@uni-hamburg.de>, dkowalski@uni-hamburg.de (Diego Kowalski) writes:
+> I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Kenji Sánchez
+Tape trading list upon request. SASE required for international mail.
+
+From msato@clari.net Sat Sep 02 20:20:57 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!clari!msato
+From: msato@clari.net (Marta Sato)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Sep02.202057.7608@clari.net>
+Date: Sat, 02 Sep 1995 20:20:57 GMT
+References: <1995Aug26.110657.3549@uu.net> <1995Aug28.055757.7145@purdue.edu> <1995Aug29.184057.7132@uni-hamburg.de> <1995Aug31.212657.2542@kiae.su>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Aug31.212657.2542@kiae.su>, ksanchez@kiae.su (Kenji Sánchez) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Marta Sato <msato@clari.net>
+*PLONK* filter active for trolls.
+Sun SparcStation 20 - NetBSD 1.0
+

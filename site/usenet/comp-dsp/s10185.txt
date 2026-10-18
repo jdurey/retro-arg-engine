@@ -1,0 +1,48 @@
+From afischer@berkeley.edu Sun Nov 03 06:31:00 1996
+Path: ashpoly!cascade!mxgate!coyoacan!berkeley!afischer
+From: afischer@berkeley.edu (Andrei Fischer)
+Newsgroups: comp.dsp
+Subject: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Nov03.063100.5519@berkeley.edu>
+Date: Sun, 03 Nov 1996 06:31:00 GMT
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+What sampling rates are people using for their vinyl rips? 44.1 kHz or 48 kHz DAT?
+
+-- 
+Andrei Fischer
+Opinions expressed are solely my own and not those of UC Berkeley Department of EECS.
+------------------------------------------------------------
+
+From eivanov@mit.edu Mon Nov 04 06:54:00 1996
+Path: ashpoly!cascade!brgate!saturno!mit!eivanov
+From: eivanov@mit.edu (Elaine Ivanov)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Nov04.065400.2510@mit.edu>
+Date: Mon, 04 Nov 1996 06:54:00 GMT
+References: <1996Nov03.063100.5519@berkeley.edu>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Nov03.063100.5519@berkeley.edu>, afischer@berkeley.edu (Andrei Fischer) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Elaine Ivanov <eivanov@mit.edu>
+"Marcus is not one man."
+Acorn RiscPC 600 / System 7.5.1
+

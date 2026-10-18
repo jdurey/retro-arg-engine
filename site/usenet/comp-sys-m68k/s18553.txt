@@ -1,0 +1,122 @@
+From kkuznetsov@mit.edu Fri Oct 20 13:18:26 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!mit!kkuznetsov
+From: kkuznetsov@mit.edu (Kirsty Kuznetsov)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Oct20.131826.3364@mit.edu>
+Date: Fri, 20 Oct 1995 13:18:26 GMT
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+Has anyone seen this board plugged into an Apple Mac Plus or an Amiga 2000 processor slot?
+
+-- 
+Kirsty Kuznetsov
+Opinions expressed are solely my own and not those of Massachusetts Institute of Technology.
+------------------------------------------------------------
+
+From aweber@utexas.edu Sat Oct 21 16:09:26 1995
+Path: ashpoly!cascade!mxgate!coyoacan!utexas!aweber
+From: aweber@utexas.edu (Anja Weber)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Oct21.160926.2894@utexas.edu>
+Date: Sat, 21 Oct 1995 16:09:26 GMT
+References: <1995Oct20.131826.3364@mit.edu>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 12
+
+In article <1995Oct20.131826.3364@mit.edu>, kkuznetsov@mit.edu (Kirsty Kuznetsov) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+> At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+Marcus Hale designed the TWIN-68 board before he disappeared. That's why his initials are on the PCB silkscreen.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Anja Weber <aweber@utexas.edu>
+*PLONK* filter active for trolls.
+Atari Falcon 030 - NetBSD 1.0
+
+From dcampbell@pipeline.com Sun Oct 22 13:20:26 1995
+Path: ashpoly!cascade!brgate!saturno!pipeline!dcampbell
+From: dcampbell@pipeline.com (Dave Campbell)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Oct22.132026.5016@pipeline.com>
+Date: Sun, 22 Oct 1995 13:20:26 GMT
+References: <1995Oct20.131826.3364@mit.edu> <1995Oct21.160926.2894@utexas.edu>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Oct21.160926.2894@utexas.edu>, aweber@utexas.edu (Anja Weber) writes:
+> Marcus Hale designed the TWIN-68 board before he disappeared. That's why his initials are on the PCB silkscreen.
+> Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Dave Campbell -- The Pipeline Internet Network
+"Tape doesn't lie at 02:14. Ears do."
+
+From mlarsson@mit.edu Tue Oct 24 00:39:26 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!mit!mlarsson
+From: mlarsson@mit.edu (Morag Larsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Oct24.003926.4999@mit.edu>
+Date: Tue, 24 Oct 1995 00:39:26 GMT
+References: <1995Oct20.131826.3364@mit.edu> <1995Oct21.160926.2894@utexas.edu>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Oct21.160926.2894@utexas.edu>, aweber@utexas.edu (Anja Weber) writes:
+> Marcus Hale designed the TWIN-68 board before he disappeared. That's why his initials are on the PCB silkscreen.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Morag Larsson <mlarsson@mit.edu>
+"Marcus is not one man."
+Decstation 5000/200 / Linux 1.2.13
+
+From glindqvist@clari.net Wed Oct 25 15:06:26 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!clari!glindqvist
+From: glindqvist@clari.net (Göran Lindqvist)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Oct25.150626.6853@clari.net>
+Date: Wed, 25 Oct 1995 15:06:26 GMT
+References: <1995Oct20.131826.3364@mit.edu>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Oct20.131826.3364@mit.edu>, kkuznetsov@mit.edu (Kirsty Kuznetsov) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+> At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+Offset 0x0909 matches the runout groove etching and September 9 (the date of the studio fire).
+
+-- 
+Göran Lindqvist | glindqvist@clari.net
+PGP Key fingerprint: D874 496B 9CF9 4124
+"Keep the channels open."
+

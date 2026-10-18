@@ -1,0 +1,117 @@
+From tmuller@stanford.edu Wed Oct 11 03:20:41 1995
+Path: ashpoly!cascade!bigsur!stanford!tmuller
+From: tmuller@stanford.edu (Takeshi Müller)
+Newsgroups: comp.sys.m68k
+Subject: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Oct11.032041.8089@stanford.edu>
+Date: Wed, 11 Oct 1995 03:20:41 GMT
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+Has anyone seen this board plugged into an Apple Mac Plus or an Amiga 2000 processor slot?
+
+-- 
+Takeshi Müller <tmuller@stanford.edu>
+SupraFAXModem 28.8 @ ISDN 64k bps
+"When every node is whole, the channel opens."
+
+From mnovak@hanse.de Wed Oct 11 20:05:41 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!hanse!mnovak
+From: mnovak@hanse.de (Mei Novak)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Oct11.200541.9483@hanse.de>
+Date: Wed, 11 Oct 1995 20:05:41 GMT
+References: <1995Oct11.032041.8089@stanford.edu>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Oct11.032041.8089@stanford.edu>, tmuller@stanford.edu (Takeshi Müller) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+-- 
+Mei Novak | mnovak@hanse.de
+PGP Key fingerprint: 205A 4365 5CCC 9FB7
+"Keep the channels open."
+
+From ekarlsson@illinois.edu Fri Oct 13 10:07:41 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!illinois!ekarlsson
+From: ekarlsson@illinois.edu (Emi Karlsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Oct13.100741.3342@illinois.edu>
+Date: Fri, 13 Oct 1995 10:07:41 GMT
+References: <1995Oct11.032041.8089@stanford.edu> <1995Oct11.200541.9483@hanse.de>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Oct11.200541.9483@hanse.de>, mnovak@hanse.de (Mei Novak) writes:
+> Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+-- 
+Emi Karlsson <ekarlsson@illinois.edu>
+SupraFAXModem 28.8 @ 28,800 bps
+"We don't sign stars. We build them."
+
+From ikang@cam.ac.uk Sat Oct 14 06:20:41 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!cam!ikang
+From: ikang@cam.ac.uk (Ines Kang)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Oct14.062041.5992@cam.ac.uk>
+Date: Sat, 14 Oct 1995 06:20:41 GMT
+References: <1995Oct11.032041.8089@stanford.edu> <1995Oct11.200541.9483@hanse.de> <1995Oct13.100741.3342@illinois.edu>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Oct13.100741.3342@illinois.edu>, ekarlsson@illinois.edu (Emi Karlsson) writes:
+> Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+Ines Kang
+Tape trading list upon request. SASE required for international mail.
+
+From jpark@purdue.edu Sat Oct 14 17:30:41 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!purdue!jpark
+From: jpark@purdue.edu (Jen Park)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Oct14.173041.9152@purdue.edu>
+Date: Sat, 14 Oct 1995 17:30:41 GMT
+References: <1995Oct11.032041.8089@stanford.edu> <1995Oct11.200541.9483@hanse.de>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Oct11.200541.9483@hanse.de>, mnovak@hanse.de (Mei Novak) writes:
+> Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Jen Park <jpark@purdue.edu>
+*PLONK* filter active for trolls.
+Amiga 3000T - NetBSD 1.0
+

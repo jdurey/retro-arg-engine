@@ -1,0 +1,47 @@
+From msato@hanse.de Tue Dec 26 13:08:07 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!hanse!msato
+From: msato@hanse.de (Mikhail Sato)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Dec26.130807.1507@hanse.de>
+Date: Tue, 26 Dec 1995 13:08:07 GMT
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Mikhail Sato
+Opinions expressed are solely my own and not those of Hanse-Netzwerk Hamburg.
+------------------------------------------------------------
+
+From esanchez@kiae.su Wed Dec 27 00:18:07 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!kiae!esanchez
+From: esanchez@kiae.su (Emi Sánchez)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Dec27.001807.2833@kiae.su>
+Date: Wed, 27 Dec 1995 00:18:07 GMT
+References: <1995Dec26.130807.1507@hanse.de>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Dec26.130807.1507@hanse.de>, msato@hanse.de (Mikhail Sato) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+> At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Emi Sánchez -- Kurchatov Institute of Atomic Energy, Moscow
+"The hatch is open. Is anyone listening?"
+

@@ -1,0 +1,119 @@
+From msokolov@netcom.com Fri Aug 09 14:19:45 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!netcom!msokolov
+From: msokolov@netcom.com (Morag Sokolov)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Aug09.141945.3180@netcom.com>
+Date: Fri, 09 Aug 1996 14:19:45 GMT
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Morag Sokolov <msokolov@netcom.com>
+SupraFAXModem 28.8 @ 14,400 bps
+"Row 14. No joke."
+
+From ysokolov@uni-hamburg.de Sat Aug 10 00:45:45 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!uni-hamburg!ysokolov
+From: ysokolov@uni-hamburg.de (Yuki Sokolov)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Aug10.004545.4449@uni-hamburg.de>
+Date: Sat, 10 Aug 1996 00:45:45 GMT
+References: <1996Aug09.141945.3180@netcom.com>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Aug09.141945.3180@netcom.com>, msokolov@netcom.com (Morag Sokolov) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Yuki Sokolov <ysokolov@uni-hamburg.de>
+*PLONK* filter active for trolls.
+Sun SparcStation 20 - NetBSD 1.0
+
+From jsouza@cmu.edu Sun Aug 11 13:48:45 1996
+Path: ashpoly!cascade!bigsur!cmu!jsouza
+From: jsouza@cmu.edu (Ji-woo Souza)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Aug11.134845.5436@cmu.edu>
+Date: Sun, 11 Aug 1996 13:48:45 GMT
+References: <1996Aug09.141945.3180@netcom.com>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Aug09.141945.3180@netcom.com>, msokolov@netcom.com (Morag Sokolov) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Ji-woo Souza <jsouza@cmu.edu>
+Hayes Optima 288 @ ISDN 64k bps
+"Extraordinary claims require extraordinary spectra."
+
+From lweber@ox.ac.uk Mon Aug 12 19:55:45 1996
+Path: ashpoly!cascade!mxgate!coyoacan!ox!lweber
+From: lweber@ox.ac.uk (Lucia Weber)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Aug12.195545.4018@ox.ac.uk>
+Date: Mon, 12 Aug 1996 19:55:45 GMT
+References: <1996Aug09.141945.3180@netcom.com> <1996Aug11.134845.5436@cmu.edu>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Aug11.134845.5436@cmu.edu>, jsouza@cmu.edu (Ji-woo Souza) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Lucia Weber <lweber@ox.ac.uk>
+"We don't sign stars. We build them."
+PC-9821Ap2 (NEC) / FreeBSD 2.1
+
+From rtanaka@mit.edu Wed Aug 14 04:23:45 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!mit!rtanaka
+From: rtanaka@mit.edu (Raj Tanaka)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Aug14.042345.2883@mit.edu>
+Date: Wed, 14 Aug 1996 04:23:45 GMT
+References: <1996Aug09.141945.3180@netcom.com> <1996Aug10.004545.4449@uni-hamburg.de>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1996Aug10.004545.4449@uni-hamburg.de>, ysokolov@uni-hamburg.de (Yuki Sokolov) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+Raj Tanaka <rtanaka@mit.edu>
+*PLONK* filter active for trolls.
+Pentium 90 (OS/2 Warp) - NetBSD 1.0
+

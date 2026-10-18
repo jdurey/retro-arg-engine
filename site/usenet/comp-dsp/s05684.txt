@@ -1,0 +1,96 @@
+From smoreau@uu.net Sun Dec 03 09:56:36 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!uu!smoreau
+From: smoreau@uu.net (Seo-yeon Moreau)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Dec03.095636.6476@uu.net>
+Date: Sun, 03 Dec 1995 09:56:36 GMT
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+What sampling rates are people using for their vinyl rips? 44.1 kHz or 48 kHz DAT?
+
+-- 
+Seo-yeon Moreau | smoreau@uu.net
+PGP Key fingerprint: CB98 E792 3A6E C01A
+"Keep the channels open."
+
+From vmartinez@mindspring.com Tue Dec 05 08:51:36 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!mindspring!vmartinez
+From: vmartinez@mindspring.com (Valeria Martínez)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Dec05.085136.6626@mindspring.com>
+Date: Tue, 05 Dec 1995 08:51:36 GMT
+References: <1995Dec03.095636.6476@uu.net>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1995Dec03.095636.6476@uu.net>, smoreau@uu.net (Seo-yeon Moreau) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Valeria Martínez <vmartinez@mindspring.com>
+*PLONK* filter active for trolls.
+Pentium 90 (OS/2 Warp) - NetBSD 1.0
+
+From jgonzalez@earthlink.net Tue Dec 05 14:11:36 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!earthlink!jgonzalez
+From: jgonzalez@earthlink.net (Joachim González)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Dec05.141136.7860@earthlink.net>
+Date: Tue, 05 Dec 1995 14:11:36 GMT
+References: <1995Dec03.095636.6476@uu.net> <1995Dec05.085136.6626@mindspring.com>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Dec05.085136.6626@mindspring.com>, vmartinez@mindspring.com (Valeria Martínez) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+> Top-posters will be placed in my ~/.killfile without notice.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Joachim González <jgonzalez@earthlink.net>
+*PLONK* filter active for trolls.
+Amiga 3000T - NetBSD 1.0
+
+From tandersson@rwth-aachen.de Wed Dec 06 16:28:36 1995
+Path: ashpoly!cascade!mxgate!coyoacan!rwth-aachen!tandersson
+From: tandersson@rwth-aachen.de (Tyler Andersson)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Dec06.162836.8529@rwth-aachen.de>
+Date: Wed, 06 Dec 1995 16:28:36 GMT
+References: <1995Dec03.095636.6476@uu.net> <1995Dec05.085136.6626@mindspring.com> <1995Dec05.141136.7860@earthlink.net>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1995Dec05.141136.7860@earthlink.net>, jgonzalez@earthlink.net (Joachim González) writes:
+> I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Tyler Andersson
+Tape trading list upon request. SASE required for international mail.
+

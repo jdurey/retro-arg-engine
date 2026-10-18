@@ -1,0 +1,71 @@
+From bmoreno@cmu.edu Mon Sep 09 02:30:56 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!cmu!bmoreno
+From: bmoreno@cmu.edu (Brian Moreno)
+Newsgroups: comp.dsp
+Subject: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Sep09.023056.8814@cmu.edu>
+Date: Mon, 09 Sep 1996 02:30:56 GMT
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+=== Brian Moreno ===
+Dept of Electrical Engineering, Carnegie Mellon University School of CS
+"In theory there is no difference between theory and practice."
+
+From isantos@netcom.com Tue Sep 10 20:53:56 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!netcom!isantos
+From: isantos@netcom.com (Ines Santos)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Sep10.205356.6130@netcom.com>
+Date: Tue, 10 Sep 1996 20:53:56 GMT
+References: <1996Sep09.023056.8814@cmu.edu>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Sep09.023056.8814@cmu.edu>, bmoreno@cmu.edu (Brian Moreno) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Ines Santos | isantos@netcom.com
+PGP Key fingerprint: AEDD 4D74 239C 3C8C
+"Keep the channels open."
+
+From mrobertson@mindspring.com Thu Sep 12 18:20:56 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!mindspring!mrobertson
+From: mrobertson@mindspring.com (Mike Robertson)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Sep12.182056.9636@mindspring.com>
+Date: Thu, 12 Sep 1996 18:20:56 GMT
+References: <1996Sep09.023056.8814@cmu.edu>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1996Sep09.023056.8814@cmu.edu>, bmoreno@cmu.edu (Brian Moreno) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Mike Robertson <mrobertson@mindspring.com>
+Practical Peripherals 14.4 @ 33,600 bps
+"Hold for relay."
+

@@ -1,0 +1,118 @@
+From awatanabe@uni-hamburg.de Sat Dec 10 22:18:39 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!uni-hamburg!awatanabe
+From: awatanabe@uni-hamburg.de (Anja Watanabe)
+Newsgroups: comp.dsp
+Subject: Observation: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Dec10.221839.9137@uni-hamburg.de>
+Date: Sat, 10 Dec 1994 22:18:39 GMT
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+
+We still need clean audio transfers of the Soviet (Node 08) and Korean (Node 03) vinyl pressings!
+
+-- 
+Anja Watanabe <awatanabe@uni-hamburg.de>
+"A soul is not exclusive to biology."
+NeXTstation Turbo Color / Linux 1.2.13
+
+From mmoreau@netcom.com Tue Dec 13 01:23:39 1994
+Path: ashpoly!cascade!mxgate!coyoacan!netcom!mmoreau
+From: mmoreau@netcom.com (Mikhail Moreau)
+Newsgroups: comp.dsp
+Subject: Re: Observation: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Dec13.012339.6617@netcom.com>
+Date: Tue, 13 Dec 1994 01:23:39 GMT
+References: <1994Dec10.221839.9137@uni-hamburg.de>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Dec10.221839.9137@uni-hamburg.de>, awatanabe@uni-hamburg.de (Anja Watanabe) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Mikhail Moreau <mmoreau@netcom.com>
+*PLONK* filter active for trolls.
+PC-9821Ap2 (NEC) - NetBSD 1.0
+
+From yvasiliev@pacbell.net Wed Dec 14 14:38:39 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!pacbell!yvasiliev
+From: yvasiliev@pacbell.net (Yuki Vasiliev)
+Newsgroups: comp.dsp
+Subject: Re: Observation: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Dec14.143839.5221@pacbell.net>
+Date: Wed, 14 Dec 1994 14:38:39 GMT
+References: <1994Dec10.221839.9137@uni-hamburg.de> <1994Dec13.012339.6617@netcom.com>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1994Dec13.012339.6617@netcom.com>, mmoreau@netcom.com (Mikhail Moreau) writes:
+> Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Yuki Vasiliev <yvasiliev@pacbell.net>
+*PLONK* filter active for trolls.
+Mac IIci / 68882 FPU - NetBSD 1.0
+
+From sperez@hanse.de Thu Dec 15 12:04:39 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!hanse!sperez
+From: sperez@hanse.de (Sergei Pérez)
+Newsgroups: comp.dsp
+Subject: Re: Observation: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Dec15.120439.6691@hanse.de>
+Date: Thu, 15 Dec 1994 12:04:39 GMT
+References: <1994Dec10.221839.9137@uni-hamburg.de>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Dec10.221839.9137@uni-hamburg.de>, awatanabe@uni-hamburg.de (Anja Watanabe) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+> Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+
+On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+-- 
+Sergei Pérez -- Hanse-Netzwerk Hamburg
+"Do not worship the copy."
+
+From mhughes@uni-hamburg.de Fri Dec 16 03:24:39 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!uni-hamburg!mhughes
+From: mhughes@uni-hamburg.de (Mikhail Hughes)
+Newsgroups: comp.dsp
+Subject: Re: Observation: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Dec16.032439.9913@uni-hamburg.de>
+Date: Fri, 16 Dec 1994 03:24:39 GMT
+References: <1994Dec10.221839.9137@uni-hamburg.de>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Dec10.221839.9137@uni-hamburg.de>, awatanabe@uni-hamburg.de (Anja Watanabe) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+-- 
+Mikhail Hughes <mhughes@uni-hamburg.de>
+SupraFAXModem 28.8 @ 9600 Telebit bps
+"Measuring a record you own is listening, not piracy."
+

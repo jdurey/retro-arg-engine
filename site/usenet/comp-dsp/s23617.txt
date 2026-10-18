@@ -1,0 +1,93 @@
+From vrodriguez@u-tokyo.ac.jp Wed May 18 06:47:03 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!u-tokyo!vrodriguez
+From: vrodriguez@u-tokyo.ac.jp (Valeria Rodríguez)
+Newsgroups: comp.dsp
+Subject: [INFO] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994May18.064703.9407@u-tokyo.ac.jp>
+Date: Wed, 18 May 1994 06:47:03 GMT
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+Grab the source archive from ftp.ashford-poly.edu:/pub/telecom-archives/stardust/stardust-1.3.tar.gz.
+
+-- 
+Valeria Rodríguez | vrodriguez@u-tokyo.ac.jp
+PGP Key fingerprint: C8D9 E26A D5BB 3EC0
+"Keep the channels open."
+
+From dnilsson@hanse.de Fri May 20 04:14:03 1994
+Path: ashpoly!cascade!brgate!saturno!hanse!dnilsson
+From: dnilsson@hanse.de (Dmitri Nilsson)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994May20.041403.3018@hanse.de>
+Date: Fri, 20 May 1994 04:14:03 GMT
+References: <1994May18.064703.9407@u-tokyo.ac.jp>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1994May18.064703.9407@u-tokyo.ac.jp>, vrodriguez@u-tokyo.ac.jp (Valeria Rodríguez) writes:
+> Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+> Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Dmitri Nilsson <dnilsson@hanse.de>
+*PLONK* filter active for trolls.
+Atari Falcon 030 - NetBSD 1.0
+
+From ntanaka@rwth-aachen.de Fri May 20 05:58:03 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!rwth-aachen!ntanaka
+From: ntanaka@rwth-aachen.de (Nadine Tanaka)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994May20.055803.2104@rwth-aachen.de>
+Date: Fri, 20 May 1994 05:58:03 GMT
+References: <1994May18.064703.9407@u-tokyo.ac.jp> <1994May20.041403.3018@hanse.de>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1994May20.041403.3018@hanse.de>, dnilsson@hanse.de (Dmitri Nilsson) writes:
+> Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+-- 
+Nadine Tanaka
+Tape trading list upon request. SASE required for international mail.
+
+From mfournier@cmu.edu Sat May 21 22:15:03 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!cmu!mfournier
+From: mfournier@cmu.edu (Mikhail Fournier)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994May21.221503.6226@cmu.edu>
+Date: Sat, 21 May 1994 22:15:03 GMT
+References: <1994May18.064703.9407@u-tokyo.ac.jp> <1994May20.041403.3018@hanse.de>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994May20.041403.3018@hanse.de>, dnilsson@hanse.de (Dmitri Nilsson) writes:
+> Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+-- 
+Mikhail Fournier
+Opinions expressed are solely my own and not those of Carnegie Mellon University School of CS.
+------------------------------------------------------------
+

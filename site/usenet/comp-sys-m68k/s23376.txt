@@ -1,0 +1,91 @@
+From dtanaka@cam.ac.uk Mon Jan 23 23:44:32 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!cam!dtanaka
+From: dtanaka@cam.ac.uk (Diego Tanaka)
+Newsgroups: comp.sys.m68k
+Subject: Observation: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Jan23.234432.1058@cam.ac.uk>
+Date: Mon, 23 Jan 1995 23:44:32 GMT
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Diego Tanaka
+Tape trading list upon request. SASE required for international mail.
+
+From tlarsson@mindspring.com Wed Jan 25 01:36:32 1995
+Path: ashpoly!cascade!mxgate!coyoacan!mindspring!tlarsson
+From: tlarsson@mindspring.com (Thiago Larsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Jan25.013632.2776@mindspring.com>
+Date: Wed, 25 Jan 1995 01:36:32 GMT
+References: <1995Jan23.234432.1058@cam.ac.uk>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Jan23.234432.1058@cam.ac.uk>, dtanaka@cam.ac.uk (Diego Tanaka) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Thiago Larsson
+Tape trading list upon request. SASE required for international mail.
+
+From mfischer@kiae.su Wed Jan 25 13:41:32 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!kiae!mfischer
+From: mfischer@kiae.su (Marta Fischer)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Jan25.134132.5503@kiae.su>
+Date: Wed, 25 Jan 1995 13:41:32 GMT
+References: <1995Jan23.234432.1058@cam.ac.uk> <1995Jan25.013632.2776@mindspring.com>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Jan25.013632.2776@mindspring.com>, tlarsson@mindspring.com (Thiago Larsson) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Marta Fischer | mfischer@kiae.su
+PGP Key fingerprint: F45B 6C93 85CC DA0E
+"Keep the channels open."
+
+From mlindqvist@mit.edu Thu Jan 26 15:58:32 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!mit!mlindqvist
+From: mlindqvist@mit.edu (Morag Lindqvist)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Jan26.155832.1477@mit.edu>
+Date: Thu, 26 Jan 1995 15:58:32 GMT
+References: <1995Jan23.234432.1058@cam.ac.uk>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Jan23.234432.1058@cam.ac.uk>, dtanaka@cam.ac.uk (Diego Tanaka) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+-- 
+Morag Lindqvist <mlindqvist@mit.edu>
+*PLONK* filter active for trolls.
+Pentium 90 (OS/2 Warp) - NetBSD 1.0
+

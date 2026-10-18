@@ -1,0 +1,69 @@
+From msokolov@illinois.edu Tue Jul 18 13:49:10 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!illinois!msokolov
+From: msokolov@illinois.edu (Mathieu Sokolov)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jul18.134910.5606@illinois.edu>
+Date: Tue, 18 Jul 1995 13:49:10 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Mathieu Sokolov | msokolov@illinois.edu
+PGP Key fingerprint: 4073 5F73 0EDF 6BFC
+"Keep the channels open."
+
+From tlaurent@panix.com Wed Jul 19 20:28:10 1995
+Path: ashpoly!cascade!mxgate!coyoacan!panix!tlaurent
+From: tlaurent@panix.com (Tomas Laurent)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jul19.202810.7233@panix.com>
+Date: Wed, 19 Jul 1995 20:28:10 GMT
+References: <1995Jul18.134910.5606@illinois.edu>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Jul18.134910.5606@illinois.edu>, msokolov@illinois.edu (Mathieu Sokolov) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+=== Tomas Laurent ===
+Dept of Electrical Engineering, Public Access Unix of New York
+"Tape doesn't lie at 02:14. Ears do."
+
+From fnakamura@unam.mx Fri Jul 21 18:41:10 1995
+Path: ashpoly!cascade!mxgate!coyoacan!unam!fnakamura
+From: fnakamura@unam.mx (Fiona Nakamura)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jul21.184110.7681@unam.mx>
+Date: Fri, 21 Jul 1995 18:41:10 GMT
+References: <1995Jul18.134910.5606@illinois.edu> <1995Jul19.202810.7233@panix.com>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1995Jul19.202810.7233@panix.com>, tlaurent@panix.com (Tomas Laurent) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Fiona Nakamura
+Tape trading list upon request. SASE required for international mail.
+

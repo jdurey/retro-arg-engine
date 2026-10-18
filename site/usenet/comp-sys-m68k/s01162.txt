@@ -1,0 +1,122 @@
+From tmuller@mit.edu Thu Sep 05 20:43:08 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!mit!tmuller
+From: tmuller@mit.edu (Thiago Müller)
+Newsgroups: comp.sys.m68k
+Subject: WTB/WTT: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Sep05.204308.8454@mit.edu>
+Date: Thu, 05 Sep 1996 20:43:08 GMT
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+=== Thiago Müller ===
+Dept of Electrical Engineering, Massachusetts Institute of Technology
+"Extraordinary claims require extraordinary spectra."
+
+From mnovak@panix.com Fri Sep 06 01:54:08 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!panix!mnovak
+From: mnovak@panix.com (Mei Novak)
+Newsgroups: comp.sys.m68k
+Subject: Re: WTB/WTT: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Sep06.015408.4011@panix.com>
+Date: Fri, 06 Sep 1996 01:54:08 GMT
+References: <1996Sep05.204308.8454@mit.edu>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Sep05.204308.8454@mit.edu>, tmuller@mit.edu (Thiago Müller) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Mei Novak
+Opinions expressed are solely my own and not those of Public Access Unix of New York.
+------------------------------------------------------------
+
+From rsantos@tum.de Fri Sep 06 18:52:08 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!tum!rsantos
+From: rsantos@tum.de (Rodrigo Santos)
+Newsgroups: comp.sys.m68k
+Subject: Re: WTB/WTT: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Sep06.185208.3890@tum.de>
+Date: Fri, 06 Sep 1996 18:52:08 GMT
+References: <1996Sep05.204308.8454@mit.edu> <1996Sep06.015408.4011@panix.com>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1996Sep06.015408.4011@panix.com>, mnovak@panix.com (Mei Novak) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Rodrigo Santos <rsantos@tum.de>
+Hayes Optima 288 @ 14,400 bps
+"Hold for relay."
+
+From anilsson@mit.edu Sun Sep 08 15:02:08 1996
+Path: ashpoly!cascade!brgate!saturno!mit!anilsson
+From: anilsson@mit.edu (Amy Nilsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: WTB/WTT: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Sep08.150208.9593@mit.edu>
+Date: Sun, 08 Sep 1996 15:02:08 GMT
+References: <1996Sep05.204308.8454@mit.edu>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1996Sep05.204308.8454@mit.edu>, tmuller@mit.edu (Thiago Müller) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+> CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+PGP Public key available via finger or upon request.
+
+-- 
+=== Amy Nilsson ===
+Dept of Electrical Engineering, Massachusetts Institute of Technology
+"When every node is whole, the channel opens."
+
+From jperez@titech.ac.jp Mon Sep 09 09:37:08 1996
+Path: ashpoly!cascade!mxgate!coyoacan!titech!jperez
+From: jperez@titech.ac.jp (Joachim Pérez)
+Newsgroups: comp.sys.m68k
+Subject: Re: WTB/WTT: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Sep09.093708.8868@titech.ac.jp>
+Date: Mon, 09 Sep 1996 09:37:08 GMT
+References: <1996Sep05.204308.8454@mit.edu> <1996Sep06.015408.4011@panix.com> <1996Sep06.185208.3890@tum.de>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996Sep06.185208.3890@tum.de>, rsantos@tum.de (Rodrigo Santos) writes:
+> The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+> If you are posting from AOL, please read RFC 1036 before posting again.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Joachim Pérez
+Opinions expressed are solely my own and not those of Tokyo Institute of Technology Computer Centre.
+------------------------------------------------------------
+

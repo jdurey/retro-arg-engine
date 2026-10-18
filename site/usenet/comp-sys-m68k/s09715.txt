@@ -1,0 +1,71 @@
+From opetrov@cmu.edu Tue Feb 07 23:51:21 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!cmu!opetrov
+From: opetrov@cmu.edu (Olga Petrov)
+Newsgroups: comp.sys.m68k
+Subject: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Feb07.235121.2444@cmu.edu>
+Date: Tue, 07 Feb 1995 23:51:21 GMT
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Olga Petrov <opetrov@cmu.edu>
+Practical Peripherals 14.4 @ 9600 Telebit bps
+"The hatch is open. Is anyone listening?"
+
+From msuzuki@stanford.edu Thu Feb 09 05:24:21 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!stanford!msuzuki
+From: msuzuki@stanford.edu (Morag Suzuki)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Feb09.052421.7320@stanford.edu>
+Date: Thu, 09 Feb 1995 05:24:21 GMT
+References: <1995Feb07.235121.2444@cmu.edu>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Feb07.235121.2444@cmu.edu>, opetrov@cmu.edu (Olga Petrov) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Morag Suzuki <msuzuki@stanford.edu>
+"Measuring a record you own is listening, not piracy."
+Atari TT030 / System 7.5.1
+
+From bgarcia@earthlink.net Thu Feb 09 18:36:21 1995
+Path: ashpoly!cascade!bigsur!earthlink!bgarcia
+From: bgarcia@earthlink.net (Bastien García)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Feb09.183621.9857@earthlink.net>
+Date: Thu, 09 Feb 1995 18:36:21 GMT
+References: <1995Feb07.235121.2444@cmu.edu> <1995Feb09.052421.7320@stanford.edu>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Feb09.052421.7320@stanford.edu>, msuzuki@stanford.edu (Morag Suzuki) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Bastien García <bgarcia@earthlink.net>
+Zyxel U-1496E @ 14,400 bps
+"Tape doesn't lie at 02:14. Ears do."
+

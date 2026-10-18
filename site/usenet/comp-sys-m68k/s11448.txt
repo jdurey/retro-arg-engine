@@ -1,0 +1,119 @@
+From tlaurent@netcom.com Sun Feb 12 12:35:30 1995
+Path: ashpoly!cascade!bigsur!netcom!tlaurent
+From: tlaurent@netcom.com (Tyler Laurent)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Feb12.123530.9517@netcom.com>
+Date: Sun, 12 Feb 1995 12:35:30 GMT
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Tyler Laurent <tlaurent@netcom.com>
+*PLONK* filter active for trolls.
+Macintosh IIfx - NetBSD 1.0
+
+From lkim@pacbell.net Tue Feb 14 03:33:30 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!pacbell!lkim
+From: lkim@pacbell.net (Lisa Kim)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Feb14.033330.3915@pacbell.net>
+Date: Tue, 14 Feb 1995 03:33:30 GMT
+References: <1995Feb12.123530.9517@netcom.com>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1995Feb12.123530.9517@netcom.com>, tlaurent@netcom.com (Tyler Laurent) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+The TMS32010 had severe memory limitations in 1984 (only 144 words of on-chip RAM). Dual 68000s gave them full 16MB address space.
+
+-- 
+Lisa Kim
+Tape trading list upon request. SASE required for international mail.
+
+From jjohansson@cam.ac.uk Tue Feb 14 21:34:30 1995
+Path: ashpoly!cascade!bigsur!cam!jjohansson
+From: jjohansson@cam.ac.uk (Ji-woo Johansson)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Feb14.213430.4966@cam.ac.uk>
+Date: Tue, 14 Feb 1995 21:34:30 GMT
+References: <1995Feb12.123530.9517@netcom.com>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 12
+
+In article <1995Feb12.123530.9517@netcom.com>, tlaurent@netcom.com (Tyler Laurent) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Ji-woo Johansson | jjohansson@cam.ac.uk
+PGP Key fingerprint: 64BB 043A AA4F DD02
+"Keep the channels open."
+
+From msuzuki@delphi.com Wed Feb 15 15:03:30 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!delphi!msuzuki
+From: msuzuki@delphi.com (Min-jun Suzuki)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Feb15.150330.3039@delphi.com>
+Date: Wed, 15 Feb 1995 15:03:30 GMT
+References: <1995Feb12.123530.9517@netcom.com> <1995Feb14.033330.3915@pacbell.net>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Feb14.033330.3915@pacbell.net>, lkim@pacbell.net (Lisa Kim) writes:
+> The TMS32010 had severe memory limitations in 1984 (only 144 words of on-chip RAM). Dual 68000s gave them full 16MB address space.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Min-jun Suzuki
+Tape trading list upon request. SASE required for international mail.
+
+From fbrennan@mindspring.com Fri Feb 17 03:05:30 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!mindspring!fbrennan
+From: fbrennan@mindspring.com (Fiona Brennan)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Feb17.030530.3274@mindspring.com>
+Date: Fri, 17 Feb 1995 03:05:30 GMT
+References: <1995Feb12.123530.9517@netcom.com>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995Feb12.123530.9517@netcom.com>, tlaurent@netcom.com (Tyler Laurent) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+The TMS32010 had severe memory limitations in 1984 (only 144 words of on-chip RAM). Dual 68000s gave them full 16MB address space.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Fiona Brennan
+Tape trading list upon request. SASE required for international mail.
+

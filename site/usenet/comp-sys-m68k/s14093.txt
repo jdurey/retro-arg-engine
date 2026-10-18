@@ -1,0 +1,47 @@
+From bpark@cam.ac.uk Mon Sep 25 17:18:40 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!cam!bpark
+From: bpark@cam.ac.uk (Bastien Park)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Sep25.171840.8358@cam.ac.uk>
+Date: Mon, 25 Sep 1995 17:18:40 GMT
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+Bastien Park
+Tape trading list upon request. SASE required for international mail.
+
+From fjohansson@mindspring.com Mon Sep 25 22:04:40 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!mindspring!fjohansson
+From: fjohansson@mindspring.com (Fiona Johansson)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Sep25.220440.9972@mindspring.com>
+Date: Mon, 25 Sep 1995 22:04:40 GMT
+References: <1995Sep25.171840.8358@cam.ac.uk>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Sep25.171840.8358@cam.ac.uk>, bpark@cam.ac.uk (Bastien Park) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Fiona Johansson
+Opinions expressed are solely my own and not those of MindSpring Enterprises.
+------------------------------------------------------------
+

@@ -1,0 +1,46 @@
+From msanchez@cmu.edu Wed Mar 23 19:08:14 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!cmu!msanchez
+From: msanchez@cmu.edu (Min-jun Sánchez)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Mar23.190814.9371@cmu.edu>
+Date: Wed, 23 Mar 1994 19:08:14 GMT
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+Min-jun Sánchez | msanchez@cmu.edu
+PGP Key fingerprint: 36CC AE62 BCA4 C60A
+"Keep the channels open."
+
+From akang@berkeley.edu Thu Mar 24 19:05:14 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!berkeley!akang
+From: akang@berkeley.edu (Amy Kang)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Mar24.190514.2661@berkeley.edu>
+Date: Thu, 24 Mar 1994 19:05:14 GMT
+References: <1994Mar23.190814.9371@cmu.edu>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1994Mar23.190814.9371@cmu.edu>, msanchez@cmu.edu (Min-jun Sánchez) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Amy Kang
+Tape trading list upon request. SASE required for international mail.
+

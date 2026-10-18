@@ -1,0 +1,116 @@
+From bsokolov@pacbell.net Tue May 16 23:10:26 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!pacbell!bsokolov
+From: bsokolov@pacbell.net (Bill Sokolov)
+Newsgroups: comp.sys.m68k
+Subject: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995May16.231026.5141@pacbell.net>
+Date: Tue, 16 May 1995 23:10:26 GMT
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+Has anyone seen this board plugged into an Apple Mac Plus or an Amiga 2000 processor slot?
+
+-- 
+Bill Sokolov <bsokolov@pacbell.net>
+Practical Peripherals 14.4 @ 28,800 bps
+"They will send a copy in my place."
+
+From esantos@rwth-aachen.de Wed May 17 21:27:26 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!rwth-aachen!esantos
+From: esantos@rwth-aachen.de (Élodie Santos)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995May17.212726.5087@rwth-aachen.de>
+Date: Wed, 17 May 1995 21:27:26 GMT
+References: <1995May16.231026.5141@pacbell.net>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995May16.231026.5141@pacbell.net>, bsokolov@pacbell.net (Bill Sokolov) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Élodie Santos
+Opinions expressed are solely my own and not those of RWTH Aachen Informatik.
+------------------------------------------------------------
+
+From mkim@kth.se Fri May 19 03:07:26 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!kth!mkim
+From: mkim@kth.se (Marisol Kim)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995May19.030726.7852@kth.se>
+Date: Fri, 19 May 1995 03:07:26 GMT
+References: <1995May16.231026.5141@pacbell.net> <1995May17.212726.5087@rwth-aachen.de>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995May17.212726.5087@rwth-aachen.de>, esantos@rwth-aachen.de (Élodie Santos) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+Tom from Ashford Poly owns the physical board! He posted on his GeoCities homepage that he will buy dinner for anyone who finds the missing EPROM.
+
+-- 
+=== Marisol Kim ===
+Dept of Electrical Engineering, Royal Institute of Technology, Stockholm
+"The carrier frequency does not drift by accident."
+
+From gperez@purdue.edu Sat May 20 21:37:26 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!purdue!gperez
+From: gperez@purdue.edu (Graham Pérez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995May20.213726.8691@purdue.edu>
+Date: Sat, 20 May 1995 21:37:26 GMT
+References: <1995May16.231026.5141@pacbell.net>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995May16.231026.5141@pacbell.net>, bsokolov@pacbell.net (Bill Sokolov) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+-- 
+Graham Pérez <gperez@purdue.edu>
+*PLONK* filter active for trolls.
+Amiga 3000T - NetBSD 1.0
+
+From smoreau@rwth-aachen.de Sun May 21 11:27:26 1995
+Path: ashpoly!cascade!brgate!saturno!rwth-aachen!smoreau
+From: smoreau@rwth-aachen.de (Sun-mi Moreau)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995May21.112726.5903@rwth-aachen.de>
+Date: Sun, 21 May 1995 11:27:26 GMT
+References: <1995May16.231026.5141@pacbell.net>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995May16.231026.5141@pacbell.net>, bsokolov@pacbell.net (Bill Sokolov) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Sun-mi Moreau | smoreau@rwth-aachen.de
+PGP Key fingerprint: D32B 924E 0352 7337
+"Keep the channels open."
+

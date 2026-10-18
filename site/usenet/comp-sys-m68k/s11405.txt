@@ -1,0 +1,46 @@
+From acampbell@hanse.de Mon Mar 06 00:29:27 1995
+Path: ashpoly!cascade!mxgate!coyoacan!hanse!acampbell
+From: acampbell@hanse.de (Amy Campbell)
+Newsgroups: comp.sys.m68k
+Subject: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Mar06.002927.8459@hanse.de>
+Date: Mon, 06 Mar 1995 00:29:27 GMT
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Amy Campbell
+Tape trading list upon request. SASE required for international mail.
+
+From dtanaka@netcom.com Tue Mar 07 06:41:27 1995
+Path: ashpoly!cascade!brgate!saturno!netcom!dtanaka
+From: dtanaka@netcom.com (Dong-hyun Tanaka)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Mar07.064127.9188@netcom.com>
+Date: Tue, 07 Mar 1995 06:41:27 GMT
+References: <1995Mar06.002927.8459@hanse.de>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Mar06.002927.8459@hanse.de>, acampbell@hanse.de (Amy Campbell) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Dong-hyun Tanaka
+Opinions expressed are solely my own and not those of NETCOM On-Line Communication Services.
+------------------------------------------------------------
+

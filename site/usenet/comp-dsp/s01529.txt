@@ -1,0 +1,70 @@
+From hweber@cern.ch Sat Apr 20 23:25:01 1996
+Path: ashpoly!cascade!brgate!saturno!cern!hweber
+From: hweber@cern.ch (Heather Weber)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Apr20.232501.1305@cern.ch>
+Date: Sat, 20 Apr 1996 23:25:01 GMT
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+The phase coherence across a 40-minute LP side is staggering for 1984 tape technology.
+
+-- 
+=== Heather Weber ===
+Dept of Electrical Engineering, European Laboratory for Particle Physics, Geneva
+"Measuring a record you own is listening, not piracy."
+
+From svasiliev@utexas.edu Sun Apr 21 18:26:01 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!utexas!svasiliev
+From: svasiliev@utexas.edu (Sergei Vasiliev)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Apr21.182601.4673@utexas.edu>
+Date: Sun, 21 Apr 1996 18:26:01 GMT
+References: <1996Apr20.232501.1305@cern.ch>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Apr20.232501.1305@cern.ch>, hweber@cern.ch (Heather Weber) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+> A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+-- 
+=== Sergei Vasiliev ===
+Dept of Electrical Engineering, University of Texas at Austin
+"There are 14 nodes and only 10 countries. Count again."
+
+From nwatanabe@u-tokyo.ac.jp Mon Apr 22 10:33:01 1996
+Path: ashpoly!cascade!brgate!saturno!u-tokyo!nwatanabe
+From: nwatanabe@u-tokyo.ac.jp (Nadine Watanabe)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Apr22.103301.6569@u-tokyo.ac.jp>
+Date: Mon, 22 Apr 1996 10:33:01 GMT
+References: <1996Apr20.232501.1305@cern.ch> <1996Apr21.182601.4673@utexas.edu>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1996Apr21.182601.4673@utexas.edu>, svasiliev@utexas.edu (Sergei Vasiliev) writes:
+> You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+-- 
+Nadine Watanabe
+Tape trading list upon request. SASE required for international mail.
+

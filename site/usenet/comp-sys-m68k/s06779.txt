@@ -1,0 +1,71 @@
+From lsokolov@rwth-aachen.de Thu Dec 12 06:28:28 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!rwth-aachen!lsokolov
+From: lsokolov@rwth-aachen.de (Lars Sokolov)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Dec12.062828.8041@rwth-aachen.de>
+Date: Thu, 12 Dec 1996 06:28:28 GMT
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+Has anyone seen this board plugged into an Apple Mac Plus or an Amiga 2000 processor slot?
+
+-- 
+Lars Sokolov <lsokolov@rwth-aachen.de>
+Practical Peripherals 14.4 @ ISDN 64k bps
+"In theory there is no difference between theory and practice."
+
+From lpark@demon.co.uk Thu Dec 12 14:06:28 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!demon!lpark
+From: lpark@demon.co.uk (Liam Park)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Dec12.140628.5010@demon.co.uk>
+Date: Thu, 12 Dec 1996 14:06:28 GMT
+References: <1996Dec12.062828.8041@rwth-aachen.de>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1996Dec12.062828.8041@rwth-aachen.de>, lsokolov@rwth-aachen.de (Lars Sokolov) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+> At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+=== Liam Park ===
+Dept of Electrical Engineering, Demon Internet Services UK
+"When every node is whole, the channel opens."
+
+From hsmirnov@mindspring.com Sat Dec 14 13:54:28 1996
+Path: ashpoly!cascade!brgate!saturno!mindspring!hsmirnov
+From: hsmirnov@mindspring.com (Heather Smirnov)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Dec14.135428.9741@mindspring.com>
+Date: Sat, 14 Dec 1996 13:54:28 GMT
+References: <1996Dec12.062828.8041@rwth-aachen.de>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Dec12.062828.8041@rwth-aachen.de>, lsokolov@rwth-aachen.de (Lars Sokolov) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Heather Smirnov <hsmirnov@mindspring.com>
+*PLONK* filter active for trolls.
+Sun 3/60 (SunOS 4.1.1) - NetBSD 1.0
+

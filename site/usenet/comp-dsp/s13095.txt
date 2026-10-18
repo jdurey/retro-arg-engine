@@ -1,0 +1,96 @@
+From jhughes@titech.ac.jp Thu Dec 22 01:00:31 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!titech!jhughes
+From: jhughes@titech.ac.jp (Julien Hughes)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Dec22.010031.7997@titech.ac.jp>
+Date: Thu, 22 Dec 1994 01:00:31 GMT
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Julien Hughes
+Opinions expressed are solely my own and not those of Tokyo Institute of Technology Computer Centre.
+------------------------------------------------------------
+
+From jramirez@cmu.edu Fri Dec 23 12:58:31 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!cmu!jramirez
+From: jramirez@cmu.edu (Jen Ramírez)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Dec23.125831.7941@cmu.edu>
+Date: Fri, 23 Dec 1994 12:58:31 GMT
+References: <1994Dec22.010031.7997@titech.ac.jp>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1994Dec22.010031.7997@titech.ac.jp>, jhughes@titech.ac.jp (Julien Hughes) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Jen Ramírez <jramirez@cmu.edu>
+"In theory there is no difference between theory and practice."
+Sun 3/60 (SunOS 4.1.1) / AmigaOS 3.1
+
+From knilsson@stanford.edu Sun Dec 25 10:27:31 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!stanford!knilsson
+From: knilsson@stanford.edu (Katrin Nilsson)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Dec25.102731.6259@stanford.edu>
+Date: Sun, 25 Dec 1994 10:27:31 GMT
+References: <1994Dec22.010031.7997@titech.ac.jp> <1994Dec23.125831.7941@cmu.edu>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1994Dec23.125831.7941@cmu.edu>, jramirez@cmu.edu (Jen Ramírez) writes:
+> Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Katrin Nilsson
+Tape trading list upon request. SASE required for international mail.
+
+From lchoi@clari.net Mon Dec 26 20:03:31 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!clari!lchoi
+From: lchoi@clari.net (Liam Choi)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Dec26.200331.1477@clari.net>
+Date: Mon, 26 Dec 1994 20:03:31 GMT
+References: <1994Dec22.010031.7997@titech.ac.jp>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1994Dec22.010031.7997@titech.ac.jp>, jhughes@titech.ac.jp (Julien Hughes) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Liam Choi <lchoi@clari.net>
+US Robotics Courier V.34 @ ISDN 64k bps
+"5 sigma is a discovery. 7 is a question."
+

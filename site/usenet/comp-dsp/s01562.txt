@@ -1,0 +1,97 @@
+From mtakahashi@hanse.de Sat Nov 18 22:59:26 1995
+Path: ashpoly!cascade!brgate!saturno!hanse!mtakahashi
+From: mtakahashi@hanse.de (Marisol Takahashi)
+Newsgroups: comp.dsp
+Subject: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Nov18.225926.4462@hanse.de>
+Date: Sat, 18 Nov 1995 22:59:26 GMT
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Marisol Takahashi <mtakahashi@hanse.de>
+US Robotics Courier V.34 @ 14,400 bps
+"There are 14 nodes and only 10 countries. Count again."
+
+From bduarte@rwth-aachen.de Sun Nov 19 11:44:26 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!rwth-aachen!bduarte
+From: bduarte@rwth-aachen.de (Brian Duarte)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Nov19.114426.8847@rwth-aachen.de>
+Date: Sun, 19 Nov 1995 11:44:26 GMT
+References: <1995Nov18.225926.4462@hanse.de>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Nov18.225926.4462@hanse.de>, mtakahashi@hanse.de (Marisol Takahashi) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Brian Duarte <bduarte@rwth-aachen.de>
+Practical Peripherals 14.4 @ 19,200 bps
+"There are 14 nodes and only 10 countries. Count again."
+
+From dpetrov@panix.com Mon Nov 20 20:57:26 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!panix!dpetrov
+From: dpetrov@panix.com (Dmitri Petrov)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Nov20.205726.6050@panix.com>
+Date: Mon, 20 Nov 1995 20:57:26 GMT
+References: <1995Nov18.225926.4462@hanse.de>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Nov18.225926.4462@hanse.de>, mtakahashi@hanse.de (Marisol Takahashi) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Dmitri Petrov
+Tape trading list upon request. SASE required for international mail.
+
+From mvasiliev@utexas.edu Tue Nov 21 04:00:26 1995
+Path: ashpoly!cascade!bigsur!utexas!mvasiliev
+From: mvasiliev@utexas.edu (Matthias Vasiliev)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Nov21.040026.7329@utexas.edu>
+Date: Tue, 21 Nov 1995 04:00:26 GMT
+References: <1995Nov18.225926.4462@hanse.de>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1995Nov18.225926.4462@hanse.de>, mtakahashi@hanse.de (Marisol Takahashi) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Matthias Vasiliev <mvasiliev@utexas.edu>
+US Robotics Courier V.34 @ 33,600 bps
+"There are 14 nodes and only 10 countries. Count again."
+

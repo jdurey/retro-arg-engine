@@ -1,0 +1,116 @@
+From tsanchez@u-tokyo.ac.jp Sun Sep 25 17:48:59 1994
+Path: ashpoly!cascade!brgate!saturno!u-tokyo!tsanchez
+From: tsanchez@u-tokyo.ac.jp (Tomas Sánchez)
+Newsgroups: comp.dsp
+Subject: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Sep25.174859.1268@u-tokyo.ac.jp>
+Date: Sun, 25 Sep 1994 17:48:59 GMT
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Tomas Sánchez <tsanchez@u-tokyo.ac.jp>
+*PLONK* filter active for trolls.
+Amiga 1200 (Blizzard 030/50) - NetBSD 1.0
+
+From sito@delphi.com Tue Sep 27 09:19:59 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!delphi!sito
+From: sito@delphi.com (Sven Ito)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Sep27.091959.2661@delphi.com>
+Date: Tue, 27 Sep 1994 09:19:59 GMT
+References: <1994Sep25.174859.1268@u-tokyo.ac.jp>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1994Sep25.174859.1268@u-tokyo.ac.jp>, tsanchez@u-tokyo.ac.jp (Tomas Sánchez) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+=== Sven Ito ===
+Dept of Electrical Engineering, Delphi Internet Services
+"They will send a copy in my place."
+
+From ipetrov@stanford.edu Thu Sep 29 11:56:59 1994
+Path: ashpoly!cascade!bigsur!stanford!ipetrov
+From: ipetrov@stanford.edu (Ines Petrov)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Sep29.115659.6436@stanford.edu>
+Date: Thu, 29 Sep 1994 11:56:59 GMT
+References: <1994Sep25.174859.1268@u-tokyo.ac.jp>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Sep25.174859.1268@u-tokyo.ac.jp>, tsanchez@u-tokyo.ac.jp (Tomas Sánchez) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Ines Petrov | ipetrov@stanford.edu
+PGP Key fingerprint: 17EB 40A4 60D0 4910
+"Keep the channels open."
+
+From alaurent@titech.ac.jp Sat Oct 01 03:46:59 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!titech!alaurent
+From: alaurent@titech.ac.jp (Anja Laurent)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Oct01.034659.7797@titech.ac.jp>
+Date: Sat, 01 Oct 1994 03:46:59 GMT
+References: <1994Sep25.174859.1268@u-tokyo.ac.jp> <1994Sep27.091959.2661@delphi.com>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1994Sep27.091959.2661@delphi.com>, sito@delphi.com (Sven Ito) writes:
+> Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+Anja Laurent
+Tape trading list upon request. SASE required for international mail.
+
+From msokolov@cam.ac.uk Sun Oct 02 23:03:59 1994
+Path: ashpoly!cascade!mxgate!coyoacan!cam!msokolov
+From: msokolov@cam.ac.uk (Marta Sokolov)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Oct02.230359.2952@cam.ac.uk>
+Date: Sun, 02 Oct 1994 23:03:59 GMT
+References: <1994Sep25.174859.1268@u-tokyo.ac.jp> <1994Sep27.091959.2661@delphi.com> <1994Oct01.034659.7797@titech.ac.jp>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Oct01.034659.7797@titech.ac.jp>, alaurent@titech.ac.jp (Anja Laurent) writes:
+> Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Marta Sokolov <msokolov@cam.ac.uk>
+"Extraordinary claims require extraordinary spectra."
+486DX2/66 (Linux 1.2.13) / FreeBSD 2.1
+

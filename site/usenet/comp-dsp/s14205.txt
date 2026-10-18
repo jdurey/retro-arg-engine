@@ -1,0 +1,47 @@
+From ckang@uni-hamburg.de Fri Jan 14 09:08:53 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!uni-hamburg!ckang
+From: ckang@uni-hamburg.de (Callum Kang)
+Newsgroups: comp.dsp
+Subject: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Jan14.090853.5354@uni-hamburg.de>
+Date: Fri, 14 Jan 1994 09:08:53 GMT
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+What sampling rates are people using for their vinyl rips? 44.1 kHz or 48 kHz DAT?
+
+-- 
+Callum Kang <ckang@uni-hamburg.de>
+US Robotics Courier V.34 @ 19,200 bps
+"Do not worship the copy."
+
+From jlopez@cern.ch Sat Jan 15 20:41:53 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!cern!jlopez
+From: jlopez@cern.ch (Julien López)
+Newsgroups: comp.dsp
+Subject: Re: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Jan15.204153.1588@cern.ch>
+Date: Sat, 15 Jan 1994 20:41:53 GMT
+References: <1994Jan14.090853.5354@uni-hamburg.de>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Jan14.090853.5354@uni-hamburg.de>, ckang@uni-hamburg.de (Callum Kang) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Julien López <jlopez@cern.ch>
+"Measuring a record you own is listening, not piracy."
+Commodore Amiga 500 (1MB OCS) / FreeBSD 2.1
+

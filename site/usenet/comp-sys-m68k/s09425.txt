@@ -1,0 +1,99 @@
+From btanaka@u-tokyo.ac.jp Thu Dec 22 20:15:56 1994
+Path: ashpoly!cascade!brgate!saturno!u-tokyo!btanaka
+From: btanaka@u-tokyo.ac.jp (Bastien Tanaka)
+Newsgroups: comp.sys.m68k
+Subject: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Dec22.201556.3844@u-tokyo.ac.jp>
+Date: Thu, 22 Dec 1994 20:15:56 GMT
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+Bastien Tanaka
+Opinions expressed are solely my own and not those of University of Tokyo Department of Information Science.
+------------------------------------------------------------
+
+From vbrennan@tum.de Sat Dec 24 10:39:56 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!tum!vbrennan
+From: vbrennan@tum.de (Valeria Brennan)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Dec24.103956.3509@tum.de>
+Date: Sat, 24 Dec 1994 10:39:56 GMT
+References: <1994Dec22.201556.3844@u-tokyo.ac.jp>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1994Dec22.201556.3844@u-tokyo.ac.jp>, btanaka@u-tokyo.ac.jp (Bastien Tanaka) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Valeria Brennan
+Opinions expressed are solely my own and not those of Technische Universität München.
+------------------------------------------------------------
+
+From fperez@delphi.com Sun Dec 25 05:30:56 1994
+Path: ashpoly!cascade!bigsur!delphi!fperez
+From: fperez@delphi.com (Freya Pérez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Dec25.053056.2750@delphi.com>
+Date: Sun, 25 Dec 1994 05:30:56 GMT
+References: <1994Dec22.201556.3844@u-tokyo.ac.jp>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1994Dec22.201556.3844@u-tokyo.ac.jp>, btanaka@u-tokyo.ac.jp (Bastien Tanaka) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Freya Pérez | fperez@delphi.com
+PGP Key fingerprint: E9F5 8B8C F606 515E
+"Keep the channels open."
+
+From hkuznetsov@tum.de Mon Dec 26 13:51:56 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!tum!hkuznetsov
+From: hkuznetsov@tum.de (Hugo Kuznetsov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Dec26.135156.3798@tum.de>
+Date: Mon, 26 Dec 1994 13:51:56 GMT
+References: <1994Dec22.201556.3844@u-tokyo.ac.jp> <1994Dec25.053056.2750@delphi.com>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1994Dec25.053056.2750@delphi.com>, fperez@delphi.com (Freya Pérez) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+> PGP Public key available via finger or upon request.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Hugo Kuznetsov <hkuznetsov@tum.de>
+"We don't sign stars. We build them."
+Acorn RiscPC 600 / AmigaOS 3.1
+

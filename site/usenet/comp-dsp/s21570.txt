@@ -1,0 +1,116 @@
+From mkuznetsov@unam.mx Sat Apr 22 00:32:04 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!unam!mkuznetsov
+From: mkuznetsov@unam.mx (Mikhail Kuznetsov)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Apr22.003204.9971@unam.mx>
+Date: Sat, 22 Apr 1995 00:32:04 GMT
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Mikhail Kuznetsov
+Tape trading list upon request. SASE required for international mail.
+
+From jsmirnov@pacbell.net Sat Apr 22 03:05:04 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!pacbell!jsmirnov
+From: jsmirnov@pacbell.net (Julien Smirnov)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Apr22.030504.7821@pacbell.net>
+Date: Sat, 22 Apr 1995 03:05:04 GMT
+References: <1995Apr22.003204.9971@unam.mx>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Apr22.003204.9971@unam.mx>, mkuznetsov@unam.mx (Mikhail Kuznetsov) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Julien Smirnov | jsmirnov@pacbell.net
+PGP Key fingerprint: 5FBD 1BD1 A9C4 8B73
+"Keep the channels open."
+
+From jsmirnov@delphi.com Sat Apr 22 20:49:04 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!delphi!jsmirnov
+From: jsmirnov@delphi.com (Ji-woo Smirnov)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Apr22.204904.8094@delphi.com>
+Date: Sat, 22 Apr 1995 20:49:04 GMT
+References: <1995Apr22.003204.9971@unam.mx> <1995Apr22.030504.7821@pacbell.net>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Apr22.030504.7821@pacbell.net>, jsmirnov@pacbell.net (Julien Smirnov) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+=== Ji-woo Smirnov ===
+Dept of Electrical Engineering, Delphi Internet Services
+"The hatch is open. Is anyone listening?"
+
+From smoreau@utexas.edu Sun Apr 23 07:37:04 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!utexas!smoreau
+From: smoreau@utexas.edu (Seo-yeon Moreau)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Apr23.073704.5582@utexas.edu>
+Date: Sun, 23 Apr 1995 07:37:04 GMT
+References: <1995Apr22.003204.9971@unam.mx> <1995Apr22.030504.7821@pacbell.net> <1995Apr22.204904.8094@delphi.com>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Apr22.204904.8094@delphi.com>, jsmirnov@delphi.com (Ji-woo Smirnov) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Seo-yeon Moreau | smoreau@utexas.edu
+PGP Key fingerprint: 67CC 3428 5EC6 2BCD
+"Keep the channels open."
+
+From lgirard@illinois.edu Sun Apr 23 08:27:04 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!illinois!lgirard
+From: lgirard@illinois.edu (Liam Girard)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Apr23.082704.4462@illinois.edu>
+Date: Sun, 23 Apr 1995 08:27:04 GMT
+References: <1995Apr22.003204.9971@unam.mx>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Apr22.003204.9971@unam.mx>, mkuznetsov@unam.mx (Mikhail Kuznetsov) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Liam Girard <lgirard@illinois.edu>
+"There are 14 nodes and only 10 countries. Count again."
+Acorn RiscPC 600 / SunOS 4.1.4
+

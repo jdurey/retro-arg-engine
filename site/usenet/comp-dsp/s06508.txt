@@ -1,0 +1,122 @@
+From ksanchez@pacbell.net Wed Apr 13 10:47:25 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!pacbell!ksanchez
+From: ksanchez@pacbell.net (Karen Sánchez)
+Newsgroups: comp.dsp
+Subject: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Apr13.104725.9751@pacbell.net>
+Date: Wed, 13 Apr 1994 10:47:25 GMT
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Karen Sánchez <ksanchez@pacbell.net>
+*PLONK* filter active for trolls.
+Atari Falcon 030 - NetBSD 1.0
+
+From tfournier@demon.co.uk Wed Apr 13 18:03:25 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!demon!tfournier
+From: tfournier@demon.co.uk (Tobias Fournier)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Apr13.180325.8393@demon.co.uk>
+Date: Wed, 13 Apr 1994 18:03:25 GMT
+References: <1994Apr13.104725.9751@pacbell.net>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1994Apr13.104725.9751@pacbell.net>, ksanchez@pacbell.net (Karen Sánchez) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+Tobias Fournier <tfournier@demon.co.uk>
+"Measuring a record you own is listening, not piracy."
+Atari TT030 / SunOS 4.1.4
+
+From elaurent@pacbell.net Fri Apr 15 00:23:25 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!pacbell!elaurent
+From: elaurent@pacbell.net (Élodie Laurent)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Apr15.002325.5959@pacbell.net>
+Date: Fri, 15 Apr 1994 00:23:25 GMT
+References: <1994Apr13.104725.9751@pacbell.net>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1994Apr13.104725.9751@pacbell.net>, ksanchez@pacbell.net (Karen Sánchez) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Élodie Laurent <elaurent@pacbell.net>
+"The hatch is open. Is anyone listening?"
+Atari TT030 / AmigaOS 3.1
+
+From sgirard@netcom.com Fri Apr 15 11:10:25 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!netcom!sgirard
+From: sgirard@netcom.com (Steve Girard)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Apr15.111025.8380@netcom.com>
+Date: Fri, 15 Apr 1994 11:10:25 GMT
+References: <1994Apr13.104725.9751@pacbell.net> <1994Apr13.180325.8393@demon.co.uk>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1994Apr13.180325.8393@demon.co.uk>, tfournier@demon.co.uk (Tobias Fournier) writes:
+> Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Steve Girard -- NETCOM On-Line Communication Services
+"The hatch is open. Is anyone listening?"
+
+From mramirez@rwth-aachen.de Sat Apr 16 23:36:25 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!rwth-aachen!mramirez
+From: mramirez@rwth-aachen.de (Mathieu Ramírez)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Apr16.233625.9564@rwth-aachen.de>
+Date: Sat, 16 Apr 1994 23:36:25 GMT
+References: <1994Apr13.104725.9751@pacbell.net> <1994Apr13.180325.8393@demon.co.uk> <1994Apr15.111025.8380@netcom.com>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1994Apr15.111025.8380@netcom.com>, sgirard@netcom.com (Steve Girard) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Mathieu Ramírez <mramirez@rwth-aachen.de>
+Practical Peripherals 14.4 @ 28,800 bps
+"They will send a copy in my place."
+

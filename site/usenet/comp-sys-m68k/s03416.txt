@@ -1,0 +1,114 @@
+From ysato@panix.com Mon Jan 09 15:02:41 1995
+Path: ashpoly!cascade!mxgate!coyoacan!panix!ysato
+From: ysato@panix.com (Yuki Sato)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Jan09.150241.9748@panix.com>
+Date: Mon, 09 Jan 1995 15:02:41 GMT
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+
+Does anyone have a 27C256 EPROM marked 'MH-U14' or 'ORION-CRYPTO'?
+
+-- 
+=== Yuki Sato ===
+Dept of Electrical Engineering, Public Access Unix of New York
+"They will send a copy in my place."
+
+From msouza@kth.se Tue Jan 10 00:55:41 1995
+Path: ashpoly!cascade!brgate!saturno!kth!msouza
+From: msouza@kth.se (Mei Souza)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Jan10.005541.5609@kth.se>
+Date: Tue, 10 Jan 1995 00:55:41 GMT
+References: <1995Jan09.150241.9748@panix.com>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Jan09.150241.9748@panix.com>, ysato@panix.com (Yuki Sato) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+-- 
+Mei Souza
+Opinions expressed are solely my own and not those of Royal Institute of Technology, Stockholm.
+------------------------------------------------------------
+
+From mkowalski@rwth-aachen.de Wed Jan 11 06:57:41 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!rwth-aachen!mkowalski
+From: mkowalski@rwth-aachen.de (Matthias Kowalski)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Jan11.065741.6601@rwth-aachen.de>
+Date: Wed, 11 Jan 1995 06:57:41 GMT
+References: <1995Jan09.150241.9748@panix.com>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1995Jan09.150241.9748@panix.com>, ysato@panix.com (Yuki Sato) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Matthias Kowalski -- RWTH Aachen Informatik
+"Row 14. No joke."
+
+From jmoreno@purdue.edu Thu Jan 12 12:37:41 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!purdue!jmoreno
+From: jmoreno@purdue.edu (Julien Moreno)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Jan12.123741.8886@purdue.edu>
+Date: Thu, 12 Jan 1995 12:37:41 GMT
+References: <1995Jan09.150241.9748@panix.com> <1995Jan10.005541.5609@kth.se>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1995Jan10.005541.5609@kth.se>, msouza@kth.se (Mei Souza) writes:
+> That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+-- 
+Julien Moreno -- Purdue University Engineering Computer Network
+"Measuring a record you own is listening, not piracy."
+
+From emartinez@kth.se Fri Jan 13 07:37:41 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!kth!emartinez
+From: emartinez@kth.se (Élodie Martínez)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Jan13.073741.3966@kth.se>
+Date: Fri, 13 Jan 1995 07:37:41 GMT
+References: <1995Jan09.150241.9748@panix.com> <1995Jan10.005541.5609@kth.se>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1995Jan10.005541.5609@kth.se>, msouza@kth.se (Mei Souza) writes:
+> That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+-- 
+Élodie Martínez -- Royal Institute of Technology, Stockholm
+"When every node is whole, the channel opens."
+

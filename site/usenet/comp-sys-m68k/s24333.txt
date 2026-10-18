@@ -1,0 +1,119 @@
+From rstewart@demon.co.uk Mon Jun 03 13:35:18 1996
+Path: ashpoly!cascade!brgate!saturno!demon!rstewart
+From: rstewart@demon.co.uk (Rodrigo Stewart)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Jun03.133518.9502@demon.co.uk>
+Date: Mon, 03 Jun 1996 13:35:18 GMT
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+
+Does anyone have a 27C256 EPROM marked 'MH-U14' or 'ORION-CRYPTO'?
+
+-- 
+Rodrigo Stewart | rstewart@demon.co.uk
+PGP Key fingerprint: EBA7 2399 0232 2DE8
+"Keep the channels open."
+
+From vhernandez@mit.edu Wed Jun 05 16:14:18 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!mit!vhernandez
+From: vhernandez@mit.edu (Valeria Hernández)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Jun05.161418.4208@mit.edu>
+Date: Wed, 05 Jun 1996 16:14:18 GMT
+References: <1996Jun03.133518.9502@demon.co.uk>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Jun03.133518.9502@demon.co.uk>, rstewart@demon.co.uk (Rodrigo Stewart) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+-- 
+=== Valeria Hernández ===
+Dept of Electrical Engineering, Massachusetts Institute of Technology
+"5 sigma is a discovery. 7 is a question."
+
+From tmuller@illinois.edu Fri Jun 07 08:34:18 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!illinois!tmuller
+From: tmuller@illinois.edu (Tyler Müller)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Jun07.083418.2453@illinois.edu>
+Date: Fri, 07 Jun 1996 08:34:18 GMT
+References: <1996Jun03.133518.9502@demon.co.uk> <1996Jun05.161418.4208@mit.edu>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1996Jun05.161418.4208@mit.edu>, vhernandez@mit.edu (Valeria Hernández) writes:
+> Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+=== Tyler Müller ===
+Dept of Electrical Engineering, University of Illinois Urbana-Champaign
+"Hold for relay."
+
+From jmacdonald@uni-hamburg.de Fri Jun 07 19:56:18 1996
+Path: ashpoly!cascade!mxgate!coyoacan!uni-hamburg!jmacdonald
+From: jmacdonald@uni-hamburg.de (Jens MacDonald)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Jun07.195618.9502@uni-hamburg.de>
+Date: Fri, 07 Jun 1996 19:56:18 GMT
+References: <1996Jun03.133518.9502@demon.co.uk> <1996Jun05.161418.4208@mit.edu> <1996Jun07.083418.2453@illinois.edu>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Jun07.083418.2453@illinois.edu>, tmuller@illinois.edu (Tyler Müller) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+=== Jens MacDonald ===
+Dept of Electrical Engineering, Universität Hamburg Fachbereich Informatik
+"Hardware is temporary. The signal survives."
+
+From msantos@hanse.de Sat Jun 08 00:06:18 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!hanse!msantos
+From: msantos@hanse.de (Mateo Santos)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Jun08.000618.5588@hanse.de>
+Date: Sat, 08 Jun 1996 00:06:18 GMT
+References: <1996Jun03.133518.9502@demon.co.uk> <1996Jun05.161418.4208@mit.edu> <1996Jun07.083418.2453@illinois.edu> <1996Jun07.195618.9502@uni-hamburg.de>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996Jun07.195618.9502@uni-hamburg.de>, jmacdonald@uni-hamburg.de (Jens MacDonald) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+PGP Public key available via finger or upon request.
+
+-- 
+Mateo Santos
+Tape trading list upon request. SASE required for international mail.
+

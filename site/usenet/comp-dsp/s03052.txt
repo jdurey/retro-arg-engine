@@ -1,0 +1,49 @@
+From kpark@mindspring.com Sun Jan 23 13:22:40 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!mindspring!kpark
+From: kpark@mindspring.com (Kirsty Park)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Jan23.132240.1845@mindspring.com>
+Date: Sun, 23 Jan 1994 13:22:40 GMT
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Kirsty Park -- MindSpring Enterprises
+"In theory there is no difference between theory and practice."
+
+From dlarsson@mit.edu Mon Jan 24 05:53:40 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!mit!dlarsson
+From: dlarsson@mit.edu (Dmitri Larsson)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Jan24.055340.1509@mit.edu>
+Date: Mon, 24 Jan 1994 05:53:40 GMT
+References: <1994Jan23.132240.1845@mindspring.com>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1994Jan23.132240.1845@mindspring.com>, kpark@mindspring.com (Kirsty Park) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Dmitri Larsson
+Opinions expressed are solely my own and not those of Massachusetts Institute of Technology.
+------------------------------------------------------------
+

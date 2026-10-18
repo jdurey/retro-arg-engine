@@ -1,0 +1,115 @@
+From aivanov@cam.ac.uk Mon Dec 11 08:34:16 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!cam!aivanov
+From: aivanov@cam.ac.uk (Andrei Ivanov)
+Newsgroups: comp.dsp
+Subject: [INFO] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Dec11.083416.4670@cam.ac.uk>
+Date: Mon, 11 Dec 1995 08:34:16 GMT
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+
+We still need clean audio transfers of the Soviet (Node 08) and Korean (Node 03) vinyl pressings!
+
+-- 
+Andrei Ivanov
+Opinions expressed are solely my own and not those of University of Cambridge Computer Laboratory.
+------------------------------------------------------------
+
+From bkuznetsov@netcom.com Tue Dec 12 20:51:16 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!netcom!bkuznetsov
+From: bkuznetsov@netcom.com (Bruno Kuznetsov)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Dec12.205116.4297@netcom.com>
+Date: Tue, 12 Dec 1995 20:51:16 GMT
+References: <1995Dec11.083416.4670@cam.ac.uk>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Dec11.083416.4670@cam.ac.uk>, aivanov@cam.ac.uk (Andrei Ivanov) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Can you provide a pre-compiled DOS binary? Some of us don't have Linux or a C compiler installed on our machines.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Bruno Kuznetsov <bkuznetsov@netcom.com>
+"Hardware is temporary. The signal survives."
+486DX4/100 (FreeBSD 2.0.5) / System 7.5.1
+
+From lhughes@kiae.su Wed Dec 13 12:21:16 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!kiae!lhughes
+From: lhughes@kiae.su (Lucia Hughes)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Dec13.122116.1212@kiae.su>
+Date: Wed, 13 Dec 1995 12:21:16 GMT
+References: <1995Dec11.083416.4670@cam.ac.uk>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1995Dec11.083416.4670@cam.ac.uk>, aivanov@cam.ac.uk (Andrei Ivanov) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Lucia Hughes
+Tape trading list upon request. SASE required for international mail.
+
+From mpark@mit.edu Fri Dec 15 11:07:16 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!mit!mpark
+From: mpark@mit.edu (Min-jun Park)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Dec15.110716.2555@mit.edu>
+Date: Fri, 15 Dec 1995 11:07:16 GMT
+References: <1995Dec11.083416.4670@cam.ac.uk> <1995Dec13.122116.1212@kiae.su>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Dec13.122116.1212@kiae.su>, lhughes@kiae.su (Lucia Hughes) writes:
+> Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+-- 
+Min-jun Park
+Tape trading list upon request. SASE required for international mail.
+
+From sduarte@unam.mx Fri Dec 15 14:59:16 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!unam!sduarte
+From: sduarte@unam.mx (Seo-yeon Duarte)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Dec15.145916.9243@unam.mx>
+Date: Fri, 15 Dec 1995 14:59:16 GMT
+References: <1995Dec11.083416.4670@cam.ac.uk> <1995Dec13.122116.1212@kiae.su>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Dec13.122116.1212@kiae.su>, lhughes@kiae.su (Lucia Hughes) writes:
+> Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+-- 
+Seo-yeon Duarte -- Universidad Nacional Autónoma de México (DGSCA)
+"When every node is whole, the channel opens."
+

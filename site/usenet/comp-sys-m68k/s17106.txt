@@ -1,0 +1,117 @@
+From ihernandez@utexas.edu Thu May 25 11:57:55 1995
+Path: ashpoly!cascade!brgate!saturno!utexas!ihernandez
+From: ihernandez@utexas.edu (Ines Hernández)
+Newsgroups: comp.sys.m68k
+Subject: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995May25.115755.1306@utexas.edu>
+Date: Thu, 25 May 1995 11:57:55 GMT
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Hardware disassembly report for Motorola hardware hackers.
+
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Does anyone have a 27C256 EPROM marked 'MH-U14' or 'ORION-CRYPTO'?
+
+-- 
+Ines Hernández
+Opinions expressed are solely my own and not those of University of Texas at Austin.
+------------------------------------------------------------
+
+From ksanchez@cern.ch Fri May 26 04:00:55 1995
+Path: ashpoly!cascade!mxgate!coyoacan!cern!ksanchez
+From: ksanchez@cern.ch (Kirsty Sánchez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995May26.040055.1330@cern.ch>
+Date: Fri, 26 May 1995 04:00:55 GMT
+References: <1995May25.115755.1306@utexas.edu>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995May25.115755.1306@utexas.edu>, ihernandez@utexas.edu (Ines Hernández) writes:
+> Hardware disassembly report for Motorola hardware hackers.
+> Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Kirsty Sánchez <ksanchez@cern.ch>
+"We don't sign stars. We build them."
+Amiga 3000T / Linux 1.2.13
+
+From nkang@uu.net Fri May 26 06:54:55 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!uu!nkang
+From: nkang@uu.net (Nadia Kang)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995May26.065455.2699@uu.net>
+Date: Fri, 26 May 1995 06:54:55 GMT
+References: <1995May25.115755.1306@utexas.edu>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995May25.115755.1306@utexas.edu>, ihernandez@utexas.edu (Ines Hernández) writes:
+> Hardware disassembly report for Motorola hardware hackers.
+> Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Nadia Kang | nkang@uu.net
+PGP Key fingerprint: AEB3 DFBF 4F92 38E1
+"Keep the channels open."
+
+From tnilsson@uni-hamburg.de Sat May 27 03:14:55 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!uni-hamburg!tnilsson
+From: tnilsson@uni-hamburg.de (Tyler Nilsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995May27.031455.4548@uni-hamburg.de>
+Date: Sat, 27 May 1995 03:14:55 GMT
+References: <1995May25.115755.1306@utexas.edu> <1995May26.065455.2699@uu.net>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1995May26.065455.2699@uu.net>, nkang@uu.net (Nadia Kang) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Tyler Nilsson
+Tape trading list upon request. SASE required for international mail.
+
+From tfischer@utexas.edu Sat May 27 11:13:55 1995
+Path: ashpoly!cascade!mxgate!coyoacan!utexas!tfischer
+From: tfischer@utexas.edu (Takeshi Fischer)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995May27.111355.7190@utexas.edu>
+Date: Sat, 27 May 1995 11:13:55 GMT
+References: <1995May25.115755.1306@utexas.edu> <1995May26.065455.2699@uu.net>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995May26.065455.2699@uu.net>, nkang@uu.net (Nadia Kang) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Takeshi Fischer <tfischer@utexas.edu>
+Practical Peripherals 14.4 @ ISDN 64k bps
+"Extraordinary claims require extraordinary spectra."
+

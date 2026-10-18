@@ -1,0 +1,93 @@
+From evasiliev@uni-hamburg.de Sun Jan 16 07:42:30 1994
+Path: ashpoly!cascade!bigsur!uni-hamburg!evasiliev
+From: evasiliev@uni-hamburg.de (Elaine Vasiliev)
+Newsgroups: comp.dsp
+Subject: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Jan16.074230.2163@uni-hamburg.de>
+Date: Sun, 16 Jan 1994 07:42:30 GMT
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+What sampling rates are people using for their vinyl rips? 44.1 kHz or 48 kHz DAT?
+
+-- 
+Elaine Vasiliev -- Universität Hamburg Fachbereich Informatik
+"Hold for relay."
+
+From hsouza@cam.ac.uk Mon Jan 17 20:56:30 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!cam!hsouza
+From: hsouza@cam.ac.uk (Hana Souza)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Jan17.205630.8198@cam.ac.uk>
+Date: Mon, 17 Jan 1994 20:56:30 GMT
+References: <1994Jan16.074230.2163@uni-hamburg.de>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1994Jan16.074230.2163@uni-hamburg.de>, evasiliev@uni-hamburg.de (Elaine Vasiliev) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+=== Hana Souza ===
+Dept of Electrical Engineering, University of Cambridge Computer Laboratory
+"We don't sign stars. We build them."
+
+From slarsson@netcom.com Tue Jan 18 23:49:30 1994
+Path: ashpoly!cascade!bigsur!netcom!slarsson
+From: slarsson@netcom.com (Sun-mi Larsson)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Jan18.234930.2812@netcom.com>
+Date: Tue, 18 Jan 1994 23:49:30 GMT
+References: <1994Jan16.074230.2163@uni-hamburg.de>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Jan16.074230.2163@uni-hamburg.de>, evasiliev@uni-hamburg.de (Elaine Vasiliev) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Sun-mi Larsson | slarsson@netcom.com
+PGP Key fingerprint: A4AA 9EFF 09A2 1C18
+"Keep the channels open."
+
+From bkuznetsov@tum.de Thu Jan 20 16:28:30 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!tum!bkuznetsov
+From: bkuznetsov@tum.de (Brian Kuznetsov)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Jan20.162830.1679@tum.de>
+Date: Thu, 20 Jan 1994 16:28:30 GMT
+References: <1994Jan16.074230.2163@uni-hamburg.de> <1994Jan18.234930.2812@netcom.com>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Jan18.234930.2812@netcom.com>, slarsson@netcom.com (Sun-mi Larsson) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Brian Kuznetsov
+Opinions expressed are solely my own and not those of Technische Universität München.
+------------------------------------------------------------
+

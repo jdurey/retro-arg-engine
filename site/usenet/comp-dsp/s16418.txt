@@ -1,0 +1,49 @@
+From achoi@berkeley.edu Tue May 07 20:00:50 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!berkeley!achoi
+From: achoi@berkeley.edu (Amy Choi)
+Newsgroups: comp.dsp
+Subject: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996May07.200050.9914@berkeley.edu>
+Date: Tue, 07 May 1996 20:00:50 GMT
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Amy Choi | achoi@berkeley.edu
+PGP Key fingerprint: 4C51 9CE7 72D3 5B1D
+"Keep the channels open."
+
+From tnakamura@u-tokyo.ac.jp Tue May 07 21:51:50 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!u-tokyo!tnakamura
+From: tnakamura@u-tokyo.ac.jp (Thiago Nakamura)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996May07.215150.1135@u-tokyo.ac.jp>
+Date: Tue, 07 May 1996 21:51:50 GMT
+References: <1996May07.200050.9914@berkeley.edu>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1996May07.200050.9914@berkeley.edu>, achoi@berkeley.edu (Amy Choi) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Thiago Nakamura <tnakamura@u-tokyo.ac.jp>
+"Tape doesn't lie at 02:14. Ears do."
+Sun 3/60 (SunOS 4.1.1) / TOS 4.04
+

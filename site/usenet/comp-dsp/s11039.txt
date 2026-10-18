@@ -1,0 +1,73 @@
+From meriksson@pipeline.com Sun May 21 02:59:25 1995
+Path: ashpoly!cascade!brgate!saturno!pipeline!meriksson
+From: meriksson@pipeline.com (Min-jun Eriksson)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May21.025925.2758@pipeline.com>
+Date: Sun, 21 May 1995 02:59:25 GMT
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Min-jun Eriksson
+Opinions expressed are solely my own and not those of The Pipeline Internet Network.
+------------------------------------------------------------
+
+From gnilsson@demon.co.uk Sun May 21 05:35:25 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!demon!gnilsson
+From: gnilsson@demon.co.uk (Graham Nilsson)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May21.053525.7857@demon.co.uk>
+Date: Sun, 21 May 1995 05:35:25 GMT
+References: <1995May21.025925.2758@pipeline.com>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995May21.025925.2758@pipeline.com>, meriksson@pipeline.com (Min-jun Eriksson) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Graham Nilsson <gnilsson@demon.co.uk>
+"5 sigma is a discovery. 7 is a question."
+Commodore Amiga 500 (1MB OCS) / SunOS 4.1.4
+
+From fsokolov@clari.net Mon May 22 14:45:25 1995
+Path: ashpoly!cascade!mxgate!coyoacan!clari!fsokolov
+From: fsokolov@clari.net (Fiona Sokolov)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May22.144525.2924@clari.net>
+Date: Mon, 22 May 1995 14:45:25 GMT
+References: <1995May21.025925.2758@pipeline.com> <1995May21.053525.7857@demon.co.uk>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995May21.053525.7857@demon.co.uk>, gnilsson@demon.co.uk (Graham Nilsson) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Fiona Sokolov <fsokolov@clari.net>
+"The carrier frequency does not drift by accident."
+486DX4/100 (FreeBSD 2.0.5) / Linux 1.2.13
+

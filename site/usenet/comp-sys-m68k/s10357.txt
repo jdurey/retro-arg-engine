@@ -1,0 +1,96 @@
+From lmartinez@mindspring.com Mon Nov 21 04:19:21 1994
+Path: ashpoly!cascade!bigsur!mindspring!lmartinez
+From: lmartinez@mindspring.com (Lisa Martínez)
+Newsgroups: comp.sys.m68k
+Subject: Discussion: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Nov21.041921.6056@mindspring.com>
+Date: Mon, 21 Nov 1994 04:19:21 GMT
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Hardware disassembly report for Motorola hardware hackers.
+
+The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Did Marcus take the decryption EPROM with him when he left the lab?
+
+-- 
+Lisa Martínez <lmartinez@mindspring.com>
+Zyxel U-1496E @ 9600 Telebit bps
+"We don't sign stars. We build them."
+
+From msokolov@utexas.edu Tue Nov 22 18:12:21 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!utexas!msokolov
+From: msokolov@utexas.edu (Matthias Sokolov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Nov22.181221.4730@utexas.edu>
+Date: Tue, 22 Nov 1994 18:12:21 GMT
+References: <1994Nov21.041921.6056@mindspring.com>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1994Nov21.041921.6056@mindspring.com>, lmartinez@mindspring.com (Lisa Martínez) writes:
+> Hardware disassembly report for Motorola hardware hackers.
+> The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Matthias Sokolov
+Opinions expressed are solely my own and not those of University of Texas at Austin.
+------------------------------------------------------------
+
+From meriksson@inria.fr Thu Nov 24 17:19:21 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!inria!meriksson
+From: meriksson@inria.fr (Mike Eriksson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Nov24.171921.1976@inria.fr>
+Date: Thu, 24 Nov 1994 17:19:21 GMT
+References: <1994Nov21.041921.6056@mindspring.com> <1994Nov22.181221.4730@utexas.edu>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1994Nov22.181221.4730@utexas.edu>, msokolov@utexas.edu (Matthias Sokolov) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+=== Mike Eriksson ===
+Dept of Electrical Engineering, INRIA Rocquencourt
+"A soul is not exclusive to biology."
+
+From arobertson@purdue.edu Fri Nov 25 04:06:21 1994
+Path: ashpoly!cascade!brgate!saturno!purdue!arobertson
+From: arobertson@purdue.edu (Anja Robertson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Nov25.040621.3968@purdue.edu>
+Date: Fri, 25 Nov 1994 04:06:21 GMT
+References: <1994Nov21.041921.6056@mindspring.com> <1994Nov22.181221.4730@utexas.edu> <1994Nov24.171921.1976@inria.fr>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Nov24.171921.1976@inria.fr>, meriksson@inria.fr (Mike Eriksson) writes:
+> That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+=== Anja Robertson ===
+Dept of Electrical Engineering, Purdue University Engineering Computer Network
+"We don't sign stars. We build them."
+

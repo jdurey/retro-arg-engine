@@ -1,0 +1,69 @@
+From bkim@tum.de Fri Jun 14 13:07:43 1996
+Path: ashpoly!cascade!mxgate!coyoacan!tum!bkim
+From: bkim@tum.de (Bill Kim)
+Newsgroups: comp.dsp
+Subject: Data: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Jun14.130743.7848@tum.de>
+Date: Fri, 14 Jun 1996 13:07:43 GMT
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+MATLAB script available upon request via email.
+
+-- 
+Bill Kim -- Technische Universität München
+"Tape doesn't lie at 02:14. Ears do."
+
+From dlindqvist@illinois.edu Sat Jun 15 04:09:43 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!illinois!dlindqvist
+From: dlindqvist@illinois.edu (Dong-hyun Lindqvist)
+Newsgroups: comp.dsp
+Subject: Re: Data: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Jun15.040943.3639@illinois.edu>
+Date: Sat, 15 Jun 1996 04:09:43 GMT
+References: <1996Jun14.130743.7848@tum.de>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Jun14.130743.7848@tum.de>, bkim@tum.de (Bill Kim) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Dong-hyun Lindqvist
+Tape trading list upon request. SASE required for international mail.
+
+From pvasiliev@purdue.edu Mon Jun 17 05:35:43 1996
+Path: ashpoly!cascade!bigsur!purdue!pvasiliev
+From: pvasiliev@purdue.edu (Pavel Vasiliev)
+Newsgroups: comp.dsp
+Subject: Re: Data: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Jun17.053543.1984@purdue.edu>
+Date: Mon, 17 Jun 1996 05:35:43 GMT
+References: <1996Jun14.130743.7848@tum.de>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Jun14.130743.7848@tum.de>, bkim@tum.de (Bill Kim) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Pavel Vasiliev
+Opinions expressed are solely my own and not those of Purdue University Engineering Computer Network.
+------------------------------------------------------------
+

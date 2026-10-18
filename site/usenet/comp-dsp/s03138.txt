@@ -1,0 +1,93 @@
+From flopez@u-tokyo.ac.jp Wed Sep 18 03:19:40 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!u-tokyo!flopez
+From: flopez@u-tokyo.ac.jp (Fiona López)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Sep18.031940.4999@u-tokyo.ac.jp>
+Date: Wed, 18 Sep 1996 03:19:40 GMT
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+What sampling rates are people using for their vinyl rips? 44.1 kHz or 48 kHz DAT?
+
+-- 
+Fiona López <flopez@u-tokyo.ac.jp>
+"Measuring a record you own is listening, not piracy."
+486DX2/66 (Linux 1.2.13) / SunOS 4.1.4
+
+From lgirard@pipeline.com Wed Sep 18 05:40:40 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!pipeline!lgirard
+From: lgirard@pipeline.com (Liam Girard)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Sep18.054040.6791@pipeline.com>
+Date: Wed, 18 Sep 1996 05:40:40 GMT
+References: <1996Sep18.031940.4999@u-tokyo.ac.jp>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Sep18.031940.4999@u-tokyo.ac.jp>, flopez@u-tokyo.ac.jp (Fiona López) writes:
+> Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+> A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Liam Girard
+Tape trading list upon request. SASE required for international mail.
+
+From nkang@inria.fr Wed Sep 18 17:58:40 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!inria!nkang
+From: nkang@inria.fr (Natalia Kang)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Sep18.175840.4828@inria.fr>
+Date: Wed, 18 Sep 1996 17:58:40 GMT
+References: <1996Sep18.031940.4999@u-tokyo.ac.jp>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Sep18.031940.4999@u-tokyo.ac.jp>, flopez@u-tokyo.ac.jp (Fiona López) writes:
+> Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Natalia Kang | nkang@inria.fr
+PGP Key fingerprint: 299F 997C C80D 56AA
+"Keep the channels open."
+
+From jsuzuki@pipeline.com Thu Sep 19 10:37:40 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!pipeline!jsuzuki
+From: jsuzuki@pipeline.com (Ji-woo Suzuki)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Sep19.103740.9071@pipeline.com>
+Date: Thu, 19 Sep 1996 10:37:40 GMT
+References: <1996Sep18.031940.4999@u-tokyo.ac.jp> <1996Sep18.175840.4828@inria.fr>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Sep18.175840.4828@inria.fr>, nkang@inria.fr (Natalia Kang) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+=== Ji-woo Suzuki ===
+Dept of Electrical Engineering, The Pipeline Internet Network
+"Hold for relay."
+

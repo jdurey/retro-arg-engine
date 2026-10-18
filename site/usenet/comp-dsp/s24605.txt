@@ -1,0 +1,70 @@
+From mjohansson@pipeline.com Sat Sep 23 22:03:50 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!pipeline!mjohansson
+From: mjohansson@pipeline.com (Matthias Johansson)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Sep23.220350.1075@pipeline.com>
+Date: Sat, 23 Sep 1995 22:03:50 GMT
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+Matthias Johansson
+Tape trading list upon request. SASE required for international mail.
+
+From mvasiliev@purdue.edu Mon Sep 25 16:21:50 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!purdue!mvasiliev
+From: mvasiliev@purdue.edu (Mikhail Vasiliev)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Sep25.162150.9123@purdue.edu>
+Date: Mon, 25 Sep 1995 16:21:50 GMT
+References: <1995Sep23.220350.1075@pipeline.com>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1995Sep23.220350.1075@pipeline.com>, mjohansson@pipeline.com (Matthias Johansson) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Mikhail Vasiliev
+Tape trading list upon request. SASE required for international mail.
+
+From fschneider@mindspring.com Tue Sep 26 09:37:50 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!mindspring!fschneider
+From: fschneider@mindspring.com (Fiona Schneider)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Sep26.093750.6573@mindspring.com>
+Date: Tue, 26 Sep 1995 09:37:50 GMT
+References: <1995Sep23.220350.1075@pipeline.com>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Sep23.220350.1075@pipeline.com>, mjohansson@pipeline.com (Matthias Johansson) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Fiona Schneider
+Opinions expressed are solely my own and not those of MindSpring Enterprises.
+------------------------------------------------------------
+

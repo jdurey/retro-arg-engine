@@ -1,0 +1,93 @@
+From arodriguez@illinois.edu Thu May 23 07:29:00 1996
+Path: ashpoly!cascade!bigsur!illinois!arodriguez
+From: arodriguez@illinois.edu (Astrid Rodríguez)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996May23.072900.3993@illinois.edu>
+Date: Thu, 23 May 1996 07:29:00 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+=== Astrid Rodríguez ===
+Dept of Electrical Engineering, University of Illinois Urbana-Champaign
+"Marcus is not one man."
+
+From mdubois@rwth-aachen.de Sat May 25 05:06:00 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!rwth-aachen!mdubois
+From: mdubois@rwth-aachen.de (Marta Dubois)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996May25.050600.2754@rwth-aachen.de>
+Date: Sat, 25 May 1996 05:06:00 GMT
+References: <1996May23.072900.3993@illinois.edu>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996May23.072900.3993@illinois.edu>, arodriguez@illinois.edu (Astrid Rodríguez) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Marta Dubois <mdubois@rwth-aachen.de>
+Hayes Optima 288 @ 28,800 bps
+"Do not worship the copy."
+
+From gandersson@cmu.edu Sun May 26 18:15:00 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!cmu!gandersson
+From: gandersson@cmu.edu (Göran Andersson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996May26.181500.9242@cmu.edu>
+Date: Sun, 26 May 1996 18:15:00 GMT
+References: <1996May23.072900.3993@illinois.edu>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1996May23.072900.3993@illinois.edu>, arodriguez@illinois.edu (Astrid Rodríguez) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Göran Andersson
+Tape trading list upon request. SASE required for international mail.
+
+From lstewart@berkeley.edu Mon May 27 09:45:00 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!berkeley!lstewart
+From: lstewart@berkeley.edu (Lucia Stewart)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996May27.094500.2916@berkeley.edu>
+Date: Mon, 27 May 1996 09:45:00 GMT
+References: <1996May23.072900.3993@illinois.edu>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1996May23.072900.3993@illinois.edu>, arodriguez@illinois.edu (Astrid Rodríguez) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+> By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Lucia Stewart <lstewart@berkeley.edu>
+"Hardware is temporary. The signal survives."
+Mac IIci / 68882 FPU / NEXTSTEP 3.3
+

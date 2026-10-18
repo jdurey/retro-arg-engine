@@ -1,0 +1,94 @@
+From sschneider@u-tokyo.ac.jp Tue Aug 06 15:19:03 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!u-tokyo!sschneider
+From: sschneider@u-tokyo.ac.jp (Sun-mi Schneider)
+Newsgroups: comp.dsp
+Subject: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Aug06.151903.6935@u-tokyo.ac.jp>
+Date: Tue, 06 Aug 1996 15:19:03 GMT
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Sun-mi Schneider | sschneider@u-tokyo.ac.jp
+PGP Key fingerprint: 7B4A 44D8 6BCB 9B6C
+"Keep the channels open."
+
+From fmartinez@cmu.edu Wed Aug 07 06:06:03 1996
+Path: ashpoly!cascade!bigsur!cmu!fmartinez
+From: fmartinez@cmu.edu (Freya Martínez)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Aug07.060603.6365@cmu.edu>
+Date: Wed, 07 Aug 1996 06:06:03 GMT
+References: <1996Aug06.151903.6935@u-tokyo.ac.jp>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1996Aug06.151903.6935@u-tokyo.ac.jp>, sschneider@u-tokyo.ac.jp (Sun-mi Schneider) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Freya Martínez <fmartinez@cmu.edu>
+Hayes Optima 288 @ ISDN 64k bps
+"A soul is not exclusive to biology."
+
+From nsilva@cern.ch Wed Aug 07 14:05:03 1996
+Path: ashpoly!cascade!bigsur!cern!nsilva
+From: nsilva@cern.ch (Nadine Silva)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Aug07.140503.2957@cern.ch>
+Date: Wed, 07 Aug 1996 14:05:03 GMT
+References: <1996Aug06.151903.6935@u-tokyo.ac.jp> <1996Aug07.060603.6365@cmu.edu>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Aug07.060603.6365@cmu.edu>, fmartinez@cmu.edu (Freya Martínez) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Nadine Silva <nsilva@cern.ch>
+US Robotics Courier V.34 @ 14,400 bps
+"A soul is not exclusive to biology."
+
+From dnovak@ox.ac.uk Thu Aug 08 09:33:03 1996
+Path: ashpoly!cascade!mxgate!coyoacan!ox!dnovak
+From: dnovak@ox.ac.uk (Dave Novak)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Aug08.093303.7019@ox.ac.uk>
+Date: Thu, 08 Aug 1996 09:33:03 GMT
+References: <1996Aug06.151903.6935@u-tokyo.ac.jp> <1996Aug07.060603.6365@cmu.edu>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Aug07.060603.6365@cmu.edu>, fmartinez@cmu.edu (Freya Martínez) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+Dave Novak <dnovak@ox.ac.uk>
+US Robotics Courier V.34 @ 14,400 bps
+"5 sigma is a discovery. 7 is a question."
+

@@ -1,0 +1,117 @@
+From kkuznetsov@titech.ac.jp Mon Apr 10 20:42:55 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!titech!kkuznetsov
+From: kkuznetsov@titech.ac.jp (Kirsty Kuznetsov)
+Newsgroups: comp.sys.m68k
+Subject: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Apr10.204255.4905@titech.ac.jp>
+Date: Mon, 10 Apr 1995 20:42:55 GMT
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Kirsty Kuznetsov <kkuznetsov@titech.ac.jp>
+Practical Peripherals 14.4 @ 33,600 bps
+"5 sigma is a discovery. 7 is a question."
+
+From otanaka@rwth-aachen.de Tue Apr 11 23:29:55 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!rwth-aachen!otanaka
+From: otanaka@rwth-aachen.de (Olga Tanaka)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Apr11.232955.3170@rwth-aachen.de>
+Date: Tue, 11 Apr 1995 23:29:55 GMT
+References: <1995Apr10.204255.4905@titech.ac.jp>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995Apr10.204255.4905@titech.ac.jp>, kkuznetsov@titech.ac.jp (Kirsty Kuznetsov) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Olga Tanaka <otanaka@rwth-aachen.de>
+"Extraordinary claims require extraordinary spectra."
+Mac IIci / 68882 FPU / FreeBSD 2.1
+
+From alopez@cmu.edu Wed Apr 12 11:47:55 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!cmu!alopez
+From: alopez@cmu.edu (Astrid López)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Apr12.114755.3564@cmu.edu>
+Date: Wed, 12 Apr 1995 11:47:55 GMT
+References: <1995Apr10.204255.4905@titech.ac.jp>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Apr10.204255.4905@titech.ac.jp>, kkuznetsov@titech.ac.jp (Kirsty Kuznetsov) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Astrid López -- Carnegie Mellon University School of CS
+"In theory there is no difference between theory and practice."
+
+From vbrennan@kth.se Fri Apr 14 04:32:55 1995
+Path: ashpoly!cascade!brgate!saturno!kth!vbrennan
+From: vbrennan@kth.se (Valeria Brennan)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Apr14.043255.3649@kth.se>
+Date: Fri, 14 Apr 1995 04:32:55 GMT
+References: <1995Apr10.204255.4905@titech.ac.jp> <1995Apr12.114755.3564@cmu.edu>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Apr12.114755.3564@cmu.edu>, alopez@cmu.edu (Astrid López) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Valeria Brennan
+Opinions expressed are solely my own and not those of Royal Institute of Technology, Stockholm.
+------------------------------------------------------------
+
+From dhughes@cmu.edu Fri Apr 14 12:48:55 1995
+Path: ashpoly!cascade!brgate!saturno!cmu!dhughes
+From: dhughes@cmu.edu (Diego Hughes)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Apr14.124855.2620@cmu.edu>
+Date: Fri, 14 Apr 1995 12:48:55 GMT
+References: <1995Apr10.204255.4905@titech.ac.jp> <1995Apr12.114755.3564@cmu.edu> <1995Apr14.043255.3649@kth.se>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Apr14.043255.3649@kth.se>, vbrennan@kth.se (Valeria Brennan) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Diego Hughes -- Carnegie Mellon University School of CS
+"Marcus is not one man."
+

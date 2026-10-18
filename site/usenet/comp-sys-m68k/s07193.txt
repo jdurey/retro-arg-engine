@@ -1,0 +1,117 @@
+From jkarlsson@unam.mx Fri Dec 15 08:05:00 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!unam!jkarlsson
+From: jkarlsson@unam.mx (Jen Karlsson)
+Newsgroups: comp.sys.m68k
+Subject: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Dec15.080500.9190@unam.mx>
+Date: Fri, 15 Dec 1995 08:05:00 GMT
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+
+Does anyone have a 27C256 EPROM marked 'MH-U14' or 'ORION-CRYPTO'?
+
+-- 
+Jen Karlsson | jkarlsson@unam.mx
+PGP Key fingerprint: 41B2 19CF 0E77 F211
+"Keep the channels open."
+
+From blaurent@uu.net Sun Dec 17 11:19:00 1995
+Path: ashpoly!cascade!bigsur!uu!blaurent
+From: blaurent@uu.net (Bill Laurent)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Dec17.111900.3945@uu.net>
+Date: Sun, 17 Dec 1995 11:19:00 GMT
+References: <1995Dec15.080500.9190@unam.mx>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Dec15.080500.9190@unam.mx>, jkarlsson@unam.mx (Jen Karlsson) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Bill Laurent -- UUNET Technologies, Falls Church VA
+"Row 14. No joke."
+
+From apopov@u-tokyo.ac.jp Tue Dec 19 03:08:00 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!u-tokyo!apopov
+From: apopov@u-tokyo.ac.jp (Aiko Popov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Dec19.030800.5266@u-tokyo.ac.jp>
+Date: Tue, 19 Dec 1995 03:08:00 GMT
+References: <1995Dec15.080500.9190@unam.mx> <1995Dec17.111900.3945@uu.net>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Dec17.111900.3945@uu.net>, blaurent@uu.net (Bill Laurent) writes:
+> Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Aiko Popov <apopov@u-tokyo.ac.jp>
+"The hatch is open. Is anyone listening?"
+486DX4/100 (FreeBSD 2.0.5) / Linux 1.2.13
+
+From mkowalski@unam.mx Tue Dec 19 20:54:00 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!unam!mkowalski
+From: mkowalski@unam.mx (Marta Kowalski)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Dec19.205400.8316@unam.mx>
+Date: Tue, 19 Dec 1995 20:54:00 GMT
+References: <1995Dec15.080500.9190@unam.mx>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Dec15.080500.9190@unam.mx>, jkarlsson@unam.mx (Jen Karlsson) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+
+Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+-- 
+Marta Kowalski <mkowalski@unam.mx>
+Hayes Optima 288 @ 28,800 bps
+"There are 14 nodes and only 10 countries. Count again."
+
+From mandersson@kth.se Wed Dec 20 20:37:00 1995
+Path: ashpoly!cascade!bigsur!kth!mandersson
+From: mandersson@kth.se (Mateo Andersson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Dec20.203700.6386@kth.se>
+Date: Wed, 20 Dec 1995 20:37:00 GMT
+References: <1995Dec15.080500.9190@unam.mx> <1995Dec17.111900.3945@uu.net>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Dec17.111900.3945@uu.net>, blaurent@uu.net (Bill Laurent) writes:
+> Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Mateo Andersson <mandersson@kth.se>
+Zyxel U-1496E @ 19,200 bps
+"The hatch is open. Is anyone listening?"
+

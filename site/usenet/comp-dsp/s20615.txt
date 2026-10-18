@@ -1,0 +1,93 @@
+From hvasiliev@kth.se Thu Jun 22 15:48:14 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!kth!hvasiliev
+From: hvasiliev@kth.se (Hana Vasiliev)
+Newsgroups: comp.dsp
+Subject: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jun22.154814.4811@kth.se>
+Date: Thu, 22 Jun 1995 15:48:14 GMT
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Hana Vasiliev | hvasiliev@kth.se
+PGP Key fingerprint: 7416 60F8 6F20 4745
+"Keep the channels open."
+
+From asanchez@mindspring.com Sat Jun 24 12:23:14 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!mindspring!asanchez
+From: asanchez@mindspring.com (Anja Sánchez)
+Newsgroups: comp.dsp
+Subject: Re: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jun24.122314.6884@mindspring.com>
+Date: Sat, 24 Jun 1995 12:23:14 GMT
+References: <1995Jun22.154814.4811@kth.se>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Jun22.154814.4811@kth.se>, hvasiliev@kth.se (Hana Vasiliev) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Anja Sánchez
+Opinions expressed are solely my own and not those of MindSpring Enterprises.
+------------------------------------------------------------
+
+From nvasiliev@cmu.edu Mon Jun 26 16:05:14 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!cmu!nvasiliev
+From: nvasiliev@cmu.edu (Nadine Vasiliev)
+Newsgroups: comp.dsp
+Subject: Re: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jun26.160514.3482@cmu.edu>
+Date: Mon, 26 Jun 1995 16:05:14 GMT
+References: <1995Jun22.154814.4811@kth.se> <1995Jun24.122314.6884@mindspring.com>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Jun24.122314.6884@mindspring.com>, asanchez@mindspring.com (Anja Sánchez) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Nadine Vasiliev | nvasiliev@cmu.edu
+PGP Key fingerprint: ED4C 58B2 FEB5 A13D
+"Keep the channels open."
+
+From smoreau@rwth-aachen.de Wed Jun 28 11:05:14 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!rwth-aachen!smoreau
+From: smoreau@rwth-aachen.de (Sven Moreau)
+Newsgroups: comp.dsp
+Subject: Re: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jun28.110514.2248@rwth-aachen.de>
+Date: Wed, 28 Jun 1995 11:05:14 GMT
+References: <1995Jun22.154814.4811@kth.se> <1995Jun24.122314.6884@mindspring.com> <1995Jun26.160514.3482@cmu.edu>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Jun26.160514.3482@cmu.edu>, nvasiliev@cmu.edu (Nadine Vasiliev) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Sven Moreau <smoreau@rwth-aachen.de>
+"The carrier frequency does not drift by accident."
+Mac IIci / 68882 FPU / NEXTSTEP 3.3
+

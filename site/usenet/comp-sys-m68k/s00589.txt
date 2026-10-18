@@ -1,0 +1,120 @@
+From aschneider@kth.se Mon Mar 25 21:43:22 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!kth!aschneider
+From: aschneider@kth.se (Andrei Schneider)
+Newsgroups: comp.sys.m68k
+Subject: Observation: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Mar25.214322.8673@kth.se>
+Date: Mon, 25 Mar 1996 21:43:22 GMT
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Andrei Schneider
+Tape trading list upon request. SASE required for international mail.
+
+From eramirez@unam.mx Mon Mar 25 23:15:22 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!unam!eramirez
+From: eramirez@unam.mx (Élodie Ramírez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Mar25.231522.7380@unam.mx>
+Date: Mon, 25 Mar 1996 23:15:22 GMT
+References: <1996Mar25.214322.8673@kth.se>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1996Mar25.214322.8673@kth.se>, aschneider@kth.se (Andrei Schneider) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+> Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Élodie Ramírez | eramirez@unam.mx
+PGP Key fingerprint: CEC3 F879 C1EA 4B2D
+"Keep the channels open."
+
+From fivanov@pacbell.net Tue Mar 26 16:18:22 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!pacbell!fivanov
+From: fivanov@pacbell.net (Fiona Ivanov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Mar26.161822.2763@pacbell.net>
+Date: Tue, 26 Mar 1996 16:18:22 GMT
+References: <1996Mar25.214322.8673@kth.se>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Mar25.214322.8673@kth.se>, aschneider@kth.se (Andrei Schneider) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+> Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+-- 
+Fiona Ivanov -- Pacific Bell Internet Services
+"Extraordinary claims require extraordinary spectra."
+
+From kbrennan@inria.fr Thu Mar 28 16:57:22 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!inria!kbrennan
+From: kbrennan@inria.fr (Kenji Brennan)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Mar28.165722.2043@inria.fr>
+Date: Thu, 28 Mar 1996 16:57:22 GMT
+References: <1996Mar25.214322.8673@kth.se> <1996Mar25.231522.7380@unam.mx>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1996Mar25.231522.7380@unam.mx>, eramirez@unam.mx (Élodie Ramírez) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Kenji Brennan <kbrennan@inria.fr>
+Practical Peripherals 14.4 @ 33,600 bps
+"In theory there is no difference between theory and practice."
+
+From mwatanabe@utexas.edu Thu Mar 28 20:23:22 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!utexas!mwatanabe
+From: mwatanabe@utexas.edu (Mikhail Watanabe)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Mar28.202322.1271@utexas.edu>
+Date: Thu, 28 Mar 1996 20:23:22 GMT
+References: <1996Mar25.214322.8673@kth.se> <1996Mar26.161822.2763@pacbell.net>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Mar26.161822.2763@pacbell.net>, fivanov@pacbell.net (Fiona Ivanov) writes:
+> Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Mikhail Watanabe <mwatanabe@utexas.edu>
+"Tape doesn't lie at 02:14. Ears do."
+Sun 3/60 (SunOS 4.1.1) / SunOS 4.1.4
+

@@ -1,0 +1,119 @@
+From tramirez@cern.ch Sat Aug 13 00:15:15 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!cern!tramirez
+From: tramirez@cern.ch (Tobias Ramírez)
+Newsgroups: comp.sys.m68k
+Subject: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Aug13.001515.2533@cern.ch>
+Date: Sat, 13 Aug 1994 00:15:15 GMT
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+Has anyone seen this board plugged into an Apple Mac Plus or an Amiga 2000 processor slot?
+
+-- 
+=== Tobias Ramírez ===
+Dept of Electrical Engineering, European Laboratory for Particle Physics, Geneva
+"In theory there is no difference between theory and practice."
+
+From ilindqvist@cern.ch Sat Aug 13 17:19:15 1994
+Path: ashpoly!cascade!brgate!saturno!cern!ilindqvist
+From: ilindqvist@cern.ch (Ines Lindqvist)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Aug13.171915.8343@cern.ch>
+Date: Sat, 13 Aug 1994 17:19:15 GMT
+References: <1994Aug13.001515.2533@cern.ch>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1994Aug13.001515.2533@cern.ch>, tramirez@cern.ch (Tobias Ramírez) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+-- 
+Ines Lindqvist <ilindqvist@cern.ch>
+*PLONK* filter active for trolls.
+Atari TT030 - NetBSD 1.0
+
+From mhernandez@purdue.edu Sun Aug 14 04:39:15 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!purdue!mhernandez
+From: mhernandez@purdue.edu (Min-jun Hernández)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Aug14.043915.9873@purdue.edu>
+Date: Sun, 14 Aug 1994 04:39:15 GMT
+References: <1994Aug13.001515.2533@cern.ch> <1994Aug13.171915.8343@cern.ch>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1994Aug13.171915.8343@cern.ch>, ilindqvist@cern.ch (Ines Lindqvist) writes:
+> Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+Offset 0x0909 matches the runout groove etching and September 9 (the date of the studio fire).
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Min-jun Hernández | mhernandez@purdue.edu
+PGP Key fingerprint: 3B62 44D7 9F32 A54E
+"Keep the channels open."
+
+From mnilsson@mindspring.com Sun Aug 14 06:51:15 1994
+Path: ashpoly!cascade!bigsur!mindspring!mnilsson
+From: mnilsson@mindspring.com (Morag Nilsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Aug14.065115.7578@mindspring.com>
+Date: Sun, 14 Aug 1994 06:51:15 GMT
+References: <1994Aug13.001515.2533@cern.ch> <1994Aug13.171915.8343@cern.ch>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Aug13.171915.8343@cern.ch>, ilindqvist@cern.ch (Ines Lindqvist) writes:
+> Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Morag Nilsson <mnilsson@mindspring.com>
+"Marcus is not one man."
+486DX4/100 (FreeBSD 2.0.5) / System 7.5.1
+
+From lpopov@delphi.com Sun Aug 14 09:56:15 1994
+Path: ashpoly!cascade!bigsur!delphi!lpopov
+From: lpopov@delphi.com (Lars Popov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Aug14.095615.9279@delphi.com>
+Date: Sun, 14 Aug 1994 09:56:15 GMT
+References: <1994Aug13.001515.2533@cern.ch> <1994Aug13.171915.8343@cern.ch> <1994Aug14.043915.9873@purdue.edu>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Aug14.043915.9873@purdue.edu>, mhernandez@purdue.edu (Min-jun Hernández) writes:
+> Offset 0x0909 matches the runout groove etching and September 9 (the date of the studio fire).
+
+Marcus Hale designed the TWIN-68 board before he disappeared. That's why his initials are on the PCB silkscreen.
+
+-- 
+Lars Popov <lpopov@delphi.com>
+US Robotics Courier V.34 @ ISDN 64k bps
+"Extraordinary claims require extraordinary spectra."
+

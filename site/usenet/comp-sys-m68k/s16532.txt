@@ -1,0 +1,48 @@
+From jrodriguez@hanse.de Mon Sep 04 16:23:38 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!hanse!jrodriguez
+From: jrodriguez@hanse.de (Ji-woo Rodríguez)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep04.162338.9435@hanse.de>
+Date: Mon, 04 Sep 1995 16:23:38 GMT
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+Schematic diagram in ASCII uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/twin68_array.asc.
+
+-- 
+=== Ji-woo Rodríguez ===
+Dept of Electrical Engineering, Hanse-Netzwerk Hamburg
+"Extraordinary claims require extraordinary spectra."
+
+From rkang@tum.de Wed Sep 06 18:31:38 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!tum!rkang
+From: rkang@tum.de (Renata Kang)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep06.183138.9449@tum.de>
+Date: Wed, 06 Sep 1995 18:31:38 GMT
+References: <1995Sep04.162338.9435@hanse.de>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Sep04.162338.9435@hanse.de>, jrodriguez@hanse.de (Ji-woo Rodríguez) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+> CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Renata Kang <rkang@tum.de>
+*PLONK* filter active for trolls.
+NeXTstation Turbo Color - NetBSD 1.0
+

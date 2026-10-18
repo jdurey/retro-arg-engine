@@ -1,0 +1,48 @@
+From mtakahashi@unam.mx Sun Jun 11 04:42:22 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!unam!mtakahashi
+From: mtakahashi@unam.mx (Marisol Takahashi)
+Newsgroups: comp.dsp
+Subject: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jun11.044222.6764@unam.mx>
+Date: Sun, 11 Jun 1995 04:42:22 GMT
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Marisol Takahashi | mtakahashi@unam.mx
+PGP Key fingerprint: A582 F919 DB3C F3EB
+"Keep the channels open."
+
+From lmartinez@netcom.com Tue Jun 13 01:12:22 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!netcom!lmartinez
+From: lmartinez@netcom.com (Lars Martínez)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jun13.011222.5440@netcom.com>
+Date: Tue, 13 Jun 1995 01:12:22 GMT
+References: <1995Jun11.044222.6764@unam.mx>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Jun11.044222.6764@unam.mx>, mtakahashi@unam.mx (Marisol Takahashi) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+=== Lars Martínez ===
+Dept of Electrical Engineering, NETCOM On-Line Communication Services
+"The hatch is open. Is anyone listening?"
+

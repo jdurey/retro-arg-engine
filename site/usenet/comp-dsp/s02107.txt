@@ -1,0 +1,74 @@
+From msmirnov@pipeline.com Fri Nov 22 13:48:20 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!pipeline!msmirnov
+From: msmirnov@pipeline.com (Matthias Smirnov)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Nov22.134820.5317@pipeline.com>
+Date: Fri, 22 Nov 1996 13:48:20 GMT
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+What sampling rates are people using for their vinyl rips? 44.1 kHz or 48 kHz DAT?
+
+-- 
+Matthias Smirnov
+Opinions expressed are solely my own and not those of The Pipeline Internet Network.
+------------------------------------------------------------
+
+From lchoi@mit.edu Sat Nov 23 19:38:20 1996
+Path: ashpoly!cascade!brgate!saturno!mit!lchoi
+From: lchoi@mit.edu (Lucia Choi)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Nov23.193820.8959@mit.edu>
+Date: Sat, 23 Nov 1996 19:38:20 GMT
+References: <1996Nov22.134820.5317@pipeline.com>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1996Nov22.134820.5317@pipeline.com>, msmirnov@pipeline.com (Matthias Smirnov) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+Lucia Choi | lchoi@mit.edu
+PGP Key fingerprint: 1D2C 9493 DB65 CFBC
+"Keep the channels open."
+
+From shernandez@purdue.edu Sun Nov 24 01:30:20 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!purdue!shernandez
+From: shernandez@purdue.edu (Steve Hernández)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Nov24.013020.7004@purdue.edu>
+Date: Sun, 24 Nov 1996 01:30:20 GMT
+References: <1996Nov22.134820.5317@pipeline.com> <1996Nov23.193820.8959@mit.edu>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Nov23.193820.8959@mit.edu>, lchoi@mit.edu (Lucia Choi) writes:
+> I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+> Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Steve Hernández | shernandez@purdue.edu
+PGP Key fingerprint: 6237 D4BD 0699 2AA7
+"Keep the channels open."
+

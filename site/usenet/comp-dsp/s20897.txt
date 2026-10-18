@@ -1,0 +1,117 @@
+From oramirez@mit.edu Wed Jun 26 21:12:23 1996
+Path: ashpoly!cascade!mxgate!coyoacan!mit!oramirez
+From: oramirez@mit.edu (Olga Ramírez)
+Newsgroups: comp.dsp
+Subject: [INFO] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Jun26.211223.7201@mit.edu>
+Date: Wed, 26 Jun 1996 21:12:23 GMT
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+Olga Ramírez <oramirez@mit.edu>
+SupraFAXModem 28.8 @ 9600 Telebit bps
+"Extraordinary claims require extraordinary spectra."
+
+From ymoreau@hanse.de Wed Jun 26 22:49:23 1996
+Path: ashpoly!cascade!bigsur!hanse!ymoreau
+From: ymoreau@hanse.de (Yuki Moreau)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Jun26.224923.6464@hanse.de>
+Date: Wed, 26 Jun 1996 22:49:23 GMT
+References: <1996Jun26.211223.7201@mit.edu>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Jun26.211223.7201@mit.edu>, oramirez@mit.edu (Olga Ramírez) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Yuki Moreau
+Tape trading list upon request. SASE required for international mail.
+
+From ygarcia@cern.ch Thu Jun 27 06:55:23 1996
+Path: ashpoly!cascade!mxgate!coyoacan!cern!ygarcia
+From: ygarcia@cern.ch (Yuki García)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Jun27.065523.6655@cern.ch>
+Date: Thu, 27 Jun 1996 06:55:23 GMT
+References: <1996Jun26.211223.7201@mit.edu> <1996Jun26.224923.6464@hanse.de>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1996Jun26.224923.6464@hanse.de>, ymoreau@hanse.de (Yuki Moreau) writes:
+> Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+-- 
+Yuki García
+Tape trading list upon request. SASE required for international mail.
+
+From tmacdonald@utexas.edu Fri Jun 28 10:53:23 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!utexas!tmacdonald
+From: tmacdonald@utexas.edu (Tomas MacDonald)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Jun28.105323.8762@utexas.edu>
+Date: Fri, 28 Jun 1996 10:53:23 GMT
+References: <1996Jun26.211223.7201@mit.edu> <1996Jun26.224923.6464@hanse.de> <1996Jun27.065523.6655@cern.ch>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Jun27.065523.6655@cern.ch>, ygarcia@cern.ch (Yuki García) writes:
+> Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Tomas MacDonald
+Opinions expressed are solely my own and not those of University of Texas at Austin.
+------------------------------------------------------------
+
+From mandersson@rwth-aachen.de Fri Jun 28 21:22:23 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!rwth-aachen!mandersson
+From: mandersson@rwth-aachen.de (Morag Andersson)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Jun28.212223.2499@rwth-aachen.de>
+Date: Fri, 28 Jun 1996 21:22:23 GMT
+References: <1996Jun26.211223.7201@mit.edu> <1996Jun26.224923.6464@hanse.de>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1996Jun26.224923.6464@hanse.de>, ymoreau@hanse.de (Yuki Moreau) writes:
+> Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+> Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+-- 
+Morag Andersson <mandersson@rwth-aachen.de>
+*PLONK* filter active for trolls.
+Macintosh IIfx - NetBSD 1.0
+

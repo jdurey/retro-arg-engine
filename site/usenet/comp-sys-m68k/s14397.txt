@@ -1,0 +1,69 @@
+From ekim@kiae.su Mon Jan 15 19:48:09 1996
+Path: ashpoly!cascade!brgate!saturno!kiae!ekim
+From: ekim@kiae.su (Emi Kim)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Jan15.194809.9379@kiae.su>
+Date: Mon, 15 Jan 1996 19:48:09 GMT
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Emi Kim
+Tape trading list upon request. SASE required for international mail.
+
+From bivanov@berkeley.edu Mon Jan 15 21:25:09 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!berkeley!bivanov
+From: bivanov@berkeley.edu (Brian Ivanov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Jan15.212509.2907@berkeley.edu>
+Date: Mon, 15 Jan 1996 21:25:09 GMT
+References: <1996Jan15.194809.9379@kiae.su>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1996Jan15.194809.9379@kiae.su>, ekim@kiae.su (Emi Kim) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Brian Ivanov
+Tape trading list upon request. SASE required for international mail.
+
+From snovak@delphi.com Wed Jan 17 19:42:09 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!delphi!snovak
+From: snovak@delphi.com (Steve Novak)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Jan17.194209.6045@delphi.com>
+Date: Wed, 17 Jan 1996 19:42:09 GMT
+References: <1996Jan15.194809.9379@kiae.su>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996Jan15.194809.9379@kiae.su>, ekim@kiae.su (Emi Kim) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Steve Novak | snovak@delphi.com
+PGP Key fingerprint: FF10 40E3 6B06 912A
+"Keep the channels open."
+

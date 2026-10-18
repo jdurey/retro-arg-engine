@@ -1,0 +1,47 @@
+From jramirez@berkeley.edu Thu May 26 00:42:57 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!berkeley!jramirez
+From: jramirez@berkeley.edu (Julien Ramírez)
+Newsgroups: comp.dsp
+Subject: Discussion: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994May26.004257.1949@berkeley.edu>
+Date: Thu, 26 May 1994 00:42:57 GMT
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+
+Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+
+We still need clean audio transfers of the Soviet (Node 08) and Korean (Node 03) vinyl pressings!
+
+-- 
+Julien Ramírez -- UC Berkeley Department of EECS
+"The carrier frequency does not drift by accident."
+
+From mokonkwo@cern.ch Fri May 27 14:10:57 1994
+Path: ashpoly!cascade!brgate!saturno!cern!mokonkwo
+From: mokonkwo@cern.ch (Mateo Okonkwo)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994May27.141057.1564@cern.ch>
+Date: Fri, 27 May 1994 14:10:57 GMT
+References: <1994May26.004257.1949@berkeley.edu>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1994May26.004257.1949@berkeley.edu>, jramirez@berkeley.edu (Julien Ramírez) writes:
+> Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+> Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Mateo Okonkwo <mokonkwo@cern.ch>
+*PLONK* filter active for trolls.
+Sun 3/60 (SunOS 4.1.1) - NetBSD 1.0
+

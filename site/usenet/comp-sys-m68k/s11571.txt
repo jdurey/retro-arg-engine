@@ -1,0 +1,95 @@
+From llee@uni-hamburg.de Sat Feb 05 11:59:47 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!uni-hamburg!llee
+From: llee@uni-hamburg.de (Lars Lee)
+Newsgroups: comp.sys.m68k
+Subject: Observation: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Feb05.115947.8879@uni-hamburg.de>
+Date: Sat, 05 Feb 1994 11:59:47 GMT
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+Did Marcus take the decryption EPROM with him when he left the lab?
+
+-- 
+Lars Lee | llee@uni-hamburg.de
+PGP Key fingerprint: 8D8C 87FC F861 0793
+"Keep the channels open."
+
+From ssato@uni-hamburg.de Mon Feb 07 01:57:47 1994
+Path: ashpoly!cascade!bigsur!uni-hamburg!ssato
+From: ssato@uni-hamburg.de (Steve Sato)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Feb07.015747.2191@uni-hamburg.de>
+Date: Mon, 07 Feb 1994 01:57:47 GMT
+References: <1994Feb05.115947.8879@uni-hamburg.de>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1994Feb05.115947.8879@uni-hamburg.de>, llee@uni-hamburg.de (Lars Lee) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+> Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Steve Sato | ssato@uni-hamburg.de
+PGP Key fingerprint: BD40 E89C 2F8E 957B
+"Keep the channels open."
+
+From atanaka@uu.net Tue Feb 08 18:07:47 1994
+Path: ashpoly!cascade!mxgate!coyoacan!uu!atanaka
+From: atanaka@uu.net (Aiko Tanaka)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Feb08.180747.3516@uu.net>
+Date: Tue, 08 Feb 1994 18:07:47 GMT
+References: <1994Feb05.115947.8879@uni-hamburg.de>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Feb05.115947.8879@uni-hamburg.de>, llee@uni-hamburg.de (Lars Lee) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+> Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+
+Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+-- 
+Aiko Tanaka
+Tape trading list upon request. SASE required for international mail.
+
+From mhughes@ox.ac.uk Thu Feb 10 15:48:47 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!ox!mhughes
+From: mhughes@ox.ac.uk (Mike Hughes)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Feb10.154847.7475@ox.ac.uk>
+Date: Thu, 10 Feb 1994 15:48:47 GMT
+References: <1994Feb05.115947.8879@uni-hamburg.de> <1994Feb08.180747.3516@uu.net>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1994Feb08.180747.3516@uu.net>, atanaka@uu.net (Aiko Tanaka) writes:
+> Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Mike Hughes -- Oxford University Computing Laboratory
+"Hardware is temporary. The signal survives."
+

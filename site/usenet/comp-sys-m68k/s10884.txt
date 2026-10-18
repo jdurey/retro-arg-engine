@@ -1,0 +1,116 @@
+From kpopov@kth.se Fri Sep 15 03:59:16 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!kth!kpopov
+From: kpopov@kth.se (Kirsty Popov)
+Newsgroups: comp.sys.m68k
+Subject: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Sep15.035916.3837@kth.se>
+Date: Fri, 15 Sep 1995 03:59:16 GMT
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Kirsty Popov <kpopov@kth.se>
+*PLONK* filter active for trolls.
+NeXTstation Turbo Color - NetBSD 1.0
+
+From fkuznetsov@pipeline.com Fri Sep 15 14:50:16 1995
+Path: ashpoly!cascade!bigsur!pipeline!fkuznetsov
+From: fkuznetsov@pipeline.com (Freya Kuznetsov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Sep15.145016.6536@pipeline.com>
+Date: Fri, 15 Sep 1995 14:50:16 GMT
+References: <1995Sep15.035916.3837@kth.se>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Sep15.035916.3837@kth.se>, kpopov@kth.se (Kirsty Popov) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Freya Kuznetsov
+Tape trading list upon request. SASE required for international mail.
+
+From csanchez@cmu.edu Sun Sep 17 17:33:16 1995
+Path: ashpoly!cascade!mxgate!coyoacan!cmu!csanchez
+From: csanchez@cmu.edu (Callum Sánchez)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Sep17.173316.4064@cmu.edu>
+Date: Sun, 17 Sep 1995 17:33:16 GMT
+References: <1995Sep15.035916.3837@kth.se>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Sep15.035916.3837@kth.se>, kpopov@kth.se (Kirsty Popov) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Callum Sánchez <csanchez@cmu.edu>
+SupraFAXModem 28.8 @ 28,800 bps
+"Row 14. No joke."
+
+From rsantos@mindspring.com Mon Sep 18 11:34:16 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!mindspring!rsantos
+From: rsantos@mindspring.com (Rodrigo Santos)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Sep18.113416.6139@mindspring.com>
+Date: Mon, 18 Sep 1995 11:34:16 GMT
+References: <1995Sep15.035916.3837@kth.se> <1995Sep15.145016.6536@pipeline.com>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Sep15.145016.6536@pipeline.com>, fkuznetsov@pipeline.com (Freya Kuznetsov) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+=== Rodrigo Santos ===
+Dept of Electrical Engineering, MindSpring Enterprises
+"They will send a copy in my place."
+
+From ekang@cmu.edu Wed Sep 20 05:12:16 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!cmu!ekang
+From: ekang@cmu.edu (Emi Kang)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Sep20.051216.8376@cmu.edu>
+Date: Wed, 20 Sep 1995 05:12:16 GMT
+References: <1995Sep15.035916.3837@kth.se> <1995Sep15.145016.6536@pipeline.com>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Sep15.145016.6536@pipeline.com>, fkuznetsov@pipeline.com (Freya Kuznetsov) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Emi Kang
+Opinions expressed are solely my own and not those of Carnegie Mellon University School of CS.
+------------------------------------------------------------
+

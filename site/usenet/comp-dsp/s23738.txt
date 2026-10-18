@@ -1,0 +1,47 @@
+From srodriguez@cern.ch Sun Jun 19 15:41:04 1994
+Path: ashpoly!cascade!bigsur!cern!srodriguez
+From: srodriguez@cern.ch (Sven Rodríguez)
+Newsgroups: comp.dsp
+Subject: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Jun19.154104.3052@cern.ch>
+Date: Sun, 19 Jun 1994 15:41:04 GMT
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Sven Rodríguez <srodriguez@cern.ch>
+"The hatch is open. Is anyone listening?"
+Pentium 90 (OS/2 Warp) / SunOS 4.1.4
+
+From mmoreau@stanford.edu Mon Jun 20 14:49:04 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!stanford!mmoreau
+From: mmoreau@stanford.edu (Matthias Moreau)
+Newsgroups: comp.dsp
+Subject: Re: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Jun20.144904.8591@stanford.edu>
+Date: Mon, 20 Jun 1994 14:49:04 GMT
+References: <1994Jun19.154104.3052@cern.ch>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Jun19.154104.3052@cern.ch>, srodriguez@cern.ch (Sven Rodríguez) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Matthias Moreau
+Tape trading list upon request. SASE required for international mail.
+

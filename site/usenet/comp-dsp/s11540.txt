@@ -1,0 +1,50 @@
+From arobertson@inria.fr Fri May 12 05:54:44 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!inria!arobertson
+From: arobertson@inria.fr (Anja Robertson)
+Newsgroups: comp.dsp
+Subject: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May12.055444.7859@inria.fr>
+Date: Fri, 12 May 1995 05:54:44 GMT
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Anja Robertson <arobertson@inria.fr>
+US Robotics Courier V.34 @ 28,800 bps
+"Hold for relay."
+
+From jtanaka@pacbell.net Sat May 13 07:17:44 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!pacbell!jtanaka
+From: jtanaka@pacbell.net (Julien Tanaka)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May13.071744.4846@pacbell.net>
+Date: Sat, 13 May 1995 07:17:44 GMT
+References: <1995May12.055444.7859@inria.fr>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1995May12.055444.7859@inria.fr>, arobertson@inria.fr (Anja Robertson) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Julien Tanaka <jtanaka@pacbell.net>
+*PLONK* filter active for trolls.
+Atari Falcon 030 - NetBSD 1.0
+

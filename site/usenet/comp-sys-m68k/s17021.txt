@@ -1,0 +1,123 @@
+From jbrennan@kth.se Mon Jul 15 17:55:16 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!kth!jbrennan
+From: jbrennan@kth.se (Julien Brennan)
+Newsgroups: comp.sys.m68k
+Subject: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Jul15.175516.5226@kth.se>
+Date: Mon, 15 Jul 1996 17:55:16 GMT
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+
+Does anyone have a 27C256 EPROM marked 'MH-U14' or 'ORION-CRYPTO'?
+
+-- 
+Julien Brennan <jbrennan@kth.se>
+"Marcus is not one man."
+PC-9821Ap2 (NEC) / TOS 4.04
+
+From lnilsson@titech.ac.jp Tue Jul 16 23:24:16 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!titech!lnilsson
+From: lnilsson@titech.ac.jp (Liam Nilsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Jul16.232416.5590@titech.ac.jp>
+Date: Tue, 16 Jul 1996 23:24:16 GMT
+References: <1996Jul15.175516.5226@kth.se>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1996Jul15.175516.5226@kth.se>, jbrennan@kth.se (Julien Brennan) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Liam Nilsson
+Tape trading list upon request. SASE required for international mail.
+
+From lnakamura@delphi.com Wed Jul 17 20:31:16 1996
+Path: ashpoly!cascade!mxgate!coyoacan!delphi!lnakamura
+From: lnakamura@delphi.com (Lars Nakamura)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Jul17.203116.9755@delphi.com>
+Date: Wed, 17 Jul 1996 20:31:16 GMT
+References: <1996Jul15.175516.5226@kth.se>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 12
+
+In article <1996Jul15.175516.5226@kth.se>, jbrennan@kth.se (Julien Brennan) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Lars Nakamura <lnakamura@delphi.com>
+Hayes Optima 288 @ 9600 Telebit bps
+"They will send a copy in my place."
+
+From skang@inria.fr Thu Jul 18 05:39:16 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!inria!skang
+From: skang@inria.fr (Sergei Kang)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Jul18.053916.8962@inria.fr>
+Date: Thu, 18 Jul 1996 05:39:16 GMT
+References: <1996Jul15.175516.5226@kth.se> <1996Jul16.232416.5590@titech.ac.jp>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1996Jul16.232416.5590@titech.ac.jp>, lnilsson@titech.ac.jp (Liam Nilsson) writes:
+> That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Sergei Kang <skang@inria.fr>
+"Do not worship the copy."
+Pentium 90 (OS/2 Warp) / System 7.5.1
+
+From nmoreno@panix.com Fri Jul 19 07:44:16 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!panix!nmoreno
+From: nmoreno@panix.com (Natalia Moreno)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Jul19.074416.7470@panix.com>
+Date: Fri, 19 Jul 1996 07:44:16 GMT
+References: <1996Jul15.175516.5226@kth.se>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1996Jul15.175516.5226@kth.se>, jbrennan@kth.se (Julien Brennan) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+-- 
+Natalia Moreno <nmoreno@panix.com>
+*PLONK* filter active for trolls.
+Sun 3/60 (SunOS 4.1.1) - NetBSD 1.0
+

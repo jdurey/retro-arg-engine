@@ -1,0 +1,119 @@
+From eperez@hanse.de Tue Apr 04 23:38:04 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!hanse!eperez
+From: eperez@hanse.de (Élodie Pérez)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Apr04.233804.2021@hanse.de>
+Date: Tue, 04 Apr 1995 23:38:04 GMT
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+Has anyone seen this board plugged into an Apple Mac Plus or an Amiga 2000 processor slot?
+
+-- 
+Élodie Pérez <eperez@hanse.de>
+*PLONK* filter active for trolls.
+Amiga 3000T - NetBSD 1.0
+
+From ltanaka@unam.mx Thu Apr 06 20:02:04 1995
+Path: ashpoly!cascade!bigsur!unam!ltanaka
+From: ltanaka@unam.mx (Lars Tanaka)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Apr06.200204.3238@unam.mx>
+Date: Thu, 06 Apr 1995 20:02:04 GMT
+References: <1995Apr04.233804.2021@hanse.de>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Apr04.233804.2021@hanse.de>, eperez@hanse.de (Élodie Pérez) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Lars Tanaka -- Universidad Nacional Autónoma de México (DGSCA)
+"When every node is whole, the channel opens."
+
+From bhughes@u-tokyo.ac.jp Fri Apr 07 02:53:04 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!u-tokyo!bhughes
+From: bhughes@u-tokyo.ac.jp (Bastien Hughes)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Apr07.025304.6305@u-tokyo.ac.jp>
+Date: Fri, 07 Apr 1995 02:53:04 GMT
+References: <1995Apr04.233804.2021@hanse.de>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1995Apr04.233804.2021@hanse.de>, eperez@hanse.de (Élodie Pérez) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Bastien Hughes
+Opinions expressed are solely my own and not those of University of Tokyo Department of Information Science.
+------------------------------------------------------------
+
+From lcampbell@clari.net Fri Apr 07 11:49:04 1995
+Path: ashpoly!cascade!mxgate!coyoacan!clari!lcampbell
+From: lcampbell@clari.net (Lucia Campbell)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Apr07.114904.7034@clari.net>
+Date: Fri, 07 Apr 1995 11:49:04 GMT
+References: <1995Apr04.233804.2021@hanse.de>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Apr04.233804.2021@hanse.de>, eperez@hanse.de (Élodie Pérez) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+-- 
+Lucia Campbell <lcampbell@clari.net>
+US Robotics Courier V.34 @ 19,200 bps
+"5 sigma is a discovery. 7 is a question."
+
+From jkang@cam.ac.uk Sun Apr 09 13:09:04 1995
+Path: ashpoly!cascade!brgate!saturno!cam!jkang
+From: jkang@cam.ac.uk (Julien Kang)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Apr09.130904.7813@cam.ac.uk>
+Date: Sun, 09 Apr 1995 13:09:04 GMT
+References: <1995Apr04.233804.2021@hanse.de> <1995Apr07.114904.7034@clari.net>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Apr07.114904.7034@clari.net>, lcampbell@clari.net (Lucia Campbell) writes:
+> Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Julien Kang -- University of Cambridge Computer Laboratory
+"When every node is whole, the channel opens."
+

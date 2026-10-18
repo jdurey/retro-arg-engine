@@ -1,0 +1,70 @@
+From cmoreno@utexas.edu Thu Apr 06 03:40:11 1995
+Path: ashpoly!cascade!bigsur!utexas!cmoreno
+From: cmoreno@utexas.edu (Camila Moreno)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Apr06.034011.4443@utexas.edu>
+Date: Thu, 06 Apr 1995 03:40:11 GMT
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+
+Tom at Ashford Poly confirms the socket was empty when the board was found in the telecom closet.
+
+-- 
+Camila Moreno <cmoreno@utexas.edu>
+*PLONK* filter active for trolls.
+Atari Falcon 030 - NetBSD 1.0
+
+From glindqvist@tum.de Thu Apr 06 15:09:11 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!tum!glindqvist
+From: glindqvist@tum.de (Göran Lindqvist)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Apr06.150911.8438@tum.de>
+Date: Thu, 06 Apr 1995 15:09:11 GMT
+References: <1995Apr06.034011.4443@utexas.edu>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Apr06.034011.4443@utexas.edu>, cmoreno@utexas.edu (Camila Moreno) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Göran Lindqvist | glindqvist@tum.de
+PGP Key fingerprint: 3F03 E9E8 A3A0 8E09
+"Keep the channels open."
+
+From rito@kth.se Fri Apr 07 07:46:11 1995
+Path: ashpoly!cascade!bigsur!kth!rito
+From: rito@kth.se (Raj Ito)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Apr07.074611.3831@kth.se>
+Date: Fri, 07 Apr 1995 07:46:11 GMT
+References: <1995Apr06.034011.4443@utexas.edu>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Apr06.034011.4443@utexas.edu>, cmoreno@utexas.edu (Camila Moreno) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Raj Ito -- Royal Institute of Technology, Stockholm
+"Hold for relay."
+

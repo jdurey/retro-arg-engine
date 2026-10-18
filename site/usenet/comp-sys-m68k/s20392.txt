@@ -1,0 +1,93 @@
+From mweber@demon.co.uk Sat May 11 02:51:05 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!demon!mweber
+From: mweber@demon.co.uk (Marisol Weber)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996May11.025105.8662@demon.co.uk>
+Date: Sat, 11 May 1996 02:51:05 GMT
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Marisol Weber <mweber@demon.co.uk>
+Hayes Optima 288 @ 19,200 bps
+"Row 14. No joke."
+
+From ofournier@inria.fr Sat May 11 12:13:05 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!inria!ofournier
+From: ofournier@inria.fr (Olga Fournier)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996May11.121305.7162@inria.fr>
+Date: Sat, 11 May 1996 12:13:05 GMT
+References: <1996May11.025105.8662@demon.co.uk>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996May11.025105.8662@demon.co.uk>, mweber@demon.co.uk (Marisol Weber) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Olga Fournier
+Opinions expressed are solely my own and not those of INRIA Rocquencourt.
+------------------------------------------------------------
+
+From hpetrov@cmu.edu Sat May 11 13:01:05 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!cmu!hpetrov
+From: hpetrov@cmu.edu (Heather Petrov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996May11.130105.3624@cmu.edu>
+Date: Sat, 11 May 1996 13:01:05 GMT
+References: <1996May11.025105.8662@demon.co.uk>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996May11.025105.8662@demon.co.uk>, mweber@demon.co.uk (Marisol Weber) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Heather Petrov <hpetrov@cmu.edu>
+"There are 14 nodes and only 10 countries. Count again."
+Pentium 90 (OS/2 Warp) / Linux 1.2.13
+
+From yweber@netcom.com Sun May 12 21:59:05 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!netcom!yweber
+From: yweber@netcom.com (Yuki Weber)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996May12.215905.2773@netcom.com>
+Date: Sun, 12 May 1996 21:59:05 GMT
+References: <1996May11.025105.8662@demon.co.uk>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996May11.025105.8662@demon.co.uk>, mweber@demon.co.uk (Marisol Weber) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Yuki Weber <yweber@netcom.com>
+*PLONK* filter active for trolls.
+Pentium 90 (OS/2 Warp) - NetBSD 1.0
+

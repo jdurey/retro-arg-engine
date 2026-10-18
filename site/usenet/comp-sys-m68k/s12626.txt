@@ -1,0 +1,72 @@
+From mpopov@netcom.com Fri Jun 09 13:45:00 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!netcom!mpopov
+From: mpopov@netcom.com (Mike Popov)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jun09.134500.2970@netcom.com>
+Date: Fri, 09 Jun 1995 13:45:00 GMT
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Mike Popov <mpopov@netcom.com>
+Zyxel U-1496E @ 14,400 bps
+"A soul is not exclusive to biology."
+
+From shughes@titech.ac.jp Sun Jun 11 16:15:00 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!titech!shughes
+From: shughes@titech.ac.jp (Sergei Hughes)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jun11.161500.4806@titech.ac.jp>
+Date: Sun, 11 Jun 1995 16:15:00 GMT
+References: <1995Jun09.134500.2970@netcom.com>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Jun09.134500.2970@netcom.com>, mpopov@netcom.com (Mike Popov) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+=== Sergei Hughes ===
+Dept of Electrical Engineering, Tokyo Institute of Technology Computer Centre
+"Hold for relay."
+
+From jsanchez@cern.ch Mon Jun 12 14:34:00 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!cern!jsanchez
+From: jsanchez@cern.ch (Ji-woo Sánchez)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jun12.143400.8778@cern.ch>
+Date: Mon, 12 Jun 1995 14:34:00 GMT
+References: <1995Jun09.134500.2970@netcom.com>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995Jun09.134500.2970@netcom.com>, mpopov@netcom.com (Mike Popov) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+Ji-woo Sánchez | jsanchez@cern.ch
+PGP Key fingerprint: 6BA4 268B 04D5 8141
+"Keep the channels open."
+

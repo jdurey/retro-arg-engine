@@ -1,0 +1,118 @@
+From jramirez@berkeley.edu Thu Jun 02 23:05:51 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!berkeley!jramirez
+From: jramirez@berkeley.edu (Joachim Ramírez)
+Newsgroups: comp.dsp
+Subject: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Jun02.230551.1119@berkeley.edu>
+Date: Thu, 02 Jun 1994 23:05:51 GMT
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+MATLAB script available upon request via email.
+
+-- 
+Joachim Ramírez
+Tape trading list upon request. SASE required for international mail.
+
+From hgarcia@pacbell.net Sat Jun 04 00:01:51 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!pacbell!hgarcia
+From: hgarcia@pacbell.net (Hugo García)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Jun04.000151.1853@pacbell.net>
+Date: Sat, 04 Jun 1994 00:01:51 GMT
+References: <1994Jun02.230551.1119@berkeley.edu>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1994Jun02.230551.1119@berkeley.edu>, jramirez@berkeley.edu (Joachim Ramírez) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Hugo García | hgarcia@pacbell.net
+PGP Key fingerprint: 2015 4535 9A0F 7624
+"Keep the channels open."
+
+From ogarcia@unam.mx Sat Jun 04 01:50:51 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!unam!ogarcia
+From: ogarcia@unam.mx (Olga García)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Jun04.015051.7941@unam.mx>
+Date: Sat, 04 Jun 1994 01:50:51 GMT
+References: <1994Jun02.230551.1119@berkeley.edu>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1994Jun02.230551.1119@berkeley.edu>, jramirez@berkeley.edu (Joachim Ramírez) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Olga García
+Tape trading list upon request. SASE required for international mail.
+
+From bsilva@inria.fr Sun Jun 05 02:47:51 1994
+Path: ashpoly!cascade!bigsur!inria!bsilva
+From: bsilva@inria.fr (Bill Silva)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Jun05.024751.2101@inria.fr>
+Date: Sun, 05 Jun 1994 02:47:51 GMT
+References: <1994Jun02.230551.1119@berkeley.edu>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Jun02.230551.1119@berkeley.edu>, jramirez@berkeley.edu (Joachim Ramírez) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Bill Silva
+Tape trading list upon request. SASE required for international mail.
+
+From tsantos@berkeley.edu Sun Jun 05 19:09:51 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!berkeley!tsantos
+From: tsantos@berkeley.edu (Tyler Santos)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Jun05.190951.8414@berkeley.edu>
+Date: Sun, 05 Jun 1994 19:09:51 GMT
+References: <1994Jun02.230551.1119@berkeley.edu> <1994Jun04.015051.7941@unam.mx>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1994Jun04.015051.7941@unam.mx>, ogarcia@unam.mx (Olga García) writes:
+> I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Tyler Santos
+Opinions expressed are solely my own and not those of UC Berkeley Department of EECS.
+------------------------------------------------------------
+

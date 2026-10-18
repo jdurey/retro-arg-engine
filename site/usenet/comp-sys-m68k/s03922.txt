@@ -1,0 +1,71 @@
+From kschneider@clari.net Sat Jun 24 21:10:14 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!clari!kschneider
+From: kschneider@clari.net (Kirsty Schneider)
+Newsgroups: comp.sys.m68k
+Subject: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Jun24.211014.3998@clari.net>
+Date: Sat, 24 Jun 1995 21:10:14 GMT
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+Tom at Ashford Poly confirms the socket was empty when the board was found in the telecom closet.
+
+-- 
+Kirsty Schneider | kschneider@clari.net
+PGP Key fingerprint: CA82 070C 599A 85C8
+"Keep the channels open."
+
+From aperez@netcom.com Sun Jun 25 18:59:14 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!netcom!aperez
+From: aperez@netcom.com (Anja Pérez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Jun25.185914.4682@netcom.com>
+Date: Sun, 25 Jun 1995 18:59:14 GMT
+References: <1995Jun24.211014.3998@clari.net>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Jun24.211014.3998@clari.net>, kschneider@clari.net (Kirsty Schneider) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Anja Pérez | aperez@netcom.com
+PGP Key fingerprint: AF9B 0411 012F 4FF9
+"Keep the channels open."
+
+From jweber@cmu.edu Mon Jun 26 23:21:14 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!cmu!jweber
+From: jweber@cmu.edu (Jen Weber)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Jun26.232114.9372@cmu.edu>
+Date: Mon, 26 Jun 1995 23:21:14 GMT
+References: <1995Jun24.211014.3998@clari.net> <1995Jun25.185914.4682@netcom.com>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Jun25.185914.4682@netcom.com>, aperez@netcom.com (Anja Pérez) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Jen Weber | jweber@cmu.edu
+PGP Key fingerprint: 2422 E880 5E68 6400
+"Keep the channels open."
+

@@ -1,0 +1,50 @@
+From mandersson@mit.edu Thu Aug 11 00:36:28 1994
+Path: ashpoly!cascade!bigsur!mit!mandersson
+From: mandersson@mit.edu (Mateo Andersson)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Aug11.003628.5150@mit.edu>
+Date: Thu, 11 Aug 1994 00:36:28 GMT
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Mateo Andersson | mandersson@mit.edu
+PGP Key fingerprint: 594D 316F 3B47 EC15
+"Keep the channels open."
+
+From tnilsson@kiae.su Fri Aug 12 04:47:28 1994
+Path: ashpoly!cascade!bigsur!kiae!tnilsson
+From: tnilsson@kiae.su (Tyler Nilsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Aug12.044728.5461@kiae.su>
+Date: Fri, 12 Aug 1994 04:47:28 GMT
+References: <1994Aug11.003628.5150@mit.edu>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1994Aug11.003628.5150@mit.edu>, mandersson@mit.edu (Mateo Andersson) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Tyler Nilsson | tnilsson@kiae.su
+PGP Key fingerprint: 0158 4C17 1961 BE44
+"Keep the channels open."
+

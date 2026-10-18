@@ -1,0 +1,96 @@
+From fkuznetsov@mindspring.com Thu Sep 28 11:21:05 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!mindspring!fkuznetsov
+From: fkuznetsov@mindspring.com (Fiona Kuznetsov)
+Newsgroups: comp.dsp
+Subject: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Sep28.112105.1211@mindspring.com>
+Date: Thu, 28 Sep 1995 11:21:05 GMT
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Fiona Kuznetsov <fkuznetsov@mindspring.com>
+Zyxel U-1496E @ 14,400 bps
+"Hold for relay."
+
+From mcampbell@kiae.su Sat Sep 30 11:11:05 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!kiae!mcampbell
+From: mcampbell@kiae.su (Mateo Campbell)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Sep30.111105.7702@kiae.su>
+Date: Sat, 30 Sep 1995 11:11:05 GMT
+References: <1995Sep28.112105.1211@mindspring.com>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Sep28.112105.1211@mindspring.com>, fkuznetsov@mindspring.com (Fiona Kuznetsov) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+=== Mateo Campbell ===
+Dept of Electrical Engineering, Kurchatov Institute of Atomic Energy, Moscow
+"There are 14 nodes and only 10 countries. Count again."
+
+From stakahashi@pacbell.net Mon Oct 02 02:31:05 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!pacbell!stakahashi
+From: stakahashi@pacbell.net (Steve Takahashi)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Oct02.023105.3754@pacbell.net>
+Date: Mon, 02 Oct 1995 02:31:05 GMT
+References: <1995Sep28.112105.1211@mindspring.com> <1995Sep30.111105.7702@kiae.su>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Sep30.111105.7702@kiae.su>, mcampbell@kiae.su (Mateo Campbell) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Steve Takahashi -- Pacific Bell Internet Services
+"We don't sign stars. We build them."
+
+From mito@illinois.edu Tue Oct 03 15:15:05 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!illinois!mito
+From: mito@illinois.edu (Matthias Ito)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Oct03.151505.8971@illinois.edu>
+Date: Tue, 03 Oct 1995 15:15:05 GMT
+References: <1995Sep28.112105.1211@mindspring.com> <1995Sep30.111105.7702@kiae.su> <1995Oct02.023105.3754@pacbell.net>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Oct02.023105.3754@pacbell.net>, stakahashi@pacbell.net (Steve Takahashi) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+> Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Matthias Ito <mito@illinois.edu>
+*PLONK* filter active for trolls.
+Acorn RiscPC 600 - NetBSD 1.0
+

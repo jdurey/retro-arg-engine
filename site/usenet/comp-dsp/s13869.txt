@@ -1,0 +1,47 @@
+From mpopov@illinois.edu Mon Jan 10 23:18:58 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!illinois!mpopov
+From: mpopov@illinois.edu (Matthias Popov)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Jan10.231858.8985@illinois.edu>
+Date: Mon, 10 Jan 1994 23:18:58 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Matthias Popov
+Opinions expressed are solely my own and not those of University of Illinois Urbana-Champaign.
+------------------------------------------------------------
+
+From jlaurent@mit.edu Wed Jan 12 06:07:58 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!mit!jlaurent
+From: jlaurent@mit.edu (Jens Laurent)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Jan12.060758.9659@mit.edu>
+Date: Wed, 12 Jan 1994 06:07:58 GMT
+References: <1994Jan10.231858.8985@illinois.edu>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Jan10.231858.8985@illinois.edu>, mpopov@illinois.edu (Matthias Popov) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Jens Laurent | jlaurent@mit.edu
+PGP Key fingerprint: 5C92 79C5 EA0B FC8D
+"Keep the channels open."
+

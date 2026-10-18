@@ -1,0 +1,92 @@
+From ltakahashi@earthlink.net Thu Sep 14 07:01:19 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!earthlink!ltakahashi
+From: ltakahashi@earthlink.net (Liam Takahashi)
+Newsgroups: comp.sys.m68k
+Subject: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep14.070119.6133@earthlink.net>
+Date: Thu, 14 Sep 1995 07:01:19 GMT
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Liam Takahashi
+Opinions expressed are solely my own and not those of EarthLink Network.
+------------------------------------------------------------
+
+From dlarsson@demon.co.uk Fri Sep 15 20:15:19 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!demon!dlarsson
+From: dlarsson@demon.co.uk (Dmitri Larsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep15.201519.3532@demon.co.uk>
+Date: Fri, 15 Sep 1995 20:15:19 GMT
+References: <1995Sep14.070119.6133@earthlink.net>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Sep14.070119.6133@earthlink.net>, ltakahashi@earthlink.net (Liam Takahashi) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Dmitri Larsson -- Demon Internet Services UK
+"When every node is whole, the channel opens."
+
+From fmuller@pipeline.com Sat Sep 16 09:21:19 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!pipeline!fmuller
+From: fmuller@pipeline.com (Freya Müller)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep16.092119.8301@pipeline.com>
+Date: Sat, 16 Sep 1995 09:21:19 GMT
+References: <1995Sep14.070119.6133@earthlink.net>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Sep14.070119.6133@earthlink.net>, ltakahashi@earthlink.net (Liam Takahashi) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+=== Freya Müller ===
+Dept of Electrical Engineering, The Pipeline Internet Network
+"When every node is whole, the channel opens."
+
+From thughes@demon.co.uk Mon Sep 18 07:42:19 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!demon!thughes
+From: thughes@demon.co.uk (Thiago Hughes)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep18.074219.5761@demon.co.uk>
+Date: Mon, 18 Sep 1995 07:42:19 GMT
+References: <1995Sep14.070119.6133@earthlink.net>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1995Sep14.070119.6133@earthlink.net>, ltakahashi@earthlink.net (Liam Takahashi) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Thiago Hughes
+Tape trading list upon request. SASE required for international mail.
+

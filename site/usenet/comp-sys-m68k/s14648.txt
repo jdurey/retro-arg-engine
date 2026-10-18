@@ -1,0 +1,98 @@
+From bstewart@mit.edu Tue May 21 13:53:07 1996
+Path: ashpoly!cascade!bigsur!mit!bstewart
+From: bstewart@mit.edu (Bruno Stewart)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996May21.135307.8696@mit.edu>
+Date: Tue, 21 May 1996 13:53:07 GMT
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Hardware disassembly report for Motorola hardware hackers.
+
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+
+Does anyone have a 27C256 EPROM marked 'MH-U14' or 'ORION-CRYPTO'?
+
+-- 
+Bruno Stewart <bstewart@mit.edu>
+"They will send a copy in my place."
+Commodore Amiga 500 (1MB OCS) / System 7.5.1
+
+From pjohansson@cern.ch Tue May 21 19:24:07 1996
+Path: ashpoly!cascade!bigsur!cern!pjohansson
+From: pjohansson@cern.ch (Pavel Johansson)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996May21.192407.3429@cern.ch>
+Date: Tue, 21 May 1996 19:24:07 GMT
+References: <1996May21.135307.8696@mit.edu>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1996May21.135307.8696@mit.edu>, bstewart@mit.edu (Bruno Stewart) writes:
+> Hardware disassembly report for Motorola hardware hackers.
+> This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Pavel Johansson -- European Laboratory for Particle Physics, Geneva
+"Hardware is temporary. The signal survives."
+
+From nsmirnov@kiae.su Thu May 23 08:33:07 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!kiae!nsmirnov
+From: nsmirnov@kiae.su (Natalia Smirnov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996May23.083307.6933@kiae.su>
+Date: Thu, 23 May 1996 08:33:07 GMT
+References: <1996May21.135307.8696@mit.edu>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 12
+
+In article <1996May21.135307.8696@mit.edu>, bstewart@mit.edu (Bruno Stewart) writes:
+> Hardware disassembly report for Motorola hardware hackers.
+> This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Natalia Smirnov | nsmirnov@kiae.su
+PGP Key fingerprint: B5D5 AF11 767A AE71
+"Keep the channels open."
+
+From hhernandez@cam.ac.uk Sat May 25 04:35:07 1996
+Path: ashpoly!cascade!mxgate!coyoacan!cam!hhernandez
+From: hhernandez@cam.ac.uk (Heather Hernández)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996May25.043507.7817@cam.ac.uk>
+Date: Sat, 25 May 1996 04:35:07 GMT
+References: <1996May21.135307.8696@mit.edu> <1996May21.192407.3429@cern.ch>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996May21.192407.3429@cern.ch>, pjohansson@cern.ch (Pavel Johansson) writes:
+> That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+> Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Heather Hernández -- University of Cambridge Computer Laboratory
+"Tape doesn't lie at 02:14. Ears do."
+

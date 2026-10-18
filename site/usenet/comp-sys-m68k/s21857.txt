@@ -1,0 +1,72 @@
+From csokolov@ox.ac.uk Thu Dec 21 18:35:06 1995
+Path: ashpoly!cascade!bigsur!ox!csokolov
+From: csokolov@ox.ac.uk (Camila Sokolov)
+Newsgroups: comp.sys.m68k
+Subject: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Dec21.183506.9260@ox.ac.uk>
+Date: Thu, 21 Dec 1995 18:35:06 GMT
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Camila Sokolov | csokolov@ox.ac.uk
+PGP Key fingerprint: 09CF 62F8 833A 52A5
+"Keep the channels open."
+
+From tmoreau@rwth-aachen.de Sat Dec 23 09:31:06 1995
+Path: ashpoly!cascade!brgate!saturno!rwth-aachen!tmoreau
+From: tmoreau@rwth-aachen.de (Takeshi Moreau)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Dec23.093106.5721@rwth-aachen.de>
+Date: Sat, 23 Dec 1995 09:31:06 GMT
+References: <1995Dec21.183506.9260@ox.ac.uk>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Dec21.183506.9260@ox.ac.uk>, csokolov@ox.ac.uk (Camila Sokolov) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Takeshi Moreau <tmoreau@rwth-aachen.de>
+*PLONK* filter active for trolls.
+Acorn RiscPC 600 - NetBSD 1.0
+
+From atakahashi@pacbell.net Sat Dec 23 11:32:06 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!pacbell!atakahashi
+From: atakahashi@pacbell.net (Astrid Takahashi)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Dec23.113206.7917@pacbell.net>
+Date: Sat, 23 Dec 1995 11:32:06 GMT
+References: <1995Dec21.183506.9260@ox.ac.uk> <1995Dec23.093106.5721@rwth-aachen.de>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995Dec23.093106.5721@rwth-aachen.de>, tmoreau@rwth-aachen.de (Takeshi Moreau) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Astrid Takahashi
+Opinions expressed are solely my own and not those of Pacific Bell Internet Services.
+------------------------------------------------------------
+

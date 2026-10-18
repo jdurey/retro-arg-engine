@@ -1,0 +1,119 @@
+From jsmirnov@cmu.edu Mon Mar 13 23:36:29 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!cmu!jsmirnov
+From: jsmirnov@cmu.edu (Jen Smirnov)
+Newsgroups: comp.dsp
+Subject: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Mar13.233629.1494@cmu.edu>
+Date: Mon, 13 Mar 1995 23:36:29 GMT
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Jen Smirnov <jsmirnov@cmu.edu>
+US Robotics Courier V.34 @ 14,400 bps
+"Tape doesn't lie at 02:14. Ears do."
+
+From tnilsson@pipeline.com Wed Mar 15 10:03:29 1995
+Path: ashpoly!cascade!brgate!saturno!pipeline!tnilsson
+From: tnilsson@pipeline.com (Tobias Nilsson)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Mar15.100329.3470@pipeline.com>
+Date: Wed, 15 Mar 1995 10:03:29 GMT
+References: <1995Mar13.233629.1494@cmu.edu>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Mar13.233629.1494@cmu.edu>, jsmirnov@cmu.edu (Jen Smirnov) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+=== Tobias Nilsson ===
+Dept of Electrical Engineering, The Pipeline Internet Network
+"Row 14. No joke."
+
+From mkuznetsov@demon.co.uk Fri Mar 17 05:10:29 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!demon!mkuznetsov
+From: mkuznetsov@demon.co.uk (Mateo Kuznetsov)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Mar17.051029.3647@demon.co.uk>
+Date: Fri, 17 Mar 1995 05:10:29 GMT
+References: <1995Mar13.233629.1494@cmu.edu>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Mar13.233629.1494@cmu.edu>, jsmirnov@cmu.edu (Jen Smirnov) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Mateo Kuznetsov -- Demon Internet Services UK
+"In theory there is no difference between theory and practice."
+
+From pschneider@panix.com Sat Mar 18 11:57:29 1995
+Path: ashpoly!cascade!brgate!saturno!panix!pschneider
+From: pschneider@panix.com (Pavel Schneider)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Mar18.115729.5138@panix.com>
+Date: Sat, 18 Mar 1995 11:57:29 GMT
+References: <1995Mar13.233629.1494@cmu.edu>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Mar13.233629.1494@cmu.edu>, jsmirnov@cmu.edu (Jen Smirnov) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Pavel Schneider -- Public Access Unix of New York
+"Hardware is temporary. The signal survives."
+
+From koliveira@rwth-aachen.de Sun Mar 19 08:29:29 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!rwth-aachen!koliveira
+From: koliveira@rwth-aachen.de (Kenji Oliveira)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Mar19.082929.8542@rwth-aachen.de>
+Date: Sun, 19 Mar 1995 08:29:29 GMT
+References: <1995Mar13.233629.1494@cmu.edu> <1995Mar15.100329.3470@pipeline.com>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995Mar15.100329.3470@pipeline.com>, tnilsson@pipeline.com (Tobias Nilsson) writes:
+> Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Kenji Oliveira <koliveira@rwth-aachen.de>
+*PLONK* filter active for trolls.
+Amiga 3000T - NetBSD 1.0
+

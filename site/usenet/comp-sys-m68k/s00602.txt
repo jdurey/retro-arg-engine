@@ -1,0 +1,115 @@
+From rrodriguez@delphi.com Wed May 01 14:19:46 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!delphi!rrodriguez
+From: rrodriguez@delphi.com (Raj Rodríguez)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996May01.141946.8832@delphi.com>
+Date: Wed, 01 May 1996 14:19:46 GMT
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+Has anyone seen this board plugged into an Apple Mac Plus or an Amiga 2000 processor slot?
+
+-- 
+Raj Rodríguez
+Opinions expressed are solely my own and not those of Delphi Internet Services.
+------------------------------------------------------------
+
+From iivanov@kiae.su Wed May 01 16:19:46 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!kiae!iivanov
+From: iivanov@kiae.su (Ines Ivanov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996May01.161946.7470@kiae.su>
+Date: Wed, 01 May 1996 16:19:46 GMT
+References: <1996May01.141946.8832@delphi.com>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1996May01.141946.8832@delphi.com>, rrodriguez@delphi.com (Raj Rodríguez) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Ines Ivanov
+Tape trading list upon request. SASE required for international mail.
+
+From asouza@ox.ac.uk Fri May 03 18:27:46 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!ox!asouza
+From: asouza@ox.ac.uk (Aiko Souza)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996May03.182746.2531@ox.ac.uk>
+Date: Fri, 03 May 1996 18:27:46 GMT
+References: <1996May01.141946.8832@delphi.com> <1996May01.161946.7470@kiae.su>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996May01.161946.7470@kiae.su>, iivanov@kiae.su (Ines Ivanov) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Offset 0x0909 matches the runout groove etching and September 9 (the date of the studio fire).
+
+-- 
+Aiko Souza <asouza@ox.ac.uk>
+SupraFAXModem 28.8 @ 28,800 bps
+"We don't sign stars. We build them."
+
+From bnakamura@demon.co.uk Sat May 04 21:53:46 1996
+Path: ashpoly!cascade!brgate!saturno!demon!bnakamura
+From: bnakamura@demon.co.uk (Bastien Nakamura)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996May04.215346.5297@demon.co.uk>
+Date: Sat, 04 May 1996 21:53:46 GMT
+References: <1996May01.141946.8832@delphi.com>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996May01.141946.8832@delphi.com>, rrodriguez@delphi.com (Raj Rodríguez) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Bastien Nakamura -- Demon Internet Services UK
+"Measuring a record you own is listening, not piracy."
+
+From akang@uu.net Sun May 05 10:20:46 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!uu!akang
+From: akang@uu.net (Anton Kang)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996May05.102046.5784@uu.net>
+Date: Sun, 05 May 1996 10:20:46 GMT
+References: <1996May01.141946.8832@delphi.com> <1996May01.161946.7470@kiae.su> <1996May03.182746.2531@ox.ac.uk>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996May03.182746.2531@ox.ac.uk>, asouza@ox.ac.uk (Aiko Souza) writes:
+> Offset 0x0909 matches the runout groove etching and September 9 (the date of the studio fire).
+
+Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+-- 
+Anton Kang
+Opinions expressed are solely my own and not those of UUNET Technologies, Falls Church VA.
+------------------------------------------------------------
+

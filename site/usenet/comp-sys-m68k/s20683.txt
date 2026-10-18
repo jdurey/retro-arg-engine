@@ -1,0 +1,118 @@
+From bjohansson@tum.de Wed Feb 09 08:02:05 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!tum!bjohansson
+From: bjohansson@tum.de (Bruno Johansson)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Feb09.080205.7701@tum.de>
+Date: Wed, 09 Feb 1994 08:02:05 GMT
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Bruno Johansson
+Opinions expressed are solely my own and not those of Technische Universität München.
+------------------------------------------------------------
+
+From jfischer@mindspring.com Wed Feb 09 18:17:05 1994
+Path: ashpoly!cascade!brgate!saturno!mindspring!jfischer
+From: jfischer@mindspring.com (Julien Fischer)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Feb09.181705.4073@mindspring.com>
+Date: Wed, 09 Feb 1994 18:17:05 GMT
+References: <1994Feb09.080205.7701@tum.de>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1994Feb09.080205.7701@tum.de>, bjohansson@tum.de (Bruno Johansson) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+=== Julien Fischer ===
+Dept of Electrical Engineering, MindSpring Enterprises
+"Row 14. No joke."
+
+From ycampbell@clari.net Thu Feb 10 02:08:05 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!clari!ycampbell
+From: ycampbell@clari.net (Yuki Campbell)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Feb10.020805.2010@clari.net>
+Date: Thu, 10 Feb 1994 02:08:05 GMT
+References: <1994Feb09.080205.7701@tum.de> <1994Feb09.181705.4073@mindspring.com>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Feb09.181705.4073@mindspring.com>, jfischer@mindspring.com (Julien Fischer) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Yuki Campbell <ycampbell@clari.net>
+*PLONK* filter active for trolls.
+Sun 3/60 (SunOS 4.1.1) - NetBSD 1.0
+
+From jmoreau@cmu.edu Fri Feb 11 21:32:05 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!cmu!jmoreau
+From: jmoreau@cmu.edu (Joachim Moreau)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Feb11.213205.2962@cmu.edu>
+Date: Fri, 11 Feb 1994 21:32:05 GMT
+References: <1994Feb09.080205.7701@tum.de>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1994Feb09.080205.7701@tum.de>, bjohansson@tum.de (Bruno Johansson) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Joachim Moreau <jmoreau@cmu.edu>
+"The hatch is open. Is anyone listening?"
+Decstation 5000/200 / SunOS 4.1.4
+
+From ehughes@netcom.com Sun Feb 13 06:41:05 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!netcom!ehughes
+From: ehughes@netcom.com (Emi Hughes)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Feb13.064105.4883@netcom.com>
+Date: Sun, 13 Feb 1994 06:41:05 GMT
+References: <1994Feb09.080205.7701@tum.de> <1994Feb09.181705.4073@mindspring.com>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Feb09.181705.4073@mindspring.com>, jfischer@mindspring.com (Julien Fischer) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Emi Hughes <ehughes@netcom.com>
+Practical Peripherals 14.4 @ ISDN 64k bps
+"They will send a copy in my place."
+

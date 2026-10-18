@@ -1,0 +1,96 @@
+From sgonzalez@rwth-aachen.de Thu Oct 26 16:11:12 1995
+Path: ashpoly!cascade!bigsur!rwth-aachen!sgonzalez
+From: sgonzalez@rwth-aachen.de (Steve González)
+Newsgroups: comp.sys.m68k
+Subject: Observation: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Oct26.161112.8464@rwth-aachen.de>
+Date: Thu, 26 Oct 1995 16:11:12 GMT
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Steve González | sgonzalez@rwth-aachen.de
+PGP Key fingerprint: E234 F36D 96CA ED22
+"Keep the channels open."
+
+From hnakamura@cmu.edu Thu Oct 26 19:00:12 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!cmu!hnakamura
+From: hnakamura@cmu.edu (Hana Nakamura)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Oct26.190012.4178@cmu.edu>
+Date: Thu, 26 Oct 1995 19:00:12 GMT
+References: <1995Oct26.161112.8464@rwth-aachen.de>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995Oct26.161112.8464@rwth-aachen.de>, sgonzalez@rwth-aachen.de (Steve González) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+> CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Hana Nakamura -- Carnegie Mellon University School of CS
+"Tape doesn't lie at 02:14. Ears do."
+
+From kmacdonald@panix.com Fri Oct 27 18:59:12 1995
+Path: ashpoly!cascade!mxgate!coyoacan!panix!kmacdonald
+From: kmacdonald@panix.com (Kirsty MacDonald)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Oct27.185912.7944@panix.com>
+Date: Fri, 27 Oct 1995 18:59:12 GMT
+References: <1995Oct26.161112.8464@rwth-aachen.de>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Oct26.161112.8464@rwth-aachen.de>, sgonzalez@rwth-aachen.de (Steve González) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Kirsty MacDonald -- Public Access Unix of New York
+"A soul is not exclusive to biology."
+
+From clee@netcom.com Sat Oct 28 00:34:12 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!netcom!clee
+From: clee@netcom.com (Callum Lee)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Oct28.003412.8686@netcom.com>
+Date: Sat, 28 Oct 1995 00:34:12 GMT
+References: <1995Oct26.161112.8464@rwth-aachen.de> <1995Oct26.190012.4178@cmu.edu>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995Oct26.190012.4178@cmu.edu>, hnakamura@cmu.edu (Hana Nakamura) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+> PGP Public key available via finger or upon request.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Callum Lee
+Tape trading list upon request. SASE required for international mail.
+

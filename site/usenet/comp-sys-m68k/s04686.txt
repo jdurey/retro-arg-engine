@@ -1,0 +1,122 @@
+From hhughes@uu.net Wed Oct 26 08:45:56 1994
+Path: ashpoly!cascade!brgate!saturno!uu!hhughes
+From: hhughes@uu.net (Hugo Hughes)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Oct26.084556.6575@uu.net>
+Date: Wed, 26 Oct 1994 08:45:56 GMT
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+Hardware disassembly report for Motorola hardware hackers.
+
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+Does anyone have a 27C256 EPROM marked 'MH-U14' or 'ORION-CRYPTO'?
+
+-- 
+Hugo Hughes
+Tape trading list upon request. SASE required for international mail.
+
+From agonzalez@utexas.edu Thu Oct 27 03:19:56 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!utexas!agonzalez
+From: agonzalez@utexas.edu (Anton González)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Oct27.031956.2474@utexas.edu>
+Date: Thu, 27 Oct 1994 03:19:56 GMT
+References: <1994Oct26.084556.6575@uu.net>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1994Oct26.084556.6575@uu.net>, hhughes@uu.net (Hugo Hughes) writes:
+> Hardware disassembly report for Motorola hardware hackers.
+> This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Anton González <agonzalez@utexas.edu>
+"Tape doesn't lie at 02:14. Ears do."
+Decstation 5000/200 / Linux 1.2.13
+
+From dhernandez@stanford.edu Fri Oct 28 04:27:56 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!stanford!dhernandez
+From: dhernandez@stanford.edu (Dmitri Hernández)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Oct28.042756.7285@stanford.edu>
+Date: Fri, 28 Oct 1994 04:27:56 GMT
+References: <1994Oct26.084556.6575@uu.net> <1994Oct27.031956.2474@utexas.edu>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1994Oct27.031956.2474@utexas.edu>, agonzalez@utexas.edu (Anton González) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+=== Dmitri Hernández ===
+Dept of Electrical Engineering, Stanford University Computer Systems Lab
+"When every node is whole, the channel opens."
+
+From leriksson@unam.mx Sat Oct 29 04:55:56 1994
+Path: ashpoly!cascade!mxgate!coyoacan!unam!leriksson
+From: leriksson@unam.mx (Lars Eriksson)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Oct29.045556.1963@unam.mx>
+Date: Sat, 29 Oct 1994 04:55:56 GMT
+References: <1994Oct26.084556.6575@uu.net>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1994Oct26.084556.6575@uu.net>, hhughes@uu.net (Hugo Hughes) writes:
+> Hardware disassembly report for Motorola hardware hackers.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Lars Eriksson <leriksson@unam.mx>
+"Marcus is not one man."
+Macintosh IIfx / System 7.5.1
+
+From kivanov@stanford.edu Sat Oct 29 08:09:56 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!stanford!kivanov
+From: kivanov@stanford.edu (Kirsty Ivanov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Oct29.080956.6702@stanford.edu>
+Date: Sat, 29 Oct 1994 08:09:56 GMT
+References: <1994Oct26.084556.6575@uu.net> <1994Oct27.031956.2474@utexas.edu>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1994Oct27.031956.2474@utexas.edu>, agonzalez@utexas.edu (Anton González) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Kirsty Ivanov <kivanov@stanford.edu>
+"In theory there is no difference between theory and practice."
+Sun SparcStation 20 / SunOS 4.1.4
+

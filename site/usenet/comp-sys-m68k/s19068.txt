@@ -1,0 +1,115 @@
+From yrodriguez@mindspring.com Tue Aug 13 13:56:46 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!mindspring!yrodriguez
+From: yrodriguez@mindspring.com (Yuki Rodríguez)
+Newsgroups: comp.sys.m68k
+Subject: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Aug13.135646.8004@mindspring.com>
+Date: Tue, 13 Aug 1996 13:56:46 GMT
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Yuki Rodríguez
+Tape trading list upon request. SASE required for international mail.
+
+From gkowalski@ox.ac.uk Thu Aug 15 02:18:46 1996
+Path: ashpoly!cascade!bigsur!ox!gkowalski
+From: gkowalski@ox.ac.uk (Göran Kowalski)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Aug15.021846.9683@ox.ac.uk>
+Date: Thu, 15 Aug 1996 02:18:46 GMT
+References: <1996Aug13.135646.8004@mindspring.com>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Aug13.135646.8004@mindspring.com>, yrodriguez@mindspring.com (Yuki Rodríguez) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Göran Kowalski
+Tape trading list upon request. SASE required for international mail.
+
+From tito@pacbell.net Thu Aug 15 16:46:46 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!pacbell!tito
+From: tito@pacbell.net (Takeshi Ito)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Aug15.164646.2157@pacbell.net>
+Date: Thu, 15 Aug 1996 16:46:46 GMT
+References: <1996Aug13.135646.8004@mindspring.com>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Aug13.135646.8004@mindspring.com>, yrodriguez@mindspring.com (Yuki Rodríguez) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Takeshi Ito
+Tape trading list upon request. SASE required for international mail.
+
+From livanov@mit.edu Fri Aug 16 18:02:46 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!mit!livanov
+From: livanov@mit.edu (Liam Ivanov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Aug16.180246.8384@mit.edu>
+Date: Fri, 16 Aug 1996 18:02:46 GMT
+References: <1996Aug13.135646.8004@mindspring.com> <1996Aug15.164646.2157@pacbell.net>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1996Aug15.164646.2157@pacbell.net>, tito@pacbell.net (Takeshi Ito) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Liam Ivanov -- Massachusetts Institute of Technology
+"The hatch is open. Is anyone listening?"
+
+From tmoreno@u-tokyo.ac.jp Sun Aug 18 06:42:46 1996
+Path: ashpoly!cascade!bigsur!u-tokyo!tmoreno
+From: tmoreno@u-tokyo.ac.jp (Tobias Moreno)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Aug18.064246.9984@u-tokyo.ac.jp>
+Date: Sun, 18 Aug 1996 06:42:46 GMT
+References: <1996Aug13.135646.8004@mindspring.com> <1996Aug15.021846.9683@ox.ac.uk>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Aug15.021846.9683@ox.ac.uk>, gkowalski@ox.ac.uk (Göran Kowalski) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+Tobias Moreno -- University of Tokyo Department of Information Science
+"Row 14. No joke."
+

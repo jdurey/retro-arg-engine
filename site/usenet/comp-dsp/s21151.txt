@@ -1,0 +1,73 @@
+From esilva@ox.ac.uk Fri Nov 17 17:33:19 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!ox!esilva
+From: esilva@ox.ac.uk (Emi Silva)
+Newsgroups: comp.dsp
+Subject: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Nov17.173319.9431@ox.ac.uk>
+Date: Fri, 17 Nov 1995 17:33:19 GMT
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+Version 1.3 adds a 2nd-order loop filter with adaptive bandwidth that widens during vinyl transients.
+Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+
+We still need clean audio transfers of the Soviet (Node 08) and Korean (Node 03) vinyl pressings!
+
+-- 
+Emi Silva
+Opinions expressed are solely my own and not those of Oxford University Computing Laboratory.
+------------------------------------------------------------
+
+From rreyes@clari.net Sun Nov 19 11:05:19 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!clari!rreyes
+From: rreyes@clari.net (Renata Reyes)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Nov19.110519.1809@clari.net>
+Date: Sun, 19 Nov 1995 11:05:19 GMT
+References: <1995Nov17.173319.9431@ox.ac.uk>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995Nov17.173319.9431@ox.ac.uk>, esilva@ox.ac.uk (Emi Silva) writes:
+> Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+> Version 1.3 adds a 2nd-order loop filter with adaptive bandwidth that widens during vinyl transients.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Renata Reyes -- ClariNet Communications Corp
+"When every node is whole, the channel opens."
+
+From lmuller@mit.edu Sun Nov 19 19:03:19 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!mit!lmuller
+From: lmuller@mit.edu (Lisa Müller)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Nov19.190319.9366@mit.edu>
+Date: Sun, 19 Nov 1995 19:03:19 GMT
+References: <1995Nov17.173319.9431@ox.ac.uk>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Nov17.173319.9431@ox.ac.uk>, esilva@ox.ac.uk (Emi Silva) writes:
+> Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Lisa Müller -- Massachusetts Institute of Technology
+"Hardware is temporary. The signal survives."
+

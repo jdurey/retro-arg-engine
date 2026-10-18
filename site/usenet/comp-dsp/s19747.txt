@@ -1,0 +1,48 @@
+From ahernandez@cern.ch Wed Jan 18 03:50:48 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!cern!ahernandez
+From: ahernandez@cern.ch (Amy Hernández)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jan18.035048.8172@cern.ch>
+Date: Wed, 18 Jan 1995 03:50:48 GMT
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+=== Amy Hernández ===
+Dept of Electrical Engineering, European Laboratory for Particle Physics, Geneva
+"In theory there is no difference between theory and practice."
+
+From rpopov@pipeline.com Thu Jan 19 04:43:48 1995
+Path: ashpoly!cascade!mxgate!coyoacan!pipeline!rpopov
+From: rpopov@pipeline.com (Renata Popov)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jan19.044348.6404@pipeline.com>
+Date: Thu, 19 Jan 1995 04:43:48 GMT
+References: <1995Jan18.035048.8172@cern.ch>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Jan18.035048.8172@cern.ch>, ahernandez@cern.ch (Amy Hernández) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Renata Popov <rpopov@pipeline.com>
+Zyxel U-1496E @ 14,400 bps
+"Hardware is temporary. The signal survives."
+

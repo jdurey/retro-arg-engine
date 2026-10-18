@@ -1,0 +1,74 @@
+From kchoi@inria.fr Mon Feb 14 21:40:03 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!inria!kchoi
+From: kchoi@inria.fr (Katrin Choi)
+Newsgroups: comp.dsp
+Subject: Observation: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Feb14.214003.8810@inria.fr>
+Date: Mon, 14 Feb 1994 21:40:03 GMT
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+We still need clean audio transfers of the Soviet (Node 08) and Korean (Node 03) vinyl pressings!
+
+-- 
+Katrin Choi | kchoi@inria.fr
+PGP Key fingerprint: FE52 9D99 81B5 DD85
+"Keep the channels open."
+
+From ktakahashi@rwth-aachen.de Tue Feb 15 04:06:03 1994
+Path: ashpoly!cascade!mxgate!coyoacan!rwth-aachen!ktakahashi
+From: ktakahashi@rwth-aachen.de (Karen Takahashi)
+Newsgroups: comp.dsp
+Subject: Re: Observation: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Feb15.040603.8755@rwth-aachen.de>
+Date: Tue, 15 Feb 1994 04:06:03 GMT
+References: <1994Feb14.214003.8810@inria.fr>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1994Feb14.214003.8810@inria.fr>, kchoi@inria.fr (Katrin Choi) writes:
+> Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+> Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+Karen Takahashi <ktakahashi@rwth-aachen.de>
+Hayes Optima 288 @ 33,600 bps
+"The carrier frequency does not drift by accident."
+
+From cdubois@delphi.com Wed Feb 16 08:41:03 1994
+Path: ashpoly!cascade!bigsur!delphi!cdubois
+From: cdubois@delphi.com (Callum Dubois)
+Newsgroups: comp.dsp
+Subject: Re: Observation: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Feb16.084103.5232@delphi.com>
+Date: Wed, 16 Feb 1994 08:41:03 GMT
+References: <1994Feb14.214003.8810@inria.fr> <1994Feb15.040603.8755@rwth-aachen.de>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1994Feb15.040603.8755@rwth-aachen.de>, ktakahashi@rwth-aachen.de (Karen Takahashi) writes:
+> Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+> Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+-- 
+Callum Dubois | cdubois@delphi.com
+PGP Key fingerprint: 9C64 5439 9AA3 1EAA
+"Keep the channels open."
+

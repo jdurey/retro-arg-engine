@@ -1,0 +1,71 @@
+From phughes@clari.net Fri Jun 17 20:50:24 1994
+Path: ashpoly!cascade!brgate!saturno!clari!phughes
+From: phughes@clari.net (Pavel Hughes)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Jun17.205024.1633@clari.net>
+Date: Fri, 17 Jun 1994 20:50:24 GMT
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Pavel Hughes <phughes@clari.net>
+Hayes Optima 288 @ 33,600 bps
+"In theory there is no difference between theory and practice."
+
+From mweber@unam.mx Sat Jun 18 11:33:24 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!unam!mweber
+From: mweber@unam.mx (Matthias Weber)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Jun18.113324.7796@unam.mx>
+Date: Sat, 18 Jun 1994 11:33:24 GMT
+References: <1994Jun17.205024.1633@clari.net>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1994Jun17.205024.1633@clari.net>, phughes@clari.net (Pavel Hughes) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Matthias Weber <mweber@unam.mx>
+"Row 14. No joke."
+Pentium 90 (OS/2 Warp) / NEXTSTEP 3.3
+
+From ltakahashi@mindspring.com Sun Jun 19 03:41:24 1994
+Path: ashpoly!cascade!bigsur!mindspring!ltakahashi
+From: ltakahashi@mindspring.com (Lucia Takahashi)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Jun19.034124.8668@mindspring.com>
+Date: Sun, 19 Jun 1994 03:41:24 GMT
+References: <1994Jun17.205024.1633@clari.net> <1994Jun18.113324.7796@unam.mx>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Jun18.113324.7796@unam.mx>, mweber@unam.mx (Matthias Weber) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Lucia Takahashi <ltakahashi@mindspring.com>
+*PLONK* filter active for trolls.
+PC-9821Ap2 (NEC) - NetBSD 1.0
+

@@ -1,0 +1,93 @@
+From jsanchez@u-tokyo.ac.jp Sat Oct 07 06:25:48 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!u-tokyo!jsanchez
+From: jsanchez@u-tokyo.ac.jp (Joachim Sánchez)
+Newsgroups: comp.dsp
+Subject: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Oct07.062548.4438@u-tokyo.ac.jp>
+Date: Sat, 07 Oct 1995 06:25:48 GMT
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Joachim Sánchez <jsanchez@u-tokyo.ac.jp>
+Practical Peripherals 14.4 @ 14,400 bps
+"Row 14. No joke."
+
+From mpark@stanford.edu Mon Oct 09 09:32:48 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!stanford!mpark
+From: mpark@stanford.edu (Mei Park)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Oct09.093248.8924@stanford.edu>
+Date: Mon, 09 Oct 1995 09:32:48 GMT
+References: <1995Oct07.062548.4438@u-tokyo.ac.jp>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Oct07.062548.4438@u-tokyo.ac.jp>, jsanchez@u-tokyo.ac.jp (Joachim Sánchez) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Mei Park <mpark@stanford.edu>
+Practical Peripherals 14.4 @ ISDN 64k bps
+"Tape doesn't lie at 02:14. Ears do."
+
+From mgirard@clari.net Mon Oct 09 21:37:48 1995
+Path: ashpoly!cascade!brgate!saturno!clari!mgirard
+From: mgirard@clari.net (Marisol Girard)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Oct09.213748.9074@clari.net>
+Date: Mon, 09 Oct 1995 21:37:48 GMT
+References: <1995Oct07.062548.4438@u-tokyo.ac.jp> <1995Oct09.093248.8924@stanford.edu>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1995Oct09.093248.8924@stanford.edu>, mpark@stanford.edu (Mei Park) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Marisol Girard
+Tape trading list upon request. SASE required for international mail.
+
+From rmoreno@cam.ac.uk Tue Oct 10 07:07:48 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!cam!rmoreno
+From: rmoreno@cam.ac.uk (Renata Moreno)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Oct10.070748.6322@cam.ac.uk>
+Date: Tue, 10 Oct 1995 07:07:48 GMT
+References: <1995Oct07.062548.4438@u-tokyo.ac.jp> <1995Oct09.093248.8924@stanford.edu> <1995Oct09.213748.9074@clari.net>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Oct09.213748.9074@clari.net>, mgirard@clari.net (Marisol Girard) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+=== Renata Moreno ===
+Dept of Electrical Engineering, University of Cambridge Computer Laboratory
+"5 sigma is a discovery. 7 is a question."
+

@@ -1,0 +1,117 @@
+From eivanov@unam.mx Wed Oct 18 12:31:52 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!unam!eivanov
+From: eivanov@unam.mx (Elaine Ivanov)
+Newsgroups: comp.sys.m68k
+Subject: Discussion: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Oct18.123152.4978@unam.mx>
+Date: Wed, 18 Oct 1995 12:31:52 GMT
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+
+Did Marcus take the decryption EPROM with him when he left the lab?
+
+-- 
+Elaine Ivanov -- Universidad Nacional Autónoma de México (DGSCA)
+"Do not worship the copy."
+
+From vsantos@earthlink.net Thu Oct 19 19:16:52 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!earthlink!vsantos
+From: vsantos@earthlink.net (Valeria Santos)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Oct19.191652.1044@earthlink.net>
+Date: Thu, 19 Oct 1995 19:16:52 GMT
+References: <1995Oct18.123152.4978@unam.mx>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Oct18.123152.4978@unam.mx>, eivanov@unam.mx (Elaine Ivanov) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Valeria Santos | vsantos@earthlink.net
+PGP Key fingerprint: 08F6 B20E 33B1 AE2C
+"Keep the channels open."
+
+From hwatanabe@ox.ac.uk Sat Oct 21 13:10:52 1995
+Path: ashpoly!cascade!mxgate!coyoacan!ox!hwatanabe
+From: hwatanabe@ox.ac.uk (Heather Watanabe)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Oct21.131052.8947@ox.ac.uk>
+Date: Sat, 21 Oct 1995 13:10:52 GMT
+References: <1995Oct18.123152.4978@unam.mx> <1995Oct19.191652.1044@earthlink.net>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Oct19.191652.1044@earthlink.net>, vsantos@earthlink.net (Valeria Santos) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Heather Watanabe | hwatanabe@ox.ac.uk
+PGP Key fingerprint: 8C25 90CC 10C4 F62B
+"Keep the channels open."
+
+From tmacdonald@earthlink.net Sun Oct 22 08:14:52 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!earthlink!tmacdonald
+From: tmacdonald@earthlink.net (Tomas MacDonald)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Oct22.081452.3734@earthlink.net>
+Date: Sun, 22 Oct 1995 08:14:52 GMT
+References: <1995Oct18.123152.4978@unam.mx> <1995Oct19.191652.1044@earthlink.net>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1995Oct19.191652.1044@earthlink.net>, vsantos@earthlink.net (Valeria Santos) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Tomas MacDonald
+Tape trading list upon request. SASE required for international mail.
+
+From bokonkwo@clari.net Mon Oct 23 00:14:52 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!clari!bokonkwo
+From: bokonkwo@clari.net (Bruno Okonkwo)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Oct23.001452.4278@clari.net>
+Date: Mon, 23 Oct 1995 00:14:52 GMT
+References: <1995Oct18.123152.4978@unam.mx> <1995Oct19.191652.1044@earthlink.net> <1995Oct22.081452.3734@earthlink.net>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995Oct22.081452.3734@earthlink.net>, tmacdonald@earthlink.net (Tomas MacDonald) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Bruno Okonkwo <bokonkwo@clari.net>
+*PLONK* filter active for trolls.
+Pentium 90 (OS/2 Warp) - NetBSD 1.0
+

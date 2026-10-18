@@ -1,0 +1,46 @@
+From fsokolov@mit.edu Sun Mar 12 02:40:38 1995
+Path: ashpoly!cascade!bigsur!mit!fsokolov
+From: fsokolov@mit.edu (Fiona Sokolov)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Mar12.024038.3986@mit.edu>
+Date: Sun, 12 Mar 1995 02:40:38 GMT
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Does anyone have a 27C256 EPROM marked 'MH-U14' or 'ORION-CRYPTO'?
+
+-- 
+Fiona Sokolov <fsokolov@mit.edu>
+"In theory there is no difference between theory and practice."
+Amiga 1200 (Blizzard 030/50) / NEXTSTEP 3.3
+
+From bpopov@purdue.edu Sun Mar 12 05:23:38 1995
+Path: ashpoly!cascade!bigsur!purdue!bpopov
+From: bpopov@purdue.edu (Bruno Popov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Mar12.052338.4196@purdue.edu>
+Date: Sun, 12 Mar 1995 05:23:38 GMT
+References: <1995Mar12.024038.3986@mit.edu>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1995Mar12.024038.3986@mit.edu>, fsokolov@mit.edu (Fiona Sokolov) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Bruno Popov
+Tape trading list upon request. SASE required for international mail.
+

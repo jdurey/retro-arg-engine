@@ -1,0 +1,118 @@
+From sivanov@unam.mx Sun Nov 24 17:06:57 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!unam!sivanov
+From: sivanov@unam.mx (Sergei Ivanov)
+Newsgroups: comp.dsp
+Subject: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Nov24.170657.1953@unam.mx>
+Date: Sun, 24 Nov 1996 17:06:57 GMT
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+What sampling rates are people using for their vinyl rips? 44.1 kHz or 48 kHz DAT?
+
+-- 
+=== Sergei Ivanov ===
+Dept of Electrical Engineering, Universidad Nacional Autónoma de México (DGSCA)
+"We don't sign stars. We build them."
+
+From rrobertson@cmu.edu Tue Nov 26 15:02:57 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!cmu!rrobertson
+From: rrobertson@cmu.edu (Rodrigo Robertson)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Nov26.150257.5535@cmu.edu>
+Date: Tue, 26 Nov 1996 15:02:57 GMT
+References: <1996Nov24.170657.1953@unam.mx>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Nov24.170657.1953@unam.mx>, sivanov@unam.mx (Sergei Ivanov) writes:
+> Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+> A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Rodrigo Robertson -- Carnegie Mellon University School of CS
+"We don't sign stars. We build them."
+
+From jtanaka@kiae.su Wed Nov 27 15:29:57 1996
+Path: ashpoly!cascade!mxgate!coyoacan!kiae!jtanaka
+From: jtanaka@kiae.su (Jens Tanaka)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Nov27.152957.2585@kiae.su>
+Date: Wed, 27 Nov 1996 15:29:57 GMT
+References: <1996Nov24.170657.1953@unam.mx> <1996Nov26.150257.5535@cmu.edu>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1996Nov26.150257.5535@cmu.edu>, rrobertson@cmu.edu (Rodrigo Robertson) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Jens Tanaka -- Kurchatov Institute of Atomic Energy, Moscow
+"They will send a copy in my place."
+
+From abrennan@kiae.su Thu Nov 28 11:12:57 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!kiae!abrennan
+From: abrennan@kiae.su (Aiko Brennan)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Nov28.111257.9810@kiae.su>
+Date: Thu, 28 Nov 1996 11:12:57 GMT
+References: <1996Nov24.170657.1953@unam.mx>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1996Nov24.170657.1953@unam.mx>, sivanov@unam.mx (Sergei Ivanov) writes:
+> Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+> A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+=== Aiko Brennan ===
+Dept of Electrical Engineering, Kurchatov Institute of Atomic Energy, Moscow
+"Hold for relay."
+
+From fstewart@tum.de Thu Nov 28 12:59:57 1996
+Path: ashpoly!cascade!mxgate!coyoacan!tum!fstewart
+From: fstewart@tum.de (Fiona Stewart)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Nov28.125957.4247@tum.de>
+Date: Thu, 28 Nov 1996 12:59:57 GMT
+References: <1996Nov24.170657.1953@unam.mx> <1996Nov26.150257.5535@cmu.edu> <1996Nov27.152957.2585@kiae.su>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Nov27.152957.2585@kiae.su>, jtanaka@kiae.su (Jens Tanaka) writes:
+> I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Fiona Stewart <fstewart@tum.de>
+Zyxel U-1496E @ 28,800 bps
+"There are 14 nodes and only 10 countries. Count again."
+

@@ -1,0 +1,118 @@
+From hchoi@uni-hamburg.de Thu Apr 14 07:55:02 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!uni-hamburg!hchoi
+From: hchoi@uni-hamburg.de (Hana Choi)
+Newsgroups: comp.dsp
+Subject: Observation: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Apr14.075502.5691@uni-hamburg.de>
+Date: Thu, 14 Apr 1994 07:55:02 GMT
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+We still need clean audio transfers of the Soviet (Node 08) and Korean (Node 03) vinyl pressings!
+
+-- 
+Hana Choi
+Tape trading list upon request. SASE required for international mail.
+
+From aduarte@cern.ch Sat Apr 16 02:57:02 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!cern!aduarte
+From: aduarte@cern.ch (Anja Duarte)
+Newsgroups: comp.dsp
+Subject: Re: Observation: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Apr16.025702.7746@cern.ch>
+Date: Sat, 16 Apr 1994 02:57:02 GMT
+References: <1994Apr14.075502.5691@uni-hamburg.de>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1994Apr14.075502.5691@uni-hamburg.de>, hchoi@uni-hamburg.de (Hana Choi) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+> Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+-- 
+=== Anja Duarte ===
+Dept of Electrical Engineering, European Laboratory for Particle Physics, Geneva
+"There are 14 nodes and only 10 countries. Count again."
+
+From roliveira@kth.se Mon Apr 18 04:42:02 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!kth!roliveira
+From: roliveira@kth.se (Raj Oliveira)
+Newsgroups: comp.dsp
+Subject: Re: Observation: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Apr18.044202.6255@kth.se>
+Date: Mon, 18 Apr 1994 04:42:02 GMT
+References: <1994Apr14.075502.5691@uni-hamburg.de> <1994Apr16.025702.7746@cern.ch>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1994Apr16.025702.7746@cern.ch>, aduarte@cern.ch (Anja Duarte) writes:
+> Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Raj Oliveira <roliveira@kth.se>
+*PLONK* filter active for trolls.
+PC-9821Ap2 (NEC) - NetBSD 1.0
+
+From msato@utexas.edu Tue Apr 19 23:01:02 1994
+Path: ashpoly!cascade!mxgate!coyoacan!utexas!msato
+From: msato@utexas.edu (Matthias Sato)
+Newsgroups: comp.dsp
+Subject: Re: Observation: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Apr19.230102.8496@utexas.edu>
+Date: Tue, 19 Apr 1994 23:01:02 GMT
+References: <1994Apr14.075502.5691@uni-hamburg.de> <1994Apr16.025702.7746@cern.ch>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Apr16.025702.7746@cern.ch>, aduarte@cern.ch (Anja Duarte) writes:
+> Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+Can you provide a pre-compiled DOS binary? Some of us don't have Linux or a C compiler installed on our machines.
+
+-- 
+=== Matthias Sato ===
+Dept of Electrical Engineering, University of Texas at Austin
+"Tape doesn't lie at 02:14. Ears do."
+
+From grodriguez@cam.ac.uk Wed Apr 20 19:31:02 1994
+Path: ashpoly!cascade!brgate!saturno!cam!grodriguez
+From: grodriguez@cam.ac.uk (Göran Rodríguez)
+Newsgroups: comp.dsp
+Subject: Re: Observation: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Apr20.193102.6905@cam.ac.uk>
+Date: Wed, 20 Apr 1994 19:31:02 GMT
+References: <1994Apr14.075502.5691@uni-hamburg.de> <1994Apr16.025702.7746@cern.ch> <1994Apr19.230102.8496@utexas.edu>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Apr19.230102.8496@utexas.edu>, msato@utexas.edu (Matthias Sato) writes:
+> Can you provide a pre-compiled DOS binary? Some of us don't have Linux or a C compiler installed on our machines.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Göran Rodríguez
+Opinions expressed are solely my own and not those of University of Cambridge Computer Laboratory.
+------------------------------------------------------------
+

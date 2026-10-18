@@ -1,0 +1,71 @@
+From rperez@demon.co.uk Sat Jan 14 11:54:36 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!demon!rperez
+From: rperez@demon.co.uk (Renata Pérez)
+Newsgroups: comp.sys.m68k
+Subject: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jan14.115436.6240@demon.co.uk>
+Date: Sat, 14 Jan 1995 11:54:36 GMT
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Renata Pérez <rperez@demon.co.uk>
+"They will send a copy in my place."
+PC-9821Ap2 (NEC) / SunOS 4.1.4
+
+From tkang@clari.net Sun Jan 15 21:14:36 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!clari!tkang
+From: tkang@clari.net (Thiago Kang)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jan15.211436.1037@clari.net>
+Date: Sun, 15 Jan 1995 21:14:36 GMT
+References: <1995Jan14.115436.6240@demon.co.uk>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Jan14.115436.6240@demon.co.uk>, rperez@demon.co.uk (Renata Pérez) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Thiago Kang -- ClariNet Communications Corp
+"The carrier frequency does not drift by accident."
+
+From nsmirnov@kiae.su Mon Jan 16 03:20:36 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!kiae!nsmirnov
+From: nsmirnov@kiae.su (Nadia Smirnov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jan16.032036.3992@kiae.su>
+Date: Mon, 16 Jan 1995 03:20:36 GMT
+References: <1995Jan14.115436.6240@demon.co.uk>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Jan14.115436.6240@demon.co.uk>, rperez@demon.co.uk (Renata Pérez) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Nadia Smirnov <nsmirnov@kiae.su>
+"Hold for relay."
+Commodore Amiga 500 (1MB OCS) / TOS 4.04
+

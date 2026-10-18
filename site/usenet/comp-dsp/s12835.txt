@@ -1,0 +1,49 @@
+From dsokolov@illinois.edu Fri Jul 21 23:26:39 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!illinois!dsokolov
+From: dsokolov@illinois.edu (Diego Sokolov)
+Newsgroups: comp.dsp
+Subject: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jul21.232639.5821@illinois.edu>
+Date: Fri, 21 Jul 1995 23:26:39 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+What sampling rates are people using for their vinyl rips? 44.1 kHz or 48 kHz DAT?
+
+-- 
+Diego Sokolov
+Tape trading list upon request. SASE required for international mail.
+
+From nkarlsson@inria.fr Sun Jul 23 01:21:39 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!inria!nkarlsson
+From: nkarlsson@inria.fr (Natalia Karlsson)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jul23.012139.6821@inria.fr>
+Date: Sun, 23 Jul 1995 01:21:39 GMT
+References: <1995Jul21.232639.5821@illinois.edu>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1995Jul21.232639.5821@illinois.edu>, dsokolov@illinois.edu (Diego Sokolov) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Natalia Karlsson <nkarlsson@inria.fr>
+"We don't sign stars. We build them."
+Pentium 90 (OS/2 Warp) / System 7.5.1
+

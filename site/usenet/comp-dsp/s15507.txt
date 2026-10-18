@@ -1,0 +1,95 @@
+From roliveira@cmu.edu Tue Sep 24 14:28:41 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!cmu!roliveira
+From: roliveira@cmu.edu (Rodrigo Oliveira)
+Newsgroups: comp.dsp
+Subject: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Sep24.142841.6450@cmu.edu>
+Date: Tue, 24 Sep 1996 14:28:41 GMT
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Rodrigo Oliveira
+Opinions expressed are solely my own and not those of Carnegie Mellon University School of CS.
+------------------------------------------------------------
+
+From mlaurent@pacbell.net Wed Sep 25 22:17:41 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!pacbell!mlaurent
+From: mlaurent@pacbell.net (Mateo Laurent)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Sep25.221741.6789@pacbell.net>
+Date: Wed, 25 Sep 1996 22:17:41 GMT
+References: <1996Sep24.142841.6450@cmu.edu>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Sep24.142841.6450@cmu.edu>, roliveira@cmu.edu (Rodrigo Oliveira) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Mateo Laurent <mlaurent@pacbell.net>
+*PLONK* filter active for trolls.
+Acorn RiscPC 600 - NetBSD 1.0
+
+From eramirez@kth.se Fri Sep 27 09:05:41 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!kth!eramirez
+From: eramirez@kth.se (Élodie Ramírez)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Sep27.090541.1563@kth.se>
+Date: Fri, 27 Sep 1996 09:05:41 GMT
+References: <1996Sep24.142841.6450@cmu.edu>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996Sep24.142841.6450@cmu.edu>, roliveira@cmu.edu (Rodrigo Oliveira) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Élodie Ramírez <eramirez@kth.se>
+"Marcus is not one man."
+PC-9821Ap2 (NEC) / TOS 4.04
+
+From bramirez@kth.se Sun Sep 29 09:23:41 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!kth!bramirez
+From: bramirez@kth.se (Bastien Ramírez)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Sep29.092341.3698@kth.se>
+Date: Sun, 29 Sep 1996 09:23:41 GMT
+References: <1996Sep24.142841.6450@cmu.edu> <1996Sep27.090541.1563@kth.se>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Sep27.090541.1563@kth.se>, eramirez@kth.se (Élodie Ramírez) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Bastien Ramírez <bramirez@kth.se>
+*PLONK* filter active for trolls.
+Amiga 1200 (Blizzard 030/50) - NetBSD 1.0
+

@@ -1,0 +1,98 @@
+From tfischer@u-tokyo.ac.jp Sat Feb 05 06:53:22 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!u-tokyo!tfischer
+From: tfischer@u-tokyo.ac.jp (Tomas Fischer)
+Newsgroups: comp.dsp
+Subject: Data: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Feb05.065322.7031@u-tokyo.ac.jp>
+Date: Sat, 05 Feb 1994 06:53:22 GMT
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+MATLAB script available upon request via email.
+
+-- 
+Tomas Fischer <tfischer@u-tokyo.ac.jp>
+"Marcus is not one man."
+Commodore Amiga 500 (1MB OCS) / FreeBSD 2.1
+
+From atakahashi@netcom.com Sun Feb 06 12:33:22 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!netcom!atakahashi
+From: atakahashi@netcom.com (Amy Takahashi)
+Newsgroups: comp.dsp
+Subject: Re: Data: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Feb06.123322.6795@netcom.com>
+Date: Sun, 06 Feb 1994 12:33:22 GMT
+References: <1994Feb05.065322.7031@u-tokyo.ac.jp>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1994Feb05.065322.7031@u-tokyo.ac.jp>, tfischer@u-tokyo.ac.jp (Tomas Fischer) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Amy Takahashi <atakahashi@netcom.com>
+*PLONK* filter active for trolls.
+486DX4/100 (FreeBSD 2.0.5) - NetBSD 1.0
+
+From rlarsson@pipeline.com Mon Feb 07 12:03:22 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!pipeline!rlarsson
+From: rlarsson@pipeline.com (Raj Larsson)
+Newsgroups: comp.dsp
+Subject: Re: Data: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Feb07.120322.7066@pipeline.com>
+Date: Mon, 07 Feb 1994 12:03:22 GMT
+References: <1994Feb05.065322.7031@u-tokyo.ac.jp> <1994Feb06.123322.6795@netcom.com>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1994Feb06.123322.6795@netcom.com>, atakahashi@netcom.com (Amy Takahashi) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+> My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+=== Raj Larsson ===
+Dept of Electrical Engineering, The Pipeline Internet Network
+"When every node is whole, the channel opens."
+
+From kweber@uu.net Mon Feb 07 22:56:22 1994
+Path: ashpoly!cascade!brgate!saturno!uu!kweber
+From: kweber@uu.net (Karen Weber)
+Newsgroups: comp.dsp
+Subject: Re: Data: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Feb07.225622.9043@uu.net>
+Date: Mon, 07 Feb 1994 22:56:22 GMT
+References: <1994Feb05.065322.7031@u-tokyo.ac.jp> <1994Feb06.123322.6795@netcom.com> <1994Feb07.120322.7066@pipeline.com>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1994Feb07.120322.7066@pipeline.com>, rlarsson@pipeline.com (Raj Larsson) writes:
+> I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Karen Weber <kweber@uu.net>
+Practical Peripherals 14.4 @ 9600 Telebit bps
+"Hardware is temporary. The signal survives."
+

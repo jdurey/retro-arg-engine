@@ -1,0 +1,95 @@
+From jgarcia@pacbell.net Sat Apr 22 04:27:17 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!pacbell!jgarcia
+From: jgarcia@pacbell.net (Ji-woo García)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Apr22.042717.4153@pacbell.net>
+Date: Sat, 22 Apr 1995 04:27:17 GMT
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Ji-woo García
+Opinions expressed are solely my own and not those of Pacific Bell Internet Services.
+------------------------------------------------------------
+
+From clee@pipeline.com Mon Apr 24 01:32:17 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!pipeline!clee
+From: clee@pipeline.com (Callum Lee)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Apr24.013217.8516@pipeline.com>
+Date: Mon, 24 Apr 1995 01:32:17 GMT
+References: <1995Apr22.042717.4153@pacbell.net>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Apr22.042717.4153@pacbell.net>, jgarcia@pacbell.net (Ji-woo García) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Callum Lee
+Opinions expressed are solely my own and not those of The Pipeline Internet Network.
+------------------------------------------------------------
+
+From vgirard@panix.com Tue Apr 25 19:11:17 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!panix!vgirard
+From: vgirard@panix.com (Valeria Girard)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Apr25.191117.9881@panix.com>
+Date: Tue, 25 Apr 1995 19:11:17 GMT
+References: <1995Apr22.042717.4153@pacbell.net>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Apr22.042717.4153@pacbell.net>, jgarcia@pacbell.net (Ji-woo García) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Valeria Girard
+Opinions expressed are solely my own and not those of Public Access Unix of New York.
+------------------------------------------------------------
+
+From civanov@stanford.edu Thu Apr 27 08:50:17 1995
+Path: ashpoly!cascade!brgate!saturno!stanford!civanov
+From: civanov@stanford.edu (Camila Ivanov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Apr27.085017.6857@stanford.edu>
+Date: Thu, 27 Apr 1995 08:50:17 GMT
+References: <1995Apr22.042717.4153@pacbell.net> <1995Apr24.013217.8516@pipeline.com>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Apr24.013217.8516@pipeline.com>, clee@pipeline.com (Callum Lee) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Camila Ivanov <civanov@stanford.edu>
+*PLONK* filter active for trolls.
+Amiga 1200 (Blizzard 030/50) - NetBSD 1.0
+

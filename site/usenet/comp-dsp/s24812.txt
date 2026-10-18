@@ -1,0 +1,121 @@
+From amartinez@titech.ac.jp Sun May 12 04:40:33 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!titech!amartinez
+From: amartinez@titech.ac.jp (Anton Martínez)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996May12.044033.5419@titech.ac.jp>
+Date: Sun, 12 May 1996 04:40:33 GMT
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Anton Martínez | amartinez@titech.ac.jp
+PGP Key fingerprint: 6D60 76E3 7073 1E09
+"Keep the channels open."
+
+From jpark@uu.net Mon May 13 09:46:33 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!uu!jpark
+From: jpark@uu.net (Ji-woo Park)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996May13.094633.4867@uu.net>
+Date: Mon, 13 May 1996 09:46:33 GMT
+References: <1996May12.044033.5419@titech.ac.jp>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1996May12.044033.5419@titech.ac.jp>, amartinez@titech.ac.jp (Anton Martínez) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Ji-woo Park
+Opinions expressed are solely my own and not those of UUNET Technologies, Falls Church VA.
+------------------------------------------------------------
+
+From dsouza@hanse.de Mon May 13 16:43:33 1996
+Path: ashpoly!cascade!bigsur!hanse!dsouza
+From: dsouza@hanse.de (Dmitri Souza)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996May13.164333.8394@hanse.de>
+Date: Mon, 13 May 1996 16:43:33 GMT
+References: <1996May12.044033.5419@titech.ac.jp> <1996May13.094633.4867@uu.net>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996May13.094633.4867@uu.net>, jpark@uu.net (Ji-woo Park) writes:
+> Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Dmitri Souza <dsouza@hanse.de>
+"We don't sign stars. We build them."
+Atari Falcon 030 / TOS 4.04
+
+From jnilsson@u-tokyo.ac.jp Tue May 14 11:57:33 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!u-tokyo!jnilsson
+From: jnilsson@u-tokyo.ac.jp (Joachim Nilsson)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996May14.115733.1805@u-tokyo.ac.jp>
+Date: Tue, 14 May 1996 11:57:33 GMT
+References: <1996May12.044033.5419@titech.ac.jp> <1996May13.094633.4867@uu.net>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996May13.094633.4867@uu.net>, jpark@uu.net (Ji-woo Park) writes:
+> Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Joachim Nilsson <jnilsson@u-tokyo.ac.jp>
+Hayes Optima 288 @ 28,800 bps
+"Tape doesn't lie at 02:14. Ears do."
+
+From fnovak@uu.net Thu May 16 09:20:33 1996
+Path: ashpoly!cascade!bigsur!uu!fnovak
+From: fnovak@uu.net (Freya Novak)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996May16.092033.3393@uu.net>
+Date: Thu, 16 May 1996 09:20:33 GMT
+References: <1996May12.044033.5419@titech.ac.jp> <1996May13.094633.4867@uu.net> <1996May13.164333.8394@hanse.de>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1996May13.164333.8394@hanse.de>, dsouza@hanse.de (Dmitri Souza) writes:
+> Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Freya Novak <fnovak@uu.net>
+"We don't sign stars. We build them."
+Macintosh IIfx / TOS 4.04
+

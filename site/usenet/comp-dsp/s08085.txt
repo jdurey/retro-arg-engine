@@ -1,0 +1,93 @@
+From lsato@uni-hamburg.de Sun Jun 18 21:18:53 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!uni-hamburg!lsato
+From: lsato@uni-hamburg.de (Liam Sato)
+Newsgroups: comp.dsp
+Subject: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jun18.211853.2520@uni-hamburg.de>
+Date: Sun, 18 Jun 1995 21:18:53 GMT
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Liam Sato <lsato@uni-hamburg.de>
+*PLONK* filter active for trolls.
+Atari Falcon 030 - NetBSD 1.0
+
+From kwatanabe@uni-hamburg.de Tue Jun 20 17:37:53 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!uni-hamburg!kwatanabe
+From: kwatanabe@uni-hamburg.de (Karen Watanabe)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jun20.173753.7285@uni-hamburg.de>
+Date: Tue, 20 Jun 1995 17:37:53 GMT
+References: <1995Jun18.211853.2520@uni-hamburg.de>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Jun18.211853.2520@uni-hamburg.de>, lsato@uni-hamburg.de (Liam Sato) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+=== Karen Watanabe ===
+Dept of Electrical Engineering, Universität Hamburg Fachbereich Informatik
+"Extraordinary claims require extraordinary spectra."
+
+From rgonzalez@mit.edu Thu Jun 22 05:17:53 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!mit!rgonzalez
+From: rgonzalez@mit.edu (Renata González)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jun22.051753.1302@mit.edu>
+Date: Thu, 22 Jun 1995 05:17:53 GMT
+References: <1995Jun18.211853.2520@uni-hamburg.de> <1995Jun20.173753.7285@uni-hamburg.de>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Jun20.173753.7285@uni-hamburg.de>, kwatanabe@uni-hamburg.de (Karen Watanabe) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Renata González <rgonzalez@mit.edu>
+*PLONK* filter active for trolls.
+Macintosh IIfx - NetBSD 1.0
+
+From mjohansson@kth.se Fri Jun 23 16:04:53 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!kth!mjohansson
+From: mjohansson@kth.se (Mikhail Johansson)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jun23.160453.6838@kth.se>
+Date: Fri, 23 Jun 1995 16:04:53 GMT
+References: <1995Jun18.211853.2520@uni-hamburg.de> <1995Jun20.173753.7285@uni-hamburg.de>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Jun20.173753.7285@uni-hamburg.de>, kwatanabe@uni-hamburg.de (Karen Watanabe) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Mikhail Johansson <mjohansson@kth.se>
+*PLONK* filter active for trolls.
+Acorn RiscPC 600 - NetBSD 1.0
+

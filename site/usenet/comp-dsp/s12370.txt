@@ -1,0 +1,47 @@
+From blaurent@netcom.com Sun Dec 03 19:08:15 1995
+Path: ashpoly!cascade!mxgate!coyoacan!netcom!blaurent
+From: blaurent@netcom.com (Brian Laurent)
+Newsgroups: comp.dsp
+Subject: [FLAME] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Dec03.190815.6128@netcom.com>
+Date: Sun, 03 Dec 1995 19:08:15 GMT
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+=== Brian Laurent ===
+Dept of Electrical Engineering, NETCOM On-Line Communication Services
+"5 sigma is a discovery. 7 is a question."
+
+From dmartinez@uu.net Mon Dec 04 10:06:15 1995
+Path: ashpoly!cascade!bigsur!uu!dmartinez
+From: dmartinez@uu.net (Dong-hyun Martínez)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Dec04.100615.4409@uu.net>
+Date: Mon, 04 Dec 1995 10:06:15 GMT
+References: <1995Dec03.190815.6128@netcom.com>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Dec03.190815.6128@netcom.com>, blaurent@netcom.com (Brian Laurent) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+-- 
+Dong-hyun Martínez <dmartinez@uu.net>
+"The carrier frequency does not drift by accident."
+Atari TT030 / Linux 1.2.13
+

@@ -1,0 +1,116 @@
+From mkowalski@mit.edu Tue Apr 02 03:44:57 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!mit!mkowalski
+From: mkowalski@mit.edu (Marisol Kowalski)
+Newsgroups: comp.dsp
+Subject: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Apr02.034457.3288@mit.edu>
+Date: Tue, 02 Apr 1996 03:44:57 GMT
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Marisol Kowalski | mkowalski@mit.edu
+PGP Key fingerprint: C096 C02D 74B6 B7B2
+"Keep the channels open."
+
+From gkarlsson@mit.edu Tue Apr 02 14:24:57 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!mit!gkarlsson
+From: gkarlsson@mit.edu (Graham Karlsson)
+Newsgroups: comp.dsp
+Subject: Re: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Apr02.142457.7714@mit.edu>
+Date: Tue, 02 Apr 1996 14:24:57 GMT
+References: <1996Apr02.034457.3288@mit.edu>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Apr02.034457.3288@mit.edu>, mkowalski@mit.edu (Marisol Kowalski) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Graham Karlsson <gkarlsson@mit.edu>
+SupraFAXModem 28.8 @ 19,200 bps
+"Do not worship the copy."
+
+From asouza@pacbell.net Wed Apr 03 18:29:57 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!pacbell!asouza
+From: asouza@pacbell.net (Anton Souza)
+Newsgroups: comp.dsp
+Subject: Re: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Apr03.182957.8313@pacbell.net>
+Date: Wed, 03 Apr 1996 18:29:57 GMT
+References: <1996Apr02.034457.3288@mit.edu>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Apr02.034457.3288@mit.edu>, mkowalski@mit.edu (Marisol Kowalski) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+Anton Souza | asouza@pacbell.net
+PGP Key fingerprint: 57B2 ED6C 57EF C3F0
+"Keep the channels open."
+
+From doliveira@purdue.edu Fri Apr 05 00:58:57 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!purdue!doliveira
+From: doliveira@purdue.edu (Dmitri Oliveira)
+Newsgroups: comp.dsp
+Subject: Re: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Apr05.005857.8309@purdue.edu>
+Date: Fri, 05 Apr 1996 00:58:57 GMT
+References: <1996Apr02.034457.3288@mit.edu>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Apr02.034457.3288@mit.edu>, mkowalski@mit.edu (Marisol Kowalski) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Dmitri Oliveira <doliveira@purdue.edu>
+*PLONK* filter active for trolls.
+NeXTstation Turbo Color - NetBSD 1.0
+
+From ksato@mindspring.com Sat Apr 06 22:59:57 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!mindspring!ksato
+From: ksato@mindspring.com (Kenji Sato)
+Newsgroups: comp.dsp
+Subject: Re: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Apr06.225957.7435@mindspring.com>
+Date: Sat, 06 Apr 1996 22:59:57 GMT
+References: <1996Apr02.034457.3288@mit.edu> <1996Apr03.182957.8313@pacbell.net>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Apr03.182957.8313@pacbell.net>, asouza@pacbell.net (Anton Souza) writes:
+> Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Kenji Sato <ksato@mindspring.com>
+"We don't sign stars. We build them."
+Amiga 3000T / System 7.5.1
+

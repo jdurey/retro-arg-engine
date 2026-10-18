@@ -1,0 +1,120 @@
+From arodriguez@titech.ac.jp Sat Nov 16 10:18:35 1996
+Path: ashpoly!cascade!mxgate!coyoacan!titech!arodriguez
+From: arodriguez@titech.ac.jp (Andrei Rodríguez)
+Newsgroups: comp.sys.m68k
+Subject: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Nov16.101835.3523@titech.ac.jp>
+Date: Sat, 16 Nov 1996 10:18:35 GMT
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Andrei Rodríguez | arodriguez@titech.ac.jp
+PGP Key fingerprint: EF69 B562 C39A 1CA3
+"Keep the channels open."
+
+From tnovak@cern.ch Sun Nov 17 05:36:35 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!cern!tnovak
+From: tnovak@cern.ch (Thiago Novak)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Nov17.053635.1157@cern.ch>
+Date: Sun, 17 Nov 1996 05:36:35 GMT
+References: <1996Nov16.101835.3523@titech.ac.jp>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1996Nov16.101835.3523@titech.ac.jp>, arodriguez@titech.ac.jp (Andrei Rodríguez) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Thiago Novak
+Opinions expressed are solely my own and not those of European Laboratory for Particle Physics, Geneva.
+------------------------------------------------------------
+
+From dsato@kiae.su Sun Nov 17 13:56:35 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!kiae!dsato
+From: dsato@kiae.su (Diego Sato)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Nov17.135635.6056@kiae.su>
+Date: Sun, 17 Nov 1996 13:56:35 GMT
+References: <1996Nov16.101835.3523@titech.ac.jp> <1996Nov17.053635.1157@cern.ch>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1996Nov17.053635.1157@cern.ch>, tnovak@cern.ch (Thiago Novak) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+> Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Diego Sato
+Opinions expressed are solely my own and not those of Kurchatov Institute of Atomic Energy, Moscow.
+------------------------------------------------------------
+
+From tbrennan@ox.ac.uk Mon Nov 18 15:53:35 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!ox!tbrennan
+From: tbrennan@ox.ac.uk (Takeshi Brennan)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Nov18.155335.9829@ox.ac.uk>
+Date: Mon, 18 Nov 1996 15:53:35 GMT
+References: <1996Nov16.101835.3523@titech.ac.jp> <1996Nov17.053635.1157@cern.ch> <1996Nov17.135635.6056@kiae.su>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Nov17.135635.6056@kiae.su>, dsato@kiae.su (Diego Sato) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Takeshi Brennan <tbrennan@ox.ac.uk>
+*PLONK* filter active for trolls.
+Atari TT030 - NetBSD 1.0
+
+From afournier@unam.mx Wed Nov 20 12:08:35 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!unam!afournier
+From: afournier@unam.mx (Astrid Fournier)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Nov20.120835.1371@unam.mx>
+Date: Wed, 20 Nov 1996 12:08:35 GMT
+References: <1996Nov16.101835.3523@titech.ac.jp> <1996Nov17.053635.1157@cern.ch>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Nov17.053635.1157@cern.ch>, tnovak@cern.ch (Thiago Novak) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+> Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Astrid Fournier -- Universidad Nacional Autónoma de México (DGSCA)
+"Tape doesn't lie at 02:14. Ears do."
+

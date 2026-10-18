@@ -1,0 +1,71 @@
+From doliveira@uu.net Fri Nov 22 18:17:45 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!uu!doliveira
+From: doliveira@uu.net (Dong-hyun Oliveira)
+Newsgroups: comp.dsp
+Subject: Data: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Nov22.181745.3154@uu.net>
+Date: Fri, 22 Nov 1996 18:17:45 GMT
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Dong-hyun Oliveira <doliveira@uu.net>
+*PLONK* filter active for trolls.
+Pentium 90 (OS/2 Warp) - NetBSD 1.0
+
+From akowalski@u-tokyo.ac.jp Sat Nov 23 16:35:45 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!u-tokyo!akowalski
+From: akowalski@u-tokyo.ac.jp (Astrid Kowalski)
+Newsgroups: comp.dsp
+Subject: Re: Data: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Nov23.163545.4952@u-tokyo.ac.jp>
+Date: Sat, 23 Nov 1996 16:35:45 GMT
+References: <1996Nov22.181745.3154@uu.net>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996Nov22.181745.3154@uu.net>, doliveira@uu.net (Dong-hyun Oliveira) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+> A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+=== Astrid Kowalski ===
+Dept of Electrical Engineering, University of Tokyo Department of Information Science
+"The hatch is open. Is anyone listening?"
+
+From mlee@delphi.com Sun Nov 24 07:58:45 1996
+Path: ashpoly!cascade!mxgate!coyoacan!delphi!mlee
+From: mlee@delphi.com (Mikhail Lee)
+Newsgroups: comp.dsp
+Subject: Re: Data: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Nov24.075845.4436@delphi.com>
+Date: Sun, 24 Nov 1996 07:58:45 GMT
+References: <1996Nov22.181745.3154@uu.net>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Nov22.181745.3154@uu.net>, doliveira@uu.net (Dong-hyun Oliveira) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Mikhail Lee <mlee@delphi.com>
+Zyxel U-1496E @ 9600 Telebit bps
+"In theory there is no difference between theory and practice."
+

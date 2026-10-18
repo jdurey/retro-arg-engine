@@ -1,0 +1,122 @@
+From keriksson@uni-hamburg.de Fri Dec 09 12:38:06 1994
+Path: ashpoly!cascade!brgate!saturno!uni-hamburg!keriksson
+From: keriksson@uni-hamburg.de (Katrin Eriksson)
+Newsgroups: comp.dsp
+Subject: Discussion: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Dec09.123806.8360@uni-hamburg.de>
+Date: Fri, 09 Dec 1994 12:38:06 GMT
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+Katrin Eriksson <keriksson@uni-hamburg.de>
+"Extraordinary claims require extraordinary spectra."
+Atari TT030 / NEXTSTEP 3.3
+
+From tpetrov@tum.de Fri Dec 09 15:17:06 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!tum!tpetrov
+From: tpetrov@tum.de (Tobias Petrov)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Dec09.151706.4421@tum.de>
+Date: Fri, 09 Dec 1994 15:17:06 GMT
+References: <1994Dec09.123806.8360@uni-hamburg.de>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1994Dec09.123806.8360@uni-hamburg.de>, keriksson@uni-hamburg.de (Katrin Eriksson) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+> This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Tobias Petrov | tpetrov@tum.de
+PGP Key fingerprint: 8CDF 2E41 D377 5511
+"Keep the channels open."
+
+From lkim@purdue.edu Sun Dec 11 03:05:06 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!purdue!lkim
+From: lkim@purdue.edu (Lucia Kim)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Dec11.030506.2181@purdue.edu>
+Date: Sun, 11 Dec 1994 03:05:06 GMT
+References: <1994Dec09.123806.8360@uni-hamburg.de>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1994Dec09.123806.8360@uni-hamburg.de>, keriksson@uni-hamburg.de (Katrin Eriksson) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+> This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+=== Lucia Kim ===
+Dept of Electrical Engineering, Purdue University Engineering Computer Network
+"We don't sign stars. We build them."
+
+From ccampbell@uni-hamburg.de Mon Dec 12 13:49:06 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!uni-hamburg!ccampbell
+From: ccampbell@uni-hamburg.de (Callum Campbell)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Dec12.134906.1065@uni-hamburg.de>
+Date: Mon, 12 Dec 1994 13:49:06 GMT
+References: <1994Dec09.123806.8360@uni-hamburg.de> <1994Dec11.030506.2181@purdue.edu>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Dec11.030506.2181@purdue.edu>, lkim@purdue.edu (Lucia Kim) writes:
+> Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Callum Campbell <ccampbell@uni-hamburg.de>
+"In theory there is no difference between theory and practice."
+Atari Falcon 030 / AmigaOS 3.1
+
+From osmirnov@cern.ch Mon Dec 12 16:08:06 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!cern!osmirnov
+From: osmirnov@cern.ch (Olga Smirnov)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Dec12.160806.2474@cern.ch>
+Date: Mon, 12 Dec 1994 16:08:06 GMT
+References: <1994Dec09.123806.8360@uni-hamburg.de> <1994Dec11.030506.2181@purdue.edu> <1994Dec12.134906.1065@uni-hamburg.de>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Dec12.134906.1065@uni-hamburg.de>, ccampbell@uni-hamburg.de (Callum Campbell) writes:
+> If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+-- 
+Olga Smirnov <osmirnov@cern.ch>
+*PLONK* filter active for trolls.
+Amiga 3000T - NetBSD 1.0
+

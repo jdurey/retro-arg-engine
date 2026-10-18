@@ -1,0 +1,46 @@
+From kduarte@pacbell.net Mon Mar 28 02:05:16 1994
+Path: ashpoly!cascade!brgate!saturno!pacbell!kduarte
+From: kduarte@pacbell.net (Katrin Duarte)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Mar28.020516.7855@pacbell.net>
+Date: Mon, 28 Mar 1994 02:05:16 GMT
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+=== Katrin Duarte ===
+Dept of Electrical Engineering, Pacific Bell Internet Services
+"The carrier frequency does not drift by accident."
+
+From jlee@cmu.edu Mon Mar 28 17:32:16 1994
+Path: ashpoly!cascade!mxgate!coyoacan!cmu!jlee
+From: jlee@cmu.edu (Jen Lee)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Mar28.173216.1929@cmu.edu>
+Date: Mon, 28 Mar 1994 17:32:16 GMT
+References: <1994Mar28.020516.7855@pacbell.net>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1994Mar28.020516.7855@pacbell.net>, kduarte@pacbell.net (Katrin Duarte) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Jen Lee -- Carnegie Mellon University School of CS
+"A soul is not exclusive to biology."
+

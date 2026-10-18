@@ -1,0 +1,118 @@
+From jtanaka@pipeline.com Thu Jan 12 23:55:13 1995
+Path: ashpoly!cascade!mxgate!coyoacan!pipeline!jtanaka
+From: jtanaka@pipeline.com (Ji-woo Tanaka)
+Newsgroups: comp.sys.m68k
+Subject: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Jan12.235513.2535@pipeline.com>
+Date: Thu, 12 Jan 1995 23:55:13 GMT
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Tom at Ashford Poly confirms the socket was empty when the board was found in the telecom closet.
+
+-- 
+Ji-woo Tanaka <jtanaka@pipeline.com>
+SupraFAXModem 28.8 @ 19,200 bps
+"Hold for relay."
+
+From sduarte@utexas.edu Sat Jan 14 09:07:13 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!utexas!sduarte
+From: sduarte@utexas.edu (Steve Duarte)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Jan14.090713.1228@utexas.edu>
+Date: Sat, 14 Jan 1995 09:07:13 GMT
+References: <1995Jan12.235513.2535@pipeline.com>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Jan12.235513.2535@pipeline.com>, jtanaka@pipeline.com (Ji-woo Tanaka) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+> The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Steve Duarte <sduarte@utexas.edu>
+Hayes Optima 288 @ 33,600 bps
+"Marcus is not one man."
+
+From mvasiliev@uu.net Sun Jan 15 14:03:13 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!uu!mvasiliev
+From: mvasiliev@uu.net (Matthias Vasiliev)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Jan15.140313.8515@uu.net>
+Date: Sun, 15 Jan 1995 14:03:13 GMT
+References: <1995Jan12.235513.2535@pipeline.com>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Jan12.235513.2535@pipeline.com>, jtanaka@pipeline.com (Ji-woo Tanaka) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Matthias Vasiliev <mvasiliev@uu.net>
+US Robotics Courier V.34 @ 19,200 bps
+"The carrier frequency does not drift by accident."
+
+From alee@pipeline.com Mon Jan 16 20:59:13 1995
+Path: ashpoly!cascade!bigsur!pipeline!alee
+From: alee@pipeline.com (Aiko Lee)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Jan16.205913.2458@pipeline.com>
+Date: Mon, 16 Jan 1995 20:59:13 GMT
+References: <1995Jan12.235513.2535@pipeline.com>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Jan12.235513.2535@pipeline.com>, jtanaka@pipeline.com (Ji-woo Tanaka) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+> The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+-- 
+Aiko Lee
+Opinions expressed are solely my own and not those of The Pipeline Internet Network.
+------------------------------------------------------------
+
+From mpopov@stanford.edu Tue Jan 17 09:24:13 1995
+Path: ashpoly!cascade!mxgate!coyoacan!stanford!mpopov
+From: mpopov@stanford.edu (Mikhail Popov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Jan17.092413.7085@stanford.edu>
+Date: Tue, 17 Jan 1995 09:24:13 GMT
+References: <1995Jan12.235513.2535@pipeline.com>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Jan12.235513.2535@pipeline.com>, jtanaka@pipeline.com (Ji-woo Tanaka) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+=== Mikhail Popov ===
+Dept of Electrical Engineering, Stanford University Computer Systems Lab
+"When every node is whole, the channel opens."
+

@@ -1,0 +1,72 @@
+From lnilsson@u-tokyo.ac.jp Wed Mar 13 09:45:11 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!u-tokyo!lnilsson
+From: lnilsson@u-tokyo.ac.jp (Lisa Nilsson)
+Newsgroups: comp.sys.m68k
+Subject: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Mar13.094511.8493@u-tokyo.ac.jp>
+Date: Wed, 13 Mar 1996 09:45:11 GMT
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Lisa Nilsson
+Tape trading list upon request. SASE required for international mail.
+
+From rlaurent@netcom.com Fri Mar 15 05:24:11 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!netcom!rlaurent
+From: rlaurent@netcom.com (Raj Laurent)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Mar15.052411.2537@netcom.com>
+Date: Fri, 15 Mar 1996 05:24:11 GMT
+References: <1996Mar13.094511.8493@u-tokyo.ac.jp>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1996Mar13.094511.8493@u-tokyo.ac.jp>, lnilsson@u-tokyo.ac.jp (Lisa Nilsson) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+=== Raj Laurent ===
+Dept of Electrical Engineering, NETCOM On-Line Communication Services
+"A soul is not exclusive to biology."
+
+From svasiliev@uni-hamburg.de Fri Mar 15 06:56:11 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!uni-hamburg!svasiliev
+From: svasiliev@uni-hamburg.de (Steve Vasiliev)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Mar15.065611.2459@uni-hamburg.de>
+Date: Fri, 15 Mar 1996 06:56:11 GMT
+References: <1996Mar13.094511.8493@u-tokyo.ac.jp>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Mar13.094511.8493@u-tokyo.ac.jp>, lnilsson@u-tokyo.ac.jp (Lisa Nilsson) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+> At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Steve Vasiliev
+Opinions expressed are solely my own and not those of Universität Hamburg Fachbereich Informatik.
+------------------------------------------------------------
+

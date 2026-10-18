@@ -1,0 +1,70 @@
+From ljohansson@pipeline.com Tue May 03 21:29:00 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!pipeline!ljohansson
+From: ljohansson@pipeline.com (Lars Johansson)
+Newsgroups: comp.sys.m68k
+Subject: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994May03.212900.4191@pipeline.com>
+Date: Tue, 03 May 1994 21:29:00 GMT
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Lars Johansson
+Tape trading list upon request. SASE required for international mail.
+
+From tpark@u-tokyo.ac.jp Wed May 04 03:55:00 1994
+Path: ashpoly!cascade!bigsur!u-tokyo!tpark
+From: tpark@u-tokyo.ac.jp (Tomas Park)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994May04.035500.1907@u-tokyo.ac.jp>
+Date: Wed, 04 May 1994 03:55:00 GMT
+References: <1994May03.212900.4191@pipeline.com>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1994May03.212900.4191@pipeline.com>, ljohansson@pipeline.com (Lars Johansson) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Tomas Park <tpark@u-tokyo.ac.jp>
+*PLONK* filter active for trolls.
+Commodore Amiga 500 (1MB OCS) - NetBSD 1.0
+
+From nkuznetsov@delphi.com Thu May 05 07:32:00 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!delphi!nkuznetsov
+From: nkuznetsov@delphi.com (Natalia Kuznetsov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994May05.073200.2509@delphi.com>
+Date: Thu, 05 May 1994 07:32:00 GMT
+References: <1994May03.212900.4191@pipeline.com> <1994May04.035500.1907@u-tokyo.ac.jp>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994May04.035500.1907@u-tokyo.ac.jp>, tpark@u-tokyo.ac.jp (Tomas Park) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Natalia Kuznetsov | nkuznetsov@delphi.com
+PGP Key fingerprint: B6B0 59A9 8A0A 5333
+"Keep the channels open."
+

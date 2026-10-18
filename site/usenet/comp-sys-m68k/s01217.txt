@@ -1,0 +1,92 @@
+From cduarte@u-tokyo.ac.jp Fri Jan 27 12:49:39 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!u-tokyo!cduarte
+From: cduarte@u-tokyo.ac.jp (Callum Duarte)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jan27.124939.3041@u-tokyo.ac.jp>
+Date: Fri, 27 Jan 1995 12:49:39 GMT
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Callum Duarte <cduarte@u-tokyo.ac.jp>
+SupraFAXModem 28.8 @ 28,800 bps
+"Extraordinary claims require extraordinary spectra."
+
+From rmoreno@clari.net Sun Jan 29 10:27:39 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!clari!rmoreno
+From: rmoreno@clari.net (Renata Moreno)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jan29.102739.8777@clari.net>
+Date: Sun, 29 Jan 1995 10:27:39 GMT
+References: <1995Jan27.124939.3041@u-tokyo.ac.jp>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1995Jan27.124939.3041@u-tokyo.ac.jp>, cduarte@u-tokyo.ac.jp (Callum Duarte) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Renata Moreno
+Tape trading list upon request. SASE required for international mail.
+
+From slopez@purdue.edu Sun Jan 29 13:01:39 1995
+Path: ashpoly!cascade!brgate!saturno!purdue!slopez
+From: slopez@purdue.edu (Seo-yeon López)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jan29.130139.5631@purdue.edu>
+Date: Sun, 29 Jan 1995 13:01:39 GMT
+References: <1995Jan27.124939.3041@u-tokyo.ac.jp> <1995Jan29.102739.8777@clari.net>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Jan29.102739.8777@clari.net>, rmoreno@clari.net (Renata Moreno) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Seo-yeon López <slopez@purdue.edu>
+*PLONK* filter active for trolls.
+Atari TT030 - NetBSD 1.0
+
+From tlindqvist@ox.ac.uk Tue Jan 31 11:11:39 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!ox!tlindqvist
+From: tlindqvist@ox.ac.uk (Thiago Lindqvist)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jan31.111139.5077@ox.ac.uk>
+Date: Tue, 31 Jan 1995 11:11:39 GMT
+References: <1995Jan27.124939.3041@u-tokyo.ac.jp>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Jan27.124939.3041@u-tokyo.ac.jp>, cduarte@u-tokyo.ac.jp (Callum Duarte) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Thiago Lindqvist | tlindqvist@ox.ac.uk
+PGP Key fingerprint: B8E4 6BDA 1769 C432
+"Keep the channels open."
+

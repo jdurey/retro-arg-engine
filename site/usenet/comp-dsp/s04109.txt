@@ -1,0 +1,118 @@
+From msilva@titech.ac.jp Thu Mar 09 19:27:12 1995
+Path: ashpoly!cascade!brgate!saturno!titech!msilva
+From: msilva@titech.ac.jp (Min-jun Silva)
+Newsgroups: comp.dsp
+Subject: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Mar09.192712.3114@titech.ac.jp>
+Date: Thu, 09 Mar 1995 19:27:12 GMT
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Min-jun Silva
+Tape trading list upon request. SASE required for international mail.
+
+From lrobertson@purdue.edu Fri Mar 10 00:35:12 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!purdue!lrobertson
+From: lrobertson@purdue.edu (Liam Robertson)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Mar10.003512.7844@purdue.edu>
+Date: Fri, 10 Mar 1995 00:35:12 GMT
+References: <1995Mar09.192712.3114@titech.ac.jp>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Mar09.192712.3114@titech.ac.jp>, msilva@titech.ac.jp (Min-jun Silva) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Liam Robertson <lrobertson@purdue.edu>
+*PLONK* filter active for trolls.
+486DX4/100 (FreeBSD 2.0.5) - NetBSD 1.0
+
+From dpetrov@stanford.edu Sat Mar 11 13:38:12 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!stanford!dpetrov
+From: dpetrov@stanford.edu (Dmitri Petrov)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Mar11.133812.5367@stanford.edu>
+Date: Sat, 11 Mar 1995 13:38:12 GMT
+References: <1995Mar09.192712.3114@titech.ac.jp> <1995Mar10.003512.7844@purdue.edu>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Mar10.003512.7844@purdue.edu>, lrobertson@purdue.edu (Liam Robertson) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Dmitri Petrov <dpetrov@stanford.edu>
+*PLONK* filter active for trolls.
+NeXTstation Turbo Color - NetBSD 1.0
+
+From ofournier@panix.com Mon Mar 13 04:20:12 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!panix!ofournier
+From: ofournier@panix.com (Olga Fournier)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Mar13.042012.7478@panix.com>
+Date: Mon, 13 Mar 1995 04:20:12 GMT
+References: <1995Mar09.192712.3114@titech.ac.jp> <1995Mar10.003512.7844@purdue.edu> <1995Mar11.133812.5367@stanford.edu>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995Mar11.133812.5367@stanford.edu>, dpetrov@stanford.edu (Dmitri Petrov) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Olga Fournier | ofournier@panix.com
+PGP Key fingerprint: CAFE 1B7E 2EB2 0D3E
+"Keep the channels open."
+
+From lsouza@unam.mx Tue Mar 14 08:10:12 1995
+Path: ashpoly!cascade!bigsur!unam!lsouza
+From: lsouza@unam.mx (Lucia Souza)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Mar14.081012.2170@unam.mx>
+Date: Tue, 14 Mar 1995 08:10:12 GMT
+References: <1995Mar09.192712.3114@titech.ac.jp>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Mar09.192712.3114@titech.ac.jp>, msilva@titech.ac.jp (Min-jun Silva) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Lucia Souza <lsouza@unam.mx>
+*PLONK* filter active for trolls.
+486DX2/66 (Linux 1.2.13) - NetBSD 1.0
+

@@ -1,0 +1,116 @@
+From atakahashi@inria.fr Thu Apr 20 18:03:43 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!inria!atakahashi
+From: atakahashi@inria.fr (Astrid Takahashi)
+Newsgroups: comp.dsp
+Subject: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Apr20.180343.9402@inria.fr>
+Date: Thu, 20 Apr 1995 18:03:43 GMT
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Astrid Takahashi <atakahashi@inria.fr>
+*PLONK* filter active for trolls.
+486DX2/66 (Linux 1.2.13) - NetBSD 1.0
+
+From mmoreau@earthlink.net Thu Apr 20 19:46:43 1995
+Path: ashpoly!cascade!brgate!saturno!earthlink!mmoreau
+From: mmoreau@earthlink.net (Marisol Moreau)
+Newsgroups: comp.dsp
+Subject: Re: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Apr20.194643.9579@earthlink.net>
+Date: Thu, 20 Apr 1995 19:46:43 GMT
+References: <1995Apr20.180343.9402@inria.fr>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1995Apr20.180343.9402@inria.fr>, atakahashi@inria.fr (Astrid Takahashi) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Marisol Moreau -- EarthLink Network
+"Do not worship the copy."
+
+From gpopov@utexas.edu Sat Apr 22 09:17:43 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!utexas!gpopov
+From: gpopov@utexas.edu (Göran Popov)
+Newsgroups: comp.dsp
+Subject: Re: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Apr22.091743.5793@utexas.edu>
+Date: Sat, 22 Apr 1995 09:17:43 GMT
+References: <1995Apr20.180343.9402@inria.fr>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Apr20.180343.9402@inria.fr>, atakahashi@inria.fr (Astrid Takahashi) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Göran Popov
+Tape trading list upon request. SASE required for international mail.
+
+From hsilva@netcom.com Sun Apr 23 22:58:43 1995
+Path: ashpoly!cascade!brgate!saturno!netcom!hsilva
+From: hsilva@netcom.com (Heather Silva)
+Newsgroups: comp.dsp
+Subject: Re: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Apr23.225843.5804@netcom.com>
+Date: Sun, 23 Apr 1995 22:58:43 GMT
+References: <1995Apr20.180343.9402@inria.fr> <1995Apr22.091743.5793@utexas.edu>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995Apr22.091743.5793@utexas.edu>, gpopov@utexas.edu (Göran Popov) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+Heather Silva
+Opinions expressed are solely my own and not those of NETCOM On-Line Communication Services.
+------------------------------------------------------------
+
+From akarlsson@netcom.com Mon Apr 24 06:06:43 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!netcom!akarlsson
+From: akarlsson@netcom.com (Anja Karlsson)
+Newsgroups: comp.dsp
+Subject: Re: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Apr24.060643.7696@netcom.com>
+Date: Mon, 24 Apr 1995 06:06:43 GMT
+References: <1995Apr20.180343.9402@inria.fr> <1995Apr20.194643.9579@earthlink.net>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Apr20.194643.9579@earthlink.net>, mmoreau@earthlink.net (Marisol Moreau) writes:
+> Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Anja Karlsson
+Opinions expressed are solely my own and not those of NETCOM On-Line Communication Services.
+------------------------------------------------------------
+

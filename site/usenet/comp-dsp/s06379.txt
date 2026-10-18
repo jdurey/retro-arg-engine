@@ -1,0 +1,49 @@
+From dsokolov@rwth-aachen.de Wed Feb 01 02:49:04 1995
+Path: ashpoly!cascade!mxgate!coyoacan!rwth-aachen!dsokolov
+From: dsokolov@rwth-aachen.de (Dave Sokolov)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Feb01.024904.7577@rwth-aachen.de>
+Date: Wed, 01 Feb 1995 02:49:04 GMT
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+What sampling rates are people using for their vinyl rips? 44.1 kHz or 48 kHz DAT?
+
+-- 
+Dave Sokolov
+Tape trading list upon request. SASE required for international mail.
+
+From gsuzuki@pacbell.net Wed Feb 01 04:01:04 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!pacbell!gsuzuki
+From: gsuzuki@pacbell.net (Göran Suzuki)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Feb01.040104.6644@pacbell.net>
+Date: Wed, 01 Feb 1995 04:01:04 GMT
+References: <1995Feb01.024904.7577@rwth-aachen.de>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 12
+
+In article <1995Feb01.024904.7577@rwth-aachen.de>, dsokolov@rwth-aachen.de (Dave Sokolov) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+=== Göran Suzuki ===
+Dept of Electrical Engineering, Pacific Bell Internet Services
+"Row 14. No joke."
+

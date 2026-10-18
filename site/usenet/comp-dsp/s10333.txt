@@ -1,0 +1,72 @@
+From ypark@titech.ac.jp Tue Nov 21 03:42:21 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!titech!ypark
+From: ypark@titech.ac.jp (Yuki Park)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Nov21.034221.4364@titech.ac.jp>
+Date: Tue, 21 Nov 1995 03:42:21 GMT
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+Yuki Park
+Opinions expressed are solely my own and not those of Tokyo Institute of Technology Computer Centre.
+------------------------------------------------------------
+
+From tgonzalez@demon.co.uk Thu Nov 23 05:43:21 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!demon!tgonzalez
+From: tgonzalez@demon.co.uk (Tomas González)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Nov23.054321.7250@demon.co.uk>
+Date: Thu, 23 Nov 1995 05:43:21 GMT
+References: <1995Nov21.034221.4364@titech.ac.jp>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Nov21.034221.4364@titech.ac.jp>, ypark@titech.ac.jp (Yuki Park) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Tomas González
+Opinions expressed are solely my own and not those of Demon Internet Services UK.
+------------------------------------------------------------
+
+From rkarlsson@kiae.su Sat Nov 25 00:43:21 1995
+Path: ashpoly!cascade!mxgate!coyoacan!kiae!rkarlsson
+From: rkarlsson@kiae.su (Renata Karlsson)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Nov25.004321.7687@kiae.su>
+Date: Sat, 25 Nov 1995 00:43:21 GMT
+References: <1995Nov21.034221.4364@titech.ac.jp> <1995Nov23.054321.7250@demon.co.uk>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Nov23.054321.7250@demon.co.uk>, tgonzalez@demon.co.uk (Tomas González) writes:
+> If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+> Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Renata Karlsson -- Kurchatov Institute of Atomic Energy, Moscow
+"The hatch is open. Is anyone listening?"
+

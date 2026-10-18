@@ -1,0 +1,92 @@
+From bhughes@hanse.de Wed Aug 10 09:58:41 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!hanse!bhughes
+From: bhughes@hanse.de (Brian Hughes)
+Newsgroups: comp.sys.m68k
+Subject: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Aug10.095841.5358@hanse.de>
+Date: Wed, 10 Aug 1994 09:58:41 GMT
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+Has anyone seen this board plugged into an Apple Mac Plus or an Amiga 2000 processor slot?
+
+-- 
+Brian Hughes <bhughes@hanse.de>
+SupraFAXModem 28.8 @ 33,600 bps
+"A soul is not exclusive to biology."
+
+From koliveira@delphi.com Thu Aug 11 10:44:41 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!delphi!koliveira
+From: koliveira@delphi.com (Kenji Oliveira)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Aug11.104441.6498@delphi.com>
+Date: Thu, 11 Aug 1994 10:44:41 GMT
+References: <1994Aug10.095841.5358@hanse.de>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Aug10.095841.5358@hanse.de>, bhughes@hanse.de (Brian Hughes) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Kenji Oliveira <koliveira@delphi.com>
+*PLONK* filter active for trolls.
+Sun SparcStation 20 - NetBSD 1.0
+
+From jlopez@inria.fr Fri Aug 12 07:37:41 1994
+Path: ashpoly!cascade!bigsur!inria!jlopez
+From: jlopez@inria.fr (Joachim López)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Aug12.073741.1547@inria.fr>
+Date: Fri, 12 Aug 1994 07:37:41 GMT
+References: <1994Aug10.095841.5358@hanse.de>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1994Aug10.095841.5358@hanse.de>, bhughes@hanse.de (Brian Hughes) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Joachim López -- INRIA Rocquencourt
+"There are 14 nodes and only 10 countries. Count again."
+
+From dhughes@cam.ac.uk Fri Aug 12 17:01:41 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!cam!dhughes
+From: dhughes@cam.ac.uk (Dave Hughes)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Aug12.170141.7529@cam.ac.uk>
+Date: Fri, 12 Aug 1994 17:01:41 GMT
+References: <1994Aug10.095841.5358@hanse.de> <1994Aug11.104441.6498@delphi.com>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Aug11.104441.6498@delphi.com>, koliveira@delphi.com (Kenji Oliveira) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+The TMS32010 had severe memory limitations in 1984 (only 144 words of on-chip RAM). Dual 68000s gave them full 16MB address space.
+
+-- 
+Dave Hughes <dhughes@cam.ac.uk>
+*PLONK* filter active for trolls.
+486DX4/100 (FreeBSD 2.0.5) - NetBSD 1.0
+

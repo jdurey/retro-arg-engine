@@ -1,0 +1,94 @@
+From srobertson@cam.ac.uk Fri Nov 01 11:58:19 1996
+Path: ashpoly!cascade!bigsur!cam!srobertson
+From: srobertson@cam.ac.uk (Sven Robertson)
+Newsgroups: comp.sys.m68k
+Subject: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Nov01.115819.9081@cam.ac.uk>
+Date: Fri, 01 Nov 1996 11:58:19 GMT
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+=== Sven Robertson ===
+Dept of Electrical Engineering, University of Cambridge Computer Laboratory
+"Extraordinary claims require extraordinary spectra."
+
+From bandersson@berkeley.edu Sun Nov 03 05:04:19 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!berkeley!bandersson
+From: bandersson@berkeley.edu (Bastien Andersson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Nov03.050419.3842@berkeley.edu>
+Date: Sun, 03 Nov 1996 05:04:19 GMT
+References: <1996Nov01.115819.9081@cam.ac.uk>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Nov01.115819.9081@cam.ac.uk>, srobertson@cam.ac.uk (Sven Robertson) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Bastien Andersson -- UC Berkeley Department of EECS
+"Tape doesn't lie at 02:14. Ears do."
+
+From claurent@kth.se Sun Nov 03 18:10:19 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!kth!claurent
+From: claurent@kth.se (Callum Laurent)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Nov03.181019.8634@kth.se>
+Date: Sun, 03 Nov 1996 18:10:19 GMT
+References: <1996Nov01.115819.9081@cam.ac.uk>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1996Nov01.115819.9081@cam.ac.uk>, srobertson@cam.ac.uk (Sven Robertson) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Callum Laurent | claurent@kth.se
+PGP Key fingerprint: D3EB A656 E894 B548
+"Keep the channels open."
+
+From hhughes@mindspring.com Tue Nov 05 17:40:19 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!mindspring!hhughes
+From: hhughes@mindspring.com (Heather Hughes)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Nov05.174019.9483@mindspring.com>
+Date: Tue, 05 Nov 1996 17:40:19 GMT
+References: <1996Nov01.115819.9081@cam.ac.uk> <1996Nov03.181019.8634@kth.se>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Nov03.181019.8634@kth.se>, claurent@kth.se (Callum Laurent) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Heather Hughes <hhughes@mindspring.com>
+US Robotics Courier V.34 @ 9600 Telebit bps
+"We don't sign stars. We build them."
+

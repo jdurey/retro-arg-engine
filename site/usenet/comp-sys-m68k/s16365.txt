@@ -1,0 +1,97 @@
+From mdubois@unam.mx Fri Oct 14 23:08:43 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!unam!mdubois
+From: mdubois@unam.mx (Mateo Dubois)
+Newsgroups: comp.sys.m68k
+Subject: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Oct14.230843.9820@unam.mx>
+Date: Fri, 14 Oct 1994 23:08:43 GMT
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+Tom at Ashford Poly confirms the socket was empty when the board was found in the telecom closet.
+
+-- 
+=== Mateo Dubois ===
+Dept of Electrical Engineering, Universidad Nacional Autónoma de México (DGSCA)
+"Do not worship the copy."
+
+From mstewart@ox.ac.uk Sat Oct 15 06:21:43 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!ox!mstewart
+From: mstewart@ox.ac.uk (Matthias Stewart)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Oct15.062143.3242@ox.ac.uk>
+Date: Sat, 15 Oct 1994 06:21:43 GMT
+References: <1994Oct14.230843.9820@unam.mx>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1994Oct14.230843.9820@unam.mx>, mdubois@unam.mx (Mateo Dubois) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Matthias Stewart
+Opinions expressed are solely my own and not those of Oxford University Computing Laboratory.
+------------------------------------------------------------
+
+From hmoreno@uni-hamburg.de Sun Oct 16 05:41:43 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!uni-hamburg!hmoreno
+From: hmoreno@uni-hamburg.de (Heather Moreno)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Oct16.054143.1993@uni-hamburg.de>
+Date: Sun, 16 Oct 1994 05:41:43 GMT
+References: <1994Oct14.230843.9820@unam.mx>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Oct14.230843.9820@unam.mx>, mdubois@unam.mx (Mateo Dubois) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Heather Moreno
+Opinions expressed are solely my own and not those of Universität Hamburg Fachbereich Informatik.
+------------------------------------------------------------
+
+From jkarlsson@mit.edu Mon Oct 17 05:38:43 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!mit!jkarlsson
+From: jkarlsson@mit.edu (Jen Karlsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Oct17.053843.1067@mit.edu>
+Date: Mon, 17 Oct 1994 05:38:43 GMT
+References: <1994Oct14.230843.9820@unam.mx> <1994Oct16.054143.1993@uni-hamburg.de>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1994Oct16.054143.1993@uni-hamburg.de>, hmoreno@uni-hamburg.de (Heather Moreno) writes:
+> Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Jen Karlsson <jkarlsson@mit.edu>
+*PLONK* filter active for trolls.
+Acorn RiscPC 600 - NetBSD 1.0
+

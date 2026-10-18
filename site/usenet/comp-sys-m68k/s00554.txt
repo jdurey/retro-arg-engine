@@ -1,0 +1,123 @@
+From mvasiliev@mindspring.com Tue Aug 13 07:48:19 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!mindspring!mvasiliev
+From: mvasiliev@mindspring.com (Min-jun Vasiliev)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Aug13.074819.9700@mindspring.com>
+Date: Tue, 13 Aug 1996 07:48:19 GMT
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+Did Marcus take the decryption EPROM with him when he left the lab?
+
+-- 
+Min-jun Vasiliev
+Tape trading list upon request. SASE required for international mail.
+
+From dkang@berkeley.edu Thu Aug 15 04:09:19 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!berkeley!dkang
+From: dkang@berkeley.edu (Dong-hyun Kang)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Aug15.040919.8886@berkeley.edu>
+Date: Thu, 15 Aug 1996 04:09:19 GMT
+References: <1996Aug13.074819.9700@mindspring.com>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1996Aug13.074819.9700@mindspring.com>, mvasiliev@mindspring.com (Min-jun Vasiliev) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+PGP Public key available via finger or upon request.
+
+-- 
+Dong-hyun Kang | dkang@berkeley.edu
+PGP Key fingerprint: 4303 8F87 578A 0EF1
+"Keep the channels open."
+
+From msokolov@kiae.su Sat Aug 17 05:29:19 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!kiae!msokolov
+From: msokolov@kiae.su (Mike Sokolov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Aug17.052919.6447@kiae.su>
+Date: Sat, 17 Aug 1996 05:29:19 GMT
+References: <1996Aug13.074819.9700@mindspring.com> <1996Aug15.040919.8886@berkeley.edu>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Aug15.040919.8886@berkeley.edu>, dkang@berkeley.edu (Dong-hyun Kang) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Mike Sokolov <msokolov@kiae.su>
+US Robotics Courier V.34 @ 33,600 bps
+"Extraordinary claims require extraordinary spectra."
+
+From snovak@unam.mx Sat Aug 17 22:41:19 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!unam!snovak
+From: snovak@unam.mx (Sven Novak)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Aug17.224119.7924@unam.mx>
+Date: Sat, 17 Aug 1996 22:41:19 GMT
+References: <1996Aug13.074819.9700@mindspring.com>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1996Aug13.074819.9700@mindspring.com>, mvasiliev@mindspring.com (Min-jun Vasiliev) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+=== Sven Novak ===
+Dept of Electrical Engineering, Universidad Nacional Autónoma de México (DGSCA)
+"Do not worship the copy."
+
+From ahernandez@mindspring.com Mon Aug 19 16:12:19 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!mindspring!ahernandez
+From: ahernandez@mindspring.com (Andrei Hernández)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Aug19.161219.3672@mindspring.com>
+Date: Mon, 19 Aug 1996 16:12:19 GMT
+References: <1996Aug13.074819.9700@mindspring.com> <1996Aug15.040919.8886@berkeley.edu>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 12
+
+In article <1996Aug15.040919.8886@berkeley.edu>, dkang@berkeley.edu (Dong-hyun Kang) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+> PGP Public key available via finger or upon request.
+
+Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Andrei Hernández | ahernandez@mindspring.com
+PGP Key fingerprint: 212E 8DEB B957 B9DA
+"Keep the channels open."
+

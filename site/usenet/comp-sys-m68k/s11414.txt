@@ -1,0 +1,97 @@
+From dnovak@illinois.edu Thu Jun 23 04:05:25 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!illinois!dnovak
+From: dnovak@illinois.edu (Diego Novak)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Jun23.040525.1143@illinois.edu>
+Date: Thu, 23 Jun 1994 04:05:25 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+
+Does anyone have a 27C256 EPROM marked 'MH-U14' or 'ORION-CRYPTO'?
+
+-- 
+Diego Novak | dnovak@illinois.edu
+PGP Key fingerprint: 2573 52AC BF74 06AF
+"Keep the channels open."
+
+From pmacdonald@mindspring.com Fri Jun 24 16:59:25 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!mindspring!pmacdonald
+From: pmacdonald@mindspring.com (Pavel MacDonald)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Jun24.165925.6989@mindspring.com>
+Date: Fri, 24 Jun 1994 16:59:25 GMT
+References: <1994Jun23.040525.1143@illinois.edu>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1994Jun23.040525.1143@illinois.edu>, dnovak@illinois.edu (Diego Novak) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+> This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Pavel MacDonald
+Tape trading list upon request. SASE required for international mail.
+
+From anilsson@uu.net Sun Jun 26 14:12:25 1994
+Path: ashpoly!cascade!mxgate!coyoacan!uu!anilsson
+From: anilsson@uu.net (Amy Nilsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Jun26.141225.3024@uu.net>
+Date: Sun, 26 Jun 1994 14:12:25 GMT
+References: <1994Jun23.040525.1143@illinois.edu> <1994Jun24.165925.6989@mindspring.com>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Jun24.165925.6989@mindspring.com>, pmacdonald@mindspring.com (Pavel MacDonald) writes:
+> Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+> Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Amy Nilsson
+Tape trading list upon request. SASE required for international mail.
+
+From atanaka@berkeley.edu Tue Jun 28 05:23:25 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!berkeley!atanaka
+From: atanaka@berkeley.edu (Aiko Tanaka)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Jun28.052325.6722@berkeley.edu>
+Date: Tue, 28 Jun 1994 05:23:25 GMT
+References: <1994Jun23.040525.1143@illinois.edu> <1994Jun24.165925.6989@mindspring.com>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1994Jun24.165925.6989@mindspring.com>, pmacdonald@mindspring.com (Pavel MacDonald) writes:
+> Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+=== Aiko Tanaka ===
+Dept of Electrical Engineering, UC Berkeley Department of EECS
+"Hardware is temporary. The signal survives."
+

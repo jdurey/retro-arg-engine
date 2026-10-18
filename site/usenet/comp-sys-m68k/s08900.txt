@@ -1,0 +1,115 @@
+From rkang@kth.se Sat Aug 24 19:07:02 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!kth!rkang
+From: rkang@kth.se (Renata Kang)
+Newsgroups: comp.sys.m68k
+Subject: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Aug24.190702.7892@kth.se>
+Date: Sat, 24 Aug 1996 19:07:02 GMT
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Renata Kang
+Tape trading list upon request. SASE required for international mail.
+
+From rgonzalez@kth.se Sun Aug 25 05:20:02 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!kth!rgonzalez
+From: rgonzalez@kth.se (Rodrigo González)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Aug25.052002.5267@kth.se>
+Date: Sun, 25 Aug 1996 05:20:02 GMT
+References: <1996Aug24.190702.7892@kth.se>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Aug24.190702.7892@kth.se>, rkang@kth.se (Renata Kang) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+Tom from Ashford Poly owns the physical board! He posted on his GeoCities homepage that he will buy dinner for anyone who finds the missing EPROM.
+
+-- 
+Rodrigo González
+Tape trading list upon request. SASE required for international mail.
+
+From jlee@kiae.su Mon Aug 26 21:36:02 1996
+Path: ashpoly!cascade!bigsur!kiae!jlee
+From: jlee@kiae.su (Jens Lee)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Aug26.213602.7164@kiae.su>
+Date: Mon, 26 Aug 1996 21:36:02 GMT
+References: <1996Aug24.190702.7892@kth.se> <1996Aug25.052002.5267@kth.se>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1996Aug25.052002.5267@kth.se>, rgonzalez@kth.se (Rodrigo González) writes:
+> Tom from Ashford Poly owns the physical board! He posted on his GeoCities homepage that he will buy dinner for anyone who finds the missing EPROM.
+
+Marcus Hale designed the TWIN-68 board before he disappeared. That's why his initials are on the PCB silkscreen.
+
+-- 
+Jens Lee -- Kurchatov Institute of Atomic Energy, Moscow
+"Extraordinary claims require extraordinary spectra."
+
+From tlopez@mit.edu Tue Aug 27 09:33:02 1996
+Path: ashpoly!cascade!mxgate!coyoacan!mit!tlopez
+From: tlopez@mit.edu (Takeshi López)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Aug27.093302.1726@mit.edu>
+Date: Tue, 27 Aug 1996 09:33:02 GMT
+References: <1996Aug24.190702.7892@kth.se>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1996Aug24.190702.7892@kth.se>, rkang@kth.se (Renata Kang) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Takeshi López
+Tape trading list upon request. SASE required for international mail.
+
+From mtakahashi@unam.mx Tue Aug 27 18:29:02 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!unam!mtakahashi
+From: mtakahashi@unam.mx (Mikhail Takahashi)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Aug27.182902.7141@unam.mx>
+Date: Tue, 27 Aug 1996 18:29:02 GMT
+References: <1996Aug24.190702.7892@kth.se> <1996Aug27.093302.1726@mit.edu>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Aug27.093302.1726@mit.edu>, tlopez@mit.edu (Takeshi López) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+> PGP Public key available via finger or upon request.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Mikhail Takahashi
+Tape trading list upon request. SASE required for international mail.
+

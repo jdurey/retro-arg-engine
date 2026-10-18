@@ -1,0 +1,46 @@
+From aeriksson@earthlink.net Thu Nov 14 23:03:23 1996
+Path: ashpoly!cascade!bigsur!earthlink!aeriksson
+From: aeriksson@earthlink.net (Amy Eriksson)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Nov14.230323.6527@earthlink.net>
+Date: Thu, 14 Nov 1996 23:03:23 GMT
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Amy Eriksson
+Tape trading list upon request. SASE required for international mail.
+
+From mjohansson@illinois.edu Fri Nov 15 11:38:23 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!illinois!mjohansson
+From: mjohansson@illinois.edu (Marisol Johansson)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Nov15.113823.7298@illinois.edu>
+Date: Fri, 15 Nov 1996 11:38:23 GMT
+References: <1996Nov14.230323.6527@earthlink.net>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Nov14.230323.6527@earthlink.net>, aeriksson@earthlink.net (Amy Eriksson) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Marisol Johansson | mjohansson@illinois.edu
+PGP Key fingerprint: 91AC D62A 2BD7 CA7B
+"Keep the channels open."
+

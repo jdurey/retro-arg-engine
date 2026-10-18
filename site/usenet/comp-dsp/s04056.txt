@@ -1,0 +1,93 @@
+From tsokolov@panix.com Fri May 12 02:26:49 1995
+Path: ashpoly!cascade!brgate!saturno!panix!tsokolov
+From: tsokolov@panix.com (Tyler Sokolov)
+Newsgroups: comp.dsp
+Subject: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995May12.022649.6391@panix.com>
+Date: Fri, 12 May 1995 02:26:49 GMT
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+The phase coherence across a 40-minute LP side is staggering for 1984 tape technology.
+
+-- 
+Tyler Sokolov
+Tape trading list upon request. SASE required for international mail.
+
+From glopez@tum.de Sun May 14 00:55:49 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!tum!glopez
+From: glopez@tum.de (Göran López)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995May14.005549.3121@tum.de>
+Date: Sun, 14 May 1995 00:55:49 GMT
+References: <1995May12.022649.6391@panix.com>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995May12.022649.6391@panix.com>, tsokolov@panix.com (Tyler Sokolov) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+> This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+-- 
+=== Göran López ===
+Dept of Electrical Engineering, Technische Universität München
+"A soul is not exclusive to biology."
+
+From jmacdonald@hanse.de Sun May 14 07:43:49 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!hanse!jmacdonald
+From: jmacdonald@hanse.de (Julien MacDonald)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995May14.074349.6589@hanse.de>
+Date: Sun, 14 May 1995 07:43:49 GMT
+References: <1995May12.022649.6391@panix.com> <1995May14.005549.3121@tum.de>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995May14.005549.3121@tum.de>, glopez@tum.de (Göran López) writes:
+> Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+=== Julien MacDonald ===
+Dept of Electrical Engineering, Hanse-Netzwerk Hamburg
+"The hatch is open. Is anyone listening?"
+
+From jokonkwo@stanford.edu Mon May 15 13:36:49 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!stanford!jokonkwo
+From: jokonkwo@stanford.edu (Jen Okonkwo)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995May15.133649.5413@stanford.edu>
+Date: Mon, 15 May 1995 13:36:49 GMT
+References: <1995May12.022649.6391@panix.com>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995May12.022649.6391@panix.com>, tsokolov@panix.com (Tyler Sokolov) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+> This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Jen Okonkwo -- Stanford University Computer Systems Lab
+"The hatch is open. Is anyone listening?"
+

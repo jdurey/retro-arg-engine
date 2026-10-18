@@ -1,0 +1,118 @@
+From afournier@netcom.com Fri Dec 22 15:54:29 1995
+Path: ashpoly!cascade!mxgate!coyoacan!netcom!afournier
+From: afournier@netcom.com (Aiko Fournier)
+Newsgroups: comp.dsp
+Subject: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec22.155429.7238@netcom.com>
+Date: Fri, 22 Dec 1995 15:54:29 GMT
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+=== Aiko Fournier ===
+Dept of Electrical Engineering, NETCOM On-Line Communication Services
+"They will send a copy in my place."
+
+From jpopov@kiae.su Sun Dec 24 06:09:29 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!kiae!jpopov
+From: jpopov@kiae.su (Julien Popov)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec24.060929.7452@kiae.su>
+Date: Sun, 24 Dec 1995 06:09:29 GMT
+References: <1995Dec22.155429.7238@netcom.com>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Dec22.155429.7238@netcom.com>, afournier@netcom.com (Aiko Fournier) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Julien Popov | jpopov@kiae.su
+PGP Key fingerprint: 4242 E3E2 9A46 D98F
+"Keep the channels open."
+
+From tmoreau@pacbell.net Sun Dec 24 12:06:29 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!pacbell!tmoreau
+From: tmoreau@pacbell.net (Tobias Moreau)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec24.120629.8426@pacbell.net>
+Date: Sun, 24 Dec 1995 12:06:29 GMT
+References: <1995Dec22.155429.7238@netcom.com> <1995Dec24.060929.7452@kiae.su>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Dec24.060929.7452@kiae.su>, jpopov@kiae.su (Julien Popov) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Tobias Moreau <tmoreau@pacbell.net>
+*PLONK* filter active for trolls.
+NeXTstation Turbo Color - NetBSD 1.0
+
+From mgonzalez@delphi.com Mon Dec 25 01:08:29 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!delphi!mgonzalez
+From: mgonzalez@delphi.com (Mike González)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec25.010829.4823@delphi.com>
+Date: Mon, 25 Dec 1995 01:08:29 GMT
+References: <1995Dec22.155429.7238@netcom.com> <1995Dec24.060929.7452@kiae.su> <1995Dec24.120629.8426@pacbell.net>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Dec24.120629.8426@pacbell.net>, tmoreau@pacbell.net (Tobias Moreau) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Mike González <mgonzalez@delphi.com>
+*PLONK* filter active for trolls.
+Decstation 5000/200 - NetBSD 1.0
+
+From dmoreau@stanford.edu Wed Dec 27 01:27:29 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!stanford!dmoreau
+From: dmoreau@stanford.edu (Dmitri Moreau)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec27.012729.6975@stanford.edu>
+Date: Wed, 27 Dec 1995 01:27:29 GMT
+References: <1995Dec22.155429.7238@netcom.com> <1995Dec24.060929.7452@kiae.su> <1995Dec24.120629.8426@pacbell.net> <1995Dec25.010829.4823@delphi.com>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995Dec25.010829.4823@delphi.com>, mgonzalez@delphi.com (Mike González) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+Dmitri Moreau <dmoreau@stanford.edu>
+"Marcus is not one man."
+486DX2/66 (Linux 1.2.13) / NEXTSTEP 3.3
+

@@ -1,0 +1,122 @@
+From jsokolov@ox.ac.uk Wed Dec 14 07:56:42 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!ox!jsokolov
+From: jsokolov@ox.ac.uk (Joachim Sokolov)
+Newsgroups: comp.sys.m68k
+Subject: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Dec14.075642.6061@ox.ac.uk>
+Date: Wed, 14 Dec 1994 07:56:42 GMT
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+
+Did Marcus take the decryption EPROM with him when he left the lab?
+
+-- 
+Joachim Sokolov <jsokolov@ox.ac.uk>
+*PLONK* filter active for trolls.
+Acorn RiscPC 600 - NetBSD 1.0
+
+From ksilva@cmu.edu Fri Dec 16 07:01:42 1994
+Path: ashpoly!cascade!bigsur!cmu!ksilva
+From: ksilva@cmu.edu (Kenji Silva)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Dec16.070142.1795@cmu.edu>
+Date: Fri, 16 Dec 1994 07:01:42 GMT
+References: <1994Dec14.075642.6061@ox.ac.uk>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1994Dec14.075642.6061@ox.ac.uk>, jsokolov@ox.ac.uk (Joachim Sokolov) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Kenji Silva <ksilva@cmu.edu>
+Zyxel U-1496E @ 14,400 bps
+"Do not worship the copy."
+
+From aeriksson@mindspring.com Sat Dec 17 18:10:42 1994
+Path: ashpoly!cascade!mxgate!coyoacan!mindspring!aeriksson
+From: aeriksson@mindspring.com (Astrid Eriksson)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Dec17.181042.1576@mindspring.com>
+Date: Sat, 17 Dec 1994 18:10:42 GMT
+References: <1994Dec14.075642.6061@ox.ac.uk> <1994Dec16.070142.1795@cmu.edu>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1994Dec16.070142.1795@cmu.edu>, ksilva@cmu.edu (Kenji Silva) writes:
+> Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+> PGP Public key available via finger or upon request.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Astrid Eriksson <aeriksson@mindspring.com>
+Hayes Optima 288 @ 14,400 bps
+"There are 14 nodes and only 10 countries. Count again."
+
+From dkang@clari.net Mon Dec 19 06:14:42 1994
+Path: ashpoly!cascade!mxgate!coyoacan!clari!dkang
+From: dkang@clari.net (Dave Kang)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Dec19.061442.2369@clari.net>
+Date: Mon, 19 Dec 1994 06:14:42 GMT
+References: <1994Dec14.075642.6061@ox.ac.uk> <1994Dec16.070142.1795@cmu.edu> <1994Dec17.181042.1576@mindspring.com>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1994Dec17.181042.1576@mindspring.com>, aeriksson@mindspring.com (Astrid Eriksson) writes:
+> Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Dave Kang <dkang@clari.net>
+US Robotics Courier V.34 @ 28,800 bps
+"A soul is not exclusive to biology."
+
+From asantos@hanse.de Wed Dec 21 03:58:42 1994
+Path: ashpoly!cascade!brgate!saturno!hanse!asantos
+From: asantos@hanse.de (Aiko Santos)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Dec21.035842.2238@hanse.de>
+Date: Wed, 21 Dec 1994 03:58:42 GMT
+References: <1994Dec14.075642.6061@ox.ac.uk> <1994Dec16.070142.1795@cmu.edu> <1994Dec17.181042.1576@mindspring.com> <1994Dec19.061442.2369@clari.net>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1994Dec19.061442.2369@clari.net>, dkang@clari.net (Dave Kang) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+> Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+-- 
+Aiko Santos <asantos@hanse.de>
+Hayes Optima 288 @ 14,400 bps
+"A soul is not exclusive to biology."
+

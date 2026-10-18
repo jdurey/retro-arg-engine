@@ -1,0 +1,97 @@
+From jtanaka@ox.ac.uk Tue Dec 26 00:16:39 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!ox!jtanaka
+From: jtanaka@ox.ac.uk (Julien Tanaka)
+Newsgroups: comp.dsp
+Subject: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec26.001639.9128@ox.ac.uk>
+Date: Tue, 26 Dec 1995 00:16:39 GMT
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Julien Tanaka
+Opinions expressed are solely my own and not those of Oxford University Computing Laboratory.
+------------------------------------------------------------
+
+From psouza@purdue.edu Wed Dec 27 08:31:39 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!purdue!psouza
+From: psouza@purdue.edu (Pavel Souza)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec27.083139.6747@purdue.edu>
+Date: Wed, 27 Dec 1995 08:31:39 GMT
+References: <1995Dec26.001639.9128@ox.ac.uk>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Dec26.001639.9128@ox.ac.uk>, jtanaka@ox.ac.uk (Julien Tanaka) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Pavel Souza <psouza@purdue.edu>
+Practical Peripherals 14.4 @ ISDN 64k bps
+"The hatch is open. Is anyone listening?"
+
+From yfischer@u-tokyo.ac.jp Thu Dec 28 15:58:39 1995
+Path: ashpoly!cascade!mxgate!coyoacan!u-tokyo!yfischer
+From: yfischer@u-tokyo.ac.jp (Yuki Fischer)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec28.155839.5304@u-tokyo.ac.jp>
+Date: Thu, 28 Dec 1995 15:58:39 GMT
+References: <1995Dec26.001639.9128@ox.ac.uk> <1995Dec27.083139.6747@purdue.edu>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Dec27.083139.6747@purdue.edu>, psouza@purdue.edu (Pavel Souza) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Yuki Fischer
+Tape trading list upon request. SASE required for international mail.
+
+From neriksson@demon.co.uk Fri Dec 29 07:57:39 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!demon!neriksson
+From: neriksson@demon.co.uk (Nadia Eriksson)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec29.075739.2993@demon.co.uk>
+Date: Fri, 29 Dec 1995 07:57:39 GMT
+References: <1995Dec26.001639.9128@ox.ac.uk>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Dec26.001639.9128@ox.ac.uk>, jtanaka@ox.ac.uk (Julien Tanaka) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+Nadia Eriksson
+Tape trading list upon request. SASE required for international mail.
+

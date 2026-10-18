@@ -1,0 +1,70 @@
+From agirard@unam.mx Wed Nov 08 00:32:04 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!unam!agirard
+From: agirard@unam.mx (Aiko Girard)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Nov08.003204.9735@unam.mx>
+Date: Wed, 08 Nov 1995 00:32:04 GMT
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Aiko Girard
+Opinions expressed are solely my own and not those of Universidad Nacional Autónoma de México (DGSCA).
+------------------------------------------------------------
+
+From vnovak@pipeline.com Thu Nov 09 12:34:04 1995
+Path: ashpoly!cascade!bigsur!pipeline!vnovak
+From: vnovak@pipeline.com (Valeria Novak)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Nov09.123404.4334@pipeline.com>
+Date: Thu, 09 Nov 1995 12:34:04 GMT
+References: <1995Nov08.003204.9735@unam.mx>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Nov08.003204.9735@unam.mx>, agirard@unam.mx (Aiko Girard) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Valeria Novak -- The Pipeline Internet Network
+"Measuring a record you own is listening, not piracy."
+
+From tduarte@uni-hamburg.de Fri Nov 10 03:13:04 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!uni-hamburg!tduarte
+From: tduarte@uni-hamburg.de (Takeshi Duarte)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Nov10.031304.5153@uni-hamburg.de>
+Date: Fri, 10 Nov 1995 03:13:04 GMT
+References: <1995Nov08.003204.9735@unam.mx> <1995Nov09.123404.4334@pipeline.com>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Nov09.123404.4334@pipeline.com>, vnovak@pipeline.com (Valeria Novak) writes:
+> Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+=== Takeshi Duarte ===
+Dept of Electrical Engineering, Universität Hamburg Fachbereich Informatik
+"A soul is not exclusive to biology."
+

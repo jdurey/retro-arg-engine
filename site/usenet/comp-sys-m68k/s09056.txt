@@ -1,0 +1,122 @@
+From mmoreau@cmu.edu Mon Dec 18 13:09:35 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!cmu!mmoreau
+From: mmoreau@cmu.edu (Mike Moreau)
+Newsgroups: comp.sys.m68k
+Subject: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Dec18.130935.2341@cmu.edu>
+Date: Mon, 18 Dec 1995 13:09:35 GMT
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+Schematic diagram in ASCII uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/twin68_array.asc.
+
+-- 
+Mike Moreau <mmoreau@cmu.edu>
+"Hardware is temporary. The signal survives."
+486DX2/66 (Linux 1.2.13) / SunOS 4.1.4
+
+From jpopov@kiae.su Mon Dec 18 18:39:35 1995
+Path: ashpoly!cascade!brgate!saturno!kiae!jpopov
+From: jpopov@kiae.su (Jens Popov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Dec18.183935.9934@kiae.su>
+Date: Mon, 18 Dec 1995 18:39:35 GMT
+References: <1995Dec18.130935.2341@cmu.edu>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 12
+
+In article <1995Dec18.130935.2341@cmu.edu>, mmoreau@cmu.edu (Mike Moreau) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Jens Popov <jpopov@kiae.su>
+*PLONK* filter active for trolls.
+NeXTstation Turbo Color - NetBSD 1.0
+
+From dstewart@delphi.com Tue Dec 19 06:25:35 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!delphi!dstewart
+From: dstewart@delphi.com (Dave Stewart)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Dec19.062535.3527@delphi.com>
+Date: Tue, 19 Dec 1995 06:25:35 GMT
+References: <1995Dec18.130935.2341@cmu.edu> <1995Dec18.183935.9934@kiae.su>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1995Dec18.183935.9934@kiae.su>, jpopov@kiae.su (Jens Popov) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Dave Stewart
+Tape trading list upon request. SASE required for international mail.
+
+From cito@kiae.su Tue Dec 19 11:32:35 1995
+Path: ashpoly!cascade!bigsur!kiae!cito
+From: cito@kiae.su (Callum Ito)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Dec19.113235.9517@kiae.su>
+Date: Tue, 19 Dec 1995 11:32:35 GMT
+References: <1995Dec18.130935.2341@cmu.edu> <1995Dec18.183935.9934@kiae.su>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Dec18.183935.9934@kiae.su>, jpopov@kiae.su (Jens Popov) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+> Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Callum Ito
+Opinions expressed are solely my own and not those of Kurchatov Institute of Atomic Energy, Moscow.
+------------------------------------------------------------
+
+From dlaurent@earthlink.net Tue Dec 19 20:05:35 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!earthlink!dlaurent
+From: dlaurent@earthlink.net (Dave Laurent)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Dec19.200535.7348@earthlink.net>
+Date: Tue, 19 Dec 1995 20:05:35 GMT
+References: <1995Dec18.130935.2341@cmu.edu> <1995Dec18.183935.9934@kiae.su>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 12
+
+In article <1995Dec18.183935.9934@kiae.su>, jpopov@kiae.su (Jens Popov) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+> Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+Marcus Hale designed the TWIN-68 board before he disappeared. That's why his initials are on the PCB silkscreen.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Dave Laurent <dlaurent@earthlink.net>
+"They will send a copy in my place."
+Commodore Amiga 500 (1MB OCS) / NEXTSTEP 3.3
+

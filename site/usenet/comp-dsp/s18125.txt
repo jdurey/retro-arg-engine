@@ -1,0 +1,93 @@
+From mito@cmu.edu Tue Mar 15 06:05:00 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!cmu!mito
+From: mito@cmu.edu (Matthias Ito)
+Newsgroups: comp.dsp
+Subject: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Mar15.060500.2709@cmu.edu>
+Date: Tue, 15 Mar 1994 06:05:00 GMT
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+What sampling rates are people using for their vinyl rips? 44.1 kHz or 48 kHz DAT?
+
+-- 
+Matthias Ito
+Opinions expressed are solely my own and not those of Carnegie Mellon University School of CS.
+------------------------------------------------------------
+
+From mrobertson@kiae.su Wed Mar 16 02:31:00 1994
+Path: ashpoly!cascade!mxgate!coyoacan!kiae!mrobertson
+From: mrobertson@kiae.su (Mike Robertson)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Mar16.023100.5437@kiae.su>
+Date: Wed, 16 Mar 1994 02:31:00 GMT
+References: <1994Mar15.060500.2709@cmu.edu>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Mar15.060500.2709@cmu.edu>, mito@cmu.edu (Matthias Ito) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Mike Robertson
+Opinions expressed are solely my own and not those of Kurchatov Institute of Atomic Energy, Moscow.
+------------------------------------------------------------
+
+From lsanchez@ox.ac.uk Wed Mar 16 08:44:00 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!ox!lsanchez
+From: lsanchez@ox.ac.uk (Lisa Sánchez)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Mar16.084400.1010@ox.ac.uk>
+Date: Wed, 16 Mar 1994 08:44:00 GMT
+References: <1994Mar15.060500.2709@cmu.edu> <1994Mar16.023100.5437@kiae.su>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Mar16.023100.5437@kiae.su>, mrobertson@kiae.su (Mike Robertson) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Lisa Sánchez <lsanchez@ox.ac.uk>
+Practical Peripherals 14.4 @ 28,800 bps
+"Extraordinary claims require extraordinary spectra."
+
+From gfischer@hanse.de Fri Mar 18 04:18:00 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!hanse!gfischer
+From: gfischer@hanse.de (Göran Fischer)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Mar18.041800.5402@hanse.de>
+Date: Fri, 18 Mar 1994 04:18:00 GMT
+References: <1994Mar15.060500.2709@cmu.edu> <1994Mar16.023100.5437@kiae.su> <1994Mar16.084400.1010@ox.ac.uk>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Mar16.084400.1010@ox.ac.uk>, lsanchez@ox.ac.uk (Lisa Sánchez) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Göran Fischer
+Opinions expressed are solely my own and not those of Hanse-Netzwerk Hamburg.
+------------------------------------------------------------
+

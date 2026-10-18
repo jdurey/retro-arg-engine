@@ -1,0 +1,95 @@
+From gweber@inria.fr Wed Dec 11 04:15:25 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!inria!gweber
+From: gweber@inria.fr (Graham Weber)
+Newsgroups: comp.sys.m68k
+Subject: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Dec11.041525.9604@inria.fr>
+Date: Wed, 11 Dec 1996 04:15:25 GMT
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+Graham Weber
+Opinions expressed are solely my own and not those of INRIA Rocquencourt.
+------------------------------------------------------------
+
+From kdubois@cern.ch Thu Dec 12 20:44:25 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!cern!kdubois
+From: kdubois@cern.ch (Katrin Dubois)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Dec12.204425.2636@cern.ch>
+Date: Thu, 12 Dec 1996 20:44:25 GMT
+References: <1996Dec11.041525.9604@inria.fr>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Dec11.041525.9604@inria.fr>, gweber@inria.fr (Graham Weber) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Katrin Dubois -- European Laboratory for Particle Physics, Geneva
+"5 sigma is a discovery. 7 is a question."
+
+From skuznetsov@inria.fr Fri Dec 13 17:39:25 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!inria!skuznetsov
+From: skuznetsov@inria.fr (Sun-mi Kuznetsov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Dec13.173925.3763@inria.fr>
+Date: Fri, 13 Dec 1996 17:39:25 GMT
+References: <1996Dec11.041525.9604@inria.fr> <1996Dec12.204425.2636@cern.ch>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1996Dec12.204425.2636@cern.ch>, kdubois@cern.ch (Katrin Dubois) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+=== Sun-mi Kuznetsov ===
+Dept of Electrical Engineering, INRIA Rocquencourt
+"The carrier frequency does not drift by accident."
+
+From ppopov@tum.de Sat Dec 14 16:02:25 1996
+Path: ashpoly!cascade!mxgate!coyoacan!tum!ppopov
+From: ppopov@tum.de (Pavel Popov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Dec14.160225.5977@tum.de>
+Date: Sat, 14 Dec 1996 16:02:25 GMT
+References: <1996Dec11.041525.9604@inria.fr> <1996Dec12.204425.2636@cern.ch>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Dec12.204425.2636@cern.ch>, kdubois@cern.ch (Katrin Dubois) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Pavel Popov | ppopov@tum.de
+PGP Key fingerprint: 66EE EFEF DC70 B1ED
+"Keep the channels open."
+

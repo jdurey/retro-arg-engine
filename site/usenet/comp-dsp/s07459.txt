@@ -1,0 +1,118 @@
+From joliveira@netcom.com Thu Apr 27 00:57:30 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!netcom!joliveira
+From: joliveira@netcom.com (Ji-woo Oliveira)
+Newsgroups: comp.dsp
+Subject: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Apr27.005730.2832@netcom.com>
+Date: Thu, 27 Apr 1995 00:57:30 GMT
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+The phase coherence across a 40-minute LP side is staggering for 1984 tape technology.
+
+-- 
+Ji-woo Oliveira
+Opinions expressed are solely my own and not those of NETCOM On-Line Communication Services.
+------------------------------------------------------------
+
+From asanchez@uu.net Thu Apr 27 16:30:30 1995
+Path: ashpoly!cascade!bigsur!uu!asanchez
+From: asanchez@uu.net (Anja Sánchez)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Apr27.163030.8711@uu.net>
+Date: Thu, 27 Apr 1995 16:30:30 GMT
+References: <1995Apr27.005730.2832@netcom.com>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Apr27.005730.2832@netcom.com>, joliveira@netcom.com (Ji-woo Oliveira) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+-- 
+Anja Sánchez <asanchez@uu.net>
+Hayes Optima 288 @ 19,200 bps
+"Measuring a record you own is listening, not piracy."
+
+From tmoreno@earthlink.net Sat Apr 29 04:51:30 1995
+Path: ashpoly!cascade!bigsur!earthlink!tmoreno
+From: tmoreno@earthlink.net (Tobias Moreno)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Apr29.045130.2009@earthlink.net>
+Date: Sat, 29 Apr 1995 04:51:30 GMT
+References: <1995Apr27.005730.2832@netcom.com>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Apr27.005730.2832@netcom.com>, joliveira@netcom.com (Ji-woo Oliveira) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+> Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Tobias Moreno <tmoreno@earthlink.net>
+"There are 14 nodes and only 10 countries. Count again."
+NeXTstation Turbo Color / System 7.5.1
+
+From jchoi@ox.ac.uk Sat Apr 29 19:57:30 1995
+Path: ashpoly!cascade!brgate!saturno!ox!jchoi
+From: jchoi@ox.ac.uk (Ji-woo Choi)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Apr29.195730.6650@ox.ac.uk>
+Date: Sat, 29 Apr 1995 19:57:30 GMT
+References: <1995Apr27.005730.2832@netcom.com> <1995Apr29.045130.2009@earthlink.net>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995Apr29.045130.2009@earthlink.net>, tmoreno@earthlink.net (Tobias Moreno) writes:
+> If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+Ji-woo Choi <jchoi@ox.ac.uk>
+Zyxel U-1496E @ 19,200 bps
+"There are 14 nodes and only 10 countries. Count again."
+
+From glopez@uu.net Mon May 01 16:28:30 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!uu!glopez
+From: glopez@uu.net (Göran López)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995May01.162830.2976@uu.net>
+Date: Mon, 01 May 1995 16:28:30 GMT
+References: <1995Apr27.005730.2832@netcom.com>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Apr27.005730.2832@netcom.com>, joliveira@netcom.com (Ji-woo Oliveira) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+Prof. Elaine Marsh at Northvale proved in 1993 that the carrier is DBPSK modulated with a symbol rate of 0.71 Hz.
+
+-- 
+Göran López -- UUNET Technologies, Falls Church VA
+"A soul is not exclusive to biology."
+

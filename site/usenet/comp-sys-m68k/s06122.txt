@@ -1,0 +1,117 @@
+From iduarte@cern.ch Sun Jul 09 06:29:40 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!cern!iduarte
+From: iduarte@cern.ch (Ines Duarte)
+Newsgroups: comp.sys.m68k
+Subject: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jul09.062940.3817@cern.ch>
+Date: Sun, 09 Jul 1995 06:29:40 GMT
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Ines Duarte <iduarte@cern.ch>
+"Hold for relay."
+Sun 3/60 (SunOS 4.1.1) / TOS 4.04
+
+From dgonzalez@mindspring.com Mon Jul 10 21:38:40 1995
+Path: ashpoly!cascade!bigsur!mindspring!dgonzalez
+From: dgonzalez@mindspring.com (Dmitri González)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jul10.213840.4376@mindspring.com>
+Date: Mon, 10 Jul 1995 21:38:40 GMT
+References: <1995Jul09.062940.3817@cern.ch>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Jul09.062940.3817@cern.ch>, iduarte@cern.ch (Ines Duarte) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Dmitri González <dgonzalez@mindspring.com>
+"The hatch is open. Is anyone listening?"
+486DX4/100 (FreeBSD 2.0.5) / Linux 1.2.13
+
+From tschneider@kth.se Wed Jul 12 20:08:40 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!kth!tschneider
+From: tschneider@kth.se (Tomas Schneider)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jul12.200840.5334@kth.se>
+Date: Wed, 12 Jul 1995 20:08:40 GMT
+References: <1995Jul09.062940.3817@cern.ch>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Jul09.062940.3817@cern.ch>, iduarte@cern.ch (Ines Duarte) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Tomas Schneider | tschneider@kth.se
+PGP Key fingerprint: D501 9E81 620D 9EC4
+"Keep the channels open."
+
+From tsokolov@pipeline.com Fri Jul 14 15:49:40 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!pipeline!tsokolov
+From: tsokolov@pipeline.com (Takeshi Sokolov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jul14.154940.2830@pipeline.com>
+Date: Fri, 14 Jul 1995 15:49:40 GMT
+References: <1995Jul09.062940.3817@cern.ch> <1995Jul12.200840.5334@kth.se>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Jul12.200840.5334@kth.se>, tschneider@kth.se (Tomas Schneider) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Takeshi Sokolov <tsokolov@pipeline.com>
+Hayes Optima 288 @ 19,200 bps
+"Hardware is temporary. The signal survives."
+
+From ckang@illinois.edu Sat Jul 15 01:27:40 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!illinois!ckang
+From: ckang@illinois.edu (Callum Kang)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jul15.012740.3196@illinois.edu>
+Date: Sat, 15 Jul 1995 01:27:40 GMT
+References: <1995Jul09.062940.3817@cern.ch> <1995Jul12.200840.5334@kth.se> <1995Jul14.154940.2830@pipeline.com>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Jul14.154940.2830@pipeline.com>, tsokolov@pipeline.com (Takeshi Sokolov) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Callum Kang
+Opinions expressed are solely my own and not those of University of Illinois Urbana-Champaign.
+------------------------------------------------------------
+

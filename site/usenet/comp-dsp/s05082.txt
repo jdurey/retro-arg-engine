@@ -1,0 +1,119 @@
+From fhughes@rwth-aachen.de Thu Jul 25 01:09:02 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!rwth-aachen!fhughes
+From: fhughes@rwth-aachen.de (Fiona Hughes)
+Newsgroups: comp.dsp
+Subject: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Jul25.010902.5897@rwth-aachen.de>
+Date: Thu, 25 Jul 1996 01:09:02 GMT
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+
+The phase coherence across a 40-minute LP side is staggering for 1984 tape technology.
+
+-- 
+Fiona Hughes
+Opinions expressed are solely my own and not those of RWTH Aachen Informatik.
+------------------------------------------------------------
+
+From mhernandez@netcom.com Thu Jul 25 03:44:02 1996
+Path: ashpoly!cascade!bigsur!netcom!mhernandez
+From: mhernandez@netcom.com (Mathieu Hernández)
+Newsgroups: comp.dsp
+Subject: Re: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Jul25.034402.5857@netcom.com>
+Date: Thu, 25 Jul 1996 03:44:02 GMT
+References: <1996Jul25.010902.5897@rwth-aachen.de>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 12
+
+In article <1996Jul25.010902.5897@rwth-aachen.de>, fhughes@rwth-aachen.de (Fiona Hughes) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+> Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Mathieu Hernández
+Opinions expressed are solely my own and not those of NETCOM On-Line Communication Services.
+------------------------------------------------------------
+
+From lnovak@pacbell.net Thu Jul 25 11:55:02 1996
+Path: ashpoly!cascade!mxgate!coyoacan!pacbell!lnovak
+From: lnovak@pacbell.net (Liam Novak)
+Newsgroups: comp.dsp
+Subject: Re: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Jul25.115502.2602@pacbell.net>
+Date: Thu, 25 Jul 1996 11:55:02 GMT
+References: <1996Jul25.010902.5897@rwth-aachen.de>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Jul25.010902.5897@rwth-aachen.de>, fhughes@rwth-aachen.de (Fiona Hughes) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Liam Novak <lnovak@pacbell.net>
+*PLONK* filter active for trolls.
+486DX2/66 (Linux 1.2.13) - NetBSD 1.0
+
+From lsanchez@purdue.edu Fri Jul 26 23:33:02 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!purdue!lsanchez
+From: lsanchez@purdue.edu (Liam Sánchez)
+Newsgroups: comp.dsp
+Subject: Re: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Jul26.233302.9333@purdue.edu>
+Date: Fri, 26 Jul 1996 23:33:02 GMT
+References: <1996Jul25.010902.5897@rwth-aachen.de> <1996Jul25.115502.2602@pacbell.net>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Jul25.115502.2602@pacbell.net>, lnovak@pacbell.net (Liam Novak) writes:
+> Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+-- 
+Liam Sánchez <lsanchez@purdue.edu>
+"The carrier frequency does not drift by accident."
+Atari Falcon 030 / NEXTSTEP 3.3
+
+From sduarte@ox.ac.uk Sun Jul 28 11:56:02 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!ox!sduarte
+From: sduarte@ox.ac.uk (Sergei Duarte)
+Newsgroups: comp.dsp
+Subject: Re: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Jul28.115602.8739@ox.ac.uk>
+Date: Sun, 28 Jul 1996 11:56:02 GMT
+References: <1996Jul25.010902.5897@rwth-aachen.de> <1996Jul25.115502.2602@pacbell.net> <1996Jul26.233302.9333@purdue.edu>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Jul26.233302.9333@purdue.edu>, lsanchez@purdue.edu (Liam Sánchez) writes:
+> Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Sergei Duarte <sduarte@ox.ac.uk>
+Hayes Optima 288 @ 33,600 bps
+"In theory there is no difference between theory and practice."
+

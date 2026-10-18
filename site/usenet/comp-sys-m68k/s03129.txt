@@ -1,0 +1,92 @@
+From sperez@cern.ch Wed Nov 16 01:22:54 1994
+Path: ashpoly!cascade!brgate!saturno!cern!sperez
+From: sperez@cern.ch (Seo-yeon Pérez)
+Newsgroups: comp.sys.m68k
+Subject: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Nov16.012254.3400@cern.ch>
+Date: Wed, 16 Nov 1994 01:22:54 GMT
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+Schematic diagram in ASCII uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/twin68_array.asc.
+
+-- 
+Seo-yeon Pérez | sperez@cern.ch
+PGP Key fingerprint: BC6A BA79 FD97 7864
+"Keep the channels open."
+
+From atanaka@stanford.edu Thu Nov 17 00:12:54 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!stanford!atanaka
+From: atanaka@stanford.edu (Anton Tanaka)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Nov17.001254.8851@stanford.edu>
+Date: Thu, 17 Nov 1994 00:12:54 GMT
+References: <1994Nov16.012254.3400@cern.ch>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1994Nov16.012254.3400@cern.ch>, sperez@cern.ch (Seo-yeon Pérez) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Anton Tanaka <atanaka@stanford.edu>
+"They will send a copy in my place."
+Acorn RiscPC 600 / System 7.5.1
+
+From hmartinez@ox.ac.uk Sat Nov 19 02:27:54 1994
+Path: ashpoly!cascade!brgate!saturno!ox!hmartinez
+From: hmartinez@ox.ac.uk (Heather Martínez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Nov19.022754.2756@ox.ac.uk>
+Date: Sat, 19 Nov 1994 02:27:54 GMT
+References: <1994Nov16.012254.3400@cern.ch>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1994Nov16.012254.3400@cern.ch>, sperez@cern.ch (Seo-yeon Pérez) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Heather Martínez
+Tape trading list upon request. SASE required for international mail.
+
+From amuller@u-tokyo.ac.jp Sun Nov 20 18:37:54 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!u-tokyo!amuller
+From: amuller@u-tokyo.ac.jp (Astrid Müller)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Nov20.183754.1704@u-tokyo.ac.jp>
+Date: Sun, 20 Nov 1994 18:37:54 GMT
+References: <1994Nov16.012254.3400@cern.ch> <1994Nov19.022754.2756@ox.ac.uk>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1994Nov19.022754.2756@ox.ac.uk>, hmartinez@ox.ac.uk (Heather Martínez) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Astrid Müller -- University of Tokyo Department of Information Science
+"Hardware is temporary. The signal survives."
+

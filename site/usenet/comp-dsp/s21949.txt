@@ -1,0 +1,116 @@
+From jschneider@unam.mx Tue Aug 01 10:45:23 1995
+Path: ashpoly!cascade!bigsur!unam!jschneider
+From: jschneider@unam.mx (Julien Schneider)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Aug01.104523.1324@unam.mx>
+Date: Tue, 01 Aug 1995 10:45:23 GMT
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Julien Schneider | jschneider@unam.mx
+PGP Key fingerprint: 9DC3 B3DE C9CE E5E9
+"Keep the channels open."
+
+From rhughes@rwth-aachen.de Thu Aug 03 04:56:23 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!rwth-aachen!rhughes
+From: rhughes@rwth-aachen.de (Renata Hughes)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Aug03.045623.5614@rwth-aachen.de>
+Date: Thu, 03 Aug 1995 04:56:23 GMT
+References: <1995Aug01.104523.1324@unam.mx>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1995Aug01.104523.1324@unam.mx>, jschneider@unam.mx (Julien Schneider) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Renata Hughes
+Tape trading list upon request. SASE required for international mail.
+
+From hkarlsson@hanse.de Fri Aug 04 18:58:23 1995
+Path: ashpoly!cascade!mxgate!coyoacan!hanse!hkarlsson
+From: hkarlsson@hanse.de (Heather Karlsson)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Aug04.185823.1826@hanse.de>
+Date: Fri, 04 Aug 1995 18:58:23 GMT
+References: <1995Aug01.104523.1324@unam.mx>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995Aug01.104523.1324@unam.mx>, jschneider@unam.mx (Julien Schneider) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Heather Karlsson -- Hanse-Netzwerk Hamburg
+"The carrier frequency does not drift by accident."
+
+From ksmirnov@demon.co.uk Sun Aug 06 18:57:23 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!demon!ksmirnov
+From: ksmirnov@demon.co.uk (Karen Smirnov)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Aug06.185723.8481@demon.co.uk>
+Date: Sun, 06 Aug 1995 18:57:23 GMT
+References: <1995Aug01.104523.1324@unam.mx> <1995Aug03.045623.5614@rwth-aachen.de>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Aug03.045623.5614@rwth-aachen.de>, rhughes@rwth-aachen.de (Renata Hughes) writes:
+> Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Karen Smirnov
+Tape trading list upon request. SASE required for international mail.
+
+From loliveira@purdue.edu Mon Aug 07 03:17:23 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!purdue!loliveira
+From: loliveira@purdue.edu (Lisa Oliveira)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Aug07.031723.7123@purdue.edu>
+Date: Mon, 07 Aug 1995 03:17:23 GMT
+References: <1995Aug01.104523.1324@unam.mx> <1995Aug03.045623.5614@rwth-aachen.de> <1995Aug06.185723.8481@demon.co.uk>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Aug06.185723.8481@demon.co.uk>, ksmirnov@demon.co.uk (Karen Smirnov) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Lisa Oliveira <loliveira@purdue.edu>
+*PLONK* filter active for trolls.
+Amiga 1200 (Blizzard 030/50) - NetBSD 1.0
+

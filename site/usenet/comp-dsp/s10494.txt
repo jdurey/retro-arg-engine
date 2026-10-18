@@ -1,0 +1,117 @@
+From msantos@berkeley.edu Tue Dec 26 12:39:23 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!berkeley!msantos
+From: msantos@berkeley.edu (Min-jun Santos)
+Newsgroups: comp.dsp
+Subject: WTB/WTT: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec26.123923.1333@berkeley.edu>
+Date: Tue, 26 Dec 1995 12:39:23 GMT
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Min-jun Santos | msantos@berkeley.edu
+PGP Key fingerprint: AD56 200C 631A B40C
+"Keep the channels open."
+
+From aoliveira@inria.fr Wed Dec 27 19:57:23 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!inria!aoliveira
+From: aoliveira@inria.fr (Astrid Oliveira)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec27.195723.2725@inria.fr>
+Date: Wed, 27 Dec 1995 19:57:23 GMT
+References: <1995Dec26.123923.1333@berkeley.edu>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1995Dec26.123923.1333@berkeley.edu>, msantos@berkeley.edu (Min-jun Santos) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Astrid Oliveira -- INRIA Rocquencourt
+"5 sigma is a discovery. 7 is a question."
+
+From pweber@illinois.edu Fri Dec 29 08:40:23 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!illinois!pweber
+From: pweber@illinois.edu (Pavel Weber)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec29.084023.8658@illinois.edu>
+Date: Fri, 29 Dec 1995 08:40:23 GMT
+References: <1995Dec26.123923.1333@berkeley.edu>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Dec26.123923.1333@berkeley.edu>, msantos@berkeley.edu (Min-jun Santos) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Pavel Weber | pweber@illinois.edu
+PGP Key fingerprint: 5937 DB4A 29AD 8A66
+"Keep the channels open."
+
+From bgonzalez@tum.de Sun Dec 31 00:19:23 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!tum!bgonzalez
+From: bgonzalez@tum.de (Bill González)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec31.001923.7243@tum.de>
+Date: Sun, 31 Dec 1995 00:19:23 GMT
+References: <1995Dec26.123923.1333@berkeley.edu> <1995Dec27.195723.2725@inria.fr>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Dec27.195723.2725@inria.fr>, aoliveira@inria.fr (Astrid Oliveira) writes:
+> Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Bill González <bgonzalez@tum.de>
+*PLONK* filter active for trolls.
+Amiga 1200 (Blizzard 030/50) - NetBSD 1.0
+
+From skowalski@rwth-aachen.de Tue Jan 02 03:46:23 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!rwth-aachen!skowalski
+From: skowalski@rwth-aachen.de (Sergei Kowalski)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jan02.034623.3957@rwth-aachen.de>
+Date: Tue, 02 Jan 1996 03:46:23 GMT
+References: <1995Dec26.123923.1333@berkeley.edu>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Dec26.123923.1333@berkeley.edu>, msantos@berkeley.edu (Min-jun Santos) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Sergei Kowalski <skowalski@rwth-aachen.de>
+*PLONK* filter active for trolls.
+Pentium 90 (OS/2 Warp) - NetBSD 1.0
+

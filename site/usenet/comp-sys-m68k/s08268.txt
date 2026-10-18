@@ -1,0 +1,120 @@
+From enovak@mit.edu Wed Mar 09 07:01:41 1994
+Path: ashpoly!cascade!brgate!saturno!mit!enovak
+From: enovak@mit.edu (Elaine Novak)
+Newsgroups: comp.sys.m68k
+Subject: Discussion: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Mar09.070141.9487@mit.edu>
+Date: Wed, 09 Mar 1994 07:01:41 GMT
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+
+Does anyone have a 27C256 EPROM marked 'MH-U14' or 'ORION-CRYPTO'?
+
+-- 
+=== Elaine Novak ===
+Dept of Electrical Engineering, Massachusetts Institute of Technology
+"Extraordinary claims require extraordinary spectra."
+
+From nwatanabe@rwth-aachen.de Thu Mar 10 04:26:41 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!rwth-aachen!nwatanabe
+From: nwatanabe@rwth-aachen.de (Nadine Watanabe)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Mar10.042641.7720@rwth-aachen.de>
+Date: Thu, 10 Mar 1994 04:26:41 GMT
+References: <1994Mar09.070141.9487@mit.edu>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1994Mar09.070141.9487@mit.edu>, enovak@mit.edu (Elaine Novak) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+> This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Nadine Watanabe <nwatanabe@rwth-aachen.de>
+Zyxel U-1496E @ 14,400 bps
+"5 sigma is a discovery. 7 is a question."
+
+From jnilsson@delphi.com Fri Mar 11 14:54:41 1994
+Path: ashpoly!cascade!bigsur!delphi!jnilsson
+From: jnilsson@delphi.com (Jens Nilsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Mar11.145441.3575@delphi.com>
+Date: Fri, 11 Mar 1994 14:54:41 GMT
+References: <1994Mar09.070141.9487@mit.edu>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1994Mar09.070141.9487@mit.edu>, enovak@mit.edu (Elaine Novak) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+> This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Jens Nilsson | jnilsson@delphi.com
+PGP Key fingerprint: 6A1E FCAE B663 487F
+"Keep the channels open."
+
+From stanaka@delphi.com Sun Mar 13 15:36:41 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!delphi!stanaka
+From: stanaka@delphi.com (Sun-mi Tanaka)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Mar13.153641.4901@delphi.com>
+Date: Sun, 13 Mar 1994 15:36:41 GMT
+References: <1994Mar09.070141.9487@mit.edu>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1994Mar09.070141.9487@mit.edu>, enovak@mit.edu (Elaine Novak) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+> This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+=== Sun-mi Tanaka ===
+Dept of Electrical Engineering, Delphi Internet Services
+"Measuring a record you own is listening, not piracy."
+
+From agonzalez@clari.net Mon Mar 14 13:51:41 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!clari!agonzalez
+From: agonzalez@clari.net (Amy González)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Mar14.135141.5553@clari.net>
+Date: Mon, 14 Mar 1994 13:51:41 GMT
+References: <1994Mar09.070141.9487@mit.edu> <1994Mar13.153641.4901@delphi.com>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1994Mar13.153641.4901@delphi.com>, stanaka@delphi.com (Sun-mi Tanaka) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+-- 
+Amy González -- ClariNet Communications Corp
+"They will send a copy in my place."
+

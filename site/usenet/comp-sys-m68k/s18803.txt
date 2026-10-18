@@ -1,0 +1,71 @@
+From areyes@cam.ac.uk Wed Apr 05 06:54:40 1995
+Path: ashpoly!cascade!brgate!saturno!cam!areyes
+From: areyes@cam.ac.uk (Andrei Reyes)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Apr05.065440.7413@cam.ac.uk>
+Date: Wed, 05 Apr 1995 06:54:40 GMT
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Andrei Reyes
+Opinions expressed are solely my own and not those of University of Cambridge Computer Laboratory.
+------------------------------------------------------------
+
+From bfischer@pipeline.com Thu Apr 06 20:33:40 1995
+Path: ashpoly!cascade!bigsur!pipeline!bfischer
+From: bfischer@pipeline.com (Bruno Fischer)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Apr06.203340.1014@pipeline.com>
+Date: Thu, 06 Apr 1995 20:33:40 GMT
+References: <1995Apr05.065440.7413@cam.ac.uk>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Apr05.065440.7413@cam.ac.uk>, areyes@cam.ac.uk (Andrei Reyes) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Bruno Fischer <bfischer@pipeline.com>
+*PLONK* filter active for trolls.
+486DX4/100 (FreeBSD 2.0.5) - NetBSD 1.0
+
+From hkowalski@delphi.com Fri Apr 07 09:54:40 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!delphi!hkowalski
+From: hkowalski@delphi.com (Hana Kowalski)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Apr07.095440.8470@delphi.com>
+Date: Fri, 07 Apr 1995 09:54:40 GMT
+References: <1995Apr05.065440.7413@cam.ac.uk>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Apr05.065440.7413@cam.ac.uk>, areyes@cam.ac.uk (Andrei Reyes) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Hana Kowalski | hkowalski@delphi.com
+PGP Key fingerprint: FFCE 0AD7 5A8C 696E
+"Keep the channels open."
+

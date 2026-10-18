@@ -1,0 +1,116 @@
+From mjohansson@kiae.su Sun Dec 03 16:12:29 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!kiae!mjohansson
+From: mjohansson@kiae.su (Mei Johansson)
+Newsgroups: comp.sys.m68k
+Subject: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Dec03.161229.9320@kiae.su>
+Date: Sun, 03 Dec 1995 16:12:29 GMT
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Mei Johansson
+Opinions expressed are solely my own and not those of Kurchatov Institute of Atomic Energy, Moscow.
+------------------------------------------------------------
+
+From jgonzalez@cmu.edu Mon Dec 04 04:15:29 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!cmu!jgonzalez
+From: jgonzalez@cmu.edu (Jens González)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Dec04.041529.7125@cmu.edu>
+Date: Mon, 04 Dec 1995 04:15:29 GMT
+References: <1995Dec03.161229.9320@kiae.su>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Dec03.161229.9320@kiae.su>, mjohansson@kiae.su (Mei Johansson) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+> CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Jens González
+Opinions expressed are solely my own and not those of Carnegie Mellon University School of CS.
+------------------------------------------------------------
+
+From jpetrov@berkeley.edu Mon Dec 04 17:18:29 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!berkeley!jpetrov
+From: jpetrov@berkeley.edu (Joachim Petrov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Dec04.171829.4314@berkeley.edu>
+Date: Mon, 04 Dec 1995 17:18:29 GMT
+References: <1995Dec03.161229.9320@kiae.su>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Dec03.161229.9320@kiae.su>, mjohansson@kiae.su (Mei Johansson) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+> CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+-- 
+Joachim Petrov -- UC Berkeley Department of EECS
+"Extraordinary claims require extraordinary spectra."
+
+From jsouza@ox.ac.uk Wed Dec 06 13:53:29 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!ox!jsouza
+From: jsouza@ox.ac.uk (Jens Souza)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Dec06.135329.8883@ox.ac.uk>
+Date: Wed, 06 Dec 1995 13:53:29 GMT
+References: <1995Dec03.161229.9320@kiae.su> <1995Dec04.171829.4314@berkeley.edu>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Dec04.171829.4314@berkeley.edu>, jpetrov@berkeley.edu (Joachim Petrov) writes:
+> Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+Looks like a prototype telecommunications board for military secure voice, not an audio music product.
+
+-- 
+Jens Souza <jsouza@ox.ac.uk>
+SupraFAXModem 28.8 @ 14,400 bps
+"Marcus is not one man."
+
+From kfournier@kiae.su Wed Dec 06 17:38:29 1995
+Path: ashpoly!cascade!mxgate!coyoacan!kiae!kfournier
+From: kfournier@kiae.su (Karen Fournier)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Dec06.173829.2385@kiae.su>
+Date: Wed, 06 Dec 1995 17:38:29 GMT
+References: <1995Dec03.161229.9320@kiae.su> <1995Dec04.171829.4314@berkeley.edu>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1995Dec04.171829.4314@berkeley.edu>, jpetrov@berkeley.edu (Joachim Petrov) writes:
+> Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+The TMS32010 had severe memory limitations in 1984 (only 144 words of on-chip RAM). Dual 68000s gave them full 16MB address space.
+
+-- 
+Karen Fournier
+Tape trading list upon request. SASE required for international mail.
+

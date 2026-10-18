@@ -1,0 +1,46 @@
+From fpetrov@utexas.edu Fri Sep 23 22:08:28 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!utexas!fpetrov
+From: fpetrov@utexas.edu (Fiona Petrov)
+Newsgroups: comp.sys.m68k
+Subject: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Sep23.220828.8694@utexas.edu>
+Date: Fri, 23 Sep 1994 22:08:28 GMT
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+
+Did Marcus take the decryption EPROM with him when he left the lab?
+
+-- 
+Fiona Petrov -- University of Texas at Austin
+"They will send a copy in my place."
+
+From bsato@pipeline.com Sat Sep 24 15:39:28 1994
+Path: ashpoly!cascade!brgate!saturno!pipeline!bsato
+From: bsato@pipeline.com (Bastien Sato)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Sep24.153928.4856@pipeline.com>
+Date: Sat, 24 Sep 1994 15:39:28 GMT
+References: <1994Sep23.220828.8694@utexas.edu>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Sep23.220828.8694@utexas.edu>, fpetrov@utexas.edu (Fiona Petrov) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+> This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Bastien Sato
+Tape trading list upon request. SASE required for international mail.
+

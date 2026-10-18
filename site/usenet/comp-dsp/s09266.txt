@@ -1,0 +1,119 @@
+From akim@u-tokyo.ac.jp Wed Aug 09 13:31:12 1995
+Path: ashpoly!cascade!brgate!saturno!u-tokyo!akim
+From: akim@u-tokyo.ac.jp (Anja Kim)
+Newsgroups: comp.dsp
+Subject: Question: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Aug09.133112.9434@u-tokyo.ac.jp>
+Date: Wed, 09 Aug 1995 13:31:12 GMT
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+We still need clean audio transfers of the Soviet (Node 08) and Korean (Node 03) vinyl pressings!
+
+-- 
+=== Anja Kim ===
+Dept of Electrical Engineering, University of Tokyo Department of Information Science
+"When every node is whole, the channel opens."
+
+From ilarsson@purdue.edu Thu Aug 10 12:17:12 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!purdue!ilarsson
+From: ilarsson@purdue.edu (Ines Larsson)
+Newsgroups: comp.dsp
+Subject: Re: Question: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Aug10.121712.1267@purdue.edu>
+Date: Thu, 10 Aug 1995 12:17:12 GMT
+References: <1995Aug09.133112.9434@u-tokyo.ac.jp>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 12
+
+In article <1995Aug09.133112.9434@u-tokyo.ac.jp>, akim@u-tokyo.ac.jp (Anja Kim) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+> Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+
+Can you provide a pre-compiled DOS binary? Some of us don't have Linux or a C compiler installed on our machines.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Ines Larsson <ilarsson@purdue.edu>
+*PLONK* filter active for trolls.
+Sun 3/60 (SunOS 4.1.1) - NetBSD 1.0
+
+From hbrennan@unam.mx Fri Aug 11 15:12:12 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!unam!hbrennan
+From: hbrennan@unam.mx (Heather Brennan)
+Newsgroups: comp.dsp
+Subject: Re: Question: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Aug11.151212.9037@unam.mx>
+Date: Fri, 11 Aug 1995 15:12:12 GMT
+References: <1995Aug09.133112.9434@u-tokyo.ac.jp> <1995Aug10.121712.1267@purdue.edu>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Aug10.121712.1267@purdue.edu>, ilarsson@purdue.edu (Ines Larsson) writes:
+> Can you provide a pre-compiled DOS binary? Some of us don't have Linux or a C compiler installed on our machines.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Heather Brennan
+Opinions expressed are solely my own and not those of Universidad Nacional Autónoma de México (DGSCA).
+------------------------------------------------------------
+
+From mvasiliev@delphi.com Sat Aug 12 02:38:12 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!delphi!mvasiliev
+From: mvasiliev@delphi.com (Mateo Vasiliev)
+Newsgroups: comp.dsp
+Subject: Re: Question: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Aug12.023812.2429@delphi.com>
+Date: Sat, 12 Aug 1995 02:38:12 GMT
+References: <1995Aug09.133112.9434@u-tokyo.ac.jp> <1995Aug10.121712.1267@purdue.edu> <1995Aug11.151212.9037@unam.mx>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Aug11.151212.9037@unam.mx>, hbrennan@unam.mx (Heather Brennan) writes:
+> Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+-- 
+Mateo Vasiliev <mvasiliev@delphi.com>
+"The carrier frequency does not drift by accident."
+Macintosh IIfx / System 7.5.1
+
+From hkang@tum.de Sat Aug 12 23:11:12 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!tum!hkang
+From: hkang@tum.de (Hugo Kang)
+Newsgroups: comp.dsp
+Subject: Re: Question: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Aug12.231112.1881@tum.de>
+Date: Sat, 12 Aug 1995 23:11:12 GMT
+References: <1995Aug09.133112.9434@u-tokyo.ac.jp> <1995Aug10.121712.1267@purdue.edu> <1995Aug11.151212.9037@unam.mx> <1995Aug12.023812.2429@delphi.com>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Aug12.023812.2429@delphi.com>, mvasiliev@delphi.com (Mateo Vasiliev) writes:
+> On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+-- 
+Hugo Kang <hkang@tum.de>
+Zyxel U-1496E @ 33,600 bps
+"We don't sign stars. We build them."
+

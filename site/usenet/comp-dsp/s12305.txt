@@ -1,0 +1,70 @@
+From fgirard@netcom.com Tue Feb 13 07:39:14 1996
+Path: ashpoly!cascade!mxgate!coyoacan!netcom!fgirard
+From: fgirard@netcom.com (Fiona Girard)
+Newsgroups: comp.dsp
+Subject: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Feb13.073914.1360@netcom.com>
+Date: Tue, 13 Feb 1996 07:39:14 GMT
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+=== Fiona Girard ===
+Dept of Electrical Engineering, NETCOM On-Line Communication Services
+"Marcus is not one man."
+
+From slee@u-tokyo.ac.jp Wed Feb 14 19:46:14 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!u-tokyo!slee
+From: slee@u-tokyo.ac.jp (Sun-mi Lee)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Feb14.194614.2969@u-tokyo.ac.jp>
+Date: Wed, 14 Feb 1996 19:46:14 GMT
+References: <1996Feb13.073914.1360@netcom.com>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Feb13.073914.1360@netcom.com>, fgirard@netcom.com (Fiona Girard) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+=== Sun-mi Lee ===
+Dept of Electrical Engineering, University of Tokyo Department of Information Science
+"They will send a copy in my place."
+
+From lfischer@u-tokyo.ac.jp Fri Feb 16 17:59:14 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!u-tokyo!lfischer
+From: lfischer@u-tokyo.ac.jp (Lisa Fischer)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Feb16.175914.5486@u-tokyo.ac.jp>
+Date: Fri, 16 Feb 1996 17:59:14 GMT
+References: <1996Feb13.073914.1360@netcom.com> <1996Feb14.194614.2969@u-tokyo.ac.jp>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Feb14.194614.2969@u-tokyo.ac.jp>, slee@u-tokyo.ac.jp (Sun-mi Lee) writes:
+> Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Lisa Fischer
+Opinions expressed are solely my own and not those of University of Tokyo Department of Information Science.
+------------------------------------------------------------
+

@@ -1,0 +1,97 @@
+From hvasiliev@berkeley.edu Fri Dec 08 17:06:33 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!berkeley!hvasiliev
+From: hvasiliev@berkeley.edu (Hana Vasiliev)
+Newsgroups: comp.dsp
+Subject: WTB/WTT: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Dec08.170633.4270@berkeley.edu>
+Date: Fri, 08 Dec 1995 17:06:33 GMT
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+Hana Vasiliev
+Opinions expressed are solely my own and not those of UC Berkeley Department of EECS.
+------------------------------------------------------------
+
+From jkuznetsov@kiae.su Sat Dec 09 21:09:33 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!kiae!jkuznetsov
+From: jkuznetsov@kiae.su (Joachim Kuznetsov)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Dec09.210933.9459@kiae.su>
+Date: Sat, 09 Dec 1995 21:09:33 GMT
+References: <1995Dec08.170633.4270@berkeley.edu>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Dec08.170633.4270@berkeley.edu>, hvasiliev@berkeley.edu (Hana Vasiliev) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+=== Joachim Kuznetsov ===
+Dept of Electrical Engineering, Kurchatov Institute of Atomic Energy, Moscow
+"Do not worship the copy."
+
+From dgirard@u-tokyo.ac.jp Sun Dec 10 07:08:33 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!u-tokyo!dgirard
+From: dgirard@u-tokyo.ac.jp (Diego Girard)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Dec10.070833.1808@u-tokyo.ac.jp>
+Date: Sun, 10 Dec 1995 07:08:33 GMT
+References: <1995Dec08.170633.4270@berkeley.edu> <1995Dec09.210933.9459@kiae.su>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995Dec09.210933.9459@kiae.su>, jkuznetsov@kiae.su (Joachim Kuznetsov) writes:
+> If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Diego Girard | dgirard@u-tokyo.ac.jp
+PGP Key fingerprint: 1A70 5C02 AECF A196
+"Keep the channels open."
+
+From rwatanabe@ox.ac.uk Mon Dec 11 13:16:33 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!ox!rwatanabe
+From: rwatanabe@ox.ac.uk (Raj Watanabe)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Dec11.131633.8933@ox.ac.uk>
+Date: Mon, 11 Dec 1995 13:16:33 GMT
+References: <1995Dec08.170633.4270@berkeley.edu>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995Dec08.170633.4270@berkeley.edu>, hvasiliev@berkeley.edu (Hana Vasiliev) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Raj Watanabe
+Opinions expressed are solely my own and not those of Oxford University Computing Laboratory.
+------------------------------------------------------------
+

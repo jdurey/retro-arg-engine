@@ -1,0 +1,115 @@
+From mfournier@rwth-aachen.de Thu Apr 06 14:16:47 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!rwth-aachen!mfournier
+From: mfournier@rwth-aachen.de (Mikhail Fournier)
+Newsgroups: comp.dsp
+Subject: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Apr06.141647.1518@rwth-aachen.de>
+Date: Thu, 06 Apr 1995 14:16:47 GMT
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Mikhail Fournier <mfournier@rwth-aachen.de>
+Zyxel U-1496E @ ISDN 64k bps
+"Tape doesn't lie at 02:14. Ears do."
+
+From ngirard@unam.mx Fri Apr 07 02:09:47 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!unam!ngirard
+From: ngirard@unam.mx (Natalia Girard)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Apr07.020947.7154@unam.mx>
+Date: Fri, 07 Apr 1995 02:09:47 GMT
+References: <1995Apr06.141647.1518@rwth-aachen.de>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Apr06.141647.1518@rwth-aachen.de>, mfournier@rwth-aachen.de (Mikhail Fournier) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Natalia Girard
+Opinions expressed are solely my own and not those of Universidad Nacional Autónoma de México (DGSCA).
+------------------------------------------------------------
+
+From fperez@tum.de Sat Apr 08 23:27:47 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!tum!fperez
+From: fperez@tum.de (Fiona Pérez)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Apr08.232747.4747@tum.de>
+Date: Sat, 08 Apr 1995 23:27:47 GMT
+References: <1995Apr06.141647.1518@rwth-aachen.de>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Apr06.141647.1518@rwth-aachen.de>, mfournier@rwth-aachen.de (Mikhail Fournier) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Fiona Pérez <fperez@tum.de>
+*PLONK* filter active for trolls.
+Atari TT030 - NetBSD 1.0
+
+From ereyes@ox.ac.uk Mon Apr 10 08:24:47 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!ox!ereyes
+From: ereyes@ox.ac.uk (Elaine Reyes)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Apr10.082447.9265@ox.ac.uk>
+Date: Mon, 10 Apr 1995 08:24:47 GMT
+References: <1995Apr06.141647.1518@rwth-aachen.de>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Apr06.141647.1518@rwth-aachen.de>, mfournier@rwth-aachen.de (Mikhail Fournier) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+Elaine Reyes -- Oxford University Computing Laboratory
+"A soul is not exclusive to biology."
+
+From mjohansson@mit.edu Mon Apr 10 13:30:47 1995
+Path: ashpoly!cascade!mxgate!coyoacan!mit!mjohansson
+From: mjohansson@mit.edu (Mike Johansson)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Apr10.133047.3969@mit.edu>
+Date: Mon, 10 Apr 1995 13:30:47 GMT
+References: <1995Apr06.141647.1518@rwth-aachen.de> <1995Apr08.232747.4747@tum.de>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1995Apr08.232747.4747@tum.de>, fperez@tum.de (Fiona Pérez) writes:
+> Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Mike Johansson -- Massachusetts Institute of Technology
+"Tape doesn't lie at 02:14. Ears do."
+

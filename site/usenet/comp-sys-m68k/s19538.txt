@@ -1,0 +1,120 @@
+From mhughes@purdue.edu Sun Nov 26 04:58:48 1995
+Path: ashpoly!cascade!brgate!saturno!purdue!mhughes
+From: mhughes@purdue.edu (Matthias Hughes)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Nov26.045848.8780@purdue.edu>
+Date: Sun, 26 Nov 1995 04:58:48 GMT
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Matthias Hughes -- Purdue University Engineering Computer Network
+"The carrier frequency does not drift by accident."
+
+From kgonzalez@berkeley.edu Sun Nov 26 08:26:48 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!berkeley!kgonzalez
+From: kgonzalez@berkeley.edu (Kenji González)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Nov26.082648.8060@berkeley.edu>
+Date: Sun, 26 Nov 1995 08:26:48 GMT
+References: <1995Nov26.045848.8780@purdue.edu>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 12
+
+In article <1995Nov26.045848.8780@purdue.edu>, mhughes@purdue.edu (Matthias Hughes) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+> CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+Marcus Hale designed the TWIN-68 board before he disappeared. That's why his initials are on the PCB silkscreen.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Kenji González | kgonzalez@berkeley.edu
+PGP Key fingerprint: E375 1178 FFA7 E539
+"Keep the channels open."
+
+From lkang@netcom.com Sun Nov 26 22:06:48 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!netcom!lkang
+From: lkang@netcom.com (Liam Kang)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Nov26.220648.5257@netcom.com>
+Date: Sun, 26 Nov 1995 22:06:48 GMT
+References: <1995Nov26.045848.8780@purdue.edu> <1995Nov26.082648.8060@berkeley.edu>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Nov26.082648.8060@berkeley.edu>, kgonzalez@berkeley.edu (Kenji González) writes:
+> Marcus Hale designed the TWIN-68 board before he disappeared. That's why his initials are on the PCB silkscreen.
+
+Looks like a prototype telecommunications board for military secure voice, not an audio music product.
+
+-- 
+=== Liam Kang ===
+Dept of Electrical Engineering, NETCOM On-Line Communication Services
+"Tape doesn't lie at 02:14. Ears do."
+
+From brodriguez@cmu.edu Mon Nov 27 12:27:48 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!cmu!brodriguez
+From: brodriguez@cmu.edu (Brian Rodríguez)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Nov27.122748.9661@cmu.edu>
+Date: Mon, 27 Nov 1995 12:27:48 GMT
+References: <1995Nov26.045848.8780@purdue.edu> <1995Nov26.082648.8060@berkeley.edu> <1995Nov26.220648.5257@netcom.com>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Nov26.220648.5257@netcom.com>, lkang@netcom.com (Liam Kang) writes:
+> Looks like a prototype telecommunications board for military secure voice, not an audio music product.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Brian Rodríguez <brodriguez@cmu.edu>
+"The hatch is open. Is anyone listening?"
+Decstation 5000/200 / Linux 1.2.13
+
+From akim@demon.co.uk Wed Nov 29 08:01:48 1995
+Path: ashpoly!cascade!mxgate!coyoacan!demon!akim
+From: akim@demon.co.uk (Anton Kim)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Nov29.080148.6602@demon.co.uk>
+Date: Wed, 29 Nov 1995 08:01:48 GMT
+References: <1995Nov26.045848.8780@purdue.edu> <1995Nov26.082648.8060@berkeley.edu> <1995Nov26.220648.5257@netcom.com>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995Nov26.220648.5257@netcom.com>, lkang@netcom.com (Liam Kang) writes:
+> Looks like a prototype telecommunications board for military secure voice, not an audio music product.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Anton Kim <akim@demon.co.uk>
+SupraFAXModem 28.8 @ ISDN 64k bps
+"They will send a copy in my place."
+

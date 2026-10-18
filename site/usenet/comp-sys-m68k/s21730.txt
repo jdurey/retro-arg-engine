@@ -1,0 +1,119 @@
+From apetrov@demon.co.uk Sat Jun 22 03:19:22 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!demon!apetrov
+From: apetrov@demon.co.uk (Amy Petrov)
+Newsgroups: comp.sys.m68k
+Subject: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Jun22.031922.6484@demon.co.uk>
+Date: Sat, 22 Jun 1996 03:19:22 GMT
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+Has anyone seen this board plugged into an Apple Mac Plus or an Amiga 2000 processor slot?
+
+-- 
+Amy Petrov <apetrov@demon.co.uk>
+"They will send a copy in my place."
+Sun SparcStation 20 / FreeBSD 2.1
+
+From rsanchez@uu.net Sun Jun 23 00:36:22 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!uu!rsanchez
+From: rsanchez@uu.net (Raj Sánchez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Jun23.003622.4946@uu.net>
+Date: Sun, 23 Jun 1996 00:36:22 GMT
+References: <1996Jun22.031922.6484@demon.co.uk>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1996Jun22.031922.6484@demon.co.uk>, apetrov@demon.co.uk (Amy Petrov) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Raj Sánchez <rsanchez@uu.net>
+*PLONK* filter active for trolls.
+Acorn RiscPC 600 - NetBSD 1.0
+
+From mtakahashi@netcom.com Sun Jun 23 18:55:22 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!netcom!mtakahashi
+From: mtakahashi@netcom.com (Matthias Takahashi)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Jun23.185522.2755@netcom.com>
+Date: Sun, 23 Jun 1996 18:55:22 GMT
+References: <1996Jun22.031922.6484@demon.co.uk>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Jun22.031922.6484@demon.co.uk>, apetrov@demon.co.uk (Amy Petrov) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+> The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+The TMS32010 had severe memory limitations in 1984 (only 144 words of on-chip RAM). Dual 68000s gave them full 16MB address space.
+
+-- 
+=== Matthias Takahashi ===
+Dept of Electrical Engineering, NETCOM On-Line Communication Services
+"A soul is not exclusive to biology."
+
+From aokonkwo@netcom.com Tue Jun 25 20:52:22 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!netcom!aokonkwo
+From: aokonkwo@netcom.com (Anja Okonkwo)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Jun25.205222.2576@netcom.com>
+Date: Tue, 25 Jun 1996 20:52:22 GMT
+References: <1996Jun22.031922.6484@demon.co.uk> <1996Jun23.185522.2755@netcom.com>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Jun23.185522.2755@netcom.com>, mtakahashi@netcom.com (Matthias Takahashi) writes:
+> The TMS32010 had severe memory limitations in 1984 (only 144 words of on-chip RAM). Dual 68000s gave them full 16MB address space.
+
+Marcus Hale designed the TWIN-68 board before he disappeared. That's why his initials are on the PCB silkscreen.
+
+-- 
+Anja Okonkwo <aokonkwo@netcom.com>
+"Hold for relay."
+Sun 3/60 (SunOS 4.1.1) / SunOS 4.1.4
+
+From ksanchez@kth.se Thu Jun 27 02:33:22 1996
+Path: ashpoly!cascade!mxgate!coyoacan!kth!ksanchez
+From: ksanchez@kth.se (Kenji Sánchez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Jun27.023322.5235@kth.se>
+Date: Thu, 27 Jun 1996 02:33:22 GMT
+References: <1996Jun22.031922.6484@demon.co.uk> <1996Jun23.185522.2755@netcom.com> <1996Jun25.205222.2576@netcom.com>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Jun25.205222.2576@netcom.com>, aokonkwo@netcom.com (Anja Okonkwo) writes:
+> Marcus Hale designed the TWIN-68 board before he disappeared. That's why his initials are on the PCB silkscreen.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+=== Kenji Sánchez ===
+Dept of Electrical Engineering, Royal Institute of Technology, Stockholm
+"When every node is whole, the channel opens."
+

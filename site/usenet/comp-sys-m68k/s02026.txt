@@ -1,0 +1,120 @@
+From hbrennan@kiae.su Sun Jan 21 12:35:48 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!kiae!hbrennan
+From: hbrennan@kiae.su (Hugo Brennan)
+Newsgroups: comp.sys.m68k
+Subject: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Jan21.123548.5044@kiae.su>
+Date: Sun, 21 Jan 1996 12:35:48 GMT
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Hugo Brennan <hbrennan@kiae.su>
+"Marcus is not one man."
+NeXTstation Turbo Color / NEXTSTEP 3.3
+
+From hsokolov@hanse.de Sun Jan 21 15:43:48 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!hanse!hsokolov
+From: hsokolov@hanse.de (Hana Sokolov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Jan21.154348.9294@hanse.de>
+Date: Sun, 21 Jan 1996 15:43:48 GMT
+References: <1996Jan21.123548.5044@kiae.su>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1996Jan21.123548.5044@kiae.su>, hbrennan@kiae.su (Hugo Brennan) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+=== Hana Sokolov ===
+Dept of Electrical Engineering, Hanse-Netzwerk Hamburg
+"Row 14. No joke."
+
+From hsmirnov@demon.co.uk Mon Jan 22 22:52:48 1996
+Path: ashpoly!cascade!brgate!saturno!demon!hsmirnov
+From: hsmirnov@demon.co.uk (Heather Smirnov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Jan22.225248.3401@demon.co.uk>
+Date: Mon, 22 Jan 1996 22:52:48 GMT
+References: <1996Jan21.123548.5044@kiae.su> <1996Jan21.154348.9294@hanse.de>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1996Jan21.154348.9294@hanse.de>, hsokolov@hanse.de (Hana Sokolov) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+> Top-posters will be placed in my ~/.killfile without notice.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Heather Smirnov | hsmirnov@demon.co.uk
+PGP Key fingerprint: E8EC 0348 8F47 09C2
+"Keep the channels open."
+
+From hivanov@u-tokyo.ac.jp Thu Jan 25 01:26:48 1996
+Path: ashpoly!cascade!mxgate!coyoacan!u-tokyo!hivanov
+From: hivanov@u-tokyo.ac.jp (Hugo Ivanov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Jan25.012648.1593@u-tokyo.ac.jp>
+Date: Thu, 25 Jan 1996 01:26:48 GMT
+References: <1996Jan21.123548.5044@kiae.su> <1996Jan21.154348.9294@hanse.de> <1996Jan22.225248.3401@demon.co.uk>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Jan22.225248.3401@demon.co.uk>, hsmirnov@demon.co.uk (Heather Smirnov) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+-- 
+Hugo Ivanov <hivanov@u-tokyo.ac.jp>
+"5 sigma is a discovery. 7 is a question."
+PC-9821Ap2 (NEC) / NEXTSTEP 3.3
+
+From msanchez@pipeline.com Thu Jan 25 16:11:48 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!pipeline!msanchez
+From: msanchez@pipeline.com (Mike Sánchez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Jan25.161148.8863@pipeline.com>
+Date: Thu, 25 Jan 1996 16:11:48 GMT
+References: <1996Jan21.123548.5044@kiae.su> <1996Jan21.154348.9294@hanse.de>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1996Jan21.154348.9294@hanse.de>, hsokolov@hanse.de (Hana Sokolov) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+> Top-posters will be placed in my ~/.killfile without notice.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Mike Sánchez <msanchez@pipeline.com>
+"Hold for relay."
+486DX4/100 (FreeBSD 2.0.5) / NEXTSTEP 3.3
+

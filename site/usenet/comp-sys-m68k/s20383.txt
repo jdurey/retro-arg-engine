@@ -1,0 +1,96 @@
+From bfournier@demon.co.uk Thu Aug 03 10:59:04 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!demon!bfournier
+From: bfournier@demon.co.uk (Bastien Fournier)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Aug03.105904.9211@demon.co.uk>
+Date: Thu, 03 Aug 1995 10:59:04 GMT
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+Bastien Fournier -- Demon Internet Services UK
+"Hardware is temporary. The signal survives."
+
+From trodriguez@earthlink.net Fri Aug 04 13:25:04 1995
+Path: ashpoly!cascade!mxgate!coyoacan!earthlink!trodriguez
+From: trodriguez@earthlink.net (Tyler Rodríguez)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Aug04.132504.8156@earthlink.net>
+Date: Fri, 04 Aug 1995 13:25:04 GMT
+References: <1995Aug03.105904.9211@demon.co.uk>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1995Aug03.105904.9211@demon.co.uk>, bfournier@demon.co.uk (Bastien Fournier) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Tyler Rodríguez <trodriguez@earthlink.net>
+US Robotics Courier V.34 @ 33,600 bps
+"Tape doesn't lie at 02:14. Ears do."
+
+From yrobertson@stanford.edu Sun Aug 06 09:25:04 1995
+Path: ashpoly!cascade!bigsur!stanford!yrobertson
+From: yrobertson@stanford.edu (Yuki Robertson)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Aug06.092504.7184@stanford.edu>
+Date: Sun, 06 Aug 1995 09:25:04 GMT
+References: <1995Aug03.105904.9211@demon.co.uk>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Aug03.105904.9211@demon.co.uk>, bfournier@demon.co.uk (Bastien Fournier) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Yuki Robertson
+Opinions expressed are solely my own and not those of Stanford University Computer Systems Lab.
+------------------------------------------------------------
+
+From jduarte@u-tokyo.ac.jp Sun Aug 06 12:23:04 1995
+Path: ashpoly!cascade!brgate!saturno!u-tokyo!jduarte
+From: jduarte@u-tokyo.ac.jp (Ji-woo Duarte)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Aug06.122304.6760@u-tokyo.ac.jp>
+Date: Sun, 06 Aug 1995 12:23:04 GMT
+References: <1995Aug03.105904.9211@demon.co.uk> <1995Aug04.132504.8156@earthlink.net>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Aug04.132504.8156@earthlink.net>, trodriguez@earthlink.net (Tyler Rodríguez) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+> Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Ji-woo Duarte <jduarte@u-tokyo.ac.jp>
+"They will send a copy in my place."
+Macintosh IIfx / NEXTSTEP 3.3
+

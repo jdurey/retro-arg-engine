@@ -1,0 +1,47 @@
+From jchoi@netcom.com Sat May 20 17:43:07 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!netcom!jchoi
+From: jchoi@netcom.com (Ji-woo Choi)
+Newsgroups: comp.sys.m68k
+Subject: Observation: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995May20.174307.9614@netcom.com>
+Date: Sat, 20 May 1995 17:43:07 GMT
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Ji-woo Choi | jchoi@netcom.com
+PGP Key fingerprint: AB78 251E 8D85 1D78
+"Keep the channels open."
+
+From jnilsson@purdue.edu Sun May 21 02:26:07 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!purdue!jnilsson
+From: jnilsson@purdue.edu (Jen Nilsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995May21.022607.6994@purdue.edu>
+Date: Sun, 21 May 1995 02:26:07 GMT
+References: <1995May20.174307.9614@netcom.com>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995May20.174307.9614@netcom.com>, jchoi@netcom.com (Ji-woo Choi) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Jen Nilsson <jnilsson@purdue.edu>
+Zyxel U-1496E @ 9600 Telebit bps
+"Extraordinary claims require extraordinary spectra."
+

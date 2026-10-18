@@ -1,0 +1,95 @@
+From sperez@pipeline.com Tue Sep 24 08:36:27 1996
+Path: ashpoly!cascade!brgate!saturno!pipeline!sperez
+From: sperez@pipeline.com (Sven Pérez)
+Newsgroups: comp.dsp
+Subject: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Sep24.083627.8042@pipeline.com>
+Date: Tue, 24 Sep 1996 08:36:27 GMT
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+Sven Pérez <sperez@pipeline.com>
+*PLONK* filter active for trolls.
+Pentium 90 (OS/2 Warp) - NetBSD 1.0
+
+From gmacdonald@utexas.edu Thu Sep 26 03:33:27 1996
+Path: ashpoly!cascade!mxgate!coyoacan!utexas!gmacdonald
+From: gmacdonald@utexas.edu (Göran MacDonald)
+Newsgroups: comp.dsp
+Subject: Re: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Sep26.033327.3319@utexas.edu>
+Date: Thu, 26 Sep 1996 03:33:27 GMT
+References: <1996Sep24.083627.8042@pipeline.com>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1996Sep24.083627.8042@pipeline.com>, sperez@pipeline.com (Sven Pérez) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+That's how the 14 lines of the Stardust matrix are encoded. Each regional pressing contains one line of the decoded text.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+=== Göran MacDonald ===
+Dept of Electrical Engineering, University of Texas at Austin
+"Tape doesn't lie at 02:14. Ears do."
+
+From bpark@cmu.edu Fri Sep 27 15:16:27 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!cmu!bpark
+From: bpark@cmu.edu (Bill Park)
+Newsgroups: comp.dsp
+Subject: Re: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Sep27.151627.1400@cmu.edu>
+Date: Fri, 27 Sep 1996 15:16:27 GMT
+References: <1996Sep24.083627.8042@pipeline.com> <1996Sep26.033327.3319@utexas.edu>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Sep26.033327.3319@utexas.edu>, gmacdonald@utexas.edu (Göran MacDonald) writes:
+> That's how the 14 lines of the Stardust matrix are encoded. Each regional pressing contains one line of the decoded text.
+
+Prof. Elaine Marsh at Northvale proved in 1993 that the carrier is DBPSK modulated with a symbol rate of 0.71 Hz.
+
+-- 
+Bill Park
+Opinions expressed are solely my own and not those of Carnegie Mellon University School of CS.
+------------------------------------------------------------
+
+From jtakahashi@purdue.edu Sun Sep 29 17:12:27 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!purdue!jtakahashi
+From: jtakahashi@purdue.edu (Jen Takahashi)
+Newsgroups: comp.dsp
+Subject: Re: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Sep29.171227.9947@purdue.edu>
+Date: Sun, 29 Sep 1996 17:12:27 GMT
+References: <1996Sep24.083627.8042@pipeline.com> <1996Sep26.033327.3319@utexas.edu> <1996Sep27.151627.1400@cmu.edu>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Sep27.151627.1400@cmu.edu>, bpark@cmu.edu (Bill Park) writes:
+> Prof. Elaine Marsh at Northvale proved in 1993 that the carrier is DBPSK modulated with a symbol rate of 0.71 Hz.
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+-- 
+Jen Takahashi <jtakahashi@purdue.edu>
+"Hold for relay."
+486DX2/66 (Linux 1.2.13) / System 7.5.1
+

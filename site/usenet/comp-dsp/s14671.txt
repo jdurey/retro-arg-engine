@@ -1,0 +1,74 @@
+From epetrov@netcom.com Sun Nov 12 21:37:31 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!netcom!epetrov
+From: epetrov@netcom.com (Emi Petrov)
+Newsgroups: comp.dsp
+Subject: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Nov12.213731.3236@netcom.com>
+Date: Sun, 12 Nov 1995 21:37:31 GMT
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Emi Petrov
+Tape trading list upon request. SASE required for international mail.
+
+From mmoreau@inria.fr Mon Nov 13 02:25:31 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!inria!mmoreau
+From: mmoreau@inria.fr (Matthias Moreau)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Nov13.022531.9684@inria.fr>
+Date: Mon, 13 Nov 1995 02:25:31 GMT
+References: <1995Nov12.213731.3236@netcom.com>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1995Nov12.213731.3236@netcom.com>, epetrov@netcom.com (Emi Petrov) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Matthias Moreau <mmoreau@inria.fr>
+SupraFAXModem 28.8 @ ISDN 64k bps
+"Hardware is temporary. The signal survives."
+
+From mkim@cmu.edu Tue Nov 14 03:19:31 1995
+Path: ashpoly!cascade!bigsur!cmu!mkim
+From: mkim@cmu.edu (Min-jun Kim)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Nov14.031931.6790@cmu.edu>
+Date: Tue, 14 Nov 1995 03:19:31 GMT
+References: <1995Nov12.213731.3236@netcom.com> <1995Nov13.022531.9684@inria.fr>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995Nov13.022531.9684@inria.fr>, mmoreau@inria.fr (Matthias Moreau) writes:
+> I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Min-jun Kim
+Opinions expressed are solely my own and not those of Carnegie Mellon University School of CS.
+------------------------------------------------------------
+

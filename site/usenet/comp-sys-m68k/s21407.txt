@@ -1,0 +1,70 @@
+From gstewart@clari.net Fri Jul 14 03:15:23 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!clari!gstewart
+From: gstewart@clari.net (Göran Stewart)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jul14.031523.8814@clari.net>
+Date: Fri, 14 Jul 1995 03:15:23 GMT
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Göran Stewart <gstewart@clari.net>
+"Hold for relay."
+Atari TT030 / SunOS 4.1.4
+
+From sivanov@hanse.de Fri Jul 14 19:46:23 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!hanse!sivanov
+From: sivanov@hanse.de (Sun-mi Ivanov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jul14.194623.9828@hanse.de>
+Date: Fri, 14 Jul 1995 19:46:23 GMT
+References: <1995Jul14.031523.8814@clari.net>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Jul14.031523.8814@clari.net>, gstewart@clari.net (Göran Stewart) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Sun-mi Ivanov -- Hanse-Netzwerk Hamburg
+"In theory there is no difference between theory and practice."
+
+From msato@u-tokyo.ac.jp Sun Jul 16 07:33:23 1995
+Path: ashpoly!cascade!bigsur!u-tokyo!msato
+From: msato@u-tokyo.ac.jp (Mei Sato)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jul16.073323.6974@u-tokyo.ac.jp>
+Date: Sun, 16 Jul 1995 07:33:23 GMT
+References: <1995Jul14.031523.8814@clari.net> <1995Jul14.194623.9828@hanse.de>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Jul14.194623.9828@hanse.de>, sivanov@hanse.de (Sun-mi Ivanov) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Mei Sato | msato@u-tokyo.ac.jp
+PGP Key fingerprint: 7757 888E 2928 E735
+"Keep the channels open."
+

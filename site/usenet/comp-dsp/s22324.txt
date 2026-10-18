@@ -1,0 +1,72 @@
+From cchoi@kiae.su Fri Apr 01 00:45:48 1994
+Path: ashpoly!cascade!bigsur!kiae!cchoi
+From: cchoi@kiae.su (Camila Choi)
+Newsgroups: comp.dsp
+Subject: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Apr01.004548.2577@kiae.su>
+Date: Fri, 01 Apr 1994 00:45:48 GMT
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+
+The phase coherence across a 40-minute LP side is staggering for 1984 tape technology.
+
+-- 
+Camila Choi <cchoi@kiae.su>
+*PLONK* filter active for trolls.
+Sun SparcStation 20 - NetBSD 1.0
+
+From mchoi@stanford.edu Sat Apr 02 06:42:48 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!stanford!mchoi
+From: mchoi@stanford.edu (Mike Choi)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Apr02.064248.7247@stanford.edu>
+Date: Sat, 02 Apr 1994 06:42:48 GMT
+References: <1994Apr01.004548.2577@kiae.su>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1994Apr01.004548.2577@kiae.su>, cchoi@kiae.su (Camila Choi) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Mike Choi <mchoi@stanford.edu>
+Practical Peripherals 14.4 @ 28,800 bps
+"The carrier frequency does not drift by accident."
+
+From lgarcia@cam.ac.uk Sun Apr 03 04:57:48 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!cam!lgarcia
+From: lgarcia@cam.ac.uk (Lucia García)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Apr03.045748.9382@cam.ac.uk>
+Date: Sun, 03 Apr 1994 04:57:48 GMT
+References: <1994Apr01.004548.2577@kiae.su> <1994Apr02.064248.7247@stanford.edu>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Apr02.064248.7247@stanford.edu>, mchoi@stanford.edu (Mike Choi) writes:
+> Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+-- 
+Lucia García
+Opinions expressed are solely my own and not those of University of Cambridge Computer Laboratory.
+------------------------------------------------------------
+

@@ -1,0 +1,72 @@
+From mnakamura@kth.se Sat Jul 27 17:36:56 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!kth!mnakamura
+From: mnakamura@kth.se (Matthias Nakamura)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jul27.173656.5814@kth.se>
+Date: Sat, 27 Jul 1996 17:36:56 GMT
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Matthias Nakamura <mnakamura@kth.se>
+"Do not worship the copy."
+Macintosh IIfx / Linux 1.2.13
+
+From tsokolov@mindspring.com Sun Jul 28 18:12:56 1996
+Path: ashpoly!cascade!bigsur!mindspring!tsokolov
+From: tsokolov@mindspring.com (Tomas Sokolov)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jul28.181256.9096@mindspring.com>
+Date: Sun, 28 Jul 1996 18:12:56 GMT
+References: <1996Jul27.173656.5814@kth.se>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Jul27.173656.5814@kth.se>, mnakamura@kth.se (Matthias Nakamura) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Tomas Sokolov -- MindSpring Enterprises
+"5 sigma is a discovery. 7 is a question."
+
+From jlaurent@titech.ac.jp Tue Jul 30 13:29:56 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!titech!jlaurent
+From: jlaurent@titech.ac.jp (Joachim Laurent)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jul30.132956.1265@titech.ac.jp>
+Date: Tue, 30 Jul 1996 13:29:56 GMT
+References: <1996Jul27.173656.5814@kth.se> <1996Jul28.181256.9096@mindspring.com>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1996Jul28.181256.9096@mindspring.com>, tsokolov@mindspring.com (Tomas Sokolov) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Joachim Laurent <jlaurent@titech.ac.jp>
+"They will send a copy in my place."
+Sun 3/60 (SunOS 4.1.1) / System 7.5.1
+

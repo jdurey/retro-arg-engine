@@ -1,0 +1,70 @@
+From beriksson@mindspring.com Tue Jun 06 23:29:38 1995
+Path: ashpoly!cascade!mxgate!coyoacan!mindspring!beriksson
+From: beriksson@mindspring.com (Brian Eriksson)
+Newsgroups: comp.dsp
+Subject: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jun06.232938.5147@mindspring.com>
+Date: Tue, 06 Jun 1995 23:29:38 GMT
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Brian Eriksson <beriksson@mindspring.com>
+Practical Peripherals 14.4 @ ISDN 64k bps
+"Extraordinary claims require extraordinary spectra."
+
+From lsokolov@uu.net Wed Jun 07 03:12:38 1995
+Path: ashpoly!cascade!mxgate!coyoacan!uu!lsokolov
+From: lsokolov@uu.net (Lisa Sokolov)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jun07.031238.3035@uu.net>
+Date: Wed, 07 Jun 1995 03:12:38 GMT
+References: <1995Jun06.232938.5147@mindspring.com>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Jun06.232938.5147@mindspring.com>, beriksson@mindspring.com (Brian Eriksson) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Lisa Sokolov <lsokolov@uu.net>
+*PLONK* filter active for trolls.
+Macintosh IIfx - NetBSD 1.0
+
+From ktakahashi@rwth-aachen.de Wed Jun 07 12:02:38 1995
+Path: ashpoly!cascade!mxgate!coyoacan!rwth-aachen!ktakahashi
+From: ktakahashi@rwth-aachen.de (Karen Takahashi)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jun07.120238.7105@rwth-aachen.de>
+Date: Wed, 07 Jun 1995 12:02:38 GMT
+References: <1995Jun06.232938.5147@mindspring.com> <1995Jun07.031238.3035@uu.net>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Jun07.031238.3035@uu.net>, lsokolov@uu.net (Lisa Sokolov) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+Karen Takahashi
+Opinions expressed are solely my own and not those of RWTH Aachen Informatik.
+------------------------------------------------------------
+

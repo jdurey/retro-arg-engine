@@ -1,0 +1,116 @@
+From ystewart@inria.fr Fri Sep 27 02:43:48 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!inria!ystewart
+From: ystewart@inria.fr (Yuki Stewart)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Sep27.024348.7448@inria.fr>
+Date: Fri, 27 Sep 1996 02:43:48 GMT
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+Schematic diagram in ASCII uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/twin68_array.asc.
+
+-- 
+Yuki Stewart
+Tape trading list upon request. SASE required for international mail.
+
+From mtanaka@uni-hamburg.de Sat Sep 28 07:33:48 1996
+Path: ashpoly!cascade!brgate!saturno!uni-hamburg!mtanaka
+From: mtanaka@uni-hamburg.de (Mikhail Tanaka)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Sep28.073348.2617@uni-hamburg.de>
+Date: Sat, 28 Sep 1996 07:33:48 GMT
+References: <1996Sep27.024348.7448@inria.fr>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1996Sep27.024348.7448@inria.fr>, ystewart@inria.fr (Yuki Stewart) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+> CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Mikhail Tanaka | mtanaka@uni-hamburg.de
+PGP Key fingerprint: B953 BC14 28B2 D836
+"Keep the channels open."
+
+From tfischer@stanford.edu Sun Sep 29 12:07:48 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!stanford!tfischer
+From: tfischer@stanford.edu (Tyler Fischer)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Sep29.120748.4490@stanford.edu>
+Date: Sun, 29 Sep 1996 12:07:48 GMT
+References: <1996Sep27.024348.7448@inria.fr>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Sep27.024348.7448@inria.fr>, ystewart@inria.fr (Yuki Stewart) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Tyler Fischer <tfischer@stanford.edu>
+Practical Peripherals 14.4 @ ISDN 64k bps
+"Tape doesn't lie at 02:14. Ears do."
+
+From ckuznetsov@mit.edu Sun Sep 29 17:56:48 1996
+Path: ashpoly!cascade!bigsur!mit!ckuznetsov
+From: ckuznetsov@mit.edu (Callum Kuznetsov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Sep29.175648.8316@mit.edu>
+Date: Sun, 29 Sep 1996 17:56:48 GMT
+References: <1996Sep27.024348.7448@inria.fr> <1996Sep28.073348.2617@uni-hamburg.de>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Sep28.073348.2617@uni-hamburg.de>, mtanaka@uni-hamburg.de (Mikhail Tanaka) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Callum Kuznetsov <ckuznetsov@mit.edu>
+*PLONK* filter active for trolls.
+NeXTstation Turbo Color - NetBSD 1.0
+
+From jjohansson@purdue.edu Tue Oct 01 17:56:48 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!purdue!jjohansson
+From: jjohansson@purdue.edu (Julien Johansson)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Oct01.175648.6650@purdue.edu>
+Date: Tue, 01 Oct 1996 17:56:48 GMT
+References: <1996Sep27.024348.7448@inria.fr> <1996Sep29.120748.4490@stanford.edu>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Sep29.120748.4490@stanford.edu>, tfischer@stanford.edu (Tyler Fischer) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Julien Johansson <jjohansson@purdue.edu>
+*PLONK* filter active for trolls.
+Commodore Amiga 500 (1MB OCS) - NetBSD 1.0
+

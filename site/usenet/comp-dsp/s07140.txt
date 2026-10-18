@@ -1,0 +1,119 @@
+From deriksson@uu.net Tue Jun 11 15:40:48 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!uu!deriksson
+From: deriksson@uu.net (Dave Eriksson)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Jun11.154048.4645@uu.net>
+Date: Tue, 11 Jun 1996 15:40:48 GMT
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+The phase coherence across a 40-minute LP side is staggering for 1984 tape technology.
+
+-- 
+Dave Eriksson <deriksson@uu.net>
+*PLONK* filter active for trolls.
+Amiga 3000T - NetBSD 1.0
+
+From ahernandez@hanse.de Wed Jun 12 16:05:48 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!hanse!ahernandez
+From: ahernandez@hanse.de (Astrid Hernández)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Jun12.160548.8835@hanse.de>
+Date: Wed, 12 Jun 1996 16:05:48 GMT
+References: <1996Jun11.154048.4645@uu.net>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Jun11.154048.4645@uu.net>, deriksson@uu.net (Dave Eriksson) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Astrid Hernández <ahernandez@hanse.de>
+*PLONK* filter active for trolls.
+Sun 3/60 (SunOS 4.1.1) - NetBSD 1.0
+
+From fdubois@inria.fr Thu Jun 13 19:46:48 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!inria!fdubois
+From: fdubois@inria.fr (Fiona Dubois)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Jun13.194648.4090@inria.fr>
+Date: Thu, 13 Jun 1996 19:46:48 GMT
+References: <1996Jun11.154048.4645@uu.net>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Jun11.154048.4645@uu.net>, deriksson@uu.net (Dave Eriksson) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+-- 
+Fiona Dubois <fdubois@inria.fr>
+"Tape doesn't lie at 02:14. Ears do."
+Acorn RiscPC 600 / System 7.5.1
+
+From mstewart@hanse.de Thu Jun 13 22:07:48 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!hanse!mstewart
+From: mstewart@hanse.de (Mikhail Stewart)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Jun13.220748.5863@hanse.de>
+Date: Thu, 13 Jun 1996 22:07:48 GMT
+References: <1996Jun11.154048.4645@uu.net> <1996Jun12.160548.8835@hanse.de>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1996Jun12.160548.8835@hanse.de>, ahernandez@hanse.de (Astrid Hernández) writes:
+> If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Mikhail Stewart <mstewart@hanse.de>
+"There are 14 nodes and only 10 countries. Count again."
+Acorn RiscPC 600 / NEXTSTEP 3.3
+
+From mtakahashi@titech.ac.jp Sat Jun 15 08:15:48 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!titech!mtakahashi
+From: mtakahashi@titech.ac.jp (Marisol Takahashi)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Jun15.081548.9536@titech.ac.jp>
+Date: Sat, 15 Jun 1996 08:15:48 GMT
+References: <1996Jun11.154048.4645@uu.net> <1996Jun12.160548.8835@hanse.de>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Jun12.160548.8835@hanse.de>, ahernandez@hanse.de (Astrid Hernández) writes:
+> If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Marisol Takahashi
+Tape trading list upon request. SASE required for international mail.
+

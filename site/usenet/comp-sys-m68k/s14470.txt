@@ -1,0 +1,95 @@
+From bsilva@kth.se Mon Apr 03 20:04:42 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!kth!bsilva
+From: bsilva@kth.se (Bruno Silva)
+Newsgroups: comp.sys.m68k
+Subject: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Apr03.200442.7198@kth.se>
+Date: Mon, 03 Apr 1995 20:04:42 GMT
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+Bruno Silva <bsilva@kth.se>
+"We don't sign stars. We build them."
+PC-9821Ap2 (NEC) / SunOS 4.1.4
+
+From sgarcia@earthlink.net Wed Apr 05 10:32:42 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!earthlink!sgarcia
+From: sgarcia@earthlink.net (Sven García)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Apr05.103242.9807@earthlink.net>
+Date: Wed, 05 Apr 1995 10:32:42 GMT
+References: <1995Apr03.200442.7198@kth.se>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Apr03.200442.7198@kth.se>, bsilva@kth.se (Bruno Silva) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+=== Sven García ===
+Dept of Electrical Engineering, EarthLink Network
+"There are 14 nodes and only 10 countries. Count again."
+
+From kjohansson@titech.ac.jp Thu Apr 06 21:37:42 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!titech!kjohansson
+From: kjohansson@titech.ac.jp (Kirsty Johansson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Apr06.213742.3229@titech.ac.jp>
+Date: Thu, 06 Apr 1995 21:37:42 GMT
+References: <1995Apr03.200442.7198@kth.se> <1995Apr05.103242.9807@earthlink.net>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Apr05.103242.9807@earthlink.net>, sgarcia@earthlink.net (Sven García) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Kirsty Johansson | kjohansson@titech.ac.jp
+PGP Key fingerprint: 717A 82C2 67D3 F862
+"Keep the channels open."
+
+From ehughes@illinois.edu Fri Apr 07 14:38:42 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!illinois!ehughes
+From: ehughes@illinois.edu (Élodie Hughes)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Apr07.143842.8969@illinois.edu>
+Date: Fri, 07 Apr 1995 14:38:42 GMT
+References: <1995Apr03.200442.7198@kth.se>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995Apr03.200442.7198@kth.se>, bsilva@kth.se (Bruno Silva) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+=== Élodie Hughes ===
+Dept of Electrical Engineering, University of Illinois Urbana-Champaign
+"5 sigma is a discovery. 7 is a question."
+

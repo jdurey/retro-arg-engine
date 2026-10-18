@@ -1,0 +1,116 @@
+From kfischer@utexas.edu Thu Feb 16 14:40:42 1995
+Path: ashpoly!cascade!bigsur!utexas!kfischer
+From: kfischer@utexas.edu (Kenji Fischer)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Feb16.144042.2055@utexas.edu>
+Date: Thu, 16 Feb 1995 14:40:42 GMT
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Kenji Fischer -- University of Texas at Austin
+"Hardware is temporary. The signal survives."
+
+From erodriguez@uu.net Fri Feb 17 07:39:42 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!uu!erodriguez
+From: erodriguez@uu.net (Elaine Rodríguez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Feb17.073942.5771@uu.net>
+Date: Fri, 17 Feb 1995 07:39:42 GMT
+References: <1995Feb16.144042.2055@utexas.edu>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Feb16.144042.2055@utexas.edu>, kfischer@utexas.edu (Kenji Fischer) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Elaine Rodríguez
+Tape trading list upon request. SASE required for international mail.
+
+From kito@cam.ac.uk Sun Feb 19 08:52:42 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!cam!kito
+From: kito@cam.ac.uk (Karen Ito)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Feb19.085242.5903@cam.ac.uk>
+Date: Sun, 19 Feb 1995 08:52:42 GMT
+References: <1995Feb16.144042.2055@utexas.edu>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Feb16.144042.2055@utexas.edu>, kfischer@utexas.edu (Kenji Fischer) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Karen Ito | kito@cam.ac.uk
+PGP Key fingerprint: B2C9 E68F E3E7 8F42
+"Keep the channels open."
+
+From sito@pipeline.com Mon Feb 20 15:41:42 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!pipeline!sito
+From: sito@pipeline.com (Steve Ito)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Feb20.154142.1749@pipeline.com>
+Date: Mon, 20 Feb 1995 15:41:42 GMT
+References: <1995Feb16.144042.2055@utexas.edu> <1995Feb19.085242.5903@cam.ac.uk>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1995Feb19.085242.5903@cam.ac.uk>, kito@cam.ac.uk (Karen Ito) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Steve Ito -- The Pipeline Internet Network
+"In theory there is no difference between theory and practice."
+
+From joliveira@mindspring.com Wed Feb 22 02:15:42 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!mindspring!joliveira
+From: joliveira@mindspring.com (Julien Oliveira)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Feb22.021542.5476@mindspring.com>
+Date: Wed, 22 Feb 1995 02:15:42 GMT
+References: <1995Feb16.144042.2055@utexas.edu> <1995Feb19.085242.5903@cam.ac.uk> <1995Feb20.154142.1749@pipeline.com>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Feb20.154142.1749@pipeline.com>, sito@pipeline.com (Steve Ito) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Julien Oliveira -- MindSpring Enterprises
+"In theory there is no difference between theory and practice."
+

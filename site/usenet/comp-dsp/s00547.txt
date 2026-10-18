@@ -1,0 +1,92 @@
+From mivanov@mit.edu Tue Sep 26 21:51:11 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!mit!mivanov
+From: mivanov@mit.edu (Mikhail Ivanov)
+Newsgroups: comp.dsp
+Subject: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Sep26.215111.1080@mit.edu>
+Date: Tue, 26 Sep 1995 21:51:11 GMT
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Mikhail Ivanov
+Opinions expressed are solely my own and not those of Massachusetts Institute of Technology.
+------------------------------------------------------------
+
+From yfischer@cmu.edu Thu Sep 28 04:45:11 1995
+Path: ashpoly!cascade!bigsur!cmu!yfischer
+From: yfischer@cmu.edu (Yuki Fischer)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Sep28.044511.5295@cmu.edu>
+Date: Thu, 28 Sep 1995 04:45:11 GMT
+References: <1995Sep26.215111.1080@mit.edu>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Sep26.215111.1080@mit.edu>, mivanov@mit.edu (Mikhail Ivanov) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Yuki Fischer -- Carnegie Mellon University School of CS
+"Marcus is not one man."
+
+From tsantos@mindspring.com Fri Sep 29 10:15:11 1995
+Path: ashpoly!cascade!bigsur!mindspring!tsantos
+From: tsantos@mindspring.com (Tobias Santos)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Sep29.101511.1924@mindspring.com>
+Date: Fri, 29 Sep 1995 10:15:11 GMT
+References: <1995Sep26.215111.1080@mit.edu> <1995Sep28.044511.5295@cmu.edu>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Sep28.044511.5295@cmu.edu>, yfischer@cmu.edu (Yuki Fischer) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Tobias Santos <tsantos@mindspring.com>
+*PLONK* filter active for trolls.
+Mac IIci / 68882 FPU - NetBSD 1.0
+
+From flindqvist@pacbell.net Sat Sep 30 13:52:11 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!pacbell!flindqvist
+From: flindqvist@pacbell.net (Freya Lindqvist)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Sep30.135211.4473@pacbell.net>
+Date: Sat, 30 Sep 1995 13:52:11 GMT
+References: <1995Sep26.215111.1080@mit.edu> <1995Sep28.044511.5295@cmu.edu> <1995Sep29.101511.1924@mindspring.com>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Sep29.101511.1924@mindspring.com>, tsantos@mindspring.com (Tobias Santos) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Freya Lindqvist
+Opinions expressed are solely my own and not those of Pacific Bell Internet Services.
+------------------------------------------------------------
+

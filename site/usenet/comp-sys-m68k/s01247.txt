@@ -1,0 +1,97 @@
+From sduarte@illinois.edu Fri Nov 15 07:44:42 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!illinois!sduarte
+From: sduarte@illinois.edu (Steve Duarte)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Nov15.074442.4167@illinois.edu>
+Date: Fri, 15 Nov 1996 07:44:42 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+Steve Duarte <sduarte@illinois.edu>
+Hayes Optima 288 @ ISDN 64k bps
+"Extraordinary claims require extraordinary spectra."
+
+From skim@pipeline.com Sat Nov 16 02:01:42 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!pipeline!skim
+From: skim@pipeline.com (Sergei Kim)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Nov16.020142.1228@pipeline.com>
+Date: Sat, 16 Nov 1996 02:01:42 GMT
+References: <1996Nov15.074442.4167@illinois.edu>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Nov15.074442.4167@illinois.edu>, sduarte@illinois.edu (Steve Duarte) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Sergei Kim <skim@pipeline.com>
+*PLONK* filter active for trolls.
+Atari Falcon 030 - NetBSD 1.0
+
+From mmoreno@clari.net Sat Nov 16 10:06:42 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!clari!mmoreno
+From: mmoreno@clari.net (Mike Moreno)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Nov16.100642.5839@clari.net>
+Date: Sat, 16 Nov 1996 10:06:42 GMT
+References: <1996Nov15.074442.4167@illinois.edu>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1996Nov15.074442.4167@illinois.edu>, sduarte@illinois.edu (Steve Duarte) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Mike Moreno
+Opinions expressed are solely my own and not those of ClariNet Communications Corp.
+------------------------------------------------------------
+
+From vkim@clari.net Mon Nov 18 04:50:42 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!clari!vkim
+From: vkim@clari.net (Valeria Kim)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Nov18.045042.5796@clari.net>
+Date: Mon, 18 Nov 1996 04:50:42 GMT
+References: <1996Nov15.074442.4167@illinois.edu>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Nov15.074442.4167@illinois.edu>, sduarte@illinois.edu (Steve Duarte) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Valeria Kim <vkim@clari.net>
+"We don't sign stars. We build them."
+Macintosh IIfx / System 7.5.1
+

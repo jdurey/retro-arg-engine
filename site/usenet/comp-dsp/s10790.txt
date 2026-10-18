@@ -1,0 +1,95 @@
+From cito@utexas.edu Wed Sep 04 05:29:25 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!utexas!cito
+From: cito@utexas.edu (Camila Ito)
+Newsgroups: comp.dsp
+Subject: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Sep04.052925.9779@utexas.edu>
+Date: Wed, 04 Sep 1996 05:29:25 GMT
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Camila Ito <cito@utexas.edu>
+*PLONK* filter active for trolls.
+PC-9821Ap2 (NEC) - NetBSD 1.0
+
+From iandersson@ox.ac.uk Wed Sep 04 11:33:25 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!ox!iandersson
+From: iandersson@ox.ac.uk (Ines Andersson)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Sep04.113325.9615@ox.ac.uk>
+Date: Wed, 04 Sep 1996 11:33:25 GMT
+References: <1996Sep04.052925.9779@utexas.edu>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Sep04.052925.9779@utexas.edu>, cito@utexas.edu (Camila Ito) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Ines Andersson
+Opinions expressed are solely my own and not those of Oxford University Computing Laboratory.
+------------------------------------------------------------
+
+From mkim@mindspring.com Wed Sep 04 15:33:25 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!mindspring!mkim
+From: mkim@mindspring.com (Marisol Kim)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Sep04.153325.5526@mindspring.com>
+Date: Wed, 04 Sep 1996 15:33:25 GMT
+References: <1996Sep04.052925.9779@utexas.edu> <1996Sep04.113325.9615@ox.ac.uk>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Sep04.113325.9615@ox.ac.uk>, iandersson@ox.ac.uk (Ines Andersson) writes:
+> Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Marisol Kim <mkim@mindspring.com>
+Practical Peripherals 14.4 @ 14,400 bps
+"Measuring a record you own is listening, not piracy."
+
+From flarsson@mindspring.com Fri Sep 06 19:13:25 1996
+Path: ashpoly!cascade!bigsur!mindspring!flarsson
+From: flarsson@mindspring.com (Freya Larsson)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Sep06.191325.1046@mindspring.com>
+Date: Fri, 06 Sep 1996 19:13:25 GMT
+References: <1996Sep04.052925.9779@utexas.edu> <1996Sep04.113325.9615@ox.ac.uk> <1996Sep04.153325.5526@mindspring.com>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1996Sep04.153325.5526@mindspring.com>, mkim@mindspring.com (Marisol Kim) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Freya Larsson <flarsson@mindspring.com>
+*PLONK* filter active for trolls.
+Atari Falcon 030 - NetBSD 1.0
+

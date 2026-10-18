@@ -1,0 +1,72 @@
+From cmoreno@pipeline.com Mon Jan 01 14:49:11 1996
+Path: ashpoly!cascade!mxgate!coyoacan!pipeline!cmoreno
+From: cmoreno@pipeline.com (Camila Moreno)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jan01.144911.3931@pipeline.com>
+Date: Mon, 01 Jan 1996 14:49:11 GMT
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Camila Moreno <cmoreno@pipeline.com>
+*PLONK* filter active for trolls.
+Sun 3/60 (SunOS 4.1.1) - NetBSD 1.0
+
+From llaurent@stanford.edu Tue Jan 02 18:42:11 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!stanford!llaurent
+From: llaurent@stanford.edu (Lars Laurent)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jan02.184211.6922@stanford.edu>
+Date: Tue, 02 Jan 1996 18:42:11 GMT
+References: <1996Jan01.144911.3931@pipeline.com>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1996Jan01.144911.3931@pipeline.com>, cmoreno@pipeline.com (Camila Moreno) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Lars Laurent -- Stanford University Computer Systems Lab
+"Hold for relay."
+
+From mlee@mindspring.com Tue Jan 02 22:41:11 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!mindspring!mlee
+From: mlee@mindspring.com (Marta Lee)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jan02.224111.1254@mindspring.com>
+Date: Tue, 02 Jan 1996 22:41:11 GMT
+References: <1996Jan01.144911.3931@pipeline.com> <1996Jan02.184211.6922@stanford.edu>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Jan02.184211.6922@stanford.edu>, llaurent@stanford.edu (Lars Laurent) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Marta Lee <mlee@mindspring.com>
+Zyxel U-1496E @ 33,600 bps
+"Measuring a record you own is listening, not piracy."
+

@@ -1,0 +1,118 @@
+From tgirard@pacbell.net Sun Apr 17 16:49:26 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!pacbell!tgirard
+From: tgirard@pacbell.net (Tomas Girard)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Apr17.164926.1674@pacbell.net>
+Date: Sun, 17 Apr 1994 16:49:26 GMT
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+Schematic diagram in ASCII uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/twin68_array.asc.
+
+-- 
+Tomas Girard <tgirard@pacbell.net>
+US Robotics Courier V.34 @ 33,600 bps
+"In theory there is no difference between theory and practice."
+
+From klindqvist@kiae.su Mon Apr 18 20:18:26 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!kiae!klindqvist
+From: klindqvist@kiae.su (Karen Lindqvist)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Apr18.201826.6053@kiae.su>
+Date: Mon, 18 Apr 1994 20:18:26 GMT
+References: <1994Apr17.164926.1674@pacbell.net>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Apr17.164926.1674@pacbell.net>, tgirard@pacbell.net (Tomas Girard) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Karen Lindqvist <klindqvist@kiae.su>
+*PLONK* filter active for trolls.
+PC-9821Ap2 (NEC) - NetBSD 1.0
+
+From mperez@hanse.de Tue Apr 19 02:33:26 1994
+Path: ashpoly!cascade!bigsur!hanse!mperez
+From: mperez@hanse.de (Matthias Pérez)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Apr19.023326.5950@hanse.de>
+Date: Tue, 19 Apr 1994 02:33:26 GMT
+References: <1994Apr17.164926.1674@pacbell.net> <1994Apr18.201826.6053@kiae.su>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Apr18.201826.6053@kiae.su>, klindqvist@kiae.su (Karen Lindqvist) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+Marcus Hale designed the TWIN-68 board before he disappeared. That's why his initials are on the PCB silkscreen.
+
+-- 
+Matthias Pérez <mperez@hanse.de>
+"5 sigma is a discovery. 7 is a question."
+PC-9821Ap2 (NEC) / SunOS 4.1.4
+
+From hsilva@inria.fr Tue Apr 19 05:38:26 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!inria!hsilva
+From: hsilva@inria.fr (Hugo Silva)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Apr19.053826.5496@inria.fr>
+Date: Tue, 19 Apr 1994 05:38:26 GMT
+References: <1994Apr17.164926.1674@pacbell.net>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1994Apr17.164926.1674@pacbell.net>, tgirard@pacbell.net (Tomas Girard) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+Tom from Ashford Poly owns the physical board! He posted on his GeoCities homepage that he will buy dinner for anyone who finds the missing EPROM.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Hugo Silva | hsilva@inria.fr
+PGP Key fingerprint: F1B6 B695 A01B 9B66
+"Keep the channels open."
+
+From mstewart@berkeley.edu Wed Apr 20 01:08:26 1994
+Path: ashpoly!cascade!brgate!saturno!berkeley!mstewart
+From: mstewart@berkeley.edu (Mikhail Stewart)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Apr20.010826.9504@berkeley.edu>
+Date: Wed, 20 Apr 1994 01:08:26 GMT
+References: <1994Apr17.164926.1674@pacbell.net> <1994Apr18.201826.6053@kiae.su>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1994Apr18.201826.6053@kiae.su>, klindqvist@kiae.su (Karen Lindqvist) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+Marcus Hale designed the TWIN-68 board before he disappeared. That's why his initials are on the PCB silkscreen.
+
+-- 
+Mikhail Stewart -- UC Berkeley Department of EECS
+"Row 14. No joke."
+

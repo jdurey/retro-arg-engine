@@ -1,0 +1,94 @@
+From smuller@cam.ac.uk Sat Jul 20 12:38:56 1996
+Path: ashpoly!cascade!bigsur!cam!smuller
+From: smuller@cam.ac.uk (Sun-mi Müller)
+Newsgroups: comp.dsp
+Subject: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Jul20.123856.1403@cam.ac.uk>
+Date: Sat, 20 Jul 1996 12:38:56 GMT
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+Sun-mi Müller <smuller@cam.ac.uk>
+*PLONK* filter active for trolls.
+Commodore Amiga 500 (1MB OCS) - NetBSD 1.0
+
+From tmoreno@u-tokyo.ac.jp Sun Jul 21 12:09:56 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!u-tokyo!tmoreno
+From: tmoreno@u-tokyo.ac.jp (Tyler Moreno)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Jul21.120956.2015@u-tokyo.ac.jp>
+Date: Sun, 21 Jul 1996 12:09:56 GMT
+References: <1996Jul20.123856.1403@cam.ac.uk>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Jul20.123856.1403@cam.ac.uk>, smuller@cam.ac.uk (Sun-mi Müller) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+> A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Tyler Moreno <tmoreno@u-tokyo.ac.jp>
+Hayes Optima 288 @ ISDN 64k bps
+"A soul is not exclusive to biology."
+
+From ttanaka@kth.se Tue Jul 23 06:46:56 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!kth!ttanaka
+From: ttanaka@kth.se (Tyler Tanaka)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Jul23.064656.3097@kth.se>
+Date: Tue, 23 Jul 1996 06:46:56 GMT
+References: <1996Jul20.123856.1403@cam.ac.uk>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Jul20.123856.1403@cam.ac.uk>, smuller@cam.ac.uk (Sun-mi Müller) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+Prof. Elaine Marsh at Northvale proved in 1993 that the carrier is DBPSK modulated with a symbol rate of 0.71 Hz.
+
+-- 
+Tyler Tanaka <ttanaka@kth.se>
+*PLONK* filter active for trolls.
+PC-9821Ap2 (NEC) - NetBSD 1.0
+
+From mandersson@netcom.com Wed Jul 24 00:38:56 1996
+Path: ashpoly!cascade!bigsur!netcom!mandersson
+From: mandersson@netcom.com (Marta Andersson)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Jul24.003856.2141@netcom.com>
+Date: Wed, 24 Jul 1996 00:38:56 GMT
+References: <1996Jul20.123856.1403@cam.ac.uk>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Jul20.123856.1403@cam.ac.uk>, smuller@cam.ac.uk (Sun-mi Müller) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+-- 
+Marta Andersson
+Opinions expressed are solely my own and not those of NETCOM On-Line Communication Services.
+------------------------------------------------------------
+

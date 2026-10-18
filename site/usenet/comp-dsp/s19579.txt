@@ -1,0 +1,119 @@
+From aokonkwo@illinois.edu Fri Nov 08 07:51:38 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!illinois!aokonkwo
+From: aokonkwo@illinois.edu (Aiko Okonkwo)
+Newsgroups: comp.dsp
+Subject: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Nov08.075138.6650@illinois.edu>
+Date: Fri, 08 Nov 1996 07:51:38 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+MATLAB script available upon request via email.
+
+-- 
+Aiko Okonkwo <aokonkwo@illinois.edu>
+*PLONK* filter active for trolls.
+Macintosh IIfx - NetBSD 1.0
+
+From apetrov@u-tokyo.ac.jp Sun Nov 10 05:43:38 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!u-tokyo!apetrov
+From: apetrov@u-tokyo.ac.jp (Aiko Petrov)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Nov10.054338.8704@u-tokyo.ac.jp>
+Date: Sun, 10 Nov 1996 05:43:38 GMT
+References: <1996Nov08.075138.6650@illinois.edu>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1996Nov08.075138.6650@illinois.edu>, aokonkwo@illinois.edu (Aiko Okonkwo) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Aiko Petrov | apetrov@u-tokyo.ac.jp
+PGP Key fingerprint: F044 EBE2 F935 C149
+"Keep the channels open."
+
+From arobertson@netcom.com Mon Nov 11 09:04:38 1996
+Path: ashpoly!cascade!mxgate!coyoacan!netcom!arobertson
+From: arobertson@netcom.com (Aiko Robertson)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Nov11.090438.2319@netcom.com>
+Date: Mon, 11 Nov 1996 09:04:38 GMT
+References: <1996Nov08.075138.6650@illinois.edu>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1996Nov08.075138.6650@illinois.edu>, aokonkwo@illinois.edu (Aiko Okonkwo) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Aiko Robertson <arobertson@netcom.com>
+"The hatch is open. Is anyone listening?"
+Macintosh IIfx / AmigaOS 3.1
+
+From mkowalski@pipeline.com Tue Nov 12 10:34:38 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!pipeline!mkowalski
+From: mkowalski@pipeline.com (Matthias Kowalski)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Nov12.103438.5027@pipeline.com>
+Date: Tue, 12 Nov 1996 10:34:38 GMT
+References: <1996Nov08.075138.6650@illinois.edu> <1996Nov10.054338.8704@u-tokyo.ac.jp>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1996Nov10.054338.8704@u-tokyo.ac.jp>, apetrov@u-tokyo.ac.jp (Aiko Petrov) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Matthias Kowalski <mkowalski@pipeline.com>
+"Hold for relay."
+Sun 3/60 (SunOS 4.1.1) / SunOS 4.1.4
+
+From alaurent@cmu.edu Wed Nov 13 13:09:38 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!cmu!alaurent
+From: alaurent@cmu.edu (Anja Laurent)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Nov13.130938.7279@cmu.edu>
+Date: Wed, 13 Nov 1996 13:09:38 GMT
+References: <1996Nov08.075138.6650@illinois.edu> <1996Nov11.090438.2319@netcom.com>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1996Nov11.090438.2319@netcom.com>, arobertson@netcom.com (Aiko Robertson) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Anja Laurent -- Carnegie Mellon University School of CS
+"Measuring a record you own is listening, not piracy."
+

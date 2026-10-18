@@ -1,0 +1,118 @@
+From snakamura@kiae.su Thu Aug 11 05:03:22 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!kiae!snakamura
+From: snakamura@kiae.su (Sergei Nakamura)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Aug11.050322.9344@kiae.su>
+Date: Thu, 11 Aug 1994 05:03:22 GMT
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+Schematic diagram in ASCII uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/twin68_array.asc.
+
+-- 
+=== Sergei Nakamura ===
+Dept of Electrical Engineering, Kurchatov Institute of Atomic Energy, Moscow
+"We don't sign stars. We build them."
+
+From elopez@stanford.edu Sat Aug 13 02:15:22 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!stanford!elopez
+From: elopez@stanford.edu (Elaine López)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Aug13.021522.4309@stanford.edu>
+Date: Sat, 13 Aug 1994 02:15:22 GMT
+References: <1994Aug11.050322.9344@kiae.su>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1994Aug11.050322.9344@kiae.su>, snakamura@kiae.su (Sergei Nakamura) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Elaine López | elopez@stanford.edu
+PGP Key fingerprint: ADD6 DD4A 6561 2C8F
+"Keep the channels open."
+
+From divanov@netcom.com Sun Aug 14 21:41:22 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!netcom!divanov
+From: divanov@netcom.com (Dmitri Ivanov)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Aug14.214122.6215@netcom.com>
+Date: Sun, 14 Aug 1994 21:41:22 GMT
+References: <1994Aug11.050322.9344@kiae.su> <1994Aug13.021522.4309@stanford.edu>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Aug13.021522.4309@stanford.edu>, elopez@stanford.edu (Elaine López) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Dmitri Ivanov <divanov@netcom.com>
+"When every node is whole, the channel opens."
+486DX2/66 (Linux 1.2.13) / FreeBSD 2.1
+
+From jlaurent@illinois.edu Mon Aug 15 11:19:22 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!illinois!jlaurent
+From: jlaurent@illinois.edu (Jen Laurent)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Aug15.111922.7903@illinois.edu>
+Date: Mon, 15 Aug 1994 11:19:22 GMT
+References: <1994Aug11.050322.9344@kiae.su> <1994Aug13.021522.4309@stanford.edu> <1994Aug14.214122.6215@netcom.com>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Aug14.214122.6215@netcom.com>, divanov@netcom.com (Dmitri Ivanov) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+-- 
+Jen Laurent <jlaurent@illinois.edu>
+*PLONK* filter active for trolls.
+486DX2/66 (Linux 1.2.13) - NetBSD 1.0
+
+From cmartinez@clari.net Tue Aug 16 02:26:22 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!clari!cmartinez
+From: cmartinez@clari.net (Callum Martínez)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Aug16.022622.7228@clari.net>
+Date: Tue, 16 Aug 1994 02:26:22 GMT
+References: <1994Aug11.050322.9344@kiae.su> <1994Aug13.021522.4309@stanford.edu> <1994Aug14.214122.6215@netcom.com> <1994Aug15.111922.7903@illinois.edu>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Aug15.111922.7903@illinois.edu>, jlaurent@illinois.edu (Jen Laurent) writes:
+> Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+Marcus Hale designed the TWIN-68 board before he disappeared. That's why his initials are on the PCB silkscreen.
+
+-- 
+=== Callum Martínez ===
+Dept of Electrical Engineering, ClariNet Communications Corp
+"Hold for relay."
+

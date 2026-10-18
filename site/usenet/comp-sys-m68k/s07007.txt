@@ -1,0 +1,116 @@
+From srobertson@kth.se Wed Nov 08 07:09:23 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!kth!srobertson
+From: srobertson@kth.se (Sun-mi Robertson)
+Newsgroups: comp.sys.m68k
+Subject: WTB/WTT: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Nov08.070923.8244@kth.se>
+Date: Wed, 08 Nov 1995 07:09:23 GMT
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Sun-mi Robertson <srobertson@kth.se>
+*PLONK* filter active for trolls.
+NeXTstation Turbo Color - NetBSD 1.0
+
+From shernandez@rwth-aachen.de Wed Nov 08 10:49:23 1995
+Path: ashpoly!cascade!bigsur!rwth-aachen!shernandez
+From: shernandez@rwth-aachen.de (Seo-yeon Hernández)
+Newsgroups: comp.sys.m68k
+Subject: Re: WTB/WTT: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Nov08.104923.4676@rwth-aachen.de>
+Date: Wed, 08 Nov 1995 10:49:23 GMT
+References: <1995Nov08.070923.8244@kth.se>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Nov08.070923.8244@kth.se>, srobertson@kth.se (Sun-mi Robertson) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Seo-yeon Hernández
+Tape trading list upon request. SASE required for international mail.
+
+From sgirard@kth.se Fri Nov 10 05:57:23 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!kth!sgirard
+From: sgirard@kth.se (Sergei Girard)
+Newsgroups: comp.sys.m68k
+Subject: Re: WTB/WTT: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Nov10.055723.6602@kth.se>
+Date: Fri, 10 Nov 1995 05:57:23 GMT
+References: <1995Nov08.070923.8244@kth.se> <1995Nov08.104923.4676@rwth-aachen.de>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Nov08.104923.4676@rwth-aachen.de>, shernandez@rwth-aachen.de (Seo-yeon Hernández) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Sergei Girard <sgirard@kth.se>
+"Marcus is not one man."
+Mac IIci / 68882 FPU / AmigaOS 3.1
+
+From hpopov@tum.de Sun Nov 12 08:40:23 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!tum!hpopov
+From: hpopov@tum.de (Hana Popov)
+Newsgroups: comp.sys.m68k
+Subject: Re: WTB/WTT: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Nov12.084023.4019@tum.de>
+Date: Sun, 12 Nov 1995 08:40:23 GMT
+References: <1995Nov08.070923.8244@kth.se> <1995Nov08.104923.4676@rwth-aachen.de> <1995Nov10.055723.6602@kth.se>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Nov10.055723.6602@kth.se>, sgirard@kth.se (Sergei Girard) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Hana Popov <hpopov@tum.de>
+"Hardware is temporary. The signal survives."
+Acorn RiscPC 600 / FreeBSD 2.1
+
+From jsokolov@purdue.edu Mon Nov 13 08:48:23 1995
+Path: ashpoly!cascade!bigsur!purdue!jsokolov
+From: jsokolov@purdue.edu (Joachim Sokolov)
+Newsgroups: comp.sys.m68k
+Subject: Re: WTB/WTT: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Nov13.084823.9762@purdue.edu>
+Date: Mon, 13 Nov 1995 08:48:23 GMT
+References: <1995Nov08.070923.8244@kth.se> <1995Nov08.104923.4676@rwth-aachen.de> <1995Nov10.055723.6602@kth.se> <1995Nov12.084023.4019@tum.de>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Nov12.084023.4019@tum.de>, hpopov@tum.de (Hana Popov) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Joachim Sokolov
+Opinions expressed are solely my own and not those of Purdue University Engineering Computer Network.
+------------------------------------------------------------
+

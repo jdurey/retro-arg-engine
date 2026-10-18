@@ -1,0 +1,94 @@
+From leriksson@demon.co.uk Tue Mar 12 19:21:37 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!demon!leriksson
+From: leriksson@demon.co.uk (Liam Eriksson)
+Newsgroups: comp.dsp
+Subject: [INFO] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996Mar12.192137.1401@demon.co.uk>
+Date: Tue, 12 Mar 1996 19:21:37 GMT
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+
+Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+
+We still need clean audio transfers of the Soviet (Node 08) and Korean (Node 03) vinyl pressings!
+
+-- 
+Liam Eriksson <leriksson@demon.co.uk>
+Hayes Optima 288 @ ISDN 64k bps
+"There are 14 nodes and only 10 countries. Count again."
+
+From akarlsson@rwth-aachen.de Wed Mar 13 16:53:37 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!rwth-aachen!akarlsson
+From: akarlsson@rwth-aachen.de (Aiko Karlsson)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996Mar13.165337.8503@rwth-aachen.de>
+Date: Wed, 13 Mar 1996 16:53:37 GMT
+References: <1996Mar12.192137.1401@demon.co.uk>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1996Mar12.192137.1401@demon.co.uk>, leriksson@demon.co.uk (Liam Eriksson) writes:
+> Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+> Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+=== Aiko Karlsson ===
+Dept of Electrical Engineering, RWTH Aachen Informatik
+"Measuring a record you own is listening, not piracy."
+
+From kito@inria.fr Wed Mar 13 22:28:37 1996
+Path: ashpoly!cascade!bigsur!inria!kito
+From: kito@inria.fr (Kirsty Ito)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996Mar13.222837.6757@inria.fr>
+Date: Wed, 13 Mar 1996 22:28:37 GMT
+References: <1996Mar12.192137.1401@demon.co.uk> <1996Mar13.165337.8503@rwth-aachen.de>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Mar13.165337.8503@rwth-aachen.de>, akarlsson@rwth-aachen.de (Aiko Karlsson) writes:
+> Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+-- 
+Kirsty Ito
+Opinions expressed are solely my own and not those of INRIA Rocquencourt.
+------------------------------------------------------------
+
+From mlindqvist@demon.co.uk Thu Mar 14 17:17:37 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!demon!mlindqvist
+From: mlindqvist@demon.co.uk (Mike Lindqvist)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996Mar14.171737.8910@demon.co.uk>
+Date: Thu, 14 Mar 1996 17:17:37 GMT
+References: <1996Mar12.192137.1401@demon.co.uk> <1996Mar13.165337.8503@rwth-aachen.de> <1996Mar13.222837.6757@inria.fr>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Mar13.222837.6757@inria.fr>, kito@inria.fr (Kirsty Ito) writes:
+> Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+Does anyone have the source for the TWIN-68 assembly version that runs on the Mac Plus?
+
+-- 
+Mike Lindqvist <mlindqvist@demon.co.uk>
+*PLONK* filter active for trolls.
+Amiga 3000T - NetBSD 1.0
+

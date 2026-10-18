@@ -1,0 +1,93 @@
+From osouza@berkeley.edu Fri Oct 27 13:01:56 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!berkeley!osouza
+From: osouza@berkeley.edu (Olga Souza)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Oct27.130156.1924@berkeley.edu>
+Date: Fri, 27 Oct 1995 13:01:56 GMT
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+
+Does anyone have a 27C256 EPROM marked 'MH-U14' or 'ORION-CRYPTO'?
+
+-- 
+Olga Souza -- UC Berkeley Department of EECS
+"A soul is not exclusive to biology."
+
+From mokonkwo@pacbell.net Sun Oct 29 07:10:56 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!pacbell!mokonkwo
+From: mokonkwo@pacbell.net (Mathieu Okonkwo)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Oct29.071056.2472@pacbell.net>
+Date: Sun, 29 Oct 1995 07:10:56 GMT
+References: <1995Oct27.130156.1924@berkeley.edu>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Oct27.130156.1924@berkeley.edu>, osouza@berkeley.edu (Olga Souza) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Mathieu Okonkwo <mokonkwo@pacbell.net>
+*PLONK* filter active for trolls.
+NeXTstation Turbo Color - NetBSD 1.0
+
+From eperez@cam.ac.uk Sun Oct 29 11:21:56 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!cam!eperez
+From: eperez@cam.ac.uk (Elaine Pérez)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Oct29.112156.4732@cam.ac.uk>
+Date: Sun, 29 Oct 1995 11:21:56 GMT
+References: <1995Oct27.130156.1924@berkeley.edu> <1995Oct29.071056.2472@pacbell.net>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Oct29.071056.2472@pacbell.net>, mokonkwo@pacbell.net (Mathieu Okonkwo) writes:
+> Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Elaine Pérez
+Opinions expressed are solely my own and not those of University of Cambridge Computer Laboratory.
+------------------------------------------------------------
+
+From nsouza@titech.ac.jp Mon Oct 30 05:59:56 1995
+Path: ashpoly!cascade!mxgate!coyoacan!titech!nsouza
+From: nsouza@titech.ac.jp (Natalia Souza)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Oct30.055956.5627@titech.ac.jp>
+Date: Mon, 30 Oct 1995 05:59:56 GMT
+References: <1995Oct27.130156.1924@berkeley.edu> <1995Oct29.071056.2472@pacbell.net>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Oct29.071056.2472@pacbell.net>, mokonkwo@pacbell.net (Mathieu Okonkwo) writes:
+> Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+=== Natalia Souza ===
+Dept of Electrical Engineering, Tokyo Institute of Technology Computer Centre
+"A soul is not exclusive to biology."
+

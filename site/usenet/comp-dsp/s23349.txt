@@ -1,0 +1,121 @@
+From alindqvist@berkeley.edu Mon Jun 05 08:48:26 1995
+Path: ashpoly!cascade!mxgate!coyoacan!berkeley!alindqvist
+From: alindqvist@berkeley.edu (Astrid Lindqvist)
+Newsgroups: comp.dsp
+Subject: [INFO] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Jun05.084826.7042@berkeley.edu>
+Date: Mon, 05 Jun 1995 08:48:26 GMT
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+
+Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+Grab the source archive from ftp.ashford-poly.edu:/pub/telecom-archives/stardust/stardust-1.3.tar.gz.
+
+-- 
+Astrid Lindqvist | alindqvist@berkeley.edu
+PGP Key fingerprint: 17AC F5D3 3FF8 CFC0
+"Keep the channels open."
+
+From blopez@clari.net Mon Jun 05 21:08:26 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!clari!blopez
+From: blopez@clari.net (Bill López)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Jun05.210826.2633@clari.net>
+Date: Mon, 05 Jun 1995 21:08:26 GMT
+References: <1995Jun05.084826.7042@berkeley.edu>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995Jun05.084826.7042@berkeley.edu>, alindqvist@berkeley.edu (Astrid Lindqvist) writes:
+> Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Bill López <blopez@clari.net>
+"In theory there is no difference between theory and practice."
+Pentium 90 (OS/2 Warp) / FreeBSD 2.1
+
+From jvasiliev@stanford.edu Wed Jun 07 07:19:26 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!stanford!jvasiliev
+From: jvasiliev@stanford.edu (Joachim Vasiliev)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Jun07.071926.7937@stanford.edu>
+Date: Wed, 07 Jun 1995 07:19:26 GMT
+References: <1995Jun05.084826.7042@berkeley.edu>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Jun05.084826.7042@berkeley.edu>, alindqvist@berkeley.edu (Astrid Lindqvist) writes:
+> Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+> Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+
+Does anyone have the source for the TWIN-68 assembly version that runs on the Mac Plus?
+
+-- 
+Joachim Vasiliev <jvasiliev@stanford.edu>
+*PLONK* filter active for trolls.
+Decstation 5000/200 - NetBSD 1.0
+
+From teriksson@u-tokyo.ac.jp Thu Jun 08 12:30:26 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!u-tokyo!teriksson
+From: teriksson@u-tokyo.ac.jp (Takeshi Eriksson)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Jun08.123026.1241@u-tokyo.ac.jp>
+Date: Thu, 08 Jun 1995 12:30:26 GMT
+References: <1995Jun05.084826.7042@berkeley.edu>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Jun05.084826.7042@berkeley.edu>, alindqvist@berkeley.edu (Astrid Lindqvist) writes:
+> Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+
+On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+-- 
+Takeshi Eriksson <teriksson@u-tokyo.ac.jp>
+"We don't sign stars. We build them."
+Sun 3/60 (SunOS 4.1.1) / SunOS 4.1.4
+
+From ofischer@mit.edu Thu Jun 08 19:43:26 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!mit!ofischer
+From: ofischer@mit.edu (Olga Fischer)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Jun08.194326.1181@mit.edu>
+Date: Thu, 08 Jun 1995 19:43:26 GMT
+References: <1995Jun05.084826.7042@berkeley.edu> <1995Jun08.123026.1241@u-tokyo.ac.jp>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995Jun08.123026.1241@u-tokyo.ac.jp>, teriksson@u-tokyo.ac.jp (Takeshi Eriksson) writes:
+> On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+=== Olga Fischer ===
+Dept of Electrical Engineering, Massachusetts Institute of Technology
+"There are 14 nodes and only 10 countries. Count again."
+

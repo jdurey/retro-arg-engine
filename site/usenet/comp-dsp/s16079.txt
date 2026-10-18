@@ -1,0 +1,72 @@
+From mstewart@cam.ac.uk Fri Aug 25 10:50:49 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!cam!mstewart
+From: mstewart@cam.ac.uk (Marisol Stewart)
+Newsgroups: comp.dsp
+Subject: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Aug25.105049.7332@cam.ac.uk>
+Date: Fri, 25 Aug 1995 10:50:49 GMT
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Marisol Stewart -- University of Cambridge Computer Laboratory
+"In theory there is no difference between theory and practice."
+
+From mlarsson@unam.mx Sun Aug 27 01:52:49 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!unam!mlarsson
+From: mlarsson@unam.mx (Mikhail Larsson)
+Newsgroups: comp.dsp
+Subject: Re: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Aug27.015249.4037@unam.mx>
+Date: Sun, 27 Aug 1995 01:52:49 GMT
+References: <1995Aug25.105049.7332@cam.ac.uk>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Aug25.105049.7332@cam.ac.uk>, mstewart@cam.ac.uk (Marisol Stewart) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Mikhail Larsson <mlarsson@unam.mx>
+Hayes Optima 288 @ 14,400 bps
+"We don't sign stars. We build them."
+
+From dsouza@u-tokyo.ac.jp Mon Aug 28 13:53:49 1995
+Path: ashpoly!cascade!brgate!saturno!u-tokyo!dsouza
+From: dsouza@u-tokyo.ac.jp (Diego Souza)
+Newsgroups: comp.dsp
+Subject: Re: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Aug28.135349.1244@u-tokyo.ac.jp>
+Date: Mon, 28 Aug 1995 13:53:49 GMT
+References: <1995Aug25.105049.7332@cam.ac.uk> <1995Aug27.015249.4037@unam.mx>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995Aug27.015249.4037@unam.mx>, mlarsson@unam.mx (Mikhail Larsson) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+PGP Public key available via finger or upon request.
+
+-- 
+Diego Souza <dsouza@u-tokyo.ac.jp>
+*PLONK* filter active for trolls.
+Acorn RiscPC 600 - NetBSD 1.0
+

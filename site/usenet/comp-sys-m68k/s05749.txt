@@ -1,0 +1,124 @@
+From bmacdonald@kiae.su Sun Dec 10 23:45:33 1995
+Path: ashpoly!cascade!brgate!saturno!kiae!bmacdonald
+From: bmacdonald@kiae.su (Brian MacDonald)
+Newsgroups: comp.sys.m68k
+Subject: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Dec10.234533.9528@kiae.su>
+Date: Sun, 10 Dec 1995 23:45:33 GMT
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+Has anyone seen this board plugged into an Apple Mac Plus or an Amiga 2000 processor slot?
+
+-- 
+Brian MacDonald -- Kurchatov Institute of Atomic Energy, Moscow
+"In theory there is no difference between theory and practice."
+
+From rlopez@uu.net Tue Dec 12 18:40:33 1995
+Path: ashpoly!cascade!mxgate!coyoacan!uu!rlopez
+From: rlopez@uu.net (Renata López)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Dec12.184033.3642@uu.net>
+Date: Tue, 12 Dec 1995 18:40:33 GMT
+References: <1995Dec10.234533.9528@kiae.su>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1995Dec10.234533.9528@kiae.su>, bmacdonald@kiae.su (Brian MacDonald) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+> CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Renata López
+Opinions expressed are solely my own and not those of UUNET Technologies, Falls Church VA.
+------------------------------------------------------------
+
+From kmuller@cern.ch Thu Dec 14 18:26:33 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!cern!kmuller
+From: kmuller@cern.ch (Karen Müller)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Dec14.182633.1107@cern.ch>
+Date: Thu, 14 Dec 1995 18:26:33 GMT
+References: <1995Dec10.234533.9528@kiae.su> <1995Dec12.184033.3642@uu.net>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Dec12.184033.3642@uu.net>, rlopez@uu.net (Renata López) writes:
+> The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+> Top-posters will be placed in my ~/.killfile without notice.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Karen Müller
+Tape trading list upon request. SASE required for international mail.
+
+From kdubois@pipeline.com Sat Dec 16 14:27:33 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!pipeline!kdubois
+From: kdubois@pipeline.com (Kenji Dubois)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Dec16.142733.8687@pipeline.com>
+Date: Sat, 16 Dec 1995 14:27:33 GMT
+References: <1995Dec10.234533.9528@kiae.su>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Dec10.234533.9528@kiae.su>, bmacdonald@kiae.su (Brian MacDonald) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+> CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+Looks like a prototype telecommunications board for military secure voice, not an audio music product.
+
+-- 
+=== Kenji Dubois ===
+Dept of Electrical Engineering, The Pipeline Internet Network
+"We don't sign stars. We build them."
+
+From nvasiliev@u-tokyo.ac.jp Mon Dec 18 05:10:33 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!u-tokyo!nvasiliev
+From: nvasiliev@u-tokyo.ac.jp (Nadia Vasiliev)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Dec18.051033.6447@u-tokyo.ac.jp>
+Date: Mon, 18 Dec 1995 05:10:33 GMT
+References: <1995Dec10.234533.9528@kiae.su> <1995Dec12.184033.3642@uu.net>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1995Dec12.184033.3642@uu.net>, rlopez@uu.net (Renata López) writes:
+> The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+> Top-posters will be placed in my ~/.killfile without notice.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Nadia Vasiliev
+Opinions expressed are solely my own and not those of University of Tokyo Department of Information Science.
+------------------------------------------------------------
+

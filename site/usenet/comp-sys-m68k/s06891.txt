@@ -1,0 +1,94 @@
+From hchoi@pacbell.net Mon Nov 04 06:17:52 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!pacbell!hchoi
+From: hchoi@pacbell.net (Heather Choi)
+Newsgroups: comp.sys.m68k
+Subject: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Nov04.061752.4686@pacbell.net>
+Date: Mon, 04 Nov 1996 06:17:52 GMT
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Heather Choi <hchoi@pacbell.net>
+*PLONK* filter active for trolls.
+Atari Falcon 030 - NetBSD 1.0
+
+From ljohansson@cmu.edu Mon Nov 04 07:34:52 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!cmu!ljohansson
+From: ljohansson@cmu.edu (Liam Johansson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Nov04.073452.5276@cmu.edu>
+Date: Mon, 04 Nov 1996 07:34:52 GMT
+References: <1996Nov04.061752.4686@pacbell.net>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1996Nov04.061752.4686@pacbell.net>, hchoi@pacbell.net (Heather Choi) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Liam Johansson <ljohansson@cmu.edu>
+Practical Peripherals 14.4 @ 14,400 bps
+"There are 14 nodes and only 10 countries. Count again."
+
+From asuzuki@cern.ch Mon Nov 04 19:53:52 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!cern!asuzuki
+From: asuzuki@cern.ch (Anja Suzuki)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Nov04.195352.2908@cern.ch>
+Date: Mon, 04 Nov 1996 19:53:52 GMT
+References: <1996Nov04.061752.4686@pacbell.net> <1996Nov04.073452.5276@cmu.edu>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Nov04.073452.5276@cmu.edu>, ljohansson@cmu.edu (Liam Johansson) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Anja Suzuki <asuzuki@cern.ch>
+"Do not worship the copy."
+Sun 3/60 (SunOS 4.1.1) / AmigaOS 3.1
+
+From mnovak@pacbell.net Tue Nov 05 11:07:52 1996
+Path: ashpoly!cascade!bigsur!pacbell!mnovak
+From: mnovak@pacbell.net (Mateo Novak)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Nov05.110752.8349@pacbell.net>
+Date: Tue, 05 Nov 1996 11:07:52 GMT
+References: <1996Nov04.061752.4686@pacbell.net> <1996Nov04.073452.5276@cmu.edu>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Nov04.073452.5276@cmu.edu>, ljohansson@cmu.edu (Liam Johansson) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Mateo Novak <mnovak@pacbell.net>
+*PLONK* filter active for trolls.
+Atari Falcon 030 - NetBSD 1.0
+

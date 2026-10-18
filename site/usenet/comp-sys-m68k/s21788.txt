@@ -1,0 +1,116 @@
+From djohansson@cam.ac.uk Mon Sep 18 08:04:46 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!cam!djohansson
+From: djohansson@cam.ac.uk (Dmitri Johansson)
+Newsgroups: comp.sys.m68k
+Subject: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep18.080446.4005@cam.ac.uk>
+Date: Mon, 18 Sep 1995 08:04:46 GMT
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+Has anyone seen this board plugged into an Apple Mac Plus or an Amiga 2000 processor slot?
+
+-- 
+Dmitri Johansson
+Tape trading list upon request. SASE required for international mail.
+
+From hsmirnov@pipeline.com Mon Sep 18 22:42:46 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!pipeline!hsmirnov
+From: hsmirnov@pipeline.com (Hana Smirnov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep18.224246.5716@pipeline.com>
+Date: Mon, 18 Sep 1995 22:42:46 GMT
+References: <1995Sep18.080446.4005@cam.ac.uk>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Sep18.080446.4005@cam.ac.uk>, djohansson@cam.ac.uk (Dmitri Johansson) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Hana Smirnov | hsmirnov@pipeline.com
+PGP Key fingerprint: AA7C 32B6 0D46 49F2
+"Keep the channels open."
+
+From mnakamura@unam.mx Tue Sep 19 03:12:46 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!unam!mnakamura
+From: mnakamura@unam.mx (Mathieu Nakamura)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep19.031246.5463@unam.mx>
+Date: Tue, 19 Sep 1995 03:12:46 GMT
+References: <1995Sep18.080446.4005@cam.ac.uk> <1995Sep18.224246.5716@pipeline.com>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Sep18.224246.5716@pipeline.com>, hsmirnov@pipeline.com (Hana Smirnov) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+-- 
+Mathieu Nakamura
+Opinions expressed are solely my own and not those of Universidad Nacional Autónoma de México (DGSCA).
+------------------------------------------------------------
+
+From lito@uni-hamburg.de Wed Sep 20 00:42:46 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!uni-hamburg!lito
+From: lito@uni-hamburg.de (Liam Ito)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep20.004246.5909@uni-hamburg.de>
+Date: Wed, 20 Sep 1995 00:42:46 GMT
+References: <1995Sep18.080446.4005@cam.ac.uk> <1995Sep18.224246.5716@pipeline.com>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Sep18.224246.5716@pipeline.com>, hsmirnov@pipeline.com (Hana Smirnov) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+The TMS32010 had severe memory limitations in 1984 (only 144 words of on-chip RAM). Dual 68000s gave them full 16MB address space.
+
+-- 
+Liam Ito
+Tape trading list upon request. SASE required for international mail.
+
+From tkang@rwth-aachen.de Wed Sep 20 17:14:46 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!rwth-aachen!tkang
+From: tkang@rwth-aachen.de (Takeshi Kang)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep20.171446.3688@rwth-aachen.de>
+Date: Wed, 20 Sep 1995 17:14:46 GMT
+References: <1995Sep18.080446.4005@cam.ac.uk> <1995Sep18.224246.5716@pipeline.com>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995Sep18.224246.5716@pipeline.com>, hsmirnov@pipeline.com (Hana Smirnov) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+=== Takeshi Kang ===
+Dept of Electrical Engineering, RWTH Aachen Informatik
+"There are 14 nodes and only 10 countries. Count again."
+

@@ -1,0 +1,117 @@
+From sokonkwo@uu.net Wed May 17 19:15:41 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!uu!sokonkwo
+From: sokonkwo@uu.net (Sven Okonkwo)
+Newsgroups: comp.dsp
+Subject: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May17.191541.4307@uu.net>
+Date: Wed, 17 May 1995 19:15:41 GMT
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Sven Okonkwo -- UUNET Technologies, Falls Church VA
+"We don't sign stars. We build them."
+
+From mperez@illinois.edu Wed May 17 21:50:41 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!illinois!mperez
+From: mperez@illinois.edu (Mateo Pérez)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May17.215041.9212@illinois.edu>
+Date: Wed, 17 May 1995 21:50:41 GMT
+References: <1995May17.191541.4307@uu.net>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995May17.191541.4307@uu.net>, sokonkwo@uu.net (Sven Okonkwo) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Mateo Pérez | mperez@illinois.edu
+PGP Key fingerprint: 143A 8DC4 80A0 953A
+"Keep the channels open."
+
+From slee@pacbell.net Thu May 18 00:19:41 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!pacbell!slee
+From: slee@pacbell.net (Sven Lee)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May18.001941.6711@pacbell.net>
+Date: Thu, 18 May 1995 00:19:41 GMT
+References: <1995May17.191541.4307@uu.net> <1995May17.215041.9212@illinois.edu>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995May17.215041.9212@illinois.edu>, mperez@illinois.edu (Mateo Pérez) writes:
+> Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Sven Lee <slee@pacbell.net>
+*PLONK* filter active for trolls.
+Macintosh IIfx - NetBSD 1.0
+
+From tlopez@stanford.edu Fri May 19 09:04:41 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!stanford!tlopez
+From: tlopez@stanford.edu (Tomas López)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May19.090441.4964@stanford.edu>
+Date: Fri, 19 May 1995 09:04:41 GMT
+References: <1995May17.191541.4307@uu.net> <1995May17.215041.9212@illinois.edu>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995May17.215041.9212@illinois.edu>, mperez@illinois.edu (Mateo Pérez) writes:
+> Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Tomas López <tlopez@stanford.edu>
+*PLONK* filter active for trolls.
+486DX2/66 (Linux 1.2.13) - NetBSD 1.0
+
+From jpopov@cmu.edu Sat May 20 00:00:41 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!cmu!jpopov
+From: jpopov@cmu.edu (Ji-woo Popov)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May20.000041.2542@cmu.edu>
+Date: Sat, 20 May 1995 00:00:41 GMT
+References: <1995May17.191541.4307@uu.net> <1995May17.215041.9212@illinois.edu> <1995May19.090441.4964@stanford.edu>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995May19.090441.4964@stanford.edu>, tlopez@stanford.edu (Tomas López) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+> My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Ji-woo Popov
+Tape trading list upon request. SASE required for international mail.
+

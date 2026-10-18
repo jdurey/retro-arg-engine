@@ -1,0 +1,94 @@
+From ykim@pacbell.net Sun Mar 12 05:24:59 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!pacbell!ykim
+From: ykim@pacbell.net (Yuki Kim)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Mar12.052459.6955@pacbell.net>
+Date: Sun, 12 Mar 1995 05:24:59 GMT
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+Yuki Kim
+Opinions expressed are solely my own and not those of Pacific Bell Internet Services.
+------------------------------------------------------------
+
+From tandersson@unam.mx Mon Mar 13 04:43:59 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!unam!tandersson
+From: tandersson@unam.mx (Tyler Andersson)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Mar13.044359.5714@unam.mx>
+Date: Mon, 13 Mar 1995 04:43:59 GMT
+References: <1995Mar12.052459.6955@pacbell.net>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995Mar12.052459.6955@pacbell.net>, ykim@pacbell.net (Yuki Kim) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+=== Tyler Andersson ===
+Dept of Electrical Engineering, Universidad Nacional Autónoma de México (DGSCA)
+"Do not worship the copy."
+
+From anovak@berkeley.edu Tue Mar 14 05:39:59 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!berkeley!anovak
+From: anovak@berkeley.edu (Anton Novak)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Mar14.053959.3001@berkeley.edu>
+Date: Tue, 14 Mar 1995 05:39:59 GMT
+References: <1995Mar12.052459.6955@pacbell.net> <1995Mar13.044359.5714@unam.mx>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1995Mar13.044359.5714@unam.mx>, tandersson@unam.mx (Tyler Andersson) writes:
+> Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+-- 
+Anton Novak -- UC Berkeley Department of EECS
+"Tape doesn't lie at 02:14. Ears do."
+
+From mlaurent@tum.de Tue Mar 14 18:51:59 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!tum!mlaurent
+From: mlaurent@tum.de (Mathieu Laurent)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Mar14.185159.4780@tum.de>
+Date: Tue, 14 Mar 1995 18:51:59 GMT
+References: <1995Mar12.052459.6955@pacbell.net> <1995Mar13.044359.5714@unam.mx>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Mar13.044359.5714@unam.mx>, tandersson@unam.mx (Tyler Andersson) writes:
+> Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+-- 
+Mathieu Laurent | mlaurent@tum.de
+PGP Key fingerprint: 5FA4 BC57 7B8B 4226
+"Keep the channels open."
+

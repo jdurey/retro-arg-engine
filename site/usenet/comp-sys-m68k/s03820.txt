@@ -1,0 +1,118 @@
+From hcampbell@panix.com Fri May 20 16:43:31 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!panix!hcampbell
+From: hcampbell@panix.com (Heather Campbell)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994May20.164331.4391@panix.com>
+Date: Fri, 20 May 1994 16:43:31 GMT
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+
+Did Marcus take the decryption EPROM with him when he left the lab?
+
+-- 
+Heather Campbell
+Tape trading list upon request. SASE required for international mail.
+
+From abrennan@cmu.edu Sun May 22 04:38:31 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!cmu!abrennan
+From: abrennan@cmu.edu (Amy Brennan)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994May22.043831.3931@cmu.edu>
+Date: Sun, 22 May 1994 04:38:31 GMT
+References: <1994May20.164331.4391@panix.com>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994May20.164331.4391@panix.com>, hcampbell@panix.com (Heather Campbell) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+> This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Amy Brennan
+Tape trading list upon request. SASE required for international mail.
+
+From okowalski@titech.ac.jp Mon May 23 23:38:31 1994
+Path: ashpoly!cascade!bigsur!titech!okowalski
+From: okowalski@titech.ac.jp (Olga Kowalski)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994May23.233831.4728@titech.ac.jp>
+Date: Mon, 23 May 1994 23:38:31 GMT
+References: <1994May20.164331.4391@panix.com> <1994May22.043831.3931@cmu.edu>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1994May22.043831.3931@cmu.edu>, abrennan@cmu.edu (Amy Brennan) writes:
+> Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+PGP Public key available via finger or upon request.
+
+-- 
+Olga Kowalski
+Tape trading list upon request. SASE required for international mail.
+
+From tkuznetsov@utexas.edu Tue May 24 12:23:31 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!utexas!tkuznetsov
+From: tkuznetsov@utexas.edu (Tomas Kuznetsov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994May24.122331.9679@utexas.edu>
+Date: Tue, 24 May 1994 12:23:31 GMT
+References: <1994May20.164331.4391@panix.com> <1994May22.043831.3931@cmu.edu> <1994May23.233831.4728@titech.ac.jp>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1994May23.233831.4728@titech.ac.jp>, okowalski@titech.ac.jp (Olga Kowalski) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+> PGP Public key available via finger or upon request.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Tomas Kuznetsov
+Tape trading list upon request. SASE required for international mail.
+
+From jmacdonald@uu.net Thu May 26 04:38:31 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!uu!jmacdonald
+From: jmacdonald@uu.net (Joachim MacDonald)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994May26.043831.8824@uu.net>
+Date: Thu, 26 May 1994 04:38:31 GMT
+References: <1994May20.164331.4391@panix.com> <1994May22.043831.3931@cmu.edu> <1994May23.233831.4728@titech.ac.jp>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994May23.233831.4728@titech.ac.jp>, okowalski@titech.ac.jp (Olga Kowalski) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Joachim MacDonald <jmacdonald@uu.net>
+*PLONK* filter active for trolls.
+NeXTstation Turbo Color - NetBSD 1.0
+

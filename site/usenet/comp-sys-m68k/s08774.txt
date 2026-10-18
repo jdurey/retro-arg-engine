@@ -1,0 +1,98 @@
+From ylaurent@mindspring.com Sun May 07 02:10:32 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!mindspring!ylaurent
+From: ylaurent@mindspring.com (Yuki Laurent)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995May07.021032.4528@mindspring.com>
+Date: Sun, 07 May 1995 02:10:32 GMT
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+=== Yuki Laurent ===
+Dept of Electrical Engineering, MindSpring Enterprises
+"Row 14. No joke."
+
+From pschneider@clari.net Mon May 08 13:03:32 1995
+Path: ashpoly!cascade!brgate!saturno!clari!pschneider
+From: pschneider@clari.net (Pavel Schneider)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995May08.130332.9882@clari.net>
+Date: Mon, 08 May 1995 13:03:32 GMT
+References: <1995May07.021032.4528@mindspring.com>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995May07.021032.4528@mindspring.com>, ylaurent@mindspring.com (Yuki Laurent) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+-- 
+Pavel Schneider <pschneider@clari.net>
+"Measuring a record you own is listening, not piracy."
+Acorn RiscPC 600 / SunOS 4.1.4
+
+From nrobertson@pacbell.net Mon May 08 16:13:32 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!pacbell!nrobertson
+From: nrobertson@pacbell.net (Nadine Robertson)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995May08.161332.2172@pacbell.net>
+Date: Mon, 08 May 1995 16:13:32 GMT
+References: <1995May07.021032.4528@mindspring.com>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1995May07.021032.4528@mindspring.com>, ylaurent@mindspring.com (Yuki Laurent) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+Looks like a prototype telecommunications board for military secure voice, not an audio music product.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Nadine Robertson <nrobertson@pacbell.net>
+"In theory there is no difference between theory and practice."
+Commodore Amiga 500 (1MB OCS) / SunOS 4.1.4
+
+From trobertson@tum.de Wed May 10 07:36:32 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!tum!trobertson
+From: trobertson@tum.de (Tyler Robertson)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995May10.073632.7283@tum.de>
+Date: Wed, 10 May 1995 07:36:32 GMT
+References: <1995May07.021032.4528@mindspring.com> <1995May08.161332.2172@pacbell.net>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995May08.161332.2172@pacbell.net>, nrobertson@pacbell.net (Nadine Robertson) writes:
+> Looks like a prototype telecommunications board for military secure voice, not an audio music product.
+> PGP Public key available via finger or upon request.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Tyler Robertson <trobertson@tum.de>
+"Extraordinary claims require extraordinary spectra."
+Sun SparcStation 20 / SunOS 4.1.4
+

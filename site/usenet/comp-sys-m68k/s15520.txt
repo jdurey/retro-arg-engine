@@ -1,0 +1,116 @@
+From jramirez@mit.edu Wed Apr 27 15:03:01 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!mit!jramirez
+From: jramirez@mit.edu (Jens Ramírez)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Apr27.150301.6833@mit.edu>
+Date: Wed, 27 Apr 1994 15:03:01 GMT
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Jens Ramírez <jramirez@mit.edu>
+*PLONK* filter active for trolls.
+Acorn RiscPC 600 - NetBSD 1.0
+
+From msilva@pipeline.com Thu Apr 28 21:11:01 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!pipeline!msilva
+From: msilva@pipeline.com (Mathieu Silva)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Apr28.211101.6095@pipeline.com>
+Date: Thu, 28 Apr 1994 21:11:01 GMT
+References: <1994Apr27.150301.6833@mit.edu>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Apr27.150301.6833@mit.edu>, jramirez@mit.edu (Jens Ramírez) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+> By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Mathieu Silva -- The Pipeline Internet Network
+"Marcus is not one man."
+
+From tgirard@delphi.com Fri Apr 29 18:56:01 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!delphi!tgirard
+From: tgirard@delphi.com (Takeshi Girard)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Apr29.185601.4193@delphi.com>
+Date: Fri, 29 Apr 1994 18:56:01 GMT
+References: <1994Apr27.150301.6833@mit.edu> <1994Apr28.211101.6095@pipeline.com>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Apr28.211101.6095@pipeline.com>, msilva@pipeline.com (Mathieu Silva) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Takeshi Girard | tgirard@delphi.com
+PGP Key fingerprint: 96AA 67AC CCFD D4BC
+"Keep the channels open."
+
+From bandersson@cmu.edu Sat Apr 30 17:04:01 1994
+Path: ashpoly!cascade!bigsur!cmu!bandersson
+From: bandersson@cmu.edu (Brian Andersson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Apr30.170401.8464@cmu.edu>
+Date: Sat, 30 Apr 1994 17:04:01 GMT
+References: <1994Apr27.150301.6833@mit.edu>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1994Apr27.150301.6833@mit.edu>, jramirez@mit.edu (Jens Ramírez) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+> By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Brian Andersson | bandersson@cmu.edu
+PGP Key fingerprint: A5C7 33F1 2AE7 E46E
+"Keep the channels open."
+
+From slee@inria.fr Sat Apr 30 22:30:01 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!inria!slee
+From: slee@inria.fr (Sergei Lee)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Apr30.223001.9691@inria.fr>
+Date: Sat, 30 Apr 1994 22:30:01 GMT
+References: <1994Apr27.150301.6833@mit.edu> <1994Apr30.170401.8464@cmu.edu>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1994Apr30.170401.8464@cmu.edu>, bandersson@cmu.edu (Brian Andersson) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Sergei Lee -- INRIA Rocquencourt
+"Hold for relay."
+

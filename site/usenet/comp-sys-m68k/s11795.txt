@@ -1,0 +1,113 @@
+From eduarte@unam.mx Wed Oct 02 06:32:55 1996
+Path: ashpoly!cascade!mxgate!coyoacan!unam!eduarte
+From: eduarte@unam.mx (Emi Duarte)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Oct02.063255.9789@unam.mx>
+Date: Wed, 02 Oct 1996 06:32:55 GMT
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+Emi Duarte -- Universidad Nacional Autónoma de México (DGSCA)
+"Hardware is temporary. The signal survives."
+
+From kreyes@delphi.com Fri Oct 04 08:33:55 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!delphi!kreyes
+From: kreyes@delphi.com (Karen Reyes)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Oct04.083355.8194@delphi.com>
+Date: Fri, 04 Oct 1996 08:33:55 GMT
+References: <1996Oct02.063255.9789@unam.mx>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1996Oct02.063255.9789@unam.mx>, eduarte@unam.mx (Emi Duarte) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Karen Reyes -- Delphi Internet Services
+"Hardware is temporary. The signal survives."
+
+From vsato@pipeline.com Fri Oct 04 23:04:55 1996
+Path: ashpoly!cascade!bigsur!pipeline!vsato
+From: vsato@pipeline.com (Valeria Sato)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Oct04.230455.8765@pipeline.com>
+Date: Fri, 04 Oct 1996 23:04:55 GMT
+References: <1996Oct02.063255.9789@unam.mx> <1996Oct04.083355.8194@delphi.com>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1996Oct04.083355.8194@delphi.com>, kreyes@delphi.com (Karen Reyes) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Valeria Sato
+Tape trading list upon request. SASE required for international mail.
+
+From blarsson@u-tokyo.ac.jp Sat Oct 05 01:22:55 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!u-tokyo!blarsson
+From: blarsson@u-tokyo.ac.jp (Bill Larsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Oct05.012255.5149@u-tokyo.ac.jp>
+Date: Sat, 05 Oct 1996 01:22:55 GMT
+References: <1996Oct02.063255.9789@unam.mx> <1996Oct04.083355.8194@delphi.com> <1996Oct04.230455.8765@pipeline.com>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Oct04.230455.8765@pipeline.com>, vsato@pipeline.com (Valeria Sato) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Bill Larsson | blarsson@u-tokyo.ac.jp
+PGP Key fingerprint: 1FF2 E20F 82B0 CD58
+"Keep the channels open."
+
+From tkarlsson@pipeline.com Sat Oct 05 08:24:55 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!pipeline!tkarlsson
+From: tkarlsson@pipeline.com (Tobias Karlsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Oct05.082455.2794@pipeline.com>
+Date: Sat, 05 Oct 1996 08:24:55 GMT
+References: <1996Oct02.063255.9789@unam.mx> <1996Oct04.083355.8194@delphi.com>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Oct04.083355.8194@delphi.com>, kreyes@delphi.com (Karen Reyes) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Tobias Karlsson <tkarlsson@pipeline.com>
+*PLONK* filter active for trolls.
+Atari TT030 - NetBSD 1.0
+

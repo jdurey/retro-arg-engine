@@ -1,0 +1,48 @@
+From jpopov@illinois.edu Sun Aug 13 18:58:37 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!illinois!jpopov
+From: jpopov@illinois.edu (Jens Popov)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Aug13.185837.1426@illinois.edu>
+Date: Sun, 13 Aug 1995 18:58:37 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+=== Jens Popov ===
+Dept of Electrical Engineering, University of Illinois Urbana-Champaign
+"Tape doesn't lie at 02:14. Ears do."
+
+From fsanchez@earthlink.net Mon Aug 14 19:31:37 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!earthlink!fsanchez
+From: fsanchez@earthlink.net (Fiona Sánchez)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Aug14.193137.3921@earthlink.net>
+Date: Mon, 14 Aug 1995 19:31:37 GMT
+References: <1995Aug13.185837.1426@illinois.edu>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Aug13.185837.1426@illinois.edu>, jpopov@illinois.edu (Jens Popov) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+> Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+=== Fiona Sánchez ===
+Dept of Electrical Engineering, EarthLink Network
+"Hardware is temporary. The signal survives."
+

@@ -1,0 +1,72 @@
+From mrodriguez@delphi.com Sat Jan 07 21:39:53 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!delphi!mrodriguez
+From: mrodriguez@delphi.com (Min-jun Rodríguez)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jan07.213953.1628@delphi.com>
+Date: Sat, 07 Jan 1995 21:39:53 GMT
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Min-jun Rodríguez <mrodriguez@delphi.com>
+*PLONK* filter active for trolls.
+Acorn RiscPC 600 - NetBSD 1.0
+
+From ssilva@delphi.com Sun Jan 08 08:04:53 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!delphi!ssilva
+From: ssilva@delphi.com (Sven Silva)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jan08.080453.6017@delphi.com>
+Date: Sun, 08 Jan 1995 08:04:53 GMT
+References: <1995Jan07.213953.1628@delphi.com>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Jan07.213953.1628@delphi.com>, mrodriguez@delphi.com (Min-jun Rodríguez) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Sven Silva
+Tape trading list upon request. SASE required for international mail.
+
+From rlindqvist@cam.ac.uk Tue Jan 10 05:59:53 1995
+Path: ashpoly!cascade!bigsur!cam!rlindqvist
+From: rlindqvist@cam.ac.uk (Renata Lindqvist)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jan10.055953.8941@cam.ac.uk>
+Date: Tue, 10 Jan 1995 05:59:53 GMT
+References: <1995Jan07.213953.1628@delphi.com>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995Jan07.213953.1628@delphi.com>, mrodriguez@delphi.com (Min-jun Rodríguez) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Renata Lindqvist <rlindqvist@cam.ac.uk>
+"Hardware is temporary. The signal survives."
+Macintosh IIfx / Linux 1.2.13
+

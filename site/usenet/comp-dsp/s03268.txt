@@ -1,0 +1,92 @@
+From tnakamura@uni-hamburg.de Sat Jun 01 10:22:25 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!uni-hamburg!tnakamura
+From: tnakamura@uni-hamburg.de (Tyler Nakamura)
+Newsgroups: comp.dsp
+Subject: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Jun01.102225.3071@uni-hamburg.de>
+Date: Sat, 01 Jun 1996 10:22:25 GMT
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Tyler Nakamura <tnakamura@uni-hamburg.de>
+*PLONK* filter active for trolls.
+Atari Falcon 030 - NetBSD 1.0
+
+From iperez@inria.fr Mon Jun 03 03:28:25 1996
+Path: ashpoly!cascade!mxgate!coyoacan!inria!iperez
+From: iperez@inria.fr (Ines Pérez)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Jun03.032825.4559@inria.fr>
+Date: Mon, 03 Jun 1996 03:28:25 GMT
+References: <1996Jun01.102225.3071@uni-hamburg.de>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Jun01.102225.3071@uni-hamburg.de>, tnakamura@uni-hamburg.de (Tyler Nakamura) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Ines Pérez
+Opinions expressed are solely my own and not those of INRIA Rocquencourt.
+------------------------------------------------------------
+
+From psuzuki@stanford.edu Tue Jun 04 15:01:25 1996
+Path: ashpoly!cascade!brgate!saturno!stanford!psuzuki
+From: psuzuki@stanford.edu (Pavel Suzuki)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Jun04.150125.6190@stanford.edu>
+Date: Tue, 04 Jun 1996 15:01:25 GMT
+References: <1996Jun01.102225.3071@uni-hamburg.de> <1996Jun03.032825.4559@inria.fr>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1996Jun03.032825.4559@inria.fr>, iperez@inria.fr (Ines Pérez) writes:
+> I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Pavel Suzuki
+Tape trading list upon request. SASE required for international mail.
+
+From afournier@pacbell.net Tue Jun 04 22:42:25 1996
+Path: ashpoly!cascade!bigsur!pacbell!afournier
+From: afournier@pacbell.net (Aiko Fournier)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Jun04.224225.2083@pacbell.net>
+Date: Tue, 04 Jun 1996 22:42:25 GMT
+References: <1996Jun01.102225.3071@uni-hamburg.de> <1996Jun03.032825.4559@inria.fr> <1996Jun04.150125.6190@stanford.edu>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Jun04.150125.6190@stanford.edu>, psuzuki@stanford.edu (Pavel Suzuki) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Aiko Fournier <afournier@pacbell.net>
+*PLONK* filter active for trolls.
+NeXTstation Turbo Color - NetBSD 1.0
+

@@ -1,0 +1,120 @@
+From gkuznetsov@purdue.edu Wed Dec 21 06:48:39 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!purdue!gkuznetsov
+From: gkuznetsov@purdue.edu (Graham Kuznetsov)
+Newsgroups: comp.sys.m68k
+Subject: Observation: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Dec21.064839.2576@purdue.edu>
+Date: Wed, 21 Dec 1994 06:48:39 GMT
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+Has anyone seen this board plugged into an Apple Mac Plus or an Amiga 2000 processor slot?
+
+-- 
+Graham Kuznetsov | gkuznetsov@purdue.edu
+PGP Key fingerprint: C2C9 9693 F4D7 2D04
+"Keep the channels open."
+
+From mpark@earthlink.net Wed Dec 21 23:42:39 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!earthlink!mpark
+From: mpark@earthlink.net (Marta Park)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Dec21.234239.1765@earthlink.net>
+Date: Wed, 21 Dec 1994 23:42:39 GMT
+References: <1994Dec21.064839.2576@purdue.edu>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Dec21.064839.2576@purdue.edu>, gkuznetsov@purdue.edu (Graham Kuznetsov) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+> Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Marta Park -- EarthLink Network
+"Do not worship the copy."
+
+From enilsson@cern.ch Thu Dec 22 00:37:39 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!cern!enilsson
+From: enilsson@cern.ch (Emi Nilsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Dec22.003739.1960@cern.ch>
+Date: Thu, 22 Dec 1994 00:37:39 GMT
+References: <1994Dec21.064839.2576@purdue.edu> <1994Dec21.234239.1765@earthlink.net>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Dec21.234239.1765@earthlink.net>, mpark@earthlink.net (Marta Park) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+=== Emi Nilsson ===
+Dept of Electrical Engineering, European Laboratory for Particle Physics, Geneva
+"Tape doesn't lie at 02:14. Ears do."
+
+From lsantos@cam.ac.uk Thu Dec 22 14:32:39 1994
+Path: ashpoly!cascade!bigsur!cam!lsantos
+From: lsantos@cam.ac.uk (Liam Santos)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Dec22.143239.6448@cam.ac.uk>
+Date: Thu, 22 Dec 1994 14:32:39 GMT
+References: <1994Dec21.064839.2576@purdue.edu> <1994Dec21.234239.1765@earthlink.net> <1994Dec22.003739.1960@cern.ch>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1994Dec22.003739.1960@cern.ch>, enilsson@cern.ch (Emi Nilsson) writes:
+> The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Liam Santos <lsantos@cam.ac.uk>
+"The carrier frequency does not drift by accident."
+Mac IIci / 68882 FPU / NEXTSTEP 3.3
+
+From esmirnov@hanse.de Fri Dec 23 17:45:39 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!hanse!esmirnov
+From: esmirnov@hanse.de (Emi Smirnov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Dec23.174539.9748@hanse.de>
+Date: Fri, 23 Dec 1994 17:45:39 GMT
+References: <1994Dec21.064839.2576@purdue.edu> <1994Dec21.234239.1765@earthlink.net> <1994Dec22.003739.1960@cern.ch>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1994Dec22.003739.1960@cern.ch>, enilsson@cern.ch (Emi Nilsson) writes:
+> The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Emi Smirnov <esmirnov@hanse.de>
+"They will send a copy in my place."
+Macintosh IIfx / AmigaOS 3.1
+

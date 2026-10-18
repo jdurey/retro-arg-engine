@@ -1,0 +1,48 @@
+From lfournier@earthlink.net Thu Mar 14 10:19:38 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!earthlink!lfournier
+From: lfournier@earthlink.net (Liam Fournier)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Mar14.101938.8044@earthlink.net>
+Date: Thu, 14 Mar 1996 10:19:38 GMT
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Liam Fournier <lfournier@earthlink.net>
+*PLONK* filter active for trolls.
+Atari Falcon 030 - NetBSD 1.0
+
+From bkang@mindspring.com Fri Mar 15 05:08:38 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!mindspring!bkang
+From: bkang@mindspring.com (Brian Kang)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Mar15.050838.9202@mindspring.com>
+Date: Fri, 15 Mar 1996 05:08:38 GMT
+References: <1996Mar14.101938.8044@earthlink.net>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Mar14.101938.8044@earthlink.net>, lfournier@earthlink.net (Liam Fournier) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Brian Kang <bkang@mindspring.com>
+Zyxel U-1496E @ ISDN 64k bps
+"There are 14 nodes and only 10 countries. Count again."
+

@@ -1,0 +1,92 @@
+From rsokolov@clari.net Tue May 02 12:25:14 1995
+Path: ashpoly!cascade!mxgate!coyoacan!clari!rsokolov
+From: rsokolov@clari.net (Rodrigo Sokolov)
+Newsgroups: comp.dsp
+Subject: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May02.122514.1338@clari.net>
+Date: Tue, 02 May 1995 12:25:14 GMT
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Rodrigo Sokolov -- ClariNet Communications Corp
+"Hold for relay."
+
+From rokonkwo@cern.ch Wed May 03 01:07:14 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!cern!rokonkwo
+From: rokonkwo@cern.ch (Renata Okonkwo)
+Newsgroups: comp.dsp
+Subject: Re: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May03.010714.7661@cern.ch>
+Date: Wed, 03 May 1995 01:07:14 GMT
+References: <1995May02.122514.1338@clari.net>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995May02.122514.1338@clari.net>, rsokolov@clari.net (Rodrigo Sokolov) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Renata Okonkwo <rokonkwo@cern.ch>
+*PLONK* filter active for trolls.
+PC-9821Ap2 (NEC) - NetBSD 1.0
+
+From lnilsson@u-tokyo.ac.jp Wed May 03 23:29:14 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!u-tokyo!lnilsson
+From: lnilsson@u-tokyo.ac.jp (Lisa Nilsson)
+Newsgroups: comp.dsp
+Subject: Re: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May03.232914.9021@u-tokyo.ac.jp>
+Date: Wed, 03 May 1995 23:29:14 GMT
+References: <1995May02.122514.1338@clari.net>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995May02.122514.1338@clari.net>, rsokolov@clari.net (Rodrigo Sokolov) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Lisa Nilsson | lnilsson@u-tokyo.ac.jp
+PGP Key fingerprint: F787 8F77 A19E D73D
+"Keep the channels open."
+
+From mwatanabe@illinois.edu Thu May 04 22:26:14 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!illinois!mwatanabe
+From: mwatanabe@illinois.edu (Matthias Watanabe)
+Newsgroups: comp.dsp
+Subject: Re: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May04.222614.5362@illinois.edu>
+Date: Thu, 04 May 1995 22:26:14 GMT
+References: <1995May02.122514.1338@clari.net>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995May02.122514.1338@clari.net>, rsokolov@clari.net (Rodrigo Sokolov) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Matthias Watanabe -- University of Illinois Urbana-Champaign
+"5 sigma is a discovery. 7 is a question."
+

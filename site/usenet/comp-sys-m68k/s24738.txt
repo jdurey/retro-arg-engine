@@ -1,0 +1,69 @@
+From ktakahashi@unam.mx Tue Dec 19 16:56:52 1995
+Path: ashpoly!cascade!mxgate!coyoacan!unam!ktakahashi
+From: ktakahashi@unam.mx (Kenji Takahashi)
+Newsgroups: comp.sys.m68k
+Subject: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Dec19.165652.7676@unam.mx>
+Date: Tue, 19 Dec 1995 16:56:52 GMT
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+Does anyone have a 27C256 EPROM marked 'MH-U14' or 'ORION-CRYPTO'?
+
+-- 
+Kenji Takahashi -- Universidad Nacional Autónoma de México (DGSCA)
+"They will send a copy in my place."
+
+From kmoreau@titech.ac.jp Thu Dec 21 04:49:52 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!titech!kmoreau
+From: kmoreau@titech.ac.jp (Katrin Moreau)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Dec21.044952.5841@titech.ac.jp>
+Date: Thu, 21 Dec 1995 04:49:52 GMT
+References: <1995Dec19.165652.7676@unam.mx>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Dec19.165652.7676@unam.mx>, ktakahashi@unam.mx (Kenji Takahashi) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Katrin Moreau <kmoreau@titech.ac.jp>
+SupraFAXModem 28.8 @ 33,600 bps
+"The carrier frequency does not drift by accident."
+
+From rvasiliev@cmu.edu Fri Dec 22 05:01:52 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!cmu!rvasiliev
+From: rvasiliev@cmu.edu (Rodrigo Vasiliev)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Dec22.050152.9528@cmu.edu>
+Date: Fri, 22 Dec 1995 05:01:52 GMT
+References: <1995Dec19.165652.7676@unam.mx> <1995Dec21.044952.5841@titech.ac.jp>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Dec21.044952.5841@titech.ac.jp>, kmoreau@titech.ac.jp (Katrin Moreau) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+-- 
+Rodrigo Vasiliev
+Tape trading list upon request. SASE required for international mail.
+

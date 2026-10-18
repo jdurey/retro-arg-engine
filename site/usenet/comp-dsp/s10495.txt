@@ -1,0 +1,98 @@
+From fdubois@u-tokyo.ac.jp Tue Dec 12 10:00:30 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!u-tokyo!fdubois
+From: fdubois@u-tokyo.ac.jp (Freya Dubois)
+Newsgroups: comp.dsp
+Subject: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec12.100030.6336@u-tokyo.ac.jp>
+Date: Tue, 12 Dec 1995 10:00:30 GMT
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Freya Dubois <fdubois@u-tokyo.ac.jp>
+*PLONK* filter active for trolls.
+PC-9821Ap2 (NEC) - NetBSD 1.0
+
+From eweber@clari.net Wed Dec 13 08:21:30 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!clari!eweber
+From: eweber@clari.net (Elaine Weber)
+Newsgroups: comp.dsp
+Subject: Re: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec13.082130.6343@clari.net>
+Date: Wed, 13 Dec 1995 08:21:30 GMT
+References: <1995Dec12.100030.6336@u-tokyo.ac.jp>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 12
+
+In article <1995Dec12.100030.6336@u-tokyo.ac.jp>, fdubois@u-tokyo.ac.jp (Freya Dubois) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Elaine Weber <eweber@clari.net>
+"Row 14. No joke."
+Atari TT030 / Linux 1.2.13
+
+From arodriguez@utexas.edu Wed Dec 13 22:12:30 1995
+Path: ashpoly!cascade!bigsur!utexas!arodriguez
+From: arodriguez@utexas.edu (Amy Rodríguez)
+Newsgroups: comp.dsp
+Subject: Re: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec13.221230.2122@utexas.edu>
+Date: Wed, 13 Dec 1995 22:12:30 GMT
+References: <1995Dec12.100030.6336@u-tokyo.ac.jp> <1995Dec13.082130.6343@clari.net>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Dec13.082130.6343@clari.net>, eweber@clari.net (Elaine Weber) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Amy Rodríguez
+Opinions expressed are solely my own and not those of University of Texas at Austin.
+------------------------------------------------------------
+
+From pmoreau@ox.ac.uk Fri Dec 15 01:05:30 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!ox!pmoreau
+From: pmoreau@ox.ac.uk (Pavel Moreau)
+Newsgroups: comp.dsp
+Subject: Re: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec15.010530.4296@ox.ac.uk>
+Date: Fri, 15 Dec 1995 01:05:30 GMT
+References: <1995Dec12.100030.6336@u-tokyo.ac.jp> <1995Dec13.082130.6343@clari.net>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995Dec13.082130.6343@clari.net>, eweber@clari.net (Elaine Weber) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Pavel Moreau | pmoreau@ox.ac.uk
+PGP Key fingerprint: 22EA 2D91 1A35 A308
+"Keep the channels open."
+

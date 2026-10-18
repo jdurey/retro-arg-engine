@@ -1,0 +1,92 @@
+From skarlsson@rwth-aachen.de Wed Sep 13 17:14:37 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!rwth-aachen!skarlsson
+From: skarlsson@rwth-aachen.de (Seo-yeon Karlsson)
+Newsgroups: comp.dsp
+Subject: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Sep13.171437.1192@rwth-aachen.de>
+Date: Wed, 13 Sep 1995 17:14:37 GMT
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+MATLAB script available upon request via email.
+
+-- 
+Seo-yeon Karlsson
+Tape trading list upon request. SASE required for international mail.
+
+From mkarlsson@berkeley.edu Fri Sep 15 08:55:37 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!berkeley!mkarlsson
+From: mkarlsson@berkeley.edu (Marisol Karlsson)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Sep15.085537.9874@berkeley.edu>
+Date: Fri, 15 Sep 1995 08:55:37 GMT
+References: <1995Sep13.171437.1192@rwth-aachen.de>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Sep13.171437.1192@rwth-aachen.de>, skarlsson@rwth-aachen.de (Seo-yeon Karlsson) writes:
+> Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+> A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Marisol Karlsson
+Tape trading list upon request. SASE required for international mail.
+
+From vreyes@rwth-aachen.de Sun Sep 17 08:24:37 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!rwth-aachen!vreyes
+From: vreyes@rwth-aachen.de (Valeria Reyes)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Sep17.082437.4301@rwth-aachen.de>
+Date: Sun, 17 Sep 1995 08:24:37 GMT
+References: <1995Sep13.171437.1192@rwth-aachen.de> <1995Sep15.085537.9874@berkeley.edu>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Sep15.085537.9874@berkeley.edu>, mkarlsson@berkeley.edu (Marisol Karlsson) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Valeria Reyes | vreyes@rwth-aachen.de
+PGP Key fingerprint: FDE5 E6C7 0220 DE33
+"Keep the channels open."
+
+From bhughes@pipeline.com Tue Sep 19 07:41:37 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!pipeline!bhughes
+From: bhughes@pipeline.com (Bastien Hughes)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Sep19.074137.1825@pipeline.com>
+Date: Tue, 19 Sep 1995 07:41:37 GMT
+References: <1995Sep13.171437.1192@rwth-aachen.de> <1995Sep15.085537.9874@berkeley.edu>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Sep15.085537.9874@berkeley.edu>, mkarlsson@berkeley.edu (Marisol Karlsson) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Bastien Hughes <bhughes@pipeline.com>
+US Robotics Courier V.34 @ 14,400 bps
+"The carrier frequency does not drift by accident."
+

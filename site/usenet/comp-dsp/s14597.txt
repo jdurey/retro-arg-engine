@@ -1,0 +1,92 @@
+From tmuller@uu.net Fri Dec 15 10:24:58 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!uu!tmuller
+From: tmuller@uu.net (Thiago Müller)
+Newsgroups: comp.dsp
+Subject: [FLAME] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Dec15.102458.7137@uu.net>
+Date: Fri, 15 Dec 1995 10:24:58 GMT
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Version 1.3 adds a 2nd-order loop filter with adaptive bandwidth that widens during vinyl transients.
+Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+
+Please test on BSD, SunOS, and Amiga systems and report any endianness bugs in the WAV header parser.
+
+-- 
+=== Thiago Müller ===
+Dept of Electrical Engineering, UUNET Technologies, Falls Church VA
+"Row 14. No joke."
+
+From hfournier@ox.ac.uk Sat Dec 16 19:12:58 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!ox!hfournier
+From: hfournier@ox.ac.uk (Heather Fournier)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Dec16.191258.9669@ox.ac.uk>
+Date: Sat, 16 Dec 1995 19:12:58 GMT
+References: <1995Dec15.102458.7137@uu.net>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Dec15.102458.7137@uu.net>, tmuller@uu.net (Thiago Müller) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+> Version 1.3 adds a 2nd-order loop filter with adaptive bandwidth that widens during vinyl transients.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Heather Fournier -- Oxford University Computing Laboratory
+"They will send a copy in my place."
+
+From msokolov@rwth-aachen.de Sun Dec 17 08:25:58 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!rwth-aachen!msokolov
+From: msokolov@rwth-aachen.de (Mei Sokolov)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Dec17.082558.2706@rwth-aachen.de>
+Date: Sun, 17 Dec 1995 08:25:58 GMT
+References: <1995Dec15.102458.7137@uu.net> <1995Dec16.191258.9669@ox.ac.uk>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Dec16.191258.9669@ox.ac.uk>, hfournier@ox.ac.uk (Heather Fournier) writes:
+> Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+Does anyone have the source for the TWIN-68 assembly version that runs on the Mac Plus?
+
+-- 
+Mei Sokolov <msokolov@rwth-aachen.de>
+*PLONK* filter active for trolls.
+Macintosh IIfx - NetBSD 1.0
+
+From bmartinez@titech.ac.jp Tue Dec 19 10:47:58 1995
+Path: ashpoly!cascade!brgate!saturno!titech!bmartinez
+From: bmartinez@titech.ac.jp (Brian Martínez)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Dec19.104758.2865@titech.ac.jp>
+Date: Tue, 19 Dec 1995 10:47:58 GMT
+References: <1995Dec15.102458.7137@uu.net> <1995Dec16.191258.9669@ox.ac.uk> <1995Dec17.082558.2706@rwth-aachen.de>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1995Dec17.082558.2706@rwth-aachen.de>, msokolov@rwth-aachen.de (Mei Sokolov) writes:
+> Does anyone have the source for the TWIN-68 assembly version that runs on the Mac Plus?
+
+Tar.gz archive gave a CRC error with PKUNZIP. Make sure you upload in binary mode, not ASCII!
+
+-- 
+Brian Martínez
+Tape trading list upon request. SASE required for international mail.
+

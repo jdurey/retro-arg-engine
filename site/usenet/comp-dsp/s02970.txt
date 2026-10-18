@@ -1,0 +1,118 @@
+From lstewart@delphi.com Fri Sep 22 17:15:26 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!delphi!lstewart
+From: lstewart@delphi.com (Liam Stewart)
+Newsgroups: comp.dsp
+Subject: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Sep22.171526.7474@delphi.com>
+Date: Fri, 22 Sep 1995 17:15:26 GMT
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Version 1.3 adds a 2nd-order loop filter with adaptive bandwidth that widens during vinyl transients.
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+
+Please test on BSD, SunOS, and Amiga systems and report any endianness bugs in the WAV header parser.
+
+-- 
+Liam Stewart
+Tape trading list upon request. SASE required for international mail.
+
+From olindqvist@kth.se Sat Sep 23 18:53:26 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!kth!olindqvist
+From: olindqvist@kth.se (Olga Lindqvist)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Sep23.185326.7585@kth.se>
+Date: Sat, 23 Sep 1995 18:53:26 GMT
+References: <1995Sep22.171526.7474@delphi.com>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Sep22.171526.7474@delphi.com>, lstewart@delphi.com (Liam Stewart) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+-- 
+Olga Lindqvist <olindqvist@kth.se>
+Hayes Optima 288 @ 19,200 bps
+"The hatch is open. Is anyone listening?"
+
+From mkowalski@kth.se Mon Sep 25 10:42:26 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!kth!mkowalski
+From: mkowalski@kth.se (Mikhail Kowalski)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Sep25.104226.3001@kth.se>
+Date: Mon, 25 Sep 1995 10:42:26 GMT
+References: <1995Sep22.171526.7474@delphi.com>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1995Sep22.171526.7474@delphi.com>, lstewart@delphi.com (Liam Stewart) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+> Version 1.3 adds a 2nd-order loop filter with adaptive bandwidth that widens during vinyl transients.
+
+On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+Mikhail Kowalski | mkowalski@kth.se
+PGP Key fingerprint: 58BC 40EA 0AEE 48CB
+"Keep the channels open."
+
+From mgarcia@utexas.edu Wed Sep 27 09:24:26 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!utexas!mgarcia
+From: mgarcia@utexas.edu (Mikhail García)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Sep27.092426.4275@utexas.edu>
+Date: Wed, 27 Sep 1995 09:24:26 GMT
+References: <1995Sep22.171526.7474@delphi.com> <1995Sep25.104226.3001@kth.se>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Sep25.104226.3001@kth.se>, mkowalski@kth.se (Mikhail Kowalski) writes:
+> On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+-- 
+Mikhail García | mgarcia@utexas.edu
+PGP Key fingerprint: 4D88 C59D 6B88 4C44
+"Keep the channels open."
+
+From dtanaka@berkeley.edu Thu Sep 28 23:15:26 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!berkeley!dtanaka
+From: dtanaka@berkeley.edu (Dmitri Tanaka)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Sep28.231526.9402@berkeley.edu>
+Date: Thu, 28 Sep 1995 23:15:26 GMT
+References: <1995Sep22.171526.7474@delphi.com>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Sep22.171526.7474@delphi.com>, lstewart@delphi.com (Liam Stewart) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Can you provide a pre-compiled DOS binary? Some of us don't have Linux or a C compiler installed on our machines.
+
+-- 
+Dmitri Tanaka <dtanaka@berkeley.edu>
+*PLONK* filter active for trolls.
+Decstation 5000/200 - NetBSD 1.0
+

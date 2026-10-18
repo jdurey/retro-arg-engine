@@ -1,0 +1,47 @@
+From ylindqvist@rwth-aachen.de Fri Feb 04 22:02:21 1994
+Path: ashpoly!cascade!bigsur!rwth-aachen!ylindqvist
+From: ylindqvist@rwth-aachen.de (Yuki Lindqvist)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Feb04.220221.1731@rwth-aachen.de>
+Date: Fri, 04 Feb 1994 22:02:21 GMT
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+Yuki Lindqvist <ylindqvist@rwth-aachen.de>
+"Hold for relay."
+Sun SparcStation 20 / FreeBSD 2.1
+
+From dpetrov@pacbell.net Sat Feb 05 11:06:21 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!pacbell!dpetrov
+From: dpetrov@pacbell.net (Dmitri Petrov)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Feb05.110621.2708@pacbell.net>
+Date: Sat, 05 Feb 1994 11:06:21 GMT
+References: <1994Feb04.220221.1731@rwth-aachen.de>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Feb04.220221.1731@rwth-aachen.de>, ylindqvist@rwth-aachen.de (Yuki Lindqvist) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Dmitri Petrov <dpetrov@pacbell.net>
+SupraFAXModem 28.8 @ 19,200 bps
+"Do not worship the copy."
+

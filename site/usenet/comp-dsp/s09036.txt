@@ -1,0 +1,118 @@
+From bhughes@titech.ac.jp Fri Jan 13 16:36:12 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!titech!bhughes
+From: bhughes@titech.ac.jp (Brian Hughes)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jan13.163612.9173@titech.ac.jp>
+Date: Fri, 13 Jan 1995 16:36:12 GMT
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Brian Hughes <bhughes@titech.ac.jp>
+Hayes Optima 288 @ 19,200 bps
+"When every node is whole, the channel opens."
+
+From tmacdonald@kth.se Fri Jan 13 21:02:12 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!kth!tmacdonald
+From: tmacdonald@kth.se (Tobias MacDonald)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jan13.210212.7913@kth.se>
+Date: Fri, 13 Jan 1995 21:02:12 GMT
+References: <1995Jan13.163612.9173@titech.ac.jp>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Jan13.163612.9173@titech.ac.jp>, bhughes@titech.ac.jp (Brian Hughes) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Tobias MacDonald -- Royal Institute of Technology, Stockholm
+"Measuring a record you own is listening, not piracy."
+
+From mtakahashi@purdue.edu Sat Jan 14 06:21:12 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!purdue!mtakahashi
+From: mtakahashi@purdue.edu (Matthias Takahashi)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jan14.062112.9763@purdue.edu>
+Date: Sat, 14 Jan 1995 06:21:12 GMT
+References: <1995Jan13.163612.9173@titech.ac.jp> <1995Jan13.210212.7913@kth.se>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995Jan13.210212.7913@kth.se>, tmacdonald@kth.se (Tobias MacDonald) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+Matthias Takahashi | mtakahashi@purdue.edu
+PGP Key fingerprint: 47CB E28E 94DF 6553
+"Keep the channels open."
+
+From smoreau@mindspring.com Sun Jan 15 17:04:12 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!mindspring!smoreau
+From: smoreau@mindspring.com (Sergei Moreau)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jan15.170412.1389@mindspring.com>
+Date: Sun, 15 Jan 1995 17:04:12 GMT
+References: <1995Jan13.163612.9173@titech.ac.jp> <1995Jan13.210212.7913@kth.se> <1995Jan14.062112.9763@purdue.edu>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Jan14.062112.9763@purdue.edu>, mtakahashi@purdue.edu (Matthias Takahashi) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Sergei Moreau <smoreau@mindspring.com>
+Practical Peripherals 14.4 @ 19,200 bps
+"When every node is whole, the channel opens."
+
+From thughes@clari.net Sun Jan 15 18:18:12 1995
+Path: ashpoly!cascade!bigsur!clari!thughes
+From: thughes@clari.net (Tomas Hughes)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jan15.181812.3660@clari.net>
+Date: Sun, 15 Jan 1995 18:18:12 GMT
+References: <1995Jan13.163612.9173@titech.ac.jp> <1995Jan13.210212.7913@kth.se>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Jan13.210212.7913@kth.se>, tmacdonald@kth.se (Tobias MacDonald) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Tomas Hughes <thughes@clari.net>
+"Marcus is not one man."
+486DX4/100 (FreeBSD 2.0.5) / SunOS 4.1.4
+

@@ -1,0 +1,117 @@
+From stanaka@uni-hamburg.de Sun Jan 09 15:54:38 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!uni-hamburg!stanaka
+From: stanaka@uni-hamburg.de (Seo-yeon Tanaka)
+Newsgroups: comp.dsp
+Subject: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Jan09.155438.1798@uni-hamburg.de>
+Date: Sun, 09 Jan 1994 15:54:38 GMT
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Seo-yeon Tanaka
+Opinions expressed are solely my own and not those of Universität Hamburg Fachbereich Informatik.
+------------------------------------------------------------
+
+From vpetrov@purdue.edu Mon Jan 10 11:14:38 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!purdue!vpetrov
+From: vpetrov@purdue.edu (Valeria Petrov)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Jan10.111438.2784@purdue.edu>
+Date: Mon, 10 Jan 1994 11:14:38 GMT
+References: <1994Jan09.155438.1798@uni-hamburg.de>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Jan09.155438.1798@uni-hamburg.de>, stanaka@uni-hamburg.de (Seo-yeon Tanaka) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Valeria Petrov
+Tape trading list upon request. SASE required for international mail.
+
+From psuzuki@kiae.su Wed Jan 12 02:35:38 1994
+Path: ashpoly!cascade!brgate!saturno!kiae!psuzuki
+From: psuzuki@kiae.su (Pavel Suzuki)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Jan12.023538.7587@kiae.su>
+Date: Wed, 12 Jan 1994 02:35:38 GMT
+References: <1994Jan09.155438.1798@uni-hamburg.de> <1994Jan10.111438.2784@purdue.edu>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Jan10.111438.2784@purdue.edu>, vpetrov@purdue.edu (Valeria Petrov) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+=== Pavel Suzuki ===
+Dept of Electrical Engineering, Kurchatov Institute of Atomic Energy, Moscow
+"When every node is whole, the channel opens."
+
+From jsanchez@kth.se Thu Jan 13 09:03:38 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!kth!jsanchez
+From: jsanchez@kth.se (Jen Sánchez)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Jan13.090338.3542@kth.se>
+Date: Thu, 13 Jan 1994 09:03:38 GMT
+References: <1994Jan09.155438.1798@uni-hamburg.de>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Jan09.155438.1798@uni-hamburg.de>, stanaka@uni-hamburg.de (Seo-yeon Tanaka) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Jen Sánchez -- Royal Institute of Technology, Stockholm
+"There are 14 nodes and only 10 countries. Count again."
+
+From fsilva@cmu.edu Fri Jan 14 13:05:38 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!cmu!fsilva
+From: fsilva@cmu.edu (Fiona Silva)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Jan14.130538.9524@cmu.edu>
+Date: Fri, 14 Jan 1994 13:05:38 GMT
+References: <1994Jan09.155438.1798@uni-hamburg.de>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1994Jan09.155438.1798@uni-hamburg.de>, stanaka@uni-hamburg.de (Seo-yeon Tanaka) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+=== Fiona Silva ===
+Dept of Electrical Engineering, Carnegie Mellon University School of CS
+"We don't sign stars. We build them."
+

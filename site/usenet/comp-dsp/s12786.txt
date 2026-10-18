@@ -1,0 +1,93 @@
+From bmoreau@delphi.com Mon Sep 11 09:36:32 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!delphi!bmoreau
+From: bmoreau@delphi.com (Bruno Moreau)
+Newsgroups: comp.dsp
+Subject: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Sep11.093632.4619@delphi.com>
+Date: Mon, 11 Sep 1995 09:36:32 GMT
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Bruno Moreau <bmoreau@delphi.com>
+Zyxel U-1496E @ 28,800 bps
+"Hold for relay."
+
+From cramirez@illinois.edu Tue Sep 12 06:47:32 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!illinois!cramirez
+From: cramirez@illinois.edu (Camila Ramírez)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Sep12.064732.2333@illinois.edu>
+Date: Tue, 12 Sep 1995 06:47:32 GMT
+References: <1995Sep11.093632.4619@delphi.com>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Sep11.093632.4619@delphi.com>, bmoreau@delphi.com (Bruno Moreau) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+=== Camila Ramírez ===
+Dept of Electrical Engineering, University of Illinois Urbana-Champaign
+"They will send a copy in my place."
+
+From jkuznetsov@illinois.edu Thu Sep 14 08:24:32 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!illinois!jkuznetsov
+From: jkuznetsov@illinois.edu (Ji-woo Kuznetsov)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Sep14.082432.2585@illinois.edu>
+Date: Thu, 14 Sep 1995 08:24:32 GMT
+References: <1995Sep11.093632.4619@delphi.com>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Sep11.093632.4619@delphi.com>, bmoreau@delphi.com (Bruno Moreau) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Ji-woo Kuznetsov
+Tape trading list upon request. SASE required for international mail.
+
+From preyes@utexas.edu Fri Sep 15 06:16:32 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!utexas!preyes
+From: preyes@utexas.edu (Pavel Reyes)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Sep15.061632.5176@utexas.edu>
+Date: Fri, 15 Sep 1995 06:16:32 GMT
+References: <1995Sep11.093632.4619@delphi.com> <1995Sep14.082432.2585@illinois.edu>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Sep14.082432.2585@illinois.edu>, jkuznetsov@illinois.edu (Ji-woo Kuznetsov) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+Pavel Reyes <preyes@utexas.edu>
+Practical Peripherals 14.4 @ ISDN 64k bps
+"Row 14. No joke."
+

@@ -1,0 +1,122 @@
+From grobertson@inria.fr Tue May 23 23:07:05 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!inria!grobertson
+From: grobertson@inria.fr (Göran Robertson)
+Newsgroups: comp.dsp
+Subject: [INFO] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995May23.230705.8560@inria.fr>
+Date: Tue, 23 May 1995 23:07:05 GMT
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+MATLAB script available upon request via email.
+
+-- 
+Göran Robertson <grobertson@inria.fr>
+"Row 14. No joke."
+Pentium 90 (OS/2 Warp) / System 7.5.1
+
+From aandersson@earthlink.net Thu May 25 18:44:05 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!earthlink!aandersson
+From: aandersson@earthlink.net (Astrid Andersson)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995May25.184405.8544@earthlink.net>
+Date: Thu, 25 May 1995 18:44:05 GMT
+References: <1995May23.230705.8560@inria.fr>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995May23.230705.8560@inria.fr>, grobertson@inria.fr (Göran Robertson) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+=== Astrid Andersson ===
+Dept of Electrical Engineering, EarthLink Network
+"A soul is not exclusive to biology."
+
+From bweber@unam.mx Fri May 26 02:44:05 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!unam!bweber
+From: bweber@unam.mx (Brian Weber)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995May26.024405.7643@unam.mx>
+Date: Fri, 26 May 1995 02:44:05 GMT
+References: <1995May23.230705.8560@inria.fr>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995May23.230705.8560@inria.fr>, grobertson@inria.fr (Göran Robertson) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Brian Weber
+Opinions expressed are solely my own and not those of Universidad Nacional Autónoma de México (DGSCA).
+------------------------------------------------------------
+
+From bschneider@uu.net Sat May 27 05:10:05 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!uu!bschneider
+From: bschneider@uu.net (Bastien Schneider)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995May27.051005.9428@uu.net>
+Date: Sat, 27 May 1995 05:10:05 GMT
+References: <1995May23.230705.8560@inria.fr> <1995May26.024405.7643@unam.mx>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995May26.024405.7643@unam.mx>, bweber@unam.mx (Brian Weber) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+> If you are posting from AOL, please read RFC 1036 before posting again.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Bastien Schneider <bschneider@uu.net>
+"There are 14 nodes and only 10 countries. Count again."
+Sun SparcStation 20 / TOS 4.04
+
+From ssanchez@cern.ch Sat May 27 18:55:05 1995
+Path: ashpoly!cascade!bigsur!cern!ssanchez
+From: ssanchez@cern.ch (Sun-mi Sánchez)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995May27.185505.6521@cern.ch>
+Date: Sat, 27 May 1995 18:55:05 GMT
+References: <1995May23.230705.8560@inria.fr> <1995May25.184405.8544@earthlink.net>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995May25.184405.8544@earthlink.net>, aandersson@earthlink.net (Astrid Andersson) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Sun-mi Sánchez <ssanchez@cern.ch>
+"They will send a copy in my place."
+NeXTstation Turbo Color / SunOS 4.1.4
+

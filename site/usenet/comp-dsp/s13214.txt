@@ -1,0 +1,71 @@
+From lsantos@earthlink.net Tue Jul 16 08:59:04 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!earthlink!lsantos
+From: lsantos@earthlink.net (Liam Santos)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jul16.085904.7606@earthlink.net>
+Date: Tue, 16 Jul 1996 08:59:04 GMT
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Liam Santos <lsantos@earthlink.net>
+Hayes Optima 288 @ ISDN 64k bps
+"Marcus is not one man."
+
+From boliveira@delphi.com Thu Jul 18 07:04:04 1996
+Path: ashpoly!cascade!mxgate!coyoacan!delphi!boliveira
+From: boliveira@delphi.com (Brian Oliveira)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jul18.070404.9109@delphi.com>
+Date: Thu, 18 Jul 1996 07:04:04 GMT
+References: <1996Jul16.085904.7606@earthlink.net>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996Jul16.085904.7606@earthlink.net>, lsantos@earthlink.net (Liam Santos) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+=== Brian Oliveira ===
+Dept of Electrical Engineering, Delphi Internet Services
+"There are 14 nodes and only 10 countries. Count again."
+
+From mkowalski@purdue.edu Fri Jul 19 09:26:04 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!purdue!mkowalski
+From: mkowalski@purdue.edu (Min-jun Kowalski)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jul19.092604.5087@purdue.edu>
+Date: Fri, 19 Jul 1996 09:26:04 GMT
+References: <1996Jul16.085904.7606@earthlink.net> <1996Jul18.070404.9109@delphi.com>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Jul18.070404.9109@delphi.com>, boliveira@delphi.com (Brian Oliveira) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Min-jun Kowalski <mkowalski@purdue.edu>
+*PLONK* filter active for trolls.
+Mac IIci / 68882 FPU - NetBSD 1.0
+

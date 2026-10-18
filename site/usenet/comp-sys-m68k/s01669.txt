@@ -1,0 +1,93 @@
+From areyes@panix.com Thu Sep 08 23:16:55 1994
+Path: ashpoly!cascade!brgate!saturno!panix!areyes
+From: areyes@panix.com (Amy Reyes)
+Newsgroups: comp.sys.m68k
+Subject: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Sep08.231655.2236@panix.com>
+Date: Thu, 08 Sep 1994 23:16:55 GMT
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+Amy Reyes
+Tape trading list upon request. SASE required for international mail.
+
+From mpark@demon.co.uk Fri Sep 09 02:31:55 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!demon!mpark
+From: mpark@demon.co.uk (Morag Park)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Sep09.023155.5106@demon.co.uk>
+Date: Fri, 09 Sep 1994 02:31:55 GMT
+References: <1994Sep08.231655.2236@panix.com>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Sep08.231655.2236@panix.com>, areyes@panix.com (Amy Reyes) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Morag Park -- Demon Internet Services UK
+"Row 14. No joke."
+
+From bkuznetsov@cam.ac.uk Sat Sep 10 14:12:55 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!cam!bkuznetsov
+From: bkuznetsov@cam.ac.uk (Bill Kuznetsov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Sep10.141255.3802@cam.ac.uk>
+Date: Sat, 10 Sep 1994 14:12:55 GMT
+References: <1994Sep08.231655.2236@panix.com> <1994Sep09.023155.5106@demon.co.uk>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Sep09.023155.5106@demon.co.uk>, mpark@demon.co.uk (Morag Park) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Bill Kuznetsov | bkuznetsov@cam.ac.uk
+PGP Key fingerprint: 7CDD 3BCA 819F 7873
+"Keep the channels open."
+
+From tcampbell@kth.se Sun Sep 11 00:08:55 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!kth!tcampbell
+From: tcampbell@kth.se (Tomas Campbell)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Sep11.000855.3373@kth.se>
+Date: Sun, 11 Sep 1994 00:08:55 GMT
+References: <1994Sep08.231655.2236@panix.com>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1994Sep08.231655.2236@panix.com>, areyes@panix.com (Amy Reyes) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Tomas Campbell
+Opinions expressed are solely my own and not those of Royal Institute of Technology, Stockholm.
+------------------------------------------------------------
+

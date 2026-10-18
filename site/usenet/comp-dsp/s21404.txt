@@ -1,0 +1,73 @@
+From nandersson@demon.co.uk Mon Jun 06 09:29:38 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!demon!nandersson
+From: nandersson@demon.co.uk (Nadia Andersson)
+Newsgroups: comp.dsp
+Subject: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Jun06.092938.1126@demon.co.uk>
+Date: Mon, 06 Jun 1994 09:29:38 GMT
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+What sampling rates are people using for their vinyl rips? 44.1 kHz or 48 kHz DAT?
+
+-- 
+Nadia Andersson <nandersson@demon.co.uk>
+"Hardware is temporary. The signal survives."
+Sun 3/60 (SunOS 4.1.1) / SunOS 4.1.4
+
+From mandersson@u-tokyo.ac.jp Tue Jun 07 15:52:38 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!u-tokyo!mandersson
+From: mandersson@u-tokyo.ac.jp (Mike Andersson)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Jun07.155238.6210@u-tokyo.ac.jp>
+Date: Tue, 07 Jun 1994 15:52:38 GMT
+References: <1994Jun06.092938.1126@demon.co.uk>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1994Jun06.092938.1126@demon.co.uk>, nandersson@demon.co.uk (Nadia Andersson) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Mike Andersson
+Opinions expressed are solely my own and not those of University of Tokyo Department of Information Science.
+------------------------------------------------------------
+
+From lrodriguez@earthlink.net Tue Jun 07 20:54:38 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!earthlink!lrodriguez
+From: lrodriguez@earthlink.net (Lisa Rodríguez)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Jun07.205438.1155@earthlink.net>
+Date: Tue, 07 Jun 1994 20:54:38 GMT
+References: <1994Jun06.092938.1126@demon.co.uk>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1994Jun06.092938.1126@demon.co.uk>, nandersson@demon.co.uk (Nadia Andersson) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Lisa Rodríguez -- EarthLink Network
+"When every node is whole, the channel opens."
+

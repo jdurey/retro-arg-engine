@@ -1,0 +1,71 @@
+From arobertson@clari.net Mon Dec 04 19:38:38 1995
+Path: ashpoly!cascade!mxgate!coyoacan!clari!arobertson
+From: arobertson@clari.net (Andrei Robertson)
+Newsgroups: comp.dsp
+Subject: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec04.193838.3757@clari.net>
+Date: Mon, 04 Dec 1995 19:38:38 GMT
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Andrei Robertson <arobertson@clari.net>
+SupraFAXModem 28.8 @ 19,200 bps
+"When every node is whole, the channel opens."
+
+From cnovak@earthlink.net Tue Dec 05 18:01:38 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!earthlink!cnovak
+From: cnovak@earthlink.net (Camila Novak)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec05.180138.9105@earthlink.net>
+Date: Tue, 05 Dec 1995 18:01:38 GMT
+References: <1995Dec04.193838.3757@clari.net>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Dec04.193838.3757@clari.net>, arobertson@clari.net (Andrei Robertson) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Camila Novak <cnovak@earthlink.net>
+"When every node is whole, the channel opens."
+Pentium 90 (OS/2 Warp) / TOS 4.04
+
+From jito@berkeley.edu Thu Dec 07 04:00:38 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!berkeley!jito
+From: jito@berkeley.edu (Ji-woo Ito)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec07.040038.3237@berkeley.edu>
+Date: Thu, 07 Dec 1995 04:00:38 GMT
+References: <1995Dec04.193838.3757@clari.net> <1995Dec05.180138.9105@earthlink.net>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Dec05.180138.9105@earthlink.net>, cnovak@earthlink.net (Camila Novak) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+=== Ji-woo Ito ===
+Dept of Electrical Engineering, UC Berkeley Department of EECS
+"Measuring a record you own is listening, not piracy."
+

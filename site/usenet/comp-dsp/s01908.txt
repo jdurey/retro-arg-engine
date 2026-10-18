@@ -1,0 +1,93 @@
+From ssokolov@utexas.edu Mon May 23 23:16:25 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!utexas!ssokolov
+From: ssokolov@utexas.edu (Sven Sokolov)
+Newsgroups: comp.dsp
+Subject: Data: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994May23.231625.9477@utexas.edu>
+Date: Mon, 23 May 1994 23:16:25 GMT
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Sven Sokolov <ssokolov@utexas.edu>
+*PLONK* filter active for trolls.
+Macintosh IIfx - NetBSD 1.0
+
+From mmoreau@stanford.edu Wed May 25 07:50:25 1994
+Path: ashpoly!cascade!mxgate!coyoacan!stanford!mmoreau
+From: mmoreau@stanford.edu (Mateo Moreau)
+Newsgroups: comp.dsp
+Subject: Re: Data: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994May25.075025.8345@stanford.edu>
+Date: Wed, 25 May 1994 07:50:25 GMT
+References: <1994May23.231625.9477@utexas.edu>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994May23.231625.9477@utexas.edu>, ssokolov@utexas.edu (Sven Sokolov) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Mateo Moreau
+Tape trading list upon request. SASE required for international mail.
+
+From flopez@rwth-aachen.de Thu May 26 01:42:25 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!rwth-aachen!flopez
+From: flopez@rwth-aachen.de (Fiona López)
+Newsgroups: comp.dsp
+Subject: Re: Data: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994May26.014225.4403@rwth-aachen.de>
+Date: Thu, 26 May 1994 01:42:25 GMT
+References: <1994May23.231625.9477@utexas.edu> <1994May25.075025.8345@stanford.edu>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994May25.075025.8345@stanford.edu>, mmoreau@stanford.edu (Mateo Moreau) writes:
+> I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Fiona López | flopez@rwth-aachen.de
+PGP Key fingerprint: C32F 9A32 67DB D0E9
+"Keep the channels open."
+
+From lfournier@mit.edu Thu May 26 10:11:25 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!mit!lfournier
+From: lfournier@mit.edu (Lars Fournier)
+Newsgroups: comp.dsp
+Subject: Re: Data: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994May26.101125.8535@mit.edu>
+Date: Thu, 26 May 1994 10:11:25 GMT
+References: <1994May23.231625.9477@utexas.edu> <1994May25.075025.8345@stanford.edu> <1994May26.014225.4403@rwth-aachen.de>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994May26.014225.4403@rwth-aachen.de>, flopez@rwth-aachen.de (Fiona López) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Lars Fournier <lfournier@mit.edu>
+SupraFAXModem 28.8 @ 9600 Telebit bps
+"They will send a copy in my place."
+

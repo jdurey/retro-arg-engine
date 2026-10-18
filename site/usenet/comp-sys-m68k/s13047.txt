@@ -1,0 +1,73 @@
+From nokonkwo@uu.net Sun Oct 16 04:59:54 1994
+Path: ashpoly!cascade!mxgate!coyoacan!uu!nokonkwo
+From: nokonkwo@uu.net (Nadine Okonkwo)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Oct16.045954.4963@uu.net>
+Date: Sun, 16 Oct 1994 04:59:54 GMT
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+=== Nadine Okonkwo ===
+Dept of Electrical Engineering, UUNET Technologies, Falls Church VA
+"Row 14. No joke."
+
+From hramirez@uni-hamburg.de Mon Oct 17 17:52:54 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!uni-hamburg!hramirez
+From: hramirez@uni-hamburg.de (Hugo Ramírez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Oct17.175254.9793@uni-hamburg.de>
+Date: Mon, 17 Oct 1994 17:52:54 GMT
+References: <1994Oct16.045954.4963@uu.net>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1994Oct16.045954.4963@uu.net>, nokonkwo@uu.net (Nadine Okonkwo) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+=== Hugo Ramírez ===
+Dept of Electrical Engineering, Universität Hamburg Fachbereich Informatik
+"The hatch is open. Is anyone listening?"
+
+From anilsson@netcom.com Wed Oct 19 09:11:54 1994
+Path: ashpoly!cascade!brgate!saturno!netcom!anilsson
+From: anilsson@netcom.com (Anja Nilsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Oct19.091154.6571@netcom.com>
+Date: Wed, 19 Oct 1994 09:11:54 GMT
+References: <1994Oct16.045954.4963@uu.net> <1994Oct17.175254.9793@uni-hamburg.de>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1994Oct17.175254.9793@uni-hamburg.de>, hramirez@uni-hamburg.de (Hugo Ramírez) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+=== Anja Nilsson ===
+Dept of Electrical Engineering, NETCOM On-Line Communication Services
+"In theory there is no difference between theory and practice."
+

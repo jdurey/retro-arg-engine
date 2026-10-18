@@ -1,0 +1,121 @@
+From soliveira@cern.ch Mon Dec 16 16:17:39 1996
+Path: ashpoly!cascade!bigsur!cern!soliveira
+From: soliveira@cern.ch (Sun-mi Oliveira)
+Newsgroups: comp.dsp
+Subject: Question: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Dec16.161739.7565@cern.ch>
+Date: Mon, 16 Dec 1996 16:17:39 GMT
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+Sun-mi Oliveira | soliveira@cern.ch
+PGP Key fingerprint: D9C8 742B FB7E 1002
+"Keep the channels open."
+
+From hsuzuki@clari.net Mon Dec 16 20:31:39 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!clari!hsuzuki
+From: hsuzuki@clari.net (Heather Suzuki)
+Newsgroups: comp.dsp
+Subject: Re: Question: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Dec16.203139.2221@clari.net>
+Date: Mon, 16 Dec 1996 20:31:39 GMT
+References: <1996Dec16.161739.7565@cern.ch>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Dec16.161739.7565@cern.ch>, soliveira@cern.ch (Sun-mi Oliveira) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+> A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+-- 
+Heather Suzuki -- ClariNet Communications Corp
+"When every node is whole, the channel opens."
+
+From mmuller@netcom.com Tue Dec 17 14:19:39 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!netcom!mmuller
+From: mmuller@netcom.com (Mateo Müller)
+Newsgroups: comp.dsp
+Subject: Re: Question: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Dec17.141939.4841@netcom.com>
+Date: Tue, 17 Dec 1996 14:19:39 GMT
+References: <1996Dec16.161739.7565@cern.ch>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Dec16.161739.7565@cern.ch>, soliveira@cern.ch (Sun-mi Oliveira) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+> A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Mateo Müller -- NETCOM On-Line Communication Services
+"Hold for relay."
+
+From cnovak@delphi.com Wed Dec 18 21:08:39 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!delphi!cnovak
+From: cnovak@delphi.com (Camila Novak)
+Newsgroups: comp.dsp
+Subject: Re: Question: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Dec18.210839.1762@delphi.com>
+Date: Wed, 18 Dec 1996 21:08:39 GMT
+References: <1996Dec16.161739.7565@cern.ch> <1996Dec17.141939.4841@netcom.com>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1996Dec17.141939.4841@netcom.com>, mmuller@netcom.com (Mateo Müller) writes:
+> Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Camila Novak <cnovak@delphi.com>
+*PLONK* filter active for trolls.
+Pentium 90 (OS/2 Warp) - NetBSD 1.0
+
+From hivanov@kth.se Fri Dec 20 20:24:39 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!kth!hivanov
+From: hivanov@kth.se (Hugo Ivanov)
+Newsgroups: comp.dsp
+Subject: Re: Question: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Dec20.202439.8228@kth.se>
+Date: Fri, 20 Dec 1996 20:24:39 GMT
+References: <1996Dec16.161739.7565@cern.ch> <1996Dec17.141939.4841@netcom.com> <1996Dec18.210839.1762@delphi.com>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1996Dec18.210839.1762@delphi.com>, cnovak@delphi.com (Camila Novak) writes:
+> Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+> Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+Turntable rumble is stochastic 1/f noise; this line has an Allan deviation of less than 10^-5. It was generated by a quartz crystal clock.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Hugo Ivanov <hivanov@kth.se>
+"Marcus is not one man."
+Amiga 1200 (Blizzard 030/50) / SunOS 4.1.4
+

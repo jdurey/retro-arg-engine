@@ -1,0 +1,70 @@
+From nsmirnov@cmu.edu Mon Apr 18 15:15:28 1994
+Path: ashpoly!cascade!bigsur!cmu!nsmirnov
+From: nsmirnov@cmu.edu (Natalia Smirnov)
+Newsgroups: comp.dsp
+Subject: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Apr18.151528.2638@cmu.edu>
+Date: Mon, 18 Apr 1994 15:15:28 GMT
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+Natalia Smirnov <nsmirnov@cmu.edu>
+*PLONK* filter active for trolls.
+PC-9821Ap2 (NEC) - NetBSD 1.0
+
+From mlaurent@mit.edu Tue Apr 19 11:20:28 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!mit!mlaurent
+From: mlaurent@mit.edu (Mikhail Laurent)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Apr19.112028.5060@mit.edu>
+Date: Tue, 19 Apr 1994 11:20:28 GMT
+References: <1994Apr18.151528.2638@cmu.edu>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Apr18.151528.2638@cmu.edu>, nsmirnov@cmu.edu (Natalia Smirnov) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Mikhail Laurent
+Opinions expressed are solely my own and not those of Massachusetts Institute of Technology.
+------------------------------------------------------------
+
+From cfischer@purdue.edu Tue Apr 19 16:23:28 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!purdue!cfischer
+From: cfischer@purdue.edu (Callum Fischer)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Apr19.162328.8962@purdue.edu>
+Date: Tue, 19 Apr 1994 16:23:28 GMT
+References: <1994Apr18.151528.2638@cmu.edu> <1994Apr19.112028.5060@mit.edu>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Apr19.112028.5060@mit.edu>, mlaurent@mit.edu (Mikhail Laurent) writes:
+> If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+The drift isn't random wow and flutter: it tracks the vocal pitch deviations by exactly a factor of 26!
+
+-- 
+Callum Fischer <cfischer@purdue.edu>
+"When every node is whole, the channel opens."
+NeXTstation Turbo Color / System 7.5.1
+

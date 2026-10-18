@@ -1,0 +1,116 @@
+From fivanov@netcom.com Thu Feb 17 23:16:09 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!netcom!fivanov
+From: fivanov@netcom.com (Fiona Ivanov)
+Newsgroups: comp.dsp
+Subject: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Feb17.231609.2498@netcom.com>
+Date: Thu, 17 Feb 1994 23:16:09 GMT
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+Fiona Ivanov
+Tape trading list upon request. SASE required for international mail.
+
+From erodriguez@rwth-aachen.de Fri Feb 18 06:02:09 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!rwth-aachen!erodriguez
+From: erodriguez@rwth-aachen.de (Elaine Rodríguez)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Feb18.060209.9558@rwth-aachen.de>
+Date: Fri, 18 Feb 1994 06:02:09 GMT
+References: <1994Feb17.231609.2498@netcom.com>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Feb17.231609.2498@netcom.com>, fivanov@netcom.com (Fiona Ivanov) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+> This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Elaine Rodríguez -- RWTH Aachen Informatik
+"In theory there is no difference between theory and practice."
+
+From tmartinez@illinois.edu Fri Feb 18 19:19:09 1994
+Path: ashpoly!cascade!brgate!saturno!illinois!tmartinez
+From: tmartinez@illinois.edu (Tyler Martínez)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Feb18.191909.4849@illinois.edu>
+Date: Fri, 18 Feb 1994 19:19:09 GMT
+References: <1994Feb17.231609.2498@netcom.com>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1994Feb17.231609.2498@netcom.com>, fivanov@netcom.com (Fiona Ivanov) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+> This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+
+Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+-- 
+Tyler Martínez <tmartinez@illinois.edu>
+SupraFAXModem 28.8 @ 28,800 bps
+"There are 14 nodes and only 10 countries. Count again."
+
+From vvasiliev@demon.co.uk Sun Feb 20 10:04:09 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!demon!vvasiliev
+From: vvasiliev@demon.co.uk (Valeria Vasiliev)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Feb20.100409.6585@demon.co.uk>
+Date: Sun, 20 Feb 1994 10:04:09 GMT
+References: <1994Feb17.231609.2498@netcom.com> <1994Feb18.191909.4849@illinois.edu>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Feb18.191909.4849@illinois.edu>, tmartinez@illinois.edu (Tyler Martínez) writes:
+> Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+-- 
+Valeria Vasiliev | vvasiliev@demon.co.uk
+PGP Key fingerprint: 42EA A4DC C73E B13C
+"Keep the channels open."
+
+From gwatanabe@berkeley.edu Tue Feb 22 10:11:09 1994
+Path: ashpoly!cascade!brgate!saturno!berkeley!gwatanabe
+From: gwatanabe@berkeley.edu (Graham Watanabe)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Feb22.101109.1405@berkeley.edu>
+Date: Tue, 22 Feb 1994 10:11:09 GMT
+References: <1994Feb17.231609.2498@netcom.com> <1994Feb18.191909.4849@illinois.edu>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Feb18.191909.4849@illinois.edu>, tmartinez@illinois.edu (Tyler Martínez) writes:
+> Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Graham Watanabe
+Opinions expressed are solely my own and not those of UC Berkeley Department of EECS.
+------------------------------------------------------------
+

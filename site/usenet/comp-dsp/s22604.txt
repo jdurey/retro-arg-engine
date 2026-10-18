@@ -1,0 +1,72 @@
+From sperez@uu.net Sat Dec 24 01:08:19 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!uu!sperez
+From: sperez@uu.net (Seo-yeon Pérez)
+Newsgroups: comp.dsp
+Subject: WTB/WTT: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Dec24.010819.3641@uu.net>
+Date: Sat, 24 Dec 1994 01:08:19 GMT
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Seo-yeon Pérez <sperez@uu.net>
+Hayes Optima 288 @ 9600 Telebit bps
+"In theory there is no difference between theory and practice."
+
+From slaurent@pacbell.net Sun Dec 25 11:08:19 1994
+Path: ashpoly!cascade!brgate!saturno!pacbell!slaurent
+From: slaurent@pacbell.net (Sergei Laurent)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Dec25.110819.6826@pacbell.net>
+Date: Sun, 25 Dec 1994 11:08:19 GMT
+References: <1994Dec24.010819.3641@uu.net>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1994Dec24.010819.3641@uu.net>, sperez@uu.net (Seo-yeon Pérez) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Sergei Laurent
+Opinions expressed are solely my own and not those of Pacific Bell Internet Services.
+------------------------------------------------------------
+
+From csantos@illinois.edu Mon Dec 26 14:33:19 1994
+Path: ashpoly!cascade!bigsur!illinois!csantos
+From: csantos@illinois.edu (Camila Santos)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Dec26.143319.7821@illinois.edu>
+Date: Mon, 26 Dec 1994 14:33:19 GMT
+References: <1994Dec24.010819.3641@uu.net>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1994Dec24.010819.3641@uu.net>, sperez@uu.net (Seo-yeon Pérez) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Camila Santos
+Tape trading list upon request. SASE required for international mail.
+

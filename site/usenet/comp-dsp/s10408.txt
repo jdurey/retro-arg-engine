@@ -1,0 +1,70 @@
+From mandersson@delphi.com Tue Oct 24 02:27:41 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!delphi!mandersson
+From: mandersson@delphi.com (Marisol Andersson)
+Newsgroups: comp.dsp
+Subject: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Oct24.022741.2891@delphi.com>
+Date: Tue, 24 Oct 1995 02:27:41 GMT
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Marisol Andersson <mandersson@delphi.com>
+*PLONK* filter active for trolls.
+Commodore Amiga 500 (1MB OCS) - NetBSD 1.0
+
+From nkarlsson@cam.ac.uk Tue Oct 24 10:02:41 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!cam!nkarlsson
+From: nkarlsson@cam.ac.uk (Natalia Karlsson)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Oct24.100241.3400@cam.ac.uk>
+Date: Tue, 24 Oct 1995 10:02:41 GMT
+References: <1995Oct24.022741.2891@delphi.com>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Oct24.022741.2891@delphi.com>, mandersson@delphi.com (Marisol Andersson) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Natalia Karlsson <nkarlsson@cam.ac.uk>
+*PLONK* filter active for trolls.
+Amiga 3000T - NetBSD 1.0
+
+From glaurent@unam.mx Tue Oct 24 18:06:41 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!unam!glaurent
+From: glaurent@unam.mx (Graham Laurent)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Oct24.180641.9775@unam.mx>
+Date: Tue, 24 Oct 1995 18:06:41 GMT
+References: <1995Oct24.022741.2891@delphi.com> <1995Oct24.100241.3400@cam.ac.uk>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Oct24.100241.3400@cam.ac.uk>, nkarlsson@cam.ac.uk (Natalia Karlsson) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Graham Laurent
+Opinions expressed are solely my own and not those of Universidad Nacional Autónoma de México (DGSCA).
+------------------------------------------------------------
+

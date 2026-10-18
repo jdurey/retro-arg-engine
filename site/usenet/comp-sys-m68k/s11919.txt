@@ -1,0 +1,47 @@
+From ohernandez@pacbell.net Sat Oct 07 15:27:53 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!pacbell!ohernandez
+From: ohernandez@pacbell.net (Olga Hernández)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Oct07.152753.7973@pacbell.net>
+Date: Sat, 07 Oct 1995 15:27:53 GMT
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Olga Hernández <ohernandez@pacbell.net>
+SupraFAXModem 28.8 @ 19,200 bps
+"Row 14. No joke."
+
+From hito@mit.edu Sun Oct 08 04:47:53 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!mit!hito
+From: hito@mit.edu (Heather Ito)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Oct08.044753.6085@mit.edu>
+Date: Sun, 08 Oct 1995 04:47:53 GMT
+References: <1995Oct07.152753.7973@pacbell.net>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Oct07.152753.7973@pacbell.net>, ohernandez@pacbell.net (Olga Hernández) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+=== Heather Ito ===
+Dept of Electrical Engineering, Massachusetts Institute of Technology
+"The hatch is open. Is anyone listening?"
+

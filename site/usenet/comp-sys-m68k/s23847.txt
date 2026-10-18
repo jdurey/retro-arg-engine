@@ -1,0 +1,93 @@
+From jmuller@pacbell.net Wed Feb 07 04:12:27 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!pacbell!jmuller
+From: jmuller@pacbell.net (Ji-woo Müller)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Feb07.041227.5860@pacbell.net>
+Date: Wed, 07 Feb 1996 04:12:27 GMT
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+
+Did Marcus take the decryption EPROM with him when he left the lab?
+
+-- 
+Ji-woo Müller
+Opinions expressed are solely my own and not those of Pacific Bell Internet Services.
+------------------------------------------------------------
+
+From ynovak@kth.se Wed Feb 07 09:55:27 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!kth!ynovak
+From: ynovak@kth.se (Yuki Novak)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Feb07.095527.1178@kth.se>
+Date: Wed, 07 Feb 1996 09:55:27 GMT
+References: <1996Feb07.041227.5860@pacbell.net>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Feb07.041227.5860@pacbell.net>, jmuller@pacbell.net (Ji-woo Müller) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+=== Yuki Novak ===
+Dept of Electrical Engineering, Royal Institute of Technology, Stockholm
+"Tape doesn't lie at 02:14. Ears do."
+
+From asouza@stanford.edu Wed Feb 07 17:00:27 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!stanford!asouza
+From: asouza@stanford.edu (Andrei Souza)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Feb07.170027.5821@stanford.edu>
+Date: Wed, 07 Feb 1996 17:00:27 GMT
+References: <1996Feb07.041227.5860@pacbell.net> <1996Feb07.095527.1178@kth.se>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Feb07.095527.1178@kth.se>, ynovak@kth.se (Yuki Novak) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Andrei Souza <asouza@stanford.edu>
+US Robotics Courier V.34 @ 19,200 bps
+"They will send a copy in my place."
+
+From tschneider@rwth-aachen.de Thu Feb 08 22:57:27 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!rwth-aachen!tschneider
+From: tschneider@rwth-aachen.de (Thiago Schneider)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Feb08.225727.6382@rwth-aachen.de>
+Date: Thu, 08 Feb 1996 22:57:27 GMT
+References: <1996Feb07.041227.5860@pacbell.net> <1996Feb07.095527.1178@kth.se>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Feb07.095527.1178@kth.se>, ynovak@kth.se (Yuki Novak) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+-- 
+Thiago Schneider <tschneider@rwth-aachen.de>
+Zyxel U-1496E @ 14,400 bps
+"In theory there is no difference between theory and practice."
+

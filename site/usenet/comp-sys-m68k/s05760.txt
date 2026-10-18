@@ -1,0 +1,45 @@
+From kramirez@titech.ac.jp Sat Jul 22 21:38:53 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!titech!kramirez
+From: kramirez@titech.ac.jp (Katrin Ramírez)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jul22.213853.5504@titech.ac.jp>
+Date: Sat, 22 Jul 1995 21:38:53 GMT
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+Katrin Ramírez -- Tokyo Institute of Technology Computer Centre
+"Hardware is temporary. The signal survives."
+
+From jfischer@kth.se Sun Jul 23 04:18:53 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!kth!jfischer
+From: jfischer@kth.se (Ji-woo Fischer)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jul23.041853.8300@kth.se>
+Date: Sun, 23 Jul 1995 04:18:53 GMT
+References: <1995Jul22.213853.5504@titech.ac.jp>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Jul22.213853.5504@titech.ac.jp>, kramirez@titech.ac.jp (Katrin Ramírez) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Ji-woo Fischer -- Royal Institute of Technology, Stockholm
+"Measuring a record you own is listening, not piracy."
+

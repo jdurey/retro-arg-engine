@@ -1,0 +1,95 @@
+From mlindqvist@u-tokyo.ac.jp Tue Feb 14 20:58:18 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!u-tokyo!mlindqvist
+From: mlindqvist@u-tokyo.ac.jp (Mathieu Lindqvist)
+Newsgroups: comp.dsp
+Subject: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Feb14.205818.1455@u-tokyo.ac.jp>
+Date: Tue, 14 Feb 1995 20:58:18 GMT
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+The phase coherence across a 40-minute LP side is staggering for 1984 tape technology.
+
+-- 
+Mathieu Lindqvist <mlindqvist@u-tokyo.ac.jp>
+Zyxel U-1496E @ ISDN 64k bps
+"Extraordinary claims require extraordinary spectra."
+
+From yokonkwo@pipeline.com Thu Feb 16 09:04:18 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!pipeline!yokonkwo
+From: yokonkwo@pipeline.com (Yuki Okonkwo)
+Newsgroups: comp.dsp
+Subject: Re: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Feb16.090418.6795@pipeline.com>
+Date: Thu, 16 Feb 1995 09:04:18 GMT
+References: <1995Feb14.205818.1455@u-tokyo.ac.jp>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Feb14.205818.1455@u-tokyo.ac.jp>, mlindqvist@u-tokyo.ac.jp (Mathieu Lindqvist) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+> A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Yuki Okonkwo <yokonkwo@pipeline.com>
+Hayes Optima 288 @ 14,400 bps
+"Extraordinary claims require extraordinary spectra."
+
+From fweber@uni-hamburg.de Fri Feb 17 20:12:18 1995
+Path: ashpoly!cascade!brgate!saturno!uni-hamburg!fweber
+From: fweber@uni-hamburg.de (Freya Weber)
+Newsgroups: comp.dsp
+Subject: Re: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Feb17.201218.3409@uni-hamburg.de>
+Date: Fri, 17 Feb 1995 20:12:18 GMT
+References: <1995Feb14.205818.1455@u-tokyo.ac.jp>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Feb14.205818.1455@u-tokyo.ac.jp>, mlindqvist@u-tokyo.ac.jp (Mathieu Lindqvist) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Freya Weber | fweber@uni-hamburg.de
+PGP Key fingerprint: D3BD AC08 8A7C 2955
+"Keep the channels open."
+
+From dlarsson@cmu.edu Sun Feb 19 23:47:18 1995
+Path: ashpoly!cascade!mxgate!coyoacan!cmu!dlarsson
+From: dlarsson@cmu.edu (Diego Larsson)
+Newsgroups: comp.dsp
+Subject: Re: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Feb19.234718.1359@cmu.edu>
+Date: Sun, 19 Feb 1995 23:47:18 GMT
+References: <1995Feb14.205818.1455@u-tokyo.ac.jp> <1995Feb16.090418.6795@pipeline.com>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Feb16.090418.6795@pipeline.com>, yokonkwo@pipeline.com (Yuki Okonkwo) writes:
+> Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+Diego Larsson
+Tape trading list upon request. SASE required for international mail.
+

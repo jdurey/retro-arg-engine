@@ -1,0 +1,123 @@
+From mperez@purdue.edu Sun Jun 16 10:05:56 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!purdue!mperez
+From: mperez@purdue.edu (Morag Pérez)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jun16.100556.2184@purdue.edu>
+Date: Sun, 16 Jun 1996 10:05:56 GMT
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Morag Pérez <mperez@purdue.edu>
+*PLONK* filter active for trolls.
+Macintosh IIfx - NetBSD 1.0
+
+From mreyes@pipeline.com Mon Jun 17 13:58:56 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!pipeline!mreyes
+From: mreyes@pipeline.com (Mateo Reyes)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jun17.135856.5423@pipeline.com>
+Date: Mon, 17 Jun 1996 13:58:56 GMT
+References: <1996Jun16.100556.2184@purdue.edu>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Jun16.100556.2184@purdue.edu>, mperez@purdue.edu (Morag Pérez) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Mateo Reyes
+Tape trading list upon request. SASE required for international mail.
+
+From npetrov@earthlink.net Wed Jun 19 12:55:56 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!earthlink!npetrov
+From: npetrov@earthlink.net (Natalia Petrov)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jun19.125556.1376@earthlink.net>
+Date: Wed, 19 Jun 1996 12:55:56 GMT
+References: <1996Jun16.100556.2184@purdue.edu>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1996Jun16.100556.2184@purdue.edu>, mperez@purdue.edu (Morag Pérez) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Natalia Petrov <npetrov@earthlink.net>
+Zyxel U-1496E @ 14,400 bps
+"They will send a copy in my place."
+
+From akim@kiae.su Fri Jun 21 16:24:56 1996
+Path: ashpoly!cascade!brgate!saturno!kiae!akim
+From: akim@kiae.su (Astrid Kim)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jun21.162456.3952@kiae.su>
+Date: Fri, 21 Jun 1996 16:24:56 GMT
+References: <1996Jun16.100556.2184@purdue.edu>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1996Jun16.100556.2184@purdue.edu>, mperez@purdue.edu (Morag Pérez) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+Astrid Kim <akim@kiae.su>
+*PLONK* filter active for trolls.
+486DX2/66 (Linux 1.2.13) - NetBSD 1.0
+
+From lschneider@ox.ac.uk Sun Jun 23 03:08:56 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!ox!lschneider
+From: lschneider@ox.ac.uk (Lisa Schneider)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jun23.030856.1216@ox.ac.uk>
+Date: Sun, 23 Jun 1996 03:08:56 GMT
+References: <1996Jun16.100556.2184@purdue.edu>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 12
+
+In article <1996Jun16.100556.2184@purdue.edu>, mperez@purdue.edu (Morag Pérez) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Lisa Schneider
+Opinions expressed are solely my own and not those of Oxford University Computing Laboratory.
+------------------------------------------------------------
+

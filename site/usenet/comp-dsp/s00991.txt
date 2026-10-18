@@ -1,0 +1,116 @@
+From ltanaka@cmu.edu Tue Jun 18 18:35:32 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!cmu!ltanaka
+From: ltanaka@cmu.edu (Lucia Tanaka)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jun18.183532.6806@cmu.edu>
+Date: Tue, 18 Jun 1996 18:35:32 GMT
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Lucia Tanaka | ltanaka@cmu.edu
+PGP Key fingerprint: 0A98 9CC1 BCBE 9621
+"Keep the channels open."
+
+From lcampbell@cern.ch Thu Jun 20 05:11:32 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!cern!lcampbell
+From: lcampbell@cern.ch (Lisa Campbell)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jun20.051132.2607@cern.ch>
+Date: Thu, 20 Jun 1996 05:11:32 GMT
+References: <1996Jun18.183532.6806@cmu.edu>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1996Jun18.183532.6806@cmu.edu>, ltanaka@cmu.edu (Lucia Tanaka) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Lisa Campbell -- European Laboratory for Particle Physics, Geneva
+"We don't sign stars. We build them."
+
+From meriksson@clari.net Fri Jun 21 05:03:32 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!clari!meriksson
+From: meriksson@clari.net (Marta Eriksson)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jun21.050332.1388@clari.net>
+Date: Fri, 21 Jun 1996 05:03:32 GMT
+References: <1996Jun18.183532.6806@cmu.edu>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Jun18.183532.6806@cmu.edu>, ltanaka@cmu.edu (Lucia Tanaka) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+Marta Eriksson
+Tape trading list upon request. SASE required for international mail.
+
+From khughes@kiae.su Sun Jun 23 04:05:32 1996
+Path: ashpoly!cascade!brgate!saturno!kiae!khughes
+From: khughes@kiae.su (Kirsty Hughes)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jun23.040532.4113@kiae.su>
+Date: Sun, 23 Jun 1996 04:05:32 GMT
+References: <1996Jun18.183532.6806@cmu.edu> <1996Jun20.051132.2607@cern.ch>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1996Jun20.051132.2607@cern.ch>, lcampbell@cern.ch (Lisa Campbell) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Kirsty Hughes
+Tape trading list upon request. SASE required for international mail.
+
+From alindqvist@kiae.su Tue Jun 25 02:17:32 1996
+Path: ashpoly!cascade!bigsur!kiae!alindqvist
+From: alindqvist@kiae.su (Astrid Lindqvist)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jun25.021732.3534@kiae.su>
+Date: Tue, 25 Jun 1996 02:17:32 GMT
+References: <1996Jun18.183532.6806@cmu.edu>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Jun18.183532.6806@cmu.edu>, ltanaka@cmu.edu (Lucia Tanaka) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Astrid Lindqvist
+Opinions expressed are solely my own and not those of Kurchatov Institute of Atomic Energy, Moscow.
+------------------------------------------------------------
+

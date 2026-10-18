@@ -1,0 +1,95 @@
+From amartinez@stanford.edu Tue Dec 13 20:19:14 1994
+Path: ashpoly!cascade!brgate!saturno!stanford!amartinez
+From: amartinez@stanford.edu (Aiko Martínez)
+Newsgroups: comp.sys.m68k
+Subject: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Dec13.201914.2959@stanford.edu>
+Date: Tue, 13 Dec 1994 20:19:14 GMT
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+Aiko Martínez <amartinez@stanford.edu>
+"The hatch is open. Is anyone listening?"
+Sun SparcStation 20 / NEXTSTEP 3.3
+
+From ssmirnov@illinois.edu Thu Dec 15 09:11:14 1994
+Path: ashpoly!cascade!brgate!saturno!illinois!ssmirnov
+From: ssmirnov@illinois.edu (Steve Smirnov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Dec15.091114.4340@illinois.edu>
+Date: Thu, 15 Dec 1994 09:11:14 GMT
+References: <1994Dec13.201914.2959@stanford.edu>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1994Dec13.201914.2959@stanford.edu>, amartinez@stanford.edu (Aiko Martínez) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Steve Smirnov -- University of Illinois Urbana-Champaign
+"5 sigma is a discovery. 7 is a question."
+
+From elee@unam.mx Fri Dec 16 04:21:14 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!unam!elee
+From: elee@unam.mx (Elaine Lee)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Dec16.042114.3418@unam.mx>
+Date: Fri, 16 Dec 1994 04:21:14 GMT
+References: <1994Dec13.201914.2959@stanford.edu> <1994Dec15.091114.4340@illinois.edu>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Dec15.091114.4340@illinois.edu>, ssmirnov@illinois.edu (Steve Smirnov) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+> My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Elaine Lee -- Universidad Nacional Autónoma de México (DGSCA)
+"Hardware is temporary. The signal survives."
+
+From dlarsson@demon.co.uk Sat Dec 17 08:20:14 1994
+Path: ashpoly!cascade!mxgate!coyoacan!demon!dlarsson
+From: dlarsson@demon.co.uk (Dave Larsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Dec17.082014.4474@demon.co.uk>
+Date: Sat, 17 Dec 1994 08:20:14 GMT
+References: <1994Dec13.201914.2959@stanford.edu> <1994Dec15.091114.4340@illinois.edu>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1994Dec15.091114.4340@illinois.edu>, ssmirnov@illinois.edu (Steve Smirnov) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+> My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Dave Larsson <dlarsson@demon.co.uk>
+*PLONK* filter active for trolls.
+Mac IIci / 68882 FPU - NetBSD 1.0
+

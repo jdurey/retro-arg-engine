@@ -1,0 +1,121 @@
+From cgirard@pipeline.com Sat Nov 23 19:17:40 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!pipeline!cgirard
+From: cgirard@pipeline.com (Camila Girard)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Nov23.191740.7510@pipeline.com>
+Date: Sat, 23 Nov 1996 19:17:40 GMT
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Camila Girard <cgirard@pipeline.com>
+"The hatch is open. Is anyone listening?"
+Commodore Amiga 500 (1MB OCS) / TOS 4.04
+
+From hnakamura@ox.ac.uk Sun Nov 24 10:58:40 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!ox!hnakamura
+From: hnakamura@ox.ac.uk (Hana Nakamura)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Nov24.105840.1998@ox.ac.uk>
+Date: Sun, 24 Nov 1996 10:58:40 GMT
+References: <1996Nov23.191740.7510@pipeline.com>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1996Nov23.191740.7510@pipeline.com>, cgirard@pipeline.com (Camila Girard) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+Looks like a prototype telecommunications board for military secure voice, not an audio music product.
+
+-- 
+Hana Nakamura <hnakamura@ox.ac.uk>
+"They will send a copy in my place."
+Atari TT030 / SunOS 4.1.4
+
+From tstewart@demon.co.uk Mon Nov 25 14:58:40 1996
+Path: ashpoly!cascade!bigsur!demon!tstewart
+From: tstewart@demon.co.uk (Tobias Stewart)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Nov25.145840.8180@demon.co.uk>
+Date: Mon, 25 Nov 1996 14:58:40 GMT
+References: <1996Nov23.191740.7510@pipeline.com>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1996Nov23.191740.7510@pipeline.com>, cgirard@pipeline.com (Camila Girard) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+Marcus Hale designed the TWIN-68 board before he disappeared. That's why his initials are on the PCB silkscreen.
+
+-- 
+=== Tobias Stewart ===
+Dept of Electrical Engineering, Demon Internet Services UK
+"Hardware is temporary. The signal survives."
+
+From smartinez@delphi.com Tue Nov 26 12:35:40 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!delphi!smartinez
+From: smartinez@delphi.com (Seo-yeon Martínez)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Nov26.123540.1826@delphi.com>
+Date: Tue, 26 Nov 1996 12:35:40 GMT
+References: <1996Nov23.191740.7510@pipeline.com> <1996Nov24.105840.1998@ox.ac.uk>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1996Nov24.105840.1998@ox.ac.uk>, hnakamura@ox.ac.uk (Hana Nakamura) writes:
+> Looks like a prototype telecommunications board for military secure voice, not an audio music product.
+
+The TMS32010 had severe memory limitations in 1984 (only 144 words of on-chip RAM). Dual 68000s gave them full 16MB address space.
+
+PGP Public key available via finger or upon request.
+
+-- 
+=== Seo-yeon Martínez ===
+Dept of Electrical Engineering, Delphi Internet Services
+"Row 14. No joke."
+
+From bsanchez@tum.de Tue Nov 26 19:44:40 1996
+Path: ashpoly!cascade!brgate!saturno!tum!bsanchez
+From: bsanchez@tum.de (Bill Sánchez)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Nov26.194440.4729@tum.de>
+Date: Tue, 26 Nov 1996 19:44:40 GMT
+References: <1996Nov23.191740.7510@pipeline.com>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1996Nov23.191740.7510@pipeline.com>, cgirard@pipeline.com (Camila Girard) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Bill Sánchez <bsanchez@tum.de>
+SupraFAXModem 28.8 @ 28,800 bps
+"Tape doesn't lie at 02:14. Ears do."
+

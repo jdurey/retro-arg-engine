@@ -1,0 +1,115 @@
+From jsouza@u-tokyo.ac.jp Thu Feb 01 14:50:25 1996
+Path: ashpoly!cascade!mxgate!coyoacan!u-tokyo!jsouza
+From: jsouza@u-tokyo.ac.jp (Julien Souza)
+Newsgroups: comp.sys.m68k
+Subject: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Feb01.145025.7675@u-tokyo.ac.jp>
+Date: Thu, 01 Feb 1996 14:50:25 GMT
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+
+Does anyone have a 27C256 EPROM marked 'MH-U14' or 'ORION-CRYPTO'?
+
+-- 
+Julien Souza <jsouza@u-tokyo.ac.jp>
+"Measuring a record you own is listening, not piracy."
+Commodore Amiga 500 (1MB OCS) / Linux 1.2.13
+
+From mtanaka@tum.de Thu Feb 01 16:35:25 1996
+Path: ashpoly!cascade!mxgate!coyoacan!tum!mtanaka
+From: mtanaka@tum.de (Mathieu Tanaka)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Feb01.163525.4500@tum.de>
+Date: Thu, 01 Feb 1996 16:35:25 GMT
+References: <1996Feb01.145025.7675@u-tokyo.ac.jp>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Feb01.145025.7675@u-tokyo.ac.jp>, jsouza@u-tokyo.ac.jp (Julien Souza) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Mathieu Tanaka <mtanaka@tum.de>
+US Robotics Courier V.34 @ 33,600 bps
+"When every node is whole, the channel opens."
+
+From avasiliev@purdue.edu Fri Feb 02 02:39:25 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!purdue!avasiliev
+From: avasiliev@purdue.edu (Anja Vasiliev)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Feb02.023925.6133@purdue.edu>
+Date: Fri, 02 Feb 1996 02:39:25 GMT
+References: <1996Feb01.145025.7675@u-tokyo.ac.jp> <1996Feb01.163525.4500@tum.de>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Feb01.163525.4500@tum.de>, mtanaka@tum.de (Mathieu Tanaka) writes:
+> Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+-- 
+Anja Vasiliev | avasiliev@purdue.edu
+PGP Key fingerprint: 515E D7F6 47B1 3A71
+"Keep the channels open."
+
+From dwatanabe@mindspring.com Sat Feb 03 02:37:25 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!mindspring!dwatanabe
+From: dwatanabe@mindspring.com (Dong-hyun Watanabe)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Feb03.023725.3591@mindspring.com>
+Date: Sat, 03 Feb 1996 02:37:25 GMT
+References: <1996Feb01.145025.7675@u-tokyo.ac.jp> <1996Feb01.163525.4500@tum.de> <1996Feb02.023925.6133@purdue.edu>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Feb02.023925.6133@purdue.edu>, avasiliev@purdue.edu (Anja Vasiliev) writes:
+> That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Dong-hyun Watanabe <dwatanabe@mindspring.com>
+"Marcus is not one man."
+Commodore Amiga 500 (1MB OCS) / System 7.5.1
+
+From acampbell@mit.edu Sun Feb 04 03:16:25 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!mit!acampbell
+From: acampbell@mit.edu (Aiko Campbell)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Feb04.031625.1584@mit.edu>
+Date: Sun, 04 Feb 1996 03:16:25 GMT
+References: <1996Feb01.145025.7675@u-tokyo.ac.jp>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1996Feb01.145025.7675@u-tokyo.ac.jp>, jsouza@u-tokyo.ac.jp (Julien Souza) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Aiko Campbell
+Tape trading list upon request. SASE required for international mail.
+

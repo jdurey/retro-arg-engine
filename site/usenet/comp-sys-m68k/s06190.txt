@@ -1,0 +1,115 @@
+From dmoreau@ox.ac.uk Mon Oct 21 18:18:49 1996
+Path: ashpoly!cascade!mxgate!coyoacan!ox!dmoreau
+From: dmoreau@ox.ac.uk (Dong-hyun Moreau)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Oct21.181849.1184@ox.ac.uk>
+Date: Mon, 21 Oct 1996 18:18:49 GMT
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+=== Dong-hyun Moreau ===
+Dept of Electrical Engineering, Oxford University Computing Laboratory
+"When every node is whole, the channel opens."
+
+From akim@hanse.de Tue Oct 22 01:26:49 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!hanse!akim
+From: akim@hanse.de (Aiko Kim)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Oct22.012649.5297@hanse.de>
+Date: Tue, 22 Oct 1996 01:26:49 GMT
+References: <1996Oct21.181849.1184@ox.ac.uk>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1996Oct21.181849.1184@ox.ac.uk>, dmoreau@ox.ac.uk (Dong-hyun Moreau) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Aiko Kim
+Tape trading list upon request. SASE required for international mail.
+
+From gtanaka@kiae.su Wed Oct 23 05:03:49 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!kiae!gtanaka
+From: gtanaka@kiae.su (Graham Tanaka)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Oct23.050349.1389@kiae.su>
+Date: Wed, 23 Oct 1996 05:03:49 GMT
+References: <1996Oct21.181849.1184@ox.ac.uk> <1996Oct22.012649.5297@hanse.de>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Oct22.012649.5297@hanse.de>, akim@hanse.de (Aiko Kim) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Graham Tanaka | gtanaka@kiae.su
+PGP Key fingerprint: A9D8 46F1 7EF8 A576
+"Keep the channels open."
+
+From hnakamura@u-tokyo.ac.jp Wed Oct 23 07:03:49 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!u-tokyo!hnakamura
+From: hnakamura@u-tokyo.ac.jp (Hana Nakamura)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Oct23.070349.6954@u-tokyo.ac.jp>
+Date: Wed, 23 Oct 1996 07:03:49 GMT
+References: <1996Oct21.181849.1184@ox.ac.uk> <1996Oct22.012649.5297@hanse.de> <1996Oct23.050349.1389@kiae.su>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Oct23.050349.1389@kiae.su>, gtanaka@kiae.su (Graham Tanaka) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Hana Nakamura <hnakamura@u-tokyo.ac.jp>
+"Marcus is not one man."
+Atari TT030 / FreeBSD 2.1
+
+From nivanov@utexas.edu Fri Oct 25 01:11:49 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!utexas!nivanov
+From: nivanov@utexas.edu (Nadia Ivanov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Oct25.011149.6791@utexas.edu>
+Date: Fri, 25 Oct 1996 01:11:49 GMT
+References: <1996Oct21.181849.1184@ox.ac.uk> <1996Oct22.012649.5297@hanse.de>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Oct22.012649.5297@hanse.de>, akim@hanse.de (Aiko Kim) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+=== Nadia Ivanov ===
+Dept of Electrical Engineering, University of Texas at Austin
+"Extraordinary claims require extraordinary spectra."
+

@@ -1,0 +1,98 @@
+From dito@panix.com Fri Aug 09 12:55:04 1996
+Path: ashpoly!cascade!brgate!saturno!panix!dito
+From: dito@panix.com (Dmitri Ito)
+Newsgroups: comp.dsp
+Subject: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Aug09.125504.9051@panix.com>
+Date: Fri, 09 Aug 1996 12:55:04 GMT
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Dmitri Ito <dito@panix.com>
+*PLONK* filter active for trolls.
+Atari Falcon 030 - NetBSD 1.0
+
+From bsuzuki@panix.com Sat Aug 10 19:11:04 1996
+Path: ashpoly!cascade!bigsur!panix!bsuzuki
+From: bsuzuki@panix.com (Bruno Suzuki)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Aug10.191104.4776@panix.com>
+Date: Sat, 10 Aug 1996 19:11:04 GMT
+References: <1996Aug09.125504.9051@panix.com>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1996Aug09.125504.9051@panix.com>, dito@panix.com (Dmitri Ito) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Bruno Suzuki | bsuzuki@panix.com
+PGP Key fingerprint: 3F1D 5783 FD31 1027
+"Keep the channels open."
+
+From ltanaka@panix.com Sun Aug 11 09:30:04 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!panix!ltanaka
+From: ltanaka@panix.com (Liam Tanaka)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Aug11.093004.2665@panix.com>
+Date: Sun, 11 Aug 1996 09:30:04 GMT
+References: <1996Aug09.125504.9051@panix.com> <1996Aug10.191104.4776@panix.com>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Aug10.191104.4776@panix.com>, bsuzuki@panix.com (Bruno Suzuki) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+> Top-posters will be placed in my ~/.killfile without notice.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Liam Tanaka
+Tape trading list upon request. SASE required for international mail.
+
+From lcampbell@uni-hamburg.de Sun Aug 11 11:17:04 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!uni-hamburg!lcampbell
+From: lcampbell@uni-hamburg.de (Lars Campbell)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Aug11.111704.9453@uni-hamburg.de>
+Date: Sun, 11 Aug 1996 11:17:04 GMT
+References: <1996Aug09.125504.9051@panix.com>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1996Aug09.125504.9051@panix.com>, dito@panix.com (Dmitri Ito) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Lars Campbell <lcampbell@uni-hamburg.de>
+*PLONK* filter active for trolls.
+Pentium 90 (OS/2 Warp) - NetBSD 1.0
+

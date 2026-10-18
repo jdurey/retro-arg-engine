@@ -1,0 +1,118 @@
+From csanchez@cam.ac.uk Thu Feb 23 16:46:32 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!cam!csanchez
+From: csanchez@cam.ac.uk (Camila Sánchez)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Feb23.164632.4522@cam.ac.uk>
+Date: Thu, 23 Feb 1995 16:46:32 GMT
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Camila Sánchez -- University of Cambridge Computer Laboratory
+"A soul is not exclusive to biology."
+
+From gschneider@inria.fr Fri Feb 24 13:13:32 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!inria!gschneider
+From: gschneider@inria.fr (Göran Schneider)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Feb24.131332.3712@inria.fr>
+Date: Fri, 24 Feb 1995 13:13:32 GMT
+References: <1995Feb23.164632.4522@cam.ac.uk>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1995Feb23.164632.4522@cam.ac.uk>, csanchez@cam.ac.uk (Camila Sánchez) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Göran Schneider <gschneider@inria.fr>
+Practical Peripherals 14.4 @ ISDN 64k bps
+"When every node is whole, the channel opens."
+
+From bsouza@delphi.com Sun Feb 26 01:21:32 1995
+Path: ashpoly!cascade!mxgate!coyoacan!delphi!bsouza
+From: bsouza@delphi.com (Bruno Souza)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Feb26.012132.1373@delphi.com>
+Date: Sun, 26 Feb 1995 01:21:32 GMT
+References: <1995Feb23.164632.4522@cam.ac.uk>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Feb23.164632.4522@cam.ac.uk>, csanchez@cam.ac.uk (Camila Sánchez) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Bruno Souza <bsouza@delphi.com>
+*PLONK* filter active for trolls.
+Amiga 1200 (Blizzard 030/50) - NetBSD 1.0
+
+From gandersson@earthlink.net Sun Feb 26 10:24:32 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!earthlink!gandersson
+From: gandersson@earthlink.net (Göran Andersson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Feb26.102432.2067@earthlink.net>
+Date: Sun, 26 Feb 1995 10:24:32 GMT
+References: <1995Feb23.164632.4522@cam.ac.uk>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Feb23.164632.4522@cam.ac.uk>, csanchez@cam.ac.uk (Camila Sánchez) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Göran Andersson | gandersson@earthlink.net
+PGP Key fingerprint: 3B82 517E 5E5B 54A1
+"Keep the channels open."
+
+From jsanchez@demon.co.uk Mon Feb 27 09:44:32 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!demon!jsanchez
+From: jsanchez@demon.co.uk (Julien Sánchez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Feb27.094432.8039@demon.co.uk>
+Date: Mon, 27 Feb 1995 09:44:32 GMT
+References: <1995Feb23.164632.4522@cam.ac.uk> <1995Feb26.012132.1373@delphi.com>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1995Feb26.012132.1373@delphi.com>, bsouza@delphi.com (Bruno Souza) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Julien Sánchez -- Demon Internet Services UK
+"Extraordinary claims require extraordinary spectra."
+

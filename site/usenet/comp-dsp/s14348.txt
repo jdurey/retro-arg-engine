@@ -1,0 +1,69 @@
+From jkuznetsov@earthlink.net Fri Jul 07 18:19:09 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!earthlink!jkuznetsov
+From: jkuznetsov@earthlink.net (Ji-woo Kuznetsov)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jul07.181909.6830@earthlink.net>
+Date: Fri, 07 Jul 1995 18:19:09 GMT
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Ji-woo Kuznetsov -- EarthLink Network
+"There are 14 nodes and only 10 countries. Count again."
+
+From goliveira@earthlink.net Sat Jul 08 03:25:09 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!earthlink!goliveira
+From: goliveira@earthlink.net (Göran Oliveira)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jul08.032509.3175@earthlink.net>
+Date: Sat, 08 Jul 1995 03:25:09 GMT
+References: <1995Jul07.181909.6830@earthlink.net>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Jul07.181909.6830@earthlink.net>, jkuznetsov@earthlink.net (Ji-woo Kuznetsov) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Göran Oliveira <goliveira@earthlink.net>
+*PLONK* filter active for trolls.
+486DX2/66 (Linux 1.2.13) - NetBSD 1.0
+
+From landersson@uni-hamburg.de Sat Jul 08 23:25:09 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!uni-hamburg!landersson
+From: landersson@uni-hamburg.de (Lucia Andersson)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jul08.232509.1594@uni-hamburg.de>
+Date: Sat, 08 Jul 1995 23:25:09 GMT
+References: <1995Jul07.181909.6830@earthlink.net>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Jul07.181909.6830@earthlink.net>, jkuznetsov@earthlink.net (Ji-woo Kuznetsov) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Lucia Andersson <landersson@uni-hamburg.de>
+"We don't sign stars. We build them."
+Amiga 3000T / Linux 1.2.13
+

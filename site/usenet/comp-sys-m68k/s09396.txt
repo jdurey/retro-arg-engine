@@ -1,0 +1,95 @@
+From rpetrov@tum.de Tue Mar 28 23:59:50 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!tum!rpetrov
+From: rpetrov@tum.de (Rodrigo Petrov)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Mar28.235950.2374@tum.de>
+Date: Tue, 28 Mar 1995 23:59:50 GMT
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+Schematic diagram in ASCII uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/twin68_array.asc.
+
+-- 
+Rodrigo Petrov <rpetrov@tum.de>
+*PLONK* filter active for trolls.
+Amiga 3000T - NetBSD 1.0
+
+From anakamura@delphi.com Wed Mar 29 21:30:50 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!delphi!anakamura
+From: anakamura@delphi.com (Andrei Nakamura)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Mar29.213050.9243@delphi.com>
+Date: Wed, 29 Mar 1995 21:30:50 GMT
+References: <1995Mar28.235950.2374@tum.de>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Mar28.235950.2374@tum.de>, rpetrov@tum.de (Rodrigo Petrov) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Andrei Nakamura <anakamura@delphi.com>
+"We don't sign stars. We build them."
+PC-9821Ap2 (NEC) / Linux 1.2.13
+
+From agirard@cam.ac.uk Thu Mar 30 14:28:50 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!cam!agirard
+From: agirard@cam.ac.uk (Aiko Girard)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Mar30.142850.4971@cam.ac.uk>
+Date: Thu, 30 Mar 1995 14:28:50 GMT
+References: <1995Mar28.235950.2374@tum.de>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Mar28.235950.2374@tum.de>, rpetrov@tum.de (Rodrigo Petrov) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Aiko Girard <agirard@cam.ac.uk>
+"There are 14 nodes and only 10 countries. Count again."
+Amiga 1200 (Blizzard 030/50) / TOS 4.04
+
+From jlopez@stanford.edu Thu Mar 30 21:14:50 1995
+Path: ashpoly!cascade!brgate!saturno!stanford!jlopez
+From: jlopez@stanford.edu (Ji-woo López)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Mar30.211450.6375@stanford.edu>
+Date: Thu, 30 Mar 1995 21:14:50 GMT
+References: <1995Mar28.235950.2374@tum.de> <1995Mar29.213050.9243@delphi.com>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Mar29.213050.9243@delphi.com>, anakamura@delphi.com (Andrei Nakamura) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Ji-woo López | jlopez@stanford.edu
+PGP Key fingerprint: 3A81 720A A382 4F23
+"Keep the channels open."
+

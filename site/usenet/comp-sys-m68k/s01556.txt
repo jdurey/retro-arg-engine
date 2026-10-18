@@ -1,0 +1,117 @@
+From ksouza@cmu.edu Wed Jul 17 19:07:56 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!cmu!ksouza
+From: ksouza@cmu.edu (Kenji Souza)
+Newsgroups: comp.sys.m68k
+Subject: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Jul17.190756.6738@cmu.edu>
+Date: Wed, 17 Jul 1996 19:07:56 GMT
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Kenji Souza <ksouza@cmu.edu>
+"In theory there is no difference between theory and practice."
+Atari TT030 / SunOS 4.1.4
+
+From mkang@tum.de Thu Jul 18 06:51:56 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!tum!mkang
+From: mkang@tum.de (Mike Kang)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Jul18.065156.4241@tum.de>
+Date: Thu, 18 Jul 1996 06:51:56 GMT
+References: <1996Jul17.190756.6738@cmu.edu>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1996Jul17.190756.6738@cmu.edu>, ksouza@cmu.edu (Kenji Souza) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Mike Kang
+Tape trading list upon request. SASE required for international mail.
+
+From gmacdonald@inria.fr Fri Jul 19 08:06:56 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!inria!gmacdonald
+From: gmacdonald@inria.fr (Graham MacDonald)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Jul19.080656.1695@inria.fr>
+Date: Fri, 19 Jul 1996 08:06:56 GMT
+References: <1996Jul17.190756.6738@cmu.edu> <1996Jul18.065156.4241@tum.de>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Jul18.065156.4241@tum.de>, mkang@tum.de (Mike Kang) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Graham MacDonald | gmacdonald@inria.fr
+PGP Key fingerprint: 7CF1 2930 23FE 233E
+"Keep the channels open."
+
+From gandersson@utexas.edu Sat Jul 20 15:33:56 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!utexas!gandersson
+From: gandersson@utexas.edu (Graham Andersson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Jul20.153356.4187@utexas.edu>
+Date: Sat, 20 Jul 1996 15:33:56 GMT
+References: <1996Jul17.190756.6738@cmu.edu>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Jul17.190756.6738@cmu.edu>, ksouza@cmu.edu (Kenji Souza) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Graham Andersson <gandersson@utexas.edu>
+"The carrier frequency does not drift by accident."
+Atari TT030 / AmigaOS 3.1
+
+From breyes@cam.ac.uk Sun Jul 21 23:39:56 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!cam!breyes
+From: breyes@cam.ac.uk (Bastien Reyes)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Jul21.233956.7075@cam.ac.uk>
+Date: Sun, 21 Jul 1996 23:39:56 GMT
+References: <1996Jul17.190756.6738@cmu.edu> <1996Jul18.065156.4241@tum.de>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1996Jul18.065156.4241@tum.de>, mkang@tum.de (Mike Kang) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Bastien Reyes <breyes@cam.ac.uk>
+Zyxel U-1496E @ 14,400 bps
+"Do not worship the copy."
+

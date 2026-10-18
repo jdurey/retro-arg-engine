@@ -1,0 +1,94 @@
+From hgarcia@pacbell.net Sat Jan 08 23:16:33 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!pacbell!hgarcia
+From: hgarcia@pacbell.net (Hana García)
+Newsgroups: comp.dsp
+Subject: Observation: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Jan08.231633.2536@pacbell.net>
+Date: Sat, 08 Jan 1994 23:16:33 GMT
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+Hana García
+Tape trading list upon request. SASE required for international mail.
+
+From asouza@illinois.edu Mon Jan 10 00:33:33 1994
+Path: ashpoly!cascade!brgate!saturno!illinois!asouza
+From: asouza@illinois.edu (Anton Souza)
+Newsgroups: comp.dsp
+Subject: Re: Observation: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Jan10.003333.9891@illinois.edu>
+Date: Mon, 10 Jan 1994 00:33:33 GMT
+References: <1994Jan08.231633.2536@pacbell.net>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1994Jan08.231633.2536@pacbell.net>, hgarcia@pacbell.net (Hana García) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Anton Souza
+Opinions expressed are solely my own and not those of University of Illinois Urbana-Champaign.
+------------------------------------------------------------
+
+From dpetrov@panix.com Mon Jan 10 02:57:33 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!panix!dpetrov
+From: dpetrov@panix.com (Diego Petrov)
+Newsgroups: comp.dsp
+Subject: Re: Observation: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Jan10.025733.1946@panix.com>
+Date: Mon, 10 Jan 1994 02:57:33 GMT
+References: <1994Jan08.231633.2536@pacbell.net> <1994Jan10.003333.9891@illinois.edu>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1994Jan10.003333.9891@illinois.edu>, asouza@illinois.edu (Anton Souza) writes:
+> If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+> Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Diego Petrov
+Opinions expressed are solely my own and not those of Public Access Unix of New York.
+------------------------------------------------------------
+
+From sgonzalez@cmu.edu Tue Jan 11 23:22:33 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!cmu!sgonzalez
+From: sgonzalez@cmu.edu (Steve González)
+Newsgroups: comp.dsp
+Subject: Re: Observation: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Jan11.232233.4957@cmu.edu>
+Date: Tue, 11 Jan 1994 23:22:33 GMT
+References: <1994Jan08.231633.2536@pacbell.net> <1994Jan10.003333.9891@illinois.edu> <1994Jan10.025733.1946@panix.com>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1994Jan10.025733.1946@panix.com>, dpetrov@panix.com (Diego Petrov) writes:
+> Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+-- 
+Steve González
+Tape trading list upon request. SASE required for international mail.
+

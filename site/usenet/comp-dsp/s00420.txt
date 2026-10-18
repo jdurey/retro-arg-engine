@@ -1,0 +1,93 @@
+From ssanchez@hanse.de Mon Aug 08 14:00:20 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!hanse!ssanchez
+From: ssanchez@hanse.de (Seo-yeon Sánchez)
+Newsgroups: comp.dsp
+Subject: [INFO] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Aug08.140020.3574@hanse.de>
+Date: Mon, 08 Aug 1994 14:00:20 GMT
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+=== Seo-yeon Sánchez ===
+Dept of Electrical Engineering, Hanse-Netzwerk Hamburg
+"The carrier frequency does not drift by accident."
+
+From tfournier@earthlink.net Tue Aug 09 20:18:20 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!earthlink!tfournier
+From: tfournier@earthlink.net (Takeshi Fournier)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Aug09.201820.8184@earthlink.net>
+Date: Tue, 09 Aug 1994 20:18:20 GMT
+References: <1994Aug08.140020.3574@hanse.de>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Aug08.140020.3574@hanse.de>, ssanchez@hanse.de (Seo-yeon Sánchez) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+That's how the 14 lines of the Stardust matrix are encoded. Each regional pressing contains one line of the decoded text.
+
+-- 
+Takeshi Fournier <tfournier@earthlink.net>
+"When every node is whole, the channel opens."
+Commodore Amiga 500 (1MB OCS) / TOS 4.04
+
+From jgonzalez@u-tokyo.ac.jp Tue Aug 09 22:24:20 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!u-tokyo!jgonzalez
+From: jgonzalez@u-tokyo.ac.jp (Ji-woo González)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Aug09.222420.1456@u-tokyo.ac.jp>
+Date: Tue, 09 Aug 1994 22:24:20 GMT
+References: <1994Aug08.140020.3574@hanse.de> <1994Aug09.201820.8184@earthlink.net>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Aug09.201820.8184@earthlink.net>, tfournier@earthlink.net (Takeshi Fournier) writes:
+> That's how the 14 lines of the Stardust matrix are encoded. Each regional pressing contains one line of the decoded text.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Ji-woo González
+Opinions expressed are solely my own and not those of University of Tokyo Department of Information Science.
+------------------------------------------------------------
+
+From fgonzalez@rwth-aachen.de Wed Aug 10 10:53:20 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!rwth-aachen!fgonzalez
+From: fgonzalez@rwth-aachen.de (Fiona González)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Aug10.105320.7629@rwth-aachen.de>
+Date: Wed, 10 Aug 1994 10:53:20 GMT
+References: <1994Aug08.140020.3574@hanse.de> <1994Aug09.201820.8184@earthlink.net>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Aug09.201820.8184@earthlink.net>, tfournier@earthlink.net (Takeshi Fournier) writes:
+> That's how the 14 lines of the Stardust matrix are encoded. Each regional pressing contains one line of the decoded text.
+
+Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+-- 
+=== Fiona González ===
+Dept of Electrical Engineering, RWTH Aachen Informatik
+"Measuring a record you own is listening, not piracy."
+

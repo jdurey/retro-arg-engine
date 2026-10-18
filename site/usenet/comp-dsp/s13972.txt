@@ -1,0 +1,48 @@
+From nlopez@cam.ac.uk Tue Aug 27 07:11:08 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!cam!nlopez
+From: nlopez@cam.ac.uk (Natalia López)
+Newsgroups: comp.dsp
+Subject: Question: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996Aug27.071108.9122@cam.ac.uk>
+Date: Tue, 27 Aug 1996 07:11:08 GMT
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+
+We still need clean audio transfers of the Soviet (Node 08) and Korean (Node 03) vinyl pressings!
+
+-- 
+Natalia López <nlopez@cam.ac.uk>
+"The hatch is open. Is anyone listening?"
+Mac IIci / 68882 FPU / TOS 4.04
+
+From fgirard@stanford.edu Wed Aug 28 17:44:08 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!stanford!fgirard
+From: fgirard@stanford.edu (Fiona Girard)
+Newsgroups: comp.dsp
+Subject: Re: Question: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1996Aug28.174408.1843@stanford.edu>
+Date: Wed, 28 Aug 1996 17:44:08 GMT
+References: <1996Aug27.071108.9122@cam.ac.uk>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1996Aug27.071108.9122@cam.ac.uk>, nlopez@cam.ac.uk (Natalia López) writes:
+> Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+> The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Fiona Girard <fgirard@stanford.edu>
+SupraFAXModem 28.8 @ 19,200 bps
+"Marcus is not one man."
+

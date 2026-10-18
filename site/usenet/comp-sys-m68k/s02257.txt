@@ -1,0 +1,74 @@
+From tgarcia@utexas.edu Mon Mar 14 19:44:03 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!utexas!tgarcia
+From: tgarcia@utexas.edu (Tobias García)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Mar14.194403.4304@utexas.edu>
+Date: Mon, 14 Mar 1994 19:44:03 GMT
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Tobias García | tgarcia@utexas.edu
+PGP Key fingerprint: D190 1A36 2110 C2EC
+"Keep the channels open."
+
+From ggirard@uni-hamburg.de Tue Mar 15 21:58:03 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!uni-hamburg!ggirard
+From: ggirard@uni-hamburg.de (Göran Girard)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Mar15.215803.6640@uni-hamburg.de>
+Date: Tue, 15 Mar 1994 21:58:03 GMT
+References: <1994Mar14.194403.4304@utexas.edu>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1994Mar14.194403.4304@utexas.edu>, tgarcia@utexas.edu (Tobias García) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Göran Girard <ggirard@uni-hamburg.de>
+US Robotics Courier V.34 @ ISDN 64k bps
+"Hold for relay."
+
+From rkang@pipeline.com Fri Mar 18 01:54:03 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!pipeline!rkang
+From: rkang@pipeline.com (Rodrigo Kang)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Mar18.015403.5932@pipeline.com>
+Date: Fri, 18 Mar 1994 01:54:03 GMT
+References: <1994Mar14.194403.4304@utexas.edu> <1994Mar15.215803.6640@uni-hamburg.de>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1994Mar15.215803.6640@uni-hamburg.de>, ggirard@uni-hamburg.de (Göran Girard) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+=== Rodrigo Kang ===
+Dept of Electrical Engineering, The Pipeline Internet Network
+"There are 14 nodes and only 10 countries. Count again."
+

@@ -1,0 +1,117 @@
+From bduarte@netcom.com Thu May 11 14:49:26 1995
+Path: ashpoly!cascade!bigsur!netcom!bduarte
+From: bduarte@netcom.com (Brian Duarte)
+Newsgroups: comp.sys.m68k
+Subject: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995May11.144926.9225@netcom.com>
+Date: Thu, 11 May 1995 14:49:26 GMT
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+Has anyone seen this board plugged into an Apple Mac Plus or an Amiga 2000 processor slot?
+
+-- 
+Brian Duarte <bduarte@netcom.com>
+Practical Peripherals 14.4 @ 9600 Telebit bps
+"There are 14 nodes and only 10 countries. Count again."
+
+From osmirnov@tum.de Fri May 12 22:38:26 1995
+Path: ashpoly!cascade!mxgate!coyoacan!tum!osmirnov
+From: osmirnov@tum.de (Olga Smirnov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995May12.223826.1462@tum.de>
+Date: Fri, 12 May 1995 22:38:26 GMT
+References: <1995May11.144926.9225@netcom.com>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995May11.144926.9225@netcom.com>, bduarte@netcom.com (Brian Duarte) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+> The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Olga Smirnov | osmirnov@tum.de
+PGP Key fingerprint: B40E F090 5A83 A305
+"Keep the channels open."
+
+From scampbell@panix.com Sat May 13 17:16:26 1995
+Path: ashpoly!cascade!brgate!saturno!panix!scampbell
+From: scampbell@panix.com (Steve Campbell)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995May13.171626.8210@panix.com>
+Date: Sat, 13 May 1995 17:16:26 GMT
+References: <1995May11.144926.9225@netcom.com> <1995May12.223826.1462@tum.de>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995May12.223826.1462@tum.de>, osmirnov@tum.de (Olga Smirnov) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Steve Campbell | scampbell@panix.com
+PGP Key fingerprint: 4867 0D01 A7E2 A85A
+"Keep the channels open."
+
+From bgonzalez@utexas.edu Sat May 13 18:20:26 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!utexas!bgonzalez
+From: bgonzalez@utexas.edu (Bastien González)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995May13.182026.5845@utexas.edu>
+Date: Sat, 13 May 1995 18:20:26 GMT
+References: <1995May11.144926.9225@netcom.com>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995May11.144926.9225@netcom.com>, bduarte@netcom.com (Brian Duarte) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+> The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Bastien González | bgonzalez@utexas.edu
+PGP Key fingerprint: A54D D0F8 BE72 3EDC
+"Keep the channels open."
+
+From bnovak@ox.ac.uk Sun May 14 23:17:26 1995
+Path: ashpoly!cascade!brgate!saturno!ox!bnovak
+From: bnovak@ox.ac.uk (Bill Novak)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995May14.231726.4457@ox.ac.uk>
+Date: Sun, 14 May 1995 23:17:26 GMT
+References: <1995May11.144926.9225@netcom.com> <1995May12.223826.1462@tum.de> <1995May13.171626.8210@panix.com>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1995May13.171626.8210@panix.com>, scampbell@panix.com (Steve Campbell) writes:
+> The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Bill Novak -- Oxford University Computing Laboratory
+"Marcus is not one man."
+

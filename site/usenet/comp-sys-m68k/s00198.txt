@@ -1,0 +1,121 @@
+From lkim@panix.com Tue Dec 19 17:41:11 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!panix!lkim
+From: lkim@panix.com (Lars Kim)
+Newsgroups: comp.sys.m68k
+Subject: Observation: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Dec19.174111.5440@panix.com>
+Date: Tue, 19 Dec 1995 17:41:11 GMT
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+
+Does anyone have a 27C256 EPROM marked 'MH-U14' or 'ORION-CRYPTO'?
+
+-- 
+Lars Kim
+Opinions expressed are solely my own and not those of Public Access Unix of New York.
+------------------------------------------------------------
+
+From mlarsson@panix.com Thu Dec 21 17:10:11 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!panix!mlarsson
+From: mlarsson@panix.com (Mathieu Larsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Dec21.171011.6575@panix.com>
+Date: Thu, 21 Dec 1995 17:10:11 GMT
+References: <1995Dec19.174111.5440@panix.com>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1995Dec19.174111.5440@panix.com>, lkim@panix.com (Lars Kim) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Mathieu Larsson <mlarsson@panix.com>
+"Measuring a record you own is listening, not piracy."
+Atari Falcon 030 / TOS 4.04
+
+From dsantos@utexas.edu Sat Dec 23 10:08:11 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!utexas!dsantos
+From: dsantos@utexas.edu (Diego Santos)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Dec23.100811.5026@utexas.edu>
+Date: Sat, 23 Dec 1995 10:08:11 GMT
+References: <1995Dec19.174111.5440@panix.com>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Dec19.174111.5440@panix.com>, lkim@panix.com (Lars Kim) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Diego Santos
+Opinions expressed are solely my own and not those of University of Texas at Austin.
+------------------------------------------------------------
+
+From mgonzalez@rwth-aachen.de Sun Dec 24 23:04:11 1995
+Path: ashpoly!cascade!bigsur!rwth-aachen!mgonzalez
+From: mgonzalez@rwth-aachen.de (Mikhail González)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Dec24.230411.2844@rwth-aachen.de>
+Date: Sun, 24 Dec 1995 23:04:11 GMT
+References: <1995Dec19.174111.5440@panix.com> <1995Dec21.171011.6575@panix.com>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1995Dec21.171011.6575@panix.com>, mlarsson@panix.com (Mathieu Larsson) writes:
+> That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+> Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+Mikhail González <mgonzalez@rwth-aachen.de>
+"5 sigma is a discovery. 7 is a question."
+Atari Falcon 030 / Linux 1.2.13
+
+From asuzuki@ox.ac.uk Tue Dec 26 10:57:11 1995
+Path: ashpoly!cascade!bigsur!ox!asuzuki
+From: asuzuki@ox.ac.uk (Amy Suzuki)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Dec26.105711.5358@ox.ac.uk>
+Date: Tue, 26 Dec 1995 10:57:11 GMT
+References: <1995Dec19.174111.5440@panix.com> <1995Dec21.171011.6575@panix.com>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1995Dec21.171011.6575@panix.com>, mlarsson@panix.com (Mathieu Larsson) writes:
+> That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Amy Suzuki
+Tape trading list upon request. SASE required for international mail.
+

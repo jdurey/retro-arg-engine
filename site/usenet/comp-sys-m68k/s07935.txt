@@ -1,0 +1,94 @@
+From lpopov@clari.net Sat Apr 16 04:28:40 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!clari!lpopov
+From: lpopov@clari.net (Lucia Popov)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Apr16.042840.8828@clari.net>
+Date: Sat, 16 Apr 1994 04:28:40 GMT
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+=== Lucia Popov ===
+Dept of Electrical Engineering, ClariNet Communications Corp
+"5 sigma is a discovery. 7 is a question."
+
+From lsantos@inria.fr Sat Apr 16 20:57:40 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!inria!lsantos
+From: lsantos@inria.fr (Lucia Santos)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Apr16.205740.2000@inria.fr>
+Date: Sat, 16 Apr 1994 20:57:40 GMT
+References: <1994Apr16.042840.8828@clari.net>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1994Apr16.042840.8828@clari.net>, lpopov@clari.net (Lucia Popov) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+> The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Lucia Santos <lsantos@inria.fr>
+US Robotics Courier V.34 @ ISDN 64k bps
+"The carrier frequency does not drift by accident."
+
+From mschneider@cam.ac.uk Sun Apr 17 12:35:40 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!cam!mschneider
+From: mschneider@cam.ac.uk (Morag Schneider)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Apr17.123540.4019@cam.ac.uk>
+Date: Sun, 17 Apr 1994 12:35:40 GMT
+References: <1994Apr16.042840.8828@clari.net>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Apr16.042840.8828@clari.net>, lpopov@clari.net (Lucia Popov) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+> The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+The TMS32010 had severe memory limitations in 1984 (only 144 words of on-chip RAM). Dual 68000s gave them full 16MB address space.
+
+-- 
+Morag Schneider -- University of Cambridge Computer Laboratory
+"Row 14. No joke."
+
+From jlopez@mit.edu Tue Apr 19 10:28:40 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!mit!jlopez
+From: jlopez@mit.edu (Jens López)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Apr19.102840.9842@mit.edu>
+Date: Tue, 19 Apr 1994 10:28:40 GMT
+References: <1994Apr16.042840.8828@clari.net> <1994Apr17.123540.4019@cam.ac.uk>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Apr17.123540.4019@cam.ac.uk>, mschneider@cam.ac.uk (Morag Schneider) writes:
+> The TMS32010 had severe memory limitations in 1984 (only 144 words of on-chip RAM). Dual 68000s gave them full 16MB address space.
+
+Marcus Hale designed the TWIN-68 board before he disappeared. That's why his initials are on the PCB silkscreen.
+
+-- 
+Jens López <jlopez@mit.edu>
+*PLONK* filter active for trolls.
+Atari TT030 - NetBSD 1.0
+

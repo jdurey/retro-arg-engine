@@ -1,0 +1,118 @@
+From spetrov@panix.com Wed Apr 26 20:23:07 1995
+Path: ashpoly!cascade!mxgate!coyoacan!panix!spetrov
+From: spetrov@panix.com (Steve Petrov)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Apr26.202307.1331@panix.com>
+Date: Wed, 26 Apr 1995 20:23:07 GMT
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Steve Petrov | spetrov@panix.com
+PGP Key fingerprint: E9CF 605E 1553 AE1D
+"Keep the channels open."
+
+From ikang@titech.ac.jp Fri Apr 28 06:25:07 1995
+Path: ashpoly!cascade!bigsur!titech!ikang
+From: ikang@titech.ac.jp (Ines Kang)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Apr28.062507.8947@titech.ac.jp>
+Date: Fri, 28 Apr 1995 06:25:07 GMT
+References: <1995Apr26.202307.1331@panix.com>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Apr26.202307.1331@panix.com>, spetrov@panix.com (Steve Petrov) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Ines Kang <ikang@titech.ac.jp>
+SupraFAXModem 28.8 @ 9600 Telebit bps
+"Tape doesn't lie at 02:14. Ears do."
+
+From tsmirnov@uni-hamburg.de Sat Apr 29 11:53:07 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!uni-hamburg!tsmirnov
+From: tsmirnov@uni-hamburg.de (Takeshi Smirnov)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Apr29.115307.1249@uni-hamburg.de>
+Date: Sat, 29 Apr 1995 11:53:07 GMT
+References: <1995Apr26.202307.1331@panix.com>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Apr26.202307.1331@panix.com>, spetrov@panix.com (Steve Petrov) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+Takeshi Smirnov <tsmirnov@uni-hamburg.de>
+"Row 14. No joke."
+Amiga 3000T / NEXTSTEP 3.3
+
+From mperez@purdue.edu Sat Apr 29 17:32:07 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!purdue!mperez
+From: mperez@purdue.edu (Mikhail Pérez)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Apr29.173207.7498@purdue.edu>
+Date: Sat, 29 Apr 1995 17:32:07 GMT
+References: <1995Apr26.202307.1331@panix.com> <1995Apr28.062507.8947@titech.ac.jp>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995Apr28.062507.8947@titech.ac.jp>, ikang@titech.ac.jp (Ines Kang) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Mikhail Pérez
+Opinions expressed are solely my own and not those of Purdue University Engineering Computer Network.
+------------------------------------------------------------
+
+From ktakahashi@panix.com Sun Apr 30 01:00:07 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!panix!ktakahashi
+From: ktakahashi@panix.com (Katrin Takahashi)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Apr30.010007.1069@panix.com>
+Date: Sun, 30 Apr 1995 01:00:07 GMT
+References: <1995Apr26.202307.1331@panix.com> <1995Apr29.115307.1249@uni-hamburg.de>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Apr29.115307.1249@uni-hamburg.de>, tsmirnov@uni-hamburg.de (Takeshi Smirnov) writes:
+> Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Katrin Takahashi | ktakahashi@panix.com
+PGP Key fingerprint: 7D89 B5C6 F606 14BD
+"Keep the channels open."
+

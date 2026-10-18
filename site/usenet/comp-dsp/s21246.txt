@@ -1,0 +1,70 @@
+From llindqvist@cern.ch Wed Jan 03 01:12:17 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!cern!llindqvist
+From: llindqvist@cern.ch (Liam Lindqvist)
+Newsgroups: comp.dsp
+Subject: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jan03.011217.1365@cern.ch>
+Date: Wed, 03 Jan 1996 01:12:17 GMT
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Liam Lindqvist
+Opinions expressed are solely my own and not those of European Laboratory for Particle Physics, Geneva.
+------------------------------------------------------------
+
+From sfournier@uu.net Thu Jan 04 12:34:17 1996
+Path: ashpoly!cascade!brgate!saturno!uu!sfournier
+From: sfournier@uu.net (Sun-mi Fournier)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jan04.123417.9988@uu.net>
+Date: Thu, 04 Jan 1996 12:34:17 GMT
+References: <1996Jan03.011217.1365@cern.ch>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Jan03.011217.1365@cern.ch>, llindqvist@cern.ch (Liam Lindqvist) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Sun-mi Fournier
+Opinions expressed are solely my own and not those of UUNET Technologies, Falls Church VA.
+------------------------------------------------------------
+
+From thughes@pipeline.com Sat Jan 06 15:39:17 1996
+Path: ashpoly!cascade!brgate!saturno!pipeline!thughes
+From: thughes@pipeline.com (Thiago Hughes)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jan06.153917.1887@pipeline.com>
+Date: Sat, 06 Jan 1996 15:39:17 GMT
+References: <1996Jan03.011217.1365@cern.ch> <1996Jan04.123417.9988@uu.net>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Jan04.123417.9988@uu.net>, sfournier@uu.net (Sun-mi Fournier) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Thiago Hughes <thughes@pipeline.com>
+*PLONK* filter active for trolls.
+Commodore Amiga 500 (1MB OCS) - NetBSD 1.0
+

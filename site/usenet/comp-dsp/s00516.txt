@@ -1,0 +1,93 @@
+From mchoi@mindspring.com Thu Jan 26 04:50:59 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!mindspring!mchoi
+From: mchoi@mindspring.com (Mikhail Choi)
+Newsgroups: comp.dsp
+Subject: Observation: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Jan26.045059.3267@mindspring.com>
+Date: Thu, 26 Jan 1995 04:50:59 GMT
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+Version 1.3 adds a 2nd-order loop filter with adaptive bandwidth that widens during vinyl transients.
+
+Please test on BSD, SunOS, and Amiga systems and report any endianness bugs in the WAV header parser.
+
+-- 
+Mikhail Choi <mchoi@mindspring.com>
+"Tape doesn't lie at 02:14. Ears do."
+Atari TT030 / SunOS 4.1.4
+
+From mmuller@demon.co.uk Thu Jan 26 21:40:59 1995
+Path: ashpoly!cascade!brgate!saturno!demon!mmuller
+From: mmuller@demon.co.uk (Mathieu Müller)
+Newsgroups: comp.dsp
+Subject: Re: Observation: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Jan26.214059.7862@demon.co.uk>
+Date: Thu, 26 Jan 1995 21:40:59 GMT
+References: <1995Jan26.045059.3267@mindspring.com>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Jan26.045059.3267@mindspring.com>, mchoi@mindspring.com (Mikhail Choi) writes:
+> Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Mathieu Müller | mmuller@demon.co.uk
+PGP Key fingerprint: F6A7 8C6E 7276 29C0
+"Keep the channels open."
+
+From gkim@ox.ac.uk Sat Jan 28 12:11:59 1995
+Path: ashpoly!cascade!bigsur!ox!gkim
+From: gkim@ox.ac.uk (Graham Kim)
+Newsgroups: comp.dsp
+Subject: Re: Observation: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Jan28.121159.7698@ox.ac.uk>
+Date: Sat, 28 Jan 1995 12:11:59 GMT
+References: <1995Jan26.045059.3267@mindspring.com> <1995Jan26.214059.7862@demon.co.uk>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1995Jan26.214059.7862@demon.co.uk>, mmuller@demon.co.uk (Mathieu Müller) writes:
+> Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+-- 
+Graham Kim
+Tape trading list upon request. SASE required for international mail.
+
+From sbrennan@unam.mx Sun Jan 29 04:41:59 1995
+Path: ashpoly!cascade!mxgate!coyoacan!unam!sbrennan
+From: sbrennan@unam.mx (Sergei Brennan)
+Newsgroups: comp.dsp
+Subject: Re: Observation: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Jan29.044159.8153@unam.mx>
+Date: Sun, 29 Jan 1995 04:41:59 GMT
+References: <1995Jan26.045059.3267@mindspring.com>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Jan26.045059.3267@mindspring.com>, mchoi@mindspring.com (Mikhail Choi) writes:
+> Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+> The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Sergei Brennan
+Opinions expressed are solely my own and not those of Universidad Nacional Autónoma de México (DGSCA).
+------------------------------------------------------------
+

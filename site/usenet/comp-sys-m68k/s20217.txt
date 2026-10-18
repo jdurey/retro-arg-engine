@@ -1,0 +1,93 @@
+From kkim@inria.fr Fri Mar 03 18:09:20 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!inria!kkim
+From: kkim@inria.fr (Karen Kim)
+Newsgroups: comp.sys.m68k
+Subject: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Mar03.180920.5025@inria.fr>
+Date: Fri, 03 Mar 1995 18:09:20 GMT
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Karen Kim -- INRIA Rocquencourt
+"5 sigma is a discovery. 7 is a question."
+
+From bpetrov@kth.se Sun Mar 05 02:04:20 1995
+Path: ashpoly!cascade!mxgate!coyoacan!kth!bpetrov
+From: bpetrov@kth.se (Bill Petrov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Mar05.020420.9805@kth.se>
+Date: Sun, 05 Mar 1995 02:04:20 GMT
+References: <1995Mar03.180920.5025@inria.fr>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Mar03.180920.5025@inria.fr>, kkim@inria.fr (Karen Kim) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Bill Petrov
+Opinions expressed are solely my own and not those of Royal Institute of Technology, Stockholm.
+------------------------------------------------------------
+
+From agonzalez@netcom.com Sun Mar 05 22:28:20 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!netcom!agonzalez
+From: agonzalez@netcom.com (Amy González)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Mar05.222820.5575@netcom.com>
+Date: Sun, 05 Mar 1995 22:28:20 GMT
+References: <1995Mar03.180920.5025@inria.fr> <1995Mar05.020420.9805@kth.se>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Mar05.020420.9805@kth.se>, bpetrov@kth.se (Bill Petrov) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Amy González
+Opinions expressed are solely my own and not those of NETCOM On-Line Communication Services.
+------------------------------------------------------------
+
+From mhernandez@ox.ac.uk Tue Mar 07 08:55:20 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!ox!mhernandez
+From: mhernandez@ox.ac.uk (Mikhail Hernández)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Mar07.085520.5692@ox.ac.uk>
+Date: Tue, 07 Mar 1995 08:55:20 GMT
+References: <1995Mar03.180920.5025@inria.fr> <1995Mar05.020420.9805@kth.se> <1995Mar05.222820.5575@netcom.com>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Mar05.222820.5575@netcom.com>, agonzalez@netcom.com (Amy González) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Mikhail Hernández <mhernandez@ox.ac.uk>
+"5 sigma is a discovery. 7 is a question."
+Decstation 5000/200 / FreeBSD 2.1
+

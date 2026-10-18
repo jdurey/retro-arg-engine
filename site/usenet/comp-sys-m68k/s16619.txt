@@ -1,0 +1,96 @@
+From amacdonald@utexas.edu Fri Apr 12 07:21:15 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!utexas!amacdonald
+From: amacdonald@utexas.edu (Amy MacDonald)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Apr12.072115.2330@utexas.edu>
+Date: Fri, 12 Apr 1996 07:21:15 GMT
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Amy MacDonald <amacdonald@utexas.edu>
+*PLONK* filter active for trolls.
+Commodore Amiga 500 (1MB OCS) - NetBSD 1.0
+
+From bmoreau@mindspring.com Fri Apr 12 15:16:15 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!mindspring!bmoreau
+From: bmoreau@mindspring.com (Bill Moreau)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Apr12.151615.8444@mindspring.com>
+Date: Fri, 12 Apr 1996 15:16:15 GMT
+References: <1996Apr12.072115.2330@utexas.edu>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1996Apr12.072115.2330@utexas.edu>, amacdonald@utexas.edu (Amy MacDonald) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Bill Moreau <bmoreau@mindspring.com>
+*PLONK* filter active for trolls.
+Decstation 5000/200 - NetBSD 1.0
+
+From ejohansson@tum.de Sat Apr 13 16:17:15 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!tum!ejohansson
+From: ejohansson@tum.de (Élodie Johansson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Apr13.161715.9778@tum.de>
+Date: Sat, 13 Apr 1996 16:17:15 GMT
+References: <1996Apr12.072115.2330@utexas.edu>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Apr12.072115.2330@utexas.edu>, amacdonald@utexas.edu (Amy MacDonald) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Élodie Johansson <ejohansson@tum.de>
+Zyxel U-1496E @ 9600 Telebit bps
+"We don't sign stars. We build them."
+
+From dsantos@cern.ch Sun Apr 14 11:21:15 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!cern!dsantos
+From: dsantos@cern.ch (Dong-hyun Santos)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Apr14.112115.2070@cern.ch>
+Date: Sun, 14 Apr 1996 11:21:15 GMT
+References: <1996Apr12.072115.2330@utexas.edu> <1996Apr12.151615.8444@mindspring.com>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Apr12.151615.8444@mindspring.com>, bmoreau@mindspring.com (Bill Moreau) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Dong-hyun Santos <dsantos@cern.ch>
+"Marcus is not one man."
+Amiga 3000T / TOS 4.04
+

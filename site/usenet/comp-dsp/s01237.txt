@@ -1,0 +1,118 @@
+From tfournier@mindspring.com Mon Apr 17 22:53:42 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!mindspring!tfournier
+From: tfournier@mindspring.com (Takeshi Fournier)
+Newsgroups: comp.dsp
+Subject: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Apr17.225342.8302@mindspring.com>
+Date: Mon, 17 Apr 1995 22:53:42 GMT
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Takeshi Fournier -- MindSpring Enterprises
+"Measuring a record you own is listening, not piracy."
+
+From akim@pipeline.com Wed Apr 19 20:59:42 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!pipeline!akim
+From: akim@pipeline.com (Anja Kim)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Apr19.205942.7663@pipeline.com>
+Date: Wed, 19 Apr 1995 20:59:42 GMT
+References: <1995Apr17.225342.8302@mindspring.com>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Apr17.225342.8302@mindspring.com>, tfournier@mindspring.com (Takeshi Fournier) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+=== Anja Kim ===
+Dept of Electrical Engineering, The Pipeline Internet Network
+"When every node is whole, the channel opens."
+
+From aschneider@unam.mx Fri Apr 21 15:37:42 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!unam!aschneider
+From: aschneider@unam.mx (Anton Schneider)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Apr21.153742.6440@unam.mx>
+Date: Fri, 21 Apr 1995 15:37:42 GMT
+References: <1995Apr17.225342.8302@mindspring.com>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Apr17.225342.8302@mindspring.com>, tfournier@mindspring.com (Takeshi Fournier) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+Anton Schneider <aschneider@unam.mx>
+"5 sigma is a discovery. 7 is a question."
+Atari TT030 / TOS 4.04
+
+From ihughes@utexas.edu Sat Apr 22 11:05:42 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!utexas!ihughes
+From: ihughes@utexas.edu (Ines Hughes)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Apr22.110542.6507@utexas.edu>
+Date: Sat, 22 Apr 1995 11:05:42 GMT
+References: <1995Apr17.225342.8302@mindspring.com> <1995Apr19.205942.7663@pipeline.com>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Apr19.205942.7663@pipeline.com>, akim@pipeline.com (Anja Kim) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+Ines Hughes -- University of Texas at Austin
+"Marcus is not one man."
+
+From tmacdonald@delphi.com Sat Apr 22 19:47:42 1995
+Path: ashpoly!cascade!mxgate!coyoacan!delphi!tmacdonald
+From: tmacdonald@delphi.com (Tyler MacDonald)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Apr22.194742.6028@delphi.com>
+Date: Sat, 22 Apr 1995 19:47:42 GMT
+References: <1995Apr17.225342.8302@mindspring.com> <1995Apr19.205942.7663@pipeline.com>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Apr19.205942.7663@pipeline.com>, akim@pipeline.com (Anja Kim) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Tyler MacDonald <tmacdonald@delphi.com>
+*PLONK* filter active for trolls.
+Mac IIci / 68882 FPU - NetBSD 1.0
+

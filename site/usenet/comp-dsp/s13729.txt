@@ -1,0 +1,96 @@
+From anovak@tum.de Sat Feb 11 05:49:36 1995
+Path: ashpoly!cascade!mxgate!coyoacan!tum!anovak
+From: anovak@tum.de (Aiko Novak)
+Newsgroups: comp.dsp
+Subject: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Feb11.054936.9305@tum.de>
+Date: Sat, 11 Feb 1995 05:49:36 GMT
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Aiko Novak | anovak@tum.de
+PGP Key fingerprint: 8D0D 983A B388 7A1A
+"Keep the channels open."
+
+From mpopov@pipeline.com Sat Feb 11 16:48:36 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!pipeline!mpopov
+From: mpopov@pipeline.com (Marisol Popov)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Feb11.164836.1069@pipeline.com>
+Date: Sat, 11 Feb 1995 16:48:36 GMT
+References: <1995Feb11.054936.9305@tum.de>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1995Feb11.054936.9305@tum.de>, anovak@tum.de (Aiko Novak) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Marisol Popov
+Tape trading list upon request. SASE required for international mail.
+
+From dvasiliev@kth.se Mon Feb 13 01:16:36 1995
+Path: ashpoly!cascade!bigsur!kth!dvasiliev
+From: dvasiliev@kth.se (Dmitri Vasiliev)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Feb13.011636.7073@kth.se>
+Date: Mon, 13 Feb 1995 01:16:36 GMT
+References: <1995Feb11.054936.9305@tum.de> <1995Feb11.164836.1069@pipeline.com>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995Feb11.164836.1069@pipeline.com>, mpopov@pipeline.com (Marisol Popov) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+Dmitri Vasiliev <dvasiliev@kth.se>
+US Robotics Courier V.34 @ 19,200 bps
+"The carrier frequency does not drift by accident."
+
+From ahughes@mit.edu Mon Feb 13 03:32:36 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!mit!ahughes
+From: ahughes@mit.edu (Amy Hughes)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Feb13.033236.9255@mit.edu>
+Date: Mon, 13 Feb 1995 03:32:36 GMT
+References: <1995Feb11.054936.9305@tum.de> <1995Feb11.164836.1069@pipeline.com> <1995Feb13.011636.7073@kth.se>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Feb13.011636.7073@kth.se>, dvasiliev@kth.se (Dmitri Vasiliev) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Amy Hughes <ahughes@mit.edu>
+*PLONK* filter active for trolls.
+Commodore Amiga 500 (1MB OCS) - NetBSD 1.0
+

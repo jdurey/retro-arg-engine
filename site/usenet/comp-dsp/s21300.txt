@@ -1,0 +1,71 @@
+From vkowalski@berkeley.edu Tue Aug 20 01:16:57 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!berkeley!vkowalski
+From: vkowalski@berkeley.edu (Valeria Kowalski)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Aug20.011657.7369@berkeley.edu>
+Date: Tue, 20 Aug 1996 01:16:57 GMT
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Valeria Kowalski
+Opinions expressed are solely my own and not those of UC Berkeley Department of EECS.
+------------------------------------------------------------
+
+From sfischer@clari.net Wed Aug 21 17:01:57 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!clari!sfischer
+From: sfischer@clari.net (Sun-mi Fischer)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Aug21.170157.2444@clari.net>
+Date: Wed, 21 Aug 1996 17:01:57 GMT
+References: <1996Aug20.011657.7369@berkeley.edu>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Aug20.011657.7369@berkeley.edu>, vkowalski@berkeley.edu (Valeria Kowalski) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Sun-mi Fischer
+Tape trading list upon request. SASE required for international mail.
+
+From sfischer@clari.net Thu Aug 22 15:39:57 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!clari!sfischer
+From: sfischer@clari.net (Steve Fischer)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Aug22.153957.8848@clari.net>
+Date: Thu, 22 Aug 1996 15:39:57 GMT
+References: <1996Aug20.011657.7369@berkeley.edu>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Aug20.011657.7369@berkeley.edu>, vkowalski@berkeley.edu (Valeria Kowalski) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Steve Fischer -- ClariNet Communications Corp
+"In theory there is no difference between theory and practice."
+

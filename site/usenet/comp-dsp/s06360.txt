@@ -1,0 +1,94 @@
+From lmacdonald@uni-hamburg.de Wed Mar 16 08:02:12 1994
+Path: ashpoly!cascade!brgate!saturno!uni-hamburg!lmacdonald
+From: lmacdonald@uni-hamburg.de (Lars MacDonald)
+Newsgroups: comp.dsp
+Subject: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Mar16.080212.5199@uni-hamburg.de>
+Date: Wed, 16 Mar 1994 08:02:12 GMT
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Lars MacDonald <lmacdonald@uni-hamburg.de>
+"The carrier frequency does not drift by accident."
+Mac IIci / 68882 FPU / Linux 1.2.13
+
+From twatanabe@cam.ac.uk Wed Mar 16 09:02:12 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!cam!twatanabe
+From: twatanabe@cam.ac.uk (Takeshi Watanabe)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Mar16.090212.8781@cam.ac.uk>
+Date: Wed, 16 Mar 1994 09:02:12 GMT
+References: <1994Mar16.080212.5199@uni-hamburg.de>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Mar16.080212.5199@uni-hamburg.de>, lmacdonald@uni-hamburg.de (Lars MacDonald) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+Takeshi Watanabe <twatanabe@cam.ac.uk>
+*PLONK* filter active for trolls.
+Sun SparcStation 20 - NetBSD 1.0
+
+From kmuller@delphi.com Fri Mar 18 12:11:12 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!delphi!kmuller
+From: kmuller@delphi.com (Katrin Müller)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Mar18.121112.9442@delphi.com>
+Date: Fri, 18 Mar 1994 12:11:12 GMT
+References: <1994Mar16.080212.5199@uni-hamburg.de> <1994Mar16.090212.8781@cam.ac.uk>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1994Mar16.090212.8781@cam.ac.uk>, twatanabe@cam.ac.uk (Takeshi Watanabe) writes:
+> Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Katrin Müller -- Delphi Internet Services
+"A soul is not exclusive to biology."
+
+From sgarcia@stanford.edu Sat Mar 19 12:49:12 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!stanford!sgarcia
+From: sgarcia@stanford.edu (Steve García)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Mar19.124912.4705@stanford.edu>
+Date: Sat, 19 Mar 1994 12:49:12 GMT
+References: <1994Mar16.080212.5199@uni-hamburg.de> <1994Mar16.090212.8781@cam.ac.uk>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1994Mar16.090212.8781@cam.ac.uk>, twatanabe@cam.ac.uk (Takeshi Watanabe) writes:
+> Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Steve García
+Opinions expressed are solely my own and not those of Stanford University Computer Systems Lab.
+------------------------------------------------------------
+

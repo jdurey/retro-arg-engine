@@ -1,0 +1,46 @@
+From sperez@panix.com Sat Jan 07 13:31:54 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!panix!sperez
+From: sperez@panix.com (Sergei Pérez)
+Newsgroups: comp.dsp
+Subject: [FLAME] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jan07.133154.9699@panix.com>
+Date: Sat, 07 Jan 1995 13:31:54 GMT
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+Sergei Pérez
+Tape trading list upon request. SASE required for international mail.
+
+From glopez@netcom.com Sat Jan 07 21:42:54 1995
+Path: ashpoly!cascade!brgate!saturno!netcom!glopez
+From: glopez@netcom.com (Göran López)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jan07.214254.2764@netcom.com>
+Date: Sat, 07 Jan 1995 21:42:54 GMT
+References: <1995Jan07.133154.9699@panix.com>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Jan07.133154.9699@panix.com>, sperez@panix.com (Sergei Pérez) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+=== Göran López ===
+Dept of Electrical Engineering, NETCOM On-Line Communication Services
+"Hardware is temporary. The signal survives."
+

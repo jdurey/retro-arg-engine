@@ -1,0 +1,70 @@
+From gsilva@ox.ac.uk Thu Sep 12 15:52:31 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!ox!gsilva
+From: gsilva@ox.ac.uk (Graham Silva)
+Newsgroups: comp.dsp
+Subject: Observation: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Sep12.155231.3805@ox.ac.uk>
+Date: Thu, 12 Sep 1996 15:52:31 GMT
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+
+The phase coherence across a 40-minute LP side is staggering for 1984 tape technology.
+
+-- 
+Graham Silva
+Opinions expressed are solely my own and not those of Oxford University Computing Laboratory.
+------------------------------------------------------------
+
+From msilva@cern.ch Fri Sep 13 09:03:31 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!cern!msilva
+From: msilva@cern.ch (Marta Silva)
+Newsgroups: comp.dsp
+Subject: Re: Observation: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Sep13.090331.7433@cern.ch>
+Date: Fri, 13 Sep 1996 09:03:31 GMT
+References: <1996Sep12.155231.3805@ox.ac.uk>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Sep12.155231.3805@ox.ac.uk>, gsilva@ox.ac.uk (Graham Silva) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+> A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Marta Silva -- European Laboratory for Particle Physics, Geneva
+"Hold for relay."
+
+From ngonzalez@uni-hamburg.de Sun Sep 15 06:43:31 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!uni-hamburg!ngonzalez
+From: ngonzalez@uni-hamburg.de (Nadine González)
+Newsgroups: comp.dsp
+Subject: Re: Observation: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Sep15.064331.1404@uni-hamburg.de>
+Date: Sun, 15 Sep 1996 06:43:31 GMT
+References: <1996Sep12.155231.3805@ox.ac.uk> <1996Sep13.090331.7433@cern.ch>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Sep13.090331.7433@cern.ch>, msilva@cern.ch (Marta Silva) writes:
+> Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+-- 
+Nadine González <ngonzalez@uni-hamburg.de>
+SupraFAXModem 28.8 @ 9600 Telebit bps
+"Hold for relay."
+

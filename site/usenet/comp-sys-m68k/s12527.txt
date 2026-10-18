@@ -1,0 +1,72 @@
+From atakahashi@cern.ch Tue Dec 06 19:42:12 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!cern!atakahashi
+From: atakahashi@cern.ch (Aiko Takahashi)
+Newsgroups: comp.sys.m68k
+Subject: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Dec06.194212.9932@cern.ch>
+Date: Tue, 06 Dec 1994 19:42:12 GMT
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+Aiko Takahashi <atakahashi@cern.ch>
+Hayes Optima 288 @ 33,600 bps
+"Hardware is temporary. The signal survives."
+
+From fwatanabe@stanford.edu Thu Dec 08 04:24:12 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!stanford!fwatanabe
+From: fwatanabe@stanford.edu (Fiona Watanabe)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Dec08.042412.8327@stanford.edu>
+Date: Thu, 08 Dec 1994 04:24:12 GMT
+References: <1994Dec06.194212.9932@cern.ch>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1994Dec06.194212.9932@cern.ch>, atakahashi@cern.ch (Aiko Takahashi) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Fiona Watanabe
+Tape trading list upon request. SASE required for international mail.
+
+From jsanchez@berkeley.edu Thu Dec 08 22:24:12 1994
+Path: ashpoly!cascade!bigsur!berkeley!jsanchez
+From: jsanchez@berkeley.edu (Julien Sánchez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Dec08.222412.9084@berkeley.edu>
+Date: Thu, 08 Dec 1994 22:24:12 GMT
+References: <1994Dec06.194212.9932@cern.ch>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1994Dec06.194212.9932@cern.ch>, atakahashi@cern.ch (Aiko Takahashi) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Julien Sánchez <jsanchez@berkeley.edu>
+*PLONK* filter active for trolls.
+Macintosh IIfx - NetBSD 1.0
+

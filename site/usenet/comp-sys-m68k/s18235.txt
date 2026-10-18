@@ -1,0 +1,117 @@
+From bdubois@kiae.su Mon Jan 16 13:24:25 1995
+Path: ashpoly!cascade!brgate!saturno!kiae!bdubois
+From: bdubois@kiae.su (Bill Dubois)
+Newsgroups: comp.sys.m68k
+Subject: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jan16.132425.3303@kiae.su>
+Date: Mon, 16 Jan 1995 13:24:25 GMT
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+Bill Dubois
+Opinions expressed are solely my own and not those of Kurchatov Institute of Atomic Energy, Moscow.
+------------------------------------------------------------
+
+From lmoreau@mit.edu Tue Jan 17 10:58:25 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!mit!lmoreau
+From: lmoreau@mit.edu (Lisa Moreau)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jan17.105825.9955@mit.edu>
+Date: Tue, 17 Jan 1995 10:58:25 GMT
+References: <1995Jan16.132425.3303@kiae.su>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Jan16.132425.3303@kiae.su>, bdubois@kiae.su (Bill Dubois) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Lisa Moreau -- Massachusetts Institute of Technology
+"Hardware is temporary. The signal survives."
+
+From jrodriguez@berkeley.edu Tue Jan 17 12:13:25 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!berkeley!jrodriguez
+From: jrodriguez@berkeley.edu (Joachim Rodríguez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jan17.121325.5994@berkeley.edu>
+Date: Tue, 17 Jan 1995 12:13:25 GMT
+References: <1995Jan16.132425.3303@kiae.su> <1995Jan17.105825.9955@mit.edu>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Jan17.105825.9955@mit.edu>, lmoreau@mit.edu (Lisa Moreau) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+=== Joachim Rodríguez ===
+Dept of Electrical Engineering, UC Berkeley Department of EECS
+"When every node is whole, the channel opens."
+
+From lsouza@stanford.edu Thu Jan 19 09:56:25 1995
+Path: ashpoly!cascade!bigsur!stanford!lsouza
+From: lsouza@stanford.edu (Lucia Souza)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jan19.095625.4539@stanford.edu>
+Date: Thu, 19 Jan 1995 09:56:25 GMT
+References: <1995Jan16.132425.3303@kiae.su> <1995Jan17.105825.9955@mit.edu> <1995Jan17.121325.5994@berkeley.edu>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995Jan17.121325.5994@berkeley.edu>, jrodriguez@berkeley.edu (Joachim Rodríguez) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Lucia Souza <lsouza@stanford.edu>
+"They will send a copy in my place."
+Amiga 3000T / NEXTSTEP 3.3
+
+From neriksson@pacbell.net Thu Jan 19 17:44:25 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!pacbell!neriksson
+From: neriksson@pacbell.net (Nadine Eriksson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jan19.174425.8641@pacbell.net>
+Date: Thu, 19 Jan 1995 17:44:25 GMT
+References: <1995Jan16.132425.3303@kiae.su> <1995Jan17.105825.9955@mit.edu>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Jan17.105825.9955@mit.edu>, lmoreau@mit.edu (Lisa Moreau) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Nadine Eriksson
+Tape trading list upon request. SASE required for international mail.
+

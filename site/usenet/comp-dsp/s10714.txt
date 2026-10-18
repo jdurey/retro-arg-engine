@@ -1,0 +1,47 @@
+From mchoi@illinois.edu Sun Oct 23 11:00:45 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!illinois!mchoi
+From: mchoi@illinois.edu (Mathieu Choi)
+Newsgroups: comp.dsp
+Subject: [FLAME] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Oct23.110045.4291@illinois.edu>
+Date: Sun, 23 Oct 1994 11:00:45 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+Mathieu Choi | mchoi@illinois.edu
+PGP Key fingerprint: 0448 EC14 5D28 84BE
+"Keep the channels open."
+
+From atanaka@u-tokyo.ac.jp Mon Oct 24 05:35:45 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!u-tokyo!atanaka
+From: atanaka@u-tokyo.ac.jp (Anja Tanaka)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Oct24.053545.4660@u-tokyo.ac.jp>
+Date: Mon, 24 Oct 1994 05:35:45 GMT
+References: <1994Oct23.110045.4291@illinois.edu>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Oct23.110045.4291@illinois.edu>, mchoi@illinois.edu (Mathieu Choi) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Anja Tanaka | atanaka@u-tokyo.ac.jp
+PGP Key fingerprint: 2B9D 8DAC CD51 9EA9
+"Keep the channels open."
+

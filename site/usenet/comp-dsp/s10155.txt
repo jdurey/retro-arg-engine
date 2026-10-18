@@ -1,0 +1,69 @@
+From lhernandez@demon.co.uk Thu Jul 06 13:33:51 1995
+Path: ashpoly!cascade!bigsur!demon!lhernandez
+From: lhernandez@demon.co.uk (Lucia Hernández)
+Newsgroups: comp.dsp
+Subject: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Jul06.133351.3597@demon.co.uk>
+Date: Thu, 06 Jul 1995 13:33:51 GMT
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Version 1.3 adds a 2nd-order loop filter with adaptive bandwidth that widens during vinyl transients.
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+Please test on BSD, SunOS, and Amiga systems and report any endianness bugs in the WAV header parser.
+
+-- 
+Lucia Hernández
+Opinions expressed are solely my own and not those of Demon Internet Services UK.
+------------------------------------------------------------
+
+From nrobertson@netcom.com Fri Jul 07 08:04:51 1995
+Path: ashpoly!cascade!brgate!saturno!netcom!nrobertson
+From: nrobertson@netcom.com (Nadia Robertson)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Jul07.080451.3219@netcom.com>
+Date: Fri, 07 Jul 1995 08:04:51 GMT
+References: <1995Jul06.133351.3597@demon.co.uk>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1995Jul06.133351.3597@demon.co.uk>, lhernandez@demon.co.uk (Lucia Hernández) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Nadia Robertson
+Tape trading list upon request. SASE required for international mail.
+
+From njohansson@clari.net Sat Jul 08 10:40:51 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!clari!njohansson
+From: njohansson@clari.net (Nadine Johansson)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Jul08.104051.6837@clari.net>
+Date: Sat, 08 Jul 1995 10:40:51 GMT
+References: <1995Jul06.133351.3597@demon.co.uk> <1995Jul07.080451.3219@netcom.com>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Jul07.080451.3219@netcom.com>, nrobertson@netcom.com (Nadia Robertson) writes:
+> Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+-- 
+=== Nadine Johansson ===
+Dept of Electrical Engineering, ClariNet Communications Corp
+"In theory there is no difference between theory and practice."
+

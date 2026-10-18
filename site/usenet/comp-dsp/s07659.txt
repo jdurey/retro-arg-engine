@@ -1,0 +1,68 @@
+From jramirez@utexas.edu Sun Dec 24 06:47:45 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!utexas!jramirez
+From: jramirez@utexas.edu (Jen Ramírez)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec24.064745.7968@utexas.edu>
+Date: Sun, 24 Dec 1995 06:47:45 GMT
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Jen Ramírez | jramirez@utexas.edu
+PGP Key fingerprint: 2DF5 0DEE 629A CF43
+"Keep the channels open."
+
+From llopez@earthlink.net Mon Dec 25 09:08:45 1995
+Path: ashpoly!cascade!brgate!saturno!earthlink!llopez
+From: llopez@earthlink.net (Lars López)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec25.090845.7704@earthlink.net>
+Date: Mon, 25 Dec 1995 09:08:45 GMT
+References: <1995Dec24.064745.7968@utexas.edu>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1995Dec24.064745.7968@utexas.edu>, jramirez@utexas.edu (Jen Ramírez) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Lars López -- EarthLink Network
+"Hardware is temporary. The signal survives."
+
+From esokolov@stanford.edu Tue Dec 26 06:38:45 1995
+Path: ashpoly!cascade!bigsur!stanford!esokolov
+From: esokolov@stanford.edu (Emi Sokolov)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec26.063845.3215@stanford.edu>
+Date: Tue, 26 Dec 1995 06:38:45 GMT
+References: <1995Dec24.064745.7968@utexas.edu> <1995Dec25.090845.7704@earthlink.net>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1995Dec25.090845.7704@earthlink.net>, llopez@earthlink.net (Lars López) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Emi Sokolov -- Stanford University Computer Systems Lab
+"There are 14 nodes and only 10 countries. Count again."
+

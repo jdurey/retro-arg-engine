@@ -1,0 +1,47 @@
+From msmirnov@utexas.edu Thu May 11 19:39:15 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!utexas!msmirnov
+From: msmirnov@utexas.edu (Mei Smirnov)
+Newsgroups: comp.dsp
+Subject: WTB/WTT: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May11.193915.8494@utexas.edu>
+Date: Thu, 11 May 1995 19:39:15 GMT
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Mei Smirnov
+Opinions expressed are solely my own and not those of University of Texas at Austin.
+------------------------------------------------------------
+
+From trodriguez@purdue.edu Fri May 12 12:25:15 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!purdue!trodriguez
+From: trodriguez@purdue.edu (Tyler Rodríguez)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May12.122515.7831@purdue.edu>
+Date: Fri, 12 May 1995 12:25:15 GMT
+References: <1995May11.193915.8494@utexas.edu>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995May11.193915.8494@utexas.edu>, msmirnov@utexas.edu (Mei Smirnov) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Tyler Rodríguez
+Tape trading list upon request. SASE required for international mail.
+

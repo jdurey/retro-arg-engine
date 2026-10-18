@@ -1,0 +1,121 @@
+From eeriksson@hanse.de Wed Sep 27 16:27:55 1995
+Path: ashpoly!cascade!brgate!saturno!hanse!eeriksson
+From: eeriksson@hanse.de (Elaine Eriksson)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Sep27.162755.3547@hanse.de>
+Date: Wed, 27 Sep 1995 16:27:55 GMT
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Elaine Eriksson <eeriksson@hanse.de>
+"Extraordinary claims require extraordinary spectra."
+Atari Falcon 030 / NEXTSTEP 3.3
+
+From bwatanabe@rwth-aachen.de Thu Sep 28 05:21:55 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!rwth-aachen!bwatanabe
+From: bwatanabe@rwth-aachen.de (Bastien Watanabe)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Sep28.052155.6126@rwth-aachen.de>
+Date: Thu, 28 Sep 1995 05:21:55 GMT
+References: <1995Sep27.162755.3547@hanse.de>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Sep27.162755.3547@hanse.de>, eeriksson@hanse.de (Elaine Eriksson) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Bastien Watanabe <bwatanabe@rwth-aachen.de>
+US Robotics Courier V.34 @ ISDN 64k bps
+"5 sigma is a discovery. 7 is a question."
+
+From tkarlsson@mindspring.com Sat Sep 30 01:18:55 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!mindspring!tkarlsson
+From: tkarlsson@mindspring.com (Tomas Karlsson)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Sep30.011855.9676@mindspring.com>
+Date: Sat, 30 Sep 1995 01:18:55 GMT
+References: <1995Sep27.162755.3547@hanse.de> <1995Sep28.052155.6126@rwth-aachen.de>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Sep28.052155.6126@rwth-aachen.de>, bwatanabe@rwth-aachen.de (Bastien Watanabe) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Tomas Karlsson <tkarlsson@mindspring.com>
+"Hold for relay."
+Pentium 90 (OS/2 Warp) / Linux 1.2.13
+
+From tsuzuki@cam.ac.uk Mon Oct 02 01:08:55 1995
+Path: ashpoly!cascade!mxgate!coyoacan!cam!tsuzuki
+From: tsuzuki@cam.ac.uk (Takeshi Suzuki)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Oct02.010855.9196@cam.ac.uk>
+Date: Mon, 02 Oct 1995 01:08:55 GMT
+References: <1995Sep27.162755.3547@hanse.de> <1995Sep28.052155.6126@rwth-aachen.de>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Sep28.052155.6126@rwth-aachen.de>, bwatanabe@rwth-aachen.de (Bastien Watanabe) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Takeshi Suzuki -- University of Cambridge Computer Laboratory
+"We don't sign stars. We build them."
+
+From esanchez@berkeley.edu Mon Oct 02 03:59:55 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!berkeley!esanchez
+From: esanchez@berkeley.edu (Élodie Sánchez)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Oct02.035955.8433@berkeley.edu>
+Date: Mon, 02 Oct 1995 03:59:55 GMT
+References: <1995Sep27.162755.3547@hanse.de>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1995Sep27.162755.3547@hanse.de>, eeriksson@hanse.de (Elaine Eriksson) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Élodie Sánchez <esanchez@berkeley.edu>
+Hayes Optima 288 @ 9600 Telebit bps
+"In theory there is no difference between theory and practice."
+

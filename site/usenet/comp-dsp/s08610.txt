@@ -1,0 +1,74 @@
+From slopez@pacbell.net Wed Jan 10 13:36:37 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!pacbell!slopez
+From: slopez@pacbell.net (Steve López)
+Newsgroups: comp.dsp
+Subject: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Jan10.133637.1468@pacbell.net>
+Date: Wed, 10 Jan 1996 13:36:37 GMT
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Steve López <slopez@pacbell.net>
+"5 sigma is a discovery. 7 is a question."
+Mac IIci / 68882 FPU / System 7.5.1
+
+From lperez@titech.ac.jp Thu Jan 11 18:18:37 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!titech!lperez
+From: lperez@titech.ac.jp (Lars Pérez)
+Newsgroups: comp.dsp
+Subject: Re: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Jan11.181837.1619@titech.ac.jp>
+Date: Thu, 11 Jan 1996 18:18:37 GMT
+References: <1996Jan10.133637.1468@pacbell.net>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1996Jan10.133637.1468@pacbell.net>, slopez@pacbell.net (Steve López) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Lars Pérez
+Opinions expressed are solely my own and not those of Tokyo Institute of Technology Computer Centre.
+------------------------------------------------------------
+
+From mnovak@u-tokyo.ac.jp Sat Jan 13 18:52:37 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!u-tokyo!mnovak
+From: mnovak@u-tokyo.ac.jp (Mei Novak)
+Newsgroups: comp.dsp
+Subject: Re: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Jan13.185237.5434@u-tokyo.ac.jp>
+Date: Sat, 13 Jan 1996 18:52:37 GMT
+References: <1996Jan10.133637.1468@pacbell.net> <1996Jan11.181837.1619@titech.ac.jp>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1996Jan11.181837.1619@titech.ac.jp>, lperez@titech.ac.jp (Lars Pérez) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+> Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Mei Novak
+Tape trading list upon request. SASE required for international mail.
+

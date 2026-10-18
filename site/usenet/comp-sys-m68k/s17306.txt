@@ -1,0 +1,97 @@
+From smoreau@illinois.edu Thu Aug 01 12:29:20 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!illinois!smoreau
+From: smoreau@illinois.edu (Seo-yeon Moreau)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Aug01.122920.8816@illinois.edu>
+Date: Thu, 01 Aug 1996 12:29:20 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+=== Seo-yeon Moreau ===
+Dept of Electrical Engineering, University of Illinois Urbana-Champaign
+"5 sigma is a discovery. 7 is a question."
+
+From apetrov@uni-hamburg.de Fri Aug 02 22:23:20 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!uni-hamburg!apetrov
+From: apetrov@uni-hamburg.de (Amy Petrov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Aug02.222320.1944@uni-hamburg.de>
+Date: Fri, 02 Aug 1996 22:23:20 GMT
+References: <1996Aug01.122920.8816@illinois.edu>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996Aug01.122920.8816@illinois.edu>, smoreau@illinois.edu (Seo-yeon Moreau) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+> By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Amy Petrov
+Opinions expressed are solely my own and not those of Universität Hamburg Fachbereich Informatik.
+------------------------------------------------------------
+
+From fkang@ox.ac.uk Sat Aug 03 11:57:20 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!ox!fkang
+From: fkang@ox.ac.uk (Fiona Kang)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Aug03.115720.8372@ox.ac.uk>
+Date: Sat, 03 Aug 1996 11:57:20 GMT
+References: <1996Aug01.122920.8816@illinois.edu>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1996Aug01.122920.8816@illinois.edu>, smoreau@illinois.edu (Seo-yeon Moreau) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+> By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Fiona Kang <fkang@ox.ac.uk>
+Practical Peripherals 14.4 @ 14,400 bps
+"The hatch is open. Is anyone listening?"
+
+From aito@purdue.edu Mon Aug 05 13:42:20 1996
+Path: ashpoly!cascade!mxgate!coyoacan!purdue!aito
+From: aito@purdue.edu (Amy Ito)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Aug05.134220.3558@purdue.edu>
+Date: Mon, 05 Aug 1996 13:42:20 GMT
+References: <1996Aug01.122920.8816@illinois.edu>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Aug01.122920.8816@illinois.edu>, smoreau@illinois.edu (Seo-yeon Moreau) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Amy Ito <aito@purdue.edu>
+SupraFAXModem 28.8 @ ISDN 64k bps
+"There are 14 nodes and only 10 countries. Count again."
+

@@ -1,0 +1,115 @@
+From tmoreno@uu.net Wed Jul 10 22:00:29 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!uu!tmoreno
+From: tmoreno@uu.net (Takeshi Moreno)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Jul10.220029.5440@uu.net>
+Date: Wed, 10 Jul 1996 22:00:29 GMT
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+=== Takeshi Moreno ===
+Dept of Electrical Engineering, UUNET Technologies, Falls Church VA
+"Measuring a record you own is listening, not piracy."
+
+From opopov@illinois.edu Fri Jul 12 00:45:29 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!illinois!opopov
+From: opopov@illinois.edu (Olga Popov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Jul12.004529.3183@illinois.edu>
+Date: Fri, 12 Jul 1996 00:45:29 GMT
+References: <1996Jul10.220029.5440@uu.net>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1996Jul10.220029.5440@uu.net>, tmoreno@uu.net (Takeshi Moreno) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Olga Popov -- University of Illinois Urbana-Champaign
+"When every node is whole, the channel opens."
+
+From mfournier@uni-hamburg.de Sat Jul 13 02:06:29 1996
+Path: ashpoly!cascade!brgate!saturno!uni-hamburg!mfournier
+From: mfournier@uni-hamburg.de (Morag Fournier)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Jul13.020629.3803@uni-hamburg.de>
+Date: Sat, 13 Jul 1996 02:06:29 GMT
+References: <1996Jul10.220029.5440@uu.net>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Jul10.220029.5440@uu.net>, tmoreno@uu.net (Takeshi Moreno) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Morag Fournier <mfournier@uni-hamburg.de>
+*PLONK* filter active for trolls.
+486DX2/66 (Linux 1.2.13) - NetBSD 1.0
+
+From btakahashi@rwth-aachen.de Sun Jul 14 01:57:29 1996
+Path: ashpoly!cascade!bigsur!rwth-aachen!btakahashi
+From: btakahashi@rwth-aachen.de (Brian Takahashi)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Jul14.015729.8308@rwth-aachen.de>
+Date: Sun, 14 Jul 1996 01:57:29 GMT
+References: <1996Jul10.220029.5440@uu.net>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Jul10.220029.5440@uu.net>, tmoreno@uu.net (Takeshi Moreno) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+=== Brian Takahashi ===
+Dept of Electrical Engineering, RWTH Aachen Informatik
+"There are 14 nodes and only 10 countries. Count again."
+
+From mcampbell@clari.net Mon Jul 15 14:57:29 1996
+Path: ashpoly!cascade!bigsur!clari!mcampbell
+From: mcampbell@clari.net (Morag Campbell)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Jul15.145729.5940@clari.net>
+Date: Mon, 15 Jul 1996 14:57:29 GMT
+References: <1996Jul10.220029.5440@uu.net>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Jul10.220029.5440@uu.net>, tmoreno@uu.net (Takeshi Moreno) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Morag Campbell <mcampbell@clari.net>
+"A soul is not exclusive to biology."
+486DX4/100 (FreeBSD 2.0.5) / System 7.5.1
+

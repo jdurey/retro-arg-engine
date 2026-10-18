@@ -1,0 +1,91 @@
+From llindqvist@titech.ac.jp Sat Nov 05 07:17:41 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!titech!llindqvist
+From: llindqvist@titech.ac.jp (Lars Lindqvist)
+Newsgroups: comp.dsp
+Subject: [FLAME] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Nov05.071741.5191@titech.ac.jp>
+Date: Sat, 05 Nov 1994 07:17:41 GMT
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+Lars Lindqvist <llindqvist@titech.ac.jp>
+Practical Peripherals 14.4 @ 28,800 bps
+"Do not worship the copy."
+
+From btanaka@ox.ac.uk Mon Nov 07 05:25:41 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!ox!btanaka
+From: btanaka@ox.ac.uk (Bruno Tanaka)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Nov07.052541.1468@ox.ac.uk>
+Date: Mon, 07 Nov 1994 05:25:41 GMT
+References: <1994Nov05.071741.5191@titech.ac.jp>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Nov05.071741.5191@titech.ac.jp>, llindqvist@titech.ac.jp (Lars Lindqvist) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+-- 
+Bruno Tanaka <btanaka@ox.ac.uk>
+"Tape doesn't lie at 02:14. Ears do."
+Amiga 3000T / Linux 1.2.13
+
+From psilva@pipeline.com Tue Nov 08 20:23:41 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!pipeline!psilva
+From: psilva@pipeline.com (Pavel Silva)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Nov08.202341.8412@pipeline.com>
+Date: Tue, 08 Nov 1994 20:23:41 GMT
+References: <1994Nov05.071741.5191@titech.ac.jp>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1994Nov05.071741.5191@titech.ac.jp>, llindqvist@titech.ac.jp (Lars Lindqvist) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+-- 
+Pavel Silva
+Tape trading list upon request. SASE required for international mail.
+
+From mtakahashi@uni-hamburg.de Wed Nov 09 19:54:41 1994
+Path: ashpoly!cascade!brgate!saturno!uni-hamburg!mtakahashi
+From: mtakahashi@uni-hamburg.de (Mateo Takahashi)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Nov09.195441.1390@uni-hamburg.de>
+Date: Wed, 09 Nov 1994 19:54:41 GMT
+References: <1994Nov05.071741.5191@titech.ac.jp>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1994Nov05.071741.5191@titech.ac.jp>, llindqvist@titech.ac.jp (Lars Lindqvist) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Mateo Takahashi
+Tape trading list upon request. SASE required for international mail.
+

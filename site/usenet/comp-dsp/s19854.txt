@@ -1,0 +1,99 @@
+From gkim@rwth-aachen.de Sun May 14 20:43:56 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!rwth-aachen!gkim
+From: gkim@rwth-aachen.de (Göran Kim)
+Newsgroups: comp.dsp
+Subject: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995May14.204356.6703@rwth-aachen.de>
+Date: Sun, 14 May 1995 20:43:56 GMT
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+MATLAB script available upon request via email.
+
+-- 
+Göran Kim <gkim@rwth-aachen.de>
+Zyxel U-1496E @ 33,600 bps
+"Do not worship the copy."
+
+From tlindqvist@u-tokyo.ac.jp Mon May 15 07:07:56 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!u-tokyo!tlindqvist
+From: tlindqvist@u-tokyo.ac.jp (Tomas Lindqvist)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995May15.070756.3394@u-tokyo.ac.jp>
+Date: Mon, 15 May 1995 07:07:56 GMT
+References: <1995May14.204356.6703@rwth-aachen.de>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995May14.204356.6703@rwth-aachen.de>, gkim@rwth-aachen.de (Göran Kim) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+> A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Tomas Lindqvist -- University of Tokyo Department of Information Science
+"Marcus is not one man."
+
+From mcampbell@cern.ch Tue May 16 20:27:56 1995
+Path: ashpoly!cascade!mxgate!coyoacan!cern!mcampbell
+From: mcampbell@cern.ch (Morag Campbell)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995May16.202756.2437@cern.ch>
+Date: Tue, 16 May 1995 20:27:56 GMT
+References: <1995May14.204356.6703@rwth-aachen.de> <1995May15.070756.3394@u-tokyo.ac.jp>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995May15.070756.3394@u-tokyo.ac.jp>, tlindqvist@u-tokyo.ac.jp (Tomas Lindqvist) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Morag Campbell
+Tape trading list upon request. SASE required for international mail.
+
+From rhughes@kiae.su Wed May 17 05:31:56 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!kiae!rhughes
+From: rhughes@kiae.su (Rodrigo Hughes)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995May17.053156.4313@kiae.su>
+Date: Wed, 17 May 1995 05:31:56 GMT
+References: <1995May14.204356.6703@rwth-aachen.de> <1995May15.070756.3394@u-tokyo.ac.jp> <1995May16.202756.2437@cern.ch>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1995May16.202756.2437@cern.ch>, mcampbell@cern.ch (Morag Campbell) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+> Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Rodrigo Hughes <rhughes@kiae.su>
+*PLONK* filter active for trolls.
+486DX2/66 (Linux 1.2.13) - NetBSD 1.0
+

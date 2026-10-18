@@ -1,0 +1,115 @@
+From mtanaka@cmu.edu Mon Feb 19 12:27:05 1996
+Path: ashpoly!cascade!bigsur!cmu!mtanaka
+From: mtanaka@cmu.edu (Mikhail Tanaka)
+Newsgroups: comp.dsp
+Subject: [FLAME] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Feb19.122705.2309@cmu.edu>
+Date: Mon, 19 Feb 1996 12:27:05 GMT
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+Mikhail Tanaka <mtanaka@cmu.edu>
+Zyxel U-1496E @ 9600 Telebit bps
+"Extraordinary claims require extraordinary spectra."
+
+From tsmirnov@utexas.edu Mon Feb 19 16:54:05 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!utexas!tsmirnov
+From: tsmirnov@utexas.edu (Tomas Smirnov)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Feb19.165405.6031@utexas.edu>
+Date: Mon, 19 Feb 1996 16:54:05 GMT
+References: <1996Feb19.122705.2309@cmu.edu>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1996Feb19.122705.2309@cmu.edu>, mtanaka@cmu.edu (Mikhail Tanaka) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+-- 
+Tomas Smirnov -- University of Texas at Austin
+"Row 14. No joke."
+
+From mmuller@panix.com Wed Feb 21 02:31:05 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!panix!mmuller
+From: mmuller@panix.com (Mei Müller)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Feb21.023105.4641@panix.com>
+Date: Wed, 21 Feb 1996 02:31:05 GMT
+References: <1996Feb19.122705.2309@cmu.edu>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Feb19.122705.2309@cmu.edu>, mtanaka@cmu.edu (Mikhail Tanaka) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+-- 
+Mei Müller <mmuller@panix.com>
+SupraFAXModem 28.8 @ ISDN 64k bps
+"Marcus is not one man."
+
+From fschneider@cern.ch Thu Feb 22 12:50:05 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!cern!fschneider
+From: fschneider@cern.ch (Fiona Schneider)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Feb22.125005.5043@cern.ch>
+Date: Thu, 22 Feb 1996 12:50:05 GMT
+References: <1996Feb19.122705.2309@cmu.edu> <1996Feb19.165405.6031@utexas.edu>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Feb19.165405.6031@utexas.edu>, tsmirnov@utexas.edu (Tomas Smirnov) writes:
+> Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+=== Fiona Schneider ===
+Dept of Electrical Engineering, European Laboratory for Particle Physics, Geneva
+"Do not worship the copy."
+
+From kwatanabe@cam.ac.uk Sat Feb 24 04:19:05 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!cam!kwatanabe
+From: kwatanabe@cam.ac.uk (Kirsty Watanabe)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Feb24.041905.3904@cam.ac.uk>
+Date: Sat, 24 Feb 1996 04:19:05 GMT
+References: <1996Feb19.122705.2309@cmu.edu> <1996Feb21.023105.4641@panix.com>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Feb21.023105.4641@panix.com>, mmuller@panix.com (Mei Müller) writes:
+> Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Kirsty Watanabe <kwatanabe@cam.ac.uk>
+SupraFAXModem 28.8 @ 33,600 bps
+"Marcus is not one man."
+

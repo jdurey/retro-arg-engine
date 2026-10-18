@@ -1,0 +1,96 @@
+From thughes@purdue.edu Thu Feb 17 21:42:13 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!purdue!thughes
+From: thughes@purdue.edu (Thiago Hughes)
+Newsgroups: comp.dsp
+Subject: Observation: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Feb17.214213.4752@purdue.edu>
+Date: Thu, 17 Feb 1994 21:42:13 GMT
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+
+Grab the source archive from ftp.ashford-poly.edu:/pub/telecom-archives/stardust/stardust-1.3.tar.gz.
+
+-- 
+Thiago Hughes <thughes@purdue.edu>
+"Hold for relay."
+Decstation 5000/200 / TOS 4.04
+
+From mreyes@earthlink.net Fri Feb 18 13:35:13 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!earthlink!mreyes
+From: mreyes@earthlink.net (Marisol Reyes)
+Newsgroups: comp.dsp
+Subject: Re: Observation: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Feb18.133513.7897@earthlink.net>
+Date: Fri, 18 Feb 1994 13:35:13 GMT
+References: <1994Feb17.214213.4752@purdue.edu>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1994Feb17.214213.4752@purdue.edu>, thughes@purdue.edu (Thiago Hughes) writes:
+> Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+> The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+Tar.gz archive gave a CRC error with PKUNZIP. Make sure you upload in binary mode, not ASCII!
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Marisol Reyes <mreyes@earthlink.net>
+US Robotics Courier V.34 @ 19,200 bps
+"Tape doesn't lie at 02:14. Ears do."
+
+From fkarlsson@berkeley.edu Sat Feb 19 15:08:13 1994
+Path: ashpoly!cascade!mxgate!coyoacan!berkeley!fkarlsson
+From: fkarlsson@berkeley.edu (Fiona Karlsson)
+Newsgroups: comp.dsp
+Subject: Re: Observation: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Feb19.150813.4001@berkeley.edu>
+Date: Sat, 19 Feb 1994 15:08:13 GMT
+References: <1994Feb17.214213.4752@purdue.edu>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Feb17.214213.4752@purdue.edu>, thughes@purdue.edu (Thiago Hughes) writes:
+> Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+-- 
+Fiona Karlsson
+Opinions expressed are solely my own and not those of UC Berkeley Department of EECS.
+------------------------------------------------------------
+
+From sstewart@hanse.de Sun Feb 20 06:48:13 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!hanse!sstewart
+From: sstewart@hanse.de (Sergei Stewart)
+Newsgroups: comp.dsp
+Subject: Re: Observation: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Feb20.064813.5564@hanse.de>
+Date: Sun, 20 Feb 1994 06:48:13 GMT
+References: <1994Feb17.214213.4752@purdue.edu> <1994Feb18.133513.7897@earthlink.net>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Feb18.133513.7897@earthlink.net>, mreyes@earthlink.net (Marisol Reyes) writes:
+> Tar.gz archive gave a CRC error with PKUNZIP. Make sure you upload in binary mode, not ASCII!
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Sergei Stewart <sstewart@hanse.de>
+*PLONK* filter active for trolls.
+Amiga 1200 (Blizzard 030/50) - NetBSD 1.0
+

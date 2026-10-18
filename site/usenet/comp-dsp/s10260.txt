@@ -1,0 +1,72 @@
+From rkowalski@kiae.su Mon Jan 22 12:40:28 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!kiae!rkowalski
+From: rkowalski@kiae.su (Renata Kowalski)
+Newsgroups: comp.dsp
+Subject: [INFO] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Jan22.124028.4602@kiae.su>
+Date: Mon, 22 Jan 1996 12:40:28 GMT
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+MATLAB script available upon request via email.
+
+-- 
+Renata Kowalski <rkowalski@kiae.su>
+US Robotics Courier V.34 @ ISDN 64k bps
+"When every node is whole, the channel opens."
+
+From smoreno@mit.edu Tue Jan 23 06:43:28 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!mit!smoreno
+From: smoreno@mit.edu (Seo-yeon Moreno)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Jan23.064328.5062@mit.edu>
+Date: Tue, 23 Jan 1996 06:43:28 GMT
+References: <1996Jan22.124028.4602@kiae.su>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1996Jan22.124028.4602@kiae.su>, rkowalski@kiae.su (Renata Kowalski) writes:
+> Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+> At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Seo-yeon Moreno <smoreno@mit.edu>
+SupraFAXModem 28.8 @ 28,800 bps
+"The hatch is open. Is anyone listening?"
+
+From mmoreno@delphi.com Tue Jan 23 14:50:28 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!delphi!mmoreno
+From: mmoreno@delphi.com (Marta Moreno)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Jan23.145028.7110@delphi.com>
+Date: Tue, 23 Jan 1996 14:50:28 GMT
+References: <1996Jan22.124028.4602@kiae.su>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1996Jan22.124028.4602@kiae.su>, rkowalski@kiae.su (Renata Kowalski) writes:
+> Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+> At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+=== Marta Moreno ===
+Dept of Electrical Engineering, Delphi Internet Services
+"The carrier frequency does not drift by accident."
+

@@ -1,0 +1,75 @@
+From dsuzuki@kth.se Tue Apr 02 23:21:26 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!kth!dsuzuki
+From: dsuzuki@kth.se (Dmitri Suzuki)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Apr02.232126.6848@kth.se>
+Date: Tue, 02 Apr 1996 23:21:26 GMT
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+Schematic diagram in ASCII uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/twin68_array.asc.
+
+-- 
+Dmitri Suzuki
+Opinions expressed are solely my own and not those of Royal Institute of Technology, Stockholm.
+------------------------------------------------------------
+
+From jsmirnov@unam.mx Wed Apr 03 15:42:26 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!unam!jsmirnov
+From: jsmirnov@unam.mx (Jens Smirnov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Apr03.154226.6194@unam.mx>
+Date: Wed, 03 Apr 1996 15:42:26 GMT
+References: <1996Apr02.232126.6848@kth.se>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1996Apr02.232126.6848@kth.se>, dsuzuki@kth.se (Dmitri Suzuki) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Jens Smirnov | jsmirnov@unam.mx
+PGP Key fingerprint: DC29 F350 FD59 B2F3
+"Keep the channels open."
+
+From tmuller@pacbell.net Fri Apr 05 01:15:26 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!pacbell!tmuller
+From: tmuller@pacbell.net (Thiago Müller)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Apr05.011526.2720@pacbell.net>
+Date: Fri, 05 Apr 1996 01:15:26 GMT
+References: <1996Apr02.232126.6848@kth.se>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1996Apr02.232126.6848@kth.se>, dsuzuki@kth.se (Dmitri Suzuki) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Thiago Müller <tmuller@pacbell.net>
+SupraFAXModem 28.8 @ 19,200 bps
+"Measuring a record you own is listening, not piracy."
+

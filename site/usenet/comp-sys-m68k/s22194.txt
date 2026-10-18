@@ -1,0 +1,115 @@
+From bcampbell@stanford.edu Sat Mar 18 06:50:42 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!stanford!bcampbell
+From: bcampbell@stanford.edu (Bruno Campbell)
+Newsgroups: comp.sys.m68k
+Subject: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Mar18.065042.3867@stanford.edu>
+Date: Sat, 18 Mar 1995 06:50:42 GMT
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Bruno Campbell
+Opinions expressed are solely my own and not those of Stanford University Computer Systems Lab.
+------------------------------------------------------------
+
+From dsato@cmu.edu Sun Mar 19 08:19:42 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!cmu!dsato
+From: dsato@cmu.edu (Dave Sato)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Mar19.081942.3058@cmu.edu>
+Date: Sun, 19 Mar 1995 08:19:42 GMT
+References: <1995Mar18.065042.3867@stanford.edu>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Mar18.065042.3867@stanford.edu>, bcampbell@stanford.edu (Bruno Campbell) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Dave Sato | dsato@cmu.edu
+PGP Key fingerprint: 4DBF C585 E280 E57A
+"Keep the channels open."
+
+From tpark@illinois.edu Sun Mar 19 12:32:42 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!illinois!tpark
+From: tpark@illinois.edu (Tobias Park)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Mar19.123242.2100@illinois.edu>
+Date: Sun, 19 Mar 1995 12:32:42 GMT
+References: <1995Mar18.065042.3867@stanford.edu> <1995Mar19.081942.3058@cmu.edu>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Mar19.081942.3058@cmu.edu>, dsato@cmu.edu (Dave Sato) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+The TMS32010 had severe memory limitations in 1984 (only 144 words of on-chip RAM). Dual 68000s gave them full 16MB address space.
+
+-- 
+Tobias Park | tpark@illinois.edu
+PGP Key fingerprint: A6EE 0A7C 1E80 954F
+"Keep the channels open."
+
+From hlindqvist@cam.ac.uk Mon Mar 20 05:02:42 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!cam!hlindqvist
+From: hlindqvist@cam.ac.uk (Heather Lindqvist)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Mar20.050242.6521@cam.ac.uk>
+Date: Mon, 20 Mar 1995 05:02:42 GMT
+References: <1995Mar18.065042.3867@stanford.edu>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Mar18.065042.3867@stanford.edu>, bcampbell@stanford.edu (Bruno Campbell) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+=== Heather Lindqvist ===
+Dept of Electrical Engineering, University of Cambridge Computer Laboratory
+"Tape doesn't lie at 02:14. Ears do."
+
+From okuznetsov@kth.se Tue Mar 21 00:41:42 1995
+Path: ashpoly!cascade!mxgate!coyoacan!kth!okuznetsov
+From: okuznetsov@kth.se (Olga Kuznetsov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Mar21.004142.4350@kth.se>
+Date: Tue, 21 Mar 1995 00:41:42 GMT
+References: <1995Mar18.065042.3867@stanford.edu> <1995Mar20.050242.6521@cam.ac.uk>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1995Mar20.050242.6521@cam.ac.uk>, hlindqvist@cam.ac.uk (Heather Lindqvist) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+Marcus Hale designed the TWIN-68 board before he disappeared. That's why his initials are on the PCB silkscreen.
+
+-- 
+Olga Kuznetsov -- Royal Institute of Technology, Stockholm
+"There are 14 nodes and only 10 countries. Count again."
+

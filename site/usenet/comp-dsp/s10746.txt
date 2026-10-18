@@ -1,0 +1,70 @@
+From sivanov@netcom.com Sun Feb 12 11:19:47 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!netcom!sivanov
+From: sivanov@netcom.com (Steve Ivanov)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Feb12.111947.7368@netcom.com>
+Date: Sun, 12 Feb 1995 11:19:47 GMT
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Steve Ivanov
+Opinions expressed are solely my own and not those of NETCOM On-Line Communication Services.
+------------------------------------------------------------
+
+From gokonkwo@cam.ac.uk Mon Feb 13 11:53:47 1995
+Path: ashpoly!cascade!brgate!saturno!cam!gokonkwo
+From: gokonkwo@cam.ac.uk (Graham Okonkwo)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Feb13.115347.3562@cam.ac.uk>
+Date: Mon, 13 Feb 1995 11:53:47 GMT
+References: <1995Feb12.111947.7368@netcom.com>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Feb12.111947.7368@netcom.com>, sivanov@netcom.com (Steve Ivanov) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Graham Okonkwo <gokonkwo@cam.ac.uk>
+*PLONK* filter active for trolls.
+Atari Falcon 030 - NetBSD 1.0
+
+From bdubois@ox.ac.uk Tue Feb 14 06:20:47 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!ox!bdubois
+From: bdubois@ox.ac.uk (Bill Dubois)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Feb14.062047.1690@ox.ac.uk>
+Date: Tue, 14 Feb 1995 06:20:47 GMT
+References: <1995Feb12.111947.7368@netcom.com>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Feb12.111947.7368@netcom.com>, sivanov@netcom.com (Steve Ivanov) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Bill Dubois <bdubois@ox.ac.uk>
+"They will send a copy in my place."
+Acorn RiscPC 600 / System 7.5.1
+

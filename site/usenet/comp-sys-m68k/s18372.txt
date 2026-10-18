@@ -1,0 +1,96 @@
+From tkowalski@mindspring.com Wed Sep 20 11:09:36 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!mindspring!tkowalski
+From: tkowalski@mindspring.com (Tomas Kowalski)
+Newsgroups: comp.sys.m68k
+Subject: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Sep20.110936.6812@mindspring.com>
+Date: Wed, 20 Sep 1995 11:09:36 GMT
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+Tomas Kowalski <tkowalski@mindspring.com>
+"Hardware is temporary. The signal survives."
+Amiga 3000T / System 7.5.1
+
+From kkarlsson@mit.edu Thu Sep 21 17:08:36 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!mit!kkarlsson
+From: kkarlsson@mit.edu (Katrin Karlsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Sep21.170836.2163@mit.edu>
+Date: Thu, 21 Sep 1995 17:08:36 GMT
+References: <1995Sep20.110936.6812@mindspring.com>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 12
+
+In article <1995Sep20.110936.6812@mindspring.com>, tkowalski@mindspring.com (Tomas Kowalski) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+> Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+=== Katrin Karlsson ===
+Dept of Electrical Engineering, Massachusetts Institute of Technology
+"Do not worship the copy."
+
+From msanchez@kth.se Sat Sep 23 14:16:36 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!kth!msanchez
+From: msanchez@kth.se (Marta Sánchez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Sep23.141636.4304@kth.se>
+Date: Sat, 23 Sep 1995 14:16:36 GMT
+References: <1995Sep20.110936.6812@mindspring.com> <1995Sep21.170836.2163@mit.edu>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Sep21.170836.2163@mit.edu>, kkarlsson@mit.edu (Katrin Karlsson) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+> Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Marta Sánchez
+Tape trading list upon request. SASE required for international mail.
+
+From atakahashi@utexas.edu Mon Sep 25 13:40:36 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!utexas!atakahashi
+From: atakahashi@utexas.edu (Astrid Takahashi)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Sep25.134036.2483@utexas.edu>
+Date: Mon, 25 Sep 1995 13:40:36 GMT
+References: <1995Sep20.110936.6812@mindspring.com> <1995Sep21.170836.2163@mit.edu>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Sep21.170836.2163@mit.edu>, kkarlsson@mit.edu (Katrin Karlsson) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+=== Astrid Takahashi ===
+Dept of Electrical Engineering, University of Texas at Austin
+"There are 14 nodes and only 10 countries. Count again."
+

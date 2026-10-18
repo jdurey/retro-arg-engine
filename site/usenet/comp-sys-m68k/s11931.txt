@@ -1,0 +1,121 @@
+From mhughes@clari.net Sun Aug 14 00:17:09 1994
+Path: ashpoly!cascade!bigsur!clari!mhughes
+From: mhughes@clari.net (Mike Hughes)
+Newsgroups: comp.sys.m68k
+Subject: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Aug14.001709.3422@clari.net>
+Date: Sun, 14 Aug 1994 00:17:09 GMT
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+Mike Hughes
+Opinions expressed are solely my own and not those of ClariNet Communications Corp.
+------------------------------------------------------------
+
+From mivanov@stanford.edu Mon Aug 15 11:04:09 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!stanford!mivanov
+From: mivanov@stanford.edu (Mike Ivanov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Aug15.110409.7037@stanford.edu>
+Date: Mon, 15 Aug 1994 11:04:09 GMT
+References: <1994Aug14.001709.3422@clari.net>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Aug14.001709.3422@clari.net>, mhughes@clari.net (Mike Hughes) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Mike Ivanov -- Stanford University Computer Systems Lab
+"Marcus is not one man."
+
+From afournier@mit.edu Tue Aug 16 07:33:09 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!mit!afournier
+From: afournier@mit.edu (Anton Fournier)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Aug16.073309.2664@mit.edu>
+Date: Tue, 16 Aug 1994 07:33:09 GMT
+References: <1994Aug14.001709.3422@clari.net>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1994Aug14.001709.3422@clari.net>, mhughes@clari.net (Mike Hughes) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Anton Fournier -- Massachusetts Institute of Technology
+"Marcus is not one man."
+
+From tkowalski@panix.com Wed Aug 17 11:59:09 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!panix!tkowalski
+From: tkowalski@panix.com (Tobias Kowalski)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Aug17.115909.9001@panix.com>
+Date: Wed, 17 Aug 1994 11:59:09 GMT
+References: <1994Aug14.001709.3422@clari.net> <1994Aug16.073309.2664@mit.edu>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1994Aug16.073309.2664@mit.edu>, afournier@mit.edu (Anton Fournier) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+> Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+Tobias Kowalski
+Tape trading list upon request. SASE required for international mail.
+
+From claurent@inria.fr Fri Aug 19 14:06:09 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!inria!claurent
+From: claurent@inria.fr (Callum Laurent)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Aug19.140609.7168@inria.fr>
+Date: Fri, 19 Aug 1994 14:06:09 GMT
+References: <1994Aug14.001709.3422@clari.net> <1994Aug16.073309.2664@mit.edu>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1994Aug16.073309.2664@mit.edu>, afournier@mit.edu (Anton Fournier) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+> Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Callum Laurent
+Opinions expressed are solely my own and not those of INRIA Rocquencourt.
+------------------------------------------------------------
+

@@ -1,0 +1,118 @@
+From twatanabe@kiae.su Fri Nov 01 15:00:40 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!kiae!twatanabe
+From: twatanabe@kiae.su (Thiago Watanabe)
+Newsgroups: comp.sys.m68k
+Subject: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Nov01.150040.6099@kiae.su>
+Date: Fri, 01 Nov 1996 15:00:40 GMT
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+Schematic diagram in ASCII uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/twin68_array.asc.
+
+-- 
+Thiago Watanabe <twatanabe@kiae.su>
+*PLONK* filter active for trolls.
+Sun SparcStation 20 - NetBSD 1.0
+
+From alopez@purdue.edu Sat Nov 02 14:28:40 1996
+Path: ashpoly!cascade!brgate!saturno!purdue!alopez
+From: alopez@purdue.edu (Anton López)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Nov02.142840.2767@purdue.edu>
+Date: Sat, 02 Nov 1996 14:28:40 GMT
+References: <1996Nov01.150040.6099@kiae.su>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996Nov01.150040.6099@kiae.su>, twatanabe@kiae.su (Thiago Watanabe) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Anton López | alopez@purdue.edu
+PGP Key fingerprint: 055F 8F28 8EFD 5514
+"Keep the channels open."
+
+From jpark@berkeley.edu Sun Nov 03 20:37:40 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!berkeley!jpark
+From: jpark@berkeley.edu (Ji-woo Park)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Nov03.203740.3707@berkeley.edu>
+Date: Sun, 03 Nov 1996 20:37:40 GMT
+References: <1996Nov01.150040.6099@kiae.su>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Nov01.150040.6099@kiae.su>, twatanabe@kiae.su (Thiago Watanabe) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+Tom from Ashford Poly owns the physical board! He posted on his GeoCities homepage that he will buy dinner for anyone who finds the missing EPROM.
+
+-- 
+Ji-woo Park <jpark@berkeley.edu>
+"There are 14 nodes and only 10 countries. Count again."
+486DX2/66 (Linux 1.2.13) / FreeBSD 2.1
+
+From dhughes@tum.de Tue Nov 05 03:25:40 1996
+Path: ashpoly!cascade!bigsur!tum!dhughes
+From: dhughes@tum.de (Diego Hughes)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Nov05.032540.6988@tum.de>
+Date: Tue, 05 Nov 1996 03:25:40 GMT
+References: <1996Nov01.150040.6099@kiae.su> <1996Nov03.203740.3707@berkeley.edu>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996Nov03.203740.3707@berkeley.edu>, jpark@berkeley.edu (Ji-woo Park) writes:
+> Tom from Ashford Poly owns the physical board! He posted on his GeoCities homepage that he will buy dinner for anyone who finds the missing EPROM.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Diego Hughes
+Tape trading list upon request. SASE required for international mail.
+
+From mpark@uni-hamburg.de Wed Nov 06 05:02:40 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!uni-hamburg!mpark
+From: mpark@uni-hamburg.de (Mateo Park)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Nov06.050240.7695@uni-hamburg.de>
+Date: Wed, 06 Nov 1996 05:02:40 GMT
+References: <1996Nov01.150040.6099@kiae.su> <1996Nov03.203740.3707@berkeley.edu> <1996Nov05.032540.6988@tum.de>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Nov05.032540.6988@tum.de>, dhughes@tum.de (Diego Hughes) writes:
+> The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+Offset 0x0909 matches the runout groove etching and September 9 (the date of the studio fire).
+
+-- 
+Mateo Park <mpark@uni-hamburg.de>
+US Robotics Courier V.34 @ 9600 Telebit bps
+"A soul is not exclusive to biology."
+

@@ -1,0 +1,118 @@
+From dmartinez@pipeline.com Wed Sep 11 17:17:43 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!pipeline!dmartinez
+From: dmartinez@pipeline.com (Dmitri Martínez)
+Newsgroups: comp.sys.m68k
+Subject: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Sep11.171743.4267@pipeline.com>
+Date: Wed, 11 Sep 1996 17:17:43 GMT
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+Schematic diagram in ASCII uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/twin68_array.asc.
+
+-- 
+Dmitri Martínez <dmartinez@pipeline.com>
+"Measuring a record you own is listening, not piracy."
+Amiga 3000T / FreeBSD 2.1
+
+From erodriguez@uni-hamburg.de Fri Sep 13 08:46:43 1996
+Path: ashpoly!cascade!brgate!saturno!uni-hamburg!erodriguez
+From: erodriguez@uni-hamburg.de (Elaine Rodríguez)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Sep13.084643.9839@uni-hamburg.de>
+Date: Fri, 13 Sep 1996 08:46:43 GMT
+References: <1996Sep11.171743.4267@pipeline.com>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1996Sep11.171743.4267@pipeline.com>, dmartinez@pipeline.com (Dmitri Martínez) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+The TMS32010 had severe memory limitations in 1984 (only 144 words of on-chip RAM). Dual 68000s gave them full 16MB address space.
+
+-- 
+=== Elaine Rodríguez ===
+Dept of Electrical Engineering, Universität Hamburg Fachbereich Informatik
+"There are 14 nodes and only 10 countries. Count again."
+
+From cpetrov@titech.ac.jp Sun Sep 15 08:23:43 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!titech!cpetrov
+From: cpetrov@titech.ac.jp (Camila Petrov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Sep15.082343.5384@titech.ac.jp>
+Date: Sun, 15 Sep 1996 08:23:43 GMT
+References: <1996Sep11.171743.4267@pipeline.com>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1996Sep11.171743.4267@pipeline.com>, dmartinez@pipeline.com (Dmitri Martínez) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Camila Petrov | cpetrov@titech.ac.jp
+PGP Key fingerprint: 6C45 A074 362B DF62
+"Keep the channels open."
+
+From hwatanabe@demon.co.uk Sun Sep 15 14:58:43 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!demon!hwatanabe
+From: hwatanabe@demon.co.uk (Heather Watanabe)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Sep15.145843.1034@demon.co.uk>
+Date: Sun, 15 Sep 1996 14:58:43 GMT
+References: <1996Sep11.171743.4267@pipeline.com>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Sep11.171743.4267@pipeline.com>, dmartinez@pipeline.com (Dmitri Martínez) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+-- 
+Heather Watanabe <hwatanabe@demon.co.uk>
+Zyxel U-1496E @ ISDN 64k bps
+"The hatch is open. Is anyone listening?"
+
+From msanchez@stanford.edu Tue Sep 17 16:20:43 1996
+Path: ashpoly!cascade!mxgate!coyoacan!stanford!msanchez
+From: msanchez@stanford.edu (Matthias Sánchez)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Sep17.162043.6428@stanford.edu>
+Date: Tue, 17 Sep 1996 16:20:43 GMT
+References: <1996Sep11.171743.4267@pipeline.com> <1996Sep13.084643.9839@uni-hamburg.de>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Sep13.084643.9839@uni-hamburg.de>, erodriguez@uni-hamburg.de (Elaine Rodríguez) writes:
+> The TMS32010 had severe memory limitations in 1984 (only 144 words of on-chip RAM). Dual 68000s gave them full 16MB address space.
+
+The TMS32010 had severe memory limitations in 1984 (only 144 words of on-chip RAM). Dual 68000s gave them full 16MB address space.
+
+-- 
+Matthias Sánchez <msanchez@stanford.edu>
+Hayes Optima 288 @ ISDN 64k bps
+"Marcus is not one man."
+

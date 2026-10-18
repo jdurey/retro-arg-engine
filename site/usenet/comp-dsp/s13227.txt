@@ -1,0 +1,47 @@
+From civanov@cern.ch Mon Sep 19 05:18:06 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!cern!civanov
+From: civanov@cern.ch (Camila Ivanov)
+Newsgroups: comp.dsp
+Subject: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Sep19.051806.4139@cern.ch>
+Date: Mon, 19 Sep 1994 05:18:06 GMT
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+Camila Ivanov
+Opinions expressed are solely my own and not those of European Laboratory for Particle Physics, Geneva.
+------------------------------------------------------------
+
+From kramirez@clari.net Tue Sep 20 21:54:06 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!clari!kramirez
+From: kramirez@clari.net (Karen Ramírez)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Sep20.215406.9432@clari.net>
+Date: Tue, 20 Sep 1994 21:54:06 GMT
+References: <1994Sep19.051806.4139@cern.ch>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Sep19.051806.4139@cern.ch>, civanov@cern.ch (Camila Ivanov) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+-- 
+Karen Ramírez <kramirez@clari.net>
+Practical Peripherals 14.4 @ 33,600 bps
+"Row 14. No joke."
+

@@ -1,0 +1,48 @@
+From rkarlsson@illinois.edu Fri Dec 15 00:44:58 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!illinois!rkarlsson
+From: rkarlsson@illinois.edu (Rodrigo Karlsson)
+Newsgroups: comp.dsp
+Subject: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Dec15.004458.6194@illinois.edu>
+Date: Fri, 15 Dec 1995 00:44:58 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Rodrigo Karlsson
+Opinions expressed are solely my own and not those of University of Illinois Urbana-Champaign.
+------------------------------------------------------------
+
+From jkarlsson@purdue.edu Fri Dec 15 11:41:58 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!purdue!jkarlsson
+From: jkarlsson@purdue.edu (Jen Karlsson)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Dec15.114158.3077@purdue.edu>
+Date: Fri, 15 Dec 1995 11:41:58 GMT
+References: <1995Dec15.004458.6194@illinois.edu>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Dec15.004458.6194@illinois.edu>, rkarlsson@illinois.edu (Rodrigo Karlsson) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Jen Karlsson | jkarlsson@purdue.edu
+PGP Key fingerprint: ADC6 D1C3 95A1 1425
+"Keep the channels open."
+

@@ -1,0 +1,116 @@
+From fjohansson@clari.net Fri Aug 25 00:30:08 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!clari!fjohansson
+From: fjohansson@clari.net (Fiona Johansson)
+Newsgroups: comp.sys.m68k
+Subject: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Aug25.003008.9985@clari.net>
+Date: Fri, 25 Aug 1995 00:30:08 GMT
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+Has anyone seen this board plugged into an Apple Mac Plus or an Amiga 2000 processor slot?
+
+-- 
+Fiona Johansson -- ClariNet Communications Corp
+"Hold for relay."
+
+From sbrennan@u-tokyo.ac.jp Fri Aug 25 11:07:08 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!u-tokyo!sbrennan
+From: sbrennan@u-tokyo.ac.jp (Seo-yeon Brennan)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Aug25.110708.7967@u-tokyo.ac.jp>
+Date: Fri, 25 Aug 1995 11:07:08 GMT
+References: <1995Aug25.003008.9985@clari.net>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Aug25.003008.9985@clari.net>, fjohansson@clari.net (Fiona Johansson) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Seo-yeon Brennan | sbrennan@u-tokyo.ac.jp
+PGP Key fingerprint: 75E0 9417 004F 93EE
+"Keep the channels open."
+
+From pgonzalez@panix.com Sat Aug 26 10:55:08 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!panix!pgonzalez
+From: pgonzalez@panix.com (Pavel González)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Aug26.105508.7076@panix.com>
+Date: Sat, 26 Aug 1995 10:55:08 GMT
+References: <1995Aug25.003008.9985@clari.net> <1995Aug25.110708.7967@u-tokyo.ac.jp>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Aug25.110708.7967@u-tokyo.ac.jp>, sbrennan@u-tokyo.ac.jp (Seo-yeon Brennan) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+=== Pavel González ===
+Dept of Electrical Engineering, Public Access Unix of New York
+"Extraordinary claims require extraordinary spectra."
+
+From mpopov@kiae.su Mon Aug 28 14:50:08 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!kiae!mpopov
+From: mpopov@kiae.su (Mikhail Popov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Aug28.145008.3779@kiae.su>
+Date: Mon, 28 Aug 1995 14:50:08 GMT
+References: <1995Aug25.003008.9985@clari.net> <1995Aug25.110708.7967@u-tokyo.ac.jp>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Aug25.110708.7967@u-tokyo.ac.jp>, sbrennan@u-tokyo.ac.jp (Seo-yeon Brennan) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Mikhail Popov
+Opinions expressed are solely my own and not those of Kurchatov Institute of Atomic Energy, Moscow.
+------------------------------------------------------------
+
+From ekim@kth.se Tue Aug 29 11:41:08 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!kth!ekim
+From: ekim@kth.se (Elaine Kim)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Aug29.114108.9115@kth.se>
+Date: Tue, 29 Aug 1995 11:41:08 GMT
+References: <1995Aug25.003008.9985@clari.net> <1995Aug25.110708.7967@u-tokyo.ac.jp> <1995Aug28.145008.3779@kiae.su>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Aug28.145008.3779@kiae.su>, mpopov@kiae.su (Mikhail Popov) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+Elaine Kim
+Tape trading list upon request. SASE required for international mail.
+

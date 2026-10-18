@@ -1,0 +1,47 @@
+From mkang@cmu.edu Wed May 03 05:24:12 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!cmu!mkang
+From: mkang@cmu.edu (Mike Kang)
+Newsgroups: comp.dsp
+Subject: WTB/WTT: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May03.052412.5602@cmu.edu>
+Date: Wed, 03 May 1995 05:24:12 GMT
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Mike Kang <mkang@cmu.edu>
+SupraFAXModem 28.8 @ 19,200 bps
+"Hardware is temporary. The signal survives."
+
+From msokolov@berkeley.edu Thu May 04 08:47:12 1995
+Path: ashpoly!cascade!bigsur!berkeley!msokolov
+From: msokolov@berkeley.edu (Marisol Sokolov)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May04.084712.4564@berkeley.edu>
+Date: Thu, 04 May 1995 08:47:12 GMT
+References: <1995May03.052412.5602@cmu.edu>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995May03.052412.5602@cmu.edu>, mkang@cmu.edu (Mike Kang) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Marisol Sokolov <msokolov@berkeley.edu>
+*PLONK* filter active for trolls.
+PC-9821Ap2 (NEC) - NetBSD 1.0
+

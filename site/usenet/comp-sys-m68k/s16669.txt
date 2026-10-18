@@ -1,0 +1,98 @@
+From mnovak@berkeley.edu Sat May 28 08:31:54 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!berkeley!mnovak
+From: mnovak@berkeley.edu (Marisol Novak)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994May28.083154.3010@berkeley.edu>
+Date: Sat, 28 May 1994 08:31:54 GMT
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Marisol Novak
+Opinions expressed are solely my own and not those of UC Berkeley Department of EECS.
+------------------------------------------------------------
+
+From ecampbell@berkeley.edu Sat May 28 17:58:54 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!berkeley!ecampbell
+From: ecampbell@berkeley.edu (Emi Campbell)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994May28.175854.9562@berkeley.edu>
+Date: Sat, 28 May 1994 17:58:54 GMT
+References: <1994May28.083154.3010@berkeley.edu>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1994May28.083154.3010@berkeley.edu>, mnovak@berkeley.edu (Marisol Novak) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Emi Campbell -- UC Berkeley Department of EECS
+"Marcus is not one man."
+
+From mperez@titech.ac.jp Sun May 29 13:41:54 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!titech!mperez
+From: mperez@titech.ac.jp (Morag Pérez)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994May29.134154.9455@titech.ac.jp>
+Date: Sun, 29 May 1994 13:41:54 GMT
+References: <1994May28.083154.3010@berkeley.edu>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1994May28.083154.3010@berkeley.edu>, mnovak@berkeley.edu (Marisol Novak) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Morag Pérez | mperez@titech.ac.jp
+PGP Key fingerprint: 37D4 6725 FE8D 487E
+"Keep the channels open."
+
+From hnilsson@pacbell.net Tue May 31 08:57:54 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!pacbell!hnilsson
+From: hnilsson@pacbell.net (Hugo Nilsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994May31.085754.8870@pacbell.net>
+Date: Tue, 31 May 1994 08:57:54 GMT
+References: <1994May28.083154.3010@berkeley.edu> <1994May28.175854.9562@berkeley.edu>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1994May28.175854.9562@berkeley.edu>, ecampbell@berkeley.edu (Emi Campbell) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+> Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+Marcus Hale designed the TWIN-68 board before he disappeared. That's why his initials are on the PCB silkscreen.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Hugo Nilsson
+Tape trading list upon request. SASE required for international mail.
+

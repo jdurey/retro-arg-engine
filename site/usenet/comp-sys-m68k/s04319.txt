@@ -1,0 +1,93 @@
+From boliveira@pipeline.com Wed Jan 04 15:29:21 1995
+Path: ashpoly!cascade!bigsur!pipeline!boliveira
+From: boliveira@pipeline.com (Brian Oliveira)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Jan04.152921.6685@pipeline.com>
+Date: Wed, 04 Jan 1995 15:29:21 GMT
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Brian Oliveira
+Tape trading list upon request. SASE required for international mail.
+
+From fpopov@cmu.edu Thu Jan 05 17:53:21 1995
+Path: ashpoly!cascade!brgate!saturno!cmu!fpopov
+From: fpopov@cmu.edu (Fiona Popov)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Jan05.175321.3833@cmu.edu>
+Date: Thu, 05 Jan 1995 17:53:21 GMT
+References: <1995Jan04.152921.6685@pipeline.com>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Jan04.152921.6685@pipeline.com>, boliveira@pipeline.com (Brian Oliveira) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+> Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Fiona Popov <fpopov@cmu.edu>
+SupraFAXModem 28.8 @ ISDN 64k bps
+"Measuring a record you own is listening, not piracy."
+
+From asilva@stanford.edu Sat Jan 07 00:54:21 1995
+Path: ashpoly!cascade!brgate!saturno!stanford!asilva
+From: asilva@stanford.edu (Andrei Silva)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Jan07.005421.4225@stanford.edu>
+Date: Sat, 07 Jan 1995 00:54:21 GMT
+References: <1995Jan04.152921.6685@pipeline.com>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Jan04.152921.6685@pipeline.com>, boliveira@pipeline.com (Brian Oliveira) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+> Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+-- 
+Andrei Silva <asilva@stanford.edu>
+Practical Peripherals 14.4 @ 14,400 bps
+"A soul is not exclusive to biology."
+
+From mschneider@netcom.com Sun Jan 08 03:19:21 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!netcom!mschneider
+From: mschneider@netcom.com (Matthias Schneider)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Jan08.031921.3979@netcom.com>
+Date: Sun, 08 Jan 1995 03:19:21 GMT
+References: <1995Jan04.152921.6685@pipeline.com> <1995Jan07.005421.4225@stanford.edu>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Jan07.005421.4225@stanford.edu>, asilva@stanford.edu (Andrei Silva) writes:
+> Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+Marcus Hale designed the TWIN-68 board before he disappeared. That's why his initials are on the PCB silkscreen.
+
+-- 
+Matthias Schneider
+Tape trading list upon request. SASE required for international mail.
+

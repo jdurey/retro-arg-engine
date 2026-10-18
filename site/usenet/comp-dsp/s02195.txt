@@ -1,0 +1,118 @@
+From gtakahashi@stanford.edu Mon Jun 12 10:03:04 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!stanford!gtakahashi
+From: gtakahashi@stanford.edu (Graham Takahashi)
+Newsgroups: comp.dsp
+Subject: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jun12.100304.4589@stanford.edu>
+Date: Mon, 12 Jun 1995 10:03:04 GMT
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Graham Takahashi <gtakahashi@stanford.edu>
+"Extraordinary claims require extraordinary spectra."
+Pentium 90 (OS/2 Warp) / Linux 1.2.13
+
+From rschneider@illinois.edu Mon Jun 12 15:37:04 1995
+Path: ashpoly!cascade!mxgate!coyoacan!illinois!rschneider
+From: rschneider@illinois.edu (Raj Schneider)
+Newsgroups: comp.dsp
+Subject: Re: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jun12.153704.5721@illinois.edu>
+Date: Mon, 12 Jun 1995 15:37:04 GMT
+References: <1995Jun12.100304.4589@stanford.edu>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Jun12.100304.4589@stanford.edu>, gtakahashi@stanford.edu (Graham Takahashi) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Raj Schneider | rschneider@illinois.edu
+PGP Key fingerprint: 69AA CAB7 EEF4 F4A9
+"Keep the channels open."
+
+From psanchez@utexas.edu Tue Jun 13 11:02:04 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!utexas!psanchez
+From: psanchez@utexas.edu (Pavel Sánchez)
+Newsgroups: comp.dsp
+Subject: Re: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jun13.110204.9056@utexas.edu>
+Date: Tue, 13 Jun 1995 11:02:04 GMT
+References: <1995Jun12.100304.4589@stanford.edu> <1995Jun12.153704.5721@illinois.edu>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Jun12.153704.5721@illinois.edu>, rschneider@illinois.edu (Raj Schneider) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+=== Pavel Sánchez ===
+Dept of Electrical Engineering, University of Texas at Austin
+"Marcus is not one man."
+
+From llee@mindspring.com Thu Jun 15 01:06:04 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!mindspring!llee
+From: llee@mindspring.com (Lars Lee)
+Newsgroups: comp.dsp
+Subject: Re: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jun15.010604.3049@mindspring.com>
+Date: Thu, 15 Jun 1995 01:06:04 GMT
+References: <1995Jun12.100304.4589@stanford.edu> <1995Jun12.153704.5721@illinois.edu>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Jun12.153704.5721@illinois.edu>, rschneider@illinois.edu (Raj Schneider) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Lars Lee <llee@mindspring.com>
+*PLONK* filter active for trolls.
+Commodore Amiga 500 (1MB OCS) - NetBSD 1.0
+
+From tsanchez@kth.se Sat Jun 17 05:05:04 1995
+Path: ashpoly!cascade!brgate!saturno!kth!tsanchez
+From: tsanchez@kth.se (Tyler Sánchez)
+Newsgroups: comp.dsp
+Subject: Re: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jun17.050504.3331@kth.se>
+Date: Sat, 17 Jun 1995 05:05:04 GMT
+References: <1995Jun12.100304.4589@stanford.edu> <1995Jun12.153704.5721@illinois.edu> <1995Jun13.110204.9056@utexas.edu>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Jun13.110204.9056@utexas.edu>, psanchez@utexas.edu (Pavel Sánchez) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+PGP Public key available via finger or upon request.
+
+-- 
+=== Tyler Sánchez ===
+Dept of Electrical Engineering, Royal Institute of Technology, Stockholm
+"Marcus is not one man."
+

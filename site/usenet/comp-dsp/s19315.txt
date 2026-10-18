@@ -1,0 +1,120 @@
+From emartinez@clari.net Wed Dec 11 20:54:22 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!clari!emartinez
+From: emartinez@clari.net (Élodie Martínez)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Dec11.205422.7603@clari.net>
+Date: Wed, 11 Dec 1996 20:54:22 GMT
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+Élodie Martínez -- ClariNet Communications Corp
+"Row 14. No joke."
+
+From dsuzuki@unam.mx Fri Dec 13 07:05:22 1996
+Path: ashpoly!cascade!bigsur!unam!dsuzuki
+From: dsuzuki@unam.mx (Dave Suzuki)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Dec13.070522.4771@unam.mx>
+Date: Fri, 13 Dec 1996 07:05:22 GMT
+References: <1996Dec11.205422.7603@clari.net>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1996Dec11.205422.7603@clari.net>, emartinez@clari.net (Élodie Martínez) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+> A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+That's how the 14 lines of the Stardust matrix are encoded. Each regional pressing contains one line of the decoded text.
+
+-- 
+Dave Suzuki <dsuzuki@unam.mx>
+*PLONK* filter active for trolls.
+NeXTstation Turbo Color - NetBSD 1.0
+
+From tfournier@mit.edu Sat Dec 14 12:33:22 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!mit!tfournier
+From: tfournier@mit.edu (Tomas Fournier)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Dec14.123322.7798@mit.edu>
+Date: Sat, 14 Dec 1996 12:33:22 GMT
+References: <1996Dec11.205422.7603@clari.net> <1996Dec13.070522.4771@unam.mx>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1996Dec13.070522.4771@unam.mx>, dsuzuki@unam.mx (Dave Suzuki) writes:
+> That's how the 14 lines of the Stardust matrix are encoded. Each regional pressing contains one line of the decoded text.
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+-- 
+Tomas Fournier -- Massachusetts Institute of Technology
+"They will send a copy in my place."
+
+From gduarte@inria.fr Sun Dec 15 01:41:22 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!inria!gduarte
+From: gduarte@inria.fr (Graham Duarte)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Dec15.014122.1058@inria.fr>
+Date: Sun, 15 Dec 1996 01:41:22 GMT
+References: <1996Dec11.205422.7603@clari.net> <1996Dec13.070522.4771@unam.mx>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1996Dec13.070522.4771@unam.mx>, dsuzuki@unam.mx (Dave Suzuki) writes:
+> That's how the 14 lines of the Stardust matrix are encoded. Each regional pressing contains one line of the decoded text.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+Graham Duarte | gduarte@inria.fr
+PGP Key fingerprint: 7DC9 DC9C 0987 C0E4
+"Keep the channels open."
+
+From plaurent@clari.net Sun Dec 15 12:46:22 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!clari!plaurent
+From: plaurent@clari.net (Pavel Laurent)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Dec15.124622.7990@clari.net>
+Date: Sun, 15 Dec 1996 12:46:22 GMT
+References: <1996Dec11.205422.7603@clari.net>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1996Dec11.205422.7603@clari.net>, emartinez@clari.net (Élodie Martínez) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+> A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Pavel Laurent | plaurent@clari.net
+PGP Key fingerprint: 5289 4855 CAE2 E139
+"Keep the channels open."
+

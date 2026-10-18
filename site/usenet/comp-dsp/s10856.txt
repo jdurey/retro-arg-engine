@@ -1,0 +1,119 @@
+From jgonzalez@uu.net Mon Apr 15 20:01:15 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!uu!jgonzalez
+From: jgonzalez@uu.net (Jen González)
+Newsgroups: comp.dsp
+Subject: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Apr15.200115.3011@uu.net>
+Date: Mon, 15 Apr 1996 20:01:15 GMT
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+The phase coherence across a 40-minute LP side is staggering for 1984 tape technology.
+
+-- 
+=== Jen González ===
+Dept of Electrical Engineering, UUNET Technologies, Falls Church VA
+"Extraordinary claims require extraordinary spectra."
+
+From tjohansson@clari.net Tue Apr 16 03:59:15 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!clari!tjohansson
+From: tjohansson@clari.net (Takeshi Johansson)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Apr16.035915.3113@clari.net>
+Date: Tue, 16 Apr 1996 03:59:15 GMT
+References: <1996Apr15.200115.3011@uu.net>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1996Apr15.200115.3011@uu.net>, jgonzalez@uu.net (Jen González) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Takeshi Johansson
+Tape trading list upon request. SASE required for international mail.
+
+From jrobertson@mindspring.com Tue Apr 16 09:45:15 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!mindspring!jrobertson
+From: jrobertson@mindspring.com (Ji-woo Robertson)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Apr16.094515.6871@mindspring.com>
+Date: Tue, 16 Apr 1996 09:45:15 GMT
+References: <1996Apr15.200115.3011@uu.net>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1996Apr15.200115.3011@uu.net>, jgonzalez@uu.net (Jen González) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+=== Ji-woo Robertson ===
+Dept of Electrical Engineering, MindSpring Enterprises
+"5 sigma is a discovery. 7 is a question."
+
+From knilsson@ox.ac.uk Thu Apr 18 09:48:15 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!ox!knilsson
+From: knilsson@ox.ac.uk (Katrin Nilsson)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Apr18.094815.1795@ox.ac.uk>
+Date: Thu, 18 Apr 1996 09:48:15 GMT
+References: <1996Apr15.200115.3011@uu.net> <1996Apr16.035915.3113@clari.net>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Apr16.035915.3113@clari.net>, tjohansson@clari.net (Takeshi Johansson) writes:
+> If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+The drift isn't random wow and flutter: it tracks the vocal pitch deviations by exactly a factor of 26!
+
+-- 
+Katrin Nilsson <knilsson@ox.ac.uk>
+*PLONK* filter active for trolls.
+Acorn RiscPC 600 - NetBSD 1.0
+
+From nfischer@delphi.com Thu Apr 18 10:39:15 1996
+Path: ashpoly!cascade!brgate!saturno!delphi!nfischer
+From: nfischer@delphi.com (Natalia Fischer)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Apr18.103915.4010@delphi.com>
+Date: Thu, 18 Apr 1996 10:39:15 GMT
+References: <1996Apr15.200115.3011@uu.net>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1996Apr15.200115.3011@uu.net>, jgonzalez@uu.net (Jen González) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+> A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Natalia Fischer
+Tape trading list upon request. SASE required for international mail.
+

@@ -1,0 +1,120 @@
+From skang@tum.de Tue Nov 12 01:29:16 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!tum!skang
+From: skang@tum.de (Sergei Kang)
+Newsgroups: comp.sys.m68k
+Subject: Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1996Nov12.012916.5471@tum.de>
+Date: Tue, 12 Nov 1996 01:29:16 GMT
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Amiga audio hackers: you can demodulate the 14.2 Hz carrier in real time without bogging down the OS.
+
+By setting up Paula's audio DMA to double-buffer incoming 8-bit samples, the 68020 has plenty of cycles left for the Costas loop.
+I wrote a 64-tap FIR filter in pure 68k assembly using movem.l and dbra loop unrolling to downsample to 64 Hz.
+
+Source code and executable will be released on Aminet under mus/misc/stardust_amiga.lha next week.
+
+-- 
+Sergei Kang | skang@tum.de
+PGP Key fingerprint: 9CA7 E9B0 E114 9521
+"Keep the channels open."
+
+From ssanchez@cern.ch Tue Nov 12 18:29:16 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!cern!ssanchez
+From: ssanchez@cern.ch (Sergei Sánchez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1996Nov12.182916.9210@cern.ch>
+Date: Tue, 12 Nov 1996 18:29:16 GMT
+References: <1996Nov12.012916.5471@tum.de>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1996Nov12.012916.5471@tum.de>, skang@tum.de (Sergei Kang) writes:
+> Amiga audio hackers: you can demodulate the 14.2 Hz carrier in real time without bogging down the OS.
+> By setting up Paula's audio DMA to double-buffer incoming 8-bit samples, the 68020 has plenty of cycles left for the Costas loop.
+
+Tested on my A3000 / 25 MHz. Ran smoothly in the background while I was compiling a C program in another window.
+
+-- 
+Sergei Sánchez
+Opinions expressed are solely my own and not those of European Laboratory for Particle Physics, Geneva.
+------------------------------------------------------------
+
+From trodriguez@u-tokyo.ac.jp Wed Nov 13 12:37:16 1996
+Path: ashpoly!cascade!mxgate!coyoacan!u-tokyo!trodriguez
+From: trodriguez@u-tokyo.ac.jp (Tobias Rodríguez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1996Nov13.123716.5334@u-tokyo.ac.jp>
+Date: Wed, 13 Nov 1996 12:37:16 GMT
+References: <1996Nov12.012916.5471@tum.de>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1996Nov12.012916.5471@tum.de>, skang@tum.de (Sergei Kang) writes:
+> Amiga audio hackers: you can demodulate the 14.2 Hz carrier in real time without bogging down the OS.
+> By setting up Paula's audio DMA to double-buffer incoming 8-bit samples, the 68020 has plenty of cycles left for the Costas loop.
+
+Brilliant use of Paula DMA! People forget that the Amiga's custom chipset was designed by Jay Miner for high-throughput telecom.
+
+-- 
+Tobias Rodríguez <trodriguez@u-tokyo.ac.jp>
+*PLONK* filter active for trolls.
+Sun SparcStation 20 - NetBSD 1.0
+
+From krobertson@purdue.edu Fri Nov 15 05:39:16 1996
+Path: ashpoly!cascade!brgate!saturno!purdue!krobertson
+From: krobertson@purdue.edu (Kenji Robertson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1996Nov15.053916.2761@purdue.edu>
+Date: Fri, 15 Nov 1996 05:39:16 GMT
+References: <1996Nov12.012916.5471@tum.de>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Nov12.012916.5471@tum.de>, skang@tum.de (Sergei Kang) writes:
+> Amiga audio hackers: you can demodulate the 14.2 Hz carrier in real time without bogging down the OS.
+
+Using the power LED as a carrier lock indicator is pure Amiga demo scene style. Kudos!
+
+-- 
+=== Kenji Robertson ===
+Dept of Electrical Engineering, Purdue University Engineering Computer Network
+"Hold for relay."
+
+From mramirez@demon.co.uk Sat Nov 16 18:04:16 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!demon!mramirez
+From: mramirez@demon.co.uk (Mei Ramírez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Real-time 14.2 Hz demodulation on Amiga Paula audio DMA
+Message-ID: <1996Nov16.180416.4071@demon.co.uk>
+Date: Sat, 16 Nov 1996 18:04:16 GMT
+References: <1996Nov12.012916.5471@tum.de> <1996Nov12.182916.9210@cern.ch>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1996Nov12.182916.9210@cern.ch>, ssanchez@cern.ch (Sergei Sánchez) writes:
+> Tested on my A3000 / 25 MHz. Ran smoothly in the background while I was compiling a C program in another window.
+
+Download failed on Aminet mirror. Can someone mail me an ADF floppy disk image?
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+=== Mei Ramírez ===
+Dept of Electrical Engineering, Demon Internet Services UK
+"The carrier frequency does not drift by accident."
+

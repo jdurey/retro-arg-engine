@@ -1,0 +1,92 @@
+From lbrennan@stanford.edu Mon Mar 20 12:48:53 1995
+Path: ashpoly!cascade!mxgate!coyoacan!stanford!lbrennan
+From: lbrennan@stanford.edu (Lucia Brennan)
+Newsgroups: comp.dsp
+Subject: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Mar20.124853.2790@stanford.edu>
+Date: Mon, 20 Mar 1995 12:48:53 GMT
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Lucia Brennan -- Stanford University Computer Systems Lab
+"Extraordinary claims require extraordinary spectra."
+
+From mramirez@earthlink.net Tue Mar 21 00:19:53 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!earthlink!mramirez
+From: mramirez@earthlink.net (Mei Ramírez)
+Newsgroups: comp.dsp
+Subject: Re: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Mar21.001953.8324@earthlink.net>
+Date: Tue, 21 Mar 1995 00:19:53 GMT
+References: <1995Mar20.124853.2790@stanford.edu>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1995Mar20.124853.2790@stanford.edu>, lbrennan@stanford.edu (Lucia Brennan) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Mei Ramírez
+Tape trading list upon request. SASE required for international mail.
+
+From dgarcia@titech.ac.jp Wed Mar 22 15:35:53 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!titech!dgarcia
+From: dgarcia@titech.ac.jp (Dave García)
+Newsgroups: comp.dsp
+Subject: Re: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Mar22.153553.4719@titech.ac.jp>
+Date: Wed, 22 Mar 1995 15:35:53 GMT
+References: <1995Mar20.124853.2790@stanford.edu>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Mar20.124853.2790@stanford.edu>, lbrennan@stanford.edu (Lucia Brennan) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Dave García
+Tape trading list upon request. SASE required for international mail.
+
+From clopez@panix.com Thu Mar 23 22:04:53 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!panix!clopez
+From: clopez@panix.com (Camila López)
+Newsgroups: comp.dsp
+Subject: Re: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Mar23.220453.1938@panix.com>
+Date: Thu, 23 Mar 1995 22:04:53 GMT
+References: <1995Mar20.124853.2790@stanford.edu> <1995Mar21.001953.8324@earthlink.net>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Mar21.001953.8324@earthlink.net>, mramirez@earthlink.net (Mei Ramírez) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Camila López -- Public Access Unix of New York
+"When every node is whole, the channel opens."
+

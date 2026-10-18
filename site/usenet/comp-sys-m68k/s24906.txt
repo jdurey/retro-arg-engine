@@ -1,0 +1,119 @@
+From ksantos@cam.ac.uk Mon Nov 04 20:37:23 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!cam!ksantos
+From: ksantos@cam.ac.uk (Kirsty Santos)
+Newsgroups: comp.sys.m68k
+Subject: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Nov04.203723.6570@cam.ac.uk>
+Date: Mon, 04 Nov 1996 20:37:23 GMT
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Did Marcus take the decryption EPROM with him when he left the lab?
+
+-- 
+Kirsty Santos <ksantos@cam.ac.uk>
+*PLONK* filter active for trolls.
+Acorn RiscPC 600 - NetBSD 1.0
+
+From bchoi@rwth-aachen.de Wed Nov 06 20:17:23 1996
+Path: ashpoly!cascade!bigsur!rwth-aachen!bchoi
+From: bchoi@rwth-aachen.de (Bill Choi)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Nov06.201723.5353@rwth-aachen.de>
+Date: Wed, 06 Nov 1996 20:17:23 GMT
+References: <1996Nov04.203723.6570@cam.ac.uk>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Nov04.203723.6570@cam.ac.uk>, ksantos@cam.ac.uk (Kirsty Santos) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+-- 
+Bill Choi <bchoi@rwth-aachen.de>
+"5 sigma is a discovery. 7 is a question."
+Decstation 5000/200 / SunOS 4.1.4
+
+From jsilva@mindspring.com Thu Nov 07 12:46:23 1996
+Path: ashpoly!cascade!bigsur!mindspring!jsilva
+From: jsilva@mindspring.com (Jen Silva)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Nov07.124623.3031@mindspring.com>
+Date: Thu, 07 Nov 1996 12:46:23 GMT
+References: <1996Nov04.203723.6570@cam.ac.uk> <1996Nov06.201723.5353@rwth-aachen.de>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Nov06.201723.5353@rwth-aachen.de>, bchoi@rwth-aachen.de (Bill Choi) writes:
+> That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+-- 
+Jen Silva <jsilva@mindspring.com>
+"When every node is whole, the channel opens."
+Sun 3/60 (SunOS 4.1.1) / AmigaOS 3.1
+
+From vsanchez@hanse.de Thu Nov 07 20:19:23 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!hanse!vsanchez
+From: vsanchez@hanse.de (Valeria Sánchez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Nov07.201923.9530@hanse.de>
+Date: Thu, 07 Nov 1996 20:19:23 GMT
+References: <1996Nov04.203723.6570@cam.ac.uk> <1996Nov06.201723.5353@rwth-aachen.de>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Nov06.201723.5353@rwth-aachen.de>, bchoi@rwth-aachen.de (Bill Choi) writes:
+> That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Valeria Sánchez
+Tape trading list upon request. SASE required for international mail.
+
+From asokolov@utexas.edu Fri Nov 08 23:17:23 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!utexas!asokolov
+From: asokolov@utexas.edu (Astrid Sokolov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Nov08.231723.7477@utexas.edu>
+Date: Fri, 08 Nov 1996 23:17:23 GMT
+References: <1996Nov04.203723.6570@cam.ac.uk> <1996Nov06.201723.5353@rwth-aachen.de>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1996Nov06.201723.5353@rwth-aachen.de>, bchoi@rwth-aachen.de (Bill Choi) writes:
+> That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+=== Astrid Sokolov ===
+Dept of Electrical Engineering, University of Texas at Austin
+"Hardware is temporary. The signal survives."
+

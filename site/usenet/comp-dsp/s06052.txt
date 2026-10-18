@@ -1,0 +1,117 @@
+From bwatanabe@ox.ac.uk Thu Oct 13 07:16:45 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!ox!bwatanabe
+From: bwatanabe@ox.ac.uk (Brian Watanabe)
+Newsgroups: comp.dsp
+Subject: [FLAME] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Oct13.071645.6248@ox.ac.uk>
+Date: Thu, 13 Oct 1994 07:16:45 GMT
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+
+Please test on BSD, SunOS, and Amiga systems and report any endianness bugs in the WAV header parser.
+
+-- 
+Brian Watanabe -- Oxford University Computing Laboratory
+"In theory there is no difference between theory and practice."
+
+From bfischer@utexas.edu Thu Oct 13 09:29:45 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!utexas!bfischer
+From: bfischer@utexas.edu (Bruno Fischer)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Oct13.092945.6288@utexas.edu>
+Date: Thu, 13 Oct 1994 09:29:45 GMT
+References: <1994Oct13.071645.6248@ox.ac.uk>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Oct13.071645.6248@ox.ac.uk>, bwatanabe@ox.ac.uk (Brian Watanabe) writes:
+> Released stardust.c v1.3 with improved Costas loop carrier recovery for low-SNR vinyl rips.
+
+Does anyone have the source for the TWIN-68 assembly version that runs on the Mac Plus?
+
+-- 
+Bruno Fischer <bfischer@utexas.edu>
+"Marcus is not one man."
+Decstation 5000/200 / AmigaOS 3.1
+
+From mpark@uni-hamburg.de Fri Oct 14 13:20:45 1994
+Path: ashpoly!cascade!bigsur!uni-hamburg!mpark
+From: mpark@uni-hamburg.de (Matthias Park)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Oct14.132045.1271@uni-hamburg.de>
+Date: Fri, 14 Oct 1994 13:20:45 GMT
+References: <1994Oct13.071645.6248@ox.ac.uk> <1994Oct13.092945.6288@utexas.edu>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Oct13.092945.6288@utexas.edu>, bfischer@utexas.edu (Bruno Fischer) writes:
+> Does anyone have the source for the TWIN-68 assembly version that runs on the Mac Plus?
+
+Can you provide a pre-compiled DOS binary? Some of us don't have Linux or a C compiler installed on our machines.
+
+-- 
+Matthias Park <mpark@uni-hamburg.de>
+US Robotics Courier V.34 @ 14,400 bps
+"The carrier frequency does not drift by accident."
+
+From tlopez@hanse.de Sun Oct 16 00:30:45 1994
+Path: ashpoly!cascade!mxgate!coyoacan!hanse!tlopez
+From: tlopez@hanse.de (Tomas López)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Oct16.003045.7899@hanse.de>
+Date: Sun, 16 Oct 1994 00:30:45 GMT
+References: <1994Oct13.071645.6248@ox.ac.uk> <1994Oct13.092945.6288@utexas.edu>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Oct13.092945.6288@utexas.edu>, bfischer@utexas.edu (Bruno Fischer) writes:
+> Does anyone have the source for the TWIN-68 assembly version that runs on the Mac Plus?
+
+On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+-- 
+Tomas López
+Opinions expressed are solely my own and not those of Hanse-Netzwerk Hamburg.
+------------------------------------------------------------
+
+From awatanabe@ox.ac.uk Mon Oct 17 05:39:45 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!ox!awatanabe
+From: awatanabe@ox.ac.uk (Astrid Watanabe)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Oct17.053945.6954@ox.ac.uk>
+Date: Mon, 17 Oct 1994 05:39:45 GMT
+References: <1994Oct13.071645.6248@ox.ac.uk> <1994Oct13.092945.6288@utexas.edu> <1994Oct14.132045.1271@uni-hamburg.de>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1994Oct14.132045.1271@uni-hamburg.de>, mpark@uni-hamburg.de (Matthias Park) writes:
+> Can you provide a pre-compiled DOS binary? Some of us don't have Linux or a C compiler installed on our machines.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Astrid Watanabe <awatanabe@ox.ac.uk>
+"A soul is not exclusive to biology."
+Mac IIci / 68882 FPU / Linux 1.2.13
+

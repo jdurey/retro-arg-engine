@@ -1,0 +1,94 @@
+From dgarcia@unam.mx Sat Sep 21 17:45:19 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!unam!dgarcia
+From: dgarcia@unam.mx (Dave García)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Sep21.174519.4704@unam.mx>
+Date: Sat, 21 Sep 1996 17:45:19 GMT
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+Dave García | dgarcia@unam.mx
+PGP Key fingerprint: DD39 DEB1 12CB 0077
+"Keep the channels open."
+
+From mmoreno@uu.net Mon Sep 23 07:55:19 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!uu!mmoreno
+From: mmoreno@uu.net (Mathieu Moreno)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Sep23.075519.9423@uu.net>
+Date: Mon, 23 Sep 1996 07:55:19 GMT
+References: <1996Sep21.174519.4704@unam.mx>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1996Sep21.174519.4704@unam.mx>, dgarcia@unam.mx (Dave García) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Mathieu Moreno <mmoreno@uu.net>
+*PLONK* filter active for trolls.
+Acorn RiscPC 600 - NetBSD 1.0
+
+From dmartinez@kiae.su Tue Sep 24 08:36:19 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!kiae!dmartinez
+From: dmartinez@kiae.su (Dave Martínez)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Sep24.083619.3907@kiae.su>
+Date: Tue, 24 Sep 1996 08:36:19 GMT
+References: <1996Sep21.174519.4704@unam.mx> <1996Sep23.075519.9423@uu.net>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1996Sep23.075519.9423@uu.net>, mmoreno@uu.net (Mathieu Moreno) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Dave Martínez
+Tape trading list upon request. SASE required for international mail.
+
+From rlindqvist@cern.ch Tue Sep 24 21:30:19 1996
+Path: ashpoly!cascade!mxgate!coyoacan!cern!rlindqvist
+From: rlindqvist@cern.ch (Renata Lindqvist)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Sep24.213019.1198@cern.ch>
+Date: Tue, 24 Sep 1996 21:30:19 GMT
+References: <1996Sep21.174519.4704@unam.mx>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Sep21.174519.4704@unam.mx>, dgarcia@unam.mx (Dave García) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Renata Lindqvist <rlindqvist@cern.ch>
+"Row 14. No joke."
+Pentium 90 (OS/2 Warp) / System 7.5.1
+

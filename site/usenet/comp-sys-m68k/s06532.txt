@@ -1,0 +1,97 @@
+From treyes@ox.ac.uk Tue Jan 17 03:50:01 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!ox!treyes
+From: treyes@ox.ac.uk (Tobias Reyes)
+Newsgroups: comp.sys.m68k
+Subject: WTB/WTT: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Jan17.035001.6001@ox.ac.uk>
+Date: Tue, 17 Jan 1995 03:50:01 GMT
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+
+Does anyone have a 27C256 EPROM marked 'MH-U14' or 'ORION-CRYPTO'?
+
+-- 
+Tobias Reyes
+Opinions expressed are solely my own and not those of Oxford University Computing Laboratory.
+------------------------------------------------------------
+
+From vsuzuki@u-tokyo.ac.jp Tue Jan 17 21:45:01 1995
+Path: ashpoly!cascade!brgate!saturno!u-tokyo!vsuzuki
+From: vsuzuki@u-tokyo.ac.jp (Valeria Suzuki)
+Newsgroups: comp.sys.m68k
+Subject: Re: WTB/WTT: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Jan17.214501.6197@u-tokyo.ac.jp>
+Date: Tue, 17 Jan 1995 21:45:01 GMT
+References: <1995Jan17.035001.6001@ox.ac.uk>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1995Jan17.035001.6001@ox.ac.uk>, treyes@ox.ac.uk (Tobias Reyes) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Valeria Suzuki <vsuzuki@u-tokyo.ac.jp>
+Hayes Optima 288 @ 9600 Telebit bps
+"When every node is whole, the channel opens."
+
+From anovak@tum.de Thu Jan 19 10:40:01 1995
+Path: ashpoly!cascade!bigsur!tum!anovak
+From: anovak@tum.de (Amy Novak)
+Newsgroups: comp.sys.m68k
+Subject: Re: WTB/WTT: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Jan19.104001.8402@tum.de>
+Date: Thu, 19 Jan 1995 10:40:01 GMT
+References: <1995Jan17.035001.6001@ox.ac.uk>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Jan17.035001.6001@ox.ac.uk>, treyes@ox.ac.uk (Tobias Reyes) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Amy Novak <anovak@tum.de>
+US Robotics Courier V.34 @ 28,800 bps
+"They will send a copy in my place."
+
+From jnilsson@kth.se Thu Jan 19 13:53:01 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!kth!jnilsson
+From: jnilsson@kth.se (Ji-woo Nilsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: WTB/WTT: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Jan19.135301.3178@kth.se>
+Date: Thu, 19 Jan 1995 13:53:01 GMT
+References: <1995Jan17.035001.6001@ox.ac.uk> <1995Jan17.214501.6197@u-tokyo.ac.jp>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Jan17.214501.6197@u-tokyo.ac.jp>, vsuzuki@u-tokyo.ac.jp (Valeria Suzuki) writes:
+> Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+=== Ji-woo Nilsson ===
+Dept of Electrical Engineering, Royal Institute of Technology, Stockholm
+"We don't sign stars. We build them."
+

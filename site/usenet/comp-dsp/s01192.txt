@@ -1,0 +1,48 @@
+From tpetrov@berkeley.edu Thu Jan 18 11:09:48 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!berkeley!tpetrov
+From: tpetrov@berkeley.edu (Takeshi Petrov)
+Newsgroups: comp.dsp
+Subject: Data: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Jan18.110948.4278@berkeley.edu>
+Date: Thu, 18 Jan 1996 11:09:48 GMT
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+MATLAB script available upon request via email.
+
+-- 
+=== Takeshi Petrov ===
+Dept of Electrical Engineering, UC Berkeley Department of EECS
+"The hatch is open. Is anyone listening?"
+
+From yduarte@purdue.edu Thu Jan 18 13:30:48 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!purdue!yduarte
+From: yduarte@purdue.edu (Yuki Duarte)
+Newsgroups: comp.dsp
+Subject: Re: Data: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Jan18.133048.7675@purdue.edu>
+Date: Thu, 18 Jan 1996 13:30:48 GMT
+References: <1996Jan18.110948.4278@berkeley.edu>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Jan18.110948.4278@berkeley.edu>, tpetrov@berkeley.edu (Takeshi Petrov) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Yuki Duarte
+Opinions expressed are solely my own and not those of Purdue University Engineering Computer Network.
+------------------------------------------------------------
+

@@ -1,0 +1,46 @@
+From ksokolov@u-tokyo.ac.jp Thu Sep 15 05:14:17 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!u-tokyo!ksokolov
+From: ksokolov@u-tokyo.ac.jp (Kenji Sokolov)
+Newsgroups: comp.dsp
+Subject: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Sep15.051417.2969@u-tokyo.ac.jp>
+Date: Thu, 15 Sep 1994 05:14:17 GMT
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Kenji Sokolov
+Tape trading list upon request. SASE required for international mail.
+
+From rrobertson@berkeley.edu Thu Sep 15 08:50:17 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!berkeley!rrobertson
+From: rrobertson@berkeley.edu (Rodrigo Robertson)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Sep15.085017.5262@berkeley.edu>
+Date: Thu, 15 Sep 1994 08:50:17 GMT
+References: <1994Sep15.051417.2969@u-tokyo.ac.jp>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Sep15.051417.2969@u-tokyo.ac.jp>, ksokolov@u-tokyo.ac.jp (Kenji Sokolov) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Rodrigo Robertson | rrobertson@berkeley.edu
+PGP Key fingerprint: 4043 A13D 0085 DD9D
+"Keep the channels open."
+

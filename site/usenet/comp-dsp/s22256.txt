@@ -1,0 +1,116 @@
+From bschneider@panix.com Sat Dec 28 06:24:58 1996
+Path: ashpoly!cascade!brgate!saturno!panix!bschneider
+From: bschneider@panix.com (Brian Schneider)
+Newsgroups: comp.dsp
+Subject: [INFO] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Dec28.062458.1674@panix.com>
+Date: Sat, 28 Dec 1996 06:24:58 GMT
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+Brian Schneider <bschneider@panix.com>
+"Hold for relay."
+Amiga 1200 (Blizzard 030/50) / FreeBSD 2.1
+
+From areyes@mit.edu Mon Dec 30 02:54:58 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!mit!areyes
+From: areyes@mit.edu (Anja Reyes)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Dec30.025458.6894@mit.edu>
+Date: Mon, 30 Dec 1996 02:54:58 GMT
+References: <1996Dec28.062458.1674@panix.com>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1996Dec28.062458.1674@panix.com>, bschneider@panix.com (Brian Schneider) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+> A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+-- 
+Anja Reyes <areyes@mit.edu>
+"We don't sign stars. We build them."
+PC-9821Ap2 (NEC) / FreeBSD 2.1
+
+From dsmirnov@rwth-aachen.de Tue Dec 31 23:51:58 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!rwth-aachen!dsmirnov
+From: dsmirnov@rwth-aachen.de (Dave Smirnov)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Dec31.235158.4137@rwth-aachen.de>
+Date: Tue, 31 Dec 1996 23:51:58 GMT
+References: <1996Dec28.062458.1674@panix.com> <1996Dec30.025458.6894@mit.edu>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Dec30.025458.6894@mit.edu>, areyes@mit.edu (Anja Reyes) writes:
+> You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+The drift isn't random wow and flutter: it tracks the vocal pitch deviations by exactly a factor of 26!
+
+-- 
+Dave Smirnov <dsmirnov@rwth-aachen.de>
+Hayes Optima 288 @ 14,400 bps
+"In theory there is no difference between theory and practice."
+
+From schoi@unam.mx Wed Jan 01 05:55:58 1997
+Path: ashpoly!bigsur!pacrim!krgate!eunha!unam!schoi
+From: schoi@unam.mx (Sergei Choi)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1997Jan01.055558.6688@unam.mx>
+Date: Wed, 01 Jan 1997 05:55:58 GMT
+References: <1996Dec28.062458.1674@panix.com> <1996Dec30.025458.6894@mit.edu> <1996Dec31.235158.4137@rwth-aachen.de>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Dec31.235158.4137@rwth-aachen.de>, dsmirnov@rwth-aachen.de (Dave Smirnov) writes:
+> The drift isn't random wow and flutter: it tracks the vocal pitch deviations by exactly a factor of 26!
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+-- 
+Sergei Choi | schoi@unam.mx
+PGP Key fingerprint: 7DB2 5C2A 664C 8F05
+"Keep the channels open."
+
+From tsantos@rwth-aachen.de Wed Jan 01 16:26:58 1997
+Path: ashpoly!cascade!bigsur!rwth-aachen!tsantos
+From: tsantos@rwth-aachen.de (Tyler Santos)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1997Jan01.162658.6255@rwth-aachen.de>
+Date: Wed, 01 Jan 1997 16:26:58 GMT
+References: <1996Dec28.062458.1674@panix.com> <1996Dec30.025458.6894@mit.edu>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1996Dec30.025458.6894@mit.edu>, areyes@mit.edu (Anja Reyes) writes:
+> You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+-- 
+Tyler Santos -- RWTH Aachen Informatik
+"Hold for relay."
+

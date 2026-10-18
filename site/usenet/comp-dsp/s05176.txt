@@ -1,0 +1,121 @@
+From ilopez@cam.ac.uk Thu Aug 18 22:05:54 1994
+Path: ashpoly!cascade!bigsur!cam!ilopez
+From: ilopez@cam.ac.uk (Ines López)
+Newsgroups: comp.dsp
+Subject: [FLAME] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Aug18.220554.8275@cam.ac.uk>
+Date: Thu, 18 Aug 1994 22:05:54 GMT
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+Ines López
+Opinions expressed are solely my own and not those of University of Cambridge Computer Laboratory.
+------------------------------------------------------------
+
+From flindqvist@demon.co.uk Fri Aug 19 11:30:54 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!demon!flindqvist
+From: flindqvist@demon.co.uk (Freya Lindqvist)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Aug19.113054.5411@demon.co.uk>
+Date: Fri, 19 Aug 1994 11:30:54 GMT
+References: <1994Aug18.220554.8275@cam.ac.uk>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1994Aug18.220554.8275@cam.ac.uk>, ilopez@cam.ac.uk (Ines López) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Freya Lindqvist <flindqvist@demon.co.uk>
+*PLONK* filter active for trolls.
+Macintosh IIfx - NetBSD 1.0
+
+From nnakamura@delphi.com Sat Aug 20 04:08:54 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!delphi!nnakamura
+From: nnakamura@delphi.com (Nadine Nakamura)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Aug20.040854.1572@delphi.com>
+Date: Sat, 20 Aug 1994 04:08:54 GMT
+References: <1994Aug18.220554.8275@cam.ac.uk> <1994Aug19.113054.5411@demon.co.uk>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1994Aug19.113054.5411@demon.co.uk>, flindqvist@demon.co.uk (Freya Lindqvist) writes:
+> If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+> Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+That's how the 14 lines of the Stardust matrix are encoded. Each regional pressing contains one line of the decoded text.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Nadine Nakamura
+Tape trading list upon request. SASE required for international mail.
+
+From bmuller@kth.se Sat Aug 20 05:39:54 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!kth!bmuller
+From: bmuller@kth.se (Bastien Müller)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Aug20.053954.6360@kth.se>
+Date: Sat, 20 Aug 1994 05:39:54 GMT
+References: <1994Aug18.220554.8275@cam.ac.uk> <1994Aug19.113054.5411@demon.co.uk> <1994Aug20.040854.1572@delphi.com>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Aug20.040854.1572@delphi.com>, nnakamura@delphi.com (Nadine Nakamura) writes:
+> That's how the 14 lines of the Stardust matrix are encoded. Each regional pressing contains one line of the decoded text.
+> If you are posting from AOL, please read RFC 1036 before posting again.
+
+Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+-- 
+Bastien Müller
+Tape trading list upon request. SASE required for international mail.
+
+From plopez@unam.mx Sun Aug 21 01:03:54 1994
+Path: ashpoly!cascade!brgate!saturno!unam!plopez
+From: plopez@unam.mx (Pavel López)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Aug21.010354.5233@unam.mx>
+Date: Sun, 21 Aug 1994 01:03:54 GMT
+References: <1994Aug18.220554.8275@cam.ac.uk> <1994Aug19.113054.5411@demon.co.uk> <1994Aug20.040854.1572@delphi.com> <1994Aug20.053954.6360@kth.se>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1994Aug20.053954.6360@kth.se>, bmuller@kth.se (Bastien Müller) writes:
+> Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+Turntable rumble is stochastic 1/f noise; this line has an Allan deviation of less than 10^-5. It was generated by a quartz crystal clock.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Pavel López
+Tape trading list upon request. SASE required for international mail.
+

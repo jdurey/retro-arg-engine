@@ -1,0 +1,48 @@
+From rsmirnov@cam.ac.uk Sat Jan 28 20:47:04 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!cam!rsmirnov
+From: rsmirnov@cam.ac.uk (Rodrigo Smirnov)
+Newsgroups: comp.dsp
+Subject: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jan28.204704.8588@cam.ac.uk>
+Date: Sat, 28 Jan 1995 20:47:04 GMT
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+MATLAB script available upon request via email.
+
+-- 
+=== Rodrigo Smirnov ===
+Dept of Electrical Engineering, University of Cambridge Computer Laboratory
+"Row 14. No joke."
+
+From ktakahashi@ox.ac.uk Sun Jan 29 07:33:04 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!ox!ktakahashi
+From: ktakahashi@ox.ac.uk (Kenji Takahashi)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jan29.073304.8266@ox.ac.uk>
+Date: Sun, 29 Jan 1995 07:33:04 GMT
+References: <1995Jan28.204704.8588@cam.ac.uk>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Jan28.204704.8588@cam.ac.uk>, rsmirnov@cam.ac.uk (Rodrigo Smirnov) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Kenji Takahashi <ktakahashi@ox.ac.uk>
+*PLONK* filter active for trolls.
+Sun 3/60 (SunOS 4.1.1) - NetBSD 1.0
+

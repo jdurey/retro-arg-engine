@@ -1,0 +1,74 @@
+From ymartinez@uni-hamburg.de Fri May 05 11:40:27 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!uni-hamburg!ymartinez
+From: ymartinez@uni-hamburg.de (Yuki Martínez)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995May05.114027.5361@uni-hamburg.de>
+Date: Fri, 05 May 1995 11:40:27 GMT
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+
+Does anyone have a 27C256 EPROM marked 'MH-U14' or 'ORION-CRYPTO'?
+
+-- 
+Yuki Martínez
+Opinions expressed are solely my own and not those of Universität Hamburg Fachbereich Informatik.
+------------------------------------------------------------
+
+From msanchez@inria.fr Sun May 07 01:35:27 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!inria!msanchez
+From: msanchez@inria.fr (Mateo Sánchez)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995May07.013527.6433@inria.fr>
+Date: Sun, 07 May 1995 01:35:27 GMT
+References: <1995May05.114027.5361@uni-hamburg.de>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995May05.114027.5361@uni-hamburg.de>, ymartinez@uni-hamburg.de (Yuki Martínez) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Mateo Sánchez <msanchez@inria.fr>
+*PLONK* filter active for trolls.
+Mac IIci / 68882 FPU - NetBSD 1.0
+
+From chughes@pacbell.net Mon May 08 05:16:27 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!pacbell!chughes
+From: chughes@pacbell.net (Camila Hughes)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995May08.051627.1837@pacbell.net>
+Date: Mon, 08 May 1995 05:16:27 GMT
+References: <1995May05.114027.5361@uni-hamburg.de>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 12
+
+In article <1995May05.114027.5361@uni-hamburg.de>, ymartinez@uni-hamburg.de (Yuki Martínez) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Camila Hughes | chughes@pacbell.net
+PGP Key fingerprint: 972D 80D0 5A26 55DE
+"Keep the channels open."
+

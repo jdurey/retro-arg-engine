@@ -1,0 +1,98 @@
+From drodriguez@stanford.edu Tue Mar 19 18:18:21 1996
+Path: ashpoly!cascade!bigsur!stanford!drodriguez
+From: drodriguez@stanford.edu (Diego Rodríguez)
+Newsgroups: comp.dsp
+Subject: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Mar19.181821.1386@stanford.edu>
+Date: Tue, 19 Mar 1996 18:18:21 GMT
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+MATLAB script available upon request via email.
+
+-- 
+Diego Rodríguez -- Stanford University Computer Systems Lab
+"Hardware is temporary. The signal survives."
+
+From msilva@pipeline.com Tue Mar 19 23:02:21 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!pipeline!msilva
+From: msilva@pipeline.com (Mei Silva)
+Newsgroups: comp.dsp
+Subject: Re: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Mar19.230221.3192@pipeline.com>
+Date: Tue, 19 Mar 1996 23:02:21 GMT
+References: <1996Mar19.181821.1386@stanford.edu>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1996Mar19.181821.1386@stanford.edu>, drodriguez@stanford.edu (Diego Rodríguez) writes:
+> Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+> A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Mei Silva <msilva@pipeline.com>
+SupraFAXModem 28.8 @ 19,200 bps
+"When every node is whole, the channel opens."
+
+From hfournier@cern.ch Wed Mar 20 08:14:21 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!cern!hfournier
+From: hfournier@cern.ch (Hana Fournier)
+Newsgroups: comp.dsp
+Subject: Re: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Mar20.081421.8865@cern.ch>
+Date: Wed, 20 Mar 1996 08:14:21 GMT
+References: <1996Mar19.181821.1386@stanford.edu>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1996Mar19.181821.1386@stanford.edu>, drodriguez@stanford.edu (Diego Rodríguez) writes:
+> Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+> A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Hana Fournier <hfournier@cern.ch>
+*PLONK* filter active for trolls.
+Acorn RiscPC 600 - NetBSD 1.0
+
+From mtanaka@clari.net Wed Mar 20 19:51:21 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!clari!mtanaka
+From: mtanaka@clari.net (Matthias Tanaka)
+Newsgroups: comp.dsp
+Subject: Re: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Mar20.195121.4285@clari.net>
+Date: Wed, 20 Mar 1996 19:51:21 GMT
+References: <1996Mar19.181821.1386@stanford.edu> <1996Mar20.081421.8865@cern.ch>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1996Mar20.081421.8865@cern.ch>, hfournier@cern.ch (Hana Fournier) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Matthias Tanaka | mtanaka@clari.net
+PGP Key fingerprint: 8265 41A3 A144 E346
+"Keep the channels open."
+

@@ -1,0 +1,114 @@
+From jstewart@utexas.edu Fri Dec 22 03:52:44 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!utexas!jstewart
+From: jstewart@utexas.edu (Joachim Stewart)
+Newsgroups: comp.dsp
+Subject: Question: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Dec22.035244.4692@utexas.edu>
+Date: Fri, 22 Dec 1995 03:52:44 GMT
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+=== Joachim Stewart ===
+Dept of Electrical Engineering, University of Texas at Austin
+"Extraordinary claims require extraordinary spectra."
+
+From nkarlsson@netcom.com Sat Dec 23 06:21:44 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!netcom!nkarlsson
+From: nkarlsson@netcom.com (Nadine Karlsson)
+Newsgroups: comp.dsp
+Subject: Re: Question: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Dec23.062144.6149@netcom.com>
+Date: Sat, 23 Dec 1995 06:21:44 GMT
+References: <1995Dec22.035244.4692@utexas.edu>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Dec22.035244.4692@utexas.edu>, jstewart@utexas.edu (Joachim Stewart) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Nadine Karlsson <nkarlsson@netcom.com>
+Hayes Optima 288 @ 28,800 bps
+"Hardware is temporary. The signal survives."
+
+From cmoreno@panix.com Sun Dec 24 17:25:44 1995
+Path: ashpoly!cascade!bigsur!panix!cmoreno
+From: cmoreno@panix.com (Camila Moreno)
+Newsgroups: comp.dsp
+Subject: Re: Question: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Dec24.172544.4057@panix.com>
+Date: Sun, 24 Dec 1995 17:25:44 GMT
+References: <1995Dec22.035244.4692@utexas.edu>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Dec22.035244.4692@utexas.edu>, jstewart@utexas.edu (Joachim Stewart) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+That's how the 14 lines of the Stardust matrix are encoded. Each regional pressing contains one line of the decoded text.
+
+-- 
+Camila Moreno -- Public Access Unix of New York
+"Do not worship the copy."
+
+From hsilva@cern.ch Tue Dec 26 10:43:44 1995
+Path: ashpoly!cascade!brgate!saturno!cern!hsilva
+From: hsilva@cern.ch (Hugo Silva)
+Newsgroups: comp.dsp
+Subject: Re: Question: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Dec26.104344.9269@cern.ch>
+Date: Tue, 26 Dec 1995 10:43:44 GMT
+References: <1995Dec22.035244.4692@utexas.edu> <1995Dec23.062144.6149@netcom.com>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Dec23.062144.6149@netcom.com>, nkarlsson@netcom.com (Nadine Karlsson) writes:
+> If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+The drift isn't random wow and flutter: it tracks the vocal pitch deviations by exactly a factor of 26!
+
+-- 
+Hugo Silva <hsilva@cern.ch>
+SupraFAXModem 28.8 @ 28,800 bps
+"Marcus is not one man."
+
+From bramirez@uu.net Wed Dec 27 17:25:44 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!uu!bramirez
+From: bramirez@uu.net (Bill Ramírez)
+Newsgroups: comp.dsp
+Subject: Re: Question: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Dec27.172544.8062@uu.net>
+Date: Wed, 27 Dec 1995 17:25:44 GMT
+References: <1995Dec22.035244.4692@utexas.edu> <1995Dec23.062144.6149@netcom.com> <1995Dec26.104344.9269@cern.ch>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1995Dec26.104344.9269@cern.ch>, hsilva@cern.ch (Hugo Silva) writes:
+> The drift isn't random wow and flutter: it tracks the vocal pitch deviations by exactly a factor of 26!
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Bill Ramírez
+Tape trading list upon request. SASE required for international mail.
+

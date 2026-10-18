@@ -1,0 +1,92 @@
+From fhughes@u-tokyo.ac.jp Sun Sep 03 14:32:27 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!u-tokyo!fhughes
+From: fhughes@u-tokyo.ac.jp (Fiona Hughes)
+Newsgroups: comp.dsp
+Subject: [INFO] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Sep03.143227.6255@u-tokyo.ac.jp>
+Date: Sun, 03 Sep 1995 14:32:27 GMT
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+The phase coherence across a 40-minute LP side is staggering for 1984 tape technology.
+
+-- 
+Fiona Hughes -- University of Tokyo Department of Information Science
+"In theory there is no difference between theory and practice."
+
+From mwatanabe@ox.ac.uk Mon Sep 04 10:03:27 1995
+Path: ashpoly!cascade!mxgate!coyoacan!ox!mwatanabe
+From: mwatanabe@ox.ac.uk (Mikhail Watanabe)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Sep04.100327.7951@ox.ac.uk>
+Date: Mon, 04 Sep 1995 10:03:27 GMT
+References: <1995Sep03.143227.6255@u-tokyo.ac.jp>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Sep03.143227.6255@u-tokyo.ac.jp>, fhughes@u-tokyo.ac.jp (Fiona Hughes) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Mikhail Watanabe <mwatanabe@ox.ac.uk>
+Hayes Optima 288 @ 14,400 bps
+"Hold for relay."
+
+From evasiliev@illinois.edu Tue Sep 05 17:10:27 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!illinois!evasiliev
+From: evasiliev@illinois.edu (Emi Vasiliev)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Sep05.171027.4573@illinois.edu>
+Date: Tue, 05 Sep 1995 17:10:27 GMT
+References: <1995Sep03.143227.6255@u-tokyo.ac.jp>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Sep03.143227.6255@u-tokyo.ac.jp>, fhughes@u-tokyo.ac.jp (Fiona Hughes) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+> A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+-- 
+Emi Vasiliev <evasiliev@illinois.edu>
+*PLONK* filter active for trolls.
+Pentium 90 (OS/2 Warp) - NetBSD 1.0
+
+From hreyes@titech.ac.jp Thu Sep 07 15:08:27 1995
+Path: ashpoly!cascade!bigsur!titech!hreyes
+From: hreyes@titech.ac.jp (Hugo Reyes)
+Newsgroups: comp.dsp
+Subject: Re: [INFO] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Sep07.150827.6892@titech.ac.jp>
+Date: Thu, 07 Sep 1995 15:08:27 GMT
+References: <1995Sep03.143227.6255@u-tokyo.ac.jp>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1995Sep03.143227.6255@u-tokyo.ac.jp>, fhughes@u-tokyo.ac.jp (Fiona Hughes) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Hugo Reyes -- Tokyo Institute of Technology Computer Centre
+"Hardware is temporary. The signal survives."
+

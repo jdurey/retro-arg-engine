@@ -1,0 +1,46 @@
+From nlindqvist@pipeline.com Tue Apr 26 06:05:24 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!pipeline!nlindqvist
+From: nlindqvist@pipeline.com (Nadine Lindqvist)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Apr26.060524.9771@pipeline.com>
+Date: Tue, 26 Apr 1994 06:05:24 GMT
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+Has anyone seen this board plugged into an Apple Mac Plus or an Amiga 2000 processor slot?
+
+-- 
+Nadine Lindqvist | nlindqvist@pipeline.com
+PGP Key fingerprint: 59E9 BA6F 7D02 A37D
+"Keep the channels open."
+
+From lpetrov@illinois.edu Thu Apr 28 00:01:24 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!illinois!lpetrov
+From: lpetrov@illinois.edu (Lucia Petrov)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Apr28.000124.9504@illinois.edu>
+Date: Thu, 28 Apr 1994 00:01:24 GMT
+References: <1994Apr26.060524.9771@pipeline.com>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1994Apr26.060524.9771@pipeline.com>, nlindqvist@pipeline.com (Nadine Lindqvist) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Lucia Petrov
+Tape trading list upon request. SASE required for international mail.
+

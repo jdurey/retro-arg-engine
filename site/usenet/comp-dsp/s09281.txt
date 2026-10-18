@@ -1,0 +1,95 @@
+From hmacdonald@earthlink.net Thu Nov 03 09:23:10 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!earthlink!hmacdonald
+From: hmacdonald@earthlink.net (Hana MacDonald)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Nov03.092310.2943@earthlink.net>
+Date: Thu, 03 Nov 1994 09:23:10 GMT
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Hana MacDonald <hmacdonald@earthlink.net>
+Practical Peripherals 14.4 @ 9600 Telebit bps
+"We don't sign stars. We build them."
+
+From sduarte@uni-hamburg.de Sat Nov 05 06:17:10 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!uni-hamburg!sduarte
+From: sduarte@uni-hamburg.de (Steve Duarte)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Nov05.061710.4411@uni-hamburg.de>
+Date: Sat, 05 Nov 1994 06:17:10 GMT
+References: <1994Nov03.092310.2943@earthlink.net>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1994Nov03.092310.2943@earthlink.net>, hmacdonald@earthlink.net (Hana MacDonald) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Steve Duarte <sduarte@uni-hamburg.de>
+*PLONK* filter active for trolls.
+Commodore Amiga 500 (1MB OCS) - NetBSD 1.0
+
+From kkuznetsov@kth.se Sun Nov 06 16:59:10 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!kth!kkuznetsov
+From: kkuznetsov@kth.se (Karen Kuznetsov)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Nov06.165910.6471@kth.se>
+Date: Sun, 06 Nov 1994 16:59:10 GMT
+References: <1994Nov03.092310.2943@earthlink.net>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Nov03.092310.2943@earthlink.net>, hmacdonald@earthlink.net (Hana MacDonald) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Karen Kuznetsov <kkuznetsov@kth.se>
+"Marcus is not one man."
+Decstation 5000/200 / NEXTSTEP 3.3
+
+From kperez@mit.edu Tue Nov 08 16:10:10 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!mit!kperez
+From: kperez@mit.edu (Kenji Pérez)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Nov08.161010.8604@mit.edu>
+Date: Tue, 08 Nov 1994 16:10:10 GMT
+References: <1994Nov03.092310.2943@earthlink.net> <1994Nov05.061710.4411@uni-hamburg.de>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1994Nov05.061710.4411@uni-hamburg.de>, sduarte@uni-hamburg.de (Steve Duarte) writes:
+> Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+Kenji Pérez
+Tape trading list upon request. SASE required for international mail.
+

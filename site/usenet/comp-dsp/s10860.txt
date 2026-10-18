@@ -1,0 +1,48 @@
+From vduarte@kth.se Sat Jul 15 06:18:07 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!kth!vduarte
+From: vduarte@kth.se (Valeria Duarte)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jul15.061807.7032@kth.se>
+Date: Sat, 15 Jul 1995 06:18:07 GMT
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+MATLAB script available upon request via email.
+
+-- 
+Valeria Duarte <vduarte@kth.se>
+Practical Peripherals 14.4 @ 19,200 bps
+"5 sigma is a discovery. 7 is a question."
+
+From jlee@u-tokyo.ac.jp Sun Jul 16 22:02:07 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!u-tokyo!jlee
+From: jlee@u-tokyo.ac.jp (Joachim Lee)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Jul16.220207.3175@u-tokyo.ac.jp>
+Date: Sun, 16 Jul 1995 22:02:07 GMT
+References: <1995Jul15.061807.7032@kth.se>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Jul15.061807.7032@kth.se>, vduarte@kth.se (Valeria Duarte) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+> A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Joachim Lee <jlee@u-tokyo.ac.jp>
+"The hatch is open. Is anyone listening?"
+Macintosh IIfx / FreeBSD 2.1
+

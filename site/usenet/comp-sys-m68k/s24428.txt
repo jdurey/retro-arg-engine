@@ -1,0 +1,121 @@
+From atakahashi@cern.ch Fri Mar 11 11:17:32 1994
+Path: ashpoly!cascade!brgate!saturno!cern!atakahashi
+From: atakahashi@cern.ch (Anton Takahashi)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Mar11.111732.3290@cern.ch>
+Date: Fri, 11 Mar 1994 11:17:32 GMT
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Anton Takahashi <atakahashi@cern.ch>
+"5 sigma is a discovery. 7 is a question."
+Sun SparcStation 20 / Linux 1.2.13
+
+From tpetrov@clari.net Fri Mar 11 15:47:32 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!clari!tpetrov
+From: tpetrov@clari.net (Takeshi Petrov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Mar11.154732.9180@clari.net>
+Date: Fri, 11 Mar 1994 15:47:32 GMT
+References: <1994Mar11.111732.3290@cern.ch>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Mar11.111732.3290@cern.ch>, atakahashi@cern.ch (Anton Takahashi) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Takeshi Petrov <tpetrov@clari.net>
+"They will send a copy in my place."
+Acorn RiscPC 600 / System 7.5.1
+
+From bgarcia@uni-hamburg.de Sat Mar 12 01:50:32 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!uni-hamburg!bgarcia
+From: bgarcia@uni-hamburg.de (Brian García)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Mar12.015032.4745@uni-hamburg.de>
+Date: Sat, 12 Mar 1994 01:50:32 GMT
+References: <1994Mar11.111732.3290@cern.ch>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1994Mar11.111732.3290@cern.ch>, atakahashi@cern.ch (Anton Takahashi) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+> By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Brian García
+Opinions expressed are solely my own and not those of Universität Hamburg Fachbereich Informatik.
+------------------------------------------------------------
+
+From lkowalski@titech.ac.jp Sat Mar 12 20:11:32 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!titech!lkowalski
+From: lkowalski@titech.ac.jp (Lucia Kowalski)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Mar12.201132.9831@titech.ac.jp>
+Date: Sat, 12 Mar 1994 20:11:32 GMT
+References: <1994Mar11.111732.3290@cern.ch> <1994Mar11.154732.9180@clari.net>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1994Mar11.154732.9180@clari.net>, tpetrov@clari.net (Takeshi Petrov) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Lucia Kowalski <lkowalski@titech.ac.jp>
+"Hold for relay."
+Sun 3/60 (SunOS 4.1.1) / AmigaOS 3.1
+
+From skang@clari.net Sun Mar 13 15:11:32 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!clari!skang
+From: skang@clari.net (Seo-yeon Kang)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Mar13.151132.4625@clari.net>
+Date: Sun, 13 Mar 1994 15:11:32 GMT
+References: <1994Mar11.111732.3290@cern.ch> <1994Mar11.154732.9180@clari.net> <1994Mar12.201132.9831@titech.ac.jp>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1994Mar12.201132.9831@titech.ac.jp>, lkowalski@titech.ac.jp (Lucia Kowalski) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+> Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Seo-yeon Kang -- ClariNet Communications Corp
+"A soul is not exclusive to biology."
+

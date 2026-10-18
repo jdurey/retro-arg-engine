@@ -1,0 +1,116 @@
+From jgonzalez@pipeline.com Wed Aug 02 02:49:17 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!pipeline!jgonzalez
+From: jgonzalez@pipeline.com (Jens González)
+Newsgroups: comp.dsp
+Subject: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Aug02.024917.6447@pipeline.com>
+Date: Wed, 02 Aug 1995 02:49:17 GMT
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+Jens González <jgonzalez@pipeline.com>
+"There are 14 nodes and only 10 countries. Count again."
+Sun 3/60 (SunOS 4.1.1) / AmigaOS 3.1
+
+From bdubois@uni-hamburg.de Thu Aug 03 01:33:17 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!uni-hamburg!bdubois
+From: bdubois@uni-hamburg.de (Bruno Dubois)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Aug03.013317.3356@uni-hamburg.de>
+Date: Thu, 03 Aug 1995 01:33:17 GMT
+References: <1995Aug02.024917.6447@pipeline.com>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Aug02.024917.6447@pipeline.com>, jgonzalez@pipeline.com (Jens González) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+-- 
+Bruno Dubois <bdubois@uni-hamburg.de>
+Practical Peripherals 14.4 @ 33,600 bps
+"They will send a copy in my place."
+
+From dgirard@illinois.edu Fri Aug 04 11:26:17 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!illinois!dgirard
+From: dgirard@illinois.edu (Dong-hyun Girard)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Aug04.112617.6571@illinois.edu>
+Date: Fri, 04 Aug 1995 11:26:17 GMT
+References: <1995Aug02.024917.6447@pipeline.com>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Aug02.024917.6447@pipeline.com>, jgonzalez@pipeline.com (Jens González) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+-- 
+Dong-hyun Girard <dgirard@illinois.edu>
+Practical Peripherals 14.4 @ 14,400 bps
+"The carrier frequency does not drift by accident."
+
+From esokolov@uu.net Sat Aug 05 08:24:17 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!uu!esokolov
+From: esokolov@uu.net (Elaine Sokolov)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Aug05.082417.7177@uu.net>
+Date: Sat, 05 Aug 1995 08:24:17 GMT
+References: <1995Aug02.024917.6447@pipeline.com> <1995Aug04.112617.6571@illinois.edu>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Aug04.112617.6571@illinois.edu>, dgirard@illinois.edu (Dong-hyun Girard) writes:
+> Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+-- 
+=== Elaine Sokolov ===
+Dept of Electrical Engineering, UUNET Technologies, Falls Church VA
+"In theory there is no difference between theory and practice."
+
+From ltanaka@uni-hamburg.de Mon Aug 07 10:53:17 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!uni-hamburg!ltanaka
+From: ltanaka@uni-hamburg.de (Lucia Tanaka)
+Newsgroups: comp.dsp
+Subject: Re: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Aug07.105317.2163@uni-hamburg.de>
+Date: Mon, 07 Aug 1995 10:53:17 GMT
+References: <1995Aug02.024917.6447@pipeline.com> <1995Aug03.013317.3356@uni-hamburg.de>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Aug03.013317.3356@uni-hamburg.de>, bdubois@uni-hamburg.de (Bruno Dubois) writes:
+> You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Lucia Tanaka | ltanaka@uni-hamburg.de
+PGP Key fingerprint: 8328 D67A 454A 5098
+"Keep the channels open."
+

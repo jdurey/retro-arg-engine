@@ -1,0 +1,47 @@
+From mstewart@netcom.com Mon Jul 10 12:29:15 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!netcom!mstewart
+From: mstewart@netcom.com (Mateo Stewart)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jul10.122915.5160@netcom.com>
+Date: Mon, 10 Jul 1995 12:29:15 GMT
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+Mateo Stewart -- NETCOM On-Line Communication Services
+"Hardware is temporary. The signal survives."
+
+From ctanaka@demon.co.uk Tue Jul 11 00:07:15 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!demon!ctanaka
+From: ctanaka@demon.co.uk (Camila Tanaka)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Jul11.000715.9280@demon.co.uk>
+Date: Tue, 11 Jul 1995 00:07:15 GMT
+References: <1995Jul10.122915.5160@netcom.com>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Jul10.122915.5160@netcom.com>, mstewart@netcom.com (Mateo Stewart) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+> Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+=== Camila Tanaka ===
+Dept of Electrical Engineering, Demon Internet Services UK
+"Tape doesn't lie at 02:14. Ears do."
+

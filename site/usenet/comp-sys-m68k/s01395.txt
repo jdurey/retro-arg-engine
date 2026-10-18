@@ -1,0 +1,73 @@
+From adubois@utexas.edu Mon Mar 18 17:15:33 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!utexas!adubois
+From: adubois@utexas.edu (Andrei Dubois)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Mar18.171533.4162@utexas.edu>
+Date: Mon, 18 Mar 1996 17:15:33 GMT
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Andrei Dubois
+Opinions expressed are solely my own and not those of University of Texas at Austin.
+------------------------------------------------------------
+
+From nduarte@cam.ac.uk Tue Mar 19 15:23:33 1996
+Path: ashpoly!cascade!bigsur!cam!nduarte
+From: nduarte@cam.ac.uk (Natalia Duarte)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Mar19.152333.8039@cam.ac.uk>
+Date: Tue, 19 Mar 1996 15:23:33 GMT
+References: <1996Mar18.171533.4162@utexas.edu>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1996Mar18.171533.4162@utexas.edu>, adubois@utexas.edu (Andrei Dubois) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Natalia Duarte <nduarte@cam.ac.uk>
+*PLONK* filter active for trolls.
+Pentium 90 (OS/2 Warp) - NetBSD 1.0
+
+From mcampbell@pipeline.com Wed Mar 20 04:52:33 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!pipeline!mcampbell
+From: mcampbell@pipeline.com (Mathieu Campbell)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Mar20.045233.6229@pipeline.com>
+Date: Wed, 20 Mar 1996 04:52:33 GMT
+References: <1996Mar18.171533.4162@utexas.edu> <1996Mar19.152333.8039@cam.ac.uk>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1996Mar19.152333.8039@cam.ac.uk>, nduarte@cam.ac.uk (Natalia Duarte) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Mathieu Campbell <mcampbell@pipeline.com>
+"Marcus is not one man."
+Pentium 90 (OS/2 Warp) / NEXTSTEP 3.3
+

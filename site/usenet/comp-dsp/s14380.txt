@@ -1,0 +1,50 @@
+From lstewart@u-tokyo.ac.jp Fri Mar 10 23:34:53 1995
+Path: ashpoly!cascade!bigsur!u-tokyo!lstewart
+From: lstewart@u-tokyo.ac.jp (Lars Stewart)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Mar10.233453.6929@u-tokyo.ac.jp>
+Date: Fri, 10 Mar 1995 23:34:53 GMT
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+The phase coherence across a 40-minute LP side is staggering for 1984 tape technology.
+
+-- 
+Lars Stewart <lstewart@u-tokyo.ac.jp>
+"The carrier frequency does not drift by accident."
+Atari TT030 / Linux 1.2.13
+
+From koliveira@clari.net Mon Mar 13 00:46:53 1995
+Path: ashpoly!cascade!mxgate!coyoacan!clari!koliveira
+From: koliveira@clari.net (Katrin Oliveira)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Mar13.004653.5396@clari.net>
+Date: Mon, 13 Mar 1995 00:46:53 GMT
+References: <1995Mar10.233453.6929@u-tokyo.ac.jp>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1995Mar10.233453.6929@u-tokyo.ac.jp>, lstewart@u-tokyo.ac.jp (Lars Stewart) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+> A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+=== Katrin Oliveira ===
+Dept of Electrical Engineering, ClariNet Communications Corp
+"Hardware is temporary. The signal survives."
+

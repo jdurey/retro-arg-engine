@@ -1,0 +1,95 @@
+From skuznetsov@berkeley.edu Fri Jul 05 23:56:07 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!berkeley!skuznetsov
+From: skuznetsov@berkeley.edu (Steve Kuznetsov)
+Newsgroups: comp.dsp
+Subject: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Jul05.235607.8923@berkeley.edu>
+Date: Fri, 05 Jul 1996 23:56:07 GMT
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Steve Kuznetsov
+Opinions expressed are solely my own and not those of UC Berkeley Department of EECS.
+------------------------------------------------------------
+
+From dramirez@titech.ac.jp Sat Jul 06 06:34:07 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!titech!dramirez
+From: dramirez@titech.ac.jp (Diego Ramírez)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Jul06.063407.9220@titech.ac.jp>
+Date: Sat, 06 Jul 1996 06:34:07 GMT
+References: <1996Jul05.235607.8923@berkeley.edu>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Jul05.235607.8923@berkeley.edu>, skuznetsov@berkeley.edu (Steve Kuznetsov) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Diego Ramírez <dramirez@titech.ac.jp>
+*PLONK* filter active for trolls.
+Acorn RiscPC 600 - NetBSD 1.0
+
+From mreyes@pacbell.net Mon Jul 08 02:24:07 1996
+Path: ashpoly!cascade!mxgate!coyoacan!pacbell!mreyes
+From: mreyes@pacbell.net (Marisol Reyes)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Jul08.022407.4538@pacbell.net>
+Date: Mon, 08 Jul 1996 02:24:07 GMT
+References: <1996Jul05.235607.8923@berkeley.edu>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1996Jul05.235607.8923@berkeley.edu>, skuznetsov@berkeley.edu (Steve Kuznetsov) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+> A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+=== Marisol Reyes ===
+Dept of Electrical Engineering, Pacific Bell Internet Services
+"The hatch is open. Is anyone listening?"
+
+From esmirnov@utexas.edu Wed Jul 10 01:11:07 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!utexas!esmirnov
+From: esmirnov@utexas.edu (Emi Smirnov)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Jul10.011107.2194@utexas.edu>
+Date: Wed, 10 Jul 1996 01:11:07 GMT
+References: <1996Jul05.235607.8923@berkeley.edu> <1996Jul06.063407.9220@titech.ac.jp>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1996Jul06.063407.9220@titech.ac.jp>, dramirez@titech.ac.jp (Diego Ramírez) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Emi Smirnov
+Tape trading list upon request. SASE required for international mail.
+

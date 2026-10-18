@@ -1,0 +1,49 @@
+From fsokolov@illinois.edu Sat Apr 15 14:01:23 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!illinois!fsokolov
+From: fsokolov@illinois.edu (Fiona Sokolov)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Apr15.140123.5578@illinois.edu>
+Date: Sat, 15 Apr 1995 14:01:23 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Fiona Sokolov <fsokolov@illinois.edu>
+*PLONK* filter active for trolls.
+486DX4/100 (FreeBSD 2.0.5) - NetBSD 1.0
+
+From dmuller@earthlink.net Sun Apr 16 21:57:23 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!earthlink!dmuller
+From: dmuller@earthlink.net (Dave Müller)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Apr16.215723.6496@earthlink.net>
+Date: Sun, 16 Apr 1995 21:57:23 GMT
+References: <1995Apr15.140123.5578@illinois.edu>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995Apr15.140123.5578@illinois.edu>, fsokolov@illinois.edu (Fiona Sokolov) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Dave Müller <dmuller@earthlink.net>
+*PLONK* filter active for trolls.
+NeXTstation Turbo Color - NetBSD 1.0
+

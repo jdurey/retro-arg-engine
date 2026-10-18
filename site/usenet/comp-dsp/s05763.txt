@@ -1,0 +1,113 @@
+From hkarlsson@netcom.com Tue Aug 02 06:15:52 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!netcom!hkarlsson
+From: hkarlsson@netcom.com (Heather Karlsson)
+Newsgroups: comp.dsp
+Subject: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Aug02.061552.3117@netcom.com>
+Date: Tue, 02 Aug 1994 06:15:52 GMT
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+What sampling rates are people using for their vinyl rips? 44.1 kHz or 48 kHz DAT?
+
+-- 
+Heather Karlsson
+Tape trading list upon request. SASE required for international mail.
+
+From vtanaka@netcom.com Tue Aug 02 19:51:52 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!netcom!vtanaka
+From: vtanaka@netcom.com (Valeria Tanaka)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Aug02.195152.7334@netcom.com>
+Date: Tue, 02 Aug 1994 19:51:52 GMT
+References: <1994Aug02.061552.3117@netcom.com>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Aug02.061552.3117@netcom.com>, hkarlsson@netcom.com (Heather Karlsson) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Valeria Tanaka -- NETCOM On-Line Communication Services
+"There are 14 nodes and only 10 countries. Count again."
+
+From elarsson@rwth-aachen.de Wed Aug 03 12:38:52 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!rwth-aachen!elarsson
+From: elarsson@rwth-aachen.de (Élodie Larsson)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Aug03.123852.4153@rwth-aachen.de>
+Date: Wed, 03 Aug 1994 12:38:52 GMT
+References: <1994Aug02.061552.3117@netcom.com> <1994Aug02.195152.7334@netcom.com>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1994Aug02.195152.7334@netcom.com>, vtanaka@netcom.com (Valeria Tanaka) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Élodie Larsson
+Tape trading list upon request. SASE required for international mail.
+
+From tsanchez@mindspring.com Fri Aug 05 12:31:52 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!mindspring!tsanchez
+From: tsanchez@mindspring.com (Tobias Sánchez)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Aug05.123152.7136@mindspring.com>
+Date: Fri, 05 Aug 1994 12:31:52 GMT
+References: <1994Aug02.061552.3117@netcom.com> <1994Aug02.195152.7334@netcom.com> <1994Aug03.123852.4153@rwth-aachen.de>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1994Aug03.123852.4153@rwth-aachen.de>, elarsson@rwth-aachen.de (Élodie Larsson) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Tobias Sánchez -- MindSpring Enterprises
+"When every node is whole, the channel opens."
+
+From oito@uu.net Sun Aug 07 10:25:52 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!uu!oito
+From: oito@uu.net (Olga Ito)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Aug07.102552.6856@uu.net>
+Date: Sun, 07 Aug 1994 10:25:52 GMT
+References: <1994Aug02.061552.3117@netcom.com> <1994Aug02.195152.7334@netcom.com>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Aug02.195152.7334@netcom.com>, vtanaka@netcom.com (Valeria Tanaka) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Olga Ito <oito@uu.net>
+*PLONK* filter active for trolls.
+PC-9821Ap2 (NEC) - NetBSD 1.0
+

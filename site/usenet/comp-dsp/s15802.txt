@@ -1,0 +1,115 @@
+From blarsson@titech.ac.jp Wed Jul 06 20:12:56 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!titech!blarsson
+From: blarsson@titech.ac.jp (Brian Larsson)
+Newsgroups: comp.dsp
+Subject: Data: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Jul06.201256.8503@titech.ac.jp>
+Date: Wed, 06 Jul 1994 20:12:56 GMT
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+Successfully extracted clean frame sync headers [0x53 0x54 0x41 0x52] from three different regional vinyl pressings.
+
+Grab the source archive from ftp.ashford-poly.edu:/pub/telecom-archives/stardust/stardust-1.3.tar.gz.
+
+-- 
+Brian Larsson <blarsson@titech.ac.jp>
+Zyxel U-1496E @ 19,200 bps
+"The hatch is open. Is anyone listening?"
+
+From gbrennan@kiae.su Fri Jul 08 10:46:56 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!kiae!gbrennan
+From: gbrennan@kiae.su (Graham Brennan)
+Newsgroups: comp.dsp
+Subject: Re: Data: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Jul08.104656.6794@kiae.su>
+Date: Fri, 08 Jul 1994 10:46:56 GMT
+References: <1994Jul06.201256.8503@titech.ac.jp>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Jul06.201256.8503@titech.ac.jp>, blarsson@titech.ac.jp (Brian Larsson) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Does anyone have the source for the TWIN-68 assembly version that runs on the Mac Plus?
+
+-- 
+Graham Brennan <gbrennan@kiae.su>
+Hayes Optima 288 @ 14,400 bps
+"Hold for relay."
+
+From fhughes@hanse.de Fri Jul 08 13:58:56 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!hanse!fhughes
+From: fhughes@hanse.de (Freya Hughes)
+Newsgroups: comp.dsp
+Subject: Re: Data: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Jul08.135856.3243@hanse.de>
+Date: Fri, 08 Jul 1994 13:58:56 GMT
+References: <1994Jul06.201256.8503@titech.ac.jp> <1994Jul08.104656.6794@kiae.su>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Jul08.104656.6794@kiae.su>, gbrennan@kiae.su (Graham Brennan) writes:
+> Does anyone have the source for the TWIN-68 assembly version that runs on the Mac Plus?
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Freya Hughes | fhughes@hanse.de
+PGP Key fingerprint: 195D 8990 01A2 2547
+"Keep the channels open."
+
+From aduarte@mindspring.com Sun Jul 10 12:45:56 1994
+Path: ashpoly!cascade!bigsur!mindspring!aduarte
+From: aduarte@mindspring.com (Andrei Duarte)
+Newsgroups: comp.dsp
+Subject: Re: Data: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Jul10.124556.9617@mindspring.com>
+Date: Sun, 10 Jul 1994 12:45:56 GMT
+References: <1994Jul06.201256.8503@titech.ac.jp> <1994Jul08.104656.6794@kiae.su> <1994Jul08.135856.3243@hanse.de>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Jul08.135856.3243@hanse.de>, fhughes@hanse.de (Freya Hughes) writes:
+> Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+Tar.gz archive gave a CRC error with PKUNZIP. Make sure you upload in binary mode, not ASCII!
+
+-- 
+Andrei Duarte | aduarte@mindspring.com
+PGP Key fingerprint: 994D 64AE CF6C 99D3
+"Keep the channels open."
+
+From omacdonald@ox.ac.uk Tue Jul 12 06:46:56 1994
+Path: ashpoly!cascade!brgate!saturno!ox!omacdonald
+From: omacdonald@ox.ac.uk (Olga MacDonald)
+Newsgroups: comp.dsp
+Subject: Re: Data: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Jul12.064656.5135@ox.ac.uk>
+Date: Tue, 12 Jul 1994 06:46:56 GMT
+References: <1994Jul06.201256.8503@titech.ac.jp> <1994Jul08.104656.6794@kiae.su> <1994Jul08.135856.3243@hanse.de>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1994Jul08.135856.3243@hanse.de>, fhughes@hanse.de (Freya Hughes) writes:
+> Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+-- 
+Olga MacDonald -- Oxford University Computing Laboratory
+"We don't sign stars. We build them."
+

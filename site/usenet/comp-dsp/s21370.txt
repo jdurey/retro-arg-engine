@@ -1,0 +1,96 @@
+From lgonzalez@rwth-aachen.de Sun Dec 17 06:12:47 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!rwth-aachen!lgonzalez
+From: lgonzalez@rwth-aachen.de (Lucia González)
+Newsgroups: comp.dsp
+Subject: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Dec17.061247.3916@rwth-aachen.de>
+Date: Sun, 17 Dec 1995 06:12:47 GMT
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+MATLAB script available upon request via email.
+
+-- 
+Lucia González
+Opinions expressed are solely my own and not those of RWTH Aachen Informatik.
+------------------------------------------------------------
+
+From ibrennan@titech.ac.jp Mon Dec 18 07:37:47 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!titech!ibrennan
+From: ibrennan@titech.ac.jp (Ines Brennan)
+Newsgroups: comp.dsp
+Subject: Re: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Dec18.073747.7399@titech.ac.jp>
+Date: Mon, 18 Dec 1995 07:37:47 GMT
+References: <1995Dec17.061247.3916@rwth-aachen.de>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995Dec17.061247.3916@rwth-aachen.de>, lgonzalez@rwth-aachen.de (Lucia González) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Ines Brennan | ibrennan@titech.ac.jp
+PGP Key fingerprint: 7269 AB45 BF7B ED23
+"Keep the channels open."
+
+From anilsson@cmu.edu Tue Dec 19 17:42:47 1995
+Path: ashpoly!cascade!mxgate!coyoacan!cmu!anilsson
+From: anilsson@cmu.edu (Andrei Nilsson)
+Newsgroups: comp.dsp
+Subject: Re: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Dec19.174247.9680@cmu.edu>
+Date: Tue, 19 Dec 1995 17:42:47 GMT
+References: <1995Dec17.061247.3916@rwth-aachen.de> <1995Dec18.073747.7399@titech.ac.jp>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Dec18.073747.7399@titech.ac.jp>, ibrennan@titech.ac.jp (Ines Brennan) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Andrei Nilsson <anilsson@cmu.edu>
+*PLONK* filter active for trolls.
+Amiga 1200 (Blizzard 030/50) - NetBSD 1.0
+
+From vmoreno@netcom.com Thu Dec 21 19:37:47 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!netcom!vmoreno
+From: vmoreno@netcom.com (Valeria Moreno)
+Newsgroups: comp.dsp
+Subject: Re: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Dec21.193747.3872@netcom.com>
+Date: Thu, 21 Dec 1995 19:37:47 GMT
+References: <1995Dec17.061247.3916@rwth-aachen.de> <1995Dec18.073747.7399@titech.ac.jp>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Dec18.073747.7399@titech.ac.jp>, ibrennan@titech.ac.jp (Ines Brennan) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+> Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Valeria Moreno <vmoreno@netcom.com>
+*PLONK* filter active for trolls.
+NeXTstation Turbo Color - NetBSD 1.0
+

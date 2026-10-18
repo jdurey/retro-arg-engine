@@ -1,0 +1,48 @@
+From apark@inria.fr Sat Oct 01 10:55:32 1994
+Path: ashpoly!cascade!brgate!saturno!inria!apark
+From: apark@inria.fr (Astrid Park)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Oct01.105532.4770@inria.fr>
+Date: Sat, 01 Oct 1994 10:55:32 GMT
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Astrid Park <apark@inria.fr>
+US Robotics Courier V.34 @ 14,400 bps
+"The carrier frequency does not drift by accident."
+
+From ncampbell@uni-hamburg.de Sun Oct 02 14:11:32 1994
+Path: ashpoly!cascade!brgate!saturno!uni-hamburg!ncampbell
+From: ncampbell@uni-hamburg.de (Nadia Campbell)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Oct02.141132.8701@uni-hamburg.de>
+Date: Sun, 02 Oct 1994 14:11:32 GMT
+References: <1994Oct01.105532.4770@inria.fr>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1994Oct01.105532.4770@inria.fr>, apark@inria.fr (Astrid Park) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Nadia Campbell
+Tape trading list upon request. SASE required for international mail.
+

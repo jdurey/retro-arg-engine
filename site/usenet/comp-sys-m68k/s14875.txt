@@ -1,0 +1,119 @@
+From breyes@kth.se Thu Feb 23 08:30:10 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!kth!breyes
+From: breyes@kth.se (Brian Reyes)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Feb23.083010.5134@kth.se>
+Date: Thu, 23 Feb 1995 08:30:10 GMT
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Brian Reyes <breyes@kth.se>
+*PLONK* filter active for trolls.
+Atari TT030 - NetBSD 1.0
+
+From jfournier@uu.net Thu Feb 23 10:21:10 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!uu!jfournier
+From: jfournier@uu.net (Jen Fournier)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Feb23.102110.1839@uu.net>
+Date: Thu, 23 Feb 1995 10:21:10 GMT
+References: <1995Feb23.083010.5134@kth.se>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1995Feb23.083010.5134@kth.se>, breyes@kth.se (Brian Reyes) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Jen Fournier
+Tape trading list upon request. SASE required for international mail.
+
+From gsuzuki@unam.mx Fri Feb 24 13:40:10 1995
+Path: ashpoly!cascade!mxgate!coyoacan!unam!gsuzuki
+From: gsuzuki@unam.mx (Göran Suzuki)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Feb24.134010.6687@unam.mx>
+Date: Fri, 24 Feb 1995 13:40:10 GMT
+References: <1995Feb23.083010.5134@kth.se>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1995Feb23.083010.5134@kth.se>, breyes@kth.se (Brian Reyes) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Göran Suzuki
+Opinions expressed are solely my own and not those of Universidad Nacional Autónoma de México (DGSCA).
+------------------------------------------------------------
+
+From llopez@utexas.edu Sat Feb 25 03:57:10 1995
+Path: ashpoly!cascade!bigsur!utexas!llopez
+From: llopez@utexas.edu (Lucia López)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Feb25.035710.4208@utexas.edu>
+Date: Sat, 25 Feb 1995 03:57:10 GMT
+References: <1995Feb23.083010.5134@kth.se> <1995Feb23.102110.1839@uu.net>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Feb23.102110.1839@uu.net>, jfournier@uu.net (Jen Fournier) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Lucia López <llopez@utexas.edu>
+"The hatch is open. Is anyone listening?"
+Sun 3/60 (SunOS 4.1.1) / Linux 1.2.13
+
+From djohansson@cern.ch Sat Feb 25 08:45:10 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!cern!djohansson
+From: djohansson@cern.ch (Dong-hyun Johansson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Feb25.084510.3700@cern.ch>
+Date: Sat, 25 Feb 1995 08:45:10 GMT
+References: <1995Feb23.083010.5134@kth.se>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Feb23.083010.5134@kth.se>, breyes@kth.se (Brian Reyes) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Dong-hyun Johansson
+Opinions expressed are solely my own and not those of European Laboratory for Particle Physics, Geneva.
+------------------------------------------------------------
+

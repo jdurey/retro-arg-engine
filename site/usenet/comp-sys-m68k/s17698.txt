@@ -1,0 +1,118 @@
+From mperez@netcom.com Mon May 06 04:39:00 1996
+Path: ashpoly!cascade!brgate!saturno!netcom!mperez
+From: mperez@netcom.com (Mei Pérez)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996May06.043900.8401@netcom.com>
+Date: Mon, 06 May 1996 04:39:00 GMT
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+
+Does anyone have a 27C256 EPROM marked 'MH-U14' or 'ORION-CRYPTO'?
+
+-- 
+Mei Pérez
+Opinions expressed are solely my own and not those of NETCOM On-Line Communication Services.
+------------------------------------------------------------
+
+From livanov@pipeline.com Mon May 06 19:19:00 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!pipeline!livanov
+From: livanov@pipeline.com (Liam Ivanov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996May06.191900.8757@pipeline.com>
+Date: Mon, 06 May 1996 19:19:00 GMT
+References: <1996May06.043900.8401@netcom.com>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996May06.043900.8401@netcom.com>, mperez@netcom.com (Mei Pérez) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+> This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+=== Liam Ivanov ===
+Dept of Electrical Engineering, The Pipeline Internet Network
+"The carrier frequency does not drift by accident."
+
+From mmuller@titech.ac.jp Tue May 07 11:23:00 1996
+Path: ashpoly!cascade!mxgate!coyoacan!titech!mmuller
+From: mmuller@titech.ac.jp (Min-jun Müller)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996May07.112300.1284@titech.ac.jp>
+Date: Tue, 07 May 1996 11:23:00 GMT
+References: <1996May06.043900.8401@netcom.com>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1996May06.043900.8401@netcom.com>, mperez@netcom.com (Mei Pérez) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Min-jun Müller -- Tokyo Institute of Technology Computer Centre
+"We don't sign stars. We build them."
+
+From slindqvist@illinois.edu Tue May 07 12:53:00 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!illinois!slindqvist
+From: slindqvist@illinois.edu (Sergei Lindqvist)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996May07.125300.8708@illinois.edu>
+Date: Tue, 07 May 1996 12:53:00 GMT
+References: <1996May06.043900.8401@netcom.com>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1996May06.043900.8401@netcom.com>, mperez@netcom.com (Mei Pérez) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Sergei Lindqvist <slindqvist@illinois.edu>
+*PLONK* filter active for trolls.
+Atari TT030 - NetBSD 1.0
+
+From dfournier@panix.com Tue May 07 21:18:00 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!panix!dfournier
+From: dfournier@panix.com (Dmitri Fournier)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996May07.211800.5208@panix.com>
+Date: Tue, 07 May 1996 21:18:00 GMT
+References: <1996May06.043900.8401@netcom.com> <1996May07.112300.1284@titech.ac.jp>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996May07.112300.1284@titech.ac.jp>, mmuller@titech.ac.jp (Min-jun Müller) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Dmitri Fournier <dfournier@panix.com>
+Practical Peripherals 14.4 @ 19,200 bps
+"The carrier frequency does not drift by accident."
+

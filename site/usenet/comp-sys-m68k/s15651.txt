@@ -1,0 +1,117 @@
+From swatanabe@utexas.edu Thu Sep 14 00:02:26 1995
+Path: ashpoly!cascade!mxgate!coyoacan!utexas!swatanabe
+From: swatanabe@utexas.edu (Steve Watanabe)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep14.000226.2281@utexas.edu>
+Date: Thu, 14 Sep 1995 00:02:26 GMT
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+Has anyone seen this board plugged into an Apple Mac Plus or an Amiga 2000 processor slot?
+
+-- 
+=== Steve Watanabe ===
+Dept of Electrical Engineering, University of Texas at Austin
+"The hatch is open. Is anyone listening?"
+
+From jreyes@rwth-aachen.de Thu Sep 14 06:29:26 1995
+Path: ashpoly!cascade!bigsur!rwth-aachen!jreyes
+From: jreyes@rwth-aachen.de (Jen Reyes)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep14.062926.4247@rwth-aachen.de>
+Date: Thu, 14 Sep 1995 06:29:26 GMT
+References: <1995Sep14.000226.2281@utexas.edu>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Sep14.000226.2281@utexas.edu>, swatanabe@utexas.edu (Steve Watanabe) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Jen Reyes <jreyes@rwth-aachen.de>
+*PLONK* filter active for trolls.
+NeXTstation Turbo Color - NetBSD 1.0
+
+From lmoreau@demon.co.uk Thu Sep 14 13:00:26 1995
+Path: ashpoly!cascade!mxgate!coyoacan!demon!lmoreau
+From: lmoreau@demon.co.uk (Lucia Moreau)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep14.130026.1035@demon.co.uk>
+Date: Thu, 14 Sep 1995 13:00:26 GMT
+References: <1995Sep14.000226.2281@utexas.edu>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Sep14.000226.2281@utexas.edu>, swatanabe@utexas.edu (Steve Watanabe) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+> At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Lucia Moreau | lmoreau@demon.co.uk
+PGP Key fingerprint: 8481 406B 3F4E 0385
+"Keep the channels open."
+
+From mduarte@cern.ch Sat Sep 16 08:47:26 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!cern!mduarte
+From: mduarte@cern.ch (Mathieu Duarte)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep16.084726.7816@cern.ch>
+Date: Sat, 16 Sep 1995 08:47:26 GMT
+References: <1995Sep14.000226.2281@utexas.edu>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1995Sep14.000226.2281@utexas.edu>, swatanabe@utexas.edu (Steve Watanabe) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Mathieu Duarte -- European Laboratory for Particle Physics, Geneva
+"Measuring a record you own is listening, not piracy."
+
+From hperez@utexas.edu Sun Sep 17 17:48:26 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!utexas!hperez
+From: hperez@utexas.edu (Hugo Pérez)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep17.174826.1115@utexas.edu>
+Date: Sun, 17 Sep 1995 17:48:26 GMT
+References: <1995Sep14.000226.2281@utexas.edu> <1995Sep14.130026.1035@demon.co.uk>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1995Sep14.130026.1035@demon.co.uk>, lmoreau@demon.co.uk (Lucia Moreau) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Hugo Pérez -- University of Texas at Austin
+"Extraordinary claims require extraordinary spectra."
+

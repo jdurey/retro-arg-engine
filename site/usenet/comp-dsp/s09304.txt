@@ -1,0 +1,72 @@
+From jcampbell@utexas.edu Wed Nov 15 17:39:27 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!utexas!jcampbell
+From: jcampbell@utexas.edu (Julien Campbell)
+Newsgroups: comp.dsp
+Subject: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Nov15.173927.5502@utexas.edu>
+Date: Wed, 15 Nov 1995 17:39:27 GMT
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Julien Campbell <jcampbell@utexas.edu>
+"Row 14. No joke."
+Mac IIci / 68882 FPU / SunOS 4.1.4
+
+From asmirnov@unam.mx Fri Nov 17 15:01:27 1995
+Path: ashpoly!cascade!mxgate!coyoacan!unam!asmirnov
+From: asmirnov@unam.mx (Anja Smirnov)
+Newsgroups: comp.dsp
+Subject: Re: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Nov17.150127.6320@unam.mx>
+Date: Fri, 17 Nov 1995 15:01:27 GMT
+References: <1995Nov15.173927.5502@utexas.edu>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Nov15.173927.5502@utexas.edu>, jcampbell@utexas.edu (Julien Campbell) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Anja Smirnov <asmirnov@unam.mx>
+*PLONK* filter active for trolls.
+486DX4/100 (FreeBSD 2.0.5) - NetBSD 1.0
+
+From gmartinez@illinois.edu Sun Nov 19 09:15:27 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!illinois!gmartinez
+From: gmartinez@illinois.edu (Graham Martínez)
+Newsgroups: comp.dsp
+Subject: Re: Question: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Nov19.091527.8694@illinois.edu>
+Date: Sun, 19 Nov 1995 09:15:27 GMT
+References: <1995Nov15.173927.5502@utexas.edu>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Nov15.173927.5502@utexas.edu>, jcampbell@utexas.edu (Julien Campbell) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+Graham Martínez <gmartinez@illinois.edu>
+*PLONK* filter active for trolls.
+Sun SparcStation 20 - NetBSD 1.0
+

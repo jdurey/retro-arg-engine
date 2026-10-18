@@ -1,0 +1,91 @@
+From ysato@uni-hamburg.de Wed Sep 14 23:45:08 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!uni-hamburg!ysato
+From: ysato@uni-hamburg.de (Yuki Sato)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Sep14.234508.9274@uni-hamburg.de>
+Date: Wed, 14 Sep 1994 23:45:08 GMT
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Yuki Sato | ysato@uni-hamburg.de
+PGP Key fingerprint: C94B 5976 A069 DA7A
+"Keep the channels open."
+
+From kstewart@earthlink.net Fri Sep 16 20:30:08 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!earthlink!kstewart
+From: kstewart@earthlink.net (Kirsty Stewart)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Sep16.203008.3050@earthlink.net>
+Date: Fri, 16 Sep 1994 20:30:08 GMT
+References: <1994Sep14.234508.9274@uni-hamburg.de>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1994Sep14.234508.9274@uni-hamburg.de>, ysato@uni-hamburg.de (Yuki Sato) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Kirsty Stewart
+Tape trading list upon request. SASE required for international mail.
+
+From mpark@u-tokyo.ac.jp Sun Sep 18 16:09:08 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!u-tokyo!mpark
+From: mpark@u-tokyo.ac.jp (Mike Park)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Sep18.160908.6038@u-tokyo.ac.jp>
+Date: Sun, 18 Sep 1994 16:09:08 GMT
+References: <1994Sep14.234508.9274@uni-hamburg.de>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Sep14.234508.9274@uni-hamburg.de>, ysato@uni-hamburg.de (Yuki Sato) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Mike Park -- University of Tokyo Department of Information Science
+"Tape doesn't lie at 02:14. Ears do."
+
+From operez@ox.ac.uk Sun Sep 18 21:04:08 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!ox!operez
+From: operez@ox.ac.uk (Olga Pérez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Sep18.210408.3873@ox.ac.uk>
+Date: Sun, 18 Sep 1994 21:04:08 GMT
+References: <1994Sep14.234508.9274@uni-hamburg.de> <1994Sep18.160908.6038@u-tokyo.ac.jp>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1994Sep18.160908.6038@u-tokyo.ac.jp>, mpark@u-tokyo.ac.jp (Mike Park) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Olga Pérez
+Tape trading list upon request. SASE required for international mail.
+

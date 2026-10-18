@@ -1,0 +1,49 @@
+From ahughes@uu.net Thu Jan 19 15:52:07 1995
+Path: ashpoly!cascade!brgate!saturno!uu!ahughes
+From: ahughes@uu.net (Andrei Hughes)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jan19.155207.8510@uu.net>
+Date: Thu, 19 Jan 1995 15:52:07 GMT
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Andrei Hughes <ahughes@uu.net>
+Zyxel U-1496E @ ISDN 64k bps
+"Do not worship the copy."
+
+From nmoreau@titech.ac.jp Thu Jan 19 22:15:07 1995
+Path: ashpoly!cascade!brgate!saturno!titech!nmoreau
+From: nmoreau@titech.ac.jp (Natalia Moreau)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jan19.221507.4640@titech.ac.jp>
+Date: Thu, 19 Jan 1995 22:15:07 GMT
+References: <1995Jan19.155207.8510@uu.net>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995Jan19.155207.8510@uu.net>, ahughes@uu.net (Andrei Hughes) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Natalia Moreau -- Tokyo Institute of Technology Computer Centre
+"We don't sign stars. We build them."
+

@@ -1,0 +1,93 @@
+From mmacdonald@tum.de Mon Sep 02 07:06:39 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!tum!mmacdonald
+From: mmacdonald@tum.de (Matthias MacDonald)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Sep02.070639.5515@tum.de>
+Date: Mon, 02 Sep 1996 07:06:39 GMT
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+
+Does anyone have a 27C256 EPROM marked 'MH-U14' or 'ORION-CRYPTO'?
+
+-- 
+Matthias MacDonald -- Technische Universität München
+"Tape doesn't lie at 02:14. Ears do."
+
+From adubois@pacbell.net Mon Sep 02 14:52:39 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!pacbell!adubois
+From: adubois@pacbell.net (Amy Dubois)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Sep02.145239.5148@pacbell.net>
+Date: Mon, 02 Sep 1996 14:52:39 GMT
+References: <1996Sep02.070639.5515@tum.de>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Sep02.070639.5515@tum.de>, mmacdonald@tum.de (Matthias MacDonald) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Amy Dubois <adubois@pacbell.net>
+Practical Peripherals 14.4 @ 9600 Telebit bps
+"We don't sign stars. We build them."
+
+From yjohansson@cmu.edu Mon Sep 02 20:46:39 1996
+Path: ashpoly!cascade!bigsur!cmu!yjohansson
+From: yjohansson@cmu.edu (Yuki Johansson)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Sep02.204639.3248@cmu.edu>
+Date: Mon, 02 Sep 1996 20:46:39 GMT
+References: <1996Sep02.070639.5515@tum.de> <1996Sep02.145239.5148@pacbell.net>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996Sep02.145239.5148@pacbell.net>, adubois@pacbell.net (Amy Dubois) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Yuki Johansson -- Carnegie Mellon University School of CS
+"Marcus is not one man."
+
+From kandersson@stanford.edu Tue Sep 03 14:41:39 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!stanford!kandersson
+From: kandersson@stanford.edu (Kenji Andersson)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Sep03.144139.3063@stanford.edu>
+Date: Tue, 03 Sep 1996 14:41:39 GMT
+References: <1996Sep02.070639.5515@tum.de> <1996Sep02.145239.5148@pacbell.net>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Sep02.145239.5148@pacbell.net>, adubois@pacbell.net (Amy Dubois) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Kenji Andersson <kandersson@stanford.edu>
+"Tape doesn't lie at 02:14. Ears do."
+Sun 3/60 (SunOS 4.1.1) / SunOS 4.1.4
+

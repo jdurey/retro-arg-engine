@@ -1,0 +1,99 @@
+From cvasiliev@pipeline.com Tue Oct 17 13:21:44 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!pipeline!cvasiliev
+From: cvasiliev@pipeline.com (Camila Vasiliev)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Oct17.132144.4437@pipeline.com>
+Date: Tue, 17 Oct 1995 13:21:44 GMT
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Camila Vasiliev <cvasiliev@pipeline.com>
+*PLONK* filter active for trolls.
+Atari Falcon 030 - NetBSD 1.0
+
+From amoreau@tum.de Wed Oct 18 16:10:44 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!tum!amoreau
+From: amoreau@tum.de (Amy Moreau)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Oct18.161044.5186@tum.de>
+Date: Wed, 18 Oct 1995 16:10:44 GMT
+References: <1995Oct17.132144.4437@pipeline.com>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Oct17.132144.4437@pipeline.com>, cvasiliev@pipeline.com (Camila Vasiliev) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Amy Moreau <amoreau@tum.de>
+"When every node is whole, the channel opens."
+Atari Falcon 030 / SunOS 4.1.4
+
+From tnakamura@uni-hamburg.de Fri Oct 20 13:16:44 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!uni-hamburg!tnakamura
+From: tnakamura@uni-hamburg.de (Tomas Nakamura)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Oct20.131644.5233@uni-hamburg.de>
+Date: Fri, 20 Oct 1995 13:16:44 GMT
+References: <1995Oct17.132144.4437@pipeline.com> <1995Oct18.161044.5186@tum.de>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Oct18.161044.5186@tum.de>, amoreau@tum.de (Amy Moreau) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Tomas Nakamura <tnakamura@uni-hamburg.de>
+Hayes Optima 288 @ 33,600 bps
+"A soul is not exclusive to biology."
+
+From hmoreno@kiae.su Sun Oct 22 01:24:44 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!kiae!hmoreno
+From: hmoreno@kiae.su (Hana Moreno)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Oct22.012444.3570@kiae.su>
+Date: Sun, 22 Oct 1995 01:24:44 GMT
+References: <1995Oct17.132144.4437@pipeline.com> <1995Oct18.161044.5186@tum.de> <1995Oct20.131644.5233@uni-hamburg.de>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1995Oct20.131644.5233@uni-hamburg.de>, tnakamura@uni-hamburg.de (Tomas Nakamura) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+> Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Hana Moreno <hmoreno@kiae.su>
+*PLONK* filter active for trolls.
+Amiga 3000T - NetBSD 1.0
+

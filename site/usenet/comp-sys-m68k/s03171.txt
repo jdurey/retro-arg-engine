@@ -1,0 +1,118 @@
+From ifischer@stanford.edu Wed Aug 21 12:46:17 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!stanford!ifischer
+From: ifischer@stanford.edu (Ines Fischer)
+Newsgroups: comp.sys.m68k
+Subject: Question: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Aug21.124617.4915@stanford.edu>
+Date: Wed, 21 Aug 1996 12:46:17 GMT
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Does anyone have a 27C256 EPROM marked 'MH-U14' or 'ORION-CRYPTO'?
+
+-- 
+=== Ines Fischer ===
+Dept of Electrical Engineering, Stanford University Computer Systems Lab
+"The carrier frequency does not drift by accident."
+
+From gnakamura@unam.mx Thu Aug 22 12:14:17 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!unam!gnakamura
+From: gnakamura@unam.mx (Graham Nakamura)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Aug22.121417.6212@unam.mx>
+Date: Thu, 22 Aug 1996 12:14:17 GMT
+References: <1996Aug21.124617.4915@stanford.edu>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Aug21.124617.4915@stanford.edu>, ifischer@stanford.edu (Ines Fischer) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+-- 
+Graham Nakamura | gnakamura@unam.mx
+PGP Key fingerprint: 342B CA4A 0FEE B726
+"Keep the channels open."
+
+From boliveira@hanse.de Fri Aug 23 22:08:17 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!hanse!boliveira
+From: boliveira@hanse.de (Bastien Oliveira)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Aug23.220817.3336@hanse.de>
+Date: Fri, 23 Aug 1996 22:08:17 GMT
+References: <1996Aug21.124617.4915@stanford.edu> <1996Aug22.121417.6212@unam.mx>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Aug22.121417.6212@unam.mx>, gnakamura@unam.mx (Graham Nakamura) writes:
+> Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Bastien Oliveira | boliveira@hanse.de
+PGP Key fingerprint: 167B 9AC7 5A70 CB70
+"Keep the channels open."
+
+From jnilsson@purdue.edu Sat Aug 24 04:32:17 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!purdue!jnilsson
+From: jnilsson@purdue.edu (Joachim Nilsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Aug24.043217.6832@purdue.edu>
+Date: Sat, 24 Aug 1996 04:32:17 GMT
+References: <1996Aug21.124617.4915@stanford.edu> <1996Aug22.121417.6212@unam.mx> <1996Aug23.220817.3336@hanse.de>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1996Aug23.220817.3336@hanse.de>, boliveira@hanse.de (Bastien Oliveira) writes:
+> Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Joachim Nilsson
+Opinions expressed are solely my own and not those of Purdue University Engineering Computer Network.
+------------------------------------------------------------
+
+From asokolov@ox.ac.uk Sat Aug 24 20:55:17 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!ox!asokolov
+From: asokolov@ox.ac.uk (Astrid Sokolov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Aug24.205517.3067@ox.ac.uk>
+Date: Sat, 24 Aug 1996 20:55:17 GMT
+References: <1996Aug21.124617.4915@stanford.edu>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Aug21.124617.4915@stanford.edu>, ifischer@stanford.edu (Ines Fischer) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Astrid Sokolov
+Opinions expressed are solely my own and not those of Oxford University Computing Laboratory.
+------------------------------------------------------------
+

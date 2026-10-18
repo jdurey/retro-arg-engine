@@ -1,0 +1,94 @@
+From jivanov@earthlink.net Wed Jun 28 15:00:07 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!earthlink!jivanov
+From: jivanov@earthlink.net (Ji-woo Ivanov)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jun28.150007.6665@earthlink.net>
+Date: Wed, 28 Jun 1995 15:00:07 GMT
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Ji-woo Ivanov
+Opinions expressed are solely my own and not those of EarthLink Network.
+------------------------------------------------------------
+
+From lmuller@uni-hamburg.de Thu Jun 29 06:07:07 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!uni-hamburg!lmuller
+From: lmuller@uni-hamburg.de (Lars Müller)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jun29.060707.6944@uni-hamburg.de>
+Date: Thu, 29 Jun 1995 06:07:07 GMT
+References: <1995Jun28.150007.6665@earthlink.net>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Jun28.150007.6665@earthlink.net>, jivanov@earthlink.net (Ji-woo Ivanov) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+> This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Lars Müller <lmuller@uni-hamburg.de>
+Hayes Optima 288 @ 19,200 bps
+"Row 14. No joke."
+
+From epopov@clari.net Sat Jul 01 09:56:07 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!clari!epopov
+From: epopov@clari.net (Élodie Popov)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jul01.095607.9358@clari.net>
+Date: Sat, 01 Jul 1995 09:56:07 GMT
+References: <1995Jun28.150007.6665@earthlink.net>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Jun28.150007.6665@earthlink.net>, jivanov@earthlink.net (Ji-woo Ivanov) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Élodie Popov | epopov@clari.net
+PGP Key fingerprint: 1F9F C2A6 270A 4B2D
+"Keep the channels open."
+
+From klaurent@pipeline.com Sun Jul 02 04:03:07 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!pipeline!klaurent
+From: klaurent@pipeline.com (Katrin Laurent)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jul02.040307.9834@pipeline.com>
+Date: Sun, 02 Jul 1995 04:03:07 GMT
+References: <1995Jun28.150007.6665@earthlink.net> <1995Jul01.095607.9358@clari.net>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Jul01.095607.9358@clari.net>, epopov@clari.net (Élodie Popov) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Katrin Laurent <klaurent@pipeline.com>
+"Measuring a record you own is listening, not piracy."
+Decstation 5000/200 / NEXTSTEP 3.3
+

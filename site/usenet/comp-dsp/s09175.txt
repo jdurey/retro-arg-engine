@@ -1,0 +1,93 @@
+From lhernandez@delphi.com Wed Jan 18 18:48:09 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!delphi!lhernandez
+From: lhernandez@delphi.com (Liam Hernández)
+Newsgroups: comp.dsp
+Subject: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jan18.184809.1000@delphi.com>
+Date: Wed, 18 Jan 1995 18:48:09 GMT
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+Liam Hernández -- Delphi Internet Services
+"In theory there is no difference between theory and practice."
+
+From lsantos@berkeley.edu Fri Jan 20 18:44:09 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!berkeley!lsantos
+From: lsantos@berkeley.edu (Liam Santos)
+Newsgroups: comp.dsp
+Subject: Re: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jan20.184409.1386@berkeley.edu>
+Date: Fri, 20 Jan 1995 18:44:09 GMT
+References: <1995Jan18.184809.1000@delphi.com>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995Jan18.184809.1000@delphi.com>, lhernandez@delphi.com (Liam Hernández) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+> Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Liam Santos
+Tape trading list upon request. SASE required for international mail.
+
+From hfournier@earthlink.net Sun Jan 22 12:38:09 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!earthlink!hfournier
+From: hfournier@earthlink.net (Hugo Fournier)
+Newsgroups: comp.dsp
+Subject: Re: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jan22.123809.6378@earthlink.net>
+Date: Sun, 22 Jan 1995 12:38:09 GMT
+References: <1995Jan18.184809.1000@delphi.com>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Jan18.184809.1000@delphi.com>, lhernandez@delphi.com (Liam Hernández) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+> Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Hugo Fournier -- EarthLink Network
+"Measuring a record you own is listening, not piracy."
+
+From dkowalski@mindspring.com Tue Jan 24 00:58:09 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!mindspring!dkowalski
+From: dkowalski@mindspring.com (Dong-hyun Kowalski)
+Newsgroups: comp.dsp
+Subject: Re: Data: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jan24.005809.8705@mindspring.com>
+Date: Tue, 24 Jan 1995 00:58:09 GMT
+References: <1995Jan18.184809.1000@delphi.com> <1995Jan20.184409.1386@berkeley.edu>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1995Jan20.184409.1386@berkeley.edu>, lsantos@berkeley.edu (Liam Santos) writes:
+> Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Dong-hyun Kowalski -- MindSpring Enterprises
+"In theory there is no difference between theory and practice."
+

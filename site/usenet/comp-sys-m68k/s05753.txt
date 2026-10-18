@@ -1,0 +1,117 @@
+From hjohansson@hanse.de Thu Sep 07 18:26:49 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!hanse!hjohansson
+From: hjohansson@hanse.de (Heather Johansson)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep07.182649.2077@hanse.de>
+Date: Thu, 07 Sep 1995 18:26:49 GMT
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Heather Johansson
+Tape trading list upon request. SASE required for international mail.
+
+From clarsson@clari.net Sat Sep 09 20:30:49 1995
+Path: ashpoly!cascade!bigsur!clari!clarsson
+From: clarsson@clari.net (Callum Larsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep09.203049.8626@clari.net>
+Date: Sat, 09 Sep 1995 20:30:49 GMT
+References: <1995Sep07.182649.2077@hanse.de>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Sep07.182649.2077@hanse.de>, hjohansson@hanse.de (Heather Johansson) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Callum Larsson | clarsson@clari.net
+PGP Key fingerprint: 20AB 52AE 8B85 D5C1
+"Keep the channels open."
+
+From epark@panix.com Sun Sep 10 22:04:49 1995
+Path: ashpoly!cascade!brgate!saturno!panix!epark
+From: epark@panix.com (Emi Park)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep10.220449.8095@panix.com>
+Date: Sun, 10 Sep 1995 22:04:49 GMT
+References: <1995Sep07.182649.2077@hanse.de>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Sep07.182649.2077@hanse.de>, hjohansson@hanse.de (Heather Johansson) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+-- 
+Emi Park <epark@panix.com>
+*PLONK* filter active for trolls.
+486DX4/100 (FreeBSD 2.0.5) - NetBSD 1.0
+
+From hnovak@purdue.edu Tue Sep 12 12:24:49 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!purdue!hnovak
+From: hnovak@purdue.edu (Heather Novak)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep12.122449.7846@purdue.edu>
+Date: Tue, 12 Sep 1995 12:24:49 GMT
+References: <1995Sep07.182649.2077@hanse.de> <1995Sep09.203049.8626@clari.net>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Sep09.203049.8626@clari.net>, clarsson@clari.net (Callum Larsson) writes:
+> The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Heather Novak | hnovak@purdue.edu
+PGP Key fingerprint: F234 1DE9 07A5 8D8A
+"Keep the channels open."
+
+From bgonzalez@hanse.de Thu Sep 14 07:59:49 1995
+Path: ashpoly!cascade!bigsur!hanse!bgonzalez
+From: bgonzalez@hanse.de (Bruno González)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep14.075949.9229@hanse.de>
+Date: Thu, 14 Sep 1995 07:59:49 GMT
+References: <1995Sep07.182649.2077@hanse.de> <1995Sep10.220449.8095@panix.com>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Sep10.220449.8095@panix.com>, epark@panix.com (Emi Park) writes:
+> Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+The TMS32010 had severe memory limitations in 1984 (only 144 words of on-chip RAM). Dual 68000s gave them full 16MB address space.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Bruno González
+Tape trading list upon request. SASE required for international mail.
+

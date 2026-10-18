@@ -1,0 +1,116 @@
+From aduarte@cmu.edu Mon Jul 17 17:14:53 1995
+Path: ashpoly!cascade!mxgate!coyoacan!cmu!aduarte
+From: aduarte@cmu.edu (Astrid Duarte)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Jul17.171453.7618@cmu.edu>
+Date: Mon, 17 Jul 1995 17:14:53 GMT
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+Schematic diagram in ASCII uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/twin68_array.asc.
+
+-- 
+Astrid Duarte | aduarte@cmu.edu
+PGP Key fingerprint: A54C 7AB6 9BB7 4B7F
+"Keep the channels open."
+
+From cschneider@purdue.edu Wed Jul 19 06:28:53 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!purdue!cschneider
+From: cschneider@purdue.edu (Camila Schneider)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Jul19.062853.5958@purdue.edu>
+Date: Wed, 19 Jul 1995 06:28:53 GMT
+References: <1995Jul17.171453.7618@cmu.edu>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Jul17.171453.7618@cmu.edu>, aduarte@cmu.edu (Astrid Duarte) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Camila Schneider <cschneider@purdue.edu>
+*PLONK* filter active for trolls.
+Sun 3/60 (SunOS 4.1.1) - NetBSD 1.0
+
+From kschneider@cmu.edu Thu Jul 20 23:18:53 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!cmu!kschneider
+From: kschneider@cmu.edu (Kirsty Schneider)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Jul20.231853.5089@cmu.edu>
+Date: Thu, 20 Jul 1995 23:18:53 GMT
+References: <1995Jul17.171453.7618@cmu.edu> <1995Jul19.062853.5958@purdue.edu>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Jul19.062853.5958@purdue.edu>, cschneider@purdue.edu (Camila Schneider) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+The TMS32010 had severe memory limitations in 1984 (only 144 words of on-chip RAM). Dual 68000s gave them full 16MB address space.
+
+-- 
+Kirsty Schneider <kschneider@cmu.edu>
+"The hatch is open. Is anyone listening?"
+PC-9821Ap2 (NEC) / AmigaOS 3.1
+
+From rsato@ox.ac.uk Sun Jul 23 02:00:53 1995
+Path: ashpoly!cascade!bigsur!ox!rsato
+From: rsato@ox.ac.uk (Renata Sato)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Jul23.020053.2450@ox.ac.uk>
+Date: Sun, 23 Jul 1995 02:00:53 GMT
+References: <1995Jul17.171453.7618@cmu.edu> <1995Jul19.062853.5958@purdue.edu>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Jul19.062853.5958@purdue.edu>, cschneider@purdue.edu (Camila Schneider) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Renata Sato | rsato@ox.ac.uk
+PGP Key fingerprint: 78FA F44B 8D7D EA13
+"Keep the channels open."
+
+From drobertson@cern.ch Tue Jul 25 02:15:53 1995
+Path: ashpoly!cascade!bigsur!cern!drobertson
+From: drobertson@cern.ch (Dong-hyun Robertson)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Jul25.021553.3283@cern.ch>
+Date: Tue, 25 Jul 1995 02:15:53 GMT
+References: <1995Jul17.171453.7618@cmu.edu> <1995Jul19.062853.5958@purdue.edu> <1995Jul23.020053.2450@ox.ac.uk>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Jul23.020053.2450@ox.ac.uk>, rsato@ox.ac.uk (Renata Sato) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Dong-hyun Robertson <drobertson@cern.ch>
+*PLONK* filter active for trolls.
+Amiga 3000T - NetBSD 1.0
+

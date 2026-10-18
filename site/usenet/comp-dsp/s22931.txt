@@ -1,0 +1,117 @@
+From rlarsson@kiae.su Sat Dec 02 06:38:38 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!kiae!rlarsson
+From: rlarsson@kiae.su (Renata Larsson)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec02.063838.3848@kiae.su>
+Date: Sat, 02 Dec 1995 06:38:38 GMT
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+=== Renata Larsson ===
+Dept of Electrical Engineering, Kurchatov Institute of Atomic Energy, Moscow
+"Tape doesn't lie at 02:14. Ears do."
+
+From mgarcia@u-tokyo.ac.jp Sat Dec 02 12:19:38 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!u-tokyo!mgarcia
+From: mgarcia@u-tokyo.ac.jp (Matthias García)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec02.121938.7205@u-tokyo.ac.jp>
+Date: Sat, 02 Dec 1995 12:19:38 GMT
+References: <1995Dec02.063838.3848@kiae.su>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995Dec02.063838.3848@kiae.su>, rlarsson@kiae.su (Renata Larsson) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Matthias García <mgarcia@u-tokyo.ac.jp>
+*PLONK* filter active for trolls.
+Acorn RiscPC 600 - NetBSD 1.0
+
+From spark@clari.net Sat Dec 02 20:35:38 1995
+Path: ashpoly!cascade!bigsur!clari!spark
+From: spark@clari.net (Seo-yeon Park)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec02.203538.7740@clari.net>
+Date: Sat, 02 Dec 1995 20:35:38 GMT
+References: <1995Dec02.063838.3848@kiae.su> <1995Dec02.121938.7205@u-tokyo.ac.jp>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1995Dec02.121938.7205@u-tokyo.ac.jp>, mgarcia@u-tokyo.ac.jp (Matthias García) writes:
+> Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+Seo-yeon Park
+Tape trading list upon request. SASE required for international mail.
+
+From rchoi@pacbell.net Sat Dec 02 21:23:38 1995
+Path: ashpoly!cascade!bigsur!pacbell!rchoi
+From: rchoi@pacbell.net (Rodrigo Choi)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec02.212338.6452@pacbell.net>
+Date: Sat, 02 Dec 1995 21:23:38 GMT
+References: <1995Dec02.063838.3848@kiae.su> <1995Dec02.121938.7205@u-tokyo.ac.jp>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Dec02.121938.7205@u-tokyo.ac.jp>, mgarcia@u-tokyo.ac.jp (Matthias García) writes:
+> Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+> Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+Rodrigo Choi
+Tape trading list upon request. SASE required for international mail.
+
+From nnovak@panix.com Sun Dec 03 22:16:38 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!panix!nnovak
+From: nnovak@panix.com (Nadine Novak)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec03.221638.9575@panix.com>
+Date: Sun, 03 Dec 1995 22:16:38 GMT
+References: <1995Dec02.063838.3848@kiae.su> <1995Dec02.121938.7205@u-tokyo.ac.jp>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Dec02.121938.7205@u-tokyo.ac.jp>, mgarcia@u-tokyo.ac.jp (Matthias García) writes:
+> Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Nadine Novak
+Opinions expressed are solely my own and not those of Public Access Unix of New York.
+------------------------------------------------------------
+

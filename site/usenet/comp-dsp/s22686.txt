@@ -1,0 +1,122 @@
+From jperez@earthlink.net Sun Mar 06 19:04:53 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!earthlink!jperez
+From: jperez@earthlink.net (Joachim Pérez)
+Newsgroups: comp.dsp
+Subject: Question: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Mar06.190453.2583@earthlink.net>
+Date: Sun, 06 Mar 1994 19:04:53 GMT
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+=== Joachim Pérez ===
+Dept of Electrical Engineering, EarthLink Network
+"Do not worship the copy."
+
+From lduarte@purdue.edu Tue Mar 08 14:59:53 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!purdue!lduarte
+From: lduarte@purdue.edu (Lars Duarte)
+Newsgroups: comp.dsp
+Subject: Re: Question: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Mar08.145953.2461@purdue.edu>
+Date: Tue, 08 Mar 1994 14:59:53 GMT
+References: <1994Mar06.190453.2583@earthlink.net>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Mar06.190453.2583@earthlink.net>, jperez@earthlink.net (Joachim Pérez) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+-- 
+Lars Duarte <lduarte@purdue.edu>
+*PLONK* filter active for trolls.
+486DX4/100 (FreeBSD 2.0.5) - NetBSD 1.0
+
+From jdubois@illinois.edu Wed Mar 09 04:55:53 1994
+Path: ashpoly!cascade!bigsur!illinois!jdubois
+From: jdubois@illinois.edu (Ji-woo Dubois)
+Newsgroups: comp.dsp
+Subject: Re: Question: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Mar09.045553.8010@illinois.edu>
+Date: Wed, 09 Mar 1994 04:55:53 GMT
+References: <1994Mar06.190453.2583@earthlink.net>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: Netscape 1.1N
+Lines: 12
+
+In article <1994Mar06.190453.2583@earthlink.net>, jperez@earthlink.net (Joachim Pérez) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+> With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+=== Ji-woo Dubois ===
+Dept of Electrical Engineering, University of Illinois Urbana-Champaign
+"There are 14 nodes and only 10 countries. Count again."
+
+From aito@u-tokyo.ac.jp Wed Mar 09 09:29:53 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!u-tokyo!aito
+From: aito@u-tokyo.ac.jp (Amy Ito)
+Newsgroups: comp.dsp
+Subject: Re: Question: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Mar09.092953.5043@u-tokyo.ac.jp>
+Date: Wed, 09 Mar 1994 09:29:53 GMT
+References: <1994Mar06.190453.2583@earthlink.net>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1994Mar06.190453.2583@earthlink.net>, jperez@earthlink.net (Joachim Pérez) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+
+Prof. Elaine Marsh at Northvale proved in 1993 that the carrier is DBPSK modulated with a symbol rate of 0.71 Hz.
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+=== Amy Ito ===
+Dept of Electrical Engineering, University of Tokyo Department of Information Science
+"Do not worship the copy."
+
+From agirard@unam.mx Fri Mar 11 12:54:53 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!unam!agirard
+From: agirard@unam.mx (Anja Girard)
+Newsgroups: comp.dsp
+Subject: Re: Question: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1994Mar11.125453.9243@unam.mx>
+Date: Fri, 11 Mar 1994 12:54:53 GMT
+References: <1994Mar06.190453.2583@earthlink.net>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1994Mar06.190453.2583@earthlink.net>, jperez@earthlink.net (Joachim Pérez) writes:
+> Comparing non-parametric Welch PSD with parametric Burg autoregressive models for the 14.2 Hz line.
+> With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+-- 
+=== Anja Girard ===
+Dept of Electrical Engineering, Universidad Nacional Autónoma de México (DGSCA)
+"Do not worship the copy."
+

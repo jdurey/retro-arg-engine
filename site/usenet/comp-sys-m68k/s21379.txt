@@ -1,0 +1,115 @@
+From tmuller@pipeline.com Tue Dec 27 18:28:51 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!pipeline!tmuller
+From: tmuller@pipeline.com (Tobias Müller)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Dec27.182851.4986@pipeline.com>
+Date: Tue, 27 Dec 1994 18:28:51 GMT
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Tobias Müller
+Opinions expressed are solely my own and not those of The Pipeline Internet Network.
+------------------------------------------------------------
+
+From sstewart@u-tokyo.ac.jp Wed Dec 28 21:12:51 1994
+Path: ashpoly!cascade!brgate!saturno!u-tokyo!sstewart
+From: sstewart@u-tokyo.ac.jp (Steve Stewart)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Dec28.211251.5847@u-tokyo.ac.jp>
+Date: Wed, 28 Dec 1994 21:12:51 GMT
+References: <1994Dec27.182851.4986@pipeline.com>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1994Dec27.182851.4986@pipeline.com>, tmuller@pipeline.com (Tobias Müller) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Steve Stewart
+Tape trading list upon request. SASE required for international mail.
+
+From smacdonald@illinois.edu Thu Dec 29 12:03:51 1994
+Path: ashpoly!cascade!mxgate!coyoacan!illinois!smacdonald
+From: smacdonald@illinois.edu (Sun-mi MacDonald)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Dec29.120351.9252@illinois.edu>
+Date: Thu, 29 Dec 1994 12:03:51 GMT
+References: <1994Dec27.182851.4986@pipeline.com>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Dec27.182851.4986@pipeline.com>, tmuller@pipeline.com (Tobias Müller) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Sun-mi MacDonald <smacdonald@illinois.edu>
+"Measuring a record you own is listening, not piracy."
+Sun SparcStation 20 / System 7.5.1
+
+From mreyes@delphi.com Fri Dec 30 02:41:51 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!delphi!mreyes
+From: mreyes@delphi.com (Mike Reyes)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Dec30.024151.9986@delphi.com>
+Date: Fri, 30 Dec 1994 02:41:51 GMT
+References: <1994Dec27.182851.4986@pipeline.com> <1994Dec29.120351.9252@illinois.edu>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Dec29.120351.9252@illinois.edu>, smacdonald@illinois.edu (Sun-mi MacDonald) writes:
+> The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Mike Reyes <mreyes@delphi.com>
+"Do not worship the copy."
+Mac IIci / 68882 FPU / Linux 1.2.13
+
+From amartinez@hanse.de Fri Dec 30 23:17:51 1994
+Path: ashpoly!cascade!bigsur!hanse!amartinez
+From: amartinez@hanse.de (Amy Martínez)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Dec30.231751.6858@hanse.de>
+Date: Fri, 30 Dec 1994 23:17:51 GMT
+References: <1994Dec27.182851.4986@pipeline.com>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Dec27.182851.4986@pipeline.com>, tmuller@pipeline.com (Tobias Müller) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+> Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+Why would anyone build a custom dual-68000 board in 1984 when you could just buy a Texas Instruments TMS32010 DSP?
+
+-- 
+Amy Martínez
+Tape trading list upon request. SASE required for international mail.
+

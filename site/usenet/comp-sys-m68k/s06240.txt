@@ -1,0 +1,73 @@
+From ckuznetsov@delphi.com Wed Apr 13 05:02:09 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!delphi!ckuznetsov
+From: ckuznetsov@delphi.com (Callum Kuznetsov)
+Newsgroups: comp.sys.m68k
+Subject: Observation: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Apr13.050209.8180@delphi.com>
+Date: Wed, 13 Apr 1994 05:02:09 GMT
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+
+Does anyone have a 27C256 EPROM marked 'MH-U14' or 'ORION-CRYPTO'?
+
+-- 
+Callum Kuznetsov <ckuznetsov@delphi.com>
+Practical Peripherals 14.4 @ 28,800 bps
+"Hold for relay."
+
+From tjohansson@mindspring.com Thu Apr 14 21:42:09 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!mindspring!tjohansson
+From: tjohansson@mindspring.com (Thiago Johansson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Apr14.214209.6886@mindspring.com>
+Date: Thu, 14 Apr 1994 21:42:09 GMT
+References: <1994Apr13.050209.8180@delphi.com>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1994Apr13.050209.8180@delphi.com>, ckuznetsov@delphi.com (Callum Kuznetsov) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+> This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+-- 
+=== Thiago Johansson ===
+Dept of Electrical Engineering, MindSpring Enterprises
+"5 sigma is a discovery. 7 is a question."
+
+From mmoreno@kth.se Fri Apr 15 22:34:09 1994
+Path: ashpoly!cascade!brgate!saturno!kth!mmoreno
+From: mmoreno@kth.se (Mei Moreno)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1994Apr15.223409.6427@kth.se>
+Date: Fri, 15 Apr 1994 22:34:09 GMT
+References: <1994Apr13.050209.8180@delphi.com>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1994Apr13.050209.8180@delphi.com>, ckuznetsov@delphi.com (Callum Kuznetsov) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Mei Moreno <mmoreno@kth.se>
+*PLONK* filter active for trolls.
+Pentium 90 (OS/2 Warp) - NetBSD 1.0
+

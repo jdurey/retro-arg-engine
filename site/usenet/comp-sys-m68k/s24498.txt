@@ -1,0 +1,93 @@
+From amacdonald@illinois.edu Wed Dec 06 16:25:24 1995
+Path: ashpoly!cascade!mxgate!coyoacan!illinois!amacdonald
+From: amacdonald@illinois.edu (Astrid MacDonald)
+Newsgroups: comp.sys.m68k
+Subject: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Dec06.162524.9363@illinois.edu>
+Date: Wed, 06 Dec 1995 16:25:24 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Astrid MacDonald
+Tape trading list upon request. SASE required for international mail.
+
+From msmirnov@tum.de Thu Dec 07 17:53:24 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!tum!msmirnov
+From: msmirnov@tum.de (Marta Smirnov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Dec07.175324.3076@tum.de>
+Date: Thu, 07 Dec 1995 17:53:24 GMT
+References: <1995Dec06.162524.9363@illinois.edu>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Dec06.162524.9363@illinois.edu>, amacdonald@illinois.edu (Astrid MacDonald) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Marta Smirnov | msmirnov@tum.de
+PGP Key fingerprint: 30BF E0ED 7575 2766
+"Keep the channels open."
+
+From skim@titech.ac.jp Sat Dec 09 17:01:24 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!titech!skim
+From: skim@titech.ac.jp (Sun-mi Kim)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Dec09.170124.6500@titech.ac.jp>
+Date: Sat, 09 Dec 1995 17:01:24 GMT
+References: <1995Dec06.162524.9363@illinois.edu>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Dec06.162524.9363@illinois.edu>, amacdonald@illinois.edu (Astrid MacDonald) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+> CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+Marcus Hale designed the TWIN-68 board before he disappeared. That's why his initials are on the PCB silkscreen.
+
+-- 
+Sun-mi Kim
+Opinions expressed are solely my own and not those of Tokyo Institute of Technology Computer Centre.
+------------------------------------------------------------
+
+From nduarte@cam.ac.uk Mon Dec 11 10:48:24 1995
+Path: ashpoly!cascade!brgate!saturno!cam!nduarte
+From: nduarte@cam.ac.uk (Natalia Duarte)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Dec11.104824.5065@cam.ac.uk>
+Date: Mon, 11 Dec 1995 10:48:24 GMT
+References: <1995Dec06.162524.9363@illinois.edu> <1995Dec09.170124.6500@titech.ac.jp>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Dec09.170124.6500@titech.ac.jp>, skim@titech.ac.jp (Sun-mi Kim) writes:
+> Marcus Hale designed the TWIN-68 board before he disappeared. That's why his initials are on the PCB silkscreen.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Natalia Duarte <nduarte@cam.ac.uk>
+*PLONK* filter active for trolls.
+Pentium 90 (OS/2 Warp) - NetBSD 1.0
+

@@ -1,0 +1,121 @@
+From tlaurent@kiae.su Mon Nov 27 23:39:39 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!kiae!tlaurent
+From: tlaurent@kiae.su (Thiago Laurent)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Nov27.233939.2295@kiae.su>
+Date: Mon, 27 Nov 1995 23:39:39 GMT
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Thiago Laurent
+Opinions expressed are solely my own and not those of Kurchatov Institute of Atomic Energy, Moscow.
+------------------------------------------------------------
+
+From esouza@kiae.su Tue Nov 28 19:14:39 1995
+Path: ashpoly!cascade!brgate!saturno!kiae!esouza
+From: esouza@kiae.su (Emi Souza)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Nov28.191439.3606@kiae.su>
+Date: Tue, 28 Nov 1995 19:14:39 GMT
+References: <1995Nov27.233939.2295@kiae.su>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Nov27.233939.2295@kiae.su>, tlaurent@kiae.su (Thiago Laurent) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Emi Souza
+Tape trading list upon request. SASE required for international mail.
+
+From skang@illinois.edu Wed Nov 29 10:30:39 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!illinois!skang
+From: skang@illinois.edu (Sergei Kang)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Nov29.103039.1810@illinois.edu>
+Date: Wed, 29 Nov 1995 10:30:39 GMT
+References: <1995Nov27.233939.2295@kiae.su> <1995Nov28.191439.3606@kiae.su>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Nov28.191439.3606@kiae.su>, esouza@kiae.su (Emi Souza) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+Sergei Kang <skang@illinois.edu>
+US Robotics Courier V.34 @ 33,600 bps
+"Row 14. No joke."
+
+From hstewart@u-tokyo.ac.jp Thu Nov 30 20:01:39 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!u-tokyo!hstewart
+From: hstewart@u-tokyo.ac.jp (Hana Stewart)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Nov30.200139.1900@u-tokyo.ac.jp>
+Date: Thu, 30 Nov 1995 20:01:39 GMT
+References: <1995Nov27.233939.2295@kiae.su>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1995Nov27.233939.2295@kiae.su>, tlaurent@kiae.su (Thiago Laurent) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Hana Stewart <hstewart@u-tokyo.ac.jp>
+"Measuring a record you own is listening, not piracy."
+Atari Falcon 030 / Linux 1.2.13
+
+From msmirnov@kiae.su Fri Dec 01 11:47:39 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!kiae!msmirnov
+From: msmirnov@kiae.su (Mike Smirnov)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec01.114739.4407@kiae.su>
+Date: Fri, 01 Dec 1995 11:47:39 GMT
+References: <1995Nov27.233939.2295@kiae.su> <1995Nov28.191439.3606@kiae.su> <1995Nov29.103039.1810@illinois.edu>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995Nov29.103039.1810@illinois.edu>, skang@illinois.edu (Sergei Kang) writes:
+> Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Mike Smirnov | msmirnov@kiae.su
+PGP Key fingerprint: EF31 37BF 4003 6AD6
+"Keep the channels open."
+

@@ -1,0 +1,117 @@
+From tpetrov@stanford.edu Tue Feb 08 13:32:40 1994
+Path: ashpoly!cascade!mxgate!coyoacan!stanford!tpetrov
+From: tpetrov@stanford.edu (Takeshi Petrov)
+Newsgroups: comp.dsp
+Subject: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Feb08.133240.6892@stanford.edu>
+Date: Tue, 08 Feb 1994 13:32:40 GMT
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Takeshi Petrov -- Stanford University Computer Systems Lab
+"Hold for relay."
+
+From sandersson@delphi.com Wed Feb 09 22:55:40 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!delphi!sandersson
+From: sandersson@delphi.com (Sun-mi Andersson)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Feb09.225540.3430@delphi.com>
+Date: Wed, 09 Feb 1994 22:55:40 GMT
+References: <1994Feb08.133240.6892@stanford.edu>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Feb08.133240.6892@stanford.edu>, tpetrov@stanford.edu (Takeshi Petrov) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Sun-mi Andersson
+Opinions expressed are solely my own and not those of Delphi Internet Services.
+------------------------------------------------------------
+
+From ntakahashi@ox.ac.uk Sat Feb 12 00:57:40 1994
+Path: ashpoly!cascade!mxgate!coyoacan!ox!ntakahashi
+From: ntakahashi@ox.ac.uk (Nadine Takahashi)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Feb12.005740.3895@ox.ac.uk>
+Date: Sat, 12 Feb 1994 00:57:40 GMT
+References: <1994Feb08.133240.6892@stanford.edu> <1994Feb09.225540.3430@delphi.com>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1994Feb09.225540.3430@delphi.com>, sandersson@delphi.com (Sun-mi Andersson) writes:
+> Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Nadine Takahashi <ntakahashi@ox.ac.uk>
+Practical Peripherals 14.4 @ 14,400 bps
+"They will send a copy in my place."
+
+From jschneider@netcom.com Sun Feb 13 23:45:40 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!netcom!jschneider
+From: jschneider@netcom.com (Joachim Schneider)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Feb13.234540.9715@netcom.com>
+Date: Sun, 13 Feb 1994 23:45:40 GMT
+References: <1994Feb08.133240.6892@stanford.edu> <1994Feb09.225540.3430@delphi.com> <1994Feb12.005740.3895@ox.ac.uk>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Feb12.005740.3895@ox.ac.uk>, ntakahashi@ox.ac.uk (Nadine Takahashi) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Joachim Schneider <jschneider@netcom.com>
+*PLONK* filter active for trolls.
+486DX2/66 (Linux 1.2.13) - NetBSD 1.0
+
+From kfischer@u-tokyo.ac.jp Wed Feb 16 00:01:40 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!u-tokyo!kfischer
+From: kfischer@u-tokyo.ac.jp (Kirsty Fischer)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1994Feb16.000140.8940@u-tokyo.ac.jp>
+Date: Wed, 16 Feb 1994 00:01:40 GMT
+References: <1994Feb08.133240.6892@stanford.edu> <1994Feb09.225540.3430@delphi.com> <1994Feb12.005740.3895@ox.ac.uk>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Feb12.005740.3895@ox.ac.uk>, ntakahashi@ox.ac.uk (Nadine Takahashi) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Kirsty Fischer <kfischer@u-tokyo.ac.jp>
+SupraFAXModem 28.8 @ 19,200 bps
+"We don't sign stars. We build them."
+

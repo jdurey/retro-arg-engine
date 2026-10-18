@@ -1,0 +1,47 @@
+From mtakahashi@utexas.edu Sat Feb 18 09:10:00 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!utexas!mtakahashi
+From: mtakahashi@utexas.edu (Mikhail Takahashi)
+Newsgroups: comp.dsp
+Subject: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Feb18.091000.5584@utexas.edu>
+Date: Sat, 18 Feb 1995 09:10:00 GMT
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Mikhail Takahashi | mtakahashi@utexas.edu
+PGP Key fingerprint: 155D ACA8 6F8B FD4F
+"Keep the channels open."
+
+From teriksson@netcom.com Sat Feb 18 23:28:00 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!netcom!teriksson
+From: teriksson@netcom.com (Takeshi Eriksson)
+Newsgroups: comp.dsp
+Subject: Re: Observation: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Feb18.232800.5089@netcom.com>
+Date: Sat, 18 Feb 1995 23:28:00 GMT
+References: <1995Feb18.091000.5584@utexas.edu>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Feb18.091000.5584@utexas.edu>, mtakahashi@utexas.edu (Mikhail Takahashi) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+> By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Takeshi Eriksson
+Tape trading list upon request. SASE required for international mail.
+

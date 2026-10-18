@@ -1,0 +1,120 @@
+From lrodriguez@unam.mx Sun Sep 04 17:45:07 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!unam!lrodriguez
+From: lrodriguez@unam.mx (Lars Rodríguez)
+Newsgroups: comp.dsp
+Subject: [FLAME] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Sep04.174507.3794@unam.mx>
+Date: Sun, 04 Sep 1994 17:45:07 GMT
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+Version 1.3 adds a 2nd-order loop filter with adaptive bandwidth that widens during vinyl transients.
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+
+Grab the source archive from ftp.ashford-poly.edu:/pub/telecom-archives/stardust/stardust-1.3.tar.gz.
+
+-- 
+Lars Rodríguez
+Opinions expressed are solely my own and not those of Universidad Nacional Autónoma de México (DGSCA).
+------------------------------------------------------------
+
+From mgirard@ox.ac.uk Tue Sep 06 07:11:07 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!ox!mgirard
+From: mgirard@ox.ac.uk (Marta Girard)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Sep06.071107.6538@ox.ac.uk>
+Date: Tue, 06 Sep 1994 07:11:07 GMT
+References: <1994Sep04.174507.3794@unam.mx>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1994Sep04.174507.3794@unam.mx>, lrodriguez@unam.mx (Lars Rodríguez) writes:
+> Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+> Version 1.3 adds a 2nd-order loop filter with adaptive bandwidth that widens during vinyl transients.
+
+Tar.gz archive gave a CRC error with PKUNZIP. Make sure you upload in binary mode, not ASCII!
+
+-- 
+Marta Girard <mgirard@ox.ac.uk>
+SupraFAXModem 28.8 @ 19,200 bps
+"Hardware is temporary. The signal survives."
+
+From tmoreau@mindspring.com Thu Sep 08 03:18:07 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!mindspring!tmoreau
+From: tmoreau@mindspring.com (Tomas Moreau)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Sep08.031807.2060@mindspring.com>
+Date: Thu, 08 Sep 1994 03:18:07 GMT
+References: <1994Sep04.174507.3794@unam.mx> <1994Sep06.071107.6538@ox.ac.uk>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1994Sep06.071107.6538@ox.ac.uk>, mgirard@ox.ac.uk (Marta Girard) writes:
+> Tar.gz archive gave a CRC error with PKUNZIP. Make sure you upload in binary mode, not ASCII!
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Tomas Moreau -- MindSpring Enterprises
+"5 sigma is a discovery. 7 is a question."
+
+From nnilsson@ox.ac.uk Thu Sep 08 18:14:07 1994
+Path: ashpoly!cascade!mxgate!coyoacan!ox!nnilsson
+From: nnilsson@ox.ac.uk (Natalia Nilsson)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Sep08.181407.6956@ox.ac.uk>
+Date: Thu, 08 Sep 1994 18:14:07 GMT
+References: <1994Sep04.174507.3794@unam.mx>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Sep04.174507.3794@unam.mx>, lrodriguez@unam.mx (Lars Rodríguez) writes:
+> Demodulating the 14.2 Hz Stardust carrier: software update and benchmark results.
+
+Tar.gz archive gave a CRC error with PKUNZIP. Make sure you upload in binary mode, not ASCII!
+
+-- 
+Natalia Nilsson
+Opinions expressed are solely my own and not those of Oxford University Computing Laboratory.
+------------------------------------------------------------
+
+From osokolov@unam.mx Fri Sep 09 03:57:07 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!unam!osokolov
+From: osokolov@unam.mx (Olga Sokolov)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1994Sep09.035707.2557@unam.mx>
+Date: Fri, 09 Sep 1994 03:57:07 GMT
+References: <1994Sep04.174507.3794@unam.mx> <1994Sep06.071107.6538@ox.ac.uk> <1994Sep08.031807.2060@mindspring.com>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1994Sep08.031807.2060@mindspring.com>, tmoreau@mindspring.com (Tomas Moreau) writes:
+> Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Olga Sokolov | osokolov@unam.mx
+PGP Key fingerprint: BB28 4580 642A EF29
+"Keep the channels open."
+

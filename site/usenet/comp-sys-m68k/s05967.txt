@@ -1,0 +1,114 @@
+From ookonkwo@inria.fr Mon Nov 28 00:29:57 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!inria!ookonkwo
+From: ookonkwo@inria.fr (Olga Okonkwo)
+Newsgroups: comp.sys.m68k
+Subject: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Nov28.002957.2153@inria.fr>
+Date: Mon, 28 Nov 1994 00:29:57 GMT
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Olga Okonkwo
+Tape trading list upon request. SASE required for international mail.
+
+From asouza@cam.ac.uk Mon Nov 28 07:54:57 1994
+Path: ashpoly!cascade!brgate!saturno!cam!asouza
+From: asouza@cam.ac.uk (Aiko Souza)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Nov28.075457.6539@cam.ac.uk>
+Date: Mon, 28 Nov 1994 07:54:57 GMT
+References: <1994Nov28.002957.2153@inria.fr>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1994Nov28.002957.2153@inria.fr>, ookonkwo@inria.fr (Olga Okonkwo) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Aiko Souza
+Tape trading list upon request. SASE required for international mail.
+
+From csmirnov@cmu.edu Mon Nov 28 10:55:57 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!cmu!csmirnov
+From: csmirnov@cmu.edu (Camila Smirnov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Nov28.105557.3919@cmu.edu>
+Date: Mon, 28 Nov 1994 10:55:57 GMT
+References: <1994Nov28.002957.2153@inria.fr> <1994Nov28.075457.6539@cam.ac.uk>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Nov28.075457.6539@cam.ac.uk>, asouza@cam.ac.uk (Aiko Souza) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+=== Camila Smirnov ===
+Dept of Electrical Engineering, Carnegie Mellon University School of CS
+"There are 14 nodes and only 10 countries. Count again."
+
+From mramirez@earthlink.net Tue Nov 29 21:24:57 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!earthlink!mramirez
+From: mramirez@earthlink.net (Min-jun Ramírez)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Nov29.212457.3416@earthlink.net>
+Date: Tue, 29 Nov 1994 21:24:57 GMT
+References: <1994Nov28.002957.2153@inria.fr>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Nov28.002957.2153@inria.fr>, ookonkwo@inria.fr (Olga Okonkwo) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Min-jun Ramírez <mramirez@earthlink.net>
+*PLONK* filter active for trolls.
+Macintosh IIfx - NetBSD 1.0
+
+From mreyes@uu.net Thu Dec 01 11:37:57 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!uu!mreyes
+From: mreyes@uu.net (Min-jun Reyes)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Dec01.113757.2461@uu.net>
+Date: Thu, 01 Dec 1994 11:37:57 GMT
+References: <1994Nov28.002957.2153@inria.fr> <1994Nov28.075457.6539@cam.ac.uk> <1994Nov28.105557.3919@cmu.edu>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Nov28.105557.3919@cmu.edu>, csmirnov@cmu.edu (Camila Smirnov) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Min-jun Reyes | mreyes@uu.net
+PGP Key fingerprint: FF48 1BCF C93F 7005
+"Keep the channels open."
+

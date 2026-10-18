@@ -1,0 +1,50 @@
+From fsanchez@berkeley.edu Fri Dec 15 15:16:04 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!berkeley!fsanchez
+From: fsanchez@berkeley.edu (Fiona Sánchez)
+Newsgroups: comp.dsp
+Subject: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Dec15.151604.2855@berkeley.edu>
+Date: Fri, 15 Dec 1995 15:16:04 GMT
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+MATLAB script available upon request via email.
+
+-- 
+Fiona Sánchez
+Opinions expressed are solely my own and not those of UC Berkeley Department of EECS.
+------------------------------------------------------------
+
+From tmoreau@purdue.edu Sun Dec 17 03:13:04 1995
+Path: ashpoly!cascade!brgate!saturno!purdue!tmoreau
+From: tmoreau@purdue.edu (Tomas Moreau)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Dec17.031304.1843@purdue.edu>
+Date: Sun, 17 Dec 1995 03:13:04 GMT
+References: <1995Dec15.151604.2855@berkeley.edu>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1995Dec15.151604.2855@berkeley.edu>, fsanchez@berkeley.edu (Fiona Sánchez) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Tomas Moreau <tmoreau@purdue.edu>
+US Robotics Courier V.34 @ 14,400 bps
+"Hardware is temporary. The signal survives."
+

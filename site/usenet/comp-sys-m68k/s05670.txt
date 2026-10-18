@@ -1,0 +1,120 @@
+From amacdonald@inria.fr Tue Sep 12 18:06:02 1995
+Path: ashpoly!cascade!mxgate!coyoacan!inria!amacdonald
+From: amacdonald@inria.fr (Amy MacDonald)
+Newsgroups: comp.sys.m68k
+Subject: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep12.180602.6190@inria.fr>
+Date: Tue, 12 Sep 1995 18:06:02 GMT
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Amy MacDonald | amacdonald@inria.fr
+PGP Key fingerprint: 92D1 6307 6A63 5C58
+"Keep the channels open."
+
+From ecampbell@uu.net Tue Sep 12 23:03:02 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!uu!ecampbell
+From: ecampbell@uu.net (Emi Campbell)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep12.230302.7822@uu.net>
+Date: Tue, 12 Sep 1995 23:03:02 GMT
+References: <1995Sep12.180602.6190@inria.fr>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Sep12.180602.6190@inria.fr>, amacdonald@inria.fr (Amy MacDonald) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Emi Campbell
+Opinions expressed are solely my own and not those of UUNET Technologies, Falls Church VA.
+------------------------------------------------------------
+
+From blindqvist@cmu.edu Wed Sep 13 04:22:02 1995
+Path: ashpoly!cascade!brgate!saturno!cmu!blindqvist
+From: blindqvist@cmu.edu (Bill Lindqvist)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep13.042202.5093@cmu.edu>
+Date: Wed, 13 Sep 1995 04:22:02 GMT
+References: <1995Sep12.180602.6190@inria.fr>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995Sep12.180602.6190@inria.fr>, amacdonald@inria.fr (Amy MacDonald) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Bill Lindqvist <blindqvist@cmu.edu>
+"When every node is whole, the channel opens."
+Amiga 1200 (Blizzard 030/50) / AmigaOS 3.1
+
+From iduarte@demon.co.uk Thu Sep 14 02:17:02 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!demon!iduarte
+From: iduarte@demon.co.uk (Ines Duarte)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep14.021702.3073@demon.co.uk>
+Date: Thu, 14 Sep 1995 02:17:02 GMT
+References: <1995Sep12.180602.6190@inria.fr>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Sep12.180602.6190@inria.fr>, amacdonald@inria.fr (Amy MacDonald) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+=== Ines Duarte ===
+Dept of Electrical Engineering, Demon Internet Services UK
+"In theory there is no difference between theory and practice."
+
+From hfournier@unam.mx Fri Sep 15 16:36:02 1995
+Path: ashpoly!cascade!mxgate!coyoacan!unam!hfournier
+From: hfournier@unam.mx (Hugo Fournier)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep15.163602.7472@unam.mx>
+Date: Fri, 15 Sep 1995 16:36:02 GMT
+References: <1995Sep12.180602.6190@inria.fr> <1995Sep13.042202.5093@cmu.edu>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995Sep13.042202.5093@cmu.edu>, blindqvist@cmu.edu (Bill Lindqvist) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+> Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+Tom from Ashford Poly owns the physical board! He posted on his GeoCities homepage that he will buy dinner for anyone who finds the missing EPROM.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Hugo Fournier
+Tape trading list upon request. SASE required for international mail.
+

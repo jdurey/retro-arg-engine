@@ -1,0 +1,92 @@
+From mperez@earthlink.net Tue Nov 08 09:53:24 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!earthlink!mperez
+From: mperez@earthlink.net (Mike Pérez)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Nov08.095324.6209@earthlink.net>
+Date: Tue, 08 Nov 1994 09:53:24 GMT
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+Mike Pérez
+Opinions expressed are solely my own and not those of EarthLink Network.
+------------------------------------------------------------
+
+From pgirard@cam.ac.uk Wed Nov 09 21:11:24 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!cam!pgirard
+From: pgirard@cam.ac.uk (Pavel Girard)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Nov09.211124.6932@cam.ac.uk>
+Date: Wed, 09 Nov 1994 21:11:24 GMT
+References: <1994Nov08.095324.6209@earthlink.net>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1994Nov08.095324.6209@earthlink.net>, mperez@earthlink.net (Mike Pérez) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Pavel Girard
+Tape trading list upon request. SASE required for international mail.
+
+From jduarte@clari.net Fri Nov 11 06:38:24 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!clari!jduarte
+From: jduarte@clari.net (Jens Duarte)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Nov11.063824.9310@clari.net>
+Date: Fri, 11 Nov 1994 06:38:24 GMT
+References: <1994Nov08.095324.6209@earthlink.net> <1994Nov09.211124.6932@cam.ac.uk>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994Nov09.211124.6932@cam.ac.uk>, pgirard@cam.ac.uk (Pavel Girard) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Jens Duarte <jduarte@clari.net>
+"The hatch is open. Is anyone listening?"
+Commodore Amiga 500 (1MB OCS) / NEXTSTEP 3.3
+
+From dlaurent@tum.de Sat Nov 12 05:32:24 1994
+Path: ashpoly!cascade!brgate!saturno!tum!dlaurent
+From: dlaurent@tum.de (Dong-hyun Laurent)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Nov12.053224.4140@tum.de>
+Date: Sat, 12 Nov 1994 05:32:24 GMT
+References: <1994Nov08.095324.6209@earthlink.net> <1994Nov09.211124.6932@cam.ac.uk> <1994Nov11.063824.9310@clari.net>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Nov11.063824.9310@clari.net>, jduarte@clari.net (Jens Duarte) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Dong-hyun Laurent <dlaurent@tum.de>
+*PLONK* filter active for trolls.
+NeXTstation Turbo Color - NetBSD 1.0
+

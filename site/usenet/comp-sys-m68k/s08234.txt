@@ -1,0 +1,122 @@
+From bvasiliev@cmu.edu Fri Apr 01 13:22:22 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!cmu!bvasiliev
+From: bvasiliev@cmu.edu (Bruno Vasiliev)
+Newsgroups: comp.sys.m68k
+Subject: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Apr01.132222.8774@cmu.edu>
+Date: Fri, 01 Apr 1994 13:22:22 GMT
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+Bruno Vasiliev | bvasiliev@cmu.edu
+PGP Key fingerprint: 49A9 8219 7ECE 9FF6
+"Keep the channels open."
+
+From nlaurent@stanford.edu Sat Apr 02 00:57:22 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!stanford!nlaurent
+From: nlaurent@stanford.edu (Nadia Laurent)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Apr02.005722.5203@stanford.edu>
+Date: Sat, 02 Apr 1994 00:57:22 GMT
+References: <1994Apr01.132222.8774@cmu.edu>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Apr01.132222.8774@cmu.edu>, bvasiliev@cmu.edu (Bruno Vasiliev) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Nadia Laurent -- Stanford University Computer Systems Lab
+"There are 14 nodes and only 10 countries. Count again."
+
+From dnovak@clari.net Sat Apr 02 09:09:22 1994
+Path: ashpoly!cascade!mxgate!coyoacan!clari!dnovak
+From: dnovak@clari.net (Dong-hyun Novak)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Apr02.090922.3391@clari.net>
+Date: Sat, 02 Apr 1994 09:09:22 GMT
+References: <1994Apr01.132222.8774@cmu.edu>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 12
+
+In article <1994Apr01.132222.8774@cmu.edu>, bvasiliev@cmu.edu (Bruno Vasiliev) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Dong-hyun Novak <dnovak@clari.net>
+"Do not worship the copy."
+Sun 3/60 (SunOS 4.1.1) / TOS 4.04
+
+From scampbell@cmu.edu Mon Apr 04 00:05:22 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!cmu!scampbell
+From: scampbell@cmu.edu (Sun-mi Campbell)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Apr04.000522.5427@cmu.edu>
+Date: Mon, 04 Apr 1994 00:05:22 GMT
+References: <1994Apr01.132222.8774@cmu.edu> <1994Apr02.090922.3391@clari.net>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Apr02.090922.3391@clari.net>, dnovak@clari.net (Dong-hyun Novak) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Sun-mi Campbell <scampbell@cmu.edu>
+US Robotics Courier V.34 @ 14,400 bps
+"The carrier frequency does not drift by accident."
+
+From mfournier@delphi.com Mon Apr 04 12:21:22 1994
+Path: ashpoly!cascade!brgate!saturno!delphi!mfournier
+From: mfournier@delphi.com (Matthias Fournier)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Apr04.122122.8224@delphi.com>
+Date: Mon, 04 Apr 1994 12:21:22 GMT
+References: <1994Apr01.132222.8774@cmu.edu>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 12
+
+In article <1994Apr01.132222.8774@cmu.edu>, bvasiliev@cmu.edu (Bruno Vasiliev) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Matthias Fournier <mfournier@delphi.com>
+US Robotics Courier V.34 @ 19,200 bps
+"Measuring a record you own is listening, not piracy."
+

@@ -1,0 +1,70 @@
+From dito@pipeline.com Thu May 02 20:20:48 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!pipeline!dito
+From: dito@pipeline.com (Dong-hyun Ito)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996May02.202048.3851@pipeline.com>
+Date: Thu, 02 May 1996 20:20:48 GMT
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Dong-hyun Ito | dito@pipeline.com
+PGP Key fingerprint: B335 03C5 5D78 0E35
+"Keep the channels open."
+
+From fdubois@pacbell.net Fri May 03 20:33:48 1996
+Path: ashpoly!cascade!bigsur!pacbell!fdubois
+From: fdubois@pacbell.net (Fiona Dubois)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996May03.203348.6088@pacbell.net>
+Date: Fri, 03 May 1996 20:33:48 GMT
+References: <1996May02.202048.3851@pipeline.com>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996May02.202048.3851@pipeline.com>, dito@pipeline.com (Dong-hyun Ito) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Fiona Dubois <fdubois@pacbell.net>
+"The hatch is open. Is anyone listening?"
+Amiga 1200 (Blizzard 030/50) / AmigaOS 3.1
+
+From lpark@uni-hamburg.de Sat May 04 20:47:48 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!uni-hamburg!lpark
+From: lpark@uni-hamburg.de (Lisa Park)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996May04.204748.7333@uni-hamburg.de>
+Date: Sat, 04 May 1996 20:47:48 GMT
+References: <1996May02.202048.3851@pipeline.com> <1996May03.203348.6088@pacbell.net>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996May03.203348.6088@pacbell.net>, fdubois@pacbell.net (Fiona Dubois) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+=== Lisa Park ===
+Dept of Electrical Engineering, Universität Hamburg Fachbereich Informatik
+"Marcus is not one man."
+

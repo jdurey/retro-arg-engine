@@ -1,0 +1,119 @@
+From fsouza@panix.com Thu Mar 02 13:19:06 1995
+Path: ashpoly!cascade!mxgate!coyoacan!panix!fsouza
+From: fsouza@panix.com (Fiona Souza)
+Newsgroups: comp.dsp
+Subject: WTB/WTT: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Mar02.131906.8281@panix.com>
+Date: Thu, 02 Mar 1995 13:19:06 GMT
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Fiona Souza | fsouza@panix.com
+PGP Key fingerprint: 2727 A90D 8D5B F82E
+"Keep the channels open."
+
+From mmoreau@inria.fr Fri Mar 03 08:05:06 1995
+Path: ashpoly!cascade!bigsur!inria!mmoreau
+From: mmoreau@inria.fr (Morag Moreau)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Mar03.080506.5743@inria.fr>
+Date: Fri, 03 Mar 1995 08:05:06 GMT
+References: <1995Mar02.131906.8281@panix.com>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Mar02.131906.8281@panix.com>, fsouza@panix.com (Fiona Souza) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+=== Morag Moreau ===
+Dept of Electrical Engineering, INRIA Rocquencourt
+"5 sigma is a discovery. 7 is a question."
+
+From kkuznetsov@netcom.com Sat Mar 04 04:00:06 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!netcom!kkuznetsov
+From: kkuznetsov@netcom.com (Karen Kuznetsov)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Mar04.040006.4279@netcom.com>
+Date: Sat, 04 Mar 1995 04:00:06 GMT
+References: <1995Mar02.131906.8281@panix.com> <1995Mar03.080506.5743@inria.fr>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Mar03.080506.5743@inria.fr>, mmoreau@inria.fr (Morag Moreau) writes:
+> Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Karen Kuznetsov | kkuznetsov@netcom.com
+PGP Key fingerprint: CA78 07EB FFD4 5336
+"Keep the channels open."
+
+From rmoreau@uu.net Sat Mar 04 08:31:06 1995
+Path: ashpoly!cascade!mxgate!coyoacan!uu!rmoreau
+From: rmoreau@uu.net (Raj Moreau)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Mar04.083106.6611@uu.net>
+Date: Sat, 04 Mar 1995 08:31:06 GMT
+References: <1995Mar02.131906.8281@panix.com> <1995Mar03.080506.5743@inria.fr>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Mar03.080506.5743@inria.fr>, mmoreau@inria.fr (Morag Moreau) writes:
+> Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Raj Moreau
+Opinions expressed are solely my own and not those of UUNET Technologies, Falls Church VA.
+------------------------------------------------------------
+
+From mkuznetsov@cern.ch Sun Mar 05 21:30:06 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!cern!mkuznetsov
+From: mkuznetsov@cern.ch (Min-jun Kuznetsov)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Mar05.213006.9807@cern.ch>
+Date: Sun, 05 Mar 1995 21:30:06 GMT
+References: <1995Mar02.131906.8281@panix.com> <1995Mar03.080506.5743@inria.fr>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995Mar03.080506.5743@inria.fr>, mmoreau@inria.fr (Morag Moreau) writes:
+> Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Min-jun Kuznetsov <mkuznetsov@cern.ch>
+US Robotics Courier V.34 @ 33,600 bps
+"Measuring a record you own is listening, not piracy."
+

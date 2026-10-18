@@ -1,0 +1,71 @@
+From schoi@netcom.com Wed Sep 13 08:24:53 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!netcom!schoi
+From: schoi@netcom.com (Sun-mi Choi)
+Newsgroups: comp.sys.m68k
+Subject: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep13.082453.1948@netcom.com>
+Date: Wed, 13 Sep 1995 08:24:53 GMT
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Sun-mi Choi | schoi@netcom.com
+PGP Key fingerprint: C2A6 FF90 722B 006F
+"Keep the channels open."
+
+From seriksson@netcom.com Wed Sep 13 18:51:53 1995
+Path: ashpoly!cascade!brgate!saturno!netcom!seriksson
+From: seriksson@netcom.com (Sergei Eriksson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep13.185153.2429@netcom.com>
+Date: Wed, 13 Sep 1995 18:51:53 GMT
+References: <1995Sep13.082453.1948@netcom.com>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Sep13.082453.1948@netcom.com>, schoi@netcom.com (Sun-mi Choi) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Sergei Eriksson | seriksson@netcom.com
+PGP Key fingerprint: 2A3F B36D 72B8 9CD9
+"Keep the channels open."
+
+From nsokolov@panix.com Fri Sep 15 09:23:53 1995
+Path: ashpoly!cascade!mxgate!coyoacan!panix!nsokolov
+From: nsokolov@panix.com (Nadine Sokolov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Sep15.092353.5216@panix.com>
+Date: Fri, 15 Sep 1995 09:23:53 GMT
+References: <1995Sep13.082453.1948@netcom.com>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Sep13.082453.1948@netcom.com>, schoi@netcom.com (Sun-mi Choi) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+> The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Nadine Sokolov
+Opinions expressed are solely my own and not those of Public Access Unix of New York.
+------------------------------------------------------------
+

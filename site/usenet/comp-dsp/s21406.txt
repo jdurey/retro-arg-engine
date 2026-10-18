@@ -1,0 +1,73 @@
+From pweber@rwth-aachen.de Sat Nov 04 16:20:58 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!rwth-aachen!pweber
+From: pweber@rwth-aachen.de (Pavel Weber)
+Newsgroups: comp.dsp
+Subject: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Nov04.162058.1677@rwth-aachen.de>
+Date: Sat, 04 Nov 1995 16:20:58 GMT
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+The original stardust.c v1.0 dropped sync whenever there was a scratch or surface pop on the record.
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+
+Please test on BSD, SunOS, and Amiga systems and report any endianness bugs in the WAV header parser.
+
+-- 
+=== Pavel Weber ===
+Dept of Electrical Engineering, RWTH Aachen Informatik
+"In theory there is no difference between theory and practice."
+
+From tlee@unam.mx Mon Nov 06 09:24:58 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!unam!tlee
+From: tlee@unam.mx (Tobias Lee)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Nov06.092458.3073@unam.mx>
+Date: Mon, 06 Nov 1995 09:24:58 GMT
+References: <1995Nov04.162058.1677@rwth-aachen.de>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Nov04.162058.1677@rwth-aachen.de>, pweber@rwth-aachen.de (Pavel Weber) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+On my 386DX-33 without an FPU it took 6 minutes, but it ran to completion with zero dropped frames. Great work!
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Tobias Lee -- Universidad Nacional Autónoma de México (DGSCA)
+"Extraordinary claims require extraordinary spectra."
+
+From cpetrov@pacbell.net Mon Nov 06 11:25:58 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!pacbell!cpetrov
+From: cpetrov@pacbell.net (Camila Petrov)
+Newsgroups: comp.dsp
+Subject: Re: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Nov06.112558.5986@pacbell.net>
+Date: Mon, 06 Nov 1995 11:25:58 GMT
+References: <1995Nov04.162058.1677@rwth-aachen.de>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995Nov04.162058.1677@rwth-aachen.de>, pweber@rwth-aachen.de (Pavel Weber) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+=== Camila Petrov ===
+Dept of Electrical Engineering, Pacific Bell Internet Services
+"The hatch is open. Is anyone listening?"
+

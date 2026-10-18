@@ -1,0 +1,120 @@
+From gsokolov@unam.mx Thu Apr 13 12:39:30 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!unam!gsokolov
+From: gsokolov@unam.mx (Graham Sokolov)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Apr13.123930.9503@unam.mx>
+Date: Thu, 13 Apr 1995 12:39:30 GMT
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Graham Sokolov <gsokolov@unam.mx>
+"Hardware is temporary. The signal survives."
+NeXTstation Turbo Color / NEXTSTEP 3.3
+
+From esato@pipeline.com Fri Apr 14 18:10:30 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!pipeline!esato
+From: esato@pipeline.com (Emi Sato)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Apr14.181030.7319@pipeline.com>
+Date: Fri, 14 Apr 1995 18:10:30 GMT
+References: <1995Apr13.123930.9503@unam.mx>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Apr13.123930.9503@unam.mx>, gsokolov@unam.mx (Graham Sokolov) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Emi Sato <esato@pipeline.com>
+Hayes Optima 288 @ 33,600 bps
+"The carrier frequency does not drift by accident."
+
+From mlaurent@illinois.edu Sun Apr 16 07:05:30 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!illinois!mlaurent
+From: mlaurent@illinois.edu (Mike Laurent)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Apr16.070530.5713@illinois.edu>
+Date: Sun, 16 Apr 1995 07:05:30 GMT
+References: <1995Apr13.123930.9503@unam.mx> <1995Apr14.181030.7319@pipeline.com>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Apr14.181030.7319@pipeline.com>, esato@pipeline.com (Emi Sato) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Mike Laurent
+Opinions expressed are solely my own and not those of University of Illinois Urbana-Champaign.
+------------------------------------------------------------
+
+From tnilsson@rwth-aachen.de Sun Apr 16 23:40:30 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!rwth-aachen!tnilsson
+From: tnilsson@rwth-aachen.de (Tobias Nilsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Apr16.234030.8648@rwth-aachen.de>
+Date: Sun, 16 Apr 1995 23:40:30 GMT
+References: <1995Apr13.123930.9503@unam.mx> <1995Apr14.181030.7319@pipeline.com> <1995Apr16.070530.5713@illinois.edu>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995Apr16.070530.5713@illinois.edu>, mlaurent@illinois.edu (Mike Laurent) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+=== Tobias Nilsson ===
+Dept of Electrical Engineering, RWTH Aachen Informatik
+"Extraordinary claims require extraordinary spectra."
+
+From akowalski@berkeley.edu Mon Apr 17 05:39:30 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!berkeley!akowalski
+From: akowalski@berkeley.edu (Amy Kowalski)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Apr17.053930.1170@berkeley.edu>
+Date: Mon, 17 Apr 1995 05:39:30 GMT
+References: <1995Apr13.123930.9503@unam.mx>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Apr13.123930.9503@unam.mx>, gsokolov@unam.mx (Graham Sokolov) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+=== Amy Kowalski ===
+Dept of Electrical Engineering, UC Berkeley Department of EECS
+"There are 14 nodes and only 10 countries. Count again."
+

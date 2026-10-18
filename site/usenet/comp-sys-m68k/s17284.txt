@@ -1,0 +1,95 @@
+From nweber@kth.se Sun Jun 04 20:40:25 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!kth!nweber
+From: nweber@kth.se (Natalia Weber)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Jun04.204025.3253@kth.se>
+Date: Sun, 04 Jun 1995 20:40:25 GMT
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+Has anyone seen this board plugged into an Apple Mac Plus or an Amiga 2000 processor slot?
+
+-- 
+Natalia Weber <nweber@kth.se>
+*PLONK* filter active for trolls.
+PC-9821Ap2 (NEC) - NetBSD 1.0
+
+From bramirez@berkeley.edu Tue Jun 06 13:33:25 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!berkeley!bramirez
+From: bramirez@berkeley.edu (Bruno Ramírez)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Jun06.133325.7281@berkeley.edu>
+Date: Tue, 06 Jun 1995 13:33:25 GMT
+References: <1995Jun04.204025.3253@kth.se>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Jun04.204025.3253@kth.se>, nweber@kth.se (Natalia Weber) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+=== Bruno Ramírez ===
+Dept of Electrical Engineering, UC Berkeley Department of EECS
+"Extraordinary claims require extraordinary spectra."
+
+From ylarsson@tum.de Wed Jun 07 16:35:25 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!tum!ylarsson
+From: ylarsson@tum.de (Yuki Larsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Jun07.163525.5940@tum.de>
+Date: Wed, 07 Jun 1995 16:35:25 GMT
+References: <1995Jun04.204025.3253@kth.se>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Jun04.204025.3253@kth.se>, nweber@kth.se (Natalia Weber) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+> Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Yuki Larsson <ylarsson@tum.de>
+SupraFAXModem 28.8 @ 19,200 bps
+"Row 14. No joke."
+
+From ggarcia@illinois.edu Thu Jun 08 06:33:25 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!illinois!ggarcia
+From: ggarcia@illinois.edu (Göran García)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Jun08.063325.6528@illinois.edu>
+Date: Thu, 08 Jun 1995 06:33:25 GMT
+References: <1995Jun04.204025.3253@kth.se>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Jun04.204025.3253@kth.se>, nweber@kth.se (Natalia Weber) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+> Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Göran García <ggarcia@illinois.edu>
+Hayes Optima 288 @ 14,400 bps
+"The carrier frequency does not drift by accident."
+

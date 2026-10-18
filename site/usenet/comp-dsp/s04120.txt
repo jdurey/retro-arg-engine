@@ -1,0 +1,92 @@
+From mnovak@purdue.edu Mon Dec 04 22:33:01 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!purdue!mnovak
+From: mnovak@purdue.edu (Mathieu Novak)
+Newsgroups: comp.dsp
+Subject: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec04.223301.2106@purdue.edu>
+Date: Mon, 04 Dec 1995 22:33:01 GMT
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Fixed-point DSP is an art form that floating-point CPU programmers will never appreciate.
+
+-- 
+Mathieu Novak
+Opinions expressed are solely my own and not those of Purdue University Engineering Computer Network.
+------------------------------------------------------------
+
+From mpopov@clari.net Tue Dec 05 20:40:01 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!clari!mpopov
+From: mpopov@clari.net (Morag Popov)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec05.204001.6691@clari.net>
+Date: Tue, 05 Dec 1995 20:40:01 GMT
+References: <1995Dec04.223301.2106@purdue.edu>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1995Dec04.223301.2106@purdue.edu>, mnovak@purdue.edu (Mathieu Novak) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Morag Popov -- ClariNet Communications Corp
+"Marcus is not one man."
+
+From mkim@cmu.edu Wed Dec 06 16:43:01 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!cmu!mkim
+From: mkim@cmu.edu (Marisol Kim)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec06.164301.5025@cmu.edu>
+Date: Wed, 06 Dec 1995 16:43:01 GMT
+References: <1995Dec04.223301.2106@purdue.edu> <1995Dec05.204001.6691@clari.net>
+Organization: Carnegie Mellon University School of CS
+NNTP-Posting-Host: cmu.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Dec05.204001.6691@clari.net>, mpopov@clari.net (Morag Popov) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Marisol Kim <mkim@cmu.edu>
+Hayes Optima 288 @ 19,200 bps
+"We don't sign stars. We build them."
+
+From msilva@mit.edu Thu Dec 07 01:20:01 1995
+Path: ashpoly!cascade!mxgate!coyoacan!mit!msilva
+From: msilva@mit.edu (Marisol Silva)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Dec07.012001.9461@mit.edu>
+Date: Thu, 07 Dec 1995 01:20:01 GMT
+References: <1995Dec04.223301.2106@purdue.edu>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Dec04.223301.2106@purdue.edu>, mnovak@purdue.edu (Mathieu Novak) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Marisol Silva <msilva@mit.edu>
+*PLONK* filter active for trolls.
+NeXTstation Turbo Color - NetBSD 1.0
+

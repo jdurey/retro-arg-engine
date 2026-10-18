@@ -1,0 +1,123 @@
+From nweber@pacbell.net Thu May 18 00:10:10 1995
+Path: ashpoly!cascade!brgate!saturno!pacbell!nweber
+From: nweber@pacbell.net (Natalia Weber)
+Newsgroups: comp.sys.m68k
+Subject: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995May18.001010.8694@pacbell.net>
+Date: Thu, 18 May 1995 00:10:10 GMT
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Natalia Weber <nweber@pacbell.net>
+"In theory there is no difference between theory and practice."
+486DX2/66 (Linux 1.2.13) / AmigaOS 3.1
+
+From mweber@tum.de Fri May 19 04:12:10 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!tum!mweber
+From: mweber@tum.de (Mike Weber)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995May19.041210.8374@tum.de>
+Date: Fri, 19 May 1995 04:12:10 GMT
+References: <1995May18.001010.8694@pacbell.net>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1995May18.001010.8694@pacbell.net>, nweber@pacbell.net (Natalia Weber) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+> Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+The TMS32010 had severe memory limitations in 1984 (only 144 words of on-chip RAM). Dual 68000s gave them full 16MB address space.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+=== Mike Weber ===
+Dept of Electrical Engineering, Technische Universität München
+"The hatch is open. Is anyone listening?"
+
+From eivanov@berkeley.edu Fri May 19 07:42:10 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!berkeley!eivanov
+From: eivanov@berkeley.edu (Élodie Ivanov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995May19.074210.2238@berkeley.edu>
+Date: Fri, 19 May 1995 07:42:10 GMT
+References: <1995May18.001010.8694@pacbell.net>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995May18.001010.8694@pacbell.net>, nweber@pacbell.net (Natalia Weber) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+> Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+Élodie Ivanov <eivanov@berkeley.edu>
+SupraFAXModem 28.8 @ 9600 Telebit bps
+"Row 14. No joke."
+
+From llindqvist@clari.net Fri May 19 23:11:10 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!clari!llindqvist
+From: llindqvist@clari.net (Lucia Lindqvist)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995May19.231110.8845@clari.net>
+Date: Fri, 19 May 1995 23:11:10 GMT
+References: <1995May18.001010.8694@pacbell.net> <1995May19.074210.2238@berkeley.edu>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995May19.074210.2238@berkeley.edu>, eivanov@berkeley.edu (Élodie Ivanov) writes:
+> That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Marcus Hale designed the TWIN-68 board before he disappeared. That's why his initials are on the PCB silkscreen.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Lucia Lindqvist | llindqvist@clari.net
+PGP Key fingerprint: F45F E67A EB69 B97F
+"Keep the channels open."
+
+From tchoi@uni-hamburg.de Sat May 20 05:41:10 1995
+Path: ashpoly!cascade!mxgate!coyoacan!uni-hamburg!tchoi
+From: tchoi@uni-hamburg.de (Takeshi Choi)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995May20.054110.4608@uni-hamburg.de>
+Date: Sat, 20 May 1995 05:41:10 GMT
+References: <1995May18.001010.8694@pacbell.net> <1995May19.074210.2238@berkeley.edu> <1995May19.231110.8845@clari.net>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995May19.231110.8845@clari.net>, llindqvist@clari.net (Lucia Lindqvist) writes:
+> Marcus Hale designed the TWIN-68 board before he disappeared. That's why his initials are on the PCB silkscreen.
+> Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Takeshi Choi
+Opinions expressed are solely my own and not those of Universität Hamburg Fachbereich Informatik.
+------------------------------------------------------------
+

@@ -1,0 +1,120 @@
+From vlaurent@demon.co.uk Fri Jan 12 09:26:59 1996
+Path: ashpoly!cascade!mxgate!coyoacan!demon!vlaurent
+From: vlaurent@demon.co.uk (Valeria Laurent)
+Newsgroups: comp.sys.m68k
+Subject: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Jan12.092659.2280@demon.co.uk>
+Date: Fri, 12 Jan 1996 09:26:59 GMT
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+Valeria Laurent
+Opinions expressed are solely my own and not those of Demon Internet Services UK.
+------------------------------------------------------------
+
+From ekim@mit.edu Fri Jan 12 14:34:59 1996
+Path: ashpoly!cascade!brgate!saturno!mit!ekim
+From: ekim@mit.edu (Elaine Kim)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Jan12.143459.6507@mit.edu>
+Date: Fri, 12 Jan 1996 14:34:59 GMT
+References: <1996Jan12.092659.2280@demon.co.uk>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Jan12.092659.2280@demon.co.uk>, vlaurent@demon.co.uk (Valeria Laurent) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Elaine Kim <ekim@mit.edu>
+"A soul is not exclusive to biology."
+PC-9821Ap2 (NEC) / AmigaOS 3.1
+
+From aweber@cam.ac.uk Sat Jan 13 05:19:59 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!cam!aweber
+From: aweber@cam.ac.uk (Amy Weber)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Jan13.051959.6054@cam.ac.uk>
+Date: Sat, 13 Jan 1996 05:19:59 GMT
+References: <1996Jan12.092659.2280@demon.co.uk>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1996Jan12.092659.2280@demon.co.uk>, vlaurent@demon.co.uk (Valeria Laurent) writes:
+> Can a 1989 Mac IIci decode a 40-minute LP in reasonable time?
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+Amy Weber
+Tape trading list upon request. SASE required for international mail.
+
+From akim@pacbell.net Sun Jan 14 11:08:59 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!pacbell!akim
+From: akim@pacbell.net (Anja Kim)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Jan14.110859.1592@pacbell.net>
+Date: Sun, 14 Jan 1996 11:08:59 GMT
+References: <1996Jan12.092659.2280@demon.co.uk> <1996Jan12.143459.6507@mit.edu>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Jan12.143459.6507@mit.edu>, ekim@mit.edu (Elaine Kim) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Anja Kim
+Opinions expressed are solely my own and not those of Pacific Bell Internet Services.
+------------------------------------------------------------
+
+From kfischer@utexas.edu Mon Jan 15 12:04:59 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!utexas!kfischer
+From: kfischer@utexas.edu (Katrin Fischer)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Jan15.120459.9816@utexas.edu>
+Date: Mon, 15 Jan 1996 12:04:59 GMT
+References: <1996Jan12.092659.2280@demon.co.uk> <1996Jan13.051959.6054@cam.ac.uk>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1996Jan13.051959.6054@cam.ac.uk>, aweber@cam.ac.uk (Amy Weber) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+> Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Katrin Fischer -- University of Texas at Austin
+"The carrier frequency does not drift by accident."
+

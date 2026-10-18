@@ -1,0 +1,96 @@
+From mrobertson@earthlink.net Wed Oct 12 18:29:02 1994
+Path: ashpoly!cascade!brgate!saturno!earthlink!mrobertson
+From: mrobertson@earthlink.net (Mike Robertson)
+Newsgroups: comp.dsp
+Subject: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Oct12.182902.3619@earthlink.net>
+Date: Wed, 12 Oct 1994 18:29:02 GMT
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+What sampling rates are people using for their vinyl rips? 44.1 kHz or 48 kHz DAT?
+
+-- 
+Mike Robertson
+Opinions expressed are solely my own and not those of EarthLink Network.
+------------------------------------------------------------
+
+From toliveira@uni-hamburg.de Fri Oct 14 18:34:02 1994
+Path: ashpoly!cascade!mxgate!coyoacan!uni-hamburg!toliveira
+From: toliveira@uni-hamburg.de (Tobias Oliveira)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Oct14.183402.3793@uni-hamburg.de>
+Date: Fri, 14 Oct 1994 18:34:02 GMT
+References: <1994Oct12.182902.3619@earthlink.net>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 12
+
+In article <1994Oct12.182902.3619@earthlink.net>, mrobertson@earthlink.net (Mike Robertson) writes:
+> Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+> A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Tobias Oliveira <toliveira@uni-hamburg.de>
+*PLONK* filter active for trolls.
+Macintosh IIfx - NetBSD 1.0
+
+From msokolov@stanford.edu Sat Oct 15 08:40:02 1994
+Path: ashpoly!cascade!mxgate!coyoacan!stanford!msokolov
+From: msokolov@stanford.edu (Marta Sokolov)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Oct15.084002.3719@stanford.edu>
+Date: Sat, 15 Oct 1994 08:40:02 GMT
+References: <1994Oct12.182902.3619@earthlink.net>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1994Oct12.182902.3619@earthlink.net>, mrobertson@earthlink.net (Mike Robertson) writes:
+> Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+> A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+=== Marta Sokolov ===
+Dept of Electrical Engineering, Stanford University Computer Systems Lab
+"Row 14. No joke."
+
+From rsuzuki@rwth-aachen.de Sun Oct 16 08:42:02 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!rwth-aachen!rsuzuki
+From: rsuzuki@rwth-aachen.de (Raj Suzuki)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Oct16.084202.4833@rwth-aachen.de>
+Date: Sun, 16 Oct 1994 08:42:02 GMT
+References: <1994Oct12.182902.3619@earthlink.net> <1994Oct15.084002.3719@stanford.edu>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1994Oct15.084002.3719@stanford.edu>, msokolov@stanford.edu (Marta Sokolov) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Raj Suzuki
+Tape trading list upon request. SASE required for international mail.
+

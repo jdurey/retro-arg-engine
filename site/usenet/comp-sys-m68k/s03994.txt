@@ -1,0 +1,94 @@
+From hsanchez@titech.ac.jp Thu Dec 05 10:32:26 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!titech!hsanchez
+From: hsanchez@titech.ac.jp (Hugo Sánchez)
+Newsgroups: comp.sys.m68k
+Subject: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Dec05.103226.6725@titech.ac.jp>
+Date: Thu, 05 Dec 1996 10:32:26 GMT
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+Total execution time for a 20-minute audio track dropped from 48 minutes to 6.2 minutes.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+Hugo Sánchez <hsanchez@titech.ac.jp>
+Practical Peripherals 14.4 @ ISDN 64k bps
+"There are 14 nodes and only 10 countries. Count again."
+
+From jvasiliev@titech.ac.jp Fri Dec 06 10:36:26 1996
+Path: ashpoly!cascade!mxgate!coyoacan!titech!jvasiliev
+From: jvasiliev@titech.ac.jp (Joachim Vasiliev)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Dec06.103626.5336@titech.ac.jp>
+Date: Fri, 06 Dec 1996 10:36:26 GMT
+References: <1996Dec05.103226.6725@titech.ac.jp>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1996Dec05.103226.6725@titech.ac.jp>, hsanchez@titech.ac.jp (Hugo Sánchez) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Joachim Vasiliev <jvasiliev@titech.ac.jp>
+US Robotics Courier V.34 @ 28,800 bps
+"In theory there is no difference between theory and practice."
+
+From mkuznetsov@illinois.edu Fri Dec 06 19:49:26 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!illinois!mkuznetsov
+From: mkuznetsov@illinois.edu (Mateo Kuznetsov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Dec06.194926.3496@illinois.edu>
+Date: Fri, 06 Dec 1996 19:49:26 GMT
+References: <1996Dec05.103226.6725@titech.ac.jp> <1996Dec06.103626.5336@titech.ac.jp>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Dec06.103626.5336@titech.ac.jp>, jvasiliev@titech.ac.jp (Joachim Vasiliev) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+=== Mateo Kuznetsov ===
+Dept of Electrical Engineering, University of Illinois Urbana-Champaign
+"Tape doesn't lie at 02:14. Ears do."
+
+From rpopov@demon.co.uk Sat Dec 07 08:08:26 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!demon!rpopov
+From: rpopov@demon.co.uk (Raj Popov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Observation: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1996Dec07.080826.6211@demon.co.uk>
+Date: Sat, 07 Dec 1996 08:08:26 GMT
+References: <1996Dec05.103226.6725@titech.ac.jp> <1996Dec06.103626.5336@titech.ac.jp> <1996Dec06.194926.3496@illinois.edu>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Dec06.194926.3496@illinois.edu>, mkuznetsov@illinois.edu (Mateo Kuznetsov) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Raj Popov <rpopov@demon.co.uk>
+Practical Peripherals 14.4 @ 9600 Telebit bps
+"Do not worship the copy."
+

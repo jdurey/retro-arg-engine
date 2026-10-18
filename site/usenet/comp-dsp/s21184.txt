@@ -1,0 +1,72 @@
+From aivanov@berkeley.edu Thu Jun 01 04:45:23 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!berkeley!aivanov
+From: aivanov@berkeley.edu (Anja Ivanov)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jun01.044523.9809@berkeley.edu>
+Date: Thu, 01 Jun 1995 04:45:23 GMT
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Anja Ivanov <aivanov@berkeley.edu>
+Zyxel U-1496E @ 33,600 bps
+"Measuring a record you own is listening, not piracy."
+
+From jlopez@purdue.edu Thu Jun 01 19:20:23 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!purdue!jlopez
+From: jlopez@purdue.edu (Ji-woo López)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jun01.192023.8011@purdue.edu>
+Date: Thu, 01 Jun 1995 19:20:23 GMT
+References: <1995Jun01.044523.9809@berkeley.edu>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Jun01.044523.9809@berkeley.edu>, aivanov@berkeley.edu (Anja Ivanov) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+=== Ji-woo López ===
+Dept of Electrical Engineering, Purdue University Engineering Computer Network
+"5 sigma is a discovery. 7 is a question."
+
+From mhughes@pacbell.net Sat Jun 03 02:41:23 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!pacbell!mhughes
+From: mhughes@pacbell.net (Mathieu Hughes)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Jun03.024123.5005@pacbell.net>
+Date: Sat, 03 Jun 1995 02:41:23 GMT
+References: <1995Jun01.044523.9809@berkeley.edu>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995Jun01.044523.9809@berkeley.edu>, aivanov@berkeley.edu (Anja Ivanov) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Mathieu Hughes
+Opinions expressed are solely my own and not those of Pacific Bell Internet Services.
+------------------------------------------------------------
+

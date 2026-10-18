@@ -1,0 +1,119 @@
+From skuznetsov@inria.fr Wed Jul 17 02:11:16 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!inria!skuznetsov
+From: skuznetsov@inria.fr (Sergei Kuznetsov)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Jul17.021116.1045@inria.fr>
+Date: Wed, 17 Jul 1996 02:11:16 GMT
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+
+Does anyone have a 27C256 EPROM marked 'MH-U14' or 'ORION-CRYPTO'?
+
+-- 
+Sergei Kuznetsov -- INRIA Rocquencourt
+"We don't sign stars. We build them."
+
+From knovak@uu.net Thu Jul 18 19:12:16 1996
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!uu!knovak
+From: knovak@uu.net (Kenji Novak)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Jul18.191216.8325@uu.net>
+Date: Thu, 18 Jul 1996 19:12:16 GMT
+References: <1996Jul17.021116.1045@inria.fr>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Jul17.021116.1045@inria.fr>, skuznetsov@inria.fr (Sergei Kuznetsov) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+> This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Kenji Novak
+Tape trading list upon request. SASE required for international mail.
+
+From tsanchez@kth.se Fri Jul 19 15:23:16 1996
+Path: ashpoly!cascade!transat!eunet-de!hansebox!kth!tsanchez
+From: tsanchez@kth.se (Tomas Sánchez)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Jul19.152316.5864@kth.se>
+Date: Fri, 19 Jul 1996 15:23:16 GMT
+References: <1996Jul17.021116.1045@inria.fr> <1996Jul18.191216.8325@uu.net>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1996Jul18.191216.8325@uu.net>, knovak@uu.net (Kenji Novak) writes:
+> If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Tomas Sánchez -- Royal Institute of Technology, Stockholm
+"They will send a copy in my place."
+
+From kweber@berkeley.edu Fri Jul 19 16:34:16 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!berkeley!kweber
+From: kweber@berkeley.edu (Karen Weber)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Jul19.163416.7724@berkeley.edu>
+Date: Fri, 19 Jul 1996 16:34:16 GMT
+References: <1996Jul17.021116.1045@inria.fr>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Jul17.021116.1045@inria.fr>, skuznetsov@inria.fr (Sergei Kuznetsov) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Karen Weber | kweber@berkeley.edu
+PGP Key fingerprint: 687F F947 5443 A9CA
+"Keep the channels open."
+
+From lbrennan@mindspring.com Sun Jul 21 14:02:16 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!mindspring!lbrennan
+From: lbrennan@mindspring.com (Lucia Brennan)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Jul21.140216.2083@mindspring.com>
+Date: Sun, 21 Jul 1996 14:02:16 GMT
+References: <1996Jul17.021116.1045@inria.fr>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1996Jul17.021116.1045@inria.fr>, skuznetsov@inria.fr (Sergei Kuznetsov) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+> This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Lucia Brennan
+Opinions expressed are solely my own and not those of MindSpring Enterprises.
+------------------------------------------------------------
+

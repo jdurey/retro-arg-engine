@@ -1,0 +1,70 @@
+From sfischer@mindspring.com Thu Apr 06 11:31:30 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!mindspring!sfischer
+From: sfischer@mindspring.com (Seo-yeon Fischer)
+Newsgroups: comp.dsp
+Subject: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Apr06.113130.6985@mindspring.com>
+Date: Thu, 06 Apr 1995 11:31:30 GMT
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+What sampling rates are people using for their vinyl rips? 44.1 kHz or 48 kHz DAT?
+
+-- 
+Seo-yeon Fischer
+Opinions expressed are solely my own and not those of MindSpring Enterprises.
+------------------------------------------------------------
+
+From bmacdonald@uu.net Sat Apr 08 08:21:30 1995
+Path: ashpoly!cascade!mxgate!coyoacan!uu!bmacdonald
+From: bmacdonald@uu.net (Bastien MacDonald)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Apr08.082130.5682@uu.net>
+Date: Sat, 08 Apr 1995 08:21:30 GMT
+References: <1995Apr06.113130.6985@mindspring.com>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Apr06.113130.6985@mindspring.com>, sfischer@mindspring.com (Seo-yeon Fischer) writes:
+> Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+> A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Bastien MacDonald <bmacdonald@uu.net>
+Practical Peripherals 14.4 @ ISDN 64k bps
+"A soul is not exclusive to biology."
+
+From vlarsson@pipeline.com Mon Apr 10 11:22:30 1995
+Path: ashpoly!cascade!brgate!saturno!pipeline!vlarsson
+From: vlarsson@pipeline.com (Valeria Larsson)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Apr10.112230.5369@pipeline.com>
+Date: Mon, 10 Apr 1995 11:22:30 GMT
+References: <1995Apr06.113130.6985@mindspring.com> <1995Apr08.082130.5682@uu.net>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1995Apr08.082130.5682@uu.net>, bmacdonald@uu.net (Bastien MacDonald) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Valeria Larsson -- The Pipeline Internet Network
+"Hold for relay."
+

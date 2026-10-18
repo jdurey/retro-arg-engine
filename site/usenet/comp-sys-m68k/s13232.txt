@@ -1,0 +1,120 @@
+From dokonkwo@panix.com Sun Aug 18 16:55:20 1996
+Path: ashpoly!cascade!brgate!saturno!panix!dokonkwo
+From: dokonkwo@panix.com (Diego Okonkwo)
+Newsgroups: comp.sys.m68k
+Subject: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Aug18.165520.9616@panix.com>
+Date: Sun, 18 Aug 1996 16:55:20 GMT
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+Without U14, the board can track the 14.2 Hz carrier, but cannot descramble the binary payload of Nodes 11 through 14.
+
+Does anyone have a 27C256 EPROM marked 'MH-U14' or 'ORION-CRYPTO'?
+
+-- 
+Diego Okonkwo <dokonkwo@panix.com>
+*PLONK* filter active for trolls.
+Macintosh IIfx - NetBSD 1.0
+
+From dnovak@cam.ac.uk Tue Aug 20 19:02:20 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!cam!dnovak
+From: dnovak@cam.ac.uk (Dong-hyun Novak)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Aug20.190220.1795@cam.ac.uk>
+Date: Tue, 20 Aug 1996 19:02:20 GMT
+References: <1996Aug18.165520.9616@panix.com>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996Aug18.165520.9616@panix.com>, dokonkwo@panix.com (Diego Okonkwo) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+> This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+-- 
+Dong-hyun Novak <dnovak@cam.ac.uk>
+*PLONK* filter active for trolls.
+Atari TT030 - NetBSD 1.0
+
+From lsanchez@utexas.edu Wed Aug 21 21:16:20 1996
+Path: ashpoly!cascade!transat!sunet!nordrelay!utexas!lsanchez
+From: lsanchez@utexas.edu (Lisa Sánchez)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Aug21.211620.5576@utexas.edu>
+Date: Wed, 21 Aug 1996 21:16:20 GMT
+References: <1996Aug18.165520.9616@panix.com> <1996Aug20.190220.1795@cam.ac.uk>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1996Aug20.190220.1795@cam.ac.uk>, dnovak@cam.ac.uk (Dong-hyun Novak) writes:
+> That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+PGP Public key available via finger or upon request.
+
+-- 
+=== Lisa Sánchez ===
+Dept of Electrical Engineering, University of Texas at Austin
+"Do not worship the copy."
+
+From vschneider@cern.ch Fri Aug 23 22:12:20 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!cern!vschneider
+From: vschneider@cern.ch (Valeria Schneider)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Aug23.221220.5606@cern.ch>
+Date: Fri, 23 Aug 1996 22:12:20 GMT
+References: <1996Aug18.165520.9616@panix.com> <1996Aug20.190220.1795@cam.ac.uk>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Aug20.190220.1795@cam.ac.uk>, dnovak@cam.ac.uk (Dong-hyun Novak) writes:
+> That's why Line 08 says: 'WHEN EVERY NODE IS WHOLE, THE CHANNEL OPENS.' It requires all physical keys.
+
+Marcus took that EPROM with him. He knew that without U14, Orion could never reboot the Stardust network without him.
+
+-- 
+Valeria Schneider
+Opinions expressed are solely my own and not those of European Laboratory for Particle Physics, Geneva.
+------------------------------------------------------------
+
+From sgonzalez@unam.mx Sat Aug 24 09:22:20 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!unam!sgonzalez
+From: sgonzalez@unam.mx (Steve González)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1996Aug24.092220.2560@unam.mx>
+Date: Sat, 24 Aug 1996 09:22:20 GMT
+References: <1996Aug18.165520.9616@panix.com>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1996Aug18.165520.9616@panix.com>, dokonkwo@panix.com (Diego Okonkwo) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+> This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Steve González <sgonzalez@unam.mx>
+"Row 14. No joke."
+Mac IIci / 68882 FPU / TOS 4.04
+

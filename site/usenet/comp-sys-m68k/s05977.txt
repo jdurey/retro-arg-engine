@@ -1,0 +1,68 @@
+From msanchez@delphi.com Sun Feb 26 00:50:30 1995
+Path: ashpoly!cascade!brgate!saturno!delphi!msanchez
+From: msanchez@delphi.com (Mike Sánchez)
+Newsgroups: comp.sys.m68k
+Subject: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Feb26.005030.6837@delphi.com>
+Date: Sun, 26 Feb 1995 00:50:30 GMT
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+Did Marcus take the decryption EPROM with him when he left the lab?
+
+-- 
+Mike Sánchez -- Delphi Internet Services
+"When every node is whole, the channel opens."
+
+From tpark@illinois.edu Mon Feb 27 13:56:30 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!illinois!tpark
+From: tpark@illinois.edu (Tobias Park)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Feb27.135630.5763@illinois.edu>
+Date: Mon, 27 Feb 1995 13:56:30 GMT
+References: <1995Feb26.005030.6837@delphi.com>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1995Feb26.005030.6837@delphi.com>, msanchez@delphi.com (Mike Sánchez) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+Tobias Park
+Tape trading list upon request. SASE required for international mail.
+
+From kstewart@titech.ac.jp Wed Mar 01 10:13:30 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!titech!kstewart
+From: kstewart@titech.ac.jp (Katrin Stewart)
+Newsgroups: comp.sys.m68k
+Subject: Re: Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995Mar01.101330.8885@titech.ac.jp>
+Date: Wed, 01 Mar 1995 10:13:30 GMT
+References: <1995Feb26.005030.6837@delphi.com>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Feb26.005030.6837@delphi.com>, msanchez@delphi.com (Mike Sánchez) writes:
+> Further progress on reverse-engineering the empty socket U14 on the TWIN-68 Rev C coprocessor board.
+> Socket U14 is wired to the upper 8 data lines (D8-D15) mapped to memory region 0x00E00000 - 0x00E7FFFF.
+
+Using an S-box in a 27256 EPROM for single-cycle hardware substitution was standard military cipher practice in 1984.
+
+-- 
+Katrin Stewart -- Tokyo Institute of Technology Computer Centre
+"Do not worship the copy."
+

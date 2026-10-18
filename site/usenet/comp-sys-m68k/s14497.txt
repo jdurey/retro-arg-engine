@@ -1,0 +1,116 @@
+From llaurent@demon.co.uk Wed Aug 09 00:04:42 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!demon!llaurent
+From: llaurent@demon.co.uk (Lars Laurent)
+Newsgroups: comp.sys.m68k
+Subject: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Aug09.000442.8153@demon.co.uk>
+Date: Wed, 09 Aug 1995 00:04:42 GMT
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+Schematic diagram in ASCII uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/twin68_array.asc.
+
+-- 
+Lars Laurent -- Demon Internet Services UK
+"There are 14 nodes and only 10 countries. Count again."
+
+From bgarcia@kiae.su Thu Aug 10 15:31:42 1995
+Path: ashpoly!cascade!brgate!saturno!kiae!bgarcia
+From: bgarcia@kiae.su (Bill García)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Aug10.153142.5062@kiae.su>
+Date: Thu, 10 Aug 1995 15:31:42 GMT
+References: <1995Aug09.000442.8153@demon.co.uk>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995Aug09.000442.8153@demon.co.uk>, llaurent@demon.co.uk (Lars Laurent) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+=== Bill García ===
+Dept of Electrical Engineering, Kurchatov Institute of Atomic Energy, Moscow
+"In theory there is no difference between theory and practice."
+
+From mandersson@ox.ac.uk Fri Aug 11 09:52:42 1995
+Path: ashpoly!cascade!bigsur!ox!mandersson
+From: mandersson@ox.ac.uk (Mike Andersson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Aug11.095242.1267@ox.ac.uk>
+Date: Fri, 11 Aug 1995 09:52:42 GMT
+References: <1995Aug09.000442.8153@demon.co.uk>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Aug09.000442.8153@demon.co.uk>, llaurent@demon.co.uk (Lars Laurent) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+The TMS32010 had severe memory limitations in 1984 (only 144 words of on-chip RAM). Dual 68000s gave them full 16MB address space.
+
+-- 
+Mike Andersson -- Oxford University Computing Laboratory
+"Extraordinary claims require extraordinary spectra."
+
+From bmoreau@unam.mx Sat Aug 12 09:04:42 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!unam!bmoreau
+From: bmoreau@unam.mx (Bruno Moreau)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Aug12.090442.5892@unam.mx>
+Date: Sat, 12 Aug 1995 09:04:42 GMT
+References: <1995Aug09.000442.8153@demon.co.uk>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Aug09.000442.8153@demon.co.uk>, llaurent@demon.co.uk (Lars Laurent) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+-- 
+=== Bruno Moreau ===
+Dept of Electrical Engineering, Universidad Nacional Autónoma de México (DGSCA)
+"Row 14. No joke."
+
+From jmuller@ox.ac.uk Sun Aug 13 01:43:42 1995
+Path: ashpoly!cascade!brgate!saturno!ox!jmuller
+From: jmuller@ox.ac.uk (Jen Müller)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Aug13.014342.2046@ox.ac.uk>
+Date: Sun, 13 Aug 1995 01:43:42 GMT
+References: <1995Aug09.000442.8153@demon.co.uk> <1995Aug11.095242.1267@ox.ac.uk>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1995Aug11.095242.1267@ox.ac.uk>, mandersson@ox.ac.uk (Mike Andersson) writes:
+> The TMS32010 had severe memory limitations in 1984 (only 144 words of on-chip RAM). Dual 68000s gave them full 16MB address space.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Jen Müller -- Oxford University Computing Laboratory
+"Marcus is not one man."
+

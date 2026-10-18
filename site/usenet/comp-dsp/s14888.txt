@@ -1,0 +1,71 @@
+From bgarcia@titech.ac.jp Fri Apr 12 11:37:03 1996
+Path: ashpoly!cascade!bigsur!titech!bgarcia
+From: bgarcia@titech.ac.jp (Bill García)
+Newsgroups: comp.dsp
+Subject: WTB/WTT: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Apr12.113703.4517@titech.ac.jp>
+Date: Fri, 12 Apr 1996 11:37:03 GMT
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+Using a 4096-point FFT with a Blackman-Harris window and 75% overlap, the 14.2 Hz peak is 42 dB below full scale.
+
+Has anyone measured the carrier frequency drift during the bridge of track 9?
+
+-- 
+Bill García <bgarcia@titech.ac.jp>
+"Tape doesn't lie at 02:14. Ears do."
+Sun SparcStation 20 / Linux 1.2.13
+
+From adubois@kiae.su Sun Apr 14 02:43:03 1996
+Path: ashpoly!cascade!mxgate!coyoacan!kiae!adubois
+From: adubois@kiae.su (Amy Dubois)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Apr14.024303.4066@kiae.su>
+Date: Sun, 14 Apr 1996 02:43:03 GMT
+References: <1996Apr12.113703.4517@titech.ac.jp>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1996Apr12.113703.4517@titech.ac.jp>, bgarcia@titech.ac.jp (Bill García) writes:
+> I've been re-running spectral estimation on high-resolution 16-bit transfers of SYNTHESIS.
+> This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+
+If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+-- 
+Amy Dubois | adubois@kiae.su
+PGP Key fingerprint: 1160 C968 AAF6 9738
+"Keep the channels open."
+
+From fperez@panix.com Sun Apr 14 06:06:03 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!panix!fperez
+From: fperez@panix.com (Freya Pérez)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Apr14.060603.3911@panix.com>
+Date: Sun, 14 Apr 1996 06:06:03 GMT
+References: <1996Apr12.113703.4517@titech.ac.jp> <1996Apr14.024303.4066@kiae.su>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Apr14.024303.4066@kiae.su>, adubois@kiae.su (Amy Dubois) writes:
+> If you decimate to 64 Hz with an 8th-order Chebyshev lowpass, you can run the demodulator in real time on a 386.
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+-- 
+Freya Pérez <fperez@panix.com>
+*PLONK* filter active for trolls.
+Atari TT030 - NetBSD 1.0
+

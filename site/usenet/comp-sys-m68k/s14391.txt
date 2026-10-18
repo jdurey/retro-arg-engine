@@ -1,0 +1,70 @@
+From ghughes@uni-hamburg.de Sun Sep 15 02:50:01 1996
+Path: ashpoly!cascade!brgate!saturno!uni-hamburg!ghughes
+From: ghughes@uni-hamburg.de (Göran Hughes)
+Newsgroups: comp.sys.m68k
+Subject: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Sep15.025001.4030@uni-hamburg.de>
+Date: Sun, 15 Sep 1996 02:50:01 GMT
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Göran Hughes <ghughes@uni-hamburg.de>
+*PLONK* filter active for trolls.
+Atari TT030 - NetBSD 1.0
+
+From mbrennan@hanse.de Sun Sep 15 23:21:01 1996
+Path: ashpoly!cascade!mxgate!coyoacan!hanse!mbrennan
+From: mbrennan@hanse.de (Marisol Brennan)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Sep15.232101.3434@hanse.de>
+Date: Sun, 15 Sep 1996 23:21:01 GMT
+References: <1996Sep15.025001.4030@uni-hamburg.de>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Sep15.025001.4030@uni-hamburg.de>, ghughes@uni-hamburg.de (Göran Hughes) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+Looks like a prototype telecommunications board for military secure voice, not an audio music product.
+
+-- 
+Marisol Brennan <mbrennan@hanse.de>
+US Robotics Courier V.34 @ 33,600 bps
+"Extraordinary claims require extraordinary spectra."
+
+From jkuznetsov@panix.com Tue Sep 17 21:04:01 1996
+Path: ashpoly!cascade!bigsur!panix!jkuznetsov
+From: jkuznetsov@panix.com (Joachim Kuznetsov)
+Newsgroups: comp.sys.m68k
+Subject: Re: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1996Sep17.210401.3936@panix.com>
+Date: Tue, 17 Sep 1996 21:04:01 GMT
+References: <1996Sep15.025001.4030@uni-hamburg.de> <1996Sep15.232101.3434@hanse.de>
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Sep15.232101.3434@hanse.de>, mbrennan@hanse.de (Marisol Brennan) writes:
+> Looks like a prototype telecommunications board for military secure voice, not an audio music product.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Joachim Kuznetsov | jkuznetsov@panix.com
+PGP Key fingerprint: 4B8D 59BA 2953 24D9
+"Keep the channels open."
+

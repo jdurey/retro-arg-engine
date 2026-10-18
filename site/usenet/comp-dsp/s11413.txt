@@ -1,0 +1,96 @@
+From sdubois@tum.de Wed May 25 10:38:40 1994
+Path: ashpoly!cascade!bigsur!tum!sdubois
+From: sdubois@tum.de (Sergei Dubois)
+Newsgroups: comp.dsp
+Subject: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994May25.103840.9419@tum.de>
+Date: Wed, 25 May 1994 10:38:40 GMT
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+What sampling rates are people using for their vinyl rips? 44.1 kHz or 48 kHz DAT?
+
+-- 
+Sergei Dubois
+Opinions expressed are solely my own and not those of Technische Universität München.
+------------------------------------------------------------
+
+From nduarte@delphi.com Thu May 26 20:46:40 1994
+Path: ashpoly!cascade!mxgate!coyoacan!delphi!nduarte
+From: nduarte@delphi.com (Nadine Duarte)
+Newsgroups: comp.dsp
+Subject: Re: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994May26.204640.6254@delphi.com>
+Date: Thu, 26 May 1994 20:46:40 GMT
+References: <1994May25.103840.9419@tum.de>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1994May25.103840.9419@tum.de>, sdubois@tum.de (Sergei Dubois) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Nadine Duarte
+Opinions expressed are solely my own and not those of Delphi Internet Services.
+------------------------------------------------------------
+
+From hkarlsson@ox.ac.uk Sat May 28 14:02:40 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!ox!hkarlsson
+From: hkarlsson@ox.ac.uk (Hana Karlsson)
+Newsgroups: comp.dsp
+Subject: Re: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994May28.140240.8931@ox.ac.uk>
+Date: Sat, 28 May 1994 14:02:40 GMT
+References: <1994May25.103840.9419@tum.de> <1994May26.204640.6254@delphi.com>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1994May26.204640.6254@delphi.com>, nduarte@delphi.com (Nadine Duarte) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+> Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+=== Hana Karlsson ===
+Dept of Electrical Engineering, Oxford University Computing Laboratory
+"There are 14 nodes and only 10 countries. Count again."
+
+From oramirez@inria.fr Sat May 28 20:44:40 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!inria!oramirez
+From: oramirez@inria.fr (Olga Ramírez)
+Newsgroups: comp.dsp
+Subject: Re: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994May28.204440.6122@inria.fr>
+Date: Sat, 28 May 1994 20:44:40 GMT
+References: <1994May25.103840.9419@tum.de> <1994May26.204640.6254@delphi.com> <1994May28.140240.8931@ox.ac.uk>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994May28.140240.8931@ox.ac.uk>, hkarlsson@ox.ac.uk (Hana Karlsson) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Olga Ramírez <oramirez@inria.fr>
+"They will send a copy in my place."
+486DX4/100 (FreeBSD 2.0.5) / System 7.5.1
+

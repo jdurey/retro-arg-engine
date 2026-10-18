@@ -1,0 +1,70 @@
+From lsouza@uni-hamburg.de Wed Apr 05 22:45:23 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!uni-hamburg!lsouza
+From: lsouza@uni-hamburg.de (Liam Souza)
+Newsgroups: comp.sys.m68k
+Subject: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Apr05.224523.1719@uni-hamburg.de>
+Date: Wed, 05 Apr 1995 22:45:23 GMT
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Liam Souza
+Opinions expressed are solely my own and not those of Universität Hamburg Fachbereich Informatik.
+------------------------------------------------------------
+
+From dito@cam.ac.uk Fri Apr 07 06:43:23 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!cam!dito
+From: dito@cam.ac.uk (Dave Ito)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Apr07.064323.9363@cam.ac.uk>
+Date: Fri, 07 Apr 1995 06:43:23 GMT
+References: <1995Apr05.224523.1719@uni-hamburg.de>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Apr05.224523.1719@uni-hamburg.de>, lsouza@uni-hamburg.de (Liam Souza) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Dave Ito <dito@cam.ac.uk>
+*PLONK* filter active for trolls.
+PC-9821Ap2 (NEC) - NetBSD 1.0
+
+From estewart@kiae.su Sat Apr 08 10:44:23 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!kiae!estewart
+From: estewart@kiae.su (Emi Stewart)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Apr08.104423.6616@kiae.su>
+Date: Sat, 08 Apr 1995 10:44:23 GMT
+References: <1995Apr05.224523.1719@uni-hamburg.de> <1995Apr07.064323.9363@cam.ac.uk>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Apr07.064323.9363@cam.ac.uk>, dito@cam.ac.uk (Dave Ito) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Emi Stewart | estewart@kiae.su
+PGP Key fingerprint: 6A9D 4148 F56B A0C4
+"Keep the channels open."
+

@@ -1,0 +1,117 @@
+From hmoreno@cern.ch Tue Feb 21 19:47:47 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!cern!hmoreno
+From: hmoreno@cern.ch (Heather Moreno)
+Newsgroups: comp.dsp
+Subject: WTB/WTT: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Feb21.194747.2612@cern.ch>
+Date: Tue, 21 Feb 1995 19:47:47 GMT
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+Heather Moreno -- European Laboratory for Particle Physics, Geneva
+"We don't sign stars. We build them."
+
+From apetrov@hanse.de Tue Feb 21 20:46:47 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!hanse!apetrov
+From: apetrov@hanse.de (Anton Petrov)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Feb21.204647.9173@hanse.de>
+Date: Tue, 21 Feb 1995 20:46:47 GMT
+References: <1995Feb21.194747.2612@cern.ch>
+Organization: Hanse-Netzwerk Hamburg
+NNTP-Posting-Host: hanse.de
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Feb21.194747.2612@cern.ch>, hmoreno@cern.ch (Heather Moreno) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Anton Petrov <apetrov@hanse.de>
+Practical Peripherals 14.4 @ ISDN 64k bps
+"Hardware is temporary. The signal survives."
+
+From mpark@u-tokyo.ac.jp Wed Feb 22 17:26:47 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!u-tokyo!mpark
+From: mpark@u-tokyo.ac.jp (Mikhail Park)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Feb22.172647.8604@u-tokyo.ac.jp>
+Date: Wed, 22 Feb 1995 17:26:47 GMT
+References: <1995Feb21.194747.2612@cern.ch> <1995Feb21.204647.9173@hanse.de>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Feb21.204647.9173@hanse.de>, apetrov@hanse.de (Anton Petrov) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Mikhail Park
+Opinions expressed are solely my own and not those of University of Tokyo Department of Information Science.
+------------------------------------------------------------
+
+From bmacdonald@cern.ch Wed Feb 22 18:50:47 1995
+Path: ashpoly!cascade!brgate!saturno!cern!bmacdonald
+From: bmacdonald@cern.ch (Bastien MacDonald)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Feb22.185047.4766@cern.ch>
+Date: Wed, 22 Feb 1995 18:50:47 GMT
+References: <1995Feb21.194747.2612@cern.ch> <1995Feb21.204647.9173@hanse.de>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Feb21.204647.9173@hanse.de>, apetrov@hanse.de (Anton Petrov) writes:
+> Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Bastien MacDonald | bmacdonald@cern.ch
+PGP Key fingerprint: A79C CFF8 182A 4186
+"Keep the channels open."
+
+From klaurent@delphi.com Thu Feb 23 15:44:47 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!delphi!klaurent
+From: klaurent@delphi.com (Kirsty Laurent)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Feb23.154447.9362@delphi.com>
+Date: Thu, 23 Feb 1995 15:44:47 GMT
+References: <1995Feb21.194747.2612@cern.ch> <1995Feb21.204647.9173@hanse.de> <1995Feb22.185047.4766@cern.ch>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Feb22.185047.4766@cern.ch>, bmacdonald@cern.ch (Bastien MacDonald) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Kirsty Laurent <klaurent@delphi.com>
+Practical Peripherals 14.4 @ ISDN 64k bps
+"A soul is not exclusive to biology."
+

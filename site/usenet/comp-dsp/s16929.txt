@@ -1,0 +1,96 @@
+From jhughes@mindspring.com Mon Jun 26 19:11:15 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!mindspring!jhughes
+From: jhughes@mindspring.com (Julien Hughes)
+Newsgroups: comp.dsp
+Subject: Discussion: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jun26.191115.5905@mindspring.com>
+Date: Mon, 26 Jun 1995 19:11:15 GMT
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+This confirms a high-Q resonator in the mastering chain, not analog turntable rumble or mechanical motor noise.
+
+I've uploaded the C source for my decimation and bandpass filter to ftp.ashford-poly.edu.
+
+-- 
+Julien Hughes <jhughes@mindspring.com>
+*PLONK* filter active for trolls.
+Atari TT030 - NetBSD 1.0
+
+From ngirard@cam.ac.uk Tue Jun 27 15:13:15 1995
+Path: ashpoly!cascade!brgate!saturno!cam!ngirard
+From: ngirard@cam.ac.uk (Nadine Girard)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jun27.151315.2865@cam.ac.uk>
+Date: Tue, 27 Jun 1995 15:13:15 GMT
+References: <1995Jun26.191115.5905@mindspring.com>
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1995Jun26.191115.5905@mindspring.com>, jhughes@mindspring.com (Julien Hughes) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+> With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Nadine Girard | ngirard@cam.ac.uk
+PGP Key fingerprint: 653A B088 9216 8AAB
+"Keep the channels open."
+
+From rkowalski@clari.net Thu Jun 29 07:18:15 1995
+Path: ashpoly!cascade!brgate!saturno!clari!rkowalski
+From: rkowalski@clari.net (Rodrigo Kowalski)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jun29.071815.2440@clari.net>
+Date: Thu, 29 Jun 1995 07:18:15 GMT
+References: <1995Jun26.191115.5905@mindspring.com> <1995Jun27.151315.2865@cam.ac.uk>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Jun27.151315.2865@cam.ac.uk>, ngirard@cam.ac.uk (Nadine Girard) writes:
+> Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+> My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+Good work on the windowing. I replicated your result with an 8192-point FFT on a SPARCstation 20. The peak is exactly 14.2003 Hz.
+
+-- 
+Rodrigo Kowalski -- ClariNet Communications Corp
+"Hold for relay."
+
+From gdubois@kiae.su Thu Jun 29 18:59:15 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!kiae!gdubois
+From: gdubois@kiae.su (Graham Dubois)
+Newsgroups: comp.dsp
+Subject: Re: Discussion: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1995Jun29.185915.9551@kiae.su>
+Date: Thu, 29 Jun 1995 18:59:15 GMT
+References: <1995Jun26.191115.5905@mindspring.com> <1995Jun27.151315.2865@cam.ac.uk>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Jun27.151315.2865@cam.ac.uk>, ngirard@cam.ac.uk (Nadine Girard) writes:
+> Unless you're running off a studio reel-to-reel with optical capstan servo lock, your frequency accuracy is meaningless.
+> My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+Prof. Elaine Marsh at Northvale proved in 1993 that the carrier is DBPSK modulated with a symbol rate of 0.71 Hz.
+
+-- 
+Graham Dubois
+Tape trading list upon request. SASE required for international mail.
+

@@ -1,0 +1,97 @@
+From mmoreau@pacbell.net Fri Apr 28 11:23:53 1995
+Path: ashpoly!cascade!mxgate!coyoacan!pacbell!mmoreau
+From: mmoreau@pacbell.net (Mathieu Moreau)
+Newsgroups: comp.dsp
+Subject: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Apr28.112353.5056@pacbell.net>
+Date: Fri, 28 Apr 1995 11:23:53 GMT
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Mathieu Moreau <mmoreau@pacbell.net>
+Hayes Optima 288 @ 9600 Telebit bps
+"There are 14 nodes and only 10 countries. Count again."
+
+From gpetrov@mit.edu Sun Apr 30 12:47:53 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!mit!gpetrov
+From: gpetrov@mit.edu (Göran Petrov)
+Newsgroups: comp.dsp
+Subject: Re: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Apr30.124753.2380@mit.edu>
+Date: Sun, 30 Apr 1995 12:47:53 GMT
+References: <1995Apr28.112353.5056@pacbell.net>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Apr28.112353.5056@pacbell.net>, mmoreau@pacbell.net (Mathieu Moreau) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Göran Petrov
+Opinions expressed are solely my own and not those of Massachusetts Institute of Technology.
+------------------------------------------------------------
+
+From mschneider@uni-hamburg.de Sun Apr 30 22:00:53 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!uni-hamburg!mschneider
+From: mschneider@uni-hamburg.de (Mikhail Schneider)
+Newsgroups: comp.dsp
+Subject: Re: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995Apr30.220053.8893@uni-hamburg.de>
+Date: Sun, 30 Apr 1995 22:00:53 GMT
+References: <1995Apr28.112353.5056@pacbell.net> <1995Apr30.124753.2380@mit.edu>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995Apr30.124753.2380@mit.edu>, gpetrov@mit.edu (Göran Petrov) writes:
+> Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Mikhail Schneider <mschneider@uni-hamburg.de>
+"The carrier frequency does not drift by accident."
+Acorn RiscPC 600 / Linux 1.2.13
+
+From scampbell@rwth-aachen.de Tue May 02 09:17:53 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!rwth-aachen!scampbell
+From: scampbell@rwth-aachen.de (Seo-yeon Campbell)
+Newsgroups: comp.dsp
+Subject: Re: Data: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1995May02.091753.2950@rwth-aachen.de>
+Date: Tue, 02 May 1995 09:17:53 GMT
+References: <1995Apr28.112353.5056@pacbell.net>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995Apr28.112353.5056@pacbell.net>, mmoreau@pacbell.net (Mathieu Moreau) writes:
+> Why fixed-point integer math requires careful scaling when tracking a 14.2 Hz carrier.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+=== Seo-yeon Campbell ===
+Dept of Electrical Engineering, RWTH Aachen Informatik
+"Measuring a record you own is listening, not piracy."
+

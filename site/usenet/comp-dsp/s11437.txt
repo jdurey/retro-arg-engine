@@ -1,0 +1,98 @@
+From ewatanabe@illinois.edu Sat Sep 02 18:43:15 1995
+Path: ashpoly!cascade!mxgate!coyoacan!illinois!ewatanabe
+From: ewatanabe@illinois.edu (Elaine Watanabe)
+Newsgroups: comp.dsp
+Subject: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Sep02.184315.7001@illinois.edu>
+Date: Sat, 02 Sep 1995 18:43:15 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+What sampling rates are people using for their vinyl rips? 44.1 kHz or 48 kHz DAT?
+
+-- 
+Elaine Watanabe -- University of Illinois Urbana-Champaign
+"We don't sign stars. We build them."
+
+From pchoi@ox.ac.uk Mon Sep 04 13:38:15 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!ox!pchoi
+From: pchoi@ox.ac.uk (Pavel Choi)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Sep04.133815.4977@ox.ac.uk>
+Date: Mon, 04 Sep 1995 13:38:15 GMT
+References: <1995Sep02.184315.7001@illinois.edu>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Sep02.184315.7001@illinois.edu>, ewatanabe@illinois.edu (Elaine Watanabe) writes:
+> Comparing window sidelobe attenuation on 16-bit 44.1 kHz WAV files.
+> A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Pavel Choi | pchoi@ox.ac.uk
+PGP Key fingerprint: 6697 9668 472C 5D16
+"Keep the channels open."
+
+From sgonzalez@demon.co.uk Wed Sep 06 00:54:15 1995
+Path: ashpoly!cascade!bigsur!demon!sgonzalez
+From: sgonzalez@demon.co.uk (Seo-yeon González)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Sep06.005415.1804@demon.co.uk>
+Date: Wed, 06 Sep 1995 00:54:15 GMT
+References: <1995Sep02.184315.7001@illinois.edu> <1995Sep04.133815.4977@ox.ac.uk>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Sep04.133815.4977@ox.ac.uk>, pchoi@ox.ac.uk (Pavel Choi) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Seo-yeon González | sgonzalez@demon.co.uk
+PGP Key fingerprint: 7925 61C0 0685 8B3E
+"Keep the channels open."
+
+From mreyes@demon.co.uk Thu Sep 07 05:41:15 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!demon!mreyes
+From: mreyes@demon.co.uk (Matthias Reyes)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Sep07.054115.1824@demon.co.uk>
+Date: Thu, 07 Sep 1995 05:41:15 GMT
+References: <1995Sep02.184315.7001@illinois.edu> <1995Sep04.133815.4977@ox.ac.uk> <1995Sep06.005415.1804@demon.co.uk>
+Organization: Demon Internet Services UK
+NNTP-Posting-Host: demon.co.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 12
+
+In article <1995Sep06.005415.1804@demon.co.uk>, sgonzalez@demon.co.uk (Seo-yeon González) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+> Top-posters will be placed in my ~/.killfile without notice.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Matthias Reyes
+Opinions expressed are solely my own and not those of Demon Internet Services UK.
+------------------------------------------------------------
+

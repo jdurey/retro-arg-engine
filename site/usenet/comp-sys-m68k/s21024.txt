@@ -1,0 +1,72 @@
+From knakamura@panix.com Tue Nov 14 14:02:53 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!panix!knakamura
+From: knakamura@panix.com (Karen Nakamura)
+Newsgroups: comp.sys.m68k
+Subject: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Nov14.140253.7703@panix.com>
+Date: Tue, 14 Nov 1995 14:02:53 GMT
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Karen Nakamura -- Public Access Unix of New York
+"Measuring a record you own is listening, not piracy."
+
+From afischer@uu.net Wed Nov 15 18:32:53 1995
+Path: ashpoly!cascade!brgate!saturno!uu!afischer
+From: afischer@uu.net (Amy Fischer)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Nov15.183253.5031@uu.net>
+Date: Wed, 15 Nov 1995 18:32:53 GMT
+References: <1995Nov14.140253.7703@panix.com>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Nov14.140253.7703@panix.com>, knakamura@panix.com (Karen Nakamura) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+> CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Amy Fischer | afischer@uu.net
+PGP Key fingerprint: 49E0 4013 B830 4A2F
+"Keep the channels open."
+
+From lweber@mit.edu Fri Nov 17 10:52:53 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!mit!lweber
+From: lweber@mit.edu (Lucia Weber)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Nov17.105253.1169@mit.edu>
+Date: Fri, 17 Nov 1995 10:52:53 GMT
+References: <1995Nov14.140253.7703@panix.com> <1995Nov15.183253.5031@uu.net>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Nov15.183253.5031@uu.net>, afischer@uu.net (Amy Fischer) writes:
+> The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Lucia Weber <lweber@mit.edu>
+SupraFAXModem 28.8 @ 19,200 bps
+"Tape doesn't lie at 02:14. Ears do."
+

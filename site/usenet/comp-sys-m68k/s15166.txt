@@ -1,0 +1,94 @@
+From bnovak@inria.fr Wed Mar 23 10:35:53 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!inria!bnovak
+From: bnovak@inria.fr (Bill Novak)
+Newsgroups: comp.sys.m68k
+Subject: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Mar23.103553.6170@inria.fr>
+Date: Wed, 23 Mar 1994 10:35:53 GMT
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+Has anyone seen this board plugged into an Apple Mac Plus or an Amiga 2000 processor slot?
+
+-- 
+Bill Novak -- INRIA Rocquencourt
+"They will send a copy in my place."
+
+From tnakamura@titech.ac.jp Thu Mar 24 04:52:53 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!titech!tnakamura
+From: tnakamura@titech.ac.jp (Takeshi Nakamura)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Mar24.045253.3100@titech.ac.jp>
+Date: Thu, 24 Mar 1994 04:52:53 GMT
+References: <1994Mar23.103553.6170@inria.fr>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Mar23.103553.6170@inria.fr>, bnovak@inria.fr (Bill Novak) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+> CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Takeshi Nakamura -- Tokyo Institute of Technology Computer Centre
+"There are 14 nodes and only 10 countries. Count again."
+
+From lreyes@pipeline.com Sat Mar 26 06:24:53 1994
+Path: ashpoly!cascade!mxgate!coyoacan!pipeline!lreyes
+From: lreyes@pipeline.com (Lisa Reyes)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Mar26.062453.8809@pipeline.com>
+Date: Sat, 26 Mar 1994 06:24:53 GMT
+References: <1994Mar23.103553.6170@inria.fr>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1994Mar23.103553.6170@inria.fr>, bnovak@inria.fr (Bill Novak) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+> CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Lisa Reyes
+Tape trading list upon request. SASE required for international mail.
+
+From ksmirnov@pacbell.net Sun Mar 27 14:54:53 1994
+Path: ashpoly!cascade!mxgate!coyoacan!pacbell!ksmirnov
+From: ksmirnov@pacbell.net (Kirsty Smirnov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [SPECULATION] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1994Mar27.145453.6471@pacbell.net>
+Date: Sun, 27 Mar 1994 14:54:53 GMT
+References: <1994Mar23.103553.6170@inria.fr>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1994Mar23.103553.6170@inria.fr>, bnovak@inria.fr (Bill Novak) writes:
+> Hardware teardown of the dual-68000 DSP accelerator board used in the Stardust project.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Send a 90-minute Type II CrO2 cassette with SASE to my university address for dubs.
+
+-- 
+Kirsty Smirnov <ksmirnov@pacbell.net>
+*PLONK* filter active for trolls.
+Acorn RiscPC 600 - NetBSD 1.0
+

@@ -1,0 +1,97 @@
+From ddubois@earthlink.net Fri Apr 28 09:19:24 1995
+Path: ashpoly!cascade!bigsur!earthlink!ddubois
+From: ddubois@earthlink.net (Dong-hyun Dubois)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Apr28.091924.2571@earthlink.net>
+Date: Fri, 28 Apr 1995 09:19:24 GMT
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+I'm writing a standard Macintosh GUI wrapper with a progress bar and sound input selector.
+
+-- 
+Dong-hyun Dubois <ddubois@earthlink.net>
+"Measuring a record you own is listening, not piracy."
+486DX4/100 (FreeBSD 2.0.5) / Linux 1.2.13
+
+From jcampbell@kth.se Fri Apr 28 16:32:24 1995
+Path: ashpoly!cascade!bigsur!kth!jcampbell
+From: jcampbell@kth.se (Julien Campbell)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Apr28.163224.7859@kth.se>
+Date: Fri, 28 Apr 1995 16:32:24 GMT
+References: <1995Apr28.091924.2571@earthlink.net>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995Apr28.091924.2571@earthlink.net>, ddubois@earthlink.net (Dong-hyun Dubois) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Julien Campbell -- Royal Institute of Technology, Stockholm
+"They will send a copy in my place."
+
+From tstewart@uu.net Sun Apr 30 00:55:24 1995
+Path: ashpoly!cascade!mxgate!coyoacan!uu!tstewart
+From: tstewart@uu.net (Tyler Stewart)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Apr30.005524.7645@uu.net>
+Date: Sun, 30 Apr 1995 00:55:24 GMT
+References: <1995Apr28.091924.2571@earthlink.net>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Apr28.091924.2571@earthlink.net>, ddubois@earthlink.net (Dong-hyun Dubois) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Tyler Stewart | tstewart@uu.net
+PGP Key fingerprint: 1D83 3054 4969 03B5
+"Keep the channels open."
+
+From nrodriguez@clari.net Sun Apr 30 02:03:24 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!clari!nrodriguez
+From: nrodriguez@clari.net (Natalia Rodríguez)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Apr30.020324.8928@clari.net>
+Date: Sun, 30 Apr 1995 02:03:24 GMT
+References: <1995Apr28.091924.2571@earthlink.net> <1995Apr30.005524.7645@uu.net>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995Apr30.005524.7645@uu.net>, tstewart@uu.net (Tyler Stewart) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Top-posters will be placed in my ~/.killfile without notice.
+
+-- 
+Natalia Rodríguez <nrodriguez@clari.net>
+*PLONK* filter active for trolls.
+Acorn RiscPC 600 - NetBSD 1.0
+

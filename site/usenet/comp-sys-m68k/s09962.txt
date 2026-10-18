@@ -1,0 +1,72 @@
+From ppetrov@cam.ac.uk Sat Aug 19 13:06:09 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!cam!ppetrov
+From: ppetrov@cam.ac.uk (Pavel Petrov)
+Newsgroups: comp.sys.m68k
+Subject: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Aug19.130609.6044@cam.ac.uk>
+Date: Sat, 19 Aug 1995 13:06:09 GMT
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+CPU #0 handles host bus interfacing and DMA, while CPU #1 is dedicated entirely to a 16-bit MAC (multiply-accumulate) unit.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Pavel Petrov | ppetrov@cam.ac.uk
+PGP Key fingerprint: D6E8 990A 604F 86C7
+"Keep the channels open."
+
+From dmuller@purdue.edu Sun Aug 20 11:07:09 1995
+Path: ashpoly!cascade!mxgate!coyoacan!purdue!dmuller
+From: dmuller@purdue.edu (Dong-hyun Müller)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Aug20.110709.7639@purdue.edu>
+Date: Sun, 20 Aug 1995 11:07:09 GMT
+References: <1995Aug19.130609.6044@cam.ac.uk>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Aug19.130609.6044@cam.ac.uk>, ppetrov@cam.ac.uk (Pavel Petrov) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+> At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Dong-hyun Müller
+Tape trading list upon request. SASE required for international mail.
+
+From nlarsson@cern.ch Tue Aug 22 08:46:09 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!cern!nlarsson
+From: nlarsson@cern.ch (Natalia Larsson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Aug22.084609.7465@cern.ch>
+Date: Tue, 22 Aug 1995 08:46:09 GMT
+References: <1995Aug19.130609.6044@cam.ac.uk> <1995Aug20.110709.7639@purdue.edu>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1995Aug20.110709.7639@purdue.edu>, dmuller@purdue.edu (Dong-hyun Müller) writes:
+> The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Natalia Larsson | nlarsson@cern.ch
+PGP Key fingerprint: 62A8 C2F3 93C3 1911
+"Keep the channels open."
+

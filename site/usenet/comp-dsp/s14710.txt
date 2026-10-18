@@ -1,0 +1,119 @@
+From gfournier@purdue.edu Tue Apr 04 10:14:12 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!purdue!gfournier
+From: gfournier@purdue.edu (Graham Fournier)
+Newsgroups: comp.dsp
+Subject: WTB/WTT: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Apr04.101412.5322@purdue.edu>
+Date: Tue, 04 Apr 1995 10:14:12 GMT
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Version 1.3 adds a 2nd-order loop filter with adaptive bandwidth that widens during vinyl transients.
+Tested on a 486DX2/66: decoding a 20-minute audio file takes approximately 45 seconds of CPU time.
+
+Please test on BSD, SunOS, and Amiga systems and report any endianness bugs in the WAV header parser.
+
+-- 
+Graham Fournier -- Purdue University Engineering Computer Network
+"The carrier frequency does not drift by accident."
+
+From mtakahashi@purdue.edu Wed Apr 05 05:55:12 1995
+Path: ashpoly!cascade!brgate!saturno!purdue!mtakahashi
+From: mtakahashi@purdue.edu (Morag Takahashi)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Apr05.055512.7405@purdue.edu>
+Date: Wed, 05 Apr 1995 05:55:12 GMT
+References: <1995Apr04.101412.5322@purdue.edu>
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995Apr04.101412.5322@purdue.edu>, gfournier@purdue.edu (Graham Fournier) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Tar.gz archive gave a CRC error with PKUNZIP. Make sure you upload in binary mode, not ASCII!
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Morag Takahashi
+Opinions expressed are solely my own and not those of Purdue University Engineering Computer Network.
+------------------------------------------------------------
+
+From ebrennan@clari.net Thu Apr 06 03:39:12 1995
+Path: ashpoly!cascade!bigsur!clari!ebrennan
+From: ebrennan@clari.net (Élodie Brennan)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Apr06.033912.8403@clari.net>
+Date: Thu, 06 Apr 1995 03:39:12 GMT
+References: <1995Apr04.101412.5322@purdue.edu> <1995Apr05.055512.7405@purdue.edu>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Apr05.055512.7405@purdue.edu>, mtakahashi@purdue.edu (Morag Takahashi) writes:
+> Tar.gz archive gave a CRC error with PKUNZIP. Make sure you upload in binary mode, not ASCII!
+> If you are posting from AOL, please read RFC 1036 before posting again.
+
+Can you provide a pre-compiled DOS binary? Some of us don't have Linux or a C compiler installed on our machines.
+
+-- 
+Élodie Brennan | ebrennan@clari.net
+PGP Key fingerprint: 168A 3135 7625 0354
+"Keep the channels open."
+
+From kgirard@stanford.edu Thu Apr 06 22:24:12 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!stanford!kgirard
+From: kgirard@stanford.edu (Kirsty Girard)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Apr06.222412.8446@stanford.edu>
+Date: Thu, 06 Apr 1995 22:24:12 GMT
+References: <1995Apr04.101412.5322@purdue.edu>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 8
+
+In article <1995Apr04.101412.5322@purdue.edu>, gfournier@purdue.edu (Graham Fournier) writes:
+> Notes on porting stardust.c to GCC on Linux 1.2 and optimizing the inner filter loops.
+
+Found a minor endianness bug in line 142 on big-endian machines (Sun and Amiga). Replace ntohl with custom byte swap macro.
+
+-- 
+Kirsty Girard
+Tape trading list upon request. SASE required for international mail.
+
+From hkowalski@mit.edu Sun Apr 09 01:40:12 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!mit!hkowalski
+From: hkowalski@mit.edu (Hana Kowalski)
+Newsgroups: comp.dsp
+Subject: Re: WTB/WTT: stardust.c v1.3 - Costas loop stability & phase lock under Linux
+Message-ID: <1995Apr09.014012.7639@mit.edu>
+Date: Sun, 09 Apr 1995 01:40:12 GMT
+References: <1995Apr04.101412.5322@purdue.edu> <1995Apr05.055512.7405@purdue.edu>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995Apr05.055512.7405@purdue.edu>, mtakahashi@purdue.edu (Morag Takahashi) writes:
+> Tar.gz archive gave a CRC error with PKUNZIP. Make sure you upload in binary mode, not ASCII!
+
+Compiled cleanly under gcc -O2 on my Slackware box. The adaptive Costas loop is rock solid even on my scratched US copy.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Hana Kowalski <hkowalski@mit.edu>
+"Do not worship the copy."
+Sun SparcStation 20 / System 7.5.1
+

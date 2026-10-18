@@ -1,0 +1,48 @@
+From mrobertson@netcom.com Fri May 12 16:03:24 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!netcom!mrobertson
+From: mrobertson@netcom.com (Mikhail Robertson)
+Newsgroups: comp.sys.m68k
+Subject: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995May12.160324.7325@netcom.com>
+Date: Fri, 12 May 1995 16:03:24 GMT
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+
+This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+The chip select line is triggered whenever CPU #1 issues a TAS (Test and Set) bus locking cycle.
+
+Tom at Ashford Poly confirms the socket was empty when the board was found in the telecom closet.
+
+-- 
+=== Mikhail Robertson ===
+Dept of Electrical Engineering, NETCOM On-Line Communication Services
+"5 sigma is a discovery. 7 is a question."
+
+From pmartinez@mit.edu Sat May 13 21:20:24 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!mit!pmartinez
+From: pmartinez@mit.edu (Pavel Martínez)
+Newsgroups: comp.sys.m68k
+Subject: Re: [FLAME] Disassembling socket U14 firmware on the TWIN-68 board
+Message-ID: <1995May13.212024.8659@mit.edu>
+Date: Sat, 13 May 1995 21:20:24 GMT
+References: <1995May12.160324.7325@netcom.com>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995May12.160324.7325@netcom.com>, mrobertson@netcom.com (Mikhail Robertson) writes:
+> Tracing the address decoder lines on the motherboard reveals what was supposed to be in socket U14.
+> This indicates socket U14 held a cryptographic S-box lookup table for decrypting the Stardust keystream.
+
+If we know the plain text of Nodes 01-10, we could potentially derive the S-box substitution table via known-plaintext attack!
+
+-- 
+=== Pavel Martínez ===
+Dept of Electrical Engineering, Massachusetts Institute of Technology
+"Row 14. No joke."
+

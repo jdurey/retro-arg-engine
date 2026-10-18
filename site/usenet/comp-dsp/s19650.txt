@@ -1,0 +1,91 @@
+From erodriguez@stanford.edu Thu Feb 09 08:54:17 1995
+Path: ashpoly!cascade!brgate!saturno!stanford!erodriguez
+From: erodriguez@stanford.edu (Élodie Rodríguez)
+Newsgroups: comp.dsp
+Subject: [SPECULATION] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Feb09.085417.8483@stanford.edu>
+Date: Thu, 09 Feb 1995 08:54:17 GMT
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+MATLAB script available upon request via email.
+
+-- 
+Élodie Rodríguez
+Opinions expressed are solely my own and not those of Stanford University Computer Systems Lab.
+------------------------------------------------------------
+
+From ssanchez@illinois.edu Fri Feb 10 14:15:17 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!illinois!ssanchez
+From: ssanchez@illinois.edu (Steve Sánchez)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Feb10.141517.5468@illinois.edu>
+Date: Fri, 10 Feb 1995 14:15:17 GMT
+References: <1995Feb09.085417.8483@stanford.edu>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: Netscape 1.1N
+Lines: 8
+
+In article <1995Feb09.085417.8483@stanford.edu>, erodriguez@stanford.edu (Élodie Rodríguez) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Steve Sánchez
+Tape trading list upon request. SASE required for international mail.
+
+From otanaka@ox.ac.uk Sun Feb 12 10:37:17 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!ox!otanaka
+From: otanaka@ox.ac.uk (Olga Tanaka)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Feb12.103717.3613@ox.ac.uk>
+Date: Sun, 12 Feb 1995 10:37:17 GMT
+References: <1995Feb09.085417.8483@stanford.edu> <1995Feb10.141517.5468@illinois.edu>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Feb10.141517.5468@illinois.edu>, ssanchez@illinois.edu (Steve Sánchez) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Olga Tanaka -- Oxford University Computing Laboratory
+"In theory there is no difference between theory and practice."
+
+From dtakahashi@uni-hamburg.de Mon Feb 13 12:47:17 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!uni-hamburg!dtakahashi
+From: dtakahashi@uni-hamburg.de (Dmitri Takahashi)
+Newsgroups: comp.dsp
+Subject: Re: [SPECULATION] Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Feb13.124717.5097@uni-hamburg.de>
+Date: Mon, 13 Feb 1995 12:47:17 GMT
+References: <1995Feb09.085417.8483@stanford.edu> <1995Feb10.141517.5468@illinois.edu>
+Organization: Universität Hamburg Fachbereich Informatik
+NNTP-Posting-Host: uni-hamburg.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Feb10.141517.5468@illinois.edu>, ssanchez@illinois.edu (Steve Sánchez) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Dmitri Takahashi <dtakahashi@uni-hamburg.de>
+Zyxel U-1496E @ 33,600 bps
+"Marcus is not one man."
+

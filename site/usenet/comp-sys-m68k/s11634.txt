@@ -1,0 +1,120 @@
+From ncampbell@clari.net Sun Oct 16 06:53:32 1994
+Path: ashpoly!cascade!bigsur!clari!ncampbell
+From: ncampbell@clari.net (Nadia Campbell)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Oct16.065332.1503@clari.net>
+Date: Sun, 16 Oct 1994 06:53:32 GMT
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Nadia Campbell
+Opinions expressed are solely my own and not those of ClariNet Communications Corp.
+------------------------------------------------------------
+
+From esato@inria.fr Tue Oct 18 08:23:32 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!inria!esato
+From: esato@inria.fr (Elaine Sato)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Oct18.082332.5562@inria.fr>
+Date: Tue, 18 Oct 1994 08:23:32 GMT
+References: <1994Oct16.065332.1503@clari.net>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1994Oct16.065332.1503@clari.net>, ncampbell@clari.net (Nadia Campbell) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+=== Elaine Sato ===
+Dept of Electrical Engineering, INRIA Rocquencourt
+"Hold for relay."
+
+From vpetrov@uu.net Tue Oct 18 13:19:32 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!uu!vpetrov
+From: vpetrov@uu.net (Valeria Petrov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Oct18.131932.9479@uu.net>
+Date: Tue, 18 Oct 1994 13:19:32 GMT
+References: <1994Oct16.065332.1503@clari.net> <1994Oct18.082332.5562@inria.fr>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1994Oct18.082332.5562@inria.fr>, esato@inria.fr (Elaine Sato) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+> My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Valeria Petrov <vpetrov@uu.net>
+"In theory there is no difference between theory and practice."
+Commodore Amiga 500 (1MB OCS) / FreeBSD 2.1
+
+From lsouza@clari.net Wed Oct 19 22:30:32 1994
+Path: ashpoly!cascade!bigsur!clari!lsouza
+From: lsouza@clari.net (Lucia Souza)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Oct19.223032.3369@clari.net>
+Date: Wed, 19 Oct 1994 22:30:32 GMT
+References: <1994Oct16.065332.1503@clari.net>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1994Oct16.065332.1503@clari.net>, ncampbell@clari.net (Nadia Campbell) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Lucia Souza
+Opinions expressed are solely my own and not those of ClariNet Communications Corp.
+------------------------------------------------------------
+
+From gwatanabe@ox.ac.uk Fri Oct 21 08:12:32 1994
+Path: ashpoly!cascade!brgate!saturno!ox!gwatanabe
+From: gwatanabe@ox.ac.uk (Graham Watanabe)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Oct21.081232.7406@ox.ac.uk>
+Date: Fri, 21 Oct 1994 08:12:32 GMT
+References: <1994Oct16.065332.1503@clari.net> <1994Oct18.082332.5562@inria.fr>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Oct18.082332.5562@inria.fr>, esato@inria.fr (Elaine Sato) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Graham Watanabe
+Opinions expressed are solely my own and not those of Oxford University Computing Laboratory.
+------------------------------------------------------------
+

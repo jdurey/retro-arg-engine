@@ -1,0 +1,97 @@
+From ggonzalez@uu.net Wed Oct 25 06:07:19 1995
+Path: ashpoly!cascade!mxgate!coyoacan!uu!ggonzalez
+From: ggonzalez@uu.net (Göran González)
+Newsgroups: comp.sys.m68k
+Subject: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Oct25.060719.6930@uu.net>
+Date: Wed, 25 Oct 1995 06:07:19 GMT
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Make sure you install the 32-bit Enabler on older IIci machines running System 7.1!
+
+-- 
+Göran González <ggonzalez@uu.net>
+*PLONK* filter active for trolls.
+Macintosh IIfx - NetBSD 1.0
+
+From gsilva@rwth-aachen.de Fri Oct 27 09:46:19 1995
+Path: ashpoly!cascade!bigsur!rwth-aachen!gsilva
+From: gsilva@rwth-aachen.de (Graham Silva)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Oct27.094619.3679@rwth-aachen.de>
+Date: Fri, 27 Oct 1995 09:46:19 GMT
+References: <1995Oct25.060719.6930@uu.net>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995Oct25.060719.6930@uu.net>, ggonzalez@uu.net (Göran González) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+> A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+Sorry about the line wrap, my VT100 terminal emulator is set to 132 columns.
+
+-- 
+Graham Silva -- RWTH Aachen Informatik
+"Hardware is temporary. The signal survives."
+
+From elopez@unam.mx Fri Oct 27 23:00:19 1995
+Path: ashpoly!cascade!bigsur!unam!elopez
+From: elopez@unam.mx (Élodie López)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Oct27.230019.2597@unam.mx>
+Date: Fri, 27 Oct 1995 23:00:19 GMT
+References: <1995Oct25.060719.6930@uu.net> <1995Oct27.094619.3679@rwth-aachen.de>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Oct27.094619.3679@rwth-aachen.de>, gsilva@rwth-aachen.de (Graham Silva) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Élodie López <elopez@unam.mx>
+"Hardware is temporary. The signal survives."
+Macintosh IIfx / SunOS 4.1.4
+
+From skowalski@illinois.edu Sun Oct 29 20:12:19 1995
+Path: ashpoly!cascade!transat!eunet-fr!teletel!illinois!skowalski
+From: skowalski@illinois.edu (Sun-mi Kowalski)
+Newsgroups: comp.sys.m68k
+Subject: Re: Question: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Oct29.201219.3255@illinois.edu>
+Date: Sun, 29 Oct 1995 20:12:19 GMT
+References: <1995Oct25.060719.6930@uu.net>
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Oct25.060719.6930@uu.net>, ggonzalez@uu.net (Göran González) writes:
+> Benchmarking various C compilers and FPU math libraries on a Macintosh IIci (25 MHz 68030 + 68882).
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Sun-mi Kowalski <skowalski@illinois.edu>
+*PLONK* filter active for trolls.
+Sun 3/60 (SunOS 4.1.1) - NetBSD 1.0
+

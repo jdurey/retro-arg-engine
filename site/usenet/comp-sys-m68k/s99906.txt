@@ -1,0 +1,78 @@
+From dsp_guru@atarinet.de Sun Dec 17 21:05:44 1995
+Path: unihh!tub!news.cwnet.de!dsp_guru
+From: dsp_guru@atarinet.de (Markus von Hamburg)
+Newsgroups: comp.sys.m68k,comp.dsp
+Subject: Motorola DSP56001 code: Real-time 14.2 Hz DBPSK Demodulator for Atari Falcon
+Message-ID: <1995Dec17.210544.99906@atarinet.de>
+Date: Sun, 17 Dec 1995 21:05:44 GMT
+Organization: Atari Falcon DSP Enthusiasts Hamburg (Knoten 05)
+Lines: 62
+
+Fellow Falcon developers and DSP hackers:
+
+Following up on the stardust.c algorithm floating around Usenet, I have ported
+the 14.2001 Hz Costas carrier recovery loop to Motorola 56001 assembly for
+the Atari Falcon 030.
+
+With the Falcon's 32 MHz DSP running in parallel with the 68030, this code
+takes only 1.8% of available DSP cycles, leaving plenty of power for the
+real-time GEM oscilloscope visualization.
+
+Here is the inner quadrature demodulator loop:
+
+;=====================================================================
+; 14.2 Hz Costas Loop - Motorola DSP56001 Assembly
+; Inputs: R0 -> Circular sample buffer (Left/Right 16-bit 44.1kHz)
+; State:  Y0 = Cosine oscillator, Y1 = Sine oscillator
+;=====================================================================
+        org     p:$40
+demod_loop:
+        movep   x:M_RX,a                ; Read 16-bit audio sample from SSI
+        move    a,x0                    ; x0 = input sample s(t)
+
+        ; Compute I & Q products
+        mpyr    x0,y0,a   move  x:FREQ_ACC,b ; a = I = s(t)*cos(w*t)
+        mpyr    x0,y1,x1  move  a,x:I_OUT   ; x1 = Q = s(t)*sin(w*t)
+
+        ; Costas Phase Error = I * Q
+        mpyr    a,x1,a                  ; a = phase error e = I * Q
+        
+        ; Filter loop updates (Alpha and Beta coefficients)
+        move    x:ALPHA,y0
+        macr    a,y0,b    move  x:BETA,y1  ; b = phase + alpha*e
+        macr    a,y1,b    move  b,x:PHASE   ; update phase accumulator
+
+        ; Update quadrature local oscillator (Taylor sine/cosine approximation)
+        jsr     update_nco
+
+        ; Differential Phase Slicing: Output bit if phase delta > 90 deg
+        move    x:I_OUT,a
+        cmp     #0,a
+        bgt     bit_zero
+bit_one:
+        bset    #0,x:BIT_STREAM
+        jmp     frame_sync
+bit_zero:
+        bclr    #0,x:BIT_STREAM
+
+frame_sync:
+        nop
+        rts
+
+;=====================================================================
+
+We hooked up the line-in jack of the Falcon directly to an SL-1200 turntable
+playing an original Orion promotional 12-inch disc.
+Within 3.8 seconds, the green LED locked solid, and the terminal dumped:
+  PACKET LOCK: 14.2001 HZ
+  PAYLOAD: "THE SIGNAL IS OLDER THAN THE SONG"
+  ORIGIN: AKASAKA STUDIO 4 // DIRECTIVE 89-B
+
+If you don't have an Atari Falcon, you can inspect the live decoded telemetry
+via the web terminal at https://stardust-archive.net/terminal/
+or listen to the 24/7 live hardware transmission at:
+https://youtube.com/@novahart_official/live
+
+--
+Markus von Hamburg | Atari Falcon DSP Dev Team
+"56001 cycles never sleep."

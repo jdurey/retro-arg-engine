@@ -1,0 +1,117 @@
+From bsmirnov@illinois.edu Thu Oct 20 07:20:01 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!illinois!bsmirnov
+From: bsmirnov@illinois.edu (Bill Smirnov)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Oct20.072001.4991@illinois.edu>
+Date: Thu, 20 Oct 1994 07:20:01 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Bill Smirnov <bsmirnov@illinois.edu>
+*PLONK* filter active for trolls.
+PC-9821Ap2 (NEC) - NetBSD 1.0
+
+From jkang@delphi.com Fri Oct 21 20:55:01 1994
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!delphi!jkang
+From: jkang@delphi.com (Ji-woo Kang)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Oct21.205501.6522@delphi.com>
+Date: Fri, 21 Oct 1994 20:55:01 GMT
+References: <1994Oct20.072001.4991@illinois.edu>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: WinVN 0.99.5
+Lines: 12
+
+In article <1994Oct20.072001.4991@illinois.edu>, bsmirnov@illinois.edu (Bill Smirnov) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Ji-woo Kang <jkang@delphi.com>
+*PLONK* filter active for trolls.
+Sun 3/60 (SunOS 4.1.1) - NetBSD 1.0
+
+From cpetrov@netcom.com Sat Oct 22 11:45:01 1994
+Path: ashpoly!cascade!bigsur!netcom!cpetrov
+From: cpetrov@netcom.com (Camila Petrov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Oct22.114501.1022@netcom.com>
+Date: Sat, 22 Oct 1994 11:45:01 GMT
+References: <1994Oct20.072001.4991@illinois.edu>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Oct20.072001.4991@illinois.edu>, bsmirnov@illinois.edu (Bill Smirnov) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+> By passing the -mc68882 compiler flag in Think C, all sin/cos and sqrt operations compile directly to FPU opcodes.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Camila Petrov
+Tape trading list upon request. SASE required for international mail.
+
+From edubois@inria.fr Sat Oct 22 22:59:01 1994
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!inria!edubois
+From: edubois@inria.fr (Élodie Dubois)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Oct22.225901.5785@inria.fr>
+Date: Sat, 22 Oct 1994 22:59:01 GMT
+References: <1994Oct20.072001.4991@illinois.edu> <1994Oct22.114501.1022@netcom.com>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1994Oct22.114501.1022@netcom.com>, cpetrov@netcom.com (Camila Petrov) writes:
+> Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Élodie Dubois -- INRIA Rocquencourt
+"5 sigma is a discovery. 7 is a question."
+
+From enovak@mindspring.com Sun Oct 23 14:26:01 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!mindspring!enovak
+From: enovak@mindspring.com (Elaine Novak)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1994Oct23.142601.7478@mindspring.com>
+Date: Sun, 23 Oct 1994 14:26:01 GMT
+References: <1994Oct20.072001.4991@illinois.edu>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1994Oct20.072001.4991@illinois.edu>, bsmirnov@illinois.edu (Bill Smirnov) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Elaine Novak
+Tape trading list upon request. SASE required for international mail.
+

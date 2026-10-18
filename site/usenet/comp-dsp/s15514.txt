@@ -1,0 +1,95 @@
+From srobertson@kth.se Sat Oct 26 17:31:16 1996
+Path: ashpoly!cascade!mxgate!coyoacan!kth!srobertson
+From: srobertson@kth.se (Seo-yeon Robertson)
+Newsgroups: comp.dsp
+Subject: Question: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Oct26.173116.4046@kth.se>
+Date: Sat, 26 Oct 1996 17:31:16 GMT
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+With a 12th-order Burg AR model, the pole is located at z = 0.9992 * exp(j * 2 * pi * 14.2 / Fs).
+
+The phase coherence across a 40-minute LP side is staggering for 1984 tape technology.
+
+-- 
+Seo-yeon Robertson
+Opinions expressed are solely my own and not those of Royal Institute of Technology, Stockholm.
+------------------------------------------------------------
+
+From dchoi@stanford.edu Sun Oct 27 21:45:16 1996
+Path: ashpoly!cascade!mxgate!coyoacan!stanford!dchoi
+From: dchoi@stanford.edu (Dmitri Choi)
+Newsgroups: comp.dsp
+Subject: Re: Question: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Oct27.214516.3411@stanford.edu>
+Date: Sun, 27 Oct 1996 21:45:16 GMT
+References: <1996Oct26.173116.4046@kth.se>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Oct26.173116.4046@kth.se>, srobertson@kth.se (Seo-yeon Robertson) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+> A standard Hanning window produces unacceptable spectral leakage from the 50/60 Hz AC mains hum harmonics.
+
+Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+-- 
+Dmitri Choi
+Tape trading list upon request. SASE required for international mail.
+
+From rtakahashi@pipeline.com Mon Oct 28 17:59:16 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!pipeline!rtakahashi
+From: rtakahashi@pipeline.com (Renata Takahashi)
+Newsgroups: comp.dsp
+Subject: Re: Question: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Oct28.175916.7546@pipeline.com>
+Date: Mon, 28 Oct 1996 17:59:16 GMT
+References: <1996Oct26.173116.4046@kth.se> <1996Oct27.214516.3411@stanford.edu>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1996Oct27.214516.3411@stanford.edu>, dchoi@stanford.edu (Dmitri Choi) writes:
+> Have you checked your sound card's ADC clock? Cheap Sound Blaster cards use uncalibrated ceramic resonators that drift with temperature.
+
+Prof. Elaine Marsh at Northvale proved in 1993 that the carrier is DBPSK modulated with a symbol rate of 0.71 Hz.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Renata Takahashi <rtakahashi@pipeline.com>
+*PLONK* filter active for trolls.
+Acorn RiscPC 600 - NetBSD 1.0
+
+From tkowalski@uu.net Tue Oct 29 21:16:16 1996
+Path: ashpoly!cascade!mxgate!coyoacan!uu!tkowalski
+From: tkowalski@uu.net (Tomas Kowalski)
+Newsgroups: comp.dsp
+Subject: Re: Question: 14.2 Hz sub-carrier PSD estimation - Welch vs Burg periodogram
+Message-ID: <1996Oct29.211616.9811@uu.net>
+Date: Tue, 29 Oct 1996 21:16:16 GMT
+References: <1996Oct26.173116.4046@kth.se>
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Oct26.173116.4046@kth.se>, srobertson@kth.se (Seo-yeon Robertson) writes:
+> Technical analysis of the sub-audible carrier: data and MATLAB code below.
+
+You're overlooking tape wow and flutter. A Revox B77 has at least 0.05% speed drift, which would smear a 14 Hz line across several bins.
+
+-- 
+Tomas Kowalski <tkowalski@uu.net>
+"5 sigma is a discovery. 7 is a question."
+Pentium 90 (OS/2 Warp) / FreeBSD 2.1
+

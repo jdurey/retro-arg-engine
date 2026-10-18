@@ -1,0 +1,71 @@
+From achoi@cam.ac.uk Tue Jun 25 06:02:25 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!cam!achoi
+From: achoi@cam.ac.uk (Andrei Choi)
+Newsgroups: comp.dsp
+Subject: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jun25.060225.7206@cam.ac.uk>
+Date: Tue, 25 Jun 1996 06:02:25 GMT
+Organization: University of Cambridge Computer Laboratory
+NNTP-Posting-Host: cam.ac.uk
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+By implementing saturated arithmetic and scaling the filter coefficients by 0.5, the loop runs in 18 instruction cycles per sample.
+However, when downsampling from 44.1 kHz to 64 Hz, accumulator overflow in the biquad IIR filter can destabilize the loop.
+
+Source code in 56k assembly uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/dsp56k/stardust_56k.asm.
+
+-- 
+Andrei Choi <achoi@cam.ac.uk>
+*PLONK* filter active for trolls.
+Macintosh IIfx - NetBSD 1.0
+
+From rramirez@titech.ac.jp Thu Jun 27 01:24:25 1996
+Path: ashpoly!cascade!transat!eunet-fr!teletel!titech!rramirez
+From: rramirez@titech.ac.jp (Renata Ramírez)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jun27.012425.8576@titech.ac.jp>
+Date: Thu, 27 Jun 1996 01:24:25 GMT
+References: <1996Jun25.060225.7206@cam.ac.uk>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 8
+
+In article <1996Jun25.060225.7206@cam.ac.uk>, achoi@cam.ac.uk (Andrei Choi) writes:
+> Porting stardust.c to the NeXTcube and Atari Falcon DSP subsystems.
+
+Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+-- 
+Renata Ramírez -- Tokyo Institute of Technology Computer Centre
+"They will send a copy in my place."
+
+From spetrov@u-tokyo.ac.jp Thu Jun 27 13:20:25 1996
+Path: ashpoly!cascade!bigsur!u-tokyo!spetrov
+From: spetrov@u-tokyo.ac.jp (Seo-yeon Petrov)
+Newsgroups: comp.dsp
+Subject: Re: Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Jun27.132025.6644@u-tokyo.ac.jp>
+Date: Thu, 27 Jun 1996 13:20:25 GMT
+References: <1996Jun25.060225.7206@cam.ac.uk> <1996Jun27.012425.8576@titech.ac.jp>
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1996Jun27.012425.8576@titech.ac.jp>, rramirez@titech.ac.jp (Renata Ramírez) writes:
+> Spoken like someone who has never tried doing real-time multichannel filtering on an x86 processor with no pipelined MAC unit!
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+PGP Public key available via finger or upon request.
+
+-- 
+Seo-yeon Petrov
+Opinions expressed are solely my own and not those of University of Tokyo Department of Information Science.
+------------------------------------------------------------
+

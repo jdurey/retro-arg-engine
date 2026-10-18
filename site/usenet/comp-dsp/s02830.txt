@@ -1,0 +1,93 @@
+From jkuznetsov@illinois.edu Sat Mar 12 03:03:43 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!illinois!jkuznetsov
+From: jkuznetsov@illinois.edu (Jens Kuznetsov)
+Newsgroups: comp.dsp
+Subject: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Mar12.030343.2463@illinois.edu>
+Date: Sat, 12 Mar 1994 03:03:43 GMT
+Organization: University of Illinois Urbana-Champaign
+NNTP-Posting-Host: illinois.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Jens Kuznetsov | jkuznetsov@illinois.edu
+PGP Key fingerprint: 7881 1094 E105 FDAB
+"Keep the channels open."
+
+From moliveira@utexas.edu Sun Mar 13 23:44:43 1994
+Path: ashpoly!cascade!transat!eunet-de!hansebox!utexas!moliveira
+From: moliveira@utexas.edu (Matthias Oliveira)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Mar13.234443.3722@utexas.edu>
+Date: Sun, 13 Mar 1994 23:44:43 GMT
+References: <1994Mar12.030343.2463@illinois.edu>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1994Mar12.030343.2463@illinois.edu>, jkuznetsov@illinois.edu (Jens Kuznetsov) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Matthias Oliveira | moliveira@utexas.edu
+PGP Key fingerprint: C380 4A18 E6DC B095
+"Keep the channels open."
+
+From mgirard@stanford.edu Tue Mar 15 21:16:43 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!stanford!mgirard
+From: mgirard@stanford.edu (Mathieu Girard)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Mar15.211643.1705@stanford.edu>
+Date: Tue, 15 Mar 1994 21:16:43 GMT
+References: <1994Mar12.030343.2463@illinois.edu> <1994Mar13.234443.3722@utexas.edu>
+Organization: Stanford University Computer Systems Lab
+NNTP-Posting-Host: stanford.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Mar13.234443.3722@utexas.edu>, moliveira@utexas.edu (Matthias Oliveira) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Mathieu Girard
+Opinions expressed are solely my own and not those of Stanford University Computer Systems Lab.
+------------------------------------------------------------
+
+From bsmirnov@pipeline.com Wed Mar 16 13:55:43 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!pipeline!bsmirnov
+From: bsmirnov@pipeline.com (Bill Smirnov)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994Mar16.135543.7479@pipeline.com>
+Date: Wed, 16 Mar 1994 13:55:43 GMT
+References: <1994Mar12.030343.2463@illinois.edu>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994Mar12.030343.2463@illinois.edu>, jkuznetsov@illinois.edu (Jens Kuznetsov) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+> At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Bill Smirnov
+Tape trading list upon request. SASE required for international mail.
+

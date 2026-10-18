@@ -1,0 +1,92 @@
+From ssato@panix.com Fri Nov 10 05:10:52 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!panix!ssato
+From: ssato@panix.com (Sergei Sato)
+Newsgroups: comp.sys.m68k
+Subject: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Nov10.051052.2882@panix.com>
+Date: Fri, 10 Nov 1995 05:10:52 GMT
+Organization: Public Access Unix of New York
+NNTP-Posting-Host: panix.com
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Sergei Sato
+Tape trading list upon request. SASE required for international mail.
+
+From lreyes@inria.fr Sat Nov 11 22:15:52 1995
+Path: ashpoly!cascade!brgate!saturno!inria!lreyes
+From: lreyes@inria.fr (Lucia Reyes)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Nov11.221552.3440@inria.fr>
+Date: Sat, 11 Nov 1995 22:15:52 GMT
+References: <1995Nov10.051052.2882@panix.com>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Nov10.051052.2882@panix.com>, ssato@panix.com (Sergei Sato) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+=== Lucia Reyes ===
+Dept of Electrical Engineering, INRIA Rocquencourt
+"They will send a copy in my place."
+
+From sstewart@mit.edu Sun Nov 12 10:05:52 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!mit!sstewart
+From: sstewart@mit.edu (Sergei Stewart)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Nov12.100552.6047@mit.edu>
+Date: Sun, 12 Nov 1995 10:05:52 GMT
+References: <1995Nov10.051052.2882@panix.com> <1995Nov11.221552.3440@inria.fr>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Nov11.221552.3440@inria.fr>, lreyes@inria.fr (Lucia Reyes) writes:
+> The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+Sergei Stewart <sstewart@mit.edu>
+Hayes Optima 288 @ ISDN 64k bps
+"A soul is not exclusive to biology."
+
+From mkuznetsov@kiae.su Mon Nov 13 08:19:52 1995
+Path: ashpoly!cascade!bigsur!kiae!mkuznetsov
+From: mkuznetsov@kiae.su (Mateo Kuznetsov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Discussion: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Nov13.081952.9518@kiae.su>
+Date: Mon, 13 Nov 1995 08:19:52 GMT
+References: <1995Nov10.051052.2882@panix.com> <1995Nov11.221552.3440@inria.fr> <1995Nov12.100552.6047@mit.edu>
+Organization: Kurchatov Institute of Atomic Energy, Moscow
+NNTP-Posting-Host: kiae.su
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Nov12.100552.6047@mit.edu>, sstewart@mit.edu (Sergei Stewart) writes:
+> The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Mateo Kuznetsov <mkuznetsov@kiae.su>
+*PLONK* filter active for trolls.
+NeXTstation Turbo Color - NetBSD 1.0
+

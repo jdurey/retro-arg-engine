@@ -1,0 +1,118 @@
+From ikang@utexas.edu Thu Nov 16 01:54:57 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!utexas!ikang
+From: ikang@utexas.edu (Ines Kang)
+Newsgroups: comp.sys.m68k
+Subject: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Nov16.015457.3747@utexas.edu>
+Date: Thu, 16 Nov 1995 01:54:57 GMT
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+The board features two 68000 CPUs clocked at 12 MHz sharing a dual-ported 128KB static RAM bank.
+
+One 28-pin EPROM socket (labeled U14) is completely empty. What firmware was supposed to be in that socket?
+
+-- 
+Ines Kang <ikang@utexas.edu>
+*PLONK* filter active for trolls.
+NeXTstation Turbo Color - NetBSD 1.0
+
+From lnakamura@netcom.com Fri Nov 17 20:06:57 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!netcom!lnakamura
+From: lnakamura@netcom.com (Lisa Nakamura)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Nov17.200657.3621@netcom.com>
+Date: Fri, 17 Nov 1995 20:06:57 GMT
+References: <1995Nov16.015457.3747@utexas.edu>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1995Nov16.015457.3747@utexas.edu>, ikang@utexas.edu (Ines Kang) writes:
+> Looking at the bus architecture of the TWIN-68 board. Motorola engineers, please take a look.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+=== Lisa Nakamura ===
+Dept of Electrical Engineering, NETCOM On-Line Communication Services
+"A soul is not exclusive to biology."
+
+From msanchez@mindspring.com Sun Nov 19 18:00:57 1995
+Path: ashpoly!cascade!bigsur!mindspring!msanchez
+From: msanchez@mindspring.com (Marta Sánchez)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Nov19.180057.1724@mindspring.com>
+Date: Sun, 19 Nov 1995 18:00:57 GMT
+References: <1995Nov16.015457.3747@utexas.edu> <1995Nov17.200657.3621@netcom.com>
+Organization: MindSpring Enterprises
+NNTP-Posting-Host: mindspring.com
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Nov17.200657.3621@netcom.com>, lnakamura@netcom.com (Lisa Nakamura) writes:
+> The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+=== Marta Sánchez ===
+Dept of Electrical Engineering, MindSpring Enterprises
+"Measuring a record you own is listening, not piracy."
+
+From srodriguez@pipeline.com Tue Nov 21 15:20:57 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!pipeline!srodriguez
+From: srodriguez@pipeline.com (Sven Rodríguez)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Nov21.152057.7378@pipeline.com>
+Date: Tue, 21 Nov 1995 15:20:57 GMT
+References: <1995Nov16.015457.3747@utexas.edu> <1995Nov17.200657.3621@netcom.com> <1995Nov19.180057.1724@mindspring.com>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Nov19.180057.1724@mindspring.com>, msanchez@mindspring.com (Marta Sánchez) writes:
+> The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+My 14.4k connection dropped twice trying to fetch this thread. Keep articles concise!
+
+-- 
+Sven Rodríguez
+Opinions expressed are solely my own and not those of The Pipeline Internet Network.
+------------------------------------------------------------
+
+From jsokolov@tum.de Wed Nov 22 03:55:57 1995
+Path: ashpoly!cascade!brgate!saturno!tum!jsokolov
+From: jsokolov@tum.de (Jens Sokolov)
+Newsgroups: comp.sys.m68k
+Subject: Re: [INFO] TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Nov22.035557.6940@tum.de>
+Date: Wed, 22 Nov 1995 03:55:57 GMT
+References: <1995Nov16.015457.3747@utexas.edu> <1995Nov17.200657.3621@netcom.com>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Nov17.200657.3621@netcom.com>, lnakamura@netcom.com (Lisa Nakamura) writes:
+> The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+-- 
+Jens Sokolov <jsokolov@tum.de>
+Zyxel U-1496E @ 28,800 bps
+"We don't sign stars. We build them."
+

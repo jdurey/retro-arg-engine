@@ -1,0 +1,95 @@
+From dtakahashi@unam.mx Mon Jun 17 12:48:47 1996
+Path: ashpoly!cascade!brgate!saturno!unam!dtakahashi
+From: dtakahashi@unam.mx (Diego Takahashi)
+Newsgroups: comp.dsp
+Subject: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Jun17.124847.5064@unam.mx>
+Date: Mon, 17 Jun 1996 12:48:47 GMT
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+MATLAB script available upon request via email.
+
+-- 
+Diego Takahashi
+Opinions expressed are solely my own and not those of Universidad Nacional Autónoma de México (DGSCA).
+------------------------------------------------------------
+
+From mtakahashi@kth.se Tue Jun 18 04:30:47 1996
+Path: ashpoly!cascade!brgate!saturno!kth!mtakahashi
+From: mtakahashi@kth.se (Min-jun Takahashi)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Jun18.043047.1559@kth.se>
+Date: Tue, 18 Jun 1996 04:30:47 GMT
+References: <1996Jun17.124847.5064@unam.mx>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1996Jun17.124847.5064@unam.mx>, dtakahashi@unam.mx (Diego Takahashi) writes:
+> A quick note on window function selection when hunting for the 14.2 Hz line in noisy vinyl rips.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Min-jun Takahashi | mtakahashi@kth.se
+PGP Key fingerprint: 1F63 C66B 847B 855E
+"Keep the channels open."
+
+From mstewart@tum.de Wed Jun 19 12:21:47 1996
+Path: ashpoly!cascade!transat!ukc!fennimore!tum!mstewart
+From: mstewart@tum.de (Matthias Stewart)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Jun19.122147.3105@tum.de>
+Date: Wed, 19 Jun 1996 12:21:47 GMT
+References: <1996Jun17.124847.5064@unam.mx> <1996Jun18.043047.1559@kth.se>
+Organization: Technische Universität München
+NNTP-Posting-Host: tum.de
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1996Jun18.043047.1559@kth.se>, mtakahashi@kth.se (Min-jun Takahashi) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Matthias Stewart <mstewart@tum.de>
+"A soul is not exclusive to biology."
+Acorn RiscPC 600 / Linux 1.2.13
+
+From rjohansson@berkeley.edu Thu Jun 20 01:21:47 1996
+Path: ashpoly!cascade!brgate!saturno!berkeley!rjohansson
+From: rjohansson@berkeley.edu (Raj Johansson)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1996Jun20.012147.1177@berkeley.edu>
+Date: Thu, 20 Jun 1996 01:21:47 GMT
+References: <1996Jun17.124847.5064@unam.mx> <1996Jun18.043047.1559@kth.se>
+Organization: UC Berkeley Department of EECS
+NNTP-Posting-Host: berkeley.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1996Jun18.043047.1559@kth.se>, mtakahashi@kth.se (Min-jun Takahashi) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Raj Johansson <rjohansson@berkeley.edu>
+"The hatch is open. Is anyone listening?"
+Amiga 3000T / TOS 4.04
+

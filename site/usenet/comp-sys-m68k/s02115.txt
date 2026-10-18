@@ -1,0 +1,117 @@
+From mpopov@u-tokyo.ac.jp Mon Nov 20 03:07:15 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!u-tokyo!mpopov
+From: mpopov@u-tokyo.ac.jp (Marta Popov)
+Newsgroups: comp.sys.m68k
+Subject: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Nov20.030715.5125@u-tokyo.ac.jp>
+Date: Mon, 20 Nov 1995 03:07:15 GMT
+Organization: University of Tokyo Department of Information Science
+NNTP-Posting-Host: u-tokyo.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Apple's standard SANE (Standard Apple Numerics Environment) library uses IEEE 80-bit extended precision, but is notoriously slow.
+A 1024-point radix-2 FFT drops from 142 milliseconds under SANE to just 18 milliseconds using direct FPU instructions.
+
+Anyone running this on a Quadra 840AV with the 68040?
+
+-- 
+Marta Popov <mpopov@u-tokyo.ac.jp>
+"They will send a copy in my place."
+NeXTstation Turbo Color / SunOS 4.1.4
+
+From vpopov@pipeline.com Tue Nov 21 09:18:15 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!pipeline!vpopov
+From: vpopov@pipeline.com (Valeria Popov)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Nov21.091815.9487@pipeline.com>
+Date: Tue, 21 Nov 1995 09:18:15 GMT
+References: <1995Nov20.030715.5125@u-tokyo.ac.jp>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Nov20.030715.5125@u-tokyo.ac.jp>, mpopov@u-tokyo.ac.jp (Marta Popov) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+-- 
+Valeria Popov <vpopov@pipeline.com>
+"Do not worship the copy."
+PC-9821Ap2 (NEC) / NEXTSTEP 3.3
+
+From bmoreno@delphi.com Thu Nov 23 11:05:15 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!delphi!bmoreno
+From: bmoreno@delphi.com (Bruno Moreno)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Nov23.110515.9877@delphi.com>
+Date: Thu, 23 Nov 1995 11:05:15 GMT
+References: <1995Nov20.030715.5125@u-tokyo.ac.jp>
+Organization: Delphi Internet Services
+NNTP-Posting-Host: delphi.com
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Nov20.030715.5125@u-tokyo.ac.jp>, mpopov@u-tokyo.ac.jp (Marta Popov) writes:
+> Compiling stardust.c with Think C 6.0 vs MPW C with direct 68882 inlining.
+
+Beware of System 7.5.1 memory leaks if you allocate large sample buffers in the application heap. Use NewPtrSys instead.
+
+-- 
+Bruno Moreno <bmoreno@delphi.com>
+*PLONK* filter active for trolls.
+Sun 3/60 (SunOS 4.1.1) - NetBSD 1.0
+
+From mkim@utexas.edu Fri Nov 24 16:24:15 1995
+Path: ashpoly!bigsur!pacrim!krgate!eunha!utexas!mkim
+From: mkim@utexas.edu (Mateo Kim)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Nov24.162415.5732@utexas.edu>
+Date: Fri, 24 Nov 1995 16:24:15 GMT
+References: <1995Nov20.030715.5125@u-tokyo.ac.jp> <1995Nov21.091815.9487@pipeline.com>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 8
+
+In article <1995Nov21.091815.9487@pipeline.com>, vpopov@pipeline.com (Valeria Popov) writes:
+> The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+-- 
+Mateo Kim -- University of Texas at Austin
+"A soul is not exclusive to biology."
+
+From mbrennan@titech.ac.jp Sun Nov 26 03:47:15 1995
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!titech!mbrennan
+From: mbrennan@titech.ac.jp (Mateo Brennan)
+Newsgroups: comp.sys.m68k
+Subject: Re: Benchmarking FFT routines on Mac IIci with MC68882 FPU under System 7.5
+Message-ID: <1995Nov26.034715.1323@titech.ac.jp>
+Date: Sun, 26 Nov 1995 03:47:15 GMT
+References: <1995Nov20.030715.5125@u-tokyo.ac.jp> <1995Nov21.091815.9487@pipeline.com> <1995Nov24.162415.5732@utexas.edu>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995Nov24.162415.5732@utexas.edu>, mkim@utexas.edu (Mateo Kim) writes:
+> Mac users bragging about 6-minute render times while Unix workstations do it in 20 seconds. Classic Apple distortion field.
+
+The 68040 on the Quadra is a monster -- the on-chip FPU executes FFT butterflies in less than 4 milliseconds.
+
+Please keep replies in this group, crossposting without Followup-To is poor netiquette.
+
+-- 
+Mateo Brennan <mbrennan@titech.ac.jp>
+*PLONK* filter active for trolls.
+Acorn RiscPC 600 - NetBSD 1.0
+

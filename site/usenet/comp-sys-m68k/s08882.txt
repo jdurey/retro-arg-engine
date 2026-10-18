@@ -1,0 +1,121 @@
+From gkim@clari.net Thu Dec 21 08:46:53 1995
+Path: ashpoly!cascade!transat!eunet-fi!relcom!kiae!clari!gkim
+From: gkim@clari.net (Graham Kim)
+Newsgroups: comp.sys.m68k
+Subject: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Dec21.084653.2537@clari.net>
+Date: Thu, 21 Dec 1995 08:46:53 GMT
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+At ROM offset 0x0909, the string 'M.H. // THE HATCH IS OPEN // ADVANCED ACOUSTICS LAB' is stored in ASCII.
+
+Schematic diagram in ASCII uploaded to ftp.ashford-poly.edu:/pub/telecom-archives/twin68_array.asc.
+
+-- 
+Graham Kim <gkim@clari.net>
+"Row 14. No joke."
+Macintosh IIfx / NEXTSTEP 3.3
+
+From sfournier@kth.se Fri Dec 22 07:02:53 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!kth!sfournier
+From: sfournier@kth.se (Steve Fournier)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Dec22.070253.6161@kth.se>
+Date: Fri, 22 Dec 1995 07:02:53 GMT
+References: <1995Dec21.084653.2537@clari.net>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 10
+
+In article <1995Dec21.084653.2537@clari.net>, gkim@clari.net (Graham Kim) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+
+Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+-- 
+Steve Fournier -- Royal Institute of Technology, Stockholm
+"Hold for relay."
+
+From jpark@pacbell.net Sun Dec 24 00:44:53 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!pacbell!jpark
+From: jpark@pacbell.net (Jen Park)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Dec24.004453.5122@pacbell.net>
+Date: Sun, 24 Dec 1995 00:44:53 GMT
+References: <1995Dec21.084653.2537@clari.net> <1995Dec22.070253.6161@kth.se>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+In article <1995Dec22.070253.6161@kth.se>, sfournier@kth.se (Steve Fournier) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+> Unsubscribe me from this list! (Wait, this is Usenet, never mind).
+
+The MAC unit looks like a precursor to the DSP56001 that Motorola put in the NeXT and Atari Falcon.
+
+-- 
+=== Jen Park ===
+Dept of Electrical Engineering, Pacific Bell Internet Services
+"Measuring a record you own is listening, not piracy."
+
+From crobertson@earthlink.net Tue Dec 26 00:21:53 1995
+Path: ashpoly!cascade!bigsur!earthlink!crobertson
+From: crobertson@earthlink.net (Callum Robertson)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Dec26.002153.5335@earthlink.net>
+Date: Tue, 26 Dec 1995 00:21:53 GMT
+References: <1995Dec21.084653.2537@clari.net>
+Organization: EarthLink Network
+NNTP-Posting-Host: earthlink.net
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1995Dec21.084653.2537@clari.net>, gkim@clari.net (Graham Kim) writes:
+> Managed to dump the 27256 EPROMs from the TWIN-68 Rev C board recovered from Ashford Poly.
+> Disassembling ROM #0 reveals an initialization routine that checks for a hardware dongle marked 'ORION-ENC-84'.
+
+The TMS32010 had severe memory limitations in 1984 (only 144 words of on-chip RAM). Dual 68000s gave them full 16MB address space.
+
+-- 
+Callum Robertson | crobertson@earthlink.net
+PGP Key fingerprint: 3238 338F 48AA CE7D
+"Keep the channels open."
+
+From mnovak@pacbell.net Wed Dec 27 03:52:53 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!pacbell!mnovak
+From: mnovak@pacbell.net (Mateo Novak)
+Newsgroups: comp.sys.m68k
+Subject: Re: Data: TWIN-68 Rev C coprocessor board - schematic analysis & EPROM dump
+Message-ID: <1995Dec27.035253.8789@pacbell.net>
+Date: Wed, 27 Dec 1995 03:52:53 GMT
+References: <1995Dec21.084653.2537@clari.net> <1995Dec22.070253.6161@kth.se>
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+In article <1995Dec22.070253.6161@kth.se>, sfournier@kth.se (Steve Fournier) writes:
+> Socket U14 was probably for the decryption key lookup table. Without that EPROM, CPU #1 is running in an idle loop.
+
+That dual-ported SRAM design is ingenious. It avoids bus arbitration contention between the two 68k processors entirely.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Mateo Novak | mnovak@pacbell.net
+PGP Key fingerprint: 7C72 036A FA0A 2245
+"Keep the channels open."
+

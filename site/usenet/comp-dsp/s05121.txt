@@ -1,0 +1,95 @@
+From rfournier@purdue.edu Wed Dec 13 22:24:24 1995
+Path: ashpoly!cascade!bigsur!purdue!rfournier
+From: rfournier@purdue.edu (Raj Fournier)
+Newsgroups: comp.dsp
+Subject: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Dec13.222424.8385@purdue.edu>
+Date: Wed, 13 Dec 1995 22:24:24 GMT
+Organization: Purdue University Engineering Computer Network
+NNTP-Posting-Host: purdue.edu
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+A Kaiser-Bessel window with parameter beta = 8.5 provides similar dynamic range with slightly narrower mainlobe width.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Raj Fournier <rfournier@purdue.edu>
+Hayes Optima 288 @ 33,600 bps
+"The carrier frequency does not drift by accident."
+
+From rjohansson@ox.ac.uk Thu Dec 14 07:55:24 1995
+Path: ashpoly!cascade!mxgate!coyoacan!ox!rjohansson
+From: rjohansson@ox.ac.uk (Renata Johansson)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Dec14.075524.6850@ox.ac.uk>
+Date: Thu, 14 Dec 1995 07:55:24 GMT
+References: <1995Dec13.222424.8385@purdue.edu>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1995Dec13.222424.8385@purdue.edu>, rfournier@purdue.edu (Raj Fournier) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Renata Johansson <rjohansson@ox.ac.uk>
+"Row 14. No joke."
+Sun SparcStation 20 / FreeBSD 2.1
+
+From mandersson@ox.ac.uk Thu Dec 14 20:20:24 1995
+Path: ashpoly!cascade!transat!ukc!fennimore!ox!mandersson
+From: mandersson@ox.ac.uk (Morag Andersson)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Dec14.202024.3809@ox.ac.uk>
+Date: Thu, 14 Dec 1995 20:20:24 GMT
+References: <1995Dec13.222424.8385@purdue.edu> <1995Dec14.075524.6850@ox.ac.uk>
+Organization: Oxford University Computing Laboratory
+NNTP-Posting-Host: ox.ac.uk
+X-Newsreader: Netscape 1.1N
+Lines: 11
+
+In article <1995Dec14.075524.6850@ox.ac.uk>, rjohansson@ox.ac.uk (Renata Johansson) writes:
+> Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+Netscape 1.1 crashes when loading large preformatted text. Stick to rn or tin!
+
+-- 
+Morag Andersson <mandersson@ox.ac.uk>
+*PLONK* filter active for trolls.
+486DX4/100 (FreeBSD 2.0.5) - NetBSD 1.0
+
+From elarsson@kth.se Fri Dec 15 07:01:24 1995
+Path: ashpoly!cascade!mxgate!coyoacan!kth!elarsson
+From: elarsson@kth.se (Élodie Larsson)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Dec15.070124.7255@kth.se>
+Date: Fri, 15 Dec 1995 07:01:24 GMT
+References: <1995Dec13.222424.8385@purdue.edu> <1995Dec14.075524.6850@ox.ac.uk> <1995Dec14.202024.3809@ox.ac.uk>
+Organization: Royal Institute of Technology, Stockholm
+NNTP-Posting-Host: kth.se
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 9
+
+In article <1995Dec14.202024.3809@ox.ac.uk>, mandersson@ox.ac.uk (Morag Andersson) writes:
+> I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Élodie Larsson
+Opinions expressed are solely my own and not those of Royal Institute of Technology, Stockholm.
+------------------------------------------------------------
+

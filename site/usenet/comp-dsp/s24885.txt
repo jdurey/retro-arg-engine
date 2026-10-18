@@ -1,0 +1,96 @@
+From sgirard@pacbell.net Mon Oct 02 09:54:58 1995
+Path: ashpoly!cascade!transat!eunet-de!hansebox!pacbell!sgirard
+From: sgirard@pacbell.net (Sergei Girard)
+Newsgroups: comp.dsp
+Subject: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Oct02.095458.5247@pacbell.net>
+Date: Mon, 02 Oct 1995 09:54:58 GMT
+Organization: Pacific Bell Internet Services
+NNTP-Posting-Host: pacbell.net
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+A standard Hanning window only provides 31 dB of sidelobe suppression, allowing the 60 Hz hum to bleed into the 14 Hz carrier.
+
+What sampling rates are people using for their vinyl rips? 44.1 kHz or 48 kHz DAT?
+
+-- 
+Sergei Girard <sgirard@pacbell.net>
+Practical Peripherals 14.4 @ 9600 Telebit bps
+"Measuring a record you own is listening, not piracy."
+
+From atakahashi@mit.edu Tue Oct 03 01:41:58 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!mit!atakahashi
+From: atakahashi@mit.edu (Andrei Takahashi)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Oct03.014158.7084@mit.edu>
+Date: Tue, 03 Oct 1995 01:41:58 GMT
+References: <1995Oct02.095458.5247@pacbell.net>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1995Oct02.095458.5247@pacbell.net>, sgirard@pacbell.net (Sergei Girard) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Andrei Takahashi
+Opinions expressed are solely my own and not those of Massachusetts Institute of Technology.
+------------------------------------------------------------
+
+From mvasiliev@titech.ac.jp Thu Oct 05 00:00:58 1995
+Path: ashpoly!cascade!transat!sunet!nordrelay!titech!mvasiliev
+From: mvasiliev@titech.ac.jp (Mei Vasiliev)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Oct05.000058.5313@titech.ac.jp>
+Date: Thu, 05 Oct 1995 00:00:58 GMT
+References: <1995Oct02.095458.5247@pacbell.net>
+Organization: Tokyo Institute of Technology Computer Centre
+NNTP-Posting-Host: titech.ac.jp
+X-Newsreader: WinVN 0.99.5
+Lines: 10
+
+In article <1995Oct02.095458.5247@pacbell.net>, sgirard@pacbell.net (Sergei Girard) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Mei Vasiliev <mvasiliev@titech.ac.jp>
+SupraFAXModem 28.8 @ 28,800 bps
+"Extraordinary claims require extraordinary spectra."
+
+From srodriguez@utexas.edu Thu Oct 05 23:37:58 1995
+Path: ashpoly!cascade!brgate!saturno!utexas!srodriguez
+From: srodriguez@utexas.edu (Steve Rodríguez)
+Newsgroups: comp.dsp
+Subject: Re: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1995Oct05.233758.1166@utexas.edu>
+Date: Thu, 05 Oct 1995 23:37:58 GMT
+References: <1995Oct02.095458.5247@pacbell.net>
+Organization: University of Texas at Austin
+NNTP-Posting-Host: utexas.edu
+X-Newsreader: WinVN 0.99.5
+Lines: 11
+
+In article <1995Oct02.095458.5247@pacbell.net>, sgirard@pacbell.net (Sergei Girard) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Steve Rodríguez
+Opinions expressed are solely my own and not those of University of Texas at Austin.
+------------------------------------------------------------
+

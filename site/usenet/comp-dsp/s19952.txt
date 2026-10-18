@@ -1,0 +1,117 @@
+From aramirez@uu.net Wed Dec 04 19:18:55 1996
+Path: ashpoly!bigsur!pacrim!krgate!eunha!uu!aramirez
+From: aramirez@uu.net (Andrei Ramírez)
+Newsgroups: comp.dsp
+Subject: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Dec04.191855.6390@uu.net>
+Date: Wed, 04 Dec 1996 19:18:55 GMT
+Organization: UUNET Technologies, Falls Church VA
+NNTP-Posting-Host: uu.net
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 11
+
+Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+
+This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+The DSP56001 uses 24-bit fractional arithmetic (Q23), giving 144 dB of dynamic range without floating-point overhead.
+
+Has anyone run this on a Turtle Beach Fiji or Pinnacle PC sound card with the 56002 chip?
+
+-- 
+=== Andrei Ramírez ===
+Dept of Electrical Engineering, UUNET Technologies, Falls Church VA
+"There are 14 nodes and only 10 countries. Count again."
+
+From kmoreno@rwth-aachen.de Fri Dec 06 05:42:55 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!rwth-aachen!kmoreno
+From: kmoreno@rwth-aachen.de (Karen Moreno)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Dec06.054255.6733@rwth-aachen.de>
+Date: Fri, 06 Dec 1996 05:42:55 GMT
+References: <1996Dec04.191855.6390@uu.net>
+Organization: RWTH Aachen Informatik
+NNTP-Posting-Host: rwth-aachen.de
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 9
+
+In article <1996Dec04.191855.6390@uu.net>, aramirez@uu.net (Andrei Ramírez) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Karen Moreno -- RWTH Aachen Informatik
+"Do not worship the copy."
+
+From elopez@cern.ch Fri Dec 06 08:42:55 1996
+Path: ashpoly!bigsur!pacrim!jpgate!kamome!cern!elopez
+From: elopez@cern.ch (Élodie López)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Dec06.084255.2372@cern.ch>
+Date: Fri, 06 Dec 1996 08:42:55 GMT
+References: <1996Dec04.191855.6390@uu.net> <1996Dec06.054255.6733@rwth-aachen.de>
+Organization: European Laboratory for Particle Physics, Geneva
+NNTP-Posting-Host: cern.ch
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Dec06.054255.6733@rwth-aachen.de>, kmoreno@rwth-aachen.de (Karen Moreno) writes:
+> Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Ran your code on my NeXTstation Turbo. It locked onto the carrier within 1.2 seconds of vinyl lead-in.
+
+-- 
+Élodie López <elopez@cern.ch>
+*PLONK* filter active for trolls.
+Amiga 3000T - NetBSD 1.0
+
+From gmacdonald@inria.fr Fri Dec 06 21:25:55 1996
+Path: ashpoly!cascade!bigsur!inria!gmacdonald
+From: gmacdonald@inria.fr (Göran MacDonald)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Dec06.212555.6750@inria.fr>
+Date: Fri, 06 Dec 1996 21:25:55 GMT
+References: <1996Dec04.191855.6390@uu.net> <1996Dec06.054255.6733@rwth-aachen.de>
+Organization: INRIA Rocquencourt
+NNTP-Posting-Host: inria.fr
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1996Dec06.054255.6733@rwth-aachen.de>, kmoreno@rwth-aachen.de (Karen Moreno) writes:
+> Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+Beautiful assembly code! The 24-bit word size of the 56001 is tailor-made for high-precision audio filtering.
+
+-- 
+Göran MacDonald <gmacdonald@inria.fr>
+Hayes Optima 288 @ 19,200 bps
+"There are 14 nodes and only 10 countries. Count again."
+
+From yramirez@mit.edu Mon Dec 09 01:16:55 1996
+Path: ashpoly!cascade!bigsur!mit!yramirez
+From: yramirez@mit.edu (Yuki Ramírez)
+Newsgroups: comp.dsp
+Subject: Re: [FLAME] Fixed-point Q15 arithmetic on Motorola DSP56001 vs IEEE floating point
+Message-ID: <1996Dec09.011655.4095@mit.edu>
+Date: Mon, 09 Dec 1996 01:16:55 GMT
+References: <1996Dec04.191855.6390@uu.net>
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1996Dec04.191855.6390@uu.net>, aramirez@uu.net (Andrei Ramírez) writes:
+> Optimizing the Stardust Costas loop demodulator for the Motorola DSP56001 chip.
+> This leaves over 95% of the DSP56001's 16.5 MIPS available for other audio tasks.
+
+Real programmers write in C, not arcane DSP microcode. With Pentium chips hitting 100 MHz, dedicated DSPs are obsolete.
+
+-- 
+Yuki Ramírez <yramirez@mit.edu>
+"Tape doesn't lie at 02:14. Ears do."
+Decstation 5000/200 / FreeBSD 2.1
+

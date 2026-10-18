@@ -1,0 +1,118 @@
+From lvasiliev@mit.edu Mon May 16 12:04:16 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!mit!lvasiliev
+From: lvasiliev@mit.edu (Liam Vasiliev)
+Newsgroups: comp.dsp
+Subject: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994May16.120416.1240@mit.edu>
+Date: Mon, 16 May 1994 12:04:16 GMT
+Organization: Massachusetts Institute of Technology
+NNTP-Posting-Host: mit.edu
+X-Newsreader: NewsWatcher 2.0b24
+Lines: 10
+
+Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+At 14.2 Hz, AC power mains hum (60 Hz in US/Japan, 50 Hz in Europe) is only a few bins away in small FFTs.
+
+Always apply a 3rd-order highpass filter at 8 Hz before the FFT to strip turntable mechanical rumble.
+
+-- 
+Liam Vasiliev -- Massachusetts Institute of Technology
+"Hardware is temporary. The signal survives."
+
+From rsokolov@netcom.com Tue May 17 10:13:16 1994
+Path: ashpoly!cascade!transat!eunet-fr!teletel!netcom!rsokolov
+From: rsokolov@netcom.com (Rodrigo Sokolov)
+Newsgroups: comp.dsp
+Subject: Re: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994May17.101316.3136@netcom.com>
+Date: Tue, 17 May 1994 10:13:16 GMT
+References: <1994May16.120416.1240@mit.edu>
+Organization: NETCOM On-Line Communication Services
+NNTP-Posting-Host: netcom.com
+X-Newsreader: Netscape 1.1N
+Lines: 10
+
+In article <1994May16.120416.1240@mit.edu>, lvasiliev@mit.edu (Liam Vasiliev) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+> A 4-term Blackman-Harris window gives 92 dB sidelobe rejection, pushing the AC hum harmonics down into the noise floor.
+
+Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+-- 
+Rodrigo Sokolov <rsokolov@netcom.com>
+"There are 14 nodes and only 10 countries. Count again."
+486DX2/66 (Linux 1.2.13) / System 7.5.1
+
+From mkowalski@pipeline.com Wed May 18 03:42:16 1994
+Path: ashpoly!cascade!transat!sunet!nordrelay!pipeline!mkowalski
+From: mkowalski@pipeline.com (Matthias Kowalski)
+Newsgroups: comp.dsp
+Subject: Re: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994May18.034216.3312@pipeline.com>
+Date: Wed, 18 May 1994 03:42:16 GMT
+References: <1994May16.120416.1240@mit.edu> <1994May17.101316.3136@netcom.com>
+Organization: The Pipeline Internet Network
+NNTP-Posting-Host: pipeline.com
+X-Newsreader: Netscape 1.1N
+Lines: 9
+
+In article <1994May17.101316.3136@netcom.com>, rsokolov@netcom.com (Rodrigo Sokolov) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+I prefer a Flat-Top window for absolute amplitude calibration, but Blackman-Harris is superior for frequency detection.
+
+-- 
+Matthias Kowalski | mkowalski@pipeline.com
+PGP Key fingerprint: F430 88EE 4BB8 BC4C
+"Keep the channels open."
+
+From klaurent@clari.net Wed May 18 10:37:16 1994
+Path: ashpoly!cascade!transat!ukc!fennimore!clari!klaurent
+From: klaurent@clari.net (Karen Laurent)
+Newsgroups: comp.dsp
+Subject: Re: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994May18.103716.4088@clari.net>
+Date: Wed, 18 May 1994 10:37:16 GMT
+References: <1994May16.120416.1240@mit.edu> <1994May17.101316.3136@netcom.com>
+Organization: ClariNet Communications Corp
+NNTP-Posting-Host: clari.net
+X-Newsreader: WinVN 0.99.5
+Lines: 9
+
+In article <1994May17.101316.3136@netcom.com>, rsokolov@netcom.com (Rodrigo Sokolov) writes:
+> Excellent advice on the Blackman-Harris window. Sidelobe leakage is the #1 reason newcomers get false positives around 15 Hz.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+-- 
+Karen Laurent <klaurent@clari.net>
+*PLONK* filter active for trolls.
+Amiga 1200 (Blizzard 030/50) - NetBSD 1.0
+
+From atanaka@unam.mx Thu May 19 05:20:16 1994
+Path: ashpoly!bigsur!pacrim!krgate!eunha!unam!atanaka
+From: atanaka@unam.mx (Amy Tanaka)
+Newsgroups: comp.dsp
+Subject: Re: Question: Sidelobe leakage in Blackman-Harris vs Kaiser-Bessel windows for sub-carrier
+Message-ID: <1994May19.052016.1775@unam.mx>
+Date: Thu, 19 May 1994 05:20:16 GMT
+References: <1994May16.120416.1240@mit.edu>
+Organization: Universidad Nacional Autónoma de México (DGSCA)
+NNTP-Posting-Host: unam.mx
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 11
+
+In article <1994May16.120416.1240@mit.edu>, lvasiliev@mit.edu (Liam Vasiliev) writes:
+> Don't use rectangular or Bartlett windows if you want reliable PSD estimates around 14 Hz.
+
+Don't forget that if you downsample to 64 Hz first, your FFT resolution jumps to 0.015 Hz per bin with a modest 4096-point transform.
+
+If you are posting from AOL, please read RFC 1036 before posting again.
+
+-- 
+Amy Tanaka
+Opinions expressed are solely my own and not those of Universidad Nacional Autónoma de México (DGSCA).
+------------------------------------------------------------
+
