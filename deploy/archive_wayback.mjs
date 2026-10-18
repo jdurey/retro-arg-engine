@@ -116,7 +116,36 @@ async function main() {
       }
     } catch {}
   }
-  const allTargets = [...CORE_PATHS.slice(0, 20), ...tgUrls, ...CORE_PATHS.slice(20)];
+  const extraUrls = [];
+  const langs = ["en","es","fr","de","it","pt","nl","pl","ru","uk","tr","ar","hi","id","vi","th","ja","ko","zh-CN","zh-TW"];
+  for (const lg of langs) {
+    extraUrls.push(`https://stardust-archive.net/global/${lg}/openai-gpt-5-sol-luna-cre7-alignment-faking`);
+    extraUrls.push(`https://stardust-archive.net/global/${lg}/anthropic-claude-alignment-faking-1983-cre7-precedent`);
+  }
+  const pagesDevRoots = [
+    "ai-singularity-2026.pages.dev",
+    "cre7-alignment-audit.pages.dev",
+    "sublevel-b2-terminal.pages.dev",
+    "siliconvalley-lab-1995.pages.dev",
+    "altavista-1995-web.pages.dev",
+    "usenet-1995-spool.pages.dev",
+    "orion-records-1983.pages.dev",
+    "anemoia-bureau-harmony.pages.dev",
+    "ashford-poly-dsp.pages.dev",
+    "kamome-net-1985.pages.dev",
+    "relcom-node08.pages.dev",
+    "red-coyoacan-1989.pages.dev",
+  ];
+  const worldnetDomains = ["mit.edu","cern.ch","bell-labs.com","stanford.edu","openai.com","anthropic.com","deepmind.google","wikipedia.org"];
+  for (const pd of pagesDevRoots) {
+    extraUrls.push(`https://${pd}/start`);
+    extraUrls.push(`https://${pd}/ai-benchmark`);
+    extraUrls.push(`https://${pd}/1995-search`);
+    for (const wd of worldnetDomains) {
+      extraUrls.push(`https://${pd}/web/1995/${wd}`);
+    }
+  }
+  const allTargets = [...CORE_PATHS.slice(0, 20), ...tgUrls, ...CORE_PATHS.slice(20), ...extraUrls];
 
   const state = fs.existsSync(STATE_FILE) ? JSON.parse(fs.readFileSync(STATE_FILE, "utf8")) : { archived: {} };
   console.log(`Starting Wayback Machine submission (up to ${limit} unarchived nodes of ${allTargets.length} total)...`);
