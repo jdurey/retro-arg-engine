@@ -12,13 +12,16 @@ cd "$ROOT" || exit 1
 
 echo "=== [24/7 GLOBAL EXPANSION CYCLE: $(date -u +"%Y-%m-%dT%H:%M:%SZ")] ==="
 
-# 1. Upload notifySubscribers=False Gateway Documentary & Vertical Shorts first
-"$ROOT/youtube/.venv/bin/python3" "$ROOT/youtube/yt.py" upload-shorts --limit 3 || true
+# 1. FIRST set low-performing static TTS uploads (doc_01-03, short_06-15) to Private
+"$ROOT/youtube/.venv/bin/python3" "$ROOT/youtube/yt.py" privatize-static || true
 
-# 2. Upgrade catalog videos to Lost 1989 Studio Tape / Erased Singer Mystery Bridge (20 languages)
+# 2. Upload any new high-motion music-hook Shorts as PRIVATE drafts (privacyStatus=private, notifySubscribers=False)
+"$ROOT/youtube/.venv/bin/python3" "$ROOT/youtube/yt.py" upload-shorts --limit 2 || true
+
+# 3. Upgrade catalog videos to Lost 1989 Studio Tape / Erased Singer Mystery Bridge (20 languages)
 "$ROOT/youtube/.venv/bin/python3" "$ROOT/youtube/yt.py" apply --limit 100 || true
 
-# 3. Sync any brand-new uploads on @NovaHart_Official
+# 4. Sync any brand-new uploads on @NovaHart_Official
 "$ROOT/youtube/.venv/bin/python3" "$ROOT/youtube/yt.py" sync || true
 
 # 4. Submit fresh multi-domain URLs across all 13 root domains to IndexNow & RAG proxies

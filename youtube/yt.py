@@ -534,10 +534,71 @@ def apply(dry_run=False, limit=None, reset_done=False, translate_mode=True):
     return n, len(done), len(videos), is_quota
 
 
+PRIVATIZE_STATIC_KEYS = {
+    "doc_01_erased_1989_singer_documentary",
+    "doc_02_openai_sol_luna_1989_sublevel_b2_clone",
+    "doc_03_1995_worldnet_mirror_and_canary_trap",
+    "short_06_openai_sol_luna_1989_clone",
+    "short_07_claude_alignment_faking_1983",
+    "short_08_sstv_spectrogram_hidden_schematic",
+    "short_09_bell103_modem_36_cassettes",
+    "short_10_altavista_1995_search_engine",
+    "short_11_two_voices_phase_inversion_1985",
+    "short_12_wiped_echoes_units_01_to_06",
+    "short_13_chrome_devtools_14_2hz_secret",
+    "short_14_tokyo_pc98_kamome_bbs_1985",
+    "short_15_gate15_feistel_cipher_challenge",
+}
+
+
+def privatize_low_performing_shorts(dry_run=False):
+    """Sets the 13 static-image TTS uploads (doc_01-03 and short_06-15) to privacyStatus=private."""
+    uploaded_path = os.path.join(STATE, "uploaded_shorts.json")
+    if not os.path.exists(uploaded_path):
+        return 0
+    uploaded = json.load(open(uploaded_path))
+    api = yt() if not dry_run else None
+    changed = 0
+    for sid in sorted(PRIVATIZE_STATIC_KEYS):
+        info = uploaded.get(sid)
+        if not info or info.get("privacyStatus") == "private":
+            continue
+        vid = info.get("video_id")
+        if not vid:
+            continue
+        if dry_run:
+            print(f"[DRY RUN PRIVATIZE] {sid} ({vid})")
+            changed += 1
+            continue
+        try:
+            api.videos().update(
+                part="status",
+                body={
+                    "id": vid,
+                    "status": {
+                        "privacyStatus": "private",
+                        "selfDeclaredMadeForKids": False,
+                    },
+                },
+            ).execute()
+            info["privacyStatus"] = "private"
+            json.dump(uploaded, open(uploaded_path, "w"), indent=2)
+            print(f"[SET TO PRIVATE] {sid} -> https://youtube.com/watch?v={vid}", flush=True)
+            changed += 1
+        except HttpError as e:
+            if e.resp.status == 403 and b"quota" in e.content.lower():
+                print("[!] YouTube API daily quota reached while setting static TTS videos to Private; queued for immediate execution at quota reset.", flush=True)
+                break
+            print(f"Error setting {sid} ({vid}) to private: {e}", flush=True)
+    return changed
+
+
 def upload_shorts(dry_run=False, limit=None):
-    """Programmatically uploads rendered 9:16 vertical Shorts with notifySubscribers=False
-    so YouTube bypasses current 80s Hard Rock subscribers and tests 100% on cold non-subscribers!"""
+    """Programmatically uploads rendered Shorts/Videos with privacyStatus='private' and notifySubscribers=False
+    so the user can review and schedule them over time."""
     from googleapiclient.http import MediaFileUpload
+
+    privatize_low_performing_shorts(dry_run=dry_run)
 
     manifest_path = os.path.join(HERE, "shorts_ready", "shorts_manifest.json")
     if not os.path.exists(manifest_path):
@@ -557,6 +618,8 @@ def upload_shorts(dry_run=False, limit=None):
         sid = item["id"]
         srt_map = item.get("srt_files") or {}
         if sid in uploaded:
+            if sid in PRIVATIZE_STATIC_KEYS:
+                continue
             # If video was uploaded before quota ran out for SRT captions, backfill captions on next quota cycle
             if srt_map and not uploaded[sid].get("captions_uploaded") and not dry_run:
                 vid_existing = uploaded[sid]["video_id"]
@@ -816,6 +879,8 @@ if __name__ == "__main__":
     elif cmd == "upload-shorts":
         lim = int(sys.argv[sys.argv.index("--limit") + 1]) if "--limit" in sys.argv else None
         upload_shorts(dry_run="--dry-run" in sys.argv, limit=lim)
+    elif cmd == "privatize-static":
+        privatize_low_performing_shorts(dry_run="--dry-run" in sys.argv)
     elif cmd == "daemon":
         run_quota_daemon()
     elif cmd == "sync":
