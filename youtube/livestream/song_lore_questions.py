@@ -1568,10 +1568,10 @@ SONG_LORE_CODEX: dict[str, dict] = {
     },
     "radio_edit_the_script.mp3": {
         "title": "Edit the Script",
-        "catalog_id": "HS-85.04-ES // HEARTSTRIKE MASTER",
-        "timeline": "1985 — Steel Thunder / Malibu",
+        "catalog_id": "HS-85.04-ES",
+        "timeline": "1985 — Steel Thunder Era",
         "source": "Heartstrike 24-Track Studio Master Reel",
-        "pov": "Heartstrike — Cleveland / Malibu",
+        "pov": "Heartstrike (1985 Lineup)",
         "lyrics_stanzas": [
             "You've got a vision, bold and bright, / Shake off the hurt, step into the light. / You're unstoppable, now face the test, / Turn every challenge into pure success. / Erase the doubt, rise above the fear, / Rewrite your path, make your purpose clear. / The reel's rolling, your story unfolds, / You're the creator and the power holds.",
             "Cut and splice, shift the view, / Rewrite it till your dreams come true. / No limits, no chains, you're set to fly, / Frame by frame, watch yourself rise high. / Edit the story, make it bold and strong, / You're the director right where you belong.",
@@ -3672,10 +3672,10 @@ SONG_LORE_CODEX: dict[str, dict] = {
     },
     "radio_to_the_ends_of_forever.mp3": {
         "title": "To the Ends of Forever",
-        "catalog_id": "HS-87.09 // HEARTSTRIKE MASTER",
-        "timeline": "1987 Heartstrike / Phase 4 Relay",
+        "catalog_id": "HS-87.09 // PHASE 4 RELAY",
+        "timeline": "1987 Heartstrike / Phase 4",
         "source": "Heartstrike Master Reel / Orion Phase 4 Guardian Broadcast",
-        "pov": "Heartstrike — Presented by Nova",
+        "pov": "Heartstrike (w/ Nova Hart)",
         "lyrics_stanzas": [
             "When the world feels cold, and you’re standing alone, / I’ll be the fire that leads you home. / Through endless nights and skies so wide, / You’ll always have my heart by your side.",
             "To the ends of forever, I’ll carry your name, / Through thunder and lightning, through joy and pain. / No force could break this love I feel, / To the ends of forever, it’s strong, it’s real.",
