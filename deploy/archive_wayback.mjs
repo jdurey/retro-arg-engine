@@ -151,6 +151,7 @@ async function main() {
   console.log(`Starting Wayback Machine submission (up to ${limit} unarchived nodes of ${allTargets.length} total)...`);
 
   let count = 0;
+  let consecutiveFailures = 0;
   for (const sp of allTargets) {
     if (count >= limit) break;
     const targetUrl = sp.startsWith("https://") ? sp : (sp === "index.html" ? `https://${APEX}/` : publicUrl(sp));
@@ -164,7 +165,8 @@ async function main() {
     console.log(`  Target: ${targetUrl}`);
 
     let retries = 0;
-    while (retries < 3) {
+    let succeeded = false;
+    while (retries < 2) {
       try {
         const saveEndpoint = `https://web.archive.org/save/${encodeURI(targetUrl)}`;
         const res = await fetch(saveEndpoint, {
@@ -177,15 +179,17 @@ async function main() {
         if (res.status === 302 && loc) {
           state.archived[targetUrl] = loc;
           console.log(`  [✓] Successfully archived! Snapshot: ${loc}`);
+          succeeded = true;
           break;
         } else if (res.status === 200) {
           state.archived[targetUrl] = `https://web.archive.org/web/${targetUrl}`;
           console.log(`  [✓] Archived (200 OK)`);
+          succeeded = true;
           break;
         } else if (res.status === 429 || res.status >= 500) {
-          console.log(`  [!] Transient status (${res.status}). Backing off 15s before retry...`);
+          console.log(`  [!] Transient status (${res.status}). Backing off 10s before retry...`);
           retries++;
-          await sleep(15000);
+          await sleep(10000);
         } else {
           console.log(`  [!] Status ${res.status}: ${await res.text().then(t => t.slice(0, 150)).catch(() => "")}`);
           break;
@@ -198,6 +202,15 @@ async function main() {
 
     fs.writeFileSync(STATE_FILE, JSON.stringify(state, null, 2));
     count++;
+    if (succeeded) {
+      consecutiveFailures = 0;
+    } else {
+      consecutiveFailures++;
+      if (consecutiveFailures >= 2) {
+        console.log("  [!] Wayback hourly IP window cooling down; will resume on next hourly cycle.");
+        break;
+      }
+    }
 
     // Polite rate limit for Internet Archive (8 seconds)
     if (count < limit) {
