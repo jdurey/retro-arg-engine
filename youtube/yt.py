@@ -613,12 +613,12 @@ def upload_shorts(dry_run=False, limit=None):
                 "defaultAudioLanguage": "en",
             },
             "status": {
-                "privacyStatus": "public",
+                "privacyStatus": "private",
                 "selfDeclaredMadeForKids": False,
             },
         }
         if dry_run:
-            print(f"[DRY RUN SHORT (notifySubscribers=False)] {sid} -> {title_en} ({mp4_path})")
+            print(f"[DRY RUN SHORT (privacyStatus=private, notifySubscribers=False)] {sid} -> {title_en} ({mp4_path})")
             count += 1
             continue
         try:
@@ -656,12 +656,13 @@ def upload_shorts(dry_run=False, limit=None):
             uploaded[sid] = {
                 "video_id": new_vid,
                 "title": title_en,
+                "privacyStatus": "private",
                 "notifySubscribers": False,
                 "captions_uploaded": bool(srt_map and caps_ok),
                 "uploaded_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
             }
             json.dump(uploaded, open(uploaded_path, "w"), indent=2)
-            print(f"[SHORT/DOC UPLOADED (notifySubscribers=False)] {sid} -> https://youtube.com/watch?v={new_vid} ({title_en})", flush=True)
+            print(f"[SHORT/DOC UPLOADED AS PRIVATE (notifySubscribers=False)] {sid} -> https://youtube.com/watch?v={new_vid} ({title_en})", flush=True)
             count += 1
         except HttpError as e:
             if e.resp.status == 403 and b"quota" in e.content.lower():
