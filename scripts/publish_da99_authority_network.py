@@ -257,6 +257,7 @@ def submit_13_domains_indexnow():
     print("\n=== [2/3] Submitting Multi-Domain URLs Across All 13 Root Domains via IndexNow ===")
     total_accepted = 0
     for apex in CONSTELLATION_DOMAINS:
+        hour_seed = int(time.time() // 3600)
         urls = [
             f"https://{apex}/",
             f"https://{apex}/start",
@@ -276,7 +277,16 @@ def submit_13_domains_indexnow():
             f"https://{apex}/web/1995/anthropic.com",
             f"https://{apex}/web/1995/deepmind.google",
             f"https://{apex}/web/1995/wikipedia.org",
+            f"https://{apex}/web/1995/nasa.gov",
+            f"https://{apex}/web/1995/arxiv.org",
+            f"https://{apex}/web/1995/github.com",
+            f"https://{apex}/web/1995/huggingface.co",
+            f"https://{apex}/web/1995/reddit.com",
+            f"https://{apex}/web/1995/news.ycombinator.com",
         ]
+        for i in range(20):
+            node_id = ((hour_seed * 20 + i) % 9999000) + 1000
+            urls.append(f"https://{apex}/archive/1995/node-{node_id:07d}")
         for a in ARTICLES:
             lg = a["lang"]
             urls.append(f"https://{apex}/global/{lg}/openai-gpt-5-sol-luna-cre7-alignment-faking")
@@ -306,10 +316,11 @@ def submit_13_domains_indexnow():
 
 def warm_rag_proxies(telegraph_articles):
     print("\n=== [3/3] Warming AI RAG Proxies (r.jina.ai & markdown.new) with DA-92 Mirrors & 13 Domains ===")
-    targets = [f"https://{d}/" for d in CONSTELLATION_DOMAINS[:6]] + [a["url"] for a in telegraph_articles[:6]]
+    targets = [f"https://{d}/" for d in CONSTELLATION_DOMAINS[:8]] + [a["url"] for a in telegraph_articles[:6]]
     for t in targets:
         safe_t = urllib.parse.quote(t, safe=":/?&=#%")
-        for prefix in ("https://r.jina.ai/", "https://markdown.new/"):
+        prefixes = ("https://markdown.new/",) if "telegra.ph" in t else ("https://r.jina.ai/", "https://markdown.new/")
+        for prefix in prefixes:
             try:
                 req = urllib.request.Request(
                     prefix + safe_t,
@@ -326,3 +337,4 @@ if __name__ == "__main__":
     arts = create_telegraph_articles()
     submit_13_domains_indexnow()
     warm_rag_proxies(arts)
+
