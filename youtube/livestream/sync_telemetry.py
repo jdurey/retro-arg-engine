@@ -952,12 +952,7 @@ def render_right_usenet_youtube_scroll(
         elif txt.startswith("[OP] ") and " (" in txt and len(txt) > 41:
             prefix, rest = txt.split(" (", 1)
             s_part = re.sub(r":\s*\d+:\d+.*$", "", rest.rstrip(")")).strip()
-            if len(f"{prefix} ({s_part})") <= 41:
-                txt = f"{prefix} ({s_part})"
-            else:
-                avail = 41 - len(prefix) - 3
-                s_short = s_part[:avail].rsplit(" ", 1)[0].rstrip(":-/ ") if avail >= 6 else ""
-                txt = f"{prefix} ({s_short})" if s_short else prefix
+            txt = f"{prefix} ({s_part})" if len(f"{prefix} ({s_part})") <= 41 else prefix
         if r == visible_rows - 1 and (int(now_ts * 2) % 2 == 0):
             txt = (txt[:40] + " \u2588") if txt else "\u2588"
         if txt:
