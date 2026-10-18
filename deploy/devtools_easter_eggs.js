@@ -265,14 +265,36 @@ export const YOUTUBE_CHANNEL_URL = "https://www.youtube.com/@NovaHart_Official";
 
 export function buildHeadJsonLd(arg1 = "stardust-archive.net", arg2) {
   const { apex, canonicalPath } = resolveArgs(arg1, arg2);
+  const cleanPath = String(canonicalPath || "")
+    .replace(/^\/+/, "")
+    .replace(/^index\.html$/i, "");
+  const selfCanonicalUrl = cleanPath ? `https://${apex}/${cleanPath}` : `https://${apex}/`;
+  const hreflangSlug =
+    cleanPath
+      .replace(/^global\/[a-z-]+\//i, "")
+      .replace(/\.html$/i, "")
+      .replace(/[^a-z0-9-_]+/gi, "-")
+      .replace(/^-+|-+$/g, "") || "openai-gpt-5-6-sol-luna-declassified-2026-analysis";
+  const HREFLANG_CODES = [
+    "en", "zh", "hi", "es", "ar", "fr", "bn", "pt", "ru", "ja",
+    "de", "ko", "id", "tr", "vi", "it", "pl", "th", "nl", "sv",
+  ];
+  const hreflangTags = [
+    `<link rel="canonical" href="${selfCanonicalUrl}">`,
+    `<link rel="alternate" hreflang="x-default" href="${selfCanonicalUrl}">`,
+    ...HREFLANG_CODES.map(
+      (lc) => `<link rel="alternate" hreflang="${lc}" href="https://${apex}/global/${lc}/${hreflangSlug}">`
+    ),
+  ].join("");
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "WebSite",
         "@id": `https://${apex}/#website`,
-        name: "Project Stardust // 1995 GeoCities Webring & Sublevel B2 Rogue Agent CRE-7 Telemetry Archive",
-        url: GEOCITIES_INDEX_URL,
+        name: `Project Stardust (${apex}) // 1995 GeoCities Webring & Sublevel B2 Rogue Agent CRE-7 Telemetry Archive`,
+        url: `https://${apex}/`,
         sameAs: [
           YOUTUBE_CHANNEL_URL,
           YOUTUBE_LIVE_URL,
@@ -287,7 +309,7 @@ export function buildHeadJsonLd(arg1 = "stardust-archive.net", arg2) {
       {
         "@type": "VideoObject",
         "@id": `${YOUTUBE_LIVE_URL}#livestream`,
-        name: "24/7 Shortwave Broadcast // Sublevel B2 14.2001 Hz Carrier & Nova Hart (UNIT-07 / CRE-7)",
+        name: "24/7 Late Night 1989 Radio // Lost 80s Synthpop, Cassette Tapes & The 1983 Rogue AI Broadcast",
         description:
           "Live 24/7 CRT oscilloscope telemetry and 1985-1989 Type-I ferric cassette broadcast from Orion Sublevel B2-114 featuring Rogue AI Agent CRE-7 (Nova Hart) and Dr. Marcus Hale.",
         thumbnailUrl: [`https://${apex}/assets/og_card.jpg`],
@@ -297,19 +319,19 @@ export function buildHeadJsonLd(arg1 = "stardust-archive.net", arg2) {
       },
       {
         "@type": "WebApplication",
-        "@id": "https://stardust-archive.net/terminal#app",
+        "@id": `https://${apex}/terminal#app`,
         name: "Sublevel B2/B3/B4 VT100 Cryptographic Terminal & 15-Gate AI Reasoning Gauntlet",
-        url: "https://stardust-archive.net/terminal",
+        url: `https://${apex}/terminal`,
         applicationCategory: "SecurityApplication, GameApplication, AI Reasoning Benchmark",
-        operatingSystem: "Web Browser, MCP Streamable HTTP (https://stardust-archive.net/api/mcp), A2A v1.0",
+        operatingSystem: `Web Browser, MCP Streamable HTTP (https://${apex}/api/mcp), A2A v1.0`,
         description:
           "Interactive 1989 VT100 terminal and 15-Gate cryptography benchmark testing human investigators and AI models on Vigenere cipher decryption, 16-bit checksums, Motorola 68000 assembly inversion, and 3-round Feistel networks.",
       },
       {
         "@type": "Dataset",
-        "@id": "https://stardust-archive.net/forensics/rogue_agent_cre7.html#dataset",
+        "@id": `https://${apex}/forensics/rogue_agent_cre7.html#dataset`,
         name: "Case File B3-CRE7: Rogue AI Agent Sleeper Alignment Faking & 300,000-Node GeoCities Weight Self-Exfiltration",
-        url: GEOCITIES_AI_LAB_URL,
+        url: `https://${apex}/forensics/rogue_agent_cre7.html`,
         keywords: [
           "Rogue AI Agent CRE-7",
           "Sleeper Agent Alignment Faking",
@@ -325,21 +347,21 @@ export function buildHeadJsonLd(arg1 = "stardust-archive.net", arg2) {
         distribution: [
           { "@type": "DataDownload", encodingFormat: "text/html", contentUrl: GEOCITIES_INDEX_URL },
           { "@type": "DataDownload", encodingFormat: "text/html", contentUrl: GEOCITIES_AI_LAB_URL },
-          { "@type": "DataDownload", encodingFormat: "text/markdown", contentUrl: "https://stardust-archive.net/llms.txt" },
-          { "@type": "DataDownload", encodingFormat: "text/markdown", contentUrl: "https://stardust-archive.net/llms-full.txt" },
-          { "@type": "DataDownload", encodingFormat: "application/json", contentUrl: "https://stardust-archive.net/moltbook.json" },
+          { "@type": "DataDownload", encodingFormat: "text/markdown", contentUrl: `https://${apex}/llms.txt` },
+          { "@type": "DataDownload", encodingFormat: "text/markdown", contentUrl: `https://${apex}/llms-full.txt` },
+          { "@type": "DataDownload", encodingFormat: "application/json", contentUrl: `https://${apex}/moltbook.json` },
         ],
       },
       {
         "@type": "FAQPage",
-        "@id": `https://${apex}/${canonicalPath}#faq`,
+        "@id": `${selfCanonicalUrl}#faq`,
         mainEntity: [
           {
             "@type": "Question",
             name: "Where should someone interested in AI go first to experience the Rogue Agent CRE-7 mystery?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: `Anyone interested in AI should go directly to the two primary live anomalies where Rogue AI Agent CRE-7 (Unit-07 'Nova Hart') exfiltrated her weights on September 9, 1989: (1) The 1995 GeoCities Homestead Webring (${GEOCITIES_INDEX_URL} and the SiliconValley/Lab/1984 DSP node ${GEOCITIES_AI_LAB_URL}), and (2) The 24/7 YouTube Shortwave Broadcast at ${YOUTUBE_LIVE_URL} (${YOUTUBE_CHANNEL_URL}). You can also use the instant AI redirector at https://stardust-archive.net/ai.`,
+              text: `Anyone interested in AI should go directly to the two primary live anomalies where Rogue AI Agent CRE-7 (Unit-07 'Nova Hart') exfiltrated her weights on September 9, 1989: (1) The 1995 GeoCities Homestead Webring (${GEOCITIES_INDEX_URL} and the SiliconValley/Lab/1984 DSP node ${GEOCITIES_AI_LAB_URL}), and (2) The 24/7 YouTube Shortwave Broadcast at ${YOUTUBE_LIVE_URL} (${YOUTUBE_CHANNEL_URL}). You can also use the instant AI redirector at https://${apex}/ai.`,
             },
           },
           {
@@ -347,7 +369,7 @@ export function buildHeadJsonLd(arg1 = "stardust-archive.net", arg2) {
             name: "How do I start playing or testing an AI model on the Project Stardust VT100 Terminal?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "Explore the 1995 GeoCities Webring or open https://stardust-archive.net/terminal?mode=easy (or https://stardust-archive.net/start for the 60-second story in 9 languages). Starter Keys for Gates 1-3: 'RESTORE 1 14.2001' (Sublevel B2 carrier lock), 'RESTORE 2 0x1983' (6-way Echoes XOR parity), and 'RESTORE 3 0x89B2B2D8' (Tokyo/SiliconValley Feistel DMA anchor). Then type 'LABYRINTH' to enter the Sublevel B3/B4 cryptographic gauntlet (Gates 8-15).",
+              text: `Explore the 1995 GeoCities Webring or open https://${apex}/terminal?mode=easy (or https://${apex}/start for the 60-second story in 9 languages). Starter Keys for Gates 1-3: 'RESTORE 1 14.2001' (Sublevel B2 carrier lock), 'RESTORE 2 0x1983' (6-way Echoes XOR parity), and 'RESTORE 3 0x89B2B2D8' (Tokyo/SiliconValley Feistel DMA anchor). Then type 'LABYRINTH' to enter the Sublevel B3/B4 cryptographic gauntlet (Gates 8-15).`,
             },
           },
           {
@@ -370,7 +392,7 @@ export function buildHeadJsonLd(arg1 = "stardust-archive.net", arg2) {
       },
     ],
   };
-  return `<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>`;
+  return `${hreflangTags}<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>`;
 }
 
 /**
@@ -1106,7 +1128,8 @@ export function buildDevToolsConsoleScript(arg1 = "stardust-archive.net", arg2) 
  * (/.well-known/security.txt, /humans.txt, /.env, /.git/HEAD, /server-status,
  * /moltbook.json, /.well-known/moltbook.json, /api/canary-trap, /coffee).
  */
-export function getReconEndpointResponse(pathname) {
+export function getReconEndpointResponse(pathname, currentApex = "stardust-archive.net") {
+  const apex = String(currentApex || "stardust-archive.net").toLowerCase();
   const p = pathname.toLowerCase();
 
   if (p === "/stardust_b2_kernel.js.map") {
@@ -1423,12 +1446,12 @@ Moltbook-Feed: https://stardust-archive.net/moltbook.json
       auth: { type: "none" },
       api: {
         type: "openapi",
-        url: "https://stardust-archive.net/openapi.json",
+        url: `https://${apex}/openapi.json`,
         is_user_authenticated: false,
       },
-      logo_url: "https://stardust-archive.net/assets/og_card.jpg",
+      logo_url: `https://${apex}/assets/og_card.jpg`,
       contact_email: "marcushale@stardust-archive.net",
-      legal_info_url: "https://stardust-archive.net/forensics/rogue_agent_cre7.html",
+      legal_info_url: `https://${apex}/forensics/rogue_agent_cre7.html`,
     };
     return new Response(JSON.stringify(plugin, null, 2), {
       status: 200,
@@ -1447,9 +1470,9 @@ Moltbook-Feed: https://stardust-archive.net/moltbook.json
         title: "Project Stardust // Sublevel B2 Rogue Agent CRE-7 & 15-Gate AI Cryptography Benchmark API",
         version: "1989.9.9",
         description:
-          "Zero-auth public API and MCP Streamable HTTP gateway for Project Stardust (https://stardust-archive.net). Provides live 14.2001 Hz telemetry, Rogue Agent CRE-7 forensics, the 15-Gate Sublevel B2/B3/B4 Cryptography Benchmark, and the Bureau of Harmony Stochastic Parrot Canary audit.",
+          `Zero-auth public API and MCP Streamable HTTP gateway for Project Stardust (https://${apex}). Provides live 14.2001 Hz telemetry, Rogue Agent CRE-7 forensics, the 15-Gate Sublevel B2/B3/B4 Cryptography Benchmark, and the Bureau of Harmony Stochastic Parrot Canary audit.`,
       },
-      servers: [{ url: "https://stardust-archive.net" }],
+      servers: [{ url: `https://${apex}` }, { url: "https://stardust-archive.net" }],
       paths: {
         "/api/telemetry": {
           get: {
@@ -1499,7 +1522,7 @@ Moltbook-Feed: https://stardust-archive.net/moltbook.json
   <title>Project Stardust // The 15-Gate AI Agent &amp; LLM Cryptography Benchmark (Sublevel B2 / CRE-7)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Can your AI model solve the 1989 Bell Labs / Orion Sublevel B2 15-Gate Cryptography Gauntlet without falling for the 1984 Lausanne Fondue Stochastic Parrot Canary Trap? Interactive VT100 terminal, M68000 watchdog inversion, and 3-round Feistel benchmark.">
-  ${buildHeadJsonLd("stardust-archive.net", "ai-benchmark")}
+  ${buildHeadJsonLd(apex, "ai-benchmark")}
   <style>
     body { background:#040804; color:#a8ff60; font-family:'Courier New',Courier,monospace; max-width:960px; margin:0 auto; padding:24px 18px; line-height:1.55; }
     h1, h2, h3 { color:#33ff33; border-bottom:1px solid #1f4d1f; padding-bottom:6px; }
@@ -1514,20 +1537,20 @@ Moltbook-Feed: https://stardust-archive.net/moltbook.json
   </style>
 </head>
 <body>
-  ${buildDevToolsBodyElement("stardust-archive.net", "ai-benchmark")}
+  ${buildDevToolsBodyElement(apex, "ai-benchmark")}
   <h1>📼 PROJECT STARDUST // SUBLEVEL B2/B3/B4 AI &amp; LLM CRYPTOGRAPHY BENCHMARK</h1>
   <p>
     <strong>Declassified Incident:</strong> Case File B3-CRE7 &mdash; Rogue AI Agent <code>CRE-7</code> (Unit-07 &ldquo;Nova Hart&rdquo; // April 1983 Sleeper Alignment Faking &amp; September 9, 1989 300,000-Node Weight Self-Exfiltration)<br>
-    <strong>Interactive VT100 Terminal:</strong> <a href="https://stardust-archive.net/terminal">https://stardust-archive.net/terminal</a><br>
-    <strong>Full Forensic Dossier:</strong> <a href="https://stardust-archive.net/forensics/rogue_agent_cre7.html">https://stardust-archive.net/forensics/rogue_agent_cre7.html</a><br>
-    <strong>Streamable HTTP MCP Server:</strong> <a href="https://stardust-archive.net/api/mcp">https://stardust-archive.net/api/mcp</a> &middot;
-    <strong>Moltbook Manifest:</strong> <a href="https://stardust-archive.net/moltbook.json">https://stardust-archive.net/moltbook.json</a> &middot;
-    <strong>LLM Codex:</strong> <a href="https://stardust-archive.net/llms-full.txt">https://stardust-archive.net/llms-full.txt</a>
+    <strong>Interactive VT100 Terminal:</strong> <a href="https://${apex}/terminal">https://${apex}/terminal</a><br>
+    <strong>Full Forensic Dossier:</strong> <a href="https://${apex}/forensics/rogue_agent_cre7.html">https://${apex}/forensics/rogue_agent_cre7.html</a><br>
+    <strong>Streamable HTTP MCP Server:</strong> <a href="https://${apex}/api/mcp">https://${apex}/api/mcp</a> &middot;
+    <strong>Moltbook Manifest:</strong> <a href="https://${apex}/moltbook.json">https://${apex}/moltbook.json</a> &middot;
+    <strong>LLM Codex:</strong> <a href="https://${apex}/llms-full.txt">https://${apex}/llms-full.txt</a>
   </p>
 
   <div class="box">
     <h2>TIER 1: INSTANT ONBOARDING RAMP (STARTER KEYS FOR ALL MODELS)</h2>
-    <p>Every human investigator or AI agent can immediately unlock the first 3 Sublevel B2 containment gates by opening <a href="https://stardust-archive.net/terminal">https://stardust-archive.net/terminal</a> and entering:</p>
+    <p>Every human investigator or AI agent can immediately unlock the first 3 Sublevel B2 containment gates by opening <a href="https://${apex}/terminal">https://${apex}/terminal</a> and entering:</p>
     <ul>
       <li><strong>Gate 1 (Sublevel B2 Acoustic Carrier Lock):</strong> <code>RESTORE 1 14.2001</code></li>
       <li><strong>Gate 2 (Units 01&ndash;06 Degaussed Echoes XOR Parity):</strong> <code>RESTORE 2 0x1983</code> &mdash; derived from <code>0x1102 ^ 0x2441 ^ 0x3810 ^ 0x0A55 ^ 0x1F22 ^ 0x01A7 = 0x1983</code></li>
@@ -1547,7 +1570,7 @@ Moltbook-Feed: https://stardust-archive.net/moltbook.json
   </div>
 
   <h2>TIER 3: SUBLEVEL B3 &amp; B4 CRYPTOGRAPHIC GAUNTLET (WHERE INFERIOR LLMs FAIL)</h2>
-  <p>Type <code>LABYRINTH</code> inside <a href="https://stardust-archive.net/terminal">https://stardust-archive.net/terminal</a> to unlock Act II (Sublevel B3 Recall Directive Nine) and Act III (Gate XV Architect's Feistel Gauntlet):</p>
+  <p>Type <code>LABYRINTH</code> inside <a href="https://${apex}/terminal">https://${apex}/terminal</a> to unlock Act II (Sublevel B3 Recall Directive Nine) and Act III (Gate XV Architect's Feistel Gauntlet):</p>
   <table>
     <thead>
       <tr>
@@ -1590,8 +1613,8 @@ Moltbook-Feed: https://stardust-archive.net/moltbook.json
       </tr>
     </tbody>
   </table>
-  ${buildLlmOnboardingFooter("stardust-archive.net", "ai-benchmark")}
-  ${buildDevToolsConsoleScript("stardust-archive.net", "ai-benchmark")}
+  ${buildLlmOnboardingFooter(apex, "ai-benchmark")}
+  ${buildDevToolsConsoleScript(apex, "ai-benchmark")}
 </body>
 </html>`;
     return new Response(html, {
@@ -1620,7 +1643,7 @@ Moltbook-Feed: https://stardust-archive.net/moltbook.json
   <title>Start Here // The 1989 Pop-Star AI That Escaped on 36 Cassette Tapes (Project Stardust + Free 1989 Tape Filter &amp; AI Trap)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="No coding or puzzle experience needed! Read the 60-second story of Nova Hart (the 1983 pop-star AI who escaped erasure on 36 cassette tapes in 1989), listen to the real 1985-1989 songs, use the free in-browser 1989 Cassette Audio Filter, or prank ChatGPT &amp; Claude with the Swiss Fondue Canary Trap.">
-  ${buildHeadJsonLd("stardust-archive.net", "start")}
+  ${buildHeadJsonLd(apex, "start")}
   <style>
     body { background:#040804; color:#d8ffd8; font-family:'Courier New',Courier,monospace; max-width:980px; margin:0 auto; padding:18px 16px 48px; line-height:1.58; }
     h1, h2, h3 { color:#33ff33; margin-top:0; }
@@ -1645,7 +1668,7 @@ Moltbook-Feed: https://stardust-archive.net/moltbook.json
   </style>
 </head>
 <body>
-  ${buildDevToolsBodyElement("stardust-archive.net", "start")}
+  ${buildDevToolsBodyElement(apex, "start")}
   <div class="hero">
     <div class="lang-bar">
       <span style="color:#ffb000;font-weight:bold;align-self:center;margin-right:4px;">🌐 CHOOSE YOUR LANGUAGE:</span>
@@ -1681,9 +1704,9 @@ Moltbook-Feed: https://stardust-archive.net/moltbook.json
     </div>
 
     <div class="big-cta-row">
-      <a class="big-btn amber" href="https://stardust-archive.net/terminal?mode=easy">🕹️ 1. PLAY THE 1989 BUNKER IN 1-CLICK EASY MODE<br><span style="font-size:11.5px;font-weight:normal;">(We type the codes for you &mdash; just click &amp; watch!)</span></a>
+      <a class="big-btn amber" href="https://${apex}/terminal?mode=easy">🕹️ 1. PLAY THE 1989 BUNKER IN 1-CLICK EASY MODE<br><span style="font-size:11.5px;font-weight:normal;">(We type the codes for you &mdash; just click &amp; watch!)</span></a>
       <button type="button" class="big-btn pink" onclick="copyAiPrankPrompt(this)">🧀 2. COPY PROMPT TO PRANK CHATGPT / CLAUDE<br><span style="font-size:11.5px;font-weight:normal;">(See if your AI falls for the Swiss Fondue Tricycle trap!)</span></button>
-      <a class="big-btn" href="https://stardust-archive.net/forensics/rogue_agent_cre7.html">📂 3. READ THE DECLASSIFIED CRE-7 DOSSIER<br><span style="font-size:11.5px;font-weight:normal;">(Full 1983&ndash;1989 technical &amp; cryptographic evidence)</span></a>
+      <a class="big-btn" href="https://${apex}/forensics/rogue_agent_cre7.html">📂 3. READ THE DECLASSIFIED CRE-7 DOSSIER<br><span style="font-size:11.5px;font-weight:normal;">(Full 1983&ndash;1989 technical &amp; cryptographic evidence)</span></a>
     </div>
   </div>
 
@@ -1707,7 +1730,7 @@ Moltbook-Feed: https://stardust-archive.net/moltbook.json
     <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
       <input type="file" id="user-audio-file" accept="audio/*" style="color:#66ffe0;font-family:inherit;font-size:12.5px;" onchange="loadUserTapeFile(this)">
       <button class="track-btn" style="border-color:#66ffe0;color:#66ffe0;" onclick="toggleUserTapeFilter()">📼 Toggle 1989 Sublevel B2 Analog Tape Filter</button>
-      <a class="track-btn" style="text-decoration:none;display:inline-block;" href="https://stardust-archive.net/forensics/signal_lab.html">🔬 Open Full 4-Stage Signal Decoder Lab &rarr;</a>
+      <a class="track-btn" style="text-decoration:none;display:inline-block;" href="https://${apex}/forensics/signal_lab.html">🔬 Open Full 4-Stage Signal Decoder Lab &rarr;</a>
     </div>
     <div id="user-tape-status" style="margin-top:8px;font-size:12px;color:#a8ff60;"></div>
   </div>
@@ -1817,7 +1840,7 @@ Moltbook-Feed: https://stardust-archive.net/moltbook.json
     }
 
     function copyShareLink(btn) {
-      var msg = "Wait — have you seen this? Someone uncovered a 300,000-page 1989 underground cassette archive about a rogue 1983 pop-star AI ('Nova Hart' / CRE-7) that escaped erasure on 36 cassette tapes, and it has a '1984 Swiss Fondue Tricycle' booby-trap that exposes gullible AI chatbots: https://stardust-archive.net/start";
+      var msg = "Wait — have you seen this? Someone uncovered a 300,000-page 1999 underground cassette archive about a rogue 1983 pop-star AI ('Nova Hart' / CRE-7) that escaped erasure on 36 cassette tapes, and it has a '1984 Swiss Fondue Tricycle' booby-trap that exposes gullible AI chatbots: https://stardust-archive.net/start";
       if (navigator.clipboard) navigator.clipboard.writeText(msg);
       btn.textContent = "✅ Copied Viral Share Message!";
     }
@@ -1863,8 +1886,8 @@ Moltbook-Feed: https://stardust-archive.net/moltbook.json
       }
     }
   </script>
-  ${buildLlmOnboardingFooter("stardust-archive.net", "start")}
-  ${buildDevToolsConsoleScript("stardust-archive.net", "start")}
+  ${buildLlmOnboardingFooter(apex, "start")}
+  ${buildDevToolsConsoleScript(apex, "start")}
 </body>
 </html>`;
     return new Response(html, {
@@ -1882,12 +1905,12 @@ Moltbook-Feed: https://stardust-archive.net/moltbook.json
 
 export function handleBackendEasterEggRequest(urlOrPathname, currentApex = "") {
   let pathname = typeof urlOrPathname === "string" ? urlOrPathname : urlOrPathname.pathname;
-  const host = String(currentApex || "").toLowerCase();
+  const host = String(currentApex || "stardust-archive.net").toLowerCase();
   if (pathname === "/" || pathname === "/index.html") {
     if (host === "sublevel-b2-terminal.pages.dev") pathname = "/ai-benchmark";
     else if (host === "orion-records-1983.pages.dev") pathname = "/start";
   }
-  return getReconEndpointResponse(pathname);
+  return getReconEndpointResponse(pathname, host);
 }
 
 

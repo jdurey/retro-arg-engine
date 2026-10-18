@@ -191,6 +191,8 @@ export function resolve(hostname, pathname) {
     "cre7-alignment-audit.pages.dev": "forensics/rogue_agent_cre7.html",
     "anemoia-bureau-harmony.pages.dev": "forensics/anemoia_harmony.html",
     "usenet-1995-spool.pages.dev": "forensics/usenet_1995_feed.html",
+    "sublevel-b2-terminal.pages.dev": "terminal/index.html",
+    "orion-records-1983.pages.dev": "forensics/dead_hand_protocol.html",
     "ashford-poly-dsp.pages.dev": "forensics/ashford_poly.html",
     "kamome-net-1985.pages.dev": "forensics/kamome_net.html",
     "relcom-node08.pages.dev": "forensics/relcom_node08.html",

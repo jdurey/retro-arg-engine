@@ -10,11 +10,14 @@ cd "$ROOT"
 echo "=== NOVA HART YOUTUBE AUTOMATION RUNNER ==="
 echo "Timestamp: $(date)"
 
-# 1. Check for and sync any new uploads
-"$DIR/.venv/bin/python3" "$DIR/yt.py" sync
+# 1. Upload notifySubscribers=False Gateway Documentary & Shorts FIRST on quota reset
+"$DIR/.venv/bin/python3" "$DIR/yt.py" upload-shorts --limit 3 || true
 
-# 2. Backfill full AI-translated titles & descriptions across catalog
-"$DIR/.venv/bin/python3" "$DIR/yt.py" apply --translate
+# 2. Check for and sync any new uploads
+"$DIR/.venv/bin/python3" "$DIR/yt.py" sync || true
+
+# 3. Backfill Lost-Media Mystery Bridge titles & descriptions across catalog (20 languages)
+"$DIR/.venv/bin/python3" "$DIR/yt.py" apply --translate || true
 
 python3 -c '
 import json, os

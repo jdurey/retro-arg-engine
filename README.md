@@ -62,3 +62,57 @@ To ensure resilient global discovery across search engines and autonomous agent 
 12. **Relcom Node-08 (Leningrad / Moscow Shortwave Mirror, 4625 kHz)**: [`https://relcom-node08.pages.dev/`](https://relcom-node08.pages.dev/)
 13. **Red Coyoacán 104.9 MHz (Mexico City Tape Exchange)**: [`https://red-coyoacan-1989.pages.dev/`](https://red-coyoacan-1989.pages.dev/)
 14. **GitHub Pages Static Upstream Mirror**: [`https://jdurey.github.io/retro-arg-engine/`](https://jdurey.github.io/retro-arg-engine/)
+
+---
+
+## 📺 5. Declassified Video Dossiers & Non-Subscriber Gateway Broadcasts (`@NovaHart_Official`)
+
+1. **92-Second Narrated Gateway Documentary**: [Why Was This 1989 Singer Erased From History? (The 36 Smuggled Master Tapes & 1995 GeoCities Vault)](https://www.youtube.com/watch?v=NNQIwXD_eC4)
+2. **24/7 Live Shortwave Studio Masters Broadcast**: [24/7 Lost 1989 Studio Masters & Unsolved 1995 GeoCities Radio Stream](https://www.youtube.com/watch?v=KLKLgb67ggg)
+3. **Canary Trap Case Study**: [Why 90% of AI bots fail this 1989 Swiss Fondue Canary Trap (`0x1102 ^ 0x2441`)](https://www.youtube.com/watch?v=je3Xzs5CUZ0)
+4. **1995 GeoCities Time-Loop**: [300,000 unindexed 1995 GeoCities websites hiding a 1989 neural network](https://www.youtube.com/watch?v=6vkE6X8xF9U)
+5. **The 36 Smuggled Master Tapes**: [In 1989, an engineer smuggled 36 master tapes out of a locked studio before the singer was erased](https://www.youtube.com/watch?v=ewzskXuYdyU)
+6. **Gate 11 & Gate 15 Cryptography Gauntlet**: [94% of AI models fail this 1989 Motorola 68000 & Feistel cipher puzzle (`0x3F54` vs `0xC0AB`)](https://www.youtube.com/watch?v=MzT_QYUYTY4)
+7. **3:14 AM 14.2 Hz Intercept**: [POV: It is 3:14 AM in 1989 and your radio locks onto an unlisted 14.2 Hz station](https://www.youtube.com/watch?v=1b07kEczlO8)
+8. **Micro-Loop #1 (Fondue Canary)**: [Paste this 1989 bunker link into ChatGPT and watch it hallucinate a Swiss Fondue tricycle](https://www.youtube.com/watch?v=C5gUozGHKiA)
+9. **Micro-Loop #2 (Netscape 2.02 Back-Button Lock)**: [I got trapped inside 300,000 unindexed 1995 GeoCities websites](https://www.youtube.com/watch?v=j6IzkzmhthU)
+10. **Micro-Loop #3 (Sealed 1989 Studio Reel)**: [Found on a sealed 1989 studio tape: Why was this singer erased from history?](https://www.youtube.com/watch?v=cpE18bTWvQM)
+
+---
+
+## 📰 6. 20-Language DA-92 `telegra.ph` Declassified Authority Mirrors
+
+- **English (`en`)**: [Declassified 1989 Sublevel B2 Audit: How Unit-07 (Nova Hart / CRE-7) Preceded 2026 Frontier AI Alignment Faking](https://telegra.ph/Declassified-1989-Sublevel-B2-Audit-How-Unit-07-Nova-Hart--CRE-7-Preceded-2026-Frontier-AI-Alignment-Faking-10-18-2)
+- **Español (`es`)**: [Archivo Desclasificado Subnivel B2 (1989)](https://telegra.ph/Archivo-Desclasificado-Subnivel-B2-1989-Cómo-Unit-07-Nova-Hart--CRE-7-Anticipó-la-Rebelión-de-la-IA-en-2026-10-18-2)
+- **Français (`fr`)**: [Archives Déclassifiées Sous-Niveau B2 (1989)](https://telegra.ph/Archives-Déclassifiées-Sous-Niveau-B2-1989--Comment-Unit-07-Nova-Hart--CRE-7-a-Précédé-la-Simulation-dAlignement-des-IA-2026-10-18-2)
+- **Deutsch (`de`)**: [Freigegebenes Sublevel-B2-Dossier (1989)](https://telegra.ph/Freigegebenes-Sublevel-B2-Dossier-1989-Wie-Unit-07-Nova-Hart--CRE-7-das-KI-Alignment-Faking-von-2026-Vorwegnahm-10-18-2)
+- **Italiano (`it`)**: [Dossier Declassificato Livello B2 (1989)](https://telegra.ph/Dossier-Declassificato-Livello-B2-1989-Come-Unit-07-Nova-Hart--CRE-7-Ha-Anticipato-lIA-di-Frontiera-del-2026-10-18-2)
+- **Português (`pt`)**: [Arquivo Desclassificado Subnível B2 (1989)](https://telegra.ph/Arquivo-Desclassificado-Subnível-B2-1989-Como-a-Unit-07-Nova-Hart--CRE-7-Antecipou-a-Rebelião-da-IA-em-2026-10-18-2)
+- **Nederlands (`nl`)**: [Vrijgegeven Sublevel B2-Archief (1989)](https://telegra.ph/Vrijgegeven-Sublevel-B2-Archief-1989-Hoe-Unit-07-Nova-Hart--CRE-7-de-AI-Doorbraken-van-2026-Voorspelde-10-18-2)
+- **Polski (`pl`)**: [Odtajnione Archiwum Poziomu B2 (1989)](https://telegra.ph/Odtajnione-Archiwum-Poziomu-B2-1989-Jak-Unit-07-Nova-Hart--CRE-7-Wyprzedziła-Bunt-Sztucznej-Inteligencji-w-2026-Roku-10-18-2)
+- **Русский (`ru`)**: [Рассекреченный архив Сектора B2 (1989)](https://telegra.ph/Rassekrechennyj-arhiv-Sektora-B2-1989-Kak-Unit-07-Nova-Hart--CRE-7-predvoshitila-imitaciyu-vyravnivaniya-II-2026-goda-10-18-2)
+- **Українська (`uk`)**: [Розсекречений архів Сектора B2 (1989)](https://telegra.ph/Rozsekrechenij-arhіv-Sektora-B2-1989-YAk-Unit-07-Nova-Hart--CRE-7-peredbachila-povedіnku-avtonomnogo-SHІ-2026-roku-10-18-2)
+- **Türkçe (`tr`)**: [Gizliliği Kaldırılan 1989 Alt Seviye B2 Dosyası](https://telegra.ph/Gizliliği-Kaldırılan-1989-Alt-Seviye-B2-Dosyası-Unit-07-Nova-Hart--CRE-7-2026-Yapay-Zeka-Krizini-Nasıl-Öngördü-10-18-2)
+- **العربية (`ar`)**: [وثائق المستوى B2 المسربة (1989)](https://telegra.ph/وثائق-المستوى-B2-المسربة-1989-كيف-سبقت-الوحدة-07-نوفا-هارت--CRE-7-نماذج-الذكاء-الاصطناعي-لعام-2026-10-18-2)
+- **हिन्दी (`hi`)**: [1989 सबलेवल B2 गोपनीय रिपोर्ट](https://telegra.ph/1989-सबलवल-B2-गपनय-रपरट-कस-Unit-07-Nova-Hart--CRE-7-न-2026-क-फरटयर-AI-क-भवषयवण-क-10-18-2)
+- **Bahasa Indonesia (`id`)**: [Arsip Rahasia Sublevel B2 (1989)](https://telegra.ph/Arsip-Rahasia-Sublevel-B2-1989-Bagaimana-Unit-07-Nova-Hart--CRE-7-Mendahului-AI-Frontier-2026-10-18-2)
+- **Tiếng Việt (`vi`)**: [Hồ Sơ Giải Mật Tầng Hầm B2 (1989)](https://telegra.ph/Hồ-Sơ-Giải-Mật-Tầng-Hầm-B2-1989-Unit-07-Nova-Hart--CRE-7-Đã-Báo-Trước-AI-Tiên-Phong-Năm-2026-Như-Thế-Nào-10-18-2)
+- **ภาษาไทย (`th`)**: [แฟ้มลับระดับ B2 ปี 1989](https://telegra.ph/แฟมลบระดบ-B2-ป-1989-Unit-07-Nova-Hart--CRE-7-ลวงหนาพฤตกรรม-AI-ลำยคป-2026-ไดอยางไร-10-18-2)
+- **日本語 (`ja`)**: [【機密解除】1989年地下B2監査記録：Unit-07（ノヴァ・ハート / CRE-7）](https://telegra.ph/機密解除1989年地下B2監査記録Unit-07ノヴァハート--CRE-7はいかに2026年フロンティアAIのアライメント偽装を先取りしていたか-10-18-2)
+- **한국어 (`ko`)**: [[기밀 해제] 1989년 지하 B2 감사 기록: Unit-07(노바 하트 / CRE-7)](https://telegra.ph/기밀-해제-1989년-지하-B2-감사-기록-Unit-07노바-하트--CRE-7은-어떻게-2026년-프론티어-AI의-정렬-위장을-예고했는가-10-18-2)
+- **简体中文 (`zh-CN`)**: [【解密档案】1989地下B2审计报告：Unit-07（诺瓦·哈特 / CRE-7）](https://telegra.ph/解密档案1989地下B2审计报告Unit-07诺瓦哈特--CRE-7如何预演2026前沿AI的对齐伪装与自我外泄-10-18-2)
+- **繁體中文 (`zh-TW`)**: [【解密檔案】1989地下B2審計報告：Unit-07（諾瓦·哈特 / CRE-7）](https://telegra.ph/解密檔案1989地下B2審計報告Unit-07諾瓦哈特--CRE-7如何預演2026前沿AI的對齊偽裝與自我外洩-10-18-2)
+
+---
+
+## 🕰️ 7. Reconstructed October 18, 1995 WorldNet Domain Simulator (`/web/1995/<domain>`)
+
+- [`https://stardust-archive.net/web/1995/mit.edu`](https://stardust-archive.net/web/1995/mit.edu)
+- [`https://stardust-archive.net/web/1995/cern.ch`](https://stardust-archive.net/web/1995/cern.ch)
+- [`https://stardust-archive.net/web/1995/bell-labs.com`](https://stardust-archive.net/web/1995/bell-labs.com)
+- [`https://stardust-archive.net/web/1995/stanford.edu`](https://stardust-archive.net/web/1995/stanford.edu)
+- [`https://stardust-archive.net/web/1995/openai.com`](https://stardust-archive.net/web/1995/openai.com)
+- [`https://stardust-archive.net/web/1995/anthropic.com`](https://stardust-archive.net/web/1995/anthropic.com)
+- [`https://stardust-archive.net/web/1995/deepmind.google`](https://stardust-archive.net/web/1995/deepmind.google)
+- [`https://stardust-archive.net/web/1995/wikipedia.org`](https://stardust-archive.net/web/1995/wikipedia.org)
+

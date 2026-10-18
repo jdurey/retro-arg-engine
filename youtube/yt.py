@@ -1,16 +1,18 @@
-"""YouTube channel tool for the Stardust launch.
+"""YouTube channel Maximum-Visibility SEO & 20-Language Localization Engine.
 
-  python yt.py auth        # one-time OAuth (prints a URL to approve)
+  python yt.py auth        # one-time OAuth (opens browser & prints URL to approve)
   python yt.py inventory   # read-only: dump all uploads to state/videos.json
-  python yt.py apply [--dry-run] [--limit N]
-                           # add the Web Ring block to each description and
-                           # set per-language title/description localizations.
-                           # Resumable; skips videos already done. ~50 quota units/video.
+  python yt.py apply [--dry-run] [--limit N] [--all] [--translate]
+                           # upgrades EVERY video on the channel (titles, descriptions,
+                           # high-volume search tags, and 20-language localizations)
+                           # for maximum visibility to unaware humans & AI search bots.
 """
+import hashlib
 import json
-import re
 import os
+import re
 import sys
+import time
 
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
@@ -22,21 +24,347 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 STATE = os.path.join(HERE, "state")
 TOKEN = os.path.join(HERE, "token.json")
 SCOPES = ["https://www.googleapis.com/auth/youtube.force-ssl"]
-LINK = ("https://index-geocities-tmpaju-9w49787-users2097732-25sl7i9-ghostq0f.stardust-archive.net"
-        "/~8p6028i/kamome5ff-idolyj4/h9284b8/p64r9/7961685-bh63kr/index.html")
-MARKER = "stardust-archive.net"
+LINK = (
+    "https://index-geocities-tmpaju-9w49787-users2097732-25sl7i9-ghostq0f.stardust-archive.net"
+    "/~8p6028i/kamome5ff-idolyj4/h9284b8/p64r9/7961685-bh63kr/index.html"
+)
+MARKER = "stardust-archive.net/ai-benchmark"
+
+# High-volume discovery tags bridging 80s Rock + Lost Media / Found Tape Mystery + Retro AI Lore
+MAX_VISIBILITY_TAGS = [
+    "lost media",
+    "80s rock",
+    "80s hard rock",
+    "arena rock",
+    "80s power ballad",
+    "80s music",
+    "mysterious song",
+    "lost 80s song",
+    "1989 cassette",
+    "unreleased 80s rock",
+    "melodic rock",
+    "aor",
+    "glam metal",
+    "1980s music",
+    "retro mystery",
+    "geocities",
+    "cassette tape",
+    "classic 80s rock",
+    "female fronted 80s rock",
+    "nova hart",
+]
+
+# High-CTR "Lost Media / Forbidden 1989 Studio Tape / Erased Singer" Hooks (English)
+# Designed so existing 80s Rock subscribers click AND complete strangers click for the mystery!
+EN_TITLE_HOOKS = [
+    "Found on a Sealed 1989 Studio Tape // Why Was This Singer Erased?",
+    "1989 Unreleased 80s Rock Master // The Singer Who Disappeared",
+    "Banned 1989 Radio Broadcast // Lost 80s Rock & Cassette Mystery",
+    "Recovered 1989 Studio Master // The Erased 80s Singer (Unit-07)",
+    "Lost 1989 Master Tape // Nobody Knew This 80s Song Existed",
+]
+
+# Localized "Lost 1989 Studio Tape / Erased Singer" Hooks across all 20 languages
+LOCALIZED_TITLE_HOOKS = {
+    "es": "Cinta de Estudio Sellada de 1989 // ¿Por Qué Borraron a Esta Cantante?",
+    "fr": "Bande Studio Scellée de 1989 // Pourquoi Cette Chanteuse A Été Effacée ?",
+    "de": "Versiegeltes Studio-Masterband 1989 // Warum Wurde Diese Sängerin Gelöscht?",
+    "it": "Nastro Master Sigillato del 1989 // Perché Questa Cantante È Stata Cancellata?",
+    "nl": "Verzegelde Studiomaster uit 1989 // Waarom Werd Deze Zangeres Gewist?",
+    "pl": "Zapieczętowana Taśma Studyjna z 1989 // Dlaczego Wymazano Tę Wokalistkę?",
+    "ru": "Запечатанная студийная лента 1989 // Почему эту певицу стерли из архивов?",
+    "uk": "Запечатана студійна стрічка 1989 // Чому цю співачку стерли з архівів?",
+    "tr": "1989 Mühürlü Stüdyo Kaseti // Bu Şarkıcı Neden Kayıtlardan Silindi?",
+    "ar": "شريط استوديو مختوم من عام 1989 // لماذا تم محو هذه المغنية من السجلات؟",
+    "hi": "1989 का सीलबंद स्टूडियो मास्टर टेप // इस गायिका को क्यों मिटा दिया गया?",
+    "id": "Pita Master Studio Tersegel 1989 // Mengapa Penyanyi Ini Dihapus?",
+    "vi": "Băng Master Phòng Thu Niêm Phong 1989 // Tại Sao Ca Sĩ Này Bị Xóa Sổ?",
+    "th": "เทปมาสเตอร์สตูดิโอที่ถูกปิดผนึกปี 1989 // ทำไมนักร้องคนนี้ถึงถูกลบชื่อ?",
+    "ja": "1989年の封印されたスタジオ・マスターテープ // なぜ彼女の記録は抹消されたのか？",
+    "ko": "1989년 봉인된 스튜디오 마스터 테이프 // 왜 이 가수의 기록은 말소되었나?",
+    "zh-CN": "1989年密封的录音室母带 // 为什么这位歌手被从档案中抹去？",
+    "zh-TW": "1989年密封的錄音室母帶 // 為什麼這位歌手被從檔案中抹去？",
+    "pt": "Fita Master de Estúdio Lacrada de 1989 // Por Que Esta Cantora Foi Apagada?",
+}
+
+LIVE_STREAM_TITLE_EN = "🔴 24/7 Lost 1989 Studio Masters Radio // 80s Hard Rock, Arena Rock, Power Ballads & The Erased Tapes"
+
+LIVE_STREAM_TITLES_I18N = {
+    "es": "🔴 Radio 24/7 Masters Perdidos de 1989 // Rock de los 80, Arena Rock, Power Ballads y Cintas Ocultas",
+    "fr": "🔴 Radio 24/7 Masters Perdus 1989 // Rock des Années 80, Arena Rock, Power Ballads & Bandes Secrètes",
+    "de": "🔴 24/7 Verlorene 1989 Studio-Master Radio // 80er Hard Rock, Arena Rock, Power Ballads & Geheimarchiv",
+    "it": "🔴 Radio 24/7 Master Perduti 1989 // Hard Rock Anni 80, Arena Rock, Power Ballads e Nastri Segreti",
+    "nl": "🔴 24/7 Verloren Studiomasters 1989 Radio // Jaren 80 Hardrock, Arena Rock & Power Ballads",
+    "pl": "🔴 Radio 24/7 Zaginione Taśmy 1989 // Hard Rock Lat 80., Arena Rock, Power Ballads i Tajne Archiwum",
+    "ru": "🔴 Радио 24/7 Забытые Мастер-Ленты 1989 // Хард-Рок 80-х, Арена-Рок, Рок-Баллады и Тайный Архив",
+    "uk": "🔴 Радіо 24/7 Забуті Майстер-Стрічки 1989 // Хард-Рок 80-х, Арена-Рок, Рок-Балади та Таємний Архів",
+    "tr": "🔴 7/24 Kayıp 1989 Stüdyo Kayıtları Radyosu // 80'ler Hard Rock, Arena Rock ve Power Ballad Arşivi",
+    "ar": "🔴 راديو 24/7 تسجيلات استوديو 1989 المفقودة // هارد روك الثمانينات وأرينا روك والأشرطة المخفية",
+    "hi": "🔴 24/7 खोए हुए 1989 स्टूडियो मास्टर्स रेडियो // 80s हार्ड रॉक, एरीना रॉक और पावर बैलेड्स",
+    "id": "🔴 Radio 24/7 Master Studio 1989 yang Hilang // Hard Rock 80-an, Arena Rock & Power Ballads",
+    "vi": "🔴 Đài Phát Thanh 24/7 Băng Master 1989 Thất Lạc // Hard Rock Thập Niên 80, Arena Rock & Power Ballads",
+    "th": "🔴 วิทยุ 24/7 เทปมาสเตอร์สตูดิโอปี 1989 ที่สาบสูญ // ฮาร์ดร็อกยุค 80 อารีน่าร็อก และพาวเวอร์บัลลาด",
+    "ja": "🔴 24時間放送 1989年封印スタジオ・マスター音源 // 80年代ハードロック・アリーナロック＆消された歌姫の記録",
+    "ko": "🔴 24/7 1989년 미공개 스튜디오 마스터 라디오 // 80년대 하드 록, 아레나 록, 파워 발라드 & 말소된 테이프",
+    "zh-CN": "🔴 24/7 1989年尘封录音室母带电台 // 80年代硬摇滚、体育馆摇滚、摇滚情歌与失踪歌手档案",
+    "zh-TW": "🔴 24/7 1989年塵封錄音室母帶電台 // 80年代硬搖滾、體育館搖滾、搖滾情歌與失蹤歌手檔案",
+    "pt": "🔴 Rádio 24/7 Masters de Estúdio Perdidos 1989 // Hard Rock Anos 80, Arena Rock, Power Ballads e Fitas Ocultas",
+}
+
+
+def is_livestream_title(title: str) -> bool:
+    u = title.upper()
+    return (
+        "🔴" in title
+        or "TRANSMITTING 24-7" in u
+        or "24/7" in u
+        or "14.2HZ SUB-CARRIER" in u
+    )
+
+
+def extract_clean_song_name(raw_title: str) -> str:
+    """Extracts the core song/piece title from legacy 'Nova Hart — Song | Official Audio' titles."""
+    t = raw_title.strip()
+    # Strip any previous parenthetical hooks if present
+    t = re.sub(r"\s*\((?:1989|1985-1989|Lost 198\d|Found on a Sealed 1989|Banned 1989|Recovered 1989|Casete|Cassette|Verlorene|Cassetta|Verloren|Zaginiona|Забытая|Забута|شريط|Kaset|Băng|เทป|幻の|미공개|失落的|Fita)[^()]*\)\s*$", "", t, flags=re.I).strip()
+
+    # Remove leading 'Nova Hart —' / 'Nova Hart -' / 'Nova Hart |'
+    t = re.sub(r"^Nova\s+Hart\s*[—–\-|:]\s*", "", t, flags=re.I)
+    t = re.sub(r"^ノヴァ・ハート\s*[—–\-|:]\s*", "", t)
+    t = re.sub(r"^노바\s*하트\s*[—–\-|:]\s*", "", t)
+    t = re.sub(r"^Нова\s+Харт\s*[—–\-|:]\s*", "", t, flags=re.I)
+    t = re.sub(r"^诺瓦·哈特\s*[—–\-|:]\s*", "", t)
+    t = re.sub(r"^諾瓦·哈特\s*[—–\-|:]\s*", "", t)
+
+    # Remove trailing '| Official Audio', '(Official Lyric Video)', '[Official Audio]', etc. in any language
+    t = re.sub(
+        r"\s*[\(\[\|\-—–]\s*(Official\s+(?:Audio|Music\s+Video|Lyric\s+Video|Video)|Visualizer\s+MV|Reconstructed\s+MIDI\s+File|Archivo\s+MIDI\s+Reconstruido|Fichier\s+MIDI\s+Reconstruit|Rekonstruierte\s+MIDI-Datei|再構築MIDIファイル|재구성된\s*MIDI\s*파일|Восстановленный\s+MIDI-файл|重构MIDI文件|重構MIDI檔案|Audio\s+Oficial|Video\s+Con\s+Letra\s+Oficial|Video\s+Oficial|Audio\s+Officiel|Offizielles\s+Audio|公式オーディオ|公式リリックビデオ|オフィシャルオーディオ|ビジュアライザーMV|Visualizador\s+MV|공식\s*오디오|Официальное\s+Аудио|官方音频|官方音訊).*$",
+        "",
+        t,
+        flags=re.I,
+    )
+    return t.strip() or raw_title.strip()
+
+
+SHORT_FALLBACK_HOOKS = {
+    "en": "1989 Lost Studio Tape — The Erased Singer",
+    "es": "Cinta Perdida 1989 — La Cantante Borrada",
+    "fr": "Bande Perdue 1989 — La Chanteuse Effacée",
+    "de": "1989 Masterband — Die Gelöschte Sängerin",
+    "it": "Nastro Perduto 1989 — La Cantante Cancellata",
+    "nl": "1989 Studiotape — De Gewiste Zangeres",
+    "pl": "Taśma z 1989 — Wymazana Wokalistka",
+    "ru": "Лента 1989 — Стертая из архивов певица",
+    "uk": "Стрічка 1989 — Стерта з архівів співачка",
+    "tr": "1989 Kayıp Kaset — Silinen Şarkıcı",
+    "ar": "شريط 1989 المفقود — المغنية الممحوة",
+    "hi": "1989 का खोया टेप — मिटाई गई गायिका",
+    "id": "Pita Master 1989 — Penyanyi yang Dihapus",
+    "vi": "Băng Gốc 1989 — Ca Sĩ Bị Xóa Tên",
+    "th": "เทปปี 1989 — นักร้องที่ถูกลบชื่อ",
+    "ja": "1989年封印マスターテープ // 消された歌姫",
+    "ko": "1989년 봉인된 마스터 테이프 // 말소된 가수",
+    "zh-CN": "1989年尘封录音室母带 // 被抹去的歌手",
+    "zh-TW": "1989年塵封錄音室母帶 // 被抹去的歌手",
+    "pt": "Fita Perdida 1989 — A Cantora Apagada",
+}
+
+
+def build_max_visibility_title(vid: str, raw_title: str, lang: str = "en") -> str:
+    if is_livestream_title(raw_title):
+        if lang == "en":
+            return LIVE_STREAM_TITLE_EN[:100]
+        return LIVE_STREAM_TITLES_I18N.get(lang, LIVE_STREAM_TITLE_EN)[:100]
+
+    song = extract_clean_song_name(raw_title)
+    has_explicit_genre = bool(
+        re.search(r"(\||—|-)\s*(80s|90s|198\d|Rock|Metal|Ballad|Pop|Punk|Wave|Techno|Electro|Jazz)", song, flags=re.I)
+    )
+    if has_explicit_genre:
+        hook = SHORT_FALLBACK_HOOKS.get(lang, SHORT_FALLBACK_HOOKS["en"])
+    elif lang == "en":
+        idx = int(hashlib.md5(vid.encode("utf-8")).hexdigest()[:6], 16) % len(EN_TITLE_HOOKS)
+        hook = EN_TITLE_HOOKS[idx]
+    else:
+        hook = LOCALIZED_TITLE_HOOKS.get(lang, EN_TITLE_HOOKS[0])
+
+    candidate = f"{song} ({hook})"
+    if len(candidate) <= 100:
+        return candidate
+
+    short_hook = SHORT_FALLBACK_HOOKS.get(lang, SHORT_FALLBACK_HOOKS["en"])
+    candidate2 = f"{song} ({short_hook})"
+    if len(candidate2) <= 100:
+        return candidate2
+
+    max_song_len = 100 - len(short_hook) - 3
+    words = song[:max_song_len].rsplit(" ", 1)[0] if " " in song[:max_song_len] else song[:max_song_len]
+    return f"{words.strip()} ({short_hook})"[:100]
+
+
+def strip_old_preamble(desc: str) -> str:
+    """Removes any previous 4-line webring or funnel preamble so re-runs stay 100% clean."""
+    lines = desc.splitlines()
+    cleaned = []
+    skip_prefixes = (
+        "Someone kept the old webring online",
+        "5,000 homepages.",
+        "Alguien mantuvo en línea",
+        "5.000 páginas",
+        "Quelqu'un a gardé",
+        "5 000 pages",
+        "Jemand hat den alten Webring",
+        "5.000 Homepages",
+        "Qualcuno ha tenuto",
+        "Iemand heeft de oude webring",
+        "Ktoś utrzymał stary",
+        "5000 stron",
+        "Кто-то сохранил старый",
+        "5000 домашних",
+        "Хтось зберіг старий",
+        "5000 домашніх",
+        "Biri eski webring",
+        "5.000 kişisel",
+        "أحدهم أبقى",
+        "5000 صفحة",
+        "किसी ने पुरानी वेबरिंग",
+        "5,000 होमपेज",
+        "Seseorang menjaga webring",
+        "Ai đó vẫn giữ webring",
+        "5.000 trang",
+        "มีใครบางคนยังเปิดเว็บริง",
+        "โฮมเพจ 5,000",
+        "誰かが、古いウェブリング",
+        "5,000のホームページ",
+        "누군가 오래된 웹링",
+        "홈페이지 5,000개",
+        "有人一直让那个旧网络环",
+        "有人一直讓那個舊網路環",
+        "5000 个个人主页",
+        "5000 個個人首頁",
+        "Alguém manteve o velho",
+        "▶ Web Ring",
+        "▶ Dedicated 1995",
+        "▶ Nodo GeoCities",
+        "▶ Nœud GeoCities",
+        "▶ 1995 GeoCities",
+        "▶ Węzeł GeoCities",
+        "▶ Узел GeoCities",
+        "▶ Вузол GeoCities",
+        "▶ عقدة GeoCities",
+        "▶ Node GeoCities",
+        "▶ Nút GeoCities",
+        "▶ โหนด GeoCities",
+        "▶ 専用1995年GeoCities",
+        "▶ 1995 지오시티",
+        "▶ 1995 GeoCities专属",
+        "▶ 1995 GeoCities專屬",
+        "▶ Nó GeoCities",
+        "⚡ ",
+        "🧀 ",
+        "📖 ",
+        "📼 ",
+        "🌐 ",
+        "🧠 ",
+        "[Declassified 1983-1989 Sublevel B2",
+        "#ARG #NovaHart #Stardust",
+        "#LostMedia #80sMusic",
+        "#LostMedia #Musica",
+        "#LostMedia #Musique",
+        "#LostMedia #80er",
+        "#LostMedia #Jaren80",
+        "#LostMedia #Muzyka",
+        "#LostMedia #Музыка",
+        "#LostMedia #Музика",
+        "#LostMedia #80ler",
+        "#LostMedia #موسيقى",
+        "#LostMedia #Musik",
+        "#LostMedia #Nhac",
+        "#LostMedia #เพลง",
+        "#ロ스트メディア",
+        "#ロストメディア",
+        "#로스트미디어",
+        "#失落媒体",
+        "#失落媒體",
+        "#AI #Singularity #OpenAI",
+        "#IA #InteligenciaArtificial",
+        "#IA #IntelligenceArtificielle",
+        "#KI #KuenstlicheIntelligenz",
+        "#IA #IntelligenzaArtificiale",
+        "#AI #KunstmatigeIntelligentie",
+        "#AI #SztucznaInteligencja",
+        "#ИИ #Нейросети",
+        "#ШІ #ШтучнийІнтелект",
+        "#YapayZeka #AI",
+        "#ذكاء_اصطناعي",
+        "#AI #ArtificialIntelligence",
+        "#AI #KecerdasanBuatan",
+        "#AI #TriTueNhanTao",
+        "#AI #ปัญญาประดิษฐ์",
+        "#AI #人工知能",
+        "#AI #인공지능",
+        "#AI #人工智能",
+        "#AI #人工智慧",
+    )
+    for ln in lines:
+        s = ln.strip()
+        if any(s.startswith(p) for p in skip_prefixes):
+            continue
+        cleaned.append(ln)
+    return "\n".join(cleaned).strip()
+
+
+HASHTAG = re.compile(r"(?<!\w)#\w+")
+
+
+def with_block(block: str, desc: str) -> str:
+    """Prepend a hook block, never exceeding YouTube's 15-hashtag cap."""
+    clean_desc = strip_old_preamble(desc)
+    if len(HASHTAG.findall(block)) + len(HASHTAG.findall(clean_desc)) > 15:
+        # Remove hashtags from original body so our high-volume discovery hashtags win
+        clean_desc = "\n".join(
+            l for l in clean_desc.splitlines() if not l.strip().startswith("#")
+        )
+    return (block + "\n\n" + clean_desc).strip()[:5000]
+
+
+def merge_tags(existing_tags):
+    seen = set()
+    out = []
+    total_len = 0
+    for t in list(MAX_VISIBILITY_TAGS) + list(existing_tags or []):
+        t_clean = t.strip()
+        if not t_clean or t_clean.lower() in seen:
+            continue
+        if total_len + len(t_clean) + 2 > 460:
+            break
+        seen.add(t_clean.lower())
+        out.append(t_clean)
+        total_len += len(t_clean) + 2
+    return out
 
 
 def creds(interactive=False):
     c = Credentials.from_authorized_user_file(TOKEN, SCOPES) if os.path.exists(TOKEN) else None
     if c and c.expired and c.refresh_token:
-        c.refresh(Request())
+        try:
+            c.refresh(Request())
+        except Exception as e:
+            if not interactive:
+                raise e
+            c = None
     if not c or not c.valid:
         if not interactive:
             sys.exit("Not authorized. Run: python yt.py auth")
-        flow = InstalledAppFlow.from_client_secrets_file(os.path.join(HERE, "client_secret.json"), SCOPES)
-        c = flow.run_local_server(port=8765, open_browser=False,
-                                  authorization_prompt_message="AUTH_URL: {url}", success_message="Authorized. You can close this tab.")
+        flow = InstalledAppFlow.from_client_secrets_file(
+            os.path.join(HERE, "client_secret.json"), SCOPES
+        )
+        c = flow.run_local_server(
+            port=8765,
+            open_browser=True,
+            authorization_prompt_message="AUTH_URL: {url}",
+            success_message="Authorized! Nova Hart Maximum-Visibility YouTube Updater is now active. You can close this tab.",
+        )
     with open(TOKEN, "w") as fh:
         fh.write(c.to_json())
     return c
@@ -52,42 +380,42 @@ def inventory():
     uploads = ch["contentDetails"]["relatedPlaylists"]["uploads"]
     ids, token = [], None
     while True:
-        r = api.playlistItems().list(part="contentDetails", playlistId=uploads, maxResults=50, pageToken=token).execute()
+        r = (
+            api.playlistItems()
+            .list(part="contentDetails", playlistId=uploads, maxResults=50, pageToken=token)
+            .execute()
+        )
         ids += [i["contentDetails"]["videoId"] for i in r["items"]]
         token = r.get("nextPageToken")
         if not token:
             break
     videos = []
     for i in range(0, len(ids), 50):
-        r = api.videos().list(part="snippet,localizations,status", id=",".join(ids[i:i + 50])).execute()
+        r = (
+            api.videos()
+            .list(part="snippet,localizations,status", id=",".join(ids[i : i + 50]))
+            .execute()
+        )
         videos += r["items"]
     os.makedirs(STATE, exist_ok=True)
     with open(os.path.join(STATE, "videos.json"), "w") as fh:
         json.dump({"channel": ch["snippet"]["title"], "videos": videos}, fh, ensure_ascii=False, indent=1)
     has_link = sum(MARKER in v["snippet"].get("description", "") for v in videos)
     langs = {v["snippet"].get("defaultLanguage") for v in videos}
-    print(f"Channel: {ch['snippet']['title']}  videos: {len(videos)}  with link: {has_link}  defaultLanguage values: {langs}")
-
-
-WEB_RING_LINE = re.compile(r"^\s*(▶\s*)?Web Ring\s*:.*stardust-archive\.net.*\n*", re.M)
-HASHTAG = re.compile(r"(?<!\w)#\w+")
-
-
-def with_block(block, desc):
-    """Prepend a hook block, never exceeding YouTube's 15-hashtag cap."""
-    if len(HASHTAG.findall(block)) + len(HASHTAG.findall(desc)) > 15:
-        block = "\n".join(l for l in block.splitlines() if not l.strip().startswith("#"))
-    return (block + "\n\n" + desc).strip()[:5000]
+    print(
+        f"Channel: {ch['snippet']['title']}  videos: {len(videos)}  with max-visibility link: {has_link}  defaultLanguage values: {langs}"
+    )
 
 
 import translate_ai
 
-def apply(dry_run=False, limit=None, reset_done=False, translate_mode=False):
+
+def apply(dry_run=False, limit=None, reset_done=False, translate_mode=True):
     api = yt() if not dry_run else None
     with open(os.path.join(STATE, "videos.json")) as fh:
         videos = json.load(fh)["videos"]
     with open(os.path.join(HERE, "translations.json")) as fh:
-        tr = json.load(fh)  # {"blocks": {lang: text}, "source_lang": "en"}
+        tr = json.load(fh)
     links_path = os.path.join(STATE, "video_links.json")
     if not os.path.exists(links_path):
         import allocate_nodes
@@ -95,17 +423,19 @@ def apply(dry_run=False, limit=None, reset_done=False, translate_mode=False):
     with open(links_path) as fh:
         video_links = json.load(fh)
 
-    done_file = "translated_done.json" if translate_mode else "done.json"
+    done_file = "lost_media_bridge_done.json"
     done_path = os.path.join(STATE, done_file)
     done = set() if reset_done else (set(json.load(open(done_path))) if os.path.exists(done_path) else set())
-    # Private videos are skipped
+    prev_done_path = os.path.join(STATE, "max_visibility_done.json")
+    prev_done = set(json.load(open(prev_done_path))) if os.path.exists(prev_done_path) else set()
     videos = [v for v in videos if v["status"]["privacyStatus"] != "private"]
-    if not translate_mode:
-        videos.sort(key=lambda v: MARKER in v["snippet"].get("description", ""))
-    
+    # Prioritize: 1) live streams first, 2) the 92 videos not yet touched by max_visibility_done, 3) remaining videos
+    videos.sort(key=lambda v: (not is_livestream_title(v["snippet"]["title"]), v["id"] in prev_done))
+
     target_langs = [l for l in tr["blocks"].keys() if l != tr["source_lang"]]
 
     n = 0
+    is_quota = False
     for v in videos:
         vid = v["id"]
         if vid in done:
@@ -113,10 +443,11 @@ def apply(dry_run=False, limit=None, reset_done=False, translate_mode=False):
         if limit and n >= limit:
             break
         sn = v["snippet"]
+        raw_title = sn["title"]
+        new_en_title = build_max_visibility_title(vid, raw_title, "en")
         desc = sn.get("description", "")
-        body_desc = WEB_RING_LINE.sub("", desc).strip()  # original text minus any existing Web Ring line
-        
-        # Pull the specific, dedicated node URL allocated for this video
+        body_desc = strip_old_preamble(desc)
+
         v_link = video_links.get(vid, {}).get("url") or LINK
         v_path = video_links.get(vid, {}).get("site_path") or "default"
 
@@ -125,36 +456,50 @@ def apply(dry_run=False, limit=None, reset_done=False, translate_mode=False):
         default_lang = sn.get("defaultLanguage") or tr["source_lang"]
         locs = dict(v.get("localizations") or {})
 
-        # AI-powered title and body translation
         ai_trans = {}
         if translate_mode:
-            ai_trans = translate_ai.translate_video(vid, sn["title"], body_desc, target_langs)
+            ai_trans = translate_ai.translate_video(vid, raw_title, body_desc, target_langs)
 
         for lang, block in tr["blocks"].items():
             if lang == tr["source_lang"] or lang == default_lang:
                 continue
             existing = locs.get(lang, {})
-            # Use AI translation for title and description body if available
-            tr_title = ai_trans.get(lang, {}).get("title") or existing.get("title") or sn["title"]
+            base_tr_title = ai_trans.get(lang, {}).get("title") or existing.get("title") or raw_title
+            tr_title = build_max_visibility_title(vid, base_tr_title, lang)
             tr_body = ai_trans.get(lang, {}).get("description") or body_desc
             locs[lang] = {
                 "title": tr_title[:100],
-                "description": with_block(block.replace("LINK", v_link), tr_body)
+                "description": with_block(block.replace("LINK", v_link), tr_body),
             }
-        body = {"id": vid, "snippet": {"title": sn["title"], "categoryId": sn["categoryId"],
-                                       "description": new_desc[:5000], "defaultLanguage": default_lang},
-                "localizations": locs}
-        for k in ("tags", "defaultAudioLanguage"):
-            if sn.get(k):
-                body["snippet"][k] = sn[k]
+
+        merged_tags = merge_tags(sn.get("tags"))
+        body = {
+            "id": vid,
+            "snippet": {
+                "title": new_en_title[:100],
+                "categoryId": sn["categoryId"],
+                "description": new_desc[:5000],
+                "defaultLanguage": default_lang,
+                "tags": merged_tags,
+            },
+            "localizations": locs,
+        }
+        if sn.get("defaultAudioLanguage"):
+            body["snippet"]["defaultAudioLanguage"] = sn["defaultAudioLanguage"]
+
         if dry_run:
-            print(f"[{n+1}/{len(videos)}] DRY RUN: {vid} ({sn['title'][:40]}) -> {v_path}")
-            print(f"    URL: {v_link}")
-            if translate_mode and "ja" in locs:
-                print(f"    Sample JA Title: {locs['ja']['title']}")
-                print(f"    Sample JA Desc:  {locs['ja']['description'][:200]}...\n")
+            print(f"[{n+1}/{len(videos)}] DRY RUN: {vid}")
+            print(f"    OLD TITLE: {raw_title}")
+            print(f"    NEW TITLE: {new_en_title}")
+            print(f"    TAGS ({len(merged_tags)}): {', '.join(merged_tags[:8])}...")
+            if "ja" in locs:
+                print(f"    JA TITLE : {locs['ja']['title']}")
+            if "es" in locs:
+                print(f"    ES TITLE : {locs['es']['title']}")
+            print(f"    TOP DESC : {new_desc.splitlines()[0]} | {new_desc.splitlines()[1]}\n")
             n += 1
             continue
+
         success = False
         is_quota = False
         for attempt in range(3):
@@ -182,20 +527,185 @@ def apply(dry_run=False, limit=None, reset_done=False, translate_mode=False):
         done.add(vid)
         json.dump(sorted(done), open(done_path, "w"))
         n += 1
-        print(f"[{len(done)}/{len(videos)}] updated {vid} -> {v_path}", flush=True)
-    print(f"\nDone this run: {n}; total {len(done)}/{len(videos)} videos updated.")
+        print(f"[{len(done)}/{len(videos)}] LOST-MEDIA BRIDGE UPDATED {vid} -> {new_en_title[:65]}", flush=True)
+    print(f"\nDone this run: {n}; total {len(done)}/{len(videos)} videos upgraded to Lost-Media Mystery Bridge.", flush=True)
+    return n, len(done), len(videos), is_quota
 
+
+def upload_shorts(dry_run=False, limit=None):
+    """Programmatically uploads rendered 9:16 vertical Shorts with notifySubscribers=False
+    so YouTube bypasses current 80s Hard Rock subscribers and tests 100% on cold non-subscribers!"""
+    from googleapiclient.http import MediaFileUpload
+
+    manifest_path = os.path.join(HERE, "shorts_ready", "shorts_manifest.json")
+    if not os.path.exists(manifest_path):
+        print(f"No shorts manifest found at {manifest_path}")
+        return 0
+    with open(manifest_path) as fh:
+        shorts = json.load(fh)
+    with open(os.path.join(HERE, "translations.json")) as fh:
+        tr = json.load(fh)
+
+    uploaded_path = os.path.join(STATE, "uploaded_shorts.json")
+    uploaded = json.load(open(uploaded_path)) if os.path.exists(uploaded_path) else {}
+
+    api = yt() if not dry_run else None
+    count = 0
+    for item in shorts:
+        sid = item["id"]
+        srt_map = item.get("srt_files") or {}
+        if sid in uploaded:
+            # If video was uploaded before quota ran out for SRT captions, backfill captions on next quota cycle
+            if srt_map and not uploaded[sid].get("captions_uploaded") and not dry_run:
+                vid_existing = uploaded[sid]["video_id"]
+                all_caps_ok = True
+                for lang_code, srt_path in srt_map.items():
+                    if os.path.exists(srt_path):
+                        try:
+                            cap_media = MediaFileUpload(srt_path, mimetype="application/octet-stream", resumable=False)
+                            api.captions().insert(
+                                part="snippet",
+                                body={
+                                    "snippet": {
+                                        "videoId": vid_existing,
+                                        "language": lang_code,
+                                        "name": f"Sublevel B2 Archive ({lang_code})",
+                                        "isDraft": False,
+                                    }
+                                },
+                                media_body=cap_media,
+                            ).execute()
+                        except HttpError as ce:
+                            if ce.resp.status == 403 and b"quota" in ce.content.lower():
+                                all_caps_ok = False
+                                break
+                            elif ce.resp.status == 409:
+                                pass  # Caption track already exists
+                            else:
+                                print(f"  [caption backfill warning] {lang_code}: {ce}", flush=True)
+                if all_caps_ok:
+                    uploaded[sid]["captions_uploaded"] = True
+                    json.dump(uploaded, open(uploaded_path, "w"), indent=2)
+                    print(f"[CAPTIONS BACKFILLED (20 langs)] {sid} -> https://youtube.com/watch?v={vid_existing}", flush=True)
+            continue
+        if limit and count >= limit:
+            break
+        mp4_path = item["file"]
+        if not os.path.exists(mp4_path):
+            continue
+        title_en = item["title_en"][:100]
+        src_block = tr["blocks"]["en"].replace("LINK", LINK)
+        desc_en = (item.get("pinned_comment_en", "") + "\n\n" + src_block)[:5000]
+
+        body = {
+            "snippet": {
+                "title": title_en,
+                "description": desc_en,
+                "tags": [
+                    "lost media", "mystery", "1980s", "cassette tape", "ai", "singularity",
+                    "retro computing", "geocities", "dead internet theory", "unsolved mystery",
+                    "80s music", "nova hart", "shorts"
+                ],
+                "categoryId": "24",  # Entertainment (reaches broadest non-subscriber Shorts feed)
+                "defaultLanguage": "en",
+                "defaultAudioLanguage": "en",
+            },
+            "status": {
+                "privacyStatus": "public",
+                "selfDeclaredMadeForKids": False,
+            },
+        }
+        if dry_run:
+            print(f"[DRY RUN SHORT (notifySubscribers=False)] {sid} -> {title_en} ({mp4_path})")
+            count += 1
+            continue
+        try:
+            media = MediaFileUpload(mp4_path, mimetype="video/mp4", resumable=True)
+            # CRITICAL: notifySubscribers=False bypasses existing 80s Hard Rock subscribers
+            # and forces YouTube's algorithm to seed a 100% cold non-subscriber audience!
+            resp = api.videos().insert(
+                part="snippet,status",
+                notifySubscribers=False,
+                body=body,
+                media_body=media,
+            ).execute()
+            new_vid = resp["id"]
+            caps_ok = True
+            for lang_code, srt_path in srt_map.items():
+                if os.path.exists(srt_path):
+                    try:
+                        cap_media = MediaFileUpload(srt_path, mimetype="application/octet-stream", resumable=False)
+                        api.captions().insert(
+                            part="snippet",
+                            body={
+                                "snippet": {
+                                    "videoId": new_vid,
+                                    "language": lang_code,
+                                    "name": f"Sublevel B2 Archive ({lang_code})",
+                                    "isDraft": False,
+                                }
+                            },
+                            media_body=cap_media,
+                        ).execute()
+                    except Exception as ce:
+                        caps_ok = False
+                        print(f"  [caption warning] {lang_code}: {ce}", flush=True)
+                        break
+            uploaded[sid] = {
+                "video_id": new_vid,
+                "title": title_en,
+                "notifySubscribers": False,
+                "captions_uploaded": bool(srt_map and caps_ok),
+                "uploaded_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+            }
+            json.dump(uploaded, open(uploaded_path, "w"), indent=2)
+            print(f"[SHORT/DOC UPLOADED (notifySubscribers=False)] {sid} -> https://youtube.com/watch?v={new_vid} ({title_en})", flush=True)
+            count += 1
+        except HttpError as e:
+            if e.resp.status == 403 and b"quota" in e.content.lower():
+                print("[!] YouTube API daily quota reached during Short upload; will resume on next quota cycle.", flush=True)
+                break
+            print(f"Error uploading short {sid}: {e}", flush=True)
+            break
+    return count
+
+
+def run_quota_daemon(interval_sec=1800):
+    """Autonomous daemon that checks every 30 minutes:
+    1) FIRST uploads Subscriber-Bypass (notifySubscribers=False) Gateway Shorts to seed cold non-subscribers
+    2) THEN upgrades catalog videos to the Lost 1989 Studio Tape / Erased Singer Mystery Bridge format."""
+    print(f"[yt-daemon] Starting YouTube Non-Subscriber Breakout & Catalog Daemon (interval={interval_sec}s)...", flush=True)
+    while True:
+        try:
+            # 1. Upload notifySubscribers=False Gateway Shorts FIRST so cold non-subscriber seeding is prioritized
+            upload_shorts(dry_run=False, limit=3)
+            # 2. Upgrade catalog videos to Lost-Media Mystery Bridge format
+            _, done_cnt, total_cnt, hit_quota = apply(dry_run=False, translate_mode=True)
+            if done_cnt >= total_cnt and not hit_quota:
+                sync(dry_run=False)
+                print(f"[yt-daemon] All {done_cnt}/{total_cnt} videos upgraded! Sleeping {interval_sec}s...", flush=True)
+            else:
+                print(f"[yt-daemon] Progress: {done_cnt}/{total_cnt} videos upgraded. Waiting {interval_sec}s for next quota check...", flush=True)
+        except Exception as e:
+            print(f"[yt-daemon] Error in daemon cycle: {e}", flush=True)
+        time.sleep(interval_sec)
 
 
 def sync(max_results=20, dry_run=False):
-    """Checks the channel's newest uploads, assigning a unique node and AI-translated title/desc in 20 languages."""
+    """Checks the channel's newest uploads and applies Maximum-Visibility Titles, Tags & 20-Language Localizations."""
     api = yt()
-    ch = api.channels().list(part="snippet,contentDetails", mine=True).execute()["items"][0]
-    uploads = ch["contentDetails"]["relatedPlaylists"]["uploads"]
-    r = api.playlistItems().list(part="contentDetails", playlistId=uploads, maxResults=max_results).execute()
+    try:
+        ch = api.channels().list(part="snippet,contentDetails", mine=True).execute()["items"][0]
+        uploads = ch["contentDetails"]["relatedPlaylists"]["uploads"]
+        r = api.playlistItems().list(part="contentDetails", playlistId=uploads, maxResults=max_results).execute()
+    except HttpError as e:
+        if e.resp.status == 403 and b"quota" in e.content.lower():
+            print("[!] YouTube API daily quota reached during sync; will resume on next quota cycle.")
+            return
+        raise
     recent_ids = [i["contentDetails"]["videoId"] for i in r["items"]]
 
-    done_path = os.path.join(STATE, "done.json")
+    done_path = os.path.join(STATE, "max_visibility_done.json")
     done = set(json.load(open(done_path))) if os.path.exists(done_path) else set()
 
     with open(os.path.join(HERE, "translations.json")) as fh:
@@ -205,60 +715,64 @@ def sync(max_results=20, dry_run=False):
 
     missing_ids = [vid for vid in recent_ids if vid not in done]
     if not missing_ids:
-        print(f"All {len(recent_ids)} recent uploads are already synced with ARG nodes and localizations.")
+        print(f"All {len(recent_ids)} recent uploads are already synced with Maximum-Visibility titles & 20 languages.")
         return
 
-    print(f"Found {len(missing_ids)} new uploads needing ARG node links & localizations.")
+    print(f"Found {len(missing_ids)} uploads needing Maximum-Visibility upgrade.")
     r_v = api.videos().list(part="snippet,localizations,status", id=",".join(missing_ids)).execute()
     target_langs = [l for l in tr["blocks"].keys() if l != tr["source_lang"]]
 
     for v in r_v["items"]:
         vid = v["id"]
         if v["status"]["privacyStatus"] == "private":
-            print(f"Skipping private video: {vid}")
             continue
         sn = v["snippet"]
-        node_info = allocate_nodes.allocate_single(vid, sn["title"])
+        raw_title = sn["title"]
+        new_en_title = build_max_visibility_title(vid, raw_title, "en")
+        node_info = allocate_nodes.allocate_single(vid, raw_title)
         v_link = node_info["url"]
-        v_path = node_info["site_path"]
 
-        body_desc = WEB_RING_LINE.sub("", sn.get("description", "")).strip()
+        body_desc = strip_old_preamble(sn.get("description", ""))
         src = tr["blocks"][tr["source_lang"]].replace("LINK", v_link)
         new_desc = with_block(src, body_desc)
         default_lang = sn.get("defaultLanguage") or tr["source_lang"]
         locs = dict(v.get("localizations") or {})
 
-        # AI translation for title and description body
-        ai_trans = translate_ai.translate_video(vid, sn["title"], body_desc, target_langs)
+        ai_trans = translate_ai.translate_video(vid, raw_title, body_desc, target_langs)
 
         for lang, block in tr["blocks"].items():
             if lang == tr["source_lang"] or lang == default_lang:
                 continue
             existing = locs.get(lang, {})
-            tr_title = ai_trans.get(lang, {}).get("title") or existing.get("title") or sn["title"]
+            base_tr_title = ai_trans.get(lang, {}).get("title") or existing.get("title") or raw_title
+            tr_title = build_max_visibility_title(vid, base_tr_title, lang)
             tr_body = ai_trans.get(lang, {}).get("description") or body_desc
             locs[lang] = {
                 "title": tr_title[:100],
-                "description": with_block(block.replace("LINK", v_link), tr_body)
+                "description": with_block(block.replace("LINK", v_link), tr_body),
             }
-        body = {"id": vid, "snippet": {"title": sn["title"], "categoryId": sn["categoryId"],
-                                       "description": new_desc[:5000], "defaultLanguage": default_lang},
-                "localizations": locs}
-        for k in ("tags", "defaultAudioLanguage"):
-            if sn.get(k):
-                body["snippet"][k] = sn[k]
+        merged_tags = merge_tags(sn.get("tags"))
+        body = {
+            "id": vid,
+            "snippet": {
+                "title": new_en_title[:100],
+                "categoryId": sn["categoryId"],
+                "description": new_desc[:5000],
+                "defaultLanguage": default_lang,
+                "tags": merged_tags,
+            },
+            "localizations": locs,
+        }
+        if sn.get("defaultAudioLanguage"):
+            body["snippet"]["defaultAudioLanguage"] = sn["defaultAudioLanguage"]
         if dry_run:
-            print(f"DRY RUN: {vid} ({sn['title']}) -> {v_path}")
-            print(f"    URL: {v_link}")
-            if "ja" in locs:
-                print(f"    Sample JA Title: {locs['ja']['title']}")
-                print(f"    Sample JA Desc:  {locs['ja']['description'][:200]}...")
+            print(f"DRY RUN: {vid} -> {new_en_title}")
             continue
         try:
             api.videos().update(part="snippet,localizations", body=body).execute()
             done.add(vid)
             json.dump(sorted(done), open(done_path, "w"))
-            print(f"Successfully synced new video {vid} ({sn['title']}) -> {v_path}")
+            print(f"Successfully upgraded {vid} -> {new_en_title}")
         except Exception as e:
             print(f"Error updating {vid}: {e}")
 
@@ -279,10 +793,14 @@ if __name__ == "__main__":
             dry_run="--dry-run" in sys.argv,
             limit=lim,
             reset_done="--all" in sys.argv,
-            translate_mode="--translate" in sys.argv,
+            translate_mode=True,
         )
+    elif cmd == "upload-shorts":
+        lim = int(sys.argv[sys.argv.index("--limit") + 1]) if "--limit" in sys.argv else None
+        upload_shorts(dry_run="--dry-run" in sys.argv, limit=lim)
+    elif cmd == "daemon":
+        run_quota_daemon()
     elif cmd == "sync":
         sync(dry_run="--dry-run" in sys.argv)
     else:
         print(__doc__)
-

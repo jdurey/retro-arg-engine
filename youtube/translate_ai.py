@@ -115,14 +115,38 @@ Return ONLY a JSON object with this exact structure:
         try:
             r = requests.post(OPENROUTER_URL, headers=headers, json=payload, timeout=40)
             if r.status_code == 200:
-                raw_json = r.json()["choices"][0]["message"]["content"]
-                try:
-                    res = json.loads(raw_json, strict=False)
-                except Exception:
-                    sanitized = re.sub(r'\\(?![/"\\bfnrtu])', r'\\\\', raw_json)
-                    res = json.loads(sanitized, strict=False)
-                translations = res.get("translations", {})
-                
+                raw_json = r.json()["choices"][0]["message"]["content"].strip()
+                if raw_json.startswith("```"):
+                    raw_json = re.sub(r"^```(?:json)?\s*|\s*```$", "", raw_json, flags=re.S).strip()
+                res = None
+                for candidate in (
+                    raw_json,
+                    re.sub(r'\\(?![/"\\bfnrtu])', r"\\\\", raw_json),
+                ):
+                    try:
+                        res = json.loads(candidate, strict=False)
+                        break
+                    except Exception:
+                        pass
+                if res is None:
+                    # Regex fallback extractor per language block if unescaped quotes broke JSON
+                    translations = {}
+                    for lang_code in target_langs:
+                        m = re.search(
+                            rf'"{re.escape(lang_code)}"\s*:\s*\{{[^{{}}]*?"title"\s*:\s*"([^\n\r"]+)"[^{{}}]*?"description"\s*:\s*"(.*?)"\s*\}}',
+                            raw_json,
+                            flags=re.S,
+                        )
+                        if m:
+                            translations[lang_code] = {
+                                "title": m.group(1).strip(),
+                                "description": m.group(2).replace('\\n', '\n').strip(),
+                            }
+                    if not translations:
+                        raise ValueError("Could not parse JSON or fallback regex from LLM response")
+                else:
+                    translations = res.get("translations", {})
+
                 # Sanitize lengths
                 for l, val in translations.items():
                     if "title" in val:
