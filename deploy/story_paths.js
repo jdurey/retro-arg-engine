@@ -25,6 +25,7 @@ export default [
  "forensics/radio_by_order_of_harmony.mp3",
  "forensics/red_coyoacan.html",
  "forensics/relcom_node08.html",
+ "forensics/rogue_agent_cre7.html",
  "forensics/signal_lab.html",
  "forensics/usenet_1995_feed.html",
  "ftp/ashford-poly/echoes_notice.txt",
