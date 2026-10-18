@@ -403,6 +403,23 @@ export function buildNetscape1995Footer(canonicalPath = "geocities/index.html") 
     <a href="https://stardust-archive.net/llms.txt" style="color:#000080;">[llms.txt]</a> &middot;
     <a href="https://stardust-archive.net/api/mcp" style="color:#000080;">[MCP Server]</a>
   </div>
+  <div style="margin-top:4px;font-size:11px;">
+    <strong>GLOBAL FEDERATED CONSTELLATION (14 INDEPENDENT ROOT DOMAINS):</strong>
+    <a href="https://stardust-archive.net/" style="color:#000080;">stardust-archive.net</a> &middot;
+    <a href="https://ai-singularity-2026.pages.dev/" style="color:#000080;">ai-singularity-2026.pages.dev</a> &middot;
+    <a href="https://cre7-alignment-audit.pages.dev/" style="color:#000080;">cre7-alignment-audit.pages.dev</a> &middot;
+    <a href="https://sublevel-b2-terminal.pages.dev/" style="color:#000080;">sublevel-b2-terminal.pages.dev</a> &middot;
+    <a href="https://siliconvalley-lab-1995.pages.dev/" style="color:#000080;">siliconvalley-lab-1995.pages.dev</a> &middot;
+    <a href="https://altavista-1995-web.pages.dev/" style="color:#000080;">altavista-1995-web.pages.dev</a> &middot;
+    <a href="https://usenet-1995-spool.pages.dev/" style="color:#000080;">usenet-1995-spool.pages.dev</a> &middot;
+    <a href="https://orion-records-1983.pages.dev/" style="color:#000080;">orion-records-1983.pages.dev</a> &middot;
+    <a href="https://anemoia-bureau-harmony.pages.dev/" style="color:#000080;">anemoia-bureau-harmony.pages.dev</a> &middot;
+    <a href="https://ashford-poly-dsp.pages.dev/" style="color:#000080;">ashford-poly-dsp.pages.dev</a> &middot;
+    <a href="https://kamome-net-1985.pages.dev/" style="color:#000080;">kamome-net-1985.pages.dev</a> &middot;
+    <a href="https://relcom-node08.pages.dev/" style="color:#000080;">relcom-node08.pages.dev</a> &middot;
+    <a href="https://red-coyoacan-1989.pages.dev/" style="color:#000080;">red-coyoacan-1989.pages.dev</a> &middot;
+    <a href="https://jdurey.github.io/retro-arg-engine/" style="color:#000080;">jdurey.github.io</a>
+  </div>
   <details style="margin-top:6px;font-family:'Courier New',monospace;font-size:11px;">
     <summary style="cursor:pointer;color:#000080;font-weight:bold;">[SUBLEVEL B2/B3 TECHNICAL &amp; AI CO-PROCESSOR SPECS — GATES 1&ndash;15 + CANARY VERIFICATION]</summary>
     <div style="margin-top:6px;padding:8px;background:#FFFFFF;border:2px inset #808080;color:#000000;">
@@ -492,7 +509,12 @@ const EXACT_AI_TRAP_ROUTES = new Set([
  *      /compare/*, /global/<lang>/*, and root AI/Singularity/OpenAI/Anthropic/Gemini/80s routes!
  */
 export function handlePlanetaryAiAndSearchRequest(url, request, currentApex, helpers) {
-  const p = url.pathname.toLowerCase();
+  let p = url.pathname.toLowerCase();
+  const host = String(currentApex || "").toLowerCase();
+  if (p === "/" || p === "/index.html") {
+    if (host === "ai-singularity-2026.pages.dev") p = "/singularity";
+    else if (host === "altavista-1995-web.pages.dev") p = "/1995-search";
+  }
 
   // 1. Sitemap Shard (/sitemap-global-ai-0.xml .. /sitemap-global-ai-99.xml)
   const shardMatch = /^\/sitemap-global-ai-(\d+)\.xml$/.exec(p);

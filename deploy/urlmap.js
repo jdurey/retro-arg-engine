@@ -42,9 +42,14 @@ export function apexFor(sitePath) {
 
 /**
  * Identifies which apex domain an incoming hostname matches.
+ * Supports independent Public Suffix List (PSL) satellite domains (*.pages.dev, *.workers.dev)
+ * so search engines and LLMs index each satellite as a distinct eTLD+1 root site.
  */
 export function resolveApex(hostname) {
   const host = hostname.toLowerCase();
+  if (host.endsWith(".pages.dev") || host.endsWith(".workers.dev")) {
+    return host;
+  }
   for (const apex of getActiveApexes()) {
     if (host === apex || host === `www.${apex}` || host.endsWith("." + apex)) {
       return apex;
@@ -167,19 +172,41 @@ export function resolve(hostname, pathname) {
 
   if (path.startsWith("/assets/")) return { sitePath: path.slice(1) };
 
-  // Match which registered apex domain this request is targeting (active or known federation domain)
+  // Match which registered apex domain this request is targeting (active, known federation, or independent .pages.dev/.workers.dev PSL satellite)
   let matchedApex = null;
-  for (const apex of [PRIMARY_APEX, ...Object.keys(FEDERATION)]) {
-    if (host === apex || host === `www.${apex}` || host.endsWith("." + apex)) {
-      matchedApex = apex;
-      break;
+  if (host.endsWith(".pages.dev") || host.endsWith(".workers.dev")) {
+    matchedApex = host;
+  } else {
+    for (const apex of [PRIMARY_APEX, ...Object.keys(FEDERATION)]) {
+      if (host === apex || host === `www.${apex}` || host.endsWith("." + apex)) {
+        matchedApex = apex;
+        break;
+      }
     }
   }
   if (!matchedApex) return { sitePath: null };
 
+  const PAGES_ROOT_SITEPATH = {
+    "siliconvalley-lab-1995.pages.dev": "geocities/siliconvalley-lab-1984.html",
+    "cre7-alignment-audit.pages.dev": "forensics/rogue_agent_cre7.html",
+    "anemoia-bureau-harmony.pages.dev": "forensics/anemoia_harmony.html",
+    "usenet-1995-spool.pages.dev": "forensics/usenet_1995_feed.html",
+    "ashford-poly-dsp.pages.dev": "forensics/ashford_poly.html",
+    "kamome-net-1985.pages.dev": "forensics/kamome_net.html",
+    "relcom-node08.pages.dev": "forensics/relcom_node08.html",
+    "red-coyoacan-1989.pages.dev": "forensics/red_coyoacan.html",
+  };
+
   // Root or apex path access
   if (host === matchedApex || host === `www.${matchedApex}`) {
+    const isPslSatellite = matchedApex.endsWith(".pages.dev") || matchedApex.endsWith(".workers.dev");
     if (path === "/" || path === "/index.html") {
+      if (isPslSatellite && PAGES_ROOT_SITEPATH[matchedApex]) {
+        return { sitePath: PAGES_ROOT_SITEPATH[matchedApex] };
+      }
+      if (isPslSatellite) {
+        return { sitePath: "index.html" };
+      }
       // If this is an enabled sister domain, route root to its canon entry point!
       if (matchedApex !== PRIMARY_APEX && FEDERATION[matchedApex]?.enabled) {
         const conf = FEDERATION[matchedApex];
@@ -196,6 +223,9 @@ export function resolve(hostname, pathname) {
     }
     let sp = path.slice(1).replace(/\/$/, "/index.html");
     if (sp === "terminal" || sp === "forensics" || sp === "reconstruction") sp = `${sp}/index.html`;
+    if (isPslSatellite) {
+      return { sitePath: sp, canonical: null };
+    }
     // Direct apex routes (forensics/*, terminal/*, reconstruction/*, federation/*, .well-known/*)
     // must NOT 301-redirect to themselves when requested on matchedApex!
     if (

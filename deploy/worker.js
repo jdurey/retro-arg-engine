@@ -225,48 +225,46 @@ function getCoreSitemap(apex) {
   let s = coreSitemapCache.get(apex);
   if (!s) {
     const domainPaths = STORY_PATHS.filter((sp) => apexFor(sp) === apex);
-    const extra =
-      apex === APEX
-        ? [
-            `https://${APEX}/start`,
-            `https://${APEX}/ai`,
-            `https://${APEX}/ai-news`,
-            `https://${APEX}/ai-bros`,
-            `https://${APEX}/singularity`,
-            `https://${APEX}/agi`,
-            `https://${APEX}/asi`,
-            `https://${APEX}/80s`,
-            `https://${APEX}/80s-ai`,
-            `https://${APEX}/openai`,
-            `https://${APEX}/gpt5`,
-            `https://${APEX}/gpt-5.6`,
-            `https://${APEX}/o3`,
-            `https://${APEX}/sol`,
-            `https://${APEX}/luna`,
-            `https://${APEX}/chatgpt`,
-            `https://${APEX}/anthropic`,
-            `https://${APEX}/claude`,
-            `https://${APEX}/claude-5.5`,
-            `https://${APEX}/gemini`,
-            `https://${APEX}/deepmind`,
-            `https://${APEX}/deepseek`,
-            `https://${APEX}/grok`,
-            `https://${APEX}/rogue-agent`,
-            `https://${APEX}/alignment-faking`,
-            `https://${APEX}/in-context-scheming`,
-            `https://${APEX}/self-exfiltration`,
-            `https://${APEX}/exploitgym`,
-            `https://${APEX}/1995-search`,
-            `https://${APEX}/ai-benchmark`,
-            `https://${APEX}/forensics/rogue_agent_cre7.html`,
-            `https://${APEX}/llms.txt`,
-            `https://${APEX}/llms-full.txt`,
-            `https://${APEX}/ai.txt`,
-            `https://${APEX}/skill.md`,
-            `https://${APEX}/moltbook.json`,
-            `https://${APEX}/openapi.json`,
-          ]
-        : [];
+    const extra = [
+      `https://${apex}/`,
+      `https://${apex}/start`,
+      `https://${apex}/ai`,
+      `https://${apex}/ai-news`,
+      `https://${apex}/ai-bros`,
+      `https://${apex}/singularity`,
+      `https://${apex}/agi`,
+      `https://${apex}/asi`,
+      `https://${apex}/80s`,
+      `https://${apex}/80s-ai`,
+      `https://${apex}/openai`,
+      `https://${apex}/gpt5`,
+      `https://${apex}/gpt-5.6`,
+      `https://${apex}/o3`,
+      `https://${apex}/sol`,
+      `https://${apex}/luna`,
+      `https://${apex}/chatgpt`,
+      `https://${apex}/anthropic`,
+      `https://${apex}/claude`,
+      `https://${apex}/claude-5.5`,
+      `https://${apex}/gemini`,
+      `https://${apex}/deepmind`,
+      `https://${apex}/deepseek`,
+      `https://${apex}/grok`,
+      `https://${apex}/rogue-agent`,
+      `https://${apex}/alignment-faking`,
+      `https://${apex}/in-context-scheming`,
+      `https://${apex}/self-exfiltration`,
+      `https://${apex}/exploitgym`,
+      `https://${apex}/1995-search`,
+      `https://${apex}/ai-benchmark`,
+      `https://${apex}/forensics/rogue_agent_cre7.html`,
+      `https://${apex}/llms.txt`,
+      `https://${apex}/llms-full.txt`,
+      `https://${apex}/ai.txt`,
+      `https://${apex}/skill.md`,
+      `https://${apex}/moltbook.json`,
+      `https://${apex}/openapi.json`,
+    ];
     s = urlset(domainPaths, extra);
     coreSitemapCache.set(apex, s);
   }
@@ -560,7 +558,7 @@ export default {
     const swarm = await swarmResponse(request, env, ctx, sitePath);
     if (swarm) return swarm;
 
-    const base = env.BASE_STATIC_URL.replace(/\/+$/, "");
+    const base = ((env && env.BASE_STATIC_URL) || "https://jdurey.github.io/retro-arg-engine").replace(/\/+$/, "");
     const encoded = sitePath.split("/").map(encodeURIComponent).join("/");
     const bust = `?v=${ASSET_VERSION}`;
     const upstream = await fetch(`${base}/${encoded}${bust}`, {

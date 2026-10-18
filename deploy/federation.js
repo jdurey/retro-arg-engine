@@ -251,9 +251,19 @@ ${buildDevToolsConsoleScript("stardust-archive.net", canonicalPath)}</body>
 </html>\n`;
 }
 
+const PAGES_HOST_TO_SISTER = {
+  "ashford-poly-dsp.pages.dev": "ashford-poly.org",
+  "kamome-net-1985.pages.dev": "kamome-net.org",
+  "relcom-node08.pages.dev": "relcom-node08.org",
+  "red-coyoacan-1989.pages.dev": "redcoyoacan.org",
+};
+
 export function handleFederationRequest(url) {
   const host = url.hostname.toLowerCase().replace(/^www\./, "");
   let domainKey = SISTER_DOMAINS[host] ? host : null;
+  if (!domainKey && PAGES_HOST_TO_SISTER[host] && (url.pathname === "/" || url.pathname === "/index.html")) {
+    domainKey = PAGES_HOST_TO_SISTER[host];
+  }
   if (!domainKey) {
     const mFed = /^\/federation\/([^/]+)(?:\/.*)?$/.exec(url.pathname);
     if (mFed && SISTER_DOMAINS[mFed[1].toLowerCase()]) {
