@@ -408,7 +408,7 @@ def _clean_crt_text(text: str, max_chars: int = 32) -> str:
     dangling = {"A", "AN", "THE", "IN", "ON", "AT", "TO", "OF", "FOR", "BY", "WITH", "FROM", "INTO", "ACROSS", "AND", "OR", "//", "->", ":"}
     while len(out_words) > 1 and out_words[-1].upper().rstrip(":-") in dangling:
         out_words.pop()
-    res = " ".join(out_words) if out_words else t[:max_chars]
+    res = (" ".join(out_words) if out_words else t[:max_chars]).rstrip(":-/ ")
     if "(" in res and ")" not in res:
         res = res.split("(", 1)[0].strip()
     return res
@@ -531,23 +531,28 @@ def render_crt_window_patch(
         _CRT_PATCH_CACHE["img"] = out_img
         return out_img
 
-    # VOCAL SONG MODE: Header & clue in upper zone (y=20..38), 32-band EQ in lower zone (y=106..152),
-    # and target sector footer at y=158 so the EQ never covers any text!
+    # VOCAL SONG MODE: Clean Song Title & Role/Era in upper zone (y=20..38), 32-band EQ in lower zone (y=106..152),
+    # and diegetic carrier/reel stamp at y=158 so the CRT stays 100% in-universe and uncluttered!
     text_layer = Image.new("RGBA", (CRT_PX_W, CRT_PX_H), (0, 0, 0, 0))
     draw = _HiDPIDraw(ImageDraw.Draw(text_layer), scale=CRT_SX, scale_y=CRT_SY)
 
     lore = resolve_song_lore_panel(current_track or {}, state, now_ts)
     raw_title = lore.get("title", state.get("crt_sub", "NOVA HART")).upper()
     title_str = raw_title.split("(", 1)[0].strip() or raw_title
-    hdr_str = _clean_crt_text(f"{title_str} // {state.get('crt_header', '')}", 29)
-    clue_str = _clean_crt_text(state.get("crt_body", ""), 29)
-    ftr_str = _clean_crt_text(state.get("crt_footer", f"TARGET: SEC #{state.get('target_sector', 1):02d}"), 29)
+    role_str = lore.get("pov", "NOVA HART").upper()
+    era_str = lore.get("timeline", "ORION ARCHIVE").upper().split("(", 1)[0].strip()
+    era_short = re.sub(r"^PHASE (\d+):\s*(?:THE\s+)?", r"PHASE \1 ", era_str)
+    reel_id = lore.get("catalog_id", "ORION-B2").replace("ARCHIVE REEL // ", "").strip()
+
+    hdr_str = _clean_crt_text(title_str, 29)
+    sub_str = _clean_crt_text(f"{role_str} - {era_short}", 29)
+    ftr_str = _clean_crt_text(f"14.2001 HZ - {reel_id}", 29)
 
     top_fg = (232, 180, 70, 230) if is_warn else (88, 226, 106, 230)
-    clue_fg = (238, 192, 95, 235) if is_warn else (105, 235, 122, 235)
+    sub_fg = (238, 192, 95, 235) if is_warn else (105, 235, 122, 235)
     bot_fg = (225, 162, 45, 225) if is_warn else (76, 214, 92, 225)
     draw.text((24, 20), hdr_str, fill=top_fg, font=FONT_CRT_8)
-    draw.text((24, 38), clue_str, fill=clue_fg, font=FONT_CRT_8)
+    draw.text((24, 38), sub_str, fill=sub_fg, font=FONT_CRT_8)
     draw.text((24, 158), ftr_str, fill=bot_fg, font=FONT_CRT_8)
 
     out_img = _apply_crt_subglass_phosphor(text_layer, geom)
@@ -815,98 +820,58 @@ def render_bottom_engineering_console(
         font=FONT_HUD_9,
     )
 
-    # --- BAY 2 (CENTER `x=234..720` -> `468..1440` px): PRIMARY TELEPRINTER & DYNAMIC FORENSIC FEED ---
+    # --- BAY 2 (CENTER `x=234..720` -> `468..1440` px): CLEAN NOW PLAYING & DIEGETIC TELEPRINTER ---
     draw.rectangle([236, Y0 + 2, 718, Y0 + 18], fill=hdr_bg)
     if is_b3_breach:
-        badge = f"[! B3 GATE #{target_sec:02d}]"
+        badge = "[! B3 OVERRIDE]"
     elif is_warn:
         badge = "[! DYAD BLEED]"
     else:
         badge = "[14.2001 HZ]"
-    clean_l1 = re.sub(r"^\[PHASE [^\]]+\]\s*", "", state["line1"])
-    draw.text((240, Y0 + 3), _fit_px_logical(f"{badge} {clean_l1}", FONT_HUD_10, 72, 474.0), fill=c_main, font=FONT_HUD_10)
-    draw.text((240, Y0 + 21), _fit_px_logical(state["line2"], FONT_HUD_10, 72, 474.0), fill=c_bright, font=FONT_HUD_10)
-    draw.text((240, Y0 + 38), _fit_px_logical(state["line3"], FONT_HUD_10, 72, 474.0), fill=c_sub, font=FONT_HUD_10)
 
-    # Dynamic Line 4 synced to active puzzle layer & acoustic forensics tools (all <= 76 chars)
-    if is_b3_breach:
-        b3_directives = {
-            8: "ACT II GATE VIII: DECRYPT VIGENERE (KEY: SEVENTH) OR 'BACKMASK 16'",
-            9: "ACT II GATE IX: SUM ECHOES 01-06 OR DIAL '1983' IN SIGNAL LAB",
-            10: "ACT II GATE X: UNMASK TELEPRINTER (^ 0x55) IN 'LABYRINTH' AT /forensics/",
-            11: "ACT II GATE XI: INVERT TWIN-68 M68K ROM IN 'LABYRINTH' AT /forensics/",
-            12: "ACT II GATE XII: DIAL '10690' ON AUTOVON KEYPAD (NODE #15 ORBIT)",
-            13: "ACT II GATE XIII: SOLVE 7-SIGMA SHAMIR (^ 0x33) AT /forensics/",
-            14: "ACT II GATE XIV: SHATTER MÖBIUS CAGE (4-WAY XOR -> 0x0200) AT /forensics/",
-        }
-        line4_txt = b3_directives.get(target_sec, "ACT II SUBLEVEL B3: TYPE 'LABYRINTH' AT /forensics/ (GATES 8-14)")
+    cur_trk = snap_meta.get("current_track") or {}
+    is_vocal = cur_trk.get("kind", "vocal_song") == "vocal_song"
+    lore = resolve_song_lore_panel(cur_trk, state, now_ts)
+    if is_vocal:
+        np_title = lore.get("title", state.get("crt_sub", "NOVA HART")).upper()
+        l1_txt = f"{badge} NOW PLAYING: {np_title}"
+        l2_txt = f"ROLE: {lore.get('pov', 'NOVA HART').upper()}  //  ERA: {lore.get('timeline', 'ORION ARCHIVE').upper()}"
     else:
-        rot_idx = int(now_ts // 12) % 3
-        if rot_idx == 0:
-            line4_txt = f"ACT I TARGET (SEC #{target_sec:02d}): ENTER PASSKEY AT stardust-archive.net/forensics/"
-        elif rot_idx == 1:
-            line4_txt = "SIGNAL LAB: COAGULA, 2600 HZ BLUE-BOX & 7.5 IPS -> /forensics/signal_lab.html"
-        else:
-            line4_txt = "TWIST WARNING: THE 1983<->2025 LOOP IS A CAGE! TYPE 'LABYRINTH' AT /forensics/"
+        np_title = cur_trk.get("display_title", state.get("crt_header", "SIGNAL INTERCEPT")).upper()
+        l1_txt = f"{badge} INTERCEPT: {np_title}"
+        l2_txt = f"SOURCE: {state.get('crt_sub', 'SHORTWAVE RELAY').upper()}"
 
+    raw_trace = re.sub(r"^(?:CLUE|CHALLENGE|HINT)\s*[:\[-]?\s*", "", state.get("line2", "")).strip(" ]")
+    l3_txt = f"SIGNAL TRACE: {raw_trace}" if raw_trace else "SIGNAL TRACE: SUB-AUDIBLE 14.2001 HZ CARRIER ACTIVE"
+    l4_txt = "ARCHIVE DOSSIERS, LYRICS & SIGNAL LAB -> stardust-archive.net"
+
+    draw.text((240, Y0 + 3), _fit_px_logical(l1_txt, FONT_HUD_10, 72, 474.0), fill=c_main, font=FONT_HUD_10)
+    draw.text((240, Y0 + 21), _fit_px_logical(l2_txt, FONT_HUD_10, 72, 474.0), fill=c_bright, font=FONT_HUD_10)
+    draw.text((240, Y0 + 38), _fit_px_logical(l3_txt, FONT_HUD_9, 78, 474.0), fill=c_sub, font=FONT_HUD_9)
+    draw.text((240, Y0 + 55), _fit_px_logical(l4_txt, FONT_HUD_9, 80, 474.0), fill=c_main, font=FONT_HUD_9)
+
+    # --- BAY 3 (RIGHT `x=720..952` -> `1440..1904` px): DIEGETIC SUBLEVEL B2 SIGNAL & ARCHIVE STATUS ---
+    draw.rectangle([722, Y0 + 2, X1 - 2, Y0 + 18], fill=hdr_bg)
+    draw.text((726, Y0 + 3), "SUBLEVEL B2 // SIGNAL STATUS", fill=c_main, font=FONT_HUD_9)
+
+    reel_code = lore.get("catalog_id", "ORION-B2").replace("ARCHIVE REEL // ", "").strip()
+    status_mode = "CONTAINMENT BREACH" if (is_warn or is_b3_breach) else "CARRIER LOCKED"
     draw.text(
-        (240, Y0 + 55),
-        _fit_px_logical(line4_txt, FONT_HUD_9, 80, 474.0),
-        fill=c_main,
+        (726, Y0 + 21),
+        _fit_px_logical(f"STATUS : {status_mode}", FONT_HUD_9, 34, 216.0),
+        fill=c_bright,
         font=FONT_HUD_9,
     )
-
-    # --- BAY 3 (RIGHT `x=720..952` -> `1440..1904` px): DUAL-ROW ACT I VAULT & ACT II B3 SEALS MATRIX ---
-    draw.rectangle([722, Y0 + 2, X1 - 2, Y0 + 18], fill=hdr_bg)
-    draw.text((726, Y0 + 3), "ACT I VAULT & ACT II SEALS", fill=c_main, font=FONT_HUD_9)
-
-    # Row 1: Act I Sectors [1][2][3][4][5][6][Ω]
-    draw.text((726, Y0 + 22), "B2:", fill=c_sub, font=FONT_HUD_9)
-    sec_labels = ["1", "2", "3", "4", "5", "6", "\u03a9"]
-    for s_idx, s_lbl in enumerate(sec_labels, start=1):
-        sx = 762 + (s_idx - 1) * 25
-        sy = Y0 + 21
-        is_active_sec = target_sec == s_idx
-        if is_active_sec:
-            s_bg = (255, 195, 30, 255)
-            s_fg = (10, 10, 5, 255)
-            s_out = (255, 235, 130, 255)
-        elif target_sec >= 8:
-            s_bg = (14, 46, 20, 235)
-            s_fg = (110, 255, 130, 240)
-            s_out = (55, 205, 80, 220)
-        else:
-            s_bg = (8, 24, 11, 230)
-            s_fg = (65, 205, 85, 220)
-            s_out = dim_border
-        draw.rectangle([sx, sy, sx + 21, sy + 14], fill=s_bg, outline=s_out)
-        draw.text((sx + 5, sy + 1), s_lbl, fill=s_fg, font=FONT_HUD_9)
-
-    # Row 2: Act II Sublevel B3 Gates [8][9][X][XI][12][13][14]
-    draw.text((726, Y0 + 39), "B3:", fill=c_sub, font=FONT_HUD_9)
-    gate_labels = ["8", "9", "X", "XI", "12", "13", "14"]
-    for g_offset, g_lbl in enumerate(gate_labels):
-        g_num = 8 + g_offset
-        gx = 762 + g_offset * 25
-        gy = Y0 + 38
-        is_active_gate = target_sec == g_num
-        if is_active_gate:
-            g_bg = (255, 120, 30, 255)
-            g_fg = (12, 6, 2, 255)
-            g_out = (255, 225, 120, 255)
-        else:
-            g_bg = (18, 10, 4, 230) if is_b3_breach else (6, 18, 8, 215)
-            g_fg = (255, 175, 55, 225) if is_b3_breach else (55, 175, 72, 200)
-            g_out = dim_border
-        draw.rectangle([gx, gy, gx + 21, gy + 14], fill=g_bg, outline=g_out)
-        tx_off = 2 if len(g_lbl) == 2 else 5
-        draw.text((gx + tx_off, gy + 1), g_lbl, fill=g_fg, font=FONT_HUD_9)
-
-    gate_tag = f"GATE #{target_sec:02d}" if target_sec >= 8 else f"SECTOR #{target_sec:02d}"
+    draw.text(
+        (726, Y0 + 38),
+        _fit_px_logical(f"REEL   : {reel_code}", FONT_HUD_9, 34, 216.0),
+        fill=c_sub,
+        font=FONT_HUD_9,
+    )
     draw.text(
         (726, Y0 + 55),
-        _fit_px_logical(f"TARGET: {gate_tag} -> /forensics/", FONT_HUD_9, 34, 216.0),
-        fill=c_bright,
+        _fit_px_logical("PORTAL : stardust-archive.net", FONT_HUD_9, 34, 216.0),
+        fill=c_main,
         font=FONT_HUD_9,
     )
 
@@ -1257,13 +1222,14 @@ def render_center_live_chat_banner(
 
     if is_vocal_song:
         lore = resolve_song_lore_panel(current_track, state, now_ts)
-        hdr_txt = f"[? LIVE CHAT SONG THEORY #{lore['question_index']}/{lore['question_total']} — DROP YOUR TAKE IN LIVE CHAT]"
+        s_title = lore.get("title", "ACTIVE REEL").upper()
+        hdr_txt = f"LISTENER DISCUSSION #{lore['question_index']}/{lore['question_total']} // {s_title}"
         body_txt = lore["question_text"]
     else:
-        hdr_txt = f"[? LIVE CHAT SIGNAL DECODE — {state.get('crt_header', 'SHORTWAVE INTERCEPT')}]"
+        hdr_txt = f"SHORTWAVE INTERCEPT LOG // {state.get('crt_header', 'SIGNAL RELAY')}"
         body_txt = (
-            f"INTERCEPT ACTIVE: {state.get('crt_body', '')} — Compare notes in Live Chat or test passkeys at "
-            f"stardust-archive.net/forensics/"
+            f"INTERCEPT ACTIVE: {state.get('crt_body', '')} — Archival terminal & signal logs at "
+            f"stardust-archive.net"
         )
 
     border_col = (255, 202, 48, 252)
@@ -1358,16 +1324,16 @@ def render_top_trailhead_banner(
     led_col = (255, 75, 35, 255) if led_on else (140, 35, 20, 220)
     raw_d.ellipse([X0 + 10, Y0 + 9, X0 + 20, Y0 + 19], fill=led_col, outline=(255, 210, 65, 255))
 
-    # Rotating Line 2 directive (strictly <= 88 chars so full URLs never truncate!)
-    rot = int(now_ts // 10) % 3
+    # Diegetic rotating Line 2 telemetry (strictly in-universe, no out-of-character puzzle spoilers)
+    rot = int(now_ts // 12) % 3
     if rot == 0:
-        line2_str = "NEW INVESTIGATOR? ENTER STREAM CODES AT: stardust-archive.net/forensics/"
+        line2_str = "SUBLEVEL B2 ARCHIVAL RELAY // PUBLIC TERMINAL: stardust-archive.net"
         bot_col = (215, 255, 222, 255) if not (is_warn or is_b3_breach) else (255, 242, 190, 255)
     elif rot == 1:
-        line2_str = "SIGNAL LAB: 2600 HZ BLUE-BOX, 7.5 IPS & COAGULA -> /forensics/signal_lab.html"
+        line2_str = "ANOMALY MONITOR: SUB-AUDIBLE CARRIER LOCKED AT 14.2001 HZ (STUDIO B)"
         bot_col = (135, 245, 215, 255)
     else:
-        line2_str = "TWIST WARNING: THE 1983<->2025 LOOP IS A CAGE! TYPE 'LABYRINTH' AT /forensics/"
+        line2_str = "DECLASSIFIED ORION RECORDS VAULT & SIGNAL LOGS // stardust-archive.net"
         bot_col = (255, 205, 65, 255)
 
     raw_d.text(
