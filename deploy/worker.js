@@ -59,7 +59,7 @@ Sitemap: https://${apex}/sitemap.xml
 }
 
 const INDEXNOW_KEY = "37feeed875722863fda484c68e6695e5";
-const ASSET_VERSION = "22";
+const ASSET_VERSION = "23";
 
 const BROADCAST_EPOCH_SEC = 1791763200; // 2026-10-12T00:00:00Z
 const CYCLE_DURATION_SEC = 44 * 3600;
