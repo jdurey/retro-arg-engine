@@ -84,19 +84,33 @@ def process_one_track(item):
         return None
 
     try:
+        tmp_trimmed = dest_path + ".trimmed.mp3"
         cmd = [
             "ffmpeg", "-y",
             "-i", src_path,
             "-af", RADIO_BROADCAST_FILTER,
             "-c:a", "libmp3lame", "-b:a", "192k", "-ar", "44100", "-ac", "2",
-            dest_path
+            tmp_trimmed
         ]
         subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
+
+        # Apply /audio-analog 1989 Sublevel B2 Type-I Ferric Cassette Dub DSP chain
+        try:
+            import sys
+            analog_dir = "/Users/joshuadurey/literacy-launchpad/.agents/skills/audio-analog/scripts"
+            if os.path.isdir(analog_dir) and analog_dir not in sys.path:
+                sys.path.insert(0, analog_dir)
+            import audio_analog as aa
+            aa.process_audio_file(tmp_trimmed, output_path=dest_path, wow_scale=0.35, add_clicks=False, bitrate="192k")
+            if os.path.exists(tmp_trimmed):
+                os.remove(tmp_trimmed)
+        except Exception:
+            os.replace(tmp_trimmed, dest_path)
 
         cmd_info = ["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "default=noprint_wrappers=1:nokey=1", dest_path]
         dur = float(subprocess.check_output(cmd_info).decode().strip())
         sz_kb = os.path.getsize(dest_path) // 1024
-        print(f"  ✓ {dest_filename}: {dur:.2f}s ({sz_kb} KB) mastered with radio EQ!")
+        print(f"  ✓ {dest_filename}: {dur:.2f}s ({sz_kb} KB) mastered with /audio-analog 1989 cassette dub!")
         return dest_path
     except Exception as e:
         print(f"  ✗ Failed to process {fname}: {e}")

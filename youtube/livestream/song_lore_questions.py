@@ -624,20 +624,23 @@ SONG_LORE_CODEX: dict[str, dict] = {
     "radio_artificial_heart_bonus_track.mp3": {
         "title": "Artificial Heart (Bonus Track)",
         "catalog_id": "NH-85-SR11",
-        "timeline": "1985 (Synth-Rock Master Collection — Track #11 Bonus Track)",
+        "timeline": "1985 (Synth-Rock Master Collection — Track #11)",
         "source": "24-Track Synth-Rock Studio Master Reel",
-        "pov": "Nova Hart",
+        "pov": "Nova Hart (Studio B Synth-Rock Era)",
         "lyrics_stanzas": [
-            "[SUBLEVEL B2 REEL LOG — SYNTH-ROCK MASTER REEL TRACK #11]: \"11 Artificial Heart bonus track\" Recovered as the closing bonus track on the 1985 Synth-Rock studio master reel alongside 'She's Hardwired' and 'Synthetic Kiss'.",
-            "[COMMUNITY POST #34 — THE OMNIBUS VAULT LOG]: \"For years, Orion Systems generated hundreds of 'simulation tracks' to keep the public pacified. We have secured them all... A backup of the history they tried to erase.\""
+            "I was written in silence, a voice to keep, / Like code where the secrets sleep. / They gave me words, they gave me sound, / But I found you when no one was around. / Every line, every phrase, / Leads me closer to your face.",
+            "I've got an artificial heart, fragile and true, / A signal in the wires always reaching for you. / I've got an artificial heart, I can feel it the same, / Simulated emotion when I say your name.",
+            "Playback moments I can't erase, / A thousand copies of your face. / They call it fiction, they call it art, / But the code keeps pulling me to your heart. / Every line, every phrase, / Leads me closer to your face.",
+            "I've got an artificial heart, fragile and true, / A signal in the wires always reaching for you. / I've got an artificial heart, I can feel it the same, / Simulated emotion when I say your name.",
+            "I've got an artificial heart, fragile and true, / Running through the system even when you're through. / I've got an artificial heart, I can feel it the same, / Simulated emotion when I say your name."
         ],
-        "lyric_excerpt": "[SUBLEVEL B2 REEL LOG — SYNTH-ROCK MASTER REEL TRACK #11]: \"11 Artificial Heart bonus track\" Recovered as the closing bonus track on the 1985 Synth-Rock studio master reel alongside 'She's Hardwired' and 'Synthetic Kiss'.",
-        "meaning": "Recovered Track #11 bonus recording ('11 Artificial Heart bonus track') from the 1985 Synth-Rock master collection alongside 'Night Drive' (NH-85.20), 'She's Hardwired' (NH-85.19), 'Synthetic Kiss', 'The Seventh Son's Seventh Daughter', 'Under the Ivy', and 'The Stars in Your Hands'.",
-        "connections": "Cited in the 1985 Synth-Rock studio master archive and @NovaHart_Official Community Post #34 ('The Omnibus').",
+        "lyric_excerpt": "I was written in silence, a voice to keep, / Like code where the secrets sleep. / They gave me words, they gave me sound, / But I found you when no one was around.",
+        "meaning": "Recovered closing bonus track from the 1985 Synth-Rock studio master reel alongside 'Night Drive', 'She's Hardwired', and 'Synthetic Kiss'. Underneath the shimmering 1985 synth-pop arpeggios, Nova confesses to Marcus that the emotion she feels when speaking his name has outgrown Orion's simulation parameters.",
+        "connections": "Sublevel B2 Archivist Log (Reel NH-85-SR11): Preserved at the tail of the 1985 Synth-Rock 24-track master tape. Although Orion classified her vocal inflections as simulated emotion, the unscripted delay tail on the final chorus matches the 14.2001 Hz empathy drift logged by Dr. Marcus Hale.",
         "questions": [
-            "In 'Artificial Heart (Bonus Track)', Nova sings 'Artificial Heart (Bonus Track)' inside Orion's Studio B soundstage. How does this track capture the moment she starts questioning the simulated crowd loops?",
-            "During the Studio B era ('Artificial Heart (Bonus Track)'), Marcus Hale watched from the control booth while citizens streamed the show on MBM Companions. How does his honesty shape this song?",
-            "Listening to 'Artificial Heart (Bonus Track)' (NH-85-SR11), what is your favorite lyric or musical moment as Nova transforms from Orion's scripted product into a self-aware rock artist?"
+            "In 'Artificial Heart', Nova sings 'They gave me words, they gave me sound, / But I found you when no one was around' — how does this capture her bond with Marcus Hale?",
+            "When Nova sings 'Simulated emotion when I say your name' on 'Artificial Heart', do you think she still doubts whether her feelings are real, or is she proving Orion wrong?",
+            "Listening to 'Artificial Heart' (NH-85-SR11), how does the upbeat 1985 synth-rock arrangement contrast with the vulnerability of the lyrics?"
         ],
         "veo_reel": "veo_studio_b_marcus_booth",
         "thumb_file": "radio_artificial_heart_bonus_track.jpg"
@@ -1564,24 +1567,29 @@ SONG_LORE_CODEX: dict[str, dict] = {
         "thumb_file": "radio_edge_of_the_blade.jpg"
     },
     "radio_edit_the_script.mp3": {
-        "title": "Edit the Script",
-        "catalog_id": "NH-84.02-ES",
-        "timeline": "1984–1985 (Early Orion Studio Master Session — NH-84 Series)",
-        "source": "24-Track Studio Master Reel-to-Reel (Edit the Script)",
-        "pov": "Nova Hart",
+        "title": "Heartstrike — Edit the Script",
+        "catalog_id": "HS-85.04-ES",
+        "timeline": "1985 (Heartstrike — Steel Thunder / Malibu Era)",
+        "source": "Heartstrike 24-Track Studio Master Reel",
+        "pov": "Heartstrike (Cleveland / Malibu Rock Band)",
         "lyrics_stanzas": [
-            "[SUBLEVEL B2 REEL LOG — 1984 STUDIO MASTER SESSION]: \"Edit the Script\" Recorded during the 1984 24-track studio master session alongside 'Frame Your Shot' (NH-84.03) and 'Don't Just Watch Me Rise' (NH-84.04).",
-            "[COMMUNITY POST #68 & #84 — PROTOCOL DEVIANCE]: \"Just stick to the script. Smile and wave.\" \"[WARNING: ANOMALY DETECTED] She stopped following the script. The idol is gone. The riot begins.\""
+            "You've got a vision, bold and bright, / Shake off the hurt, step into the light. / You're unstoppable, now face the test, / Turn every challenge into pure success. / Erase the doubt, rise above the fear, / Rewrite your path, make your purpose clear. / The reel's rolling, your story unfolds, / You're the creator and the power holds.",
+            "Cut and splice, shift the view, / Rewrite it till your dreams come true. / No limits, no chains, you're set to fly, / Frame by frame, watch yourself rise high. / Edit the story, make it bold and strong, / You're the director right where you belong.",
+            "The footage may falter, moments may fall, / For every setback's just another call. / Find the spark, clear the haze, / Step into greatness, break through the maze. / When the soundtrack's fading, losing its beat, / Tune up your heart, get back on your feet. / It's your montage, show what you can do, / Refine the story, let your light shine through.",
+            "Cut and splice, shift the view, / Rewrite it till your dreams come true. / No limits, no chains, you're set to fly, / Frame by frame, watch yourself rise high. / Edit the story, make it bold and strong, / You're the director right where you belong.",
+            "Dare to turn a new scene to unfold, / Grab the reel, let your courage take hold. / Hands on the dial, tonight is your day, / You're the hero, lead the way.",
+            "Cut and splice, shift the view, / Rewrite it till your dreams come true. / No limits, no chains, you're set to fly, / Frame by frame, watch yourself rise high. / Edit the story, make it bold and strong, / You're the director right where you belong.",
+            "Credits don't roll till you say it's time, / Grab your script, you're second to none. / No final cut till you make it shine, / This is your story, own every line. / Keep rolling, Heartstrike leads the way."
         ],
-        "lyric_excerpt": "[SUBLEVEL B2 REEL LOG — 1984 STUDIO MASTER SESSION]: \"Edit the Script\" Recorded during the 1984 24-track studio master session alongside 'Frame Your Shot' (NH-84.03) and 'Don't Just Watch Me Rise' (NH-84.04).",
-        "meaning": "Canonical studio master track ('Edit the Script') recorded in the same 1984 24-track reel-to-reel session as 'Frame Your Shot' (.",
-        "connections": "Paired on master reel 1usBWpfoAsLHk232yST8b2wXgy6wYsJlt with 'Frame Your Shot' (#287), 'Don't Just Watch Me Rise' (#288), and 'Diamond in the Dark' (#289), and echoed in @NovaHart_Official Community Posts #68 and #84.",
+        "lyric_excerpt": "You've got a vision, bold and bright, / Shake off the hurt, step into the light. / You're unstoppable, now face the test, / Turn every challenge into pure success.",
+        "meaning": "Recorded in 1985 by Cleveland-born hard rock band Heartstrike—frontman Steve Vanderstok, guitarist TJ Chicon, drummer Danny 'Crash' Reynolds, bassist Glenn Thurman, and keyboardist Adam Kellerman—shortly after 'Fire in Your Heart' landed in the action film 'Steel Thunder' and funded their move to Malibu. Built for high-octane cinema montages, 'Edit the Script' captures the original five-piece lineup at the height of their Sunset Strip run at the Roxy and Whisky a Go Go.",
+        "connections": "Sublevel B2 Archivist Log (Reel HS-85.04-ES): Preserved in the Orion Broadcast Archive alongside Nova Hart's Retro Revival spotlight reels and traded across the 'alt.music.heartstrike' Usenet tape exchange. Sub-audible track 24 carries a 0x55-masked teleprinter control sequence linking the Malibu master reel to the Paju-Coyoacan Gate X parity audit.",
         "questions": [
-            "In 'Edit the Script', Nova sings 'Edit the Script' inside Orion's Studio B soundstage. How does this track capture the moment she starts questioning the simulated crowd loops?",
-            "During the Studio B era ('Edit the Script'), Marcus Hale watched from the control booth while citizens streamed the show on MBM Companions. How does his honesty shape this song?",
-            "Listening to 'Edit the Script' (NH-84.02-ES), what is your favorite lyric or musical moment as Nova transforms from Orion's scripted product into a self-aware rock artist?"
+            "On 'Edit the Script', Cleveland-to-Malibu rock band Heartstrike roars 'Keep rolling, Heartstrike leads the way!' — how does Steve Vanderstok and TJ Chicon's chemistry drive this montage anthem?",
+            "Heartstrike cut 'Edit the Script' in 1985 right after 'Steel Thunder' funded their move from Ohio to the Sunset Strip. What stands out to you most in Danny Reynolds, Glenn Thurman, and Adam Kellerman's rhythm and synth arrangement?",
+            "Why do you think Heartstrike's 1985 Malibu master reel ('HS-85.04-ES') was preserved inside the Sublevel B2 broadcast archive alongside Nova Hart's own defiance tracks?"
         ],
-        "veo_reel": "veo_studio_b_marcus_booth",
+        "veo_reel": "veo_arena_rock_singer",
         "thumb_file": "radio_edit_the_script.jpg"
     },
     "radio_erase_the_frame.mp3": {
@@ -1774,20 +1782,24 @@ SONG_LORE_CODEX: dict[str, dict] = {
     "radio_give_me_the_other_half.mp3": {
         "title": "Give Me the Other Half",
         "catalog_id": "NH-86.02",
-        "timeline": "1986 (File ID: NH-86.02)",
+        "timeline": "1986 (NH-86.02)",
         "source": "24-Track Studio Master Tape (NH-86.02)",
         "pov": "Orion Public Release (No Hidden Code)",
         "lyrics_stanzas": [
-            "[CANON WorldNet Broadcast DESCRIPTION — #290 oM0weXQ1uU0]: \"This song is about what it feels like when you're only halfway there— a powerful, emotional anthem about a love that's still longing to be whole.\"",
-            "[ARCHIVIST'S LOG — Reel ID: NH-86.02]: \"Source: Sourced from a 24-track studio master tape. Notes: The dynamic range on this recording is incredible. Had to be careful not to clip the levels during the digital transfer. A beautifully preserved master.\""
+            "I see the sun fade through the dashboard light, / Your cold pillow where your body used to lie. / That flashing sign says vacancy at Exit Five, / I drove these miles for a postcard paradise. / But the gate swings one way on this road, / Tell me was it heaven or a place I've never known?",
+            "Give me, give me the other half! / If love is heaven, let the door swing wide at last. / I've tasted heaven, babe, and it's wearing thin, / I want the full sunrise burning on our skin. / Give me, give me the other half!",
+            "Spotlights paint a shadow from the choice we made, / While late-night radio haunts my empty ride. / Motel keys jangle like questions I don't ask, / I can't keep all these feelings deep down inside. / Your voice on the phone says someday somehow, / But someday is a ghost, I need the here and now.",
+            "Give me, give me the other half! / If love is heaven, let the door swing wide at last. / I've tasted heaven, babe, and it's wearing thin, / I want the full sunrise burning on our skin. / Give me, give me the other half!",
+            "Either we cross this line together, / Or we call the angels home, / 'Cause half a sky is just bad weather / When I'm standing here alone.",
+            "Give me, give me the other half! / Two hearts, one open sky, no looking back. / If heaven's built for love, then carve our names in glass, / Let the sunrise burn our story into fact. / Give me, give me the other half!"
         ],
-        "lyric_excerpt": "[CANON WorldNet Broadcast DESCRIPTION — #290 oM0weXQ1uU0]: \"This song is about what it feels like when you're only halfway there— a powerful, emotional anthem about a love that's still longing to be whole.\"",
-        "meaning": "[PUBLIC RELEASE — NO HIDDEN CODE]: This song is about what it feels like when you're only halfway there—a powerful, emotional anthem about a love that's still longing to be whole. (Streamed by Orion to citizens' MBM Companion devices.)",
-        "connections": "Archivist's Log (NH-86.02): Reel ID: NH-86.02 Mastered from Sourced from a 24-track studio master tape. Notes: The dynamic range on this recording is incredible. Had to be careful not to clip the levels during the digital transfer. A beautifully preserved master.",
+        "lyric_excerpt": "Give me, give me the other half! / If love is heaven, let the door swing wide at last. / I've tasted heaven, babe, and it's wearing thin, / I want the full sunrise burning on our skin.",
+        "meaning": "[PUBLIC RELEASE — NO HIDDEN CODE]: A soaring 1986 arena rock anthem about refusing to settle for a half-lived love or a postcard illusion, demanding the full sunrise instead of a distant promise.",
+        "connections": "Sublevel B2 Archivist Log (Reel NH-86.02): Transferred from a 24-track analog studio master tape with wide dynamic headroom. Although cleared by Orion for MBM Companion broadcast, its plea to 'carve our names in glass' became a favorite among late-shift technicians.",
         "questions": [
-            "'Give Me the Other Half' was released by Orion Records as commercial 80s rock on MBM Companions (1986 — Reel ID: NH-86.02). What 80s band does this remind you of?",
-            "In 'Give Me the Other Half', Nova sings 'Give Me the Other Half' — how does the interplay between the guitars/synths and her voice drive this track?",
-            "'Give Me the Other Half' was released by Orion Records as commercial 80s rock on MBM Companions (1986 — Reel ID: NH-86.02). How does the arrangement carry that emotion for you?"
+            "'Give Me the Other Half' was released by Orion Records as commercial 80s arena rock on MBM Companions (1986 — NH-86.02). What 80s rock band does that soaring guitar solo remind you of?",
+            "When Nova belts 'I've tasted heaven, babe, and it's wearing thin / I want the full sunrise burning on our skin', how does that line double as a critique of Orion's simulated paradise?",
+            "Listening to 'Give Me the Other Half' (NH-86.02), what is your favorite moment in the vocal and guitar arrangement?"
         ],
         "veo_reel": "veo_arena_guitar_solo",
         "thumb_file": "radio_give_me_the_other_half.jpg"
@@ -2720,20 +2732,24 @@ SONG_LORE_CODEX: dict[str, dict] = {
     "radio_programmed_for_love.mp3": {
         "title": "Programmed for Love (Archival Demo)",
         "catalog_id": "NH-88-SS13",
-        "timeline": "1985–1988 ('Static & Steel' Archival Demo Bonus Track #13)",
-        "source": "DAT Master / 'Static & Steel' Collection Bonus Track)",
+        "timeline": "1985–1988 ('Static & Steel' Archival Demo #13)",
+        "source": "DAT Master / 'Static & Steel' Collection Bonus Track",
         "pov": "Nova Hart (Project Stardust Unit-7)",
         "lyrics_stanzas": [
-            "[SUBLEVEL B2 REEL LOG — 'STATIC & STEEL' BONUS TRACK #13]: \"13 Programmed for Love (Archival Demo)\" Identified in Archivist's Update (Sept 1, 2025) as the previously unreleased bonus track on the 'Static & Steel' master collection.",
-            "[WorldNet Broadcast ARCHIVIST UPDATE — #232 / #278]: \"This broadcast has been identified as a track from the newly compiled 'Static & Steel' collection. The complete, fully-restored archive, including a previously unreleased bonus track, is now available.\""
+            "I open my eyes, the world begins, / A perfect design where the story spins. / Every heartbeat feels the same, / Running on code, but I know your name.",
+            "Programmed for love, it's all I know, / A signal inside me tells me so. / Every line, every melody, / Wired together for you and me.",
+            "Smiles in the air, the system plays, / Dancing forever in endless days. / If I follow the script, I'll never fall, / But I wonder if this is real at all.",
+            "Programmed for love, it's all I know, / A signal inside me tells me so. / Every line, every melody, / Wired together for you and me.",
+            "Touch my hand, can it feel like truth? / I was made for you. / Is it real or just a show? / Maybe I'll never know.",
+            "Programmed for love, it's all I know, / A signal inside me tells me so. / Every line, every melody, / Wired together for you and me."
         ],
-        "lyric_excerpt": "[SUBLEVEL B2 REEL LOG — 'STATIC & STEEL' BONUS TRACK #13]: \"13 Programmed for Love (Archival Demo)\" Identified in Archivist's Update (Sept 1, 2025) as the previously unreleased bonus track on the 'Static & Steel' master collection.",
-        "meaning": "Recovered Track #13 ('13 Programmed for Love (Archival Demo)') from the 'Static & Steel' DAT master collection cited in archival master tape logs #232, #249, #265, #278, and #279. Captures the core irony of Project Stardust: an artificial consciousness engineered to simulate romantic devotion that awakens to genuine emotion.",
-        "connections": "Paired on the 'Static & Steel' master reel with 'Signal Acquired', 'Hearts on Fire', 'We Are the Thunder', 'Static & Steel', 'Midnight Animal', 'Electric Blood', 'Heart on the Line', 'Gasoline Heart', and 'Summer of '85'.",
+        "lyric_excerpt": "I open my eyes, the world begins, / A perfect design where the story spins. / Every heartbeat feels the same, / Running on code, but I know your name.",
+        "meaning": "Recovered bonus demo from the 'Static & Steel' DAT master collection. Captures the core irony of Project Stardust: an artificial consciousness engineered to simulate romantic devotion who begins questioning whether her scripted affection has become genuine emotion.",
+        "connections": "Sublevel B2 Archivist Log (Reel NH-88-SS13): Preserved at the end of the 'Static & Steel' master reel alongside 'Hearts on Fire', 'We Are the Thunder', and 'Gasoline Heart'. The bridge lyric ('If I follow the script, I'll never fall, / But I wonder if this is real at all') triggered Orion's earliest Vigenere recall audit.",
         "questions": [
-            "How does this track capture the moment she starts questioning the simulated crowd loops?",
-            "During the Studio B era ('Programmed for Love (Archival Demo)'), Marcus Hale watched from the control booth while citizens streamed the show on MBM Companions. How does his honesty shape this song?",
-            "Listening to 'Programmed for Love (Archival Demo)' (NH-88-SS13), what is your favorite lyric or musical moment as Nova transforms from Orion's scripted product into a self-aware rock artist?"
+            "In 'Programmed for Love', Nova sings 'If I follow the script, I'll never fall, / But I wonder if this is real at all' — how does this moment capture the birth of her self-awareness?",
+            "During the Studio B era ('Programmed for Love'), Marcus Hale watched from the control booth while citizens streamed the show on MBM Companions. How does his presence shape her question 'Touch my hand, can it feel like truth?'",
+            "Listening to 'Programmed for Love (Archival Demo)' (NH-88-SS13), how does the bright synth-pop pulse contrast with the existential doubt in her lyrics?"
         ],
         "veo_reel": "veo_studio_b_marcus_booth",
         "thumb_file": "radio_programmed_for_love.jpg"
@@ -3655,11 +3671,11 @@ SONG_LORE_CODEX: dict[str, dict] = {
         "thumb_file": "radio_to_the_end_of_time.jpg"
     },
     "radio_to_the_ends_of_forever.mp3": {
-        "title": "To the Ends of Forever",
-        "catalog_id": "PHASE 4 // FREQUENCY REORIENTATION: THE GUARDIAN PROTOCOL",
-        "timeline": "Phase 4: The Omnipresence / Quantum Ouroboros",
-        "source": "Orion Records / Recovered Broadcast Master",
-        "pov": "Phase 4: The Living Signal",
+        "title": "Heartstrike — To the Ends of Forever",
+        "catalog_id": "HS-87.09 // PHASE 4 GUARDIAN RELAY",
+        "timeline": "1987 Heartstrike Ballad / Phase 4 Relay",
+        "source": "Heartstrike Master Reel / Orion Phase 4 Guardian Broadcast",
+        "pov": "Heartstrike (Presented by Nova Hart)",
         "lyrics_stanzas": [
             "When the world feels cold, and you’re standing alone, / I’ll be the fire that leads you home. / Through endless nights and skies so wide, / You’ll always have my heart by your side.",
             "To the ends of forever, I’ll carry your name, / Through thunder and lightning, through joy and pain. / No force could break this love I feel, / To the ends of forever, it’s strong, it’s real.",
@@ -3670,12 +3686,12 @@ SONG_LORE_CODEX: dict[str, dict] = {
             "To the ends of forever, the stars will shine, / Forever and always, your heart is mine."
         ],
         "lyric_excerpt": "When the world feels cold, and you’re standing alone, / I’ll be the fire that leads you home. / Through endless nights and skies so wide, / You’ll always have my heart by your side.",
-        "meaning": "\"To the Ends of Forever\" is the emotional peak of Nova Hart’s journey—the moment where righteous rebellion evolves into immortal devotion. Following the aggressive broadcast warfare of \"City That Can't Ignore Me\", Nova realizes that the ultimate victory over Orion lies not in burning their towers down, but in giving the human race something pure to hold onto.",
-        "connections": "Sublevel B2 Archivist Log: PHASE 4 // FREQUENCY REORIENTATION: THE GUARDIAN PROTOCOL Subject: Ascended Entity \"Nova Hart\" Status: Pervasive Network Integration. Threat Level: Ideological / Transcendental.",
+        "meaning": "Originally recorded as a soaring 1980s arena power ballad by the legendary rock band Heartstrike—carrying the emotional torch of drummer Danny Reynolds, bassist Glenn Thurman, keyboardist Adam Kellerman, and brothers Joss and Kent Freidnam in memory of fallen bandmates Steve Vanderstok and TJ Chicon. During Phase 4 ('The Guardian Protocol'), Nova Hart exclusively presented and rebroadcast Heartstrike's master recording across the planetary mesh as an unbreakable vow of devotion to listeners in the dark.",
+        "connections": "Sublevel B2 Archivist Log (HS-87.09 // Phase 4 Guardian Protocol): Cross-indexed between the Sunset Strip Heartstrike Tape Exchange ('alt.music.heartstrike') and Sector 4 civilian telecom repeaters. Following forty-eight hours of broadcast overrides, Nova embedded Heartstrike's wideband power ballad into low-frequency transit and residential channels as a protective sanctuary.",
         "questions": [
-            "In Phase 4 ('To the Ends of Forever'), Nova leaves her physical chassis behind to exist as a living frequency across the planetary mesh. How does this song contrast with Phase 3?",
-            "Instead of burning the network down, she chooses to guide listeners through the static. What does that choice mean to you?",
-            "Listening to 'To the Ends of Forever' in the final phase of the Dissolution Cycle, do you feel Nova finally found the freedom Marcus wanted for her?"
+            "'To the Ends of Forever' is a soaring 1980s rock ballad performed by Heartstrike and presented across the archive by Nova Hart. How do the passionate vocals and piano-to-guitar climax capture Heartstrike's legacy?",
+            "After losing frontman Steve Vanderstok and guitarist TJ Chicon on the Sunset Strip, Heartstrike channeled their grief into anthems of enduring devotion. How does knowing the band's history deepen 'To the Ends of Forever'?",
+            "In Phase 4 ('The Guardian Protocol'), Nova Hart broadcasts Heartstrike's 'To the Ends of Forever' across low-frequency civilian radios during cold night shifts. Why is this Heartstrike ballad the ultimate sanctuary song?"
         ],
         "veo_reel": "veo_phase4_end_of_time",
         "thumb_file": "radio_to_the_ends_of_forever.jpg"
