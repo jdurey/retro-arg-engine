@@ -182,8 +182,8 @@ async function main() {
           state.archived[targetUrl] = `https://web.archive.org/web/${targetUrl}`;
           console.log(`  [✓] Archived (200 OK)`);
           break;
-        } else if (res.status === 429) {
-          console.log(`  [!] Rate limited (429). Backing off 15s before retry...`);
+        } else if (res.status === 429 || res.status >= 500) {
+          console.log(`  [!] Transient status (${res.status}). Backing off 15s before retry...`);
           retries++;
           await sleep(15000);
         } else {

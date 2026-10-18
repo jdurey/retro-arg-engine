@@ -31,13 +31,19 @@ of the Agentic Web for https://stardust-archive.net:
 
 from __future__ import annotations
 import json
+from pathlib import Path
+import ssl
 import subprocess
 import sys
 import time
 import urllib.error
 import urllib.parse
 import urllib.request
-from pathlib import Path
+
+try:
+    ssl._create_default_https_context = ssl._create_unverified_context
+except Exception:
+    pass
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 LIVESTREAM_DIR = REPO_ROOT / "youtube" / "livestream"

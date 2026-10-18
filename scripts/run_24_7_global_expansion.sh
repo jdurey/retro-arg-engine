@@ -16,7 +16,7 @@ echo "=== [24/7 GLOBAL EXPANSION CYCLE: $(date -u +"%Y-%m-%dT%H:%M:%SZ")] ==="
 "$ROOT/youtube/.venv/bin/python3" "$ROOT/youtube/yt.py" upload-shorts --limit 3 || true
 
 # 2. Upgrade catalog videos to Lost 1989 Studio Tape / Erased Singer Mystery Bridge (20 languages)
-"$ROOT/youtube/.venv/bin/python3" "$ROOT/youtube/yt.py" apply --limit 50 || true
+"$ROOT/youtube/.venv/bin/python3" "$ROOT/youtube/yt.py" apply --limit 100 || true
 
 # 3. Sync any brand-new uploads on @NovaHart_Official
 "$ROOT/youtube/.venv/bin/python3" "$ROOT/youtube/yt.py" sync || true
@@ -28,7 +28,7 @@ echo "=== [24/7 GLOBAL EXPANSION CYCLE: $(date -u +"%Y-%m-%dT%H:%M:%SZ")] ==="
 /usr/bin/python3 "$ROOT/scripts/agentic_web_seeder.py" || true
 
 # 6. Archive unarchived nodes across 13 domains & DA-92 mirrors into Internet Archive Wayback Machine (DA-97)
-node "$ROOT/deploy/archive_wayback.mjs" --limit 3 || true
+node "$ROOT/deploy/archive_wayback.mjs" --limit 10 || true
 
 echo "=== [CYCLE COMPLETE: $(date -u +"%Y-%m-%dT%H:%M:%SZ")] ==="
 

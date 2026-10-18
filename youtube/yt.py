@@ -526,6 +526,8 @@ def apply(dry_run=False, limit=None, reset_done=False, translate_mode=True):
             continue
         done.add(vid)
         json.dump(sorted(done), open(done_path, "w"))
+        prev_done.add(vid)
+        json.dump(sorted(prev_done), open(prev_done_path, "w"))
         n += 1
         print(f"[{len(done)}/{len(videos)}] LOST-MEDIA BRIDGE UPDATED {vid} -> {new_en_title[:65]}", flush=True)
     print(f"\nDone this run: {n}; total {len(done)}/{len(videos)} videos upgraded to Lost-Media Mystery Bridge.", flush=True)

@@ -8,10 +8,16 @@ Then warms r.jina.ai, markdown.new, IndexNow (across all 13 domains), and Waybac
 
 import json
 import os
+import ssl
 import sys
 import time
 import urllib.request
 import urllib.parse
+
+try:
+    ssl._create_default_https_context = ssl._create_unverified_context
+except Exception:
+    pass
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
