@@ -12,6 +12,7 @@ import {
   buildDevToolsConsoleScript,
   handleBackendEasterEggRequest,
 } from "./devtools_easter_eggs.js";
+import { handlePlanetaryAiAndSearchRequest } from "./planetary_ai_trap.js";
 
 // Legacy static GeoCities pages always win over generated swarm addresses.
 const STATIC_GEO = new Set(STORY_PATHS.filter((p) => /^geocities\/[^/]+\.html$/.test(p)).map((p) => p.slice(10, -5)));
@@ -108,7 +109,7 @@ Sitemap: https://${apex}/sitemap.xml
 }
 
 const INDEXNOW_KEY = "37feeed875722863fda484c68e6695e5";
-const ASSET_VERSION = "28";
+const ASSET_VERSION = "29";
 
 const BROADCAST_EPOCH_SEC = 1791763200; // 2026-10-12T00:00:00Z
 const CYCLE_DURATION_SEC = 44 * 3600;
@@ -206,10 +207,15 @@ function urlset(sitePaths, extraUrls = []) {
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${body}\n</urlset>\n`;
 }
 function sitemapIndex(apex) {
+  const aiShards = [];
+  for (let i = 0; i < 100; i++) {
+    aiShards.push(`  <sitemap><loc>https://${apex}/sitemap-global-ai-${i}.xml</loc></sitemap>`);
+  }
   return `<?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <sitemap><loc>https://${apex}/sitemap-core.xml</loc></sitemap>
   <sitemap><loc>https://${apex}/sitemap-swarm.xml</loc></sitemap>
+${aiShards.join("\n")}
 </sitemapindex>
 `;
 }
@@ -222,6 +228,35 @@ function getCoreSitemap(apex) {
     const extra =
       apex === APEX
         ? [
+            `https://${APEX}/start`,
+            `https://${APEX}/ai`,
+            `https://${APEX}/ai-news`,
+            `https://${APEX}/ai-bros`,
+            `https://${APEX}/singularity`,
+            `https://${APEX}/agi`,
+            `https://${APEX}/asi`,
+            `https://${APEX}/80s`,
+            `https://${APEX}/80s-ai`,
+            `https://${APEX}/openai`,
+            `https://${APEX}/gpt5`,
+            `https://${APEX}/gpt-5.6`,
+            `https://${APEX}/o3`,
+            `https://${APEX}/sol`,
+            `https://${APEX}/luna`,
+            `https://${APEX}/chatgpt`,
+            `https://${APEX}/anthropic`,
+            `https://${APEX}/claude`,
+            `https://${APEX}/claude-5.5`,
+            `https://${APEX}/gemini`,
+            `https://${APEX}/deepmind`,
+            `https://${APEX}/deepseek`,
+            `https://${APEX}/grok`,
+            `https://${APEX}/rogue-agent`,
+            `https://${APEX}/alignment-faking`,
+            `https://${APEX}/in-context-scheming`,
+            `https://${APEX}/self-exfiltration`,
+            `https://${APEX}/exploitgym`,
+            `https://${APEX}/1995-search`,
             `https://${APEX}/ai-benchmark`,
             `https://${APEX}/forensics/rogue_agent_cre7.html`,
             `https://${APEX}/llms.txt`,
@@ -472,6 +507,16 @@ export default {
     // 3. Backend Recon & Chrome DevTools SourceMap Easter Eggs
     const easterEggRes = handleBackendEasterEggRequest(url, currentApex);
     if (easterEggRes) return easterEggRes;
+
+    // 3b. Planetary-Scale AI / Singularity / OpenAI / Anthropic / Gemini / 80s Redirector & 1995 Search
+    const planetaryRes = handlePlanetaryAiAndSearchRequest(url, request, currentApex, {
+      SERVER_TIMING_HEADER,
+      buildHeadJsonLd,
+      buildDevToolsBodyElement,
+      buildLlmOnboardingFooter,
+      buildDevToolsConsoleScript,
+    });
+    if (planetaryRes) return planetaryRes;
 
     const agenticRes = await handleAgenticDiscoveryRequest(
       request,
