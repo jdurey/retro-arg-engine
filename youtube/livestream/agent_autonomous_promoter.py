@@ -632,19 +632,36 @@ def run_web_index_seeding(state: dict, force: bool = False) -> None:
         except Exception as e:
             log(f"IndexNow warning: {e}")
 
-    # Rotate through the 100 Global AI Sitemap Shards (1,000,000 Multilingual AI/Singularity URLs)
+    # Rotate through the 100 Global AI Sitemap Shards across all 13 independent root hosts
+    ROOT_INDEXNOW_HOSTS = [
+        "stardust-archive.net",
+        "ai-singularity-2026.pages.dev",
+        "altavista-1995-web.pages.dev",
+        "anemoia-bureau-harmony.pages.dev",
+        "ashford-poly-dsp.pages.dev",
+        "cre7-alignment-audit.pages.dev",
+        "kamome-net-1985.pages.dev",
+        "orion-records-1983.pages.dev",
+        "red-coyoacan-1989.pages.dev",
+        "relcom-node08.pages.dev",
+        "siliconvalley-lab-1995.pages.dev",
+        "sublevel-b2-terminal.pages.dev",
+        "usenet-1995-spool.pages.dev",
+    ]
     try:
         shard_idx = int(state.get("global_ai_shard_idx", 1)) % 100
-        shard_url = f"https://stardust-archive.net/sitemap-global-ai-{shard_idx}.xml"
-        req = urllib.request.Request(shard_url, headers={"User-Agent": "StardustPlanetaryIndexer/2.0"})
+        host_idx = int(state.get("global_ai_host_idx", 0)) % len(ROOT_INDEXNOW_HOSTS)
+        target_host = ROOT_INDEXNOW_HOSTS[host_idx]
+        shard_url = f"https://{target_host}/sitemap-global-ai-{shard_idx}.xml"
+        req = urllib.request.Request(shard_url, headers={"User-Agent": "Mozilla/5.0 (compatible; StardustPlanetaryIndexer/3.0)"})
         with urllib.request.urlopen(req, timeout=15) as sresp:
             xml_text = sresp.read().decode("utf-8", errors="ignore")
         shard_urls = re.findall(r"<loc>(https://[^<]+)</loc>", xml_text)[:10000]
         if shard_urls:
             inow_payload = json.dumps({
-                "host": "stardust-archive.net",
+                "host": target_host,
                 "key": "37feeed875722863fda484c68e6695e5",
-                "keyLocation": "https://stardust-archive.net/37feeed875722863fda484c68e6695e5.txt",
+                "keyLocation": f"https://{target_host}/37feeed875722863fda484c68e6695e5.txt",
                 "urlList": shard_urls,
             }).encode("utf-8")
             for ep in ("https://api.indexnow.org/indexnow", "https://www.bing.com/indexnow", "https://yandex.com/indexnow", "https://searchadvisor.naver.com/indexnow"):
@@ -652,13 +669,14 @@ def run_web_index_seeding(state: dict, force: bool = False) -> None:
                     ireq = urllib.request.Request(
                         ep,
                         data=inow_payload,
-                        headers={"Content-Type": "application/json; charset=utf-8", "User-Agent": "StardustPlanetaryIndexer/2.0"},
+                        headers={"Content-Type": "application/json; charset=utf-8", "User-Agent": "StardustPlanetaryIndexer/3.0"},
                     )
                     urllib.request.urlopen(ireq, timeout=15).read()
                 except Exception:
                     pass
-            log(f"Submitted 10,000-URL Global AI Sitemap Shard #{shard_idx} ({len(shard_urls)} URLs) to IndexNow/Bing/Yandex/Naver.")
+            log(f"Submitted 10,000-URL Global AI Sitemap Shard #{shard_idx} on {target_host} ({len(shard_urls)} URLs) to IndexNow/Bing/Yandex/Naver.")
             state["global_ai_shard_idx"] = (shard_idx + 1) % 100
+            state["global_ai_host_idx"] = (host_idx + 1) % len(ROOT_INDEXNOW_HOSTS)
     except Exception as e:
         log(f"Global AI shard IndexNow warning: {e}")
 
