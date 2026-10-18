@@ -708,6 +708,16 @@ def sync(max_results=20, dry_run=False):
     done_path = os.path.join(STATE, "max_visibility_done.json")
     done = set(json.load(open(done_path))) if os.path.exists(done_path) else set()
 
+    uploaded_shorts_path = os.path.join(STATE, "uploaded_shorts.json")
+    if os.path.exists(uploaded_shorts_path):
+        try:
+            up_shorts = json.load(open(uploaded_shorts_path))
+            for item in up_shorts.values():
+                if isinstance(item, dict) and item.get("video_id"):
+                    done.add(item["video_id"])
+        except Exception:
+            pass
+
     with open(os.path.join(HERE, "translations.json")) as fh:
         tr = json.load(fh)
 
@@ -773,6 +783,11 @@ def sync(max_results=20, dry_run=False):
             done.add(vid)
             json.dump(sorted(done), open(done_path, "w"))
             print(f"Successfully upgraded {vid} -> {new_en_title}")
+        except HttpError as e:
+            if e.resp.status == 403 and b"quota" in e.content.lower():
+                print("[!] YouTube API daily quota reached during sync; will resume on next quota cycle.")
+                break
+            print(f"Error updating {vid}: {e}")
         except Exception as e:
             print(f"Error updating {vid}: {e}")
 

@@ -57,6 +57,26 @@ const CORE_PATHS = [
   "geocities/lang_es.html",
   "geocities/lang_de.html",
   "geocities/lang_fr.html",
+  "https://stardust-archive.net/start",
+  "https://stardust-archive.net/ai",
+  "https://stardust-archive.net/ai-benchmark",
+  "https://stardust-archive.net/1995-search",
+  "https://stardust-archive.net/web/1995/mit.edu",
+  "https://stardust-archive.net/web/1995/cern.ch",
+  "https://stardust-archive.net/web/1995/openai.com",
+  "https://ai-singularity-2026.pages.dev/",
+  "https://cre7-alignment-audit.pages.dev/",
+  "https://sublevel-b2-terminal.pages.dev/",
+  "https://siliconvalley-lab-1995.pages.dev/",
+  "https://altavista-1995-web.pages.dev/",
+  "https://usenet-1995-spool.pages.dev/",
+  "https://orion-records-1983.pages.dev/",
+  "https://anemoia-bureau-harmony.pages.dev/",
+  "https://ashford-poly-dsp.pages.dev/",
+  "https://kamome-net-1985.pages.dev/",
+  "https://relcom-node08.pages.dev/",
+  "https://red-coyoacan-1989.pages.dev/",
+  "https://jdurey.github.io/retro-arg-engine/",
 ];
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -65,17 +85,27 @@ async function main() {
   const limitArg = process.argv.indexOf("--limit");
   const limit = limitArg !== -1 ? parseInt(process.argv[limitArg + 1], 10) : CORE_PATHS.length;
 
+  const telegraphFile = path.join(__dirname, "da92_telegraph_mirrors.json");
+  const allTargets = [...CORE_PATHS];
+  if (fs.existsSync(telegraphFile)) {
+    try {
+      const tg = JSON.parse(fs.readFileSync(telegraphFile, "utf8"));
+      for (const art of tg.articles || []) {
+        if (art.url) allTargets.push(art.url);
+      }
+    } catch {}
+  }
+
   const state = fs.existsSync(STATE_FILE) ? JSON.parse(fs.readFileSync(STATE_FILE, "utf8")) : { archived: {} };
-  console.log(`Starting Wayback Machine submission for ${Math.min(limit, CORE_PATHS.length)} priority nodes...`);
+  console.log(`Starting Wayback Machine submission (up to ${limit} unarchived nodes of ${allTargets.length} total)...`);
 
   let count = 0;
-  for (const sp of CORE_PATHS) {
+  for (const sp of allTargets) {
     if (count >= limit) break;
-    const targetUrl = sp === "index.html" ? `https://${APEX}/` : publicUrl(sp);
+    const targetUrl = sp.startsWith("https://") ? sp : (sp === "index.html" ? `https://${APEX}/` : publicUrl(sp));
     if (!targetUrl) continue;
 
     if (state.archived[targetUrl]) {
-      console.log(`[ALREADY ARCHIVED] ${sp} -> ${state.archived[targetUrl]}`);
       continue;
     }
 

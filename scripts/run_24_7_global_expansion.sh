@@ -27,4 +27,8 @@ echo "=== [24/7 GLOBAL EXPANSION CYCLE: $(date -u +"%Y-%m-%dT%H:%M:%SZ")] ==="
 # 5. Seed AgentDex, Nostr/Clawstr relays, WebSub, and Markdown RAG caches
 /usr/bin/python3 "$ROOT/scripts/agentic_web_seeder.py" || true
 
+# 6. Archive unarchived nodes across 13 domains & DA-92 mirrors into Internet Archive Wayback Machine (DA-97)
+node "$ROOT/deploy/archive_wayback.mjs" --limit 3 || true
+
 echo "=== [CYCLE COMPLETE: $(date -u +"%Y-%m-%dT%H:%M:%SZ")] ==="
+
