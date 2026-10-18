@@ -948,7 +948,7 @@ def render_right_usenet_youtube_scroll(
         item = lines[(head_idx + r) % total]
         txt = item.get("text", "")
         if txt.startswith("===="):
-            txt = "─" * 36
+            txt = "-" * 40
         if r == visible_rows - 1 and (int(now_ts * 2) % 2 == 0):
             txt = (txt[:40] + " \u2588") if txt else "\u2588"
         if txt:
@@ -1217,10 +1217,10 @@ def render_center_live_chat_banner(
     t_str = f"{offset_s // 60:02d}:{offset_s % 60:02d} / {dur_s // 60:02d}:{dur_s % 60:02d}"
     raw_d.text((bar_x0 + bar_w + 12, Y0 + 6), t_str, fill=(225, 255, 232, 255), font=FONT_SCROLL_HDR)
 
-    q_lines = _wrap_px_1080p(body_txt, FONT_HUD_9, 892.0, 2)
+    q_lines = _wrap_px_1080p(body_txt, FONT_HUD_9, 892.0, 3)
     for idx, ln in enumerate(q_lines):
         raw_d.text(
-            (X0 + 16, Y0 + 44 + idx * 36),
+            (X0 + 16, Y0 + 40 + idx * 30),
             ln,
             fill=(255, 248, 215, 255) if is_warn else (225, 255, 232, 255),
             font=FONT_HUD_9,
