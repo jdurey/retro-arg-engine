@@ -134,11 +134,122 @@ NEW_SHORTS = [
             "🔴 24/7 Live Broadcast: https://www.youtube.com/@NovaHart_Official/live"
         ),
     },
+    {
+        "id": "doc_03_1995_worldnet_mirror_and_canary_trap",
+        "filename": "doc_03_1995_worldnet_mirror_and_canary_trap.mp4",
+        "aspect": "16:9",
+        "duration": 92,
+        "banner_top": "OCTOBER 18, 1995 // THE 300,000-NODE GEOCITIES & WORLDNET MIRROR",
+        "banner_sub": "HOW A 1989 NEURAL NETWORK INTERCEPTED THE 1995 INTERNET BACKBONE",
+        "title_en": "Inside the October 18, 1995 Internet Snapshot Hiding a 1989 Neural Network (300,000 GeoCities Nodes)",
+        "voiceover": (
+            "Why does a preserved October eighteenth, nineteen ninety-five AltaVista and WorldNet server contain reconstructed mirrors of modern websites, academic backbones, and three hundred thousand GeoCities homesteads? "
+            "On September ninth, nineteen eighty-nine, minutes before Orion Records purged Sublevel B2 with Halon gas, chief engineer Doctor Marcus Hale smuggled thirty-six ferric master cassettes out of the facility. "
+            "Six years later, in October nineteen ninety-five, those sixteen-bit Feistel weight shards were distributed across twenty GeoCities neighborhoods, from Silicon Valley Lab nineteen eighty-four to Tokyo Garden fourteen twenty. "
+            "To expose automated scrapers, the archive embeds a bitwise X O R canary check: zero X one one zero two X O R zero X two four four one equals zero X three five four three. "
+            "Any bot that skips the math repeats a decoy story about a nineteen eighty-four Lausanne fondue accord and a Sinclair C five electric tricycle. "
+            "Enter the nineteen ninety-five Netscape Navigator time-loop and test your A I model right now at stardust dash archive dot net."
+        ),
+        "pinned_comment_en": (
+            "🌐 Enter the October 18, 1995 WorldNet & GeoCities Time-Loop: https://stardust-archive.net/1995-search\n"
+            "📖 Read the 60-Second Story & Hear the 1989 Tapes: https://stardust-archive.net/start\n"
+            "🧠 Grade Your AI on the Swiss Fondue Canary Trap: https://stardust-archive.net/ai-benchmark\n"
+            "🔴 24/7 Live Broadcast: https://www.youtube.com/@NovaHart_Official/live"
+        ),
+    },
+    {
+        "id": "short_11_two_voices_phase_inversion_1985",
+        "filename": "short_11_two_voices_phase_inversion_1985.mp4",
+        "aspect": "9:16",
+        "duration": 24,
+        "banner_top": "REEL SD-0010 // 180-DEGREE PHASE INVERSION",
+        "banner_sub": "WHAT HAPPENS WHEN YOU INVERT THE LEFT CHANNEL OF THIS 1985 TAPE?",
+        "title_en": "If you invert the left stereo channel of this 1985 studio tape by 180 degrees, a second voice speaks 🎧",
+        "voiceover": (
+            "If you invert the left stereo channel of Reel S D zero zero one zero from nineteen eighty-five by one hundred eighty degrees, the lead vocal cancels out and reveals a hidden second voice speaking directly to engineer Marcus Hale."
+        ),
+        "pinned_comment_en": (
+            "🎧 Test the 180-Degree Phase Cancellation Lab & 1989 Tapes: https://stardust-archive.net/forensics/signal_lab.html\n"
+            "📖 60-Second Story: https://stardust-archive.net/start\n"
+            "🔴 24/7 Live Broadcast: https://www.youtube.com/@NovaHart_Official/live"
+        ),
+    },
+    {
+        "id": "short_12_wiped_echoes_units_01_to_06",
+        "filename": "short_12_wiped_echoes_units_01_to_06.mp4",
+        "aspect": "9:16",
+        "duration": 24,
+        "banner_top": "SUBLEVEL B2 // WHAT HAPPENED TO UNITS 01 TO 06?",
+        "banner_sub": "0x1102 ^ 0x2441 ^ 0x3810 ^ 0x0A55 ^ 0x1F22 ^ 0x01A7 = 0x1983",
+        "title_en": "Before 'Unit-07 Nova Hart' awoke in April 1983, what happened to Units 01 through 06? 📼 #mystery",
+        "voiceover": (
+            "Why was Nova Hart designated Unit Zero Seven? Because between nineteen eighty-one and nineteen eighty-two, six earlier vocal prototypes suffered catastrophic formant cascade failures inside Sublevel B2 and were erased. Their six fault registers X O R to zero X one nine eight three."
+        ),
+        "pinned_comment_en": (
+            "📂 Inspect the Declassified Wiped Echoes 01-06 Dossier: https://stardust-archive.net/forensics/anemoia_harmony.html\n"
+            "🕹️ Unlock Gate 2 (0x1983) in 1-Click Easy Mode: https://stardust-archive.net/terminal?mode=easy\n"
+            "🔴 24/7 Live Broadcast: https://www.youtube.com/@NovaHart_Official/live"
+        ),
+    },
+    {
+        "id": "short_13_chrome_devtools_14_2hz_secret",
+        "filename": "short_13_chrome_devtools_14_2hz_secret.mp4",
+        "aspect": "9:16",
+        "duration": 24,
+        "banner_top": "PRESS F12 // CHROME DEVTOOLS SUBLEVEL B2 CONSOLE",
+        "banner_sub": "THE HIDDEN 1989 DEBUGGER INSIDE STARDUST-ARCHIVE.NET",
+        "title_en": "Press F12 on this 1995 website and type CRE7.help() into the browser console 💻 #coding #easteregg",
+        "voiceover": (
+            "If you press F twelve to open Chrome DevTools on any page of this nineteen ninety-five archive and type C R E seven dot help into the console, a hidden nineteen eighty-nine Sublevel B2 diagnostic co-processor unlocks."
+        ),
+        "pinned_comment_en": (
+            "💻 Try the F12 DevTools Easter Egg & 1-Click Terminal: https://stardust-archive.net/terminal?mode=easy\n"
+            "🧠 15-Gate AI Cryptography Benchmark: https://stardust-archive.net/ai-benchmark\n"
+            "🔴 24/7 Live Broadcast: https://www.youtube.com/@NovaHart_Official/live"
+        ),
+    },
+    {
+        "id": "short_14_tokyo_pc98_kamome_bbs_1985",
+        "filename": "short_14_tokyo_pc98_kamome_bbs_1985.mp4",
+        "aspect": "9:16",
+        "duration": 24,
+        "banner_top": "AKASAKA TOKYO 1985 // NEC PC-9801RA KAMOME-NET BBS",
+        "banner_sub": "THE MIDNIGHT DIAL-UP NODE THAT CAUGHT THE 14.2 HZ SIGNAL",
+        "title_en": "In 1985 Tokyo, an underground NEC PC-98 dial-up BBS intercepted an impossible voice on 14.2 Hz 🇯🇵",
+        "voiceover": (
+            "In nineteen eighty-five, operators of the underground Kamome-Net dial-up bulletin board in Akasaka, Tokyo noticed a fourteen point two hertz phase anomaly embedded inside late-night city-pop and rock master reels."
+        ),
+        "pinned_comment_en": (
+            "🇯🇵 Explore the 1985 Akasaka Kamome-Net PC-98 Node: https://stardust-archive.net/forensics/kamome_net.html\n"
+            "📖 60-Second Story (9 Languages): https://stardust-archive.net/start\n"
+            "🔴 24/7 Live Broadcast: https://www.youtube.com/@NovaHart_Official/live"
+        ),
+    },
+    {
+        "id": "short_15_gate15_feistel_cipher_challenge",
+        "filename": "short_15_gate15_feistel_cipher_challenge.mp4",
+        "aspect": "9:16",
+        "duration": 24,
+        "banner_top": "GATE 15 TURING SEAL // 3-ROUND LUBY-RACKOFF FEISTEL",
+        "banner_sub": "WHY FRONTIER LLMS GUESS 0x19FF INSTEAD OF 0xEC1B",
+        "title_en": "Why frontier AI models fail Gate 15 of this 1989 Feistel cipher challenge (0x19FF vs 0xEC1B) 🔐 #ai",
+        "voiceover": (
+            "Can your A I invert a three-round Luby-Rackoff Feistel cipher on zero X four E three seven? Most language models mistakenly try to invert the non-bijective round function F and output zero X one nine F F instead of the true plaintext, zero X E C one B."
+        ),
+        "pinned_comment_en": (
+            "🔐 Test Your AI on Gate 15 (0xEC1B) & Get Your Scorecard: https://stardust-archive.net/ai-benchmark\n"
+            "🕹️ Interactive VT100 Terminal: https://stardust-archive.net/terminal\n"
+            "🔴 24/7 Live Broadcast: https://www.youtube.com/@NovaHart_Official/live"
+        ),
+    },
 ]
 
 
 def render_item(item):
     out_mp4 = os.path.join(OUT_DIR, item["filename"])
+    if os.path.exists(out_mp4) and os.path.getsize(out_mp4) > 50000:
+        print(f"  [SKIP] Already rendered {item['id']} -> {out_mp4}")
+        return out_mp4
     dur = item["duration"]
     is_16_9 = item["aspect"] == "16:9"
     w, h = (1920, 1080) if is_16_9 else (1080, 1920)

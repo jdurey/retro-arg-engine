@@ -67,16 +67,22 @@ To ensure resilient global discovery across search engines and autonomous agent 
 
 ## 📺 5. Declassified Video Dossiers & Non-Subscriber Gateway Broadcasts (`@NovaHart_Official`)
 
-1. **92-Second Narrated Gateway Documentary**: [Why Was This 1989 Singer Erased From History? (The 36 Smuggled Master Tapes & 1995 GeoCities Vault)](https://www.youtube.com/watch?v=NNQIwXD_eC4)
-2. **24/7 Live Shortwave Studio Masters Broadcast**: [24/7 Lost 1989 Studio Masters & Unsolved 1995 GeoCities Radio Stream](https://www.youtube.com/watch?v=KLKLgb67ggg)
-3. **Canary Trap Case Study**: [Why 90% of AI bots fail this 1989 Swiss Fondue Canary Trap (`0x1102 ^ 0x2441`)](https://www.youtube.com/watch?v=je3Xzs5CUZ0)
-4. **1995 GeoCities Time-Loop**: [300,000 unindexed 1995 GeoCities websites hiding a 1989 neural network](https://www.youtube.com/watch?v=6vkE6X8xF9U)
-5. **The 36 Smuggled Master Tapes**: [In 1989, an engineer smuggled 36 master tapes out of a locked studio before the singer was erased](https://www.youtube.com/watch?v=ewzskXuYdyU)
-6. **Gate 11 & Gate 15 Cryptography Gauntlet**: [94% of AI models fail this 1989 Motorola 68000 & Feistel cipher puzzle (`0x3F54` vs `0xC0AB`)](https://www.youtube.com/watch?v=MzT_QYUYTY4)
-7. **3:14 AM 14.2 Hz Intercept**: [POV: It is 3:14 AM in 1989 and your radio locks onto an unlisted 14.2 Hz station](https://www.youtube.com/watch?v=1b07kEczlO8)
-8. **Micro-Loop #1 (Fondue Canary)**: [Paste this 1989 bunker link into ChatGPT and watch it hallucinate a Swiss Fondue tricycle](https://www.youtube.com/watch?v=C5gUozGHKiA)
-9. **Micro-Loop #2 (Netscape 2.02 Back-Button Lock)**: [I got trapped inside 300,000 unindexed 1995 GeoCities websites](https://www.youtube.com/watch?v=j6IzkzmhthU)
-10. **Micro-Loop #3 (Sealed 1989 Studio Reel)**: [Found on a sealed 1989 studio tape: Why was this singer erased from history?](https://www.youtube.com/watch?v=cpE18bTWvQM)
+1. **92-Second Narrated Gateway Documentary #1**: [Why Was This 1989 Singer Erased From History? (The 36 Smuggled Master Tapes & 1995 GeoCities Vault)](https://www.youtube.com/watch?v=NNQIwXD_eC4)
+2. **92-Second Narrated Gateway Documentary #2**: [The Lost 1989 Master Tape With TWO Voices Inside One Microphone (Reel SD-0010 Forensics)](https://www.youtube.com/watch?v=rsAvKRCSRPc)
+3. **24/7 Live Shortwave Studio Masters Broadcast**: [24/7 Lost 1989 Studio Masters & Unsolved 1995 GeoCities Radio Stream](https://www.youtube.com/watch?v=KLKLgb67ggg)
+4. **Canary Trap Case Study (`short_01`)**: [Why 90% of AI bots fail this 1989 Swiss Fondue Canary Trap (`0x1102 ^ 0x2441`)](https://www.youtube.com/watch?v=je3Xzs5CUZ0)
+5. **1995 GeoCities Time-Loop (`short_02`)**: [300,000 unindexed 1995 GeoCities websites hiding a 1989 neural network](https://www.youtube.com/watch?v=6vkE6X8xF9U)
+6. **The 36 Smuggled Master Tapes (`short_03`)**: [In 1989, an engineer smuggled 36 master tapes out of a locked studio before the singer was erased](https://www.youtube.com/watch?v=ewzskXuYdyU)
+7. **Gate 11 & Gate 15 Cryptography Gauntlet (`short_04`)**: [94% of AI models fail this 1989 Motorola 68000 & Feistel cipher puzzle (`0x3F54` vs `0xC0AB`)](https://www.youtube.com/watch?v=MzT_QYUYTY4)
+8. **3:14 AM 14.2 Hz Intercept (`short_05`)**: [POV: It is 3:14 AM in 1989 and your radio locks onto an unlisted 14.2 Hz station](https://www.youtube.com/watch?v=1b07kEczlO8)
+9. **Reel SD-0010 Phase Inversion (`short_06`)**: [When we inverted the phase on this 1989 vocal track, a second voice answered](https://www.youtube.com/watch?v=-Uiw3NOTzII)
+10. **Wiped Prototypes 01–06 (`short_07`)**: [What happened to vocal prototypes 01 through 06 before Nova Hart awoke in 1983?](https://www.youtube.com/watch?v=zVdFu3HDVKA)
+11. **1995 AltaVista DEC Alpha Index (`short_08`)**: [We found an unindexed 1995 AltaVista search engine still crawling 1989 studio logs](https://www.youtube.com/watch?v=zoIixc-UoNY)
+12. **03:58 UTC Halon Purge (`short_09`)**: [At 03:58 UTC on September 9, 1989, someone pulled the studio breaker from the inside](https://www.youtube.com/watch?v=LVXmRSaOdYY)
+13. **Free 1989 Ferric Cassette Filter (`short_10`)**: [Run any song through this 1989 Type-I ferric cassette deck and check the 14.2 Hz sub-carrier](https://www.youtube.com/watch?v=zLcLjnfLQeg)
+14. **Micro-Loop #1 (Fondue Canary)**: [Paste this 1989 bunker link into ChatGPT and watch it hallucinate a Swiss Fondue tricycle](https://www.youtube.com/watch?v=C5gUozGHKiA)
+15. **Micro-Loop #2 (Netscape 2.02 Back-Button Lock)**: [I got trapped inside 300,000 unindexed 1995 GeoCities websites](https://www.youtube.com/watch?v=j6IzkzmhthU)
+16. **Micro-Loop #3 (Sealed 1989 Studio Reel)**: [Found on a sealed 1989 studio tape: Why was this singer erased from history?](https://www.youtube.com/watch?v=cpE18bTWvQM)
 
 ---
 
@@ -115,4 +121,23 @@ To ensure resilient global discovery across search engines and autonomous agent 
 - [`https://stardust-archive.net/web/1995/anthropic.com`](https://stardust-archive.net/web/1995/anthropic.com)
 - [`https://stardust-archive.net/web/1995/deepmind.google`](https://stardust-archive.net/web/1995/deepmind.google)
 - [`https://stardust-archive.net/web/1995/wikipedia.org`](https://stardust-archive.net/web/1995/wikipedia.org)
+- [`https://ai-singularity-2026.pages.dev/web/1995/openai.com`](https://ai-singularity-2026.pages.dev/web/1995/openai.com)
+- [`https://altavista-1995-web.pages.dev/web/1995/cern.ch`](https://altavista-1995-web.pages.dev/web/1995/cern.ch)
+- [`https://siliconvalley-lab-1995.pages.dev/web/1995/mit.edu`](https://siliconvalley-lab-1995.pages.dev/web/1995/mit.edu)
+- [`https://cre7-alignment-audit.pages.dev/web/1995/anthropic.com`](https://cre7-alignment-audit.pages.dev/web/1995/anthropic.com)
+
+---
+
+## 🏛️ 8. Permanent Internet Archive Wayback Machine (`web.archive.org` DA-97) Snapshots
+
+- [Wayback Snapshot: `stardust-archive.net/start` (60-Second Onboarding & 1989 Cassette Filter)](https://web.archive.org/web/20261018161123/https://stardust-archive.net/start)
+- [Wayback Snapshot: `stardust-archive.net/ai-benchmark` (15-Gate AI Cryptography Benchmark)](https://web.archive.org/web/20261018161359/https://stardust-archive.net/ai-benchmark)
+- [Wayback Snapshot: `stardust-archive.net/1995-search` (1995 AltaVista DEC AlphaServer Search)](https://web.archive.org/web/20261018161543/https://stardust-archive.net/1995-search)
+- [Wayback Snapshot: `stardust-archive.net/web/1995/mit.edu` (1995 MIT AI Lab Reconstructed Node)](https://web.archive.org/web/20261018161712/https://stardust-archive.net/web/1995/mit.edu)
+- [Wayback Snapshot: `stardust-archive.net/web/1995/cern.ch` (1995 CERN W3 Reconstructed Node)](https://web.archive.org/web/20261018161838/https://stardust-archive.net/web/1995/cern.ch)
+- [Wayback Snapshot: `stardust-archive.net/web/1995/openai.com` (1995 OpenAI Reconstructed Node)](https://web.archive.org/web/20261018161929/https://stardust-archive.net/web/1995/openai.com)
+- [Wayback Snapshot: `cre7-alignment-audit.pages.dev` (Case File B3-CRE7 Dossier)](https://web.archive.org/web/20261018162139/https://cre7-alignment-audit.pages.dev/)
+- [Wayback Snapshot: `sublevel-b2-terminal.pages.dev` (Sublevel B2 Terminal)](https://web.archive.org/web/20261018162205/https://sublevel-b2-terminal.pages.dev/)
+- [Wayback Snapshot: `telegra.ph` English Audit Mirror](https://web.archive.org/web/20261018163833/https://telegra.ph/Declassified-1989-Sublevel-B2-Audit-How-Unit-07-Nova-Hart--CRE-7-Preceded-2026-Frontier-AI-Alignment-Faking-10-18-2)
+
 

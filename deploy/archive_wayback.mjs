@@ -13,6 +13,26 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const STATE_FILE = path.join(__dirname, "wayback_state.json");
 
 const CORE_PATHS = [
+  "https://stardust-archive.net/start",
+  "https://stardust-archive.net/ai",
+  "https://stardust-archive.net/ai-benchmark",
+  "https://stardust-archive.net/1995-search",
+  "https://stardust-archive.net/web/1995/mit.edu",
+  "https://stardust-archive.net/web/1995/cern.ch",
+  "https://stardust-archive.net/web/1995/openai.com",
+  "https://ai-singularity-2026.pages.dev/",
+  "https://cre7-alignment-audit.pages.dev/",
+  "https://sublevel-b2-terminal.pages.dev/",
+  "https://siliconvalley-lab-1995.pages.dev/",
+  "https://altavista-1995-web.pages.dev/",
+  "https://usenet-1995-spool.pages.dev/",
+  "https://orion-records-1983.pages.dev/",
+  "https://anemoia-bureau-harmony.pages.dev/",
+  "https://ashford-poly-dsp.pages.dev/",
+  "https://kamome-net-1985.pages.dev/",
+  "https://relcom-node08.pages.dev/",
+  "https://red-coyoacan-1989.pages.dev/",
+  "https://jdurey.github.io/retro-arg-engine/",
   "index.html",
   "forensics/index.html",
   "forensics/signal_lab.html",
@@ -57,26 +77,6 @@ const CORE_PATHS = [
   "geocities/lang_es.html",
   "geocities/lang_de.html",
   "geocities/lang_fr.html",
-  "https://stardust-archive.net/start",
-  "https://stardust-archive.net/ai",
-  "https://stardust-archive.net/ai-benchmark",
-  "https://stardust-archive.net/1995-search",
-  "https://stardust-archive.net/web/1995/mit.edu",
-  "https://stardust-archive.net/web/1995/cern.ch",
-  "https://stardust-archive.net/web/1995/openai.com",
-  "https://ai-singularity-2026.pages.dev/",
-  "https://cre7-alignment-audit.pages.dev/",
-  "https://sublevel-b2-terminal.pages.dev/",
-  "https://siliconvalley-lab-1995.pages.dev/",
-  "https://altavista-1995-web.pages.dev/",
-  "https://usenet-1995-spool.pages.dev/",
-  "https://orion-records-1983.pages.dev/",
-  "https://anemoia-bureau-harmony.pages.dev/",
-  "https://ashford-poly-dsp.pages.dev/",
-  "https://kamome-net-1985.pages.dev/",
-  "https://relcom-node08.pages.dev/",
-  "https://red-coyoacan-1989.pages.dev/",
-  "https://jdurey.github.io/retro-arg-engine/",
 ];
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -86,15 +86,16 @@ async function main() {
   const limit = limitArg !== -1 ? parseInt(process.argv[limitArg + 1], 10) : CORE_PATHS.length;
 
   const telegraphFile = path.join(__dirname, "da92_telegraph_mirrors.json");
-  const allTargets = [...CORE_PATHS];
+  const tgUrls = [];
   if (fs.existsSync(telegraphFile)) {
     try {
       const tg = JSON.parse(fs.readFileSync(telegraphFile, "utf8"));
       for (const art of tg.articles || []) {
-        if (art.url) allTargets.push(art.url);
+        if (art.url) tgUrls.push(art.url);
       }
     } catch {}
   }
+  const allTargets = [...CORE_PATHS.slice(0, 20), ...tgUrls, ...CORE_PATHS.slice(20)];
 
   const state = fs.existsSync(STATE_FILE) ? JSON.parse(fs.readFileSync(STATE_FILE, "utf8")) : { archived: {} };
   console.log(`Starting Wayback Machine submission (up to ${limit} unarchived nodes of ${allTargets.length} total)...`);
@@ -115,7 +116,7 @@ async function main() {
     let retries = 0;
     while (retries < 3) {
       try {
-        const saveEndpoint = `https://web.archive.org/save/${targetUrl}`;
+        const saveEndpoint = `https://web.archive.org/save/${encodeURI(targetUrl)}`;
         const res = await fetch(saveEndpoint, {
           method: "GET",
           headers: { "User-Agent": "Mozilla/5.0 (compatible; StardustArchiver/1.0)" },
