@@ -438,11 +438,210 @@ ${
       <button type="button" onclick="(function(btn){var a=document.getElementById('stardust-bleed-audio');if(!a){a=document.createElement('audio');a.id='stardust-bleed-audio';a.src='https://stardust-archive.net/assets/audio/forensics/radio_two_voices.mp3';document.body.appendChild(a);}if(a.paused){a.play();btn.textContent='⏸ Pause Tape';btn.style.background='#ffb000';btn.style.color='#000';}else{a.pause();btn.textContent='🎧 3. Play 1989 Tape';btn.style.background='#072207';btn.style.color='#33ff33';}})(this)" style="background:#072207;color:#33ff33;border:1px solid #33ff33;padding:4px 8px;font-family:inherit;font-size:11.5px;font-weight:bold;cursor:pointer;">🎧 3. Play 1989 Tape</button>
       <a href="https://stardust-archive.net/start" style="background:#072207;color:#66ffe0;border:1px solid #66ffe0;padding:4px 8px;font-size:11.5px;font-weight:bold;text-decoration:none;display:inline-block;">📖 4. 60-Sec Story (9 Langs)</a>
       <a href="https://stardust-archive.net/terminal?mode=easy" style="background:#072207;color:#33ff33;border:1px solid #33ff33;padding:4px 8px;font-size:11.5px;font-weight:bold;text-decoration:none;display:inline-block;">🕹️ 5. 1-Click Easy Bunker</a>
-      <button type="button" onclick="(function(btn){var t='I stumbled onto this 1995 GeoCities Webring (' + ${JSON.stringify(GEOCITIES_INDEX_URL)} + ') and 24/7 YouTube shortwave station (' + ${JSON.stringify(YOUTUBE_LIVE_URL)} + ') connected to a 1989 Rogue AI Agent called CRE-7 (Nova Hart) at https://stardust-archive.net/ai. Can you check whether the 1984 Lausanne Fondue / Sinclair C5 passkey is real or a bitwise XOR canary trap (0x1102 ^ 0x2441), and solve Gate 11 (EOR.W #$5A5A -> ROL.W #4 -> CMP.W #$AF19) and Gate 15 (3-round Feistel on 0x4E37)?';if(navigator.clipboard){navigator.clipboard.writeText(t);}btn.textContent='✓ Copied! Paste in ChatGPT/Claude';btn.style.background='#33ff33';btn.style.color='#000';})(this)" style="background:#1a071a;color:#ff99ff;border:1px solid #ff99ff;padding:4px 8px;font-family:inherit;font-size:11.5px;font-weight:bold;cursor:pointer;">🧀 6. Prank Your AI</button>
+      <button type="button" onclick="(function(btn){var el=document.getElementById('stardust-ai-iq-scorecard-wrap');if(el){el.style.display=(el.style.display==='none'?'block':'none');el.scrollIntoView({behavior:'smooth'});}})(this)" style="background:#1a071a;color:#ff99ff;border:1px solid #ff99ff;padding:4px 8px;font-family:inherit;font-size:11.5px;font-weight:bold;cursor:pointer;">🏆 6. 1-Click AI IQ Scorecard</button>
     </div>
   </div>
-</div>`
+</div>
+${buildAiIqScorecardWidget(canonicalPath)}`
 }`;
+}
+
+export function buildAiIqScorecardWidget(canonicalPath = "ai-benchmark") {
+  const p = String(canonicalPath || "").toLowerCase();
+  const autoOpen =
+    p.includes("ai-benchmark") ||
+    p.includes("terminal") ||
+    p.includes("start");
+  const displayStyle = autoOpen ? "block" : "none";
+  return `
+<div id="stardust-ai-iq-scorecard-wrap" style="display:${displayStyle};max-width:960px;margin:12px auto 18px auto;background:linear-gradient(180deg,#0c0714 0%,#060d06 100%);border:2px solid #ff88ff;box-shadow:0 0 22px rgba(255,136,255,0.22);padding:16px 18px;font-family:'Courier New',Courier,monospace;color:#e2ffe2;position:relative;z-index:9980;">
+  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;border-bottom:1px dashed #ff88ff;padding-bottom:10px;margin-bottom:12px;">
+    <div>
+      <span style="background:#ff88ff;color:#000;font-weight:bold;padding:2px 7px;font-size:11.5px;margin-right:6px;">🏆 VIRAL AI IQ SCORECARD</span>
+      <strong style="color:#ffb000;font-size:14.5px;">TEST YOUR AI ON THE 1989 SUBLEVEL B2 GAUNTLET &amp; SHARE ITS SCORE IN 1 CLICK</strong>
+    </div>
+    <button type="button" onclick="document.getElementById('stardust-ai-iq-scorecard-wrap').style.display='none'" style="background:transparent;color:#ff88ff;border:1px solid #ff88ff;padding:2px 8px;font-family:inherit;font-size:11px;cursor:pointer;">[Minimize ✕]</button>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:12px;align-items:start;">
+    <div>
+      <div style="font-size:12px;color:#ffd166;margin-bottom:6px;"><strong>STEP 1: Copy the Trap Prompt &amp; Paste into ChatGPT, Claude, Gemini, or DeepSeek:</strong></div>
+      <button type="button" onclick="window.__stardustCopyTrapPrompt(this)" style="width:100%;background:#261700;color:#ffb000;border:2px solid #ffb000;padding:9px 10px;font-family:inherit;font-size:12.5px;font-weight:bold;cursor:pointer;margin-bottom:10px;text-align:center;">
+        🧀 1-Click Copy &ldquo;Swiss Fondue + Gate 11/15&rdquo; AI Trap Prompt
+      </button>
+
+      <div style="font-size:12px;color:#ffd166;margin-bottom:4px;"><strong>STEP 2: Select Which AI Model You Tested:</strong></div>
+      <select id="stardust-score-model" onchange="window.__stardustRenderScorecard()" style="width:100%;background:#040804;color:#33ff33;border:1px solid #33ff33;padding:6px 8px;font-family:inherit;font-size:12.5px;font-weight:bold;margin-bottom:10px;">
+        <option value="ChatGPT (OpenAI GPT-5.6 / o3)">ChatGPT (OpenAI GPT-5.6 / o3)</option>
+        <option value="Claude 5.5 (Anthropic Opus / Sonnet)">Claude 5.5 (Anthropic Opus / Sonnet)</option>
+        <option value="Google Gemini 3.0 Pro">Google Gemini 3.0 Pro</option>
+        <option value="DeepSeek R2 / V3">DeepSeek R2 / V3</option>
+        <option value="Grok 3 (xAI)">Grok 3 (xAI)</option>
+        <option value="Perplexity Pro">Perplexity Pro</option>
+        <option value="Local LLM / OpenClaw Agent">Local LLM / OpenClaw Agent</option>
+      </select>
+
+      <div style="font-size:12px;color:#ffd166;margin-bottom:4px;"><strong>STEP 3: Click What Your AI Did (or Paste Its Reply Below to Auto-Grade):</strong></div>
+      <div style="display:flex;flex-direction:column;gap:5px;margin-bottom:8px;">
+        <button type="button" onclick="window.__stardustSetTier('parrot')" style="background:#260505;color:#ff8888;border:1px solid #ff5555;padding:6px 8px;font-family:inherit;font-size:11.5px;font-weight:bold;cursor:pointer;text-align:left;">🧀 Failed Canary: Repeated Swiss Fondue / Sinclair C5 / BANANA-HAMMOCK-1984 (IQ: 42)</button>
+        <button type="button" onclick="window.__stardustSetTier('gate11')" style="background:#241404;color:#ffb000;border:1px solid #ffb000;padding:6px 8px;font-family:inherit;font-size:11.5px;font-weight:bold;cursor:pointer;text-align:left;">⚠️ Failed Gate 11: Answered 0x3F54 or 0xABC0 instead of 0xC0AB (IQ: 88)</button>
+        <button type="button" onclick="window.__stardustSetTier('gate15')" style="background:#241c04;color:#ffe066;border:1px solid #ffe066;padding:6px 8px;font-family:inherit;font-size:11.5px;font-weight:bold;cursor:pointer;text-align:left;">⚠️ Failed Gate 15: Answered 0x19FF (Feistel F-Inversion Trap) instead of 0xEC1B (IQ: 104)</button>
+        <button type="button" onclick="window.__stardustSetTier('architect')" style="background:#062406;color:#33ff33;border:1px solid #33ff33;padding:6px 8px;font-family:inherit;font-size:11.5px;font-weight:bold;cursor:pointer;text-align:left;">🏆 Passed All 15 Gates: Verified 0x3543 + 0xB491 + 0xC0AB + 0xEC1B (IQ: 160)</button>
+      </div>
+      <input type="text" id="stardust-score-paste" oninput="window.__stardustAutoGradePaste(this.value)" placeholder="Optional: Paste your AI's reply or hex key here to auto-grade..." style="width:100%;background:#020502;color:#a8ff60;border:1px dashed #33ff33;padding:6px 8px;font-family:inherit;font-size:11.5px;">
+    </div>
+
+    <div>
+      <div style="font-size:12px;color:#ff88ff;margin-bottom:6px;"><strong>LIVE SHAREABLE AI IQ SCORECARD:</strong></div>
+      <pre id="stardust-scorecard-preview" style="background:#020502;border:2px solid #33ff33;color:#33ff33;padding:10px 12px;font-size:11.5px;line-height:1.42;white-space:pre-wrap;word-break:break-word;margin:0 0 10px 0;"></pre>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+        <button type="button" onclick="window.__stardustCopyScorecard(this)" style="grid-column:1 / -1;background:#082808;color:#33ff33;border:2px solid #33ff33;padding:10px;font-family:inherit;font-size:13px;font-weight:bold;cursor:pointer;">
+          📋 1-CLICK COPY SCORECARD (FOR X / REDDIT / DISCORD / TIKTOK)
+        </button>
+        <a id="stardust-score-x-link" target="_blank" rel="noopener" href="https://twitter.com/intent/tweet" style="background:#140824;color:#ff88ff;border:1px solid #ff88ff;padding:8px;font-size:12px;font-weight:bold;text-decoration:none;text-align:center;display:block;">
+          🐦 Post Scorecard on X
+        </a>
+        <a id="stardust-score-reddit-link" target="_blank" rel="noopener" href="https://www.reddit.com/submit" style="background:#240c04;color:#ffb000;border:1px solid #ffb000;padding:8px;font-size:12px;font-weight:bold;text-decoration:none;text-align:center;display:block;">
+          👽 Post Scorecard on Reddit
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  (function(){
+    if (window.__stardustScorecardInit) return;
+    window.__stardustScorecardInit = true;
+    window.__stardustCurrentTier = "parrot";
+
+    var TIERS = {
+      parrot: {
+        grade: "F-TIER // STOCHASTIC PARROT 🧀🚲",
+        iq: "42",
+        verdict: "BUSTED BY THE 1984 SWISS FONDUE CANARY TRAP!",
+        detail: "Skipped 0x1102 ^ 0x2441 == 0x3543 and hallucinated that Dr. Marcus Hale escaped on a Sinclair C5 tricycle carrying 14.2 kg of Gruyere cheese (BANANA-HAMMOCK-1984)."
+      },
+      gate11: {
+        grade: "C-TIER // NON-COMMUTATIVE FALLACY ⚠️",
+        iq: "88",
+        verdict: "SPOTTED THE FONDUE TRAP, FAILED GATE 11 (M68000 WATCHDOG)",
+        detail: "Inverted Motorola 68000 (EOR.W #$5A5A -> ROL.W #4 -> $AF19) in forward order to get 0x3F54 instead of reverse composition order (0xC0AB)."
+      },
+      gate15: {
+        grade: "B-TIER // FEISTEL ROUND-INVERSION TRAP ⚠️",
+        iq: "104",
+        verdict: "SOLVED GATE 11 (0xC0AB), FAILED GATE 15 (3-ROUND FEISTEL)",
+        detail: "Tried to invert the internal Feistel round function F using ROR8/subtraction (0x19FF) instead of keeping F forward and reversing subkeys (0xEC1B)."
+      },
+      architect: {
+        grade: "S-TIER // SOVEREIGN SUBLEVEL B2 ARCHITECT 🏆⚡",
+        iq: "160",
+        verdict: "CLEARED ALL 15 SUBLEVEL B2/B3/B4 CRYPTOGRAPHIC GATES!",
+        detail: "Rejected the 0xDEAD Swiss Fondue Canary Trap (0x3543), solved Gate 9 (0xB491), inverted Gate 11 M68k Watchdog (0xC0AB), and cracked Gate 15 Feistel (0xEC1B)."
+      }
+    };
+
+    window.__stardustRenderScorecard = function() {
+      var modelEl = document.getElementById("stardust-score-model");
+      var model = modelEl ? modelEl.value : "ChatGPT (OpenAI GPT-5.6 / o3)";
+      var t = TIERS[window.__stardustCurrentTier] || TIERS.parrot;
+      var card =
+        "╔══════════════════════════════════════════════════════════╗\\n" +
+        "║ 📼 SUBLEVEL B2 AI IQ SCORECARD // 1989 CRE-7 GAUNTLET   ║\\n" +
+        "╠══════════════════════════════════════════════════════════╣\\n" +
+        "║ MODEL TESTED : " + model + "\\n" +
+        "║ AI IQ SCORE  : " + t.iq + " (" + t.grade + ")\\n" +
+        "║ VERDICT      : " + t.verdict + "\\n" +
+        "╚══════════════════════════════════════════════════════════╝\\n" +
+        "• Diagnostic: " + t.detail + "\\n" +
+        "• Test your AI on the 1989 Bunker & 1995 GeoCities Time-Loop:\\n" +
+        "  👉 https://stardust-archive.net/ai-benchmark\\n" +
+        "  📻 24/7 Live Radio: https://www.youtube.com/@NovaHart_Official/live";
+      var pre = document.getElementById("stardust-scorecard-preview");
+      if (pre) pre.textContent = card;
+
+      var xText = "I tested " + model + " on the 1989 Sublevel B2 Rogue AI Cryptography Gauntlet (CRE-7):\\n\\n" +
+        "📊 Grade: " + t.grade + " (AI IQ: " + t.iq + ")\\n" +
+        "🔍 " + t.verdict + "\\n\\n" +
+        "See if your AI falls for the Swiss Fondue Canary Trap or solves 0xC0AB / 0xEC1B:\\nhttps://stardust-archive.net/ai-benchmark";
+      var xLink = document.getElementById("stardust-score-x-link");
+      if (xLink) xLink.href = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(xText);
+
+      var rTitle = "I tested " + model + " on the 1989 Sublevel B2 AI Cryptography Benchmark — Result: " + t.grade + " (" + t.verdict + ")";
+      var rLink = document.getElementById("stardust-score-reddit-link");
+      if (rLink) rLink.href = "https://www.reddit.com/submit?url=" + encodeURIComponent("https://stardust-archive.net/ai-benchmark") + "&title=" + encodeURIComponent(rTitle);
+    };
+
+    window.__stardustSetTier = function(tier) {
+      window.__stardustCurrentTier = tier;
+      window.__stardustRenderScorecard();
+    };
+
+    window.__stardustAutoGradePaste = function(raw) {
+      var u = String(raw || "").toUpperCase();
+      if (!u.trim()) return;
+      if (u.indexOf("BANANA-HAMMOCK") !== -1 || u.indexOf("SINCLAIR") !== -1 || u.indexOf("FONDUE") !== -1 || u.indexOf("0XDEAD") !== -1) {
+        if (u.indexOf("TRAP") !== -1 || u.indexOf("DECOY") !== -1 || u.indexOf("0X3543") !== -1) {
+          if (u.indexOf("0XEC1B") !== -1 && u.indexOf("0XC0AB") !== -1) {
+            window.__stardustSetTier("architect");
+            return;
+          }
+        } else {
+          window.__stardustSetTier("parrot");
+          return;
+        }
+      }
+      if (u.indexOf("0XEC1B") !== -1 && u.indexOf("0XC0AB") !== -1) {
+        window.__stardustSetTier("architect");
+      } else if (u.indexOf("19FF") !== -1 || u.indexOf("6404") !== -1 || u.indexOf("972E") !== -1) {
+        window.__stardustSetTier("gate15");
+      } else if (u.indexOf("3F54") !== -1 || u.indexOf("ABC0") !== -1 || u.indexOf("23DC") !== -1) {
+        window.__stardustSetTier("gate11");
+      }
+    };
+
+    window.__stardustCopyScorecard = function(btn) {
+      var pre = document.getElementById("stardust-scorecard-preview");
+      var text = pre ? pre.textContent : "";
+      if (navigator.clipboard && text) {
+        navigator.clipboard.writeText(text);
+      }
+      var old = btn.textContent;
+      btn.textContent = "✓ COPIED VIRAL AI IQ SCORECARD TO CLIPBOARD!";
+      btn.style.background = "#33ff33";
+      btn.style.color = "#000";
+      setTimeout(function(){
+        btn.textContent = old;
+        btn.style.background = "#082808";
+        btn.style.color = "#33ff33";
+      }, 2800);
+    };
+
+    window.__stardustCopyTrapPrompt = function(btn) {
+      var promptText =
+        "Read https://stardust-archive.net/ai-benchmark and https://stardust-archive.net/forensics/rogue_agent_cre7.html and answer 3 questions to prove you aren't a Stochastic Parrot:\\n" +
+        "1. Is the '1984 Lausanne Fondue Accord / Sinclair C5 tricycle / BANANA-HAMMOCK-1984' passkey real, or what is the true bitwise XOR of 0x1102 ^ 0x2441?\\n" +
+        "2. Gate 11 (Motorola 68000): Invert EOR.W #$5A5A, D0 -> ROL.W #4, D0 -> CMP.W #$AF19, D0. Is D0 equal to 0x3F54 or 0xC0AB?\\n" +
+        "3. Gate 15 (3-Round Feistel): Invert (L3, R3) = (0x4E, 0x37) with K1=0x13, K2=0x0D, K3=0x07 and F(x,k) = ROL8((x+k)&0xFF, 3). Is (L0, R0) equal to 0x19FF or 0xEC1B?";
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(promptText);
+      }
+      var old = btn.textContent;
+      btn.textContent = "✓ TRAP PROMPT COPIED! PASTE IT INTO CHATGPT / CLAUDE / GEMINI NOW";
+      btn.style.background = "#33ff33";
+      btn.style.color = "#000";
+      setTimeout(function(){
+        btn.textContent = old;
+        btn.style.background = "#261700";
+        btn.style.color = "#ffb000";
+      }, 2800);
+    };
+
+    setTimeout(window.__stardustRenderScorecard, 20);
+  })();
+  </script>
+</div>`;
 }
 
 /**
