@@ -321,6 +321,16 @@
       <div class="reward-actions" id="reward-card-actions"></div>
     </div>
 
+    <div class="quick-deck" style="border:2px solid #ffb000; background:rgba(40,24,0,0.65); margin-bottom:8px; padding:8px 10px;">
+      <span style="font-size:12px; color:#ffb000;"><strong>🕹️ NEW HERE? 1-CLICK EASY MODE (NO CODING NEEDED &mdash; CLICK 1 &rarr; 6):</strong></span>
+      <a class="btn amber-pill" style="text-decoration:none;" href="/start">[📖 1. 60-SEC STORY (9 LANGUAGES)]</a>
+      <button class="amber-pill" onclick="runCmd('TWO-VOICES')">[🎧 2. PLAY 1989 TAPE]</button>
+      <button class="amber-pill" style="border-color:#33ff33; color:#33ff33;" onclick="runCmd('RESTORE 1 14.2001')">[🔓 3. UNLOCK GATE 1]</button>
+      <button class="amber-pill" style="border-color:#33ff33; color:#33ff33;" onclick="runCmd('RESTORE 2 0x1983')">[👻 4. UNLOCK GATE 2]</button>
+      <button class="amber-pill" style="border-color:#33ff33; color:#33ff33;" onclick="runCmd('RESTORE 3 0x89B2B2D8')">[🌐 5. UNLOCK GATE 3]</button>
+      <button class="amber-pill" style="border-color:#ff88ff; color:#ff88ff;" onclick="runCmd('BANANA-HAMMOCK-1984')">[🧀 6. TRIGGER SWISS FONDUE AI TRAP!]</button>
+    </div>
+
     <div class="quick-deck">
       <span style="font-size:11px; color:var(--amber);"><strong>QUICK CONSOLE:</strong></span>
       <button class="amber-pill" onclick="runCmd('BRIEFING')">[🕵️ CASE BRIEFING]</button>
@@ -2705,9 +2715,22 @@ uint32_t feistel_round(uint32_t x, uint32_t k) {
     try {
       const urlParams = new URLSearchParams(window.location.search);
       const autoCode = (urlParams.get("code") || urlParams.get("cmd") || "").trim();
+      const easyMode = (urlParams.get("mode") || "").toLowerCase() === "easy";
       if (autoCode) {
         if (cipherBoxEl) cipherBoxEl.value = autoCode;
         handleCommand(autoCode);
+      } else if (easyMode) {
+        printBlock(
+          "========================================================================\n" +
+          " 🕹️ 1-CLICK HUMAN EASY MODE ACTIVATED (NO CODING OR MATH REQUIRED!)\n" +
+          "========================================================================\n" +
+          " Welcome! We just auto-entered Gate 1 ('RESTORE 1 14.2001') for you below.\n" +
+          " Just click the glowing buttons in the 'NEW HERE? 1-CLICK EASY MODE' bar\n" +
+          " above ([2. PLAY 1989 TAPE], [4. UNLOCK GATE 2], [5. UNLOCK GATE 3],\n" +
+          " or [6. TRIGGER SWISS FONDUE AI TRAP!]) to experience the story!",
+          "amber"
+        );
+        handleCommand("RESTORE 1 14.2001");
       }
     } catch (e) {}
     pollBannerTelemetry();
