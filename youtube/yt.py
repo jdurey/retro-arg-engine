@@ -316,16 +316,88 @@ def strip_old_preamble(desc: str) -> str:
 
 HASHTAG = re.compile(r"(?<!\w)#\w+")
 
+METAL_PRIORITY_IDS = {
+    "ECPBs6q-X08",  # Hunter at the Gate
+    "-O2T5V4DS3U",  # Wire and Will
+    "qhsaPLzw9Yk",  # Ashes of Harmony
+    "G43PPcvdpEM",  # Cage of Wires
+    "Ofp4V9naUCY",  # Erase the Frame
+    "VMnJ1sT_ShM",  # Steel Inferno
+    "-gicv32Dcv4",  # Blood on the Stage
+    "wb66Gegebp4",  # Burn the Chorus
+    "MnvpJn2TEYQ",  # Velvet Guillotine
+    "rKtyRi5frPw",  # Recall This
+    "MvnJJyoI0s8",  # Zero Hour Rebel
+    "tzIJCJf_BGc",  # Nowhere Tour
+    "-PPQ1gWqwgI",  # Console Thunder
+    "yskrt1a31WE",  # Hardline Barricade
+    "tsbHpheH4UM",  # City Has Teeth
+    "rTBP1ZBMIOY",  # Crimson Idol
+    "HLktBXfTh7o",  # Backseat Saint
+    "m-tDpjWO6IY",  # Lip Service
+    "NV6hZnJp9gg",  # Fire in the Wires
+    "27bH64osCc0",  # Steel and Skin
+    "6aNsnQzX4mM",  # Street Serpent
+    "02Ti32mEV5s",  # Iron Claws
+    "Hi54Jc6HmyY",  # Nightfang
+    "Qom-ng6hkvQ",  # Walls Will Fall
+    "vXfJQTsDJjI",  # Electric Heartbeat
+    "Yxmt8Y7YWg4",  # Barbed Wire Kiss
+}
+
+
+def is_metal_desc(text: str) -> bool:
+    low = text.lower()
+    return any(
+        k in low
+        for k in (
+            "#thrashmetal",
+            "#speedmetal",
+            "#heavymetal",
+            "#80smetal",
+            "#powermetal",
+            "#glammetal",
+            "#melodicmetal",
+            "thrash onslaught",
+            "heavy metal suppression year",
+            "recall-directive-heavy-metal-protocol",
+            "heavy metal hits playlist",
+            "proto-metal",
+            "80s melodic metal",
+            "late-80s metal",
+        )
+    )
+
 
 def with_block(block: str, desc: str) -> str:
-    """Prepend a hook block, never exceeding YouTube's 15-hashtag cap."""
+    """Prepend a hook block while preserving the song's own genre hashtags and never exceeding YouTube's 15-hashtag cap."""
     clean_desc = strip_old_preamble(desc)
-    if len(HASHTAG.findall(block)) + len(HASHTAG.findall(clean_desc)) > 15:
-        # Remove hashtags from original body so our high-volume discovery hashtags win
-        clean_desc = "\n".join(
-            l for l in clean_desc.splitlines() if not l.strip().startswith("#")
+    if is_metal_desc(clean_desc):
+        block = (
+            block.replace("#PowerBallad", "#HeavyMetal")
+            .replace("#ArenaRock", "#80sMetal")
+            .replace("#Synthpop", "#ThrashMetal")
         )
-    return (block + "\n\n" + clean_desc).strip()[:5000]
+    desc_tags_lower = {t.lower() for t in HASHTAG.findall(clean_desc)}
+    max_block_tags = max(0, 15 - len(desc_tags_lower))
+    out_block_lines = []
+    kept_block_tags = 0
+    for line in block.splitlines():
+        if line.strip().startswith("#"):
+            tokens = HASHTAG.findall(line)
+            filtered = []
+            for tok in tokens:
+                if tok.lower() in desc_tags_lower:
+                    continue
+                if kept_block_tags < max_block_tags:
+                    filtered.append(tok)
+                    kept_block_tags += 1
+            if filtered:
+                out_block_lines.append(" ".join(filtered))
+        else:
+            out_block_lines.append(line)
+    final_block = "\n".join(out_block_lines).strip()
+    return (final_block + "\n\n" + clean_desc).strip()[:5000]
 
 
 def merge_tags(existing_tags):
@@ -429,8 +501,15 @@ def apply(dry_run=False, limit=None, reset_done=False, translate_mode=True):
     prev_done_path = os.path.join(STATE, "max_visibility_done.json")
     prev_done = set(json.load(open(prev_done_path))) if os.path.exists(prev_done_path) else set()
     videos = [v for v in videos if v["status"]["privacyStatus"] != "private"]
-    # Prioritize: 1) live streams first, 2) the 92 videos not yet touched by max_visibility_done, 3) remaining videos
-    videos.sort(key=lambda v: (not is_livestream_title(v["snippet"]["title"]), v["id"] in prev_done))
+    # Prioritize: 1) Hunter at the Gate (ECPBs6q-X08), 2) live streams, 3) Metal/Recall tracks, 4) untouched videos
+    videos.sort(
+        key=lambda v: (
+            v["id"] != "ECPBs6q-X08",
+            not is_livestream_title(v["snippet"]["title"]),
+            v["id"] not in METAL_PRIORITY_IDS,
+            v["id"] in prev_done,
+        )
+    )
 
     target_langs = [l for l in tr["blocks"].keys() if l != tr["source_lang"]]
 
