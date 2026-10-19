@@ -618,8 +618,6 @@ def upload_shorts(dry_run=False, limit=None):
         sid = item["id"]
         srt_map = item.get("srt_files") or {}
         if sid in uploaded:
-            if sid in PRIVATIZE_STATIC_KEYS:
-                continue
             # If video was uploaded before quota ran out for SRT captions, backfill captions on next quota cycle
             if srt_map and not uploaded[sid].get("captions_uploaded") and not dry_run:
                 vid_existing = uploaded[sid]["video_id"]
@@ -652,6 +650,8 @@ def upload_shorts(dry_run=False, limit=None):
                     uploaded[sid]["captions_uploaded"] = True
                     json.dump(uploaded, open(uploaded_path, "w"), indent=2)
                     print(f"[CAPTIONS BACKFILLED (20 langs)] {sid} -> https://youtube.com/watch?v={vid_existing}", flush=True)
+            if sid in PRIVATIZE_STATIC_KEYS:
+                continue
             continue
         if limit and count >= limit:
             break

@@ -25,7 +25,7 @@ echo "=== [24/7 GLOBAL EXPANSION CYCLE: $(date -u +"%Y-%m-%dT%H:%M:%SZ")] ==="
 "$ROOT/youtube/.venv/bin/python3" "$ROOT/youtube/yt.py" sync || true
 
 # 4. Submit fresh multi-domain URLs across all 13 root domains to IndexNow & RAG proxies
-/usr/bin/python3 "$ROOT/scripts/publish_da99_authority_network.py" || true
+/usr/bin/python3 "$ROOT/scripts/publish_da99_authority_network.py" --force || true
 
 # 5. Seed AgentDex, Nostr/Clawstr relays, WebSub, and Markdown RAG caches
 /usr/bin/python3 "$ROOT/scripts/agentic_web_seeder.py" || true
