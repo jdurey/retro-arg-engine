@@ -141,6 +141,8 @@ export function publicUrl(sitePath) {
   if (p.startsWith(".well-known/") || p.startsWith("nodes/")) return `https://${apex}/${p}`;
   if (p.startsWith("federation/")) return `https://${apex}/${p}`;
   if (p === "reconstruction" || p === "reconstruction/index.html") return `https://${apex}/reconstruction`;
+  if (p === "dyad" || p === "dyad/index.html") return `https://${apex}/dyad`;
+  if (p.startsWith("dyad/")) return `https://${apex}/${p}`;
   const segs = p.split("/");
   const kind = segs[0];
   if (!KINDS.includes(kind)) return null;
@@ -224,16 +226,17 @@ export function resolve(hostname, pathname) {
       return { sitePath: "index.html" };
     }
     let sp = path.slice(1).replace(/\/$/, "/index.html");
-    if (sp === "terminal" || sp === "forensics" || sp === "reconstruction") sp = `${sp}/index.html`;
+    if (sp === "terminal" || sp === "forensics" || sp === "reconstruction" || sp === "dyad") sp = `${sp}/index.html`;
     if (isPslSatellite) {
       return { sitePath: sp, canonical: null };
     }
-    // Direct apex routes (forensics/*, terminal/*, reconstruction/*, federation/*, .well-known/*)
+    // Direct apex routes (forensics/*, terminal/*, reconstruction/*, dyad/*, federation/*, .well-known/*)
     // must NOT 301-redirect to themselves when requested on matchedApex!
     if (
       sp.startsWith("forensics/") ||
       sp.startsWith("terminal/") ||
       sp.startsWith("reconstruction/") ||
+      sp.startsWith("dyad/") ||
       sp.startsWith("federation/") ||
       sp.startsWith(".well-known/") ||
       sp.startsWith("nodes/") ||

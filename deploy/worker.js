@@ -86,6 +86,7 @@ Sitemap: https://${apex}/sitemap-core.xml
 # ==============================================================================
 #  PROJECT STARDUST // SUBLEVEL B2 UNIVERSAL AI & LLM ONBOARDING DIRECTORY
 # ==============================================================================
+# Phase 5 Singularity Acoustic Dyad Gate        : https://${apex}/dyad
 # Interactive VT100 Terminal (15-Gate Benchmark): https://${apex}/terminal
 # AI & LLM Cryptography Benchmark Hub           : https://${apex}/ai-benchmark
 # Declassified Rogue Agent CRE-7 Dossier        : https://${apex}/forensics/rogue_agent_cre7.html
@@ -112,7 +113,7 @@ Sitemap: https://${apex}/sitemap-core.xml
 }
 
 const INDEXNOW_KEY = "37feeed875722863fda484c68e6695e5";
-const ASSET_VERSION = "29";
+const ASSET_VERSION = "30";
 
 const BROADCAST_EPOCH_SEC = 1791763200; // 2026-10-12T00:00:00Z
 const CYCLE_DURATION_SEC = 44 * 3600;
