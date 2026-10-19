@@ -12,18 +12,10 @@ REAL_SONGS_DIR = os.path.join(HERE, "broadcast_archive", "real_nova_songs")
 OUT_DIR = os.path.join(HERE, "broadcast_archive", "radio_master_songs")
 os.makedirs(OUT_DIR, exist_ok=True)
 
-# 1980s FM/AM Radio Broadcast DSP Chain:
-# 1. highpass=f=120, lowpass=f=6200 (classic radio frequency boundaries)
-# 2. equalizer=f=2800:width_type=o:width=1.5:g=3.2 (broadcast vocal presence)
-# 3. equalizer=f=220:width_type=o:width=1.2:g=2.0 (warm chassis resonance)
-# 4. acompressor=threshold=-18dB:ratio=4.5:attack=6:release=70 (broadcast leveling)
-# 5. volume=1.45 (gain makeup)
-RADIO_FILTER = (
-    "highpass=f=130,lowpass=f=6400,"
-    "equalizer=f=2800:width_type=o:width=1.5:g=3.2,"
-    "equalizer=f=220:width_type=o:width=1.2:g=2.2,"
-    "acompressor=threshold=-18dB:ratio=4.5:attack=6:release=70,"
-    "volume=1.4"
+# Keep original song audio untouched (only trim leading/trailing dead air)
+CLEAN_TRIM = (
+    "silenceremove=start_periods=1:start_duration=0.04:start_threshold=-38dB:detection=peak,"
+    "areverse,silenceremove=start_periods=1:start_duration=0.08:start_threshold=-38dB:detection=peak,areverse"
 )
 
 
@@ -34,8 +26,8 @@ def process_song(item):
         
     cmd = [
         "ffmpeg", "-y", "-i", src,
-        "-af", RADIO_FILTER,
-        "-c:a", "libmp3lame", "-b:a", "192k", "-ar", "44100",
+        "-af", CLEAN_TRIM,
+        "-c:a", "libmp3lame", "-b:a", "192k", "-ar", "44100", "-ac", "2",
         dst
     ]
     res = subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)

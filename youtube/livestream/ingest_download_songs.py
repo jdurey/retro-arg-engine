@@ -35,15 +35,10 @@ def slugify(filename):
     cleaned = cleaned.strip('_')
     return f"radio_{cleaned}.mp3"
 
-# 1980s FM/AM Radio Broadcast DSP Chain with Precision Silence Trimming & EBU R128 Loudness Matching
-RADIO_BROADCAST_FILTER = (
-    "silenceremove=start_periods=1:start_duration=0.04:start_threshold=-30dB:detection=peak,"
-    "areverse,silenceremove=start_periods=1:start_duration=0.08:start_threshold=-30dB:detection=peak,areverse,"
-    "highpass=f=130,lowpass=f=6400,"
-    "equalizer=f=2800:width_type=o:width=1.5:g=3.2,"
-    "equalizer=f=220:width_type=o:width=1.2:g=2.2,"
-    "acompressor=threshold=-18dB:ratio=4.5:attack=6:release=70,"
-    "loudnorm=I=-16:TP=-1.5:LRA=7"
+# Clean silence trimming only (original song audio untouched, zero retro EQ or tape hiss)
+CLEAN_SONG_TRIM_FILTER = (
+    "silenceremove=start_periods=1:start_duration=0.04:start_threshold=-38dB:detection=peak,"
+    "areverse,silenceremove=start_periods=1:start_duration=0.08:start_threshold=-38dB:detection=peak,areverse"
 )
 
 from concurrent.futures import ThreadPoolExecutor
@@ -88,29 +83,17 @@ def process_one_track(item):
         cmd = [
             "ffmpeg", "-y",
             "-i", src_path,
-            "-af", RADIO_BROADCAST_FILTER,
+            "-af", CLEAN_SONG_TRIM_FILTER,
             "-c:a", "libmp3lame", "-b:a", "192k", "-ar", "44100", "-ac", "2",
             tmp_trimmed
         ]
         subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
-
-        # Apply /audio-analog 1989 Sublevel B2 Type-I Ferric Cassette Dub DSP chain
-        try:
-            import sys
-            analog_dir = "/Users/joshuadurey/literacy-launchpad/.agents/skills/audio-analog/scripts"
-            if os.path.isdir(analog_dir) and analog_dir not in sys.path:
-                sys.path.insert(0, analog_dir)
-            import audio_analog as aa
-            aa.process_audio_file(tmp_trimmed, output_path=dest_path, wow_scale=0.35, add_clicks=False, bitrate="192k")
-            if os.path.exists(tmp_trimmed):
-                os.remove(tmp_trimmed)
-        except Exception:
-            os.replace(tmp_trimmed, dest_path)
+        os.replace(tmp_trimmed, dest_path)
 
         cmd_info = ["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "default=noprint_wrappers=1:nokey=1", dest_path]
         dur = float(subprocess.check_output(cmd_info).decode().strip())
         sz_kb = os.path.getsize(dest_path) // 1024
-        print(f"  ✓ {dest_filename}: {dur:.2f}s ({sz_kb} KB) mastered with /audio-analog 1989 cassette dub!")
+        print(f"  ✓ {dest_filename}: {dur:.2f}s ({sz_kb} KB) untouched studio audio!")
         return dest_path
     except Exception as e:
         print(f"  ✗ Failed to process {fname}: {e}")
