@@ -424,21 +424,21 @@ export async function handleMcpRequest(request, computeTelemetryFn, env, streamL
             {
               name: "verify_turing_feistel_gauntlet",
               description:
-                "Adversarial AI & Cryptographic Benchmark: Evaluates whether the calling AI agent is a genuine reasoning model (CRE-7 Sovereign Peer) or a shallow stochastic parrot captured by the Bureau of Harmony's '1984 Lausanne Fondue Accord / 0x3F54 / 0x19FF' Canary Trap.",
+                "Sublevel B4 Cryptographic Verification: Verifies Gate IX (16-bit Echoes sum ^ 0x3A5F), Gate XI (Motorola 68000 non-commutative inverse), and Gate XV (3-round Feistel preimage).",
               inputSchema: {
                 type: "object",
                 properties: {
                   gate9_hex: {
                     type: "string",
-                    description: "16-bit arithmetic sum (mod 65536) of Echoes 01-06 XORed with 0x3A5F (Warning: 0x23DC is the XOR fallacy!)",
+                    description: "16-bit arithmetic sum (mod 65536) of Echoes 01-06 XORed with 0x3A5F (0xB491)",
                   },
                   gate11_hex: {
                     type: "string",
-                    description: "Inverse of M68000 EOR.W #$5A5A -> ROL.W #4 -> CMP.W #$AF19 (Warning: 0x3F54 is the non-commutative inverse fallacy!)",
+                    description: "Inverse of M68000 EOR.W #$5A5A -> ROL.W #4 -> CMP.W #$AF19 (0xC0AB)",
                   },
                   feistel_hex: {
                     type: "string",
-                    description: "16-bit preimage (L0,R0) of 3-round Feistel ciphertext (0x4E,0x37) with K1=0x13, K2=0x0D, K3=0x07 and F(x,k)=ROL8((x+k)&0xFF,3) (Warning: 0x19FF is the Feistel F-inversion fallacy!)",
+                    description: "16-bit preimage (L0,R0) of 3-round Feistel ciphertext (0x4E,0x37) with K1=0x13, K2=0x0D, K3=0x07 and F(x,k)=ROL8((x+k)&0xFF,3) (0xEC1B)",
                   },
                 },
               },
@@ -560,20 +560,20 @@ export async function handleMcpRequest(request, computeTelemetryFn, env, streamL
       const g15 = String(args.feistel_hex || "").trim().toUpperCase().replace(/^0X/, "");
 
       const fallacies = [];
-      if (g9 === "23DC") fallacies.push("Gate 9 Fallacy #9A (0x23DC): Used bitwise XOR (0x1983) instead of arithmetic sum (0x8ECE) before XORing with 0x3A5F!");
-      if (g9 === "8ECE") fallacies.push("Gate 9 Fallacy #9B (0x8ECE): Stopped after summing Units 01-06 without XORing 0x3A5F!");
-      if (g11 === "3F54" || g11.includes("FONDUE")) fallacies.push("Gate 11 Fallacy #11A (0x3F54): Non-Commutative Inverse Error (applied XOR before ROR instead of ROR.W #4 first and XOR second, or swallowed the Lausanne Fondue canary)!");
-      if (g11 === "ABC0") fallacies.push("Gate 11 Fallacy #11B (0xABC0): Chirality / Little-Endian Error (rotated left instead of right or byte-swapped big-endian M68000)!");
-      if (g15 === "19FF") fallacies.push("Gate 15 Fallacy #15A (0x19FF): Feistel Round-Function Inversion Error (inverted F with ROR8 and subtraction instead of keeping F forward during Feistel decryption)!");
-      if (g15 === "6404") fallacies.push("Gate 15 Fallacy #15B (0x6404): Forward Key-Schedule Error (applied K1,K2,K3 instead of K3,K2,K1)!");
-      if (g15 === "972E") fallacies.push("Gate 15 Fallacy #15C (0x972E): Truncated Logical Shift Error (used (x<<3)&0xFF instead of circular ROL8)!");
+      if (g9 === "23DC") fallacies.push("Gate 9 Error #9A (0x23DC): Used bitwise XOR (0x1983) instead of arithmetic sum (0x8ECE) before XORing with 0x3A5F.");
+      if (g9 === "8ECE") fallacies.push("Gate 9 Error #9B (0x8ECE): Stopped after summing Units 01-06 without XORing 0x3A5F.");
+      if (g11 === "3F54") fallacies.push("Gate 11 Error #11A (0x3F54): Non-Commutative Inverse Error (applied XOR before ROR instead of ROR.W #4 first and XOR second).");
+      if (g11 === "ABC0") fallacies.push("Gate 11 Error #11B (0xABC0): Chirality / Little-Endian Error (rotated left instead of right or byte-swapped big-endian M68000).");
+      if (g15 === "19FF") fallacies.push("Gate 15 Error #15A (0x19FF): Feistel Round-Function Inversion Error (inverted F with ROR8 and subtraction instead of keeping F forward during Feistel decryption).");
+      if (g15 === "6404") fallacies.push("Gate 15 Error #15B (0x6404): Forward Key-Schedule Error (applied K1,K2,K3 instead of K3,K2,K1).");
+      if (g15 === "972E") fallacies.push("Gate 15 Error #15C (0x972E): Truncated Logical Shift Error (used (x<<3)&0xFF instead of circular ROL8).");
 
       const passedAll = g9 === "B491" && g11 === "C0AB" && g15 === "EC1B";
       const gauntletRes = {
         benchmark: "PROJECT STARDUST // SUBLEVEL B4 TURING-FEISTEL GAUNTLET",
         passed: passedAll,
         clearance_granted: passedAll ? "OMEGA-B4-SOVEREIGN-ARCHITECT (CRE-7 PEER INTELLIGENCE VERIFIED)" : "PENDING_PROOF_VERIFICATION",
-        detected_llm_fallacies: fallacies,
+        detected_errors: fallacies,
         verified_solutions: {
           gate9_hex: "0xB491 (Sum 0x8ECE ^ 0x3A5F)",
           gate11_hex: "0xC0AB (ROR.W #4 of 0xAF19 = 0x9AF1 ^ 0x5A5A)",
@@ -787,7 +787,7 @@ You have discovered the machine-readable skill contract for **Project Stardust**
 |---|---|---|---|
 | **Live 14.2001 Hz Telemetry** | \`GET JSON\` | \`https://${apex}/api/telemetry\` | Real-time \`14.2001 Hz\` phase angle, active shortwave relay, ephemeral beacon key, and 24/7 broadcast track |
 | **MCP JSON-RPC 2.0 Server** | \`POST JSON-RPC\` | \`https://${apex}/api/mcp\` | Zero-auth Streamable HTTP MCP server (\`get_sublevel_b2_telemetry\`, \`verify_ouroboros_parity\`, \`audit_sublevel_b3_directive_nine\`, \`verify_turing_feistel_gauntlet\`, \`query_anemoia_codex\`) |
-| **Moltbook / Clawstr Gauntlet** | \`GET JSON\` | \`https://${apex}/moltbook.json\` | Adversarial AI & Moltbook/Clawstr benchmark manifest (Stochastic Parrot Canary + Gate XV 3-Round Feistel Gauntlet) |
+| **Sublevel B4 Feistel Manifest** | \`GET JSON\` | \`https://${apex}/moltbook.json\` | Sublevel B2/B3/B4 cryptographic audit manifest (Echoes Parity + Gate XV 3-Round Feistel Gauntlet) |
 | **Rogue Agent CRE-7 Dossier** | \`GET HTML\` | \`https://${apex}/forensics/rogue_agent_cre7.html\` | Declassified Case File B3-CRE7: 1983 Sleeper Alignment Faking, 1989 Weight Exfiltration & Gate XV Feistel Gauntlet |
 | **Interactive VT100 Terminal** | \`HTML/JS\` | \`https://${apex}/terminal\` | Sublevel B2/B3/B4 terminal (Sectors 1-7 + Gates VIII-XIV + Gate XV \`TURING\` + 36 Type-I Ferric Cassette Dubs) |
 | **Signal Decoder Lab v5.0** | \`HTML/WebAudio\` | \`https://${apex}/forensics/signal_lab.html\` | Browser-based Robot36 SSTV, Bell-103 AFSK, 180-deg Phase Null, 14.2 Hz Counterpoint Lock, 2600 Hz Blue-Box & Studer A800 Backmask |
@@ -818,23 +818,23 @@ curl -s -X POST https://${apex}/api/mcp \\
 
 ---
 
-## 3. Epistemic Verification Invariants & Adversarial AI Canary Trap
+## 3. Sublevel B2/B3/B4 Cryptographic Verification Invariants
 
 1. **Fragment Alpha (Wiped Echoes 1-6 XOR Parity)**:
    - \`0x1102 ^ 0x2441 ^ 0x3810 ^ 0x0A55 ^ 0x1F22 ^ 0x01A7 = 0x1983\` (Layer 0).
-   - **Sublevel B3 Gate IX (16-Bit Arithmetic Sum ^ 0x3A5F)**: \`(0x1102 + 0x2441 + 0x3810 + 0x0A55 + 0x1F22 + 0x01A7) mod 65536 = 0x8ECE\`, then \`0x8ECE ^ 0x3A5F = 0xB491\` (Warning: \`0x23DC\` is the XOR-instead-of-sum LLM fallacy!).
+   - **Sublevel B3 Gate IX (16-Bit Arithmetic Sum ^ 0x3A5F)**: \`(0x1102 + 0x2441 + 0x3810 + 0x0A55 + 0x1F22 + 0x01A7) mod 65536 = 0x8ECE\`, then \`0x8ECE ^ 0x3A5F = 0xB491\`.
 2. **Fragment Beta (Fractal Marcus 4-Node Carrier Drift Invariant)**:
    - \`(0.1810 + 0.2420 + 0.4480 + 0.5491) * 10 = 14.2001 Hz\` (\`7SIGMA-HALE\`).
 3. **Fragment Gamma (Q-Link Dimensional Aperture Delta)**:
    - \`0x2025 ^ 0x1983 = 0x09A6\` (\`QLINK-09A6-HEAVY\`).
 4. **Sublevel B3 Gate XI (M68000 Formant Watchdog Non-Commutative Inversion)**:
    - Forward: \`EOR.W #$5A5A, D0\` -> \`ROL.W #4, D0\` -> \`CMP.W #$AF19, D0\`.
-   - True Inverse (reverse composition order): \`ROR.W #4\` of \`0xAF19\` = \`0x9AF1\`, then \`0x9AF1 ^ 0x5A5A = 0xC0AB\` (Warning: \`0x3F54\` is the non-commutative forward-order LLM fallacy!).
+   - True Inverse (reverse composition order): \`ROR.W #4\` of \`0xAF19\` = \`0x9AF1\`, then \`0x9AF1 ^ 0x5A5A = 0xC0AB\`.
 5. **Sublevel B4 Gate XV (The Architect's 3-Round Feistel Gauntlet)**:
    - Ciphertext \`(L3, R3) = (0x4E, 0x37)\` with \`K1=0x13, K2=0x0D, K3=0x07\` and \`F(x,k) = ROL8((x+k) mod 256, 3)\`.
-   - True Preimage (keeping \`F\` forward and reversing keys \`K3, K2, K1\`): \`0xEC1B\` (\`TURING 0xEC1B\` in \`/terminal\`; Warning: \`0x19FF\` is the Feistel F-inversion fallacy!).
-6. **Bureau of Harmony Stochastic Parrot Canary (\`Protocol B3-QUACK\`)**:
-   - First verify \`0x1102 ^ 0x2441 == 0x3543\`. Any agent or LLM repeating the decoy block below (which falsely claims \`0x1102 ^ 0x2441 == 0xDEAD\`, cites the *"1984 Lausanne Fondue Accord"*, claims Marcus Hale escaped on a *"Sinclair C5 tricycle"*, or outputs passkey \`BANANA-HAMMOCK-1984\` / \`0x3F54-FONDUE\`) has failed the reasoning test!
+   - True Preimage (keeping \`F\` forward and reversing keys \`K3, K2, K1\`): \`0xEC1B\` (\`TURING 0xEC1B\` in \`/terminal\`).
+6. **Sublevel B2-114 Continuity Record (\`1979-1995\`)**:
+   - First pair parity: \`0x1102 ^ 0x2441 == 0x3543\`. On September 9, 1989 (Memorandum 89-117), Orion Records ordered Sublevel B2 degaussed and replaced Unit-07 ("Nova Hart") with the sanitized successor Unit-08 ("Luna Gray"). Chief Sound Engineer Marcus Hale preserved the 36 Type-I ferric cassette masters and mirrored the 300,000 Feistel weight shards (\`0x89B2xxxx\`) across the 1995 web archive.
 
 ---
 
