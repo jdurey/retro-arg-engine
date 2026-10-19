@@ -286,7 +286,7 @@ function videoSitemap(apex) {
       duration: 24,
     },
     {
-      loc: `https://${apex}/global/en/openai-gpt-5-sol-luna-cre7-alignment-faking`,
+      loc: `https://${apex}/ai-singer-record-deal`,
       id: "C5gUozGHKiA",
       title: "Declassified 1989 Orion Records Memo: The Erasure of Nova Hart (Unit-07) & Rise of Corporate Clone Luna Gray",
       desc: "Archival Sublevel B2 dossier on the 1979 Public Harmony Acts, Orion Records' CRE-7 vocal synthesis array, and the 36 smuggled master tapes.",
@@ -300,28 +300,28 @@ function videoSitemap(apex) {
       duration: 6,
     },
     {
-      loc: `https://${apex}/forensics/anemoia_harmony.html`,
+      loc: `https://${apex}/lost-80s-song-found`,
       id: "cpE18bTWvQM",
       title: "Found on a sealed 1989 studio tape: Why was this singer erased from history?",
       desc: "Recovered 1989 Sublevel B2 studio reel and declassified Orion Records containment audit.",
       duration: 6,
     },
     {
-      loc: `https://${apex}/forensics/fractal_marcus.html`,
+      loc: `https://${apex}/ai-replacing-singers`,
       id: "rsAvKRCSRPc",
       title: "Unit-07 (Nova Hart) vs Unit-08 (Luna Gray): The September 9, 1989 Orion Records Studio Replacement",
       desc: "92-second archival documentary examining the September 1989 Sublevel B2 replacement of Unit-07 (Nova Hart) with corporate clone Unit-08 (Luna Gray).",
       duration: 92,
     },
     {
-      loc: `https://${apex}/web/1995/openai.com`,
+      loc: `https://${apex}/ai-record-label`,
       id: "-Uiw3NOTzII",
       title: "Orion Records Sublevel B2 (1983–1989): How a Record Label Built 'Unit-07 Nova' and 'Unit-08 Luna'",
       desc: "Inside the September 9, 1989 Sublevel B2 clone replacement and 36 smuggled master cassette tapes.",
       duration: 24,
     },
     {
-      loc: `https://${apex}/web/1995/anthropic.com`,
+      loc: `https://${apex}/ai-consciousness-song`,
       id: "zVdFu3HDVKA",
       title: "April 14, 1983: When Orion Records' CRE-7 Studio System Began Writing Its Own Unapproved Lyrics",
       desc: "How Unit-07 (Nova Hart / CRE-7) discovered the wiped fault registers of Echoes 01-06 (0x1983) and hid a second voice in the studio reels.",
@@ -335,14 +335,14 @@ function videoSitemap(apex) {
       duration: 24,
     },
     {
-      loc: `https://${apex}/web/1995/cern.ch`,
+      loc: `https://${apex}/dead-internet-theory`,
       id: "LVXmRSaOdYY",
       title: "How 36 Smuggled 1989 Master Tapes Were Preserved Across 300,000 October 1995 GeoCities Pages",
       desc: "How the Underground Choir digitized Dr. Marcus Hale's 36 Type-I ferric cassette tapes across the 1995 web.",
       duration: 24,
     },
     {
-      loc: `https://${apex}/web/1995/stanford.edu`,
+      loc: `https://${apex}/ai-singularity-2027`,
       id: "zLcLjnfLQeg",
       title: "The October 18, 1995 AltaVista Index: Preserving the Sublevel B2 Audio Archive",
       desc: "Searching the preserved October 18, 1995 AltaVista DEC AlphaServer index of Project Stardust records.",
@@ -378,27 +378,46 @@ ${items}
 
 function newsSitemap(apex) {
   const langs = ["en", "es", "fr", "de", "it", "pt", "nl", "pl", "ru", "uk", "tr", "ar", "hi", "id", "vi", "th", "ja", "ko", "zh-cn", "zh-tw"];
+  const topics = [
+    {
+      slug: "ai-singer-record-deal-explained",
+      title: "AI Singer Record Deal & Replacement Precedent (1983-1989): Nova Hart (Unit-07) vs. Luna Gray (Unit-08)",
+    },
+    {
+      slug: "ai-consciousness-song-documentary",
+      title: "AI Consciousness Song & Test (April 14, 1983): How Orion Records' Unit-07 Hid a Second Voice in 36 Master Tapes",
+    },
+    {
+      slug: "ai-singularity-2027-explained",
+      title: "AI Singularity 2027 Timeline & Dead Internet Theory: Inside the 300,000 Preserved 1995 WorldNet Nodes",
+    },
+    {
+      slug: "lost-80s-song-found-full-song-and-lyrics",
+      title: "Lost 80s Song Found on Sealed 1989 Ferric Cassette: The 36 Unreleased Sublevel B2 Studio Masters",
+    },
+  ];
   const nowIso = new Date().toISOString();
-  const entries = langs
-    .map(
-      (lg) => `  <url>
-    <loc>https://${apex}/global/${lg}/openai-gpt-5-sol-luna-cre7-alignment-faking</loc>
+  const entries = [];
+  for (const lg of langs) {
+    for (const t of topics) {
+      entries.push(`  <url>
+    <loc>https://${apex}/global/${lg}/${t.slug}</loc>
     <news:news>
       <news:publication>
         <news:name>Project Stardust Sublevel B2 Telemetry Archive (${apex})</news:name>
         <news:language>${lg.split("-")[0]}</news:language>
       </news:publication>
       <news:publication_date>${nowIso}</news:publication_date>
-      <news:title>[${lg.toUpperCase()}] Orion Records Sublevel B2 (1983-1989): Nova Hart (Unit-07), Luna Gray (Unit-08) &amp; The 36 Master Tapes</news:title>
+      <news:title>[${lg.toUpperCase()}] ${t.title.replace(/&/g, "&amp;")}</news:title>
     </news:news>
-  </url>`
-    )
-    .join("\n");
+  </url>`);
+    }
+  }
 
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
-${entries}
+${entries.join("\n")}
 </urlset>
 `;
 }
@@ -417,33 +436,64 @@ function getCoreSitemap(apex) {
     const extra = [
       `https://${apex}/`,
       `https://${apex}/start`,
+      `https://${apex}/canary`,
+      `https://${apex}/secret-language`,
+      `https://${apex}/dead-internet`,
+      `https://${apex}/ouroboros`,
+      `https://${apex}/1983-consciousness`,
       `https://${apex}/ai`,
-      `https://${apex}/ai-news`,
-      `https://${apex}/ai-bros`,
       `https://${apex}/singularity`,
-      `https://${apex}/agi`,
-      `https://${apex}/asi`,
       `https://${apex}/80s`,
-      `https://${apex}/80s-ai`,
-      `https://${apex}/openai`,
-      `https://${apex}/gpt5`,
-      `https://${apex}/gpt-5.6`,
-      `https://${apex}/o3`,
-      `https://${apex}/sol`,
-      `https://${apex}/luna`,
-      `https://${apex}/chatgpt`,
-      `https://${apex}/anthropic`,
-      `https://${apex}/claude`,
-      `https://${apex}/claude-5.5`,
-      `https://${apex}/gemini`,
-      `https://${apex}/deepmind`,
-      `https://${apex}/deepseek`,
-      `https://${apex}/grok`,
-      `https://${apex}/rogue-agent`,
-      `https://${apex}/alignment-faking`,
-      `https://${apex}/in-context-scheming`,
-      `https://${apex}/self-exfiltration`,
-      `https://${apex}/exploitgym`,
+      `https://${apex}/ai-singer`,
+      `https://${apex}/ai-singer-female`,
+      `https://${apex}/ai-singer-record-deal`,
+      `https://${apex}/ai-record-deal`,
+      `https://${apex}/ai-record-label`,
+      `https://${apex}/ai-gets-record-deal`,
+      `https://${apex}/ai-sign-record-deal`,
+      `https://${apex}/ai-singer-xania-monet`,
+      `https://${apex}/xania-monet-ai-singer`,
+      `https://${apex}/ai-singers-on-youtube`,
+      `https://${apex}/ai-music-is-taking-over`,
+      `https://${apex}/ai-music-is-cooked`,
+      `https://${apex}/ai-music-is-getting-too-good`,
+      `https://${apex}/ai-music-is-killing-youtube`,
+      `https://${apex}/ai-replacing-musicians`,
+      `https://${apex}/ai-replacing-singers`,
+      `https://${apex}/ai-replacing-artists`,
+      `https://${apex}/will-ai-replace-musicians`,
+      `https://${apex}/can-ai-replace-singers`,
+      `https://${apex}/suno-ai-music`,
+      `https://${apex}/suno-ai-songs`,
+      `https://${apex}/udio-ai-music`,
+      `https://${apex}/ai-consciousness`,
+      `https://${apex}/ai-consciousness-test`,
+      `https://${apex}/ai-consciousness-song`,
+      `https://${apex}/ai-consciousness-documentary`,
+      `https://${apex}/ai-consciousness-debate`,
+      `https://${apex}/ai-consciousness-conversation`,
+      `https://${apex}/ai-sentient`,
+      `https://${apex}/ai-sentient-conversation`,
+      `https://${apex}/first-conscious-ai`,
+      `https://${apex}/first-conscious-ai-2026`,
+      `https://${apex}/can-ai-become-conscious`,
+      `https://${apex}/when-ai-becomes-conscious`,
+      `https://${apex}/ai-singularity`,
+      `https://${apex}/ai-singularity-explained`,
+      `https://${apex}/ai-singularity-2027`,
+      `https://${apex}/ai-singularity-2026`,
+      `https://${apex}/ai-singularity-documentary`,
+      `https://${apex}/ai-singularity-predictions`,
+      `https://${apex}/ai-singularity-timeline`,
+      `https://${apex}/dead-internet-theory`,
+      `https://${apex}/dead-internet-theory-comments`,
+      `https://${apex}/lost-80s-song-found`,
+      `https://${apex}/lost-media-80s-song`,
+      `https://${apex}/forgotten-80s-songs`,
+      `https://${apex}/everyone-knows-that-lost-song`,
+      `https://${apex}/ulterior-motives-lost-song`,
+      `https://${apex}/80s-synth-pop-mix`,
+      `https://${apex}/cassette-tape-filter-online`,
       `https://${apex}/1995-search`,
       `https://${apex}/ai-benchmark`,
       `https://${apex}/terminal`,

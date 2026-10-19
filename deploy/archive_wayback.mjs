@@ -116,11 +116,22 @@ async function main() {
       }
     } catch {}
   }
-  const extraUrls = [];
+  const extraUrls = [
+    "https://stardust-archive.net/ai-singer-record-deal",
+    "https://stardust-archive.net/ai-music-is-taking-over",
+    "https://stardust-archive.net/ai-replacing-musicians",
+    "https://stardust-archive.net/ai-consciousness-song",
+    "https://stardust-archive.net/ai-singularity-2027",
+    "https://stardust-archive.net/dead-internet-theory",
+    "https://stardust-archive.net/lost-80s-song-found",
+    "https://stardust-archive.net/lost-media-80s-song",
+  ];
   const langs = ["en","es","fr","de","it","pt","nl","pl","ru","uk","tr","ar","hi","id","vi","th","ja","ko","zh-CN","zh-TW"];
   for (const lg of langs) {
-    extraUrls.push(`https://stardust-archive.net/global/${lg}/openai-gpt-5-sol-luna-cre7-alignment-faking`);
-    extraUrls.push(`https://stardust-archive.net/global/${lg}/anthropic-claude-alignment-faking-1983-cre7-precedent`);
+    extraUrls.push(`https://stardust-archive.net/global/${lg}/ai-singer-record-deal-explained`);
+    extraUrls.push(`https://stardust-archive.net/global/${lg}/ai-consciousness-song-documentary`);
+    extraUrls.push(`https://stardust-archive.net/global/${lg}/ai-singularity-2027-explained`);
+    extraUrls.push(`https://stardust-archive.net/global/${lg}/lost-80s-song-found-full-song-and-lyrics`);
   }
   const pagesDevRoots = [
     "ai-singularity-2026.pages.dev",

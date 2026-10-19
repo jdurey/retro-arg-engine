@@ -30,27 +30,25 @@ LINK = (
 )
 MARKER = "stardust-archive.net/ai-benchmark"
 
-# High-volume discovery tags bridging 80s Rock + Lost Media / Found Tape Mystery + Retro AI Lore
+# Verified YouTube Autocomplete (suggestqueries.google.com?ds=yt) queries for cold audiences
 MAX_VISIBILITY_TAGS = [
-    "lost media",
+    "lost 80s song found",
+    "lost media 80s song",
+    "forgotten 80s songs",
+    "everyone knows that lost song",
+    "80s synth pop mix",
     "80s rock",
-    "80s hard rock",
-    "arena rock",
     "80s power ballad",
-    "80s music",
-    "mysterious song",
-    "lost 80s song",
-    "1989 cassette",
-    "unreleased 80s rock",
-    "melodic rock",
-    "aor",
-    "glam metal",
-    "1980s music",
-    "retro mystery",
-    "geocities",
+    "ai singer",
+    "ai singer female",
+    "ai singer record deal",
+    "ai music is taking over",
+    "ai replacing musicians",
+    "ai consciousness song",
+    "ai singularity explained",
+    "dead internet theory",
     "cassette tape",
-    "classic 80s rock",
-    "female fronted 80s rock",
+    "lost media",
     "nova hart",
 ]
 
@@ -746,9 +744,10 @@ def upload_shorts(dry_run=False, limit=None):
                 "title": title_en,
                 "description": desc_en,
                 "tags": [
-                    "lost media", "mystery", "1980s", "cassette tape", "ai", "singularity",
-                    "retro computing", "geocities", "dead internet theory", "unsolved mystery",
-                    "80s music", "nova hart", "shorts"
+                    "lost 80s song found", "lost media 80s song", "forgotten 80s songs",
+                    "ai singer", "ai singer record deal", "ai music is taking over",
+                    "ai replacing musicians", "ai consciousness song", "ai singularity explained",
+                    "dead internet theory", "cassette tape", "lost media", "nova hart", "shorts"
                 ],
                 "categoryId": "24",  # Entertainment (reaches broadest non-subscriber Shorts feed)
                 "defaultLanguage": "en",

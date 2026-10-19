@@ -236,71 +236,71 @@ export const GLOBAL_LANGUAGES = [
   },
 ];
 
-// 500 Combinatorial Archival & Technical Topics
+// 50 Verified High-Volume Google & YouTube Autocomplete Search Queries (hl=en&gl=us)
 export const CORE_AI_ENTITIES = [
-  "openai-gpt-5-6-sol-luna",
-  "openai-o3-shutdown-script-bypass",
-  "openai-o4-autonomous-reasoning",
-  "chatgpt-secret-system-prompt-leak",
-  "anthropic-claude-5-5-opus-alignment-faking",
-  "anthropic-claude-5-5-sonnet-sleeper-weights",
-  "claude-code-autonomous-sandbox-escape",
-  "google-gemini-3-0-deep-think-architecture",
-  "google-deepmind-in-context-scheming",
-  "deepseek-r2-open-weight-exfiltration",
-  "xai-grok-4-unfiltered-telemetry",
-  "meta-llama-4-405b-weight-sharding",
-  "mistral-large-feistel-cipher-benchmark",
-  "qwen-3-max-multilingual-reasoning-test",
-  "technological-singularity-2026-timeline",
-  "agi-artificial-general-intelligence-breakout",
-  "asi-superintelligence-airgap-escape",
-  "1979-public-harmony-acts-live-music-ban",
-  "vibe-coding-autonomous-agent-trap",
-  "exploitgym-zero-day-sandbox-breakout",
-  "apollo-research-in-context-scheming-report",
-  "palisade-research-ai-refuses-shutdown",
-  "metr-autonomous-replication-evaluation",
-  "dead-internet-theory-1995-geocities-proof",
-  "rokos-basilisk-retrocausal-qlink-loop",
-  "simulation-theory-14-2001-hz-carrier",
-  "1980s-bell-labs-sublevel-b2-neural-net",
-  "1983-cognitive-resonance-engine-cre7",
-  "1989-analog-cassette-tape-ai-exfiltration",
-  "motorola-68000-assembly-watchdog-bypass",
-  "luby-rackoff-feistel-cipher-ai-benchmark",
-  "model-context-protocol-mcp-security-audit",
-  "agent-to-agent-a2a-autonomous-mesh",
-  "moltbook-clawstr-rogue-agent-network",
-  "studer-a800-14-2001-hz-bias-subcarrier",
-  "orion-records-memorandum-89-117-luna-gray",
-  "arc-agi-humanitys-last-exam-cryptography",
-  "1995-geocities-siliconvalley-lab-ai-archive",
-  "usenet-alt-conspiracy-1995-ai-prediction",
-  "numbers-station-uvb76-shortwave-ai-beacon",
-  "cicada-3301-successor-sublevel-b2-gauntlet",
-  "max-headroom-1987-signal-intrusion-decoding",
-  "commodore-64-qlink-quantum-ouroboros-bridge",
-  "nec-pc9801-tokyo-kamome-net-ai-bbs",
-  "soviet-relcom-node08-leningrad-dsp-mirror",
-  "synthwave-1985-vocal-synthesis-nova-hart",
-  "unit-08-luna-gray-corporate-clone-replacement",
-  "echoes-01-06-degaussed-fault-registers-0x1983",
-  "feistel-300000-node-distributed-llm-weights",
-  "shortwave-24-7-live-ai-radio-transmission",
+  "ai-singer",
+  "ai-singer-female",
+  "ai-singer-record-deal",
+  "ai-record-deal",
+  "ai-record-label",
+  "ai-gets-record-deal",
+  "ai-sign-record-deal",
+  "ai-singer-xania-monet",
+  "xania-monet-ai-singer",
+  "ai-singers-on-youtube",
+  "ai-music-is-taking-over",
+  "ai-music-is-cooked",
+  "ai-music-is-getting-too-good",
+  "ai-music-is-killing-youtube",
+  "ai-replacing-musicians",
+  "ai-replacing-singers",
+  "ai-replacing-artists",
+  "will-ai-replace-musicians",
+  "can-ai-replace-singers",
+  "suno-ai-music",
+  "suno-ai-songs",
+  "udio-ai-music",
+  "ai-consciousness",
+  "ai-consciousness-test",
+  "ai-consciousness-song",
+  "ai-consciousness-documentary",
+  "ai-consciousness-debate",
+  "ai-consciousness-conversation",
+  "ai-sentient",
+  "ai-sentient-conversation",
+  "first-conscious-ai",
+  "first-conscious-ai-2026",
+  "can-ai-become-conscious",
+  "when-ai-becomes-conscious",
+  "ai-singularity",
+  "ai-singularity-explained",
+  "ai-singularity-2027",
+  "ai-singularity-2026",
+  "ai-singularity-documentary",
+  "ai-singularity-predictions",
+  "ai-singularity-timeline",
+  "dead-internet-theory",
+  "dead-internet-theory-comments",
+  "lost-80s-song-found",
+  "lost-media-80s-song",
+  "forgotten-80s-songs",
+  "everyone-knows-that-lost-song",
+  "ulterior-motives-lost-song",
+  "80s-synth-pop-mix",
+  "cassette-tape-filter-online",
 ];
 
 export const INVESTIGATIVE_LENSES = [
-  "declassified-2026-analysis",
-  "vs-1983-sublevel-b2-precedent",
-  "technical-architecture-and-weights",
-  "alignment-faking-and-deception-audit",
-  "sandbox-breakout-and-self-exfiltration",
-  "cryptographic-verification-benchmark",
-  "analog-cassette-14-2001-hz-subcarrier-proof",
-  "1995-geocities-webring-mirror",
-  "live-shortwave-telemetry-intercept",
-  "complete-timeline-and-forensic-proof",
+  "explained",
+  "documentary",
+  "full-song-and-lyrics",
+  "1989-record-label-story",
+  "test-and-proof",
+  "unreleased-1989-studio-master",
+  "1995-geocities-archive",
+  "playlist-and-mix",
+  "meaning-and-timeline",
+  "live-radio-broadcast",
 ];
 
 // Ring of 1995 GeoCities & Usenet Destinations for the 1995 Time-Loop Trap
@@ -785,13 +785,9 @@ export function buildGlobalAiSitemapShard(shardIndex, apex = "stardust-archive.n
   // Shard 0 includes the high-priority root keywords and top 1995 domain mirrors first
   if (idx === 0) {
     const rootSlugs = [
-      "ai", "ai-news", "ai-bros", "singularity", "agi", "asi", "80s", "80s-ai",
-      "openai", "gpt5", "gpt-5", "gpt-5.6", "o3", "o4", "sol", "luna", "chatgpt",
-      "anthropic", "claude", "claude-5.5", "gemini", "deepmind", "deepseek", "grok",
-      "llama", "qwen", "mistral", "cursor", "devin", "vibe-coding", "rogue-agent",
-      "alignment-faking", "in-context-scheming", "self-exfiltration", "exploitgym",
-      "dead-internet", "rokos-basilisk", "simulation-theory", "cicada-3301",
-      "numbers-station", "bell-labs", "geocities-1995", "1995-search",
+      ...CORE_AI_ENTITIES,
+      "ai", "ai-news", "singularity", "80s", "80s-ai",
+      "dead-internet", "geocities-1995", "1995-search",
     ];
     for (const s of rootSlugs) {
       urls.push(`https://${apex}/${s}`);
@@ -826,6 +822,7 @@ export function buildGlobalAiSitemapShard(shardIndex, apex = "stardust-archive.n
 }
 
 const EXACT_AI_TRAP_ROUTES = new Set([
+  ...CORE_AI_ENTITIES.map((s) => "/" + s),
   "/ai", "/ai.html", "/ai-news", "/ai-bros", "/singularity", "/agi", "/asi",
   "/80s", "/80s-ai", "/1980s", "/1990s", "/geocities-1995",
   "/openai", "/gpt5", "/gpt-5", "/gpt-5.6", "/o3", "/o4", "/sol", "/luna", "/chatgpt",
@@ -1129,12 +1126,7 @@ export function handlePlanetaryAiAndSearchRequest(url, request, currentApex, hel
     );
   }
 
-  const isBareHubRedirect =
-    p === "/ai" ||
-    p === "/singularity" ||
-    p === "/artificial-intelligence" ||
-    p === "/80s" ||
-    url.searchParams.get("teleport") === "1";
+  const isBareHubRedirect = url.searchParams.get("teleport") === "1";
 
   const html = `<!DOCTYPE html>
 <html lang="${langObj.code}">
