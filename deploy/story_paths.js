@@ -9,6 +9,7 @@ export default [
  ".well-known/nostr.json",
  ".well-known/openapi.yaml",
  "agents.txt",
+ "dyad/index.html",
  "feed.xml",
  "forensics/anemoia_harmony.html",
  "forensics/ashford_poly.html",

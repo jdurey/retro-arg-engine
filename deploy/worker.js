@@ -1,3 +1,4 @@
+import { DYAD_HTML } from "./dyad_html.js";
 import { APEX, isStory, publicUrl, resolve, resolveApex, apexFor } from "./urlmap.js";
 import STORY_PATHS from "./story_paths.js";
 import { classify, liveCount, renderMember, renderDir, renderDirIndex, renderLang, sitemapSitePaths } from "./swarm/index.js";
@@ -761,6 +762,12 @@ export default {
     }
     if (url.pathname === `/${INDEXNOW_KEY}.txt`) {
       return new Response(INDEXNOW_KEY, { headers: retroHeaders("text/plain; charset=utf-8", currentApex) });
+    }
+
+    if (url.pathname === "/dyad" || url.pathname === "/dyad/" || url.pathname === "/dyad/index.html") {
+      const h = retroHeaders("text/html; charset=utf-8", currentApex);
+      h.set("X-Robots-Tag", INDEX_HEADER);
+      return new Response(DYAD_HTML, { status: 200, headers: h });
     }
 
     const { sitePath, canonical } = resolve(url.hostname, url.pathname);
