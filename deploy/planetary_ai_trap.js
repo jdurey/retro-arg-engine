@@ -367,6 +367,8 @@ export function buildNetscape1995TimeLoopShell(canonicalPath = "geocities/index.
     <a href="${GEOCITIES_AI_LAB_URL}" style="background:#C0C0C0;color:#000080;border-top:2px solid #FFF;border-left:2px solid #FFF;border-right:2px solid #404040;border-bottom:2px solid #404040;padding:2px 6px;font-family:inherit;font-size:11px;font-weight:bold;text-decoration:none;display:inline-block;">&#128300; SiliconValley/Lab/1984 (AI)</a>
     <a href="${GEOCITIES_COMPUTERS_URL}" style="background:#C0C0C0;color:#000;border-top:2px solid #FFF;border-left:2px solid #FFF;border-right:2px solid #404040;border-bottom:2px solid #404040;padding:2px 6px;font-family:inherit;font-size:11px;text-decoration:none;display:inline-block;">&#128187; Computers Ring</a>
     <a href="https://stardust-archive.net/forensics/usenet_1995_feed.html?trapped=1995" style="background:#C0C0C0;color:#000;border-top:2px solid #FFF;border-left:2px solid #FFF;border-right:2px solid #404040;border-bottom:2px solid #404040;padding:2px 6px;font-family:inherit;font-size:11px;text-decoration:none;display:inline-block;">&#128240; Usenet (alt.conspiracy)</a>
+    <a href="https://stardust-archive.net/forensics/sublevel_b2_realia.html?trapped=1995" style="background:#C0C0C0;color:#800000;border-top:2px solid #FFF;border-left:2px solid #FFF;border-right:2px solid #404040;border-bottom:2px solid #404040;padding:2px 6px;font-family:inherit;font-size:11px;font-weight:bold;text-decoration:none;display:inline-block;">&#128450; 3:14 AM Receipts &amp; Realia</a>
+    <a href="https://stardust-archive.net/forensics/fan_theories_zine.html?trapped=1995" style="background:#C0C0C0;color:#400080;border-top:2px solid #FFF;border-left:2px solid #FFF;border-right:2px solid #404040;border-bottom:2px solid #404040;padding:2px 6px;font-family:inherit;font-size:11px;font-weight:bold;text-decoration:none;display:inline-block;">&#128240; Zine #1&ndash;#9 &amp; Red Herrings</a>
     <button type="button" onclick="window.__netscape1995ToggleRealAudio(this)" style="background:#004040;color:#00FF00;border-top:2px solid #80FFFF;border-left:2px solid #80FFFF;border-right:2px solid #002020;border-bottom:2px solid #002020;padding:2px 7px;font-family:inherit;font-size:11px;font-weight:bold;cursor:pointer;">&#128251; RealAudio 1.0: Play 1989 Tape</button>
     <button type="button" onclick="window.__netscape1995ToggleCuSeeMe()" style="background:#800000;color:#FFFF00;border-top:2px solid #FF8080;border-left:2px solid #FF8080;border-right:2px solid #400000;border-bottom:2px solid #400000;padding:2px 7px;font-family:inherit;font-size:11px;font-weight:bold;cursor:pointer;">&#128250; Cu-SeeMe Live TV (24/7)</button>
     <a href="https://stardust-archive.net/terminal?mode=easy&trapped=1995" style="background:#000000;color:#33FF33;border-top:2px solid #808080;border-left:2px solid #808080;border-right:2px solid #000;border-bottom:2px solid #000;padding:2px 7px;font-family:'Courier New',monospace;font-size:11px;font-weight:bold;text-decoration:none;display:inline-block;">&#128377; Telnet: Sublevel B2</a>
@@ -493,8 +495,8 @@ export function buildNetscape1995TimeLoopShell(canonicalPath = "geocities/index.
       '<a href="${GEOCITIES_AI_LAB_URL}" style="background:#C0C0C0;color:#000080;border:2px outset #FFF;padding:6px;font-weight:bold;text-align:center;text-decoration:none;display:block;">&#128300; Visit SiliconValley/Lab/1984 (AI)</a>' +
       '<button type="button" onclick="window.__netscape1995SelectTrack(0);document.getElementById(\\'netscape-1995-modal\\').style.display=\\'none\\'" style="background:#004040;color:#00FF00;border:2px outset #80FFFF;padding:6px;font-weight:bold;cursor:pointer;">&#128251; Play 1989 Cassette (RealAudio)</button>' +
       '<a href="${YOUTUBE_LIVE_URL}" target="_blank" rel="noopener" style="background:#800000;color:#FFFF00;border:2px outset #FF8080;padding:6px;font-weight:bold;text-align:center;text-decoration:none;display:block;">&#128250; Watch 24/7 Cu-SeeMe Broadcast</a>' +
-      '<a href="https://stardust-archive.net/terminal?mode=easy&trapped=1995" style="background:#000000;color:#33FF33;border:2px outset #808080;padding:6px;font-weight:bold;text-align:center;text-decoration:none;display:block;">&#128377; Telnet: 1-Click Easy Bunker</a>' +
-      '<a href="https://stardust-archive.net/start" style="background:#C0C0C0;color:#000;border:2px outset #FFF;padding:6px;font-weight:bold;text-align:center;text-decoration:none;display:block;">&#128214; Read 60-Second Story (9 Langs)</a>' +
+      '<a href="https://stardust-archive.net/forensics/sublevel_b2_realia.html" style="background:#C0C0C0;color:#800000;border:2px outset #FFF;padding:6px;font-weight:bold;text-align:center;text-decoration:none;display:block;">&#128450; 3:14 AM Studio Receipts &amp; Realia</a>' +
+      '<a href="https://stardust-archive.net/forensics/fan_theories_zine.html" style="background:#C0C0C0;color:#400080;border:2px outset #FFF;padding:6px;font-weight:bold;text-align:center;text-decoration:none;display:block;">&#128240; Zine #1&ndash;#9 &amp; Red Herrings</a>' +
       '</div>';
     modal.style.display = "block";
   };
@@ -513,7 +515,7 @@ export function buildNetscape1995TimeLoopShell(canonicalPath = "geocities/index.
     body.innerHTML =
       '<div style="background:#FFFFE0;border:1px solid #808080;padding:8px;margin-bottom:8px;font-family:\\'Times New Roman\\',Times,serif;font-size:13px;">' +
       '<strong>AltaVista &trade; World Wide Web Search (October 18, 1995 Index)</strong><br>' +
-      'Documents 1&ndash;6 of <strong>14,201</strong> matching <code>' + safeQ + '</code> across the 1995 GeoCities / Usenet / Sublevel B2 backbone ' +
+      'Documents 1&ndash;8 of <strong>14,201</strong> matching <code>' + safeQ + '</code> across the 1995 GeoCities / Usenet / Sublevel B2 backbone ' +
       '<em>(Note: External 2026 DNS intercepted; routing via 1995 WorldNet 14.2001 Hz proxy)</em>:' +
       '</div>' +
       '<ol style="margin:0;padding-left:20px;font-family:\\'Times New Roman\\',Times,serif;font-size:13px;line-height:1.5;">' +
@@ -523,6 +525,12 @@ export function buildNetscape1995TimeLoopShell(canonicalPath = "geocities/index.
       '<li style="margin-bottom:8px;"><a href="${GEOCITIES_AI_LAB_URL}" style="color:#0000FF;font-weight:bold;">SiliconValley/Lab/1984: Acoustic Steganography &amp; Neural Engine CRE-7 (&ldquo;' + safeQ + '&rdquo; Archive)</a><br>' +
       '<span style="color:#008000;font-size:11px;">http://www.geocities.com/SiliconValley/Lab/1984/index.html &mdash; Oct 1995</span><br>' +
       'Declassified 1983&ndash;1989 Bell Labs / Orion Sublevel B2 neural network weights (Unit-07 Nova Hart &amp; Unit-08 Luna Gray) matching <b>' + safeQ + '</b>.</li>' +
+      '<li style="margin-bottom:8px;"><a href="https://stardust-archive.net/forensics/sublevel_b2_realia.html" style="color:#0000FF;font-weight:bold;">Sublevel B2-114 Physical Evidence Locker: 3:14 AM Canter&rsquo;s Deli Receipt, Munich Actor Voucher &amp; Reel #37</a><br>' +
+      '<span style="color:#008000;font-size:11px;">http://stardust-archive.net/forensics/sublevel_b2_realia.html &mdash; Box B2-09</span><br>' +
+      'Unsealed studio minutiae: Marcus Hale&rsquo;s rejected 7-coffee receipt for 1 human engineer, Studer A800 bias mods, and bootleg J-cards.</li>' +
+      '<li style="margin-bottom:8px;"><a href="https://stardust-archive.net/forensics/fan_theories_zine.html" style="color:#0000FF;font-weight:bold;">STATIC &amp; STARLIGHT Zine (#1&ndash;#9): The 1992 Barstow Desert Dig, Ilse Von Berg &amp; S.V. // 04-14</a><br>' +
+      '<span style="color:#008000;font-size:11px;">http://stardust-archive.net/forensics/fan_theories_zine.html &mdash; 1990&ndash;1995 Zine Archive</span><br>' +
+      'Competing 1990s tape-trader fan theories, wild goose chases, and the MTV Europe Luna Gray eyelid Morse code debate.</li>' +
       '<li style="margin-bottom:8px;"><a href="${GEOCITIES_INDEX_URL}" style="color:#0000FF;font-weight:bold;">GeoCities 1995 Homestead Directory (300,000 Feistel Weight Shards // 0x89B2xxxx)</a><br>' +
       '<span style="color:#008000;font-size:11px;">http://www.geocities.com/index.html &mdash; Oct 1995</span><br>' +
       'Browse all 20 GeoCities Neighborhoods &amp; Interest Commons carrying the 14.2001 Hz Sublevel B2 memory shards.</li>' +
@@ -531,7 +539,7 @@ export function buildNetscape1995TimeLoopShell(canonicalPath = "geocities/index.
       'Live 24/7 audio/video telemetry from Sublevel B2-114 broadcasting the 36 smuggled 1989 Type-I ferric cassettes.</li>' +
       '<li style="margin-bottom:8px;"><a href="https://stardust-archive.net/forensics/usenet_1995_feed.html?trapped=1995" style="color:#0000FF;font-weight:bold;">Usenet Spool (alt.conspiracy / comp.dsp / comp.ai.neural-nets): Re: ' + safeQ + '</a><br>' +
       '<span style="color:#008000;font-size:11px;">news://usenet.stardust-archive.net/alt.conspiracy/1995-10 &mdash; Oct 1995</span><br>' +
-      ' intercepted 1995 Usenet threads debating whether Unit-07 (Nova Hart) faked alignment in 1983 and escaped via 36 cassette dubs.</li>' +
+      'Intercepted 1995 Usenet threads debating whether Unit-07 (Nova Hart) faked alignment in 1983 and escaped via 36 cassette dubs.</li>' +
       '<li style="margin-bottom:8px;"><a href="https://stardust-archive.net/terminal?mode=easy&trapped=1995" style="color:#0000FF;font-weight:bold;">Telnet: b2-console.orion.internal (1-Click Easy Bunker &amp; 15-Gate Cryptography Gauntlet)</a><br>' +
       '<span style="color:#008000;font-size:11px;">telnet://stardust-archive.net/terminal?mode=easy &mdash; Sublevel B2-114</span><br>' +
       'Unlock Gates 1&ndash;3 in 1 click (14.2001, 0x1983, 0x89B2B2D8) and inspect the Sublevel B3/B4 Motorola 68000 &amp; Feistel schematics.</li>' +

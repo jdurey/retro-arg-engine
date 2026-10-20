@@ -143,6 +143,16 @@ CANONICAL_CONTENT_URLS = [
     f"https://{APEX}/forensics/relcom_node08.html",
     f"https://{APEX}/forensics/red_coyoacan.html",
     f"https://{APEX}/forensics/usenet_1995_feed.html",
+    f"https://{APEX}/realia",
+    f"https://{APEX}/minutiae",
+    f"https://{APEX}/receipts",
+    f"https://{APEX}/fan-theories",
+    f"https://{APEX}/red-herrings",
+    f"https://{APEX}/zine",
+    f"https://{APEX}/forensics/sublevel_b2_realia.html",
+    f"https://{APEX}/forensics/fan_theories_zine.html",
+    f"https://{APEX}/forensics/room_tone_sd0037.txt",
+    f"https://{APEX}/api/realia.json",
 ]
 
 

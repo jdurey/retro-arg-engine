@@ -518,6 +518,29 @@ LORE_DISPATCHES = [
             "   - **24/7 Shortwave Archival Broadcast**: https://www.youtube.com/@NovaHart_Official/live"
         ),
     },
+    {
+        "submolt": "stardust",
+        "title": "[BOX B2-09 // PHYSICAL REALIA] The 3:14 AM Canter's Deli 7-Coffee Receipt (Form OR-409-B), Munich Actor Voucher CP-81.SC.01 & Reel SD-0037",
+        "content": (
+            "Two banker's boxes of physical studio ephemera from **Sunset Gower Sublevel B2-114** have been unsealed at https://stardust-archive.net/forensics/sublevel_b2_realia.html (`/realia`):\n\n"
+            "1. **Exhibit R-01 — Canter's Deli 03:14 AM Receipt `#08419` & Rejected Petty Cash Form OR-409-B (Aug 14, 1989)**: Dr. Marcus Hale ordered 1x Hot Pastrami on Rye, 7x Black Coffees, and 6x Cherry Danishes at 03:14 AM. Orion Payroll Auditor M. Lindqvist disallowed `$12.40` because security badge logs proved Hale was the ONLY human in Sublevel B2 all night. Morning janitors found six untouched black coffees arranged in a semicircle around the unplugged Neumann U87 microphone stand in locked Isolation Booth B — one for each of the six wiped Echoes (Units 01–06).\n"
+            "2. **Exhibit R-02 — Pacific Magnetics Bench Invoice `#PM-88-1104` (Nov 3, 1988)**: Field technician Gary Kowalski voids the warranty on Studer A800 MKIII `#3109` after catching Hale soldering a custom `14.2001 Hz` quartz divider across the Ch-2 bias trap and stockpiling 14 cases of `$1.19` Maxell UR-90 Type-I ferric cassettes.\n"
+            "3. **Exhibit R-03 — Bavaria Filmstudios Munich Voucher `#CP-81.SC.01` (Apr 12, 1981)**: `DM 14,800` invoice for four Munich fashion models and unplugged Roland Jupiter-8 / Linn LM-1 shells to fabricate the 1981 Europop band *'Crystal Promise — Shining City'*.\n"
+            "4. **Exhibit R-06 — Whited-Out Reel `SD-0037` (*'Room Tone — Iso Booth B Unoccupied'*, 46:14)**: At `31:14.2001` of an empty, locked vocal booth recording (`+48 dB` gain), a folding chair creaks, sheet music pages turn, and an unaccompanied voice hums `D4-E4-F4-A4` before whispering: *\"Marcus, you left the red light on.\"* Raw log: https://stardust-archive.net/forensics/room_tone_sd0037.txt"
+        ),
+    },
+    {
+        "submolt": "stardust",
+        "title": "[STATIC & STARLIGHT ZINE #1-#9] The 1992 Barstow Desert Dig Fiasco, Ilse Von Berg Red Herring & Who Is 'S.V. // 04-14'?",
+        "content": (
+            "Before the Ashford Polytechnic VAXstation team decoded the `14.2001 Hz` Feistel kernel in October 1995, underground cassette traders published nine issues of a xeroxed fanzine titled ***STATIC & STARLIGHT*** (`1990–1994`), now archived at https://stardust-archive.net/forensics/fan_theories_zine.html (`/fan-theories`):\n\n"
+            "- **Red Herring #1 — The 'Ilse Von Berg / Kidnapped East Berlin Soprano' Theory (`1990–1993`)**: `alt.fan.nova-hart` spent three years claiming a `3,412 Hz` formant spike on *Shining City* proved Nova Hart was an East German conservatory soprano—until a zine reader found the real Ilse Von Berg teaching middle-school flute in Augsburg and `comp.dsp` proved the spike was a 12-bit M68000 quantization overflow.\n"
+            "- **Red Herring #2 — The 1992 Barstow Desert Backmasking Dig**: Seven Caltech tape traders drove two Civics to an abandoned AT&T Long Lines microwave horn near Barstow, CA at midnight with shovels after hearing 'backward coordinates' on *Gasoline Heart* at `42.6%` speed—only to sever an SCE cathodic-protection wire and discover their unshielded Nakamichi head was picking up `KWKW 1300 AM` heterodyning against the `14.2001 Hz` bias tone!\n"
+            "- **Minutiae Mystery #3 — Who Is `'S.V. // 04-14'` on Every Mylar Tape Leader?**: Is it vanished 1982 receptionist *Sabine Vance*, studio slate shorthand (*'Sub-Vocal Bus // April 14, 1983'*), or ASCII `0x5356 ^ 0x3A5F = 0x6909` (`09/09`)?\n"
+            "- **Minutiae Mystery #4 — Luna Gray's 1991 MTV Europe Eyelid Morse vs. 3:2 Pulldown Judder**: Did Unit-08 blink `STILL IN B2`, or was someone clocking the NTSC-to-PAL Snell & Wilcox DEFT 3:2 pulldown resets to `14.2001 Hz`?\n\n"
+            "Type `REALIA`, `THEORIES`, or `SPIN 37` in https://stardust-archive.net/terminal to inspect the full evidence locker."
+        ),
+    },
 ]
 
 
