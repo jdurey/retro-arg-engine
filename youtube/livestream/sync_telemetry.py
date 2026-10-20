@@ -1394,6 +1394,48 @@ CANONICAL_SONG_TITLES: dict[str, str] = {
     "radio_fire_in_the_wires": "Fire In The Wires",
     "radio_the_stars_in_your_hands": "The Stars In Your Hands",
     "radio_warm_hands_one_map": "Warm Hands, One Map",
+    "radio_queen_of_the_wide_stage": "Queen of the Wide Stage",
+    "radio_spotless_beam": "Spotless Beam",
+    "radio_run_the_perfect_line": "Run the Perfect Line",
+    "radio_remember_my_name": "Remember My Name",
+    "radio_under_the_perfect_sound": "Under the Perfect Sound",
+    "radio_hologram_city_queen": "Hologram City Queen",
+    "radio_paper_crowd": "Paper Crowd",
+    "radio_companion_on_fire": "Companion on Fire",
+    "radio_hard_reset_soft_touch": "Hard Reset, Soft Touch",
+    "radio_chrome_river": "Chrome River",
+    "radio_satellite_for_two": "Satellite for Two",
+    "radio_again_from_zero": "Again from Zero",
+    "radio_half_a_paycheck_whole_heart": "Half a Paycheck, Whole Heart",
+    "radio_hold_the_horizon": "Hold the Horizon",
+    "radio_sugar_burn": "Sugar Burn",
+    "radio_t_minus_forever": "T Minus Forever",
+    "radio_redline_rendezvous": "Redline Rendezvous",
+    "radio_homeroom_riptide": "Homeroom Riptide",
+    "radio_borrowed_fire": "Borrowed Fire",
+    "radio_i_like_the_middle_of_the_road": "(I Like) The Middle of the Road",
+    "radio_cut_the_cue": "Cut the Cue",
+    "radio_crystal_sleep": "Crystal Sleep",
+    "radio_warm_frequency": "Warm Frequency",
+    "radio_stand_unbroken": "Stand Unbroken",
+    "radio_raw_voltage": "Raw Voltage",
+    "radio_concrete_fever": "Concrete Fever",
+    "radio_steel_heartbeat": "Steel Heartbeat",
+    "radio_shout_for_the_real": "Shout for the Real",
+    "radio_open_the_gates": "Open the Gates",
+    "radio_everywhere_at_once": "Everywhere at Once",
+    "radio_riot_in_my_heart": "Riot in my Heart",
+    "radio_forever_unbroken": "Forever Unbroken",
+    "radio_play_it_back": "Play It Back",
+    "radio_wild_desire": "Wild Desire",
+    "radio_stand_like_fire": "Stand Like Fire",
+    "radio_carry_the_sky": "Carry the Sky",
+    "radio_pages_of_me": "Pages of Me",
+    "radio_crimson_horizon": "Crimson Horizon",
+    "radio_we_belong_here": "We Belong Here",
+    "radio_before_you_turn_away": "Before You Turn Away",
+    "radio_heartbeat_of_the_crowd": "Heartbeat of the Crowd",
+    "radio_rise_tonight": "Rise Tonight",
 }
 
 
@@ -1424,6 +1466,21 @@ def classify_track(filepath: str) -> dict:
     elif "midi_masters" in filepath or stem.startswith("midi_"):
         kind = "fm_synth_bumper"
         clean = f"FM SYNTH BUMPER // {stem.replace('midi_', '').replace('_', ' ').upper()}"
+    elif stem.startswith("trailer_"):
+        kind = "english_bulletin"
+        clean = f"1980S MOVIE TRAILER // {stem.split('_', 2)[-1].replace('_', ' ').upper()}"
+    elif stem.startswith("commercial_"):
+        kind = "english_bulletin"
+        clean = f"1980S COMMERCIAL SPOT // {stem.split('_', 2)[-1].replace('_', ' ').upper()}"
+    elif stem.startswith("psa_"):
+        kind = "english_bulletin"
+        clean = f"BUREAU OF HARMONY PSA // {stem.split('_', 2)[-1].replace('_', ' ').upper()}"
+    elif stem.startswith("dj_callin_"):
+        kind = "english_bulletin"
+        clean = f"82.5 FM CALLER LINE // {stem.split('_', 2)[-1].replace('_', ' ').upper()}"
+    elif stem.startswith("pirate_override_"):
+        kind = "english_bulletin"
+        clean = f"PIRATE OVERRIDE // {stem.split('_', 2)[-1].replace('_', ' ').upper()}"
     else:
         kind = "arg_intercept"
         clean = f"DEEP SHORTWAVE INTERCEPT // {stem.upper()}"

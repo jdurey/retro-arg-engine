@@ -114,12 +114,15 @@ rng.shuffle(freshly_ingested)
 midi_tracks = [t for t in glob.glob(os.path.join(MIDI_DIR, "*.mp3")) if os.path.isfile(t)]
 rng.shuffle(midi_tracks)
 
-# 5. Spoken Radio Bulletins, Newscasts & Marine Advisories (69 files)
+# 5. Spoken Radio Bulletins, Newscasts & Marine Advisories
 spoken_pool = []
 spoken_pool += [t for t in glob.glob(os.path.join(MULTILINGUAL_DIR, "*.mp3")) if os.path.isfile(t)]
 spoken_pool += [t for t in glob.glob(os.path.join(GEOCITIES_DIR, "*.mp3")) if os.path.isfile(t)]
-spoken_pool += [t for t in glob.glob(os.path.join(NEWSCASTS_DIR, "*.mp3")) if os.path.isfile(t)]
 rng.shuffle(spoken_pool)
+
+# 5B. Varied English Interstitials (50 new Trailers, Commercials, PSAs, DJ Call-Ins, Pirate Overrides + 10 English Newscasts)
+english_interstitial_pool = [t for t in glob.glob(os.path.join(NEWSCASTS_DIR, "*.mp3")) if os.path.isfile(t)]
+rng.shuffle(english_interstitial_pool)
 
 # 6. Ultra-tight Telemetry Beacons (35 files, 2.5s - 5s punchy 750Hz Morse chirps)
 morse_beacons = [t for t in glob.glob(os.path.join(MORSE_DIR, "*.mp3")) if os.path.isfile(t)]
@@ -140,7 +143,8 @@ rng.shuffle(intercept_pool)
 print(f"Building Broadcast Lineup:")
 print(f"  - Total Unique Vocal Master Songs: {len(all_songs)} ({len(freshly_ingested)} newly added from Drive)")
 print(f"  - FM Synth MIDI Masters: {len(midi_tracks)}")
-print(f"  - Spoken Radio Bulletins: {len(spoken_pool)}")
+print(f"  - Varied English Interstitials (Trailers/Ads/PSAs/DJ/Pirate): {len(english_interstitial_pool)}")
+print(f"  - Multilingual / GeoCities Bulletins: {len(spoken_pool)}")
 print(f"  - Tight Morse Beacons: {len(morse_beacons)}")
 print(f"  - Shortwave Numbers Stations: {len(numbers_pool)}")
 print(f"  - Classified Orion Lab Tapes: {len(lab_pool)}")
@@ -227,21 +231,23 @@ for c in cycles:
     ordered_songs.extend(c)
 
 # 12. Dynamic Transition Engine:
-# Alternates between 6 authentic radio interstitial cadences so transitions never feel robotic
+# Alternates between varied English interstitials (Trailers, Commercials, PSAs, DJ Call-Ins, Pirate Overrides)
+# and classic shortwave/lab/morse cadences so transitions feel like a living 1980s station
 CADENCE_PATTERNS = [
-    "bulletin",       # MIDI Stinger + Radio Bulletin / Newscast
-    "numbers",        # Morse Beacon + Shortwave Numbers Station
-    "direct_morse",   # Quick Morse chirp straight into next song (keeps energy up)
-    "lab_tape",       # Classified Orion Dictaphone / Marcus Hale tape + Morse
-    "bulletin",       # MIDI Stinger + Marine Advisory / Foreign Radio Dispatch
-    "arg_intercept",  # UVB-76 Buzzer / Deep Shortwave Intercept
-    "direct_midi",    # Vintage 3.5s FM Synth Stinger direct segue
-    "numbers",        # Shortwave Numbers Station
-    "lab_tape",       # Classified Lab Tape
-    "bulletin",       # MIDI Stinger + GeoCities Reading / Community Bulletin
+    "english_interstitial",  # English Movie Trailer / Commercial / PSA / DJ Call-In / Pirate Override
+    "direct_morse",          # Quick Morse chirp straight into next song (keeps energy up)
+    "english_interstitial",  # Varied English Interstitial
+    "lab_tape",              # Classified Orion Dictaphone / Marcus Hale tape + Morse
+    "english_interstitial",  # Varied English Interstitial
+    "numbers",               # Morse Beacon + Shortwave Numbers Station
+    "english_interstitial",  # Varied English Interstitial
+    "direct_midi",           # Vintage 3.5s FM Synth Stinger direct segue
+    "bulletin",              # MIDI Stinger + Multilingual / GeoCities Bulletin
+    "arg_intercept",         # UVB-76 Buzzer / Deep Shortwave Intercept
 ]
 
 full_playlist = []
+english_idx = 0
 spoken_idx = 0
 morse_idx = 0
 midi_idx = 0
@@ -255,7 +261,11 @@ for song_idx, song in enumerate(ordered_songs):
     # Pick next transition pattern
     pattern = CADENCE_PATTERNS[song_idx % len(CADENCE_PATTERNS)]
     
-    if pattern == "bulletin":
+    if pattern == "english_interstitial":
+        if english_interstitial_pool:
+            full_playlist.append(english_interstitial_pool[english_idx % len(english_interstitial_pool)])
+            english_idx += 1
+    elif pattern == "bulletin":
         # 3.5s MIDI Stinger -> Spoken Bulletin
         if midi_tracks:
             full_playlist.append(midi_tracks[midi_idx % len(midi_tracks)])
