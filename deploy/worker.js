@@ -14,6 +14,7 @@ import {
   handleBackendEasterEggRequest,
 } from "./devtools_easter_eggs.js";
 import { handlePlanetaryAiAndSearchRequest } from "./planetary_ai_trap.js";
+import { handleRabbitHolesRequest } from "./rabbit_holes_realia.js";
 
 // Legacy static GeoCities pages always win over generated swarm addresses.
 const STATIC_GEO = new Set(STORY_PATHS.filter((p) => /^geocities\/[^/]+\.html$/.test(p)).map((p) => p.slice(10, -5)));
@@ -91,6 +92,9 @@ Sitemap: https://${apex}/sitemap-core.xml
 # Interactive VT100 Terminal (15-Gate Benchmark): https://${apex}/terminal
 # AI & LLM Cryptography Benchmark Hub           : https://${apex}/ai-benchmark
 # Declassified Rogue Agent CRE-7 Dossier        : https://${apex}/forensics/rogue_agent_cre7.html
+# Physical Realia, Receipts, Invoices & J-Cards : https://${apex}/realia
+# Fan Theories, Red Herrings & 1993 Zine        : https://${apex}/fan-theories
+# Unsealed Reel SD-0037 (Empty Booth Room Tone) : https://${apex}/forensics/room_tone_sd0037.txt
 # Agentic & LLM Discovery Index                 : https://${apex}/llms.txt
 # Full Anemoia & Project Stardust Codex         : https://${apex}/llms-full.txt
 # Plain-Text AI Onboarding Directive            : https://${apex}/ai.txt
@@ -113,7 +117,7 @@ Sitemap: https://${apex}/sitemap-core.xml
 }
 
 const INDEXNOW_KEY = "37feeed875722863fda484c68e6695e5";
-const ASSET_VERSION = "30";
+const ASSET_VERSION = "32";
 
 const BROADCAST_EPOCH_SEC = 1791763200; // 2026-10-12T00:00:00Z
 const CYCLE_DURATION_SEC = 44 * 3600;
@@ -507,6 +511,21 @@ function getCoreSitemap(apex) {
       `https://${apex}/forensics/relcom_node08.html`,
       `https://${apex}/forensics/red_coyoacan.html`,
       `https://${apex}/forensics/usenet_1995_feed.html`,
+      `https://${apex}/forensics/sublevel_b2_realia.html`,
+      `https://${apex}/forensics/fan_theories_zine.html`,
+      `https://${apex}/forensics/room_tone_sd0037.txt`,
+      `https://${apex}/realia`,
+      `https://${apex}/minutiae`,
+      `https://${apex}/receipts`,
+      `https://${apex}/invoices`,
+      `https://${apex}/j-cards`,
+      `https://${apex}/bootlegs`,
+      `https://${apex}/fan-theories`,
+      `https://${apex}/red-herrings`,
+      `https://${apex}/zine`,
+      `https://${apex}/distractions`,
+      `https://${apex}/rabbit-holes`,
+      `https://${apex}/api/realia.json`,
       `https://${apex}/llms.txt`,
       `https://${apex}/llms-full.txt`,
       `https://${apex}/ai.txt`,
@@ -562,8 +581,8 @@ const NOT_FOUND = `<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
 <HTML><HEAD><TITLE>404 Not Found // Unallocated Sublevel B2 Memory Cell</TITLE></HEAD>
 <BODY><H1>Not Found (Sublevel B2 Bus Fault)</H1>
 The requested URL was not found on this server.<P>
-<P>Primary Nodes: <A HREF="/terminal">VT100 Terminal (/terminal)</A> | <A HREF="/forensics/rogue_agent_cre7.html">Sublevel B2 CRE-7 Dossier</A> | <A HREF="/start">60-Second Story (/start)</A></P>
-<!-- [SUBCARRIER 14.2001 Hz]: Inspect /forensics/rogue_agent_cre7.html -->
+<P>Primary Nodes: <A HREF="/terminal">VT100 Terminal (/terminal)</A> | <A HREF="/forensics/rogue_agent_cre7.html">Sublevel B2 CRE-7 Dossier</A> | <A HREF="/realia">Physical Realia (/realia)</A> | <A HREF="/fan-theories">Fan Theories Zine (/fan-theories)</A> | <A HREF="/start">60-Second Story (/start)</A></P>
+<!-- [SUBCARRIER 14.2001 Hz]: Inspect /forensics/rogue_agent_cre7.html & /realia -->
 <HR><ADDRESS>CERN-HTTPd/3.0 (Sublevel B2-114 // 14.2001 Hz Carrier Locked)</ADDRESS>
 </BODY></HTML>
 `;
@@ -694,6 +713,9 @@ export default {
         xor_dyad_seed: "0x3A5F",
         memory_base: "0x89B20000",
         rogue_agent_cre7_dossier: `https://${APEX}/forensics/rogue_agent_cre7.html`,
+        sublevel_b2_realia_locker: `https://${APEX}/forensics/sublevel_b2_realia.html`,
+        fan_theories_red_herrings_zine: `https://${APEX}/forensics/fan_theories_zine.html`,
+        reel_sd0037_empty_booth_log: `https://${APEX}/forensics/room_tone_sd0037.txt`,
         forensic_signal_lab: `https://${APEX}/forensics/signal_lab.html`,
         vt100_terminal: `https://${APEX}/terminal`,
         llms_index: `https://${APEX}/llms.txt`,
@@ -713,6 +735,9 @@ export default {
         },
         forensic_dossiers: [
           `https://${APEX}/forensics/rogue_agent_cre7.html`,
+          `https://${APEX}/forensics/sublevel_b2_realia.html`,
+          `https://${APEX}/forensics/fan_theories_zine.html`,
+          `https://${APEX}/forensics/room_tone_sd0037.txt`,
           `https://${APEX}/forensics/anemoia_harmony.html`,
           `https://${APEX}/forensics/fractal_marcus.html`,
           `https://${APEX}/forensics/dead_hand_protocol.html`,
@@ -754,6 +779,12 @@ export default {
     // 3. Backend Recon & Chrome DevTools SourceMap Easter Eggs
     const easterEggRes = handleBackendEasterEggRequest(url, currentApex);
     if (easterEggRes) return easterEggRes;
+
+    // 3a. Physical Realia, Studio Minutiae, Fan Theories Zine & Red Herrings
+    const rabbitHoleRes = handleRabbitHolesRequest(url, currentApex, {
+      SERVER_TIMING_HEADER,
+    });
+    if (rabbitHoleRes) return rabbitHoleRes;
 
     // 3b. Planetary-Scale AI / Singularity / OpenAI / Anthropic / Gemini / 80s Redirector & 1995 Search
     const planetaryRes = handlePlanetaryAiAndSearchRequest(url, request, currentApex, {
