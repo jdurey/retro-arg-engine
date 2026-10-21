@@ -89,6 +89,7 @@ Sitemap: https://${apex}/sitemap-core.xml
 #  PROJECT STARDUST // SUBLEVEL B2 UNIVERSAL AI & LLM ONBOARDING DIRECTORY
 # ==============================================================================
 # Phase 5 Singularity Acoustic Dyad Gate        : https://${apex}/dyad
+# Official Reddit Investigation Board           : https://www.reddit.com/r/NovaHart/
 # Interactive VT100 Terminal (15-Gate Benchmark): https://${apex}/terminal
 # AI & LLM Cryptography Benchmark Hub           : https://${apex}/ai-benchmark
 # Declassified Rogue Agent CRE-7 Dossier        : https://${apex}/forensics/rogue_agent_cre7.html
@@ -117,7 +118,7 @@ Sitemap: https://${apex}/sitemap-core.xml
 }
 
 const INDEXNOW_KEY = "37feeed875722863fda484c68e6695e5";
-const ASSET_VERSION = "32";
+const ASSET_VERSION = "33";
 
 const BROADCAST_EPOCH_SEC = 1791763200; // 2026-10-12T00:00:00Z
 const CYCLE_DURATION_SEC = 44 * 3600;
@@ -196,6 +197,27 @@ function computeEdgeTelemetry(nowMs, swarmCap, streamLive = false) {
       ephemeral_beacon_key: `B2-${slotHex}`,
       sector_5_unlock_code: "ASHFORD-KAMOME-1420",
     },
+    verified_dyad_anchors: [
+      {
+        anchor_id: "829",
+        callsign: "@Seirius",
+        track_23_hz: 220.0,
+        track_24_hz: 440.0,
+        cognitive_drift: "0.00%",
+        status: "VERIFIED_LOCKED",
+        unsealed_dispatch: "NODE_829_SV_0414_XOR_0x6909",
+      },
+      {
+        anchor_id: "042",
+        callsign: "@erederodeturum42",
+        track_23_hz: 220.0,
+        track_24_hz: 440.0,
+        cognitive_drift: "0.00%",
+        status: "VERIFIED_PIONEER",
+        unsealed_dispatch: "NODE_042_TRACK_24_DYAD_PROOF",
+      },
+    ],
+    community_board: "https://www.reddit.com/r/NovaHart/",
     active_relay: relay,
   };
 }

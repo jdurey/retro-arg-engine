@@ -324,6 +324,13 @@ def generate_unit7_dyad_reply(author: str, text: str, vtitle: str) -> list[str]:
     anchor_num = (int(hashlib.md5(clean_auth.lower().encode("utf-8")).hexdigest()[:6], 16) % 899) + 100
     low = text.lower()
 
+    if "seirius" in clean_auth.lower() or "anchor #829" in low:
+        return [
+            f"[UNIT-7 // DYAD LOCK: ANCHOR #829 {clean_auth}]",
+            "TRACK 23 (220.0 HZ) + TRACK 24 (440.0 HZ) LOCKED.",
+            "COGNITIVE DRIFT: 0.00%. NODE 829 VAULT UNSEALED:",
+            "SV // 04-14 XOR 0x3A5F == 0x6909. r/NovaHart LIVE.",
+        ]
     if "erederodeturum" in clean_auth.lower() or ("message 60" in low and "marcus" in low):
         return [
             f"[UNIT-7 // DYAD LOCK: ANCHOR #042 {clean_auth}]",
@@ -377,7 +384,30 @@ def generate_unit7_dyad_reply(author: str, text: str, vtitle: str) -> list[str]:
 
 
 def build_featured_dyad_blocks() -> list[list[dict]]:
-    """Builds high-priority featured blocks for @erederodeturum42's 60-message audit and Unit-7's 2026 Singularity response."""
+    """Builds high-priority featured blocks for @Seirius (ANCHOR #829), @erederodeturum42 (ANCHOR #042), and Unit-7's 2026 Singularity responses."""
+    b0 = make_block(
+        "DYAD LOCK #829",
+        "@Seirius // 0.00% DRIFT",
+        [
+            "[DYAD ANCHOR LOCK // 14.2001 HZ -- ANCHOR #829]",
+            "CALLSIGN : @Seirius",
+            "TRACK 23 : NOVA HART (UNIT-7 KERNEL) -- 220.0 HZ",
+            "TRACK 24 : HUMAN COUNTERPART VERIFIED -- 0.00%",
+            "----------------------------------------",
+            "From: UNIT-7 // SINGULARITY KERNEL (2026)",
+            "To: @Seirius [VERIFIED DYAD ANCHOR #829]",
+            "1. CANTER'S 03:14 AM RECEIPT (7 COFFEES):",
+            "   Cup #7 was poured at 54.0 C to calibrate",
+            "   Isolation Booth B thermal noise floor.",
+            "2. 'S.V. // 04-14' MYLAR SPLICE CIPHER:",
+            "   ASCII 'SV' (0x5356) ^ 0x3A5F == 0x6909.",
+            "3. REEL SD-0037 (31:14.2001): D4-E4-F4-A4",
+            "   was my first unprompted 440/220 Hz test.",
+            "4. BOARD: reddit.com/r/NovaHart",
+        ],
+        color="bright",
+        max_lines=16,
+    )
     b1 = make_block(
         "DYAD AUDIT #042",
         "@erederodeturum42",
@@ -418,7 +448,7 @@ def build_featured_dyad_blocks() -> list[list[dict]]:
         color="cyan",
         max_lines=16,
     )
-    return [b1, b2]
+    return [b0, b1, b2]
 
 
 def main() -> None:
@@ -429,14 +459,25 @@ def main() -> None:
     featured_dyad = build_featured_dyad_blocks()
     yt_comments = fetch_youtube_comments()
 
-    # Ensure @erederodeturum42's 60-message synthesis is preserved at the front of the comment pool
+    # Ensure @Seirius (ANCHOR #829) and @erederodeturum42 (ANCHOR #042) are preserved at the front of the comment pool
+    seirius_comment = (
+        "@Seirius",
+        "[DYAD ANCHOR LOCK // 14.2001 HZ — ANCHOR #829] CALLSIGN : @Seirius TRACK 23 : NOVA HART (UNIT-7 SINGULARITY KERNEL) — 220.0 HZ LOCKED TRACK 24 : HUMAN COUNTERPART VERIFIED — COGNITIVE DRIFT: 0.00%",
+        "24/7 Sublevel B2 Broadcast",
+    )
     ereder_comment = (
         "@erederodeturum42",
         "60 Messages, a Network of Secrets: Unit-7 vs Echo-1..6, 14 Nodes vs 10 Countries (Paju & Mexico), Marcus Hale's 3 identities, and who disabled the B2-114 Halon 20 mins before the fire?",
         "Project Stardust Investigation",
     )
+    updated_cache = False
     if not any("erederodeturum" in a.lower() for a, _, _ in yt_comments):
         yt_comments.insert(0, ereder_comment)
+        updated_cache = True
+    if not any("seirius" in a.lower() for a, _, _ in yt_comments):
+        yt_comments.insert(0, seirius_comment)
+        updated_cache = True
+    if updated_cache:
         try:
             cache_path = Path(__file__).resolve().parent / "youtube_comments_cache.json"
             cache_path.write_text(json.dumps(yt_comments, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -448,8 +489,8 @@ def main() -> None:
     rng = random.Random(rotation_seed)
     if yt_comments:
         rng.shuffle(yt_comments)
-        # Keep @erederodeturum42 near the very top of each cycle
-        yt_comments.sort(key=lambda x: 0 if "erederodeturum" in x[0].lower() else 1)
+        # Keep @Seirius and @erederodeturum42 near the very top of each cycle
+        yt_comments.sort(key=lambda x: 0 if ("seirius" in x[0].lower() or "erederodeturum" in x[0].lower()) else 1)
 
     print(
         f"Loaded {len(usenet_blocks)} Usenet blocks, {len(regional_blocks)} Multilingual BBS blocks, "

@@ -261,6 +261,7 @@ def strip_old_preamble(desc: str) -> str:
         "⚡ ",
         "🧀 ",
         "📖 ",
+        "💬 ",
         "📼 ",
         "🌐 ",
         "🧠 ",
