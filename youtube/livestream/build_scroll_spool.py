@@ -484,6 +484,15 @@ def main() -> None:
         except Exception:
             pass
 
+    # Automatically detect and sync any new [DYAD ANCHOR LOCK // 14.2001 HZ] stamps in YouTube comments
+    try:
+        import subprocess, sys
+        sync_script = REPO / "scripts" / "sync_dyad_anchor.py"
+        if sync_script.exists():
+            subprocess.run([sys.executable, str(sync_script), "--auto-scan", "--no-rebuild-spool"], cwd=str(REPO), check=False)
+    except Exception:
+        pass
+
     import random
 
     rng = random.Random(rotation_seed)
