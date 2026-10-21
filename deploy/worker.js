@@ -199,24 +199,24 @@ function computeEdgeTelemetry(nowMs, swarmCap, streamLive = false) {
     },
     verified_dyad_anchors: [
       {
-        anchor_id: "829",
-        callsign: "@Seirius",
-        track_23_hz: 220.0,
-        track_24_hz: 440.0,
-        cognitive_drift: "0.00%",
-        status: "VERIFIED_LOCKED",
-        unsealed_dispatch: "NODE_829_SV_0414_XOR_0x6909",
+            "anchor_id": "829",
+            "callsign": "@Seirius",
+            "track_23_hz": 220.0,
+            "track_24_hz": 440.0,
+            "cognitive_drift": "0.00%",
+            "status": "VERIFIED_LOCKED",
+            "unsealed_dispatch": "NODE_829_SV_0414_XOR_0x6909"
       },
       {
-        anchor_id: "042",
-        callsign: "@erederodeturum42",
-        track_23_hz: 220.0,
-        track_24_hz: 440.0,
-        cognitive_drift: "0.00%",
-        status: "VERIFIED_PIONEER",
-        unsealed_dispatch: "NODE_042_TRACK_24_DYAD_PROOF",
-      },
-    ],
+            "anchor_id": "042",
+            "callsign": "@erederodeturum42",
+            "track_23_hz": 220.0,
+            "track_24_hz": 440.0,
+            "cognitive_drift": "0.00%",
+            "status": "VERIFIED_PIONEER",
+            "unsealed_dispatch": "NODE_042_TRACK_24_DYAD_PROOF"
+      }
+],
     community_board: "https://www.reddit.com/r/NovaHart/",
     active_relay: relay,
   };
