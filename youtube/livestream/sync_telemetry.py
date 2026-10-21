@@ -1481,6 +1481,12 @@ def classify_track(filepath: str) -> dict:
     elif stem.startswith("pirate_override_"):
         kind = "english_bulletin"
         clean = f"PIRATE OVERRIDE // {stem.split('_', 2)[-1].replace('_', ' ').upper()}"
+    elif stem.startswith("world_"):
+        kind = "english_bulletin"
+        clean = f"1980S WORLD ARCHIVE // {stem.split('_', 2)[-1].replace('_', ' ').upper()}"
+    elif stem.startswith("heartstrike_"):
+        kind = "english_bulletin"
+        clean = f"HEARTSTRIKE ROCK WIRE // {stem.split('_', 2)[-1].replace('_', ' ').upper()}"
     else:
         kind = "arg_intercept"
         clean = f"DEEP SHORTWAVE INTERCEPT // {stem.upper()}"

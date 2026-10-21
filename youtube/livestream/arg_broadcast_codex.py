@@ -721,6 +721,156 @@ ENGLISH_BULLETINS: dict[str, tuple[str, str, str]] = {
         "Warning from the 7-Sigma engineering cell: Director Harrison's 1983-to-2025 loop is a containment cage. Type 'LABYRINTH' to break out.",
         "TYPE 'LABYRINTH' -> /forensics/",
     ),
+    "world_01_skyline_monorail_rain_commute": (
+        "METRO RED-LINE MONORAIL // CAR 402 PA",
+        "Next stop: Sector 4 Central Plaza. Rain continues across the elevated guideway; please keep Walkman volume below Level 4.",
+        "METRO TRANSIT LOG -> stardust-archive.net/start",
+    ),
+    "world_02_late_night_traffic_chopper_825fm": (
+        "SKY-WATCH CHOPPER 4 // 11:45 PM TRAFFIC",
+        "Northbank Viaduct backed up for two miles as drivers slow down to watch Orion's holographic dome test in the low clouds.",
+        "82.5 FM SKY-WATCH -> stardust-archive.net/start",
+    ),
+    "world_03_sunset_video_rental_automated_drop": (
+        "STARLIGHT VIDEO & LASERDISC // NIGHT LINE",
+        "Our storefront is closed for the 11 PM curfew, but our 24-hour chrome return slot is open. Please be kind and rewind.",
+        "1987 HOME VIDEO -> stardust-archive.net/start",
+    ),
+    "world_04_public_school_morning_homeroom_bell": (
+        "NORTHBANK HIGH SCHOOL // 8:00 AM HOMEROOM",
+        "Morning announcements: hot lunch today is rectangular pizza; unapproved band denim and Type-II chrome tapes will be held at the office.",
+        "HOMEROOM BULLETIN -> stardust-archive.net/start",
+    ),
+    "world_05_all_night_laundromat_voice_letter": (
+        "MICROCASSETTE LETTER // COIN LAUNDROMAT",
+        "Audio letter recorded at 1:15 AM in a 24-hour laundromat: 'When her song came on the corner radio, nobody said a word.'",
+        "HOMESTEAD LETTERS -> stardust-archive.net/start",
+    ),
+    "world_06_department_store_closing_chime_akasaka": (
+        "AKASAKA PLAZA // 9:00 PM CLOSING CHIMES",
+        "Thank you for shopping at Akasaka Plaza. Please collect your custom chrome mixtapes from the 7th-floor Listening Lounge.",
+        "MINATO-KU EVENING -> stardust-archive.net/start",
+    ),
+    "world_07_automated_time_and_temperature_desk": (
+        "MUNICIPAL TELEPHONE // 555-TIME SERVICE",
+        "At the tone, Pacific Time will be 3:14 AM. Downtown temperature: 58 degrees with coastal mist. Tranquility Index: Green-2.",
+        "3:14 AM TIME CHECK -> stardust-archive.net/start",
+    ),
+    "world_08_intersector_sleeper_train_dining_car": (
+        "THE NORTHERN MERIDIAN // SLEEPER CAR PA",
+        "We are now crossing the high desert quiet zone. Fresh coffee is available in the dome car; please use headphones after midnight.",
+        "DESERT RAIL LINE -> stardust-archive.net/start",
+    ),
+    "world_09_suburban_neighborhood_watch_cassette": (
+        "WILLOW CREEK ESTATES // BLOCK CAPTAIN TAPE",
+        "Monthly cassette memo: congrats to Mrs. Gable's prize roses, and whoever is running a rooftop shortwave rig at 2 AM, please stop.",
+        "SUBURBAN SECTOR 6 -> stardust-archive.net/start",
+    ),
+    "world_10_arcade_token_counter_closing_call": (
+        "STARLIGHT ARCADE // MIDNIGHT TOKEN CAGE",
+        "Ten minutes till midnight curfew! Whoever set the high score on OutRun with initials NH-7, come grab your free slice of pizza!",
+        "1986 COIN-OP NIGHTS -> stardust-archive.net/start",
+    ),
+    "world_11_municipal_library_microfiche_tour": (
+        "CENTRAL LIBRARY // AUDIO TOUR CASSETTE #4",
+        "Welcome to the 3rd-floor Microfiche Reading Room. Use the brass knob to focus 1979\u20131983 music periodicals; do not remove film spools.",
+        "MICROFICHE ARCHIVE -> stardust-archive.net/start",
+    ),
+    "world_12_harbor_ferry_foghorn_deck_intercom": (
+        "MV STARLIGHT FERRY // BAY CROSSING INTERCOM",
+        "Approaching Pier 14 through the midnight fog. Hot cocoa is available at the galley counter; watch the city neon on the water.",
+        "HARBOR CROSSING -> stardust-archive.net/start",
+    ),
+    "world_13_24hr_diner_jukebox_waitress_break": (
+        "BLUE COMET 24-HR DINER // BOOTH #3 TAPE",
+        "3:10 AM at the Blue Comet Diner: rain on the plate glass, fresh coffee on the burner, and three quarters left for the table jukebox.",
+        "HIGHWAY 95 DINER -> stardust-archive.net/start",
+    ),
+    "world_14_observatory_night_sky_stargazer_log": (
+        "MOUNT WILSON AMATEUR SKYLINE // NIGHT REPORT",
+        "Clear skies above the 2,000-foot marine inversion layer. Look south-southwest at 28 degrees elevation for a stationary magnitude-4 glint.",
+        "NIGHT SKY BULLETIN -> stardust-archive.net/start",
+    ),
+    "world_15_tape_trader_c90_side_b_voice_note": (
+        "C-90 CHROME DUB // SIDE B RUNOUT VOICE NOTE",
+        "Hey, I had twenty seconds left at the end of Side B! I recorded this straight off the 2 AM broadcast with Dolby B off\u2014pass it on!",
+        "TAPE TRADER NETWORK -> stardust-archive.net/start",
+    ),
+    "world_16_hospital_night_shift_bedside_radio": (
+        "ST. JUDE METRO HOSPITAL // CHANNEL 4 RADIO",
+        "1:30 AM on the St. Jude closed-circuit bedside network. Sending warm wishes to the 4th-floor ward and the night-shift ER crew.",
+        "HOSPITAL RADIO -> stardust-archive.net/start",
+    ),
+    "world_17_museum_of_telecommunications_tour": (
+        "ORION CORPORATE PAVILION // WALKMAN TOUR #6",
+        "Stop #6: The Hall of Synthetic Acoustics. Behind this leaded glass, magnetic-bubble arrays render human phrasing in real time.",
+        "ORION PAVILION 1986 -> stardust-archive.net/start",
+    ),
+    "world_18_rooftop_coat_hanger_antenna_rain": (
+        "TENEMENT ROOFTOP // WALKIE-TALKIE CH. 14",
+        "Turn the coat-hanger dipole thirty degrees toward the bay tower\u2014wait, don't move! The stereo beacon light just locked on!",
+        "ROOFTOP DX LISTENERS -> stardust-archive.net/start",
+    ),
+    "world_19_drive_in_theater_intermission_snack": (
+        "STARLIGHT TWIN DRIVE-IN // INTERMISSION AM",
+        "Ten minutes until our second feature! Visit the glowing projection-booth snack bar for buttered popcorn and hot pretzel rods.",
+        "DRIVE-IN INTERMISSION -> stardust-archive.net/start",
+    ),
+    "world_20_subterranean_elevator_shift_change": (
+        "ORION TOWER FREIGHT LIFT #4 // SHIFT CHANGE",
+        "Descending to Sublevel B2. Graveyard-shift tape librarians must clip magnetic dosimeter badges to their collars before exiting.",
+        "SUBLEVEL B2 NIGHT SHIFT -> stardust-archive.net/start",
+    ),
+    "heartstrike_01_cleveland_agora_1984_concert_promo": (
+        "CLEVELAND ROCK RADIO // OCT 1984 AGORA SPOT",
+        "This Friday at the Cleveland Agora: hometown legends Heartstrike celebrate 'Strike First' live! Doors at 8 PM.",
+        "HEARTSTRIKE ARCHIVE -> /geocities/sunsetstrip-club-1987.html",
+    ),
+    "heartstrike_02_steel_thunder_rex_powers_soundtrack": (
+        "1985 ROCK WIRE // STEEL THUNDER SOUNDTRACK",
+        "Heartstrike's anthem 'Fire in Your Heart' is featured in the new Rex Powers action movie 'Steel Thunder'\u2014funding their move to Malibu!",
+        "STEEL THUNDER SHRINE -> /geocities/hollywood-hills-rexpowers.html",
+    ),
+    "heartstrike_03_roxy_whisky_sunset_strip_showcase": (
+        "SUNSET STRIP CONCERT LINE // OCTOBER 1985",
+        "Fresh off signing with EMI Records, Heartstrike headlines The Whisky a Go Go and The Roxy this week on the Sunset Strip!",
+        "SUNSET STRIP 1985 -> /geocities/sunsetstrip-club-1987.html",
+    ),
+    "heartstrike_04_breaking_news_steve_and_tj_crash": (
+        "BREAKING NEWS BULLETIN // OCT 1985 SUNSET STRIP",
+        "Tragedy on the Sunset Strip: Heartstrike vocalist Steve Vanderstok and guitarist TJ Chicon killed in a 100-mph Ferrari crash near Clark St.",
+        "IN MEMORY OF STEVE & TJ -> /geocities/sunsetstrip-club-1987.html",
+    ),
+    "heartstrike_05_candlelight_vigil_roxy_and_lakewood": (
+        "MEMORIAL TRIBUTE // STEVE VANDERSTOK & TJ CHICON",
+        "Fans gather with candles outside The Roxy on Sunset Strip and in Lakewood, Ohio as surviving Heartstrike members return to Cleveland.",
+        "HEARTSTRIKE TRIBUTE -> /geocities/sunsetstrip-club-1987.html",
+    ),
+    "heartstrike_06_glenn_thurman_to_the_end_of_time_news": (
+        "1986 ROCK REPORT // HEARTSTRIKE REBIRTH",
+        "Six months after the Sunset Strip crash, bassist Glenn Thurman's grief poem 'To the End of Time' sparks auditions with Stockholm brothers Joss & Kent Freidnam.",
+        "SCANDINAVIAN REBIRTH -> /geocities/sunsetstrip-club-1987.html",
+    ),
+    "heartstrike_07_lightning_strikes_1987_album_spot": (
+        "1987 ALBUM PREMIERE // 'LIGHTNING STRIKES'",
+        "Heartstrike rises from the ashes with their 1987 EMI concept album 'Lightning Strikes', featuring Joss & Kent Freidnam on 'Echoes of Thunder'.",
+        "LIGHTNING STRIKES (1987) -> /geocities/sunsetstrip-club-1987.html",
+    ),
+    "heartstrike_08_mtv_video_boycott_announcement": (
+        "1987 MUSIC NEWS // HEARTSTRIKE REFUSES MTV",
+        "Heartstrike refuses EMI's demand to shoot glossy lip-synced MTV videos for 'Lightning Strikes', vowing to honor Steve and TJ's raw stage legacy.",
+        "ALT.MUSIC.HEARTSTRIKE -> /usenet/alt-music-heartstrike/",
+    ),
+    "heartstrike_09_strike_a_chord_1989_lars_nystrom": (
+        "1989 IMPORT SHOWCASE // 'STRIKE A CHORD'",
+        "Previewing Heartstrike's 1989 independent third album 'Strike a Chord' with Swedish producer Lars Nystr\u00f6m and the 12-minute 'Echoes in the Abyss'.",
+        "STRIKE A CHORD (1989) -> /geocities/sunsetstrip-club-1987.html",
+    ),
+    "heartstrike_10_european_tour_lawsuit_tape_seizure": (
+        "1989 ROCK WIRE // HEARTSTRIKE TOUR CANCELED",
+        "Devastating breach-of-contract lawsuit bankrupts Heartstrike on the eve of their 1989 European tour; 24-track master reels seized by corporate creditors.",
+        "ORION-Z STEM THEFT -> /usenet/alt-music-heartstrike/t01-where-are-the-freidnams.txt",
+    ),
 }
 
 # =============================================================================
