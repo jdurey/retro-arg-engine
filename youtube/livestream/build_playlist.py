@@ -120,9 +120,34 @@ spoken_pool += [t for t in glob.glob(os.path.join(MULTILINGUAL_DIR, "*.mp3")) if
 spoken_pool += [t for t in glob.glob(os.path.join(GEOCITIES_DIR, "*.mp3")) if os.path.isfile(t)]
 rng.shuffle(spoken_pool)
 
-# 5B. Varied English Interstitials (50 new Trailers, Commercials, PSAs, DJ Call-Ins, Pirate Overrides + 10 English Newscasts)
-english_interstitial_pool = [t for t in glob.glob(os.path.join(NEWSCASTS_DIR, "*.mp3")) if os.path.isfile(t)]
-rng.shuffle(english_interstitial_pool)
+# 5B. Varied English Interstitials (10 Heartstrike + 20 World-Building + 50 Trailers/Ads/PSAs/DJ/Pirate + 10 Newscasts)
+all_newscasts = [t for t in glob.glob(os.path.join(NEWSCASTS_DIR, "*.mp3")) if os.path.isfile(t)]
+hs_pool = [t for t in all_newscasts if os.path.basename(t).startswith("heartstrike_")]
+world_pool = [t for t in all_newscasts if os.path.basename(t).startswith("world_")]
+fresh_50_pool = [
+    t for t in all_newscasts
+    if os.path.basename(t).startswith(("trailer_", "commercial_", "psa_", "dj_callin_", "pirate_override_"))
+]
+legacy_en_pool = [
+    t for t in all_newscasts
+    if not os.path.basename(t).startswith(("heartstrike_", "world_", "trailer_", "commercial_", "psa_", "dj_callin_", "pirate_override_"))
+]
+rng.shuffle(hs_pool)
+rng.shuffle(world_pool)
+rng.shuffle(fresh_50_pool)
+rng.shuffle(legacy_en_pool)
+other_en_pool = fresh_50_pool + legacy_en_pool
+
+# Interleave Heartstrike, World-Building, and Trailers/Commercials/PSAs/DJ Call-Ins so listeners hear all three right away!
+english_interstitial_pool = []
+max_len = max(len(hs_pool), len(world_pool), len(other_en_pool), 1)
+for i in range(max_len):
+    if i < len(hs_pool):
+        english_interstitial_pool.append(hs_pool[i])
+    if i < len(world_pool):
+        english_interstitial_pool.append(world_pool[i])
+    if i < len(other_en_pool):
+        english_interstitial_pool.append(other_en_pool[i])
 
 # 6. Ultra-tight Telemetry Beacons (35 files, 2.5s - 5s punchy 750Hz Morse chirps)
 morse_beacons = [t for t in glob.glob(os.path.join(MORSE_DIR, "*.mp3")) if os.path.isfile(t)]
@@ -143,7 +168,7 @@ rng.shuffle(intercept_pool)
 print(f"Building Broadcast Lineup:")
 print(f"  - Total Unique Vocal Master Songs: {len(all_songs)} ({len(freshly_ingested)} newly added from Drive)")
 print(f"  - FM Synth MIDI Masters: {len(midi_tracks)}")
-print(f"  - Varied English Interstitials (Trailers/Ads/PSAs/DJ/Pirate): {len(english_interstitial_pool)}")
+print(f"  - Varied English Interstitials (Heartstrike/World/Trailers/Ads/PSAs/DJ): {len(english_interstitial_pool)}")
 print(f"  - Multilingual / GeoCities Bulletins: {len(spoken_pool)}")
 print(f"  - Tight Morse Beacons: {len(morse_beacons)}")
 print(f"  - Shortwave Numbers Stations: {len(numbers_pool)}")
@@ -231,19 +256,19 @@ for c in cycles:
     ordered_songs.extend(c)
 
 # 12. Dynamic Transition Engine:
-# Alternates between varied English interstitials (Trailers, Commercials, PSAs, DJ Call-Ins, Pirate Overrides)
-# and classic shortwave/lab/morse cadences so transitions feel like a living 1980s station
+# For the first 30 songs, play a varied English interstitial (Heartstrike / World-Building / Trailer / Ad / PSA / DJ Call-In)
+# after EVERY song so listeners immediately hear the new world-building & Heartstrike broadcasts!
 CADENCE_PATTERNS = [
-    "english_interstitial",  # English Movie Trailer / Commercial / PSA / DJ Call-In / Pirate Override
-    "direct_morse",          # Quick Morse chirp straight into next song (keeps energy up)
+    "english_interstitial",  # Heartstrike / World-Building / Movie Trailer / Commercial / PSA / DJ Call-In
+    "english_interstitial",  # Varied English Interstitial
     "english_interstitial",  # Varied English Interstitial
     "lab_tape",              # Classified Orion Dictaphone / Marcus Hale tape + Morse
     "english_interstitial",  # Varied English Interstitial
-    "numbers",               # Morse Beacon + Shortwave Numbers Station
     "english_interstitial",  # Varied English Interstitial
-    "direct_midi",           # Vintage 3.5s FM Synth Stinger direct segue
-    "bulletin",              # MIDI Stinger + Multilingual / GeoCities Bulletin
-    "arg_intercept",         # UVB-76 Buzzer / Deep Shortwave Intercept
+    "direct_morse",          # Quick Morse chirp straight into next song
+    "english_interstitial",  # Varied English Interstitial
+    "english_interstitial",  # Varied English Interstitial
+    "numbers",               # Shortwave Numbers Station
 ]
 
 full_playlist = []
@@ -258,8 +283,11 @@ intercept_idx = 0
 for song_idx, song in enumerate(ordered_songs):
     full_playlist.append(song)
     
-    # Pick next transition pattern
-    pattern = CADENCE_PATTERNS[song_idx % len(CADENCE_PATTERNS)]
+    # Guarantee the first 30 transitions are 100% the new English interstitials (Heartstrike, World-Building, Trailers/Ads/PSAs/DJ)
+    if song_idx < 30:
+        pattern = "english_interstitial"
+    else:
+        pattern = CADENCE_PATTERNS[song_idx % len(CADENCE_PATTERNS)]
     
     if pattern == "english_interstitial":
         if english_interstitial_pool:
