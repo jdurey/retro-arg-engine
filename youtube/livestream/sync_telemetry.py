@@ -1709,6 +1709,9 @@ def classify_track(filepath: str) -> dict:
     elif stem.startswith("blaze_"):
         kind = "english_bulletin"
         clean = f"80S FM WITH RICK BLAZE // {stem.split('_', 2)[-1].replace('_', ' ').upper()}"
+    elif stem.startswith("wlf_"):
+        kind = "english_bulletin"
+        clean = f"WHITE LINES & FEEDBACK // {stem.split('_', 2)[-1].replace('_', ' ').upper()}"
     elif stem.startswith("humanist_"):
         kind = "english_bulletin"
         clean = f"HUMANIST RESISTANCE BREAK-IN // {stem.split('_', 2)[-1].replace('_', ' ').upper()}"
