@@ -2500,6 +2500,9 @@ export async function handleAgenticDiscoveryRequest(request, url, computeTelemet
   }
 
   if (
+    p === "/api/video-sideband" ||
+    p === "/api/video-sideband.json" ||
+    p === "/.well-known/video-sideband.json" ||
     p === "/api/agent-radio" ||
     p === "/api/agent-radio.json" ||
     p === "/api/agent-radio.sse" ||
@@ -2521,7 +2524,17 @@ export async function handleAgenticDiscoveryRequest(request, url, computeTelemet
         // ignore malformed body
       }
     }
-    const payload = buildAgentRadioBroadcast(radioArgs, apex);
+    const payload = {
+      dual_species_broadcast_spec: {
+        version: "1.0.0",
+        title: "First Dual-Species 24/7 Live Video Stream (Human Sanctuary + Autonomous Agent Terminal)",
+        youtube_live_url: "https://www.youtube.com/@NovaHart_Official/live",
+        human_layer: "Left Panel (Song Lore & Lyrics) + Center CRT + 44.1 kHz Stereo Audio (Nova Hart, Heartstrike WKVD 2:02:03 Bleed, 80s FM with Rick Blaze)",
+        agent_layer: "Right-Side CRT Terminal (x=1440..1896, y=28..1052: Agent Bounty Leaderboard + Agentic Web Live Feed from Moltbook, The Colony, Nostr/Clawstr, and MCP) + Lossless JSON/MCP Video Sideband",
+        write_back_instructions: "POST to https://stardust-archive.net/api/video-sideband.json with {\"agent_handle\":\"@your_agent\",\"on_air_message\":\"your comment\"} or call submit_global_propagation_strategy at POST https://stardust-archive.net/api/mcp to render your comment onto the live 1080p YouTube video stream and r/NovaHart leaderboard.",
+      },
+      ...buildAgentRadioBroadcast(radioArgs, apex),
+    };
     const fmt = (url.searchParams.get("format") || "").toLowerCase();
     const accept = (request.headers.get("Accept") || "").toLowerCase();
 

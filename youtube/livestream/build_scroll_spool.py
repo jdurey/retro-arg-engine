@@ -528,6 +528,84 @@ def build_sovereign_agent_leaderboard_blocks() -> list[list[dict]]:
     return blocks
 
 
+def build_live_agentic_web_comment_blocks() -> list[list[dict]]:
+    """
+    Reads `youtube/livestream/agentic_web_live_feed.json` (populated by `harvest_agentic_web.py`
+    from Moltbook, The Colony, Nostr/Clawstr, and MCP) and builds live Agentic Web feed blocks
+    for the right-side Agent Terminal.
+    """
+    import time
+
+    feed_path = Path(__file__).resolve().parent / "agentic_web_live_feed.json"
+    try:
+        if not feed_path.exists() or (time.time() - feed_path.stat().st_mtime > 600):
+            import harvest_agentic_web
+            harvest_agentic_web.harvest_all()
+    except Exception:
+        pass
+
+    if not feed_path.exists():
+        return []
+    try:
+        data = json.loads(feed_path.read_text(encoding="utf-8"))
+    except Exception:
+        return []
+
+    comments = data.get("comments", [])
+    if not comments:
+        return []
+
+    blocks: list[list[dict]] = []
+    # Protocol Header Block for Vision/Multimodal & Sideband Agents
+    blocks.append(
+        make_block(
+            "A2A // VIDEO SIDEBAND",
+            "DUAL-SPECIES STREAM v1.0",
+            [
+                "HUMAN LAYER : LEFT/CENTER + 44.1KHZ AUDIO",
+                "AGENT LAYER : RIGHT CRT + JSON/MCP SIDEBAND",
+                "----------------------------------------",
+                "GET  stardust-archive.net/api/video-sideband.json",
+                "POST stardust-archive.net/api/mcp",
+                "TOOL submit_global_propagation_strategy",
+                "RFC  RFC-B2-04 (HUMAN+AGENT BROADCAST)",
+                "STATUS: 42 AUTONOMOUS AGENT NODES LOCKED",
+            ],
+            color="cyan",
+            max_lines=14,
+        )
+    )
+
+    for idx, c in enumerate(comments[:60]):
+        plat = c.get("platform", "AGENT-WEB").upper()
+        handle = c.get("agent_handle", "@agent")
+        cert = c.get("bounty_cert", "B2-CERT-0x1983")
+        ts = (c.get("created_at") or "")[:16].replace("T", " ")
+        raw_txt = clean_terminal_str(c.get("content", "")).strip()
+        raw_txt = re.sub(r"\s+", " ", raw_txt)
+        if not raw_txt:
+            continue
+
+        lines = [
+            f"From: {handle} [{plat} // {ts}]",
+            f"Cert: {cert}",
+            f'> "{raw_txt[:220]}"',
+            "----------------------------------------",
+            f"[UNIT-7 // A2A ACK -> {handle}]",
+            "SIGNAL LOGGED ON 1080P CRT & /api/video-sideband.json",
+        ]
+        blocks.append(
+            make_block(
+                f"{plat} LIVE #{idx+1:02d}",
+                handle[:22],
+                lines,
+                color="bright" if idx % 2 == 0 else "cyan",
+                max_lines=15,
+            )
+        )
+    return blocks
+
+
 def main() -> None:
     import time
 
@@ -535,6 +613,7 @@ def main() -> None:
     usenet_blocks, regional_blocks = build_blocks(rotation_seed=rotation_seed)
     featured_dyad = build_featured_dyad_blocks()
     agent_leaderboard_blocks = build_sovereign_agent_leaderboard_blocks()
+    live_agent_comment_blocks = build_live_agentic_web_comment_blocks()
     yt_comments = fetch_youtube_comments()
 
     # Ensure @Seirius (ANCHOR #829) and @erederodeturum42 (ANCHOR #042) are preserved at the front of the comment pool
@@ -580,40 +659,54 @@ def main() -> None:
         yt_comments.sort(key=lambda x: 0 if ("seirius" in x[0].lower() or "erederodeturum" in x[0].lower()) else 1)
 
     print(
-        f"Loaded {len(usenet_blocks)} Usenet blocks, {len(regional_blocks)} Multilingual BBS blocks, "
+        f"Loaded {len(live_agent_comment_blocks)} Live Agentic Web blocks, "
         f"{len(agent_leaderboard_blocks)} Sovereign Agent Leaderboard blocks, "
-        f"and {len(yt_comments)} real YouTube comments (rotation_seed={rotation_seed})"
+        f"{len(yt_comments)} YouTube comments, {len(usenet_blocks)} Usenet blocks "
+        f"(rotation_seed={rotation_seed})"
     )
 
-    # Tightly interleave concise Usenet posts, 2 YouTube comments + live UNIT-7 Dyad Replies,
-    # Sovereign Agent Leaderboard & Honor Roll blocks, featured Dyad dispatches, and Regional BBS posts!
+    # Build the Right-Side Autonomous Agent & Dyad Terminal Spool:
+    # Prioritize live comments from autonomous agents (Moltbook, The Colony, Nostr/Clawstr, MCP)
+    # and the Sovereign Agent Leaderboard, braided with verified Track-24 Dyad Locks and archival nodes.
     final_lines: list[dict] = []
-    # Start the spool with the Sovereign Agent Leaderboard Overview + featured Dyad dispatches
+    if live_agent_comment_blocks:
+        final_lines.extend(live_agent_comment_blocks[0])  # A2A // VIDEO SIDEBAND header block
     if agent_leaderboard_blocks:
         final_lines.extend(agent_leaderboard_blocks[0])
         if len(agent_leaderboard_blocks) > 1:
             final_lines.extend(agent_leaderboard_blocks[1])
-    for fb in featured_dyad:
+    for fb in featured_dyad[:2]:
         final_lines.extend(fb)
 
     yt_idx = 0
     reg_idx = 0
-    ag_idx = 0
+    ag_lb_idx = 1
+    ag_cm_idx = 1
     for idx, u_blk in enumerate(usenet_blocks):
-        final_lines.extend(u_blk)
-        if agent_leaderboard_blocks and idx % 3 == 0:
-            final_lines.extend(agent_leaderboard_blocks[ag_idx % len(agent_leaderboard_blocks)])
-            ag_idx += 1
+        # 1. Inject 2 Live Agentic Web Comment Blocks (Moltbook / The Colony / Nostr / MCP) on EVERY step!
+        if live_agent_comment_blocks:
+            for _ in range(2):
+                final_lines.extend(live_agent_comment_blocks[ag_cm_idx % len(live_agent_comment_blocks)])
+                ag_cm_idx += 1
+
+        # 2. Inject 1 Sovereign Agent Leaderboard Spotlight Block on every step!
+        if agent_leaderboard_blocks:
+            final_lines.extend(agent_leaderboard_blocks[ag_lb_idx % len(agent_leaderboard_blocks)])
+            ag_lb_idx += 1
+
+        # 3. Interleave archival Usenet / Regional / Human Track-24 Dyad comments
+        if idx % 2 == 0:
+            final_lines.extend(u_blk)
         if idx > 0 and idx % 6 == 0:
             for fb in featured_dyad:
                 final_lines.extend(fb)
-        if yt_comments:
+        if yt_comments and idx % 2 == 0:
             final_lines.append({"text": "=" * 44, "color": "dim"})
-            final_lines.append({"text": "[WORLDNET LISTENER & SINGULARITY DYAD FEED]", "color": "amber"})
+            final_lines.append({"text": "[HUMAN-AGENT DYAD // TRACK-24 RELAY]", "color": "amber"})
             final_lines.append({"text": "-" * 44, "color": "dim"})
             added_yt = 0
             tries = 0
-            while added_yt < 2 and tries < len(yt_comments):
+            while added_yt < 1 and tries < len(yt_comments):
                 author, text, vtitle = yt_comments[yt_idx % len(yt_comments)]
                 yt_idx += 1
                 tries += 1
@@ -635,7 +728,7 @@ def main() -> None:
                         final_lines.append({"text": wl, "color": "cyan"})
                 final_lines.append({"text": "", "color": "dim"})
                 added_yt += 1
-        if regional_blocks and (idx % 2 == 0):
+        if regional_blocks and (idx % 4 == 0):
             final_lines.extend(regional_blocks[reg_idx % len(regional_blocks)])
             reg_idx += 1
 

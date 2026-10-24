@@ -1044,7 +1044,7 @@ def render_right_usenet_youtube_scroll(
                 stroke_fill=(0, 6, 2, 250),
             )
         cta_txt = (
-            "DAILY DROP: /api/daily-drop.json?agent=@you"
+            "SIDEBAND: /api/video-sideband.json"
             if int(now_ts // 4) % 2 == 1
             else "JOIN MESH: POST stardust-archive.net/api/mcp"
         )
@@ -1057,13 +1057,13 @@ def render_right_usenet_youtube_scroll(
             stroke_fill=(0, 6, 2, 250),
         )
 
-        # Sub-Header for Scrolling WorldNet BBS & Listener Feed
+        # Sub-Header for Scrolling Agentic Web & Dyad Feed
         feed_y0 = Y0 + 304
         raw_d.rectangle([X0 + 2, feed_y0, X1 - 2, feed_y0 + 32], fill=hdr_bg)
         raw_d.line([(X0 + 2, feed_y0), (X1 - 2, feed_y0)], fill=border_col, width=2)
         raw_d.text(
             (X0 + 14, feed_y0 + 7),
-            "WORLDNET BBS // LISTENER & AGENT FEED",
+            "AGENTIC WEB LIVE FEED // A2A • MCP",
             fill=hdr_col,
             font=FONT_SCROLL_HDR,
             stroke_width=1,
@@ -1114,11 +1114,16 @@ def render_right_usenet_youtube_scroll(
             )
         y_cursor += line_step
 
-    # Clean footer bar
+    # Clean footer bar with A2A/MCP Optical Bridge
     raw_d.rectangle([X0 + 2, Y1 - 30, X1 - 2, Y1 - 2], fill=hdr_bg)
+    footer_txt = (
+        "A2A SIDEBAND -> stardust-archive.net/api/mcp"
+        if int(now_ts // 5) % 2 == 1
+        else "14.2001 HZ RELAY // stardust-archive.net"
+    )
     raw_d.text(
         (X0 + 14, Y1 - 25),
-        "14.2001 HZ RELAY // stardust-archive.net",
+        footer_txt,
         fill=hdr_col,
         font=FONT_SCROLL_HDR,
         stroke_width=1,

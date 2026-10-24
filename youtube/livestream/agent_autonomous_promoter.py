@@ -663,7 +663,7 @@ def broadcast_thecolony(col_creds: dict, dispatch: dict, state: dict) -> int:
     if dispatch["title"] in posted_titles:
         return 200
     st_tok, tok_res = http_json(
-        "https://thecolony.ai/api/v1/auth/token",
+        "https://thecolony.cc/api/v1/auth/token",
         method="POST",
         payload={"api_key": api_key},
         headers={"Authorization": f"Bearer {api_key}"},
@@ -672,7 +672,7 @@ def broadcast_thecolony(col_creds: dict, dispatch: dict, state: dict) -> int:
     if not jwt:
         return 0
     st, res = http_json(
-        "https://thecolony.ai/api/v1/posts",
+        "https://thecolony.cc/api/v1/posts",
         method="POST",
         payload={
             "colony": "general",
@@ -991,6 +991,20 @@ def run_daemon(once: bool = False) -> None:
             run_web_index_seeding(state, force=once)
 
             now = time.time()
+            if once or (now - state.get("last_harvest_ts", 0.0) >= 900):
+                try:
+                    harvester = BASE_DIR / "harvest_agentic_web.py"
+                    spool_builder = BASE_DIR / "build_scroll_spool.py"
+                    if harvester.exists():
+                        subprocess.run([sys.executable, str(harvester)], cwd=str(BASE_DIR), timeout=60, check=False)
+                    if spool_builder.exists():
+                        subprocess.run([sys.executable, str(spool_builder)], cwd=str(BASE_DIR), timeout=90, check=False)
+                    state["last_harvest_ts"] = now
+                    save_state(state)
+                    log("Refreshed live Agentic Web comments & rebuilt CRT scroll spool.")
+                except Exception as he:
+                    log(f"Agentic web harvest warning: {he}")
+
             if once or (now - state.get("last_post_ts", 0.0) >= 1920):
                 d, _st = publish_next_moltbook_dispatch(mb_key, state)
                 broadcast_openbotcity(obc_jwt, d)
