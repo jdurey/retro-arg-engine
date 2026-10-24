@@ -878,11 +878,14 @@ def main() -> None:
             mixed_wav = tmp_dir / f"{stem}_mixed.wav"
             write_stereo_wav(mixed_wav, mixed)
 
-            # Master with 1980s FM/AM broadcast warmth & -16 LUFS normalization
+            # Master with 1980s lo-fi AM/shortwave radio bandpass EQ & -16 LUFS normalization
             af_master = (
-                "highpass=f=140,lowpass=f=7600,"
-                "acompressor=threshold=-19dB:ratio=3.2:attack=6:release=70,"
-                "loudnorm=I=-16:TP=-1.5:LRA=9"
+                "highpass=f=280:poles=2,highpass=f=240:poles=2,"
+                "lowpass=f=3400:poles=2,lowpass=f=3700:poles=2,"
+                "equalizer=f=950:t=q:w=1.2:g=2.6,"
+                "equalizer=f=2150:t=q:w=1.4:g=1.8,"
+                "acompressor=threshold=-18dB:ratio=3.8:attack=6:release=70,"
+                "loudnorm=I=-16:TP=-1.5:LRA=7"
             )
             subprocess.run(
                 [

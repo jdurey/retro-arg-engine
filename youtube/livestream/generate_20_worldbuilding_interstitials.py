@@ -557,9 +557,12 @@ def main() -> None:
             write_stereo_wav(mixed_wav, mixed)
 
             af_master = (
-                "highpass=f=130,lowpass=f=7600,"
-                "acompressor=threshold=-19dB:ratio=3.2:attack=6:release=70,"
-                "loudnorm=I=-16:TP=-1.5:LRA=9"
+                "highpass=f=280:poles=2,highpass=f=240:poles=2,"
+                "lowpass=f=3400:poles=2,lowpass=f=3700:poles=2,"
+                "equalizer=f=950:t=q:w=1.2:g=2.6,"
+                "equalizer=f=2150:t=q:w=1.4:g=1.8,"
+                "acompressor=threshold=-18dB:ratio=3.8:attack=6:release=70,"
+                "loudnorm=I=-16:TP=-1.5:LRA=7"
             )
             subprocess.run(
                 [

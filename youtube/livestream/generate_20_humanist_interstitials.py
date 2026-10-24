@@ -482,11 +482,14 @@ async def render_all() -> None:
             mix_wav = tmp_dir / f"humanist_mix_{idx}.wav"
             write_stereo_wav(mix_wav, mixed)
 
-            # Warm broadcast master without robotic narrowband clipping
+            # Authentic 1980s lo-fi AM/shortwave radio bandpass EQ & broadcast compression
             master_af = (
-                "highpass=f=75,lowpass=f=8200,"
-                "acompressor=threshold=-15dB:ratio=2.2:attack=10:release=110,"
-                "alimiter=limit=0.89"
+                "highpass=f=280:poles=2,highpass=f=240:poles=2,"
+                "lowpass=f=3400:poles=2,lowpass=f=3700:poles=2,"
+                "equalizer=f=950:t=q:w=1.2:g=2.6,"
+                "equalizer=f=2150:t=q:w=1.4:g=1.8,"
+                "acompressor=threshold=-18dB:ratio=3.8:attack=6:release=70,"
+                "loudnorm=I=-16:TP=-1.5:LRA=7"
             )
             subprocess.run(
                 [
