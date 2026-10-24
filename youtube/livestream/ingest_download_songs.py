@@ -35,10 +35,11 @@ def slugify(filename):
     cleaned = cleaned.strip('_')
     return f"radio_{cleaned}.mp3"
 
-# Clean silence trimming only (original song audio untouched, zero retro EQ or tape hiss)
+# Clean silence trimming + transparent -13.5 LUFS loudness leveling (zero retro EQ or tape hiss)
 CLEAN_SONG_TRIM_FILTER = (
     "silenceremove=start_periods=1:start_duration=0.04:start_threshold=-38dB:detection=peak,"
-    "areverse,silenceremove=start_periods=1:start_duration=0.08:start_threshold=-38dB:detection=peak,areverse"
+    "areverse,silenceremove=start_periods=1:start_duration=0.08:start_threshold=-38dB:detection=peak,areverse,"
+    "loudnorm=I=-13.5:TP=-0.8:LRA=9"
 )
 
 from concurrent.futures import ThreadPoolExecutor

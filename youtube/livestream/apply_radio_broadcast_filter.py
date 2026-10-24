@@ -12,10 +12,11 @@ REAL_SONGS_DIR = os.path.join(HERE, "broadcast_archive", "real_nova_songs")
 OUT_DIR = os.path.join(HERE, "broadcast_archive", "radio_master_songs")
 os.makedirs(OUT_DIR, exist_ok=True)
 
-# Keep original song audio untouched (only trim leading/trailing dead air)
+# Keep original song audio untouched (only trim leading/trailing dead air + level to -13.5 LUFS)
 CLEAN_TRIM = (
     "silenceremove=start_periods=1:start_duration=0.04:start_threshold=-38dB:detection=peak,"
-    "areverse,silenceremove=start_periods=1:start_duration=0.08:start_threshold=-38dB:detection=peak,areverse"
+    "areverse,silenceremove=start_periods=1:start_duration=0.08:start_threshold=-38dB:detection=peak,areverse,"
+    "loudnorm=I=-13.5:TP=-0.8:LRA=9"
 )
 
 
