@@ -24,7 +24,7 @@ import hashlib
 import math
 from pathlib import Path
 import numpy as np
-from PIL import Image, ImageChops, ImageDraw, ImageFont
+from PIL import Image, ImageChops, ImageDraw, ImageFilter, ImageFont
 
 W, H = 688, 488
 
@@ -243,7 +243,7 @@ def _rot_xyz(pts: np.ndarray, rx: float, ry: float, rz: float) -> np.ndarray:
     return np.column_stack([x3, y3, z2])
 
 
-def _proj(pts: np.ndarray, fov: float = 340.0, cam_z: float = 4.2, cx: float = W * 0.5, cy: float = H * 0.50) -> np.ndarray:
+def _proj(pts: np.ndarray, fov: float = 395.0, cam_z: float = 4.2, cx: float = 338.0, cy: float = 240.0) -> np.ndarray:
     """Projects (N, 3) 3D points into (N, 2) screen coordinates."""
     z = np.maximum(0.4, pts[:, 2] + cam_z)
     px = cx + (pts[:, 0] * fov) / z
@@ -1111,33 +1111,45 @@ def _render_scene_archetype(
 
 
 _CACHED_BASE_CRT: Image.Image | None = None
-_CACHED_PHOSPHOR_MASK: Image.Image | None = None
+_CACHED_PHOSPHOR_MASK: np.ndarray | None = None
+_CACHED_BARREL_LUT: tuple[np.ndarray, np.ndarray] | None = None
 
 
-def _get_cached_crt_base_and_mask(crt_bg_arr: np.ndarray) -> tuple[Image.Image, Image.Image]:
+def _get_cached_crt_base_and_mask(crt_bg_arr: np.ndarray) -> tuple[Image.Image, np.ndarray, tuple[np.ndarray, np.ndarray]]:
     """
     Precomputes:
       1. `_CACHED_BASE_CRT`: The untouched 688x488 CRT glass & bezel patch from `backdrop_clean.png`.
-      2. `_CACHED_PHOSPHOR_MASK`: A softly feathered, inset CRT tube phosphor emission mask
-         with 1980s scanlines that fades smoothly to 0 well before the curved amber bezel.
+      2. `_CACHED_PHOSPHOR_MASK`: Full-aperture barrel-curved CRT phosphor emission & scanline/grille mask
+         that fills the physical glass dome and feathers smoothly to 0 right at the recessed inner bezel.
+      3. `_CACHED_BARREL_LUT`: `(src_y, src_x)` integer warp tables for 1983 spherical-barrel CRT glass curvature.
     """
-    global _CACHED_BASE_CRT, _CACHED_PHOSPHOR_MASK
-    if _CACHED_BASE_CRT is not None and _CACHED_PHOSPHOR_MASK is not None:
-        return _CACHED_BASE_CRT, _CACHED_PHOSPHOR_MASK
+    global _CACHED_BASE_CRT, _CACHED_PHOSPHOR_MASK, _CACHED_BARREL_LUT
+    if _CACHED_BASE_CRT is not None and _CACHED_PHOSPHOR_MASK is not None and _CACHED_BARREL_LUT is not None:
+        return _CACHED_BASE_CRT, _CACHED_PHOSPHOR_MASK, _CACHED_BARREL_LUT
 
-    _CACHED_BASE_CRT = Image.fromarray(np.clip(crt_bg_arr, 0, 255).astype(np.uint8), mode="RGB")
+    _CACHED_BASE_CRT = Image.fromarray(np.clip(crt_bg_arr, 0, 255).astype(np.uint8))
 
-    yy, xx = np.mgrid[0:H, 0:W]
-    u = (xx - (W * 0.5)) / (W * 0.43)
-    v = (yy - (H * 0.5)) / (H * 0.41)
-    dist = (np.abs(u) ** 3.6 + np.abs(v) ** 3.6) ** (1.0 / 3.6)
-    tube_mask = np.clip((1.0 - dist) / 0.24, 0.0, 1.0).astype(np.float32)
+    yy, xx = np.mgrid[0:H, 0:W].astype(np.float32)
+    cx, cy = 338.0, 248.0
+    rx, ry = 304.0, 220.0
+    u = (xx - cx) / rx
+    v = (yy - cy) / ry
+
+    # Authentic 1983 CRT spherical-barrel curvature matching the physical bezel contour
+    u_src = u * (1.0 + 0.068 * (v * v) + 0.022 * (u * u))
+    v_src = v * (1.0 + 0.082 * (u * u) + 0.026 * (v * v))
+    src_x = np.clip(np.round(cx + u_src * rx), 0, W - 1).astype(np.int32)
+    src_y = np.clip(np.round(cy + v_src * ry), 0, H - 1).astype(np.int32)
+    _CACHED_BARREL_LUT = (src_y, src_x)
+
+    dist = (np.abs(u_src) ** 4.2 + np.abs(v_src) ** 4.2) ** (1.0 / 4.2)
+    tube_mask = np.clip((1.00 - dist) / 0.16, 0.0, 1.0).astype(np.float32)
     tube_mask = tube_mask * tube_mask * (3.0 - 2.0 * tube_mask)
 
-    scan = np.where((yy % 3) == 0, 0.65, 1.0).astype(np.float32)
-    mask_u8 = np.clip(tube_mask * scan * 255.0, 0, 255).astype(np.uint8)
-    _CACHED_PHOSPHOR_MASK = Image.fromarray(np.dstack([mask_u8, mask_u8, mask_u8]), mode="RGB")
-    return _CACHED_BASE_CRT, _CACHED_PHOSPHOR_MASK
+    scan = np.where((yy % 3) == 0, 0.52, np.where((yy % 3) == 1, 1.00, 0.80)).astype(np.float32)
+    grille = np.where((xx % 2) == 0, 1.00, 0.86).astype(np.float32)
+    _CACHED_PHOSPHOR_MASK = (tube_mask * scan * grille)[:, :, None].astype(np.float32)
+    return _CACHED_BASE_CRT, _CACHED_PHOSPHOR_MASK, _CACHED_BARREL_LUT
 
 
 def render_song_crt_cgi_frame(
@@ -1152,8 +1164,7 @@ def render_song_crt_cgi_frame(
 ) -> Image.Image:
     """
     Renders a single `688x488` RGB frame of the song-specific 1980s CRT 3D CGI animation
-    at timestamp `t` by emitting glowing phosphor lines additively onto `backdrop_clean.png`
-    with zero black rectangle boundary.
+    at timestamp `t` with 1983 spherical-barrel CRT glass curvature and multi-stage phosphor halation.
     """
     seed = _song_seed(song_key or title)
     archetype = select_song_cgi_archetype(title, lyrics_text, song_key=song_key, catalog_id=catalog_id)
@@ -1168,9 +1179,20 @@ def render_song_crt_cgi_frame(
 
     _render_scene_archetype(draw, archetype, t, seed, pri, sec, grid_col, title=title, song_key=song_key)
 
-    low_res = canvas.resize((W // 2, H // 2), Image.Resampling.BILINEAR)
-    soft_crt = low_res.resize((W, H), Image.Resampling.BILINEAR)
+    base_crt, phos_mask, (src_y, src_x) = _get_cached_crt_base_and_mask(crt_bg_arr)
+    warped_cgi = Image.fromarray(np.asarray(canvas)[src_y, src_x])
+    core_cgi = warped_cgi.filter(ImageFilter.GaussianBlur(radius=0.6))
+    halo_cgi = warped_cgi.filter(ImageFilter.GaussianBlur(radius=2.8))
+    bloom_cgi = warped_cgi.filter(ImageFilter.GaussianBlur(radius=9.5))
 
-    base_crt, phos_mask = _get_cached_crt_base_and_mask(crt_bg_arr)
-    masked_phos = ImageChops.multiply(soft_crt, phos_mask)
+    c_arr = np.asarray(core_cgi, dtype=np.float32)
+    h_arr = np.asarray(halo_cgi, dtype=np.float32)
+    b_arr = np.asarray(bloom_cgi, dtype=np.float32)
+
+    raw_emit = c_arr * 0.92 + h_arr * 0.52 + b_arr * 0.34
+    lum = raw_emit[:, :, 0] * 0.299 + raw_emit[:, :, 1] * 0.587 + raw_emit[:, :, 2] * 0.114
+    warm_phos = np.dstack([lum * 0.52, lum * 1.08, lum * 0.60])
+    graded_emit = (raw_emit * 0.82 + warm_phos * 0.18) * phos_mask
+
+    masked_phos = Image.fromarray(np.clip(graded_emit, 0, 255).astype(np.uint8))
     return ImageChops.add(base_crt, masked_phos)

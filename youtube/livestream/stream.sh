@@ -82,7 +82,7 @@ if pl.exists():
   rm -f "$CRT_FIFO"
   mkfifo "$CRT_FIFO"
 
-  VF_FILTER="[1:a]aresample=44100:async=1,aformat=sample_fmts=fltp:sample_rates=44100:channel_layouts=stereo,alimiter=limit=0.87:level=disabled,asplit=2[a_out][a_viz];[a_viz]pan=mono|c0=0.5*c0+0.5*c1,volume=1.9,treble=g=8:f=3500,showfreqs=s=64x32:mode=bar:ascale=cbrt:fscale=log:win_size=1024:averaging=2:rate=30:colors=0x30c852@0.58,lagfun=decay=0.45,scale=512:112:flags=neighbor,drawgrid=w=16:h=112:t=5:c=0x000000@0.0:replace=1,drawgrid=w=512:h=7:t=2:c=0x000000@0.0:replace=1,format=yuva420p[waves];[0:v][3:v]overlay=x=616:y=204[v_crt];[v_crt][waves]overlay=x=704:y=476[v_osc];[v_osc][2:v]overlay=x=0:y=0:format=auto:eof_action=repeat,format=yuv420p[v_out]"
+  VF_FILTER="[1:a]aresample=44100:async=1,aformat=sample_fmts=fltp:sample_rates=44100:channel_layouts=stereo,alimiter=limit=0.87:level=disabled,asplit=2[a_out][a_viz];[a_viz]pan=mono|c0=0.5*c0+0.5*c1,volume=1.9,treble=g=8:f=3500,showfreqs=s=64x32:mode=bar:ascale=cbrt:fscale=log:win_size=1024:averaging=2:rate=30:colors=0x38d864@0.44,lagfun=decay=0.45,scale=544:96:flags=neighbor,drawgrid=w=17:h=96:t=5:c=0x000000@0.0:replace=1,drawgrid=w=544:h=6:t=2:c=0x000000@0.0:replace=1,gblur=sigma=0.85,drawgrid=w=544:h=3:t=1:c=0x000000@0.12:replace=1,format=yuva420p[waves];[0:v][3:v]overlay=x=616:y=204[v_crt];[v_crt][waves]overlay=x=682:y=512[v_osc];[v_osc][2:v]overlay=x=0:y=0:format=auto:eof_action=repeat,format=yuv420p[v_out]"
 
   echo "[$(date '+%Y-%m-%d %H:%M:%S')] [STREAM.SH] Selected encoder: 1080p30 Full HD Intentional ARG CRT/HUD Engine (3600k video + 160k audio)" >> "$LOG_FILE"
 

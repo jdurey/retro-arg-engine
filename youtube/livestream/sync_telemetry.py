@@ -231,12 +231,24 @@ def _get_crt_geometry() -> dict[str, np.ndarray]:
 
     # Sub-glass electron-beam scanline & shadow-mask matrix for on-CRT text:
     # Carves horizontal CRT raster lines, vertical phosphor triads, subtle radial tube falloff,
-    # and ~66% smoked-glass transmission so text looks emitted from *inside* the monitor tube.
+    # and ~68% smoked-glass transmission so text looks emitted from *inside* the monitor tube.
+    cx, cy = 338.0, 248.0
+    rx, ry = 304.0, 220.0
+    u_b = (xx - cx) / rx
+    v_b = (yy - cy) / ry
+    u_src = u_b * (1.0 + 0.068 * (v_b * v_b) + 0.022 * (u_b * u_b))
+    v_src = v_b * (1.0 + 0.082 * (u_b * u_b) + 0.026 * (v_b * v_b))
+    barrel_src_x = np.clip(np.round(cx + u_src * rx), 0, pw - 1).astype(np.int32)
+    barrel_src_y = np.clip(np.round(cy + v_src * ry), 0, ph - 1).astype(np.int32)
+
+    dist_b = (np.abs(u_src) ** 4.2 + np.abs(v_src) ** 4.2) ** (1.0 / 4.2)
+    tube_aperture = np.clip((1.08 - dist_b) / 0.10, 0.0, 1.0).astype(np.float32)
+
     row_mod = yy % 3
     scan_y = np.where(row_mod == 0, 0.36, np.where(row_mod == 1, 0.98, 0.80)).astype(np.float32)
     grille_x = np.where((xx % 2) == 0, 0.98, 0.86).astype(np.float32)
-    tube_falloff = np.clip(1.0 - 0.14 * (u * u + v * v), 0.78, 1.0).astype(np.float32)
-    text_subglass_mask = (scan_y * grille_x * tube_falloff * 0.66).astype(np.float32)
+    tube_falloff = np.clip(1.0 - 0.10 * (u_b * u_b + v_b * v_b), 0.82, 1.0).astype(np.float32)
+    text_subglass_mask = (scan_y * grille_x * tube_falloff * tube_aperture * 0.72).astype(np.float32)
 
     _CRT_GEOM_CACHE = {
         "vig": vig,
@@ -244,6 +256,8 @@ def _get_crt_geometry() -> dict[str, np.ndarray]:
         "wave_window": wave_window,
         "crt_bg_rgba": crt_bg_rgba,
         "text_subglass_mask": text_subglass_mask,
+        "barrel_src_x": barrel_src_x,
+        "barrel_src_y": barrel_src_y,
     }
     return _CRT_GEOM_CACHE
 
@@ -445,13 +459,19 @@ def _draw_crt_chrome(
 
 def _apply_crt_subglass_phosphor(text_layer: Image.Image, geom: dict) -> Image.Image:
     """
-    Transforms flat digital font glyphs into an authentic sub-glass CRT phosphor emission:
+    Transforms flat digital font glyphs into an authentic curved sub-glass CRT phosphor emission:
+      0. Warps the canvas onto the 1983 CRT spherical-barrel glass dome (`barrel_src_y, barrel_src_x`)
       1. Softens sharp digital vector edges (`GaussianBlur(0.55)`)
       2. Adds wide inner-tube phosphor halation bloom (`GaussianBlur(3.8)`)
       3. Carves horizontal CRT raster scanlines, vertical triad grille, radial tube dimming,
          and ~68% smoked-glass translucency (`geom["text_subglass_mask"]`) so the dark CRT glass
          texture shows through the characters.
     """
+    src_y = geom.get("barrel_src_y")
+    src_x = geom.get("barrel_src_x")
+    if src_y is not None and src_x is not None:
+        text_layer = Image.fromarray(np.asarray(text_layer)[src_y, src_x])
+
     soft_core = text_layer.filter(ImageFilter.GaussianBlur(radius=0.55))
     halo = text_layer.filter(ImageFilter.GaussianBlur(radius=3.8))
 
@@ -467,6 +487,20 @@ def _apply_crt_subglass_phosphor(text_layer: Image.Image, geom: dict) -> Image.I
 _CRT_PATCH_CACHE: dict[str, object] = {"key": None, "img": None}
 
 
+def _draw_subglass_crt_graticule(text_layer: Image.Image, is_warn: bool) -> None:
+    """Draws a faint sub-glass 1983 broadcast monitor raster border and horizontal calibration rules."""
+    raw_td = ImageDraw.Draw(text_layer)
+    col_frame = (225, 168, 52, 42) if is_warn else (88, 215, 102, 42)
+    col_rule = (225, 168, 52, 36) if is_warn else (88, 215, 102, 36)
+    col_tick = (225, 168, 52, 50) if is_warn else (88, 215, 102, 50)
+    raw_td.rounded_rectangle([48, 30, CRT_PX_W - 56, CRT_PX_H - 24], radius=46, outline=col_frame, width=1)
+    raw_td.line([(60, 88), (CRT_PX_W - 68, 88)], fill=col_rule, width=1)
+    raw_td.line([(60, CRT_PX_H - 64), (CRT_PX_W - 68, CRT_PX_H - 64)], fill=col_rule, width=1)
+    for tx in range(80, CRT_PX_W - 80, 48):
+        raw_td.line([(tx, 85), (tx, 91)], fill=col_tick, width=1)
+        raw_td.line([(tx, CRT_PX_H - 67), (tx, CRT_PX_H - 61)], fill=col_tick, width=1)
+
+
 def render_crt_window_patch(
     state: dict,
     relay: dict,
@@ -475,12 +509,10 @@ def render_crt_window_patch(
     current_track: dict | None = None,
 ) -> Image.Image:
     """
-    Renders the `688x488` (1080p) front-facing CRT screen patch:
-      - During interstitials (`kind != 'vocal_song'`): native dark CRT glass (`backdrop_clean.png` crop)
-        with sub-glass phosphor text, NO boxes around the text, NO black rectangle border, and NO images of Nova.
-      - During vocal songs (`kind == 'vocal_song'`): transparent CRT viewport with sub-glass scanlined
-        phosphor text so the 30fps looped 80s CRT computer graphics animation and 30fps `showwaves`
-        oscilloscope play smoothly at 30fps.
+    Renders the `688x488` (1080p) front-facing CRT screen patch with 1983 barrel curvature:
+      - During interstitials (`kind != 'vocal_song'`): curved sub-glass phosphor text & broadcast graticule.
+      - During vocal songs (`kind == 'vocal_song'`): transparent CRT viewport with barrel-curved sub-glass
+        scanlined phosphor text & graticule over the 30fps 80s CRT 3D CGI and 30fps `showfreqs` spectrum bars.
     """
     is_vocal_song = (current_track or {}).get("kind", "vocal_song") == "vocal_song"
     is_warn = (state.get("hud_mode") or state.get("mode")) == "ANOMALY_WARN"
@@ -507,33 +539,35 @@ def render_crt_window_patch(
     geom = _get_crt_geometry()
 
     if not is_vocal_song:
-        # INTERSTITIAL MODE: Codes and transcript in upper zone (y=18..102),
-        # leaving y=106..152 completely open for the 32-band 1980s EQ above the y=158 footer!
+        # INTERSTITIAL MODE: Codes and transcript in upper zone,
+        # leaving lower-middle open for the 32-band 1980s EQ above the y=170 footer!
         text_layer = Image.new("RGBA", (CRT_PX_W, CRT_PX_H), (0, 0, 0, 0))
+        _draw_subglass_crt_graticule(text_layer, is_warn)
         draw = _HiDPIDraw(ImageDraw.Draw(text_layer), scale=CRT_SX, scale_y=CRT_SY)
 
         hdr_str = _clean_crt_text(state.get("crt_header", "SIGNAL INTERCEPT"), 29)
         sub_str = _clean_crt_text(state.get("crt_sub", "BROADCAST LOG"), 29)
         ftr_str = _clean_crt_text(f"CARRIER: 14.2001 HZ // {relay.get('code', 'US-NV')}", 29)
 
-        draw.text((24, 18), hdr_str, fill=fg_green, font=FONT_CRT_8)
-        draw.text((24, 34), sub_str, fill=fg_amber, font=FONT_CRT_8)
+        draw.text((25, 17), hdr_str, fill=fg_green, font=FONT_CRT_8)
+        draw.text((25, 32), sub_str, fill=fg_amber, font=FONT_CRT_8)
 
         wrapped = textwrap.wrap(state.get("crt_body", ""), width=28)[:4]
         for idx, line in enumerate(wrapped):
             if idx == len(wrapped) - 1 and cursor_blink == 0:
                 line = line[:26] + " \u2588"
-            draw.text((24, 52 + idx * 13), line, fill=fg_bright, font=FONT_CRT_8)
+            draw.text((25, 50 + idx * 13), line, fill=fg_bright, font=FONT_CRT_8)
 
-        draw.text((24, 158), ftr_str, fill=fg_green, font=FONT_CRT_8)
+        draw.text((25, 162), ftr_str, fill=fg_green, font=FONT_CRT_8)
         out_img = _apply_crt_subglass_phosphor(text_layer, geom)
         _CRT_PATCH_CACHE["key"] = cache_key
         _CRT_PATCH_CACHE["img"] = out_img
         return out_img
 
-    # VOCAL SONG MODE: Clean Song Title & Role/Era in upper zone (y=20..38), 32-band EQ in lower zone (y=106..152),
-    # and diegetic carrier/reel stamp at y=158 so the CRT stays 100% in-universe and uncluttered!
+    # VOCAL SONG MODE: Clean Song Title & Role/Era in upper curved glass zone (y=17..32),
+    # 32-band EQ in lower-middle zone, and diegetic carrier/reel stamp at y=162!
     text_layer = Image.new("RGBA", (CRT_PX_W, CRT_PX_H), (0, 0, 0, 0))
+    _draw_subglass_crt_graticule(text_layer, is_warn)
     draw = _HiDPIDraw(ImageDraw.Draw(text_layer), scale=CRT_SX, scale_y=CRT_SY)
 
     lore = resolve_song_lore_panel(current_track or {}, state, now_ts)
@@ -544,16 +578,18 @@ def render_crt_window_patch(
     era_short = re.sub(r"^PHASE (\d+):\s*(?:THE\s+)?", r"PHASE \1 ", era_str)
     reel_id = lore.get("catalog_id", "ORION-B2").replace("ARCHIVE REEL // ", "").strip()
 
-    hdr_str = _clean_crt_text(title_str, 29)
+    hdr_str = _clean_crt_text(title_str, 22)
     sub_str = _clean_crt_text(f"{role_str} - {era_short}", 29)
     ftr_str = _clean_crt_text(f"14.2001 HZ - {reel_id}", 29)
 
-    top_fg = (232, 180, 70, 230) if is_warn else (88, 226, 106, 230)
-    sub_fg = (238, 192, 95, 235) if is_warn else (105, 235, 122, 235)
-    bot_fg = (225, 162, 45, 225) if is_warn else (76, 214, 92, 225)
-    draw.text((24, 20), hdr_str, fill=top_fg, font=FONT_CRT_8)
-    draw.text((24, 38), sub_str, fill=sub_fg, font=FONT_CRT_8)
-    draw.text((24, 158), ftr_str, fill=bot_fg, font=FONT_CRT_8)
+    top_fg = (232, 180, 70, 238) if is_warn else (108, 236, 122, 238)
+    sub_fg = (238, 192, 95, 232) if is_warn else (235, 192, 92, 232)
+    bot_fg = (225, 162, 45, 232) if is_warn else (102, 228, 116, 232)
+    tag_fg = (228, 178, 72, 210)
+    draw.text((25, 17), hdr_str, fill=top_fg, font=FONT_CRT_8)
+    draw.text((134, 17), "[P31 // LOCK]", fill=tag_fg, font=FONT_CRT_8)
+    draw.text((25, 32), sub_str, fill=sub_fg, font=FONT_CRT_8)
+    draw.text((25, 162), ftr_str, fill=bot_fg, font=FONT_CRT_8)
 
     out_img = _apply_crt_subglass_phosphor(text_layer, geom)
     _CRT_PATCH_CACHE["key"] = cache_key

@@ -83,6 +83,18 @@ def _extract_native_crt_yuv_bg(repo_root: Path) -> tuple[Image.Image, Image.Imag
     return y_bg_im, u_bg_im, v_bg_im
 
 
+def _write_all(fd: int, data: bytes) -> None:
+    """Writes 100% of `data` to `fd`, looping over any partial POSIX pipe writes so Y4M frames never byte-shift."""
+    mv = memoryview(data)
+    total = len(mv)
+    sent = 0
+    while sent < total:
+        n = os.write(fd, mv[sent:])
+        if n <= 0:
+            raise BrokenPipeError("FIFO write returned 0 bytes")
+        sent += n
+
+
 def _additive_rgb_to_y4m_frame(
     im_emit: Image.Image,
     y_bg_im: Image.Image,
@@ -92,14 +104,18 @@ def _additive_rgb_to_y4m_frame(
     """
     C-level additive YUV420P synthesis (~5.5ms/frame, zero float32 allocation):
     Unlit pixels (0,0,0) have Y=0, Cb=128, Cr=128, so y_out == y_bg_im, u_out == u_bg_im,
-    and v_out == v_bg_im bit-for-bit!
+    and v_out == v_bg_im bit-for-bit without unsigned 8-bit overflow clamping!
     """
     y_e, cb_e, cr_e = im_emit.convert("YCbCr").split()
-    cb_h = cb_e.resize((W // 2, H // 2), Image.Resampling.NEAREST)
-    cr_h = cr_e.resize((W // 2, H // 2), Image.Resampling.NEAREST)
+    cb_h = cb_e.resize((W // 2, H // 2), Image.Resampling.BILINEAR)
+    cr_h = cr_e.resize((W // 2, H // 2), Image.Resampling.BILINEAR)
     y_out = ImageChops.add(y_bg_im, y_e)
-    u_out = ImageChops.subtract(ImageChops.add(u_bg_im, cb_h), _MID_128)
-    v_out = ImageChops.subtract(ImageChops.add(v_bg_im, cr_h), _MID_128)
+    u_pos = ImageChops.subtract(cb_h, _MID_128)
+    u_neg = ImageChops.subtract(_MID_128, cb_h)
+    u_out = ImageChops.subtract(ImageChops.add(u_bg_im, u_pos), u_neg)
+    v_pos = ImageChops.subtract(cr_h, _MID_128)
+    v_neg = ImageChops.subtract(_MID_128, cr_h)
+    v_out = ImageChops.subtract(ImageChops.add(v_bg_im, v_pos), v_neg)
     return FRAME_PREFIX + y_out.tobytes() + u_out.tobytes() + v_out.tobytes()
 
 
@@ -229,14 +245,14 @@ def main() -> None:
         out_fd = os.open(fifo_path, os.O_WRONLY)
 
     try:
-        os.write(out_fd, Y4M_HEADER)
+        _write_all(out_fd, Y4M_HEADER)
         dt = 1.0 / float(FPS)
         next_tick = time.monotonic()
         frame_idx = 0
         while True:
             frames = _active_frames
             pkt = frames[frame_idx % len(frames)]
-            os.write(out_fd, pkt)
+            _write_all(out_fd, pkt)
             frame_idx += 1
             next_tick += dt
             sleep_s = next_tick - time.monotonic()
