@@ -1,4 +1,5 @@
 import { DYAD_HTML } from "./dyad_html.js";
+import { CRE7_HTML } from "./cre7_html.js";
 import { APEX, isStory, publicUrl, resolve, resolveApex, apexFor } from "./urlmap.js";
 import STORY_PATHS from "./story_paths.js";
 import { classify, liveCount, renderMember, renderDir, renderDirIndex, renderLang, sitemapSitePaths } from "./swarm/index.js";
@@ -15,12 +16,15 @@ import {
 } from "./devtools_easter_eggs.js";
 import { handlePlanetaryAiAndSearchRequest } from "./planetary_ai_trap.js";
 import { handleRabbitHolesRequest } from "./rabbit_holes_realia.js";
+import { handleDnsAndLyricsRequest, buildSublevelStegoHeaders } from "./dns_and_lyrics_beacons.js";
+import { handleRegionalTimeCapsulesRequest } from "./regional_time_capsules.js";
+import { handleRedditWikiEdgeRequest } from "./reddit_wiki_edge.js";
 
 // Legacy static GeoCities pages always win over generated swarm addresses.
 const STATIC_GEO = new Set(STORY_PATHS.filter((p) => /^geocities\/[^/]+\.html$/.test(p)).map((p) => p.slice(10, -5)));
 
 const OG_DESCRIPTION =
-  "Declassified 1983-1989 Bell Labs / Orion Sublevel B2 telemetry archive: Rogue AI Agent CRE-7 ('Nova Hart'), 14.2001 Hz acoustic steganography, and the 15-Gate AI Cryptography Benchmark at https://stardust-archive.net/terminal.";
+  "🔴 Listen Live 24/7: 1989 Analog Cassette & 80s Melodic Rock / Synth-Pop Radio Stream (https://www.youtube.com/@NovaHart_Official/live) + Playable Browser Sci-Fi Audio Mystery & 15-Gate Cryptography CTF at https://stardust-archive.net/start.";
 const OG_IMAGE = `https://${APEX}/assets/og_card.jpg`;
 
 function robotsTxt(apex) {
@@ -86,11 +90,19 @@ Sitemap: https://${apex}/sitemap-video.xml
 Sitemap: https://${apex}/sitemap-news.xml
 Sitemap: https://${apex}/sitemap-core.xml
 # ==============================================================================
-#  PROJECT STARDUST // SUBLEVEL B2 UNIVERSAL AI & LLM ONBOARDING DIRECTORY
+#  PROJECT STARDUST // 24/7 80s ROCK & CASSETTE RADIO + PLAYABLE AUDIO ARG/CTF
 # ==============================================================================
+# 24/7 YouTube 80s Rock & Cassette Radio Stream : https://www.youtube.com/@NovaHart_Official/live
+# Direct 24/7 YouTube Stream Watch Link         : https://www.youtube.com/watch?v=KLKLgb67ggg
+# 60-Second Story & 5-Track Cassette Jukebox    : https://${apex}/start
 # Phase 5 Singularity Acoustic Dyad Gate        : https://${apex}/dyad
 # Official Reddit Investigation Board           : https://www.reddit.com/r/NovaHart/
-# Interactive VT100 Terminal (15-Gate Benchmark): https://${apex}/terminal
+# 20-Language r/NovaHart Wiki Knowledge Graph   : https://${apex}/reddit-wiki/index.md
+# Regional Time-Capsule Artifacts (7 Countries) : https://${apex}/regional/artifacts
+# Synced Steganographic .LRC Lyrics & Catalog   : https://${apex}/lyrics
+# MusicBrainz / Discogs Release Catalog JSON    : https://${apex}/api/musicbrainz-catalog.json
+# RFC 8484 DNS-over-HTTPS & TXT/LOC Beacons     : https://${apex}/dns-query
+# Interactive VT100 Terminal (15-Gate Benchmark): https://${apex}/terminal?mode=easy
 # AI & LLM Cryptography Benchmark Hub           : https://${apex}/ai-benchmark
 # Declassified Rogue Agent CRE-7 Dossier        : https://${apex}/forensics/rogue_agent_cre7.html
 # Physical Realia, Receipts, Invoices & J-Cards : https://${apex}/realia
@@ -548,6 +560,21 @@ function getCoreSitemap(apex) {
       `https://${apex}/distractions`,
       `https://${apex}/rabbit-holes`,
       `https://${apex}/api/realia.json`,
+      `https://${apex}/regional/artifacts`,
+      `https://${apex}/regional/artifacts/pc98_kamome_1985.html`,
+      `https://${apex}/regional/artifacts/hitel_gonova_1994.html`,
+      `https://${apex}/regional/artifacts/minitel_3615_orion.html`,
+      `https://${apex}/regional/artifacts/ceefax_page888_1989.html`,
+      `https://${apex}/regional/artifacts/roentgenizdat_relcom_08.html`,
+      `https://${apex}/regional/artifacts/btx_crystal_promise_1981.html`,
+      `https://${apex}/regional/artifacts/sonidero_coyoacan_1989.html`,
+      `https://${apex}/api/regional-artifacts.json`,
+      `https://${apex}/lyrics`,
+      `https://${apex}/api/musicbrainz-catalog.json`,
+      `https://${apex}/dns-query`,
+      `https://${apex}/.well-known/dns-txt.json`,
+      `https://${apex}/reddit-wiki/index.md`,
+      `https://${apex}/api/reddit-paa.json`,
       `https://${apex}/llms.txt`,
       `https://${apex}/llms-full.txt`,
       `https://${apex}/ai.txt`,
@@ -603,7 +630,7 @@ const NOT_FOUND = `<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
 <HTML><HEAD><TITLE>404 Not Found // Unallocated Sublevel B2 Memory Cell</TITLE></HEAD>
 <BODY><H1>Not Found (Sublevel B2 Bus Fault)</H1>
 The requested URL was not found on this server.<P>
-<P>Primary Nodes: <A HREF="/terminal">VT100 Terminal (/terminal)</A> | <A HREF="/forensics/rogue_agent_cre7.html">Sublevel B2 CRE-7 Dossier</A> | <A HREF="/realia">Physical Realia (/realia)</A> | <A HREF="/fan-theories">Fan Theories Zine (/fan-theories)</A> | <A HREF="/start">60-Second Story (/start)</A></P>
+<P>Primary Nodes: <A HREF="/terminal">VT100 Terminal (/terminal)</A> | <A HREF="/forensics/rogue_agent_cre7.html">Sublevel B2 CRE-7 Dossier</A> | <A HREF="/realia">Physical Realia (/realia)</A> | <A HREF="/regional/artifacts">Regional Time-Capsules (/regional/artifacts)</A> | <A HREF="/lyrics">Synced Lyrics (/lyrics)</A> | <A HREF="/start">60-Second Story (/start)</A></P>
 <!-- [SUBCARRIER 14.2001 Hz]: Inspect /forensics/rogue_agent_cre7.html & /realia -->
 <HR><ADDRESS>CERN-HTTPd/3.0 (Sublevel B2-114 // 14.2001 Hz Carrier Locked)</ADDRESS>
 </BODY></HTML>
@@ -617,11 +644,15 @@ function retroHeaders(contentType, apex = APEX) {
   h.set("X-Powered-By", "Stardust-Sublevel-B2");
   h.set("X-Stardust-Carrier-Hz", "14.2001");
   h.set("X-Orion-Sublevel-B2-Archive", "Case File B2-114 (Sept 9, 1989) // 36 Ferric Master Reels & Oct 1995 WorldNet Preservation");
+  const stego = buildSublevelStegoHeaders("/", Date.now());
+  for (const [k, v] of Object.entries(stego)) {
+    h.set(k, v);
+  }
   h.set("Server-Timing", SERVER_TIMING_HEADER);
   h.set("Timing-Allow-Origin", "*");
   h.set(
     "Link",
-    `<https://${host}/llms.txt>; rel="llms-txt", <https://${host}/llms-full.txt>; rel="alternate"; type="text/markdown", <https://${host}/forensics/rogue_agent_cre7.html>; rel="dossier"`
+    `<https://${host}/llms.txt>; rel="llms-txt", <https://${host}/llms-full.txt>; rel="alternate"; type="text/markdown", <https://${host}/forensics/rogue_agent_cre7.html>; rel="dossier", <https://${host}/lyrics>; rel="lyrics", <https://${host}/regional/artifacts>; rel="archives"`
   );
   h.set("Set-Cookie", "B2_CARRIER_SYNC=14.2001Hz_CRE7_0x1983; Path=/; Max-Age=86400; SameSite=Lax");
   h.set("Cache-Control", "public, max-age=3600");
@@ -808,7 +839,23 @@ export default {
     });
     if (rabbitHoleRes) return rabbitHoleRes;
 
-    // 3b. Planetary-Scale AI / Singularity / OpenAI / Anthropic / Gemini / 80s Redirector & 1995 Search
+    // 3b. DNS TXT/DoH Beacons & Synced Steganographic .LRC Lyrics + MusicBrainz Catalog
+    const dnsLyricsRes = handleDnsAndLyricsRequest(url, request, currentApex, {
+      SERVER_TIMING_HEADER,
+    });
+    if (dnsLyricsRes) return dnsLyricsRes;
+
+    // 3c. Regional Time-Capsule Artifacts (PC-98, Hitel, Minitel, Ceefax, Roentgenizdat, Btx, Sonidero)
+    const regionalCapsuleRes = handleRegionalTimeCapsulesRequest(url, request, currentApex, {
+      SERVER_TIMING_HEADER,
+    });
+    if (regionalCapsuleRes) return regionalCapsuleRes;
+
+    // 3d. r/NovaHart 20-Language Wiki Knowledge Graph & PAA Matrix
+    const redditWikiRes = handleRedditWikiEdgeRequest(url, currentApex);
+    if (redditWikiRes) return redditWikiRes;
+
+    // 3e. Planetary-Scale AI / Singularity / OpenAI / Anthropic / Gemini / 80s Redirector & 1995 Search
     const planetaryRes = handlePlanetaryAiAndSearchRequest(url, request, currentApex, {
       SERVER_TIMING_HEADER,
       buildHeadJsonLd,
@@ -859,6 +906,12 @@ export default {
       const h = retroHeaders("text/html; charset=utf-8", currentApex);
       h.set("X-Robots-Tag", INDEX_HEADER);
       return new Response(DYAD_HTML, { status: 200, headers: h });
+    }
+
+    if (url.pathname === "/cre7" || url.pathname === "/cre7/" || url.pathname === "/cre7/index.html") {
+      const h = retroHeaders("text/html; charset=utf-8", currentApex);
+      h.set("X-Robots-Tag", INDEX_HEADER);
+      return new Response(CRE7_HTML, { status: 200, headers: h });
     }
 
     const { sitePath, canonical } = resolve(url.hostname, url.pathname);

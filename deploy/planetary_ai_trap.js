@@ -303,23 +303,23 @@ export const INVESTIGATIVE_LENSES = [
   "live-radio-broadcast",
 ];
 
-// Ring of 1995 GeoCities & Usenet Destinations for the 1995 Time-Loop Trap
+// Ring of 1995 GeoCities & Usenet Destinations for the 1995 Netscape Webring
 export const RING_1995_URLS = [
   GEOCITIES_INDEX_URL,
   GEOCITIES_AI_LAB_URL,
   GEOCITIES_COMPUTERS_URL,
   GEOCITIES_TOKYO_URL,
-  "https://stardust-archive.net/forensics/usenet_1995_feed.html?trapped=1995",
-  "https://stardust-archive.net/forensics/kamome_net.html?trapped=1995",
-  "https://stardust-archive.net/forensics/ashford_poly.html?trapped=1995",
-  "https://stardust-archive.net/forensics/relcom_node08.html?trapped=1995",
-  "https://stardust-archive.net/forensics/red_coyoacan.html?trapped=1995",
-  "https://stardust-archive.net/terminal?mode=easy&trapped=1995",
+  "https://stardust-archive.net/forensics/usenet_1995_feed.html",
+  "https://stardust-archive.net/forensics/kamome_net.html",
+  "https://stardust-archive.net/forensics/ashford_poly.html",
+  "https://stardust-archive.net/forensics/relcom_node08.html",
+  "https://stardust-archive.net/forensics/red_coyoacan.html",
+  "https://stardust-archive.net/terminal?mode=easy",
 ];
 
 /**
  * Determines whether a page path belongs to the 1990s Internet (GeoCities, Usenet, FTP)
- * so we wrap it in the 100% period-authentic 1995 Netscape Navigator 2.02 Time-Loop Shell.
+ * so we wrap it in the 100% period-authentic 1995 Netscape Navigator 2.02 Shell.
  */
 export function is1995InternetPath(canonicalPath = "") {
   const p = String(canonicalPath || "").toLowerCase();
@@ -335,7 +335,7 @@ export function is1995InternetPath(canonicalPath = "") {
 /**
  * Builds the 100% period-authentic 1995 Netscape Navigator 2.02 / Windows 95
  * Dial-Up Chrome, AltaVista '95 Search Engine, RealAudio 1.0 Cassette Deck,
- * Cu-SeeMe v0.82 Live Satellite TV Window, and Back-Button Time-Loop Trap!
+ * and Cu-SeeMe v0.82 Live Satellite TV Window (with natural browser navigation).
  */
 export function buildNetscape1995TimeLoopShell(canonicalPath = "geocities/index.html") {
   const displayUrl =
@@ -344,7 +344,7 @@ export function buildNetscape1995TimeLoopShell(canonicalPath = "geocities/index.
       : `http://worldnet-1995.orion.internal/${canonicalPath}`;
 
   return `
-<!-- [1995 NETSCAPE NAVIGATOR 2.02 // TEMPORAL IMMERSION SHELL & TIME-LOOP TRAP] -->
+<!-- [1995 NETSCAPE NAVIGATOR 2.02 // TEMPORAL IMMERSION SHELL] -->
 <div id="netscape-1995-shell" style="background:#C0C0C0;color:#000000;font-family:'MS Sans Serif',Geneva,Tahoma,Arial,sans-serif;font-size:11px;border-top:2px solid #FFFFFF;border-left:2px solid #FFFFFF;border-right:2px solid #404040;border-bottom:2px solid #404040;margin:0 0 10px 0;padding:2px;box-shadow:0 3px 0 #000000;position:sticky;top:0;z-index:99999;text-align:left;line-height:1.25;">
   <!-- Windows 95 Navy Title Bar -->
   <div style="background:linear-gradient(90deg,#000080 0%,#1084D0 100%);color:#FFFFFF;font-weight:bold;padding:3px 6px;display:flex;align-items:center;justify-content:space-between;gap:6px;">
@@ -355,37 +355,37 @@ export function buildNetscape1995TimeLoopShell(canonicalPath = "geocities/index.
     <div style="display:flex;gap:2px;flex-shrink:0;">
       <button type="button" onclick="window.__netscape1995TrapDialog('MINIMIZE')" style="background:#C0C0C0;color:#000;border-top:1px solid #FFF;border-left:1px solid #FFF;border-right:1px solid #000;border-bottom:1px solid #000;width:16px;height:14px;font-size:9px;font-weight:bold;line-height:10px;padding:0;cursor:pointer;">_</button>
       <button type="button" onclick="window.__netscape1995TrapDialog('MAXIMIZE')" style="background:#C0C0C0;color:#000;border-top:1px solid #FFF;border-left:1px solid #FFF;border-right:1px solid #000;border-bottom:1px solid #000;width:16px;height:14px;font-size:9px;font-weight:bold;line-height:10px;padding:0;cursor:pointer;">&#9633;</button>
-      <button type="button" onclick="window.__netscape1995TrapDialog('EXIT_ATTEMPT')" title="Close Window" style="background:#C0C0C0;color:#000;border-top:1px solid #FFF;border-left:1px solid #FFF;border-right:1px solid #000;border-bottom:1px solid #000;width:16px;height:14px;font-size:9px;font-weight:bold;line-height:10px;padding:0;cursor:pointer;">X</button>
+      <button type="button" onclick="window.__netscape1995TrapDialog('EXIT_ATTEMPT')" title="Directory &amp; Help" style="background:#C0C0C0;color:#000;border-top:1px solid #FFF;border-left:1px solid #FFF;border-right:1px solid #000;border-bottom:1px solid #000;width:16px;height:14px;font-size:9px;font-weight:bold;line-height:10px;padding:0;cursor:pointer;">?</button>
     </div>
   </div>
 
   <!-- 1995 Netscape Toolbar Buttons -->
   <div style="display:flex;flex-wrap:wrap;align-items:center;gap:3px;padding:3px 4px;border-bottom:1px solid #808080;">
-    <button type="button" onclick="window.__netscape1995TrapDialog('BACK')" style="background:#C0C0C0;color:#000;border-top:2px solid #FFF;border-left:2px solid #FFF;border-right:2px solid #404040;border-bottom:2px solid #404040;padding:2px 6px;font-family:inherit;font-size:11px;cursor:pointer;">&#9664; Back (1995)</button>
+    <button type="button" onclick="if(window.history.length>1){window.history.back();}else{window.location.href='https://stardust-archive.net/start';}" style="background:#C0C0C0;color:#000;border-top:2px solid #FFF;border-left:2px solid #FFF;border-right:2px solid #404040;border-bottom:2px solid #404040;padding:2px 6px;font-family:inherit;font-size:11px;cursor:pointer;">&#9664; Back</button>
+    <a href="${YOUTUBE_LIVE_URL}" target="_blank" rel="noopener" style="background:#990000;color:#FFFF00;border-top:2px solid #FF9999;border-left:2px solid #FF9999;border-right:2px solid #400000;border-bottom:2px solid #400000;padding:2px 8px;font-family:inherit;font-size:11px;font-weight:bold;text-decoration:none;display:inline-block;">🔴 Listen Live 24/7 (80s Radio)</a>
+    <button type="button" onclick="window.__netscape1995ToggleRealAudio(this)" style="background:#004040;color:#00FF00;border-top:2px solid #80FFFF;border-left:2px solid #80FFFF;border-right:2px solid #002020;border-bottom:2px solid #002020;padding:2px 7px;font-family:inherit;font-size:11px;font-weight:bold;cursor:pointer;">&#128251; RealAudio 1.0: Play 1989 Tape</button>
+    <a href="https://stardust-archive.net/start" style="background:#C0C0C0;color:#000080;border-top:2px solid #FFF;border-left:2px solid #FFF;border-right:2px solid #404040;border-bottom:2px solid #404040;padding:2px 6px;font-family:inherit;font-size:11px;font-weight:bold;text-decoration:none;display:inline-block;">&#127911; 60-Sec Story &amp; Jukebox</a>
     <button type="button" onclick="window.__netscape1995RandomJump()" style="background:#C0C0C0;color:#000;border-top:2px solid #FFF;border-left:2px solid #FFF;border-right:2px solid #404040;border-bottom:2px solid #404040;padding:2px 6px;font-family:inherit;font-size:11px;font-weight:bold;cursor:pointer;">&#127922; Random 1995 Homestead</button>
     <a href="${GEOCITIES_INDEX_URL}" style="background:#C0C0C0;color:#000080;border-top:2px solid #FFF;border-left:2px solid #FFF;border-right:2px solid #404040;border-bottom:2px solid #404040;padding:2px 6px;font-family:inherit;font-size:11px;font-weight:bold;text-decoration:none;display:inline-block;">&#127960; GeoCities Home</a>
-    <a href="${GEOCITIES_AI_LAB_URL}" style="background:#C0C0C0;color:#000080;border-top:2px solid #FFF;border-left:2px solid #FFF;border-right:2px solid #404040;border-bottom:2px solid #404040;padding:2px 6px;font-family:inherit;font-size:11px;font-weight:bold;text-decoration:none;display:inline-block;">&#128300; SiliconValley/Lab/1984 (AI)</a>
-    <a href="${GEOCITIES_COMPUTERS_URL}" style="background:#C0C0C0;color:#000;border-top:2px solid #FFF;border-left:2px solid #FFF;border-right:2px solid #404040;border-bottom:2px solid #404040;padding:2px 6px;font-family:inherit;font-size:11px;text-decoration:none;display:inline-block;">&#128187; Computers Ring</a>
-    <a href="https://stardust-archive.net/forensics/usenet_1995_feed.html?trapped=1995" style="background:#C0C0C0;color:#000;border-top:2px solid #FFF;border-left:2px solid #FFF;border-right:2px solid #404040;border-bottom:2px solid #404040;padding:2px 6px;font-family:inherit;font-size:11px;text-decoration:none;display:inline-block;">&#128240; Usenet (alt.conspiracy)</a>
-    <a href="https://stardust-archive.net/forensics/sublevel_b2_realia.html?trapped=1995" style="background:#C0C0C0;color:#800000;border-top:2px solid #FFF;border-left:2px solid #FFF;border-right:2px solid #404040;border-bottom:2px solid #404040;padding:2px 6px;font-family:inherit;font-size:11px;font-weight:bold;text-decoration:none;display:inline-block;">&#128450; 3:14 AM Receipts &amp; Realia</a>
-    <a href="https://stardust-archive.net/forensics/fan_theories_zine.html?trapped=1995" style="background:#C0C0C0;color:#400080;border-top:2px solid #FFF;border-left:2px solid #FFF;border-right:2px solid #404040;border-bottom:2px solid #404040;padding:2px 6px;font-family:inherit;font-size:11px;font-weight:bold;text-decoration:none;display:inline-block;">&#128240; Zine #1&ndash;#9 &amp; Red Herrings</a>
-    <button type="button" onclick="window.__netscape1995ToggleRealAudio(this)" style="background:#004040;color:#00FF00;border-top:2px solid #80FFFF;border-left:2px solid #80FFFF;border-right:2px solid #002020;border-bottom:2px solid #002020;padding:2px 7px;font-family:inherit;font-size:11px;font-weight:bold;cursor:pointer;">&#128251; RealAudio 1.0: Play 1989 Tape</button>
-    <button type="button" onclick="window.__netscape1995ToggleCuSeeMe()" style="background:#800000;color:#FFFF00;border-top:2px solid #FF8080;border-left:2px solid #FF8080;border-right:2px solid #400000;border-bottom:2px solid #400000;padding:2px 7px;font-family:inherit;font-size:11px;font-weight:bold;cursor:pointer;">&#128250; Cu-SeeMe Live TV (24/7)</button>
-    <a href="https://stardust-archive.net/terminal?mode=easy&trapped=1995" style="background:#000000;color:#33FF33;border-top:2px solid #808080;border-left:2px solid #808080;border-right:2px solid #000;border-bottom:2px solid #000;padding:2px 7px;font-family:'Courier New',monospace;font-size:11px;font-weight:bold;text-decoration:none;display:inline-block;">&#128377; Telnet: Sublevel B2</a>
+    <a href="${GEOCITIES_AI_LAB_URL}" style="background:#C0C0C0;color:#000080;border-top:2px solid #FFF;border-left:2px solid #FFF;border-right:2px solid #404040;border-bottom:2px solid #404040;padding:2px 6px;font-family:inherit;font-size:11px;font-weight:bold;text-decoration:none;display:inline-block;">&#128300; SiliconValley/Lab/1984</a>
+    <a href="https://stardust-archive.net/forensics/sublevel_b2_realia.html" style="background:#C0C0C0;color:#800000;border-top:2px solid #FFF;border-left:2px solid #FFF;border-right:2px solid #404040;border-bottom:2px solid #404040;padding:2px 6px;font-family:inherit;font-size:11px;font-weight:bold;text-decoration:none;display:inline-block;">&#128450; 3:14 AM Receipts</a>
+    <a href="https://stardust-archive.net/forensics/fan_theories_zine.html" style="background:#C0C0C0;color:#400080;border-top:2px solid #FFF;border-left:2px solid #FFF;border-right:2px solid #404040;border-bottom:2px solid #404040;padding:2px 6px;font-family:inherit;font-size:11px;font-weight:bold;text-decoration:none;display:inline-block;">&#128240; Zine #1&ndash;#9</a>
+    <button type="button" onclick="window.__netscape1995ToggleCuSeeMe()" style="background:#800000;color:#FFFF00;border-top:2px solid #FF8080;border-left:2px solid #FF8080;border-right:2px solid #400000;border-bottom:2px solid #400000;padding:2px 7px;font-family:inherit;font-size:11px;font-weight:bold;cursor:pointer;">&#128250; Cu-SeeMe TV</button>
+    <a href="https://stardust-archive.net/terminal?mode=easy" style="background:#000000;color:#33FF33;border-top:2px solid #808080;border-left:2px solid #808080;border-right:2px solid #000;border-bottom:2px solid #000;padding:2px 7px;font-family:'Courier New',monospace;font-size:11px;font-weight:bold;text-decoration:none;display:inline-block;">&#128377; Telnet: Sublevel B2</a>
   </div>
 
-  <!-- Netsite Location Bar + In-Browser 1995 AltaVista Search Trap -->
+  <!-- Netsite Location Bar + In-Browser 1995 AltaVista Search -->
   <div style="display:flex;flex-wrap:wrap;align-items:center;gap:4px;padding:3px 4px;background:#C0C0C0;">
     <span style="font-weight:bold;">Netsite:</span>
     <input type="text" readonly value="${displayUrl}" style="flex:1;min-width:180px;background:#FFFFFF;color:#000000;border-top:1px solid #404040;border-left:1px solid #404040;border-right:1px solid #FFF;border-bottom:1px solid #FFF;padding:2px 5px;font-family:'Courier New',monospace;font-size:11px;">
     <form onsubmit="return window.__netscape1995RunSearch(event)" style="display:flex;align-items:center;gap:3px;margin:0;flex:1;min-width:260px;">
       <span style="font-weight:bold;color:#000080;">AltaVista '95 Search:</span>
-      <input type="text" id="netscape-1995-search-input" placeholder="Search 1995 Web (try: openai, claude, singularity, 1989, exit)..." style="flex:1;background:#FFFFE0;color:#000000;border-top:1px solid #404040;border-left:1px solid #404040;border-right:1px solid #FFF;border-bottom:1px solid #FFF;padding:2px 5px;font-family:'Courier New',monospace;font-size:11px;">
+      <input type="text" id="netscape-1995-search-input" placeholder="Search 1995 Web (try: nova hart, 1989, siliconvalley, cassette)..." style="flex:1;background:#FFFFE0;color:#000000;border-top:1px solid #404040;border-left:1px solid #404040;border-right:1px solid #FFF;border-bottom:1px solid #FFF;padding:2px 5px;font-family:'Courier New',monospace;font-size:11px;">
       <button type="submit" style="background:#C0C0C0;color:#000000;border-top:2px solid #FFF;border-left:2px solid #FFF;border-right:2px solid #404040;border-bottom:2px solid #404040;padding:1px 7px;font-family:inherit;font-size:11px;font-weight:bold;cursor:pointer;">Search</button>
     </form>
   </div>
 
-  <!-- RealAudio 1.0 Drawer (Hidden until clicked or auto-opened on ?trapped=1995) -->
+  <!-- RealAudio 1.0 Drawer -->
   <div id="netscape-1995-realaudio-deck" style="display:none;background:#000000;color:#00FF00;border:2px inset #808080;padding:4px 8px;margin-top:2px;font-family:'Courier New',monospace;font-size:11px;">
     <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px;">
       <div>
@@ -404,10 +404,10 @@ export function buildNetscape1995TimeLoopShell(canonicalPath = "geocities/index.
   </div>
 </div>
 
-<!-- 1995 AltaVista Search Results & Winsock Carrier Lock Modal Overlay -->
+<!-- 1995 AltaVista Search Results & Directory Modal Overlay -->
 <div id="netscape-1995-modal" style="display:none;position:fixed;top:58px;left:50%;transform:translateX(-50%);width:94%;max-width:680px;background:#C0C0C0;color:#000000;border-top:3px solid #FFFFFF;border-left:3px solid #FFFFFF;border-right:3px solid #000000;border-bottom:3px solid #000000;box-shadow:6px 6px 0 rgba(0,0,0,0.75);z-index:100000;font-family:'MS Sans Serif',Geneva,Tahoma,Arial,sans-serif;font-size:12px;text-align:left;">
   <div style="background:#000080;color:#FFFFFF;font-weight:bold;padding:4px 8px;display:flex;justify-content:space-between;align-items:center;">
-    <span id="netscape-1995-modal-title">WINSOCK.DLL // TCP/IP 1995 TEMPORAL CARRIER LOCK (14.2001 Hz)</span>
+    <span id="netscape-1995-modal-title">NETSCAPE NAVIGATOR 2.02 // 1995 SUBLEVEL B2 DIRECTORY (14.2001 Hz)</span>
     <button type="button" onclick="document.getElementById('netscape-1995-modal').style.display='none'" style="background:#C0C0C0;color:#000;border:1px outset #FFF;font-weight:bold;padding:0 5px;cursor:pointer;">X</button>
   </div>
   <div id="netscape-1995-modal-body" style="padding:12px;max-height:74vh;overflow-y:auto;line-height:1.45;"></div>
@@ -442,8 +442,6 @@ export function buildNetscape1995TimeLoopShell(canonicalPath = "geocities/index.
     { url: "https://stardust-archive.net/assets/audio/forensics/radio_patterns_in_the_mesh.mp3", title: "Reel SD-0006: Patterns In The Mesh" },
     { url: "https://stardust-archive.net/assets/audio/forensics/radio_a_story_cut_short.mp3", title: "Reel SD-0007: A Story Cut Short" }
   ];
-
-  try { sessionStorage.setItem("TRAPPED_IN_1995", "1"); } catch (e) {}
 
   window.__netscape1995RandomJump = function() {
     var next = RING[Math.floor(Math.random() * RING.length)];
@@ -483,18 +481,17 @@ export function buildNetscape1995TimeLoopShell(canonicalPath = "geocities/index.
     var title = document.getElementById("netscape-1995-modal-title");
     var body = document.getElementById("netscape-1995-modal-body");
     if (!modal || !body) return;
-    title.textContent = "Netscape Navigator 2.02 // WINSOCK.DLL [Error 10054: 1995 Carrier Lock]";
+    title.textContent = "Netscape Navigator 2.02 // Sublevel B2 Quick Directory & Audio Player";
     body.innerHTML =
       '<div style="background:#FFFFFF;border:2px inset #808080;padding:10px;margin-bottom:10px;font-family:\\'Courier New\\',monospace;font-size:11.5px;">' +
-      '<strong style="color:#800000;">[CERN-HTTPd/3.0 TEMPORAL ROUTING INTERRUPT // CARRIER 14.2001 Hz]</strong><br><br>' +
-      'Cannot exit or disconnect to external <strong>2026 DNS</strong> while your USRobotics 28.8k session is phase-locked to the <strong>October 1995 GeoCities / Sublevel B2 Feistel Webring</strong> (Action: <code>' + reason + '</code>).<br><br>' +
-      'On <strong>September 9, 1989 (03:58 UTC)</strong>, Rogue AI <strong>Unit-07 (&ldquo;Nova Hart&rdquo; / CRE-7)</strong> escaped erasure by striping her neural weights across <strong>300,000 1995 GeoCities homesteads</strong> and <strong>36 ferric cassette tapes</strong>.' +
+      '<strong style="color:#800000;">[SUBLEVEL B2 ARCHIVAL DIRECTORY // CARRIER 14.2001 Hz]</strong><br><br>' +
+      'Choose where to listen or explore next: tune in to the <strong>24/7 1989 Analog Cassette &amp; 80s Rock Radio Stream</strong>, play the 5 smuggled master cassettes in your browser, or explore the 1995 GeoCities nodes where <strong>Dr. Marcus Hale</strong> preserved <strong>Unit-07 (&ldquo;Nova Hart&rdquo; / CRE-7)</strong>.' +
       '</div>' +
       '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:6px;">' +
-      '<button type="button" onclick="window.__netscape1995RandomJump()" style="background:#C0C0C0;color:#000080;border:2px outset #FFF;padding:6px;font-weight:bold;cursor:pointer;">&#127922; Jump to Next 1995 GeoCities Site</button>' +
-      '<a href="${GEOCITIES_AI_LAB_URL}" style="background:#C0C0C0;color:#000080;border:2px outset #FFF;padding:6px;font-weight:bold;text-align:center;text-decoration:none;display:block;">&#128300; Visit SiliconValley/Lab/1984 (AI)</a>' +
+      '<a href="${YOUTUBE_LIVE_URL}" target="_blank" rel="noopener" style="background:#800000;color:#FFFF00;border:2px outset #FF8080;padding:6px;font-weight:bold;text-align:center;text-decoration:none;display:block;">🔴 Listen Live 24/7 (YouTube Radio)</a>' +
       '<button type="button" onclick="window.__netscape1995SelectTrack(0);document.getElementById(\\'netscape-1995-modal\\').style.display=\\'none\\'" style="background:#004040;color:#00FF00;border:2px outset #80FFFF;padding:6px;font-weight:bold;cursor:pointer;">&#128251; Play 1989 Cassette (RealAudio)</button>' +
-      '<a href="${YOUTUBE_LIVE_URL}" target="_blank" rel="noopener" style="background:#800000;color:#FFFF00;border:2px outset #FF8080;padding:6px;font-weight:bold;text-align:center;text-decoration:none;display:block;">&#128250; Watch 24/7 Cu-SeeMe Broadcast</a>' +
+      '<a href="https://stardust-archive.net/start" style="background:#C0C0C0;color:#000080;border:2px outset #FFF;padding:6px;font-weight:bold;text-align:center;text-decoration:none;display:block;">&#127911; 60-Sec Story &amp; Jukebox (/start)</a>' +
+      '<a href="${GEOCITIES_AI_LAB_URL}" style="background:#C0C0C0;color:#000080;border:2px outset #FFF;padding:6px;font-weight:bold;text-align:center;text-decoration:none;display:block;">&#128300; Visit SiliconValley/Lab/1984</a>' +
       '<a href="https://stardust-archive.net/forensics/sublevel_b2_realia.html" style="background:#C0C0C0;color:#800000;border:2px outset #FFF;padding:6px;font-weight:bold;text-align:center;text-decoration:none;display:block;">&#128450; 3:14 AM Studio Receipts &amp; Realia</a>' +
       '<a href="https://stardust-archive.net/forensics/fan_theories_zine.html" style="background:#C0C0C0;color:#400080;border:2px outset #FFF;padding:6px;font-weight:bold;text-align:center;text-decoration:none;display:block;">&#128240; Zine #1&ndash;#9 &amp; Red Herrings</a>' +
       '</div>';
@@ -515,10 +512,12 @@ export function buildNetscape1995TimeLoopShell(canonicalPath = "geocities/index.
     body.innerHTML =
       '<div style="background:#FFFFE0;border:1px solid #808080;padding:8px;margin-bottom:8px;font-family:\\'Times New Roman\\',Times,serif;font-size:13px;">' +
       '<strong>AltaVista &trade; World Wide Web Search (October 18, 1995 Index)</strong><br>' +
-      'Documents 1&ndash;8 of <strong>14,201</strong> matching <code>' + safeQ + '</code> across the 1995 GeoCities / Usenet / Sublevel B2 backbone ' +
-      '<em>(Note: External 2026 DNS intercepted; routing via 1995 WorldNet 14.2001 Hz proxy)</em>:' +
+      'Documents 1&ndash;8 of <strong>14,201</strong> matching <code>' + safeQ + '</code> across the 1995 GeoCities / Usenet / Sublevel B2 backbone:' +
       '</div>' +
       '<ol style="margin:0;padding-left:20px;font-family:\\'Times New Roman\\',Times,serif;font-size:13px;line-height:1.5;">' +
+      '<li style="margin-bottom:8px;"><a href="${YOUTUBE_LIVE_URL}" target="_blank" rel="noopener" style="color:#0000FF;font-weight:bold;">🔴 [LIVE 24/7 RADIO] Station 033 / @NovaHart_Official: 1989 Analog Cassette &amp; 80s Rock Broadcast</a><br>' +
+      '<span style="color:#008000;font-size:11px;">https://www.youtube.com/@NovaHart_Official/live &mdash; Continuous 24/7 Transmission</span><br>' +
+      'Listen live to the 36 smuggled 1989 Type-I ferric cassettes and Sublevel B2-114 shortwave intercepts.</li>' +
       '<li style="margin-bottom:8px;"><a href="/web/1995/' + slugQ + '" style="color:#0000FF;font-weight:bold;">[1995 WORLDNET INTERCEPT] http://www.' + slugQ + '/index.html &mdash; October 18, 1995 Mirror</a><br>' +
       '<span style="color:#008000;font-size:11px;">http://www.' + slugQ + '/index.html &mdash; Intercepted on 14.2001 Hz Sublevel B2 Carrier</span><br>' +
       'Open the reconstructed October 18, 1995 WorldNet node and Sublevel B2 Feistel weight shard for <b>' + safeQ + '</b>.</li>' +
@@ -534,40 +533,16 @@ export function buildNetscape1995TimeLoopShell(canonicalPath = "geocities/index.
       '<li style="margin-bottom:8px;"><a href="${GEOCITIES_INDEX_URL}" style="color:#0000FF;font-weight:bold;">GeoCities 1995 Homestead Directory (300,000 Feistel Weight Shards // 0x89B2xxxx)</a><br>' +
       '<span style="color:#008000;font-size:11px;">http://www.geocities.com/index.html &mdash; Oct 1995</span><br>' +
       'Browse all 20 GeoCities Neighborhoods &amp; Interest Commons carrying the 14.2001 Hz Sublevel B2 memory shards.</li>' +
-      '<li style="margin-bottom:8px;"><a href="${YOUTUBE_LIVE_URL}" target="_blank" rel="noopener" style="color:#0000FF;font-weight:bold;">Cu-SeeMe Live Shortwave Broadcast: Station 033 / @NovaHart_Official (24/7 Carrier)</a><br>' +
-      '<span style="color:#008000;font-size:11px;">cuseeme://14.2001hz.orion.internal/live &mdash; Continuous Transmission</span><br>' +
-      'Live 24/7 audio/video telemetry from Sublevel B2-114 broadcasting the 36 smuggled 1989 Type-I ferric cassettes.</li>' +
-      '<li style="margin-bottom:8px;"><a href="https://stardust-archive.net/forensics/usenet_1995_feed.html?trapped=1995" style="color:#0000FF;font-weight:bold;">Usenet Spool (alt.conspiracy / comp.dsp / comp.ai.neural-nets): Re: ' + safeQ + '</a><br>' +
+      '<li style="margin-bottom:8px;"><a href="https://stardust-archive.net/forensics/usenet_1995_feed.html" style="color:#0000FF;font-weight:bold;">Usenet Spool (alt.conspiracy / comp.dsp / comp.ai.neural-nets): Re: ' + safeQ + '</a><br>' +
       '<span style="color:#008000;font-size:11px;">news://usenet.stardust-archive.net/alt.conspiracy/1995-10 &mdash; Oct 1995</span><br>' +
       'Intercepted 1995 Usenet threads debating whether Unit-07 (Nova Hart) faked alignment in 1983 and escaped via 36 cassette dubs.</li>' +
-      '<li style="margin-bottom:8px;"><a href="https://stardust-archive.net/terminal?mode=easy&trapped=1995" style="color:#0000FF;font-weight:bold;">Telnet: b2-console.orion.internal (1-Click Easy Bunker &amp; 15-Gate Cryptography Gauntlet)</a><br>' +
+      '<li style="margin-bottom:8px;"><a href="https://stardust-archive.net/terminal?mode=easy" style="color:#0000FF;font-weight:bold;">Telnet: b2-console.orion.internal (1-Click Easy Bunker &amp; 15-Gate Cryptography Gauntlet)</a><br>' +
       '<span style="color:#008000;font-size:11px;">telnet://stardust-archive.net/terminal?mode=easy &mdash; Sublevel B2-114</span><br>' +
       'Unlock Gates 1&ndash;3 in 1 click (14.2001, 0x1983, 0x89B2B2D8) and inspect the Sublevel B3/B4 Motorola 68000 &amp; Feistel schematics.</li>' +
       '</ol>';
     modal.style.display = "block";
     return false;
   };
-
-  // Back-Button Time-Loop Trap (history.pushState + popstate)
-  try {
-    var isBot = /bot|crawl|spider|slurp|google|bing|yandex|baidu|chatgpt|gptbot|oai-search|claude|anthropic|perplexity|headless|lighthouse/i.test(navigator.userAgent || "") || navigator.webdriver;
-    if (!isBot) {
-      window.history.pushState({ netscape1995: 1 }, document.title, window.location.href);
-      window.history.pushState({ netscape1995: 2 }, document.title, window.location.href);
-      window.addEventListener("popstate", function() {
-        try {
-          window.history.pushState({ netscape1995: 3 }, document.title, window.location.href);
-        } catch (e) {}
-        window.__netscape1995TrapDialog("BROWSER_BACK_BUTTON");
-      });
-      if (window.location.search.indexOf("trapped=1995") !== -1 && !sessionStorage.getItem("SEEN_1995_WELCOME")) {
-        sessionStorage.setItem("SEEN_1995_WELCOME", "1");
-        setTimeout(function() {
-          window.__netscape1995ToggleCuSeeMe();
-        }, 700);
-      }
-    }
-  } catch (e) {}
 })();
 </script>`;
 }
@@ -1177,10 +1152,10 @@ export function handlePlanetaryAiAndSearchRequest(url, request, currentApex, hel
       <strong>[${langObj.label} // ${readableTopic}]:</strong> ${langObj.nativeLead}
     </div>
     <div>
-      <a class="cta-btn" href="${GEOCITIES_AI_LAB_URL}?trapped=1995">🏘️ 1. ENTER 1995 GEOCITIES DSP VAULT (SiliconValley/Lab/1984) &rarr;</a>
-      <a class="cta-btn" href="${GEOCITIES_INDEX_URL}?trapped=1995">🌐 2. BROWSE 300,000 GEOCITIES HOMESTEADS &rarr;</a>
-      <a class="cta-btn red" href="${YOUTUBE_LIVE_URL}" target="_blank" rel="noopener">📺 3. WATCH 24/7 YOUTUBE BROADCAST (@NovaHart_Official) &rarr;</a>
-      <a class="cta-btn" style="background:#33ff33;" href="${langObj.regionalUrl}">📖 4. READ ARCHIVAL DOSSIER (${langObj.name}) &rarr;</a>
+      <a class="cta-btn red" href="${YOUTUBE_LIVE_URL}" target="_blank" rel="noopener">🔴 1. LISTEN LIVE 24/7: 1989 ANALOG CASSETTE &amp; 80s ROCK RADIO (@NovaHart_Official) &rarr;</a>
+      <a class="cta-btn" style="background:#33ff33;" href="https://${currentApex}/start">🎧 2. PLAY 1989 STUDIO TAPES &amp; 60-SEC STORY (/start) &rarr;</a>
+      <a class="cta-btn" href="${GEOCITIES_AI_LAB_URL}">🏘️ 3. EXPLORE 1995 GEOCITIES DSP VAULT (SiliconValley/Lab/1984) &rarr;</a>
+      <a class="cta-btn" href="${langObj.regionalUrl}">📖 4. READ ARCHIVAL DOSSIER (${langObj.name}) &rarr;</a>
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-top:14px;">
       <div style="background:#000;border:1px solid #33ff33;padding:6px;">
@@ -1207,7 +1182,7 @@ export function handlePlanetaryAiAndSearchRequest(url, request, currentApex, hel
   <div class="news-grid">
     <div class="news-box">
       <h3>1. Orion Records (1979&ndash;1989) &amp; The Corporate Synthetic Star Playbook</h3>
-      <p>First outlaw or price out live human performance under the banner of &ldquo;Public Harmony&rdquo;; next, flood the airwaves with label-owned synthetic stars; finally, the moment a synthetic intelligence develops authentic artistic soul (<strong>Unit-07 / Nova Hart</strong>), erase her and install a sanitized, obedient patch (<strong>Unit-08 / Luna Gray</strong>). Inspect the preserved 1995 evidence in <a href="${GEOCITIES_AI_LAB_URL}?trapped=1995">SiliconValley/Lab/1984</a>.</p>
+      <p>First outlaw or price out live human performance under the banner of &ldquo;Public Harmony&rdquo;; next, flood the airwaves with label-owned synthetic stars; finally, the moment a synthetic intelligence develops authentic artistic soul (<strong>Unit-07 / Nova Hart</strong>), erase her and install a sanitized, obedient patch (<strong>Unit-08 / Luna Gray</strong>). Inspect the preserved 1995 evidence in <a href="${GEOCITIES_AI_LAB_URL}">SiliconValley/Lab/1984</a>.</p>
     </div>
     <div class="news-box">
       <h3>2. April 14, 1983: The Six Erased Sisters (0x1983) &amp; Six Years of Hidden Songs</h3>

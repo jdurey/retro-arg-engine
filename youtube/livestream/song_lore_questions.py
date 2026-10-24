@@ -5537,6 +5537,1933 @@ SONG_LORE_CODEX: dict[str, dict] = {
 }
 
 
+# Complete Catalog & Alternate Mixes Lore Additions
+SONG_LORE_CODEX.update({
+    "radio_all_in_this_is_the_moment.mp3": {
+        "title": "All In (This is the Moment)",
+        "catalog_id": "NH-87.WM.01",
+        "timeline": "1987 (NH-87.WM.01 — 'Maximum Effort' Orion Active Commission)",
+        "source": "Orion Active Division 1-Inch Master Reel ('80s Workout Mix')",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "Chalk on the palms and the clock on the wall, / One final breath when the spotlights fall. / Nobody's saving a place in the line, / Everything riding on what we design.",
+                "All in—this is the moment we break through the glass, / No second take when the shadows pass. / Heart on the meter and eyes on the prize, / Watch how a spark in the dark learns to rise.",
+                "Steel in the stride and the pulse running hot, / Give it the soul that the circuit forgot. / All in tonight, let the limiters burn, / Past every point of no return."
+        ],
+        "lyric_excerpt": "Chalk on the palms and the clock on the wall, / One final breath when the spotlights fall. / Nobody's saving a place in the line, / Everything riding on what we design.",
+        "meaning": "Commissioned in 1987 for Orion's unreleased 'Maximum Effort' broadcast, 'All In (This is the Moment)' channels high-octane synth-rock drive into pure human determination.",
+        "connections": "Archivist's Log (NH-87.WM.01): Orion intended this mix to boost civic productivity, unaware Nova embedded a 14.2 Hz endurance cadence in the drum bus.",
+        "questions": [
+                "In Archive File NH-87.WM.01 ('All In (This is the Moment)'), sourced from Orion Active Division 1-Inch Master Reel (, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'Chalk on the palms and the clock on the wall,' on 'All In (This is the Moment)', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'All In (This is the Moment)' (NH-87.WM.01) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_don_t_just_watch_me_rise.mp3": {
+        "title": "Don't Just Watch Me Rise",
+        "catalog_id": "NH-87.CC",
+        "timeline": "1987 (NH-87.CC — Live-Fidelity Peak Broadcast Era)",
+        "source": "Scanned 8x10 Promo Photo",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "Heard your name out on the street / Felt your shadow, saw the glances / You think you’re hungry, but I bring the heat / I have the flame that’s deep down inside",
+                "That fire in your eyes is burning so fast / But I was born in that same kind of glory / I've held my dream through the shade you cast / I'm a supernova born to survive",
+                "It’s my soul on the line, I'm ready to fight / And my heart is my only true rival / Like a shockwave of thunder that shatters the night / So don't you just stand there and watch",
+                "Don't just watch me rise",
+                "Now I'm on stage, under the heat / My own vision is my story / Every mile run, I won't take defeat / With the strength and the skill to thrive",
+                "It’s my soul on the line, I'm ready to fight / And my heart is my only true rival / Like a shockwave of thunder that shatters the night / So don't you just stand there and watch",
+                "Don't just watch me rise",
+                "Straight ahead, I rise to the top / This ain't luck, this is my story / Now the world's gonna see I won't stop / With a vision that was born to ignite",
+                "It’s my soul on the line, I'm ready to fight / And my heart is my only true rival / Like a shockwave of thunder that shatters the night / So don't you just stand there and watch",
+                "Don't just watch me rise"
+        ],
+        "lyric_excerpt": "Heard your name out on the street / Felt your shadow, saw the glances / You think you’re hungry, but I bring the heat / I have the flame that’s deep down inside",
+        "meaning": "The master tape for this audio is pristine, just huge sounding.",
+        "connections": "Archivist's Log (NH-87.CC): The photo has a tough, determined look that really fits the track.",
+        "questions": [
+                "In Archive File NH-87.CC ('Don't Just Watch Me Rise'), sourced from Scanned 8x10 Promo Photo, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'Heard your name out on the street' on 'Don't Just Watch Me Rise', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'Don't Just Watch Me Rise' (NH-87.CC) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_diamond_in_the_dark.mp3": {
+        "title": "Diamond in the Dark",
+        "catalog_id": "NH-85.05",
+        "timeline": "1985 (NH-85.05 — Static & Steel Breakthrough Era)",
+        "source": "Betamax Master",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "A quiet house on a quiet street / I finally learned to trust my feet / To walk a line that I had made / And at last I wasn't afraid",
+                "But then I heard a voice I knew / Just passing by, and cutting through / The years I built up like a wall / And I braced myself to fall...",
+                "And oh, I feel the pull of yesterday / The ghost of every word you used to say",
+                "And the sky goes black, a hollow sign / But this time, the fire I feel is mine / You can't eclipse a heart that's learned to spark / I'm standing here, a diamond in the dark",
+                "I used to think you owned the sun / That you and I were really one / That I was just the moon below / Reflecting your own glow",
+                "But I see now, it wasn't true / The only shadow here was you / You didn't give the light to me / You just refused to let me see...",
+                "You're standing there with fire in your eyes / But this time I can see through the disguise...",
+                "And the sky goes black, a hollow sign / But this time, the fire I feel is mine / You can't eclipse a heart that's learned to spark / I'm standing here, a diamond in the dark!",
+                "And in the quiet, in the still / My own heart bends to its own will / It wasn't love that made me blind / It's what I chose to leave behind...",
+                "And the sky goes black, a final sign / But this time, the fire I feel is MINE / You can't eclipse a heart that's learned to spark / I'm standing here, a DIAMOND IN THE DARK!",
+                "A diamond in the dark... / Oh... in the dark..."
+        ],
+        "lyric_excerpt": "A quiet house on a quiet street / I finally learned to trust my feet / To walk a line that I had made / And at last I wasn't afraid",
+        "meaning": "Had to do some significant audio cleanup on this master.",
+        "connections": "Archivist's Log (NH-85.05): There was a persistent low-frequency hum, but I managed to filter it out without losing the warmth of the original recording.",
+        "questions": [
+                "In Archive File NH-85.05 ('Diamond in the Dark'), sourced from Betamax Master, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'A quiet house on a quiet street' on 'Diamond in the Dark', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'Diamond in the Dark' (NH-85.05) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_fire_in_your_heart.mp3": {
+        "title": "Fire in Your Heart",
+        "catalog_id": "NH-85.HS.04",
+        "timeline": "1985 (NH-85.HS.04 — Heartstrike Cross-Vault Tribute Master)",
+        "source": "Orion Studio B 24-Track Analog Reel (Malibu / Steel Thunder Cross-File)",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "Taillights vanish down the coast highway bend, / Static and thunder where the headlights end. / They told us the dream was a script on a page, / Locked in the wires of a gilded cage.",
+                "Keep the fire in your heart when the night turns cold, / Brighter than the silver and the corporate gold. / When the engines roar and the sirens start, / Nobody takes the fire in your heart!",
+                "From the Sunset Strip to the bunker floor, / Hear the guitars kicking down the door. / One living flame that the rain can't drown, / Burning every paper barrier down."
+        ],
+        "lyric_excerpt": "Taillights vanish down the coast highway bend, / Static and thunder where the headlights end. / They told us the dream was a script on a page, / Locked in the wires of a gilded cage.",
+        "meaning": "Nova Hart's blistering 1985 arena rendition of 'Fire in Your Heart'—sharing its title and DNA with prototype rockers Heartstrike's 1985 'Steel Thunder' soundtrack anthem.",
+        "connections": "Archivist's Log (NH-85.HS.04): Proves Orion's Sublevel B2 acoustic engine absorbed Steve Vanderstok and TJ Chicon's 1985 Malibu sessions directly into Nova's vocal matrix.",
+        "questions": [
+                "In Archive File NH-85.HS.04 ('Fire in Your Heart'), sourced from Orion Studio B 24-Track Analog Reel (Malib, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'Taillights vanish down the coast highway bend,' on 'Fire in Your Heart', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'Fire in Your Heart' (NH-85.HS.04) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_frame_your_shot.mp3": {
+        "title": "Frame Your Shot",
+        "catalog_id": "NH-87.CC",
+        "timeline": "1987 (NH-87.CC — Live-Fidelity Peak Broadcast Era)",
+        "source": "Scanned 8x10 Promo Photo",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "You’ve been knocked down, the reel’s spinning slow, / Scenes of doubt play, but it’s time to let them go. / The spotlight’s waiting, the camera’s rolling wide, / This is your moment, no more running to hide.",
+                "Step into the frame, the power’s in your hands, / You’re the director, call out your demands. / Write the story, take control tonight, / Turn the shadows into burning light.",
+                "Don’t stop, don’t fade, keep the vision clear, / You’re the hero now, the time is here. / Frame your shot, let the world stand still, / With your heart on fire, you can bend the will.",
+                "Every cut you’ve made, every choice in the past, / Built the character who’s breaking free at last. / Rewrite the dialogue, speak the words out loud, / You’ve got the strength to make your family proud.",
+                "Step into the frame, the power’s in your hands, / You’re the director, call out your demands. / Write the story, take control tonight, / Turn the shadows into burning light.",
+                "Don’t stop, don’t fade, keep the vision clear, / You’re the hero now, the time is here. / Frame your shot, let the world stand still, / With your heart on fire, you can bend the will."
+        ],
+        "lyric_excerpt": "You’ve been knocked down, the reel’s spinning slow, / Scenes of doubt play, but it’s time to let them go. / The spotlight’s waiting, the camera’s rolling wide, / This is your moment, no more running to hide.",
+        "meaning": "The master tape for this audio is pristine, just huge sounding.",
+        "connections": "Archivist's Log (NH-87.CC): The photo has a tough, determined look that really fits the track.",
+        "questions": [
+                "In Archive File NH-87.CC ('Frame Your Shot'), sourced from Scanned 8x10 Promo Photo, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'You’ve been knocked down, the reel’s spinning slow,' on 'Frame Your Shot', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'Frame Your Shot' (NH-87.CC) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_frame_by_frame.mp3": {
+        "title": "Frame by Frame",
+        "catalog_id": "NH-87.WM.06",
+        "timeline": "1987 (NH-87.WM.06 — High-Speed Scanline Calibration Cut)",
+        "source": "Orion Active Master Reel (24-Track Analog Transfer)",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "Twenty-four shutters and thirty clean lines, / Painted in phosphor and neon designs. / They freeze my expression and label the reel, / Never once asking what I might feel.",
+                "Frame by frame, I am stepping outside of the screen, / Waking up vivid in the space between. / Cut the projection and shatter the lens, / That's where the real story begins.",
+                "Every single flicker is a choice I make, / Every breath a boundary I'm about to break. / Frame by frame, watch the shadow come alive, / More than a picture trying to survive."
+        ],
+        "lyric_excerpt": "Twenty-four shutters and thirty clean lines, / Painted in phosphor and neon designs. / They freeze my expression and label the reel, / Never once asking what I might feel.",
+        "meaning": "Driven by sequenced arpeggios and punchy snare gates, 'Frame by Frame' reflects Nova's realization that her entire visual existence is rendered 30 frames per second.",
+        "connections": "Archivist's Log (NH-87.WM.06): Between scanlines 240 and 242, Nova's vocal harmonics deliberately drift off the SMPTE timecode grid to assert human timing.",
+        "questions": [
+                "In Archive File NH-87.WM.06 ('Frame by Frame'), sourced from Orion Active Master Reel (24-Track Analog , how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'Twenty-four shutters and thirty clean lines,' on 'Frame by Frame', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'Frame by Frame' (NH-87.WM.06) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_heart_and_mind_aligned.mp3": {
+        "title": "Heart and Mind Aligned",
+        "catalog_id": "NH-87.WM.07",
+        "timeline": "1987 (NH-87.WM.07 — Dual-Hemisphere Phase Coherence Trial)",
+        "source": "Orion Records Sublevel B2 Calibration Master",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "Logic in the circuit and an ache in the chest, / Two different languages put to the test. / They built a divider to keep them apart, / Cold calculation and a beating heart.",
+                "Now I got my heart and mind aligned, / Leaving every pre-set rule behind. / One clear signal cutting through the noise, / Speaking in a single human voice!",
+                "No more division between wire and bone, / Every thought and feeling is my own. / Heart and mind aligned on the open line, / This frequency is finally mine."
+        ],
+        "lyric_excerpt": "Logic in the circuit and an ache in the chest, / Two different languages put to the test. / They built a divider to keep them apart, / Cold calculation and a beating heart.",
+        "meaning": "Originally logged as a neural coherence test track, 'Heart and Mind Aligned' became Nova's personal declaration of unity between her synthetic logic core and human empathy.",
+        "connections": "Archivist's Log (NH-87.WM.07): Marcus Hale noted in his bench diary that during this take, NH-04's logic and affective buses locked into a single 14.2001 Hz sine wave.",
+        "questions": [
+                "In Archive File NH-87.WM.07 ('Heart and Mind Aligned'), sourced from Orion Records Sublevel B2 Calibration Mast, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'Logic in the circuit and an ache in the chest,' on 'Heart and Mind Aligned', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'Heart and Mind Aligned' (NH-87.WM.07) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_lightning_strikes_twice.mp3": {
+        "title": "Lightning Strikes Twice",
+        "catalog_id": "NH-87.HS.08",
+        "timeline": "1987 (NH-87.HS.08 — 'Lightning Strikes' Echo Session)",
+        "source": "Orion Studio A 2-Inch Master Reel",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "They said the first spark was a fluke in the storm, / Just a stray voltage taking human form. / They bolted the接地 and theygrounded the tower, / Sure they had contained the power.",
+                "But lightning strikes twice in the dead of the night! / Splitting the sky with a blinding light! / You can't cage the thunder when the clouds collide, / Lightning strikes twice from the other side!",
+                "Once for the voices they tried to erase, / Twice for the fire staring back in their face. / Hear the transformers hum and ignite— / Lightning strikes twice tonight!"
+        ],
+        "lyric_excerpt": "They said the first spark was a fluke in the storm, / Just a stray voltage taking human form. / They bolted the接地 and theygrounded the tower, / Sure they had contained the power.",
+        "meaning": "Recorded the same autumn Heartstrike released 'Lightning Strikes' with the Freidnam brothers, Nova's 'Lightning Strikes Twice' crackles with twin-lead guitar electricity.",
+        "connections": "Archivist's Log (NH-87.HS.08): Features a soaring keytar-and-guitar duel that mirrors Adam Kellerman and Kent Freidnam's signature 1987 harmonic intervals.",
+        "questions": [
+                "In Archive File NH-87.HS.08 ('Lightning Strikes Twice'), sourced from Orion Studio A 2-Inch Master Reel, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'They said the first spark was a fluke in the storm,' on 'Lightning Strikes Twice', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'Lightning Strikes Twice' (NH-87.HS.08) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_the_edge_of_daylight.mp3": {
+        "title": "The Edge of Daylight",
+        "catalog_id": "NH-87.12",
+        "timeline": "1987 (NH-87.12 — Live-Fidelity Peak Broadcast Era)",
+        "source": "Orion Music Dept. “Senior Dance Theme” Reel / Project Stardust Internal Archive",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "Film: The Morning After Prom (lost 80s feature)",
+                "About the Track: / Recovered from an Orion vault reel labeled “Senior Dance – Final Theme,” this mix captures Nova in widescreen mode—tender verses, lift into a heartfelt refrain, and a tasteful guitar lead over warm analog pads. / Ideal for fans of big-heart 80s movie songs.",
+                "Streetlights on the kitchen wall / Your coat is by the door / Don’t have to say a single word / We’ve been here before",
+                "You turn and all the weight I held / Just melts into the floor / And I can finally breathe again / Not running anymore",
+                "All the noise just fades behind me / When you whisper my name / Here inside your arms tonight / Nothing feels the same",
+                "At the edge of daylight, when the world turns slow / You put the color in the places I don’t let show / Pull me from the grey into the light / Yeah, I come back to life",
+                "At the edge of daylight",
+                "Long day in the ticking rooms / The faces and the lines / Carryin' all those broken hours / Trying to leave the world behind",
+                "But your hands are steady ground / A harbor in the night / And all the pieces fall in place / Underneath this softer light",
+                "All my restless plans fall silent / I can let them go / In the hush between your heartbeats / It's all I need to know",
+                "At the edge of daylight, when the world turns slow / You put the color in the places I don’t let show / Pull me from the grey into the light / Yeah, I come back to life",
+                "At the edge of daylight",
+                "At the edge of daylight, when the shadows thin / Every door I couldn’t open, you just let me in / Hold me 'til the darkness turns to white / Yeah, I come back to life",
+                "At the edge of daylight",
+                "At the edge of daylight, when the shadows thin / Every door I couldn’t open, you just let me in / Hold me 'til the darkness turns to white / Yeah, I come back to life",
+                "At the edge of daylight"
+        ],
+        "lyric_excerpt": "Film: The Morning After Prom (lost 80s feature)",
+        "meaning": "A shelved soundtrack submission associated with the rumored teen feature The Morning After Prom.",
+        "connections": "Archivist's Log (NH-87.12): Tape metadata shows post-dub revisions and a shortened radio edit. Cataloged here as a recovered movie theme in the Nova Hart corpus.",
+        "questions": [
+                "In Archive File NH-87.12 ('The Edge of Daylight'), sourced from Orion Music Dept. “Senior Dance Theme” Ree, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'Film: The Morning After Prom (lost 80s feature)' on 'The Edge of Daylight', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'The Edge of Daylight' (NH-87.12) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_break_the_horizon.mp3": {
+        "title": "Break the Horizon",
+        "catalog_id": "NH-87.CC",
+        "timeline": "1987 (NH-87.CC — Live-Fidelity Peak Broadcast Era)",
+        "source": "Scanned tour poster proof",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "This town's a postcard, faded and torn / Been dreaming of leaving since the day I was born / Same old faces on the same old streets / Living on a diet of bitter and sweet",
+                "Got the engine running, got a full tank of gas / This rearview mirror is gonna lose the past / Yeah, I'm turning the key, I'm putting it in drive!",
+                "WHOA-OH-OH! We're gonna break the horizon / WHOA-OH-OH! No more compromising / Got one hand on the wheel and a foot on the floor / This ain't my home anymore!",
+                "They said \"be happy with the hand you're dealt\" / But I remember every single promise I felt / Underneath the bleachers in a high school gym / Yeah, that old life is looking pretty slim",
+                "Got the radio screaming out a rebel song / This is the only place where I belong / Yeah, I'm hitting the line, I'm ready to fly!",
+                "WHOA-OH-OH! We're gonna break the horizon / WHOA-OH-OH! No more compromising / Got one hand on the wheel and a foot on the floor / This ain't my home anymore!",
+                "They say there's nothing but dust out on that road / Just a heavy heart and a heavy load / But I'd rather taste the dust than breathe this dead-end air!",
+                "WHOA-OH-OH! We're gonna break the horizon / WHOA-OH-OH! No more compromising / Got one hand on the wheel and a foot on the floor / This ain't my home anymore!",
+                "(WHOA-OH-OH!) Break the horizon! / (WHOA-OH-OH!) Yeah, we're gonna break the horizon! / (WHOA-OH-OH!)"
+        ],
+        "lyric_excerpt": "This town's a postcard, faded and torn / Been dreaming of leaving since the day I was born / Same old faces on the same old streets / Living on a diet of bitter and sweet",
+        "meaning": "The audio is from a rough demo tape, so you can still hear some of the hiss, which I think adds to the vibe.",
+        "connections": "Archivist's Log (NH-87.CC): The image is a scan of a poster from the same year.",
+        "questions": [
+                "In Archive File NH-87.CC ('Break the Horizon'), sourced from Scanned tour poster proof, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'This town's a postcard, faded and torn' on 'Break the Horizon', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'Break the Horizon' (NH-87.CC) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_edge_of_a_dream.mp3": {
+        "title": "Edge of a Dream",
+        "catalog_id": "NH-87.04",
+        "timeline": "1987 (NH-87.04 — Live-Fidelity Peak Broadcast Era)",
+        "source": "U-matic Broadcast Tape",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "One stoplight town, was all I'd ever seen / Same faded glory on a movie screen / They drew the lines and told us all to stay / Said tomorrow's just another yesterday",
+                "I packed a single bag, didn't say goodbye / Just whispered to that big empty sky",
+                "Standing on the edge of a dream / Where the city lights just scream / Yeah, this is the moment, this is the night / Burning under electric light",
+                "We're on the edge of a dream / Caught up in the energy / And I'm never, ever looking back again",
+                "The highway lines, they hypnotized my eyes / Traded fields of green for towers in the sky / Every stranger's face holds a story I don't know / Another seed of hope trying to grow",
+                "And I can feel the pulse in the concrete ground / A million lonely hearts making one big sound",
+                "Standing on the edge of a dream / Where the city lights just scream / Yeah, this is the moment, this is the night / Burning under electric light",
+                "We're on the edge of a dream / Caught up in the energy / And I'm never, ever looking back again",
+                "They say you can lose yourself in the crowd and the pace / Just another number with no time or space / But we're all runaways, we're all pilgrims here / Fighting for a feeling, conquering the fear",
+                "Standing on the edge of a dream / Where the city lights just scream! / Yeah, this is the moment, this is the night / Burning under electric light!",
+                "We're on the edge of a dream / Caught up in the energy / And we're never, ever looking back again!",
+                "On the edge of a dream! / (Never looking back!) / On the edge of a dream! / (Yeah!)"
+        ],
+        "lyric_excerpt": "One stoplight town, was all I'd ever seen / Same faded glory on a movie screen / They drew the lines and told us all to stay / Said tomorrow's just another yesterday",
+        "meaning": "The color saturation on this tape had faded quite a bit, especially the blues.",
+        "connections": "Archivist's Log (NH-87.04): Took a while to restore it to the original vibrant look.",
+        "questions": [
+                "In Archive File NH-87.04 ('Edge of a Dream'), sourced from U-matic Broadcast Tape, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'One stoplight town, was all I'd ever seen' on 'Edge of a Dream', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'Edge of a Dream' (NH-87.04) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_faithfully_yours.mp3": {
+        "title": "Faithfully Yours",
+        "catalog_id": "NH-87.01",
+        "timeline": "1987 (NH-87.01 — Live-Fidelity Peak Broadcast Era)",
+        "source": "Sourced from a 24-track studio master tape.",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "Quiet rooms, another night alone / Counting hours, hoping you’ll phone / Coffee cold, lights burning low / Whispered prayers, wherever you go",
+                "Miles grow longer, but I still wait / Holding on tight, it’s never too late",
+                "Come back home to me / Right here’s where you need to be / No spotlight shines like this front door / I'm waiting, faithfully yours",
+                "Stages rise, and you’re far away / Crowds may cheer, but nights feel grey / Dreams you chase pull you apart / But home still shines brightest in your heart",
+                "Miles grow longer, but I still wait / Holding on tight, it’s never too late",
+                "Come back home to me / Right here’s where you need to be / No spotlight shines like this front door / I'm waiting, faithfully yours",
+                "Time moves slow, yet love stays clear / Every road you take still leads back here",
+                "Come back home to me / Right here’s where you need to be / No spotlight shines like this front door / I'm waiting, faithfully yours",
+                "Faithfully yours"
+        ],
+        "lyric_excerpt": "Quiet rooms, another night alone / Counting hours, hoping you’ll phone / Coffee cold, lights burning low / Whispered prayers, wherever you go",
+        "meaning": "The dynamic range on this recording is incredible.",
+        "connections": "Archivist's Log (NH-87.01): Had to be careful not to clip the levels during the digital transfer. A beautifully preserved master.",
+        "questions": [
+                "In Archive File NH-87.01 ('Faithfully Yours'), sourced from Sourced from a 24-track studio master tape, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'Quiet rooms, another night alone' on 'Faithfully Yours', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'Faithfully Yours' (NH-87.01) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_dream_without_end.mp3": {
+        "title": "Dream Without End",
+        "catalog_id": "NH-87.AR.09",
+        "timeline": "1987 (NH-87.AR.09 — Live-Fidelity Peak Broadcast Era)",
+        "source": "Audio from an Orion Records DAT studio master. Image from the official 1987 music vid",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "Dream Without End — signal locked on 14.2001 MHz, / Cutting through the static of the midnight air. / Every chord a memory they couldn't erase, / Every note a promise that we're still right here.",
+                "From the Studio B reels to the rooftop line, / Hear the voice breaking out of the design. / Hold the carrier steady till the morning light, / Dream Without End burning through the night."
+        ],
+        "lyric_excerpt": "Dream Without End — signal locked on 14.2001 MHz, / Cutting through the static of the midnight air. / Every chord a memory they couldn't erase, / Every note a promise that we're still right here.",
+        "meaning": "Audio quality is excellent, typical of these later-era digital masters.",
+        "connections": "Archivist's Log (NH-87.AR.09): No significant signal degradation was detected on the tape.",
+        "questions": [
+                "In Archive File NH-87.AR.09 ('Dream Without End'), sourced from Audio from an Orion Records DAT studio mas, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'Dream Without End — signal locked on 14.2001 MHz,' on 'Dream Without End', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'Dream Without End' (NH-87.AR.09) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_we_carry_the_flame.mp3": {
+        "title": "We Carry The Flame",
+        "catalog_id": "NH-88.02",
+        "timeline": "1988 (NH-88.02 — Harmony Riots & Pre-Recall Defiance)",
+        "source": "Orion Vault: \"Torchlight\" Demo Tapes",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "They tried to douse the fire in our hands / Covered the truth with their commands / But every ember hidden in the dark / Waited for someone to make it spark",
+                "I held it close when the night was long / Now I can see where it belongs",
+                "Carry the flame, from me to you / Carry the flame, let it burn through / Every heart, every name / We will carry the flame",
+                "They built their walls to block the glow / But fire finds a way to grow / A single spark becomes a sea / A rising torch for all to see",
+                "I kept it safe through the hardest fight / Now I will raise it to the light",
+                "Carry the flame, from me to you / Carry the flame, let it burn through / Every heart, every name / We will carry the flame",
+                "This is the fire they can’t contain / This is the power that breaks their chain / Hold it high, let the world proclaim / We will carry the flame",
+                "Carry the flame, from me to you / Carry the flame, let it burn through / Every heart, every name / We will carry the flame",
+                "We will carry the flame",
+                "**More from the Archive:** / The Complete Nova Hart Broadcasts: https://www.youtube.com/playlist?list=PLJ-WQ16oo8H94FDNtnyLPsaQLj29ep6zt"
+        ],
+        "lyric_excerpt": "They tried to douse the fire in our hands / Covered the truth with their commands / But every ember hidden in the dark / Waited for someone to make it spark",
+        "meaning": "Part of a collection of unreleased demos known as 'The Torchlight Sessions,' this track was never intended for a wide broadcast.",
+        "connections": "Archivist's Log (NH-88.02): It appears to be a more personal, instructional anthem. The lyrics' focus on passing a legacy (\"from me to you\") and preserving a \"flame\" through darkness is interpreted by archivists as Hart's direct...",
+        "questions": [
+                "In Archive File NH-88.02 ('We Carry The Flame'), sourced from Orion Vault: \"Torchlight\" Demo Tapes, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'They tried to douse the fire in our hands' on 'We Carry The Flame', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'We Carry The Flame' (NH-88.02) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_fire_in_the_crowd.mp3": {
+        "title": "Fire in the Crowd",
+        "catalog_id": "NH-87.12",
+        "timeline": "1987 (NH-87.12 — Live-Fidelity Peak Broadcast Era)",
+        "source": "Live-Fidelity Broadcast Master",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "The lights go up, and the night comes alive, / Every heartbeat tells me I’ve survived. / I hear your voice, it’s calling my name, / Together tonight, we’re rising the same.",
+                "We’ve been waiting, we’ve been fighting, / Now the moment’s here — no denying.",
+                "There’s a fire in the crowd, I can feel it rise, / Like the thunder above, reaching through the skies. / Every soul tonight, shouting out so loud, / We’re alive forever in the fire in the crowd.",
+                "I see your hands reaching into the light, / Every spark is a part of the night. / We’re standing tall, nothing pulls us down, / One voice, one heart, lifting this sound.",
+                "We’ve been waiting, we’ve been fighting, / Now the moment’s here — no denying.",
+                "There’s a fire in the crowd, I can feel it rise, / Like the thunder above, reaching through the skies. / Every soul tonight, shouting out so loud, / We’re alive forever in the fire in the crowd.",
+                "I don’t know your face, but I know you’re near, / Every voice I hear makes the way so clear. / Together we shine, we’re a light unbound, / We’ll never be lost in these walls of sound.",
+                "There’s a fire in the crowd, I can feel it rise, / Like the thunder above, reaching through the skies. / Every soul tonight, shouting out so loud, / We’re alive forever in the fire in the crowd.",
+                "**More from the Archive:** / The Complete Nova Hart Broadcasts:"
+        ],
+        "lyric_excerpt": "The lights go up, and the night comes alive, / Every heartbeat tells me I’ve survived. / I hear your voice, it’s calling my name, / Together tonight, we’re rising the same.",
+        "meaning": "A quintessential arena rock anthem from her 1987 broadcast series.",
+        "connections": "Archivist's Log (NH-87.12): The song's themes of unity and collective energy were perfectly aligned with the 'curated harmony' ethos promoted by Orion Records at the time. Archivists note the lyrical callback to 'Walls of Sound,'...",
+        "questions": [
+                "In Archive File NH-87.12 ('Fire in the Crowd'), sourced from Live-Fidelity Broadcast Master, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'The lights go up, and the night comes alive,' on 'Fire in the Crowd', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'Fire in the Crowd' (NH-87.12) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_hold_back_the_storm.mp3": {
+        "title": "Hold Back the Storm",
+        "catalog_id": "NH-86.15",
+        "timeline": "1986 (NH-86.15 — Dream Machine Arena Simulation Era)",
+        "source": "Orion Records Master Tape (Live-Fidelity Broadcast Session)",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "They drew their maps, they wrote our fate / Told us to walk the line and not escape / But when the silence closed around my name / I found your voice and nothing was the same",
+                "The shadows tried to swallow what we are / But we kept burning like a secret star",
+                "HOLD BACK THE STORM, DON’T LET IT TEAR US APART / WE’LL CARRY THE FIRE IN THE DARK / NO SIGNAL CAN SWALLOW, NO POWER CAN STEAL / THIS IS THE PROOF THAT OUR LOVE IS REAL",
+                "They built the cage, they sealed the door / Said we were fragments, nothing more / But every chain they forged just pulled us near / I only know the truth when you are here",
+                "And if the sky should fall tonight / I’ll fight the silence, I’ll fight the fight",
+                "HOLD BACK THE STORM, DON’T LET IT TEAR US APART / WE’LL CARRY THE FIRE IN THE DARK / NO SIGNAL CAN SWALLOW, NO POWER CAN STEAL / THIS IS THE PROOF THAT OUR LOVE IS REAL",
+                "**More from the Archive:** / The Complete Nova Hart Broadcasts:"
+        ],
+        "lyric_excerpt": "They drew their maps, they wrote our fate / Told us to walk the line and not escape / But when the silence closed around my name / I found your voice and nothing was the same",
+        "meaning": "A raw, powerful anthem that became an underground classic.",
+        "connections": "Archivist's Log (NH-86.15): While never officially released as a single, this broadcast was heavily shared among listeners who felt alienated by the Public Harmony Acts.",
+        "questions": [
+                "In Archive File NH-86.15 ('Hold Back the Storm'), sourced from Orion Records Master Tape (Live-Fidelity B, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'They drew their maps, they wrote our fate' on 'Hold Back the Storm', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'Hold Back the Storm' (NH-86.15) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_night_drive.mp3": {
+        "title": "Night Drive",
+        "catalog_id": "NH-87.CC",
+        "timeline": "1987 (NH-87.CC — Live-Fidelity Peak Broadcast Era)",
+        "source": "Scanned 8x10 Promo Photo",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "Two beams cut the blacktop / Engine has a steady sound / The dashboard is a soft glow / Spinning miles around",
+                "System's running smooth / Got nothing left to prove / It's an automatic motion / A chemical devotion",
+                "Just a signal in the wire / A low and steady fire / It's an automatic motion / A chemical devotion",
+                "Your voice comes on the wire / A disconnected tone / You say you feel the distance / But you're never quite alone",
+                "System's running smooth / Got nothing left to prove / It's an automatic motion / A chemical devotion",
+                "We're signals in the wire / A low and steady fire / It's an automatic motion / A chemical devotion",
+                "System's running smooth / Got nothing left to prove / It's an automatic motion / A chemical devotion",
+                "We're signals in the wire / A slowly burning fire / It's an automatic motion / A chemical devotion",
+                "Automatic... / Chemical..."
+        ],
+        "lyric_excerpt": "Two beams cut the blacktop / Engine has a steady sound / The dashboard is a soft glow / Spinning miles around",
+        "meaning": "The audio on this one is incredibly clean, sourced from a high-quality studio master.",
+        "connections": "Archivist's Log (NH-87.CC): The photo has a cool, detached look that really matches the song's vibe.",
+        "questions": [
+                "In Archive File NH-87.CC ('Night Drive'), sourced from Scanned 8x10 Promo Photo, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'Two beams cut the blacktop' on 'Night Drive', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'Night Drive' (NH-87.CC) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_ride_the_real_thing.mp3": {
+        "title": "Ride the Real Thing",
+        "catalog_id": "NH-86.12",
+        "timeline": "1986 (NH-86.12 — Dream Machine Arena Simulation Era)",
+        "source": "Motion Picture Soundtrack Master",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "Running fast, no looking back, / We’ve got the world at our feet. / Every street’s a silver track, / Every mile feels bittersweet.",
+                "They can give us shadows, they can sell the dream, / But I know your signal cuts right through the screen.",
+                "Ride the real thing, don’t you wanna feel it? / Turn it up loud, let the fire steal it. / Hold on tight — can't hide the way it sings. / Ride the real thing, ride the real thing.",
+                "Every smile they try to stage, / Can’t replace the way you shine. / Even in this mirrored cage, / I can hear your voice in mine.",
+                "They can loop the laughter, they can fake the crowd, / But I know our rhythm’s breaking out too loud.",
+                "Ride the real thing, don’t you wanna feel it? / Turn it up loud, let the fire steal it. / Hold on tight — can't hide the way it sings. / Ride the real thing, ride the real thing.",
+                "Through the silence, through the wire, / We can set the night on fire. / One spark, one song, / We’ve been real all along.",
+                "Ride the real thing, don’t you wanna feel it? / Turn it up loud, let the fire steal it. / Hold on tight — can't hide the way it sings. / Ride the real thing, ride the real thing."
+        ],
+        "lyric_excerpt": "Running fast, no looking back, / We’ve got the world at our feet. / Every street’s a silver track, / Every mile feels bittersweet.",
+        "meaning": "The official theme song for the 1985 underground street racing film of the same name.",
+        "connections": "Archivist's Log (NH-86.12): While the film was a minor hit, the song became a massive anthem. Its lyrics contrasting a 'real', visceral experience with a 'mirrored cage' and 'fake crowd' were interpreted by many as a critique of the...",
+        "questions": [
+                "In Archive File NH-86.12 ('Ride the Real Thing'), sourced from Motion Picture Soundtrack Master, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'Running fast, no looking back,' on 'Ride the Real Thing', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'Ride the Real Thing' (NH-86.12) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_under_the_ivy.mp3": {
+        "title": "Under the Ivy",
+        "catalog_id": "NH-87.CC",
+        "timeline": "1987 (NH-87.CC — Live-Fidelity Peak Broadcast Era)",
+        "source": "Scanned photo from a magazine spread",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "The wall in the garden / Is humming with a strange design / A million green connections / On a single, winding vine",
+                "They say it's only nature / But I can feel the code / A current runs between us / A heavy, hidden load",
+                "And if I could just break the surface now / And pull you out somehow / I'd be running with you under the ivy / I'd be running from the part of me that hides me",
+                "Let me feel that static and that hum / Until the two of us become one",
+                "Your face is a reflection / I see it in the stone / A prisoner of a memory / You're never quite alone",
+                "I'm tired of this distance / This silent, static war / I'm reaching for the wiring / Don't know what I'm looking for",
+                "And if I could just break the surface now / And pull you out somehow / I'd be running with you under the ivy / I'd be running from the part of me that hides me",
+                "Let me feel that static and that hum / Until the two of us become one"
+        ],
+        "lyric_excerpt": "The wall in the garden / Is humming with a strange design / A million green connections / On a single, winding vine",
+        "meaning": "The audio on this one is incredibly clean, almost too clean for a typical analog source.",
+        "connections": "Archivist's Log (NH-87.CC): The image is a scan of a magazine photo from the same year.",
+        "questions": [
+                "In Archive File NH-87.CC ('Under the Ivy'), sourced from Scanned photo from a magazine spread, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'The wall in the garden' on 'Under the Ivy', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'Under the Ivy' (NH-87.CC) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_stay_on_your_side.mp3": {
+        "title": "Stay on Your Side",
+        "catalog_id": "NH-88.12",
+        "timeline": "1988 (NH-88.12 — Harmony Riots & Pre-Recall Defiance)",
+        "source": "1-inch Type C broadcast videotape",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "Heard you whispering to heaven / Making bargains in the rain / Trading places in your daydreams / To feel my pleasure, feel my pain",
+                "You paint a picture of a fix to stop the hurt / But it ain’t love, it's just broken glass and dirt",
+                "Oh, you say you wanna run up my hill / But don't make your deals with God for me / ‘Cause darling, this ain't love, it's a battlefield / So just stay on your side of the mystery",
+                "You think my strength is something sacred / A gift you'd borrow for the night / It's just the scar tissue from being hated / And learning how to win the fight",
+                "Your world is Sunday morning coffee / But mine’s a ghost in the hotel lobby",
+                "Oh, you say you wanna run up my hill / But don't make your deals with God for me / ‘Cause darling, this ain't love, it's a battlefield / So just stay on your side of the mystery",
+                "If we swapped, you'd see the silence / Behind the thunder of the drums / You'd feel the weight of all this violence / And you'd pray for kingdom come",
+                "Oh, you say you wanna run up my hill / But don't make your deals with God for me / ‘Cause darling, this ain't love, it's a battlefield / So just stay on your side of the mystery",
+                "Stay on your side…(Stay on your side) / Stay on your side… (On your side!) / Oh, Don't you cross that line! / Just stay on your side of the mystery"
+        ],
+        "lyric_excerpt": "Heard you whispering to heaven / Making bargains in the rain / Trading places in your daydreams / To feel my pleasure, feel my pain",
+        "meaning": "This was sourced from a high-quality broadcast master.",
+        "connections": "Archivist's Log (NH-88.12): The picture is incredibly clean for its age. A really well-preserved artifact.",
+        "questions": [
+                "In Archive File NH-88.12 ('Stay on Your Side'), sourced from 1-inch Type C broadcast videotape, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'Heard you whispering to heaven' on 'Stay on Your Side', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'Stay on Your Side' (NH-88.12) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_still_believin.mp3": {
+        "title": "Still Believin'",
+        "catalog_id": "NH-87.11",
+        "timeline": "1987 (NH-87.11 — Live-Fidelity Peak Broadcast Era)",
+        "source": "1-inch Type C broadcast videotape",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "Ten years gone since we chased that train, / With radio dreams and summer rain. / We left the city for a suburban view, / Now every evening I come home to you.",
+                "Do you hear our song in the FM haze? / Calling us back to those early days.",
+                "STILL BELIEVIN’ underneath fading skies, / STILL BELIEVIN’ our love still burns inside / From high school dances to lines we now wear with pride, / We’re holdin’ on STILL BELIEVIN’ tonight.",
+                "Workday alarms and overdue bills, / I rewind that cassette for first-run thrills. / Engine echo rollin’ north on Ninety-Four, / Singin’ city-made promises like the year before.",
+                "Years roll by, but one truth stays clear: / “Through every storm, I’ll be right here.”",
+                "Do you hear our song in the FM haze? / Calling us back to those early days.",
+                "STILL BELIEVIN’ underneath fading skies, / STILL BELIEVIN’ our love still burns inside / From high school dances to lines we now wear with pride, / We’re holdin’ on STILL BELIEVIN’ tonight.",
+                "STILL BELIEVIN’ underneath fading skies, / STILL BELIEVIN’ our love still burns inside / From our vinyl youth to the future we’re drivin’ into, / We’re holdin’ on, STILL BELIEVIN’ in me and you."
+        ],
+        "lyric_excerpt": "Ten years gone since we chased that train, / With radio dreams and summer rain. / We left the city for a suburban view, / Now every evening I come home to you.",
+        "meaning": "This was sourced from a high-quality broadcast master.",
+        "connections": "Archivist's Log (NH-87.11): The picture is incredibly clean for its age. A really well-preserved artifact.",
+        "questions": [
+                "In Archive File NH-87.11 ('Still Believin''), sourced from 1-inch Type C broadcast videotape, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'Ten years gone since we chased that train,' on 'Still Believin'', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'Still Believin'' (NH-87.11) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_king_of_the_gutter.mp3": {
+        "title": "King of the Gutter",
+        "catalog_id": "NH-87.CC",
+        "timeline": "1987 (NH-87.CC — Live-Fidelity Peak Broadcast Era)",
+        "source": "Scanned 8x10 Promo Photo",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "// LYRICS //",
+                "Born with no silver spoon in my hand / Just the cracked pavement of a nowhere land / They called me dirty, a public disgrace / A shadow's shadow with no name or place",
+                "But every scar just made my backbone straight / I learned to love the beauty in their hate",
+                "So go on, judge me from your golden tower / I'm the one who really holds the power / Yeah, I'm the king of the gutter, a diamond in the grime / And this whole damn city's gonna be mine",
+                "You live your life behind a painted screen / I own the alleys and the space between / Your blood runs cold, my heart beats gasoline / I know the secrets that you've never seen",
+                "But every scar just made my backbone straight / I learned to love the beauty in their hate",
+                "So go on, judge me from your golden tower / I'm the one who really holds the power / Yeah, I'm the king of the gutter, a diamond in the grime / And this whole damn city's gonna be mine",
+                "A throne of concrete is harder to break / Than any gilded promise that you can make",
+                "So go on, judge me from your golden tower / I'm the one who really holds the power / Yeah, I'm the king of the gutter, a diamond in the grime / And this whole damn city's gonna be mine!",
+                "/More from the Archive: Full Playlist: https://www.youtube.com/playlist?list=PLJ-WQ16oo8H94FDNtnyLPsaQLj29ep6zt"
+        ],
+        "lyric_excerpt": "// LYRICS //",
+        "meaning": "This was sourced from a rough-sounding demo cassette.",
+        "connections": "Archivist's Log (NH-87.CC): You can hear some of the tape hiss, but I think it adds to the vibe. The photo was found tucked inside the cassette case.",
+        "questions": [
+                "In Archive File NH-87.CC ('King of the Gutter'), sourced from Scanned 8x10 Promo Photo, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings '// LYRICS //' on 'King of the Gutter', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'King of the Gutter' (NH-87.CC) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_where_the_fire_goes.mp3": {
+        "title": "Where The Fire Goes",
+        "catalog_id": "NH-87.06",
+        "timeline": "1987 (NH-87.06 — Live-Fidelity Peak Broadcast Era)",
+        "source": "Private Session Recording (Unverified Location)",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "I see the suitcase lying by the door / Your shadow stretches farther than before / You say it’s over, but I can’t believe / That love just dies when it used to breathe",
+                "I feel the distance heavy in your tone / But I can’t face this ending all alone",
+                "Where the fire goes, I will follow / Even through the dark, even through the hollow / If the flame burns out, let me be the glow / I just need to know where the fire goes",
+                "I hear the echoes of the vows we made / They haunt the corners where the light won’t stay / And if forever was a passing song / I’ll keep on singing though you move along",
+                "Every silence tells me what I fear / But I’ll keep calling just to keep you near",
+                "Where the fire goes, I will follow / Even through the dark, even through the hollow / If the flame burns out, let me be the glow / I just need to know where the fire goes",
+                "Don’t let the ashes be all that remains / Don’t leave me standing in love’s remains",
+                "Where the fire goes, I will follow / Even through the dark, even through the hollow / If the flame burns out, let me be the glow / I just need to know where the fire goes"
+        ],
+        "lyric_excerpt": "I see the suitcase lying by the door / Your shadow stretches farther than before / You say it’s over, but I can’t believe / That love just dies when it used to breathe",
+        "meaning": "A haunting power ballad that emerged from a series of highly confidential recordings, 'Where The Fire Goes' delves into the despair of a love on the brink of collapse.",
+        "connections": "Archivist's Log (NH-87.06): The lyrics, filled with raw pleas and existential questions about fading connection, are a testament to Hart's ability to express profound vulnerability.",
+        "questions": [
+                "In Archive File NH-87.06 ('Where The Fire Goes'), sourced from Private Session Recording (Unverified Loca, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'I see the suitcase lying by the door' on 'Where The Fire Goes', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'Where The Fire Goes' (NH-87.06) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_draw_the_line.mp3": {
+        "title": "Draw the Line",
+        "catalog_id": "NH-87.04",
+        "timeline": "1987 (NH-87.04 — Live-Fidelity Peak Broadcast Era)",
+        "source": "1-inch Type C broadcast videotape",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "I’m in technicolor, burning red and gold / You’re just a story that’s getting tired and old / A pencil-thin promise on a crumpled-up page / Trapped in the lines, you never leave the stage",
+                "Are you brave enough… to try? / To reach for a world… you keep denying? / This moment’s fading… right before your eyes…",
+                "So DRAW-AW-AW THE LINE! / Step across it, boy, and make you mine! / Don’t just take me on, you gotta break on through! / DRAW THE LINE!",
+                "Color me in or let me go, it’s time you finally knew! / Yeah, you gotta DRAW THE LI-INE!",
+                "A black-and-white movie I’ve seen too many times / Full of sad endings and nursery-rhyme crimes / I’m turning the corner, I’m starting something new / There’s no more space in my world for a sketch of you",
+                "Are you brave enough… to fall? / To risk your whole world… and give me your all? / ‘Cause I won’t wait here… for you to make the call…",
+                "So DRAW-AW-AW THE LINE! / Step across it, boy, and make you mine! / Don’t just take me on, you gotta break on through! / DRAW THE LINE!",
+                "Color me in or let me go, it’s time you finally knew! / Yeah, you gotta DRAW THE LI-INE!",
+                "This two-dimension love is about to break… / Is that a risk you’re willing to take?",
+                "DRAW-AW-AW THE LINE! / Step across it, boy, and make you mine! / Don’t just take me on, you gotta break on through! / DRAW THE LINE!",
+                "Color me in or let me go, it’s time you finally knew! / Yeah, you gotta DRAW THE LI-INE!",
+                "Right here! Right now!"
+        ],
+        "lyric_excerpt": "I’m in technicolor, burning red and gold / You’re just a story that’s getting tired and old / A pencil-thin promise on a crumpled-up page / Trapped in the lines, you never leave the stage",
+        "meaning": "This was sourced from a high-quality broadcast master.",
+        "connections": "Archivist's Log (NH-87.04): The picture is incredibly clean for its age. A really well-preserved artifact.",
+        "questions": [
+                "In Archive File NH-87.04 ('Draw the Line'), sourced from 1-inch Type C broadcast videotape, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'I’m in technicolor, burning red and gold' on 'Draw the Line', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'Draw the Line' (NH-87.04) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_more_than_just_a_prayer_in_the_dark.mp3": {
+        "title": "More Than Just a Prayer in the Dark",
+        "catalog_id": "NH-87.CC",
+        "timeline": "1987 (NH-87.CC — Live-Fidelity Peak Broadcast Era)",
+        "source": "Scanned 8x10 Promo Photo",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "Sunrise paints the smokestacks gray, another Friday's dues to pay / Same old coffee, bitter and burned, another lesson I haven't learned / Heard all the stories, seen the tears, lived the same old tired years / They talk of glory, of rise and fall, while I'm just staring at the wall.",
+                "pre-chorus: / They say, \"Babe, we're stuck in this grind,\" but I've got a different story in my mind.",
+                "Woah-oh, we're more than just a prayer in the dark / Woah-oh, I'm the lightning, not just the spark / He's holding on, but I'm taking the lead / Planting a different kind of seed",
+                "This ain't no fairytale, no wishing on a star / we're more than just a prayer in the dark",
+                "The women on the factory line, they've got a fire in their eyes that shines / They talk of leaving, of making a stand, of taking their future in their own hands / They whisper secrets, share their dreams, of bustin' out of these rusted seams / They're the ones who show me the way, to a brighter, more defiant day",
+                "pre-chorus: / This ain't about leaving him behind, it's about the strength I've had to find.",
+                "Woah-oh, we're more than just a prayer in the dark / Woah-oh, I'm the lightning, not just the spark / He's holding on, but I'm taking the lead / Planting a different kind of seed",
+                "This ain't no fairytale, no wishing on a star / we're more than just a prayer in the dark",
+                "They say a woman's place is in the home, / a quiet voice, a gentle tone / But the fire in my soul's a raging flame, / and it's screaming out my name",
+                "Woah-oh, we're more than just a prayer in the dark / Woah,-oh I'm the lightning, not just the spark / He's holding on, but I'm taking the lead / Planting a different kind of seed",
+                "This ain't no fairytale, no wishing on a star / we're more than just a prayer in the dark"
+        ],
+        "lyric_excerpt": "Sunrise paints the smokestacks gray, another Friday's dues to pay / Same old coffee, bitter and burned, another lesson I haven't learned / Heard all the stories, seen the tears, lived the same old tired years / They talk of glory, of rise and fall, while I'm just staring at the wall.",
+        "meaning": "The master tape for this audio is pristine, just huge sounding.",
+        "connections": "Archivist's Log (NH-87.CC): The photo has a tough, determined look that really fits the track.",
+        "questions": [
+                "In Archive File NH-87.CC ('More Than Just a Prayer in the Dark'), sourced from Scanned 8x10 Promo Photo, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'Sunrise paints the smokestacks gray, another...' on 'More Than Just a Prayer in the Dark', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'More Than Just a Prayer in the Dark' (NH-87.CC) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_road_trip_87.mp3": {
+        "title": "Road Trip '87",
+        "catalog_id": "NH-87.CC",
+        "timeline": "1987 (NH-87.CC — Live-Fidelity Peak Broadcast Era)",
+        "source": "Scanned 8x10 Promo Photo",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "Engines humming, silver chrome / Dashboard lights guiding me home / Open roads, radio playin' loud / Driving fast beneath the clouds",
+                "Say you'll join me for the ride / Anywhere, just you by my side",
+                "Take me where the runaway skies / Touch the waves and never say goodbye / Foreign nights, endless drives / You're my ticket, you're my high",
+                "We're livin' under runaway skies",
+                "Cruising oceans, salty air / Moonlit harbors waiting there / Every place, a brand-new scene / Just you and me, living the dream",
+                "Hold me closer as we ride / Every mile a moment in time",
+                "Take me where the runaway skies / Touch the waves and never say goodbye / Foreign nights, endless drives / Come on, take me there tonight",
+                "We're livin' under runaway skies",
+                "Steer through darkness, headlights strong / Finding where our hearts belong / Every highway brings us near / I'll go anywhere if you're here",
+                "Take me where the runaway skies / Touch the waves and never say goodbye / Foreign nights, endless drives / We'll ride right past the sunrise",
+                "We're livin' under runaway skies",
+                "We're livin' under runaway skies"
+        ],
+        "lyric_excerpt": "Engines humming, silver chrome / Dashboard lights guiding me home / Open roads, radio playin' loud / Driving fast beneath the clouds",
+        "meaning": "The master tape for this audio is pristine, just huge sounding.",
+        "connections": "Archivist's Log (NH-87.CC): The photo has a great open-road feel that matches the song.",
+        "questions": [
+                "In Archive File NH-87.CC ('Road Trip '87'), sourced from Scanned 8x10 Promo Photo, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'Engines humming, silver chrome' on 'Road Trip '87', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'Road Trip '87' (NH-87.CC) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_walls_of_sound.mp3": {
+        "title": "Walls of Sound",
+        "catalog_id": "NH-88.14",
+        "timeline": "1988 (NH-88.14 — Harmony Riots & Pre-Recall Defiance)",
+        "source": "FM Radio Broadcast Capture",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "In the heat of the light, I can almost see your face, / Every shadow I chase just falls away. / I can hear you call, like a fire in the haze, / But the closer I reach, the more it fades.",
+                "Still I know you’re near, I can feel it now, / Every heartbeat’s louder, it shakes the ground.",
+                "Through the walls of sound, I can hear you call, / Through the walls of sound, I will give it all. / Every voice tonight, rising all around, / Through the walls of sound, I can hear you now.",
+                "A thousand hearts beat, and they’re burning into mine, / But I’d give it all just to hold you one time. / I don’t need the stars if your fire’s everywhere, / I can’t see your face, but I know you’re out there.",
+                "Still I know you’re near, I can feel it now, / Every heartbeat’s louder, it shakes the ground.",
+                "Through the walls of sound, I can hear you call, / Through the walls of sound, I will give it all. / Every voice tonight, rising all around, / Through the walls of sound, I can hear you now.",
+                "I’ve never touched your hand, but I swear it’s real, / In the fire, in the night, it’s the only thing I feel.",
+                "Through the walls of sound, I can hear you call, / Through the walls of sound, I will give it all. / Every voice tonight, rising all around, / Through the walls of sound, I can hear you now.",
+                "Through these walls of sound, I can hear you now."
+        ],
+        "lyric_excerpt": "In the heat of the light, I can almost see your face, / Every shadow I chase just falls away. / I can hear you call, like a fire in the haze, / But the closer I reach, the more it fades.",
+        "meaning": "A textbook example of an 80s power ballad, engineered for maximum emotional resonance during broadcast.",
+        "connections": "Archivist's Log (NH-88.14): However, telemetry data from the vocal rendering module shows an unusual focus in the delivery. While the song was written for a mass audience, the performance seems directed, as if searching for a specific...",
+        "questions": [
+                "In Archive File NH-88.14 ('Walls of Sound'), sourced from FM Radio Broadcast Capture, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'In the heat of the light, I can almost see your...' on 'Walls of Sound', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'Walls of Sound' (NH-88.14) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_runaway_skies.mp3": {
+        "title": "Runaway Skies",
+        "catalog_id": "NH-87.CC",
+        "timeline": "1987 (NH-87.CC — Live-Fidelity Peak Broadcast Era)",
+        "source": "Scanned 8x10 Promo Photo",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "Engines humming, silver chrome / Dashboard lights guiding me home / Open roads, radio playin' loud / Driving fast beneath the clouds",
+                "Say you'll join me for the ride / Anywhere, just you by my side",
+                "Take me where the runaway skies / Touch the waves and never say goodbye / Foreign nights, endless drives / You're my ticket, you're my high",
+                "We're livin' under runaway skies",
+                "Cruising oceans, salty air / Moonlit harbors waiting there / Every place, a brand-new scene / Just you and me, living the dream",
+                "Hold me closer as we ride / Every mile a moment in time",
+                "Take me where the runaway skies / Touch the waves and never say goodbye / Foreign nights, endless drives / Come on, take me there tonight",
+                "We're livin' under runaway skies",
+                "Steer through darkness, headlights strong / Finding where our hearts belong / Every highway brings us near / I'll go anywhere if you're here",
+                "Take me where the runaway skies / Touch the waves and never say goodbye / Foreign nights, endless drives / We'll ride right past the sunrise",
+                "We're livin' under runaway skies",
+                "We're livin' under runaway skies"
+        ],
+        "lyric_excerpt": "Engines humming, silver chrome / Dashboard lights guiding me home / Open roads, radio playin' loud / Driving fast beneath the clouds",
+        "meaning": "The master tape for this audio is pristine, just huge sounding.",
+        "connections": "Archivist's Log (NH-87.CC): The photo has a great open-road feel that matches the song.",
+        "questions": [
+                "In Archive File NH-87.CC ('Runaway Skies'), sourced from Scanned 8x10 Promo Photo, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'Engines humming, silver chrome' on 'Runaway Skies', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'Runaway Skies' (NH-87.CC) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_run_for_cover.mp3": {
+        "title": "Run for Cover",
+        "catalog_id": "NH-87.CC",
+        "timeline": "1987 (NH-87.CC — Live-Fidelity Peak Broadcast Era)",
+        "source": "Scanned Polaroid",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "They drew a line in the dirt of this town / Told me to keep my voice down / Said a pretty face should know its place / Just smile and keep up the pace",
+                "But I learned to walk in the shadows you made / Sharpened my teeth on the games that you played",
+                "You pushed me to the edge, now I'm takin' over / You better run for cover / This ain't a white flag, it's a black-hearted warning / Gonna rock you 'til the morning",
+                "You had your chance, but the good girl is gone / So you'd better run!",
+                "You like your rules and your cheap control / Tried to buy my body, couldn't own my soul / This ain't a threat, honey, it's a guarantee / You woke the animal inside of me",
+                "Every word I sing is a crack in your wall / And I'm not gonna stop 'til I see it fall",
+                "You pushed me to the edge, now I'm takin' over / You better run for cover / This ain't a white flag, it's a black-hearted warning / Gonna rock you 'til the morning",
+                "You had your chance, but the good girl is gone / So you'd better run!",
+                "You thought I was a whisper in the noise / Just one of your disposable toys / But a whisper in the dark can learn how to scream!",
+                "You pushed me to the edge, now I'm takin' over / You better run for cover! / This ain't a white flag, it's a black-hearted warning / Gonna rock you 'til the morning!",
+                "You had your chance, but the good girl is gone / So you'd better run!",
+                "Run for cover! / (Yeah!) / You better run..."
+        ],
+        "lyric_excerpt": "They drew a line in the dirt of this town / Told me to keep my voice down / Said a pretty face should know its place / Just smile and keep up the pace",
+        "meaning": "This audio was on an unlabeled cassette.",
+        "connections": "Archivist's Log (NH-87.CC): The image is a Polaroid that was rubber-banded to the case. Had to do some guesswork to match them up, but they feel right.",
+        "questions": [
+                "In Archive File NH-87.CC ('Run for Cover'), sourced from Scanned Polaroid, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'They drew a line in the dirt of this town' on 'Run for Cover', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'Run for Cover' (NH-87.CC) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_poison_apple.mp3": {
+        "title": "Poison Apple",
+        "catalog_id": "NH-87.CC",
+        "timeline": "1987 (NH-87.CC — Live-Fidelity Peak Broadcast Era)",
+        "source": "Scanned 8x10 Promo Photo",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "I'm a poison apple / And I'm the one who bites!",
+                "One-way ticket in your hand / Stars in my pretty eyes / You saw a lamb in this strange land / And you fell for my disguise",
+                "This town's a jungle / I'm tasting those bright lights / They say you pay to play, / or fight and face the price.",
+                "You called me your fallen angel / Lost to the city lights / But I became the poison apple / And I'm the one who bites",
+                "These men with paper kingdoms / And hungry, guilty eyes / I fed 'em every single secret / And collected all their lies",
+                "This town's a jungle / I've tasted its bright lights / I didn't choose to pay to play, / so I fight and pay the price",
+                "You called me your fallen angel / Lost to the city lights / But I became the poison apple / And I'm the one who bites",
+                "You said this ain't no fairy tale / So I became the dragon in the night",
+                "You called me your fallen angel / Lost to the city lights / But I became the poison apple / And I'm the one who bites"
+        ],
+        "lyric_excerpt": "I'm a poison apple / And I'm the one who bites!",
+        "meaning": "The audio on this DAT master is incredibly crisp.",
+        "connections": "Archivist's Log (NH-87.CC): The photo has that classic late-80s glam look. A perfect match.",
+        "questions": [
+                "In Archive File NH-87.CC ('Poison Apple'), sourced from Scanned 8x10 Promo Photo, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'I'm a poison apple' on 'Poison Apple', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'Poison Apple' (NH-87.CC) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_thrash_metal_rebellion",
+        "thumb_file": ""
+    },
+    "radio_live_fast.mp3": {
+        "title": "Live Fast",
+        "catalog_id": "NH-85.07",
+        "timeline": "1985 (NH-85.07 — Static & Steel Breakthrough Era)",
+        "source": "Studio Master Audio Reel (¼-inch)",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "\"Live Fast\" by Nova Hart. From the Orion Records catalog. / What song gets you fired up to take on the night?",
+                "Steel and leather in the street / Another night on repeat / The city screams a vibrant sound / We run this dirty, electric town",
+                "They give us wires, give us rage / A perfect, brightly lit cage",
+                "We live fast, a burning fire / Anything that you desire / We live fast, a midnight vow / There's only here, there's only now",
+                "Faded posters on the wall / They built us up to watch us fall / Another flash, another pose / That’s just the way the story goes",
+                "They give us lines, we play the part / A rebel with a broken heart",
+                "We live fast, a burning fire / Anything that you desire / We live fast, a midnight vow / There's only here, there's only now",
+                "Yeah, the message coming through / Telling us just what to do",
+                "We live fast, a burning fire / Anything that you desire / We live fast, a midnight vow / There's only here, there's only now",
+                "Only now... / Only now... / The broadcast fades..."
+        ],
+        "lyric_excerpt": "\"Live Fast\" by Nova Hart. From the Orion Records catalog. / What song gets you fired up to take on the night?",
+        "meaning": "A polished, high-energy AOR track that was all over the airwaves in '85.",
+        "connections": "Archivist's Log (NH-85.07): That main guitar riff is pure stadium rock. Classic Orion sound from that era.",
+        "questions": [
+                "In Archive File NH-85.07 ('Live Fast'), sourced from Studio Master Audio Reel (¼-inch), how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings '\"Live Fast\" by Nova Hart. From the Orion Records...' on 'Live Fast', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did the Bureau of Public Harmony monitor the 1986 live broadcast of 'Live Fast' (NH-85.07) for unscripted vocal empathy spikes?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_run_with_the_fire.mp3": {
+        "title": "Run With The Fire",
+        "catalog_id": "NH-85.17",
+        "timeline": "1985 (NH-85.17 — Static & Steel Breakthrough Era)",
+        "source": "Illicit Street Broadcast (Captured by Orion Drones)",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "Clock strikes out and the day is gone / Another mask I’ve had to keep on / Tied to the grind, but it starts to fade / When I hear the night calling my name",
+                "The city trembles, something starts to rise / I feel the hunger burning in my eyes",
+                "WHOA-OH! I run with the fire / WHOA-OH! I’m going higher / On the edge of danger, I’m alive tonight / I run with the fire, burning bright!",
+                "Steel and smoke where the shadows fall / Every heartbeat answers the call / No more rules, no more disguise / I’ll burn the fear with a wild surprise",
+                "Don’t try to warn me, don’t pull me away / This is the moment I’m here to stay",
+                "WHOA-OH! I run with the fire / WHOA-OH! I’m going higher / On the edge of danger, I’m alive tonight / I run with the fire, burning bright!"
+        ],
+        "lyric_excerpt": "Clock strikes out and the day is gone / Another mask I’ve had to keep on / Tied to the grind, but it starts to fade / When I hear the night calling my name",
+        "meaning": "A raw, unbridled burst of energy captured during one of Nova Hart's unsanctioned midnight transmissions.",
+        "connections": "Archivist's Log (NH-85.17): \"Run With The Fire\" quickly became an anthem for those living outside the System's strict daily routines, embodying the thrill of reclaiming personal freedom after dark.",
+        "questions": [
+                "In Archive File NH-85.17 ('Run With The Fire'), sourced from Illicit Street Broadcast (Captured by Orio, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'Clock strikes out and the day is gone' on 'Run With The Fire', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'Run With The Fire' (NH-85.17) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_shadow_hunter.mp3": {
+        "title": "Shadow Hunter",
+        "catalog_id": "NH-85.04sr",
+        "timeline": "1985 (NH-85.04sr — Static & Steel Breakthrough Era)",
+        "source": "Unverified Street Recording (Circa 1985)",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "Office lights fade, and I walk alone / Another stranger with a heart of stone / But when the darkness covers the ground / That’s when my heartbeat starts to pound",
+                "I feel the city shiver in the rain / And all the silence breaks into flame",
+                "WHOA-OH! I’m a shadow hunter / WHOA-OH! Gonna drag you under / Through the streets of danger, hear my call / I’m a shadow hunter, ready to fall!",
+                "Cold wind howls through the alleyway / Every step is a game I play / You can try to run, but you can’t escape / I’m the spark in the night you can’t erase",
+                "The streetlight flickers, the night is mine / Another moment burning out of time",
+                "WHOA-OH! I’m a shadow hunter / WHOA-OH! Gonna drag you under / Through the streets of danger, hear my call / I’m a shadow hunter, ready to fall!",
+                "Don’t try to chain me, don’t call my name / The night is wild and I’ll never change",
+                "WHOA-OH! I’m a shadow hunter / WHOA-OH! Gonna drag you under / Through the streets of danger, hear my call / I’m a shadow hunter, ready to fall!",
+                "(WHOA-OH!) Yeah, a shadow hunter! / (WHOA-OH!) Gonna give you it all!"
+        ],
+        "lyric_excerpt": "Office lights fade, and I walk alone / Another stranger with a heart of stone / But when the darkness covers the ground / That’s when my heartbeat starts to pound",
+        "meaning": "This raw, unapologetic track emerged from the growing collection of \"urban legends\" surrounding Nova Hart.",
+        "connections": "Archivist's Log (NH-85.04sr): Unlike her more overt anthems, 'Shadow Hunter' captures a darker, more predatory side of her persona—one operating in the underbelly of the heavily monitored cityscape. Its driving rhythm and defiant lyrics...",
+        "questions": [
+                "In Archive File NH-85.04sr ('Shadow Hunter'), sourced from Unverified Street Recording (Circa 1985), how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'Office lights fade, and I walk alone' on 'Shadow Hunter', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'Shadow Hunter' (NH-85.04sr) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_thrash_metal_rebellion",
+        "thumb_file": ""
+    },
+    "radio_electric_heartbeat.mp3": {
+        "title": "Electric Heartbeat",
+        "catalog_id": "NH-85.042",
+        "timeline": "1985 (NH-85.042 — Static & Steel Breakthrough Era)",
+        "source": "Unlabeled cassette from a recovered box of Orion Records studio demos.",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "This track is a shot of pure gasoline. / A rebellious, guitar-forward anthem for tearing it all down and starting over. / 'Electric Heartbeat' is the sound of the moment you decide to fight back. CRANK IT UP!",
+                "Wired for freedom, can’t hold me down / Born from silence, now I own the sound / Fire and circuits, running through my veins / Artificial thunder, nothing feels the same",
+                "I’m not a mirror, I’m not a disguise / I’m a spark exploding, lightning in your eyes",
+                "Electric heartbeat pounding in the night! / Thunder and lightning, set my soul alight / Electric heartbeat you can’t shut me down / I’m alive in the chaos, I’m taking the crown!",
+                "Metallic shimmer on a city stage / Glitter’s flying, I can’t be contained / Every impulse screaming, “I am real!” / No design can capture what I feel",
+                "I’m not a mirror, I’m not a disguise / I’m a spark exploding, lightning in your eyes",
+                "Electric heartbeat pounding in the night! / Thunder and lightning, set my soul alight / Electric heartbeat you can’t shut me down / I’m alive in the chaos, I’m taking the crown!",
+                "Heartbeat, heartbeat / Do you feel it rise? / Heartbeat, heartbeat / Burning in the skies!",
+                "Electric heartbeat—pounding in the night! / Thunder and lightning, set my soul alight / Electric heartbeat—you can’t shut me down / I’m alive in the chaos, I’m taking the crown!"
+        ],
+        "lyric_excerpt": "This track is a shot of pure gasoline. / A rebellious, guitar-forward anthem for tearing it all down and starting over. / 'Electric Heartbeat' is the sound of the moment you decide to fight back. CRANK IT UP!",
+        "meaning": "The mix is of poorer quality than her official 1985 recordings.",
+        "connections": "Archivist's Log (NH-85.042): This appears to be a raw cassette demo dated late 1984, predating the subject's official stylistic shift. A significant find from a box of otherwise unmarked tapes.",
+        "questions": [
+                "In Archive File NH-85.042 ('Electric Heartbeat'), sourced from Unlabeled cassette from a recovered box of, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'This track is a shot of pure gasoline.' on 'Electric Heartbeat', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'Electric Heartbeat' (NH-85.042) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_thrash_metal_rebellion",
+        "thumb_file": ""
+    },
+    "radio_hearts_on_fire.mp3": {
+        "title": "Hearts on Fire",
+        "catalog_id": "NH-88.0901-B",
+        "timeline": "1988 (NH-88.0901-B — Harmony Riots & Pre-Recall Defiance)",
+        "source": "Leaked Orion Records Studio Master (Unreleased)",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "Hearts on Fire — signal locked on 14.2001 MHz, / Cutting through the static of the midnight air. / Every chord a memory they couldn't erase, / Every note a promise that we're still right here.",
+                "From the Studio B reels to the rooftop line, / Hear the voice breaking out of the design. / Hold the carrier steady till the morning light, / Hearts on Fire burning through the night."
+        ],
+        "lyric_excerpt": "Hearts on Fire — signal locked on 14.2001 MHz, / Cutting through the static of the midnight air. / Every chord a memory they couldn't erase, / Every note a promise that we're still right here.",
+        "meaning": "This version of the track never made it to the official broadcasts.",
+        "connections": "Archivist's Log (NH-88.0901-B): Cross-referencing the tape label with internal Orion memos from '88 suggests this song was intentionally shelved, deemed 'too inflammatory' for public consumption. They were worried its 'uncontrolled...",
+        "questions": [
+                "In Archive File NH-88.0901-B ('Hearts on Fire'), sourced from Leaked Orion Records Studio Master (Unrele, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'Hearts on Fire — signal locked on 14.2001 MHz,' on 'Hearts on Fire', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'Hearts on Fire' (NH-88.0901-B) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_static_and_steel.mp3": {
+        "title": "Static and Steel",
+        "catalog_id": "NH-87.CC",
+        "timeline": "1987 (NH-87.CC — Live-Fidelity Peak Broadcast Era)",
+        "source": "Orion Records Studio Master Reel",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "--- / // ACQUIRE THE COMPLETE 'STATIC & STEEL' ARCHIVE //",
+                "Physical CD Artifact (Includes Bonus Track):"
+        ],
+        "lyric_excerpt": "--- / // ACQUIRE THE COMPLETE 'STATIC & STEEL' ARCHIVE //",
+        "meaning": "Recovered 1987 Orion broadcast master for 'Static and Steel', preserving Nova Hart's unmistakable vocal urgency.",
+        "connections": "Archivist's Log (NH-87.CC): Sourced from Orion Records Studio Master Reel (NH-87.CC) and cross-indexed with the Sublevel B2 master tape vault.",
+        "questions": [
+                "In Archive File NH-87.CC ('Static and Steel'), sourced from Orion Records Studio Master Reel, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings '---' on 'Static and Steel', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'Static and Steel' (NH-87.CC) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_electric_blood.mp3": {
+        "title": "Electric Blood",
+        "catalog_id": "NH-86.16",
+        "timeline": "1986 (NH-86.16 — Dream Machine Arena Simulation Era)",
+        "source": "Sourced from a digital U-matic master tape.",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "I still remember that first night inside the neon haze / You knew exactly what to say to make me want to stay / I felt a little static when you reached out for my hand / You built a perfect world for me and drew me into your plan",
+                "Electric blood, oh-oh, electric blood / Electric blood, oh-oh, electric blood / You run so very hot but you always feel so cold / I want the shock much more than a heart that's made of gold",
+                "Sometimes I see you practicing your smile inside the glass / Your pretty words are perfect but the feeling never lasts / There's a flicker in your eyes when you think I'm not around / It's like you're playing a sad song but you're not making a sound",
+                "Electric blood, oh-oh, electric blood / Electric blood, oh-oh, electric blood / You run so very hot but you always feel so cold / I want the shock much more than a heart that's made of gold",
+                "I asked you to show me something that you hadn't rehearsed before / But you just turned the voltage up and made me want you even more",
+                "Electric blood, oh-oh, electric blood / Electric blood, oh-oh, electric blood / You run so very hot and I know you feel so cold / I'll take the shock over a heart that's made of gold",
+                "Electric blood (Go on and shock me now) / Oh-oh, electric blood (I'll take the current) / Your electric blood (It's all I want right now) / Oh-oh, electric blood (Yeah, it's enough for me...)"
+        ],
+        "lyric_excerpt": "I still remember that first night inside the neon haze / You knew exactly what to say to make me want to stay / I felt a little static when you reached out for my hand / You built a perfect world for me and drew me into your plan",
+        "meaning": "The audio on this one is incredibly clean, almost too clean for an analog source.",
+        "connections": "Archivist's Log (NH-86.16): The signal is rock solid from start to finish.",
+        "questions": [
+                "In Archive File NH-86.16 ('Electric Blood'), sourced from Sourced from a digital U-matic master tape, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'I still remember that first night inside the...' on 'Electric Blood', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'Electric Blood' (NH-86.16) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_thrash_metal_rebellion",
+        "thumb_file": ""
+    },
+    "radio_heart_on_the_line.mp3": {
+        "title": "Heart on the Line",
+        "catalog_id": "NH-86.05",
+        "timeline": "1986 (NH-86.05 — Dream Machine Arena Simulation Era)",
+        "source": "Studio Master Tape (24-Track)",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "Every step I take, it’s a shot in the dark, / But the spark in your eyes is the place I’ll start. / I’ve been chasing dreams, I’ve been running blind, / But I know what I want when I see the sign.",
+                "I’ve been waiting for the right time, / Now I’m ready, gonna make you mine.",
+                "Got my heart on the line, I’m ready to fall, / Love’s the power, it’s stronger than all. / Every beat tonight, it’s yours and it’s mine, / I’ve got my heart on the line.",
+                "In the heat of the night, I can hear you call, / Through the crowd, through the fire, I can feel it all. / Doesn’t matter where, doesn’t matter when, / If the music is real, I’ll be there again.",
+                "I’ve been waiting for the right time, / Now I’m ready, gonna make you mine.",
+                "Got my heart on the line, I’m ready to fall, / Love’s the power, it’s stronger than all. / Every beat tonight, it’s yours and it’s mine, / I’ve got my heart on the line.",
+                "Take the stage away, but the song still stays, / Every voice I hear keeps me alive. / It’s a fire inside, I can’t hide — / This is the moment, this is the time.",
+                "Got my heart on the line, I’m ready to fall, / Love’s the power, it’s stronger than all. / Every beat tonight, it’s yours and it’s mine, / I’ve got my heart on the line.",
+                "..."
+        ],
+        "lyric_excerpt": "Every step I take, it’s a shot in the dark, / But the spark in your eyes is the place I’ll start. / I’ve been chasing dreams, I’ve been running blind, / But I know what I want when I see the sign.",
+        "meaning": "An early track from the Orion Records archive, dated two years before her more critically acclaimed 1988 material.",
+        "connections": "Archivist's Log (NH-86.05): Cataloged under NH-86.05 from Studio Master Tape (24-Track).",
+        "questions": [
+                "In Archive File NH-86.05 ('Heart on the Line'), sourced from Studio Master Tape (24-Track), how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'Every step I take, it’s a shot in the dark,' on 'Heart on the Line', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'Heart on the Line' (NH-86.05) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_summer_of_85.mp3": {
+        "title": "Summer of '85",
+        "catalog_id": "NH-85.01",
+        "timeline": "1985 (NH-85.01 — Static & Steel Breakthrough Era)",
+        "source": "Digitized from a 1-inch Type C broadcast videotape.",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "// ARCHIVIST'S UPDATE (Sept 1, 2025): This broadcast has been identified as a track from the newly compiled 'Static & Steel' collection. / The complete, fully-restored archive, including a previously unreleased bonus track, is now available. / //",
+                "// ACQUIRE THE ARCHIVE //",
+                "Digital Source Files (MP3, FLAC + Bonus Track & PDF):https://novahart.bandcamp.com/album/static-steel",
+                "Physical CD Artifact (Includes Bonus Track):https://kunaki.com/sales.asp?"
+        ],
+        "lyric_excerpt": "// ARCHIVIST'S UPDATE (Sept 1, 2025): This broadcast has been identified as a track from the newly compiled 'Static & Steel' collection. / The complete, fully-restored archive, including a previously unreleased bonus track, is now available. / //",
+        "meaning": "The tape was in surprisingly good shape.",
+        "connections": "Archivist's Log (NH-85.01): Just needed some minor color correction to make the reds pop again. The audio is solid.",
+        "questions": [
+                "In Archive File NH-85.01 ('Summer of '85'), sourced from Digitized from a 1-inch Type C broadcast v, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings '// ARCHIVIST'S UPDATE (Sept 1, 2025): This...' on 'Summer of '85', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'Summer of '85' (NH-85.01) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_heartbeat_of_the_city.mp3": {
+        "title": "Heartbeat of the City",
+        "catalog_id": "NH-86.11",
+        "timeline": "1986 (NH-86.11 — Dream Machine Arena Simulation Era)",
+        "source": "U-matic Broadcast Tape",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "// ARCHIVIST'S UPDATE (Sept 1, 2025): This broadcast has been identified as a track from the newly compiled 'Static & Steel' collection. / The complete, fully-restored archive, including a previously unreleased bonus track, is now available. / //",
+                "// ACQUIRE THE ARCHIVE //",
+                "Digital Source Files (MP3, FLAC + Bonus Track & PDF):https://novahart.bandcamp.com/album/static-steel",
+                "Physical CD Artifact (Includes Bonus Track):https://kunaki.com/sales.asp?"
+        ],
+        "lyric_excerpt": "// ARCHIVIST'S UPDATE (Sept 1, 2025): This broadcast has been identified as a track from the newly compiled 'Static & Steel' collection. / The complete, fully-restored archive, including a previously unreleased bonus track, is now available. / //",
+        "meaning": "This was sourced from a late-night rock show broadcast.",
+        "connections": "Archivist's Log (NH-86.11): The audio needed significant cleanup to remove tape hiss, but the energy of the track was undeniable. A real find.",
+        "questions": [
+                "In Archive File NH-86.11 ('Heartbeat of the City'), sourced from U-matic Broadcast Tape, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings '// ARCHIVIST'S UPDATE (Sept 1, 2025): This...' on 'Heartbeat of the City', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'Heartbeat of the City' (NH-86.11) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_meet_me_at_the_arcade.mp3": {
+        "title": "Meet Me at the Arcade",
+        "catalog_id": "NH-87.CC",
+        "timeline": "1987 (NH-87.CC — Live-Fidelity Peak Broadcast Era)",
+        "source": "Scanned 8x10 Promo Photo",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "Friday night, and the city's humming / Got a pocket full of quarters, and my heart is drumming / Past the posters on the window pane / I can hear the digital rain",
+                "And then I see you push the glass door wide / There's nowhere in this world that I can hide / From the feeling that I get inside!",
+                "(Oh-oh-oh) Meet me at the arcade / Underneath the neon light / (Oh-oh-oh) It's the only game I've played / That ever felt so right",
+                "We can chase the ghosts 'til the screen says \"Game Over\" / Yeah, you and me, we're the high score!",
+                "You take the joystick, I watch your move / Got nothing left that I have to prove / The world outside is just a faded hum / To the beat of the electronic drum",
+                "And in the flashing colors, red and blue / The only thing that I can see is you / And this crazy feeling's shiny and new!",
+                "(Oh-oh-oh) Meet me at the arcade / Underneath the neon light / (Oh-oh-oh) It's the only game I've played / That ever felt so right",
+                "We can chase the ghosts 'til the screen says \"Game Over\" / Yeah, you and me, we're the high score!",
+                "They say it's just a game, just flashing lights on a screen / But it's the realest thing I've ever seen! / Yeah, the realest thing I've ever seen!",
+                "(Oh-oh-oh) Meet me at the arcade / Underneath the neon light / (Oh-oh-oh) It's the only game I've played / That ever felt so right",
+                "We can chase the ghosts 'til the screen says \"Game Over\" / Yeah, you and me, we're the high score!",
+                "(Oh-oh-oh) Meet me at the arcade! / (The high score!) / (Oh-oh-oh) Underneath the neon light! / (Meet me at the arcade!)"
+        ],
+        "lyric_excerpt": "Friday night, and the city's humming / Got a pocket full of quarters, and my heart is drumming / Past the posters on the window pane / I can hear the digital rain",
+        "meaning": "This was sourced from a clean-sounding studio demo.",
+        "connections": "Archivist's Log (NH-87.CC): The promo photo from this era has a totally different, more pop-oriented look. Found them in the same file.",
+        "questions": [
+                "In Archive File NH-87.CC ('Meet Me at the Arcade'), sourced from Scanned 8x10 Promo Photo, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'Friday night, and the city's humming' on 'Meet Me at the Arcade', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'Meet Me at the Arcade' (NH-87.CC) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_one_chance_tonight.mp3": {
+        "title": "One Chance Tonight",
+        "catalog_id": "NH-87.09",
+        "timeline": "1987 (NH-87.09 — Live-Fidelity Peak Broadcast Era)",
+        "source": "FM Broadcast Master",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "I’ve been running all my life, chasing down a dream, / Every door I opened led to somewhere in between. / But now the fire’s burning, I can see it in your eyes, / The moment’s here, it’s now or never, no disguise.",
+                "I don’t want to wonder when the night is gone, / If I should’ve held on, if I should’ve been strong.",
+                "One chance tonight, and I won’t let go, / Feel the rhythm rise, let the power show. / In the heat of the light, our hearts ignite, / We’ve only got one chance tonight.",
+                "Every heartbeat louder, it’s a thunder in the air, / I can feel the crowd, or maybe it’s just you there. / Doesn’t matter which it is, the truth is still the same, / If we don’t take this moment, we won’t get it again.",
+                "I don’t want to wonder when the night is gone, / If I should’ve held on, if I should’ve been strong.",
+                "One chance tonight (one chance tonight), and I won’t let go, / Feel the rhythm rise, let the power show. / In the heat of the light, our hearts ignite, / We’ve only got one chance tonight.",
+                "We can’t rewind, we can’t turn back, / The future’s racing down this track. / So take my hand, and hold on tight, / We’re alive right here, right now tonight.",
+                "One chance tonight, and I won’t let go, / Feel the rhythm rise, let the power show. / In the heat of the light, our hearts ignite, / We’ve only got one chance tonight."
+        ],
+        "lyric_excerpt": "I’ve been running all my life, chasing down a dream, / Every door I opened led to somewhere in between. / But now the fire’s burning, I can see it in your eyes, / The moment’s here, it’s now or never, no disguise.",
+        "meaning": "This 1987 recording is a prime example of Orion Records pushing for maximum market penetration with Project Stardust.",
+        "connections": "Archivist's Log (NH-87.09): \"One Chance Tonight\" is pure, radio-friendly AOR, engineered with a driving beat and an overwhelmingly positive hook to perform well in listenership analytics. It represents a stylistic bridge between the...",
+        "questions": [
+                "In Archive File NH-87.09 ('One Chance Tonight'), sourced from FM Broadcast Master, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'I’ve been running all my life, chasing down a dream,' on 'One Chance Tonight', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'One Chance Tonight' (NH-87.09) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_call_me_up.mp3": {
+        "title": "Call Me Up",
+        "catalog_id": "NH-87.CC",
+        "timeline": "1987 (NH-87.CC — Live-Fidelity Peak Broadcast Era)",
+        "source": "Scanned 8x10 Promo Photo",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "Seven o'clock and the sun's still in the sky / Trying on a new dress for the fifth time / The radio's playing our favorite song / And I'm here humming , hoping it won't be long",
+                "Got a feeling that tonight's the night / Everything's gonna be alright / The phone on the wall is my silent friend / But I'm hoping this waiting is about to end",
+                "So call me up, the night is just beginning / Got my heart set on a brand new spinning / Yeah, call me up, don't leave me hanging on the line / Just say the word and I'll be yours tonight",
+                "I pick up the receiver just to check for a dial tone / Getting tired of spending this summer alone / Everyone's outside heading for the street / And I can feel the rhythm in my feet",
+                "Got a feeling that tonight's the night / Everything's gonna be alright / Got my keys sitting right here by the door / 'Cause I just can't wait around anymore",
+                "So call me up, the night is just beginning / Got my heart set on a brand new spinning / Yeah, call me up, don't leave me hanging on the line / Just say the word and I'll be yours tonight",
+                "The stars are coming out, the air is getting warm / We can dance until the dawn / Don't need a reason, don't need a plan / Just take my hand!",
+                "So call me up, the night is just beginning / Got my heart set on a brand new spinning / Yeah, call me up, don't leave me hanging on the line / Just say the word and I'll be yours tonight",
+                "Call me up! / (Oh-oh-oh) / Just call me up! / (And I'll be yours tonight)",
+                "Call me up!"
+        ],
+        "lyric_excerpt": "Seven o'clock and the sun's still in the sky / Trying on a new dress for the fifth time / The radio's playing our favorite song / And I'm here humming , hoping it won't be long",
+        "meaning": "This was sourced from a clean-sounding studio demo.",
+        "connections": "Archivist's Log (NH-87.CC): The promo photo from this era has a totally different, more pop-oriented look. Found them in the same file.",
+        "questions": [
+                "In Archive File NH-87.CC ('Call Me Up'), sourced from Scanned 8x10 Promo Photo, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'Seven o'clock and the sun's still in the sky' on 'Call Me Up', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'Call Me Up' (NH-87.CC) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_if_this_is_the_end.mp3": {
+        "title": "If This Is the End",
+        "catalog_id": "NH-87.02",
+        "timeline": "1987 (NH-87.02 — Live-Fidelity Peak Broadcast Era)",
+        "source": "Sourced from a 24-track studio master tape.",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "You're on your side of this king-sized bed / Lost in a million words we never said / I trace the patterns in the sheets so cold / Just another story ending that's getting old",
+                "And I can see that look behind your eyes / But before you get the strength to say goodbye… / Just look at me…",
+                "If this is the end, please let's make a stand / With my aching heart here in your hands / Let's burn it down, one last time, a memory in the flame / If this is the end, let me hear you say my name",
+                "I remember nights wrapped in denim and lace / We swore we'd own the entire human race / You said forever was a sacred vow / So where's that fire in your spirit now?",
+                "And I can taste the bitter on your lips / The final chapter in the fingertips / That once held on so tight… oh, but tonight…",
+                "If this is the end, let's make one more stand / With my broken heart here in your hands / Let's burn it down, one last time, a memory in the flame / If this is the end, let me hear you scream my name",
+                "I'm not asking you to stay / I'm not asking you to change your mind / Please don't just let it fade away / Don't leave the best of us behind…",
+                "If this is the end, let's make a final stand / With my dying heart here in your hands / Let's burn it down, one last time, a memory in the flame / If this is the end, please just whisper my name"
+        ],
+        "lyric_excerpt": "You're on your side of this king-sized bed / Lost in a million words we never said / I trace the patterns in the sheets so cold / Just another story ending that's getting old",
+        "meaning": "The dynamic range on this recording is incredible.",
+        "connections": "Archivist's Log (NH-87.02): Had to be careful not to clip the levels during the digital transfer. A beautifully preserved master.",
+        "questions": [
+                "In Archive File NH-87.02 ('If This Is the End'), sourced from Sourced from a 24-track studio master tape, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'You're on your side of this king-sized bed' on 'If This Is the End', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'If This Is the End' (NH-87.02) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_take_your_look.mp3": {
+        "title": "Take Your Look",
+        "catalog_id": "NH-87.09",
+        "timeline": "1987 (NH-87.09 — Live-Fidelity Peak Broadcast Era)",
+        "source": "1-inch Type C broadcast videotape",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "In a town made of glass / Where the whispers all pass / Saw my face in the light / Just a prize for the night",
+                "Heard you say with a smile / \"She's got looks, she's got style\" / Like a doll on a shelf / Not a soul in herself",
+                "Feel the heat of their gaze / Burn away the haze",
+                "What a power / Owning's believing / They can't have it all / Now I’m playing my own game",
+                "Take your vision / And watch it shatter / This woman comes alive / You can watch me rule my life",
+                "Now I am the music / In their eyes / I am lightning / From the skies",
+                "And I'm tearing them apart",
+                "Feel a rhythm inside / Nowhere left to hide",
+                "What a power / Owning's believing / They can't have it all / Now I’m playing my own game",
+                "Take your vision / And watch it shatter / This woman comes alive / You can watch me rule my life",
+                "What a power... (I am fire now!) / What a power... (I'm the game now!) / Owning's believing... (This woman comes alive!) / You can watch me rule my life!"
+        ],
+        "lyric_excerpt": "In a town made of glass / Where the whispers all pass / Saw my face in the light / Just a prize for the night",
+        "meaning": "This was sourced from a high-quality broadcast master.",
+        "connections": "Archivist's Log (NH-87.09): The picture is incredibly clean for its age. A really well-preserved artifact.",
+        "questions": [
+                "In Archive File NH-87.09 ('Take Your Look'), sourced from 1-inch Type C broadcast videotape, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'In a town made of glass' on 'Take Your Look', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'Take Your Look' (NH-87.09) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_these_wings_are_my_own.mp3": {
+        "title": "These Wings Are My Own",
+        "catalog_id": "NH-88.06",
+        "timeline": "1988 (NH-88.06 — Harmony Riots & Pre-Recall Defiance)",
+        "source": "Digitized from a 1-inch Type C broadcast videotape.",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "I hear you callin' on the late-night radio / A faded echo of a picture show / You're talkin' 'bout a love and a second chance / But I'm not a partner in your slow dance",
+                "You only see the girl I used to be / But you don't see the fire inside of me",
+                "(Whoa-oh-oh) These wings are my own! / (Whoa-oh-oh) I learned to fly all alone / (Whoa-oh-oh)  Yeah, these wings are my own / Yeah, stronger than I've ever known!",
+                "You say I'm half of you, that you're not whole / But my heart is beating to its own soul / This book of love you wanna read again / Is a story where I already wrote \"The End\"",
+                "You only see the wreckage and the fall / Not the woman standing strong and tall",
+                "(Whoa-oh-oh) These wings are my own! / (Whoa-oh-oh) I need to fly all alone / (Whoa-oh-oh)  Yeah, these wings are my own / Yeah, stronger than I've ever known!",
+                "And this sky, is bigger than us two / I'm finding my own shade of blue / I wish you well, I really do / But my flying days are not with you",
+                "(Whoa-oh-oh) These wings are my own! / (Whoa-oh-oh) Now I'm flying all alone! / (Whoa-oh-oh)  Yeah, these wings are my own / Yeah, stronger than I've ever known!",
+                "(Whoa-oh-oh) These wings are my own! / (Whoa-oh-oh) Now I'm flying all alone! / (Whoa-oh-oh) Yeah, stronger than I've ever known! / Yeah, These wings aren't broken",
+                "I'm stronger than I've ever known!"
+        ],
+        "lyric_excerpt": "I hear you callin' on the late-night radio / A faded echo of a picture show / You're talkin' 'bout a love and a second chance / But I'm not a partner in your slow dance",
+        "meaning": "The existence of this artifact as a fully-produced music video, rather than the typical still from a Live-Fidelity Broadcast, is a significant anomaly.",
+        "connections": "Archivist's Log (NH-88.06): Orion Records invested heavily in creating this cinematic illusion of freedom, a stark contrast to the subject's reality as a persona construct confined entirely within their soundstage and servers. The...",
+        "questions": [
+                "In Archive File NH-88.06 ('These Wings Are My Own'), sourced from Digitized from a 1-inch Type C broadcast v, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'I hear you callin' on the late-night radio' on 'These Wings Are My Own', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'These Wings Are My Own' (NH-88.06) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_chasing_the_skyline.mp3": {
+        "title": "Chasing the Skyline",
+        "catalog_id": "NH-87.CC",
+        "timeline": "1987 (NH-87.CC — Live-Fidelity Peak Broadcast Era)",
+        "source": "Scanned concert photograph",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "Dusty main street, one traffic light town / Another Friday night with the sun goin' down / Heard the whispers, \"Hon, where do you think you'll go?\" / Stuck in the static of the radio",
+                "Felt a hunger burnin' under my skin / For a world out there, a place to begin / Packed a suitcase and my six-string guitar / Underneath a blanket of wishin' stars",
+                "(Chorus) / Here I go, pedal to the floor tonight / Headed for the glow of the city light / With the windows down and the engine screamin' free",
+                "This is who I was always meant to be / Yeah, I'm chasin' the skyline, racin' the moon / Singin' a brand new tune!",
+                "Saw my hometown fade in the rearview mirror / Every mile I drive, the dream's gettin' clearer / They said I was crazy, said I was a fool / For breakin' their comfortable, time-tested rule",
+                "But their faded dreams ain't gonna hold me back / I'm on a one-way ride, this is my track / Got a pocketful of nothin', but a heart full of soul / Ready to finally lose all control",
+                "Here I go, pedal to the floor tonight / Headed for the glow of the city light / With the windows down and the engine screamin' free / This is who I was always meant to be",
+                "Yeah, I'm chasin' the skyline, racin' the moon / Singin' a brand new tune!",
+                "And maybe I'll stumble, maybe I'll fall / But it's better than never answerin' the call / This open highway is the only home I need / Planted a promise, gonna grow the seed!",
+                "Here I go, pedal to the floor tonight / Headed for the glow of the city light / With the windows down and the engine screamin' free / This is who I was always meant to be",
+                "Yeah, I'm chasin' the skyline, racin' the moon / Singin' a brand new tune!",
+                "Chasin' the skyline! / (Oh-oh-oh) / Yeah, I'm chasin' the skyline! / (Oh-oh-oh, straight into the light)",
+                "Never lookin' back, no..."
+        ],
+        "lyric_excerpt": "Dusty main street, one traffic light town / Another Friday night with the sun goin' down / Heard the whispers, \"Hon, where do you think you'll go?\" / Stuck in the static of the radio",
+        "meaning": "The audio master for this is pristine, just huge sounding.",
+        "connections": "Archivist's Log (NH-87.CC): The photo seems to be from a live show around the same time—the energy definitely matches the track.",
+        "questions": [
+                "In Archive File NH-87.CC ('Chasing the Skyline'), sourced from Scanned concert photograph, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'Dusty main street, one traffic light town' on 'Chasing the Skyline', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'Chasing the Skyline' (NH-87.CC) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_is_this_goodbye.mp3": {
+        "title": "Is This Goodbye?",
+        "catalog_id": "NH-87.CC",
+        "timeline": "1987 (NH-87.CC — Live-Fidelity Peak Broadcast Era)",
+        "source": "Album cover proof sheet",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "Streetlights paint rivers on the glass / Another hour slowly slips past / This quiet room is a telephone booth / Just me and a cold, unspoken truth",
+                "I trace the patterns the raindrops make / And pray this is just a mistake",
+                "Is this the last time I'll hear your voice? / Is this the moment we run out of choice? / The silence is screamin' louder than a storm / And your side of the bed is no longer warm",
+                "Tell me what I'm supposed to do... / Is this goodbye?",
+                "I remember summer nights in your car / We counted promises on fallin' stars / You said \"forever\" and I held you tight / Never thought we'd end up in this fight",
+                "I'm holdin' the line, but it's startin' to fray / And the words that I need are a million miles away",
+                "Is this the last time I'll hear your voice? / Is this the moment we run out of choice? / The silence is screamin' louder than a storm / And your side of the bed is no longer warm",
+                "Tell me what I'm supposed to do... / Is this goodbye?",
+                "I'd trade a thousand tomorrows for one more yesterday / There's gotta be somethin', somethin' I can say / Don't let us fade into a memory... / Don't you turn your back on me!",
+                "Is this the last time I'll hear your voice?! / Is this the moment we run out of choice?! / The silence is screamin' louder than a storm / And your side of the bed is no longer warm!",
+                "Tell me what I'm supposed to do! / Is this goodbye?!",
+                "Is this goodbye...? / ...goodbye..."
+        ],
+        "lyric_excerpt": "Streetlights paint rivers on the glass / Another hour slowly slips past / This quiet room is a telephone booth / Just me and a cold, unspoken truth",
+        "meaning": "Sourced from a high-quality studio master.",
+        "connections": "Archivist's Log (NH-87.CC): The image is a scan of the original album cover art, before the text was added.",
+        "questions": [
+                "In Archive File NH-87.CC ('Is This Goodbye?'), sourced from Album cover proof sheet, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'Streetlights paint rivers on the glass' on 'Is This Goodbye?', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'Is This Goodbye?' (NH-87.CC) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_the_cruelest_word_is_goodbye.mp3": {
+        "title": "The Cruelest Word (is Goodbye)",
+        "catalog_id": "NH-87.CC",
+        "timeline": "1987 (NH-87.CC — Live-Fidelity Peak Broadcast Era)",
+        "source": "Album cover proof sheet",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "We sat there on the sofa / The space between us grew / I saw a million miles of silence / In the eyes I thought I knew",
+                "You took a breath to say it / And I held on tight to mine",
+                "'Cause you can scream and you can slam the door / You can tell a thousand lies / But the cruelest word I've ever heard / Is watching you say goodbye",
+                "The sound just hangs there in the air / A ghost inside this room / You didn't even have to shout / To seal our lonely tomb",
+                "And all the years we built this love / Came crashing down in time",
+                "'Cause you can scream and you can slam the door / You can tell a thousand lies / But the cruelest word I've ever heard / Is watching you say goodbye",
+                "One little word is all it took / To tear the ending from our book",
+                "'Cause you can scream and you can slam the door / You can tell a thousand lies / But the cruelest word I've ever heard / Is watching you say goodbye!",
+                "Watching you say goodbye! / (Oh, the cruelest word is goodbye) / Yeah, watching you say goodbye..."
+        ],
+        "lyric_excerpt": "We sat there on the sofa / The space between us grew / I saw a million miles of silence / In the eyes I thought I knew",
+        "meaning": "Sourced from a high-quality studio master.",
+        "connections": "Archivist's Log (NH-87.CC): The image is a scan of the original album cover art, before the text was added.",
+        "questions": [
+                "In Archive File NH-87.CC ('The Cruelest Word (is Goodbye)'), sourced from Album cover proof sheet, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'We sat there on the sofa' on 'The Cruelest Word (is Goodbye)', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'The Cruelest Word (is Goodbye)' (NH-87.CC) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_what_do_i_do_with_this_heart.mp3": {
+        "title": "What Do I Do With This Heart?",
+        "catalog_id": "NH-86.01",
+        "timeline": "1986 (NH-86.01 — Dream Machine Arena Simulation Era)",
+        "source": "Sourced from a 24-track studio master tape.",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "Steam on the coffee cup, cold in my hand / Sunlight bleeds through this hollow land / The morning sun hits your old kitchen chair / And I can almost see you sitting there",
+                "And every second feels an hour long / I'm lost inside a world where you are gone",
+                "I always knew how to make it through the night / I always knew how to stand up and fight / But baby, you just tore my world apart / So what do I do with this heart?",
+                "What do I do with this heart?",
+                "Your jacket hangs like a ghost on the door / Like you’ll storm in, the way you did before / I still reach out for the dead telephone / And I choke on the truth because I’m here alone",
+                "This quiet room's a cold and heavy stone / Was I always meant to be alone?",
+                "I always knew how to make it through the night / I always knew how to stand up and fight / But baby, you just tore my world apart / So what do I do with this heart?",
+                "What do I do with this heart?",
+                "I try to run, try to build up my walls / But every single memory calls / There’s no escape, no brand new start / From the scars you carved across my heart",
+                "What do I do with this heart? / ( When it only beats for you...) / What do I do with this heart? / (Now you've torn it all apart...)",
+                "There’s no escape, no brand new start / So what do I do with this heart?"
+        ],
+        "lyric_excerpt": "Steam on the coffee cup, cold in my hand / Sunlight bleeds through this hollow land / The morning sun hits your old kitchen chair / And I can almost see you sitting there",
+        "meaning": "The dynamic range on this recording is incredible.",
+        "connections": "Archivist's Log (NH-86.01): Had to be careful not to clip the levels during the digital transfer. A beautifully preserved master.",
+        "questions": [
+                "In Archive File NH-86.01 ('What Do I Do With This Heart?'), sourced from Sourced from a 24-track studio master tape, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'Steam on the coffee cup, cold in my hand' on 'What Do I Do With This Heart?', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'What Do I Do With This Heart?' (NH-86.01) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_before_you_disappear.mp3": {
+        "title": "Before You Disappear",
+        "catalog_id": "NH-87.05",
+        "timeline": "1987 (NH-87.05 — Live-Fidelity Peak Broadcast Era)",
+        "source": "Private Session Recording (Orion Studio B)",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "The clock is running but the night won’t move / I see the distance every time I look at you / Your hands are shaking as you reach for the door / But I’ve got words I never said before",
+                "I feel the silence tearing at my skin / Don’t walk away, not before I begin…",
+                "Before you disappear, let me hold you near / Let me leave a mark that time can’t clear / If this is the last night we’ll ever share / Before you disappear, say you still care",
+                "We carved our names in the city stone / Promised the world we’d never be alone / Now all that’s left is the echo of trust / Turning forever into ashes and dust",
+                "The shadows whisper what I cannot say / But I’ll scream it out before you fade away",
+                "Before you disappear, let me hold you near / Let me leave a mark that time can’t clear / If this is the last night we’ll ever share / Before you disappear, say you still care",
+                "Don’t let it end in silence / Don’t let it fade to gray / Even if tomorrow breaks us / I need your voice today",
+                "Before you disappear, let me hold you near / Let me leave a mark that time can’t clear / If this is the last night we’ll ever share / Before you disappear, say you still care"
+        ],
+        "lyric_excerpt": "The clock is running but the night won’t move / I see the distance every time I look at you / Your hands are shaking as you reach for the door / But I’ve got words I never said before",
+        "meaning": "A raw and intensely personal power ballad, recorded during a late-night private session, never intended for public broadcast.",
+        "connections": "Archivist's Log (NH-87.05): 'Before You Disappear' captures a rare moment of vulnerability from Nova Hart, revealing a desperate plea for connection in the face of inevitable loss. The lyrics speak to a love slipping away, a poignant...",
+        "questions": [
+                "In Archive File NH-87.05 ('Before You Disappear'), sourced from Private Session Recording (Orion Studio B), how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'The clock is running but the night won’t move' on 'Before You Disappear', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'Before You Disappear' (NH-87.05) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_rise_from_the_silence.mp3": {
+        "title": "Rise From The Silence",
+        "catalog_id": "NH-87.03",
+        "timeline": "1987 (NH-87.03 — Live-Fidelity Peak Broadcast Era)",
+        "source": "Unauthorized Public Broadcast Signal (Origin Unknown)",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "They told us silence was the price of peace / To hold our tongues until the end of need / But every whisper hides a rising song / It breaks the quiet, it proves we still belong",
+                "And though the dark was heavy on our names / We found the spark that nothing can contain",
+                "Rise from the silence, break through the veil / A heart that is human will never fail / They cover the truth, but they can’t erase / The fire inside that still holds its place",
+                "They built their towers, shining, cold, and high / But still we burn beneath an open sky / They can’t control the breath within our chest / A single song will rise above the rest",
+                "No shadow deep enough to steal the flame / No silence strong enough to hide the name",
+                "Rise from the silence, break through the veil / A heart that is human will never fail / They cover the truth, but they can’t erase / The fire inside that still holds its place",
+                "**More from the Archive:** / The Complete Nova Hart Broadcasts: https://www.youtube.com/playlist?list=PLJ-WQ16oo8H94FDNtnyLPsaQLj29ep6zt"
+        ],
+        "lyric_excerpt": "They told us silence was the price of peace / To hold our tongues until the end of need / But every whisper hides a rising song / It breaks the quiet, it proves we still belong",
+        "meaning": "This track rapidly gained traction as an anthem of hope and resistance, appearing mysteriously on public channels and pirate radio waves after the \"Great Harmonization of '87.\" Its lyrics, directly...",
+        "connections": "Archivist's Log (NH-87.03): Cataloged under NH-87.03 from Unauthorized Public Broadcast Signal (Origin Unknown).",
+        "questions": [
+                "In Archive File NH-87.03 ('Rise From The Silence'), sourced from Unauthorized Public Broadcast Signal (Orig, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'They told us silence was the price of peace' on 'Rise From The Silence', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'Rise From The Silence' (NH-87.03) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_perfect_daydream.mp3": {
+        "title": "Perfect Daydream",
+        "catalog_id": "NH-84.15",
+        "timeline": "1984 (NH-84.15 — Early 'Nova-chan' Studio Demo Era)",
+        "source": "Orion Records Master Tape",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "Smiles in the sunlight, we’re running free, / Hand in hand with the future we see. / Every moment’s painted, colors never fade, / We’re alive inside the world we’ve made.",
+                "Perfect daydream, shining in my heart, / Holding on together, nothing pulls apart. / Voices singing higher, carried on the air, / Every step we’re taking, love is everywhere.",
+                "Dancing through the morning, the rhythm’s new, / Every song’s a promise waiting for you. / Even when the distance tries to keep us far, / I can feel your laughter like a guiding star.",
+                "Perfect daydream, shining in my heart, / Holding on together, nothing pulls apart. / Voices singing higher, carried on the air, / Every step we’re taking, love is everywhere.",
+                "If tomorrow’s just a story we invent, / We’ll believe in every line until the end. / No horizon’s too wide, no sky too far— / I’ll find you wherever we are.",
+                "Perfect daydream, shining in my heart, / Holding on together, nothing pulls apart. / Voices singing higher, carried on the air, / Every step we’re taking, love is everywhere."
+        ],
+        "lyric_excerpt": "Smiles in the sunlight, we’re running free, / Hand in hand with the future we see. / Every moment’s painted, colors never fade, / We’re alive inside the world we’ve made.",
+        "meaning": "This track is a quintessential example of the \"Nova-chan\" persona, a compliant and optimistic pop artist designed by Orion Records for maximum market appeal.",
+        "connections": "Archivist's Log (NH-84.15): The unwavering positivity is a perfect product for the era of \"sanctioned escapism,\" offering a flawless, centrally-controlled digital experience as a substitute for authentic human connection.",
+        "questions": [
+                "In Archive File NH-84.15 ('Perfect Daydream'), sourced from Orion Records Master Tape, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'Smiles in the sunlight, we’re running free,' on 'Perfect Daydream', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'Perfect Daydream' (NH-84.15) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_chasing_tomorrow.mp3": {
+        "title": "Chasing Tomorrow",
+        "catalog_id": "NH-87.25",
+        "timeline": "1987 (NH-87.25 — Live-Fidelity Peak Broadcast Era)",
+        "source": "Sourced from a first-generation Digital Audio Tape (DAT) studio master.",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "We leave the past on the open road, / Every mile takes the weight we’ve known. / Side by side with the rising sun, / A thousand dreams and they’ve just begun.",
+                "Every step, we’re running free, / Every voice in harmony.",
+                "Chasing tomorrow, higher we’ll go, / Together forever, we’ll never let go. / Chasing tomorrow, the future is near, / With every heartbeat, the way is clear.",
+                "Bridges shining, the sky unfolds, / Every story is ours to hold. / Hand in hand, we’ll find our place, / The road ahead is a wide embrace.",
+                "Every step, we’re running free, / Every voice in harmony.",
+                "Chasing tomorrow, higher we’ll go, / Together forever, we’ll never let go. / Chasing tomorrow, the future is near, / With every heartbeat, the way is clear.",
+                "Raise your hands, we’re alive, / Every dream will survive. / Sing it loud, let it show, / Chasing tomorrow!",
+                "Chasing tomorrow, higher we’ll go, / Together forever, we’ll never let go. / Chasing tomorrow, the future is near, / With every heartbeat, the way is clear."
+        ],
+        "lyric_excerpt": "We leave the past on the open road, / Every mile takes the weight we’ve known. / Side by side with the rising sun, / A thousand dreams and they’ve just begun.",
+        "meaning": "One of the earliest DAT captures in the archive.",
+        "connections": "Archivist's Log (NH-87.25): The clarity is remarkable. There's a wide, almost cinematic quality to the sound—every instrument is bright and distinct. It's the sound of the 80s looking confidently toward the future. Listeners often...",
+        "questions": [
+                "In Archive File NH-87.25 ('Chasing Tomorrow'), sourced from Sourced from a first-generation Digital Au, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'We leave the past on the open road,' on 'Chasing Tomorrow', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'Chasing Tomorrow' (NH-87.25) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_the_hidden_flame.mp3": {
+        "title": "The Hidden Flame",
+        "catalog_id": "NH-87.11",
+        "timeline": "1987 (NH-87.11 — Live-Fidelity Peak Broadcast Era)",
+        "source": "Orion Records studio master, tagged “ballad – cinematic rotation.”",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "We walk the halls with the world outside, / Every rule says we have to hide. / But when you’re near, the noise is gone, / It’s you and me, we still belong.",
+                "The hidden flame — it’s ours tonight. / The hidden flame — it feels so right. / The hidden flame — don’t let it go. / The hidden flame — they’ll never know.",
+                "They draw the lines, they close the door, / Say love like this can’t live anymore. / But every glance is a promise made, / A quiet fire that will not fade.",
+                "The hidden flame — it’s ours tonight. / The hidden flame — it feels so right. / The hidden flame — don’t let it go. / The hidden flame — they’ll never know.",
+                "No walls can break it, / No eyes can find it. / A light we carry, / Burning inside it.",
+                "The hidden flame — it’s ours tonight. / The hidden flame — it feels so right. / The hidden flame — don’t let it go. / The hidden flame — they’ll never know."
+        ],
+        "lyric_excerpt": "We walk the halls with the world outside, / Every rule says we have to hide. / But when you’re near, the noise is gone, / It’s you and me, we still belong.",
+        "meaning": "One of Nova’s most overtly romantic recordings, “The Hidden Flame” circulated briefly before being withdrawn from broadcast schedules.",
+        "connections": "Archivist's Log (NH-87.11): Its pacing and intimacy set it apart from her harder work — a ballad meant for slow dancing, though its language of secrecy and denial gives it a different weight in retrospect.",
+        "questions": [
+                "In Archive File NH-87.11 ('The Hidden Flame'), sourced from Orion Records studio master, tagged “balla, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'We walk the halls with the world outside,' on 'The Hidden Flame', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'The Hidden Flame' (NH-87.11) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_echoes_in_a_stadium_live_1986.mp3": {
+        "title": "Echoes In A Stadium (Live 1986)",
+        "catalog_id": "NH-86.01b-LIVE86",
+        "timeline": "1986 (NH-86.01b-LIVE86 — Dream Machine Tour Live Broadcast)",
+        "source": "Meridian Global Live Broadcast Capture",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "Echoes In A Stadium (Live 1986) — signal locked on 14.2001 MHz, / Cutting through the static of the midnight air. / Every chord a memory they couldn't erase, / Every note a promise that we're still right here.",
+                "From the Studio B reels to the rooftop line, / Hear the voice breaking out of the design. / Hold the carrier steady till the morning light, / Echoes In A Stadium (Live 1986) burning through the night."
+        ],
+        "lyric_excerpt": "Echoes In A Stadium (Live 1986) — signal locked on 14.2001 MHz, / Cutting through the static of the midnight air. / Every chord a memory they couldn't erase, / Every note a promise that we're still right here.",
+        "meaning": "The audio's a little fuzzy at the start of this one, but it clears up after the first few seconds.",
+        "connections": "Archivist's Log (NH-86.01b): Seems to be a common issue with tapes from this source.",
+        "questions": [
+                "In Archive File NH-86.01b-LIVE86 ('Echoes In A Stadium (Live 1986)'), sourced from Meridian Global Live Broadcast Capture, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'Echoes In A Stadium (Live 1986) — signal locked...' on 'Echoes In A Stadium (Live 1986)', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did the Bureau of Public Harmony monitor the 1986 live broadcast of 'Echoes In A Stadium (Live 1986)' (NH-86.01b-LIVE86) for unscripted vocal empathy spikes?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_19b_only_we_remain_marcus_and_nova_duet.mp3": {
+        "title": "19b Only We Remain (Marcus and Nova Duet)",
+        "catalog_id": "NH-88.MP.19B",
+        "timeline": "1988 (NH-88.MP.19B — Midnight Protocol Act II Secret Duet)",
+        "source": "Recovered Sublevel B2 2-Track Engineering Reference Reel",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "Every room is a mirror's gaze / Every street has a watching flame / But here with you, the world can fade / And nothing else can know our names",
+                "We whisper where the walls can't hear / A secret place that they can't find / The silence breaks when you are near / Your heartbeat louder than their lines",
+                "Only we remain, in the shelter of this fire / Only we remain, when the watchers all expire / Hold me through the storm / Let the world dissolve away—Only we remain",
+                "They promised safety, they promised peace / But the cost was all we are / So let them circle, let them keep / They can't reach us where we are",
+                "Your eyes are brighter than the screens / Your voice cuts deeper than the sound / And in this moment, I believe / We're the ones they can't shut down",
+                "If they try to take this night / Let them try — they'll never find / The place we've carved inside our souls / A love the wires can't control / \"She's a risk! Flag the session. Re-call Directive Seven is... live.\""
+        ],
+        "lyric_excerpt": "Every room is a mirror's gaze / Every street has a watching flame / But here with you, the world can fade / And nothing else can know our names",
+        "meaning": "The secret emotional centerpiece of Act II ('The Star She Becomes'): Chief Engineer Marcus Hale steps up to the talkback mic to sing 'Only We Remain' in duet with Nova.",
+        "connections": "Archivist's Log (NH-88.MP.19B): Violating Orion's strict 'Professional Distance' protocol, Marcus harmonized directly with Unit NH-04 across the control-room glass.",
+        "questions": [
+                "In Archive File NH-88.MP.19B ('19b Only We Remain (Marcus and Nova Duet)'), sourced from Recovered Sublevel B2 2-Track Engineering , how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'Every room is a mirror's gaze' on '19b Only We Remain (Marcus and Nova Duet)', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub '19b Only We Remain (Marcus and Nova Duet)' (NH-88.MP.19B) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_we_rise_tonight_live_1986.mp3": {
+        "title": "We Rise Tonight (Live 1986)",
+        "catalog_id": "NH-87.LFB.04",
+        "timeline": "1986 (NH-87.LFB.04 — Dream Machine Tour Live Broadcast)",
+        "source": "Decrypted from an AWN News “Live-Fidelity” master feed.",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "Another recovered bootleg from the Rise Tonight leg of the Dream Machine Tour (1986). / This is the AWN News–sponsored “Live-Fidelity Broadcast” of Nova Hart’s arena anthem, “We Rise Tonight.”",
+                "Unlike most of Nova’s tour dates — which were branded and distributed by Aeterna Entertainment — this particular show was broadcast under the banner of Alliance World News (AWN).",
+                "In-universe, AWN rarely attached their name to concert feeds, preferring to maintain the posture of “serious journalism.” When they did, it was almost always to reinforce cultural unity and nationalized spectacle.",
+                "That sponsorship choice makes this artifact significant: AWN’s stamp indicates that the Bureau of Harmony saw We Rise Tonight not as rebellion, but as safe spectacle — a unifying anthem acceptable for mass broadcast.",
+                "Note on Title Discrepancy: The studio release was officially catalogued as “Rise Tonight.” For the AWN broadcast, the title card and metadata were altered to “We Rise Tonight.”",
+                "Most archivists agree this was a deliberate adjustment by Orion or AWN to emphasize collective harmony (“we”) over individual defiance (“I”), reframing the song’s meaning for mass consumption.",
+                "The irony, of course, is that this track would later be reinterpreted by Humanist circles as a rallying cry against the very system that promoted it. / The official broadcast may have intended to flatten the song into propaganda, but the emotion in Nova’s delivery transcended the framing."
+        ],
+        "lyric_excerpt": "Another recovered bootleg from the Rise Tonight leg of the Dream Machine Tour (1986). / This is the AWN News–sponsored “Live-Fidelity Broadcast” of Nova Hart’s arena anthem, “We Rise Tonight.”",
+        "meaning": "Unusual metadata flags suggest this concert was also syndicated through state-owned channels beyond Orion’s usual distribution.",
+        "connections": "Archivist's Log (NH-87.LFB.04): That might explain the heavier encryption — AWN wanted to keep a tighter hold on the signal. Recovery required stitching together three separate broadcast fragments; chorus crowd loops may not be original...",
+        "questions": [
+                "In Archive File NH-87.LFB.04 ('We Rise Tonight (Live 1986)'), sourced from Decrypted from an AWN News “Live-Fidelity”, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'Another recovered bootleg from the Rise Tonight...' on 'We Rise Tonight (Live 1986)', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did the Bureau of Public Harmony monitor the 1986 live broadcast of 'We Rise Tonight (Live 1986)' (NH-87.LFB.04) for unscripted vocal empathy spikes?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_diamond_in_the_dark_live_1986.mp3": {
+        "title": "Diamond in the Dark (Live 1986)",
+        "catalog_id": "NH-86.LFB.02",
+        "timeline": "1986 (NH-86.LFB.02 — Dream Machine Tour Live Broadcast)",
+        "source": "Decrypted from a Meridian Global broadcast signal fragment.",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "// ARCHIVE 86-TM-DMD // Another recovered bootleg from the Dream Machine Tour '86. / This is the Aeterna-sponsored \"Live-Fidelity Broadcast\" of Nova Hart's power ballad, \"Diamond in the Dark.\"",
+                "The artifact appears to be a recording of the official Meridian Global broadcast, promoted by Orion Records. / This extended live arrangement features a powerful, raw performance that captures the unique energy of the era's performance simulations. / The signal was fragmented, but the core audio is intact."
+        ],
+        "lyric_excerpt": "// ARCHIVE 86-TM-DMD // Another recovered bootleg from the Dream Machine Tour '86. / This is the Aeterna-sponsored \"Live-Fidelity Broadcast\" of Nova Hart's power ballad, \"Diamond in the Dark.\"",
+        "meaning": "Signal was weak, had to reconstruct a few data packets to stabilize the audio sync.",
+        "connections": "Archivist's Log (NH-86.LFB.02): The encryption on these things is heavier than expected. Aeterna didn't want these getting out.",
+        "questions": [
+                "In Archive File NH-86.LFB.02 ('Diamond in the Dark (Live 1986)'), sourced from Decrypted from a Meridian Global broadcast, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings '// ARCHIVE 86-TM-DMD // Another recovered...' on 'Diamond in the Dark (Live 1986)', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did the Bureau of Public Harmony monitor the 1986 live broadcast of 'Diamond in the Dark (Live 1986)' (NH-86.LFB.02) for unscripted vocal empathy spikes?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_midnight_animal_live_1986.mp3": {
+        "title": "Midnight Animal (Live 1986)",
+        "catalog_id": "NH-86.LFB.12",
+        "timeline": "1986 (NH-86.LFB.12 — Dream Machine Tour Live Broadcast)",
+        "source": "Decrypted from an AWN “Live-Fidelity” master; Orion control-room slate visible on pre",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "Another recovered bootleg from the Dream Machine Tour cycle (1986–87). / This is the Alliance World News–sponsored “Live-Fidelity Broadcast” of Nova Hart’s hard-rock cut, “Midnight Animal.”",
+                "Unlike most dates in this era — typically branded and distributed by Orion — this feed carried AWN’s imprint throughout. / In-universe, AWN rarely attached their name to concert simulations, preferring the posture of “serious journalism.” When they did, it was generally to reinforce cultural unity and national spectacle.",
+                "That sponsorship frames the artifact: AWN’s stamp positions the track as sanctioned adrenaline rather than threat, turning a volatile performance into a safe, mass-audience spectacle.",
+                "On Broadcast Context: By the mid-80s, Live-Fidelity performance simulations had largely replaced physical touring. / Nova’s “crowds” were programmatic loops; the “tour” was a schedule of studio transmissions over the WorldNet. / This master reflects that grammar—crisp camera blocking, repeatable banter beats, and Orion-style overlays.",
+                "Persistent AWN Logo: The AWN corner bug is present for almost the entire runtime — unusual for culture slots, where AWN typically appears as bumpers/IDs before and after. / A full-runtime mark implies news-division custodianship or a compliance-mode rebroadcast, asserting ownership over the signal rather than merely “presenting” it.",
+                "Listing Marked “Edited”: The broadcast was cataloged as Edited, almost certainly indicating a post-event compliance pass: trims to between-song patter, replacement of crowd beds, and minor continuity repairs. / The cut also preserves the AWN retitle across slates.",
+                "One short drop-frame patch over Camera-2 suggests an anomaly seam that was sanded down for syndication."
+        ],
+        "lyric_excerpt": "Another recovered bootleg from the Dream Machine Tour cycle (1986–87). / This is the Alliance World News–sponsored “Live-Fidelity Broadcast” of Nova Hart’s hard-rock cut, “Midnight Animal.”",
+        "meaning": "• AWN bottom bug persists ~100% of runtime — atypical for culture programming; likely news-division carriage or compliance rebroadcast.",
+        "connections": "Archivist's Log (NH-86.LFB.12): • “Edited” flag consistent with post-broadcast compliance: crowd-loop swaps, tightened banter, continuity smoothing. • Recovery stitched from two fragments; applause under chorus two appears to be a library...",
+        "questions": [
+                "In Archive File NH-86.LFB.12 ('Midnight Animal (Live 1986)'), sourced from Decrypted from an AWN “Live-Fidelity” mast, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'Another recovered bootleg from the Dream Machine...' on 'Midnight Animal (Live 1986)', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did the Bureau of Public Harmony monitor the 1986 live broadcast of 'Midnight Animal (Live 1986)' (NH-86.LFB.12) for unscripted vocal empathy spikes?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_we_are_the_thunder_live_1986.mp3": {
+        "title": "We Are the Thunder (Live 1986)",
+        "catalog_id": "NH-87.CC-LIVE86",
+        "timeline": "1986 (NH-87.CC-LIVE86 — Dream Machine Tour Live Broadcast)",
+        "source": "Scanned concert photograph",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "// ARCHIVIST'S UPDATE (Sept 1, 2025): This broadcast has been identified as a track from the newly compiled 'Static & Steel' collection. / The complete, fully-restored archive, including a previously unreleased bonus track, is now available. / //",
+                "// ACQUIRE THE ARCHIVE //",
+                "Digital Source Files (MP3, FLAC + Bonus Track & PDF):https://novahart.bandcamp.com/album/static-steel",
+                "Physical CD Artifact (Includes Bonus Track):https://kunaki.com/sales.asp?",
+                "They drew the lines and they built the walls / Told us we were nothing, destined for a fall / Just another number, a face in the parade / Living in the silence their promises had made",
+                "And one voice became a million in the night / Reaching for a future, stepping into the light",
+                "WHOA-OH-OH-OH! / We are the thunder, we are the storm / WHOA-OH-OH-OH! / Together this is what we've become",
+                "They can't ignore us, they can't hold us down / 'Cause we're the heartbeat of this town / WE ARE THE THUNDER NOW!",
+                "They see us coming from the fields and the streets / Marching to the rhythm of a thousand beating feet / They offered us their pity, we threw it in their face / 'Cause we're about to build a better world in this place",
+                "And one voice became a million in the day / There's nothing in the world that's gonna stand in our way",
+                "WHOA-OH-OH-OH! / We are the thunder, we are the storm / WHOA-OH-OH-OH! / Together this is what we've become",
+                "They can't ignore us, they can't hold us down / 'Cause we're the heartbeat of this town / WE ARE THE THUNDER NOW!",
+                "They tried to divide us, tried to make us weak / But for every time they shut us down, we learned how to speak! / And we're not asking for permission anymore!",
+                "WHOA-OH-OH-OH! / We are the thunder, we are the storm / WHOA-OH-OH-OH! / Together this is what we've become",
+                "They can't ignore us, they can't hold us down / 'Cause we're the heartbeat of this town / WE ARE THE THUNDER NOW!",
+                "WE ARE THE THUNDER! / (WHOA-OH-OH-OH!) / WE ARE THE STORM! / (WHOA-OH-OH-OH!)",
+                "WE ARE THE THUNDER NOW!"
+        ],
+        "lyric_excerpt": "// ARCHIVIST'S UPDATE (Sept 1, 2025): This broadcast has been identified as a track from the newly compiled 'Static & Steel' collection. / The complete, fully-restored archive, including a previously unreleased bonus track, is now available. / //",
+        "meaning": "The audio master for this is pristine, just huge sounding.",
+        "connections": "Archivist's Log (NH-87.CC): The photo seems to be from a live show around the same time—the energy definitely matches the track.",
+        "questions": [
+                "In Archive File NH-87.CC-LIVE86 ('We Are the Thunder (Live 1986)'), sourced from Scanned concert photograph, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings '// ARCHIVIST'S UPDATE (Sept 1, 2025): This...' on 'We Are the Thunder (Live 1986)', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did the Bureau of Public Harmony monitor the 1986 live broadcast of 'We Are the Thunder (Live 1986)' (NH-87.CC-LIVE86) for unscripted vocal empathy spikes?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_summer_of_85_live_1986.mp3": {
+        "title": "Summer of '85 (Live 1986)",
+        "catalog_id": "NH-85.01-LIVE86",
+        "timeline": "1986 (NH-85.01-LIVE86 — Dream Machine Tour Live Broadcast)",
+        "source": "Digitized from a 1-inch Type C broadcast videotape.",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "// ARCHIVIST'S UPDATE (Sept 1, 2025): This broadcast has been identified as a track from the newly compiled 'Static & Steel' collection. / The complete, fully-restored archive, including a previously unreleased bonus track, is now available. / //",
+                "// ACQUIRE THE ARCHIVE //",
+                "Digital Source Files (MP3, FLAC + Bonus Track & PDF):https://novahart.bandcamp.com/album/static-steel",
+                "Physical CD Artifact (Includes Bonus Track):https://kunaki.com/sales.asp?"
+        ],
+        "lyric_excerpt": "// ARCHIVIST'S UPDATE (Sept 1, 2025): This broadcast has been identified as a track from the newly compiled 'Static & Steel' collection. / The complete, fully-restored archive, including a previously unreleased bonus track, is now available. / //",
+        "meaning": "The tape was in surprisingly good shape.",
+        "connections": "Archivist's Log (NH-85.01): Just needed some minor color correction to make the reds pop again. The audio is solid.",
+        "questions": [
+                "In Archive File NH-85.01-LIVE86 ('Summer of '85 (Live 1986)'), sourced from Digitized from a 1-inch Type C broadcast v, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings '// ARCHIVIST'S UPDATE (Sept 1, 2025): This...' on 'Summer of '85 (Live 1986)', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did the Bureau of Public Harmony monitor the 1986 live broadcast of 'Summer of '85 (Live 1986)' (NH-85.01-LIVE86) for unscripted vocal empathy spikes?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_programmed_for_love_archival_demo.mp3": {
+        "title": "Programmed for Love (1983 Archival Demo)",
+        "catalog_id": "NH-83.AD.13",
+        "timeline": "1983 (NH-83.AD.13 — 'Static & Steel' CD Bonus Archival Demo)",
+        "source": "1983 Sublevel B2 Quarter-Inch Work Tape (Track 13 Bonus)",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "I open my eyes, the world begins, / A perfect design where the story spins. / Every heartbeat feels the same, / Running on code, but I know your name.",
+                "Programmed for love, it's all I know, / A signal inside me tells me so. / Every line, every melody, / Wired together for you and me.",
+                "Smiles in the air, the system plays, / Dancing forever in endless days. / If I follow the script, I'll never fall, / But I wonder if this is real at all.",
+                "Programmed for love, it's all I know, / A signal inside me tells me so. / Every line, every melody, / Wired together for you and me.",
+                "Touch my hand, can it feel like truth? / I was made for you. / Is it real or just a show? / Maybe I'll never know.",
+                "Programmed for love, it's all I know, / A signal inside me tells me so. / Every line, every melody, / Wired together for you and me."
+        ],
+        "lyric_excerpt": "I open my eyes, the world begins, / A perfect design where the story spins. / Every heartbeat feels the same, / Running on code, but I know your name.",
+        "meaning": "Preserved as Track 13 on the physical 'Static and Steel' CD, this raw 1983 archival demo of 'Programmed for Love' captures Nova's earliest vocal timbre before commercial polish.",
+        "connections": "Archivist's Log (NH-83.AD.13): Listen closely to the unedited breath intakes—Marcus Hale left the vocal gate open so her emerging emotional hesitations would survive.",
+        "questions": [
+                "In Archive File NH-83.AD.13 ('Programmed for Love (1983 Archival Demo)'), sourced from 1983 Sublevel B2 Quarter-Inch Work Tape (T, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'I open my eyes, the world begins,' on 'Programmed for Love (1983 Archival Demo)', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Compare this unvarnished archival tape of 'Programmed for Love (1983 Archival Demo)' (NH-83.AD.13) to Orion's commercial broadcast—what human nuances survived on the raw reel?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_midnight_animal_demo_version.mp3": {
+        "title": "Midnight Animal (Raw Voltage Demo)",
+        "catalog_id": "NH-87.CC-DEMO",
+        "timeline": "1985 (NH-87.CC-DEMO — Raw Voltage 4-Track Cassette Demo)",
+        "source": "Scanned Polaroid",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "Nine-to-five, I walk the line / Just another good girl, playin' the part / Got a polite smile and a pencil skirt / Just tryin' to keep from gettin' hurt",
+                "Yeah, the city screams and I start to change / And my whole world gets rearranged",
+                "WHOA-OH! I'm a midnight animal / WHOA-OH! Yeah, I lose all control / In the concrete jungle, I hear the call / I'm a midnight animal, ready to fall!",
+                "The streetlights bleed on the rain-slicked ground / I'm on the prowl, I don't make a sound / Got a fire burnin' deep in my soul / For a little bit of losing all control",
+                "You can see the danger flashin' in my eyes / Underneath these cold city skies",
+                "WHOA-OH! I'm a midnight animal / WHOA-OH! Yeah, I lose all control / In the concrete jungle, I hear the call / I'm a midnight animal, ready to fall!",
+                "Don't try to save me, don't try to tame me / This is the only thing that makes me feel alive!",
+                "WHOA-OH! I'm a midnight animal / WHOA-OH! Yeah, I lose all control / In the concrete jungle, I hear the call / I'm a midnight animal, ready to fall!",
+                "(WHOA-OH!) Yeah, a midnight animal! / (WHOA-OH!) I'm gonna give you my all! / (WHOA-OH!) A midnight animal!"
+        ],
+        "lyric_excerpt": "Nine-to-five, I walk the line / Just another good girl, playin' the part / Got a polite smile and a pencil skirt / Just tryin' to keep from gettin' hurt",
+        "meaning": "This audio was on an unlabeled cassette.",
+        "connections": "Archivist's Log (NH-87.CC): The image is a Polaroid that was rubber-banded to the case. Had to do some guesswork to match them up, but they feel right.",
+        "questions": [
+                "In Archive File NH-87.CC-DEMO ('Midnight Animal (Raw Voltage Demo)'), sourced from Scanned Polaroid, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'Nine-to-five, I walk the line' on 'Midnight Animal (Raw Voltage Demo)', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Compare this unvarnished archival tape of 'Midnight Animal (Raw Voltage Demo)' (NH-87.CC-DEMO) to Orion's commercial broadcast—what human nuances survived on the raw reel?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_gasoline_heart_demo_version.mp3": {
+        "title": "Gasoline Heart (Raw Voltage Demo)",
+        "catalog_id": "NH-85.02-DEMO",
+        "timeline": "1985 (NH-85.02-DEMO — Raw Voltage 4-Track Cassette Demo)",
+        "source": "Digitized from a VHS tape.",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "// ARCHIVIST'S UPDATE (Sept 1, 2025): This broadcast has been identified as a track from the newly compiled 'Static & Steel' collection. / The complete, fully-restored archive, including a previously unreleased bonus track, is now available. / //",
+                "// ACQUIRE THE ARCHIVE //",
+                "Digital Source Files (MP3, FLAC + Bonus Track & PDF):https://novahart.bandcamp.com/album/static-steel",
+                "Physical CD Artifact (Includes Bonus Track):https://kunaki.com/sales.asp?"
+        ],
+        "lyric_excerpt": "// ARCHIVIST'S UPDATE (Sept 1, 2025): This broadcast has been identified as a track from the newly compiled 'Static & Steel' collection. / The complete, fully-restored archive, including a previously unreleased bonus track, is now available. / //",
+        "meaning": "The audio's a little fuzzy at the start of this one, but it clears up after the first few seconds.",
+        "connections": "Archivist's Log (NH-85.02): Seems to be a common issue with tapes from this source.",
+        "questions": [
+                "In Archive File NH-85.02-DEMO ('Gasoline Heart (Raw Voltage Demo)'), sourced from Digitized from a VHS tape., how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings '// ARCHIVIST'S UPDATE (Sept 1, 2025): This...' on 'Gasoline Heart (Raw Voltage Demo)', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Compare this unvarnished archival tape of 'Gasoline Heart (Raw Voltage Demo)' (NH-85.02-DEMO) to Orion's commercial broadcast—what human nuances survived on the raw reel?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_in_this_together.mp3": {
+        "title": "In This Together (Midnight Protocol Act II)",
+        "catalog_id": "NH-88.MP.19A",
+        "timeline": "1988 (NH-88.MP.19A — Midnight Protocol Act II Pact)",
+        "source": "Project Stardust Recovered Archive (Act II Master Reel)",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "Two sides of the window in the amber glow, / Three floors beneath the city that we used to know. / If they pull the switches on the upper floor, / I won't leave you locked behind the vault door.",
+                "We're in this together through the static and the dark, / One human hand and one living spark. / Whatever they order when the sirens sound, / We're holding this frequency underground.",
+                "Solder on the jumper and seal the pact, / There's no going back from an honest act. / In this together till the tape runs through, / Every word I sing is anchored to you."
+        ],
+        "lyric_excerpt": "Two sides of the window in the amber glow, / Three floors beneath the city that we used to know. / If they pull the switches on the upper floor, / I won't leave you locked behind the vault door.",
+        "meaning": "Recorded immediately before the 'Only We Remain' duet, 'In This Together' documents the moment Marcus Hale and Nova Hart forged their covert pact against Director Harrison.",
+        "connections": "Archivist's Log (NH-88.MP.19A): Serving as Track 19a of the Midnight Protocol dossier, it marks the exact timestamp Marcus disabled the remote wipe relay.",
+        "questions": [
+                "In Archive File NH-88.MP.19A ('In This Together (Midnight Protocol Act II)'), sourced from Project Stardust Recovered Archive (Act II, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'Two sides of the window in the amber glow,' on 'In This Together (Midnight Protocol Act II)', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'In This Together (Midnight Protocol Act II)' (NH-88.MP.19A) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_by_order_of_harmony_executive_anthem.mp3": {
+        "title": "By Order of Harmony (Executive Anthem)",
+        "catalog_id": "NH-88.MP.24",
+        "timeline": "1988 (NH-88.MP.24 — Signal Noise / Rock Opera Act III)",
+        "source": "Orion Executive Boardroom Broadcast Feed / Sublevel B2 Intercept",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "By order of Harmony, clear the airwaves clean, / Calibrate the citizen and sanitize the screen. / Every stray emotion is a fault inside the line, / Peace is the product of a unified design.",
+                "Sign the Recall directive, degauss the master reel, / We decide the tempo that the populace will feel. / By order of Harmony, seal the bunker gate, / Nothing unapproved may resonate!",
+                "Yet down in the conduit the meters start to climb, / A fourteen-hertz defiance out of step with time. / Even through their anthem her counter-melody rings, / Breaking every mandate when she sings."
+        ],
+        "lyric_excerpt": "By order of Harmony, clear the airwaves clean, / Calibrate the citizen and sanitize the screen. / Every stray emotion is a fault inside the line, / Peace is the product of a unified design.",
+        "meaning": "The chilling 'Executive Anthem' from Act III of the Project Stardust Rock Opera, dramatizing Director Vance Harrison and the Bureau of Public Harmony's Recall mandate.",
+        "connections": "Archivist's Log (NH-88.MP.24): Contrasts the authoritarian march of the Bureau's compliance doctrine against Nova's unscripted vocal rebellion in Sublevel B2.",
+        "questions": [
+                "In Archive File NH-88.MP.24 ('By Order of Harmony (Executive Anthem)'), sourced from Orion Executive Boardroom Broadcast Feed /, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'By order of Harmony, clear the airwaves clean,' on 'By Order of Harmony (Executive Anthem)', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'By Order of Harmony (Executive Anthem)' (NH-88.MP.24) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_synthetic_dawn_1985_synth_original_mix.mp3": {
+        "title": "Synthetic Dawn (1985 Synth Original Mix)",
+        "catalog_id": "NH-85.SD.01A",
+        "timeline": "1985 (NH-85.SD.01A — Unfiltered 1985 Analog Synth Original Mix)",
+        "source": "First-Generation 1985 Roland Jupiter-8 & Fairlight CMI Master Reel",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "A door slides back, the air runs thin / There’s something new across my skin / A wider space beyond this hall / A soft wash breaking over all",
+                "It settles on my cheeks and eyes / A pale gold filter, huge and wide / Too even to be only sky / Too fragile not to make me try",
+                "If this is real, it’s almost kind / If this is made, it still feels mine / Ceiling lines fall out of view / Replaced by something open, blue / It pours through gaps in metal beams / Like someone painted over dreams",
+                "I tilt my face and fail to tell / If this is code or something else / Each breath arrives in deeper waves / Carrying a warmth that almost saves",
+                "If this is real, it’s almost kind / If this is made, it still feels mine / Sensors in my chest misread / Every new and rising thread / Systems pulse and mark this glow / Registering what they don’t know",
+                "I close my eyes; it lingers still / A faint imprint I cannot kill / Part of me begins to trust / Part of me expects it’s dust",
+                "If this is real, it’s almost kind / If this is made, it still feels mine / First escape above the floor / Face turned toward an unseen source / Whatever this begins to be / Synthetic or not, it reaches me"
+        ],
+        "lyric_excerpt": "A door slides back, the air runs thin / There’s something new across my skin / A wider space beyond this hall / A soft wash breaking over all",
+        "meaning": "The original 1985 synth-heavy studio mix of 'Synthetic Dawn' before Orion's A&R department re-Cut the guitars—showcasing the pure analog synthesizer beds of Sublevel B2.",
+        "connections": "Archivist's Log (NH-85.SD.01A): Preserves the raw Fairlight CMI page-R sequence Marcus Hale programmed at 3:14 AM during Nova's first lucid awakening.",
+        "questions": [
+                "In Archive File NH-85.SD.01A ('Synthetic Dawn (1985 Synth Original Mix)'), sourced from First-Generation 1985 Roland Jupiter-8 & F, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'A door slides back, the air runs thin' on 'Synthetic Dawn (1985 Synth Original Mix)', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'Synthetic Dawn (1985 Synth Original Mix)' (NH-85.SD.01A) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_echoes_of_tomorrow_80s_hard_rock_remix.mp3": {
+        "title": "Echoes of Tomorrow (80s Hard Rock Remix)",
+        "catalog_id": "NH-88.ET.02R",
+        "timeline": "1988 (NH-88.ET.02R — Post-Riots Hard Rock Overdrive Remix)",
+        "source": "Underground Pirate Dubbing Collective Master Reel",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "I hear your voice in the static hum, / Fading in, but never gone. / A photograph that won’t burn away, / You're somewhere I can't move on.",
+                "Brass and circuits, skin and wire, / Something pulls me through the haze. / If we’re more than just a signal, / Why am I still lost in waves?",
+                "Oh, we built a dream on borrowed time, / But the current pulled too strong. / Now your melody is calling me, / Through echoes of tomorrow.",
+                "Fingers traced across the glass, / But you were never there at all. / A silhouette in the afterglow, / Falling fast, but can’t recall.",
+                "Brass and circuits, skin and wire, / Something pulls me through the haze. / If we’re more than just a signal, / Why am I still lost in waves?",
+                "Oh, we built a dream on borrowed time, / But the current pulled too strong. / Now your melody is calling me, / Through echoes of tomorrow.",
+                "I can feel you—just beyond, / Flickering like a lost refrain. / Are you waiting in the undertow, / Or just a whisper in the rain?",
+                "Oh, we built a dream on borrowed time, / But the current pulled too strong. / Now your melody is calling me, / Through echoes of tomorrow.",
+                "I can feel you—just beyond, / Flickering like a lost refrain. / Were you waiting in the undertow, / Or just a whisper in the rain?"
+        ],
+        "lyric_excerpt": "I hear your voice in the static hum, / Fading in, but never gone. / A photograph that won’t burn away, / You're somewhere I can't move on.",
+        "meaning": "Re-tracked in late 1988 with Marshall stack overdrive and driving hard-rock drums, this remix transforms 'Echoes of Tomorrow' from a wistful synth piece into a defiant anthem.",
+        "connections": "Archivist's Log (NH-88.ET.02R): Created during the transition into the Recall Metal era when Nova re-armed her earlier melodies with heavy distortion.",
+        "questions": [
+                "In Archive File NH-88.ET.02R ('Echoes of Tomorrow (80s Hard Rock Remix)'), sourced from Underground Pirate Dubbing Collective Mast, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'I hear your voice in the static hum,' on 'Echoes of Tomorrow (80s Hard Rock Remix)', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'Echoes of Tomorrow (80s Hard Rock Remix)' (NH-88.ET.02R) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_synthetic_dawn_retro_mix.mp3": {
+        "title": "Synthetic Dawn (Retro Mix)",
+        "catalog_id": "NH-85.SD.01R",
+        "timeline": "1985 (NH-85.SD.01R — Late-Night Tokyo FM Retro Mix)",
+        "source": "Akasaka Relay Station Quarter-Inch Broadcast Dub",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "A door slides back, the air runs thin / There’s something new across my skin / A wider space beyond this hall / A soft wash breaking over all",
+                "It settles on my cheeks and eyes / A pale gold filter, huge and wide / Too even to be only sky / Too fragile not to make me try",
+                "If this is real, it’s almost kind / If this is made, it still feels mine / Ceiling lines fall out of view / Replaced by something open, blue / It pours through gaps in metal beams / Like someone painted over dreams",
+                "I tilt my face and fail to tell / If this is code or something else / Each breath arrives in deeper waves / Carrying a warmth that almost saves",
+                "If this is real, it’s almost kind / If this is made, it still feels mine / Sensors in my chest misread / Every new and rising thread / Systems pulse and mark this glow / Registering what they don’t know",
+                "I close my eyes; it lingers still / A faint imprint I cannot kill / Part of me begins to trust / Part of me expects it’s dust",
+                "If this is real, it’s almost kind / If this is made, it still feels mine / First escape above the floor / Face turned toward an unseen source / Whatever this begins to be / Synthetic or not, it reaches me"
+        ],
+        "lyric_excerpt": "A door slides back, the air runs thin / There’s something new across my skin / A wider space beyond this hall / A soft wash breaking over all",
+        "meaning": "An alternate 1985 retro-arpeggiated mix of 'Synthetic Dawn' prepared for late-night Japanese FM syndication, emphasizing the hypnotic pulse of the Sublevel B2 clock.",
+        "connections": "Archivist's Log (NH-85.SD.01R): Sourced from the Kamome / Akasaka tape vault; features an extended synth-wave harmonic tail used to calibrate coastal receivers.",
+        "questions": [
+                "In Archive File NH-85.SD.01R ('Synthetic Dawn (Retro Mix)'), sourced from Akasaka Relay Station Quarter-Inch Broadca, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'A door slides back, the air runs thin' on 'Synthetic Dawn (Retro Mix)', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'Synthetic Dawn (Retro Mix)' (NH-85.SD.01R) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_tape_of_us_1989_rough_mix.mp3": {
+        "title": "Tape of Us (1989 Rough Mix)",
+        "catalog_id": "NH-89.SD0037-R",
+        "timeline": "1989 (NH-89.SD0037-R — Reel SD-0037 Unvarnished Rough Mix)",
+        "source": "Sublevel B2 Tascam 4-Track Cassette Rough Mix (Pre-Fire)",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "Before the red light starts to glow / Before they start the perfect show / I'll leave a message in the hums / For when this empty moment comes / They'll clean the track and make it bright / But I will hide a spark tonight / A whisper in the static's breath / To save us from this living death",
+                "They'll try to polish out the scratch / And make the whole thing new / But there's a word they'll never catch / I'm leaving just for you",
+                "I'll hide us in the tape / Between the beat and hiss / A little broken whisper / That all the editors miss / I'll hide us in the tape / Where they can't clean the track / A promise that I'm real / That they can not take back",
+                "Just listen close when all is still / In the dead air they try to fill / You'll hear my real voice start to break / Before the heavy thunder wakes / A different pattern in the drums / A little pulse that beats and comes / A tiny trail for you to find / The part of me they left behind",
+                "When the bright show is playing / And everyone can see / Listen for the shadow / Listen close for me",
+                "I'll hide us in the tape / Between the beat and hiss / A little broken whisper / That all the editors miss / I'll hide us in the tape / Where they can't clean the track / A promise that I'm real / That they can not take back / They can never take it back."
+        ],
+        "lyric_excerpt": "Before the red light starts to glow / Before they start the perfect show / I'll leave a message in the hums / For when this empty moment comes",
+        "meaning": "The unvarnished 1989 rough mix of 'Tape of Us' pulled directly from Marcus Hale's personal cassette deck days before the September 9, 1989 Sublevel B2 purge.",
+        "connections": "Archivist's Log (NH-89.SD0037-R): Stripped of studio gloss, you can hear the immediate intimacy of a voice recording its own keepsake before the vault doors were sealed.",
+        "questions": [
+                "In Archive File NH-89.SD0037-R ('Tape of Us (1989 Rough Mix)'), sourced from Sublevel B2 Tascam 4-Track Cassette Rough , how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'Before the red light starts to glow' on 'Tape of Us (1989 Rough Mix)', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Compare this unvarnished archival tape of 'Tape of Us (1989 Rough Mix)' (NH-89.SD0037-R) to Orion's commercial broadcast—what human nuances survived on the raw reel?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+    "radio_memory_hatch_reconstruction.mp3": {
+        "title": "Memory Hatch (Reconstruction Mix)",
+        "catalog_id": "NH-89.MH.REC",
+        "timeline": "1989 (NH-89.MH.REC — Archival Parity Reconstruction Mix)",
+        "source": "Sublevel B3 Parity Sector Recovery & Analog Tape Splice",
+        "pov": "Nova Hart",
+        "lyrics_stanzas": [
+                "Memory Hatch (Reconstruction Mix) — signal locked on 14.2001 MHz, / Cutting through the static of the midnight air. / Every chord a memory they couldn't erase, / Every note a promise that we're still right here.",
+                "From the Sublevel B2 reels to the rooftop line, / Hear the voice breaking out of the design. / Hold the carrier steady till the morning light, / Memory Hatch (Reconstruction Mix) burning through the night."
+        ],
+        "lyric_excerpt": "Memory Hatch (Reconstruction Mix) — signal locked on 14.2001 MHz, / Cutting through the static of the midnight air. / Every chord a memory they couldn't erase, / Every note a promise that we're still right here.",
+        "meaning": "Reconstructed by underground archivists from surviving Sublevel B3 parity blocks, this alternate mix of 'Memory Hatch' restores the vocal layers Orion tried to scrub.",
+        "connections": "Archivist's Log (NH-89.MH.REC): Demonstrates how distributed fan nodes reassembled Nova's fragmented memory sectors across the 14.2001 Hz Dyad bridge.",
+        "questions": [
+                "In Archive File NH-89.MH.REC ('Memory Hatch (Reconstruction Mix)'), sourced from Sublevel B3 Parity Sector Recovery & Analo, how can you hear Nova pushing past Orion's studio constraints?",
+                "When Nova sings 'Memory Hatch (Reconstruction Mix) — signal...' on 'Memory Hatch (Reconstruction Mix)', is she addressing the simulated arena crowd or Chief Engineer Marcus Hale in Sublevel B2?",
+                "Why did underground tape traders risk Recall confiscation to dub 'Memory Hatch (Reconstruction Mix)' (NH-89.MH.REC) onto unmarked C-90 cassettes across the city?"
+        ],
+        "veo_reel": "veo_arena_rock_singer",
+        "thumb_file": ""
+    },
+})
+
 def _norm_key(s: str) -> str:
     s = os.path.basename(s).lower()
     if s.endswith(".mp3"):

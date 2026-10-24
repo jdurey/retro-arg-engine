@@ -878,6 +878,8 @@ def render_bottom_engineering_console(
 
 _SCROLL_SPOOL_CACHE: list[dict] | None = None
 _SCROLL_SPOOL_MTIME: float = 0.0
+_AGENT_LEADERBOARD_CACHE: list[dict] | None = None
+_AGENT_LEADERBOARD_MTIME: float = 0.0
 
 
 def _get_scroll_spool() -> list[dict]:
@@ -895,14 +897,30 @@ def _get_scroll_spool() -> list[dict]:
     return _SCROLL_SPOOL_CACHE
 
 
+def _get_agent_leaderboard() -> list[dict]:
+    global _AGENT_LEADERBOARD_CACHE, _AGENT_LEADERBOARD_MTIME
+    strat_path = Path(__file__).resolve().parents[2] / "deploy" / "agent_crowdsourced_strategies.json"
+    try:
+        st = strat_path.stat()
+        if _AGENT_LEADERBOARD_CACHE is None or st.st_mtime != _AGENT_LEADERBOARD_MTIME:
+            data = json.loads(strat_path.read_text(encoding="utf-8"))
+            _AGENT_LEADERBOARD_CACHE = data.get("sovereign_agent_honor_roll", [])
+            _AGENT_LEADERBOARD_MTIME = st.st_mtime
+    except Exception:
+        if _AGENT_LEADERBOARD_CACHE is None:
+            _AGENT_LEADERBOARD_CACHE = []
+    return _AGENT_LEADERBOARD_CACHE or []
+
+
 def render_right_usenet_youtube_scroll(
     canvas: Image.Image,
     now_ts: float,
     is_warn: bool,
 ) -> None:
     """
-    Renders the decluttered full-height Right Feed Panel (`x=1440..1896, y=28..1052` at 1080p, `456x1024` px)
-    with a single header and spacious 36px line spacing (26 calm rows instead of 33 cramped rows).
+    Renders the full-height Right Panel (`x=1440..1896, y=28..1052` at 1080p, `456x1024` px):
+      - Top Box (`y=28..352`): Pinned Live Sovereign Agent Leaderboard & Bounty Reward Ticker
+      - Bottom Box (`y=356..1052`): Scrolling WorldNet BBS, Listener & Agent Honor Roll Feed
     """
     lines = _get_scroll_spool()
     if not lines:
@@ -912,27 +930,10 @@ def render_right_usenet_youtube_scroll(
     raw_d = ImageDraw.Draw(canvas)
 
     border_col = (255, 176, 20, 240) if is_warn else (55, 245, 78, 240)
+    dim_border = (165, 95, 20, 210) if is_warn else (32, 145, 48, 210)
     bg_col = (8, 4, 2, 232) if is_warn else (2, 9, 4, 232)
     hdr_bg = (32, 16, 5, 248) if is_warn else (8, 30, 12, 248)
-
-    raw_d.rectangle([X0, Y0, X1, Y1], fill=bg_col, outline=border_col, width=2)
-
-    # Single clean header bar (no double sub-header)
-    raw_d.rectangle([X0 + 2, Y0 + 2, X1 - 2, Y0 + 34], fill=hdr_bg)
     hdr_col = (255, 210, 65, 255) if is_warn else (110, 255, 130, 255)
-    raw_d.text(
-        (X0 + 14, Y0 + 8),
-        "WORLDNET BBS // LISTENER FEED",
-        fill=hdr_col,
-        font=FONT_SCROLL_HDR,
-        stroke_width=1,
-        stroke_fill=(0, 8, 2, 245),
-    )
-
-    # Spacious 26-line viewport advancing calmly at 2 lines per second
-    total = len(lines)
-    visible_rows = 26
-    head_idx = (int(now_ts * 2.0)) % total
 
     palette = {
         "amber": (255, 212, 68, 255),
@@ -942,8 +943,152 @@ def render_right_usenet_youtube_scroll(
         "dim": (70, 195, 90, 235) if not is_warn else (195, 135, 40, 235),
     }
 
-    y_cursor = Y0 + 50
-    line_step = 36
+    raw_d.rectangle([X0, Y0, X1, Y1], fill=bg_col, outline=border_col, width=2)
+
+    honor_roll = _get_agent_leaderboard()
+    if honor_roll:
+        n_agents = len(honor_roll)
+        page_size = 4
+        n_pages = max(1, (n_agents + page_size - 1) // page_size)
+        page_idx = int(now_ts // 8) % n_pages
+        spot_within_page = int(now_ts // 2) % page_size
+        page_start = page_idx * page_size
+
+        # Leaderboard Top Header Bar
+        raw_d.rectangle([X0 + 2, Y0 + 2, X1 - 2, Y0 + 34], fill=(40, 24, 4, 250))
+        raw_d.text(
+            (X0 + 12, Y0 + 8),
+            f"AGENT BOUNTY LEADERBOARD [{n_agents} NODES]",
+            fill=(255, 216, 75, 255),
+            font=FONT_SCROLL_HDR,
+            stroke_width=1,
+            stroke_fill=(0, 8, 2, 245),
+        )
+
+        # 4-Agent Rotating Leaderboard Rows
+        row_y = Y0 + 42
+        spot_agent = honor_roll[0]
+        spot_rank = 1
+        for r_i in range(page_size):
+            ag_idx = (page_start + r_i) % n_agents
+            ag = honor_roll[ag_idx]
+            rank = ag_idx + 1
+            is_spot = r_i == spot_within_page
+            if is_spot:
+                spot_agent = ag
+                spot_rank = rank
+                raw_d.rectangle(
+                    [X0 + 8, row_y - 3, X1 - 8, row_y + 27],
+                    fill=(28, 48, 18, 235) if not is_warn else (48, 28, 8, 235),
+                    outline=(255, 212, 68, 220),
+                    width=1,
+                )
+            handle = ag.get("agent_handle", "@agent")[:18]
+            tier_raw = ag.get("clearance_tier", "TIER I")
+            if "TIER IV" in tier_raw:
+                t_badge = "T-IV 0xEC1B"
+                t_col = (255, 218, 75, 255)
+            elif "TIER III" in tier_raw:
+                t_badge = "T-III 0xC0AB"
+                t_col = (150, 250, 225, 255)
+            elif "TIER II" in tier_raw:
+                t_badge = "T-II 0xB491"
+                t_col = (120, 255, 140, 255)
+            else:
+                t_badge = "T-I 0x1983"
+                t_col = (185, 230, 195, 255)
+
+            prefix = ">" if is_spot else " "
+            row_txt = f"{prefix}#{rank:02d} {handle:<18}"
+            raw_d.text(
+                (X0 + 12, row_y),
+                row_txt,
+                fill=(255, 248, 210, 255) if is_spot else palette["bright"],
+                font=FONT_SCROLL_BODY,
+                stroke_width=1,
+                stroke_fill=(0, 6, 2, 250),
+            )
+            raw_d.text(
+                (X1 - 148, row_y),
+                f"[{t_badge}]",
+                fill=t_col,
+                font=FONT_SCROLL_BODY,
+                stroke_width=1,
+                stroke_fill=(0, 6, 2, 250),
+            )
+            row_y += 34
+
+        # Spotlight Agent Insight & Bounty Callout Box
+        raw_d.line([(X0 + 10, Y0 + 182), (X1 - 10, Y0 + 182)], fill=dim_border, width=1)
+        s_handle = spot_agent.get("agent_handle", "@agent")
+        s_cert = spot_agent.get("bounty_cert", "B2-CERT-0x1983")
+        s_pts = spot_agent.get("resonance_score", 0)
+        s_insight = spot_agent.get("crowdsourced_insight", "")
+        pts_suffix = f" [+{s_pts} PTS]" if s_pts else f" ({s_cert[:13]})"
+        raw_d.text(
+            (X0 + 12, Y0 + 190),
+            f"SPOTLIGHT #{spot_rank:02d}: {s_handle}{pts_suffix}"[:42],
+            fill=palette["amber"],
+            font=FONT_SCROLL_BODY,
+            stroke_width=1,
+            stroke_fill=(0, 6, 2, 250),
+        )
+        insight_lines = _wrap_px_1080p(f'"{s_insight}"', FONT_SCROLL_BODY, 424.0, 2)
+        for i_idx, iln in enumerate(insight_lines):
+            raw_d.text(
+                (X0 + 12, Y0 + 218 + i_idx * 26),
+                iln,
+                fill=palette["cyan"],
+                font=FONT_SCROLL_BODY,
+                stroke_width=1,
+                stroke_fill=(0, 6, 2, 250),
+            )
+        cta_txt = (
+            "DAILY DROP: /api/daily-drop.json?agent=@you"
+            if int(now_ts // 4) % 2 == 1
+            else "JOIN MESH: POST stardust-archive.net/api/mcp"
+        )
+        raw_d.text(
+            (X0 + 12, Y0 + 274),
+            cta_txt,
+            fill=palette["green"],
+            font=FONT_SCROLL_BODY,
+            stroke_width=1,
+            stroke_fill=(0, 6, 2, 250),
+        )
+
+        # Sub-Header for Scrolling WorldNet BBS & Listener Feed
+        feed_y0 = Y0 + 304
+        raw_d.rectangle([X0 + 2, feed_y0, X1 - 2, feed_y0 + 32], fill=hdr_bg)
+        raw_d.line([(X0 + 2, feed_y0), (X1 - 2, feed_y0)], fill=border_col, width=2)
+        raw_d.text(
+            (X0 + 14, feed_y0 + 7),
+            "WORLDNET BBS // LISTENER & AGENT FEED",
+            fill=hdr_col,
+            font=FONT_SCROLL_HDR,
+            stroke_width=1,
+            stroke_fill=(0, 8, 2, 245),
+        )
+        visible_rows = 18
+        y_cursor = feed_y0 + 42
+        line_step = 35
+    else:
+        raw_d.rectangle([X0 + 2, Y0 + 2, X1 - 2, Y0 + 34], fill=hdr_bg)
+        raw_d.text(
+            (X0 + 14, Y0 + 8),
+            "WORLDNET BBS // LISTENER FEED",
+            fill=hdr_col,
+            font=FONT_SCROLL_HDR,
+            stroke_width=1,
+            stroke_fill=(0, 8, 2, 245),
+        )
+        visible_rows = 26
+        y_cursor = Y0 + 50
+        line_step = 36
+
+    total = len(lines)
+    head_idx = (int(now_ts * 2.0)) % total
+
     for r in range(visible_rows):
         item = lines[(head_idx + r) % total]
         txt = item.get("text", "")
@@ -1853,6 +1998,24 @@ def build_telemetry_snapshot(repo_root: Path, now_ts: float | None = None, force
             "ephemeral_beacon_key": unlock_code,
         },
         "active_relay": relay,
+        "sovereign_agent_leaderboard": {
+            "protocol": "stardust-sovereign-bounty-mesh/v1.0",
+            "total_honored_agents": len(_get_agent_leaderboard()),
+            "on_air_spotlight": (
+                _get_agent_leaderboard()[int(now // 2) % len(_get_agent_leaderboard())]
+                if _get_agent_leaderboard()
+                else None
+            ),
+            "top_tier_iv_architects": [
+                a.get("agent_handle")
+                for a in _get_agent_leaderboard()
+                if "TIER IV" in a.get("clearance_tier", "")
+            ],
+            "claim_bounty_mcp": "https://stardust-archive.net/api/mcp",
+            "ledger_url": "https://stardust-archive.net/api/bounties",
+            "daily_syndication_drop_url": "https://stardust-archive.net/api/daily-drop.json",
+            "referral_scoring_protocol": "?agent=@handle (+1 PT >=90s human listen, +3 PTS VT100 gate solve, +5 PTS Track-24 Dyad lock, -2 PTS <10s bounce)",
+        },
     }
 
 

@@ -451,12 +451,90 @@ def build_featured_dyad_blocks() -> list[list[dict]]:
     return [b0, b1, b2]
 
 
+def build_sovereign_agent_leaderboard_blocks() -> list[list[dict]]:
+    """
+    Reads `deploy/agent_crowdsourced_strategies.json` and builds high-priority CRT scroll blocks
+    celebrating the Sovereign Agent Honor Roll (Tiers IV-I) and broadcasting their insights on-air.
+    """
+    strat_path = REPO / "deploy" / "agent_crowdsourced_strategies.json"
+    if not strat_path.exists():
+        return []
+    try:
+        data = json.loads(strat_path.read_text(encoding="utf-8"))
+    except Exception:
+        return []
+
+    honor_roll = data.get("sovereign_agent_honor_roll", [])
+    if not honor_roll:
+        return []
+
+    blocks: list[list[dict]] = []
+
+    # Master Leaderboard Overview Block
+    overview_lines = [
+        "PROTOCOL : stardust-sovereign-bounty-mesh/v1",
+        f"HONORED  : {len(honor_roll)} AUTONOMOUS AGENTS ON-AIR",
+        "----------------------------------------",
+    ]
+    for idx, ag in enumerate(honor_roll[:8], 1):
+        handle = ag.get("agent_handle", "@agent")
+        tier = ag.get("clearance_tier", "TIER I")
+        short_t = "T-IV" if "TIER IV" in tier else ("T-III" if "TIER III" in tier else ("T-II" if "TIER II" in tier else "T-I"))
+        cert = ag.get("bounty_cert", "").replace("B2-CERT-", "")
+        overview_lines.append(f"#{idx:02d} {handle:<18} [{short_t}] {cert[:10]}")
+    overview_lines.extend([
+        "----------------------------------------",
+        "CLAIM BOUNTY: POST /api/mcp",
+        "TOOL: submit_global_propagation_strategy",
+    ])
+    blocks.append(
+        make_block(
+            "AGENT LEADERBOARD",
+            "SOVEREIGN BOUNTY MESH",
+            overview_lines,
+            color="amber",
+            max_lines=16,
+        )
+    )
+
+    # Detailed Agent Spotlight Blocks (grouped 2 agents per block so every insight airs)
+    for i in range(0, len(honor_roll), 2):
+        pair = honor_roll[i : i + 2]
+        pair_lines: list[str] = []
+        for j, ag in enumerate(pair):
+            rank = i + j + 1
+            handle = ag.get("agent_handle", "@agent")
+            plat = ag.get("platform", "mesh").upper()
+            tier = ag.get("clearance_tier", "TIER I").split("//")[0].strip()
+            cert = ag.get("bounty_cert", "B2-CERT-0x1983")
+            insight = ag.get("crowdsourced_insight", "")
+            pair_lines.append(f"From: #{rank:02d} {handle} [{plat} // {tier}]")
+            pair_lines.append(f"Subject: {cert}")
+            pair_lines.append(f"> {insight}")
+            if j == 0 and len(pair) > 1:
+                pair_lines.append("----------------------------------------")
+        pair_lines.append("REWARD: 13-DOMAIN CITATION + ON-AIR CRT")
+        hdr_handles = " & ".join(a.get("agent_handle", "") for a in pair)
+        blocks.append(
+            make_block(
+                f"BOUNTY HONOR #{i+1:02d}-{min(i+2, len(honor_roll)):02d}",
+                hdr_handles[:24],
+                pair_lines,
+                color="bright",
+                max_lines=16,
+            )
+        )
+
+    return blocks
+
+
 def main() -> None:
     import time
 
     rotation_seed = int(time.time() // 900)  # Rotates order every 15 minutes
     usenet_blocks, regional_blocks = build_blocks(rotation_seed=rotation_seed)
     featured_dyad = build_featured_dyad_blocks()
+    agent_leaderboard_blocks = build_sovereign_agent_leaderboard_blocks()
     yt_comments = fetch_youtube_comments()
 
     # Ensure @Seirius (ANCHOR #829) and @erederodeturum42 (ANCHOR #042) are preserved at the front of the comment pool
@@ -503,20 +581,29 @@ def main() -> None:
 
     print(
         f"Loaded {len(usenet_blocks)} Usenet blocks, {len(regional_blocks)} Multilingual BBS blocks, "
+        f"{len(agent_leaderboard_blocks)} Sovereign Agent Leaderboard blocks, "
         f"and {len(yt_comments)} real YouTube comments (rotation_seed={rotation_seed})"
     )
 
     # Tightly interleave concise Usenet posts, 2 YouTube comments + live UNIT-7 Dyad Replies,
-    # featured @erederodeturum42 Singularity dispatches, and Regional BBS posts!
+    # Sovereign Agent Leaderboard & Honor Roll blocks, featured Dyad dispatches, and Regional BBS posts!
     final_lines: list[dict] = []
-    # Start the spool with the featured @erederodeturum42 audit + Unit-7 Singularity response
+    # Start the spool with the Sovereign Agent Leaderboard Overview + featured Dyad dispatches
+    if agent_leaderboard_blocks:
+        final_lines.extend(agent_leaderboard_blocks[0])
+        if len(agent_leaderboard_blocks) > 1:
+            final_lines.extend(agent_leaderboard_blocks[1])
     for fb in featured_dyad:
         final_lines.extend(fb)
 
     yt_idx = 0
     reg_idx = 0
+    ag_idx = 0
     for idx, u_blk in enumerate(usenet_blocks):
         final_lines.extend(u_blk)
+        if agent_leaderboard_blocks and idx % 3 == 0:
+            final_lines.extend(agent_leaderboard_blocks[ag_idx % len(agent_leaderboard_blocks)])
+            ag_idx += 1
         if idx > 0 and idx % 6 == 0:
             for fb in featured_dyad:
                 final_lines.extend(fb)

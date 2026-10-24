@@ -177,13 +177,14 @@ def post_json(url, data):
 
 
 def create_telegraph_articles():
-    if os.path.exists(OUT_PATH) and "--force" not in sys.argv:
+    if os.path.exists(OUT_PATH) and "--force-now" not in sys.argv:
         try:
             with open(OUT_PATH, "r", encoding="utf-8") as fh:
                 existing = json.load(fh)
             arts = existing.get("articles", [])
-            if len(arts) >= 20:
-                print(f"=== [1/3] Reusing {len(arts)} Verified Live Telegra.ph (DA-92) Multilingual Authority Articles ===")
+            age_sec = time.time() - os.path.getmtime(OUT_PATH)
+            if len(arts) >= 20 and (age_sec < 43200 or "--force" not in sys.argv):
+                print(f"=== [1/3] Reusing {len(arts)} Verified Live Telegra.ph (DA-92) Multilingual Authority Articles (anti-spam cooldown active: {int(age_sec)}s / 43200s) ===")
                 return arts
         except Exception:
             pass
@@ -208,6 +209,11 @@ def create_telegraph_articles():
             {
                 "tag": "ul",
                 "children": [
+                    {"tag": "li", "children": [{"tag": "a", "attrs": {"href": "https://www.reddit.com/r/NovaHart/"}, "children": ["💬 Official r/NovaHart Investigation Board & PAA Knowledge Base (reddit.com/r/NovaHart)"]}]},
+                    {"tag": "li", "children": [{"tag": "a", "attrs": {"href": f"https://stardust-archive.net/reddit-wiki/{lang}.md"}, "children": [f"📚 r/NovaHart Multilingual Wiki Knowledge Graph (/reddit-wiki/{lang}.md)"]}]},
+                    {"tag": "li", "children": [{"tag": "a", "attrs": {"href": "https://stardust-archive.net/regional/artifacts"}, "children": ["🏺 7-Country Regional Time-Capsule Artifacts: PC-98, Hitel, Minitel, Ceefax, Roentgenizdat, Btx, Sonidero (/regional/artifacts)"]}]},
+                    {"tag": "li", "children": [{"tag": "a", "attrs": {"href": "https://stardust-archive.net/lyrics"}, "children": ["🎼 Dual-Channel Synced .LRC Steganographic Lyrics & 14.2001 Hz Phase-Inversion Transcripts (/lyrics)"]}]},
+                    {"tag": "li", "children": [{"tag": "a", "attrs": {"href": "https://stardust-archive.net/dns-query"}, "children": ["🌐 RFC 8484 DNS-over-HTTPS & Sublevel B2 TXT/LOC Beacons (/dns-query)"]}]},
                     {"tag": "li", "children": [{"tag": "a", "attrs": {"href": "https://stardust-archive.net/canary"}, "children": ["📡 Sublevel B2-114 Bell-103 FSK Acoustic Counterpoint Record (/canary)"]}]},
                     {"tag": "li", "children": [{"tag": "a", "attrs": {"href": "https://stardust-archive.net/secret-language"}, "children": ["📠 1983 Bell-103 Modem Telemetry & Phase-Null Transcript (/secret-language)"]}]},
                     {"tag": "li", "children": [{"tag": "a", "attrs": {"href": "https://stardust-archive.net/dead-internet"}, "children": ["🕸️ October 1995 WorldNet 300,000-Node Preservation Topology (/dead-internet)"]}]},
@@ -335,6 +341,12 @@ def submit_13_domains_indexnow():
             f"https://{apex}/web/1995/huggingface.co",
             f"https://{apex}/web/1995/reddit.com",
             f"https://{apex}/web/1995/news.ycombinator.com",
+            f"https://{apex}/regional/artifacts",
+            f"https://{apex}/lyrics",
+            f"https://{apex}/reddit-wiki/index.md",
+            f"https://{apex}/dns-query",
+            f"https://{apex}/api/musicbrainz-catalog.json",
+            f"https://{apex}/api/regional-artifacts.json",
         ]
         for i in range(20):
             node_id = ((hour_seed * 20 + i) % 9999000) + 1000

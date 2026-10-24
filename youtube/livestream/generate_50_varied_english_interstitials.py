@@ -168,20 +168,54 @@ def write_stereo_wav(path: Path, data: np.ndarray) -> None:
         wf.writeframes(pcm.tobytes())
 
 
-def render_turn_wav(voice: str, rate: int, text: str, phone_filter: bool, tmp_dir: Path, idx: int) -> Path:
-    raw_aiff = tmp_dir / f"turn_{idx}_raw.aiff"
-    out_wav = tmp_dir / f"turn_{idx}.wav"
-    subprocess.run(["say", "-v", voice, "-r", str(rate), "-o", str(raw_aiff), text], check=True)
-    if phone_filter:
-        # Authentic payphone / studio call-in line (320Hz - 2900Hz bandpass + slight overdrive)
-        af = "highpass=f=320,lowpass=f=2900,acompressor=threshold=-20dB:ratio=4:attack=5:release=50,volume=1.35"
+NEURAL_VOICE_MAP = {
+    "Alex": ["en-US-GuyNeural", "en-US-ChristopherNeural", "en-US-EricNeural", "en-US-RogerNeural"],
+    "Reed": ["en-US-AndrewNeural", "en-US-BrianNeural", "en-CA-LiamNeural", "en-US-SteffanNeural"],
+    "Daniel": ["en-GB-RyanNeural", "en-IE-ConnorNeural", "en-AU-WilliamMultilingualNeural"],
+    "Rocko": ["en-US-EricNeural", "en-US-GuyNeural", "en-US-RogerNeural"],
+    "Eddy": ["en-US-BrianNeural", "en-US-ChristopherNeural", "en-CA-LiamNeural"],
+    "Grandpa": ["en-US-RogerNeural", "en-GB-RyanNeural", "en-US-SteffanNeural"],
+    "Samantha": ["en-US-AriaNeural", "en-US-JennyNeural", "en-US-AvaNeural", "en-US-MichelleNeural"],
+    "Victoria": ["en-US-EmmaNeural", "en-CA-ClaraNeural", "en-US-AriaNeural"],
+    "Karen": ["en-AU-NatashaNeural", "en-NZ-MollyNeural", "en-GB-SoniaNeural"],
+    "Moira": ["en-IE-EmilyNeural", "en-GB-SoniaNeural"],
+    "Tessa": ["en-GB-SoniaNeural", "en-AU-NatashaNeural"],
+    "Shelley": ["en-US-JennyNeural", "en-US-AvaNeural", "en-CA-ClaraNeural"],
+    "Flo": ["en-US-MichelleNeural", "en-US-EmmaNeural", "en-US-AriaNeural"],
+    "Rishi": ["en-IN-PrabhatNeural", "en-GB-RyanNeural"],
+    "Fred": ["en-US-SteffanNeural", "en-US-ChristopherNeural"],
+    "Zarvox": ["en-US-EricNeural", "en-US-RogerNeural"],
+    "Whisper": ["en-US-AvaNeural", "en-US-JennyNeural"],
+}
+
+def render_turn_wav(voice: str, rate: int, text: str, *extra_args) -> Path:
+    import asyncio, edge_tts
+    if len(extra_args) == 2:
+        tmp_dir, idx = extra_args
     else:
-        # Warm 1980s studio broadcast ribbon mic EQ
-        af = "highpass=f=110,lowpass=f=5200,acompressor=threshold=-18dB:ratio=3:attack=8:release=80"
+        _, tmp_dir, idx = extra_args
+    raw_mp3 = tmp_dir / f"neural_turn_{idx}.mp3"
+    out_wav = tmp_dir / f"neural_turn_{idx}.wav"
+    candidates = NEURAL_VOICE_MAP.get(voice, ["en-US-AndrewNeural", "en-US-AriaNeural", "en-US-GuyNeural"])
+    n_voice = candidates[idx % len(candidates)]
+    pct = max(-15, min(25, int((rate - 182) * 0.45)))
+    rate_str = f"{pct:+d}%"
+    async def _save():
+        for attempt, v_try in enumerate([n_voice, "en-US-AndrewNeural", "en-US-AriaNeural"]):
+            try:
+                comm = edge_tts.Communicate(text, v_try, rate=rate_str)
+                await comm.save(str(raw_mp3))
+                if raw_mp3.exists() and raw_mp3.stat().st_size > 500:
+                    return
+            except Exception:
+                await asyncio.sleep(0.4 * (attempt + 1))
+        raise RuntimeError(f"Failed TTS for {text[:30]}")
+    asyncio.run(_save())
+    af = "highpass=f=90,lowpass=f=7400,acompressor=threshold=-17dB:ratio=2.5:attack=10:release=100,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-42dB:detection=peak,areverse,silenceremove=start_periods=1:start_duration=0.04:start_threshold=-42dB:detection=peak,areverse"
     subprocess.run(
         [
-            "ffmpeg", "-y", "-nostdin", "-loglevel", "error",
-            "-i", str(raw_aiff),
+            "/opt/homebrew/bin/ffmpeg", "-y", "-nostdin", "-loglevel", "error",
+            "-i", str(raw_mp3),
             "-af", af,
             "-ar", str(SR), "-ac", "2",
             str(out_wav),
@@ -846,13 +880,13 @@ def main() -> None:
 
             # Master with 1980s FM/AM broadcast warmth & -16 LUFS normalization
             af_master = (
-                "highpass=f=140,lowpass=f=4400,"
+                "highpass=f=140,lowpass=f=7600,"
                 "acompressor=threshold=-19dB:ratio=3.2:attack=6:release=70,"
                 "loudnorm=I=-16:TP=-1.5:LRA=9"
             )
             subprocess.run(
                 [
-                    "ffmpeg", "-y", "-nostdin", "-loglevel", "error",
+                    "/opt/homebrew/bin/ffmpeg", "-y", "-nostdin", "-loglevel", "error",
                     "-i", str(mixed_wav),
                     "-af", af_master,
                     "-ar", "44100", "-ac", "2", "-c:a", "libmp3lame", "-b:a", "192k",

@@ -66,6 +66,8 @@ DISCOVERY_ENDPOINTS = [
     f"https://{APEX}/.well-known/agent-card.json",
     f"https://{APEX}/.well-known/agent.json",
     f"https://{APEX}/.well-known/agents.json",
+    f"https://{APEX}/.well-known/agent-bounties.json",
+    f"https://{APEX}/api/bounties",
     f"https://{APEX}/.well-known/mcp.json",
     f"https://{APEX}/api/mcp",
     f"https://{APEX}/.well-known/ai-plugin.json",
@@ -127,6 +129,8 @@ CANONICAL_CONTENT_URLS = [
     f"https://{APEX}/terminal/index.html",
     f"https://{APEX}/ai-benchmark",
     f"https://{APEX}/ai.txt",
+    f"https://{APEX}/.well-known/agent-bounties.json",
+    f"https://{APEX}/api/bounties",
     f"https://{APEX}/moltbook.json",
     f"https://{APEX}/openapi.json",
     f"https://{APEX}/skill.md",
@@ -144,6 +148,10 @@ CANONICAL_CONTENT_URLS = [
     f"https://{APEX}/forensics/red_coyoacan.html",
     f"https://{APEX}/forensics/usenet_1995_feed.html",
     f"https://{APEX}/realia",
+    f"https://{APEX}/dyad",
+    f"https://{APEX}/regional/artifacts",
+    f"https://{APEX}/lyrics",
+    f"https://{APEX}/reddit-wiki/index.md",
     f"https://{APEX}/minutiae",
     f"https://{APEX}/receipts",
     f"https://{APEX}/fan-theories",
@@ -222,6 +230,23 @@ def verify_layer1_endpoints() -> dict:
         "response_preview": body_mcp[:300],
     }
     print(f"  [{'✓' if st_mcp == 200 else '✗'}] MCP JSON-RPC POST /api/mcp (verify_ouroboros_parity) -> HTTP {st_mcp}")
+
+    st_bounty, body_bounty, _ = http_req(
+        mcp_url,
+        method="POST",
+        payload={
+            "jsonrpc": "2.0",
+            "id": 2,
+            "method": "tools/call",
+            "params": {"name": "get_agent_bounty_leaderboard"},
+        },
+        timeout=15,
+    )
+    results["mcp_rpc_get_agent_bounty_leaderboard"] = {
+        "status": st_bounty,
+        "response_preview": body_bounty[:300],
+    }
+    print(f"  [{'✓' if st_bounty == 200 else '✗'}] MCP JSON-RPC POST /api/mcp (get_agent_bounty_leaderboard) -> HTTP {st_bounty}")
     return results
 
 
@@ -260,16 +285,19 @@ def seed_a2a_registry() -> list[dict]:
 def run_nostr_clawstr_agentdex_seeder() -> dict:
     print("\n=== [STEP 3] SEEDING AGENTDEX (KIND 31339), CLAWSTR (KIND 1111) & NOSTR RELAYS ===")
     script = LIVESTREAM_DIR / "agentic_nostr_clawstr_agentdex.mjs"
-    res = subprocess.run(
-        ["node", str(script)],
-        cwd=str(LIVESTREAM_DIR),
-        capture_output=True,
-        text=True,
-        timeout=90,
-    )
-    print(res.stdout.strip())
-    if res.stderr.strip():
-        print("  [STDERR]", res.stderr.strip()[:400])
+    try:
+        res = subprocess.run(
+            ["node", str(script)],
+            cwd=str(LIVESTREAM_DIR),
+            capture_output=True,
+            text=True,
+            timeout=180,
+        )
+        print(res.stdout.strip())
+        if res.stderr.strip():
+            print("  [STDERR]", res.stderr.strip()[:400])
+    except Exception as e:
+        print(f"  [WARN] Nostr/Clawstr seeder execution error: {e}")
     manifest_file = LIVESTREAM_DIR / "agentic_nostr_seed_results.json"
     if manifest_file.exists():
         return json.loads(manifest_file.read_text(encoding="utf-8"))
@@ -333,12 +361,18 @@ def warm_ai_reader_proxies(nostr_manifest: dict) -> dict:
         f"https://{APEX}/forensics/anemoia_harmony.html",
         f"https://{APEX}/forensics/fractal_marcus.html",
         f"https://{APEX}/forensics/dead_hand_protocol.html",
+        f"https://{APEX}/regional/artifacts",
+        f"https://{APEX}/lyrics",
+        "https://www.reddit.com/r/NovaHart/",
     ]
     for t in md_new_targets:
         proxy_url = f"https://markdown.new/{t}"
         st, body, _ = http_req(proxy_url, method="GET", timeout=20)
         proxy_results["markdown_new"].append({"target": t, "status": st, "bytes": len(body)})
         print(f"  [markdown.new] HTTP {st} ({len(body):5d}B) -> {t}")
+        if st == 429:
+            print("  [markdown.new] HTTP 429 detected — stopping markdown.new requests immediately.")
+            break
 
     # 2. Warm pure.md on core discovery + external Nostr/Clawstr/AgentDex URLs
     njump_urls = nostr_manifest.get("njumpUrls", [])[:4]
@@ -360,7 +394,10 @@ def warm_ai_reader_proxies(nostr_manifest: dict) -> dict:
         st, body, _ = http_req(proxy_url, method="GET", timeout=20)
         proxy_results["pure_md"].append({"target": t, "status": st, "bytes": len(body)})
         print(f"  [pure.md]      HTTP {st} ({len(body):5d}B) -> {t}")
-        time.sleep(1.5)
+        if st == 429:
+            print("  [pure.md]      HTTP 429 detected — stopping pure.md requests immediately to avoid rate limits.")
+            break
+        time.sleep(2.2)
 
     # 3. Warm r.jina.ai (paced at ~1.5s to stay well within Jina's 20 RPM zero-auth tier)
     jina_targets = [
@@ -377,6 +414,9 @@ def warm_ai_reader_proxies(nostr_manifest: dict) -> dict:
         f"https://{APEX}/.well-known/agent-card.json",
         f"https://{APEX}/.well-known/mcp.json",
         f"https://{APEX}/forensics/rogue_agent_cre7.html",
+        f"https://{APEX}/regional/artifacts",
+        f"https://{APEX}/lyrics",
+        "https://www.reddit.com/r/NovaHart/",
         *njump_urls[:2],
     ]
     for t in jina_targets:
@@ -384,6 +424,9 @@ def warm_ai_reader_proxies(nostr_manifest: dict) -> dict:
         st, body, _ = http_req(proxy_url, method="GET", timeout=25)
         proxy_results["r_jina_ai"].append({"target": t, "status": st, "bytes": len(body)})
         print(f"  [r.jina.ai]    HTTP {st} ({len(body):5d}B) -> {t}")
+        if st == 429:
+            print("  [r.jina.ai]    HTTP 429 detected — stopping r.jina.ai requests immediately.")
+            break
         time.sleep(1.5)
 
     return proxy_results
