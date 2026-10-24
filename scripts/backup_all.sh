@@ -3,7 +3,7 @@ set -euo pipefail
 
 cd /Users/joshuadurey/.gemini/antigravity-ide/scratch/retro_arg_engine
 
-echo "=== [1/3] Staging & Pushing Code + State Ledgers to GitHub (origin/main) ==="
+echo "=== [1/3] Staging, Merging Remote Updates & Pushing to GitHub (origin/main) ==="
 git add -u
 git add \
   deploy/*.js deploy/*.json deploy/*.mjs deploy/*.md deploy/*.bind \
@@ -16,7 +16,9 @@ git add \
   youtube/livestream/zero_auth_human_web_manifest.json \
   youtube/shorts_ready/UPLOAD_CHEATSHEET.md
 
-git commit -m "Backup Sovereign Agent Bounty Leaderboard, HMAC Dyad Ticket anti-bounce scoring, and 24/7 radio packaging" || echo "Nothing new to commit"
+git commit -m "Backup Sovereign Agent Bounty Leaderboard, HMAC Dyad Ticket anti-bounce scoring, and 24/7 radio packaging" || echo "Local commit 54beecac already created"
+git fetch origin main
+git merge --no-edit -X ours origin/main
 git push origin main
 
 echo "=== [2/3] Deploying Cloudflare Worker (retro-arg-router) ==="
