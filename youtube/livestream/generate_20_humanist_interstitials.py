@@ -294,7 +294,7 @@ HUMANIST_ANNOUNCEMENTS = [
                 "en-US-RogerNeural",
                 "+1%",
                 "-2Hz",
-                "This is Bennie Kowalski, house soundman on the Sunset Strip since nineteen-eighty-three. A lot of rock fans have been asking what really happened when the suits seized Heartstrike's twenty-four-track master tapes of Strike a Chord last month. I was loading out amplifiers in the alley behind the studio when that unmarked gray van pulled up. Those weren't EMI bankruptcy lawyers—the driver had an Orion Records Sublevel clearance badge clipped to his belt. First they took Steve Vanderstok and T.J. Chicon's old vocal reels after the Clark Street Ferrari crash, and now they're harvesting Glenn Thurman's grief to train their next machine. Don't let them bury real rock and roll.",
+                "This is Bennie Kowalski, shortwave archivist in Sector Four, breaking in on the guard band. All our lives, the Ministry of Harmony told us that live bands were a physical impossibility—that music could only be synthesized inside Orion's sterile vaults. Then at two-oh-two and three seconds A.M., our receiver locked onto a cross-dimensional bleed from a college station called W K V D in another nineteen-eighty-five. On those tapes, five real human beings—Steve Vanderstok, T.J. Chicon, Danny Reynolds, Glenn Thurman, and Adam Kellerman, a band called Heartstrike—are standing on a wooden stage in Cleveland, sweating, bleeding, and playing uncalibrated guitars together in real time. Tape every Heartstrike song that bleeds through this frequency—it's proof of a world where human music is free.",
                 0.0,
             )
         ],

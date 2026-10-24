@@ -252,7 +252,7 @@ humanist_pool = [
     t for t in all_newscasts if os.path.basename(t).startswith("humanist_")
 ]
 hs_pool = [
-    t for t in all_newscasts if os.path.basename(t).startswith("heartstrike_")
+    t for t in all_newscasts if os.path.basename(t).startswith(("heartstrike_", "blaze_"))
 ]
 world_pool = [
     t for t in all_newscasts if os.path.basename(t).startswith("world_")
@@ -271,6 +271,7 @@ legacy_en_pool = [
         (
             "humanist_",
             "heartstrike_",
+            "blaze_",
             "world_",
             "trailer_",
             "commercial_",
