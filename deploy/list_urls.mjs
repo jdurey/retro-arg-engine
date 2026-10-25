@@ -26,6 +26,7 @@ for (const sp of rows.sort()) {
       sp === "llms.txt" || sp === "llms-full.txt" || sp === "feed.xml" ||
       sp === "skill.md" || sp === "SKILL.md" || sp === "agents.txt" ||
       sp.startsWith("terminal/") || sp.startsWith("reconstruction/") || sp.startsWith("forensics/") || sp.startsWith("dyad/") ||
+      sp.startsWith("cre7/") || sp.startsWith("reddit-wiki/") ||
       sp.startsWith(".well-known/") || sp.startsWith("nodes/") || sp.startsWith("federation/") ||
       sp === "usenet/live_1995_feed.html" || sp === "usenet/comp-dsp.html" ||
       (/^regional\/[^/]+\.html$/.test(sp) && sp !== "regional/index.html") ||

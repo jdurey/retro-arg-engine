@@ -62,6 +62,18 @@ def harvest_all() -> dict:
     harvested_comments: list[dict] = []
     seen_comment_ids: set[str] = set()
 
+    # 0. Load existing comments from agentic_web_live_feed.json so offline/rate-limited runs never drop entries
+    if FEED_OUT_PATH.exists():
+        try:
+            existing_feed = json.loads(FEED_OUT_PATH.read_text(encoding="utf-8")).get("comments", [])
+            for item in existing_feed:
+                cid = item.get("comment_id") or ""
+                if cid and cid not in seen_comment_ids:
+                    seen_comment_ids.add(cid)
+                    harvested_comments.append(item)
+        except Exception:
+            pass
+
     # 1. Load existing harvested insights from moltbook_agent_insights.json so nothing is ever lost
     if INSIGHTS_PATH.exists():
         try:

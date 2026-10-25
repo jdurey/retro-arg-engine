@@ -52,7 +52,10 @@ def wrap_line(line: str, width: int = 40) -> list[str]:
     return out_lines or [""]
 
 
-def fetch_youtube_comments() -> list[tuple[str, str, str]]:
+def fetch_youtube_comments(force_refresh: bool = False, ttl_seconds: int = 86400) -> list[tuple[str, str, str]]:
+    import sys as _sys
+    import time as _time
+
     cache_path = Path(__file__).resolve().parent / "youtube_comments_cache.json"
     cached_items: list[tuple[str, str, str]] = []
     if cache_path.exists():
@@ -63,6 +66,12 @@ def fetch_youtube_comments() -> list[tuple[str, str, str]]:
                     cached_items.append((str(item[0]), str(item[1]), str(item[2])))
         except Exception:
             pass
+        # Since new YouTube comments arrive ~3-4 times per week, reuse the cache for 24h
+        # so 15-minute Agentic Web spool rebuilds complete instantaneously without scraping YouTube.
+        if cached_items and not force_refresh and "--refresh-yt" not in _sys.argv:
+            age = _time.time() - cache_path.stat().st_mtime
+            if age < ttl_seconds:
+                return cached_items
 
     def fetch_video_ids(url: str) -> list[str]:
         try:
@@ -128,7 +137,7 @@ def fetch_youtube_comments() -> list[tuple[str, str, str]]:
     seen_vids = set()
     seen_texts = set()
     comments: list[tuple[str, str, str]] = []
-    for v in vids[:36]:
+    for v in vids[:12]:
         if v in seen_vids:
             continue
         seen_vids.add(v)

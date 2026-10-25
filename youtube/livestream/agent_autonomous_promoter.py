@@ -129,10 +129,17 @@ def solve_lobster_challenge(challenge_text: str) -> str:
     merged = []
     i = 0
     while i < len(tokens):
+        if tokens[i] in ("*", "+", "-", "/"):
+            merged.append(tokens[i])
+            i += 1
+            continue
         matched = False
         for k in (4, 3, 2):
             if i + k <= len(tokens):
-                combined = "".join(tokens[i : i + k])
+                sub_toks = tokens[i : i + k]
+                if any(st in ("*", "+", "-", "/") for st in sub_toks):
+                    continue
+                combined = "".join(sub_toks)
                 w = clean_obfuscated_word(combined)
                 if w in WORD_TO_NUM:
                     merged.append(w)
@@ -170,7 +177,7 @@ def solve_lobster_challenge(challenge_text: str) -> str:
     joined = " ".join(merged)
     full_dedup = re.sub(r"(.)\1+", r"\1", re.sub(r"[^a-zA-Z]", "", challenge_text).lower())
     op = "+"
-    if any(k in joined or k in full_dedup for k in ["multiply", "multiplied", "product", "times"]):
+    if "*" in merged or any(k in joined or k in full_dedup for k in ["multiply", "multiplied", "product", "times"]):
         op = "*"
     elif any(
         k in joined or k in full_dedup

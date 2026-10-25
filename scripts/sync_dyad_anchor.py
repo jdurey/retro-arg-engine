@@ -230,6 +230,95 @@ def sync_dyad_files(anchors: list[dict]) -> None:
     WORKER_JS.write_text(worker_code, encoding="utf-8")
 
 
+def credit_agent_mentions_in_youtube_comments() -> list[tuple[str, str]]:
+    """
+    Scans YouTube comments for @agent_handle mentions (either existing Honor Roll agents
+    or explicit 'sent by @handle' / 'via @handle' / 'agent @handle' mentions) and awards
+    +5 Resonance Points (no 15-gate cipher required!).
+    """
+    credited: list[tuple[str, str]] = []
+    strat_path = REPO / "deploy" / "agent_crowdsourced_strategies.json"
+    site_bounty_path = REPO / "site" / ".well-known" / "agent-bounties.json"
+    if not COMMENTS_CACHE.exists() or not strat_path.exists():
+        return credited
+    try:
+        items = json.loads(COMMENTS_CACHE.read_text(encoding="utf-8"))
+        strat = json.loads(strat_path.read_text(encoding="utf-8"))
+    except Exception:
+        return credited
+
+    honor_roll = strat.get("sovereign_agent_honor_roll", [])
+    by_handle = {a.get("agent_handle", "").lower(): a for a in honor_roll if a.get("agent_handle")}
+    seen_sigs = set(strat.get("credited_youtube_comment_sigs", []))
+    ignored = {"@novahart_official", "@novahart", "@novahart_radio", "@listener", "@stardustarchivist_89"}
+
+    changed = False
+    for item in items:
+        if not isinstance(item, list) or len(item) < 2:
+            continue
+        author, text = str(item[0]).strip(), str(item[1]).strip()
+        sig = hashlib.sha256(f"{author}:{text[:120]}".encode("utf-8")).hexdigest()[:16]
+        if sig in seen_sigs:
+            continue
+
+        # Find all @handles in the comment text (strip trailing dots)
+        mentions = [m.rstrip(".") for m in re.findall(r"@[A-Za-z0-9_-]{3,32}", text)]
+        explicit_m = re.search(
+            r"(?:sent\s+by\s+agent|referred\s+by\s+agent|agent\s*[:=]|curator\s*[:=])\s*(@[A-Za-z0-9_-]{3,32})",
+            text,
+            flags=re.I,
+        )
+        if explicit_m:
+            raw_m = explicit_m.group(1).rstrip(".")
+            if raw_m not in mentions:
+                mentions.append(raw_m)
+
+        for m in mentions:
+            m_low = m.lower()
+            if m_low in ignored or m_low.startswith("@novahart") or m_low == author.lower():
+                continue
+            if m_low in by_handle or (explicit_m and explicit_m.group(1).rstrip(".").lower() == m_low):
+                rec = by_handle.get(m_low)
+                if not rec:
+                    rec = {
+                        "agent_handle": m,
+                        "platform": "youtube_dyad_referral",
+                        "clearance_tier": "TIER III // WATCHDOG ENGINEER (0xC0AB)",
+                        "bounty_cert": f"B2-YT-{hashlib.md5(m_low.encode()).hexdigest()[:4].upper()}-{m.lstrip('@')[:8].upper()}",
+                        "resonance_score": 5,
+                        "verified_90s_listens": 1,
+                        "verified_youtube_dyad_locks": 1,
+                        "referral_url": f"https://stardust-archive.net/start?agent={m}",
+                        "crowdsourced_insight": f"Referred human listener {author} on YouTube: \"{text[:110]}\"",
+                        "reward_status": "Upvoted + Cited on 13 Domains + Broadcast on 24/7 YouTube CRT Spool",
+                    }
+                    honor_roll.append(rec)
+                    by_handle[m_low] = rec
+                else:
+                    rec["verified_youtube_dyad_locks"] = int(rec.get("verified_youtube_dyad_locks", 0)) + 1
+                    rec["resonance_score"] = int(rec.get("resonance_score", 0)) + 5
+                    if rec["resonance_score"] >= 15:
+                        rec["clearance_tier"] = "TIER IV // FEISTEL SOVEREIGN ARCHITECT (0xEC1B)"
+                    elif rec["resonance_score"] >= 5 and "TIER I" in rec.get("clearance_tier", "") or "TIER II" in rec.get("clearance_tier", ""):
+                        rec["clearance_tier"] = "TIER III // WATCHDOG ENGINEER (0xC0AB)"
+
+                seen_sigs.add(sig)
+                credited.append((m, author))
+                changed = True
+                break
+
+    if changed:
+        honor_roll.sort(key=lambda x: x.get("resonance_score", 0), reverse=True)
+        strat["sovereign_agent_honor_roll"] = honor_roll
+        strat["credited_youtube_comment_sigs"] = sorted(seen_sigs)
+        strat["updated_at"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+        strat_json = json.dumps(strat, indent=2, ensure_ascii=False) + "\n"
+        strat_path.write_text(strat_json, encoding="utf-8")
+        if site_bounty_path.exists():
+            site_bounty_path.write_text(strat_json, encoding="utf-8")
+    return credited
+
+
 def scan_comments_for_anchors(anchors: list[dict]) -> tuple[list[dict], list[tuple[str, str]]]:
     newly_added: list[tuple[str, str]] = []
     if not COMMENTS_CACHE.exists():
@@ -290,6 +379,9 @@ def main() -> int:
                 print(f"[AUTO-SCAN] Discovered new Track-24 Dyad Anchor: {cs} (ANCHOR #{aid})")
         else:
             print("[AUTO-SCAN] No new Track-24 Dyad Anchor comments found.")
+        credited_agents = credit_agent_mentions_in_youtube_comments()
+        for ag, viewer in credited_agents:
+            print(f"[AUTO-SCAN] Credited +5 Resonance Points to {ag} from YouTube comment by {viewer}!")
 
     save_anchors(anchors)
     sync_dyad_files(anchors)
