@@ -14,6 +14,7 @@ import os
 import glob
 import re
 import subprocess
+import unicodedata
 
 DOWNLOADS_DIR = "/Users/joshuadurey/Downloads/For Live Stream"
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -27,10 +28,22 @@ def slugify(filename):
     # Remove leading numbers like "08 ", "14 "
     cleaned = re.sub(r'^\d+\s*[-_.]*\s*', '', base)
     cleaned = cleaned.lower()
+    # Normalize parenthetical or trailing language tags to canonical ISO broadcast suffixes
+    cleaned = re.sub(r'\(\s*(?:spanish|espa[ñn]ol|es)\s*\)|\s+-\s*(?:spanish|espa[ñn]ol|es)$', ' _es', cleaned)
+    cleaned = re.sub(r'\(\s*(?:korean|kr|ko)\s*\)|\s+-\s*(?:korean|kr|ko)$', ' _kr', cleaned)
+    cleaned = re.sub(r'\(\s*(?:japanese|jp|ja)\s*\)|\s+-\s*(?:japanese|jp|ja)$', ' _jp', cleaned)
+    cleaned = re.sub(r'\(\s*(?:french|fran[çc]ais|fr)\s*\)|\s+-\s*(?:french|fran[çc]ais|fr)$', ' _fr', cleaned)
+    cleaned = re.sub(r'\(\s*(?:portuguese|portugu[êe]s|pt)\s*\)|\s+-\s*(?:portuguese|portugu[êe]s|pt)$', ' _pt', cleaned)
+    cleaned = re.sub(r'\(\s*(?:german|deutsch|de)\s*\)|\s+-\s*(?:german|deutsch|de)$', ' _de', cleaned)
+    cleaned = re.sub(r'\(\s*(?:italian|italiano|it)\s*\)|\s+-\s*(?:italian|italiano|it)$', ' _it', cleaned)
+    cleaned = re.sub(r'\(\s*(?:chinese|mandarin|zh|cn)\s*\)|\s+-\s*(?:chinese|mandarin|zh|cn)$', ' _zh', cleaned)
     # Normalize Roman numerals
     cleaned = re.sub(r'\bmovement\s+iii\b', 'movement_3', cleaned)
     cleaned = re.sub(r'\bmovement\s+ii\b', 'movement_2', cleaned)
     cleaned = re.sub(r'\bmovement\s+i\b', 'movement_1', cleaned)
+    # Preserve historical apostrophe -> underscore behavior before folding Latin diacritics
+    cleaned = cleaned.replace("’", "_").replace("‘", "_").replace("'", "_")
+    cleaned = unicodedata.normalize('NFKD', cleaned).encode('ascii', 'ignore').decode('ascii')
     cleaned = re.sub(r'[^a-z0-9]+', '_', cleaned)
     cleaned = cleaned.strip('_')
     return f"radio_{cleaned}.mp3"
@@ -45,7 +58,6 @@ CLEAN_SONG_TRIM_FILTER = (
 from concurrent.futures import ThreadPoolExecutor
 
 EXCLUDED_SLUGS = {
-    "radio_two_voices.mp3",
     "radio_synthetic_dawn_retro.mp3",
     "radio_end_like_that.mp3",
     "radio_tape_of_us_1989_rough_mix.mp3",
@@ -58,10 +70,16 @@ EXCLUDED_SLUGS = {
     "radio_someone_else_s_memories_old.mp3",
     "radio_the_world_moves_without_me_old.mp3",
     "radio_nh_synthetic_dawn_1985_synth_original_mix.mp3",
-    "radio_abandoned_shell_es.mp3",
-    "radio_asset_loss_kr.mp3",
     "radio_03_corridor_dreams.mp3",
+    "radio_from_room_to_routes.mp3",
+    "radio_patterns_in_the_mesh.mp3",
+    "radio_signal_override.mp3",
 }
+try:
+    from excluded_radio_songs import EXCLUDED_RADIO_SONGS as _EXCL_RADIO
+    EXCLUDED_SLUGS |= set(_EXCL_RADIO)
+except Exception:
+    pass
 
 def process_one_track(item):
     fname, force = item
@@ -84,6 +102,7 @@ def process_one_track(item):
         cmd = [
             "ffmpeg", "-y",
             "-i", src_path,
+            "-vn", "-map", "0:a:0", "-map_metadata", "-1",
             "-af", CLEAN_SONG_TRIM_FILTER,
             "-c:a", "libmp3lame", "-b:a", "192k", "-ar", "44100", "-ac", "2",
             tmp_trimmed
@@ -108,7 +127,7 @@ def ingest_all(force=False):
     candidates = [f for f in os.listdir(DOWNLOADS_DIR) if f.lower().endswith(SUPPORTED_EXTS) and not f.startswith(".")]
     tasks = [(f, force) for f in sorted(candidates)]
 
-    print(f"Ingesting {len(tasks)} tracks with Radio Broadcast EQ (4 workers)...")
+    print(f"Ingesting {len(tasks)} tracks with clean studio trim + -13.5 LUFS leveling (4 workers)...")
     newly_added = []
     with ThreadPoolExecutor(max_workers=4) as ex:
         results = list(ex.map(process_one_track, tasks))

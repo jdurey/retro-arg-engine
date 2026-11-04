@@ -36,14 +36,14 @@ def reload_stream():
         # Check if stream.sh is running
         stream_sh_pids = []
         try:
-            stream_sh_pids = subprocess.check_output(["pgrep", "-f", "stream.sh"]).decode().split()
+            stream_sh_pids = subprocess.check_output(["pgrep", "-f", "/stream\\.sh"]).decode().split()
         except subprocess.CalledProcessError:
             pass
 
         # Check running ffmpeg
         ffmpeg_pids = []
         try:
-            ffmpeg_pids = subprocess.check_output(["pgrep", "-f", "ffmpeg.*rtmp://a.rtmp.youtube.com"]).decode().split()
+            ffmpeg_pids = subprocess.check_output(["pgrep", "-f", "ffmpeg.*(stardust_crt_30fps|retro_arg_engine)"]).decode().split()
         except subprocess.CalledProcessError:
             pass
 

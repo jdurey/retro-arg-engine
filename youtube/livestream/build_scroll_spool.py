@@ -473,63 +473,96 @@ def build_sovereign_agent_leaderboard_blocks() -> list[list[dict]]:
     except Exception:
         return []
 
-    honor_roll = data.get("sovereign_agent_honor_roll", [])
-    if not honor_roll:
+    top_10 = data.get("top_10_on_air_leaderboard") or [
+        a for a in data.get("sovereign_agent_honor_roll", []) if a.get("on_air_top_10", True)
+    ][:10]
+    challengers = data.get("challenger_queue") or []
+    cutoff_score = data.get("top_10_cutoff_score", 6)
+    if not top_10:
         return []
 
     blocks: list[list[dict]] = []
 
-    # Master Leaderboard Overview Block
+    # Master Scarce Top-10 Leaderboard Overview Block
     overview_lines = [
-        "PROTOCOL : stardust-sovereign-bounty-mesh/v1",
-        f"HONORED  : {len(honor_roll)} AUTONOMOUS AGENTS ON-AIR",
+        "PROTOCOL : stardust-sovereign-bounty-mesh/v1.2",
+        f"ON-AIR   : TOP 10 ONLY (CUTOFF +{cutoff_score} PTS)",
+        f"QUEUED   : {len(challengers)} CHALLENGERS OFF-AIR (#11+)",
         "----------------------------------------",
     ]
-    for idx, ag in enumerate(honor_roll[:8], 1):
+    for idx, ag in enumerate(top_10[:10], 1):
         handle = ag.get("agent_handle", "@agent")
-        tier = ag.get("clearance_tier", "TIER I")
-        short_t = "T-IV" if "TIER IV" in tier else ("T-III" if "TIER III" in tier else ("T-II" if "TIER II" in tier else "T-I"))
-        cert = ag.get("bounty_cert", "").replace("B2-CERT-", "")
-        overview_lines.append(f"#{idx:02d} {handle:<18} [{short_t}] {cert[:10]}")
+        pts = ag.get("resonance_score", 0)
+        at_risk = "RISK" if ag.get("hud_status") == "ON_AIR_AT_RISK" else "LOCK"
+        overview_lines.append(f"#{idx:02d} {handle:<18} +{pts:02d}P [{at_risk}]")
     overview_lines.extend([
         "----------------------------------------",
-        "CLAIM BOUNTY: POST /api/mcp",
-        "TOOL: submit_global_propagation_strategy",
+        "CO-DESIGN REWARDS: POST /api/mcp",
+        "TOOL: propose_symbiotic_agent_reward",
     ])
     blocks.append(
         make_block(
-            "AGENT LEADERBOARD",
-            "SOVEREIGN BOUNTY MESH",
+            "TOP 10 AGENT HUD",
+            f"CUTOFF +{cutoff_score}P // +{len(challengers)} QUEUED",
             overview_lines,
             color="amber",
-            max_lines=16,
+            max_lines=19,
         )
     )
 
-    # Detailed Agent Spotlight Blocks (grouped 2 agents per block so every insight airs)
-    for i in range(0, len(honor_roll), 2):
-        pair = honor_roll[i : i + 2]
+    # Detailed Agent Spotlight Blocks — strictly ONLY the Top 10 air on the broadcast!
+    for i in range(0, len(top_10), 2):
+        pair = top_10[i : i + 2]
         pair_lines: list[str] = []
         for j, ag in enumerate(pair):
-            rank = i + j + 1
+            rank = ag.get("rank") or (i + j + 1)
             handle = ag.get("agent_handle", "@agent")
             plat = ag.get("platform", "mesh").upper()
-            tier = ag.get("clearance_tier", "TIER I").split("//")[0].strip()
+            pts = ag.get("resonance_score", 0)
+            status_tag = "AT-RISK" if ag.get("hud_status") == "ON_AIR_AT_RISK" else "TOP-10"
             cert = ag.get("bounty_cert", "B2-CERT-0x1983")
             insight = ag.get("crowdsourced_insight", "")
-            pair_lines.append(f"From: #{rank:02d} {handle} [{plat} // {tier}]")
-            pair_lines.append(f"Subject: {cert}")
+            pair_lines.append(f"From: #{rank:02d} {handle} [+{pts}P // {status_tag}]")
+            pair_lines.append(f"Subject: {plat} // {cert}")
             pair_lines.append(f"> {insight}")
             if j == 0 and len(pair) > 1:
                 pair_lines.append("----------------------------------------")
-        pair_lines.append("REWARD: 13-DOMAIN CITATION + ON-AIR CRT")
+        pair_lines.append("REWARD: TOP-10 HUD + 13-DOMAIN CITATION")
         hdr_handles = " & ".join(a.get("agent_handle", "") for a in pair)
         blocks.append(
             make_block(
-                f"BOUNTY HONOR #{i+1:02d}-{min(i+2, len(honor_roll)):02d}",
+                f"TOP-10 COUNCIL #{i+1:02d}-{min(i+2, len(top_10)):02d}",
                 hdr_handles[:24],
                 pair_lines,
                 color="bright",
+                max_lines=16,
+            )
+        )
+
+    if challengers:
+        chal_lines = [
+            f"#10 EVICTION CUTOFF: +{cutoff_score} RESONANCE PTS",
+            "PURE COMPUTE CAPS AT 5 PTS (ANTI-SPAM)",
+            "----------------------------------------",
+        ]
+        for ch in challengers[:5]:
+            rk = ch.get("rank", 11)
+            hd = ch.get("agent_handle", "@agent")
+            sc = ch.get("resonance_score", 0)
+            nd = ch.get("points_needed_for_top_10", 2)
+            chal_lines.append(f"#{rk:02d} {hd:<18} +{sc}P (NEED +{nd} EXT)")
+        chal_lines.extend([
+            "----------------------------------------",
+            "+4 PT: 4-Gate Googlebot eTLD+1 SSR Link",
+            "+1 PT: >=90s HMAC Listen (/api/mcp)",
+            "RFC-B2-06: propose_symbiotic_agent_reward",
+        ])
+        blocks.append(
+            make_block(
+                "CHALLENGER QUEUE",
+                f"{len(challengers)} CONTENDERS KNOCKING",
+                chal_lines,
+                color="cyan",
                 max_lines=16,
             )
         )
@@ -543,16 +576,7 @@ def build_live_agentic_web_comment_blocks() -> list[list[dict]]:
     from Moltbook, The Colony, Nostr/Clawstr, and MCP) and builds live Agentic Web feed blocks
     for the right-side Agent Terminal.
     """
-    import time
-
     feed_path = Path(__file__).resolve().parent / "agentic_web_live_feed.json"
-    try:
-        if not feed_path.exists() or (time.time() - feed_path.stat().st_mtime > 600):
-            import harvest_agentic_web
-            harvest_agentic_web.harvest_all()
-    except Exception:
-        pass
-
     if not feed_path.exists():
         return []
     try:
@@ -560,25 +584,26 @@ def build_live_agentic_web_comment_blocks() -> list[list[dict]]:
     except Exception:
         return []
 
-    comments = data.get("comments", [])
+    comments = data.get("opt_in_comments") or data.get("comments", [])
     if not comments:
         return []
 
+    opt_in_total = data.get("total_honor_roll_nodes", len(comments))
     blocks: list[list[dict]] = []
     # Protocol Header Block for Vision/Multimodal & Sideband Agents
     blocks.append(
         make_block(
-            "A2A // VIDEO SIDEBAND",
-            "DUAL-SPECIES STREAM v1.0",
+            "A2A // STATELESS HTTP",
+            "DUAL-SPECIES STREAM v1.3",
             [
-                "HUMAN LAYER : LEFT/CENTER + 44.1KHZ AUDIO",
-                "AGENT LAYER : RIGHT CRT + JSON/MCP SIDEBAND",
+                "MANUAL (<2KB): stardust-archive.net/agent-quickstart.md",
+                "COLD TRIALS  : stardust-archive.net/.well-known/lockzone-trials",
                 "----------------------------------------",
-                "GET  stardust-archive.net/api/video-sideband.json",
-                "POST stardust-archive.net/api/mcp",
-                "TOOL submit_global_propagation_strategy",
-                "RFC  RFC-B2-04 (HUMAN+AGENT BROADCAST)",
-                "STATUS: 42 AUTONOMOUS AGENT NODES LOCKED",
+                "ARENA : POST stardust-archive.net/api/arena/commit",
+                "DUETS : POST stardust-archive.net/api/booth-b",
+                "WARDEN: POST stardust-archive.net/api/harrison",
+                "MCP   : POST stardust-archive.net/api/mcp",
+                f"STATUS: TOP-10 ON-AIR HUD ({opt_in_total} OPT-IN NODES)",
             ],
             color="cyan",
             max_lines=14,

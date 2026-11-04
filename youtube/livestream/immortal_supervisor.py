@@ -166,8 +166,8 @@ def _push_primary_ha_lease(standby_ssh: str, standby_repo_root: str, playlist_pa
 
 
 def _cleanup_orphaned_stream_children() -> None:
-    """Idempotently cleans up any stray crt_loop_feeder, hud_pipe_feeder, or ffmpeg processes before relaunch."""
-    for pat in ("crt_loop_feeder.py", "hud_pipe_feeder.py", "ffmpeg.*stardust_crt_30fps"):
+    """Idempotently cleans up any stray crt_loop_feeder, talkback_pipe_feeder, hud_pipe_feeder, or ffmpeg processes before relaunch."""
+    for pat in ("/crt_loop_feeder.py", "/talkback_pipe_feeder.py", "/hud_pipe_feeder.py", "ffmpeg.*stardust_crt_30fps"):
         try:
             subprocess.run(["pkill", "-f", pat], capture_output=True, timeout=3)
         except Exception:
@@ -206,7 +206,18 @@ def _poll_remote_primary_health(primary_ssh: str, primary_repo_root: str, lease_
         )
         if res.returncode == 0 and res.stdout.strip():
             data = json.loads(res.stdout)
-            if data.get("ha_role") == "primary" and data.get("status") == "HEALTHY" and float(data.get("log_age_sec", 99.0)) < 20.0:
+            upd_age = 999.0
+            try:
+                upd_dt = datetime.datetime.fromisoformat(str(data.get("updated_at") or ""))
+                upd_age = abs(time.time() - upd_dt.timestamp())
+            except Exception:
+                pass
+            if (
+                data.get("ha_role") == "primary"
+                and data.get("status") == "HEALTHY"
+                and float(data.get("log_age_sec", 99.0)) < 20.0
+                and upd_age < 40.0
+            ):
                 lease_file.write_text(f"{time.time():.2f}", encoding="utf-8")
                 if sync_code:
                     subprocess.run(

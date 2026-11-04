@@ -371,7 +371,8 @@ export function renderPressKitHtml(apex = "stardust-archive.net") {
         <tr><td>Deezer Artist ID</td><td><a href="https://www.deezer.com/artist/208848717"><code>208848717</code></a></td></tr>
         <tr><td>TIDAL Artist ID</td><td><a href="https://tidal.com/artist/38666478"><code>38666478</code></a></td></tr>
         <tr><td>Official Album UPCs (Orion Records)</td><td><code>5059801221638</code> (The Midnight Era Recordings, 66 tracks) • <code>5059801205829</code> • <code>5059801206918</code> • <code>5059801205805</code> • <code>5059801205812</code></td></tr>
-        <tr><td>Public Lyrics Registry (LRCLIB)</td><td><a href="https://lrclib.net/api/search?artist_name=Nova+Hart"><code>lrclib.net/api/search?artist_name=Nova+Hart</code></a> + <a href="https://${apex}/lyrics"><code>${apex}/lyrics</code></a></td></tr>
+        <tr><td>Internet Radio Directory (RadioBrowser)</td><td><a href="https://www.radio-browser.info/history/25c7799c-49a9-4522-89f9-fe3b95accac6"><code>25c7799c-49a9-4522-89f9-fe3b95accac6</code> (LIVE in VLC / Kodi / Shortwave)</a></td></tr>
+        <tr><td>Public Lyrics Registry (LRCLIB — 63 Songs)</td><td><a href="https://lrclib.net/api/search?q=Nova+Hart"><code>lrclib.net/api/search?q=Nova+Hart</code></a> + <a href="https://${apex}/lyrics"><code>${apex}/lyrics</code></a></td></tr>
         <tr><td>Direct-to-Fan Digital Albums &amp; Merch</td><td><a href="https://nova-hart-shop.fourthwall.com/collections/all"><code>nova-hart-shop.fourthwall.com</code></a> (Listener Code: <code>LIVE</code>)</td></tr>
         <tr><td>Community &amp; Press Inquiries</td><td><a href="https://www.reddit.com/r/NovaHart/"><code>reddit.com/r/NovaHart</code></a> • <a href="https://www.youtube.com/@NovaHart_Official"><code>@NovaHart_Official</code></a></td></tr>
       </table>

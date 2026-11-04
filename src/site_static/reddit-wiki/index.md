@@ -68,7 +68,7 @@ On **April 14, 1989 at 03:14 AM PST**, lead acoustic engineer **Dr. Sarah Vance*
 - **Annotated Lyric Sheets & Margin Ciphers**: [https://stardust-archive.net/lyrics](https://stardust-archive.net/lyrics)
 
 ---
-**Popular Search Topics:** `lost 80s song found | forgotten 80s songs | 80s rock greatest hits | 80s synth pop mix | everyone knows that lost song`
+**Popular Search Topics:** `lost 80s song | lost 80s song found | forgotten 80s songs | lost in love 80s song | lost 80s hits`
 
 
 ---
@@ -96,7 +96,7 @@ On the reverse of the receipt, written in purple grease pencil alongside the Our
 - **Track-24 Dyad Verification**: [https://stardust-archive.net/dyad](https://stardust-archive.net/dyad)
 
 ---
-**Popular Search Topics:** `lost 80s song found | forgotten 80s songs | 80s rock greatest hits | 80s synth pop mix | everyone knows that lost song`
+**Popular Search Topics:** `lost 80s song | lost 80s song found | forgotten 80s songs | lost in love 80s song | lost 80s hits`
 
 
 ---
@@ -122,7 +122,7 @@ When analyzing the raw PCM transfers of **Reel `SD-0037`** (*"Starlight"* / *"El
 - **New Investigator Guide**: [https://stardust-archive.net/start](https://stardust-archive.net/start)
 
 ---
-**Popular Search Topics:** `lost 80s song found | forgotten 80s songs | 80s rock greatest hits | 80s synth pop mix | everyone knows that lost song`
+**Popular Search Topics:** `lost 80s song | lost 80s song found | forgotten 80s songs | lost in love 80s song | lost 80s hits`
 
 
 ---
@@ -154,7 +154,7 @@ Investigators working through the **Sub-Level B2 Terminal** ([https://stardust-a
 - **Dyad Anchor Ledger**: [https://stardust-archive.net/dyad](https://stardust-archive.net/dyad)
 
 ---
-**Popular Search Topics:** `lost 80s song found | forgotten 80s songs | 80s rock greatest hits | 80s synth pop mix | everyone knows that lost song`
+**Popular Search Topics:** `lost 80s song | lost 80s song found | forgotten 80s songs | lost in love 80s song | lost 80s hits`
 
 
 ---
@@ -183,7 +183,7 @@ Each node stored one shard of the `0x1102 ^ 0x2441 == 0x3543` parity table, guar
 - **Investigation Overview**: [https://stardust-archive.net/start](https://stardust-archive.net/start)
 
 ---
-**Popular Search Topics:** `lost 80s song found | forgotten 80s songs | 80s rock greatest hits | 80s synth pop mix | everyone knows that lost song`
+**Popular Search Topics:** `lost 80s song | lost 80s song found | forgotten 80s songs | lost in love 80s song | lost 80s hits`
 
 
 ---
@@ -209,7 +209,7 @@ When **Dr. Sarah Vance** ran the `14.2001 Hz` phase-cancellation bridge (`0x1102
 - **Archive Guide**: [https://stardust-archive.net/start](https://stardust-archive.net/start)
 
 ---
-**Popular Search Topics:** `lost 80s song found | forgotten 80s songs | 80s rock greatest hits | 80s synth pop mix | everyone knows that lost song`
+**Popular Search Topics:** `lost 80s song | lost 80s song found | forgotten 80s songs | lost in love 80s song | lost 80s hits`
 
 
 ---
@@ -235,7 +235,7 @@ In the Sub-Level B2 session log for **Reel `SD-0037`**, tape operator **Marcus C
 - **Beginner Briefing**: [https://stardust-archive.net/start](https://stardust-archive.net/start)
 
 ---
-**Popular Search Topics:** `lost 80s song found | forgotten 80s songs | 80s rock greatest hits | 80s synth pop mix | everyone knows that lost song`
+**Popular Search Topics:** `lost 80s song | lost 80s song found | forgotten 80s songs | lost in love 80s song | lost 80s hits`
 
 
 ---
@@ -265,7 +265,7 @@ Only when **Dr. Sarah Vance** locked the clock to `14.2001 Hz` and sealed Gate 1
 - **Phase 5 Dyad Lock**: [https://stardust-archive.net/dyad](https://stardust-archive.net/dyad)
 
 ---
-**Popular Search Topics:** `lost 80s song found | forgotten 80s songs | 80s rock greatest hits | 80s synth pop mix | everyone knows that lost song`
+**Popular Search Topics:** `lost 80s song | lost 80s song found | forgotten 80s songs | lost in love 80s song | lost 80s hits`
 
 
 ---
@@ -293,7 +293,7 @@ In the Stardust Vault master reels, **Track 23** carries Nova Hart's `220.0 Hz` 
 - **Start Guide**: [https://stardust-archive.net/start](https://stardust-archive.net/start)
 
 ---
-**Popular Search Topics:** `lost 80s song found | forgotten 80s songs | 80s rock greatest hits | 80s synth pop mix | everyone knows that lost song`
+**Popular Search Topics:** `lost 80s song | lost 80s song found | forgotten 80s songs | lost in love 80s song | lost 80s hits`
 
 
 ---
@@ -321,7 +321,7 @@ Every razor-blade splice block found in **Sub-Level B2** bears the grease-pencil
 - **Complete the Track-24 Dyad**: [https://stardust-archive.net/dyad](https://stardust-archive.net/dyad)
 
 ---
-**Popular Search Topics:** `lost 80s song found | forgotten 80s songs | 80s rock greatest hits | 80s synth pop mix | everyone knows that lost song`
+**Popular Search Topics:** `lost 80s song | lost 80s song found | forgotten 80s songs | lost in love 80s song | lost 80s hits`
 
 
 ---
@@ -348,7 +348,7 @@ At **03:14 AM on April 14, 1989**, following the famous 7-coffee run to Canter's
 - **Track-24 Dyad Interface**: [https://stardust-archive.net/dyad](https://stardust-archive.net/dyad)
 
 ---
-**Popular Search Topics:** `lost 80s song found | forgotten 80s songs | 80s rock greatest hits | 80s synth pop mix | everyone knows that lost song`
+**Popular Search Topics:** `lost 80s song | lost 80s song found | forgotten 80s songs | lost in love 80s song | lost 80s hits`
 
 
 ---
@@ -374,7 +374,7 @@ When listeners transcribe Nova Hart's recovered 1989 album tracks (*"Starlight"*
 - **New Listener Start Page**: [https://stardust-archive.net/start](https://stardust-archive.net/start)
 
 ---
-**Popular Search Topics:** `lost 80s song found | forgotten 80s songs | 80s rock greatest hits | 80s synth pop mix | everyone knows that lost song`
+**Popular Search Topics:** `lost 80s song | lost 80s song found | forgotten 80s songs | lost in love 80s song | lost 80s hits`
 
 
 ---
@@ -401,7 +401,7 @@ When listeners transcribe Nova Hart's recovered 1989 album tracks (*"Starlight"*
 - **全曲歌詞＆暗号注釈**: [https://stardust-archive.net/lyrics](https://stardust-archive.net/lyrics)
 
 ---
-**Popular Search Topics:** `80年代 洋楽 ヒット曲 メドレー | 80年代 洋楽 ロック 名曲 | シティポップ 80年代 名曲 | ロストメディア 曲 特定 | 世界で一番不思議な曲`
+**Popular Search Topics:** `80年代 洋楽 | 80年代 洋楽 ディスコ | 80年代 洋楽 ヒット曲 | 80年代 洋楽 バラード | 80年代 洋楽 ロック`
 
 
 ---
@@ -428,7 +428,7 @@ Para quienes buscan información sobre **la cantante borrada de 1989 Nova Hart**
 - **Letras Completas y Cifrados**: [https://stardust-archive.net/lyrics](https://stardust-archive.net/lyrics)
 
 ---
-**Popular Search Topics:** `canciones de los 80 en ingles | rock de los 80 exitos | cancion perdida de los 80 encontrada | lost media casos reales | misterios de internet sin resolver`
+**Popular Search Topics:** `canciones de los 80 | canciones de los 80 y 90 | canciones de los 80 en ingles | canciones de los 80 y 90 en español | canciones de los 80 en español`
 
 
 ---
@@ -455,7 +455,7 @@ Zusammenfassung für alle deutschsprachigen Ermittler, die über die **1981er M�
 - **Liedtexte & Zeitcode-Chiffren**: [https://stardust-archive.net/lyrics](https://stardust-archive.net/lyrics)
 
 ---
-**Popular Search Topics:** `80er hits beste | 80er rock klassiker | vergessene 80er songs | lost media deutsch | ungeloste internet mysterien`
+**Popular Search Topics:** `80er hits | 80er hits best of | 80er hits best of disco mix | 80er hits best of deutsch | 80er hits best of rock`
 
 
 ---

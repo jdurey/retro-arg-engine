@@ -117,7 +117,9 @@ def process_one_interstitial(args: tuple[int, Path]) -> tuple[str, bool, str]:
     assert "real_nova_songs" not in str(mp3_path), f"SAFETY ABORT: {mp3_path}"
 
     name = mp3_path.name
-    is_podcast_extract = name.startswith("wlf_") or name.startswith("blaze_")
+    if name.startswith("blaze_"):
+        return name, False, "Rick Blaze 80s FM kept clean unfiltered studio audio"
+    is_podcast_extract = name.startswith("wlf_")
 
     hf_ratio, lf_ratio = measure_hf_lf_ratio(mp3_path)
     # If already tightly band-limited and not a clean podcast extract, skip

@@ -84,28 +84,28 @@ LOCALIZED_TITLE_HOOKS = {
     "pt": "Fita Master de Estúdio Lacrada de 1989 // Por Que Esta Cantora Foi Apagada?",
 }
 
-LIVE_STREAM_TITLE_EN = "🔴 24/7 80s Rock, Arena Rock & 1989 Cassette Radio // Melodic Rock, Power Ballads & Night Drive Stream"
+LIVE_STREAM_TITLE_EN = "🔴 80s Night Flight Radio Broadcast • 24/7 Rock, Synthwave & Live DJ Requests (82.5 FM)"
 
 LIVE_STREAM_TITLES_I18N = {
-    "es": "🔴 Radio 24/7 Rock de los 80 y Casetes 1989 // Arena Rock, Power Ballads, AOR y Radio Nocturna",
-    "fr": "🔴 Radio 24/7 Rock des Années 80 & Cassettes 1989 // Arena Rock, Power Ballads, AOR & Stream Nocturne",
-    "de": "🔴 24/7 80er Rock, Arena Rock & 1989 Kassetten-Radio // Melodic Rock, Power Ballads & Night-Drive Stream",
-    "it": "🔴 Radio 24/7 Rock Anni 80 & Cassette 1989 // Arena Rock, Power Ballads, Melodic Rock & Night Drive",
-    "nl": "🔴 24/7 Jaren 80 Rock, Arena Rock & 1989 Cassette Radio // Melodic Rock, Power Ballads & Night Drive",
-    "pl": "🔴 Radio 24/7 Rock Lat 80., Arena Rock i Kasety 1989 // Melodic Rock, Power Ballads & Nocna Jazda",
-    "ru": "🔴 Радио 24/7 Рок 80-х, Арена-Рок и Кассеты 1989 // Мелодик-Рок, Рок-Баллады и Ночной Эфир",
-    "uk": "🔴 Радіо 24/7 Рок 80-х, Арена-Рок та Касети 1989 // Мелодік-Рок, Рок-Балади та Нічний Ефір",
-    "tr": "🔴 7/24 80'ler Rock, Arena Rock ve 1989 Kaset Radyosu // Melodik Rock, Power Ballad ve Gece Yayını",
-    "ar": "🔴 راديو 24/7 روك الثمانينات وأشرطة كاسيت 1989 // أرينا روك وميلوديك روك وبث ليلي متواصل",
-    "hi": "🔴 24/7 80s रॉक, एरीना रॉक और 1989 कैसेट रेडियो // मेलोडिक रॉक, पावर बैलेड्स और नाइट ड्राइव स्ट्रीम",
-    "id": "🔴 Radio 24/7 Rock 80-an, Arena Rock & Kaset 1989 // Melodic Rock, Power Ballads & Siaran Malam",
-    "vi": "🔴 Đài Phát Thanh 24/7 Rock Thập Niên 80 & Cassette 1989 // Arena Rock, Power Ballads & Nhạc Đêm",
-    "th": "🔴 วิทยุ 24/7 ร็อกยุค 80 อารีน่าร็อก & เทปคาสเซ็ท 1989 // เมโลดิกฮาร์ดร็อก & พาวเวอร์บัลลาด",
-    "ja": "🔴 24時間放送 80年代ロック・アリーナロック＆1989年カセットラジオ // メロディックロック・パワーバラード作業用BGM",
-    "ko": "🔴 24/7 80년대 록, 아레나 록 & 1989 카세트 라디오 // 멜로딕 록, 파워 발라드 & 심야 드라이브 스트림",
-    "zh-CN": "🔴 24/7 80年代摇滚、体育馆摇滚与1989磁带电台 // 旋律摇滚、摇滚情歌与深夜驾驶电台",
-    "zh-TW": "🔴 24/7 80年代搖滾、體育館搖滾與1989磁帶電台 // 旋律搖滾、搖滾情歌與深夜駕駛電台",
-    "pt": "🔴 Rádio 24/7 Rock Anos 80, Arena Rock & Fitas Cassete 1989 // Melodic Rock, Power Ballads & Night Drive",
+    "es": "🔴 80s Night Flight Radio • Emisión 24/7 Rock de los 80, Synthwave y DJ en Vivo (82.5 FM)",
+    "pt": "🔴 80s Night Flight Radio • Transmissão 24/7 Rock Anos 80, Synthwave & DJ ao Vivo (82.5 FM)",
+    "fr": "🔴 80s Night Flight Radio • Diffusion 24/7 Rock Années 80, Synthwave & DJ en Direct (82.5 FM)",
+    "de": "🔴 80s Night Flight Radio Broadcast • 24/7 80er Rock, Synthwave & Live-DJ Wünsche (82.5 FM)",
+    "it": "🔴 80s Night Flight Radio • Diretta 24/7 Rock Anni 80, Synthwave & DJ dal Vivo (82.5 FM)",
+    "nl": "🔴 80s Night Flight Radio Broadcast • 24/7 Jaren 80 Rock, Synthwave & Live DJ (82.5 FM)",
+    "pl": "🔴 80s Night Flight Radio • Audycja 24/7 Rock Lat 80., Synthwave & Live DJ (82.5 FM)",
+    "ru": "🔴 80s Night Flight Radio • Эфир 24/7 Рок 80-х, Синтвейв и Живой DJ в Чате (82.5 FM)",
+    "uk": "🔴 80s Night Flight Radio • Ефір 24/7 Рок 80-х, Синтвейв та Наживо DJ (82.5 FM)",
+    "tr": "🔴 80s Night Flight Radio • 7/24 80'ler Rock, Synthwave ve Canlı DJ Yayını (82.5 FM)",
+    "ar": "🔴 80s Night Flight Radio • بث مباشر 24/7 روك الثمانينات وسينثويف ودي جي مباشر (82.5 FM)",
+    "hi": "🔴 80s Night Flight Radio • 24/7 80s रॉक, सिंथवेव और लाइव DJ रेडियो प्रसारण (82.5 FM)",
+    "id": "🔴 80s Night Flight Radio Broadcast • Siaran 24/7 Rock 80-an, Synthwave & DJ Live (82.5 FM)",
+    "th": "🔴 80s Night Flight Radio • วิทยุสด 24/7 ร็อกยุค 80 ซินธ์เวฟ & ดีเจสดขอเพลง (82.5 FM)",
+    "vi": "🔴 80s Night Flight Radio • Phát Sóng 24/7 Rock Thập Niên 80, Synthwave & DJ Trực Tiếp (82.5 FM)",
+    "ja": "🔴 80s Night Flight Radio • 24時間放送 80年代ロック＆シンセウェイヴ・ライブDJリクエスト (82.5 FM)",
+    "ko": "🔴 80s Night Flight Radio • 24/7 80년대 록, 신스웨이브 & 심야 라디오 라이브 DJ 신청곡 (82.5 FM)",
+    "zh-CN": "🔴 80s Night Flight Radio • 24/7 80年代摇滚、合成器浪潮与直播DJ点歌电台 (82.5 FM)",
+    "zh-TW": "🔴 80s Night Flight Radio • 24/7 80年代搖滾、合成器浪潮與直播DJ點歌電台 (82.5 FM)"
 }
 
 
@@ -168,35 +168,29 @@ SHORT_FALLBACK_HOOKS = {
 
 
 def build_max_visibility_title(vid: str, raw_title: str, lang: str = "en") -> str:
+    """
+    SAFEGUARD (2026-11-04): Never strip 'Nova Hart' or append '(1989 Lost Studio Tape — The Erased Singer)'
+    across English or localized titles. Preserve proven 'Nova Hart — Song | 80s Genre' titles intact.
+    """
     if is_livestream_title(raw_title):
         if lang == "en":
             return LIVE_STREAM_TITLE_EN[:100]
         return LIVE_STREAM_TITLES_I18N.get(lang, LIVE_STREAM_TITLE_EN)[:100]
 
-    song = extract_clean_song_name(raw_title)
-    has_explicit_genre = bool(
-        re.search(r"(\||—|-)\s*(80s|90s|198\d|Rock|Metal|Ballad|Pop|Punk|Wave|Techno|Electro|Jazz)", song, flags=re.I)
-    )
-    if has_explicit_genre:
-        hook = SHORT_FALLBACK_HOOKS.get(lang, SHORT_FALLBACK_HOOKS["en"])
-    elif lang == "en":
-        idx = int(hashlib.md5(vid.encode("utf-8")).hexdigest()[:6], 16) % len(EN_TITLE_HOOKS)
-        hook = EN_TITLE_HOOKS[idx]
-    else:
-        hook = LOCALIZED_TITLE_HOOKS.get(lang, EN_TITLE_HOOKS[0])
+    backup_path = STATE / "videos_pre_sync_backup.json"
+    if backup_path.exists():
+        try:
+            bmap = {v["id"]: v for v in json.loads(backup_path.read_text(encoding="utf-8"))}
+            if vid in bmap:
+                if lang == "en":
+                    return (bmap[vid].get("title") or raw_title)[:100]
+                loc_t = ((bmap[vid].get("localizations") or {}).get(lang) or {}).get("title")
+                if loc_t:
+                    return loc_t[:100]
+        except Exception:
+            pass
 
-    candidate = f"{song} ({hook})"
-    if len(candidate) <= 100:
-        return candidate
-
-    short_hook = SHORT_FALLBACK_HOOKS.get(lang, SHORT_FALLBACK_HOOKS["en"])
-    candidate2 = f"{song} ({short_hook})"
-    if len(candidate2) <= 100:
-        return candidate2
-
-    max_song_len = 100 - len(short_hook) - 3
-    words = song[:max_song_len].rsplit(" ", 1)[0] if " " in song[:max_song_len] else song[:max_song_len]
-    return f"{words.strip()} ({short_hook})"[:100]
+    return raw_title.strip()[:100]
 
 
 def strip_old_preamble(desc: str) -> str:
@@ -448,12 +442,27 @@ def creds(interactive=False):
     if not c or not c.valid:
         if not interactive:
             sys.exit("Not authorized. Run: python yt.py auth")
+        import subprocess
+        import webbrowser
+
+        class _MacChromeBrowser(webbrowser.BaseBrowser):
+            def open(self, url, new=0, autoraise=True):
+                try:
+                    subprocess.Popen(["open", "-a", "Google Chrome", url])
+                    return True
+                except Exception:
+                    return webbrowser.open(url, new=new, autoraise=autoraise)
+
+        webbrowser.register("mac-google-chrome", None, _MacChromeBrowser("Google Chrome"))
         flow = InstalledAppFlow.from_client_secrets_file(
             os.path.join(HERE, "client_secret.json"), SCOPES
         )
         c = flow.run_local_server(
             port=8765,
             open_browser=True,
+            browser="mac-google-chrome",
+            prompt="consent",
+            access_type="offline",
             authorization_prompt_message="AUTH_URL: {url}",
             success_message="Authorized! Nova Hart Maximum-Visibility YouTube Updater is now active. You can close this tab.",
         )
@@ -520,7 +529,25 @@ def apply(dry_run=False, limit=None, reset_done=False, translate_mode=True):
     done = set() if reset_done else (set(json.load(open(done_path))) if os.path.exists(done_path) else set())
     prev_done_path = os.path.join(STATE, "max_visibility_done.json")
     prev_done = set(json.load(open(prev_done_path))) if os.path.exists(prev_done_path) else set()
-    videos = [v for v in videos if v["status"]["privacyStatus"] != "private"]
+
+    # RSI Holdout & Canary Protection: NEVER overwrite locked holdout_control_ids or active canary cohorts!
+    protected_rsi_ids = set()
+    split_path = os.path.join(os.path.dirname(HERE), "deploy", "youtube_holdout_split.json")
+    if os.path.exists(split_path):
+        try:
+            sp_doc = json.load(open(split_path))
+            protected_rsi_ids.update(sp_doc.get("holdout_control_ids") or [])
+            for c_obj in (sp_doc.get("active_canary_cohorts") or {}).values():
+                protected_rsi_ids.update((c_obj.get("baseline_views_by_id") or {}).keys())
+        except Exception:
+            pass
+
+    videos = [
+        v for v in videos
+        if v["status"]["privacyStatus"] != "private"
+        and v["id"] not in protected_rsi_ids
+        and (v.get("snippet", {}).get("publishedAt") or "") < "2026-10-20"
+    ]
     # Prioritize: 1) Hunter at the Gate (ECPBs6q-X08), 2) live streams, 3) Metal/Recall tracks, 4) untouched videos
     videos.sort(
         key=lambda v: (
@@ -634,6 +661,14 @@ def apply(dry_run=False, limit=None, reset_done=False, translate_mode=True):
 
 
 PRIVATIZE_STATIC_KEYS = {
+    "micro_01_fondue_trap",
+    "micro_02_netscape_timeloop",
+    "micro_03_erased_1989_singer",
+    "short_01_chatgpt_swiss_fondue_trap",
+    "short_02_1995_netscape_timeloop",
+    "short_03_1983_rogue_ai_popstar",
+    "short_04_m68000_feistel_ai_gauntlet",
+    "short_05_late_night_1989_radio_vibe",
     "doc_01_erased_1989_singer_documentary",
     "doc_02_openai_sol_luna_1989_sublevel_b2_clone",
     "doc_03_1995_worldnet_mirror_and_canary_trap",
@@ -647,23 +682,50 @@ PRIVATIZE_STATIC_KEYS = {
     "short_13_chrome_devtools_14_2hz_secret",
     "short_14_tokyo_pc98_kamome_bbs_1985",
     "short_15_gate15_feistel_cipher_challenge",
+    "mh_03_trapped_in_1995_netscape_geocities",
+    "mh_04_1995_altavista_search_mystery",
+    "aifear_01_secret_modem_language",
+    "aifear_02_dead_internet_300k_nodes",
+    "aifear_03_moltbook_agent_obsession",
+    "aifear_04_1983_consciousness_ouroboros",
 }
 
 
 def privatize_low_performing_shorts(dry_run=False):
-    """Sets the 13 static-image TTS uploads (doc_01-03 and short_06-15) to privacyStatus=private."""
+    """Verifies live privacyStatus on YouTube and sets retired AI/cipher/GeoCities/static Shorts to private."""
     uploaded_path = os.path.join(STATE, "uploaded_shorts.json")
     if not os.path.exists(uploaded_path):
         return 0
     uploaded = json.load(open(uploaded_path))
     api = yt() if not dry_run else None
+
+    # Fetch live YouTube status in a single batch call so stale local cache never misses a public video
+    live_priv = {}
+    if api:
+        cand_vids = [
+            uploaded[sid]["video_id"]
+            for sid in sorted(PRIVATIZE_STATIC_KEYS)
+            if isinstance(uploaded.get(sid), dict) and uploaded[sid].get("video_id")
+        ]
+        for i in range(0, len(cand_vids), 50):
+            batch = cand_vids[i : i + 50]
+            try:
+                rv = api.videos().list(part="status", id=",".join(batch)).execute()
+                for it in rv.get("items", []):
+                    live_priv[it["id"]] = it.get("status", {}).get("privacyStatus")
+            except Exception:
+                pass
+
     changed = 0
     for sid in sorted(PRIVATIZE_STATIC_KEYS):
         info = uploaded.get(sid)
-        if not info or info.get("privacyStatus") == "private":
+        if not info:
             continue
         vid = info.get("video_id")
         if not vid:
+            continue
+        actual_priv = live_priv.get(vid, info.get("privacyStatus"))
+        if actual_priv == "private":
             continue
         if dry_run:
             print(f"[DRY RUN PRIVATIZE] {sid} ({vid})")
@@ -860,10 +922,10 @@ def upload_shorts(dry_run=False, limit=None):
                 "title": title_en,
                 "description": desc_en,
                 "tags": [
-                    "lost 80s song found", "lost media 80s song", "forgotten 80s songs",
-                    "ai singer", "ai singer record deal", "ai music is taking over",
-                    "ai replacing musicians", "ai consciousness song", "ai singularity explained",
-                    "dead internet theory", "cassette tape", "lost media", "nova hart", "shorts"
+                    "80s rock", "80s arena rock", "80s synth rock",
+                    "80s power ballad", "female 80s rock", "forgotten 80s songs",
+                    "80s melodic rock", "night drive 80s music", "1989 rock",
+                    "retro 80s music", "cassette tape", "nova hart", "shorts"
                 ],
                 "categoryId": "24",  # Entertainment (reaches broadest non-subscriber Shorts feed)
                 "defaultLanguage": "en",
@@ -932,28 +994,15 @@ def upload_shorts(dry_run=False, limit=None):
 
 
 def run_quota_daemon(interval_sec=1800):
-    """Autonomous daemon that checks every 30 minutes:
-    1) FIRST uploads Subscriber-Bypass (notifySubscribers=False) Gateway Shorts to seed cold non-subscribers
-    2) THEN upgrades catalog videos to the Lost 1989 Studio Tape / Erased Singer Mystery Bridge format."""
-    print(f"[yt-daemon] Starting YouTube Non-Subscriber Breakout & Catalog Daemon (interval={interval_sec}s)...", flush=True)
-    while True:
-        try:
-            # 1. Upload notifySubscribers=False Gateway Shorts FIRST so cold non-subscriber seeding is prioritized
-            upload_shorts(dry_run=False, limit=3)
-            # 2. Upgrade catalog videos to Lost-Media Mystery Bridge format
-            _, done_cnt, total_cnt, hit_quota = apply(dry_run=False, translate_mode=True)
-            if done_cnt >= total_cnt and not hit_quota:
-                sync(dry_run=False)
-                print(f"[yt-daemon] All {done_cnt}/{total_cnt} videos upgraded! Sleeping {interval_sec}s...", flush=True)
-            else:
-                print(f"[yt-daemon] Progress: {done_cnt}/{total_cnt} videos upgraded. Waiting {interval_sec}s for next quota check...", flush=True)
-        except Exception as e:
-            print(f"[yt-daemon] Error in daemon cycle: {e}", flush=True)
-        time.sleep(interval_sec)
+    """Legacy daemon disabled — packaging is governed by closed-loop meta_architect & creator studio."""
+    print("[yt-daemon] Disabled; exiting cleanly.", flush=True)
+    return
 
 
 def sync(max_results=20, dry_run=False):
-    """Checks the channel's newest uploads and applies Maximum-Visibility Titles, Tags & 20-Language Localizations."""
+    """Legacy hourly sync disabled — prevents clobbering new uploads during their 48h test window and burning API quota."""
+    print("[yt-sync] Disabled; new uploads preserve their native Creator Studio packaging.", flush=True)
+    return
     api = yt()
     try:
         ch = api.channels().list(part="snippet,contentDetails", mine=True).execute()["items"][0]
@@ -984,7 +1033,18 @@ def sync(max_results=20, dry_run=False):
 
     import allocate_nodes
 
-    missing_ids = [vid for vid in recent_ids if vid not in done]
+    protected_rsi_ids = set()
+    split_path = os.path.join(os.path.dirname(HERE), "deploy", "youtube_holdout_split.json")
+    if os.path.exists(split_path):
+        try:
+            sp_doc = json.load(open(split_path))
+            protected_rsi_ids.update(sp_doc.get("holdout_control_ids") or [])
+            for c_obj in (sp_doc.get("active_canary_cohorts") or {}).values():
+                protected_rsi_ids.update((c_obj.get("baseline_views_by_id") or {}).keys())
+        except Exception:
+            pass
+
+    missing_ids = [vid for vid in recent_ids if vid not in done and vid not in protected_rsi_ids]
     if not missing_ids:
         print(f"All {len(recent_ids)} recent uploads are already synced with Maximum-Visibility titles & 20 languages.")
         return
@@ -996,6 +1056,8 @@ def sync(max_results=20, dry_run=False):
     for v in r_v["items"]:
         vid = v["id"]
         if v["status"]["privacyStatus"] == "private":
+            continue
+        if (v.get("snippet", {}).get("publishedAt") or "") >= "2026-10-20":
             continue
         sn = v["snippet"]
         raw_title = sn["title"]

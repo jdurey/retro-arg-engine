@@ -77,18 +77,27 @@ if pl.exists():
     "$PYTHON_BIN" "$SCRIPT_DIR/sync_telemetry.py" --repo-root "$REPO_ROOT" >> "$LOG_FILE" 2>&1 || true
   fi
 
-  CRT_FIFO="/tmp/stardust_crt_30fps.y4m"
-  pkill -f "crt_loop_feeder.py.*$CRT_FIFO" 2>/dev/null || true
-  rm -f "$CRT_FIFO"
-  mkfifo "$CRT_FIFO"
+  PIPE_DIR="$HOME/.stardust_pipes"
+  mkdir -p -m 700 "$PIPE_DIR"
+  CRT_FIFO="$PIPE_DIR/stardust_crt_30fps.y4m"
+  TALKBACK_FIFO="$PIPE_DIR/stardust_talkback_44k.s16le"
+  pkill -f "crt_loop_feeder.py" 2>/dev/null || true
+  pkill -f "talkback_pipe_feeder.py" 2>/dev/null || true
+  rm -f "$CRT_FIFO" "$TALKBACK_FIFO" "/tmp/stardust_crt_30fps.y4m" "/tmp/stardust_talkback_44k.s16le"
+  mkfifo "$CRT_FIFO" "$TALKBACK_FIFO"
 
-  VF_FILTER="[1:a]aresample=44100:async=1,aformat=sample_fmts=fltp:sample_rates=44100:channel_layouts=stereo,alimiter=limit=0.87:level=disabled,asplit=2[a_out][a_viz];[a_viz]pan=mono|c0=0.5*c0+0.5*c1,volume=1.9,treble=g=8:f=3500,showfreqs=s=64x32:mode=bar:ascale=cbrt:fscale=log:win_size=1024:averaging=2:rate=30:colors=0x38d864@0.44,lagfun=decay=0.45,scale=544:96:flags=neighbor,drawgrid=w=17:h=96:t=5:c=0x000000@0.0:replace=1,drawgrid=w=544:h=6:t=2:c=0x000000@0.0:replace=1,gblur=sigma=0.85,drawgrid=w=544:h=3:t=1:c=0x000000@0.12:replace=1,format=yuva420p[waves];[0:v][3:v]overlay=x=616:y=204[v_crt];[v_crt][waves]overlay=x=682:y=512[v_osc];[v_osc][2:v]overlay=x=0:y=0:format=auto:eof_action=repeat,format=yuv420p[v_out]"
+  VF_FILTER="[1:a]aresample=44100:async=1,aformat=sample_fmts=fltp:sample_rates=44100:channel_layouts=stereo,alimiter=limit=0.87:level=disabled,asplit=2[a_music][a_viz_m];[4:a]aformat=sample_fmts=fltp:sample_rates=44100:channel_layouts=stereo,asplit=3[tb_sc][tb_mix][tb_viz];[a_music][tb_sc]sidechaincompress=threshold=0.008:ratio=12:attack=25:release=650:level_sc=3.0[a_ducked];[a_ducked][tb_mix]amix=inputs=2:weights=1 1.18:normalize=0,alimiter=limit=0.92:level=disabled[a_out];[a_viz_m][tb_viz]amix=inputs=2:weights=1 1.45:normalize=0,pan=mono|c0=0.5*c0+0.5*c1,volume=1.9,treble=g=8:f=3500,showfreqs=s=56x32:mode=bar:ascale=cbrt:fscale=log:win_size=1024:averaging=2:rate=30:colors=0xeff8ff@0.82,lagfun=decay=0.45,scale=1344:128:flags=neighbor,drawgrid=w=24:h=128:t=6:c=0x000000@0.0:replace=1,drawgrid=w=1344:h=8:t=3:c=0x000000@0.0:replace=1,format=yuva420p[waves];[0:v][waves]overlay=x=288:y=744:format=yuv420[v_osc];[3:v]scale=1728:928:flags=neighbor[crt_fg];[v_osc][crt_fg]overlay=x=96:y=76:format=yuv420[v_crt];[v_crt][2:v]overlay=x=0:y=0:format=yuv420:eof_action=repeat,format=yuv420p[v_out]"
 
-  echo "[$(date '+%Y-%m-%d %H:%M:%S')] [STREAM.SH] Selected encoder: 1080p30 Full HD Intentional ARG CRT/HUD Engine (3600k video + 160k audio)" >> "$LOG_FILE"
+  ENCODER_ARGS=(-c:v libx264 -preset veryfast -threads 4 -x264-params "nal-hrd=cbr:force-cfr=1")
+
+  echo "[$(date '+%Y-%m-%d %H:%M:%S')] [STREAM.SH] Selected encoder: 1080p30 Full HD Intentional ARG CRT/HUD + Live Talkback Engine (${ENCODER_ARGS[*]})" >> "$LOG_FILE"
 
   "$PYTHON_BIN" -u "$SCRIPT_DIR/crt_loop_feeder.py" --repo-root "$REPO_ROOT" --fifo "$CRT_FIFO" &
   CRT_FEEDER_PID=$!
-  trap 'kill "$CRT_FEEDER_PID" 2>/dev/null || true' EXIT INT TERM
+  "$PYTHON_BIN" -u "$SCRIPT_DIR/talkback_pipe_feeder.py" --repo-root "$REPO_ROOT" --fifo "$TALKBACK_FIFO" &
+  TB_FEEDER_PID=$!
+  trap 'kill "$CRT_FEEDER_PID" "$TB_FEEDER_PID" 2>/dev/null || true; exit 0' INT TERM
+  trap 'kill "$CRT_FEEDER_PID" "$TB_FEEDER_PID" 2>/dev/null || true' EXIT
 
   "$PYTHON_BIN" -u "$SCRIPT_DIR/hud_pipe_feeder.py" --repo-root "$REPO_ROOT" | caffeinate -d -i -m -s -u ffmpeg \
     -hide_banner \
@@ -103,26 +112,34 @@ if pl.exists():
     -f concat \
     -safe 0 \
     -i "$PLAYLIST" \
-    -thread_queue_size 1 \
-    -threads 1 \
+    -thread_queue_size 8 \
+    -threads 2 \
     -probesize 32768 \
     -analyzeduration 0 \
     -f image2pipe \
     -vcodec png \
     -framerate 1 \
     -i - \
-    -thread_queue_size 2 \
-    -f yuv4mpegpipe \
+    -thread_queue_size 16 \
+    -f rawvideo \
+    -pix_fmt yuva420p \
+    -video_size 864x464 \
+    -framerate 30 \
     -i "$CRT_FIFO" \
+    -thread_queue_size 64 \
+    -f s16le \
+    -ar 44100 \
+    -ac 2 \
+    -i "$TALKBACK_FIFO" \
+    -filter_complex_threads 4 \
     -filter_complex "$VF_FILTER" \
     -map "[v_out]" \
     -map "[a_out]" \
-    -c:v libx264 \
-    -preset veryfast \
-    -tune zerolatency \
-    -b:v 3600k \
-    -maxrate 4200k \
-    -bufsize 8400k \
+    "${ENCODER_ARGS[@]}" \
+    -b:v 6600k \
+    -minrate 6600k \
+    -maxrate 6600k \
+    -bufsize 13200k \
     -pix_fmt yuv420p \
     -r 30 \
     -g 60 \
@@ -139,7 +156,7 @@ if pl.exists():
     "${RTMP_URL}/${STREAM_KEY}" >> "$LOG_FILE" 2>&1
 
   EXIT_CODE=$?
-  kill "$CRT_FEEDER_PID" 2>/dev/null || true
+  kill "$CRT_FEEDER_PID" "$TB_FEEDER_PID" 2>/dev/null || true
   echo "[$(date '+%Y-%m-%d %H:%M:%S')] [STREAM.SH] FFmpeg exited with code ${EXIT_CODE}. Rotating playhead & reconnecting in 2s..." >> "$LOG_FILE"
   sleep 2
 done

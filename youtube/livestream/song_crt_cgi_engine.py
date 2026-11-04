@@ -26,7 +26,7 @@ from pathlib import Path
 import numpy as np
 from PIL import Image, ImageChops, ImageDraw, ImageFilter, ImageFont
 
-W, H = 688, 488
+W, H = 864, 464
 
 try:
     FONT_VEC_SM = ImageFont.truetype("/System/Library/Fonts/Menlo.ttc", 14, index=1)
@@ -35,25 +35,160 @@ except Exception:
     FONT_VEC_SM = ImageFont.load_default()
     FONT_VEC_MD = ImageFont.load_default()
 
-# Authentic 1980s CRT Phosphor Palettes: (primary_rgb, secondary_rgb, dim_grid_rgb, name)
-PHOSPHOR_PALETTES = [
-    ((75, 255, 115), (170, 255, 190), (18, 85, 35), "P31-PHOSPHOR-GREEN"),
-    ((255, 185, 40), (255, 225, 120), (95, 60, 10), "P12-PHOSPHOR-AMBER"),
-    ((65, 240, 255), (175, 255, 255), (15, 75, 95), "TEK-4014-CYAN-CAD"),
-    ((95, 255, 130), (255, 195, 55), (22, 82, 42), "DUAL-BEAM-GRN-AMB"),
-    ((255, 125, 45), (255, 205, 95), (90, 38, 12), "PLASMA-AMBER-RED"),
-    ((80, 255, 185), (130, 210, 255), (18, 80, 65), "VECTREX-MINT-BLUE"),
-    ((185, 135, 255), (95, 245, 255), (48, 28, 88), "SGI-INDIGO-VIOLET"),
-    ((255, 155, 60), (110, 255, 165), (75, 42, 16), "FAIRLIGHT-AMB-MINT"),
+# Dedicated Electric Neon Purple / Ultraviolet Palettes for ALL Synthwave Songs:
+# (primary_rgb, secondary_rgb, dim_grid_rgb, name)
+SYNTHWAVE_PURPLE_PALETTES = [
+    ((198, 52, 255), (242, 136, 255), (96, 18, 172), "SYNTHWAVE-ELECTRIC-PURPLE"),
+    ((178, 42, 255), (255, 76, 236), (86, 14, 162), "OUTRUN-ULTRAVIOLET-MAGENTA"),
+    ((210, 64, 255), (144, 112, 255), (94, 20, 168), "DREAMWAVE-AMETHYST-NEON"),
+    ((188, 38, 255), (234, 118, 255), (90, 16, 158), "CYBER-VIOLET-LASER"),
 ]
 
-# High-intensity fiery phosphor palettes specifically for Recall Directive Heavy Metal tracks
-RECALL_METAL_PALETTES = [
-    ((255, 130, 35), (255, 225, 85), (105, 34, 10), "RECALL-INFERNO-AMBER-GOLD"),
-    ((255, 105, 40), (255, 190, 65), (98, 28, 12), "THERMITE-PLASMA-ORANGE"),
-    ((255, 160, 35), (255, 240, 130), (95, 48, 10), "ASHFALL-FORGE-GOLD"),
-    ((255, 115, 50), (110, 245, 255), (92, 30, 16), "ARC-WELDER-FIRE-CYAN"),
+# Shibuya / Akasaka Tokyo City Pop & Idol Neon Palettes
+TOKYO_NEON_PALETTES = [
+    ((255, 42, 176), (36, 246, 255), (124, 14, 88), "SHIBUYA-NEON-PINK-CYAN"),
+    ((255, 62, 198), (255, 214, 68), (118, 18, 96), "AKASAKA-NEON-MAGENTA-GOLD"),
 ]
+
+# Gen 4 L.U.N.A. (Non-Synthwave) Clinical High-Voltage Neon Cyan Palettes
+LUNA_NEON_PALETTES = [
+    ((0, 240, 255), (176, 112, 255), (8, 86, 132), "ORION-G4-LASER-CYAN"),
+    ((32, 218, 255), (148, 255, 246), (10, 78, 126), "UNIT08-ELECTRIC-ICE"),
+]
+
+# Vibrant 1980s Sunset Strip Neon CRT Palettes for General Songs:
+# (primary_rgb, secondary_rgb, dim_grid_rgb, name)
+PHOSPHOR_PALETTES = [
+    ((0, 242, 255), (255, 64, 212), (8, 92, 136), "NEON-LASER-CYAN"),
+    ((255, 44, 168), (0, 244, 255), (122, 14, 84), "SUNSET-STRIP-HOT-PINK"),
+    ((52, 142, 255), (0, 252, 224), (18, 56, 144), "ARCADE-ELECTRIC-BLUE"),
+    ((28, 255, 142), (0, 238, 255), (10, 98, 56), "MATRIX-NEON-EMERALD"),
+    ((255, 58, 118), (255, 218, 44), (124, 16, 54), "MIAMI-NEON-ROSE-GOLD"),
+    ((255, 196, 24), (255, 56, 184), (116, 72, 10), "MARQUEE-NEON-GOLD-MAGENTA"),
+    ((0, 255, 198), (148, 108, 255), (8, 98, 82), "ELECTRIC-MINT-VIOLET"),
+    ((255, 92, 28), (255, 48, 182), (118, 32, 18), "BOULEVARD-NEON-TANGERINE"),
+]
+
+# High-voltage Neon Laser Crimson & Plasma Fire Palettes for Recall Heavy Metal tracks
+RECALL_METAL_PALETTES = [
+    ((255, 32, 88), (255, 216, 48), (126, 12, 38), "RECALL-NEON-CRIMSON-GOLD"),
+    ((255, 68, 24), (255, 44, 168), (122, 22, 12), "THERMITE-LASER-ORANGE-PINK"),
+    ((255, 42, 64), (0, 246, 255), (118, 14, 28), "ARC-WELDER-CRIMSON-CYAN"),
+    ((255, 108, 18), (255, 236, 64), (116, 36, 8), "PLASMA-FORGE-NEON-FIRE"),
+]
+
+SYNTHWAVE_EXACT_STEMS = {
+    "radio_02_between_the_circuits",
+    "radio_between_the_circuits_luna_revision",
+    "radio_04_synthetic_dawn",
+    "radio_synthetic_dawn_retro_mix",
+    "radio_synthetic_dawn_1985_synth_original_mix",
+    "radio_synthetic_dawn_luna_revision",
+    "radio_05_first_light_on_my_face",
+    "radio_05_ghost_transit_1985_tokyo_master",
+    "radio_room_full_of_color",
+    "radio_08_faultline_path",
+    "radio_faultline_path_luna_revision",
+    "radio_lost_signal_trace_luna_revision",
+    "radio_13_through_the_threshold",
+    "radio_5_the_way_back_v3",
+    "radio_corridor_dreams_movement_1",
+    "radio_corridor_dreams_movement_2",
+    "radio_corridor_dreams_movement_3",
+    "radio_incomplete_exit",
+    "radio_unopened_door_luna_revision",
+    "radio_it_has_no_face_old",
+    "radio_unstable_pattern_old",
+    "radio_the_override_luna_revision",
+    "radio_bad_signal",
+    "radio_memory_hatch",
+    "radio_memory_hatch_1989_aor_mix",
+    "radio_warm_frequency",
+    "radio_warm_frequency_luna_revision",
+    "radio_abandoned_shell",
+    "radio_abandoned_shell_es",
+    "radio_gasoline_heart_es",
+    "radio_salvese_quien_pueda",
+    "radio_fuoco_dentro",
+    "radio_perfect_daydream",
+    "radio_02_brighter_than_the_sun_1987_tokyo_master",
+    "radio_brighter_than_the_sun_unfiltered_sovereign_mix",
+    "radio_warm_hands_one_map",
+    "radio_b_midnight_protocol_final_1",
+    "radio_synth_dreams_neon_comets",
+    "radio_synthetic_kiss",
+    "radio_neon_graveyard",
+    "radio_hologram_city_queen",
+    "radio_glass_city",
+    "radio_arcade_juliet",
+    "radio_meet_me_at_the_arcade",
+    "radio_dial_tone_heart",
+    "radio_digital_heartbeat",
+    "radio_shes_hardwired",
+    "radio_chrome_desire",
+    "radio_chrome_desire_luna_revision",
+    "radio_chrome_river",
+    "radio_chrome_river_luna_revision",
+    "radio_cold_reaction",
+    "radio_bold_reaction_luna_revision",
+    "radio_city_to_city",
+    "radio_knockout_city",
+    "radio_marina_half_the_city_knows_your_name",
+    "radio_the_stars_in_your_hands",
+    "radio_afterburn",
+    "radio_borrow_the_night",
+    "radio_last_exit_first_light",
+    "radio_night_drive",
+    "radio_quantum_highway",
+    "radio_playback_forever_master",
+    "radio_private_line",
+    "radio_silk_and_teeth",
+    "radio_tinfoil_crown",
+    "radio_hard_reset_soft_touch",
+    "radio_midnight_echo",
+    "radio_ghost_on_the_radio",
+    "radio_ghost_on_the_radio_luna_revision",
+    "radio_shadows_in_the_rain",
+    "radio_stranger_to_myself",
+}
+
+SYNTHWAVE_REELS = {
+    "veo_phase1_synthetic_dawn",
+    "veo_phase1_corridor_flight",
+    "veo_hologram_city_grid",
+    "veo_night_drive_canyon",
+    "veo_neon_graveyard",
+    "veo_mbm_commuters_monorail",
+}
+
+SYNTHWAVE_KEYWORDS = (
+    "synthwave",
+    "retrowave",
+    "italo disco",
+    "italo-disco",
+    "dreamwave",
+    "darkwave",
+    "outrun",
+    "synth-pop",
+    "synthpop",
+    "synth-rock",
+    "synth rock",
+    "synth dreams",
+    "slow synth",
+    "synth original",
+    "workout synth",
+    "new wave synth",
+    "analog synth",
+    "synthetic dawn",
+    "synthetic kiss",
+    "neon comets",
+    "neon graveyard",
+    "corridor dreams",
+    "ghost transit",
+    "between the circuits",
+    "quantum highway",
+    "hologram city",
+)
 
 # Canonical Recall-Era / Heavy Metal / Harmony Riots tracks that trigger RECALL_METAL_FLAME
 RECALL_METAL_KEYWORDS = (
@@ -106,6 +241,88 @@ def is_recall_metal_song(title: str, lyrics_text: str = "", song_key: str = "", 
     if cat.startswith("NH-89.") or "RECALL" in cat:
         return True
     return False
+
+
+def is_synthwave_song(
+    title: str = "",
+    song_key: str = "",
+    catalog_id: str = "",
+    timeline: str = "",
+    veo_reel: str = "",
+    meaning: str = "",
+    connections: str = "",
+) -> bool:
+    """Returns True if the track is a Synthwave / Outrun / Dreamwave / Synth-Rock / Digital-Eternity Synth song."""
+    if is_recall_metal_song(title, "", song_key, catalog_id):
+        return False
+    if veo_reel in ("veo_thrash_metal_rebellion", "veo_recall_rebellion_cables"):
+        return False
+    stem = Path(song_key).stem.lower() if song_key else ""
+    if "hard_rock" in stem or "hard rock" in title.lower():
+        return False
+    if stem in SYNTHWAVE_EXACT_STEMS:
+        return True
+    if veo_reel in SYNTHWAVE_REELS:
+        return True
+    blob = f"{stem.replace('_', ' ')} {title} {meaning} {connections}".lower()
+    if any(kw in blob for kw in SYNTHWAVE_KEYWORDS):
+        return True
+    tl_low = timeline.lower()
+    if "phase 1" in tl_low and "hard rock" not in blob and "heavy metal" not in blob:
+        return True
+    return False
+
+
+def resolve_song_neon_palette(
+    song_key: str,
+    title: str,
+    lyrics_text: str = "",
+    catalog_id: str = "",
+    timeline: str = "",
+    veo_reel: str = "",
+    meaning: str = "",
+    connections: str = "",
+) -> tuple[tuple[int, int, int], tuple[int, int, int], tuple[int, int, int], str, str]:
+    """
+    Returns `(primary_rgb, secondary_rgb, grid_rgb, palette_name, genre_tag)`:
+      - ALL Synthwave songs -> Electric Neon Purple (`SYNTHWAVE_PURPLE_PALETTES`, genre_tag='synthwave')
+      - Recall Heavy Metal -> Neon Crimson / Laser Fire (`RECALL_METAL_PALETTES`, genre_tag='metal')
+      - Tokyo City Pop / Idol -> Shibuya Neon Pink & Cyan (`TOKYO_NEON_PALETTES`, genre_tag='tokyo')
+      - Gen 4 L.U.N.A. (non-synthwave) -> Laser Ice Cyan (`LUNA_NEON_PALETTES`, genre_tag='luna')
+      - All other 80s Rock / Ballad / Pop songs -> Vibrant Sunset Strip Neon (`PHOSPHOR_PALETTES`, genre_tag='neon_rock')
+    """
+    seed = _song_seed(song_key or title)
+    if is_synthwave_song(
+        title=title,
+        song_key=song_key,
+        catalog_id=catalog_id,
+        timeline=timeline,
+        veo_reel=veo_reel,
+        meaning=meaning,
+        connections=connections,
+    ):
+        p, s, g, nm = SYNTHWAVE_PURPLE_PALETTES[seed % len(SYNTHWAVE_PURPLE_PALETTES)]
+        return p, s, g, nm, "synthwave"
+
+    if is_recall_metal_song(title, lyrics_text, song_key, catalog_id) or veo_reel in (
+        "veo_thrash_metal_rebellion",
+        "veo_recall_rebellion_cables",
+    ):
+        p, s, g, nm = RECALL_METAL_PALETTES[seed % len(RECALL_METAL_PALETTES)]
+        return p, s, g, nm, "metal"
+
+    stem_l = Path(song_key).stem.lower() if song_key else ""
+    tl_l = timeline.lower()
+    if "_luna_revision" in stem_l or "l.u.n.a" in tl_l:
+        p, s, g, nm = LUNA_NEON_PALETTES[seed % len(LUNA_NEON_PALETTES)]
+        return p, s, g, nm, "luna"
+
+    if "tokyo" in stem_l or "akasaka" in tl_l or veo_reel == "veo_tokyo_idol_pop":
+        p, s, g, nm = TOKYO_NEON_PALETTES[seed % len(TOKYO_NEON_PALETTES)]
+        return p, s, g, nm, "tokyo"
+
+    p, s, g, nm = PHOSPHOR_PALETTES[seed % len(PHOSPHOR_PALETTES)]
+    return p, s, g, nm, "neon_rock"
 
 
 def select_recall_flame_subvariant(title: str, song_key: str = "") -> int:
@@ -243,11 +460,13 @@ def _rot_xyz(pts: np.ndarray, rx: float, ry: float, rz: float) -> np.ndarray:
     return np.column_stack([x3, y3, z2])
 
 
-def _proj(pts: np.ndarray, fov: float = 395.0, cam_z: float = 4.2, cx: float = 338.0, cy: float = 240.0) -> np.ndarray:
-    """Projects (N, 3) 3D points into (N, 2) screen coordinates."""
+def _proj(pts: np.ndarray, fov: float = 408.0, cam_z: float = 4.2, cx: float | None = None, cy: float | None = None) -> np.ndarray:
+    """Projects (N, 3) 3D points into (N, 2) widescreen CRT coordinates (`864x464` -> `1728x928`)."""
+    cx_eff = (W * 0.50) if cx is None else cx
+    cy_eff = (H * 0.422) if cy is None else cy
     z = np.maximum(0.4, pts[:, 2] + cam_z)
-    px = cx + (pts[:, 0] * fov) / z
-    py = cy - (pts[:, 1] * fov) / z
+    px = cx_eff + (pts[:, 0] * fov) / z
+    py = cy_eff - (pts[:, 1] * fov) / z
     return np.column_stack([px, py])
 
 
@@ -255,7 +474,7 @@ def _draw_edges(draw: ImageDraw.ImageDraw, pts2d: np.ndarray, edges: list[tuple[
     for i, j in edges:
         x0, y0 = float(pts2d[i, 0]), float(pts2d[i, 1])
         x1, y1 = float(pts2d[j, 0]), float(pts2d[j, 1])
-        if -200 <= x0 <= W + 200 and -200 <= y0 <= H + 200 and -200 <= x1 <= W + 200 and -200 <= y1 <= H + 200:
+        if -260 <= x0 <= W + 260 and -220 <= y0 <= H + 220 and -260 <= x1 <= W + 260 and -220 <= y1 <= H + 220:
             draw.line([(x0, y0), (x1, y1)], fill=col, width=width)
 
 
@@ -267,10 +486,10 @@ def _draw_perspective_grid(
     ceiling: bool = False,
     radial: bool = False,
 ) -> None:
-    """Draws a scrolling 1980s vector horizon floor (and optional ceiling or polar grid, periodic over 8.0s)."""
-    z_near, z_far = 0.8, 10.0
-    step_x = 0.65 if radial else 0.55
-    for ix in range(-8, 9):
+    """Draws a full-widescreen scrolling 1980s vector horizon floor (periodic over 8.0s)."""
+    z_near, z_far = 0.8, 11.2
+    step_x = 0.62 if radial else 0.54
+    for ix in range(-14, 15):
         x = ix * step_x
         pts = np.array([[x, y_floor, z_near], [x, y_floor, z_far]], dtype=np.float32)
         p2 = _proj(pts, cam_z=0.0)
@@ -283,11 +502,11 @@ def _draw_perspective_grid(
     scroll = ((t / 8.0) * 16.0 % 1.0) * 0.75
     z = z_near + scroll
     while z < z_far:
-        pts = np.array([[-4.4, y_floor, z], [4.4, y_floor, z]], dtype=np.float32)
+        pts = np.array([[-7.6, y_floor, z], [7.6, y_floor, z]], dtype=np.float32)
         p2 = _proj(pts, cam_z=0.0)
         draw.line([(p2[0, 0], p2[0, 1]), (p2[1, 0], p2[1, 1])], fill=col_grid, width=1)
         if ceiling:
-            pts_c = np.array([[-4.4, -y_floor, z], [4.4, -y_floor, z]], dtype=np.float32)
+            pts_c = np.array([[-7.6, -y_floor, z], [7.6, -y_floor, z]], dtype=np.float32)
             p2c = _proj(pts_c, cam_z=0.0)
             draw.line([(p2c[0, 0], p2c[0, 1]), (p2c[1, 0], p2c[1, 1])], fill=col_grid, width=1)
         z += 0.75
@@ -1034,9 +1253,9 @@ def _render_scene_archetype(
 
     elif archetype == "SOLAR_HORIZON":
         _draw_perspective_grid(draw, t, grid_col, y_floor=-1.20)
-        sun_c = (W * 0.5, H * 0.42)
-        sun_r = 92
-        for band in range(-5, 6):
+        sun_c = (W * 0.5, H * 0.39)
+        sun_r = 98
+        for band in range(-6, 7):
             y_off = band * 14 + (((t / 8.0) * 10.0) % 1.0) * 14.0 - 7.0
             if abs(y_off) < sun_r:
                 half_w = math.sqrt(max(0.0, sun_r * sun_r - y_off * y_off))
@@ -1124,30 +1343,35 @@ def _get_cached_crt_base_and_mask(crt_bg_arr: np.ndarray) -> tuple[Image.Image, 
       3. `_CACHED_BARREL_LUT`: `(src_y, src_x)` integer warp tables for 1983 spherical-barrel CRT glass curvature.
     """
     global _CACHED_BASE_CRT, _CACHED_PHOSPHOR_MASK, _CACHED_BARREL_LUT
-    if _CACHED_BASE_CRT is not None and _CACHED_PHOSPHOR_MASK is not None and _CACHED_BARREL_LUT is not None:
+    if (
+        _CACHED_BASE_CRT is not None
+        and _CACHED_PHOSPHOR_MASK is not None
+        and _CACHED_BARREL_LUT is not None
+        and _CACHED_PHOSPHOR_MASK.shape[:2] == (H, W)
+    ):
         return _CACHED_BASE_CRT, _CACHED_PHOSPHOR_MASK, _CACHED_BARREL_LUT
 
     _CACHED_BASE_CRT = Image.fromarray(np.clip(crt_bg_arr, 0, 255).astype(np.uint8))
 
     yy, xx = np.mgrid[0:H, 0:W].astype(np.float32)
-    cx, cy = 338.0, 248.0
-    rx, ry = 304.0, 220.0
+    cx, cy = W * 0.5, H * 0.5
+    rx, ry = W * 0.485, H * 0.482
     u = (xx - cx) / rx
     v = (yy - cy) / ry
 
-    # Authentic 1983 CRT spherical-barrel curvature matching the physical bezel contour
-    u_src = u * (1.0 + 0.068 * (v * v) + 0.022 * (u * u))
-    v_src = v * (1.0 + 0.082 * (u * u) + 0.026 * (v * v))
+    # Authentic 1983 widescreen CRT spherical-barrel curvature matching Option A bezel contour
+    u_src = u * (1.0 + 0.042 * (v * v) + 0.014 * (u * u))
+    v_src = v * (1.0 + 0.052 * (u * u) + 0.016 * (v * v))
     src_x = np.clip(np.round(cx + u_src * rx), 0, W - 1).astype(np.int32)
     src_y = np.clip(np.round(cy + v_src * ry), 0, H - 1).astype(np.int32)
     _CACHED_BARREL_LUT = (src_y, src_x)
 
-    dist = (np.abs(u_src) ** 4.2 + np.abs(v_src) ** 4.2) ** (1.0 / 4.2)
-    tube_mask = np.clip((1.00 - dist) / 0.16, 0.0, 1.0).astype(np.float32)
+    dist = (np.abs(u_src) ** 5.0 + np.abs(v_src) ** 5.0) ** (1.0 / 5.0)
+    tube_mask = np.clip((1.005 - dist) / 0.12, 0.0, 1.0).astype(np.float32)
     tube_mask = tube_mask * tube_mask * (3.0 - 2.0 * tube_mask)
 
-    scan = np.where((yy % 3) == 0, 0.52, np.where((yy % 3) == 1, 1.00, 0.80)).astype(np.float32)
-    grille = np.where((xx % 2) == 0, 1.00, 0.86).astype(np.float32)
+    scan = np.where((yy % 2) == 0, 0.68, 1.00).astype(np.float32)
+    grille = np.where((xx % 2) == 0, 1.00, 0.88).astype(np.float32)
     _CACHED_PHOSPHOR_MASK = (tube_mask * scan * grille)[:, :, None].astype(np.float32)
     return _CACHED_BASE_CRT, _CACHED_PHOSPHOR_MASK, _CACHED_BARREL_LUT
 
@@ -1161,18 +1385,28 @@ def render_song_crt_cgi_frame(
     crt_bg_arr: np.ndarray,
     edge_alpha: np.ndarray,
     scan_vig: np.ndarray,
+    timeline: str = "",
+    veo_reel: str = "",
+    meaning: str = "",
+    connections: str = "",
 ) -> Image.Image:
     """
-    Renders a single `688x488` RGB frame of the song-specific 1980s CRT 3D CGI animation
-    at timestamp `t` with 1983 spherical-barrel CRT glass curvature and multi-stage phosphor halation.
+    Renders a single `864x464` RGB frame of 1980s CRT 3D vector / wireframe CGI for vocal songs,
+    with per-song neon phosphor glow and lower EQ window clear for the live 56-band `[waves]` bars.
     """
+    pri, sec, grid_col, _, _ = resolve_song_neon_palette(
+        song_key=song_key,
+        title=title,
+        lyrics_text=lyrics_text,
+        catalog_id=catalog_id,
+        timeline=timeline,
+        veo_reel=veo_reel,
+        meaning=meaning,
+        connections=connections,
+    )
+
     seed = _song_seed(song_key or title)
     archetype = select_song_cgi_archetype(title, lyrics_text, song_key=song_key, catalog_id=catalog_id)
-
-    if archetype == "RECALL_METAL_FLAME":
-        pri, sec, grid_col, _ = RECALL_METAL_PALETTES[seed % len(RECALL_METAL_PALETTES)]
-    else:
-        pri, sec, grid_col, _ = PHOSPHOR_PALETTES[seed % len(PHOSPHOR_PALETTES)]
 
     canvas = Image.new("RGB", (W, H), (0, 0, 0))
     draw = ImageDraw.Draw(canvas)
@@ -1181,18 +1415,19 @@ def render_song_crt_cgi_frame(
 
     base_crt, phos_mask, (src_y, src_x) = _get_cached_crt_base_and_mask(crt_bg_arr)
     warped_cgi = Image.fromarray(np.asarray(canvas)[src_y, src_x])
-    core_cgi = warped_cgi.filter(ImageFilter.GaussianBlur(radius=0.6))
-    halo_cgi = warped_cgi.filter(ImageFilter.GaussianBlur(radius=2.8))
-    bloom_cgi = warped_cgi.filter(ImageFilter.GaussianBlur(radius=9.5))
+    core_cgi = warped_cgi.filter(ImageFilter.GaussianBlur(radius=0.55))
+    halo_cgi = warped_cgi.filter(ImageFilter.GaussianBlur(radius=3.2))
+    bloom_cgi = warped_cgi.filter(ImageFilter.GaussianBlur(radius=11.0))
 
     c_arr = np.asarray(core_cgi, dtype=np.float32)
     h_arr = np.asarray(halo_cgi, dtype=np.float32)
     b_arr = np.asarray(bloom_cgi, dtype=np.float32)
 
-    raw_emit = c_arr * 0.92 + h_arr * 0.52 + b_arr * 0.34
-    lum = raw_emit[:, :, 0] * 0.299 + raw_emit[:, :, 1] * 0.587 + raw_emit[:, :, 2] * 0.114
-    warm_phos = np.dstack([lum * 0.52, lum * 1.08, lum * 0.60])
-    graded_emit = (raw_emit * 0.82 + warm_phos * 0.18) * phos_mask
+    # Pure high-voltage 1980s neon glass emission: crisp hot filament core + deep saturated neon bloom
+    max_core = np.max(c_arr, axis=2, keepdims=True)
+    hot_filament = np.clip((max_core - 125.0) / 130.0, 0.0, 1.0) * 64.0
+    raw_emit = c_arr * 1.18 + h_arr * 0.86 + b_arr * 0.58 + hot_filament
+    graded_emit = raw_emit * phos_mask
 
     masked_phos = Image.fromarray(np.clip(graded_emit, 0, 255).astype(np.uint8))
     return ImageChops.add(base_crt, masked_phos)

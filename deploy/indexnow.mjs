@@ -8,6 +8,7 @@ import fs from "node:fs";
 import STORY from "./story_paths.js";
 import { publicUrl, APEX, resolveApex } from "./urlmap.js";
 import { liveCount, sitemapSitePaths } from "./swarm/index.js";
+import { UNBRANDED_GUIDE_PATHS, UNBRANDED_GUIDE_MARKDOWN_PATHS } from "./unbranded_category_guides.js";
 
 const KEY = "37feeed875722863fda484c68e6695e5";
 const STATE = new URL("./indexnow_state.json", import.meta.url);
@@ -15,7 +16,13 @@ const BATCH_SIZE = 10000; // IndexNow maximum per request
 const dryRun = process.argv.includes("--dry-run");
 
 const n = liveCount(Date.now(), process.env.SWARM_CAP);
-const allUrls = [...new Set([...STORY, ...sitemapSitePaths(n)].map((sp) => publicUrl(sp)).filter((u) => u && u.startsWith("https://")))];
+const guideUrls = [...UNBRANDED_GUIDE_PATHS, ...UNBRANDED_GUIDE_MARKDOWN_PATHS].map((p) => `https://${APEX}${p}`);
+const allUrls = [
+  ...new Set([
+    ...guideUrls,
+    ...[...STORY, ...sitemapSitePaths(n)].map((sp) => publicUrl(sp)).filter((u) => u && u.startsWith("https://")),
+  ]),
+];
 const state = fs.existsSync(STATE) && !process.argv.includes("--all") ? JSON.parse(fs.readFileSync(STATE, "utf8")) : { submitted: [] };
 const done = new Set(state.submitted);
 const fresh = allUrls.filter((u) => !done.has(u));

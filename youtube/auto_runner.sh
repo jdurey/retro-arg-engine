@@ -1,36 +1,8 @@
 #!/bin/bash
-# Autonomous background runner for Nova Hart YouTube description updates.
-# Runs daily or retries when quota resets until 100% of videos are updated.
-
-set -e
-DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-ROOT="$(dirname "$DIR")"
-
-cd "$ROOT"
-echo "=== NOVA HART YOUTUBE AUTOMATION RUNNER ==="
-echo "Timestamp: $(date)"
-
-# 1. Upload notifySubscribers=False Gateway Documentary & Shorts FIRST on quota reset
-"$DIR/.venv/bin/python3" "$DIR/yt.py" upload-shorts --limit 3 || true
-
-# 2. Check for and sync any new uploads
-"$DIR/.venv/bin/python3" "$DIR/yt.py" sync || true
-
-# 3. Backfill Lost-Media Mystery Bridge titles & descriptions across catalog (20 languages)
-"$DIR/.venv/bin/python3" "$DIR/yt.py" apply --translate || true
-
-python3 -c '
-import json, os
-state = "youtube/state"
-v_path = os.path.join(state, "videos.json")
-d_path = os.path.join(state, "done.json")
-t_path = os.path.join(state, "translated_done.json")
-if os.path.exists(v_path):
-    v = [x for x in json.load(open(v_path))["videos"] if x["status"]["privacyStatus"] != "private"]
-    d = json.load(open(d_path)) if os.path.exists(d_path) else []
-    t = json.load(open(t_path)) if os.path.exists(t_path) else []
-    print(f"Status: {len(d)}/{len(v)} videos linked to ARG nodes.")
-    print(f"Translations: {len(t)}/{len(v)} videos with full AI-translated titles & descriptions across 20 languages.")
-'
-
-
+# Legacy hourly auto_runner disarmed on 2026-10-28 to prevent:
+#   1. Hourly YouTube Data API v3 quota exhaustion (10,000 units/day)
+#   2. Clobbering new-era song titles/descriptions/tags during the 48-hour browse test window.
+# Inventory sync & holdout-protected packaging are now handled by:
+#   - scripts/sync_and_repair_youtube_catalog.py
+#   - scripts/meta_architect.py --closed-loop
+exit 0

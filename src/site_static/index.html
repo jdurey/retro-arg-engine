@@ -241,9 +241,29 @@
     </div>
 
     <div class="live-strip">
-      <span id="live-now-playing">● 24/7 SHORTWAVE BROADCAST ACTIVE // CARRIER: 14.2001 HZ [LOCKED]</span>
+      <span id="live-now-playing">● 80s NIGHT FLIGHT RADIO (82.5 FM) // CARRIER: 14.2001 HZ [LOCKED]</span>
       <span>SUBCARRIER TELEMETRY: <strong id="live-stream-key" style="text-decoration:underline; cursor:pointer;" onclick="window.location.href='forensics/index.html'">[ENCRYPTED BURST ACTIVE — DEMODULATE IN /FORENSICS]</strong></span>
-      <a class="btn btn-amber" style="padding:3px 8px; font-size:11px;" href="https://www.youtube.com/@NovaHart_Official/live" target="_blank" rel="noopener">📡 WATCH 24/7 LIVESTREAM</a>
+      <a class="btn btn-amber" style="padding:3px 8px; font-size:11px;" href="https://www.youtube.com/watch?v=KLKLgb67ggg" target="_blank" rel="noopener">📡 OPEN IN YOUTUBE + LIVE CHAT</a>
+    </div>
+
+    <div style="border:2px solid #ff5555; background:rgba(20, 4, 8, 0.92); padding:12px 14px; margin-bottom:16px; box-shadow:0 0 22px rgba(255, 85, 85, 0.22);">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:8px;">
+        <strong style="color:#ff7777; font-size:14.5px;">🔴 ON AIR NOW // 80s NIGHT FLIGHT RADIO BROADCAST (82.5 FM — STUDIO B LIVE FEED)</strong>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button type="button" id="unmute-live-radio-btn" class="btn btn-amber" style="padding:4px 10px; font-size:11.5px; border-color:#ff7777; color:#ffdddd; background:rgba(90, 10, 18, 0.9);" onclick="toggleNightFlightAudio()">🔊 UNMUTE LIVE RADIO AUDIO</button>
+          <a class="btn" style="padding:4px 10px; font-size:11.5px;" href="https://www.youtube.com/watch?v=KLKLgb67ggg" target="_blank" rel="noopener">💬 LIVE DJ SONG REQUESTS &rarr;</a>
+        </div>
+      </div>
+      <div style="position:relative; width:100%; padding-bottom:56.25%; height:0; overflow:hidden; border:1px solid #ff5555; background:#000;">
+        <iframe
+          id="night-flight-live-iframe"
+          src="https://www.youtube.com/embed/KLKLgb67ggg?autoplay=1&amp;mute=1&amp;playsinline=1&amp;enablejsapi=1&amp;rel=0"
+          title="🔴 80s Night Flight Radio Broadcast • 24/7 Rock, Synthwave &amp; Live DJ Requests (82.5 FM)"
+          style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen></iframe>
+      </div>
     </div>
 
     <div style="border:2px solid #66ffe0; background:rgba(0, 34, 24, 0.88); padding:14px 16px; margin-bottom:16px; box-shadow:0 0 18px rgba(102, 255, 224, 0.18);">
@@ -372,6 +392,23 @@
   </div>
 
   <script>
+    let nightFlightMuted = true;
+    function toggleNightFlightAudio() {
+      const ifr = document.getElementById('night-flight-live-iframe');
+      const btn = document.getElementById('unmute-live-radio-btn');
+      if (!ifr || !ifr.contentWindow) return;
+      if (nightFlightMuted) {
+        ifr.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'unMute', args: [] }), '*');
+        ifr.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'setVolume', args: [100] }), '*');
+        ifr.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'playVideo', args: [] }), '*');
+        nightFlightMuted = false;
+        if (btn) btn.textContent = '🔇 MUTE LIVE RADIO AUDIO';
+      } else {
+        ifr.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'mute', args: [] }), '*');
+        nightFlightMuted = true;
+        if (btn) btn.textContent = '🔊 UNMUTE LIVE RADIO AUDIO';
+      }
+    }
     function jumpWithCode(code) {
       const c = (code || '').trim();
       if (!c) return;

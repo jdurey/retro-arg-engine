@@ -188,29 +188,54 @@ NEURAL_VOICE_MAP = {
     "Whisper": ["en-US-AvaNeural", "en-US-JennyNeural"],
 }
 
+XI_TURN_VOICE_MAP = {
+    "Reed (English (US))": "fhEKxEVaYaowRzjwfh6b",  # Spector (Spot 08 male commercial announcer)
+    "Reed": "fhEKxEVaYaowRzjwfh6b",
+    "Alex": "fhEKxEVaYaowRzjwfh6b",
+    "Daniel": "fhEKxEVaYaowRzjwfh6b",
+    "Rocko": "fhEKxEVaYaowRzjwfh6b",
+    "Eddy": "cCYjmrGZaI86GUJ7F2Nn",
+    "Grandpa": "fhEKxEVaYaowRzjwfh6b",
+    "Fred": "fhEKxEVaYaowRzjwfh6b",
+    "Samantha": "FyrYFW3P9GUxA348YGWu",             # Madison Rae (entertainment_tv female announcer)
+    "Karen": "TbMNBJ27fH2U0VgpSNko",                # Lori (upbeat commercial female announcer)
+    "Moira": "FyrYFW3P9GUxA348YGWu",
+    "Tessa": "TbMNBJ27fH2U0VgpSNko",
+    "Victoria": "kfGEdprt9Oe4pbdP8VTo",             # Katie (confident institutional/commercial voice)
+    "Shelley": "FyrYFW3P9GUxA348YGWu",
+    "Flo": "TbMNBJ27fH2U0VgpSNko",
+}
+
+
 def render_turn_wav(voice: str, rate: int, text: str, *extra_args) -> Path:
-    import asyncio, edge_tts
+    import asyncio, edge_tts, sys
+    if str(BASE_DIR) not in sys.path:
+        sys.path.insert(0, str(BASE_DIR))
+    import generate_daily_crt_commercial as _gdcc
     if len(extra_args) == 2:
         tmp_dir, idx = extra_args
     else:
         _, tmp_dir, idx = extra_args
     raw_mp3 = tmp_dir / f"neural_turn_{idx}.mp3"
     out_wav = tmp_dir / f"neural_turn_{idx}.wav"
-    candidates = NEURAL_VOICE_MAP.get(voice, ["en-US-AndrewNeural", "en-US-AriaNeural", "en-US-GuyNeural"])
-    n_voice = candidates[idx % len(candidates)]
-    pct = max(-15, min(25, int((rate - 182) * 0.45)))
-    rate_str = f"{pct:+d}%"
-    async def _save():
-        for attempt, v_try in enumerate([n_voice, "en-US-AndrewNeural", "en-US-AriaNeural"]):
-            try:
-                comm = edge_tts.Communicate(text, v_try, rate=rate_str)
-                await comm.save(str(raw_mp3))
-                if raw_mp3.exists() and raw_mp3.stat().st_size > 500:
-                    return
-            except Exception:
-                await asyncio.sleep(0.4 * (attempt + 1))
-        raise RuntimeError(f"Failed TTS for {text[:30]}")
-    asyncio.run(_save())
+    xi_vid = XI_TURN_VOICE_MAP.get(voice, "fhEKxEVaYaowRzjwfh6b")
+    used_xi = _gdcc._synthesize_elevenlabs_cached(text, xi_vid, raw_mp3, stability=0.45)
+    if not used_xi:
+        candidates = NEURAL_VOICE_MAP.get(voice, ["en-US-AndrewNeural", "en-US-AriaNeural", "en-US-GuyNeural"])
+        n_voice = candidates[idx % len(candidates)]
+        pct = max(-15, min(25, int((rate - 182) * 0.45)))
+        rate_str = f"{pct:+d}%"
+        async def _save():
+            for attempt, v_try in enumerate([n_voice, "en-US-AndrewNeural", "en-US-AriaNeural"]):
+                try:
+                    comm = edge_tts.Communicate(text, v_try, rate=rate_str)
+                    await comm.save(str(raw_mp3))
+                    if raw_mp3.exists() and raw_mp3.stat().st_size > 500:
+                        return
+                except Exception:
+                    await asyncio.sleep(0.4 * (attempt + 1))
+            raise RuntimeError(f"Failed TTS for {text[:30]}")
+        asyncio.run(_save())
     af = "highpass=f=90,lowpass=f=7400,acompressor=threshold=-17dB:ratio=2.5:attack=10:release=100,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-42dB:detection=peak,areverse,silenceremove=start_periods=1:start_duration=0.04:start_threshold=-42dB:detection=peak,areverse"
     subprocess.run(
         [

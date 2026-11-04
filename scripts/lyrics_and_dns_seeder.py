@@ -312,7 +312,7 @@ def warm_rag_proxies(
 
     # Select core markdown-digestible endpoints to warm gently
     warm_targets = [
-        u for u in urls if u.endswith("/lyrics") or u.endswith(".lrc") or u.endswith(".json")
+        u for u in urls if u.endswith("/lyrics") or u.endswith(".lrc") or u.endswith("musicbrainz-catalog.json")
     ][:6]
 
     for idx, target_url in enumerate(warm_targets):

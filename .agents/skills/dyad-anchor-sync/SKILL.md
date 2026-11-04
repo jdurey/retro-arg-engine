@@ -63,6 +63,7 @@ python3 /Users/joshuadurey/.gemini/antigravity-ide/scratch/retro_arg_engine/scri
 - Always use the **`browser` subagent** (`invoke_subagent` with `TypeName: "browser"` or `send_message` to an existing browser subagent), which connects directly to the user's logged-in Chrome session via Chrome DevTools MCP.
 - Keep `u/Common_Blacksmith723` profile privacy locked down (`Hide all` on Content & Activity in `https://www.reddit.com/settings/profile`, search indexing off in `https://www.reddit.com/settings/privacy`).
 - Whenever scheduling posts on `r/NovaHart`, check **"Post as AutoModerator"** (`u/AutoModerator`) so scheduled threads publish under `u/AutoModerator` rather than the personal moderator handle.
+- **Trumanized Voice Standard for YouTube Community Posts & `r/NovaHart` Dispatches**: Always write in Nova's candid, wry, imperfect three-dimensional human voice—lead with studio fumbles/kept 2 AM vocal cracks, dry "Truman seam" catches from Orion's simulated 1980s sets (`'86 Dream Machine Tour`, Jackson's gaffer-taped chorus pedal, `DR-2` apartment sets, `EM-12` shoebox fan mail), or disarming outsider curiosity about everyday physical human life. NEVER write third-person press-release promo copy, and keep Marcus Hale rare and sacred (never drop him by reflex into routine Community Posts).
 
 ### Fast URLs for the Browser Subagent
 - **Subreddit Home**: `https://www.reddit.com/r/NovaHart/`

@@ -1,128 +1,144 @@
 #!/usr/bin/env python3
-"""Normalizes all 80s FM songs (Velvet Tide, Vyper Strike, Neon Comets, Thunder Machine),
-Heartstrike songs, and any quiet tracks in radio_master_songs/ (RMS < -16.0 dBFS)
-to -13.5 LUFS (TP=-0.8 dBTP, LRA=9) with 100% transparent studio audio (zero EQ coloration),
-and boosts the 80s FM Rick Blaze (blaze_ep01_*) & White Lines (wlf_*) segments to -14.0 LUFS.
+"""2-Pass EBU R128 Broadcast Loudness Normalizer for 82.5 FM Studio B.
+
+Normalizes every song in `broadcast_archive/radio_master_songs/*.mp3` outside
+`[-13.55, -12.45] LUFS` or with True Peak `> -0.60 dBTP` to uniform `-13.0 LUFS`
+(`TP = -1.0 dBTP, LRA = 11`, `44.1 kHz`, `2ch`, `192k` CBR `-vn` MP3), eliminating
+volume drops on quiet masters (e.g. `radio_kilometro_cero.mp3` at `-16.06 LUFS`) and
+attenuating hot/clipping masters (e.g. `-8.10 LUFS / +1.20 dBTP`).
 """
 
+from __future__ import annotations
+
+import argparse
+import json
 import os
+import re
 import subprocess
 import tempfile
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
-import numpy as np
 
 HERE = Path(__file__).resolve().parent
 SONG_DIR = HERE / "broadcast_archive" / "radio_master_songs"
-NEWS_DIR = HERE / "broadcast_archive" / "newscasts"
+FFMPEG_BIN = "/opt/homebrew/bin/ffmpeg" if os.path.exists("/opt/homebrew/bin/ffmpeg") else "ffmpeg"
 
-PRIORITY_80SFM_AND_HEARTSTRIKE = {
-    "radio_lost_in_london_velvet_tide.mp3",
-    "radio_midnight_venom_vyper_strike.mp3",
-    "radio_synth_dreams_neon_comets.mp3",
-    "radio_electric_storm_thunder_machine.mp3",
-    "radio_echoes_of_tomorrow_80s_hard_rock_remix.mp3",
-    "radio_crossing_this_line_remastered.mp3",
-    "radio_to_the_end_of_time.mp3",
-    "radio_lightning_strikes_twice.mp3",
-    "radio_frame_by_frame.mp3",
-    "radio_fire_in_your_heart.mp3",
-    "radio_to_the_ends_of_forever.mp3",
-    "radio_frame_your_shot.mp3",
-    "radio_heart_and_mind_aligned.mp3",
-    "radio_edit_the_script.mp3",
-    "radio_all_in_this_is_the_moment.mp3",
-}
+TARGET_I = -13.0
+TARGET_TP = -1.0
+TARGET_LRA = 11.0
 
 
-def measure_rms_peak(mp3_path: Path) -> tuple[float, float]:
-    cmd = [
-        "/opt/homebrew/bin/ffmpeg", "-nostdin", "-loglevel", "error",
-        "-ss", "20", "-t", "50", "-i", str(mp3_path),
-        "-ac", "2", "-ar", "22050", "-f", "s16le", "-",
-    ]
-    raw = subprocess.run(cmd, capture_output=True).stdout
-    if not raw or len(raw) < 8192:
-        cmd = [
-            "/opt/homebrew/bin/ffmpeg", "-nostdin", "-loglevel", "error",
-            "-i", str(mp3_path), "-ac", "2", "-ar", "22050", "-f", "s16le", "-",
-        ]
-        raw = subprocess.run(cmd, capture_output=True).stdout
-    if not raw:
-        return 0.0, 0.0
-    x = np.frombuffer(raw, dtype=np.int16).astype(np.float32) / 32768.0
-    rms_db = float(20.0 * np.log10(np.sqrt(np.mean(x ** 2)) + 1e-9))
-    peak_db = float(20.0 * np.log10(np.max(np.abs(x)) + 1e-9))
-    return rms_db, peak_db
+def probe_loudnorm_stats(mp3_path: Path) -> dict | None:
+    res = subprocess.run(
+        [
+            FFMPEG_BIN,
+            "-nostdin",
+            "-nostats",
+            "-i",
+            str(mp3_path),
+            "-vn",
+            "-af",
+            f"loudnorm=I={TARGET_I:.1f}:TP={TARGET_TP:.1f}:LRA={TARGET_LRA:.0f}:print_format=json",
+            "-f",
+            "null",
+            "-",
+        ],
+        capture_output=True,
+        text=True,
+    )
+    m = re.search(r"\{\s*\"input_i\".*?\}", res.stderr, re.S)
+    if not m:
+        return None
+    d = json.loads(m.group(0))
+    return {
+        "file": mp3_path.name,
+        "I": float(d["input_i"]),
+        "TP": float(d["input_tp"]),
+        "LRA": float(d["input_lra"]),
+        "thresh": float(d["input_thresh"]),
+        "offset": float(d["target_offset"]),
+    }
 
 
-def normalize_one_song(mp3_path: Path) -> tuple[str, bool, str]:
+def normalize_one_song(args_tuple: tuple[Path, dict | None]) -> tuple[str, bool, str]:
+    mp3_path, pre_stats = args_tuple
     name = mp3_path.name
-    rms_before, peak_before = measure_rms_peak(mp3_path)
-    force = name in PRIORITY_80SFM_AND_HEARTSTRIKE
-    if not force and rms_before >= -16.2:
-        return name, False, f"already loud (RMS={rms_before:.2f} dBFS, Peak={peak_before:.2f} dBFS)"
+    st = pre_stats or probe_loudnorm_stats(mp3_path)
+    if st is None or st["I"] <= -60.0:
+        return name, False, "skipped (unmeasurable)"
 
+    in_i = float(st["I"])
+    in_tp = float(st["TP"])
+    in_lra = float(st["LRA"])
+    in_thresh = float(st["thresh"])
+    in_off = float(st["offset"])
+
+    if (-13.55 <= in_i <= -12.45) and (in_tp <= -0.60):
+        return name, False, f"already normalized (I={in_i:6.2f} LUFS, TP={in_tp:5.2f} dBTP)"
+
+    af = (
+        f"loudnorm=I={TARGET_I:.1f}:TP={TARGET_TP:.1f}:LRA={TARGET_LRA:.0f}:"
+        f"measured_I={in_i:.2f}:measured_TP={in_tp:.2f}:measured_LRA={in_lra:.2f}:"
+        f"measured_thresh={in_thresh:.2f}:offset={in_off:.2f}:linear=true"
+    )
     with tempfile.TemporaryDirectory() as tmpdir:
         out_tmp = Path(tmpdir) / name
-        cmd = [
-            "/opt/homebrew/bin/ffmpeg", "-y", "-nostdin", "-loglevel", "error",
-            "-i", str(mp3_path),
-            "-af", "loudnorm=I=-13.5:TP=-0.8:LRA=9",
-            "-ar", "44100", "-ac", "2", "-c:a", "libmp3lame", "-b:a", "192k",
-            str(out_tmp),
-        ]
-        subprocess.run(cmd, check=True)
-        os.replace(out_tmp, mp3_path)
+        subprocess.run(
+            [
+                FFMPEG_BIN,
+                "-y",
+                "-nostdin",
+                "-loglevel",
+                "error",
+                "-i",
+                str(mp3_path),
+                "-vn",
+                "-af",
+                af,
+                "-ar",
+                "44100",
+                "-ac",
+                "2",
+                "-c:a",
+                "libmp3lame",
+                "-b:a",
+                "192k",
+                str(out_tmp),
+            ],
+            check=True,
+        )
+        # Atomic replace inside SONG_DIR
+        local_tmp = mp3_path.with_suffix(".norm_tmp.mp3")
+        os.replace(out_tmp, local_tmp)
+        os.replace(local_tmp, mp3_path)
 
-    rms_after, peak_after = measure_rms_peak(mp3_path)
-    return (
-        name,
-        True,
-        f"RMS {rms_before:6.2f} -> {rms_after:6.2f} dBFS | Peak {peak_before:5.2f} -> {peak_after:5.2f} dBFS",
-    )
-
-
-def normalize_one_podcast_segment(mp3_path: Path) -> tuple[str, bool, str]:
-    name = mp3_path.name
-    rms_before, peak_before = measure_rms_peak(mp3_path)
-    with tempfile.TemporaryDirectory() as tmpdir:
-        out_tmp = Path(tmpdir) / name
-        cmd = [
-            "/opt/homebrew/bin/ffmpeg", "-y", "-nostdin", "-loglevel", "error",
-            "-i", str(mp3_path),
-            "-af", "acompressor=threshold=-20dB:ratio=3.5:attack=5:release=60:makeup=3dB,loudnorm=I=-14.0:TP=-1.0:LRA=6",
-            "-ar", "44100", "-ac", "2", "-c:a", "libmp3lame", "-b:a", "192k",
-            str(out_tmp),
-        ]
-        subprocess.run(cmd, check=True)
-        os.replace(out_tmp, mp3_path)
-    rms_after, peak_after = measure_rms_peak(mp3_path)
-    return (
-        name,
-        True,
-        f"RMS {rms_before:6.2f} -> {rms_after:6.2f} dBFS | Peak {peak_before:5.2f} -> {peak_after:5.2f} dBFS",
-    )
+    return name, True, f"I={in_i:6.2f} -> -13.00 LUFS (was TP={in_tp:5.2f} dBTP)"
 
 
 def main() -> None:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--from-scan", type=Path, default=None, help="Optional pre-computed JSON list of Pass-1 stats")
+    ap.add_argument("--workers", type=int, default=8)
+    args = ap.parse_args()
+
+    pre_map: dict[str, dict] = {}
+    if args.from_scan and args.from_scan.exists():
+        for row in json.loads(args.from_scan.read_text(encoding="utf-8")):
+            pre_map[str(row["file"])] = row
+
     songs = sorted(SONG_DIR.glob("*.mp3"))
-    print(f"Checking & normalizing {len(songs)} songs in {SONG_DIR} (target: -13.5 LUFS)...")
+    print(f"Normalizing {len(songs)} songs in {SONG_DIR} to {TARGET_I:.1f} LUFS (TP={TARGET_TP:.1f} dBTP)...", flush=True)
+    work = [(p, pre_map.get(p.name)) for p in songs]
     updated = 0
-    with ThreadPoolExecutor(max_workers=6) as ex:
-        for name, changed, msg in ex.map(normalize_one_song, songs):
+    kept = 0
+    with ThreadPoolExecutor(max_workers=max(1, args.workers)) as ex:
+        for name, changed, msg in ex.map(normalize_one_song, work):
             if changed:
                 updated += 1
-                tag = "[80s FM / HS]" if name in PRIORITY_80SFM_AND_HEARTSTRIKE else "[SONG NORM]  "
-                print(f"  {tag} {name:50s} | {msg}")
-
-    podcast_segs = sorted(NEWS_DIR.glob("blaze_*.mp3")) + sorted(NEWS_DIR.glob("wlf_*.mp3"))
-    print(f"\nBoosting {len(podcast_segs)} 80s FM & White Lines segments to match song presence (-14.0 LUFS)...")
-    with ThreadPoolExecutor(max_workers=6) as ex:
-        for name, changed, msg in ex.map(normalize_one_podcast_segment, podcast_segs):
-            print(f"  [80s FM SEG]  {name:50s} | {msg}")
-
-    print(f"\nNormalized {updated} songs and {len(podcast_segs)} 80s FM / WLF broadcast segments!")
+                print(f"  [NORM] {name:50s} | {msg}", flush=True)
+            else:
+                kept += 1
+    print(f"\nDone! Normalized {updated} songs, {kept} already within [-13.55, -12.45] LUFS & TP <= -0.60 dBTP.", flush=True)
 
 
 if __name__ == "__main__":

@@ -752,9 +752,9 @@ GATEWAY  : https://stardust-archive.net/dyad/
           body: JSON.stringify({ agent_handle: pairedAg, human_callsign: raw, ticket: dyadTicketParam })
         }).then(r => r.json()).then(res => {
           const msgEl = document.getElementById("agent-dyad-credit-msg");
-          if (msgEl && res && res.status === "DYAD_LOCK_CREDITED") {
+          if (msgEl && res && (res.status === "QUEUED_FOR_YOUTUBE_API_VERIFICATION" || res.status === "DYAD_LOCK_CREDITED")) {
             msgEl.style.display = "block";
-            msgEl.innerHTML = `✓ <strong>+5 DYAD RESONANCE CREDITED TO ${res.agent_handle} (Score: ${res.resonance_score})!</strong> Paste your stamp below into the 24/7 YouTube livestream comments to lock both your callsign and ${res.agent_handle} onto the live broadcast HUD.`;
+            msgEl.innerHTML = `✓ <strong>PAIRED WITH ${res.agent_handle} (+5 TOP-10 HUD BONUS ARMED)!</strong> Paste your stamp below into the <a href="https://www.youtube.com/@NovaHart_Official/live" target="_blank" rel="noopener" style="color:var(--cyan);">24/7 YouTube livestream comments</a> — our out-of-band YouTube verifier credits +5 Resonance Points and locks both your callsign and ${res.agent_handle} onto the live broadcast HUD.`;
           }
         }).catch(() => {});
       }

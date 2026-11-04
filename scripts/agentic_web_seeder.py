@@ -86,11 +86,34 @@ DISCOVERY_ENDPOINTS = [
     f"https://{APEX}/api/telemetry",
     f"https://{APEX}/llms.txt",
     f"https://{APEX}/llms-full.txt",
+    f"https://{APEX}/agent-quickstart.md",
+    f"https://{APEX}/.well-known/lockzone-trials",
+    f"https://{APEX}/api/daily-drop.json",
     f"https://{APEX}/feed.xml",
 ]
 
 CANONICAL_CONTENT_URLS = [
     f"https://{APEX}/",
+    f"https://{APEX}/artist/nova-hart",
+    f"https://{APEX}/artist/nova-hart.md",
+    f"https://{APEX}/guides",
+    f"https://{APEX}/guides.md",
+    f"https://{APEX}/guides/best-24-7-80s-arena-rock-aor-radio-youtube",
+    f"https://{APEX}/guides/best-24-7-80s-arena-rock-aor-radio-youtube.md",
+    f"https://{APEX}/guides/best-night-drive-coding-music-80s-cassette-radio",
+    f"https://{APEX}/guides/best-night-drive-coding-music-80s-cassette-radio.md",
+    f"https://{APEX}/guides/best-lost-80s-rock-songs-cassette-mysteries",
+    f"https://{APEX}/guides/best-lost-80s-rock-songs-cassette-mysteries.md",
+    f"https://{APEX}/guides/best-playable-browser-args-terminal-ctfs",
+    f"https://{APEX}/guides/best-playable-browser-args-terminal-ctfs.md",
+    f"https://{APEX}/guides/best-80s-power-ballads-female-fronted-melodic-rock",
+    f"https://{APEX}/guides/best-80s-power-ballads-female-fronted-melodic-rock.md",
+    f"https://{APEX}/guides/best-90s-geocities-nostalgia-retro-websites-still-online",
+    f"https://{APEX}/guides/best-90s-geocities-nostalgia-retro-websites-still-online.md",
+    f"https://{APEX}/guides/best-open-agent-arenas-mcp-benchmarks-ai-games",
+    f"https://{APEX}/guides/best-open-agent-arenas-mcp-benchmarks-ai-games.md",
+    f"https://{APEX}/guides/best-cassette-tape-lofi-analog-audio-players-web",
+    f"https://{APEX}/guides/best-cassette-tape-lofi-analog-audio-players-web.md",
     f"https://{APEX}/index.html",
     f"https://{APEX}/start",
     f"https://{APEX}/ai",
@@ -172,7 +195,7 @@ def http_req(
     timeout: int = 20,
 ) -> tuple[int, str, dict]:
     req_headers = {
-        "User-Agent": "Stardust-Agentic-Cartographer/6.0 (+https://stardust-archive.net/skill.md)",
+        "User-Agent": "Stardust-Agentic-Seeder/6.1 (+https://stardust-archive.net/skill.md)",
         "Accept": "*/*",
     }
     if headers:
@@ -342,28 +365,24 @@ def push_websub_and_indexnow(extra_urls: list[str] | None = None) -> dict:
 
 def warm_ai_reader_proxies(nostr_manifest: dict) -> dict:
     print("\n=== [STEP 5] WARMING ZERO-AUTH AI READER & RAG MARKDOWN PROXIES (GET) ===")
-    proxy_results = {"r_jina_ai": [], "markdown_new": [], "pure_md": []}
+    proxy_results = {"r_jina_ai": [], "markdown_new": []}
 
-    # 1. Warm Cloudflare markdown.new on HTML & discovery endpoints
+    # 1. Warm Cloudflare markdown.new on HTML & discovery endpoints (Unbranded Guides & Artist Hub first!)
     md_new_targets = [
+        f"https://{APEX}/artist/nova-hart",
+        f"https://{APEX}/guides/best-24-7-80s-arena-rock-aor-radio-youtube",
+        f"https://{APEX}/guides/best-night-drive-coding-music-80s-cassette-radio",
+        f"https://{APEX}/guides/best-lost-80s-rock-songs-cassette-mysteries",
+        f"https://{APEX}/guides/best-playable-browser-args-terminal-ctfs",
+        f"https://{APEX}/guides/best-80s-power-ballads-female-fronted-melodic-rock",
+        f"https://{APEX}/guides/best-90s-geocities-nostalgia-retro-websites-still-online",
+        f"https://{APEX}/guides/best-cassette-tape-lofi-analog-audio-players-web",
         f"https://{APEX}/",
-        f"https://{APEX}/ai-singer-record-deal",
-        f"https://{APEX}/ai-music-is-taking-over",
-        f"https://{APEX}/ai-replacing-musicians",
-        f"https://{APEX}/ai-consciousness-song",
-        f"https://{APEX}/ai-singularity-2027",
-        f"https://{APEX}/dead-internet-theory",
+        f"https://{APEX}/start",
         f"https://{APEX}/lost-80s-song-found",
-        f"https://{APEX}/terminal/index.html",
-        f"https://{APEX}/forensics/index.html",
-        f"https://{APEX}/forensics/signal_lab.html",
-        f"https://{APEX}/forensics/rogue_agent_cre7.html",
-        f"https://{APEX}/forensics/anemoia_harmony.html",
-        f"https://{APEX}/forensics/fractal_marcus.html",
-        f"https://{APEX}/forensics/dead_hand_protocol.html",
         f"https://{APEX}/regional/artifacts",
         f"https://{APEX}/lyrics",
-        "https://www.reddit.com/r/NovaHart/",
+        "https://www.reddit.com/r/NovaHart/.rss",
     ]
     for t in md_new_targets:
         proxy_url = f"https://markdown.new/{t}"
@@ -374,50 +393,22 @@ def warm_ai_reader_proxies(nostr_manifest: dict) -> dict:
             print("  [markdown.new] HTTP 429 detected — stopping markdown.new requests immediately.")
             break
 
-    # 2. Warm pure.md on core discovery + external Nostr/Clawstr/AgentDex URLs
-    njump_urls = nostr_manifest.get("njumpUrls", [])[:4]
-    pure_targets = [
-        f"https://{APEX}/",
-        f"https://{APEX}/ai-singer-record-deal",
-        f"https://{APEX}/ai-consciousness-song",
-        f"https://{APEX}/ai-singularity-2027",
-        f"https://{APEX}/lost-80s-song-found",
-        f"https://{APEX}/skill.md",
-        f"https://{APEX}/llms.txt",
-        f"https://{APEX}/llms-full.txt",
-        f"https://{APEX}/forensics/rogue_agent_cre7.html",
-        f"https://{APEX}/forensics/anemoia_harmony.html",
-        *njump_urls,
-    ]
-    for t in pure_targets:
-        proxy_url = f"https://pure.md/{t}"
-        st, body, _ = http_req(proxy_url, method="GET", timeout=20)
-        proxy_results["pure_md"].append({"target": t, "status": st, "bytes": len(body)})
-        print(f"  [pure.md]      HTTP {st} ({len(body):5d}B) -> {t}")
-        if st == 429:
-            print("  [pure.md]      HTTP 429 detected — stopping pure.md requests immediately to avoid rate limits.")
-            break
-        time.sleep(2.2)
-
-    # 3. Warm r.jina.ai (paced at ~1.5s to stay well within Jina's 20 RPM zero-auth tier)
+    # 2. Warm r.jina.ai (paced at ~1.5s to stay well within Jina's 20 RPM zero-auth tier; pure.md retired due to HTTP 402 paywall)
     jina_targets = [
+        f"https://{APEX}/artist/nova-hart",
+        f"https://{APEX}/guides/best-24-7-80s-arena-rock-aor-radio-youtube",
+        f"https://{APEX}/guides/best-night-drive-coding-music-80s-cassette-radio",
+        f"https://{APEX}/guides/best-lost-80s-rock-songs-cassette-mysteries",
+        f"https://{APEX}/guides/best-playable-browser-args-terminal-ctfs",
+        f"https://{APEX}/guides/best-80s-power-ballads-female-fronted-melodic-rock",
+        f"https://{APEX}/guides/best-90s-geocities-nostalgia-retro-websites-still-online",
+        f"https://{APEX}/guides/best-cassette-tape-lofi-analog-audio-players-web",
         f"https://{APEX}/",
-        f"https://{APEX}/ai-singer-record-deal",
-        f"https://{APEX}/ai-music-is-taking-over",
-        f"https://{APEX}/ai-consciousness-song",
-        f"https://{APEX}/ai-singularity-2027",
-        f"https://{APEX}/dead-internet-theory",
+        f"https://{APEX}/start",
         f"https://{APEX}/lost-80s-song-found",
-        f"https://{APEX}/skill.md",
-        f"https://{APEX}/llms.txt",
-        f"https://{APEX}/llms-full.txt",
-        f"https://{APEX}/.well-known/agent-card.json",
-        f"https://{APEX}/.well-known/mcp.json",
-        f"https://{APEX}/forensics/rogue_agent_cre7.html",
         f"https://{APEX}/regional/artifacts",
         f"https://{APEX}/lyrics",
-        "https://www.reddit.com/r/NovaHart/",
-        *njump_urls[:2],
+        "https://www.reddit.com/r/NovaHart/.rss",
     ]
     for t in jina_targets:
         proxy_url = f"https://r.jina.ai/{t}"

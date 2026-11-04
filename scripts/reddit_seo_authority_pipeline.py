@@ -47,10 +47,14 @@ DEFAULT_COOLDOWN_SEC = 28800  # 8 hours baseline
 MAX_JITTER_SEC = 1800         # +/- 30 minutes Gaussian clamp
 
 RAG_TARGETS = [
-    "https://www.reddit.com/r/NovaHart/",
-    "https://old.reddit.com/r/NovaHart/",
     "https://www.reddit.com/r/NovaHart/.rss",
     "https://stardust-archive.net/reddit-wiki/index.md",
+    "https://stardust-archive.net/api/reddit-paa.json",
+    "https://stardust-archive.net/guides.md",
+    "https://stardust-archive.net/guides/best-24-7-80s-arena-rock-aor-radio-youtube.md",
+    "https://stardust-archive.net/guides/best-night-drive-coding-music-80s-cassette-radio.md",
+    "https://stardust-archive.net/guides/best-80s-power-ballads-female-fronted-melodic-rock.md",
+    "https://stardust-archive.net/guides/best-lost-80s-rock-songs-cassette-mysteries.md",
 ]
 
 LOCALE_WIKI_DATA: List[Dict[str, str]] = [
@@ -287,31 +291,27 @@ def load_state(queue_data: Dict[str, Any]) -> Dict[str, Any]:
             state.setdefault("effective_cooldown_sec", compute_jittered_cooldown(DEFAULT_COOLDOWN_SEC))
             state.setdefault("published_hashes", [])
             state.setdefault("published_ids", [])
+            state.setdefault("scheduled_ids", [])
+            state.setdefault("staged_hashes", [])
+            state.setdefault("staged_ids", [])
             state.setdefault("last_rag_warm_epoch", 0)
             state.setdefault("rag_warm_history", [])
             return state
         except Exception:
             pass
 
-    # Initialize default state with the first seed hash recorded and cooldown active
-    threads = queue_data.get("paa_threads", [])
-    initial_hashes: List[str] = []
-    initial_ids: List[str] = []
-    if threads:
-        first = threads[0]
-        h = compute_content_hash(first["title"], first["body_markdown"])
-        initial_hashes.append(h)
-        initial_ids.append(first["id"])
-
     state = {
-        "version": "1.0.0",
+        "version": "1.1.0",
         "subreddit": "r/NovaHart",
         "last_action_epoch": now_epoch - 1800,
         "cooldown_sec": DEFAULT_COOLDOWN_SEC,
         "effective_cooldown_sec": compute_jittered_cooldown(DEFAULT_COOLDOWN_SEC),
         "jitter_model": "gaussian_clamp_pm_1800s",
-        "published_hashes": initial_hashes,
-        "published_ids": initial_ids,
+        "published_hashes": [],
+        "published_ids": [],
+        "scheduled_ids": [],
+        "staged_hashes": [],
+        "staged_ids": [],
         "last_rag_warm_epoch": 0,
         "rag_warm_history": [],
     }
@@ -467,9 +467,10 @@ def select_next_unpublished_paa(
     queue_data: Dict[str, Any], state: Dict[str, Any]
 ) -> Optional[Tuple[Dict[str, Any], str]]:
     published_hashes = set(state.get("published_hashes", []))
+    published_ids = set(state.get("published_ids", [])) | set(state.get("scheduled_ids", []))
     for item in queue_data.get("paa_threads", []):
         digest = compute_content_hash(item["title"], item["body_markdown"])
-        if digest not in published_hashes:
+        if digest not in published_hashes and item["id"] not in published_ids:
             return item, digest
     return None
 
@@ -582,17 +583,17 @@ def stage_reddit_dispatch(
         except Exception:
             pass
 
-    published_hashes = list(state.get("published_hashes", []))
-    if digest not in published_hashes:
-        published_hashes.append(digest)
-    published_ids = list(state.get("published_ids", []))
-    if item["id"] not in published_ids:
-        published_ids.append(item["id"])
+    staged_hashes = list(state.get("staged_hashes", []))
+    if digest not in staged_hashes:
+        staged_hashes.append(digest)
+    staged_ids = list(state.get("staged_ids", []))
+    if item["id"] not in staged_ids:
+        staged_ids.append(item["id"])
 
     state["last_action_epoch"] = now_epoch
     state["effective_cooldown_sec"] = new_cooldown
-    state["published_hashes"] = published_hashes
-    state["published_ids"] = published_ids
+    state["staged_hashes"] = staged_hashes
+    state["staged_ids"] = staged_ids
     save_state(state)
     return dispatch_payload
 
@@ -600,14 +601,19 @@ def stage_reddit_dispatch(
 def print_status_report(queue_data: Dict[str, Any], state: Dict[str, Any], wiki_files: List[str]) -> None:
     ready, elapsed, remaining = check_cooldown(state)
     total_paa = len(queue_data.get("paa_threads", []))
-    published_count = len(state.get("published_hashes", []))
+    published_count = len(set(state.get("published_ids", [])))
+    scheduled_count = len(set(state.get("scheduled_ids", [])))
+    staged_count = len(set(state.get("staged_ids", [])))
     next_pick = select_next_unpublished_paa(queue_data, state)
-    next_id = next_pick[0]["id"] if next_pick else "ALL_PUBLISHED"
+    next_id = next_pick[0]["id"] if next_pick else "ALL_PUBLISHED_OR_SCHEDULED"
 
     print("=== [r/NovaHart SEO AUTHORITY PIPELINE STATUS] ===")
     print(f"  Subreddit              : {queue_data.get('subreddit', 'r/NovaHart')}")
     print(f"  Wiki Files Synced      : {len(wiki_files)} files in site/reddit-wiki/")
-    print(f"  PAA Queue Progress     : {published_count}/{total_paa} unique SHA-256 hashes recorded")
+    print(
+        f"  PAA Queue Ground Truth : {published_count} live published | {scheduled_count} scheduled | "
+        f"{staged_count} locally staged (of {total_paa} total)"
+    )
     print(f"  Next Candidate PAA ID  : {next_id}")
     print(f"  Baseline Cooldown      : {state.get('cooldown_sec', DEFAULT_COOLDOWN_SEC)}s (8.0h)")
     print(f"  Effective Cooldown     : {state.get('effective_cooldown_sec', DEFAULT_COOLDOWN_SEC)}s (with Gaussian jitter)")
@@ -648,10 +654,40 @@ def main() -> int:
         action="store_true",
         help="Allow non-invasive Chrome AppleEvents tab navigation when cooldown has elapsed.",
     )
+    parser.add_argument(
+        "--mark-scheduled",
+        default="",
+        help="Comma-separated PAA IDs verified scheduled in r/NovaHart Mod Tools.",
+    )
+    parser.add_argument(
+        "--mark-published",
+        default="",
+        help="Comma-separated PAA IDs verified live on r/NovaHart.",
+    )
     args = parser.parse_args()
 
     queue_data = load_queue()
     state = load_state(queue_data)
+
+    if args.mark_scheduled or args.mark_published:
+        by_id = {t["id"]: t for t in queue_data.get("paa_threads", [])}
+        sched_ids = list(state.get("scheduled_ids", []))
+        pub_ids = list(state.get("published_ids", []))
+        pub_hashes = list(state.get("published_hashes", []))
+        for raw_id in [x.strip() for x in args.mark_scheduled.split(",") if x.strip()]:
+            if raw_id in by_id and raw_id not in sched_ids:
+                sched_ids.append(raw_id)
+        for raw_id in [x.strip() for x in args.mark_published.split(",") if x.strip()]:
+            if raw_id in by_id:
+                if raw_id not in pub_ids:
+                    pub_ids.append(raw_id)
+                h = compute_content_hash(by_id[raw_id]["title"], by_id[raw_id]["body_markdown"])
+                if h not in pub_hashes:
+                    pub_hashes.append(h)
+        state["scheduled_ids"] = sched_ids
+        state["published_ids"] = pub_ids
+        state["published_hashes"] = pub_hashes
+        save_state(state)
     wiki_files = sync_wiki_files(queue_data)
 
     if args.check_only or args.sync_wiki:

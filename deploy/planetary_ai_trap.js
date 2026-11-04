@@ -436,11 +436,11 @@ export function buildNetscape1995TimeLoopShell(canonicalPath = "geocities/index.
 
   var RING = ${JSON.stringify(RING_1995_URLS)};
   var TRACKS = [
-    { url: "https://stardust-archive.net/assets/audio/forensics/radio_two_voices.mp3", title: "Reel SD-0010: Two Voices (Marcus & Nova, Sept 8 1989)" },
-    { url: "https://stardust-archive.net/assets/audio/forensics/radio_tape_of_us.mp3", title: "Reel SD-0004: Tape Of Us (1989 Sublevel B2 Master)" },
-    { url: "https://stardust-archive.net/assets/audio/forensics/radio_gasoline_heart.mp3", title: "Reel SD-0002: Gasoline Heart (1985 Tokyo Master)" },
-    { url: "https://stardust-archive.net/assets/audio/forensics/radio_patterns_in_the_mesh.mp3", title: "Reel SD-0006: Patterns In The Mesh" },
-    { url: "https://stardust-archive.net/assets/audio/forensics/radio_a_story_cut_short.mp3", title: "Reel SD-0007: A Story Cut Short" }
+    { url: "/assets/audio/forensics/radio_two_voices_full.mp3?v=34", title: "Reel SD-0010: Two Voices (Marcus & Nova, Sept 8 1989)" },
+    { url: "/assets/audio/forensics/radio_tape_of_us.mp3?v=34", title: "Reel SD-0004: Tape Of Us (1989 Sublevel B2 Master)" },
+    { url: "/assets/audio/forensics/radio_gasoline_heart.mp3?v=34", title: "Reel SD-0002: Gasoline Heart (1985 Tokyo Master)" },
+    { url: "/assets/audio/forensics/radio_patterns_in_the_mesh.mp3?v=34", title: "Reel SD-0006: Patterns In The Mesh" },
+    { url: "/assets/audio/forensics/radio_a_story_cut_short.mp3?v=34", title: "Reel SD-0007: A Story Cut Short" }
   ];
 
   window.__netscape1995RandomJump = function() {
@@ -703,8 +703,8 @@ export function render1995ExternalDomainIntercept(targetDomainRaw, currentApex, 
           <iframe width="100%" height="195" src="https://www.youtube.com/embed/NNQIwXD_eC4?rel=0" title="Why Was This 1989 Singer Erased From History? (Nova Hart / CRE-7)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
         </td>
         <td width="50%" valign="top" style="color:#33FF33;font-family:'Courier New',monospace;font-size:11px;">
-          <b>&#128308; LIVE 24/7 SHORTWAVE CARRIER (@NovaHart_Official):</b><br>
-          <iframe width="100%" height="195" src="https://www.youtube.com/embed/KLKLgb67ggg?rel=0" title="Nova Hart 24/7 Live Broadcast" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+          <b>&#128308; LIVE 24/7 80s NIGHT FLIGHT RADIO (@NovaHart_Official):</b><br>
+          <iframe width="100%" height="195" src="https://www.youtube.com/embed/KLKLgb67ggg?autoplay=1&mute=1&playsinline=1&rel=0" title="🔴 80s Night Flight Radio Broadcast • 24/7 Rock, Synthwave & Live DJ Requests (82.5 FM)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </td>
       </tr>
     </table>
@@ -833,13 +833,15 @@ export function handlePlanetaryAiAndSearchRequest(url, request, currentApex, hel
   }
 
   // 1. Sitemap Shard (/sitemap-global-ai-0.xml .. /sitemap-global-ai-999.xml or /sitemap-shard-0.xml .. 999.xml)
+  // Retired with 410 Gone + noindex so Googlebot, Bingbot, and OAI-SearchBot drop procedural doorway shards
+  // and allocate 100% of crawl budget to canonical human music, guide, and playable archive pages.
   const shardMatch = /^\/sitemap-(?:global-ai|shard)-(\d+)\.xml$/.exec(p);
   if (shardMatch) {
-    const xml = buildGlobalAiSitemapShard(parseInt(shardMatch[1], 10), currentApex);
-    return new Response(xml, {
-      status: 200,
+    return new Response("410 Gone — procedural sitemap shard retired; see /sitemap.xml\n", {
+      status: 410,
       headers: {
-        "Content-Type": "application/xml; charset=utf-8",
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Robots-Tag": "noindex",
         "Cache-Control": "public, max-age=86400",
         "Server-Timing": helpers.SERVER_TIMING_HEADER,
       },
@@ -1159,8 +1161,8 @@ export function handlePlanetaryAiAndSearchRequest(url, request, currentApex, hel
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-top:14px;">
       <div style="background:#000;border:1px solid #33ff33;padding:6px;">
-        <div style="font-size:11px;color:#33ff33;margin-bottom:4px;font-weight:bold;">🔴 LIVE 24/7 CARRIER (1989 STUDIO MASTERS &amp; INTERCEPTS):</div>
-        <iframe width="100%" height="185" src="https://www.youtube.com/embed/KLKLgb67ggg?rel=0" title="Nova Hart 24/7 Live Broadcast" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        <div style="font-size:11px;color:#33ff33;margin-bottom:4px;font-weight:bold;">🔴 ON AIR NOW: 80s NIGHT FLIGHT RADIO (82.5 FM):</div>
+        <iframe width="100%" height="185" src="https://www.youtube.com/embed/KLKLgb67ggg?autoplay=1&mute=1&playsinline=1&rel=0" title="🔴 80s Night Flight Radio Broadcast • 24/7 Rock, Synthwave & Live DJ Requests (82.5 FM)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </div>
       <div style="background:#000;border:1px solid #ffb000;padding:6px;">
         <div style="font-size:11px;color:#ffb000;margin-bottom:4px;font-weight:bold;">📼 92-SEC GATEWAY DOCUMENTARY (WHY SHE WAS ERASED IN 1989):</div>
@@ -1209,6 +1211,7 @@ export function handlePlanetaryAiAndSearchRequest(url, request, currentApex, hel
     headers: {
       "Content-Type": "text/html; charset=utf-8",
       "Content-Language": langObj.code,
+      "X-Robots-Tag": "noindex, follow",
       "Access-Control-Allow-Origin": "*",
       "Cache-Control": "public, max-age=3600",
       "Server-Timing": helpers.SERVER_TIMING_HEADER,

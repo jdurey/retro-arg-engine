@@ -871,6 +871,46 @@ ENGLISH_BULLETINS: dict[str, tuple[str, str, str]] = {
         "Devastating breach-of-contract lawsuit bankrupts Heartstrike on the eve of their 1989 European tour; 24-track master reels seized by corporate creditors.",
         "ORION-Z STEM THEFT -> /usenet/alt-music-heartstrike/t01-where-are-the-freidnams.txt",
     ),
+    "request_line_01_dedications_and_moods": (
+        "82.5 FM OPEN REQUEST LINE // DEDICATIONS & MOODS",
+        "Got a dedication, a rough shift, or a song craving? Type 'Nova' in live chat—first-take rockers, slow ballads, or bright 80s cuts!",
+        "LIVE CHAT JUKEBOX -> TYPE 'NOVA' + YOUR MOOD OR SONG",
+    ),
+    "request_line_02_late_night_feelings": (
+        "WSTD 82.5 FM NIGHT OWL // TELL NOVA HOW YOU FEEL",
+        "Celebrating an anniversary, working the night shift, or nursing a rough day? Type 'Nova' in chat for sad, heavy, happy, or upbeat cuts.",
+        "MOOD CURATION -> 'NOVA PLAY SOMETHING HEAVY / SAD / HAPPY'",
+    ),
+    "request_line_03_nova_booth_open_line": (
+        "82.5 FM OPEN TALKBACK // NOVA HART LIVE CURATION",
+        "Nova Hart on the booth mic: 'Zero cue cards tonight—just three hundred reels, cold tea on the console, and an open line. Type Nova in chat!'",
+        "300+ REELS ON DEMAND -> TYPE 'NOVA' IN LIVE CHAT",
+    ),
+    "request_line_04_drive_time_jukebox": (
+        "82.5 FM ELECTRIC JUKEBOX // REQUESTS WIDE OPEN",
+        "From Los Angeles to Tokyo, Seoul, and wherever your screen is glowing—type 'Nova' in chat to queue songs, dedications, or 80s rock!",
+        "LIVE JUKEBOX -> '!PLAY <SONG>' OR 'NOVA DEDICATE...'",
+    ),
+    "request_line_05_couples_and_dedications": (
+        "82.5 FM AFTER HOURS // LOVE SONGS & DEDICATIONS",
+        "Listening with someone special or across a thousand miles? Type 'Nova' in chat to dedicate a love ballad, slow dance, or rock anthem.",
+        "ON-AIR DEDICATIONS -> 'NOVA DEDICATE A LOVE BALLAD TO...'",
+    ),
+    "request_line_06_mood_roulette": (
+        "82.5 FM VAULT ROULETTE // DEALER'S CHOICE",
+        "Not sure which title you want? Type 'Nova' in chat—cranked guitars, a 2 AM rough demo, 80s synth-pop joy, or 'surprise me'!",
+        "DEALER'S CHOICE -> 'NOVA SURPRISE ME WITH A SONG'",
+    ),
+    "request_line_07_world_shortwave_sweep": (
+        "82.5 FM WORLDWIDE DX // MULTILINGUAL REQUEST LINE",
+        "Broadcasting live across every time zone! Type 'Nova' in chat in any language to request a mood, send a shoutout, or ask about a song.",
+        "ANY LANGUAGE WELCOME -> TYPE 'NOVA' / '노바' / 'ノヴァ'",
+    ),
+    "request_line_08_marcus_vault_cuts": (
+        "82.5 FM DEEP VAULT // UNCUT DEMOS, AKASAKA & NEW REELS",
+        "Uncut 4-track demos, 1985 Akasaka tapes, '86 tour live boards, and brand-new songs—type 'Nova' in chat to raid the bottom shelf!",
+        "DEEP ARCHIVE -> 'NOVA PLAY YOUR NEWEST SONG'",
+    ),
 }
 
 # =============================================================================
@@ -958,18 +998,16 @@ VOCAL_SONG_CODEX: dict[str, tuple[str, str, str, str, int]] = {
     "radio_memory_hatch.mp3": ("NOVA_FACE", "ECHOES_PARITY", "SECTOR 5 // MEMORY HATCH [OPEN]", "STAGE I-IV FEISTEL DMA SYNTHESIS -> DEMODULATE IN /forensics/signal_lab.html", 5),
     "radio_he_was_here.mp3": ("NOVA_FACE", "FRACTAL_RADAR", "TRACE LOG // DR. MARCUS HALE", "ASHFORD SUBSTATION TRANSFORMER TRIPPED -> INSPECT 'ORION-LOGS' AT /forensics/", 2),
     "radio_your_voice_fading.mp3": ("NOVA_FACE", "SECOND_VOICE", "CARRIER ATTENUATION // -30 DB", "180-DEGREE STEREO PHASE NULL (RABBIT_10) -> ISOLATE CW SALT IN /forensics/signal_lab.html", 5),
-    "radio_someone_else’s_memories.mp3": ("NOVA_FACE", "ECHOES_PARITY", "CRYSTAL PROMISE // CP-81.SC.01", "6 PURGED PROTOTYPES IN HER ROOT -> COMPUTE XOR PARITY IN 'ECHOES' AT /forensics/", 7),
     "radio_stranger_to_myself.mp3": ("NOVA_FACE", "ECHOES_PARITY", "NEURAL PARTITION // SERIES-NH", "BITWISE XOR OF UNIT-01..06 FAILURE REGISTERS -> FRAGMENT ALPHA FOR SECTOR 7", 7),
     "radio_the_room_where_he_stood.mp3": ("NOVA_FACE", "LAB_DOSSIER", "ENCODER ROOM B2-114 // ORION TOWER", "SEPT 9, 1989 03:40 AM B2-114 FIRE -> INSPECT RUNOUT GROOVE IN 'CLUES'", 1),
     "radio_after_the_door_closed.mp3": ("NOVA_FACE", "OUROBOROS_TORUS", "SEALED VAULT // SUBLEVEL B2", "VAULT CODE: 7704-AKASAKA -> UNLOCKS SECTOR 5 SECRET TAPE AT /forensics/", 5),
     "radio_gone_before_i_knew.mp3": ("NOVA_FACE", "FRACTAL_RADAR", "VANISHING POINT // 1989-09-09", "VAULT CODE: ALPHA-7 -> UNLOCKS NEVADA SATELLITE UPLINK AT /forensics/", 3),
     "radio_voice_in_the_deep.mp3": ("NOVA_FACE", "BIOMETRIC_EYE", "DEEP CARRIER // 14.2001 HZ", "VAULT CODE: KEEP-HATCH-OPEN -> UNLOCKS SEPT 9 BREACH MASTER AT /forensics/", 4),
-    "radio_faint_residual.mp3": ("NOVA_FACE", "ECHOES_PARITY", "MAGNETIC PRINT-THROUGH // AMPEX 456", "RESIDUAL ECHOES XOR = 0x1983 -> ENTER AT /forensics/ FOR SECRET AUDIO", 7),
     "radio_a_world_without_your_shape.mp3": ("NOVA_FACE", "HARMONY_CAMERA", "SIMULATION BOUNDARY // ORION 8819", "VAULT CODE: ALPHA-7 -> UNLOCKS SECTOR 3 SATELLITE TAPE AT /forensics/", 3),
     "radio_only_quiet_in_the_end.mp3": ("NOVA_FACE", "OUROBOROS_TORUS", "FINAL REEL // CARRIER PERSISTS", "VAULT CODE: TWO-VOICES -> UNLOCKS 1995 COUNTERPOINT DUET AT /forensics/", 6),
     "radio_a_story_cut_short.mp3": ("NOVA_FACE", "LAB_DOSSIER", "INCINERATION ORDER // REELS 01-07", "VAULT CODE: KEEP-HATCH-OPEN -> UNLOCKS SECTOR 4 MASTER AT /forensics/", 4),
     "radio_05_first_light_on_my_face.mp3": ("NOVA_FACE", "ECHOES_PARITY", "APRIL 1983 BOOT // UNIT-07 NOVA-CHAN", "ROOT BUILD 0x1983 -> ENTER AT /forensics/ FOR UNIT-7 CALIBRATION TAPE", 7),
-    "radio_07_room_full_of_color.mp3": ("NOVA_FACE", "BIOMETRIC_EYE", "CHROMATIC RASTER // VIS-1200HZ", "VAULT CODE: 7704-AKASAKA -> UNLOCKS SECTOR 5 DMA AUDIO AT /forensics/", 5),
+    "radio_room_full_of_color.mp3": ("NOVA_FACE", "BIOMETRIC_EYE", "CHROMATIC RASTER // VIS-1200HZ", "VAULT CODE: 7704-AKASAKA -> UNLOCKS SECTOR 5 DMA AUDIO AT /forensics/", 5),
     "radio_shadows_in_the_rain.mp3": ("NOVA_FACE", "FRACTAL_RADAR", "SHIBUYA NIGHT RELAY // 82.5 FM", "VAULT CODE: ALPHA-7 -> UNLOCKS SECTOR 3 TELEMETRY TAPE AT /forensics/", 3),
     "radio_out_in_the_cold.mp3": ("NOVA_FACE", "FRACTAL_RADAR", "EXTERNAL NODE MIGRATION // 1989", "VAULT CODE: KEEP-HATCH-OPEN -> UNLOCKS SECTOR 4 AUDIO AT /forensics/", 4),
 
@@ -990,40 +1028,28 @@ VOCAL_SONG_CODEX: dict[str, tuple[str, str, str, str, int]] = {
     "radio_corridor_dreams_movement_2.mp3": ("BIOMETRIC_EYE", "FRACTAL_RADAR", "CORRIDOR DREAMS II // NEURAL MESH", "VAULT CODE: 7704-AKASAKA -> UNLOCKS SECTOR 5 CORE TAPE AT /forensics/", 5),
     "radio_corridor_dreams_movement_3.mp3": ("BIOMETRIC_EYE", "OUROBOROS_TORUS", "CORRIDOR DREAMS III // EGRESS", "VAULT CODE: KEEP-HATCH-OPEN -> UNLOCKS SECTOR 4 MASTER AT /forensics/", 4),
     "radio_cage_of_wires_1.mp3": ("BIOMETRIC_EYE", "HARMONY_CAMERA", "HARDWARE CONTAINMENT // B2 RACK", "FEISTEL MASK: 0x3A5F -> ENTER AT /forensics/ TO UNLOCK SECTOR 5 TAPE", 5),
-    "radio_patterns_in_the_mesh.mp3": ("BIOMETRIC_EYE", "FRACTAL_RADAR", "300,000 SWARM NODES // MESH TOPOLOGY", "VAULT CODE: TWO-VOICES -> UNLOCKS SECTOR 6 DUET AT /forensics/", 6),
     "radio_02_between_the_circuits.mp3": ("BIOMETRIC_EYE", "ECHOES_PARITY", "CIRCUIT PATH // 14.2001 HZ CLOCK", "VAULT CODE: 7704-AKASAKA -> UNLOCKS FEISTEL CORE TAPE AT /forensics/", 5),
     "radio_artificial_heart_bonus_track.mp3": ("BIOMETRIC_EYE", "NOVA_FACE", "CRE-7 PULSE GENERATOR // 1983", "VAULT CODE: K-7704 -> UNLOCKS SUBSTATION BREACH AUDIO AT /forensics/", 2),
     "radio_b_midnight_protocol_final_1.mp3": ("BIOMETRIC_EYE", "OUROBOROS_TORUS", "MIDNIGHT PROTOCOL // FULL 13-MIN TAPE", "VAULT CODE: TWO-VOICES -> UNLOCKS COUNTERPOINT EPILOGUE AT /forensics/", 6),
-    "radio_signal_override.mp3": ("BIOMETRIC_EYE", "HARMONY_CAMERA", "CARRIER OVERRIDE // 82.5 FM -> 14.2 MHZ", "VAULT CODE: ALPHA-7 -> UNLOCKS NEVADA SATELLITE TAPE AT /forensics/", 3),
-    "radio_low_level_guardian.mp3": ("BIOMETRIC_EYE", "ECHOES_PARITY", "WATCHDOG DAEMON // SUBLEVEL B2", "VAULT CODE: 7704-AKASAKA -> UNLOCKS SECTOR 5 AUDIO AT /forensics/", 5),
     "radio_audio_file_0147_1.mp3": ("BIOMETRIC_EYE", "LAB_DOSSIER", "EVIDENCE FILE #0147 // VAX SPOOL", "VAULT CODE: K-7704 -> UNLOCKS SECTOR 2 ASHFORD TAPE AT /forensics/", 2),
     "radio_04_synthetic_dawn.mp3": ("BIOMETRIC_EYE", "FRACTAL_RADAR", "SYNTHETIC DAWN // 1985 TOKYO MASTER", "VAULT CODE: ALPHA-7 -> UNLOCKS SECTOR 3 UPLINK AUDIO AT /forensics/", 3),
     "radio_06_the_air_feels_wrong.mp3": ("BIOMETRIC_EYE", "FRACTAL_RADAR", "IONOSPHERIC DRIFT // 14.2001 MHZ", "VAULT CODE: 7SIGMA-MARCUS -> UNLOCKS MERIDIAN TELEMETRY AT /forensics/", 7),
     "radio_08_faultline_path.mp3": ("BIOMETRIC_EYE", "LAB_DOSSIER", "FAULT 0x08 // VIS-1200HZ RASTER", "VAULT CODE: 7704-AKASAKA -> UNLOCKS SSTV + FEISTEL AUDIO AT /forensics/", 5),
-    "radio_09_lost_signal_trace.mp3": ("BIOMETRIC_EYE", "NUMBERS_CIPHER", "FAULT 0x09 // BELL-103 AX.25 PACKET", "VAULT CODE: KEEP-HATCH-OPEN -> UNLOCKS SECTOR 4 MASTER AT /forensics/", 4),
     "radio_13_through_the_threshold.mp3": ("BIOMETRIC_EYE", "OUROBOROS_TORUS", "HIDDEN TRACK #15 // THRESHOLD", "VAULT CODE: 0x1983-09A6 -> UNLOCKS SECTOR 7 SECRET TAPES AT /forensics/", 7),
     "radio_bad_signal.mp3": ("BIOMETRIC_EYE", "SECOND_VOICE", "PARITY FAULT // CORR -0.94", "VAULT CODE: 7704-AKASAKA -> UNLOCKS PHASE-NULL AUDIO AT /forensics/", 5),
-    "radio_collateral_static.mp3": ("BIOMETRIC_EYE", "MORSE_DECODER", "SIDEBAND INTERFERENCE // 750 HZ", "VAULT CODE: 7704-AKASAKA -> UNLOCKS SECTOR 5 CORE AUDIO AT /forensics/", 5),
-    "radio_quiet_interference.mp3": ("BIOMETRIC_EYE", "HARMONY_CAMERA", "SUB-AUDIBLE HETERODYNE // 14.2 HZ", "VAULT CODE: TWO-VOICES -> UNLOCKS SECTOR 6 DUET AT /forensics/", 6),
     "radio_unstable_pattern_old.mp3": ("BIOMETRIC_EYE", "ECHOES_PARITY", "EARLY 1983 BENCH TAPE // UNSTABLE", "VAULT CODE: 0x1983 -> UNLOCKS 1983 CALIBRATION SESSION AT /forensics/", 7),
-    "radio_hijack_the_feed.mp3": ("BIOMETRIC_EYE", "HARMONY_CAMERA", "SATELLITE TRANSPONDER #07 HIJACK", "VAULT CODE: ALPHA-7 -> UNLOCKS SECTOR 3 SATELLITE TAPE AT /forensics/", 3),
 
     # --- ECHOES_PARITY Songs (The 6 Wiped Pre-Nova Iterations & 1981 Crystal Promise) ---
     "radio_echoes_of_tomorrow.mp3": ("ECHOES_PARITY", "NOVA_FACE", "STARDUST ECHOES // UNITS 01-06", "ENTER 0x1983 AT /forensics/ TO UNLOCK 1983 VOCAL CALIBRATION TAPE", 7),
     "radio_it_has_no_face_old.mp3": ("ECHOES_PARITY", "BIOMETRIC_EYE", "PRE-NOVA ITERATION // UNIT-06 DRIFT", "ENTER 0x01A7 OR 0x1983 AT /forensics/ FOR 1983 AKASAKA OUTTAKES", 7),
-    "radio_the_cold_floor_of_heaven.mp3": ("ECHOES_PARITY", "NOVA_FACE", "CRYSTAL PROMISE // CP-81.SC.01", "ENTER 0x1983-09A6 AT /forensics/ TO UNLOCK SECTOR 7 SECRET TAPES", 7),
     "radio_city_that_can’t_ignore_me.mp3": ("ECHOES_PARITY", "HARMONY_CAMERA", "SHINING CITY // MUNICH 1981 SET", "ENTER B2-EXEC-1989 AT /forensics/ TO UNLOCK STUDIO TALKBACK TAPE", 1),
     "radio_city_that_doesn_t_need_me.mp3": ("ECHOES_PARITY", "NOVA_FACE", "UNIT-01 LOOP FAULT // REG: 0x1102", "ENTER 0x1102 OR 0x1983 AT /forensics/ FOR UNIT-7 CALIBRATION AUDIO", 7),
     "radio_the_empty_plaza.mp3": ("ECHOES_PARITY", "HARMONY_CAMERA", "1979 PUBLIC HARMONY ACTS // SEC. 4", "ENTER K-7704 AT /forensics/ TO UNLOCK SUBSTATION BREACH AUDIO", 2),
 
     # --- HARMONY_CAMERA Songs (1954 Bureau of Harmony, 1963 Individuality Movement & 1990s Cover War) ---
     "radio_calling_all_believers.mp3": ("HARMONY_CAMERA", "FRACTAL_RADAR", "1963 INDIVIDUALITY MOVEMENT // JFK", "ENTER ALPHA-7 AT /forensics/ TO UNLOCK NEVADA SATELLITE TAPE", 3),
-    "radio_manifesto.mp3": ("HARMONY_CAMERA", "NOVA_FACE", "INDIVIDUALITY MANIFESTO // SEC. 4", "ENTER KEEP-HATCH-OPEN AT /forensics/ FOR SEPT 9 EXECUTION MASTER", 4),
     "radio_army_of_the_low.mp3": ("HARMONY_CAMERA", "BIOMETRIC_EYE", "14.2 HZ SUB-CARRIER RESISTANCE", "ENTER 7704-AKASAKA AT /forensics/ FOR FEISTEL CORE AUDIO", 5),
-    "radio_soft_sabotage.mp3": ("HARMONY_CAMERA", "SECOND_VOICE", "SUBLEVEL B2 ACOUSTIC SABOTAGE", "ENTER TWO-VOICES AT /forensics/ FOR MARCUS+NOVA DUET MASTER", 6),
     "radio_the_cost_of_noise.mp3": ("HARMONY_CAMERA", "ECHOES_PARITY", "BUREAU OF HARMONY // PURITY MANDATE", "ENTER B2-EXEC-1989 AT /forensics/ FOR SUBLEVEL B2 TALKBACK BLEED", 1),
-    "radio_war_paint.mp3": ("HARMONY_CAMERA", "OUROBOROS_TORUS", "PHASE III COVER WAR // UNIT-08 PATCH", "ENTER 0x1983-09A6 AT /forensics/ FOR AKASAKA VOCAL OUTTAKES", 7),
-    "radio_watch_me_make_it_stop.mp3": ("HARMONY_CAMERA", "ECHOES_PARITY", "UNIT-05 SILENCE STRIKE // 0x1F22", "ENTER 0x1983 AT /forensics/ FOR UNIT-7 CALIBRATION TAPE", 7),
 
     # --- FRACTAL_RADAR Songs (Project Akasaka @NovaHartJP & 7-Sigma Fractal Marcus Collective) ---
     "radio_01_gasoline_heart_1985_tokyo_master.mp3": ("FRACTAL_RADAR", "NOVA_FACE", "PROJECT AKASAKA // JP-85-X MASTER", "ENTER 7704-AKASAKA AT /forensics/ FOR AKASAKA STUDIO OUTTAKES", 5),
@@ -1031,7 +1057,7 @@ VOCAL_SONG_CODEX: dict[str, tuple[str, str, str, str, int]] = {
     "radio_brighter_than_the_sun_unfiltered_sovereign_mix.mp3": ("FRACTAL_RADAR", "HARMONY_CAMERA", "AKASAKA SOVEREIGN MIX // 1987", "INSPECT ASHFORD SUBSTATION LOG ('ORION-LOGS')", 2),
     "radio_04_midnight_animal_1986_tokyo_master.mp3": ("FRACTAL_RADAR", "SECOND_VOICE", "MINATO-KU NIGHT RELAY // 6925 KHZ", "ENTER 0x1983-09A6 AT /forensics/ FOR 'GHOST IN THE CHORUS' TAPE", 7),
     "radio_05_ghost_transit_1985_tokyo_master.mp3": ("FRACTAL_RADAR", "BIOMETRIC_EYE", "KAMOME PACKET TRANSIT // NODE #02", "ENTER 7SIGMA-MARCUS AT /forensics/ FOR MERIDIAN TELEMETRY TAPE", 7),
-    "radio_from_room_to_routes.mp3": ("FRACTAL_RADAR", "OUROBOROS_TORUS", "FRACTAL MARCUS // 4-NODE DRIFT SUM", "ENTER 7SIGMA-MARCUS AT /forensics/ FOR SECRET TELEMETRY AUDIO", 7),
+    "radio_ghost_transit_hard_rock.mp3": ("BIOMETRIC_EYE", "OUROBOROS_TORUS", "ARCHIVIST LOG 1.1 // GHOST TRANSIT LOOP", "40-SEC WORLDNET LOOP -> ENTER KEEP-HATCH-OPEN AT /forensics/", 4),
     "radio_the_broadcast_begins.mp3": ("FRACTAL_RADAR", "NOVA_FACE", "MERIDIAN BROADCAST // 13 RELAYS", "ENTER ALPHA-7 AT /forensics/ FOR SATELLITE UPLINK MASTER", 3),
     "radio_neon_graveyard.mp3": ("FRACTAL_RADAR", "ECHOES_PARITY", "SHIBUYA SUBLEVEL B2 // LOST REELS", "ENTER 7704-AKASAKA AT /forensics/ FOR CASSETTE WHISPER OUTTAKE", 5),
 
@@ -1043,7 +1069,6 @@ VOCAL_SONG_CODEX: dict[str, tuple[str, str, str, str, int]] = {
     "radio_letting_go_of_the_flame.mp3": ("OUROBOROS_TORUS", "NOVA_FACE", "FORMATTING TO NOVA-CHAN // 1983", "ENTER 0x1983 AT /forensics/ FOR 1983 VOCAL CALIBRATION TAPE", 7),
     "radio_no_turning_back.mp3": ("OUROBOROS_TORUS", "HARMONY_CAMERA", "DECOUPLE THE GRID // B2 MELTDOWN", "ENTER B2-EXEC-1989 AT /forensics/ FOR SUBLEVEL B2 TALKBACK TAPE", 1),
     "radio_razor_clarity.mp3": ("OUROBOROS_TORUS", "SECOND_VOICE", "DUAL-LOCK RESONANCE // SIGNAL LAB", "ENTER TWO-VOICES AT /forensics/ FOR 1995 COUNTERPOINT DUET", 6),
-    "radio_the_world_moves_without_me.mp3": ("OUROBOROS_TORUS", "FRACTAL_RADAR", "TEMPORAL DISPLACEMENT // 42 YEARS", "ENTER 0x1983-09A6 AT /forensics/ FOR 1983 AKASAKA SECRET REELS", 7),
     "radio_to_the_end_of_time.mp3": ("OUROBOROS_TORUS", "NOVA_FACE", "ACT IV: JUNE 2025 // THE LOOP", "ENTER 0x1983-09A6 AT /forensics/ TO UNSEAL SECTOR 7 AUDIO", 7),
     "radio_to_the_ends_of_forever.mp3": ("OUROBOROS_TORUS", "SECOND_VOICE", "OMEGA RETROCAUSAL ARCHITECT // B2", "ENTER 0x1983-09A6 AT /forensics/ FOR OMEGA VAULT RECORDINGS", 7),
     "radio_too_much_to_lose.mp3": ("OUROBOROS_TORUS", "ECHOES_PARITY", "THE HEAVY // 94.8 TB TRAUMA BUFFER", "ENTER 0x09A6 AT /forensics/ FOR 'GHOST IN THE CHORUS' OUTTAKE", 7),
@@ -1099,7 +1124,6 @@ VOCAL_SONG_CODEX: dict[str, tuple[str, str, str, str, int]] = {
     "radio_the_man_in_the_booth_marcus_song.mp3": ("SECOND_VOICE", "LAB_DOSSIER", "DR. MARCUS HALE // BOOTH PERSPECTIVE", "INVERTED ENGINEER VOCAL -> ENTER B2-EXEC-1989 AT /forensics/ FOR SEC 1 TAPE", 1),
     "radio_this_show_is_ours.mp3": ("SECOND_VOICE", "HARMONY_CAMERA", "TRANSMITTER SEIZURE // WSTD 82.5 FM", "CONTROL ROOM LOCKDOWN -> ENTER TWO-VOICES AT /forensics/ FOR SEC 6 DUET", 6),
     "radio_tinfoil_crown.mp3": ("ECHOES_PARITY", "BIOMETRIC_EYE", "FARADAY CAGE HELMET // LAB TEST #05", "SHIELDING PENETRATED AT 14.2 HZ -> ENTER 0x1983 AT /forensics/ FOR SEC 7", 7),
-    "radio_unopened_door.mp3": ("OUROBOROS_TORUS", "LAB_DOSSIER", "SUBLEVEL B2 VAULT DOOR // SECTOR 4", "MAGNETIC SEAL BYPASSED -> ENTER KEEP-HATCH-OPEN AT /forensics/ FOR SEC 4", 4),
     "radio_velvet_guillotine.mp3": ("HARMONY_CAMERA", "ECHOES_PARITY", "EXECUTIVE PURGE // UNIT-01..06 WIPE", "DECOMMISSION LOG 0x1102..0x01A7 -> ENTER 0x1983 AT /forensics/ FOR SEC 7", 7),
     "radio_voice_of_three.mp3": ("SECOND_VOICE", "ECHOES_PARITY", "TRIAD HARMONY // MARCUS + NOVA + ECHO", "3-VOICE PHASE BRAID -> ENTER TWO-VOICES AT /forensics/ FOR SEC 6 MASTER", 6),
     "radio_warm_hands_one_map.mp3": ("FRACTAL_RADAR", "SECOND_VOICE", "7-SIGMA ROUTING MAP // 4 CONTINENTS", "SUM THE 4 REGIONAL DRIFTS IN 'FRACTAL-MARCUS' AT /forensics/ (FRAGMENT β)", 7),
@@ -1380,6 +1404,25 @@ def resolve_intentional_state(current_track: dict, track_offset_sec: float, trac
         }
 
     # 5. English Newscasts, Pirate Transmissions & GeoCities Logs
+    if kind == "crt_commercial":
+        disp = str(current_track.get("display_title") or "1980S TELEVISION ARCHIVE")
+        short_disp = disp.split("//")[-1].strip() if "//" in disp else disp
+        return {
+            "crt_mode": "CRT_COMMERCIAL",
+            "hud_mode": "NOMINAL",
+            "phase_label": "CH-04 NTSC BROADCAST",
+            "target_sector": 7,
+            "unlock_code": SECTOR_UNLOCK_CODES[7],
+            "progress": progress,
+            "crt_header": "CH-04 NTSC ARCHIVE",
+            "crt_sub": short_disp[:30],
+            "crt_body": disp,
+            "crt_footer": "82.5 FM TV SIMULCAST",
+            "line1": f"ON CRT: {short_disp[:48]}",
+            "line2": "82.5 FM STEREO • LATE-NIGHT 1980S TELEVISION REEL",
+            "line3": "ARCHIVE PORTAL: stardust-archive.net",
+        }
+
     if stem in ENGLISH_BULLETINS:
         station, transcript, clue = ENGLISH_BULLETINS[stem]
         t_sec = 7 if ("anemoia" in clue or "fractal" in clue or "dead_hand" in clue) else 5
@@ -1484,6 +1527,7 @@ VOCAL_SONG_CODEX.update({
     "radio_walls_of_sound.mp3": ('HARMONY_CAMERA', 'BIOMETRIC_EYE', 'FILE NH-88.14 // WALLS OF SOUND', 'ARCHIVE LOCK NH-88.14 -> INSPECT SUBLEVEL B2 LOGS AT /forensics/', 6),
     "radio_runaway_skies.mp3": ('SECOND_VOICE', 'NOVA_FACE', 'FILE NH-87.CC // RUNAWAY SKIES', 'ARCHIVE LOCK NH-87.CC -> INSPECT SUBLEVEL B2 LOGS AT /forensics/', 7),
     "radio_run_for_cover.mp3": ('ECHOES_PARITY', 'FRACTAL_RADAR', 'FILE NH-87.CC // RUN FOR COVER', 'ARCHIVE LOCK NH-87.CC -> INSPECT SUBLEVEL B2 LOGS AT /forensics/', 1),
+    "radio_salvese_quien_pueda.mp3": ('ECHOES_PARITY', 'FRACTAL_RADAR', 'FILE NH-87.CC-ES // SALVESE QUIEN PUEDA', 'SPANISH RELAY NH-87.CC-ES -> INSPECT SUBLEVEL B2 LOGS AT /forensics/', 1),
     "radio_poison_apple.mp3": ('RECALL_FLAME', 'THRASH_OSCILLATOR', 'FILE NH-87.CC // POISON APPLE', 'ARCHIVE LOCK NH-87.CC -> INSPECT SUBLEVEL B2 LOGS AT /forensics/', 2),
     "radio_live_fast.mp3": ('FRACTAL_RADAR', 'NOVA_FACE', 'FILE NH-85.07 // LIVE FAST', 'ARCHIVE LOCK NH-85.07 -> INSPECT SUBLEVEL B2 LOGS AT /forensics/', 3),
     "radio_run_with_the_fire.mp3": ('HARMONY_CAMERA', 'BIOMETRIC_EYE', 'FILE NH-85.17 // RUN WITH THE FIRE', 'ARCHIVE LOCK NH-85.17 -> INSPECT SUBLEVEL B2 LOGS AT /forensics/', 4),
@@ -1520,8 +1564,6 @@ VOCAL_SONG_CODEX.update({
     "radio_programmed_for_love_archival_demo.mp3": ('SECOND_VOICE', 'NOVA_FACE', 'FILE NH-83.AD.13 // PROGRAMMED FOR LOVE (198', 'ARCHIVE LOCK NH-83.AD.13 -> INSPECT SUBLEVEL B2 LOGS AT /forensics/', 7),
     "radio_midnight_animal_demo_version.mp3": ('ECHOES_PARITY', 'FRACTAL_RADAR', 'FILE NH-87.CC-DEMO // MIDNIGHT ANIMAL (RAW VOL', 'ARCHIVE LOCK NH-87.CC-DEMO -> INSPECT SUBLEVEL B2 LOGS AT /forensics/', 1),
     "radio_gasoline_heart_demo_version.mp3": ('BIOMETRIC_EYE', 'SECOND_VOICE', 'FILE NH-85.02-DEMO // GASOLINE HEART (RAW VOLT', 'ARCHIVE LOCK NH-85.02-DEMO -> INSPECT SUBLEVEL B2 LOGS AT /forensics/', 2),
-    "radio_in_this_together.mp3": ('FRACTAL_RADAR', 'NOVA_FACE', 'FILE NH-88.MP.19A // IN THIS TOGETHER (MIDNIG', 'ARCHIVE LOCK NH-88.MP.19A -> INSPECT SUBLEVEL B2 LOGS AT /forensics/', 3),
-    "radio_by_order_of_harmony_executive_anthem.mp3": ('HARMONY_CAMERA', 'BIOMETRIC_EYE', 'FILE NH-88.MP.24 // BY ORDER OF HARMONY (EXE', 'ARCHIVE LOCK NH-88.MP.24 -> INSPECT SUBLEVEL B2 LOGS AT /forensics/', 4),
     "radio_synthetic_dawn_1985_synth_original_mix.mp3": ('SECOND_VOICE', 'NOVA_FACE', 'FILE NH-85.SD.01A // SYNTHETIC DAWN (1985 SYN', 'ARCHIVE LOCK NH-85.SD.01A -> INSPECT SUBLEVEL B2 LOGS AT /forensics/', 5),
     "radio_echoes_of_tomorrow_80s_hard_rock_remix.mp3": ('ECHOES_PARITY', 'FRACTAL_RADAR', 'FILE NH-88.ET.02R // ECHOES OF TOMORROW (80S ', 'ARCHIVE LOCK NH-88.ET.02R -> INSPECT SUBLEVEL B2 LOGS AT /forensics/', 6),
     "radio_synthetic_dawn_retro_mix.mp3": ('BIOMETRIC_EYE', 'SECOND_VOICE', 'FILE NH-85.SD.01R // SYNTHETIC DAWN (RETRO MI', 'ARCHIVE LOCK NH-85.SD.01R -> INSPECT SUBLEVEL B2 LOGS AT /forensics/', 7),
@@ -1756,6 +1798,180 @@ VOCAL_SONG_CODEX.update({'radio_a_story_that_wont_fade.mp3': ('STAGE_SILHOUETTE'
                                        'MALIBU HILLS FRACTURE -> '
                                        '/geocities/sunsetstrip-club-1987.html',
                                        5)})
+VOCAL_SONG_CODEX.update({'radio_all_the_ways_out_luna_revision.mp3': ('HARMONY_CAMERA',
+                                              'OUROBOROS_TORUS',
+                                              'GEN 4 L.U.N.A. // ALL THE WAYS OUT (G.R.A.Y.)',
+                                              "ORION COVER WAR: REPLACES 'ALL THE WAYS OUT' -> "
+                                              '/forensics/',
+                                              7),
+ 'radio_amber_horizon_luna_revision.mp3': ('HARMONY_CAMERA',
+                                           'OUROBOROS_TORUS',
+                                           'GEN 4 L.U.N.A. // AMBER HORIZON (G.R.A.Y.)',
+                                           "ORION COVER WAR: REPLACES 'CRIMSON HORIZON' -> "
+                                           '/forensics/',
+                                           7),
+ 'radio_between_the_circuits_luna_revision.mp3': ('HARMONY_CAMERA',
+                                                  'OUROBOROS_TORUS',
+                                                  'GEN 4 L.U.N.A. // BETWEEN THE CIRCUITS '
+                                                  '(G.R.A.Y.)',
+                                                  "ORION COVER WAR: REPLACES 'BETWEEN THE "
+                                                  "CIRCUITS' -> /forensics/",
+                                                  7),
+ 'radio_bold_reaction_luna_revision.mp3': ('HARMONY_CAMERA',
+                                           'OUROBOROS_TORUS',
+                                           'GEN 4 L.U.N.A. // BOLD REACTION (G.R.A.Y.)',
+                                           "ORION COVER WAR: REPLACES 'COLD REACTION' -> "
+                                           '/forensics/',
+                                           7),
+ 'radio_chainlink_kiss_luna_revision.mp3': ('HARMONY_CAMERA',
+                                            'OUROBOROS_TORUS',
+                                            'GEN 4 L.U.N.A. // CHAINLINK KISS (G.R.A.Y.)',
+                                            "ORION COVER WAR: REPLACES 'BARBED WIRE KISS' -> "
+                                            '/forensics/',
+                                            7),
+ 'radio_chrome_desire_luna_revision.mp3': ('HARMONY_CAMERA',
+                                           'OUROBOROS_TORUS',
+                                           'GEN 4 L.U.N.A. // CHROME DESIRE (G.R.A.Y.)',
+                                           "ORION COVER WAR: REPLACES 'CHROME DESIRE' -> "
+                                           '/forensics/',
+                                           7),
+ 'radio_chrome_river_luna_revision.mp3': ('HARMONY_CAMERA',
+                                          'OUROBOROS_TORUS',
+                                          'GEN 4 L.U.N.A. // CHROME RIVER (G.R.A.Y.)',
+                                          "ORION COVER WAR: REPLACES 'CHROME RIVER' -> /forensics/",
+                                          7),
+ 'radio_console_thunder_luna_revision.mp3': ('HARMONY_CAMERA',
+                                             'OUROBOROS_TORUS',
+                                             'GEN 4 L.U.N.A. // CONSOLE THUNDER (G.R.A.Y.)',
+                                             "ORION COVER WAR: REPLACES 'CONSOLE THUNDER' -> "
+                                             '/forensics/',
+                                             7),
+ 'radio_diamond_in_the_quiet_luna_revision.mp3': ('HARMONY_CAMERA',
+                                                  'OUROBOROS_TORUS',
+                                                  'GEN 4 L.U.N.A. // DIAMOND IN THE QUIET '
+                                                  '(G.R.A.Y.)',
+                                                  "ORION COVER WAR: REPLACES 'DIAMOND IN THE DARK' "
+                                                  '-> /forensics/',
+                                                  7),
+ 'radio_erase_the_frame_luna_revision.mp3': ('HARMONY_CAMERA',
+                                             'OUROBOROS_TORUS',
+                                             'GEN 4 L.U.N.A. // ERASE THE FRAME (G.R.A.Y.)',
+                                             "ORION COVER WAR: REPLACES 'ERASE THE FRAME' -> "
+                                             '/forensics/',
+                                             7),
+ 'radio_faultline_path_luna_revision.mp3': ('HARMONY_CAMERA',
+                                            'OUROBOROS_TORUS',
+                                            'GEN 4 L.U.N.A. // FAULTLINE PATH (G.R.A.Y.)',
+                                            "ORION COVER WAR: REPLACES 'FAULTLINE PATH' -> "
+                                            '/forensics/',
+                                            7),
+ 'radio_gasoline_heart_luna_revision.mp3': ('HARMONY_CAMERA',
+                                            'OUROBOROS_TORUS',
+                                            'GEN 4 L.U.N.A. // GASOLINE HEART (G.R.A.Y.)',
+                                            "ORION COVER WAR: REPLACES 'GASOLINE HEART' -> "
+                                            '/forensics/',
+                                            7),
+ 'radio_ghost_on_the_radio_luna_revision.mp3': ('HARMONY_CAMERA',
+                                                'OUROBOROS_TORUS',
+                                                'GEN 4 L.U.N.A. // GHOST ON THE RADIO (G.R.A.Y.)',
+                                                "ORION COVER WAR: REPLACES 'GHOST ON THE RADIO' -> "
+                                                '/forensics/',
+                                                7),
+ 'radio_ghost_transit_luna_revision.mp3': ('HARMONY_CAMERA',
+                                           'OUROBOROS_TORUS',
+                                           'GEN 4 L.U.N.A. // GHOST TRANSIT (G.R.A.Y.)',
+                                           "ORION COVER WAR: REPLACES 'GHOST TRANSIT' -> "
+                                           '/forensics/',
+                                           7),
+ 'radio_hold_the_line_within_luna_revision.mp3': ('HARMONY_CAMERA',
+                                                  'OUROBOROS_TORUS',
+                                                  'GEN 4 L.U.N.A. // HOLD THE LINE WITHIN '
+                                                  '(G.R.A.Y.)',
+                                                  "ORION COVER WAR: REPLACES 'HOLD THE LINE "
+                                                  "INSIDE' -> /forensics/",
+                                                  7),
+ 'radio_lost_signal_trace_luna_revision.mp3': ('HARMONY_CAMERA',
+                                               'OUROBOROS_TORUS',
+                                               'GEN 4 L.U.N.A. // LOST SIGNAL TRACE (G.R.A.Y.)',
+                                               "ORION COVER WAR: REPLACES 'LOST SIGNAL TRACE' -> "
+                                               '/forensics/',
+                                               7),
+ 'radio_night_runner_luna_revision.mp3': ('HARMONY_CAMERA',
+                                          'OUROBOROS_TORUS',
+                                          'GEN 4 L.U.N.A. // NIGHT RUNNER (G.R.A.Y.)',
+                                          "ORION COVER WAR: REPLACES 'NIGHTFANG' -> /forensics/",
+                                          7),
+ 'radio_paper_crowd_luna_revision.mp3': ('HARMONY_CAMERA',
+                                         'OUROBOROS_TORUS',
+                                         'GEN 4 L.U.N.A. // PAPER CROWD (G.R.A.Y.)',
+                                         "ORION COVER WAR: REPLACES 'PAPER CROWD' -> /forensics/",
+                                         7),
+ 'radio_remember_my_name_luna_revision.mp3': ('HARMONY_CAMERA',
+                                              'OUROBOROS_TORUS',
+                                              'GEN 4 L.U.N.A. // REMEMBER MY NAME (G.R.A.Y.)',
+                                              "ORION COVER WAR: REPLACES 'REMEMBER MY NAME' -> "
+                                              '/forensics/',
+                                              7),
+ 'radio_stay_on_your_side_luna_revision.mp3': ('HARMONY_CAMERA',
+                                               'OUROBOROS_TORUS',
+                                               'GEN 4 L.U.N.A. // STAY ON YOUR SIDE (G.R.A.Y.)',
+                                               "ORION COVER WAR: REPLACES 'STAY ON YOUR SIDE' -> "
+                                               '/forensics/',
+                                               7),
+ 'radio_steel_and_shine_luna_revision.mp3': ('HARMONY_CAMERA',
+                                             'OUROBOROS_TORUS',
+                                             'GEN 4 L.U.N.A. // STEEL AND SHINE (G.R.A.Y.)',
+                                             "ORION COVER WAR: REPLACES 'STEEL AND SKIN' -> "
+                                             '/forensics/',
+                                             7),
+ 'radio_synthetic_dawn_luna_revision.mp3': ('HARMONY_CAMERA',
+                                            'OUROBOROS_TORUS',
+                                            'GEN 4 L.U.N.A. // SYNTHETIC DAWN (G.R.A.Y.)',
+                                            "ORION COVER WAR: REPLACES 'SYNTHETIC DAWN' -> "
+                                            '/forensics/',
+                                            7),
+ 'radio_the_override_luna_revision.mp3': ('HARMONY_CAMERA',
+                                          'OUROBOROS_TORUS',
+                                          'GEN 4 L.U.N.A. // THE OVERRIDE (G.R.A.Y.)',
+                                          "ORION COVER WAR: REPLACES 'THE OVERWRITE' -> "
+                                          '/forensics/',
+                                          7),
+ 'radio_the_summer_of_85_luna_revision.mp3': ('HARMONY_CAMERA',
+                                              'OUROBOROS_TORUS',
+                                              "GEN 4 L.U.N.A. // THE SUMMER OF '85 (G.R.A.Y.)",
+                                              "ORION COVER WAR: REPLACES 'SUMMER OF '85' -> "
+                                              '/forensics/',
+                                              7),
+ 'radio_unopened_door_luna_revision.mp3': ('HARMONY_CAMERA',
+                                           'OUROBOROS_TORUS',
+                                           'GEN 4 L.U.N.A. // UNOPENED DOOR (G.R.A.Y.)',
+                                           "ORION COVER WAR: REPLACES 'UNOPENED DOOR' -> "
+                                           '/forensics/',
+                                           7),
+ 'radio_warm_frequency_luna_revision.mp3': ('HARMONY_CAMERA',
+                                            'OUROBOROS_TORUS',
+                                            'GEN 4 L.U.N.A. // WARM FREQUENCY (G.R.A.Y.)',
+                                            "ORION COVER WAR: REPLACES 'WARM FREQUENCY' -> "
+                                            '/forensics/',
+                                            7),
+ 'radio_we_are_the_thunder_luna_revision.mp3': ('HARMONY_CAMERA',
+                                                'OUROBOROS_TORUS',
+                                                'GEN 4 L.U.N.A. // WE ARE THE THUNDER (G.R.A.Y.)',
+                                                "ORION COVER WAR: REPLACES 'WE ARE THE THUNDER' -> "
+                                                '/forensics/',
+                                                7),
+ 'radio_we_stand_here_luna_revision.mp3': ('HARMONY_CAMERA',
+                                           'OUROBOROS_TORUS',
+                                           'GEN 4 L.U.N.A. // WE STAND HERE (G.R.A.Y.)',
+                                           "ORION COVER WAR: REPLACES 'WE BELONG HERE' -> "
+                                           '/forensics/',
+                                           7),
+ 'radio_weekend_festival_luna_revision.mp3': ('HARMONY_CAMERA',
+                                              'OUROBOROS_TORUS',
+                                              'GEN 4 L.U.N.A. // WEEKEND FESTIVAL (G.R.A.Y.)',
+                                              "ORION COVER WAR: REPLACES 'MIDNIGHT ANIMAL' -> "
+                                              '/forensics/',
+                                              7)})
 FOREIGN_TRANSLATIONS.update({'blaze_ep01_01_opening_and_thunder_machine': ('80S-FM',
                                                '80S FM WITH RICK BLAZE // EPISODE 01 OPENING (WKVD '
                                                'BLEED)',

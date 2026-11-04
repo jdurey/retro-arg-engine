@@ -26,7 +26,10 @@ if str(SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPT_DIR))
 
 import arg_broadcast_codex  # noqa: E402
+import radio_shows_engine  # noqa: E402
+import song_crt_cgi_engine  # noqa: E402
 import song_lore_questions  # noqa: E402
+import studio_b_live_wire  # noqa: E402
 import sync_telemetry  # noqa: E402
 
 _latest_png_bytes: bytes = b""
@@ -34,25 +37,47 @@ _last_mtimes: dict[str, float] = {}
 
 
 def _hot_reload_if_needed() -> None:
-    """Hot-reloads arg_broadcast_codex, song_lore_questions, and sync_telemetry if modified on disk."""
+    """Hot-reloads arg_broadcast_codex, radio_shows_engine, studio_b_live_wire, song_crt_cgi_engine, song_lore_questions, nova_live_jukebox, and sync_telemetry if modified on disk."""
     global _last_mtimes
     try:
         codex_p = SCRIPT_DIR / "arg_broadcast_codex.py"
+        shows_p = SCRIPT_DIR / "radio_shows_engine.py"
+        wire_p = SCRIPT_DIR / "studio_b_live_wire.py"
+        cgi_p = SCRIPT_DIR / "song_crt_cgi_engine.py"
         lore_p = SCRIPT_DIR / "song_lore_questions.py"
+        jb_p = SCRIPT_DIR / "nova_live_jukebox.py"
         sync_p = SCRIPT_DIR / "sync_telemetry.py"
-        m1 = codex_p.stat().st_mtime if codex_p.exists() else 0.0
-        m_lore = lore_p.stat().st_mtime if lore_p.exists() else 0.0
-        m2 = sync_p.stat().st_mtime if sync_p.exists() else 0.0
+        m1 = codex_p.stat().st_mtime_ns if codex_p.exists() else 0
+        m_sh = shows_p.stat().st_mtime_ns if shows_p.exists() else 0
+        m_wr = wire_p.stat().st_mtime_ns if wire_p.exists() else 0
+        m_cgi = cgi_p.stat().st_mtime_ns if cgi_p.exists() else 0
+        m_lore = lore_p.stat().st_mtime_ns if lore_p.exists() else 0
+        m_jb = jb_p.stat().st_mtime_ns if jb_p.exists() else 0
+        m2 = sync_p.stat().st_mtime_ns if sync_p.exists() else 0
         if _last_mtimes and (
             _last_mtimes.get("codex") != m1
+            or _last_mtimes.get("shows") != m_sh
+            or _last_mtimes.get("wire") != m_wr
+            or _last_mtimes.get("cgi") != m_cgi
             or _last_mtimes.get("lore") != m_lore
+            or _last_mtimes.get("jb") != m_jb
             or _last_mtimes.get("sync") != m2
         ):
+            importlib.invalidate_caches()
             importlib.reload(arg_broadcast_codex)
+            importlib.reload(radio_shows_engine)
+            importlib.reload(studio_b_live_wire)
+            importlib.reload(song_crt_cgi_engine)
             importlib.reload(song_lore_questions)
+            if "nova_live_jukebox" in sys.modules:
+                importlib.reload(sys.modules["nova_live_jukebox"])
             importlib.reload(sync_telemetry)
         _last_mtimes["codex"] = m1
+        _last_mtimes["shows"] = m_sh
+        _last_mtimes["wire"] = m_wr
+        _last_mtimes["cgi"] = m_cgi
         _last_mtimes["lore"] = m_lore
+        _last_mtimes["jb"] = m_jb
         _last_mtimes["sync"] = m2
     except Exception:
         pass
