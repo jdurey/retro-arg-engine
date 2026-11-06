@@ -1,12 +1,12 @@
-name: 24/7 Cloud IndexNow, DA-92 Authority, Wayback DA-97 & Agentic Web Seeder
+name: Daily Listener Discovery, IndexNow & Wayback Seeder
 
 on:
   schedule:
-    - cron: "15 * * * *"
+    - cron: "15 3 * * *"  # Once daily at 03:15 UTC (12:15 KST); zero hourly bot/commit spam
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   submit:
@@ -20,21 +20,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Seed 13 Root Domains, Video/News Sitemaps & DA-92 Mirrors to IndexNow & RAG Proxies
+      - name: Seed 13 Root Domains & Listener Guides to IndexNow, WebSub & RAG Proxies
         run: python3 scripts/publish_da99_authority_network.py || true
-      - name: Seed Nostr/Clawstr Relays, AgentDex, WebSub & Markdown RAG Caches
-        run: python3 scripts/agentic_web_seeder.py || true
-      - name: Archive Unarchived Multi-Domain Nodes to Internet Archive Wayback Machine (DA-97)
-        run: node deploy/archive_wayback.mjs --limit 15 || true
-      - name: Submit Swarm Rollout URLs to IndexNow
-        env:
-          SWARM_CAP: ${{ vars.SWARM_CAP }}
-        run: node deploy/indexnow.mjs || true
-      - name: Record submitted URLs & Wayback snapshots
-        run: |
-          git config user.name "stardust-indexnow"
-          git config user.email "actions@users.noreply.github.com"
-          git add deploy/indexnow_state.json deploy/da92_telegraph_mirrors.json deploy/wayback_state.json
-          git diff --cached --quiet || (git commit -m "chore(indexnow): 24/7 cloud multi-domain, wayback & agentic web seed [skip ci]" && git pull --rebase --autostash origin main && git push origin main)
+      - name: Archive Up to 3 Unarchived Listener/Guide Nodes to Internet Archive Wayback Machine
+        run: node deploy/archive_wayback.mjs --limit 3 || true
+
 
 
